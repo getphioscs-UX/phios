@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-RULESET-v2.0.0",
+  "work": "BAZI-FP-W6",
+  "rulesetId": "BAZI-W6-ZI-PING-MONTH-COMMAND-USE-RULESET-v2",
+  "status": "FROZEN_SOURCE_ADMITTED_DETAILED_V2",
+  "active": true,
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "predecessor": "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v1.json",
+  "claimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.1.json",
+  "selectionPrinciple": "DERIVE_OPERATIVE_FACTOR_FROM_ADMITTED_PATTERN_FORMATION_OR_RESCUE_PATH_THEN_MAP_FACTOR_CLASS_TO_DAY_MASTER_ELEMENT_RELATION",
+  "sourceClaimRefs": [
+    "BZR-CLM-ZPZQ-09-USE-FACTOR-FROM-FORMATION-030",
+    "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022",
+    "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-DETAIL-023"
+  ],
+  "factorClassToElementRelation": {
+    "PEER": "SAME_ELEMENT",
+    "RESOURCE": "TARGET_GENERATES_DAY_MASTER",
+    "OUTPUT": "DAY_MASTER_GENERATES_TARGET",
+    "WEALTH": "DAY_MASTER_CONTROLS_TARGET",
+    "OFFICER_OR_SEVEN_KILLINGS": "TARGET_CONTROLS_DAY_MASTER"
+  },
+  "gates": {
+    "patternPathMustBeEstablished": true,
+    "counterEvidenceMustBeRetained": true,
+    "humanAdmissionRequired": true,
+    "elementCandidateIsNotCustomerOutcome": true
+  },
+  "freezeBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "predecessorCandidateRef": "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v2.candidate.json",
+  "authority": {
+    "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+    "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-002-admission-v1.json",
+    "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-002-human-review-result-v1.json",
+    "allReferencedBatch002ClaimsHumanAdmitted": true
+  },
+  "decisionCoverage": {
+    "operativeFactorFromEstablishedFormationOrRescuePath": "SUPPORTED",
+    "factorClassToElementRelation": "SUPPORTED_STRUCTURAL_MAPPING",
+    "finalSelectionRequiresEstablishedPatternPath": true,
+    "customerOutcomePrediction": "FORBIDDEN"
+  }
+}

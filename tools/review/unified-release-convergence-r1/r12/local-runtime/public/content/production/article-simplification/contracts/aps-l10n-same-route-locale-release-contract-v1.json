@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "PHI-OS-APS-L10N-SAME-ROUTE-LOCALE-RELEASE-CONTRACT-v1.0.0",
+  "work": "APS-L10N",
+  "status": "ACTIVE_VAP_L10N_SUCCESSOR_PATTERN_ADOPTED",
+  "title": "APS Locale Authority and Same-Route Release Bridge",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "purpose": "Adopt the completed VAP-L10N R1-R5 vertical slice as the governed locale-release pattern inside Article Production Simplification, so locale work becomes part of the article pipeline instead of a separate operator phase.",
+  "canonicalSequence": [
+    "ARTICLE_CANDIDATE",
+    "ZH_HANS_AND_EN_LOCALE_ARTICLE_AUTHORITY",
+    "CAR",
+    "CPR",
+    "VISUAL_ARTICLE",
+    "SAME_ROUTE_LOCALE_RELEASE"
+  ],
+  "referenceImplementation": {
+    "phase": "VAP-L10N-R1-R5",
+    "nodeCode": "KN-PREFACE-001",
+    "secondaryLocale": "en",
+    "contract": "content/production/visual-article/l10n/contracts/vap-l10n-r1-r5-english-successor-v1.json",
+    "releaseManifest": "content/knowledge/public/visual-article-release.json",
+    "freeze": "content/production/visual-article/l10n/freeze/VAP-L10N-R5-KN-PREFACE-001-EN.json",
+    "status": "FROZEN_REFERENCE_IMPLEMENTATION_PRESERVED"
+  },
+  "mappingFromVapL10n": [
+    {
+      "vapWork": "VAP-L10N-R1",
+      "apsResponsibility": "LOCALE_ARTICLE_AUTHORITY",
+      "rule": "Each locale requires its own Candidate lineage plus explicit Human Review, Human Approval and Human Publication Decision."
+    },
+    {
+      "vapWork": "VAP-L10N-R2",
+      "apsResponsibility": "CAR",
+      "rule": "CAR retains visual publication authority. A language-free published physical figure may be reused without binary duplication while locale-specific alt/caption projection remains governed."
+    },
+    {
+      "vapWork": "VAP-L10N-R3",
+      "apsResponsibility": "CPR",
+      "rule": "CPR retains presentation authority and preserves the same presentation identity/PDS contract across locale projections."
+    },
+    {
+      "vapWork": "VAP-L10N-R4",
+      "apsResponsibility": "VISUAL_ARTICLE",
+      "rule": "VAP retains Visual Article release projection authority and binds only already-governed locale content, CAR assets and CPR presentation."
+    },
+    {
+      "vapWork": "VAP-L10N-R5",
+      "apsResponsibility": "SAME_ROUTE_LOCALE_RELEASE",
+      "rule": "The canonical article route is shared across locales; runtime locale selection chooses the published locale record without duplicating the route."
+    }
+  ],
+  "localeAuthorityRules": {
+    "supportedInitialLocales": ["zh-Hans", "en"],
+    "zhHansCanonicalMeaningAuthority": "TL",
+    "englishMustUseIndependentLocaleAuthoring": true,
+    "translationFromZhHansMayCreateEnglishAuthority": false,
+    "humanReviewInheritanceAcrossLocalesAllowed": false,
+    "humanApprovalInheritanceAcrossLocalesAllowed": false,
+    "humanPublicationInheritanceAcrossLocalesAllowed": false,
+    "localeRegistryMustBeAvailableAndCurrent": true,
+    "unassignedLocaleAuthorityMustFailClosed": true
+  },
+  "sameRouteRules": {
+    "sameNodeCodeRequired": true,
+    "sameSlugRequired": true,
+    "sameHrefRequired": true,
+    "onePhysicalHtmlRouteRequired": true,
+    "runtimeChoosesLocale": true,
+    "manifestRecordRequiredPerPublishedLocale": true
+  },
+  "projectionAuthority": {
+    "localeArticleAuthorityOwner": "Published Knowledge Authority / locale successor authority",
+    "carOwner": "CAR",
+    "cprOwner": "CPR",
+    "visualArticleReleaseOwner": "VAP",
+    "apsRole": "orchestrate_existing_authorities_without_absorbing_them"
+  },
+  "apsHandoffs": {
+    "APS-4": "Resolve/reuse Candidate and expose per-locale readiness/blockers.",
+    "APS-5": "Assemble Human Review/Approval evidence per locale, reusing exact digest-bound evidence where it already exists.",
+    "APS-6": "Collect explicit per-node/per-locale Human decisions; Publication remains explicit and independent by locale.",
+    "publicationBridgeSuccessor": "After locale article authority exists, automatically hand off to CAR → CPR → Visual Article → same-route locale release without requiring separate VAP-L10N operator choreography."
+  },
+  "governance": {
+    "vapL10nFrozenReferenceMayBeMutatedByAPS": false,
+    "apsMayBypassLocaleHumanAuthority": false,
+    "apsMayConvertCandidateToAuthority": false,
+    "apsMayDuplicateLanguageFreePhysicalMediaByDefault": false,
+    "apsMayPublishUnassignedLocale": false
+  }
+}

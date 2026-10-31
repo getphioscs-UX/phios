@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packageCode",
+    "editorialDecisionCode",
+    "changeTypes",
+    "targetAuthority",
+    "payloadReferences",
+    "status",
+    "authorityMode"
+  ],
+  "properties": {
+    "packageCode": {
+      "type": "string"
+    },
+    "editorialDecisionCode": {
+      "type": "string"
+    },
+    "changeTypes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "newNodeProposal",
+          "nodeMetadataRevision",
+          "ownershipRevision",
+          "supportingQuestionAddition",
+          "aliasAddition",
+          "relationshipProposal",
+          "deprecationProposal"
+        ]
+      }
+    },
+    "targetAuthority": {
+      "const": "KNOWLEDGE_GOVERNANCE"
+    },
+    "payloadReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "ready_for_governance",
+        "accepted_by_governance",
+        "rejected_by_governance"
+      ]
+    },
+    "authorityMode": {
+      "const": "proposal_only"
+    }
+  }
+}

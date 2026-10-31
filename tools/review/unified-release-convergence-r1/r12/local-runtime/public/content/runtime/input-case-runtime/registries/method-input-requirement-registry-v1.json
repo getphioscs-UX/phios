@@ -1,0 +1,93 @@
+{
+  "registryCode": "PHI-OS-ICR-W4-METHOD-INPUT-REQUIREMENT-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ICR-W4",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "methodAuthority": "content/professional/method-runtime/method-registry-v1.json",
+  "sharedDataAuthority": "content/professional/method-runtime/shared-data-authority-v1.json",
+  "projectionPolicyVersion": "1.0.0",
+  "entries": [
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "registrationSource": "MR-W1",
+      "requirementStatus": "FOUNDATION_DEFINED",
+      "acceptedInputTypes": ["BIRTH_DATA"],
+      "requiredBindingTypes": ["BIRTH_RECORD", "COORDINATE", "TIMEZONE"],
+      "foundationProjectionAllowed": true,
+      "productionExecutionAllowed": false
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "registrationSource": "MR-W1",
+      "requirementStatus": "FOUNDATION_DEFINED",
+      "acceptedInputTypes": ["BIRTH_DATA"],
+      "requiredBindingTypes": ["BIRTH_RECORD", "COORDINATE", "TIMEZONE"],
+      "foundationProjectionAllowed": true,
+      "productionExecutionAllowed": false
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "registrationSource": "MR-W1",
+      "requirementStatus": "FOUNDATION_DEFINED",
+      "acceptedInputTypes": ["BIRTH_DATA"],
+      "requiredBindingTypes": ["BIRTH_RECORD", "COORDINATE", "TIMEZONE"],
+      "foundationProjectionAllowed": true,
+      "productionExecutionAllowed": false
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "registrationSource": "IMR-EXT-NUMEROLOGY-001",
+      "requirementStatus": "BLOCKED_UNTIL_CANONICAL_MR_REGISTRATION",
+      "acceptedInputTypes": ["BIRTH_DATA"],
+      "requiredBindingTypes": ["BIRTH_RECORD"],
+      "foundationProjectionAllowed": false,
+      "productionExecutionAllowed": false
+    },
+    {
+      "methodCode": "I_CHING",
+      "pluginCode": "ICH",
+      "registrationSource": "MR-W1",
+      "requirementStatus": "DEFERRED_METHOD_INPUT_CONTRACT",
+      "acceptedInputTypes": [],
+      "requiredBindingTypes": [],
+      "foundationProjectionAllowed": false,
+      "productionExecutionAllowed": false
+    },
+    {
+      "methodCode": "TAROT",
+      "pluginCode": "TAR",
+      "registrationSource": "MR-W1",
+      "requirementStatus": "DEFERRED_METHOD_INPUT_CONTRACT",
+      "acceptedInputTypes": [],
+      "requiredBindingTypes": [],
+      "foundationProjectionAllowed": false,
+      "productionExecutionAllowed": false
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "pluginCode": "PSY",
+      "registrationSource": "MR-W1",
+      "requirementStatus": "DEFERRED_METHOD_INPUT_CONTRACT",
+      "acceptedInputTypes": [],
+      "requiredBindingTypes": [],
+      "foundationProjectionAllowed": false,
+      "productionExecutionAllowed": false
+    }
+  ],
+  "instances": [],
+  "rules": {
+    "registryStoresMethodInput": false,
+    "requirementsGrantProductionEligibility": false,
+    "requirementsRegisterMethod": false,
+    "methodMayReadCustomerDatabase": false,
+    "methodMayReadCanonicalInputDirectly": false,
+    "methodSpecificCopiesAllowed": false,
+    "sharedDataAuthorityBindingRequired": true,
+    "unknownRequirementFailsClosed": true
+  }
+}

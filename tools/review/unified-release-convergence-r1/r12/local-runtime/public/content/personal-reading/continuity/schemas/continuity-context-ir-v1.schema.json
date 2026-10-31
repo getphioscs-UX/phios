@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-CONTINUITY-CONTEXT-IR-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contextId",
+    "subjectRef",
+    "selectedSources",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CONTINUITY-CONTEXT-IR-v1.0.0"
+    },
+    "contextId": {
+      "type": "string"
+    },
+    "subjectRef": {
+      "type": "string"
+    },
+    "selectedSources": {
+      "type": "array"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

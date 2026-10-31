@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-TIMEZONE-FIXTURE-CORPUS-v1.0.0",
+  "work": "MPA-W22",
+  "authorityVersion": "IANA_TZDB_2026c",
+  "fixtureRole": "HOST_RUNTIME_SMOKE_NOT_AUTHORITY_PROOF",
+  "fixtures": [
+    {
+      "fixtureId": "AST-TZ-NY-SPRING-BEFORE",
+      "zoneId": "America/New_York",
+      "utc": "2024-03-10T06:59:00Z",
+      "expectedOffsetMinutes": -300
+    },
+    {
+      "fixtureId": "AST-TZ-NY-SPRING-AFTER",
+      "zoneId": "America/New_York",
+      "utc": "2024-03-10T07:01:00Z",
+      "expectedOffsetMinutes": -240
+    },
+    {
+      "fixtureId": "AST-TZ-NY-FALL-BEFORE",
+      "zoneId": "America/New_York",
+      "utc": "2024-11-03T05:59:00Z",
+      "expectedOffsetMinutes": -240
+    },
+    {
+      "fixtureId": "AST-TZ-NY-FALL-AFTER",
+      "zoneId": "America/New_York",
+      "utc": "2024-11-03T06:01:00Z",
+      "expectedOffsetMinutes": -300
+    },
+    {
+      "fixtureId": "AST-TZ-LONDON-SPRING-BEFORE",
+      "zoneId": "Europe/London",
+      "utc": "2024-03-31T00:59:00Z",
+      "expectedOffsetMinutes": 0
+    },
+    {
+      "fixtureId": "AST-TZ-LONDON-SPRING-AFTER",
+      "zoneId": "Europe/London",
+      "utc": "2024-03-31T01:01:00Z",
+      "expectedOffsetMinutes": 60
+    },
+    {
+      "fixtureId": "AST-TZ-KL-HISTORICAL",
+      "zoneId": "Asia/Kuala_Lumpur",
+      "utc": "1989-11-15T14:50:00Z",
+      "expectedOffsetMinutes": 480
+    }
+  ],
+  "rules": {
+    "hostRuntimeDifferenceDoesNotRewriteAuthority": true,
+    "productionMustUsePinnedTzdbResolver": true
+  },
+  "corpusDigest": "b4c10ece3850a1ae541aaaab8a7482afbc8c85e92d202a74d15fbdf8a22d3b64"
+}

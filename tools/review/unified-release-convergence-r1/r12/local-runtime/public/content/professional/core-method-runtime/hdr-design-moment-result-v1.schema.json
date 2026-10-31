@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/hdr/hdr-design-moment-result-v1.schema.json",
+  "title": "PHI OS HDR Design Moment Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "personalityUtcIso",
+    "personalitySunLongitude",
+    "targetSolarArcDegrees",
+    "targetSunLongitude",
+    "designUtcIso",
+    "designSunLongitude",
+    "actualSolarArcDegrees",
+    "angularErrorDegrees",
+    "solver",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "fixedDaySubtractionUsed",
+    "designMomentCreated",
+    "designAstronomyCreated",
+    "gateMappingCreated",
+    "bodyGraphCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-HDR-DESIGN-MOMENT-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "HDR_DESIGN_MOMENT_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "pluginCode": {
+      "const": "HDR"
+    },
+    "calculationType": {
+      "const": "DESIGN_MOMENT_SOLAR_ARC_88"
+    },
+    "personalityUtcIso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "personalitySunLongitude": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 360
+    },
+    "targetSolarArcDegrees": {
+      "const": 88
+    },
+    "targetSunLongitude": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 360
+    },
+    "designUtcIso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "designSunLongitude": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 360
+    },
+    "actualSolarArcDegrees": {
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 360
+    },
+    "angularErrorDegrees": {
+      "type": "number",
+      "minimum": 0
+    },
+    "solver": {
+      "type": "object",
+      "required": [
+        "strategy",
+        "iterations",
+        "earliestDaysBefore",
+        "latestDaysBefore",
+        "angleToleranceDegrees",
+        "timeToleranceMs"
+      ],
+      "properties": {
+        "strategy": {
+          "const": "BRACKETED_BINARY_SEARCH"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "fixedDaySubtractionUsed": {
+      "const": false
+    },
+    "designMomentCreated": {
+      "const": true
+    },
+    "designAstronomyCreated": {
+      "const": false
+    },
+    "gateMappingCreated": {
+      "const": false
+    },
+    "bodyGraphCreated": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    }
+  }
+}

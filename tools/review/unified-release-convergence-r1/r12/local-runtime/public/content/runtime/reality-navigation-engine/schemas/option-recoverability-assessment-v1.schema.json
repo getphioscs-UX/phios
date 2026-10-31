@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Option Recoverability Assessment v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recoverabilityAssessmentCode",
+    "recoverabilityAssessmentVersion",
+    "objectType",
+    "dataType",
+    "optionSetReference",
+    "riskContextReference",
+    "recoveryViewReference",
+    "recoveryState",
+    "optionAssessments",
+    "authorityBoundary",
+    "selectionMade",
+    "recommendationCreated",
+    "guaranteedRecoveryCreated",
+    "treatmentAdviceCreated",
+    "medicalDiagnosisCreated",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "recoverabilityAssessmentDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-OPTION-RECOVERABILITY-ASSESSMENT-v1.0.0"
+    },
+    "recoverabilityAssessmentCode": {
+      "type": "string",
+      "pattern": "^RNE-RECOVERABILITY-[A-Z0-9-]{4,120}$"
+    },
+    "recoverabilityAssessmentVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "OPTION_RECOVERABILITY_ASSESSMENT"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "optionSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "riskContextReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "recoveryViewReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest",
+        "mode"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "mode": {
+          "const": "VALIDATION_VIEW_REFERENCE_ONLY"
+        }
+      }
+    },
+    "recoveryState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capacityState",
+        "windowState",
+        "uncertaintyState"
+      ],
+      "properties": {
+        "capacityState": {
+          "enum": [
+            "AVAILABLE",
+            "CONSTRAINED",
+            "NOT_OBSERVED",
+            "UNKNOWN"
+          ]
+        },
+        "windowState": {
+          "enum": [
+            "OPEN",
+            "CONDITIONAL",
+            "NOT_OBSERVED",
+            "UNKNOWN"
+          ]
+        },
+        "uncertaintyState": {
+          "enum": [
+            "BOUNDED",
+            "ELEVATED",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "optionAssessments": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "optionCode",
+          "optionClass",
+          "boundaryMode",
+          "recoverabilityClass",
+          "recoveryWindowState",
+          "recoveryCapacityState",
+          "uncertaintyState",
+          "knownRiskReferences",
+          "unknownReferences",
+          "dependencyReferences",
+          "guaranteedRecoveryCreated",
+          "treatmentAdviceCreated",
+          "medicalDiagnosisCreated"
+        ],
+        "properties": {
+          "optionCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionClass": {
+            "enum": [
+              "OBSERVE",
+              "CLARIFY",
+              "VERIFY",
+              "REPOSITION",
+              "RECONFIGURE"
+            ]
+          },
+          "boundaryMode": {
+            "enum": [
+              "NO_STATE_CHANGE_REQUIRED",
+              "CLARIFICATION_ONLY",
+              "DEPENDENCY_VERIFICATION_ONLY",
+              "HARD_BOUNDARY_RESPECTED",
+              "SOFT_LIMIT_RECONFIGURATION"
+            ]
+          },
+          "recoverabilityClass": {
+            "enum": [
+              "NO_STATE_CHANGE_REQUIRED",
+              "RECOVERY_WINDOW_OPEN",
+              "RECOVERY_WINDOW_CONDITIONAL",
+              "RECOVERY_NOT_OBSERVED",
+              "RECOVERY_UNKNOWN"
+            ]
+          },
+          "recoveryWindowState": {
+            "enum": [
+              "OPEN",
+              "CONDITIONAL",
+              "NOT_OBSERVED",
+              "UNKNOWN"
+            ]
+          },
+          "recoveryCapacityState": {
+            "enum": [
+              "AVAILABLE",
+              "CONSTRAINED",
+              "NOT_OBSERVED",
+              "UNKNOWN"
+            ]
+          },
+          "uncertaintyState": {
+            "enum": [
+              "BOUNDED",
+              "ELEVATED",
+              "UNKNOWN"
+            ]
+          },
+          "knownRiskReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "unknownReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "dependencyReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "guaranteedRecoveryCreated": {
+            "const": false
+          },
+          "treatmentAdviceCreated": {
+            "const": false
+          },
+          "medicalDiagnosisCreated": {
+            "const": false
+          }
+        }
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recoveryReadingAuthority",
+        "optionRecoverabilityMappingAuthority",
+        "professionalJudgmentAuthority"
+      ],
+      "properties": {
+        "recoveryReadingAuthority": {
+          "const": "RRE"
+        },
+        "optionRecoverabilityMappingAuthority": {
+          "const": "RNE"
+        },
+        "professionalJudgmentAuthority": {
+          "const": "PR"
+        }
+      }
+    },
+    "selectionMade": {
+      "const": false
+    },
+    "recommendationCreated": {
+      "const": false
+    },
+    "guaranteedRecoveryCreated": {
+      "const": false
+    },
+    "treatmentAdviceCreated": {
+      "const": false
+    },
+    "medicalDiagnosisCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "recoverabilityAssessmentDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

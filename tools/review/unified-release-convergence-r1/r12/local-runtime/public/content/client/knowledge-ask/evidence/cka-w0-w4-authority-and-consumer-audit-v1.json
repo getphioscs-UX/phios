@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W0-W4-AUTHORITY-AND-CONSUMER-AUDIT-v1.0.0",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "status": "EXISTING_KAP_RUNTIME_REUSED_CKA_CLIENT_CONSUMER_IMPLEMENTED",
+  "predecessorSnapshots": [
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "sha256": "601cdfe9c75affe453f86b31deedd524c515613e08e15c6ab017707f1cbee965",
+      "role": "GROUNDED_ANSWER_RUNTIME"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "sha256": "b251475a4ff303b6c7428290d7ed231af5416b8fffa14077b9defe37952e5011",
+      "role": "GOVERNED_RETRIEVAL_RUNTIME"
+    },
+    {
+      "path": "content/web/homepage/hpc2/contracts/hpc2-w5-phios-runtime-composition-contract-v1.json",
+      "sha256": "20cfd8990349e49cb28bd533646759e16042f1b0b4e859ff301ad36afdcf5c5c",
+      "role": "H04_ASK_POSITION_PREDECESSOR"
+    },
+    {
+      "path": "content/web/homepage/hpc2/freeze/hpc2-w5-phios-runtime-composition-freeze-v1.json",
+      "sha256": "046feb91025475aa76be7eccbe01c17a6797017075d3cf1e2dcb3606d3fc9439",
+      "role": "H04_PREDECESSOR_FREEZE"
+    },
+    {
+      "path": "scripts/check-hpc2-w5.mjs",
+      "sha256": "204747fc5b9c9200965e9f39f06b2e89e0c334edda9a7b8f3f2675646d1fb703",
+      "role": "HISTORICAL_FROZEN_CHECKER"
+    }
+  ],
+  "findings": {
+    "existingAskApi": true,
+    "existingKapAnswerRuntime": true,
+    "existingKapRetrievalRuntime": true,
+    "existingKnowledgeSearchSurface": true,
+    "existingSurfaceViolations": [
+      "FIRST_SCREEN_DEPTH_SELECTOR",
+      "INTERNAL_NODE_CODES_RENDERED",
+      "GUIDED_READING_AUTO_CHECK_BEFORE_CKA_W5",
+      "NON_CKA_ANSWER_SECTION_ORDER"
+    ],
+    "remediatedBy": [
+      "CKA_CLIENT_PROJECTION",
+      "SIX_SECTION_ANSWER_SURFACE",
+      "TEMPORARY_FOLLOW_UP",
+      "HOMEPAGE_ENTRY_SUCCESSOR"
+    ]
+  },
+  "authorityResult": {
+    "secondAnswerRuntimeCreated": false,
+    "secondRetrievalRuntimeCreated": false,
+    "genericChatAuthorityCreated": false,
+    "realityJourneyAuthorityCreated": false
+  }
+}

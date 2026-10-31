@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S18-MPA-PACKAGE-DECOUPLING-RECONCILIATION-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S18",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "RECONCILED_NO_MPA_FINGERPRINT_SUCCESSOR_REQUIRED",
+  "mpaCurrentAuthority": {
+    "path": "content/professional/method-production-activation/current/mpa-current-check-consolidation-v1.json",
+    "sha256": "4e02343f58cb1db8d8b08b0fe8e06eef2bfb59bc7956f65593c9c578c80c4674"
+  },
+  "packageChange": {
+    "scriptAdded": "check:mrm-s",
+    "methodSemanticsChanged": false,
+    "methodDependencyChanged": false,
+    "methodProductionEligibilityChanged": false
+  },
+  "reason": "Current MPA explicitly forbids whole package.json/package-lock fingerprints in its current regression authority. Creating a new MPA package fingerprint successor would reintroduce retired coupling.",
+  "rules": {
+    "mpaHistoricalFreezeMutated": false,
+    "newMpaPackageFingerprintCreated": false,
+    "currentMpaDecouplingPreserved": true
+  }
+}

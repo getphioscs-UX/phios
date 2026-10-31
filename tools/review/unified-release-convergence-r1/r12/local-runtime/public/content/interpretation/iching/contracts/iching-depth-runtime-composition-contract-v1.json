@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-DEPTH-RUNTIME-COMPOSITION-CONTRACT-v1.0.0",
+  "phase": "ICHI-DEPTH",
+  "work": "ICHI-DEPTH-W5-W6",
+  "baselineCommit": "71ec2e6abcc88eb7692cf80d48edd490ab664c13",
+  "status": "ACTIVE_FAIL_CLOSED_APPROVED_EDITORIAL_ONLY",
+  "existingAuthoritiesReused": {
+    "structuralRuntime": "I_CHING_STRUCTURAL_RUNTIME_V1_FROZEN",
+    "sourceBoundAdapter": "functions/interpretation-runtime/adapters/iching-interpretation-adapter-v1.js",
+    "readingIr": "functions/interpretation-runtime/iching-reading-ir-v1.js",
+    "publicView": "functions/iching-product-runtime/iching-public-view-v1.js",
+    "humanReviewAuthority": "functions/iching-product-runtime/iching-human-review-authority-v1.js"
+  },
+  "selectionRules": {
+    "wholeHexagramEntryRequired": true,
+    "changingLineEntriesRequiredWhenPresent": true,
+    "selectedLinesMustMatchChangingLines": true,
+    "requiredReviewStatus": "HUMAN_APPROVED",
+    "humanApprovedMustBeTrue": true,
+    "namedReviewerRequired": true,
+    "reviewTimestampRequired": true,
+    "sourceFidelityChecked": true,
+    "localeFidelityChecked": true,
+    "boundaryChecked": true,
+    "runtimeCandidateFallbackAllowed": false,
+    "runtimeModelGapFillAllowed": false
+  },
+  "compositionRules": {
+    "readingIrMayBeMutated": false,
+    "supplementMayOverrideCanonicalStructure": false,
+    "supplementMayOverrideSourceClaims": false,
+    "supplementMayCreateRealityTruth": false,
+    "supplementMayCreateFateConclusion": false,
+    "supplementMayCreateProfessionalJudgment": false,
+    "supplementMayHideUncertainty": false,
+    "userDecisionAuthority": true
+  },
+  "availabilityStates": [
+    "AVAILABLE",
+    "CONTROLLED_UNAVAILABLE"
+  ],
+  "productionBoundary": {
+    "candidateCoverageMayActivatePublicRuntime": false,
+    "partialHumanApprovalMayActivateCompleteDepthClaim": false,
+    "publicDepthReadyRequires": [
+      "64/64 HUMAN_APPROVED HEXAGRAM",
+      "384/384 HUMAN_APPROVED LINE",
+      "448/448 zh-Hans LOCALE REVIEW",
+      "448/448 en LOCALE REVIEW",
+      "ZERO CRITICAL BOUNDARY FAILURES"
+    ],
+    "publicRuntimeBound": false,
+    "productionAuthorityChanged": false
+  }
+}

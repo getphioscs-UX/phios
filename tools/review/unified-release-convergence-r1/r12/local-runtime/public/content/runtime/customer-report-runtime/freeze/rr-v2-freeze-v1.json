@@ -1,0 +1,85 @@
+{
+  "freezeCode": "PHI-OS-RR-W12-V2-FREEZE-v1",
+  "freezeVersion": "2.0.0",
+  "runtimeCode": "RR",
+  "work": "RR-W12",
+  "status": "RR-v2.0.0-FROZEN",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "scope": "RR-W0-W12",
+  "completedWorks": [
+    "RR-W0",
+    "RR-W1",
+    "RR-W2",
+    "RR-W3",
+    "RR-W4",
+    "RR-W5",
+    "RR-W6",
+    "RR-W7",
+    "RR-W8",
+    "RR-W9",
+    "RR-W10",
+    "RR-W11",
+    "RR-W12"
+  ],
+  "authority": "REPORT_ASSEMBLY",
+  "dataType": "REPORT_RECORD",
+  "preservedLifecycle": [
+    "Candidate",
+    "Review",
+    "Approval",
+    "Release",
+    "Revision"
+  ],
+  "productionState": "GOVERNED_ASSEMBLY_READY_UPSTREAM_AUTHORITY_GATED",
+  "nonActivation": {
+    "liveCustomerReportCreated": false,
+    "newKnowledgeCreated": false,
+    "newMeaningCreated": false,
+    "newProfessionalJudgmentCreated": false,
+    "newReadoutCreated": false,
+    "newMetricCreated": false,
+    "professionalApprovalCreatedByRr": false,
+    "cprRenderingPerformed": false,
+    "lrmTimelinePersistedByRr": false,
+    "directStorageWritePerformed": false
+  },
+  "upstreamGates": {
+    "professionalReportRequiresPrApproval": true,
+    "readoutSectionRequiresRreReadout": true,
+    "navigationSectionRequiresJrNavigation": true,
+    "knowledgeSectionRequiresPublishedKnowledge": true,
+    "metricSectionRequiresGovernedMetricSource": true
+  },
+  "downstream": {
+    "cprPresentationAuthorityPreserved": true,
+    "lrmTimelineAuthorityPreserved": true
+  },
+  "frozenOutputs": [
+    "content/runtime/customer-report-runtime/audits/rr-w0-report-authority-audit-v2.json",
+    "content/runtime/customer-report-runtime/contracts/customer-report-contract-v2.json",
+    "content/runtime/customer-report-runtime/registries/canonical-report-section-registry-v2.json",
+    "content/runtime/customer-report-runtime/registries/report-lifecycle-state-registry-v2.json",
+    "content/runtime/customer-report-runtime/registries/report-channel-registry-v2.json",
+    "content/runtime/customer-report-runtime/contracts/report-assembly-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/report-candidate-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/report-review-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/report-approval-signature-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/canonical-report-object-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/rr-cpr-handoff-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/report-release-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/report-revision-contract-v2.json",
+    "content/runtime/customer-report-runtime/contracts/rr-lrm-integration-contract-v2.json",
+    "content/runtime/customer-report-runtime/schemas/canonical-report-v2.schema.json",
+    "content/runtime/customer-report-runtime/acceptance/rr-v2-acceptance-v1.json",
+    "content/runtime/customer-report-runtime/fixtures/rr-v2-acceptance-cases.json",
+    "content/runtime/customer-report-runtime/freeze/rr-v1-legacy-preservation-manifest-v2.json",
+    "content/governance/reality-data-governance/extensions/rr-v2/registries/rr-v2-data-contract-successor-v1.json",
+    "content/governance/reality-data-governance/extensions/rr-v2/audits/rr-v2-data-authority-reconciliation-v1.json",
+    "scripts/lib/customer-report-runtime/report-runtime-v2.mjs",
+    "scripts/check-rr-w0-w12-customer-report-runtime-v2.mjs"
+  ],
+  "packageIntegration": {
+    "checkAlias": "check:rr",
+    "defaultPostcheckIntegrationRequired": true
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "registryCode": "PHI-OS-RG-W10-CHECKER-SUCCESSOR-DEPRECATION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RG-W10",
+  "status": "canonical",
+  "implementations": [
+    {"implementation": "scripts/run-runtime-checker.mjs", "status": "legacy_frozen", "successor": "scripts/run-runtime-checker-v2.mjs"},
+    {"implementation": "scripts/run-runtime-checker-v2.mjs", "status": "superseded", "successor": "scripts/run-runtime-checker-v3.mjs"},
+    {"implementation": "scripts/run-runtime-checker-v3.mjs", "status": "active", "successor": null}
+  ],
+  "registries": [
+    {"registry": "content/runtime/checkers/runtime-checker-alias-registry-v1.json", "status": "legacy_frozen"},
+    {"registry": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v2.json", "status": "superseded_foundation"},
+    {"registry": "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v3.json", "status": "active_resolution_authority"}
+  ],
+  "rules": {
+    "workCodeChangesAcrossSuccessor": false,
+    "acceptedHistoricalFileMayBeRenamed": false,
+    "inPlaceLegacyFreezeMutationAllowed": false,
+    "successorMustBeExplicit": true
+  }
+}

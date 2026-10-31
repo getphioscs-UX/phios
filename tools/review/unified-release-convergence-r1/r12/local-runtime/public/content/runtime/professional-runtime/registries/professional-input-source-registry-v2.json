@@ -1,0 +1,68 @@
+{
+  "registryCode": "PHI-OS-PR-W2-PROFESSIONAL-INPUT-SOURCE-REGISTRY-v2",
+  "registryVersion": "2.0.0",
+  "runtimeCode": "PR",
+  "work": "PR-W2",
+  "status": "canonical",
+  "entries": [
+    {
+      "inputClass": "RAW_DATA",
+      "dataType": "REALITY_INPUT_RECORD",
+      "authority": "ICR",
+      "countsAsEvidence": false
+    },
+    {
+      "inputClass": "REALITY",
+      "dataType": "RUNTIME_STATE_RECORD",
+      "authority": "RMO",
+      "countsAsEvidence": true
+    },
+    {
+      "inputClass": "EVIDENCE",
+      "dataType": "REALITY_EVIDENCE_RECORD",
+      "authority": "RRE",
+      "countsAsEvidence": true
+    },
+    {
+      "inputClass": "READOUT",
+      "dataType": "REALITY_READOUT_RECORD",
+      "authority": "RRE",
+      "countsAsEvidence": false
+    },
+    {
+      "inputClass": "METRICS",
+      "dataType": "OUTCOME_RECORD",
+      "authority": "UPSTREAM_METRIC_AUTHORITY",
+      "countsAsEvidence": false
+    },
+    {
+      "inputClass": "MEANING",
+      "dataType": "MEANING_PROJECTION_RECORD",
+      "authority": "CMR",
+      "countsAsEvidence": false
+    },
+    {
+      "inputClass": "KNOWLEDGE",
+      "dataType": null,
+      "authority": "KNOWLEDGE_AUTHORITY",
+      "countsAsEvidence": false
+    },
+    {
+      "inputClass": "JOURNEY",
+      "dataType": "NAVIGATION_RECORD",
+      "authority": "JR",
+      "countsAsEvidence": false
+    },
+    {
+      "inputClass": "UNKNOWN",
+      "dataType": "REALITY_READOUT_RECORD|RUNTIME_STATE_RECORD",
+      "authority": "RRE|RMO",
+      "countsAsEvidence": false
+    }
+  ],
+  "rules": {
+    "rawDataNeverAutoPromotedToEvidence": true,
+    "metricNeverAutoPromotedToJudgment": true,
+    "readoutNeverAutoPromotedToJudgment": true
+  }
+}

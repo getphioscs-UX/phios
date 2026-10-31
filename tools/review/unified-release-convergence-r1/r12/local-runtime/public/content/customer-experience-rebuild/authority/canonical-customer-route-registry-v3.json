@@ -1,0 +1,778 @@
+{
+  "schemaVersion": "PHI-OS-CX-CANONICAL-CUSTOMER-ROUTE-REGISTRY-v3.0.0",
+  "work": "CX-R2-W2-W10",
+  "baselineCommit": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+  "recordedAt": "2026-09-03T03:18:00Z",
+  "status": "CUSTOMER_ROUTE_AUTHORITY_FROZEN_PRE_CUTOVER",
+  "predecessorInputs": [
+    "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v2.json",
+    "content/customer-experience-rebuild/migration/hard-cutover-preparation-v2.json"
+  ],
+  "primaryNavigation": [
+    "EXPLORE",
+    "MY_REALITY",
+    "PERSPECTIVES",
+    "KNOWLEDGE",
+    "PROFESSIONAL"
+  ],
+  "utilities": [
+    "SEARCH",
+    "ASK",
+    "ACCOUNT",
+    "LOCALE"
+  ],
+  "authorityBoundary": {
+    "createsBackendAuthority": false,
+    "presentationRoutingOnly": true,
+    "routeAuthorityMayPrecedeSurfaceImplementation": true,
+    "oneCanonicalPathPerRouteId": true,
+    "routeCutoverPerformed": false,
+    "redirectsMutatedByR2": false,
+    "physicalLegacyDeletePerformed": false
+  },
+  "routes": [
+    {
+      "routeId": "HOME",
+      "canonicalPath": "/",
+      "currentOperationalPath": "/",
+      "domain": "ROOT",
+      "navigationRole": "PRIMARY_OR_ROOT",
+      "ownerPhase": "CX-R6",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "EXPLORE",
+      "canonicalPath": "/explore/",
+      "currentOperationalPath": "/explore",
+      "domain": "EXPLORE",
+      "navigationRole": "PRIMARY",
+      "ownerPhase": "CX-R7",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "EXPLORE_WHY",
+      "canonicalPath": "/explore/why-phios/",
+      "currentOperationalPath": "/about/why-phios/",
+      "domain": "EXPLORE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R7",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "EXPLORE_HOW",
+      "canonicalPath": "/explore/how-it-works/",
+      "currentOperationalPath": null,
+      "domain": "EXPLORE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R7",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "EXPLORE_START",
+      "canonicalPath": "/explore/start/",
+      "currentOperationalPath": null,
+      "domain": "EXPLORE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R7",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ABOUT",
+      "canonicalPath": "/about/",
+      "currentOperationalPath": null,
+      "domain": "EXPLORE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R7",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "MY_REALITY",
+      "canonicalPath": "/reality/",
+      "currentOperationalPath": "/reality/",
+      "domain": "MY_REALITY",
+      "navigationRole": "PRIMARY",
+      "ownerPhase": "CX-R10",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REALITY_CURRENT",
+      "canonicalPath": "/reality/current/",
+      "currentOperationalPath": null,
+      "domain": "MY_REALITY",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R10",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REALITY_PERSPECTIVES",
+      "canonicalPath": "/reality/perspectives/",
+      "currentOperationalPath": null,
+      "domain": "MY_REALITY",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R10",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REALITY_NAVIGATION",
+      "canonicalPath": "/reality/navigation/",
+      "currentOperationalPath": null,
+      "domain": "MY_REALITY",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R10",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REALITY_ACTIONS",
+      "canonicalPath": "/reality/actions/",
+      "currentOperationalPath": null,
+      "domain": "MY_REALITY",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R10",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REALITY_REVIEW",
+      "canonicalPath": "/reality/review/",
+      "currentOperationalPath": null,
+      "domain": "MY_REALITY",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R10",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REALITY_HISTORY",
+      "canonicalPath": "/reality/history/",
+      "currentOperationalPath": null,
+      "domain": "MY_REALITY",
+      "navigationRole": "FUTURE_GATED",
+      "ownerPhase": "CX-R10",
+      "routeState": "FUTURE_LRM_GATED",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "PERSPECTIVES",
+      "canonicalPath": "/perspectives/",
+      "currentOperationalPath": "/perspectives/",
+      "domain": "PERSPECTIVES",
+      "navigationRole": "PRIMARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "PERSONAL_REALITY",
+      "canonicalPath": "/perspectives/personal/",
+      "currentOperationalPath": "/perspectives/personal/",
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R12",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "RELATIONSHIP",
+      "canonicalPath": "/perspectives/relationship/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "PROFILE",
+      "canonicalPath": "/perspectives/profile/",
+      "currentOperationalPath": "/perspectives/profile/",
+      "domain": "PERSPECTIVES",
+      "navigationRole": "RESERVED_SUCCESSOR",
+      "ownerPhase": "CX-R11",
+      "routeState": "RESERVED_NOT_R2_ACTIVATED",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "CURRENT_CONTEXT",
+      "canonicalPath": "/perspectives/current-context/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ASTROLOGY",
+      "canonicalPath": "/perspectives/astrology/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "BAZI",
+      "canonicalPath": "/perspectives/bazi/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ZI_WEI",
+      "canonicalPath": "/perspectives/zi-wei/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "HUMAN_DESIGN",
+      "canonicalPath": "/perspectives/human-design/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "NUMEROLOGY",
+      "canonicalPath": "/perspectives/numerology/",
+      "currentOperationalPath": null,
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "I_CHING",
+      "canonicalPath": "/perspectives/i-ching/",
+      "currentOperationalPath": "/perspectives/iching/",
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "TAROT",
+      "canonicalPath": "/perspectives/tarot/",
+      "currentOperationalPath": "/perspectives/tarot/",
+      "domain": "PERSPECTIVES",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R11",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "KNOWLEDGE",
+      "canonicalPath": "/knowledge/",
+      "currentOperationalPath": "/library",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "PRIMARY",
+      "ownerPhase": "CX-R8",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ASK",
+      "canonicalPath": "/knowledge/ask/",
+      "currentOperationalPath": "/ask",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "UTILITY_AND_SECONDARY",
+      "ownerPhase": "CX-R9-R2",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "SEARCH",
+      "canonicalPath": "/knowledge/search/",
+      "currentOperationalPath": "/search/",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "UTILITY_AND_SECONDARY",
+      "ownerPhase": "CX-R8",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ARTICLES",
+      "canonicalPath": "/knowledge/articles/",
+      "currentOperationalPath": "/articles",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R8",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "BOOKS",
+      "canonicalPath": "/knowledge/books/",
+      "currentOperationalPath": "/books/",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R8",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "FIGURES",
+      "canonicalPath": "/knowledge/figures/",
+      "currentOperationalPath": "/figures",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R8",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "CONCEPTS",
+      "canonicalPath": "/knowledge/concepts/",
+      "currentOperationalPath": "/glossary",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R8",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ACADEMY",
+      "canonicalPath": "/knowledge/learn/",
+      "currentOperationalPath": "/academy",
+      "domain": "KNOWLEDGE",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R16",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "PROFESSIONAL",
+      "canonicalPath": "/professional/",
+      "currentOperationalPath": "/professional/",
+      "domain": "PROFESSIONAL",
+      "navigationRole": "PRIMARY",
+      "ownerPhase": "CX-R14",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "FINANCIAL_REALITY",
+      "canonicalPath": "/professional/financial/",
+      "currentOperationalPath": "/professional/financial/",
+      "domain": "PROFESSIONAL",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R13",
+      "routeState": "PRESENT_PATH_NOT_R2_REBUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "PROFESSIONAL_REVIEW",
+      "canonicalPath": "/professional/review/",
+      "currentOperationalPath": null,
+      "domain": "PROFESSIONAL",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R14",
+      "routeState": "TARGET_DECLARED_NOT_BUILT",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "REPORTS",
+      "canonicalPath": "/professional/reports/",
+      "currentOperationalPath": "/professional-reports",
+      "domain": "PROFESSIONAL",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R14",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "SERVICES",
+      "canonicalPath": "/professional/services/",
+      "currentOperationalPath": "/services",
+      "domain": "PROFESSIONAL",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R14",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "APPOINTMENTS",
+      "canonicalPath": "/professional/appointments/",
+      "currentOperationalPath": "/professional-appointments",
+      "domain": "PROFESSIONAL",
+      "navigationRole": "SECONDARY",
+      "ownerPhase": "CX-R14",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    },
+    {
+      "routeId": "ACCOUNT",
+      "canonicalPath": "/account/",
+      "currentOperationalPath": "/account",
+      "domain": "ACCOUNT",
+      "navigationRole": "UTILITY",
+      "ownerPhase": "CX-R15",
+      "routeState": "TARGET_DECLARED_PREDECESSOR_PATH_EXISTS",
+      "successorPresentationAccepted": false,
+      "routeCutoverPerformedByR2": false
+    }
+  ],
+  "compatibilityAliases": [
+    {
+      "path": "/academy",
+      "canonicalRouteId": "ACADEMY",
+      "destination": "/knowledge/learn/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/academy.html",
+      "canonicalRouteId": "ACADEMY",
+      "destination": "/knowledge/learn/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/account",
+      "canonicalRouteId": "ACCOUNT",
+      "destination": "/account/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/account.html",
+      "canonicalRouteId": "ACCOUNT",
+      "destination": "/account/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/articles",
+      "canonicalRouteId": "ARTICLES",
+      "destination": "/knowledge/articles/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/articles.html",
+      "canonicalRouteId": "ARTICLES",
+      "destination": "/knowledge/articles/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/ask",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/ask.html",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/explore",
+      "canonicalRouteId": "EXPLORE",
+      "destination": "/explore/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/figures",
+      "canonicalRouteId": "FIGURES",
+      "destination": "/knowledge/figures/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/figures.html",
+      "canonicalRouteId": "FIGURES",
+      "destination": "/knowledge/figures/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/financial",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/financial-reality",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/financial-reality.html",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/glossary",
+      "canonicalRouteId": "CONCEPTS",
+      "destination": "/knowledge/concepts/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/glossary.html",
+      "canonicalRouteId": "CONCEPTS",
+      "destination": "/knowledge/concepts/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/knowledge-search",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/knowledge-search.html",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/library",
+      "canonicalRouteId": "KNOWLEDGE",
+      "destination": "/knowledge/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/library.html",
+      "canonicalRouteId": "KNOWLEDGE",
+      "destination": "/knowledge/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/my-reality",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/my-reality.html",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/personal-runtime",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/personal-runtime.html",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/perspectives/iching/",
+      "canonicalRouteId": "I_CHING",
+      "destination": "/perspectives/i-ching/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/professional-appointments",
+      "canonicalRouteId": "APPOINTMENTS",
+      "destination": "/professional/appointments/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/professional-appointments.html",
+      "canonicalRouteId": "APPOINTMENTS",
+      "destination": "/professional/appointments/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/professional-reports",
+      "canonicalRouteId": "REPORTS",
+      "destination": "/professional/reports/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/professional-reports.html",
+      "canonicalRouteId": "REPORTS",
+      "destination": "/professional/reports/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/professional/personal-runtime",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/reality-dashboard",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/reality-dashboard.html",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER",
+      "source": "CX-R1A_PREPARATION"
+    },
+    {
+      "path": "/search",
+      "canonicalRouteId": "SEARCH",
+      "destination": "/knowledge/search/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/search/",
+      "canonicalRouteId": "SEARCH",
+      "destination": "/knowledge/search/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/services",
+      "canonicalRouteId": "SERVICES",
+      "destination": "/professional/services/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    },
+    {
+      "path": "/services.html",
+      "canonicalRouteId": "SERVICES",
+      "destination": "/professional/services/",
+      "redirectStatus": 308,
+      "source": "CX-R2_ROUTE_AUTHORITY",
+      "activation": "PLANNED_COMPATIBILITY_NOT_R2_CUTOVER"
+    }
+  ],
+  "rules": {
+    "canonicalAsk": "/knowledge/ask/",
+    "realityJourneyTopLevelForbidden": true,
+    "readingsTopLevelForbidden": true,
+    "servicesTopLevelForbidden": true,
+    "academyTopLevelForbidden": true,
+    "reportsTopLevelForbidden": true,
+    "financialTopLevelForbidden": true,
+    "booksTopLevelForbidden": true,
+    "doNotCutOverBeforeReplacementAcceptance": true,
+    "doNotDeleteLegacyBeforeProductionBrowserAcceptance": true,
+    "routeTargetDoesNotImplyCapabilityAvailable": true
+  }
+}

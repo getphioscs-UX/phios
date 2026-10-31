@@ -1,0 +1,28 @@
+{
+  "registryCode": "PHI-OS-RR-V2-REPORT-LIFECYCLE-STATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RR",
+  "status": "canonical",
+  "states": [
+    "ASSEMBLED",
+    "CANDIDATE",
+    "REVIEW_BLOCKED",
+    "REVIEW_PASSED",
+    "APPROVAL_BLOCKED",
+    "APPROVED",
+    "RELEASED",
+    "SUPERSEDED_BY_REVISION"
+  ],
+  "preservedLegacyStages": [
+    "CANDIDATE",
+    "REVIEW",
+    "APPROVAL",
+    "RELEASE",
+    "REVISION"
+  ],
+  "rules": {
+    "noStageMayBeSkippedForRelease": true,
+    "professionalApprovalOwnedByPr": true,
+    "revisionNeverOverwritesHistory": true
+  }
+}

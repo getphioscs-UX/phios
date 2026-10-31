@@ -1,0 +1,38 @@
+{
+  "contractCode": "PHI-OS-ALR-W29-LEARNING-PROGRESS-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W29",
+  "status": "active",
+  "productionStatus": "deterministic_semantic_projection_only",
+  "semanticAuthority": "ALR",
+  "dataGovernanceAuthority": "RDG",
+  "identityPrefix": "ALR-LP-",
+  "rdgLearningDataReference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+  "requiredProgressScopeFields": ["progressCode", "progressVersion", "programCode", "learningPathCode", "moduleCode", "lessonCode", "practiceCode", "assessmentCode", "capabilityCode", "continuityCode", "reviewCode", "recommendationCode", "status", "authorityReference"],
+  "requiredEvaluationInputFields": ["progressCode", "progressVersion", "exposureDecision", "practiceDecision", "assessmentDecision", "reviewDecision", "lineageReferences"],
+  "exposureDecisions": ["NOT_RECORDED", "GOVERNED_RECORD_PRESENT", "DISPUTED", "UNKNOWN"],
+  "practiceDecisions": ["NOT_RECORDED", "GOVERNED_RECORD_PRESENT", "DISPUTED", "UNKNOWN"],
+  "assessmentDecisions": ["NOT_EVALUATED", "INTEGRITY_VALID_RESULT_PRESENT", "DISPUTED", "UNKNOWN"],
+  "reviewDecisions": ["NOT_DUE", "REVIEW_DUE", "REVIEW_COMPLETED", "DISPUTED", "UNKNOWN"],
+  "progressStates": ["NOT_STARTED", "IN_PROGRESS", "ASSESSMENT_PENDING", "REVIEW_DUE", "COMPLETED", "DISPUTED", "UNKNOWN"],
+  "forbiddenInputFields": ["learnerReference", "subjectReference", "accountReference", "rawResponse", "response", "score", "grade", "capabilityState", "capabilityAchieved", "credentialState", "entitlementState", "professionalJudgment", "providerPrompt", "providerResponse", "modelOutput", "persist", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "progressRequiresRegisteredReciprocalLearningScope": true,
+    "nonInitialProgressRequiresOpaqueGovernedLineage": true,
+    "progressSequenceMustBeMonotonic": true,
+    "completionRequiresExposurePracticeAssessmentAndReview": true,
+    "lessonCompletionIsCapability": false,
+    "completionMaySetCapabilityState": false,
+    "progressMayGrantCredentialEntitlementOrProfessionalAuthority": false,
+    "progressEvaluationPersistsLearnerData": false,
+    "unknownAndDisputedRemainGovernedStates": true,
+    "unknownReferenceDecisionOrSequenceFailsClosed": true
+  },
+  "activation": {
+    "progressDefinitionAndSemanticEvaluationActive": true,
+    "learnerProgressStoreActive": false,
+    "rdgPersistenceFromAlrActive": false,
+    "capabilityStatePersistenceActive": false,
+    "learnerDeliveryRuntimeActive": false
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "registryCode": "PHI-OS-PR-E1-PRODUCTION-ACTIVATION-GATES-v1",
+  "registryVersion": "1.0.0",
+  "status": "canonical_post_freeze_extension",
+  "gates": [
+    {
+      "gateCode": "PR_V2_FREEZE",
+      "state": "SATISFIED",
+      "authority": "PR"
+    },
+    {
+      "gateCode": "PWS_PROFESSIONAL_HANDOFF",
+      "state": "SATISFIED",
+      "authority": "PWS"
+    },
+    {
+      "gateCode": "ACTIVE_ASSIGNMENT",
+      "state": "RUNTIME_REQUIRED",
+      "authority": "runtime/assignment"
+    },
+    {
+      "gateCode": "PROFESSIONAL_ELIGIBILITY",
+      "state": "RUNTIME_REQUIRED",
+      "authority": "runtime/professional"
+    },
+    {
+      "gateCode": "RDG_PERMISSION",
+      "state": "RUNTIME_REQUIRED",
+      "authority": "RDG"
+    },
+    {
+      "gateCode": "PR_CASE_VERSIONING",
+      "state": "READY",
+      "authority": "PR"
+    },
+    {
+      "gateCode": "EVIDENCE_REFERENCE_RESOLUTION",
+      "state": "READY",
+      "authority": "PR_REFERENCE_RESOLUTION_ONLY"
+    },
+    {
+      "gateCode": "CASE_STORAGE_EXECUTOR",
+      "state": "BLOCKED_NOT_IMPLEMENTED",
+      "authority": "PWS_OR_STORAGE_EXECUTOR"
+    },
+    {
+      "gateCode": "WORKSPACE_D1_PERSISTENCE",
+      "state": "BLOCKED_CONTRACT_ONLY",
+      "authority": "PWS_OR_STORAGE_EXECUTOR"
+    }
+  ],
+  "productionDecision": "PROFESSIONAL_RUNTIME_EXECUTION_ALLOWED_WITHOUT_FALSE_PERSISTENCE_CLAIM"
+}

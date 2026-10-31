@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W6-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_FOUNDATION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W6",
+  "purpose": "Govern Current Evidence → Position Correspondence → Transition Signals → Observation Threshold → Reachable Positions without creating a parallel runtime or filling missing current facts by inference.",
+  "existingRuntimeOwners": {
+    "currentEvidence": "content/governance/current-web-authority/contracts/current-evidence-ir-contract-v1.json",
+    "currentEvidenceRuntime": "functions/current-web-authority/current-web-authority-runtime.js",
+    "realityReadout": "content/runtime/reality-readout-engine/contracts/canonical-runtime-readout-contract-v1.json",
+    "book6ReadoutAdapter": "scripts/lib/civilization-atlas/book6-rre-adapter-v1.mjs",
+    "runtimePositions": "content/registry/runtime-position-48-v1.json",
+    "correspondence": "content/civilization-atlas/reconfiguration/runtime-position-correspondence-contract-v1.json"
+  },
+  "architectureBoundary": {
+    "newParallelRuntime": false,
+    "newCurrentWebAuthority": false,
+    "newRealityReadoutEngine": false,
+    "newScoringSystem": false,
+    "currentEvidenceMayPopulateOnlyAfterAdmission": true,
+    "currentPositionRequiresHumanAdmission": true
+  },
+  "pipeline": [
+    {
+      "stage": "CURRENT_EVIDENCE_CANDIDATE",
+      "knowledgeState": "UNKNOWN",
+      "rule": "Search/discovery output is not fact or authority."
+    },
+    {
+      "stage": "CURRENT_EVIDENCE_ADMITTED",
+      "knowledgeState": "CURRENT_DATA",
+      "rule": "Requires provenance, authority class, freshness and dated evidence admission."
+    },
+    {
+      "stage": "RRE_OBSERVATION_READY",
+      "knowledgeState": "DERIVED_RUNTIME_READOUT",
+      "rule": "Current evidence enters the existing Reality Readout Engine; missing evidence remains visible."
+    },
+    {
+      "stage": "POSITION_CANDIDATE",
+      "knowledgeState": "DERIVED_RUNTIME_READOUT",
+      "rule": "A candidate runtime position may be proposed only from admitted evidence and explicit reasoning lineage; no date-only mapping."
+    },
+    {
+      "stage": "POSITION_HUMAN_ADMISSION",
+      "knowledgeState": "DERIVED_RUNTIME_READOUT",
+      "rule": "Primary/secondary/subsystem correspondence remains unadmitted until human review."
+    },
+    {
+      "stage": "TRANSITION_SIGNAL",
+      "knowledgeState": "OBSERVED_SIGNAL",
+      "rule": "A registered observation target becomes an observed signal only when admitted evidence supports direction/change."
+    },
+    {
+      "stage": "OBSERVATION_THRESHOLD_REVIEW",
+      "knowledgeState": "DERIVED_RUNTIME_READOUT",
+      "rule": "Threshold review is qualitative and evidence-addressed; no synthetic score."
+    },
+    {
+      "stage": "REACHABLE_POSITION",
+      "knowledgeState": "CONDITIONAL_PROJECTION",
+      "rule": "Reachability is conditional projection only and must list enabling/closing conditions and unknowns."
+    }
+  ],
+  "evidenceLanes": [
+    "capacity",
+    "load",
+    "alignment",
+    "resilience",
+    "adaptability",
+    "futureCapacity",
+    "externalDependency",
+    "technology",
+    "population",
+    "carrierStructure",
+    "pressureFields"
+  ],
+  "observationThresholdCriteria": [
+    {
+      "id": "PERSISTENCE",
+      "labelZh": "持续性",
+      "rule": "变化必须持续存在，而不是一次异常。"
+    },
+    {
+      "id": "CROSS_SYSTEM_BREADTH",
+      "labelZh": "跨系统范围",
+      "rule": "变化开始跨越多个子系统，而不是局部孤立波动。"
+    },
+    {
+      "id": "FEEDBACK_RELATION_CHANGE",
+      "labelZh": "反馈关系改变",
+      "rule": "原有反馈关系已经改变，同一种输入不再产生过去的结果。"
+    },
+    {
+      "id": "PATH_DEPENDENCE",
+      "labelZh": "路径依赖／难以恢复旧态",
+      "rule": "新结构开始形成，系统越来越难完全回到原来的运行状态。"
+    }
+  ],
+  "criterionStates": [
+    "PRESENT",
+    "ABSENT",
+    "CONFLICTED",
+    "UNKNOWN"
+  ],
+  "thresholdStates": [
+    "NOT_EVALUATED",
+    "EVIDENCE_INCOMPLETE",
+    "CANDIDATE_FOR_HUMAN_REVIEW",
+    "HUMAN_CONFIRMED",
+    "HUMAN_REJECTED"
+  ],
+  "rules": [
+    "No automatic position assignment from source phase date.",
+    "No automatic position assignment from one current metric or one event.",
+    "No universal score or weighted ranking is created.",
+    "Structural knowledge and observation targets remain readable while CURRENT_DATA is absent.",
+    "Observation target ≠ observed signal.",
+    "Observed signal ≠ threshold crossing.",
+    "Threshold crossing ≠ reachable future outcome.",
+    "Projection ≠ prediction.",
+    "UNKNOWN is a valid field-scoped output."
+  ]
+}

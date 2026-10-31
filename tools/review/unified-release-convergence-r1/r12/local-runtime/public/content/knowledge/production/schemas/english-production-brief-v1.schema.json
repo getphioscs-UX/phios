@@ -1,0 +1,38 @@
+{
+  "$id": "https://getphios.com/schemas/knowledge/english-production-brief-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "briefDigest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "briefSchemaVersion": {
+      "const": "PHI-OS-ENGLISH-PRODUCTION-BRIEF-v1.0.0"
+    },
+    "governance": {
+      "type": "object"
+    },
+    "locale": {
+      "const": "en"
+    }
+  },
+  "required": [
+    "briefType",
+    "briefSchemaVersion",
+    "briefCode",
+    "briefDigest",
+    "nodeCode",
+    "locale",
+    "repositoryCommit",
+    "authority",
+    "canonicalMeaning",
+    "localizedIdentity",
+    "articleBoundary",
+    "governance",
+    "terminologyProjection",
+    "sourceSnapshot",
+    "outputContract"
+  ],
+  "title": "PHI OS English Production Brief v1",
+  "type": "object"
+}

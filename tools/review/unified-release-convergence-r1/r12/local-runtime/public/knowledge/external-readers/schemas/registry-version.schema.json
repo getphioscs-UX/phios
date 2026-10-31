@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/registry-version.v1.json",
+  "title": "PHI OS External Reader Registry Version",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reader_type", "registry_version", "schema_version", "content_version", "effective_from", "effective_until", "change_reason", "changed_by", "reviewed_by", "supersedes"],
+  "properties": {
+    "reader_type": {"enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]},
+    "registry_version": {"type": "string", "minLength": 1},
+    "schema_version": {"type": "string", "minLength": 1},
+    "content_version": {"type": "string", "minLength": 1},
+    "effective_from": {"type": "string", "format": "date-time"},
+    "effective_until": {"type": ["string", "null"], "format": "date-time"},
+    "change_reason": {"type": "string", "minLength": 1},
+    "changed_by": {"type": "string", "minLength": 1},
+    "reviewed_by": {"type": ["string", "null"]},
+    "supersedes": {"type": ["string", "null"]}
+  }
+}

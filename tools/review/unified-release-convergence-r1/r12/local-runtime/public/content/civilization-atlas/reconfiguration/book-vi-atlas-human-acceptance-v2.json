@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-ATLAS-HUMAN-ACCEPTANCE-v2.1.0",
+  "version": "2.2.0",
+  "status": "REJECTED",
+  "required": {
+    "cases": 6,
+    "windows": 4,
+    "snapshots": 3,
+    "dossiers": 4,
+    "livedRealityProfiles": 4,
+    "caseComparisons": 2,
+    "dossierComparisons": 1,
+    "mobileSnapshots": 1,
+    "desktopSnapshots": 1
+  },
+  "accepted": [],
+  "reviewSurface": "tools/review/BOOK-VI-B6-WEB-F-HUMAN-REVIEW.html",
+  "reviewPlan": {
+    "cases": [
+      "RC-01",
+      "RC-02",
+      "RC-03",
+      "RC-04",
+      "RC-05",
+      "RC-06"
+    ],
+    "windows": [
+      "RW-01",
+      "RW-02",
+      "RW-03",
+      "RW-04"
+    ],
+    "snapshots": [
+      "WORLD_RECONFIGURATION_SNAPSHOT_1914",
+      "WORLD_RECONFIGURATION_SNAPSHOT_1945",
+      "WORLD_RECONFIGURATION_SNAPSHOT_2026"
+    ],
+    "dossiers": [
+      "DOSSIER-US",
+      "DOSSIER-CN",
+      "DOSSIER-IN",
+      "DOSSIER-EU"
+    ],
+    "livedRealityProfiles": [
+      "livingEnvironment",
+      "employmentOpportunity",
+      "jobQuality",
+      "incomeCostBalance"
+    ],
+    "caseComparisons": [
+      [
+        "RC-01",
+        "RC-02"
+      ],
+      [
+        "RC-05",
+        "RC-06"
+      ]
+    ],
+    "dossierComparisons": [
+      [
+        "DOSSIER-US",
+        "DOSSIER-CN"
+      ]
+    ],
+    "mobileSnapshots": [
+      "WORLD_RECONFIGURATION_SNAPSHOT_2026"
+    ],
+    "desktopSnapshots": [
+      "WORLD_RECONFIGURATION_SNAPSHOT_1945"
+    ]
+  },
+  "decision": {
+    "decision": "REJECT",
+    "decidedAt": "2026-09-25",
+    "evidenceClass": "OWNER_REAL_BROWSER_SCREENSHOTS_AND_HUMAN_REVIEW",
+    "findings": [
+      "Customer layout is visually disordered and cards wrap into narrow vertical text.",
+      "Published Book VI article page fails renderer completeness/safety gate and cannot display.",
+      "zh-Hans customer surfaces leak English case/runtime copy.",
+      "392 accepted Civilization Atlas visual bindings are not exposed by the Book VI customer renderer.",
+      "Contemporary Runtime is contract-only and renders repeated UNKNOWN values instead of a useful admitted readout.",
+      "Existing backend runtime/readout capability has no Book VI customer adapter in the current implementation."
+    ]
+  },
+  "repairPackage": "B6-WEB-FR"
+}

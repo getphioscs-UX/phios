@@ -1,0 +1,51 @@
+{
+  "contractCode": "PHI-OS-ICR-W2-BIRTH-DATA-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W2",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "inputType": "BIRTH_DATA",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/birth-data-v1.schema.json",
+  "reconciles": [
+    "functions/professional/external-readers/shared-birth-data-contract.js",
+    "knowledge/external-readers/schemas/birth-data.schema.json",
+    "content/professional/method-runtime/shared-data-record-v1.schema.json#/$defs/birthRecordPayload"
+  ],
+  "canonicalFields": [
+    "birthDataVersion",
+    "localDate",
+    "localTime",
+    "precision",
+    "calendarCode",
+    "placeName",
+    "sourceTimezoneText",
+    "uncertaintyMinutes",
+    "coordinate",
+    "subjectConfirmed",
+    "evidenceReferences"
+  ],
+  "precisionValues": ["exact", "minute", "hour", "date_only", "estimated", "unknown"],
+  "unknownRepresentation": {
+    "unknownValuesUseNull": true,
+    "unknownPrecisionUses": "unknown",
+    "inventedSentinelTextForbidden": true,
+    "unknownMayBeVerifiedAsKnown": false
+  },
+  "authorityHandoff": {
+    "declaredBirthInputOwner": "ICR Canonical Input Envelope",
+    "verifiedBirthFactOwner": "SHARED_DATA_AUTHORITY",
+    "verificationOwner": "ICR Input Verification",
+    "privacyAndRetentionOwner": "RDG"
+  },
+  "rules": {
+    "birthDataIsHighlySensitive": true,
+    "birthDataMayBecomeRuntimeMemoryByDefault": false,
+    "birthDataMayBeDuplicatedPerMethod": false,
+    "methodMayCorrectBirthData": false,
+    "providerMayInferMissingBirthTime": false,
+    "rectificationIsSilentVerification": false,
+    "coordinateMustRemainSeparatelyGoverned": true,
+    "timezoneTextIsNotResolvedTimezoneAuthority": true,
+    "sourceEvidenceMayBeReferencedButNotEmbedded": true
+  }
+}

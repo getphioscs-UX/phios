@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-CONTINUITY-NARRATIVE-DELTA-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "deltaId",
+    "contextId",
+    "changed",
+    "stable",
+    "moreRelevant",
+    "lessRelevant",
+    "contradictions",
+    "newlyOpen",
+    "observeNext",
+    "semanticDigest"
+  ],
+  "properties": {
+    "changed": {
+      "type": "array"
+    },
+    "stable": {
+      "type": "array"
+    },
+    "moreRelevant": {
+      "type": "array"
+    },
+    "lessRelevant": {
+      "type": "array"
+    },
+    "contradictions": {
+      "type": "array"
+    },
+    "newlyOpen": {
+      "type": "array"
+    },
+    "observeNext": {
+      "type": "array"
+    },
+    "schemaVersion": {
+      "const": "PHI-OS-CONTINUITY-NARRATIVE-DELTA-v1.0.0"
+    },
+    "deltaId": {
+      "type": "string"
+    },
+    "contextId": {
+      "type": "string"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/rre/confidence-runtime-v1.schema.json",
+  "type": "object",
+  "required": [
+    "confidenceCode",
+    "confidenceClass",
+    "dimensions",
+    "basisReferences",
+    "aiConfidence",
+    "numericScore",
+    "deterministic",
+    "confidenceDigest"
+  ],
+  "properties": {
+    "confidenceCode": {
+      "type": "string",
+      "pattern": "^RRE-CONFIDENCE-[A-Z0-9-]+$"
+    },
+    "confidenceClass": {
+      "enum": [
+        "HIGH",
+        "MODERATE",
+        "LIMITED",
+        "LOW",
+        "UNKNOWN"
+      ]
+    },
+    "dimensions": {
+      "type": "object",
+      "required": [
+        "evidenceQuality",
+        "coverage",
+        "agreement",
+        "recency",
+        "resolution",
+        "missingness"
+      ],
+      "properties": {
+        "evidenceQuality": {
+          "enum": [
+            "STRONG",
+            "PARTIAL",
+            "CONFLICTING",
+            "WEAK",
+            "UNKNOWN"
+          ]
+        },
+        "coverage": {
+          "enum": [
+            "BROAD",
+            "PARTIAL",
+            "LIMITED",
+            "UNKNOWN"
+          ]
+        },
+        "agreement": {
+          "enum": [
+            "CONSISTENT",
+            "CONFLICTING",
+            "UNKNOWN"
+          ]
+        },
+        "recency": {
+          "enum": [
+            "CURRENT",
+            "AGING",
+            "STALE",
+            "UNKNOWN"
+          ]
+        },
+        "resolution": {
+          "enum": [
+            "RESOLVED",
+            "PARTIALLY_RESOLVED",
+            "OPEN_LIMITS",
+            "UNKNOWN"
+          ]
+        },
+        "missingness": {
+          "enum": [
+            "NONE",
+            "PRESENT",
+            "MATERIAL",
+            "UNKNOWN"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "basisReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "aiConfidence": {
+      "const": false
+    },
+    "modelSelfAssessment": {
+      "const": false
+    },
+    "numericScore": {
+      "type": "null"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "confidenceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

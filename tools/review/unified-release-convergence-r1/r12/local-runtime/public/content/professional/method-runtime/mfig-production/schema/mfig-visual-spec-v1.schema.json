@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mfig-visual-spec-v1.json",
+  "title": "MFIG Visual Specification v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "mfigId",
+    "title",
+    "scope",
+    "role",
+    "methodRefs",
+    "runtimeRefs",
+    "nodes",
+    "edges",
+    "boundaries",
+    "mustShow",
+    "mustState",
+    "statementSources",
+    "mustNotContain",
+    "forbiddenClaims",
+    "productionRules"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "mfigId": {
+      "type": "string",
+      "pattern": "^MFIG-[0-9]{3}$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "methodRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runtimeRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1
+    },
+    "edges": {
+      "type": "array"
+    },
+    "boundaries": {
+      "type": "array"
+    },
+    "mustShow": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mustState": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "statementSources": {
+      "type": "object"
+    },
+    "mustNotContain": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbiddenClaims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "productionRules": {
+      "type": "object"
+    }
+  }
+}

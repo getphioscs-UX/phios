@@ -1,0 +1,65 @@
+{
+  "fixtureRole": "VALIDATION_ONLY_NOT_PRODUCTION_EVIDENCE",
+  "fixture": {
+    "schemaVersion": "PHI-OS-MCD-6-CROSS-METHOD-COMPOSITION-v1.0.0",
+    "compositionId": "CMC-MIR7TEST1",
+    "sourceProjectionRefs": [
+      {
+        "projectionId": "CMP-000000000000000000000001",
+        "publicMethodCode": "ASTROLOGY_PROJECTION"
+      },
+      {
+        "projectionId": "CMP-000000000000000000000002",
+        "publicMethodCode": "BAZI_PROJECTION"
+      }
+    ],
+    "signals": [
+      {
+        "signalId": "SIG-1",
+        "classification": "CONVERGENCE",
+        "label": "Governed upstream convergence fixture",
+        "detail": null,
+        "projectionRefs": [
+          "CMP-000000000000000000000001",
+          "CMP-000000000000000000000002"
+        ],
+        "evidenceRefs": [
+          "EVIDENCE-CROSS-1"
+        ]
+      },
+      {
+        "signalId": "SIG-2",
+        "classification": "UNKNOWN",
+        "label": "Governed upstream unknown fixture",
+        "detail": null,
+        "projectionRefs": [
+          "CMP-000000000000000000000002"
+        ],
+        "evidenceRefs": []
+      }
+    ],
+    "unknown": [
+      {
+        "code": "CROSS_CONTEXT_INCOMPLETE",
+        "reason": "Validation-only unknown preservation fixture"
+      }
+    ],
+    "evidence": [
+      {
+        "ref": "EVIDENCE-CROSS-1",
+        "label": "Validation evidence",
+        "source": "MIR7_FIXTURE"
+      }
+    ],
+    "lineage": [
+      {
+        "ref": "CMP-000000000000000000000001",
+        "label": "AST projection"
+      },
+      {
+        "ref": "CMP-000000000000000000000002",
+        "label": "BZR projection"
+      }
+    ]
+  }
+}

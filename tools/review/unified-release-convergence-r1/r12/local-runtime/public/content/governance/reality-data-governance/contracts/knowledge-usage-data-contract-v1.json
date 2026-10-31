@@ -1,0 +1,41 @@
+{
+  "contractCode": "PHI-OS-RDG-W22-KNOWLEDGE-USAGE-DATA-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W22",
+  "status": "active",
+  "requiredFields": [
+    "usageRecordCode",
+    "eventType",
+    "surface",
+    "locale",
+    "recordedAt",
+    "purposeCode"
+  ],
+  "referenceRequirement": {
+    "atLeastOne": ["nodeCode", "assetCode"],
+    "optional": ["readingPathReference", "relatedNodeReference"]
+  },
+  "allowedEventTypes": [
+    "EXPOSURE",
+    "OPEN",
+    "EXPAND",
+    "COMPLETE",
+    "REVISIT",
+    "READING_POSITION",
+    "READING_DURATION",
+    "RELATED_NODE_FOLLOW",
+    "READING_PATH_REFERENCE"
+  ],
+  "allowedMeasurementFields": ["readingDurationMs", "readingPosition", "completionRatio"],
+  "forbiddenFields": ["rawArticleContent", "freeTextQuery", "knowledgeAuthorityMutation", "truthScore"],
+  "rules": {
+    "usageDataIsKnowledgeAuthority": false,
+    "popularityIsTruth": false,
+    "highCompletionIsBetterKnowledge": false,
+    "usageMayPublishOrDeprecateKnowledge": false,
+    "usageMayChangeCanonicalNode": false,
+    "productAnalyticsPurposeRequired": true,
+    "analyticsConsentRequired": true,
+    "dataMinimizationRequired": true
+  }
+}

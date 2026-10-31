@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W2-ANSWER-SURFACE-CONTRACT-v1.0.0",
+  "phase": "CKA",
+  "work": "CKA-W2",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "status": "PRODUCTION_STRUCTURED_ANSWER_ACTIVE",
+  "requiredOrder": [
+    "QUESTION",
+    "DIRECT_ANSWER",
+    "WHY_THIS_MAY_HAPPEN",
+    "WHAT_TO_OBSERVE",
+    "WHAT_PHIOS_DOES_NOT_YET_KNOW",
+    "RELATED_KNOWLEDGE"
+  ],
+  "optionalCollapsedSection": "SOURCES_GROUNDING",
+  "directAnswerRules": {
+    "answerQuestionFirst": true,
+    "architectureFirst": false,
+    "longProvenanceFirst": false,
+    "caveatWallFirst": false
+  },
+  "explanationAuthority": [
+    "GROUNDED_EXPLANATION",
+    "DERIVED_EXPLANATION",
+    "BOUNDED_INTERPRETATION"
+  ],
+  "forbiddenExplanationCollapse": "DERIVED_PRESENTED_AS_OBSERVED_FACT",
+  "observationTargets": [
+    "OBSERVABLE_SIGNAL",
+    "CONDITION",
+    "RELATIONSHIP",
+    "CONSTRAINT",
+    "CHANGE",
+    "OUTCOME"
+  ],
+  "unknownStates": [
+    "UNKNOWN",
+    "INSUFFICIENT_EVIDENCE",
+    "CONFLICTING_EVIDENCE",
+    "OUTSIDE_AUTHORITY",
+    "CURRENT_DATA_REQUIRED"
+  ],
+  "unknownIsFormalAnswerSection": true,
+  "runtimeBinding": {
+    "clientSurface": "CKA",
+    "answerAuthorityConsumer": "functions/_lib/knowledge-answer-composition.js",
+    "retrievalAuthorityConsumer": "functions/_lib/knowledge-answer-grounding.js",
+    "secondAnswerRuntimeCreated": false,
+    "secondRetrievalRuntimeCreated": false
+  }
+}
+

@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-049",
+  "title": "METHOD-PROJECTION-LINEAGE",
+  "scope": "CROSS_METHOD",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_INPUT_VERSION",
+      "displayLabel": "CANONICAL INPUT VERSION",
+      "nodeType": "STATE",
+      "authorityClass": "LINEAGE",
+      "semanticRole": "LINEAGE",
+      "container": "METHOD_PROJECTION_LINEAGE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "ADAPTER_VERSION",
+      "displayLabel": "ADAPTER VERSION",
+      "nodeType": "STATE",
+      "authorityClass": "LINEAGE",
+      "semanticRole": "LINEAGE",
+      "container": "METHOD_PROJECTION_LINEAGE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "RUNTIME_VERSION",
+      "displayLabel": "RUNTIME VERSION",
+      "nodeType": "STATE",
+      "authorityClass": "LINEAGE",
+      "semanticRole": "LINEAGE",
+      "container": "METHOD_PROJECTION_LINEAGE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "PROJECTION_CONTRACT_VERSION",
+      "displayLabel": "PROJECTION CONTRACT VERSION",
+      "nodeType": "STATE",
+      "authorityClass": "LINEAGE",
+      "semanticRole": "LINEAGE",
+      "container": "METHOD_PROJECTION_LINEAGE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CANONICAL_PROJECTION_LINEAGE",
+      "displayLabel": "CANONICAL PROJECTION LINEAGE",
+      "nodeType": "STATE",
+      "authorityClass": "LINEAGE",
+      "semanticRole": "LINEAGE",
+      "container": "METHOD_PROJECTION_LINEAGE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-049-E01",
+      "from": "CANONICAL_INPUT_VERSION",
+      "to": "ADAPTER_VERSION",
+      "relation": "BINDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-049-E02",
+      "from": "ADAPTER_VERSION",
+      "to": "RUNTIME_VERSION",
+      "relation": "BINDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-049-E03",
+      "from": "RUNTIME_VERSION",
+      "to": "PROJECTION_CONTRACT_VERSION",
+      "relation": "BINDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-049-E04",
+      "from": "PROJECTION_CONTRACT_VERSION",
+      "to": "CANONICAL_PROJECTION_LINEAGE",
+      "relation": "BINDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_PROJECTION_LINEAGE",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "CANONICAL_INPUT_VERSION",
+        "ADAPTER_VERSION",
+        "RUNTIME_VERSION",
+        "PROJECTION_CONTRACT_VERSION",
+        "CANONICAL_PROJECTION_LINEAGE"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_INPUT_VERSION",
+    "ADAPTER_VERSION",
+    "RUNTIME_VERSION",
+    "PROJECTION_CONTRACT_VERSION",
+    "CANONICAL_PROJECTION_LINEAGE"
+  ],
+  "mustState": [
+    "All production versions are explicit",
+    "Version metadata does not grant Production authority",
+    "Missing version fails closed"
+  ],
+  "statementSources": {
+    "All production versions are explicit": "SRC-002",
+    "Version metadata does not grant Production authority": "SRC-002",
+    "Missing version fails closed": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+  "projectionId": "CMP-BAZI-FP-W7-FIXTURE-0001",
+  "method": {
+    "publicMethodCode": "BAZI_PROJECTION",
+    "publicLabel": "Bazi Projection",
+    "publicLabels": {
+      "en": "Bazi Projection",
+      "zh-Hans": "八字投射"
+    },
+    "internalReference": {
+      "opaqueId": "MREF-BZRAFIXTURE0001",
+      "protected": true,
+      "rawIdentityExposed": false
+    },
+    "version": "0.1.0",
+    "status": "PRODUCTION_BOUND_SCOPE",
+    "calculationMode": "DETERMINISTIC_BOUND_SCOPE"
+  },
+  "calculation": {
+    "status": "COMPLETE",
+    "deterministic": true,
+    "values": [],
+    "coordinates": null,
+    "structures": [
+      {
+        "code": "FOUR_PILLARS",
+        "items": [
+          {
+            "code": "YEAR_STEM",
+            "value": "JIA",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 1
+            }
+          },
+          {
+            "code": "YEAR_BRANCH",
+            "value": "ZI",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 1
+            }
+          },
+          {
+            "code": "MONTH_STEM",
+            "value": "BING",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 13
+            }
+          },
+          {
+            "code": "MONTH_BRANCH",
+            "value": "YIN",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 3
+            }
+          },
+          {
+            "code": "DAY_STEM",
+            "value": "GENG",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 37
+            }
+          },
+          {
+            "code": "DAY_BRANCH",
+            "value": "SHEN",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 9
+            }
+          },
+          {
+            "code": "HOUR_STEM",
+            "value": "REN",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 49
+            }
+          },
+          {
+            "code": "HOUR_BRANCH",
+            "value": "ZI",
+            "rawValue": null,
+            "meta": {
+              "sexagenaryIndex": 1
+            }
+          }
+        ]
+      }
+    ],
+    "cycles": [
+      {
+        "code": "LUCK_CYCLE",
+        "value": "DING-MAO",
+        "rawValue": null,
+        "startAge": 6.25,
+        "endAge": 16.25,
+        "cycleNumber": 1,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "WU-CHEN",
+        "rawValue": null,
+        "startAge": 16.25,
+        "endAge": 26.25,
+        "cycleNumber": 2,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "JI-SI",
+        "rawValue": null,
+        "startAge": 26.25,
+        "endAge": 36.25,
+        "cycleNumber": 3,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "GENG-WU",
+        "rawValue": null,
+        "startAge": 36.25,
+        "endAge": 46.25,
+        "cycleNumber": 4,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "XIN-WEI",
+        "rawValue": null,
+        "startAge": 46.25,
+        "endAge": 56.25,
+        "cycleNumber": 5,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "REN-SHEN",
+        "rawValue": null,
+        "startAge": 56.25,
+        "endAge": 66.25,
+        "cycleNumber": 6,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "GUI-YOU",
+        "rawValue": null,
+        "startAge": 66.25,
+        "endAge": 76.25,
+        "cycleNumber": 7,
+        "certainty": "DETERMINISTIC"
+      },
+      {
+        "code": "LUCK_CYCLE",
+        "value": "JIA-XU",
+        "rawValue": null,
+        "startAge": 76.25,
+        "endAge": 86.25,
+        "cycleNumber": 8,
+        "certainty": "DETERMINISTIC"
+      }
+    ],
+    "positions": []
+  },
+  "projection": {
+    "status": "COMPLETE",
+    "clientRenderable": true,
+    "productionResult": true,
+    "coreSchemaExposed": false,
+    "unknownDisclosureRequired": false
+  },
+  "unknown": [],
+  "evidence": [
+    {
+      "type": "RUNTIME_AUTHORITY",
+      "status": "AVAILABLE",
+      "sourceCode": "MCD_5",
+      "reference": "MCD_CANONICAL_PROJECTION_RUNTIME",
+      "version": "1.0.0",
+      "confidence": "HIGH"
+    },
+    {
+      "type": "PRODUCTION_DISPATCH_AUTHORITY",
+      "status": "AVAILABLE",
+      "sourceCode": "MPA",
+      "reference": "ELIGIBLE",
+      "version": "MCD-1-SUCCESSOR-v1.0.0",
+      "confidence": "HIGH"
+    }
+  ],
+  "version": {
+    "methodRegistryVersion": "2.0.0",
+    "runtimeVersion": "1.0.0",
+    "adapterVersion": "1.0.0",
+    "inputContractVersion": "1.0.0",
+    "projectionContractVersion": "1.0.0"
+  },
+  "execution": {
+    "requestId": "BAZI-FP-W7-FIXTURE-0001",
+    "status": "EXECUTED_BOUND_SCOPE",
+    "mpaDecision": {
+      "authorityOwner": "MPA",
+      "decision": "ELIGIBLE",
+      "dispatchAllowed": true,
+      "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+    },
+    "runtimeIdentity": "MCD_CANONICAL_PROJECTION_RUNTIME@1.0.0",
+    "executedAt": "2026-08-23T00:00:00.000Z"
+  },
+  "interpretation": {
+    "included": false,
+    "principle": "CALCULATION_NOT_EQUAL_INTERPRETATION",
+    "meaningAuthorityCreated": false,
+    "realityReadingCreated": false,
+    "professionalJudgmentCreated": false
+  }
+}

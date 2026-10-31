@@ -1,0 +1,30 @@
+import {esc} from '../../surfaces/runtime-ui.js';
+import {composeFixedEditorialReport} from '../../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
+import {reportContentLocale} from '../../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
+// Local fixed-page candidate reuses the current admitted customer section renderer.
+// Source, entitlement and locale must already have been checked by the ECR owner.
+export function renderEcrFixedAssetCandidate({reports,contentLanguage,manifest}={}){
+ const locale=reportContentLocale(contentLanguage),languages=locale==='bilingual'?['zh-Hans','en']:[locale];
+ if(!Array.isArray(reports)||reports.length!==languages.length||languages.some(l=>reports.filter(r=>r.locale===l).length!==1))throw Error('ECR_APPROVED_LOCALE_CONTENT_REQUIRED');
+ const first=reports[0],reference=first.sourceProjectionId||first.sourceProjectionRef;
+ if(!reference||reports.some(r=>(r.sourceProjectionId||r.sourceProjectionRef)!==reference||r.depth!==first.depth||r.productId!==first.productId||!r.copy||JSON.stringify(r.sections.map(s=>s.sectionId))!==JSON.stringify(first.sections.map(s=>s.sectionId))))throw Error('ECR_FIXED_CONTENT_SOURCE_MISMATCH');
+ return composeFixedEditorialReport({methodId:'ECR',contentLanguage:locale,manifest,contentPages:first.sections.map(section=>({afterSectionId:section.sectionId,locale,sourceOwner:'ECR_FULL_REPORT',sourceReference:reference,html:languages.map(l=>{const r=reports.find(r=>r.locale===l);return `<div lang="${l}">${renderSection(r.sections.find(s=>s.sectionId===section.sectionId),r)}</div>`;}).join('')}))});
+}
+const list=v=>Array.isArray(v)?v:[];
+const id=s=>`ecr-full-${s.sectionId.toLowerCase().replaceAll('_','-')}`;
+const imageUrl=key=>key?`https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev/${String(key).replace(/^\/+/, '')}`:'';
+function renderSection(section,report){
+ const cards=list(section.cards).map(card=>`<article class="cx-ecr-full-card" data-ecr-card-id="${esc(card.cardId)}"><img src="${esc(imageUrl(card.asset?.objectKey))}" alt="" loading="lazy" width="240" height="320"><h3>${esc(card.title)}</h3><p>${esc(card.subtitle)}</p><p>${esc(card.oneLineInsight)}</p>${report.depth==='PAID'?`<p>${esc(card.canonicalCustomerMeaning||'')}</p>`:''}</article>`).join('');
+ const claims=list(section.claims).map(claim=>`<article data-ecr-claim-id="${esc(claim.claimId)}"><p>${esc(claim.structuralMeaning)}</p><details><summary>${esc(report.copy.sources)}</summary><small>${list(claim.evidenceRefs).map(esc).join(' · ')}</small></details></article>`).join('');
+ const facts=list(section.facts).length?`<ul class="cx-ecr-full-facts">${section.facts.map(x=>`<li data-ecr-coordinate="${esc(x.code)}">${x.rank?`${esc(x.rank)}. `:''}${esc(x.label)} <small>${esc(x.code)}</small></li>`).join('')}</ul>`:'';
+ const observations=list(section.observations).length?`<ul>${section.observations.map(x=>`<li data-ecr-lineage="${esc(x.interpretationUnitRef)}">${esc(x.text)}</li>`).join('')}</ul>`:'';
+ const comparisons=list(section.comparisons).map(x=>`<article data-ecr-baseline-ref="${esc(x.baselineClaimRef)}"><h3>${esc(report.copy.states[x.comparisonState])}</h3><p><b>${esc(report.copy.baseline)}</b>: ${esc(x.baselineText)}</p><p><b>${esc(report.copy.current)}</b>: ${list(x.currentObservations).map(esc).join(' · ')}</p><p>${esc(x.customerExplanation)}</p><p>${esc(x.observationPrompt)}</p></article>`).join('');
+ return `<section id="${esc(id(section))}" class="cx-ecr-full-section" data-ecr-full-section="${esc(section.sectionId)}"><h2><small>${String(section.number).padStart(2,'0')}</small> ${esc(section.title)}</h2>${section.body?`<p>${esc(section.body)}</p>`:''}${facts}${cards?`<div class="cx-ecr-full-cards">${cards}</div>`:''}${claims}${observations}${comparisons}</section>`;
+}
+export function renderEcrFullReportSections(report){return `<article class="cx-ecr-full-report" data-ecr-report-depth="${esc(report.depth)}" data-ecr-product-id="${esc(report.productId)}">${report.publicationState==='INTERNAL_REVIEW'?`<p class="cx-ecr-full-review">${esc(report.copy.preview)}</p>`:''}<p>${esc(report.locale==='zh-Hans'?'报告内容按照您选择的语言生成；封面及固定章节页统一采用中英双语版本。':'Report content follows your selected language. Covers and fixed section pages use the shared bilingual edition.')}</p>${report.sections.map(s=>renderSection(s,report)).join('')}${report.depth==='FREE'?`<button type="button" class="cx-button cx-ecr-full-unlock" disabled aria-disabled="true">${esc(report.copy.unlock)}</button>`:''}</article>`;}
+export function renderEcrFullReportNavigation(report){return `<nav class="cx-ecr-product-nav" aria-label="${esc(report.title)}">${report.sections.map(s=>`<button type="button" data-ppr-r3-nav-target="#${esc(id(s))}">${esc(s.title)}</button>`).join('')}</nav>`;}
+
+export function renderEcrHumanRuntimeReport(report){
+ if(report?.edition!=='ECR_HUMAN_RUNTIME_V4_1')return '';
+ return '<article class="cx-ecr-full-report"><p>'+esc(report.publicationState)+'</p>'+report.sections.map(s=>'<section id="ecr-v41-'+esc(s.sectionId)+'"><h2>'+esc(s.title)+'</h2><p>'+esc(s.scope==='CURRENT'?(report.locale==='zh-Hans'?'当前现实':'Current reality'):(report.locale==='zh-Hans'?'基线构型':'Baseline configuration'))+'</p>'+(s.content.text?'<p>'+esc(s.content.text)+'</p>':'')+(s.content.activations?'<ul>'+s.content.activations.map(a=>'<li>'+esc(a.layer+' '+a.body+' · '+(a.gate===null?'UNKNOWN':a.gate+'.'+a.line+' · '+a.activationStage))+'</li>').join('')+'</ul>':'')+(s.content.fields?'<p>'+esc(report.locale==='zh-Hans'?'仅在个案组合与证据充分时显示个人结果；没有足够证据的字段保持未知。':'Personal values are shown only when case-specific composition and evidence are sufficient; unresolved fields remain unknown.')+'</p>':'')+(s.content.drivers?'<ul>'+s.content.drivers.map(d=>'<li>'+esc(d.bodies.join(' / ')+' · '+d.status)+'</li>').join('')+'</ul>':'')+(s.content.observations?'<ul>'+s.content.observations.map(o=>'<li>'+esc(o.statement)+'</li>').join('')+'</ul>':'')+(s.content.status?'<p>'+esc(s.content.status)+'</p>':'')+'</section>').join('')+'</article>';
+}

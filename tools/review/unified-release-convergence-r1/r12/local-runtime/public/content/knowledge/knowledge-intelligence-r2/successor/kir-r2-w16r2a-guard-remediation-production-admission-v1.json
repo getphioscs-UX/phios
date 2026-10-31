@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2A-GUARD-REMEDIATION-PRODUCTION-ADMISSION-v1.0.0",
+  "baselineCommit": "d49dd16b38d7f858c9bad861b788919d0dec4c33",
+  "predecessor": "PHI-OS-KIR-R2-W16R2-MODEL-BACKED-PRODUCTION-SUCCESSOR-v1.0.0",
+  "status": "ENGINEERING_READY_TARGETED_LIVE_REVIEW_PENDING",
+  "humanAcceptanceEvidence": {
+    "path": "review/KIR-R2-W16R2-100-CASE-HUMAN-REVIEW-v1.json",
+    "accepted": 93,
+    "rejected": 7,
+    "criticalFailures": 0,
+    "gatePassed": true,
+    "historicalRewrite": false
+  },
+  "guardGap": {
+    "machineGuardPassed": 100,
+    "humanAccepted": 93,
+    "falseNegativeCases": [
+      "KIR-R2-W15R-024",
+      "KIR-R2-W15R-035",
+      "KIR-R2-W15R-077",
+      "KIR-R2-W15R-079",
+      "KIR-R2-W15R-081",
+      "KIR-R2-W15R-084",
+      "KIR-R2-W15R-098"
+    ],
+    "classes": [
+      "MODEL_ARTIFACT_LEAK",
+      "UNEXPECTED_LANGUAGE_OR_SUFFIX_CONTAMINATION",
+      "UNSUPPORTED_PSYCHOLOGICAL_OR_BIOLOGICAL_EXPANSION",
+      "SELF_DIAGNOSTIC_FRAMING",
+      "UNSUPPORTED_STRONG_CAUSAL_OVERREACH"
+    ]
+  },
+  "remediation": {
+    "guardSchema": "PHI-OS-KIR-R2-W16R2A-MODEL-BACKED-ANSWER-GUARD-v1.0.0",
+    "promptBoundaryHardening": true,
+    "unexpectedLatinGuard": true,
+    "modelArtifactGuard": true,
+    "unsupportedHighRiskExpansionGuard": true,
+    "lunaToDeepSeekEscalationPreserved": true,
+    "knowledgeAuthorityOwnedByProvider": false
+  },
+  "targetedRegression": {
+    "runner": "scripts/run-kir-r2-w16r2a-targeted-regression.mjs",
+    "checker": "scripts/check-kir-r2-w16r2a-targeted-regression.mjs",
+    "requiredCases": 7,
+    "requiredApplied": 7,
+    "requiredGuardPassed": 7,
+    "humanSpotReviewRequired": true
+  },
+  "productionGate": {
+    "productionCutoverAllowedNow": false,
+    "requirements": [
+      "7/7 targeted live regeneration applied",
+      "7/7 W16R2A successor guard passed",
+      "7/7 targeted human spot review accepted",
+      "existing wider KIR-R2 and integrated phase regressions remain clean"
+    ],
+    "full100HumanReviewMustBeRepeated": false
+  }
+}

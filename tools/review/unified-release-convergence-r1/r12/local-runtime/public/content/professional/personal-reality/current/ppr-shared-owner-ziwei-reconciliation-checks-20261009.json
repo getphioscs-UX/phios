@@ -1,0 +1,23 @@
+{
+  "head": "712c47ba033b7963d4484d9bcdc9dcf3f0d094dc",
+  "scope": "Exact committed host and introduction successors only; historical freezes unchanged",
+  "historicalAcceptanceRewritten": false,
+  "currentSuccessorHumanAcceptance": false,
+  "providerCalls": 0,
+  "checks": [
+    {
+      "command": "node scripts/check-ppr-current-shared-owner.mjs",
+      "exitCode": 1,
+      "status": "BASELINE_FAILURE",
+      "stdout": "",
+      "stderr": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: PPR current owner: current owner digest drift: assets/customer-ui/js/specialists/bazi/product-renderer.js\r\n+ actual - expected\r\n\r\n+ '93b42e7bb26c5627b68027c6df4ad089a31e872b0fa29684c1263f2723a46d52'\r\n- '78478bc88d143e410a8288a52cf98008276125a19cf745dd76339a4bfb7048b5'\r\n\r\n    at assertPprCurrentSharedOwner (file:///C:/phios/scripts/lib/ppr-current-shared-owner.mjs:18:10)\r\n    at assertPprCurrentSharedOwnerRegistry (file:///C:/phios/scripts/lib/ppr-current-shared-owner.mjs:28:49)\r\n    at file:///C:/phios/scripts/check-ppr-current-shared-owner.mjs:2:16\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\r\n    at async node:internal/modules/esm/loader:643:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: '93b42e7bb26c5627b68027c6df4ad089a31e872b0fa29684c1263f2723a46d52',\r\n  expected: '78478bc88d143e410a8288a52cf98008276125a19cf745dd76339a4bfb7048b5',\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.18.0\r\n"
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:ziwei-cx-r1-w15-w16",
+      "exitCode": 0,
+      "status": "PASS",
+      "stdout": "✓ ZIWEI-CX-R1-W14 Real API + DOM 96-Case Machine Campaign passed.\n  96/96 customer API routes; 1152 palace buttons; 768 topic tabs; 288 timing nodes; 0 legacy owners; 0 raw-code leaks.\n  96/96 interaction exercises and 8/8 deterministic DOM replays passed.\n  English JU_MEN（MIAO） live product-route regression is closed as Ju Men（Miao） while unknown raw identifiers remain fail-closed.\n  Human visual and interaction acceptance remains pending for W15.\n✓ ZIWEI-CX-R1-W14 Real API + DOM 96-Case Machine Campaign passed.\n  96/96 customer API routes; 1152 palace buttons; 768 topic tabs; 288 timing nodes; 0 legacy owners; 0 raw-code leaks.\n  96/96 interaction exercises and 8/8 deterministic DOM replays passed.\n  English JU_MEN（MIAO） live product-route regression is closed as Ju Men（Miao） while unknown raw identifiers remain fail-closed.\n  Human visual and interaction acceptance remains pending for W15.\n✓ ZIWEI-CX-R1-W17 Final Actual Customer Surface Activation + printable product passed.\n  W23 semantics, server facade, canonical customer API, W18/W19/W20 bindings, route ownership, legacy suppression, W14 96/96 and W15 12/12 are proven together.\n  Current 402735e route replay: 96/96; palace buttons 1152; topic tabs 768; timing nodes 288; printable 96/96; deterministic replay 8/8.\n  fullProductionVisibleToCustomer=true; print contract PHI-OS-ZIWEI-CX-R1-PRINT-PRODUCT-v1.0.0; current shared PPR baseline remains unmodified by W17.\n✓ ZIWEI-CX-R1-W15 admission + W16 Actual Customer Surface Activation passed.\n  W15: 12/12 human visual & interaction cases ACCEPT by authorized human declaration; machine substitution=false.\n  W16: current 492ecdd baseline replay 96/96; 1152 palace buttons; 768 topic tabs; 288 timing nodes; activation marker 96/96; interaction 96/96; deterministic replay 8/8.\n  Full Production is visibly customer-active on /perspectives/personal/ through PPR-R3 + the current Zi Wei specialist renderer; legacy fallback remains fail-closed.\n  Shared Personal Reality/API/SMR files remain byte-frozen at the current baseline.\n",
+      "stderr": ""
+    }
+  ]
+}

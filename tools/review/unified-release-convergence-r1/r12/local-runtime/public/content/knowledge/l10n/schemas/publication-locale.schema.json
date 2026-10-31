@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phios://knowledge/l10n/publication-locale/v1",
+  "title": "Publication Locale Record",
+  "type": "object",
+  "required": [
+    "nodeCode",
+    "locale",
+    "contentStatus",
+    "reviewStatus",
+    "approvalStatus",
+    "publicationStatus",
+    "readiness"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "contentStatus": {
+      "enum": [
+        "not_started",
+        "draft",
+        "content_reviewed",
+        "localization_pending"
+      ]
+    },
+    "reviewStatus": {
+      "enum": [
+        "not_reviewed",
+        "in_review",
+        "reviewed"
+      ]
+    },
+    "approvalStatus": {
+      "enum": [
+        "not_approved",
+        "approved"
+      ]
+    },
+    "publicationStatus": {
+      "enum": [
+        "not_published",
+        "published",
+        "withdrawn"
+      ]
+    },
+    "readiness": {
+      "enum": [
+        "blocked",
+        "discovery_required",
+        "ready_for_brief",
+        "published"
+      ]
+    },
+    "articleAssetCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sourceLocale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sourceVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

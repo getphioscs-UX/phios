@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa/mpa-resolved-method-context-v1.schema.json",
+  "title": "PHI OS MPA Resolved Method Context v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "resolutionId",
+    "initializationId",
+    "methodCode",
+    "policyVersion",
+    "resolvedTimezone",
+    "resolvedCoordinates",
+    "resolvedCalendar",
+    "resolvedTrueSolarContext",
+    "utcInstant",
+    "resolutionStatus",
+    "limitations",
+    "inputDigest",
+    "outputDigest",
+    "deterministic",
+    "aiUsed",
+    "providerAuthorityUsed",
+    "fabricatedDefaultsUsed",
+    "methodCalculationCreated"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-RESOLVED-METHOD-CONTEXT-v1.0.0"
+    },
+    "resolutionId": {
+      "type": "string",
+      "minLength": 3
+    },
+    "initializationId": {
+      "type": "string",
+      "minLength": 3
+    },
+    "methodCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policyVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resolvedTimezone": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "resolvedCoordinates": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "resolvedCalendar": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "resolvedTrueSolarContext": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "utcInstant": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "resolutionStatus": {
+      "enum": [
+        "FULLY_RESOLVED",
+        "PARTIAL_DATE_ONLY",
+        "UNRESOLVED"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "inputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "outputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "providerAuthorityUsed": {
+      "const": false
+    },
+    "fabricatedDefaultsUsed": {
+      "const": false
+    },
+    "methodCalculationCreated": {
+      "const": false
+    }
+  }
+}

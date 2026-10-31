@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-VI-RUNTIME-POSITION-CORRESPONDENCE-CONTRACT-v1.0.0",
+  "version": "1.1.0",
+  "status": "CONTRACT_READY__NO_CURRENT_ENTITY_CORRESPONDENCE_ADMITTED",
+  "owner": "content/registry/runtime-position-48-v1.json",
+  "crosswalk": "content/registry/runtime-position-48-crosswalk-v1.json",
+  "appliesTo": [
+    "DOSSIER",
+    "CASE",
+    "WINDOW",
+    "SNAPSHOT",
+    "LIVED_REALITY"
+  ],
+  "recordShape": {
+    "entityId": "string",
+    "asOfDate": "YYYY-MM-DD|null",
+    "primary": {
+      "positionId": "RP-01..RP-48|null",
+      "knowledgeState": "DERIVED_RUNTIME_READOUT|UNKNOWN",
+      "confidence": "HIGH|MEDIUM|LOW|UNKNOWN",
+      "evidenceRefs": "array"
+    },
+    "secondary": "array of the same position correspondence shape",
+    "subsystemCorrespondence": "array of {subsystem, positionId, knowledgeState, evidenceRefs}",
+    "transitionSignals": "array of OBSERVED_SIGNAL references",
+    "reachablePositions": "array of {positionId, knowledgeState: CONDITIONAL_PROJECTION, conditions, evidenceRefs}",
+    "rejectedPositions": "array of {positionId, reason, evidenceRefs}",
+    "unknown": "array of unresolved questions or missing evidence",
+    "currentEvidenceGate": "{admissionState, admittedClaims, conflicts, freshness}",
+    "observationThreshold": "{state, criteria[], humanDecision}",
+    "observationTargets": "array of STRUCTURAL_KNOWLEDGE targets that are not OBSERVED_SIGNAL until evidence is admitted"
+  },
+  "readingDimensions": [
+    "capacity",
+    "load",
+    "alignment",
+    "resilience",
+    "adaptability",
+    "futureCapacity",
+    "externalDependency",
+    "technology",
+    "population",
+    "carrierStructure",
+    "pressureFields"
+  ],
+  "rules": [
+    "No entity receives a position only from a date coordinate.",
+    "No entity receives a single global position when subsystems support materially different correspondences.",
+    "A current correspondence is a DERIVED_RUNTIME_READOUT, never an observed fact.",
+    "A future reachable position is CONDITIONAL_PROJECTION, never a prediction.",
+    "UNKNOWN is a valid governed output and must remain field-scoped.",
+    "Historical precedents may support interpretation but never determine current or future correspondence.",
+    "Observation targets remain STRUCTURAL_KNOWLEDGE until admitted current evidence supports them as OBSERVED_SIGNAL.",
+    "Observation-threshold criteria are qualitative and human-governed; no machine score can establish a crossing.",
+    "Reachable positions require an admitted current position, transition evidence, threshold review, explicit conditions, and CONDITIONAL_PROJECTION state."
+  ],
+  "admission": {
+    "currentEntityValues": "NOT_ADMITTED",
+    "reason": "The 48-position structural backbone is now canonical, but entity-level correspondence requires evidence admission and human review."
+  },
+  "w6": {
+    "contract": "content/civilization-atlas/reconfiguration/runtime-position-w6-contract-v1.json",
+    "evidenceGate": "content/civilization-atlas/reconfiguration/runtime-position-w6-evidence-gate-v1.json",
+    "pipeline": "CURRENT_EVIDENCE -> RRE -> POSITION_CANDIDATE -> HUMAN_ADMISSION -> TRANSITION_SIGNAL -> OBSERVATION_THRESHOLD -> REACHABLE_POSITION"
+  }
+}

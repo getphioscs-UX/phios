@@ -1,0 +1,69 @@
+{
+  "registryCode": "PHI-OS-CPR-INFORMATION-LAYER-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "CPR-W4",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "layers": [
+    {
+      "layerCode": "L1_IMMEDIATE_UNDERSTANDING",
+      "order": 1,
+      "pdsLayerId": "customer-primary",
+      "name": "Immediate Understanding",
+      "defaultVisibility": "visible",
+      "authorityClass": "customer"
+    },
+    {
+      "layerCode": "L2_CONFIRMATION",
+      "order": 2,
+      "pdsLayerId": "customer-confirmation",
+      "name": "Confirmation",
+      "defaultVisibility": "conditional_visible",
+      "authorityClass": "customer"
+    },
+    {
+      "layerCode": "L3_PROFESSIONAL_EVIDENCE",
+      "order": 3,
+      "pdsLayerId": "professional-analysis",
+      "name": "Professional Evidence",
+      "defaultVisibility": "collapsed_or_professional",
+      "authorityClass": "professional"
+    },
+    {
+      "layerCode": "L4_TECHNICAL_RECORD",
+      "order": 4,
+      "pdsLayerId": "technical-record",
+      "name": "Technical Record",
+      "defaultVisibility": "restricted",
+      "authorityClass": "technical"
+    }
+  ],
+  "foundationAudienceClasses": {
+    "CUSTOMER": 3,
+    "PROFESSIONAL": 4,
+    "TECHNICAL": 4
+  },
+  "presentationPurposeMaximumLayer": {
+    "OVERVIEW": 1,
+    "READING": 2,
+    "CONFIRMATION": 2,
+    "EVIDENCE_REVIEW": 3,
+    "TECHNICAL_INSPECTION": 4
+  },
+  "journeyStageMaximumLayerForCustomerContext": {
+    "ENTER": 1,
+    "DESCRIBE": 2,
+    "DISCOVER": 2,
+    "UNDERSTAND": 2,
+    "CHOOSE": 2,
+    "CONTINUE": 2,
+    "NOT_APPLICABLE": 4
+  },
+  "rules": {
+    "layerOrderImmutable": true,
+    "customerLayer3ExpansionAllowedByPds": true,
+    "customerLayer4DefaultForbidden": true,
+    "surfaceCapRequired": true,
+    "audienceAuthorizationExpansionDeferredTo": "CPR-W17"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "contractCode": "PHI-OS-VAP-W20-CANONICAL-ARTICLE-VISUAL-BINDING-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W20",
+  "phase": "VAP-D_ARTICLE_FIGURE_BINDING",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "active_fail_closed_binding_contract",
+  "authority": {
+    "articleAuthority": "PJA_OR_PUBLISHED_KNOWLEDGE_AUTHORITY",
+    "publishedVisualAssetAuthority": "CAR",
+    "bindingAuthority": "VAP_REFERENCE_BINDING_ONLY",
+    "presentationAuthority": "CPR_PJA_ARTICLE_PRESENTATION_SUCCESSOR",
+    "articleOwnsImage": false,
+    "articleReferencesPublishedAsset": true,
+    "vapMayPublishFigure": false,
+    "vapMayApproveFigure": false,
+    "vapMayCreateFigureBinary": false,
+    "vapMayMutateCarFrozenRegistry": false
+  },
+  "bindingContract": {
+    "requiredFields": [
+      "bindingCode",
+      "articleAssetCode",
+      "nodeCode",
+      "locale",
+      "assetCode",
+      "publicationCode",
+      "publicationDigest",
+      "placement",
+      "bindingState"
+    ],
+    "placementPattern": "^after_section:S[0-9]{2}$",
+    "allowedAssetTypes": ["FIGURE", "DIAGRAM"],
+    "requiredAssetPublicationState": "published",
+    "requiredSurface": "WEBSITE",
+    "stableSectionCodeRequired": true,
+    "articleBodyMutationRequired": false,
+    "articleAuthorityTransfer": false,
+    "assetAuthorityTransfer": false
+  },
+  "failClosedRules": {
+    "missingPublishedAsset": "BLOCK",
+    "validationOnlyCarRegistry": "BLOCK_LIVE_BINDING",
+    "unpublishedAsset": "BLOCK",
+    "wrongAssetType": "BLOCK",
+    "wrongLocale": "BLOCK",
+    "wrongSurface": "BLOCK",
+    "missingStableSectionCode": "BLOCK",
+    "publicationDigestMismatch": "BLOCK",
+    "unverifiedLegacyFigureGroup": "BLOCK",
+    "directoryGroupAsConcreteFigure": "BLOCK"
+  },
+  "currentBaseline": {
+    "carPublishedAssetRegistry": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+    "carPublishedAssetProductionStatus": "validation_only",
+    "carPublishedAssetCount": 0,
+    "publicAssetRegistry": "content/registry/public-assets.json",
+    "legacyBookFigureGroup": "BOOK-1-FIGURES",
+    "legacyBookFigureGroupRenderable": false,
+    "liveBindingAllowed": false
+  }
+}

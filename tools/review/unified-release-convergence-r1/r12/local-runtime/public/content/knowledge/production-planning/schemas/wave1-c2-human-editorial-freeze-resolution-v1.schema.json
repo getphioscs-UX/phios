@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/production-planning/wave1-c2-human-editorial-freeze-resolution-v1.schema.json",
+  "title": "Wave 1 C2 Human Editorial Freeze Resolution v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "resolutionCode",
+    "resolutionVersion",
+    "status",
+    "baselineCommit",
+    "contractReference",
+    "sourceReviewRegistry",
+    "sourcePackageSetDigest",
+    "proposalAuthority",
+    "entryCount",
+    "entries",
+    "proposalDigest",
+    "effects"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-FREEZE-RESOLUTION-v1.0.0"
+    },
+    "resolutionCode": {
+      "const": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-FREEZE-RESOLUTION-v1"
+    },
+    "resolutionVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "OPEN_PENDING_HUMAN",
+        "PARTIALLY_RESOLVED",
+        "HUMAN_RESOLVED"
+      ]
+    },
+    "baselineCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "contractReference": {
+      "const": "content/knowledge/production-planning/contracts/wave1-c2-human-editorial-freeze-resolution-v1.json"
+    },
+    "sourceReviewRegistry": {
+      "const": "content/knowledge/production-planning/review/wave1-c2-human-editorial-review-package-registry-v1.json"
+    },
+    "sourcePackageSetDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "proposalAuthority": {
+      "const": "AI_EDITORIAL_RECOMMENDATION_ONLY"
+    },
+    "entryCount": {
+      "const": 4
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/resolutionEntry"
+      }
+    },
+    "proposalDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "canonicalThesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "mechanism",
+        "necessity",
+        "systemRole",
+        "continuity",
+        "partContribution",
+        "bookContribution"
+      ],
+      "properties": {
+        "statement": { "type": "string", "minLength": 1 },
+        "mechanism": { "type": "string", "minLength": 1 },
+        "necessity": { "type": "string", "minLength": 1 },
+        "systemRole": { "type": "string", "minLength": 1 },
+        "continuity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fromPreviousNode", "toNextNode"],
+          "properties": {
+            "fromPreviousNode": { "type": ["string", "null"] },
+            "toNextNode": { "type": ["string", "null"] }
+          }
+        },
+        "partContribution": { "type": "string", "minLength": 1 },
+        "bookContribution": { "type": "string", "minLength": 1 }
+      }
+    },
+    "boundaryObject": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "c2Content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalThesis", "boundaries"],
+      "properties": {
+        "canonicalThesis": { "$ref": "#/$defs/canonicalThesis" },
+        "boundaries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["article", "claims", "questions", "sources", "figures", "publicContent"],
+          "properties": {
+            "article": { "$ref": "#/$defs/boundaryObject" },
+            "claims": { "$ref": "#/$defs/boundaryObject" },
+            "questions": {
+              "type": "array",
+              "items": { "type": "object" }
+            },
+            "sources": { "$ref": "#/$defs/boundaryObject" },
+            "figures": { "$ref": "#/$defs/boundaryObject" },
+            "publicContent": { "$ref": "#/$defs/boundaryObject" }
+          }
+        }
+      }
+    },
+    "reviewDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimension", "recommendation", "state", "humanFinding"],
+      "properties": {
+        "dimension": {
+          "enum": [
+            "CANONICAL_THESIS",
+            "ARTICLE_BOUNDARY",
+            "SUPPORTING_QUESTION_BOUNDARY",
+            "SEQUENCE_BOUNDARY",
+            "CLAIM_BOUNDARY",
+            "SOURCE_BOUNDARY",
+            "FIGURE_BOUNDARY",
+            "PUBLIC_CONTENT_BOUNDARY",
+            "CROSS_NODE_BOUNDARY"
+          ]
+        },
+        "recommendation": { "type": "string", "minLength": 1 },
+        "state": {
+          "enum": ["PENDING_HUMAN", "HUMAN_APPROVED", "CHANGES_REQUIRED", "DEFERRED", "REJECTED"]
+        },
+        "humanFinding": { "type": ["string", "null"] }
+      }
+    },
+    "humanDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "actor", "actorRole", "decidedAt", "rationale", "contentHash"],
+      "properties": {
+        "decision": {
+          "enum": [null, "freeze_approved", "changes_required", "deferred", "rejected"]
+        },
+        "actor": { "type": ["string", "null"] },
+        "actorRole": { "type": ["string", "null"] },
+        "decidedAt": { "type": ["string", "null"] },
+        "rationale": { "type": ["string", "null"] },
+        "contentHash": {
+          "anyOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "resolutionEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeCode",
+        "titleZhHans",
+        "knowledgeVersion",
+        "locale",
+        "reviewPackageCode",
+        "approvalState",
+        "sourceAuthorities",
+        "supportingEvidenceReferences",
+        "evidenceLimitations",
+        "manuscriptMappingReview",
+        "publicationReconciliationProposal",
+        "proposedContent",
+        "proposalContentHash",
+        "reviewDimensionProposals",
+        "humanDecision",
+        "promotionAllowed"
+      ],
+      "properties": {
+        "nodeCode": { "type": "string", "pattern": "^KN-" },
+        "titleZhHans": { "type": "string", "minLength": 1 },
+        "knowledgeVersion": { "type": "string", "minLength": 1 },
+        "locale": { "const": "zh-Hans" },
+        "reviewPackageCode": { "type": "string", "minLength": 1 },
+        "approvalState": {
+          "enum": ["pending_human", "human_approved", "changes_required", "deferred", "rejected"]
+        },
+        "sourceAuthorities": { "$ref": "#/$defs/stringArray" },
+        "supportingEvidenceReferences": { "$ref": "#/$defs/stringArray" },
+        "evidenceLimitations": { "$ref": "#/$defs/stringArray" },
+        "manuscriptMappingReview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reference", "mappingStatus", "humanVerified", "requiredBeforeApproval"],
+          "properties": {
+            "reference": { "type": "string", "minLength": 1 },
+            "mappingStatus": { "const": "candidate" },
+            "humanVerified": { "type": "boolean" },
+            "requiredBeforeApproval": { "const": true }
+          }
+        },
+        "publicationReconciliationProposal": {
+          "enum": [
+            "RECONCILE_EXISTING_PUBLICATION_INTO_C2",
+            "NO_EXISTING_PUBLICATION",
+            "GOVERNED_REVISION_OR_REPLACEMENT",
+            "DEFER_PRODUCTION"
+          ]
+        },
+        "proposedContent": { "$ref": "#/$defs/c2Content" },
+        "proposalContentHash": { "$ref": "#/$defs/digest" },
+        "reviewDimensionProposals": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": { "$ref": "#/$defs/reviewDimension" }
+        },
+        "humanDecision": { "$ref": "#/$defs/humanDecision" },
+        "promotionAllowed": { "type": "boolean" }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "c2Frozen",
+        "c3Rebuilt",
+        "productionDecisionCreated",
+        "productionPlanFrozen",
+        "productionWaveFrozen",
+        "kpeAuthorityCreated",
+        "kpeActivated",
+        "pjaCandidateCreated",
+        "carCandidateCreated",
+        "published"
+      ],
+      "properties": {
+        "c2Frozen": { "const": false },
+        "c3Rebuilt": { "const": false },
+        "productionDecisionCreated": { "const": false },
+        "productionPlanFrozen": { "const": false },
+        "productionWaveFrozen": { "const": false },
+        "kpeAuthorityCreated": { "const": false },
+        "kpeActivated": { "const": false },
+        "pjaCandidateCreated": { "const": false },
+        "carCandidateCreated": { "const": false },
+        "published": { "const": false }
+      }
+    }
+  }
+}

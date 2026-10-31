@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/vap-w6-batch-selection-v1.schema.json",
+  "title": "PHI OS VAP-W6 Batch Article Selection",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "batchCode",
+    "status",
+    "baselineCommit",
+    "selectionAuthority",
+    "summary",
+    "entries",
+    "invariants",
+    "batchDigest"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "PHI-OS-VAP-W6-BATCH-ARTICLE-SELECTION-v1.0.0" },
+    "batchCode": { "type": "string", "minLength": 1 },
+    "status": { "type": "string", "minLength": 1 },
+    "baselineCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "selectionAuthority": { "const": "DERIVED_RECOMMENDATION_ONLY" },
+    "summary": { "type": "object" },
+    "entries": {
+      "type": "array",
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "required": [
+          "selectionIndex",
+          "nodeCode",
+          "portfolioState",
+          "selectionStatus",
+          "humanProductionDecisionRequired",
+          "productionBriefExport"
+        ],
+        "properties": {
+          "selectionIndex": { "type": "integer", "minimum": 1 },
+          "nodeCode": { "type": "string", "pattern": "^KN-" },
+          "portfolioState": { "type": "string" },
+          "selectionStatus": { "const": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW" },
+          "humanProductionDecisionRequired": { "type": "boolean" },
+          "productionBriefExport": {
+            "type": "object",
+            "required": ["ready", "status", "blockers"],
+            "properties": {
+              "ready": { "type": "boolean" },
+              "status": { "type": "string" },
+              "blockers": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "invariants": { "type": "object" },
+    "batchDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  },
+  "additionalProperties": true
+}

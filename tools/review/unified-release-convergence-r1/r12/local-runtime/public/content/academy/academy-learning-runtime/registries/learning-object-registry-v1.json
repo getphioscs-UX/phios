@@ -1,0 +1,50 @@
+{
+  "registryCode": "PHI-OS-ALR-W2-LEARNING-OBJECT-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W2",
+  "status": "canonical",
+  "productionStatus": "type_registry_only",
+  "identityPrefix": "ALR-LO-",
+  "requiredInstanceFields": [
+    "learningObjectCode",
+    "learningObjectVersion",
+    "objectType",
+    "title",
+    "academyLevelCode",
+    "trackReferences",
+    "sourceReferences",
+    "localeAvailability",
+    "status",
+    "authorityReference"
+  ],
+  "objectTypes": [
+    {"typeCode": "PROGRAM", "ownerWork": "ALR-W10", "contentAuthority": "ALR"},
+    {"typeCode": "LEARNING_PATH", "ownerWork": "ALR-W11", "contentAuthority": "ALR"},
+    {"typeCode": "MODULE", "ownerWork": "ALR-W12", "contentAuthority": "ALR"},
+    {"typeCode": "LESSON", "ownerWork": "ALR-W13", "contentAuthority": "ALR"},
+    {"typeCode": "LEARNING_OBJECTIVE", "ownerWork": "ALR-W14", "contentAuthority": "ALR"},
+    {"typeCode": "TEACHING_EXPLANATION", "ownerWork": "ALR-W16", "contentAuthority": "ALR"},
+    {"typeCode": "EXAMPLE", "ownerWork": "ALR-W17", "contentAuthority": "ALR"},
+    {"typeCode": "CASE_STUDY", "ownerWork": "ALR-W18", "contentAuthority": "ALR"},
+    {"typeCode": "FIGURE_LEARNING_PROJECTION", "ownerWork": "ALR-W19", "contentAuthority": "ALR"},
+    {"typeCode": "PRACTICE", "ownerWork": "ALR-W20", "contentAuthority": "ALR"},
+    {"typeCode": "GUIDED_PRACTICE", "ownerWork": "ALR-W21", "contentAuthority": "ALR"},
+    {"typeCode": "SIMULATION", "ownerWork": "ALR-W22", "contentAuthority": "ALR"},
+    {"typeCode": "REFLECTION", "ownerWork": "ALR-W23", "contentAuthority": "ALR"},
+    {"typeCode": "ASSESSMENT", "ownerWork": "ALR-W24", "contentAuthority": "ALR"},
+    {"typeCode": "LEARNING_FEEDBACK", "ownerWork": "ALR-W27", "contentAuthority": "ALR"}
+  ],
+  "instanceStatusValues": ["DRAFT", "REVIEW_REQUIRED", "APPROVED", "ACTIVE", "SUSPENDED", "RETIRED"],
+  "instances": [],
+  "populationState": "EMPTY_BY_DESIGN_UNTIL_OWNER_WORK",
+  "rules": {
+    "typeRegistrationCreatesLearningContent": false,
+    "typeRegistrationCreatesLessonRuntime": false,
+    "registryStoresKnowledgeBody": false,
+    "registryStoresUserData": false,
+    "sourceReferencesMustRemainReferences": true,
+    "publishedKnowledgeRequiredBeforeActiveTeachingUse": true,
+    "carBriefMayPopulateAlrObjectAutomatically": false,
+    "unknownObjectTypeFailsClosed": true
+  }
+}

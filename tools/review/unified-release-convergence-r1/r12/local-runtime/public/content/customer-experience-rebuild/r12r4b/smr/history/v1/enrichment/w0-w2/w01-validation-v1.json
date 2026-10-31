@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "PHIOS-SMR-W01-VALIDATION-v1",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "stage": "W0_W1_CHECKPOINT",
+  "checks": [
+    {"name": "node scripts/check-cx-smr-enrichment-w01.mjs", "status": "PASS", "protectedFiles": 64, "negativeChecks": 8},
+    {"name": "Five PDF byte hashes and five copyright-page visual checks", "status": "PASS", "sources": 5},
+    {"name": "npm run check:bazi-fp-w0-w4", "status": "PASS"},
+    {"name": "npm run check:cx-r12r4b:smr", "status": "BLOCKED_EXECUTION_APPROVAL_CANCELLED", "observedError": "network approval was cancelled before a decision was returned", "assertionFailureEstablished": false, "retryPerformed": false},
+    {"name": "npm run check", "status": "NOT_RUN", "reason": "Scoped research-only checkpoint; no full-suite pass claimed."}
+  ],
+  "productionAllowed": false,
+  "customerCutoverAllowed": false,
+  "humanAccepted": 0,
+  "humanPending": 48,
+  "w2DeliveredInThisPackage": false,
+  "w3Started": false,
+  "interpretation": "Research package integrity passes. Existing SMR regression is still unverified; this is not a production-release approval."
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-3-FINAL-CANONICAL-AUTHORITY-v1.0.0",
+  "stage": "KAU-R6E",
+  "status": "TL_AUTHORIZED_ACTIVE_BOOK3_COMPLETED_MANUSCRIPT_FINAL",
+  "baselineCommit": "f3811673588eef38814c26fbbd1c52cbf2405f6a",
+  "recordedAt": "2026-09-07",
+  "bookCode": "BOOK-3",
+  "humanAuthority": {
+    "actor": "TL",
+    "decision": "USE_COMPLETED_BOOK_III_CONTENT_AS_FINAL_CANONICAL_NODE_SOURCE",
+    "acceptedAt": "2026-09-07"
+  },
+  "finalAuthority": {
+    "canonicalRegistryPath": "content/knowledge/registry/successors/kau-r6e-book3-final/canonical-nodes-v1.json",
+    "blueprintPath": "content/knowledge/blueprints/successors/kau-r6e-book3-final/book-3-knowledge-blueprint-v3.json",
+    "sectionSemanticsPath": "content/knowledge/manuscripts/extraction/book-3-final-section-semantics-v1.json",
+    "canonicalNodeCount": 103,
+    "partCounts": {
+      "P8": 60,
+      "P9": 43
+    }
+  },
+  "supersedesForBook3FinalStructure": [
+    {
+      "path": "content/knowledge/blueprints/book-3-knowledge-blueprint.json",
+      "knownRole": "pre-completion 86-node blueprint",
+      "finalAuthority": false
+    },
+    {
+      "path": "content/knowledge/blueprints/successors/book-w1d/book-3-knowledge-blueprint-v2.json",
+      "knownRole": "interim 105-node outline successor",
+      "finalAuthority": false
+    },
+    {
+      "path": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+      "scope": "BOOK-3 records only",
+      "knownBook3NodeCount": 105,
+      "disposition": "historical compatibility evidence"
+    }
+  ],
+  "invariants": {
+    "completedManuscriptIsSourceTruth": true,
+    "sectionCount": 103,
+    "oneFinalSectionOneCanonicalNode": true,
+    "oldNodeIdentityMayBeReferencedButNotReinterpreted": true,
+    "old105Book3NodesRemainHistorical": true,
+    "otherBooksUnaffected": true,
+    "publicationStillSeparatelyGated": true,
+    "englishSemanticParityStillSeparatelyGated": true
+  },
+  "runtimeConsumers": {
+    "pjaWave1": "REBOUND_IN_THIS_SUCCESSOR",
+    "kirR2Book3Profiles": "REBUILT_IN_THIS_SUCCESSOR"
+  }
+}

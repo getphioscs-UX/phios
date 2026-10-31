@@ -1,0 +1,23 @@
+{
+  "registryCode": "PHI-OS-ALR-W29-LEARNING-PROGRESS-STATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W29",
+  "status": "canonical",
+  "initialState": "NOT_STARTED",
+  "states": [
+    {"stateCode": "NOT_STARTED", "definition": "No governed learning exposure, practice or assessment record is represented."},
+    {"stateCode": "IN_PROGRESS", "definition": "Governed exposure exists while later learning milestones remain incomplete."},
+    {"stateCode": "ASSESSMENT_PENDING", "definition": "Governed exposure and practice exist while an integrity-valid assessment result is not represented."},
+    {"stateCode": "REVIEW_DUE", "definition": "Exposure, practice and an integrity-valid assessment result are represented, but completion review remains due."},
+    {"stateCode": "COMPLETED", "definition": "Exposure, practice, assessment and review milestones support learning completion without implying Capability."},
+    {"stateCode": "DISPUTED", "definition": "A material learning milestone or lineage conflict prevents a progress conclusion."},
+    {"stateCode": "UNKNOWN", "definition": "A required learning milestone or lineage meaning cannot be resolved safely."}
+  ],
+  "evaluationPriority": ["DISPUTED", "UNKNOWN", "NOT_STARTED", "COMPLETED", "REVIEW_DUE", "ASSESSMENT_PENDING", "IN_PROGRESS"],
+  "rules": {
+    "completionIsCapability": false,
+    "stateRegistryStoresLearnerProgress": false,
+    "unknownAndDisputedRemainExplicit": true,
+    "semanticEvaluationIsPure": true
+  }
+}

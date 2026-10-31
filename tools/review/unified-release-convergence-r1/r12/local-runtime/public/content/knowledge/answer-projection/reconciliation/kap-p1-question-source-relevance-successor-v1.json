@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-KAP-P1-QUESTION-SOURCE-RELEVANCE-SUCCESSOR-v1.0.0",
+  "phase": "KAP",
+  "work": "P1-BROWSER-R1-QUESTION-SOURCE-RELEVANCE",
+  "baselineCommit": "19981b26abd3ce78f4ceaa6d7b424a693b5df2e7",
+  "status": "ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCCESSOR",
+  "problem": {
+    "observedQuestion": "为什么我丈夫脾气那么坏",
+    "observedFailure": "GENERIC_INTERROGATIVE_LEXICAL_COLLISION_RETURNED_IRRELEVANT_WHY_PHI_OS_KNOWLEDGE",
+    "requiredBehavior": "FAIL_CLOSED_WHEN_GROUNDED_SOURCES_DO_NOT_OVERLAP_INFORMATIVE_QUESTION_TERMS"
+  },
+  "runtimeSuccessors": [
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "b251475a4ff303b6c7428290d7ed231af5416b8fffa14077b9defe37952e5011",
+      "currentSha256": "c075010c29a24a21f07dc6a766043cf1bb445124cb472164554593727b5cb0a5",
+      "change": "ADD_INFORMATIVE_QUERY_TO_SOURCE_RELEVANCE_FLOOR_BEFORE_KAP_ANSWER_ELIGIBILITY"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "601cdfe9c75affe453f86b31deedd524c515613e08e15c6ab017707f1cbee965",
+      "currentSha256": "7d484eba6e52e2d91da1827b4ea0b35367d3ede5d237934be3d81bf1f5552636",
+      "change": "SUPPRESS_IRRELEVANT_SOURCE_AND_RELATED_KNOWLEDGE_PROJECTION_WHEN_RELEVANCE_FLOOR_REJECTS"
+    }
+  ],
+  "policy": {
+    "genericInterrogativeOverlapIsSufficient": false,
+    "informativeQuestionSourceOverlapRequiredWhenInformativeTermsExist": true,
+    "noUsableInformativeTermsRemainFailOpenToExistingCoveragePolicy": true,
+    "relevanceFailureBecomesInsufficientCoverage": true,
+    "irrelevantSourceCardsProjected": false,
+    "irrelevantRelatedKnowledgeProjected": false
+  },
+  "authorityBoundary": {
+    "questionSourceRelevancePolicyChanged": true,
+    "knowledgeAuthorityChanged": false,
+    "retrievalAuthorityChanged": false,
+    "answerAuthorityChanged": false,
+    "meaningAdmissionChanged": false,
+    "canonicalKnowledgeMutationAllowed": false,
+    "modelGapFillAllowed": false,
+    "historicalFreezeMutationAllowed": false
+  },
+  "historicalEvidence": {
+    "w4w10Freeze": "content/knowledge/answer-projection/freeze/kap-w4-w10-knowledge-grounding-freeze-v1.json",
+    "w11w17Freeze": "content/knowledge/answer-projection/freeze/kap-w11-w17-answer-composition-freeze-v1.json",
+    "historicalFreezeRewritten": false
+  }
+}

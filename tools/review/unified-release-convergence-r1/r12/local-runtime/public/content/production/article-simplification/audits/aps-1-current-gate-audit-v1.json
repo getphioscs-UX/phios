@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "PHI-OS-APS-1-CURRENT-GATE-AUDIT-v1.0.0",
+  "work": "APS-1",
+  "status": "CURRENT_GATE_AUDIT_COMPLETE",
+  "baselineCommit": "6932c8865c1a7d76ddaa2d402dc005dc370db788",
+  "baselineCommitMessage": "standardize article look",
+  "scope": {
+    "bookCode": "BOOK-1",
+    "locale": "zh-Hans",
+    "referenceBatchCode": "VAP-ARTICLE-BATCH-001",
+    "targetExperience": {
+      "batchCommand": "npm run article:batch -- --book BOOK-1 --count 30",
+      "publishCommand": "npm run article:publish -- --batch BATCH-001"
+    }
+  },
+  "currentGateChain": [
+    {
+      "order": 1,
+      "gate": "CANONICAL_NODE_PRESENT",
+      "owner": "Canonical Knowledge Authority",
+      "evidence": "content/knowledge/registry/nodes.json",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "Single Readiness Contract must fail closed when absent."
+    },
+    {
+      "order": 2,
+      "gate": "ARTICLE_INTENT_AND_HUMAN_PRODUCTION_DECISION",
+      "owner": "KPP / Human Production Authority",
+      "evidence": "content/production/visual-article/decisions/vap-w6a-batch-001-human-decisions-v1.json",
+      "classification": "REUSE_UPSTREAM_AUTHORITY",
+      "apsDirection": "Batch selection must consume an already-approved ARTICLE decision; it must not ask TL to approve the same role again."
+    },
+    {
+      "order": 3,
+      "gate": "C2_EDITORIAL_FREEZE",
+      "owner": "Human Editorial Authority",
+      "evidence": "content/knowledge/editorial/c2/frozen",
+      "classification": "REUSE_UPSTREAM_AUTHORITY",
+      "apsDirection": "Treat as immutable readiness evidence, not a batch-time interaction."
+    },
+    {
+      "order": 4,
+      "gate": "MANUSCRIPT_MAPPING_HUMAN_VERIFIED",
+      "owner": "Human Editorial Authority",
+      "evidence": "content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json",
+      "classification": "REUSE_UPSTREAM_AUTHORITY",
+      "apsDirection": "Consume existing verification; do not re-request it in article:batch."
+    },
+    {
+      "order": 5,
+      "gate": "C3_PRODUCTION_READY",
+      "owner": "Editorial Production Readiness",
+      "evidence": "content/knowledge/editorial/c3/assessments",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "Single Readiness Contract must include C3 production_ready."
+    },
+    {
+      "order": 6,
+      "gate": "PRODUCTION_PLAN_FROZEN",
+      "owner": "KPP",
+      "evidence": "content/knowledge/production-planning/production/vap-article-batch-001/frozen-production-plan-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "Derive/freeze deterministically from already-governed readiness instead of requiring a separate operator step."
+    },
+    {
+      "order": 7,
+      "gate": "PRODUCTION_WAVE_FROZEN",
+      "owner": "KPP",
+      "evidence": "content/knowledge/production-planning/production/vap-article-batch-001/frozen-production-wave-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "Form the batch wave automatically after selection while preserving the existing wave maximum."
+    },
+    {
+      "order": 8,
+      "gate": "EXECUTION_AUTHORITY_VALID",
+      "owner": "KPP / VAP",
+      "evidence": "content/knowledge/production-planning/production/vap-article-batch-001/execution-authority-v1.json",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "Keep fail-closed, but resolve it inside automatic preflight."
+    },
+    {
+      "order": 9,
+      "gate": "LOCALE_READY",
+      "owner": "KNR-L10N",
+      "evidence": "content/knowledge/l10n/multilingual-node-projection-registry.json",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "Automatic preflight verifies requested locale; no manual step."
+    },
+    {
+      "order": 10,
+      "gate": "BATCH_SELECTION",
+      "owner": "VAP-W6",
+      "evidence": "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "Replace fixed Batch 001 choreography with generic --book/--count deterministic selection."
+    },
+    {
+      "order": 11,
+      "gate": "PRODUCTION_BRIEF_EXPORT",
+      "owner": "PJA / VAP-W6",
+      "evidence": "scripts/export-knowledge-production-brief.mjs",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "article:batch performs export automatically."
+    },
+    {
+      "order": 12,
+      "gate": "PROVIDER_GENERATION",
+      "owner": "VAP-W7",
+      "evidence": "content/production/visual-article/contracts/vap-w7-governed-provider-generation-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "article:batch invokes the governed generation adapter after preflight; generated output remains candidate-only."
+    },
+    {
+      "order": 13,
+      "gate": "CANDIDATE_VALIDATION_AND_PJA_IMPORT",
+      "owner": "VAP-W8 / PJA",
+      "evidence": "content/production/visual-article/validation/vap-article-batch-001-candidate-validation-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "Run automatically and fail the batch entry without converting validation into approval."
+    },
+    {
+      "order": 14,
+      "gate": "HUMAN_EDITORIAL_REVIEW",
+      "owner": "TL Human Review Authority",
+      "evidence": "content/knowledge/production/reviews/zh-Hans",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "This is the main human interaction in the review batch; existing digest-bound accepted review may be reused."
+    },
+    {
+      "order": 15,
+      "gate": "HUMAN_APPROVAL",
+      "owner": "TL Human Approval Authority",
+      "evidence": "content/knowledge/production/approvals/zh-Hans",
+      "classification": "COLLAPSE_DUPLICATE_HUMAN_INTERACTION",
+      "apsDirection": "Where policy still requires distinct approval authority, record it from the same explicit per-node batch review action instead of a second operator round; never infer it from AI or validation."
+    },
+    {
+      "order": 16,
+      "gate": "PRODUCTION_ARTICLE_PACKAGE",
+      "owner": "VAP-W10 / PJA",
+      "evidence": "content/production/visual-article/packages/vap-article-batch-001-production-article-package-manifest-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "Materialize automatically after accepted review/approval lineage is valid."
+    },
+    {
+      "order": 17,
+      "gate": "HUMAN_PUBLICATION_DECISION",
+      "owner": "TL Publication Authority",
+      "evidence": "content/production/visual-article/decisions/vap-w11-batch-001-human-publication-decisions-v1.json",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "article:publish may execute only explicit digest-bound publish decisions; the command itself must not invent approval."
+    },
+    {
+      "order": 18,
+      "gate": "PJA_PUBLICATION_RUNTIME_AND_PUBLISHED_AUTHORITY",
+      "owner": "PJA Publication Runtime",
+      "evidence": "content/knowledge/production/registry/publication-registry.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "article:publish should execute the existing publication runtime and published authority projection automatically after the Human Publication Decision."
+    },
+    {
+      "order": 19,
+      "gate": "CAR_VISUAL_ASSET_LIFECYCLE",
+      "owner": "CAR",
+      "evidence": "content/production/car/contracts/car-production-activation-v1.json",
+      "classification": "CONDITIONAL_VISUAL_GATE",
+      "apsDirection": "Required only when the article references a new/unpublished CAR-managed visual asset; existing approved/published reusable figures should be rebound instead of regenerated."
+    },
+    {
+      "order": 20,
+      "gate": "ARTICLE_FIGURE_BINDING",
+      "owner": "VAP-W20/W21",
+      "evidence": "content/production/visual-article/contracts/vap-w20-canonical-article-visual-binding-v1.json",
+      "classification": "CONDITIONAL_VISUAL_GATE",
+      "apsDirection": "Resolve automatically from published CAR authority; VAP remains reference-binding only."
+    },
+    {
+      "order": 21,
+      "gate": "CPR_PRODUCTION_PRESENTATION",
+      "owner": "CPR",
+      "evidence": "content/production/visual-article/contracts/vap-w22-cpr-production-activation-v1.json",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "article:publish creates/updates the governed presentation projection from published content; presentation never becomes Knowledge Authority."
+    },
+    {
+      "order": 22,
+      "gate": "CANONICAL_PUBLISHED_ARTICLE_FORMAT",
+      "owner": "CPR / PDS / WPR presentation",
+      "evidence": "scripts/check-published-article-format-reconciliation.mjs",
+      "classification": "PRESERVE_AUTHORITY",
+      "apsDirection": "All future releases must use the standardized published-article shell established at 6932c88."
+    },
+    {
+      "order": 23,
+      "gate": "VISUAL_ARTICLE_RELEASE_CANDIDATE_AND_RELEASE_GATES",
+      "owner": "VAP-W25-W27",
+      "evidence": "scripts/build-vap-w25-visual-article-release-candidate.mjs",
+      "classification": "AUTOMATE_ORCHESTRATION",
+      "apsDirection": "article:publish should build, validate and release deterministically after upstream authority is valid."
+    },
+    {
+      "order": 24,
+      "gate": "BROWSER_ACCEPTANCE_AND_FREEZE",
+      "owner": "Human Production Acceptance / VAP-W28-W29",
+      "evidence": "content/production/visual-article/release/acceptance/VAP-W28-browser-review.template.json",
+      "classification": "POST_RELEASE_ACCEPTANCE",
+      "apsDirection": "Retain as acceptance/freeze evidence, but do not make routine batch orchestration require a separate manual command for every deterministic intermediate step."
+    }
+  ],
+  "referenceBatchSnapshot": {
+    "batchCode": "VAP-ARTICLE-BATCH-001",
+    "nodeCodes": [
+      "KN-B1-P1-006",
+      "KN-B1-P2-001",
+      "KN-B1-P2-009",
+      "KN-B1-P3-005",
+      "KN-B1-P3-015",
+      "KN-B1-P4-006"
+    ],
+    "selectedCount": 6,
+    "c2FrozenCount": 6,
+    "c3ProductionReadyCount": 6,
+    "humanProductionApprovedCount": 6,
+    "executionAuthorityValidCount": 6,
+    "humanEditorialAcceptedCount": 6,
+    "humanApprovalApprovedCount": 6,
+    "productionArticlePackageCount": 6,
+    "humanPublicationDecisionCount": 0,
+    "publicationRecordCount": 0,
+    "currentBlockingGate": "HUMAN_PUBLICATION_DECISION"
+  },
+  "interactionAudit": {
+    "currentHumanDecisionLayers": [
+      "VAP-W6A production/C2/manuscript decisions",
+      "VAP-W9 Human Editorial Review",
+      "VAP-W10 Human Approval",
+      "VAP-W11 Human Publication Decision",
+      "Conditional CAR review/approval when new visual media is produced",
+      "VAP-W28 browser acceptance"
+    ],
+    "apsSimplificationPrinciple": "Do not remove authority boundaries. Remove repeated operator choreography by reusing upstream authority, combining compatible explicit per-node decisions into one review batch interaction, and automating deterministic transitions between authorities.",
+    "irreducibleHumanBoundaries": [
+      "Human Editorial Review for newly generated candidate content unless an accepted digest-bound review already exists",
+      "Human Publication Decision",
+      "Human CAR review/approval when genuinely new visual media is generated",
+      "Human production/browser acceptance where release policy requires it"
+    ]
+  },
+  "commandAudit": {
+    "articleBatchCommandPresentAtBaseline": false,
+    "articlePublishCommandPresentAtBaseline": false,
+    "currentPipelineStillRequiresMultipleNamedRuntimeCommands": true,
+    "aps1AddsPublicCommands": false
+  },
+  "jsonRoleAudit": {
+    "reviewBatch": {
+      "role": "NON_AUTHORITATIVE_REVIEW_ENVELOPE",
+      "intendedProducer": "future article:batch",
+      "mayEqualBulkApproval": false,
+      "mayEqualPublicationDecision": false,
+      "currentReferenceState": "AWAITING_TL_PUBLICATION_DECISIONS"
+    },
+    "humanDecisions": {
+      "role": "HUMAN_DECISION_INPUT_TEMPLATE_UNTIL_COMPLETED",
+      "intendedConsumer": "future APS batch review/publication bridge",
+      "mayCreateAuthorityWhilePending": false,
+      "requiredBeforePublish": true,
+      "currentReferenceState": "PENDING_HUMAN"
+    }
+  },
+  "aps1Conclusion": {
+    "gateBypassRequiredForTargetExperience": false,
+    "authorityModelCanBePreserved": true,
+    "primaryProblem": "OPERATOR_CHOREOGRAPHY_AND_DUPLICATE_HUMAN_INTERACTION",
+    "nextStep": "APS-2 must define one machine-readable readiness contract that collapses gates 1-9 into a single fail-closed eligibility result consumed by generic batch selection."
+  }
+}

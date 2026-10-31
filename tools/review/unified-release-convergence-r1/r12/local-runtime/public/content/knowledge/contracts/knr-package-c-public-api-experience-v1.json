@@ -1,0 +1,54 @@
+{
+  "contractCode": "KNR-PACKAGE-C-PUBLIC-API-EXPERIENCE",
+  "contractVersion": "1.0.0",
+  "baselineCommit": "b622eb5",
+  "scope": [
+    "public_api",
+    "public_experience"
+  ],
+  "inputs": [
+    "STEP64 published retrieval index",
+    "Package A routing/ranking/coverage policies",
+    "Package B adaptive projection/reading path policies"
+  ],
+  "allowed": [
+    "read",
+    "normalize",
+    "route",
+    "rank",
+    "measure_coverage",
+    "project_published_fragments",
+    "build_published_reading_path",
+    "report"
+  ],
+  "forbidden": [
+    "provider_call",
+    "answer_generation",
+    "translation",
+    "unpublished_projection",
+    "registry_mutation",
+    "publication_mutation",
+    "personalization",
+    "professional_handoff"
+  ],
+  "api": {
+    "method": "GET",
+    "path": "/api/public-knowledge",
+    "locales": [
+      "zh-Hans",
+      "en"
+    ],
+    "modes": [
+      "auto",
+      "overview",
+      "focused",
+      "full_article",
+      "continuity"
+    ]
+  },
+  "experience": {
+    "path": "/knowledge-search",
+    "publishedOnly": true,
+    "noCoverageIsExplicit": true
+  }
+}

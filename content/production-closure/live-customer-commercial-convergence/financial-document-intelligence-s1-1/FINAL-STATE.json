@@ -1,0 +1,259 @@
+{
+  "state": "LOCAL_QUALITY_REVIEW_CANDIDATE_WITH_EXPLICIT_BLOCKERS",
+  "recordedAt": "2026-10-31T05:25:22.285Z",
+  "headBefore": "d15ae4c8480cf46f81152fb8c87e623f1b8fb13c",
+  "headNow": "d15ae4c8480cf46f81152fb8c87e623f1b8fb13c",
+  "branch": "main",
+  "historicalS1AndR62R63ArtifactsUnchanged": 64,
+  "nativeOwnersUnchanged": 5,
+  "localAcceptedContractsUnchanged": true,
+  "tests": {
+    "affectedNativeAndTraceTests": 15,
+    "affectedBrowser": 6,
+    "sourceFormats": 2,
+    "crossOutputMetrics": 10,
+    "actualPdfPagesRendered": 10,
+    "separateProcessSnapshots": 2,
+    "pagesCompilationExitCode": 0,
+    "priorS1Checks": "27 local / 10 browser retained unchanged, not rerun or added to new counts"
+  },
+  "fontFilePublished": false,
+  "metricFormulaUnchanged": "Closing - restricted - committed - additional operating reserve; Other Obligations not consumed",
+  "agingClassification": "Balance Summary, no aging analysis",
+  "fixedWorkbookSnapshot": true,
+  "largeFontPdf": {
+    "extraction": "PASS",
+    "bytes": 132615,
+    "encryptedUpload": "BLOCKED_BY_PREWRITE_64KB_PAYLOAD_GUARD",
+    "oldIncompleteAttemptPreserved": true
+  },
+  "remainingBlockers": [
+    {
+      "id": "S11-STORAGE-CAPACITY",
+      "owner": "Existing Context/Storage Owner",
+      "state": "BLOCKED",
+      "detail": "Native Base64 spread limitation unchanged. New font-embedded source PDF extracts correctly but is not accepted by current encrypted upload. Only compact reference metadata + original encrypted sources proven."
+    },
+    {
+      "id": "S2-PARSER-EXECUTION",
+      "owner": "Existing Financial Intake / deployment reviewer",
+      "state": "BLOCKED",
+      "detail": "Local Python subprocess extraction is not a Pages-compatible execution proof. Independently reviewed bounded parser execution path required."
+    },
+    {
+      "id": "S2-ENVIRONMENT-AND-TEST-AUTH",
+      "owner": "Owner",
+      "state": "NOT_GRANTED",
+      "detail": "Independent Pages project/host/D1/R2 IDs, test secrets/identities, exact writes, costs and separate resource/test authorization absent."
+    },
+    {
+      "id": "S2-CUSTODY-RETENTION",
+      "owner": "Named key custodian / cleanup operator / policy reviewer",
+      "state": "UNASSIGNED",
+      "detail": "No automatic legal retention or production policy approval."
+    },
+    {
+      "id": "CONTINUITY-DISTRIBUTED-RECOVERY",
+      "owner": "Existing PWS / Context / Security Owners",
+      "state": "BLOCKED",
+      "detail": "No shared D1/R2 transaction, orphan cleanup, lost-key restore or formal migration proof."
+    }
+  ],
+  "sourceReproduction": "Reviewed summary, review version, original immutable encrypted documents and source/dataset/trace digests verified. PDF-byte-identical reproduction not claimed.",
+  "productionAuthorized": false,
+  "cloudQaReady": false,
+  "cloudResourcesCreated": false,
+  "providerCalls": 0,
+  "productionWrites": 0,
+  "commit": false,
+  "push": false,
+  "merge": false,
+  "deploy": false,
+  "fullNpmCheck": false,
+  "automaticReview": {
+    "rejectedAction": "Proposed test-only replacement of actual upload ID with a prerecorded ID",
+    "executed": false,
+    "resolution": "Actual HTTP200 and actual same-response upload ID retained. Real 422 exposed capacity limit; final browser test explicitly verifies large rejection and smaller supported upload success. No mock or old ID substitution."
+  },
+  "modifiedFiles": [
+    {
+      "path": "tools/review/financial-document-s1/adapter.mjs",
+      "sha256": "11aea1da6ac0936fd2e67b1d0faa6e32e2caff2cf562904323cf519d88d55188"
+    },
+    {
+      "path": "tools/review/financial-document-s1/extract.py",
+      "sha256": "4791d76160ae35079c71310d6bdc8b087773f567c0826ded304791aaa8fb2a3f"
+    },
+    {
+      "path": "tools/review/financial-document-s1/review.html",
+      "sha256": "567bf951422575150cd343be89011fed57505e7ac97f72f74b834d32ef07a150"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/browser.mjs",
+      "sha256": "71ff6c9b0e3cdc777661e0f7cff99fd8dca93e9725420ef20cbb5cef7e992242"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/capacity.mjs",
+      "sha256": "717d0568a9b53542d98f19ddd7df1ab93a2843303410e433282ff6db97df2556"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/compile.mjs",
+      "sha256": "e09a8c2baa8b614574b178e4dd8ea72a17a35f94f98efbc47b7501424279842e"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/consistency.py",
+      "sha256": "8a306c032abd0667af8f3704111a2c0209f540629d2c99d97d62d73989f1001d"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/data.mjs",
+      "sha256": "6608147b8f4d3a995c29c5d01a28a871066f560ee3419604f0a3dd9bc390f633"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/finalize.mjs",
+      "sha256": "84342da215b8ebf46236cd632ed312ce1a7ecd925bbd7580c4650e4e36baacc8"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/formats.mjs",
+      "sha256": "0df78ea76326443df5303299ca4f91862460316e0d8bb7473349925d17a1c822"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/outputs.mjs",
+      "sha256": "b24fc721b4aac5f7543cf77342a3fb6875e8b7768e2167a5248f89c045420502"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/pdf-qa.py",
+      "sha256": "6b4d3b46a218deaa8bdbd6c0f0c8fe7242edbc7faa1a73344a4bc18611f04696"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/prepare.mjs",
+      "sha256": "45a5d97c16bc8059f8c2c8c9355c40ca29b528eb423d8356a9f46b144b1c2338"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/preview.mjs",
+      "sha256": "8b876bc5ee64d31adb571e39db55e73161f4a13f273e5967427eec31518ffef5"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/qa.mjs",
+      "sha256": "8abcbbf5618db26468096c36b6924734b91c19faf1a8aa2dcca77f6f58f055dc"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/render.mjs",
+      "sha256": "f0a9d1cbe1120f88c31de7338e6057e52af1c7cc1e6d09343ac2c7542e1d03dd"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/run.mjs",
+      "sha256": "58d90b10a56b577d2c889c14c6002db799a94af43f59d01af3636b80cbfe5033"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/snapshot-reopen.mjs",
+      "sha256": "f8dc84c10c645f4086762ca2d935f5d1742c371bdbaf69229ce1e1f8081c3cd2"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/snapshot.mjs",
+      "sha256": "7426ab040868ded7c45ccfa3bd990069fb3346ef73dd580948295ffb5902e4d7"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/staging.mjs",
+      "sha256": "7e1b94ef9dd88333e29cd5eea8fd68aebe8ccea92ed65f6bcfbad34440a15d41"
+    },
+    {
+      "path": "tools/review/financial-document-s1-1/workbook.mjs",
+      "sha256": "8ff021507c7b0dce1120f87ac16498845c323476f4be896934e459c52577fe37"
+    }
+  ],
+  "gitStatus": "M content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html\n M functions/canonical-presentation-runtime/report-editorial-resolver.js\n M scripts/build-bazi-r9-review.mjs\n M tools/review/financial-document-s1/adapter.mjs\n M tools/review/financial-document-s1/extract.py\n M tools/review/financial-document-s1/review.html\n M tools/review/unified-release-convergence-r1/r11/CANDIDATE-TRACKED-FILES.json\n M tools/review/unified-release-convergence-r1/r11/RELEASE-CANDIDATE.json\n?? content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/\n?? tools/review/financial-document-s1-1/\n?? tools/review/r12-acceptance-ziwei-next/\n?? tools/review/subject-country-spw-fin-r1/\n?? tools/review/unified-release-convergence-r1/CLOUDFLARE-R12.json\n?? tools/review/unified-release-convergence-r1/r11-build-output-isolation.mjs\n?? tools/review/unified-release-convergence-r1/r11-json-correction-record.mjs\n?? tools/review/unified-release-convergence-r1/r11/BAZI-NODE22-NO-ATTRIBUTES.json\n?? tools/review/unified-release-convergence-r1/r11/JSON-CORRECTION-MASTER-PRESERVATION.json\n?? tools/review/unified-release-convergence-r1/r11/JSON-IMPORT-CORRECTION.json\n?? tools/review/unified-release-convergence-r1/r11/json-import-correction/\n?? tools/review/unified-release-convergence-r1/r12-assets.mjs\n?? tools/review/unified-release-convergence-r1/r12-cloudflare.log\n?? tools/review/unified-release-convergence-r1/r12-materialize.mjs\n?? tools/review/unified-release-convergence-r1/r12-policy-check.mjs\n?? tools/review/unified-release-convergence-r1/r12-snapshot.mjs\n?? tools/review/unified-release-convergence-r1/r12/",
+  "stagedFiles": "",
+  "sourceFormattingAfterTests": "BOM/CRLF/trailing-whitespace normalization only; behavior unchanged.",
+  "scopedGitDiffCheckExitCode": 0,
+  "generatedFiles": [
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/ACTUAL-LARGE-UPLOAD-FAILURE.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/AFFECTED-BROWSER-CHECKS.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/analysis-1440.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/analysis-390.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/analysis.html",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/CAPACITY-PREWRITE-TEST.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/CROSS-OUTPUT-CONSISTENCY.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/ENCRYPTED-REFERENCE-SNAPSHOT.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/FINAL-STATE.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/financial-export.csv",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/INITIAL-BROWSER-HARNESS-FAILURE.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/INITIAL-LAYOUT-FAILURE.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/MASTER-APPEND-INTEGRITY.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/METRIC-DEFINITIONS.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/PAGES-COMPILATION.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/PAGES-COMPILATION.log",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/PDF-RENDER-RECEIPT.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/PDF-TEXT-VISUAL-CHECKS.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/PREVIEW-LINK-CHECKS.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft-contact.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft-page-1.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft-page-2.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft-PREFLIGHT.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft.pdf",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft.pdf.txt",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-report.html",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/review.html",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/reviewed-data.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/S2-STAGING-READINESS.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/SEPARATE-PROCESS-REOPEN.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/source-package.html",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/SOURCE-TRACEABILITY.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/SOURCE-VIEW-RECONCILIATION.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-contact.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-1.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-2.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-3.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-4.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-5.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-6.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-7.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-page-8.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements-PREFLIGHT.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements.pdf",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements.pdf.txt",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements.xlsx",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements.xlsx.inspect.ndjson",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/TARGETED-TESTS.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/W0.json",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/XLSX-ERROR-SCAN.ndjson",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/xlsx-metadata.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/xlsx-reviewed.png",
+    "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/xlsx-sources.png"
+  ],
+  "preview": {
+    "base": "http://127.0.0.1:63346",
+    "pid": 39036,
+    "master": "http://127.0.0.1:63346/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html#financial-document-intelligence-s1-1-quality-closure",
+    "privateFontsAndObjectsServed": false
+  },
+  "previewLinkChecks": {
+    "base": "http://127.0.0.1:63346",
+    "rows": [
+      {
+        "path": "/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html",
+        "status": 200
+      },
+      {
+        "path": "/content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/review.html",
+        "status": 200
+      },
+      {
+        "path": "/content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft.pdf",
+        "status": 200
+      },
+      {
+        "path": "/content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/synthetic-statements.xlsx",
+        "status": 200
+      },
+      {
+        "path": "/assets/fonts/private-report/NotoSansSC-Regular.ttf",
+        "status": 404
+      },
+      {
+        "path": "/.tmp/financial-document-s1/native-context/local-storage-key",
+        "status": 404
+      }
+    ]
+  },
+  "historicalFinalRecheck": "PASS"
+}

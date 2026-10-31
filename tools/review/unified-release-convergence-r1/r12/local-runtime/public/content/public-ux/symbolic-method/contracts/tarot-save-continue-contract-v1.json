@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-SAVE-CONTINUE-CONTRACT-v1.0.0",
+  "phase": "TPA-H",
+  "work": "TPA-W34",
+  "baselineCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "status": "ACCOUNT_PROVIDER_BACKEND_READY_PUBLIC_EXECUTION_STILL_CLOSED",
+  "methodCode": "TAROT",
+  "actions": {
+    "saveReading": "POST /api/symbolic-method-save",
+    "listSavedReadings": "GET /api/symbolic-method-readings",
+    "openSavedReading": "GET /api/symbolic-method-readings?readingId=...",
+    "addNotes": "PATCH /api/symbolic-method-readings",
+    "reviewLater": "PATCH reviewState=REVIEW_LATER",
+    "archive": "PATCH reviewState=ARCHIVED",
+    "realityHandoffMetadata": "PATCH realityHandoff={...}"
+  },
+  "allowedReviewStates": ["SAVED", "REVIEW_LATER", "CONTINUED", "ARCHIVED"],
+  "rules": {
+    "explicitAccountSaveRequired": true,
+    "automaticSaveAllowed": false,
+    "guestSaveAllowed": false,
+    "notesMutationMustBeUserScoped": true,
+    "realityHandoffDoesNotCreateCanonicalReality": true,
+    "askPhiosMayConsumeSavedReadingOnlyAfterSeparateAuthorization": true,
+    "savedTarotMayNotBecomeEvidenceByPersistence": true
+  },
+  "currentSurface": {
+    "preexistingActionsVisible": ["Save", "Ask PHI OS", "Add to Reality", "Review later", "Compare with evidence"],
+    "liveAccountProviderConnected": false,
+    "publicExecutionOpen": false
+  }
+}

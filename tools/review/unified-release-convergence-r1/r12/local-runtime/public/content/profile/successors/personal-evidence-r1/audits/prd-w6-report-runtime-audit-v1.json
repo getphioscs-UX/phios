@@ -1,0 +1,30 @@
+{
+  "work": "PRD-W6.0",
+  "owners": {
+    "evidenceTruth": "PROFILE_PPR",
+    "pfigProjection": "PVP_R1",
+    "dossierStructure": "PersonalEvidenceDossierProjection",
+    "canonicalReport": "RR",
+    "layout": "CPR",
+    "releasedArtifact": "RR release → existing Report Library / PRIVATE_REPORTS",
+    "pdf": "CPR HTML → PHI-OS-REPORT-PRINT-SHELL-V2 → existing PDF channel"
+  },
+  "paths": {
+    "profileVisualReport": "functions/personal-reading/profile-visual-report-projection.js",
+    "guidedPredecessor": "functions/canonical-presentation-runtime/visual-report-page-runtime.js",
+    "rr": "scripts/lib/customer-report-runtime/report-runtime-v2.mjs",
+    "publicationIr": "functions/personal-reading/narrative/report-publication-ir-v2.js",
+    "cpr": "functions/canonical-presentation-runtime/",
+    "printShell": "assets/customer-ui/surfaces/report-print-shell-v2.css",
+    "releasedStorage": "PRIVATE_REPORTS",
+    "library": "functions/pws/commercial/report-successor-contract.js"
+  },
+  "findings": [
+    "RR EVIDENCE base registry does not admit PROFILE_PPR. Use versioned ephemeral consumer registry projection, following existing PR professional handoff extension; do not mutate frozen RR registry.",
+    "Publication IR V2 is claim/block transport requiring methodId and section briefs; it is not a generic static-page compositor. Preserve its schema for dynamic evidence blocks and use CPR for static assets and page geometry.",
+    "Guided Profile predecessor uses PROFILE method/product identity and fixed legacy pages. It must not become dossier identity.",
+    "No live provider narrative required. No new release storage, report library, PDF generator or semantic authority."
+  ],
+  "status": "AUDITED",
+  "productionRelease": "HUMAN_ACCEPTANCE_GATED"
+}

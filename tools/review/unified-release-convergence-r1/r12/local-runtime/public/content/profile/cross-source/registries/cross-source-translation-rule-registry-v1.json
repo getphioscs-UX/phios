@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-SOURCE-TRANSLATION-RULE-REGISTRY-v1.0.0",
+  "work": "PRF-W8",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "status": "FOUNDATION_ADMITTED_MACHINE_ONLY",
+  "rules": [
+    {
+      "ruleId": "PRF-XSR-PARALLEL-SOURCE-COMPARISON-v1",
+      "status": "ADMITTED",
+      "sourceRef": "PRF-W8::PARALLEL-SOURCE-COMPARISON",
+      "allowedSourceClasses": [
+        "MEASURED_TASK_PERFORMANCE",
+        "STANDARDIZED_SELF_REPORT",
+        "CUSTOMER_SELF_REPORT",
+        "EXTERNAL_PROFILE_RESULT",
+        "SYMBOLIC_INTERPRETATION"
+      ],
+      "minimumDistinctSourceClasses": 2,
+      "allowedGroups": [
+        "SOURCE_ALIGNED",
+        "SOURCE_COMPLEMENTARY",
+        "SOURCE_TENSION",
+        "SOURCE_CONTRADICTION",
+        "OPEN"
+      ],
+      "requiresExplicitComparison": true,
+      "requiresProfileRealityCorrelation": false,
+      "automaticSemanticMatching": false,
+      "truthConversionAllowed": false,
+      "scientificValidationAllowed": false
+    },
+    {
+      "ruleId": "PRF-XSR-CURRENT-REALITY-CONTEXT-v1",
+      "status": "ADMITTED",
+      "sourceRef": "PRF-W7::PROFILE-CURRENT-REALITY-CORRELATION",
+      "allowedSourceClasses": [
+        "MEASURED_TASK_PERFORMANCE",
+        "STANDARDIZED_SELF_REPORT",
+        "CUSTOMER_SELF_REPORT",
+        "EXTERNAL_PROFILE_RESULT",
+        "SYMBOLIC_INTERPRETATION"
+      ],
+      "minimumDistinctSourceClasses": 1,
+      "allowedGroups": [
+        "CURRENTLY_SUPPORTED",
+        "CURRENTLY_CONTRADICTED",
+        "OPEN"
+      ],
+      "requiresExplicitComparison": true,
+      "requiresProfileRealityCorrelation": true,
+      "automaticSemanticMatching": false,
+      "truthConversionAllowed": false,
+      "scientificValidationAllowed": false
+    }
+  ],
+  "governance": {
+    "rulesDoNotDefineUniversalPersonalityTruth": true,
+    "rulesDoNotEquateEvidenceClasses": true,
+    "rulesDoNotPromoteSymbolicMethodsToScientificEvidence": true,
+    "humanAdmissionStillRequiredAtPrfW12": true
+  }
+}

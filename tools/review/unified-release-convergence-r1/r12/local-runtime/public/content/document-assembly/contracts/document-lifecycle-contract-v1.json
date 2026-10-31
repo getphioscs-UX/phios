@@ -1,0 +1,41 @@
+{
+  "contractCode": "PHI-OS-DAR-W2-DOCUMENT-LIFECYCLE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W2",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "FROZEN_FOUNDATION_LIFECYCLE",
+  "states": [
+    "DRAFT_INPUT",
+    "INPUT_VALIDATED",
+    "ASSEMBLY_ELIGIBLE",
+    "DOCUMENT_CANDIDATE",
+    "CUSTOMER_REVIEW",
+    "PROFESSIONAL_REVIEW_REQUIRED",
+    "NOT_REQUIRED",
+    "APPROVED_FOR_EXPORT",
+    "EXPORTED",
+    "SIGNED_EXTERNALLY",
+    "EXECUTION_RECORDED",
+    "SUPERSEDED"
+  ],
+  "canonicalFlow": [
+    "DRAFT_INPUT -> INPUT_VALIDATED",
+    "INPUT_VALIDATED -> ASSEMBLY_ELIGIBLE",
+    "ASSEMBLY_ELIGIBLE -> DOCUMENT_CANDIDATE",
+    "DOCUMENT_CANDIDATE -> CUSTOMER_REVIEW",
+    "CUSTOMER_REVIEW -> PROFESSIONAL_REVIEW_REQUIRED | NOT_REQUIRED",
+    "PROFESSIONAL_REVIEW_REQUIRED -> APPROVED_FOR_EXPORT only after admitted review evidence",
+    "NOT_REQUIRED -> APPROVED_FOR_EXPORT after required customer confirmations",
+    "APPROVED_FOR_EXPORT -> EXPORTED",
+    "EXPORTED -> SIGNED_EXTERNALLY",
+    "SIGNED_EXTERNALLY -> EXECUTION_RECORDED",
+    "any non-superseded version -> SUPERSEDED when replaced"
+  ],
+  "invariants": {
+    "exportedIsNotLegallyExecuted": true,
+    "exportDoesNotImplySignature": true,
+    "signatureDoesNotByItselfImplyLegalValidity": true,
+    "executionRecordedIsHistoricalRecordNotLegalJudgment": true,
+    "silentStateSkipForbidden": true
+  }
+}

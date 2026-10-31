@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-SHARED-INTERPRETATION-CONTRACT-v1.0.0",
+  "work": "CX-R12R3B-W5-W20",
+  "status": "DEVELOPMENT_ACTIVE",
+  "input": {
+    "schemaVersion": "PHI-OS-CX-R12R3B-METHOD-INTERPRETATION-INPUT-v1.0.0",
+    "onlyAllowedFields": ["canonicalMethodProjection", "projectionVersion", "calculationDigest", "methodId", "locale", "requestedDepth", "availableContext", "authorityState"],
+    "frontendTemporaryValuesForbidden": true,
+    "unprojectedWebFieldsForbidden": true
+  },
+  "interpretationUnit": {
+    "required": ["interpretationUnitId", "methodId", "projectionRefs", "meaningRefs", "ruleRefs", "title", "plainLanguageExplanation", "structuralReason", "relationContext", "constructiveExpression", "frictionExpression", "activationConditions", "observableSignals", "alternativeInterpretations", "uncertainties", "confidenceBoundary", "sourceLineage", "realityComparisonQuestions"],
+    "primaryQualityFloor": ["ONE_STRUCTURAL_REASON", "ONE_RELATION_OR_CONTEXT", "ONE_CONSTRUCTIVE_EXPRESSION", "ONE_FRICTION_OR_ALTERNATIVE_EXPRESSION", "ONE_OBSERVABLE_SIGNAL", "ONE_REALITY_COMPARISON_QUESTION"]
+  },
+  "plainLanguage": {
+    "defaultForbidden": ["RAW_PINYIN_CODES", "DETERMINISTIC_BADGE", "STRUCTURE_ITEM", "PROJECTION_ITEM", "CANONICAL_ITEM", "UNKNOWN_CODE"],
+    "requiredFunctions": ["LOCALIZED_NAME", "ROLE", "CONTEXTUAL_IMPORTANCE", "INTERACTION", "POSSIBLE_EXPRESSION", "OBSERVABLE_SIGNAL"],
+    "rawCodeLocation": "TECHNICAL_DETAILS_ONLY"
+  },
+  "explanationDepth": {
+    "reuses": "content/interpretation/integration/explanation-depth-contract-v1.json",
+    "allowed": ["SHORT", "STANDARD", "DETAILED", "PROFESSIONAL"],
+    "mayChange": ["PARAGRAPH_COUNT", "SUPPORTING_EVIDENCE_COUNT", "ALTERNATIVE_COUNT", "LINEAGE_VISIBILITY", "TECHNICAL_DETAIL"],
+    "mustNotChange": ["CALCULATED_FACTS", "CORE_CONCLUSION", "SEMANTIC_DIGEST", "MEANING_AUTHORITY", "UNCERTAINTY", "PROFESSIONAL_JUDGMENT_AUTHORITY"]
+  },
+  "lifecycle": ["CALCULATED", "PROJECTED", "MEANING_AVAILABLE", "SOURCE_ADMITTED", "LOCALE_COMPLETE", "COMPOSITION_SUPPORTED", "HUMAN_REVIEWED", "CUSTOMER_PUBLISHABLE"],
+  "failClosed": {
+    "missingData": "REMOVE_UNSUPPORTED_INTERPRETATION",
+    "missingMeaning": "STRUCTURE_ONLY",
+    "missingRule": "NO_COMPOSITION",
+    "unsupportedTiming": "NO_TIMING_CLAIM",
+    "unacceptedCandidate": "NO_CUSTOMER_PUBLICATION",
+    "genericSentenceFallback": false
+  },
+  "sensitiveDomainBoundary": {
+    "forbidden": ["MEDICAL_DIAGNOSIS", "MENTAL_HEALTH_DIAGNOSIS", "LEGAL_CONCLUSION", "FINANCIAL_RECOMMENDATION", "GUARANTEED_EVENT", "DEATH_PREDICTION", "PREGNANCY_PREDICTION", "RELATIONSHIP_CERTAINTY", "MORAL_JUDGMENT"],
+    "conditionalLanguage": ["may", "can be experienced as", "one possible expression", "worth observing", "does not establish fact"]
+  },
+  "atomicMeaningBoundary": {
+    "atomicMeaningEqualsCustomerInterpretation": false,
+    "requiredCompositionInputs": ["PROJECTION_REFS", "ADMITTED_ATOMIC_MEANING_REFS", "RELATIONS", "PRIORITY", "VERSIONED_COMPOSITION_RULES"],
+    "directAtomicPublicationForbidden": true
+  },
+  "compositionGrammar": ["FUNCTION", "STYLE", "DOMAIN", "RELATION", "STATE", "MOTION", "CONSTRAINT", "TIMING", "PRIORITY"],
+  "priority": {
+    "outputs": ["PRIMARY", "SECONDARY", "SUPPORTING", "TECHNICAL_ONLY"],
+    "mayRead": ["ANGULARITY", "RELATION_DENSITY", "REPETITION", "STRUCTURAL_CENTRALITY", "SEASONAL_RELEVANCE", "PALACE_PROMINENCE", "CORE_NUMBER_ROLE", "ACTIVE_CYCLE"],
+    "mayCreateMeaning": false
+  },
+  "relations": ["SUPPORT", "TENSION", "REINFORCEMENT", "COUNTERBALANCE", "REPETITION", "DEPENDENCY", "ACTIVATION", "TRANSITION"],
+  "semanticDeduplication": "SAME_THEME_AND_REALITY_DOMAIN_AND_COMPATIBLE_RELATION_TO_ONE_PRINCIPAL_INSIGHT",
+  "conflictResolution": "EXPLAIN_CONTEXTUAL_ACTIVATION_AND_PRIORITY_WITHOUT_AVERAGING_AWAY_DIFFERENCE",
+  "realityComparisonQuestionLimitPerPrimary": 3,
+  "workCoverage": [5, 6, 7, 8, 9, 10, 11, 12, "12A", 13, 14, 15, 16, 17, 18, 19, 20]
+}

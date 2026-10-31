@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-011",
+  "title": "HDR-RUNTIME-ARCHITECTURE",
+  "scope": "HDR",
+  "role": "ARCHITECTURE",
+  "methodRefs": [
+    "HDR"
+  ],
+  "runtimeRefs": [
+    "content/professional/core-method-runtime/hdr-runtime-manifest-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "SHARED_DATA_AUTHORITY",
+      "displayLabel": "SHARED DATA AUTHORITY",
+      "nodeType": "RUNTIME",
+      "authorityClass": "DATA",
+      "semanticRole": "ARCHITECTURE",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "HDR_PLUGIN_BOUNDARY",
+      "displayLabel": "HDR PLUGIN BOUNDARY",
+      "nodeType": "METHOD",
+      "authorityClass": "METHOD",
+      "semanticRole": "ARCHITECTURE",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_CALCULATION_RUNTIME",
+      "displayLabel": "SHARED CALCULATION RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "ARCHITECTURE",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_PROJECTION_RUNTIME",
+      "displayLabel": "SHARED PROJECTION RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "ARCHITECTURE",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "PROFESSIONAL_HANDOFF",
+      "displayLabel": "PROFESSIONAL HANDOFF",
+      "nodeType": "GATE",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "ARCHITECTURE",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-011-E01",
+      "from": "SHARED_DATA_AUTHORITY",
+      "to": "HDR_PLUGIN_BOUNDARY",
+      "relation": "PROVIDES_CANONICAL_INPUT",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-011-E02",
+      "from": "HDR_PLUGIN_BOUNDARY",
+      "to": "SHARED_CALCULATION_RUNTIME",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-011-E03",
+      "from": "SHARED_CALCULATION_RUNTIME",
+      "to": "SHARED_PROJECTION_RUNTIME",
+      "relation": "PROJECTS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-011-E04",
+      "from": "SHARED_PROJECTION_RUNTIME",
+      "to": "PROFESSIONAL_HANDOFF",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "SHARED_DATA_AUTHORITY",
+        "HDR_PLUGIN_BOUNDARY",
+        "SHARED_CALCULATION_RUNTIME",
+        "SHARED_PROJECTION_RUNTIME"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "PROFESSIONAL_HANDOFF"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "SHARED_DATA_AUTHORITY",
+    "HDR_PLUGIN_BOUNDARY",
+    "SHARED_CALCULATION_RUNTIME",
+    "SHARED_PROJECTION_RUNTIME",
+    "PROFESSIONAL_HANDOFF"
+  ],
+  "mustState": [
+    "HDR is a governed Method plugin, not a second Method Runtime",
+    "perMethodRuntimeAllowed=false",
+    "HDR production remains restricted by canonical policy"
+  ],
+  "statementSources": {
+    "HDR is a governed Method plugin, not a second Method Runtime": "SRC-002",
+    "perMethodRuntimeAllowed=false": "SRC-002",
+    "HDR production remains restricted by canonical policy": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

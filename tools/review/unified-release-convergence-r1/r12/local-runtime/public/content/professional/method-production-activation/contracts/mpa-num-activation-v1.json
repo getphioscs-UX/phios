@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W21-NUM-ACTIVATION-CONTRACT-v1.0.0",
+  "work": "MPA-W21",
+  "baselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "method": {
+    "methodCode": "NUMEROLOGY",
+    "pluginCode": "NUM",
+    "methodVersion": "0.1.0-candidate"
+  },
+  "purpose": "Close NUM method-specific activation evidence without bypassing MPA-W26 Production Eligibility Decision, MPA-W27 Production Execution Gate, or separate Professional/Public authority.",
+  "prerequisites": [
+    "MPA-W0-W5",
+    "MPA-W6-W10",
+    "MPA-W11-W16",
+    "MPA-W17-W20"
+  ],
+  "activationSemantics": {
+    "methodSpecificActivationReadyMeans": "All NUM-specific evidence gates required before the global MPA eligibility decision are satisfied.",
+    "createsProductionEligibility": false,
+    "createsProductionExecutionAuthority": false,
+    "createsProfessionalEligibility": false,
+    "createsPublicEligibility": false,
+    "nextGlobalEligibilityGate": "MPA-W26",
+    "nextProductionExecutionGate": "MPA-W27"
+  },
+  "requiredMethodSpecificGates": [
+    "registrationSuccessor",
+    "canonicalInput",
+    "consentPurpose",
+    "calculationAuthorityResolver",
+    "determinism",
+    "fixtureCorpus",
+    "validationHarness",
+    "regression",
+    "crossImplementationComparison",
+    "projectionFreeze",
+    "interpretationBoundary",
+    "meaningKnowledgeBoundary",
+    "professionalSeparation"
+  ],
+  "licenseBoundary": {
+    "currentCalculationAuthorityScope": "PHI_OS_INTERNAL_NUMERIC_RULES_ONLY",
+    "externalCalculationDatasetDependency": false,
+    "externalCommercialLicensePassClaimed": false,
+    "legalOpinionCreated": false,
+    "legacyCommercialLicenseFalseMayNotBeSilentlyRewritten": true
+  },
+  "rules": {
+    "legacyNumFreezeMutationAllowed": false,
+    "frozenMrMutationAllowed": false,
+    "frozenImrMutationAllowed": false,
+    "methodRegistryV2ProductionEligibleMayBeSetAtW21": false,
+    "capabilityMatrixProductionEligibleMayBeSetAtW21": false,
+    "w12HistoricalFixtureCorpusMayBeRewritten": false,
+    "fixtureDiscrepancyRequiresVersionedSuccessor": true,
+    "productionExecutionBeforeW27Forbidden": true,
+    "professionalReleaseFromNumActivationForbidden": true
+  }
+}

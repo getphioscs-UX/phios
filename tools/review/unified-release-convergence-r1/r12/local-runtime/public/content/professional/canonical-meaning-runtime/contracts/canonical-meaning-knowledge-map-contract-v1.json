@@ -1,0 +1,46 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-MEANING-KNOWLEDGE-MAP-v1.0.0",
+  "work": "CM-W5",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "authority": {
+    "canonicalMeaning": "reference_owner",
+    "knowledgeNode": "knowledge_authority",
+    "canonicalArticle": "pja_authority",
+    "publishedFragment": "public_content_authority",
+    "mapping": "canonical_meaning_knowledge_map"
+  },
+  "requiredMappingFields": [
+    "mappingCode",
+    "mappingVersion",
+    "meaningId",
+    "meaningCode",
+    "meaningVersion",
+    "primaryNodeCodes",
+    "supportingNodeCodes",
+    "publishedFragmentReferences",
+    "coverage",
+    "status"
+  ],
+  "rules": {
+    "meaningRegistryStoresArticleBody": false,
+    "meaningRegistryRewritesKnowledgeNode": false,
+    "knowledgeNodeRemainsKnowledgeAuthority": true,
+    "meaningStoresReferencesOnly": true,
+    "publishedFragmentTextMayNotBeCopiedIntoMap": true,
+    "mappingRequiresRegisteredMeaningCode": true,
+    "mappingRequiresExistingKnowledgeNode": true,
+    "publishedFragmentReferenceRequiresMatchingNodeAndLocale": true,
+    "emptyRegistryAllowedBeforeMeaningCodePopulation": true
+  },
+  "invariants": {
+    "registryLed": true,
+    "deterministic": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "methodMappingCreated": false,
+    "productionAuthorityCreated": false,
+    "khW4G6SemanticRuntimeFreezeUnchanged": true
+  }
+}

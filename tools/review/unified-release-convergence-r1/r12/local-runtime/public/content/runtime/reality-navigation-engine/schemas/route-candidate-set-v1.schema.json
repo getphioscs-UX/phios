@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Route Candidate Set v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "routeSetCode",
+    "routeSetVersion",
+    "objectType",
+    "dataType",
+    "currentPositionReference",
+    "targetReference",
+    "optionSetReference",
+    "decisionSupportReference",
+    "scenarioSetReference",
+    "routeShape",
+    "routeCandidates",
+    "routeSelectionMade",
+    "journeyStageMutationCreated",
+    "actionRecordCreated",
+    "executionCreated",
+    "outcomePredictionCreated",
+    "professionalJudgmentCreated",
+    "jrIntegrationActivated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "routeSetDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-ROUTE-CANDIDATE-SET-v1.0.0"
+    },
+    "routeSetCode": {
+      "type": "string",
+      "pattern": "^RNE-ROUTE-SET-[A-Z0-9-]{4,120}$"
+    },
+    "routeSetVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "ROUTE_CANDIDATE_SET"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "currentPositionReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "targetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "optionSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "decisionSupportReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "scenarioSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "routeShape": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "CURRENT"
+        },
+        {
+          "const": "INTERMEDIATE"
+        },
+        {
+          "const": "TARGET"
+        }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "routeCandidates": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "routeCode",
+          "optionCode",
+          "optionClass",
+          "scenarioReference",
+          "selectionState",
+          "stages",
+          "journeyStageMutationCreated",
+          "actionRecordCreated",
+          "executionCreated",
+          "outcomePredictionCreated"
+        ],
+        "properties": {
+          "routeCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionClass": {
+            "enum": [
+              "OBSERVE",
+              "CLARIFY",
+              "VERIFY",
+              "REPOSITION",
+              "RECONFIGURE"
+            ]
+          },
+          "scenarioReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "selectionState": {
+            "const": "AVAILABLE_NOT_SELECTED"
+          },
+          "stages": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "stageType",
+                "stateReference",
+                "authority",
+                "realityTruthClaimed"
+              ],
+              "properties": {
+                "stageType": {
+                  "enum": [
+                    "CURRENT",
+                    "INTERMEDIATE",
+                    "TARGET"
+                  ]
+                },
+                "stateReference": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                },
+                "authority": {
+                  "enum": [
+                    "RNE_CURRENT_POSITION_REFERENCE",
+                    "RNE_NAVIGATION_CHECKPOINT",
+                    "AUTHORIZED_TARGET_REFERENCE"
+                  ]
+                },
+                "observationPoint": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                },
+                "dependencyReferences": {
+                  "$ref": "#/$defs/strarr"
+                },
+                "targetSourceAuthority": {
+                  "enum": [
+                    "CUSTOMER",
+                    "PROFESSIONAL",
+                    "AUTHORIZED_SERVICE"
+                  ]
+                },
+                "realityTruthClaimed": {
+                  "const": false
+                }
+              }
+            }
+          },
+          "journeyStageMutationCreated": {
+            "const": false
+          },
+          "actionRecordCreated": {
+            "const": false
+          },
+          "executionCreated": {
+            "const": false
+          },
+          "outcomePredictionCreated": {
+            "const": false
+          }
+        }
+      }
+    },
+    "routeSelectionMade": {
+      "const": false
+    },
+    "journeyStageMutationCreated": {
+      "const": false
+    },
+    "actionRecordCreated": {
+      "const": false
+    },
+    "executionCreated": {
+      "const": false
+    },
+    "outcomePredictionCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "jrIntegrationActivated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "routeSetDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

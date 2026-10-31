@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-PRODUCTION-GATES-v2.0.0",
+  "work": "CX-R12R3B-PASS2B__W61_W67_CONTINUATION",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "POST_HUMAN_MACHINE_REACCEPTED_DEPLOYMENT_AND_LIVE_BROWSER_REQUIRED",
+  "prerequisites": {
+    "developmentAccepted": true,
+    "humanReview96DualAccepted": true,
+    "customerPublishableCoverageComplete": true,
+    "machineReacceptanceAfterHumanReview": true,
+    "deploymentCandidateCaptured": true,
+    "liveBrowserAccepted": false,
+    "ordinaryReaderFiveMinuteAccepted": false
+  },
+  "controlledProduction": {
+    "AST": {
+      "status": "READY_FOR_EXACT_DEPLOYMENT_AND_LIVE_BROWSER",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false,
+      "humanAcceptance": "24/24"
+    },
+    "NUM": {
+      "status": "READY_FOR_EXACT_DEPLOYMENT_AND_LIVE_BROWSER",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false,
+      "humanAcceptance": "24/24"
+    },
+    "BZR": {
+      "status": "READY_FOR_EXACT_DEPLOYMENT_AND_LIVE_BROWSER",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false,
+      "humanAcceptance": "24/24"
+    },
+    "ZWR": {
+      "status": "READY_FOR_EXACT_DEPLOYMENT_AND_LIVE_BROWSER",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false,
+      "humanAcceptance": "24/24"
+    }
+  },
+  "liveBrowserAcceptance": {
+    "status": "NOT_RUN",
+    "required": [
+      "production URL",
+      "production SHA",
+      "desktop",
+      "375px",
+      "390px",
+      "430px",
+      "768px",
+      "English",
+      "zh-Hans",
+      "graph interactions",
+      "text fallback",
+      "missing birth time",
+      "long Chinese labels",
+      "slow network",
+      "refresh/replay"
+    ],
+    "evidenceRef": null
+  },
+  "ordinaryReaderFiveMinuteTest": {
+    "status": "NOT_RUN",
+    "requiredBeforeProductionFreeze": true,
+    "evidenceRef": null
+  },
+  "productionFreeze": {
+    "status": "BLOCKED_LIVE_BROWSER_AND_ORDINARY_READER_REQUIRED",
+    "freezeAllowed": false,
+    "required": [
+      "calculation versions",
+      "projection versions",
+      "meaning versions",
+      "composition versions",
+      "adapter versions",
+      "graph contract version",
+      "customer projection version",
+      "review campaign version",
+      "production SHA",
+      "acceptance evidence"
+    ]
+  },
+  "fullProduction": false,
+  "successorOf": "content/customer-experience-rebuild/production/cx-r12r3b-production-gates-v1.json",
+  "humanAcceptanceEvidenceRef": "content/customer-experience-rebuild/review/cx-r12r3b-human-review-results-v1.json",
+  "deploymentCandidateRef": "content/customer-experience-rebuild/production/cx-r12r3b-deployment-candidate-v1.json",
+  "machineReacceptanceEvidenceRef": "content/customer-experience-rebuild/acceptance/cx-r12r3b-pass2c-machine-reacceptance-v1.json"
+}

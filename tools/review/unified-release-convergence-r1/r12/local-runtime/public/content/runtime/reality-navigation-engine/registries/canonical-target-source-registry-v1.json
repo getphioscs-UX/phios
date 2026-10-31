@@ -1,0 +1,33 @@
+{
+  "registryCode": "PHI-OS-RNE-CANONICAL-TARGET-SOURCE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "containsUserData": false,
+  "targetSources": [
+    {
+      "sourceType": "CUSTOMER",
+      "authorityClass": "SELF_DECLARED",
+      "rneMayInvent": false,
+      "professionalAuthorityRequired": false,
+      "serviceAuthorityRequired": false
+    },
+    {
+      "sourceType": "PROFESSIONAL",
+      "authorityClass": "AUTHORIZED_PROFESSIONAL",
+      "rneMayInvent": false,
+      "professionalAuthorityRequired": true,
+      "serviceAuthorityRequired": false
+    },
+    {
+      "sourceType": "AUTHORIZED_SERVICE",
+      "authorityClass": "GOVERNED_SERVICE",
+      "rneMayInvent": false,
+      "professionalAuthorityRequired": false,
+      "serviceAuthorityRequired": true
+    }
+  ],
+  "rules": {
+    "providerOrAiIsNotTargetAuthority": true,
+    "unattributedTargetAllowed": false
+  }
+}

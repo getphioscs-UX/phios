@@ -1,0 +1,46 @@
+{
+  "compositionCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-COMPOSITION-v1",
+  "compositionVersion": "1.0.0",
+  "work": "WPR-W23",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "status": "canonical_authorized_shell_composition",
+  "bindings": [
+    {
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "routeCode": "PROFESSIONAL_WORKSPACE",
+      "sourceCodes": [
+        "PR",
+        "RDG",
+        "FINANCIAL_RUNTIME"
+      ],
+      "slots": [
+        "PRIMARY_CONTEXT",
+        "EVIDENCE",
+        "PROFESSIONAL_BOUNDARY",
+        "CONTINUITY"
+      ]
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "routeCode": "PROFESSIONAL_REPORTS",
+      "sourceCodes": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "slots": [
+        "PRIMARY_CONTENT",
+        "EVIDENCE",
+        "PROFESSIONAL_BOUNDARY",
+        "CONTINUITY"
+      ]
+    }
+  ],
+  "rules": {
+    "privatePayloadRequiresExternalAuthorizedInjection": true,
+    "wprDoesNotFetchPrivatePayload": true,
+    "reportMustAlreadyExistUpstream": true,
+    "professionalApprovalMustAlreadyExistWhenRequired": true,
+    "rrAndPrAuthorityPreserved": true
+  }
+}

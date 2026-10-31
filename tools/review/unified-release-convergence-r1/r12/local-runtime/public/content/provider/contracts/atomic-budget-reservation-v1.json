@@ -1,0 +1,22 @@
+{
+  "contractCode": "PHI-OS-ATOMIC-BUDGET-RESERVATION-v1.0.0",
+  "ordinaryKvAllowedForStrictCounter": false,
+  "productionPersistenceAllowed": [
+    "d1_transaction",
+    "durable_object"
+  ],
+  "providerCallEnabledByFoundation": false,
+  "requiredOrder": [
+    "receive_request",
+    "validate_query_boundary",
+    "check_cache",
+    "estimate_usage",
+    "read_budget_authority",
+    "atomic_reservation",
+    "confirm_hard_limit",
+    "provider_call",
+    "record_actual_usage",
+    "release_unused_reservation",
+    "reconcile"
+  ]
+}

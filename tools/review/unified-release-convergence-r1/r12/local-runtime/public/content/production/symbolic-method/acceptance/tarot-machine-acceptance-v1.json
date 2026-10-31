@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCTION-MACHINE-ACCEPTANCE-v1.0.0",
+  "phase": "PROD",
+  "work": "PROD-W3",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "MACHINE_CANDIDATE_LOCAL_SOURCE_STATIC_BROWSER_PASSED_LIVE_BROWSER_AND_SHA_PENDING",
+  "passedGates": [
+    "identity",
+    "calculation_or_selection",
+    "projection",
+    "determinism_or_replay",
+    "source_provenance",
+    "interpretation_boundary",
+    "privacy",
+    "locale",
+    "frontend",
+    "browser_static_contract"
+  ],
+  "liveProductionSha": {
+    "required": true,
+    "verified": false,
+    "observedSha": null,
+    "reason": "NO_LIVE_DEPLOYMENT_SHA_EVIDENCE_IN_ARCHIVE"
+  },
+  "humanReviewRequired": true,
+  "limitedProductionAllowed": false,
+  "pendingMachineGates": [
+    "live_browser_acceptance",
+    "live_production_sha_alignment"
+  ],
+  "browserAcceptance": {
+    "staticContractPassed": true,
+    "liveBrowserVerified": false,
+    "reason": "CONTAINER_CHROMIUM_SMOKE_COULD_NOT_COMPLETE; production promotion remains fail-closed until a real deployed-browser acceptance is recorded"
+  },
+  "machineAcceptanceComplete": false
+}

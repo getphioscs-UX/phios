@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-UNCERTAINTY-CONTRACT-v1.0.0",
+  "phase": "TPA-F",
+  "work": "TPA-W25",
+  "baselineCommit": "a347b414094e23cc361c3c73120173f117eef537",
+  "status": "FROZEN_UNCERTAINTY_PRESERVATION",
+  "contractVersion": "1.0.0",
+  "methodCode": "TAROT",
+  "allowedStates": [
+    "UNKNOWN",
+    "UNRESOLVED",
+    "CONTRADICTORY",
+    "NOT_SUPPORTED_BY_REALITY",
+    "SOURCE_DISAGREEMENT"
+  ],
+  "rules": {
+    "uncertaintyLayerRequired": true,
+    "unknownMayRemainUnknown": true,
+    "unresolvedMayRemainUnresolved": true,
+    "contradictoryEvidenceMayNotBeCollapsed": true,
+    "sourceDisagreementMayNotBeVotedAway": true,
+    "notSupportedByRealityMustNotBeReframedAsSecretTruth": true,
+    "modelMayEraseUncertainty": false,
+    "missingSourcePerspectiveMayBeInvented": false,
+    "forcedConclusionRequired": false
+  },
+  "minimumFallback": "UNRESOLVED_NO_SINGLE_REALITY_CONCLUSION_AUTHORIZED"
+}

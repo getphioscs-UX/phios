@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-DA-YUN-LIU-NIAN-PROFESSIONAL-TIMELINE-CONTRACT-v1.0.0",
+  "workId": "BAZI-CX-PRO-W9",
+  "title": "Da Yun / Liu Nian Timeline Professional Reading",
+  "status": "ADMITTED",
+  "objective": "Compose natal whole-chart priorities, the full Da Yun sequence, an explicitly selected Liu Nian window, and the seven professional life topics into one readable time-axis without converting timing into event prediction.",
+  "sourceInputs": [
+    "professionalModules.wholeChartPriority",
+    "professionalModules.professionalTopics",
+    "professionalModules.timing",
+    "readingIR.sections.timing.allDaYun",
+    "readingIR.sections.timing.currentDaYun",
+    "readingIR.sections.timing.annual",
+    "readingIR.sections.timing.interactions"
+  ],
+  "surfaceOutput": {
+    "moduleSchemaVersion": "PHI-OS-BAZI-CX-PRO-DA-YUN-LIU-NIAN-PROFESSIONAL-TIMELINE-v1.0.0",
+    "requiredFields": [
+      "state",
+      "targetContext",
+      "natalPriorityRefs",
+      "daYunTimeline",
+      "currentWindow",
+      "topicCodes",
+      "boundaries"
+    ],
+    "requiredDaYunFields": [
+      "cycleNumber",
+      "startAge",
+      "endAge",
+      "pillar",
+      "stemTenGod",
+      "functionGroups",
+      "priorityRefs",
+      "topicActivations",
+      "interactions"
+    ],
+    "requiredCurrentWindowFields": [
+      "available",
+      "completeness",
+      "currentDaYun",
+      "annual",
+      "currentDaYunPriorityRefs",
+      "annualPriorityRefs",
+      "interactions",
+      "topicTimeline"
+    ]
+  },
+  "compositionRules": [
+    "Natal priorities remain the baseline and are never overwritten by Da Yun or Liu Nian.",
+    "Each Da Yun cycle is composed with its Ten-God functional groups, natal interactions, priority references and life-topic relevance.",
+    "A selected Liu Nian adds a narrower annual layer only when target date, time and timezone are explicit.",
+    "Each of the seven life topics preserves its natal reading and records whether Da Yun and Liu Nian enter as primary, supporting or contextual relevance.",
+    "Cross-layer relations may increase reading relevance but never create event certainty."
+  ],
+  "boundaries": {
+    "natalPriorityRemainsBaseline": true,
+    "daYunDoesNotOverwriteNatal": true,
+    "liuNianDoesNotOverwriteDaYun": true,
+    "topicActivationIsStructuralRelevanceNotEventPrediction": true,
+    "convergenceIsNotCertainty": true,
+    "currentDateInferred": false,
+    "browserTimezoneInferred": false,
+    "goodBadScoreCreated": false,
+    "fortunePredictionCreated": false,
+    "eventPredictionCreated": false
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "PHI-OS-MCD-5-CANONICAL-METHOD-PROJECTION-CONTRACT-v1.0.0",
+  "work": "MCD-5",
+  "baselineCommit": "14ec8f4907e13acb0b806c1920f51aab43132835",
+  "status": "ACTIVE_CORE_ISOLATED_CANONICAL_CLIENT_PROJECTION_INTERPRETATION_EXCLUDED",
+  "canonicalObject": "CanonicalMethodProjection",
+  "definition": "The only client-facing contract between governed Method execution and downstream PHI OS clients. Core Runtime result schemas remain internal; MCD-5 projects only whitelisted deterministic values, explicit unknowns, evidence lineage, complete version identity and execution metadata. Calculation is not Interpretation.",
+  "requiredRootSections": [
+    "method",
+    "calculation",
+    "projection",
+    "unknown",
+    "evidence",
+    "version",
+    "execution",
+    "interpretation"
+  ],
+  "coreIsolation": {
+    "frontendMayDependOnCoreRuntimeSchema": false,
+    "rawCoreResultMayEnterClient": false,
+    "rawCoreOutputKeyMayEnterClient": false,
+    "coreStackTraceMayEnterClient": false,
+    "internalServerPathMayEnterClient": false,
+    "canonicalProjectionIsOnlyClientContract": true
+  },
+  "method": {
+    "allowed": [
+      "CONTROLLED_PUBLIC_METHOD_LABEL",
+      "OPAQUE_PROTECTED_METHOD_REFERENCE",
+      "METHOD_VERSION",
+      "METHOD_STATUS",
+      "CALCULATION_MODE"
+    ],
+    "forbiddenClaims": [
+      "LIFE_CONCLUSION",
+      "DESTINY_CONCLUSION",
+      "REALITY_DIAGNOSIS"
+    ]
+  },
+  "calculation": {
+    "allowed": [
+      "DETERMINISTIC_VALUES",
+      "COORDINATES_WHEN_GOVERNED_AND_USED",
+      "STRUCTURES",
+      "CYCLES",
+      "POSITIONS",
+      "DERIVED_NUMERIC_RESULTS"
+    ],
+    "interpretMeaningAllowed": false,
+    "futureEventPredictionAllowed": false,
+    "realityConclusionAllowed": false
+  },
+  "projection": {
+    "stableClientSchema": true,
+    "frontendConsumesOnlyCanonicalProjection": true,
+    "frontendCoreSchemaDependencyAllowed": false,
+    "unknownDisclosureRequiredWhenPresent": true
+  },
+  "unknown": {
+    "categories": [
+      "MISSING_INPUT",
+      "UNCERTAIN_VALUE",
+      "UNAVAILABLE_CALCULATION",
+      "POLICY_LIMITED_RESULT",
+      "NOT_CALCULABLE_STATE"
+    ],
+    "rendererMayHideUnknown": false,
+    "unknownMayBeConvertedToKnownByRenderer": false,
+    "unknownMayBeFilledByAI": false
+  },
+  "evidence": {
+    "requiredEvidenceTypes": [
+      "INPUT_SOURCE",
+      "TIMEZONE_SOURCE",
+      "COORDINATES_SOURCE",
+      "RULE_SOURCE",
+      "CALCULATION_AUTHORITY",
+      "RUNTIME_AUTHORITY"
+    ],
+    "fakeEvidenceAllowed": false,
+    "unavailableEvidenceMustSayUnavailable": true
+  },
+  "version": {
+    "required": [
+      "methodRegistryVersion",
+      "runtimeVersion",
+      "adapterVersion",
+      "inputContractVersion",
+      "projectionContractVersion"
+    ],
+    "versionlessProductionResultAllowed": false
+  },
+  "execution": {
+    "required": [
+      "requestId",
+      "status",
+      "mpaDecision",
+      "runtimeIdentity",
+      "executedAt"
+    ],
+    "stackTraceAllowed": false,
+    "secretAllowed": false,
+    "internalServerPathAllowed": false
+  },
+  "interpretation": {
+    "included": false,
+    "principle": "CALCULATION_NOT_EQUAL_INTERPRETATION",
+    "meaningAuthorityCreated": false,
+    "realityReadingCreated": false,
+    "professionalJudgmentCreated": false
+  },
+  "hdr": {
+    "contractStatus": "VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE",
+    "productionCustomerResultAllowed": false,
+    "validationContractAllowed": true,
+    "normalizationSchemaAllowed": true,
+    "rendererFixtureAllowed": true,
+    "rawInternalProjectionToClientAllowed": false,
+    "requiredPublicLabelEn": "Personal Runtime Projection",
+    "requiredPublicLabelZhHans": "个人运行投射"
+  },
+  "nextWork": "MCD-6"
+}

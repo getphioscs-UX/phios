@@ -1,0 +1,87 @@
+{
+  "contractCode": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-REVIEW-FOUNDATION-v1",
+  "contractVersion": "1.0.0",
+  "status": "ESTABLISHED_PENDING_HUMAN",
+  "purpose": "Extend the existing Wave 1 C2 queue with evidence-bound human editorial review packages without creating C2 freeze or production authority.",
+  "sourceAuthorities": [
+    "Canonical Node Registry",
+    "Book I Knowledge Blueprint",
+    "PJA C2 Canonical Thesis and Boundary Contract",
+    "PJA C2 Candidate Records",
+    "PJA C3 Production Readiness Assessments",
+    "KAU-E2 Accepted Supporting Relationship Registry",
+    "Published Article and Asset Authority",
+    "CAR Published Fragment Coverage Authority",
+    "KPP v2 Validation-only Pilot Plan and Frozen Boundaries"
+  ],
+  "reviewDimensions": [
+    "CANONICAL_THESIS",
+    "ARTICLE_BOUNDARY",
+    "SUPPORTING_QUESTION_BOUNDARY",
+    "SEQUENCE_BOUNDARY",
+    "CLAIM_BOUNDARY",
+    "SOURCE_BOUNDARY",
+    "FIGURE_BOUNDARY",
+    "PUBLIC_CONTENT_BOUNDARY",
+    "CROSS_NODE_BOUNDARY"
+  ],
+  "humanAuthority": {
+    "required": true,
+    "approvalStateUntilHumanDecision": "pending_human",
+    "aiMayActAsHumanReviewer": false,
+    "aiMaySupplyHumanDecision": false,
+    "aiMayFreezeC2": false,
+    "requiredFreezeEvidence": [
+      "real reviewer",
+      "reviewedAt",
+      "approved decision",
+      "contentHash"
+    ]
+  },
+  "legacySupportingBoundary": {
+    "mayInformHumanReview": true,
+    "maySignalGap": true,
+    "mayBecomeCanonicalThesis": false,
+    "mayOverwriteLaterKnowledge": false,
+    "mayModifyCanonicalNode": false,
+    "mayCreateArticleRequirement": false,
+    "mayRaiseProductionReadiness": false,
+    "mayCreateProductionDecision": false
+  },
+  "publishedKnowledgeReconciliation": {
+    "existingPublishedKnowledgeMayBeSilentlyRebuilt": false,
+    "existingPublicationMayImplyC2Freeze": false,
+    "humanReconciliationRequiredWhenPublicationAndC2Conflict": true,
+    "allowedHumanPaths": [
+      "RECONCILE_EXISTING_PUBLICATION_INTO_C2",
+      "GOVERNED_REVISION_OR_REPLACEMENT",
+      "DEFER_PRODUCTION"
+    ]
+  },
+  "failClosedEffects": {
+    "c2Frozen": false,
+    "c3Rebuilt": false,
+    "productionDecisionCreated": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "kpeActivated": false,
+    "pjaCandidateCreated": false,
+    "carCandidateCreated": false,
+    "reviewApproved": false,
+    "published": false
+  },
+  "checkerBoundary": {
+    "read": true,
+    "validate": true,
+    "compare": true,
+    "fail": true,
+    "report": true,
+    "repair": false,
+    "mutate": false,
+    "approve": false,
+    "publish": false,
+    "freeze": false,
+    "updateRegistry": false,
+    "generateAuthority": false
+  }
+}

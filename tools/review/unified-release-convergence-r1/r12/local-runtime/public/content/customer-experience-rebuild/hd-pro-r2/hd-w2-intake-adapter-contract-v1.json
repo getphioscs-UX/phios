@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R2-W2-INTAKE-ADAPTER-v1.0.0",
+  "work": "HD-W2",
+  "inputs": [
+    "PNG",
+    "JPG",
+    "WEBP",
+    "PDF",
+    "PASTED_TEXT",
+    "MANUAL_STRUCTURED_ENTRY"
+  ],
+  "documentConversion": "CLOUDFLARE_WORKERS_AI_MARKDOWN_CONVERSION_WHEN_CONFIGURED",
+  "states": [
+    "EMPTY",
+    "FILE_SELECTED",
+    "PROCESSING",
+    "NEEDS_CONFIRMATION",
+    "EXTRACTION_INCOMPLETE",
+    "EXTRACTION_FAILED",
+    "CONFIRMED"
+  ],
+  "rules": {
+    "explicitProcessingConsentRequiredForStandaloneRead": true,
+    "documentConversionCreatesMeaning": false,
+    "fileSavedAutomatically": false,
+    "pastedTextCreatesConfirmedAuthority": false,
+    "manualStructuredEntryIsCustomerConfirmedCandidate": true
+  },
+  "status": "IMPLEMENTED"
+}

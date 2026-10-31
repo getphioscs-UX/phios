@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "1.0.0",
+  "stage": "KAU-R0",
+  "status": "reconciled",
+  "baselineCommit": "807efc359a0d1477bc697044f55970fc5e6e8500",
+  "reason": "Completed Volume I/II and approved five-volume publication architecture no longer match the four-volume Book/Part Registry baseline.",
+  "before": {
+    "architecture": "four-volume-15-part",
+    "bookOwnership": {
+      "BOOK-1": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "BOOK-2": [
+        "P5",
+        "P6",
+        "P7",
+        "P8",
+        "P9"
+      ],
+      "BOOK-3": [
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "BOOK-4": [
+        "P13",
+        "P14",
+        "P15"
+      ]
+    }
+  },
+  "after": {
+    "architecture": "five-volume-15-part",
+    "bookOwnership": {
+      "BOOK-1": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "BOOK-2": [
+        "P5",
+        "P6",
+        "P7"
+      ],
+      "BOOK-3": [
+        "P8",
+        "P9"
+      ],
+      "BOOK-4": [
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "BOOK-5": [
+        "P13",
+        "P14",
+        "P15"
+      ]
+    }
+  },
+  "titleReconciliation": [
+    {
+      "partCode": "P6",
+      "fromZhHans": "关系运行",
+      "toZhHans": "共同运行",
+      "englishIdentity": "Relational Runtime"
+    },
+    {
+      "partCode": "P8",
+      "fromZhHans": "运行维护",
+      "toZhHans": "运行维持",
+      "englishIdentity": "Runtime Maintenance"
+    },
+    {
+      "partCode": "P9",
+      "fromZhHans": "治理运行",
+      "fromEn": "Governance Runtime",
+      "toZhHans": "协调运行",
+      "toEn": "Coordination Runtime",
+      "semanticNodeDecision": "deferred-to-KAU-R2+"
+    }
+  ],
+  "canonicalImpact": {
+    "nodesPath": "content/knowledge/registry/nodes.json",
+    "nodeCount": 716,
+    "normalizedSha256": "61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+    "nodeCodeSetSha256": "98cea9eb7a84970dc1ea8fb98c992ee66612f5c560b987c90ba85a11d43f50c3",
+    "nodeCodeMutation": false,
+    "canonicalSemanticMutation": false
+  },
+  "blueprintProjection": {
+    "BOOK-1": 65,
+    "BOOK-2": 180,
+    "BOOK-3": 86,
+    "BOOK-4": 187,
+    "BOOK-5": 198,
+    "total": 716
+  },
+  "historicalEvidencePolicy": "Existing four-volume migration/freeze artifacts remain historical evidence and are not rewritten.",
+  "conclusion": "Book/Part publication authority and Blueprint projection are reconciled to five volumes without changing Canonical Node identity. Manuscript registration and semantic Node reconciliation remain separate governed stages.",
+  "downstreamImpact": {
+    "knowledgeProductionContext": "reconciled-to-part-registry-authority",
+    "knrRegistryConsumer": "reconciled-to-five-volume-authority",
+    "webProductionRuntime": "successor-reconciliation-required",
+    "webProductionReason": "Frozen WPR v1 still hashes and presents the previous four-volume Book Registry; KAU-R0 does not rewrite WPR public composition, routes, assets or freeze authority.",
+    "productionDeploymentAllowedBeforeWprReconciliation": false
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "registryCode": "PHI-OS-PR-E5-PWS-LIFECYCLE-PROJECTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "status": "canonical_extension",
+  "entries": [
+    {
+      "prState": "DRAFT",
+      "pwsState": "draft",
+      "operation": null,
+      "authority": null,
+      "eventCode": null
+    },
+    {
+      "prState": "REVIEWED",
+      "pwsState": "review_required",
+      "operation": "deliverable.freeze",
+      "authority": "deliverable.approver",
+      "eventCode": "deliverable.frozen"
+    },
+    {
+      "prState": "APPROVED",
+      "pwsState": "approved",
+      "operation": "deliverable.sign",
+      "authority": "authorised_signatory",
+      "eventCode": "deliverable.signed"
+    },
+    {
+      "prState": "SIGNED",
+      "pwsState": "signed",
+      "operation": "deliverable.release",
+      "authority": "deliverable.release_authority",
+      "eventCode": "deliverable.released"
+    },
+    {
+      "prState": "RELEASED",
+      "pwsState": "released",
+      "operation": null,
+      "authority": null,
+      "eventCode": null
+    }
+  ],
+  "rules": {
+    "projectionDoesNotMutatePws": true,
+    "operationExecutionExternal": true,
+    "deliverableCreationExternal": true,
+    "stateSkippingForbidden": true
+  }
+}

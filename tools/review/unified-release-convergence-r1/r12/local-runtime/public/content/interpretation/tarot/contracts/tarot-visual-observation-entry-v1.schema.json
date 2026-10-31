@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-TAROT-VISUAL-OBSERVATION-ENTRY-v1.0.0",
+  "title": "Tarot Visual Observation Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cardId",
+    "cardIdentity",
+    "canonicalTitle",
+    "deckId",
+    "deckVersion",
+    "artworkId",
+    "sourceId",
+    "witnessSetId",
+    "figures",
+    "objects",
+    "posture",
+    "direction",
+    "environment",
+    "foreground",
+    "background",
+    "numbers",
+    "writtenMarks",
+    "animals",
+    "plants",
+    "celestialObjects",
+    "architecturalObjects",
+    "visibleSymbols",
+    "observationEvidence",
+    "meaningAttached",
+    "interpretationAllowedInThisRecord",
+    "reviewStatus"
+  ],
+  "properties": {
+    "cardId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cardIdentity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonicalTitle": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deckId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "deckVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artworkId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "witnessSetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewStatus": {
+      "type": "string",
+      "minLength": 1
+    },
+    "figures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "posture": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "direction": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "environment": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "foreground": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "background": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "numbers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "writtenMarks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "animals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "plants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "celestialObjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "architecturalObjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "visibleSymbols": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meaningAttached": {
+      "const": false
+    },
+    "interpretationAllowedInThisRecord": {
+      "const": false
+    },
+    "observationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceType",
+        "commonsFileName",
+        "commonsFilePage",
+        "originalFileUrl",
+        "categoryUrl",
+        "witnessFamily",
+        "rightsClass",
+        "authorityTier"
+      ],
+      "properties": {
+        "evidenceType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commonsFileName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commonsFilePage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "originalFileUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "categoryUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "witnessFamily": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rightsClass": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityTier": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

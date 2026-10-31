@@ -1,0 +1,659 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/production-planning/wave1-c2-human-editorial-review-package-registry-v1.schema.json",
+  "title": "Wave 1 C2 Human Editorial Review Package Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "registryCode",
+    "registryVersion",
+    "status",
+    "baselineCommit",
+    "contractReference",
+    "sourcePreflight",
+    "sourceQueue",
+    "sourcePilotPlan",
+    "digestBinding",
+    "authoritySnapshot",
+    "requiredHumanSubmission",
+    "packageCount",
+    "packages",
+    "effects"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-REVIEW-PACKAGE-REGISTRY-v1.0.0"
+    },
+    "registryCode": {
+      "const": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-REVIEW-PACKAGE-REGISTRY-v1"
+    },
+    "registryVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "OPEN_PENDING_HUMAN"
+    },
+    "baselineCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "contractReference": {
+      "const": "content/knowledge/production-planning/contracts/wave1-c2-human-editorial-review-foundation-v1.json"
+    },
+    "sourcePreflight": {
+      "const": "content/knowledge/production-planning/activation/wave1-production-activation-preflight-v1.json"
+    },
+    "sourceQueue": {
+      "const": "content/knowledge/production-planning/review/wave1-c2-human-review-queue-v1.json"
+    },
+    "sourcePilotPlan": {
+      "const": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json"
+    },
+    "digestBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "inputProjection",
+        "inputDigest",
+        "packageSetDigest"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "canonicalization": {
+          "const": "recursive_key_sort_json"
+        },
+        "inputProjection": {
+          "const": "selected_wave1_authority_projection_v1"
+        },
+        "inputDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "packageSetDigest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "authoritySnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kppProductionStatus",
+        "kpeAuthorityStatus",
+        "humanProductionDecisionCount",
+        "frozenProductionPlanCount",
+        "frozenProductionWaveCount",
+        "pjaHandoffCount",
+        "carHandoffCount"
+      ],
+      "properties": {
+        "kppProductionStatus": {
+          "const": "validation_only"
+        },
+        "kpeAuthorityStatus": {
+          "const": "NOT_PRESENT_IN_CURRENT_MAIN"
+        },
+        "humanProductionDecisionCount": {
+          "const": 0
+        },
+        "frozenProductionPlanCount": {
+          "const": 0
+        },
+        "frozenProductionWaveCount": {
+          "const": 0
+        },
+        "pjaHandoffCount": {
+          "const": 0
+        },
+        "carHandoffCount": {
+          "const": 0
+        }
+      }
+    },
+    "requiredHumanSubmission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalThesisFields",
+        "c2BoundaryFamilies",
+        "additionalReviewDimensions",
+        "freezeEvidence",
+        "allowedDecisions"
+      ],
+      "properties": {
+        "canonicalThesisFields": {
+          "const": [
+            "statement",
+            "mechanism",
+            "necessity",
+            "systemRole",
+            "continuity",
+            "partContribution",
+            "bookContribution"
+          ]
+        },
+        "c2BoundaryFamilies": {
+          "const": [
+            "article",
+            "claims",
+            "questions",
+            "sources",
+            "figures",
+            "publicContent"
+          ]
+        },
+        "additionalReviewDimensions": {
+          "const": [
+            "sequenceBoundary",
+            "crossNodeBoundary"
+          ]
+        },
+        "freezeEvidence": {
+          "const": [
+            "real reviewer",
+            "reviewedAt",
+            "approved decision",
+            "contentHash"
+          ]
+        },
+        "allowedDecisions": {
+          "const": [
+            "freeze_approved",
+            "changes_required",
+            "deferred",
+            "rejected"
+          ]
+        }
+      }
+    },
+    "packageCount": {
+      "const": 4
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/reviewPackage"
+      }
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "reviewDimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension",
+        "state",
+        "evidence",
+        "humanFinding"
+      ],
+      "properties": {
+        "dimension": {
+          "enum": [
+            "CANONICAL_THESIS",
+            "ARTICLE_BOUNDARY",
+            "SUPPORTING_QUESTION_BOUNDARY",
+            "SEQUENCE_BOUNDARY",
+            "CLAIM_BOUNDARY",
+            "SOURCE_BOUNDARY",
+            "FIGURE_BOUNDARY",
+            "PUBLIC_CONTENT_BOUNDARY",
+            "CROSS_NODE_BOUNDARY"
+          ]
+        },
+        "state": {
+          "const": "PENDING_HUMAN"
+        },
+        "evidence": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stringArray"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "humanFinding": {
+          "type": "null"
+        }
+      }
+    },
+    "legacyRelationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relationshipCode",
+        "sourceCode",
+        "legacySectionCode",
+        "relationshipType",
+        "state",
+        "supportingOnly",
+        "canonicalAuthority",
+        "productionDecisionAuthority"
+      ],
+      "properties": {
+        "relationshipCode": {
+          "type": "string"
+        },
+        "sourceCode": {
+          "type": "string"
+        },
+        "legacySectionCode": {
+          "type": "string"
+        },
+        "relationshipType": {
+          "type": "string"
+        },
+        "state": {
+          "const": "ACCEPTED_SUPPORTING"
+        },
+        "supportingOnly": {
+          "const": true
+        },
+        "canonicalAuthority": {
+          "const": false
+        },
+        "productionDecisionAuthority": {
+          "const": false
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "c2Frozen",
+        "c3Rebuilt",
+        "productionDecisionCreated",
+        "productionPlanFrozen",
+        "productionWaveFrozen",
+        "kpeActivated",
+        "pjaCandidateCreated",
+        "carCandidateCreated",
+        "reviewApproved",
+        "published"
+      ],
+      "properties": {
+        "c2Frozen": {
+          "const": false
+        },
+        "c3Rebuilt": {
+          "const": false
+        },
+        "productionDecisionCreated": {
+          "const": false
+        },
+        "productionPlanFrozen": {
+          "const": false
+        },
+        "productionWaveFrozen": {
+          "const": false
+        },
+        "kpeActivated": {
+          "const": false
+        },
+        "pjaCandidateCreated": {
+          "const": false
+        },
+        "carCandidateCreated": {
+          "const": false
+        },
+        "reviewApproved": {
+          "const": false
+        },
+        "published": {
+          "const": false
+        }
+      }
+    },
+    "reviewPackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packageCode",
+        "packageVersion",
+        "nodeCode",
+        "titleZhHans",
+        "locale",
+        "status",
+        "approvalState",
+        "authority",
+        "candidateReference",
+        "c3AssessmentReference",
+        "productionProjection",
+        "canonicalSnapshot",
+        "c2Snapshot",
+        "c3Snapshot",
+        "publishedKnowledgeSnapshot",
+        "legacySupportingRelationships",
+        "reviewDimensions",
+        "unresolvedFindings",
+        "humanQuestions",
+        "humanDecision",
+        "effects"
+      ],
+      "properties": {
+        "packageCode": {
+          "type": "string",
+          "pattern": "^PHI-OS-WAVE1-C2-REVIEW-[A-Z0-9-]+-v1$"
+        },
+        "packageVersion": {
+          "const": "1.0.0"
+        },
+        "nodeCode": {
+          "enum": [
+            "KN-PREFACE-004",
+            "KN-B1-P1-003",
+            "KN-B1-P4-003",
+            "KN-B1-P4-004"
+          ]
+        },
+        "titleZhHans": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locale": {
+          "const": "zh-Hans"
+        },
+        "status": {
+          "const": "PENDING_HUMAN"
+        },
+        "approvalState": {
+          "const": "pending_human"
+        },
+        "authority": {
+          "const": "PJA_C2_HUMAN_EDITORIAL_REVIEW"
+        },
+        "candidateReference": {
+          "type": "string"
+        },
+        "c3AssessmentReference": {
+          "type": "string"
+        },
+        "productionProjection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "productionRole",
+            "dispatchTarget",
+            "sourcePlan",
+            "sourceIsProductionDecision"
+          ],
+          "properties": {
+            "productionRole": {
+              "enum": [
+                "ARTICLE",
+                "FRAGMENT",
+                "FIGURE",
+                "MULTI_ASSET"
+              ]
+            },
+            "dispatchTarget": {
+              "enum": [
+                "PJA",
+                "CAR"
+              ]
+            },
+            "sourcePlan": {
+              "type": "string"
+            },
+            "sourceIsProductionDecision": {
+              "const": false
+            }
+          }
+        },
+        "canonicalSnapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nodeVersion",
+            "registryStatus",
+            "canonicalLanguage",
+            "nodeRequiredPublicLanguages",
+            "blueprintStatus",
+            "blueprintArticleRequiredNow",
+            "blueprintPublicLanguagePlan",
+            "sourceCodes",
+            "supportingQuestionCodes",
+            "prerequisiteNodeCodes",
+            "nextNodeCodes",
+            "relatedNodeCodes",
+            "pilotAssemblyParticipation"
+          ],
+          "properties": {
+            "nodeVersion": {
+              "type": "string"
+            },
+            "registryStatus": {
+              "type": "string"
+            },
+            "canonicalLanguage": {
+              "const": "zh-Hans"
+            },
+            "nodeRequiredPublicLanguages": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "blueprintStatus": {
+              "type": "string"
+            },
+            "blueprintArticleRequiredNow": {
+              "type": "boolean"
+            },
+            "blueprintPublicLanguagePlan": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "sourceCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "supportingQuestionCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "prerequisiteNodeCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "nextNodeCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "relatedNodeCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "pilotAssemblyParticipation": {
+              "enum": [
+                "none",
+                "primary_node",
+                "supporting_node"
+              ]
+            }
+          }
+        },
+        "c2Snapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "thesisState",
+            "boundaryState",
+            "humanFreezeState",
+            "authorityFinding",
+            "candidateThesisPresent",
+            "candidateBoundariesPresent",
+            "blocking"
+          ],
+          "properties": {
+            "status": {
+              "const": "human_review_required"
+            },
+            "thesisState": {
+              "const": "not_assessed"
+            },
+            "boundaryState": {
+              "const": "not_assessed"
+            },
+            "humanFreezeState": {
+              "const": "required"
+            },
+            "authorityFinding": {
+              "const": "INSUFFICIENT_MANUSCRIPT_AUTHORITY"
+            },
+            "candidateThesisPresent": {
+              "const": false
+            },
+            "candidateBoundariesPresent": {
+              "const": false
+            },
+            "blocking": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "c3Snapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "productionReady",
+            "c2GateCode",
+            "publicationState",
+            "blocking"
+          ],
+          "properties": {
+            "status": {
+              "const": "blocked_by_c2"
+            },
+            "productionReady": {
+              "const": false
+            },
+            "c2GateCode": {
+              "const": "C2_NOT_FROZEN"
+            },
+            "publicationState": {
+              "type": "string"
+            },
+            "blocking": {
+              "$ref": "#/$defs/stringArray"
+            }
+          }
+        },
+        "publishedKnowledgeSnapshot": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "publishedAssetCodes",
+            "publishedArticleCodes",
+            "runtimePublishedFragmentCount",
+            "carAuthoritativePublishedFragmentCount",
+            "c3PublicationStateConflict",
+            "silentRebuildAllowed"
+          ],
+          "properties": {
+            "publishedAssetCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "publishedArticleCodes": {
+              "$ref": "#/$defs/stringArray"
+            },
+            "runtimePublishedFragmentCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "carAuthoritativePublishedFragmentCount": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "c3PublicationStateConflict": {
+              "type": "boolean"
+            },
+            "silentRebuildAllowed": {
+              "const": false
+            }
+          }
+        },
+        "legacySupportingRelationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/legacyRelationship"
+          }
+        },
+        "reviewDimensions": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "$ref": "#/$defs/reviewDimension"
+          }
+        },
+        "unresolvedFindings": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stringArray"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "humanQuestions": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stringArray"
+            },
+            {
+              "minItems": 1
+            }
+          ]
+        },
+        "humanDecision": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "decision",
+            "actor",
+            "actorRole",
+            "decidedAt",
+            "rationale"
+          ],
+          "properties": {
+            "decision": {
+              "type": "null"
+            },
+            "actor": {
+              "type": "null"
+            },
+            "actorRole": {
+              "type": "null"
+            },
+            "decidedAt": {
+              "type": "null"
+            },
+            "rationale": {
+              "type": "null"
+            }
+          }
+        },
+        "effects": {
+          "$ref": "#/$defs/effects"
+        }
+      }
+    }
+  }
+}

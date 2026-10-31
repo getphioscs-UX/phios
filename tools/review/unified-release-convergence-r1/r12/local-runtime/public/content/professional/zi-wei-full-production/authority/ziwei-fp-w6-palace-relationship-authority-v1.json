@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W6-PALACE-RELATIONSHIP-AUTHORITY-v1.0.0",
+  "work": "ZIWEI-FP-W6",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "ENGINEERING_FROZEN_STRUCTURAL_GEOMETRY_CUSTOMER_INTERPRETATION_DEFERRED",
+  "principle": "W6 owns deterministic palace relationship geometry only. W7/W8 may later qualify star combinations and patterns; W11-W17 own meanings and customer interpretation.",
+  "rules": {
+    "opposite": {"branchOffset": 6, "name": "对宫／四正位"},
+    "triad": {"branchOffsets": [4, 8], "name": "三合位／三方"},
+    "sanFangSiZheng": {"members": ["TARGET", "TRIAD_PLUS_4", "TRIAD_PLUS_8", "OPPOSITE_PLUS_6"], "count": 4},
+    "flankingPalaces": {"branchOffsets": [-1, 1], "name": "夹宫", "geometryOnly": true},
+    "emptyPalace": {"definition": "TARGET_PALACE_HAS_ZERO_OF_FOURTEEN_MAIN_STARS", "oppositeBorrowPolicy": "REFERENCE_OPPOSITE_MAIN_STARS_WITHOUT_COPYING_PLACEMENT_OR_MEANING"}
+  },
+  "internalPredecessorEvidence": [
+    "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+    "content/customer-experience-rebuild/review/materialized/v1/graphs"
+  ],
+  "externalCorroboration": [
+    {
+      "source": "紫微斗数全书／卷三・谈星要论",
+      "url": "https://zh.wikisource.org/zh/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%89",
+      "supports": ["命宫须结合迁移、财帛、官禄三方观察", "命宫无正曜时仍需结合三方"]
+    },
+    {
+      "source": "紫微研习社／紫微斗数基础",
+      "url": "https://docs.iztro.com/learn/basis",
+      "supports": ["三合位为目标位加减4", "四正位／对宫为加6", "空宫为无主星", "夹宫为前后两个宫位"]
+    }
+  ],
+  "boundaries": {
+    "externalCorroborationBecomesRuntimeMeaningAuthority": false,
+    "emptyPalaceMeansBad": false,
+    "oppositeStarsCopiedIntoEmptyPalace": false,
+    "flankingGeometryAutomaticallyBecomesPattern": false,
+    "customerInterpretationApproved": false,
+    "customerCutoverAllowed": false
+  }
+}

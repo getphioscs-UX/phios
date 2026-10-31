@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W0-ASK-FAILURE-CENSUS-v1.0.0",
+  "work": "KIR-R2-W0",
+  "status": "CENSUS_COMPLETE",
+  "baselineCommit": "429ec91ec8529b45d8c789aae48779344fe2e789",
+  "recordedAt": "2026-09-06",
+  "findings": [
+    {
+      "id": "KIR-F01",
+      "severity": "HIGH",
+      "finding": "Completed Book III exists but current manuscript knowledge source registry admits only Book I and Book II.",
+      "evidence": [
+        "content/knowledge/manuscripts/completed/completed-manuscript-registry-v2.json",
+        "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json"
+      ]
+    },
+    {
+      "id": "KIR-F02",
+      "severity": "HIGH",
+      "finding": "Published semantic profile projection contains only two Book I profiles, so production retrieval cannot reflect Book I–III semantic coverage.",
+      "evidence": [
+        "content/knowledge/intelligence/semantic-profiles/published-semantic-profiles.json"
+      ]
+    },
+    {
+      "id": "KIR-F03",
+      "severity": "HIGH",
+      "finding": "Knowledge Access may produce groundedAnswer but downstream answer composition explicitly records upstreamGroundedAnswerConsumed=false.",
+      "evidence": [
+        "functions/_lib/knowledge-access-api.js",
+        "functions/_lib/knowledge-answer-composition.js",
+        "content/knowledge/answer-projection/contracts/kap-w6-knowledge-retrieval-contract-v1.json"
+      ]
+    },
+    {
+      "id": "KIR-F04",
+      "severity": "MEDIUM",
+      "finding": "Current Ask composition remains deterministic by default and does not invoke a generative provider.",
+      "evidence": [
+        "functions/_lib/knowledge-answer-composition.js",
+        "functions/_lib/knowledge-access-api.js"
+      ]
+    }
+  ],
+  "phase1Scope": "Book I–III source admission and semantic retrieval profiles only; no composer/model-routing change in W0–W3.",
+  "productionBookBoundary": [
+    "BOOK-1",
+    "BOOK-2",
+    "BOOK-3"
+  ],
+  "excludedBooks": [
+    "BOOK-4",
+    "BOOK-5"
+  ]
+}

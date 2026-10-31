@@ -1,0 +1,32 @@
+{
+  "boundaryCode": "RMO-REASONING-BOUNDARY-INFERENCE-VALIDATION-0001",
+  "boundaryVersion": "1.0.0",
+  "requestedDataNature": "INFERRED",
+  "requestedCertainty": "INFERRED",
+  "sourceState": "SUPPORTED",
+  "componentReferences": ["RMO-STATE-DERIVED-VALIDATION-0001"],
+  "evidenceBindingReferences": ["RMO-EVIDENCE-BINDING-VALIDATION-0001"],
+  "reasoning": {
+    "mode": "INFERENCE",
+    "inference": {
+      "methodReference": "RMO-INFERENCE-METHOD-STRUCTURAL-VALIDATION-v1",
+      "methodVersion": "1.0.0",
+      "inputReferences": [
+        "RMO-EVIDENCE-BINDING-VALIDATION-0001",
+        "RMO-STATE-DERIVED-VALIDATION-0001"
+      ],
+      "uncertainty": "BOUNDED"
+    },
+    "interpretation": null,
+    "professionalJudgment": null
+  },
+  "governanceContext": {
+    "purposeCodes": ["SERVICE_DELIVERY"],
+    "sensitivityClass": "HIGHLY_SENSITIVE",
+    "sensitivityCategory": "BIRTH_DATA",
+    "explicitConsent": true
+  },
+  "createdAt": "2026-08-10T07:34:00.000Z",
+  "providerUsed": false,
+  "aiUsed": false
+}

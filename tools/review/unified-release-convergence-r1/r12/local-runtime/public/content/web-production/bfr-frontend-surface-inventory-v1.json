@@ -1,0 +1,768 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H1-FRONTEND-SURFACE-INVENTORY-v1.0.0",
+  "work": "BFR-H1",
+  "baselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "status": "BFR_H1_SURFACE_INVENTORY_COMPLETE_BROWSER_REVALIDATION_REQUIRED",
+  "recordCount": 19,
+  "records": [
+    {
+      "route": "/",
+      "surfaceCode": "HOMEPAGE",
+      "surfaceFamily": "Homepage",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "BOOK_REGISTRY",
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeConsumer": [
+        "WPR"
+      ],
+      "composition": "content/web-production/composition/public/homepage-composition-v1.1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "MULTI_VOLUME",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_CURRENT_COMPOSITION",
+      "actualHtml": "index.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": [
+        "Five-volume and Ask PHI OS consumers are incomplete; H7 records requirements."
+      ]
+    },
+    {
+      "route": "/knowledge-search",
+      "surfaceCode": "KNOWLEDGE_SEARCH",
+      "surfaceFamily": "Knowledge Search",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLIC_RETRIEVAL"
+      ],
+      "runtimeConsumer": [
+        "KNR",
+        "KAP"
+      ],
+      "composition": "STATIC_PDS_KNOWLEDGE_SEARCH",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "LOW",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "CONTEXTUAL",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "knowledge-search.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/library",
+      "surfaceCode": "LIBRARY",
+      "surfaceFamily": "Library",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "PUBLISHED_KNOWLEDGE",
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "FIGURE_REGISTRY"
+      ],
+      "runtimeConsumer": [
+        "KNR"
+      ],
+      "composition": "content/web-production/composition/public/library-composition-v1.1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "MULTI_VOLUME",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "library.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/books",
+      "surfaceCode": "BOOKS",
+      "surfaceFamily": "Books",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeConsumer": [
+        "BOOK_W1",
+        "WPR"
+      ],
+      "composition": "STATIC_PDS_BOOK_LIBRARY",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "PARTIAL_R2_BLOCKED",
+      "volumeIdentity": "FIVE_VOLUME",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "books/index.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/books/:volume-slug",
+      "surfaceCode": "INDIVIDUAL_BOOK",
+      "surfaceFamily": "Individual Book",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "FIGURE_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeConsumer": [
+        "BOOK_W1",
+        "WPR"
+      ],
+      "composition": "STATIC_PDS_BOOK_DETAIL",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM_HIGH",
+      "imageCoverage": "PARTIAL_R2_BLOCKED",
+      "volumeIdentity": "VOLUME_SPECIFIC",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "books/reality-formation/index.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/articles/:slug",
+      "surfaceCode": "ARTICLE",
+      "surfaceFamily": "Article",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLICATION_OWNERSHIP",
+        "FIGURE_REGISTRY"
+      ],
+      "runtimeConsumer": [
+        "KNR",
+        "VAP",
+        "WPR"
+      ],
+      "composition": "content/web-production/composition/public/article-composition-v1.1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "PARTIAL",
+      "volumeIdentity": "PUBLICATION_OWNERSHIP_DRIVEN",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "articles/runtime-cost-recovery-and-internal-connection-sustain-body.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/figure",
+      "surfaceCode": "FIGURE",
+      "surfaceFamily": "Figure",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "FIGURE_REGISTRY",
+        "PUBLICATION_OWNERSHIP",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeConsumer": [
+        "CAR",
+        "WPR"
+      ],
+      "composition": "STATIC_PDS_FIGURE",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "HIGH",
+      "imageCoverage": "PARTIAL_LOCAL_WEB_FILE",
+      "volumeIdentity": "PUBLICATION_OWNERSHIP_DRIVEN",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "figure.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": true,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/knowledge-search",
+      "surfaceCode": "ASK_PHIOS",
+      "surfaceFamily": "Ask PHI OS",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "PUBLISHED_KNOWLEDGE",
+        "KSAR",
+        "KNOWLEDGE_RETRIEVAL",
+        "RELATED_KNOWLEDGE"
+      ],
+      "runtimeConsumer": [
+        "KAP"
+      ],
+      "composition": "KAP_CLIENT_ASK_COMPOSITION",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "LOW",
+      "imageCoverage": "CONTEXTUAL",
+      "volumeIdentity": "CONTEXTUAL",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PUBLIC_ASK_ACTIVE",
+      "actualHtml": "knowledge-search.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": [
+        "Formal BFR surface declaration; no second Ask authority created."
+      ]
+    },
+    {
+      "route": "/academy",
+      "surfaceCode": "ACADEMY",
+      "surfaceFamily": "Academy",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "PUBLISHED_KNOWLEDGE",
+        "ALR"
+      ],
+      "runtimeConsumer": [
+        "ALR"
+      ],
+      "composition": "STATIC_PDS_ACADEMY",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "FIVE_VOLUME_LEARNING",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "DISCOVERY_ACTIVE_LIVE_LEARNING_GATED",
+      "actualHtml": "academy.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/reality-journey",
+      "surfaceCode": "REALITY_JOURNEY",
+      "surfaceFamily": "Reality Journey",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "JR",
+        "RDG"
+      ],
+      "runtimeConsumer": [
+        "JR",
+        "RRE",
+        "RNE"
+      ],
+      "composition": "content/web-production/composition/customer/reality-journey-composition-v1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_READ_ONLY_PRODUCTION",
+      "actualHtml": "reality-journey.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/personal-runtime",
+      "surfaceCode": "PERSONAL_REALITY",
+      "surfaceFamily": "Personal Reality",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "MPA",
+        "MCD"
+      ],
+      "runtimeConsumer": [
+        "MCD"
+      ],
+      "composition": "content/web-production/composition/customer/personal-runtime-composition-v1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_METHOD_GATED_PRODUCTION",
+      "actualHtml": "personal-runtime.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/professional/financial",
+      "surfaceCode": "FINANCIAL_REALITY",
+      "surfaceFamily": "Financial Reality",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "FINANCIAL_RUNTIME",
+        "PR"
+      ],
+      "runtimeConsumer": [
+        "FINANCIAL_RUNTIME"
+      ],
+      "composition": "content/web-production/composition/professional/professional-financial-composition-v1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PUBLIC_DISCOVERY",
+      "actualHtml": "professional/financial/index.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/account",
+      "surfaceCode": "ACCOUNT",
+      "surfaceFamily": "Account",
+      "audience": [
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "ACCOUNT_RUNTIME"
+      ],
+      "runtimeConsumer": [
+        "ACCOUNT_RUNTIME"
+      ],
+      "composition": "STATIC_ACCOUNT_SHELL",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "LOW",
+      "imageCoverage": "NONE",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "AUTHENTICATED_SURFACE",
+      "actualHtml": "account.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/reality-dashboard",
+      "surfaceCode": "REALITY_DASHBOARD",
+      "surfaceFamily": "Reality Dashboard",
+      "audience": [
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "M3C_BROWSER_LOCAL",
+        "JR",
+        "RDG"
+      ],
+      "runtimeConsumer": [
+        "JR"
+      ],
+      "composition": "content/web-production/composition/customer/reality-journey-composition-v1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "BROWSER_LOCAL_COMPATIBILITY",
+      "actualHtml": "reality-dashboard.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/reality-dashboard",
+      "surfaceCode": "CUSTOMER_WORKSPACE",
+      "surfaceFamily": "Customer Workspace",
+      "audience": [
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "RMO",
+        "RRE",
+        "JR",
+        "RDG"
+      ],
+      "runtimeConsumer": [
+        "RMO",
+        "RRE",
+        "JR"
+      ],
+      "composition": "WPR_CUSTOMER_WORKSPACE_COMPATIBILITY",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "PARTIAL_NO_DISTINCT_CANONICAL_WORKSPACE_ROUTE",
+      "actualHtml": "reality-dashboard.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": [
+        "Current route is compatibility projection; distinct canonical workspace surface remains a gap."
+      ]
+    },
+    {
+      "route": "/services",
+      "surfaceCode": "SERVICES",
+      "surfaceFamily": "Services",
+      "audience": [
+        "PUBLIC"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "SERVICES_REGISTRY",
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeConsumer": [
+        "PR"
+      ],
+      "composition": "STATIC_PDS_SERVICES",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE",
+      "actualHtml": "services.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/professional-workspace",
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "surfaceFamily": "Professional Workspace",
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "PR",
+        "RDG",
+        "RR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeConsumer": [
+        "PR",
+        "RR"
+      ],
+      "composition": "content/web-production/composition/professional/professional-financial-composition-v1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "HIGH",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LIMITED_AUTHORIZED_SHELL",
+      "actualHtml": "professional-workspace.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/professional-reports",
+      "surfaceCode": "REPORT",
+      "surfaceFamily": "Report",
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "runtimeConsumer": [
+        "RR",
+        "PR"
+      ],
+      "composition": "content/web-production/composition/professional/report-workspace-composition-v1.json",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "HIGH",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "UPSTREAM_AUTHORIZED_REPORT_ONLY",
+      "actualHtml": "professional-reports.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    },
+    {
+      "route": "/reality-reading",
+      "surfaceCode": "REALITY_READING",
+      "surfaceFamily": "Reading",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "locale": [
+        "en",
+        "zh-Hans"
+      ],
+      "dataSource": [
+        "RRE"
+      ],
+      "runtimeConsumer": [
+        "RRE"
+      ],
+      "composition": "STATIC_PDS_READING",
+      "pdsCompliance": "PDS_WPR_INTEGRATED",
+      "visualDensity": "MEDIUM",
+      "imageCoverage": "LOW",
+      "volumeIdentity": "NONE",
+      "responsiveState": "PDS_INTEGRATED_PRODUCTION_BROWSER_REVALIDATION_REQUIRED",
+      "accessibilityState": "PDS_INTEGRATED_SOURCE_AUDIT_READY_BROWSER_REVALIDATION_REQUIRED",
+      "productionState": "LEGACY_PUBLIC_READING_SURFACE_REQUIRES_RECONCILIATION",
+      "actualHtml": "reality-reading.html",
+      "audit": {
+        "routeFileEvidence": true,
+        "domMain": false,
+        "domH1OrRuntimeHeading": false,
+        "usesPdsTokens": true,
+        "inlineStyleAuthorityLeak": false,
+        "actualBrowserAudit": "REVALIDATION_REQUIRED_AT_CURRENT_DEPLOYMENT_SHA"
+      },
+      "notes": []
+    }
+  ],
+  "auditModes": [
+    "DOM_AUDIT",
+    "ACTUAL_BROWSER_AUDIT",
+    "DATA_SOURCE_AUDIT",
+    "ASSET_CONSUMER_AUDIT",
+    "RUNTIME_CONSUMER_AUDIT",
+    "LOCALE_AUDIT",
+    "AUDIENCE_DENSITY_AUDIT"
+  ],
+  "browserEvidencePolicy": "CURRENT_DEPLOYMENT_SHA_REQUIRED_FOR_ACTUAL_BROWSER_ACCEPTANCE",
+  "exitGate": {
+    "allActualPublicCustomerProfessionalSurfacesRepresented": true,
+    "askPhiosFormalSurfaceFamilyIncluded": true,
+    "routeFileExistenceNeverEqualsProduction": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "registryCode": "PHI-OS-CANONICAL-PRESENTATION-PRODUCTION-REGISTRY-v2",
+  "registryVersion": "2.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W11",
+  "status": "CURRENT_SUCCESSOR_CUSTOMER_PRESENTATION_SLICE_ACTIVE_GLOBAL_GATE_PENDING",
+  "predecessor": {
+    "path": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+    "sha256": "568cda919515f825b229698046c24998783b2c9a96ca644d4ca5031b5879bdfe",
+    "productionRecordsRemainEmpty": true
+  },
+  "productionRecords": [
+    {
+      "presentationCode": "CPR-PRESENT-HDR-FOUNDATION-REPORT",
+      "presentationVersion": "2.0.0",
+      "presentationType": "REPORT_SECTION",
+      "projection": "CUSTOMER_REPORT",
+      "sourceAuthority": "RELEASED_CANONICAL_REPORT",
+      "audience": "CUSTOMER",
+      "workspaceEligible": true,
+      "pdfEligible": true,
+      "publicWebsiteEligible": false,
+      "publicSelfServiceEligible": false,
+      "supportedLocales": [
+        "en",
+        "zh-Hans"
+      ],
+      "requiresCustomerAuthorization": true,
+      "requiresExplicitRelease": true,
+      "hdrExecutionGranted": false,
+      "hdrCustomerResultDispatchGranted": false
+    }
+  ],
+  "rules": {
+    "registryIsSuccessorNotMutation": true,
+    "productionPresentationDoesNotActivateHdr": true,
+    "productionPresentationDoesNotCreateReportAuthority": true
+  },
+  "scope": {
+    "activation": "CUSTOMER_PRESENTATION_SLICE_ONLY",
+    "globalRepositoryGate": "PENDING_UPSTREAM_MIR_PRESENTATION_SUCCESSOR_RECONCILIATION",
+    "deploymentAccepted": false
+  }
+}

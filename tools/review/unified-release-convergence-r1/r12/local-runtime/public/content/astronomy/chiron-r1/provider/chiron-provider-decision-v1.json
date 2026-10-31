@@ -1,0 +1,42 @@
+{
+  "status": "BLOCKED_PROVIDER_DECISION",
+  "selectedProvider": null,
+  "positionFreeze": "BLOCKED_PROVIDER_DECISION",
+  "ownerDecision": {
+    "date": "2026-09-24",
+    "swissProfessionalLicense": false,
+    "agplAuthorized": false,
+    "projectLicenseChangeAllowed": false,
+    "onlineProductionDependencyAuthorized": false
+  },
+  "candidates": [
+    {
+      "provider": "SWISS_EPHEMERIS",
+      "status": "CANDIDATE_NOT_AUTHORIZED",
+      "reason": "Owner explicitly confirms no Professional License and no authorization for AGPL. Do not import, install or adopt this provider; native/WASM compatibility and independent validation remain unverified.",
+      "source": "https://www.astro.com/swisseph/swephprg.htm"
+    },
+    {
+      "provider": "NASA_JPL_HORIZONS",
+      "status": "PENDING",
+      "reason": "Current core authority uses Horizons as VALIDATION_ONLY. A new runtime data/provider role requires pinned provenance, offline repeatability or explicit network policy, independent reference and precision acceptance. Not silently promoted.",
+      "source": "https://ssd-api.jpl.nasa.gov/doc/horizons.html"
+    }
+  ],
+  "gates": {
+    "commercialUse": "PENDING",
+    "redistribution": "PENDING",
+    "ephemerisDataRights": "PENDING",
+    "cloudflareCompatibility": "NOT_VERIFIED",
+    "bundleSize": "NOT_MEASURED",
+    "networkDependency": "UNDECIDED",
+    "offlineDeterminism": "NOT_VERIFIED",
+    "coldStart": "NOT_MEASURED",
+    "supportedRange": null,
+    "independentReference": null,
+    "tolerance": null
+  },
+  "defaultCapability": "EPHEMERIS_DATA_MISSING",
+  "ecrD11": "UNKNOWN",
+  "humanReviewAccepted": false
+}

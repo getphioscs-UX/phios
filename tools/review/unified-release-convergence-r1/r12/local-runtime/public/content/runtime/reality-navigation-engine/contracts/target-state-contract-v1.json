@@ -1,0 +1,26 @@
+{
+  "contractCode": "PHI-OS-RNE-W2-TARGET-STATE-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W2",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/target-state-v1.schema.json",
+  "registryReference": "content/runtime/reality-navigation-engine/registries/canonical-target-source-registry-v1.json",
+  "rules": {
+    "allowedTargetSources": [
+      "CUSTOMER",
+      "PROFESSIONAL",
+      "AUTHORIZED_SERVICE"
+    ],
+    "sourceReferenceRequired": true,
+    "sourceAuthorityReferenceRequired": true,
+    "targetStatementCopiedFromAuthorizedSource": true,
+    "rneMayInventTarget": false,
+    "providerOrAiMayBecomeTargetAuthority": false,
+    "targetIsPrediction": false,
+    "targetIsGuaranteedOutcome": false,
+    "professionalJudgmentCreated": false,
+    "persistentStoreActivated": false
+  }
+}

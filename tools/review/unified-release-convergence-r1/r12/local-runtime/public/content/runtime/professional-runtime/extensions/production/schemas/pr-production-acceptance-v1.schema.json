@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-production-acceptance-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "initialReleasedPackageReference",
+    "initialReleasedPackageDigest",
+    "revisionReference",
+    "revisedReleasedPackageReference",
+    "revisedReleasedPackageDigest",
+    "securityEventReferences",
+    "pwsHandoffReference",
+    "rrHandoffReference",
+    "storageExecutionActive",
+    "pwsMutationExecutionActive",
+    "previousReleasePreserved",
+    "acceptanceDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_PRODUCTION_ACCEPTANCE"
+    },
+    "initialReleasedPackageReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "initialReleasedPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "revisionReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revisedReleasedPackageReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revisedReleasedPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "securityEventReferences": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "pwsHandoffReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rrHandoffReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "storageExecutionActive": {
+      "const": false
+    },
+    "pwsMutationExecutionActive": {
+      "const": false
+    },
+    "previousReleasePreserved": {
+      "const": true
+    },
+    "acceptanceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

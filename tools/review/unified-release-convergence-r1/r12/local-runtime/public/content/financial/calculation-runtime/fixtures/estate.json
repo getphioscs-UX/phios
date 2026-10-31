@@ -1,0 +1,523 @@
+{
+  "fixtureVersion": "PHI-OS-FCR-W20-FIXTURE-v1.0.0",
+  "scenario": "estate",
+  "synthetic": true,
+  "calculationInput": {
+    "runtimeCode": "FINANCIAL_CALCULATION_RUNTIME",
+    "calculationId": "CALC-ESTATE",
+    "scenarioCode": "BASE",
+    "fdrSnapshot": {
+      "snapshotId": "SNAP-FR-ESTATE",
+      "financialRealityId": "FR-ESTATE",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-ESTATE",
+        "householdReference": "HH-ESTATE",
+        "customerReferences": [
+          "CUST1"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "CASH",
+            "assetType": "CASH",
+            "ownership": {
+              "ownershipId": "OWN-CASH",
+              "assetId": "CASH",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P1"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-CASH",
+              "factCode": "ASSET_VALUE",
+              "value": 200000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "PROP",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-PROP",
+              "assetId": "PROP",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P1"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-PROP",
+              "factCode": "ASSET_VALUE",
+              "value": 1000000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [
+          {
+            "liabilityId": "MORT",
+            "liabilityType": "MORTGAGE",
+            "borrowerReferences": [
+              "P1"
+            ],
+            "balanceFact": {
+              "factId": "F-MORT-BAL",
+              "factCode": "LIABILITY_BALANCE",
+              "value": 400000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "currency": "MYR",
+            "interestRateFact": {
+              "factId": "F-MORT-RATE",
+              "factCode": "INTEREST_RATE",
+              "value": 4,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "repaymentFact": {
+              "factId": "F-MORT-PAY",
+              "factCode": "REPAYMENT",
+              "value": 2500,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "incomeStreams": [
+          {
+            "incomeStreamId": "SAL",
+            "incomeType": "SALARY",
+            "recipientReference": "P1",
+            "amountFact": {
+              "factId": "F-SAL",
+              "factCode": "INCOME_AMOUNT",
+              "value": 15000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "grossOrNet": "GROSS",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "expenses": [
+          {
+            "expenseId": "ESS",
+            "expenseType": "ESSENTIAL",
+            "payerReference": "P1",
+            "amountFact": {
+              "factId": "F-ESS",
+              "factCode": "EXPENSE_AMOUNT",
+              "value": 6000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "expenseId": "DEBT",
+            "expenseType": "DEBT_SERVICE",
+            "payerReference": "P1",
+            "amountFact": {
+              "factId": "F-DEBT",
+              "factCode": "EXPENSE_AMOUNT",
+              "value": 2500,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "FCR_SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "FCR_SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "PLANNING"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "b66afd43325152ea5b582a09a944a1f5efcd1d0c284f658120d06e8a9f9a9ac4"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "FCR_SYNTHETIC_FIXTURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "0d358f76941d4d5d2c43dfeb223d4ba0cada90d5d33b270e2c5981e60c857a96"
+    },
+    "assumptionSet": {
+      "assumptionSetId": "AS-BASE",
+      "version": "1.0.0",
+      "effectiveDate": "2026-01-01",
+      "sourceLabel": "FCR_SYNTHETIC_SET",
+      "scenarioCode": "BASE",
+      "assumptions": [
+        {
+          "assumptionId": "ASM-BASE-INFLATION",
+          "type": "INFLATION",
+          "version": "1.0.0",
+          "value": 0.025,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-INVESTMENT_RETURN",
+          "type": "INVESTMENT_RETURN",
+          "version": "1.0.0",
+          "value": 0.05,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-EPF_RETURN",
+          "type": "EPF_RETURN",
+          "version": "1.0.0",
+          "value": 0.05,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-SALARY_GROWTH",
+          "type": "SALARY_GROWTH",
+          "version": "1.0.0",
+          "value": 0.03,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-RETIREMENT_AGE",
+          "type": "RETIREMENT_AGE",
+          "version": "1.0.0",
+          "value": 60,
+          "unit": "age_years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-LONGEVITY_AGE",
+          "type": "LONGEVITY_AGE",
+          "version": "1.0.0",
+          "value": 85,
+          "unit": "age_years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-TAX_EFFECTIVE_RATE",
+          "type": "TAX_EFFECTIVE_RATE",
+          "version": "1.0.0",
+          "value": 0.1,
+          "unit": "decimal",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-EMERGENCY_RESERVE_MONTHS",
+          "type": "EMERGENCY_RESERVE_MONTHS",
+          "version": "1.0.0",
+          "value": 6,
+          "unit": "months",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-PROTECTION_INCOME_REPLACEMENT_YEARS",
+          "type": "PROTECTION_INCOME_REPLACEMENT_YEARS",
+          "version": "1.0.0",
+          "value": 10,
+          "unit": "years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-EDUCATION_INFLATION",
+          "type": "EDUCATION_INFLATION",
+          "version": "1.0.0",
+          "value": 0.04,
+          "unit": "decimal_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-RETIREMENT_INCOME_REPLACEMENT_RATE",
+          "type": "RETIREMENT_INCOME_REPLACEMENT_RATE",
+          "version": "1.0.0",
+          "value": 0.7,
+          "unit": "decimal",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-ESTATE_EXPENSE_RATE",
+          "type": "ESTATE_EXPENSE_RATE",
+          "version": "1.0.0",
+          "value": 0.03,
+          "unit": "decimal",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-INVESTMENT_CONTRIBUTION_ANNUAL",
+          "type": "INVESTMENT_CONTRIBUTION_ANNUAL",
+          "version": "1.0.0",
+          "value": 12000,
+          "unit": "currency_per_year",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-INVESTMENT_HORIZON_YEARS",
+          "type": "INVESTMENT_HORIZON_YEARS",
+          "version": "1.0.0",
+          "value": 10,
+          "unit": "years",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_ASSUMPTION"
+        },
+        {
+          "assumptionId": "ASM-BASE-FX-USD-MYR",
+          "type": "FX_RATE",
+          "version": "1.0.0",
+          "value": 4.5,
+          "unit": "currency_pair_rate",
+          "fromCurrency": "USD",
+          "toCurrency": "MYR",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_FX"
+        },
+        {
+          "assumptionId": "ASM-BASE-FX-SGD-MYR",
+          "type": "FX_RATE",
+          "version": "1.0.0",
+          "value": 3.4,
+          "unit": "currency_pair_rate",
+          "fromCurrency": "SGD",
+          "toCurrency": "MYR",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_FX"
+        },
+        {
+          "assumptionId": "ASM-BASE-FX-IDR-MYR",
+          "type": "FX_RATE",
+          "version": "1.0.0",
+          "value": 0.0003,
+          "unit": "currency_pair_rate",
+          "fromCurrency": "IDR",
+          "toCurrency": "MYR",
+          "effectiveDate": "2026-01-01",
+          "sourceLabel": "FCR_SYNTHETIC_FX"
+        }
+      ],
+      "digest": "7469df452483b0661e5e19814f413d87defc074e759115b165a5c99dc78c9d96"
+    }
+  },
+  "expected": {
+    "estateLiquidityCalculated": true,
+    "legalJudgmentForbidden": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "id": "phi-os.m4a-w1-professional-service-definition",
+  "version": "1.0.0",
+  "milestone": "M4A-W1",
+  "status": "service-definition-frozen-next-consent",
+  "baseline": {
+    "branch": "main",
+    "commit": "a6389e3cc3e5c4052aea60064c38412ad71a712b",
+    "label": "Update m3c-w10 window"
+  },
+  "registries": {
+    "serviceCatalog": "content/registry/professional-service-catalog.json",
+    "deliverableCatalog": "content/registry/professional-deliverable-catalog.json",
+    "pricingPolicy": "content/registry/professional-pricing-policy.json",
+    "serviceLevels": "content/registry/professional-service-levels.json",
+    "boundaries": "content/registry/professional-service-boundaries.json"
+  },
+  "scope": {
+    "runtimeServicesDefined": true,
+    "humanDesignServicesDefined": true,
+    "financialServicesDefined": true,
+    "integratedServicesDefined": true,
+    "deliverablesDefined": true,
+    "pricingFieldsDefined": true,
+    "pricesPublished": false,
+    "completionWindowsDefined": true,
+    "sourceSeparationDefined": true,
+    "professionalBoundariesDefined": true
+  },
+  "financialJourneyDefinition": [
+    "financial_fact_finding",
+    "financial_position_reconstruction",
+    "financial_stamina_analysis",
+    "risk_and_constraint_review",
+    "goal_prioritisation",
+    "navigation_plan",
+    "implementation",
+    "scheduled_review"
+  ],
+  "implementationOrder": [
+    "M4A-W1",
+    "M4A-W3",
+    "M4A-W7",
+    "M4A-W8",
+    "M4A-W2",
+    "M4A-W4",
+    "M4A-W5",
+    "M4A-W6"
+  ],
+  "nextWorkPackage": "M4A-W3 Consent and Sharing",
+  "notImplementedInW1": [
+    "financial_intake",
+    "joint_household_consent",
+    "financial_file_upload",
+    "financial_calculation_engine",
+    "formula_registry",
+    "assumption_registry",
+    "financial_workspace",
+    "professional_notes",
+    "review_queue",
+    "report_generation",
+    "pdf_export",
+    "appointments",
+    "professional_payment",
+    "public_professional_pages",
+    "automatic_human_design_chart",
+    "professional_d1_schema",
+    "real_service_prices"
+  ],
+  "guardrails": {
+    "runtimeContractsChanged": false,
+    "runtimeStageAdded": false,
+    "d1SchemaChanged": false,
+    "migrationAdded": false,
+    "productionBindingChanged": false,
+    "realClientDataIncluded": false,
+    "commerceActivated": false,
+    "regulatedAdviceActivated": false
+  },
+  "frozenArtifacts": {
+    "content/registry/runtime-contracts.json": "32a630972e4978725e7efe1a0bdc58d96fb7a6bb1145f5c5b7f308d9909745d2",
+    "content/registry/runtime-security-privacy.json": "fc55fa2b8d0c0906e9b52cc48eb93122d6da2e21f651e0722a7eacadb9298aa6",
+    "functions/runtime/navigation/professional-domain-contract.js": "2c4770fcf0f8e1ec137ef7ac3af5bc2390b6ad039c22771549324ecdb41cb094",
+    "functions/runtime/navigation/professional-domains-financial.js": "9f71db71438da10a593dcf69855b08c4cf0adb067dbf8562d939883bfa49b88d",
+    "wrangler.jsonc": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
+  },
+  "migrationInventory": [
+    "0001_platform_foundation.sql",
+    "0002_initial_runtime.sql"
+  ]
+}

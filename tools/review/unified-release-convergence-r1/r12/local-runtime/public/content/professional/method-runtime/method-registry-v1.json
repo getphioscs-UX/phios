@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-REGISTRY-POPULATION-v1.0.0",
+  "stageCode": "MR-W1",
+  "registryCode": "METHOD_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "a8e8c642af0052c3579e75ce9c9a0fd124002241"
+  },
+  "contractSeed": "content/professional/method-runtime/method-registry.json",
+  "lifecycleContract": "content/professional/method-runtime/method-runtime-lifecycle.json",
+  "pluginRegistryContract": "content/professional/method-runtime/method-plugin-registry.json",
+  "populationAuthority": "MR-W1",
+  "runtimeCode": "METHOD_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "requiredFields": [
+    "methodCode",
+    "methodVersion",
+    "status",
+    "runtimeVersion",
+    "projectionVersion",
+    "requiresProfessional",
+    "licenseStatus"
+  ],
+  "registrationPolicy": {
+    "methodDefinitionBeforeRuntimeRequired": true,
+    "pluginCodeReservationRequired": true,
+    "methodRegistrationCreatesPluginExecution": false,
+    "registrationCreatesProductionAuthority": false,
+    "duplicateMethodCodeAllowed": false,
+    "duplicatePluginCodeAllowed": false,
+    "productionRequiresImr": true,
+    "productionAllowedLicenseStatus": [
+      "approved",
+      "not_required"
+    ],
+    "futureRegistrationRequiresVersionedChange": true
+  },
+  "methods": [
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "methodName": "Human Design",
+      "methodVersion": "1.0.0",
+      "status": "internal",
+      "runtimeVersion": "1.0.0",
+      "projectionVersion": "1.0.0",
+      "requiresProfessional": true,
+      "licenseStatus": "restricted",
+      "pluginCode": "HDR",
+      "category": "core",
+      "targetTrack": "HDR",
+      "definitionStatus": "defined",
+      "imrStatus": "conditional_passed",
+      "serviceStatus": "preserved",
+      "calculationStatus": "external_only_preserved",
+      "productionEligible": false,
+      "methodRegistrationStatus": "registered",
+      "pluginRegistrationStatus": "pending_contract",
+      "authoritySources": [
+        "IMR-W0",
+        "HDR-W0"
+      ]
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "methodName": "Astrology",
+      "methodVersion": "0.1.0",
+      "status": "experimental",
+      "runtimeVersion": "1.0.0",
+      "projectionVersion": "0.1.0",
+      "requiresProfessional": true,
+      "licenseStatus": "not_required",
+      "pluginCode": "AST",
+      "category": "core",
+      "targetTrack": "AST",
+      "definitionStatus": "defined",
+      "imrStatus": "conditional_passed",
+      "serviceStatus": "inactive",
+      "calculationStatus": "pilot_candidate_validation_required",
+      "productionEligible": false,
+      "methodRegistrationStatus": "registered",
+      "pluginRegistrationStatus": "pending_contract",
+      "authoritySources": [
+        "IMR-W0"
+      ]
+    },
+    {
+      "methodCode": "BAZI",
+      "methodName": "BaZi",
+      "methodVersion": "0.1.0",
+      "status": "experimental",
+      "runtimeVersion": "1.0.0",
+      "projectionVersion": "0.1.0",
+      "requiresProfessional": true,
+      "licenseStatus": "not_required",
+      "pluginCode": "BZR",
+      "category": "core",
+      "targetTrack": "BZR",
+      "definitionStatus": "defined",
+      "imrStatus": "conditional_passed",
+      "serviceStatus": "inactive",
+      "calculationStatus": "policy_candidate_validation_required",
+      "productionEligible": false,
+      "methodRegistrationStatus": "registered",
+      "pluginRegistrationStatus": "pending_contract",
+      "authoritySources": [
+        "IMR-W0"
+      ]
+    },
+    {
+      "methodCode": "I_CHING",
+      "methodName": "I Ching",
+      "methodVersion": "0.1.0",
+      "status": "draft",
+      "runtimeVersion": "1.0.0",
+      "projectionVersion": "0.1.0",
+      "requiresProfessional": true,
+      "licenseStatus": "restricted",
+      "pluginCode": "ICH",
+      "category": "planned",
+      "targetTrack": "ICH",
+      "definitionStatus": "draft",
+      "imrStatus": "not_assessed",
+      "serviceStatus": "not_implemented",
+      "calculationStatus": "not_implemented",
+      "productionEligible": false,
+      "methodRegistrationStatus": "registered",
+      "pluginRegistrationStatus": "pending_contract",
+      "authoritySources": [
+        "MR-W1"
+      ]
+    },
+    {
+      "methodCode": "TAROT",
+      "methodName": "Tarot",
+      "methodVersion": "0.1.0",
+      "status": "draft",
+      "runtimeVersion": "1.0.0",
+      "projectionVersion": "0.1.0",
+      "requiresProfessional": true,
+      "licenseStatus": "restricted",
+      "pluginCode": "TAR",
+      "category": "planned",
+      "targetTrack": "TAR",
+      "definitionStatus": "draft",
+      "imrStatus": "not_assessed",
+      "serviceStatus": "not_implemented",
+      "calculationStatus": "not_implemented",
+      "productionEligible": false,
+      "methodRegistrationStatus": "registered",
+      "pluginRegistrationStatus": "pending_contract",
+      "authoritySources": [
+        "MR-W1"
+      ]
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "methodName": "Psychology",
+      "methodVersion": "0.1.0",
+      "status": "draft",
+      "runtimeVersion": "1.0.0",
+      "projectionVersion": "0.1.0",
+      "requiresProfessional": true,
+      "licenseStatus": "restricted",
+      "pluginCode": "PSY",
+      "category": "planned",
+      "targetTrack": "PSY",
+      "definitionStatus": "draft",
+      "imrStatus": "not_assessed",
+      "serviceStatus": "not_implemented",
+      "calculationStatus": "not_implemented",
+      "productionEligible": false,
+      "methodRegistrationStatus": "registered",
+      "pluginRegistrationStatus": "pending_contract",
+      "authoritySources": [
+        "MR-W1"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion":"PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+  "projectionId":"CMP-000000000000000000000001",
+  "method":{
+    "publicMethodCode":"PERSONAL_RUNTIME_PROJECTION",
+    "publicLabel":"Personal Runtime Projection",
+    "publicLabels":{"en":"Personal Runtime Projection","zh-Hans":"个人运行投射"},
+    "internalReference":{"opaqueId":"MREF-0000000000000001","protected":true,"rawIdentityExposed":false},
+    "version":"1.0.0",
+    "status":"VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE",
+    "calculationMode":"VALIDATION_ONLY"
+  },
+  "calculation":{"status":"NOT_CALCULATED","deterministic":null,"values":[],"coordinates":null,"structures":[],"cycles":[],"positions":[]},
+  "projection":{"contract":"CANONICAL_METHOD_PROJECTION","status":"VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE","clientRenderable":true,"productionResult":false,"coreSchemaExposed":false,"unknownDisclosureRequired":true},
+  "unknown":[{"code":"PRODUCTION_CLIENT_PROJECTION_NOT_AUTHORIZED","category":"POLICY_LIMITED_RESULT","scope":"METHOD_PROJECTION","reasonCodes":["MPA_PRODUCTION_EXECUTION_BLOCKED","PRODUCTION_INVOCATION_FORBIDDEN"],"rendererMustDisplay":true}],
+  "evidence":[
+    {"type":"INPUT_SOURCE","status":"NOT_APPLICABLE","sourceCode":null,"reference":null,"version":null,"confidence":"NOT_APPLICABLE"},
+    {"type":"TIMEZONE_SOURCE","status":"NOT_APPLICABLE","sourceCode":null,"reference":null,"version":null,"confidence":"NOT_APPLICABLE"},
+    {"type":"COORDINATES_SOURCE","status":"NOT_APPLICABLE","sourceCode":null,"reference":null,"version":null,"confidence":"NOT_APPLICABLE"},
+    {"type":"RULE_SOURCE","status":"AVAILABLE","sourceCode":"MCD_5_VALIDATION_ONLY_CONTRACT","reference":"PERSONAL_RUNTIME_PROJECTION_NORMALIZATION","version":"1.0.0","confidence":"HIGH"},
+    {"type":"CALCULATION_AUTHORITY","status":"UNAVAILABLE","sourceCode":null,"reference":null,"version":null,"confidence":"UNKNOWN"},
+    {"type":"RUNTIME_AUTHORITY","status":"AVAILABLE","sourceCode":"MCD_5","reference":"MCD_CANONICAL_PROJECTION_RUNTIME","version":"1.0.0","confidence":"HIGH"},
+    {"type":"PRODUCTION_DISPATCH_AUTHORITY","status":"AVAILABLE","sourceCode":"MPA","reference":"BLOCKED_VALIDATION_ONLY","version":"1.0.0","confidence":"HIGH"}
+  ],
+  "version":{"methodRegistryVersion":"2.0.0","runtimeVersion":"1.0.0","adapterVersion":"1.0.0","inputContractVersion":"1.0.0","projectionContractVersion":"1.0.0"},
+  "execution":{"requestId":"FIXTURE-VALIDATION-ONLY","status":"VALIDATION_ONLY_NOT_DISPATCHED","mpaDecision":{"authorityOwner":"MPA","decision":"BLOCKED","dispatchAllowed":false,"state":"BLOCKED"},"runtimeIdentity":"MCD_CANONICAL_PROJECTION_RUNTIME@1.0.0","executedAt":null},
+  "interpretation":{"included":false,"principle":"CALCULATION_NOT_EQUAL_INTERPRETATION","meaningAuthorityCreated":false,"realityReadingCreated":false,"professionalJudgmentCreated":false}
+}

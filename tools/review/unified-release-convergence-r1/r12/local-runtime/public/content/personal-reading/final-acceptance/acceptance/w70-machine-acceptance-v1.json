@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-W70-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "W70",
+  "baselineCommit": "3297246c2467a7034817eb89f6d4f615b2675b7a",
+  "status": "MACHINE_VERIFIED",
+  "campaign": {
+    "ordinaryPaidNarrative": {
+      "required": 24,
+      "passed": 24
+    },
+    "profileAssessment": {
+      "required": 24,
+      "passed": 24,
+      "sourceClasses": 4
+    },
+    "relationship": {
+      "required": 24,
+      "passed": 24,
+      "specificAndSelfModes": true
+    },
+    "totalCompletePaidFlows": {
+      "required": 72,
+      "passed": 72
+    },
+    "targetedRepairSuccessfulFlows": 47
+  },
+  "surfaceReplay": {
+    "web": 72,
+    "print": 72,
+    "pdf": 72,
+    "reopen": 72,
+    "providerRegeneration": 0
+  },
+  "failureCoverage": {
+    "openAiTimeout": "PASS",
+    "openAiRefusal": "PASS",
+    "invalidProviderOutput": "PASS",
+    "verificationFailure": "PASS",
+    "repairFailure": "PASS",
+    "paymentSuccessGenerationFailure": "PASS",
+    "generationRetry": "PASS",
+    "noDuplicateCharge": "PASS",
+    "noDuplicateNarrative": "PASS",
+    "reopenWithoutProvider": "PASS",
+    "pdfWithoutProvider": "PASS"
+  },
+  "gate": "check:ppr-r2:w70-paid-narrative-e2e"
+}

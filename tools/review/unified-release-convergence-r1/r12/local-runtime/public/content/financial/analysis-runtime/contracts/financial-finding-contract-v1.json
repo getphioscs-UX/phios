@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W2-FINDING-CONTRACT-v1.0.0",
+  "phase": "FAR",
+  "work": "FAR-W2",
+  "status": "ACTIVE",
+  "authorityOwner": "FAR",
+  "requiredFields": [
+    "findingId",
+    "findingCode",
+    "findingType",
+    "domain",
+    "sourceCalculationReferences",
+    "factReferences",
+    "assumptionReferences",
+    "confidence",
+    "evidenceState",
+    "limitations",
+    "policyReferences",
+    "summary",
+    "provenance"
+  ],
+  "optionalFields": [
+    "severityState"
+  ],
+  "severityStates": [
+    "UNSPECIFIED",
+    "POLICY_TRIGGERED"
+  ],
+  "rules": {
+    "sourceCalculationReferenceRequired": true,
+    "factReferencesMayBeEmptyOnlyWhenFindingIsScenarioOrMissingEvidence": true,
+    "summaryMayContainActionDirection": false,
+    "recommendationAllowed": false,
+    "professionalJudgmentAllowed": false
+  }
+}

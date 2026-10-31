@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RRE Constraint Reading v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "readingCode",
+    "realityReference",
+    "constraints",
+    "recommendationCreated",
+    "navigationRestrictionCreated",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "readingDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RRE-CONSTRAINT-READING-v1.0.0"
+    },
+    "readingCode": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "readoutConstraintCode",
+          "observableReference",
+          "authorityConstraintReference",
+          "authorityConstraintType",
+          "authorityConstraintScope",
+          "rigidityClass",
+          "domainClass",
+          "descriptorCode",
+          "supportReferences"
+        ],
+        "properties": {
+          "readoutConstraintCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "observableReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "authorityConstraintReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "authorityConstraintType": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "authorityConstraintScope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "rigidityClass": {
+            "enum": [
+              "HARD",
+              "SOFT",
+              "UNKNOWN"
+            ]
+          },
+          "domainClass": {
+            "enum": [
+              "GENERAL",
+              "RESOURCE",
+              "TIME",
+              "CAPABILITY",
+              "RELATIONSHIP",
+              "ENVIRONMENT",
+              "UNKNOWN"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "supportReferences": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            }
+          }
+        }
+      }
+    },
+    "recommendationCreated": {
+      "const": false
+    },
+    "navigationRestrictionCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "readingDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

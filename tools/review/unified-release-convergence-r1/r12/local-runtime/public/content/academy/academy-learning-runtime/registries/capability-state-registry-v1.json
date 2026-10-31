@@ -1,0 +1,70 @@
+{
+  "registryCode": "PHI-OS-ALR-W8-CAPABILITY-STATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W8",
+  "status": "canonical",
+  "productionStatus": "semantic_state_machine_only",
+  "initialState": "NOT_EVALUATED",
+  "states": [
+    {"stateCode": "NOT_EVALUATED", "definition": "No ALR semantic capability evaluation has been completed."},
+    {"stateCode": "DEVELOPING", "definition": "Learning and practice are in progress without sufficient eligible evidence."},
+    {"stateCode": "EVIDENCE_REVIEW", "definition": "Governed capability evidence is awaiting ALR semantic evaluation."},
+    {"stateCode": "SUPPORTED", "definition": "Eligible evidence and required dependencies currently support the capability."},
+    {"stateCode": "MAINTENANCE_DUE", "definition": "Prior support exists but recency or maintenance conditions require renewed evidence."},
+    {"stateCode": "DISPUTED", "definition": "Material evidence or criterion conflict prevents a supported decision."},
+    {"stateCode": "UNKNOWN", "definition": "Required evidence or dependency meaning cannot be resolved safely."},
+    {"stateCode": "SUSPENDED", "definition": "Capability support is not currently available for governed use."},
+    {"stateCode": "RETIRED", "definition": "The capability state is closed under a retired capability definition."}
+  ],
+  "transitions": [
+    {"from": "NOT_EVALUATED", "to": "DEVELOPING", "requires": []},
+    {"from": "NOT_EVALUATED", "to": "UNKNOWN", "requires": ["UNKNOWN_EVIDENCE_OR_DEPENDENCY"]},
+    {"from": "DEVELOPING", "to": "EVIDENCE_REVIEW", "requires": ["GOVERNED_EVIDENCE_PRESENT"]},
+    {"from": "DEVELOPING", "to": "DISPUTED", "requires": ["DISPUTED_EVIDENCE"]},
+    {"from": "DEVELOPING", "to": "UNKNOWN", "requires": ["UNKNOWN_EVIDENCE_OR_DEPENDENCY"]},
+    {"from": "EVIDENCE_REVIEW", "to": "SUPPORTED", "requires": ["READY_FOR_CAPABILITY_STATE_REVIEW", "DEPENDENCIES_SATISFIED"]},
+    {"from": "EVIDENCE_REVIEW", "to": "DEVELOPING", "requires": ["INSUFFICIENT_EVIDENCE"]},
+    {"from": "EVIDENCE_REVIEW", "to": "DISPUTED", "requires": ["DISPUTED_EVIDENCE"]},
+    {"from": "EVIDENCE_REVIEW", "to": "UNKNOWN", "requires": ["UNKNOWN_EVIDENCE_OR_DEPENDENCY"]},
+    {"from": "SUPPORTED", "to": "MAINTENANCE_DUE", "requires": ["MAINTENANCE_CONDITION_DUE"]},
+    {"from": "SUPPORTED", "to": "DISPUTED", "requires": ["DISPUTED_EVIDENCE"]},
+    {"from": "SUPPORTED", "to": "UNKNOWN", "requires": ["UNKNOWN_EVIDENCE_OR_DEPENDENCY"]},
+    {"from": "SUPPORTED", "to": "SUSPENDED", "requires": ["GOVERNED_SUSPENSION_DECISION"]},
+    {"from": "MAINTENANCE_DUE", "to": "EVIDENCE_REVIEW", "requires": ["GOVERNED_EVIDENCE_PRESENT"]},
+    {"from": "MAINTENANCE_DUE", "to": "SUSPENDED", "requires": ["GOVERNED_SUSPENSION_DECISION"]},
+    {"from": "MAINTENANCE_DUE", "to": "RETIRED", "requires": ["CAPABILITY_RETIRED"]},
+    {"from": "DISPUTED", "to": "EVIDENCE_REVIEW", "requires": ["DISPUTE_RESOLUTION_EVIDENCE"]},
+    {"from": "DISPUTED", "to": "DEVELOPING", "requires": ["INSUFFICIENT_EVIDENCE"]},
+    {"from": "DISPUTED", "to": "SUSPENDED", "requires": ["GOVERNED_SUSPENSION_DECISION"]},
+    {"from": "UNKNOWN", "to": "DEVELOPING", "requires": ["UNKNOWN_RESOLVED"]},
+    {"from": "UNKNOWN", "to": "EVIDENCE_REVIEW", "requires": ["GOVERNED_EVIDENCE_PRESENT"]},
+    {"from": "SUSPENDED", "to": "EVIDENCE_REVIEW", "requires": ["GOVERNED_EVIDENCE_PRESENT"]},
+    {"from": "SUSPENDED", "to": "RETIRED", "requires": ["CAPABILITY_RETIRED"]}
+  ],
+  "semanticEvidenceDecisionMapping": {
+    "READY_FOR_CAPABILITY_STATE_REVIEW": "READY_FOR_CAPABILITY_STATE_REVIEW",
+    "INSUFFICIENT_EVIDENCE": "INSUFFICIENT_EVIDENCE",
+    "DISPUTED": "DISPUTED_EVIDENCE",
+    "UNKNOWN": "UNKNOWN_EVIDENCE_OR_DEPENDENCY"
+  },
+  "dependencyDecisionMapping": {
+    "SATISFIED": "DEPENDENCIES_SATISFIED",
+    "UNSATISFIED": "DEPENDENCIES_UNSATISFIED",
+    "DISPUTED": "DISPUTED_EVIDENCE",
+    "UNKNOWN": "UNKNOWN_EVIDENCE_OR_DEPENDENCY"
+  },
+  "rules": {
+    "onlyAlrMayDetermineSemanticState": true,
+    "supportedIsPermanentAchievement": false,
+    "unknownAndDisputedAreGovernedStates": true,
+    "stateTransitionRequiresExplicitEdge": true,
+    "providerMaySetState": false,
+    "surfaceMaySetState": false,
+    "rdgMaySetState": false,
+    "stateMayGrantCredential": false,
+    "stateMayGrantEntitlement": false,
+    "stateMayGrantProfessionalAuthority": false,
+    "semanticEvaluationMutatesPersistentState": false,
+    "persistentCapabilityStateActivated": false
+  }
+}

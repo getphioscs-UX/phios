@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W11-ECR-MANDALA-HIERARCHY-v1.0.0",
+  "work": "PVP-R1-VIS-W11",
+  "baselineCommit": "0b130813c6b599b48b1d76fe326c44691990b4b5",
+  "status": "HIERARCHY_FROZEN_EXISTING_RENDERER_RECONCILED",
+  "predecessorCensus": "content/product-visual-platform-r1/ecr/census/ecr-mandala-visual-census-v1.json",
+  "truthOwner": "ECR_EXISTING_AUTHORITY",
+  "projectionOwner": "PVP_R1",
+  "storyHierarchy": {
+    "primaryStory": ["CC12", "G16", "Q16", "R9"],
+    "secondaryDepth": ["D12", "M8", "H64", "A8"],
+    "meaning": {
+      "primaryStory": "The first customer-readable path: long-range context → Reality Grammar → baseline question → response capability.",
+      "secondaryDepth": "Deeper governed structure that refines the selected path without replacing the primary story."
+    }
+  },
+  "visualStates": ["PRIMARY_ACTIVE", "SUPPORTING_ACTIVE", "BACKGROUND", "LOCKED_DEPTH"],
+  "experienceStates": ["FREE_SNAPSHOT", "PAID_DEPTH"],
+  "hierarchyRules": {
+    "FREE_SNAPSHOT": {
+      "CC12": {"selected": "PRIMARY_ACTIVE", "unselected": "BACKGROUND"},
+      "G16": {"selected": "PRIMARY_ACTIVE", "unselected": "BACKGROUND"},
+      "Q16": {"selected": "PRIMARY_ACTIVE", "unselected": "BACKGROUND"},
+      "R9": {"primary": "PRIMARY_ACTIVE", "supporting": "LOCKED_DEPTH", "other": "BACKGROUND"},
+      "D12": {"rank1": "PRIMARY_ACTIVE", "rank2To3": "LOCKED_DEPTH", "rank4To12": "BACKGROUND"},
+      "M8": {"selected": "LOCKED_DEPTH", "unselected": "BACKGROUND"},
+      "H64": {"selected": "LOCKED_DEPTH", "unselected": "BACKGROUND"},
+      "A8": {"selected": "LOCKED_DEPTH", "unselected": "BACKGROUND"}
+    },
+    "PAID_DEPTH": {
+      "CC12": {"selected": "PRIMARY_ACTIVE", "unselected": "BACKGROUND"},
+      "G16": {"selected": "PRIMARY_ACTIVE", "unselected": "BACKGROUND"},
+      "Q16": {"selected": "PRIMARY_ACTIVE", "unselected": "BACKGROUND"},
+      "R9": {"primary": "PRIMARY_ACTIVE", "supporting": "SUPPORTING_ACTIVE", "other": "BACKGROUND"},
+      "D12": {"rank1": "PRIMARY_ACTIVE", "rank2To3": "SUPPORTING_ACTIVE", "rank4To12": "BACKGROUND"},
+      "M8": {"selected": "SUPPORTING_ACTIVE", "unselected": "BACKGROUND"},
+      "H64": {"selected": "SUPPORTING_ACTIVE", "unselected": "BACKGROUND"},
+      "A8": {"selected": "SUPPORTING_ACTIVE", "unselected": "BACKGROUND"}
+    }
+  },
+  "selectedPathPriority": [
+    "CC12_SELECTED_CONTEXT",
+    "G16_SELECTED_GRAMMAR",
+    "Q16_SELECTED_QUESTION",
+    "R9_PRIMARY_CAPABILITY",
+    "D12_RANK1_DRIVER",
+    "M8_SELECTED_MOTION",
+    "H64_SELECTED_CONFIGURATION",
+    "A8_SELECTED_ACTIVATION"
+  ],
+  "supportingPriority": [
+    "R9_SUPPORTING_CAPABILITIES",
+    "D12_RANK2_TO_3_DRIVERS",
+    "PAID_SELECTED_M8_H64_A8"
+  ],
+  "backgroundRule": "Any addressable node not selected or explicitly admitted as supporting remains BACKGROUND. No visual emphasis may create semantic importance.",
+  "lockedDepthRule": "FREE_SNAPSHOT may reveal the existence of deeper governed structure but must not expose personalized supporting/depth detail before access is granted.",
+  "rendererReconciliation": {
+    "existingRenderer": "assets/customer-ui/js/specialists/ecr/mandala-renderer.js",
+    "hierarchyRuntime": "assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js",
+    "actualGapFound": "D12 ranks 2–3 were labeled as supporting baseline drivers in customer copy but rendered as BACKGROUND because visual-state resolution only treated rank 1 as active.",
+    "gapResolution": "Centralize visual-state resolution and render D12 ranks 2–3 as SUPPORTING_ACTIVE in PAID_DEPTH and LOCKED_DEPTH in FREE_SNAPSHOT.",
+    "geometryChanged": false,
+    "semanticSelectionChanged": false,
+    "calculationAuthorityChanged": false,
+    "meaningAuthorityChanged": false
+  },
+  "authorityBoundary": {
+    "pvpMayPromoteBackgroundToPrimary": false,
+    "pvpMayInferSupportingRelation": false,
+    "hierarchyMayChangeCalculation": false,
+    "hierarchyMayChangeSelectedCoordinate": false,
+    "hierarchyMayCreateCrossLayerEquivalence": false,
+    "freePaidHierarchyIsPresentationOnlyUntilServerEntitlementAuthority": true
+  },
+  "nextGate": "PVP-R1-VIS-W12 SELECTED PATH"
+}

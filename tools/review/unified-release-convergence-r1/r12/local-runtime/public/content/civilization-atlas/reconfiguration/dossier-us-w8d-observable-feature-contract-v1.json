@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-GOLDEN-W8D-OBSERVABLE-FEATURE-CONTRACT-v1.0.0",
+  "status": "ACTIVE",
+  "dossierId": "DOSSIER-US",
+  "stage": "W8-D",
+  "title": "Observable Feature Extraction",
+  "input": "content/civilization-atlas/reconfiguration/runtime-position-w8c-current-evidence-ir-v1.json",
+  "output": "content/civilization-atlas/reconfiguration/dossier-us-w8d-observable-features-v1.json",
+  "rules": [
+    "Only CWA_ADMITTED and RRE_ELIGIBLE claims may produce observable features.",
+    "Observable features preserve claim meaning and provenance; they do not assign grammar, reality domain, runtime position, or prediction.",
+    "One admitted claim may produce one or more features only when the feature is directly stated by that claim.",
+    "Missing structure remains UNKNOWN; no missing feature may be inferred merely to complete the dossier.",
+    "Feature extraction does not mutate canonical dossier or position registries."
+  ],
+  "requiredFields": [
+    "featureId",
+    "dossierId",
+    "laneId",
+    "featureClass",
+    "observation",
+    "claimId",
+    "sourceId",
+    "observedAt",
+    "evidenceState"
+  ],
+  "nextStage": "W8-E RRE Derived Reading"
+}

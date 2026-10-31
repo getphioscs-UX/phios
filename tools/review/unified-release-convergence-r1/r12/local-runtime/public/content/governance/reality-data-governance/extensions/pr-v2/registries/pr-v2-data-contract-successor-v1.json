@@ -1,0 +1,95 @@
+{
+  "registryCode": "PHI-OS-RDG-PR-V2-DATA-CONTRACT-SUCCESSOR-v1",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_EXTENSION",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "purpose": "Extend PR read authority for governed Professional Runtime v2 inputs while preserving RDG v1 PR write authority.",
+  "preservedLegacyAuthority": {
+    "registry": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+    "runtimeCode": "PR",
+    "mutated": false,
+    "producedDataTypes": [
+      "PROFESSIONAL_JUDGMENT_RECORD",
+      "OUTCOME_RECORD"
+    ],
+    "writeAuthority": [
+      "PROFESSIONAL_JUDGMENT_RECORD",
+      "OUTCOME_RECORD"
+    ]
+  },
+  "addedReadOnlyDataTypes": [
+    "REALITY_INPUT_RECORD",
+    "REALITY_READOUT_RECORD",
+    "CAPABILITY_EVIDENCE_RECORD",
+    "NAVIGATION_RECORD",
+    "OUTCOME_RECORD"
+  ],
+  "effectiveConsumedDataTypes": [
+    "REALITY_EVIDENCE_RECORD",
+    "RUNTIME_STATE_RECORD",
+    "METHOD_PROJECTION_RECORD",
+    "MEANING_PROJECTION_RECORD",
+    "GOVERNANCE_RECORD",
+    "REALITY_INPUT_RECORD",
+    "REALITY_READOUT_RECORD",
+    "CAPABILITY_EVIDENCE_RECORD",
+    "NAVIGATION_RECORD",
+    "OUTCOME_RECORD"
+  ],
+  "externalReferenceAuthorities": [
+    {
+      "referenceKind": "PUBLISHED_KNOWLEDGE_REFERENCE",
+      "authority": "KNOWLEDGE_AUTHORITY"
+    },
+    {
+      "referenceKind": "GOVERNED_METRIC_REFERENCE",
+      "authority": "UPSTREAM_METRIC_AUTHORITY_IF_AVAILABLE"
+    },
+    {
+      "referenceKind": "CAPABILITY_DECISION_REFERENCE",
+      "authority": "runtime/capability"
+    },
+    {
+      "referenceKind": "CREDENTIAL_DECISION_REFERENCE",
+      "authority": "runtime/credential"
+    },
+    {
+      "referenceKind": "SERVICE_CONTRACT_REFERENCE",
+      "authority": "runtime/service"
+    },
+    {
+      "referenceKind": "ASSIGNMENT_REFERENCE",
+      "authority": "runtime/assignment"
+    },
+    {
+      "referenceKind": "CONSENT_REFERENCE",
+      "authority": "runtime/consent"
+    }
+  ],
+  "outcomeRecordSubtypesAllowedForPr": [
+    "PROFESSIONAL_OBSERVATION",
+    "PROFESSIONAL_RECOMMENDATION",
+    "PROFESSIONAL_REVIEW",
+    "PROFESSIONAL_APPROVAL",
+    "PROFESSIONAL_SIGNATURE",
+    "PROFESSIONAL_AUDIT",
+    "PROFESSIONAL_RELEASE"
+  ],
+  "permissions": {
+    "evidencePromotion": "DENY",
+    "readoutWrite": "DENY",
+    "metricWrite": "DENY",
+    "meaningWrite": "DENY",
+    "knowledgeWrite": "DENY",
+    "journeyWrite": "DENY",
+    "reportWrite": "DENY",
+    "professionalJudgmentWrite": "ALLOW_EXISTING_PROFESSIONAL_JUDGMENT_RECORD_ONLY",
+    "professionalOutcomeWrite": "ALLOW_EXISTING_OUTCOME_RECORD_BOUNDED_SUBTYPES_ONLY"
+  },
+  "rules": {
+    "legacyRdgV1Rewritten": false,
+    "newDataTypeCreated": false,
+    "dependencyDoesNotGrantAuthority": true,
+    "accountRoleDoesNotGrantProfessionalAuthority": true
+  }
+}

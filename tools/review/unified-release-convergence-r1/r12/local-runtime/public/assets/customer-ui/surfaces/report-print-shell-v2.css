@@ -1,0 +1,89 @@
+/* PHI OS REPORT PRINT SHELL V2 — shared physical publication owner.
+   Method skins own palette, typography, section artwork and data visuals. */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{width:210mm;max-width:210mm;margin:0 auto;letter-spacing:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static,
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{
+ position:relative;isolation:isolate;box-sizing:border-box;
+ width:210mm!important;height:297mm!important;min-width:210mm!important;max-width:210mm!important;
+ min-height:297mm!important;max-height:297mm!important;margin:0 auto 10mm!important;overflow:hidden!important;
+ break-inside:avoid-page!important;page-break-inside:avoid!important;break-after:page!important;page-break-after:always!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static{padding:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static>img{
+ display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover{position:relative;overflow:hidden}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover-overlay{position:absolute;inset:0;pointer-events:none}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-cover-value{
+ position:absolute;display:flex;align-items:center;justify-content:center;padding:0 1.2%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{padding:15mm 17mm 12mm!important;gap:4mm!important;border:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page:before{
+ content:"";position:absolute;inset:5mm;z-index:1;pointer-events:none;border:1px solid var(--report-shell-line,rgba(188,168,121,.55))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page>*:not(.pub-decoration){position:relative;z-index:2}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-decoration{
+ position:absolute!important;inset:0!important;z-index:0!important;overflow:hidden!important;pointer-events:none!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-decoration--single .pub-page-background{
+ position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;
+ max-width:none!important;max-height:none!important;object-fit:cover!important;opacity:1!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-header{
+ display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--report-shell-line,var(--phi-report-gold-line));
+ padding-bottom:3mm
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-header>span:last-child{text-align:right}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-header small{display:block}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-heading{text-align:left}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-footer{
+ display:flex;gap:6mm;justify-content:space-between;align-items:flex-end;margin-top:auto;border-top:1px solid var(--report-shell-line,var(--phi-report-gold-line))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights{display:grid;list-style:none;padding:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights li{display:grid;align-items:start;border-bottom:1px solid var(--report-shell-soft-line,rgba(203,184,142,.45))}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights li>span{display:grid;place-items:center;border:1px solid var(--report-shell-line,var(--phi-report-gold-line));border-radius:50%}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-insights p{margin:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-page{display:flex!important;flex-direction:column!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-content{min-height:0;flex-shrink:0}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-composed-node{display:contents}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-visual{margin:0;padding:2mm 0;border-block:1px solid var(--report-shell-soft-line,rgba(203,184,142,.55))}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"]{padding:0!important;display:block!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-decoration:after{
+ content:"";position:absolute;inset:0;background:var(--report-shell-opener-scrim,linear-gradient(90deg,rgba(250,247,239,.9) 0%,rgba(250,247,239,.78) 27%,rgba(250,247,239,.28) 48%,rgba(250,247,239,0) 68%))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-decoration:after{
+ background:var(--report-shell-opener-scrim-reverse,linear-gradient(270deg,rgba(250,247,239,.9) 0%,rgba(250,247,239,.78) 27%,rgba(250,247,239,.28) 48%,rgba(250,247,239,0) 68%))
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-header{
+ position:absolute;top:11mm;left:17mm;right:17mm;z-index:2
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading{
+ position:absolute;left:17mm;top:34mm;z-index:2;width:92mm;margin:0!important;text-align:left!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-opener-heading{
+ left:auto;right:17mm;text-align:right!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-section-number{display:block;margin:0 0 9mm!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading h2{margin:0 0 2mm!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-opener-heading>p{margin:0!important;padding:0 0 4mm!important;border-bottom:1px solid var(--report-shell-line,var(--phi-report-gold-line))}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights{
+ position:absolute;left:17mm;top:116mm;z-index:2;width:105mm;max-width:none!important;padding:5mm 6mm!important;margin:0!important;backdrop-filter:none!important
+}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-master-insights{left:auto;right:17mm}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights{gap:1mm!important;margin:0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights li{grid-template-columns:8mm 1fr!important;gap:3mm!important;padding:2.5mm 0!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-master-insights .pub-insights li>span{width:7mm!important;height:7mm!important}
+.pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-footer{
+ position:absolute;left:17mm;right:17mm;bottom:11mm;z-index:2
+}
+@page{size:A4;margin:0}
+@media print{
+ html,body{margin:0!important;padding:0!important;background:#fff!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"]{margin:0!important;background:#fff!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-static,
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page{margin:0!important;box-shadow:none!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] .pub-page:last-child{break-after:auto!important;page-break-after:auto!important}
+ .pub-report[data-print-shell="PHI-OS-REPORT-PRINT-SHELL-V2"] *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}

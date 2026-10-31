@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10-PILOT-PRIVATE-EVIDENCE-BOUNDARY-v1.0.0",
+  "phase": "MRM-S",
+  "work": "S10-PRIVACY",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE_UNDER_RDG",
+  "upstreamAuthorityReferences": [
+    {
+      "path": "content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+      "sha256": "0a6ee3e2a67127399acfe0991b871776d5983a1e203fe52a762b7fdcf47c1957"
+    },
+    {
+      "path": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+      "sha256": "cdf977546bcbbbfbf1b9ad3da2f639d12ed43639f093f1dd27322a16cee8db02"
+    },
+    {
+      "path": "content/governance/reality-data-governance/contracts/professional-data-isolation-v1.json",
+      "sha256": "ed4eb775e823b9488c9f705be1f9e962d2728d1466bdd0078423b95ca93c7383"
+    }
+  ],
+  "repositoryMayStore": [
+    "opaque customer reference",
+    "opaque consent reference",
+    "runtime/capability/version references",
+    "input/output digests",
+    "private evidence locator reference",
+    "completion/evidence states",
+    "human intervention metadata without payload",
+    "release reference/digest"
+  ],
+  "repositoryMustNotStore": [
+    "raw customer intake",
+    "raw financial data",
+    "raw Will content",
+    "raw Reality narrative",
+    "identity documents",
+    "contact details",
+    "bank/policy/account identifiers",
+    "private professional notes",
+    "unreleased report payload"
+  ],
+  "privateStorageRequiredForRawEvidence": true,
+  "publicUrlForbiddenForPrivateEvidence": true,
+  "crossCaseAccessForbidden": true,
+  "minimumNecessaryProjectionOnly": true,
+  "retentionDecisionAuthority": "RDG",
+  "consentAuthority": "runtime/consent + domain specialization",
+  "researchReuseImplied": false
+}

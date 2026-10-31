@@ -1,0 +1,91 @@
+{
+  "auditCode": "PHI-OS-WAVE1-C2-MANUSCRIPT-MAPPING-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "status": "HUMAN_VERIFIED",
+  "baselineCommit": "6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f",
+  "reviewedBy": "TL",
+  "reviewerRole": "HUMAN_EDITORIAL_AUTHORITY",
+  "reviewedAt": "2026-08-10T18:30:00+08:00",
+  "scope": [
+    "KN-PREFACE-004",
+    "KN-B1-P1-003",
+    "KN-B1-P4-003",
+    "KN-B1-P4-004"
+  ],
+  "hashSemantics": {
+    "sectionHashAuthority": "PART_LEVEL_NORMALIZED_SECTION_HASH",
+    "rangeUniquenessDerivedFrom": [
+      "rangeCode",
+      "startHeading",
+      "endHeading",
+      "startAnchor",
+      "endAnchor"
+    ],
+    "samePartRangesMayShareSectionHash": true,
+    "finding": "P4-003 and P4-004 sharing the same sectionHash is expected because both ranges belong to P4 and range.sectionHash binds the normalized Part authority rather than a per-range digest."
+  },
+  "items": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "partCode": "P0",
+      "mappingStatus": "candidate",
+      "authorityStatus": "automation_candidate",
+      "rangeCode": "KN-PREFACE-004-R01",
+      "startHeading": "为什么需要 PHI OS",
+      "endHeading": "第一部｜现实物理学",
+      "rangeRole": "primary",
+      "rangeSectionHash": "1b448e2d564ec9bc29797a0888adf12a59f66200172f710bc042d97e96fefb8e",
+      "partSectionHash": "1b448e2d564ec9bc29797a0888adf12a59f66200172f710bc042d97e96fefb8e",
+      "partHashMatched": true,
+      "humanDecision": "APPROVED_FOR_C2_MAPPING_VERIFICATION"
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "partCode": "P1",
+      "mappingStatus": "candidate",
+      "authorityStatus": "automation_candidate",
+      "rangeCode": "KN-B1-P1-003-R01",
+      "startHeading": "现实如何被压缩成可读取结构",
+      "endHeading": "现实如何形成结构差异",
+      "rangeRole": "primary",
+      "rangeSectionHash": "26f0c4e965845c118de524dadbb049feab634b9090112683eba6c14ffe1df804",
+      "partSectionHash": "26f0c4e965845c118de524dadbb049feab634b9090112683eba6c14ffe1df804",
+      "partHashMatched": true,
+      "humanDecision": "APPROVED_FOR_C2_MAPPING_VERIFICATION"
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "partCode": "P4",
+      "mappingStatus": "candidate",
+      "authorityStatus": "automation_candidate",
+      "rangeCode": "KN-B1-P4-003-R01",
+      "startHeading": "Initialization Stabilization |为什么初始化状态能够长期稳定",
+      "endHeading": "Carrier Hierarchy | 载体为什么拥有不同层级",
+      "rangeRole": "primary",
+      "rangeSectionHash": "850031096453eef73b0fb2bd1eea6a734181b018199a3a91e37c97bad61e049b",
+      "partSectionHash": "850031096453eef73b0fb2bd1eea6a734181b018199a3a91e37c97bad61e049b",
+      "partHashMatched": true,
+      "humanDecision": "APPROVED_FOR_C2_MAPPING_VERIFICATION"
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "partCode": "P4",
+      "mappingStatus": "candidate",
+      "authorityStatus": "automation_candidate",
+      "rangeCode": "KN-B1-P4-004-R01",
+      "startHeading": "Carrier Hierarchy | 载体为什么拥有不同层级",
+      "endHeading": "Biological Adaptation｜身体如何适应现实",
+      "rangeRole": "primary",
+      "rangeSectionHash": "850031096453eef73b0fb2bd1eea6a734181b018199a3a91e37c97bad61e049b",
+      "partSectionHash": "850031096453eef73b0fb2bd1eea6a734181b018199a3a91e37c97bad61e049b",
+      "partHashMatched": true,
+      "humanDecision": "APPROVED_FOR_C2_MAPPING_VERIFICATION"
+    }
+  ],
+  "decision": {
+    "allFourMappingsAcceptedForThisC2Freeze": true,
+    "globalManuscriptMappingAuthorityPromoted": false,
+    "canonicalNodeOwnershipChanged": false,
+    "productionAuthorityCreated": false
+  }
+}

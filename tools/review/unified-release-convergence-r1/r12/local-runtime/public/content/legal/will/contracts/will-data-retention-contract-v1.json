@@ -1,0 +1,32 @@
+{
+  "contractCode": "PHI-OS-DAR-W14-WILL-DATA-RETENTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W14",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_RDG_BOUND_MINIMUM_RETENTION",
+  "upstreamAuthority": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+  "defaultHandling": "EPHEMERAL_NO_PERSISTENCE_UNLESS_USER_EXPLICITLY_SAVES",
+  "persistenceRequirements": [
+    "explicit save consent",
+    "authenticated subject binding where persisted",
+    "purpose-bound retention code",
+    "encrypted storage",
+    "deletion policy",
+    "legal hold treatment when applicable"
+  ],
+  "subjectRightsAuthority": "content/governance/reality-data-governance/contracts/data-subject-rights-runtime-v1.json",
+  "requiredRights": [
+    "ACCESS",
+    "RECTIFY",
+    "EXPORT",
+    "WITHDRAW_CONSENT",
+    "DELETE"
+  ],
+  "rules": {
+    "silentIndefiniteRetentionForbidden": true,
+    "minimumNecessaryRetention": true,
+    "saveConsentMayBeWithdrawnSubjectToRecordedExceptions": true,
+    "deletionMustUseRDGRightsAndTombstoneSemantics": true,
+    "darDoesNotInventLegalHold": true
+  }
+}

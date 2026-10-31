@@ -1,0 +1,65 @@
+{
+  "registryCode": "PHI-OS-RMO-W12-CANONICAL-OUTCOME-CLASS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W12",
+  "status": "canonical_boundary",
+  "runtimeAuthority": "RMO",
+  "professionalOutcomeRecordAuthority": "PR",
+  "reviewContinuityAuthority": "EXISTING_RUNTIME",
+  "containsUserData": false,
+  "containsOutcomeInstances": false,
+  "outcomeClasses": [
+    {
+      "outcomeClass": "OBSERVED_CHANGE",
+      "allowedDataNatures": ["OBSERVED"],
+      "allowedCertainties": ["OBSERVED"],
+      "evidenceBindingRequired": true,
+      "unknownReferenceRequired": false,
+      "observedAtMode": "REQUIRED"
+    },
+    {
+      "outcomeClass": "REPORTED_CHANGE",
+      "allowedDataNatures": ["USER_REPORTED"],
+      "allowedCertainties": ["REPORTED", "DISPUTED"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": false,
+      "observedAtMode": "REQUIRED"
+    },
+    {
+      "outcomeClass": "NO_OBSERVED_CHANGE",
+      "allowedDataNatures": ["USER_REPORTED"],
+      "allowedCertainties": ["REPORTED"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": false,
+      "observedAtMode": "REQUIRED"
+    },
+    {
+      "outcomeClass": "UNEXPECTED_CHANGE",
+      "allowedDataNatures": ["USER_REPORTED"],
+      "allowedCertainties": ["REPORTED", "DISPUTED"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": true,
+      "observedAtMode": "REQUIRED"
+    },
+    {
+      "outcomeClass": "UNKNOWN_OUTCOME",
+      "allowedDataNatures": ["SYSTEM_STATE"],
+      "allowedCertainties": ["UNKNOWN", "UNRESOLVED"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": true,
+      "observedAtMode": "FORBIDDEN"
+    }
+  ],
+  "instances": [],
+  "rules": {
+    "registryDefinesClassesOnly": true,
+    "observedAndReportedRemainDistinct": true,
+    "noObservedChangeIsNotFailure": true,
+    "unexpectedChangeDoesNotProveCause": true,
+    "rmoOutcomeIsRuntimeStateRecord": true,
+    "rmoOutcomeIsPrOutcomeRecord": false,
+    "rmoMayClaimCausalitySuccessOrEffectiveness": false,
+    "rmoMaySelectContinuity": false,
+    "providerOrAiCannotGrantOutcomeAuthority": true
+  }
+}

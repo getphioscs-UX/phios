@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W20-CHANGE-EVENT-TYPE-REGISTRY-v1.0.0",
+  "work": "FDR-W20",
+  "status": "ACTIVE_FACT_CHANGE_TAXONOMY",
+  "authorityOwner": "FDR",
+  "eventTypes": [
+    "ASSET_ADDED",
+    "ASSET_VALUE_UPDATED",
+    "LOAN_REPAID",
+    "POLICY_ADDED",
+    "INCOME_CHANGED",
+    "GOAL_CHANGED",
+    "BENEFICIARY_FACT_UPDATED"
+  ],
+  "rules": {
+    "eventTypeDescribesObservedFactChangeOnly": true,
+    "eventDoesNotAuthorizeMutationOfHistoricalSnapshot": true,
+    "eventDoesNotCreateCalculationAuthority": true,
+    "eventDoesNotCreateRecommendationAuthority": true,
+    "unknownChangeMustNotBeForcedIntoNearestType": true
+  }
+}

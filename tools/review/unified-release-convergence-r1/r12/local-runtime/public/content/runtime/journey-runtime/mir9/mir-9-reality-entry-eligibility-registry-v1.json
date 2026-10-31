@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-MIR-9-REALITY-ENTRY-ELIGIBILITY-REGISTRY-v1.0.0",
+  "work": "MIR-9A",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "default": "NOT_ELIGIBLE",
+  "rules": [
+    {
+      "ruleCode": "MIR9-ENTRY-001",
+      "when": [
+        "MIR8_OUTCOME_REALITY_MODEL_REQUIRED",
+        "MIR8_FOUR_COMPLEXITY_SIGNALS_TRUE",
+        "KAP_W24_REQUIREMENT_YES",
+        "KAP_ROUTE_REALITY_JOURNEY_CANDIDATE",
+        "EXPLICIT_ESCALATION_CONSENT_VALID"
+      ],
+      "result": "ELIGIBLE_FOR_RJX_ENTRY"
+    },
+    {
+      "ruleCode": "MIR9-ENTRY-002",
+      "when": [
+        "MIR8_OUTCOME_REALITY_MODEL_REQUIRED",
+        "COMPLEXITY_GATE_VALID",
+        "ESCALATION_CONSENT_MISSING_OR_INVALID"
+      ],
+      "result": "AWAITING_EXPLICIT_ESCALATION_CONSENT"
+    },
+    {
+      "ruleCode": "MIR9-ENTRY-003",
+      "when": [
+        "MIR8_OUTCOME_ANSWER_SUFFICIENT_OR_MORE_CONTEXT_NEEDED"
+      ],
+      "result": "NOT_ELIGIBLE"
+    },
+    {
+      "ruleCode": "MIR9-ENTRY-004",
+      "when": [
+        "KAP_W24_REQUIREMENT_NOT_YES"
+      ],
+      "result": "NOT_ELIGIBLE"
+    }
+  ],
+  "authority": {
+    "routingOnly": true,
+    "canonicalCaseOwner": "ICR",
+    "realityModelOwner": "RMO",
+    "dataGovernanceOwner": "RDG",
+    "createsRealityTruth": false,
+    "createsDiagnosis": false
+  }
+}

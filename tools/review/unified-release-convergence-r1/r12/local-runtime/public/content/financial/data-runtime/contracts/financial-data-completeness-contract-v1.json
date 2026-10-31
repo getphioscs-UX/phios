@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W16-DATA-COMPLETENESS-CONTRACT-v1.0.0",
+  "work": "FDR-W16",
+  "status": "ACTIVE_METADATA_DERIVATION_ONLY",
+  "domains": [
+    "HOUSEHOLD",
+    "ASSETS",
+    "LIABILITIES",
+    "PROTECTION",
+    "ESTATE"
+  ],
+  "outputFields": [
+    "domain",
+    "providedPercent",
+    "providedCount",
+    "missingCount",
+    "declinedCount",
+    "unknownCount",
+    "notApplicableCount",
+    "totalApplicableCount",
+    "asOfDate"
+  ],
+  "providedStates": [
+    "KNOWN_EXACT",
+    "KNOWN_APPROXIMATE",
+    "RANGE_ONLY",
+    "SELF_REPORTED",
+    "DOCUMENT_VERIFIED"
+  ],
+  "missingStates": [
+    "NOT_YET_PROVIDED"
+  ],
+  "declinedStates": [
+    "DECLINED_TO_PROVIDE"
+  ],
+  "unknownStates": [
+    "UNKNOWN"
+  ],
+  "excludedStates": [
+    "NOT_APPLICABLE"
+  ],
+  "formula": "providedPercent = providedCount / totalApplicableCount * 100; totalApplicableCount excludes NOT_APPLICABLE",
+  "rules": {
+    "thisIsFinancialCalculation": false,
+    "thisIsFinancialAnalysis": false,
+    "thisIsRecommendation": false,
+    "thisIsGovernanceMetadataDerivation": true,
+    "declinedCountRemainsSeparate": true,
+    "unknownCountRemainsSeparate": true,
+    "missingCountRemainsSeparate": true,
+    "notApplicableCountRemainsSeparate": true,
+    "declinedCountsAsZeroValue": false,
+    "unknownCountsAsZeroValue": false
+  }
+}

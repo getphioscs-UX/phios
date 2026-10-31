@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Current Position v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "positionCode",
+    "positionVersion",
+    "objectType",
+    "dataType",
+    "realityReference",
+    "readoutViewReference",
+    "constraintReferences",
+    "unknownReferences",
+    "governanceReferences",
+    "authorityBoundary",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "productionExecutionAllowed",
+    "positionDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-CURRENT-POSITION-v1.0.0"
+    },
+    "positionCode": {
+      "type": "string",
+      "pattern": "^RNE-POSITION-[A-Z0-9-]{4,120}$"
+    },
+    "positionVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "CURRENT_POSITION"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "readoutViewReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest",
+        "mode"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "mode": {
+          "const": "VALIDATION_VIEW_REFERENCE_ONLY"
+        }
+      }
+    },
+    "constraintReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      },
+      "minItems": 1
+    },
+    "unknownReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    },
+    "governanceReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      },
+      "minItems": 1
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "realityModelAuthority",
+        "readoutAuthority",
+        "navigationAuthority",
+        "journeyWorkflowAuthority",
+        "professionalJudgmentAuthority",
+        "dataGovernanceAuthority"
+      ],
+      "properties": {
+        "realityModelAuthority": {
+          "const": "RMO"
+        },
+        "readoutAuthority": {
+          "const": "RRE"
+        },
+        "navigationAuthority": {
+          "const": "RNE"
+        },
+        "journeyWorkflowAuthority": {
+          "const": "JR"
+        },
+        "professionalJudgmentAuthority": {
+          "const": "PR"
+        },
+        "dataGovernanceAuthority": {
+          "const": "RDG"
+        }
+      }
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "productionExecutionAllowed": {
+      "const": false
+    },
+    "positionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

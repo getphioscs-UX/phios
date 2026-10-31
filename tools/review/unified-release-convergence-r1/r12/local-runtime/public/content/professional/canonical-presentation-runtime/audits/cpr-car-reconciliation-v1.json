@@ -1,0 +1,57 @@
+{
+  "reconciliationCode": "PHI-OS-CPR-CAR-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "work": "CPR-W0",
+  "status": "reconciled",
+  "productionStatus": "validation_only",
+  "carAuthorityReferences": {
+    "surfaceProjectionContract": "content/professional/canonical-asset-runtime/contracts/car-surface-projection-runtime-v1.json",
+    "qualityPolicy": "content/professional/canonical-asset-runtime/policies/car-quality-drift-policy-v1.json",
+    "presentationPdsIntegration": "content/professional/canonical-asset-runtime/contracts/car-presentation-pds-integration-v1.json",
+    "publishedAssetRegistry": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json"
+  },
+  "rules": {
+    "publishedAssetIsRequiredUpstream": true,
+    "carPublicationStateIsNeverRecomputed": true,
+    "carQualityDecisionIsNeverRecomputed": true,
+    "carSurfaceProjectionMayBeReferenced": true,
+    "carPresentationTypeRegistryIsNotCprPresentationAuthority": true,
+    "sameNamedPresentationTypesKeepCarLineage": true,
+    "cprMayExpandPresentationTypesWithoutEditingCarRegistry": true,
+    "cprSurfaceRegistryDoesNotExpandCarPublicationEligibility": true
+  },
+  "carSurfaceProjectionCompatibility": [
+    "WEBSITE",
+    "BOOK",
+    "ACADEMY",
+    "SOCIAL",
+    "API"
+  ],
+  "cprOnlyPresentationTargets": [
+    "PDF",
+    "CUSTOMER_WORKSPACE",
+    "PROFESSIONAL_WORKSPACE",
+    "APP",
+    "EMAIL"
+  ],
+  "sharedPresentationTypes": [
+    "KNOWLEDGE_CARD",
+    "FIGURE_CARD",
+    "MEDIA_CARD",
+    "AUTHORITY_BADGE",
+    "PUBLICATION_BADGE",
+    "LOCALE_BADGE"
+  ],
+  "carOnlyTypesNotMigratedByCprW0W6": [
+    "SERVICE_CARD",
+    "ACADEMY_CARD",
+    "BOOK_CARD",
+    "READING_CARD"
+  ],
+  "invariants": {
+    "carRebuilt": false,
+    "publishedAssetRegistryRebuilt": false,
+    "publicationAuthorityDuplicated": false,
+    "qualityAuthorityDuplicated": false
+  }
+}

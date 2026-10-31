@@ -1,0 +1,38 @@
+{
+  "allowedOperations": [
+    "read_policy",
+    "validate_budget",
+    "check_cache",
+    "estimate_usage",
+    "reserve_atomically",
+    "record_usage",
+    "reconcile",
+    "report"
+  ],
+  "contractCode": "PHI-OS-ZERO-COST-PROVIDER-FOUNDATION-v1.0.0",
+  "forbiddenOperations": [
+    "call_provider",
+    "enable_paid_overage",
+    "use_paid_fallback",
+    "share_paid_journey_budget",
+    "translate_article",
+    "translate_fragment",
+    "write_canonical_registry"
+  ],
+  "package": "L-B1",
+  "phase": "PHASE-L",
+  "principles": {
+    "failClosed": true,
+    "freeAllowanceOnly": true,
+    "paidOverageDisabled": true,
+    "providerCallsEnabled": false
+  },
+  "publicKnrBoundary": {
+    "openAi": {
+      "budgetUnits": 0,
+      "enabled": false
+    },
+    "paidJourneyBudgetShared": false
+  },
+  "step": "STEP83"
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-REL-W7-WORK-MANIFEST-v1.0.0",
+  "work": "REL-W7",
+  "baselineCommit": "8ca45f59db94da47ac7a66424ff1dd14cc0d746a",
+  "status": "ENGINEERING_COMPLETE_MACHINE_VERIFIED",
+  "files": [
+    "functions/personal-reading/relationship/relationship-narrative-brief.js",
+    "content/personal-reading/relationship/narrative/contracts/relationship-narrative-brief-contract-v1.json",
+    "content/personal-reading/relationship/narrative/schemas/relationship-narrative-brief-v1.schema.json",
+    "content/personal-reading/relationship/narrative/successors/rel-w7-input-authority-snapshot-v1.json",
+    "content/personal-reading/relationship/narrative/acceptance/rel-w7-machine-acceptance-v1.json",
+    "scripts/rel-w7-relationship-narrative-fixtures.mjs",
+    "scripts/check-rel-w7-relationship-narrative-brief.mjs"
+  ],
+  "preconditions": {
+    "relW0W6FoundationComplete": true,
+    "w47W54GovernedPersonalReadingMachineVerified": true,
+    "w54n0GenericNarrativeBriefMachineVerified": true,
+    "relW4SixMethodHumanAdmission": "144_OF_144"
+  },
+  "productAuthority": {
+    "relationshipNarrativeBriefAvailable": true,
+    "paidRelationshipNarrativeAvailable": false,
+    "sharedWriterReused": true,
+    "newProviderCreated": false
+  },
+  "next": "W54N1-W54N8 shared narrative infrastructure; REL-W8 follows after shared infrastructure is ready."
+}

@@ -1,0 +1,97 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "KNOWN_UNKNOWN_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-026-N01",
+        "FIG-026-N02"
+      ],
+      "mustExclude": [
+        "FIG-026-N03",
+        "FIG-026-N04"
+      ],
+      "sourceBindingId": "FIG-026-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-KNOWN-UNKNOWN-INTERPRETATION-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "PERSONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-026-E01",
+      "from": "FIG-026-N01",
+      "relation": "GROUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-026-SRC-01",
+      "to": "FIG-026-N02"
+    },
+    {
+      "edgeId": "FIG-026-E02",
+      "from": "FIG-026-N02",
+      "relation": "MAY_SUPPORT",
+      "required": true,
+      "sourceBindingId": "FIG-026-SRC-02",
+      "to": "FIG-026-N03"
+    },
+    {
+      "edgeId": "FIG-026-E03",
+      "from": "FIG-026-N03",
+      "relation": "MUST_PRESERVE",
+      "required": true,
+      "sourceBindingId": "FIG-026-SRC-02",
+      "to": "FIG-026-N04"
+    }
+  ],
+  "figureId": "FIG-026",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-026-N01",
+    "FIG-026-N02",
+    "FIG-026-N03",
+    "FIG-026-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Known Evidence",
+      "nodeId": "FIG-026-N01",
+      "required": true,
+      "semanticKey": "KNOWN_EVIDENCE",
+      "sourceBindingId": "FIG-026-SRC-01"
+    },
+    {
+      "displayLabel": "Interpretation",
+      "nodeId": "FIG-026-N02",
+      "required": true,
+      "semanticKey": "INTERPRETATION",
+      "sourceBindingId": "FIG-026-SRC-01"
+    },
+    {
+      "displayLabel": "Inference",
+      "nodeId": "FIG-026-N03",
+      "required": true,
+      "semanticKey": "INFERENCE",
+      "sourceBindingId": "FIG-026-SRC-01"
+    },
+    {
+      "displayLabel": "Unknown",
+      "nodeId": "FIG-026-N04",
+      "required": true,
+      "semanticKey": "UNKNOWN",
+      "sourceBindingId": "FIG-026-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "KNOWN-UNKNOWN-INTERPRETATION",
+  "title": "Known / Unknown / Interpretation"
+}

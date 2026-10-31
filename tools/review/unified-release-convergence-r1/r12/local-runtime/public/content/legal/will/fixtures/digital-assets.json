@@ -1,0 +1,117 @@
+{
+  "fixtureId": "digital-assets",
+  "scenario": "digital asset arrangement requires clause review",
+  "testDataOnly": true,
+  "containsRealPersonalData": false,
+  "input": {
+    "persons": [
+      {
+        "personId": "P_TESTATOR",
+        "fullName": "Fixture Testator",
+        "idType": "OTHER",
+        "idNumber": "FIXTURE-T",
+        "address": "Fixture Address",
+        "roles": [
+          "TESTATOR"
+        ]
+      },
+      {
+        "personId": "P_EXECUTOR",
+        "fullName": "Fixture Executor",
+        "idType": "OTHER",
+        "idNumber": "FIXTURE-E",
+        "address": "Fixture Address",
+        "roles": [
+          "EXECUTOR"
+        ]
+      },
+      {
+        "personId": "P_B1",
+        "fullName": "Fixture Beneficiary One",
+        "idType": "OTHER",
+        "idNumber": "FIXTURE-B1",
+        "address": "Fixture Address",
+        "roles": [
+          "BENEFICIARY"
+        ]
+      },
+      {
+        "personId": "P_B2",
+        "fullName": "Fixture Beneficiary Two",
+        "idType": "OTHER",
+        "idNumber": "FIXTURE-B2",
+        "address": "Fixture Address",
+        "roles": [
+          "BENEFICIARY"
+        ]
+      },
+      {
+        "personId": "P_GUARDIAN",
+        "fullName": "Fixture Guardian",
+        "idType": "OTHER",
+        "idNumber": "FIXTURE-G",
+        "address": "Fixture Address",
+        "roles": [
+          "GUARDIAN"
+        ]
+      }
+    ],
+    "testator": "P_TESTATOR",
+    "jurisdiction": "MALAYSIA",
+    "domicile": "MALAYSIA",
+    "executors": [
+      "P_EXECUTOR"
+    ],
+    "substituteExecutors": [],
+    "guardians": [],
+    "substituteGuardians": [],
+    "beneficiaries": [
+      "P_B1"
+    ],
+    "properties": [],
+    "businessInterests": [],
+    "bankAssets": [],
+    "investments": [],
+    "insurance": [],
+    "epf": [],
+    "prs": [],
+    "vehicles": [],
+    "jewellery": [],
+    "digitalAssets": [
+      {
+        "assetId": "A_DIGITAL",
+        "assetType": "DIGITAL_ASSET",
+        "description": "Fixture digital asset"
+      }
+    ],
+    "otherAssets": [],
+    "specificGifts": [],
+    "residuaryDistribution": [
+      {
+        "beneficiaryPersonId": "P_B1",
+        "percentage": 100
+      }
+    ],
+    "trustInstructions": [],
+    "digitalAssetInstructions": [],
+    "language": "en",
+    "translatorRequired": false,
+    "customClauseRequested": false,
+    "minorChildren": false,
+    "crossBorderEstate": false,
+    "complexTrust": false,
+    "specialNeedsBeneficiary": false,
+    "companySuccession": false,
+    "conflictingOwnership": false,
+    "largeDigitalAssetArrangement": true,
+    "nonStandardFamilyStructure": false
+  },
+  "expected": {
+    "shareIntegrityStatus": "VALID",
+    "escalationStatus": "AUTOMATIC_ASSEMBLY_BLOCKED",
+    "assemblyStatus": "AUTOMATIC_ASSEMBLY_BLOCKED",
+    "validationStatus": "FAIL",
+    "exportAllowed": false,
+    "primaryReason": "LEGAL_REVIEW_REQUIRED"
+  }
+}

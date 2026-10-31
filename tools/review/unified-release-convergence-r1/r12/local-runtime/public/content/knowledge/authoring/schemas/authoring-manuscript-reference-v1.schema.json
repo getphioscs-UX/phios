@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/authoring-manuscript-reference-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manuscriptCode",
+    "bookCode",
+    "version",
+    "locale",
+    "manifestPath",
+    "inventoryPath",
+    "sourceDigest",
+    "sectionCount",
+    "status",
+    "authorityMode"
+  ],
+  "properties": {
+    "manuscriptCode": {
+      "type": "string"
+    },
+    "bookCode": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "manifestPath": {
+      "type": "string"
+    },
+    "inventoryPath": {
+      "type": "string"
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sectionCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "editorial",
+        "candidate_complete",
+        "manuscript_complete",
+        "superseded",
+        "archived",
+        "registered"
+      ]
+    },
+    "authorityMode": {
+      "const": "reference_only"
+    }
+  }
+}

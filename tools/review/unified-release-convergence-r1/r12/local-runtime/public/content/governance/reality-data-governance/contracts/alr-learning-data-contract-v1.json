@@ -1,0 +1,44 @@
+{
+  "contractCode": "PHI-OS-RDG-W23-ALR-LEARNING-DATA-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W23",
+  "status": "active",
+  "semanticAuthority": "ALR Capability Runtime",
+  "dataGovernanceAuthority": "RDG",
+  "allowedRecordTypes": [
+    "LEARNING_EXPOSURE",
+    "LESSON_PROGRESS",
+    "PRACTICE_ATTEMPT",
+    "ASSESSMENT_RESPONSE",
+    "ASSESSMENT_RESULT",
+    "REFLECTION",
+    "CAPABILITY_EVIDENCE_REFERENCE"
+  ],
+  "allowedFields": [
+    "programReference",
+    "moduleReference",
+    "lessonReference",
+    "learningObjectiveReference",
+    "startedAt",
+    "completedAt",
+    "practiceReference",
+    "attemptReference",
+    "assessmentReference",
+    "questionReference",
+    "response",
+    "responseReference",
+    "score",
+    "criterionResults",
+    "capabilityEvidenceReference"
+  ],
+  "forbiddenAuthorityFields": ["capabilityState", "capabilityAchieved", "capabilityLevel", "credentialGranted"],
+  "rules": {
+    "assessmentScoreIsCapability": false,
+    "lessonCompletionIsCapability": false,
+    "learningRecordMaySetCapabilityState": false,
+    "capabilityDeterminationRequiresAlrCapabilityRuntime": true,
+    "responseRequiresSensitivityAndRetentionClassification": true,
+    "permissionMustBeResolvedBeforePersistence": true,
+    "rdgMayInterpretCapabilitySemantics": false
+  }
+}

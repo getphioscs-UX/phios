@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PROGRESSION-V2-CAPABILITY-SUCCESSOR-FREEZE-v1.0.0",
+  "work": "BFA-PROG-0-BFA-PROG-7",
+  "baselineCommit": "51ff68497f70df2bfe0a7869ed84646872bddb70",
+  "status": "FROZEN_ADDITIVE_BFA_PROGRESSION_V2_SUCCESSOR",
+  "predecessorFreeze": "content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json",
+  "authorityBoundary": {
+    "historicalW39FreezeRewritten": false,
+    "specificBatch003HumanDecisionFrozen": false,
+    "specificFuturePublicationOutcomeFrozen": false,
+    "humanAuthorityInferred": false
+  },
+  "reconciledPredecessorFiles": {
+    "scripts/article-batch-bfa-successor.mjs": {
+      "predecessorSha256": "39699ba4e3770674d606be401a21b9806cf2a3c9c4aa1f7fecdbec900efe9294",
+      "successorSha256": "1337ab70cb1ac88579cc53daadcf8af92bfe121958abf937f9374a2b562d8fa2",
+      "reason": "Replace ready-node scavenging with canonical-order, no-leapfrog 24-node progression for BATCH-003+."
+    }
+  },
+  "files": {
+    "scripts/lib/bilingual-final-approval/bfa-progression-v2.mjs": "80953cc58596ff58a47f7802c4d01fa6206c6a899a4a89cba19c8702c8d907f6",
+    "scripts/apply-bfa-prog-c2-decisions.mjs": "dc3c8fa8b67d80c3d5680b0a77cc9713003e0b0f3a8df1d34590971b764b3978",
+    "scripts/bfa-prog-c2-review.mjs": "53d0afe38bf4e2474b4408faeb4a040fb611e13b2d42f2c0e119d09b8d2b114e",
+    "scripts/check-bfa-progression-v2.mjs": "75d5c52306600a58a2c7892d5508c844912f83b9c51feedda7ede2e06ea17bb7",
+    "content/production/bilingual-final-approval/progression-v2/contracts/bfa-prog-0-corpus-reconciliation-v1.json": "609dabcb6d1aeee9723762c3c921ec64cd3fb2a9fce4cb9b595dcc3c6b74dd82",
+    "content/production/bilingual-final-approval/progression-v2/registries/canonical-production-corpus-v2.json": "3278d58d296192e2941a28c06474b242b93b65981da76cf6bd784927c93cddff",
+    "content/production/bilingual-final-approval/progression-v2/registries/canonical-publication-order-v1.json": "5c431217bc787dccd3951445b7c19f1c297fbfbb51da01366e674317cb485903",
+    "content/production/bilingual-final-approval/progression-v2/plans/complete-batch-plan-v2.json": "cc26c1a4a25a36b583aab0f65351b3790bf8edac28f6974e30a8084f93145513",
+    "content/production/bilingual-final-approval/progression-v2/acceptance/bfa-progression-v2-acceptance.json": "dbd6e11437f10bcd3305cdad749fae171e682e7a7ace112da30f41f052cc57e9"
+  },
+  "invariants": [
+    "931_SUCCESSOR_RECORDS_MINUS_18_INACTIVE_EQUALS_913_PRODUCTION_ACTIVE_ARTICLE_NODES",
+    "NO_CROSS_BOOK_BATCH",
+    "MAX_24_NEW_ARTICLES_PER_BATCH",
+    "NO_LATER_READY_NODE_LEAPFROGS_EARLIER_UNRESOLVED_NODE",
+    "PUBLISHED_NODES_ARE_CONSUMED_NEVER_REPUBLISHED",
+    "KAU_R3_HUMAN_ACCEPTED_BINDINGS_REUSED_WITHOUT_RECREATING_MAPPING_AUTHORITY",
+    "MISSING_MAPPING_C2_C3_REMAIN_FAIL_CLOSED",
+    "BFA_FINAL_APPROVAL_REMAINS_EXPLICIT_TL_ONLY"
+  ]
+}

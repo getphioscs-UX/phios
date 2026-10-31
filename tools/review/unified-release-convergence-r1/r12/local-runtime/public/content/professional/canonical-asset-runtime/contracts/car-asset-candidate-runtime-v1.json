@@ -1,0 +1,27 @@
+{
+  "contractCode": "PHI-OS-CAR-ASSET-CANDIDATE-RUNTIME-v1",
+  "version": "1.0.0",
+  "work": "CAR-W10",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "input": [
+    "Canonical Asset Brief",
+    "governed candidate content/specification"
+  ],
+  "output": "Asset Candidate",
+  "requiredLineage": [
+    "assetBriefDigest",
+    "meaningReferences",
+    "knowledgeReferences",
+    "sourceFragmentDigests",
+    "locale",
+    "assetType"
+  ],
+  "invariants": {
+    "candidateIsPublishedAsset": false,
+    "candidateMaySelfApprove": false,
+    "candidateMaySelfPublish": false,
+    "candidateRegistryIsKnowledgeAuthority": false,
+    "deterministicDigestRequired": true
+  }
+}

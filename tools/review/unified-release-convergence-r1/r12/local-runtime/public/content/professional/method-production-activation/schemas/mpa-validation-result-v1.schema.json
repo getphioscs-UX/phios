@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa-validation-result-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "methodCode",
+    "validationVersion",
+    "checks",
+    "decision",
+    "blockingReasons",
+    "productionEligibilityChanged"
+  ],
+  "properties": {
+    "methodCode": {
+      "type": "string"
+    },
+    "validationVersion": {
+      "type": "string"
+    },
+    "checks": {
+      "type": "object"
+    },
+    "decision": {
+      "enum": [
+        "VALIDATION_PASS_PRODUCTION_STILL_BLOCKED",
+        "VALIDATION_BLOCKED"
+      ]
+    },
+    "blockingReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "productionEligibilityChanged": {
+      "const": false
+    }
+  }
+}

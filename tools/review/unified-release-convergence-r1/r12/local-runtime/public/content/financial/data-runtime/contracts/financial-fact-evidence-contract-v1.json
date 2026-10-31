@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W14-FACT-EVIDENCE-CONTRACT-v1.0.0",
+  "work": "FDR-W14",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "evidenceTypes": [
+    "SELF_DECLARATION",
+    "DOCUMENT",
+    "PROFESSIONAL_OBSERVATION",
+    "SYSTEM_IMPORT",
+    "DOCUMENT_EXTRACTION",
+    "EXTERNAL_REFERENCE",
+    "NONE"
+  ],
+  "requiredFields": [
+    "evidenceType",
+    "source",
+    "verifiedAt",
+    "effectiveDate",
+    "documentReference",
+    "confidence"
+  ],
+  "nullableWhenUnavailable": [
+    "verifiedAt",
+    "effectiveDate",
+    "documentReference",
+    "confidence"
+  ],
+  "confidence": {
+    "representation": "0_TO_1_OR_NULL",
+    "rule": "confidence records evidence confidence only; it is not professional judgment"
+  },
+  "rules": {
+    "eachFinancialFactCarriesEvidenceState": true,
+    "documentVerificationDoesNotCreateLegalValidity": true,
+    "evidenceDoesNotCreateProfessionalJudgment": true,
+    "missingEvidenceMustRemainExplicit": true,
+    "aiExtractionIsNotVerificationByItself": true,
+    "evidenceTravelsWithEachAtomicFact": true
+  },
+  "embedding": "Embedded under each financial-fact-contract-v1.json evidence field; not a detached global verification claim."
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-MIR-10-PCA-KPP-HANDOFF-CONTRACT-v2.0.0",
+  "work": "MIR-10D",
+  "status": "ACTIVE_ADVISORY_HANDOFF",
+  "flow": [
+    "Demand Signal",
+    "Aggregation",
+    "Priority/Coverage Analysis",
+    "KPP"
+  ],
+  "required": [
+    "clusterId",
+    "priorityClass",
+    "priorityScore",
+    "gapSummary",
+    "matchedNodes",
+    "evidenceDigest"
+  ],
+  "authority": {
+    "kppMayRead": true,
+    "kppMustReassessUnderOwnPolicy": true,
+    "automaticPlanMutation": false,
+    "automaticRoleAssignment": false,
+    "automaticWaveMutation": false,
+    "pcaMayDecideProduction": false
+  },
+  "preservedKpp": {
+    "freeze": {
+      "path": "content/knowledge/production-planning/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json",
+      "sha256": "85217f79ff21a8db4f292c6abdfa3a100d0ad62a103ef2c2c388cff37d15aa7c"
+    },
+    "pjaHandoff": {
+      "path": "content/knowledge/production-planning/contracts/kpp-pja-handoff-contract-v2.json",
+      "sha256": "2876309cc4dd52119035975490caa14a02d9d5a998d4d12571e0f1f9ac09cb1a"
+    },
+    "carHandoff": {
+      "path": "content/knowledge/production-planning/contracts/kpp-car-handoff-contract-v2.json",
+      "sha256": "1e0485e4b49a6a9de97c722e34fe78e6e4ff033a70d0f05360f006ce57ad47eb"
+    }
+  }
+}

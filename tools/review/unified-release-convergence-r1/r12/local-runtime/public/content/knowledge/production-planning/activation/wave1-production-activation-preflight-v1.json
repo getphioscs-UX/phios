@@ -1,0 +1,52 @@
+{
+  "preflightCode": "PHI-OS-WAVE1-PRODUCTION-ACTIVATION-PREFLIGHT-v1",
+  "preflightVersion": "1.0.0",
+  "status": "BLOCKED_PENDING_C2_HUMAN_FREEZE",
+  "baselineCommit": "1e99186e5bc5fafa705f61cc15ef57370bec07e9",
+  "sourcePilotPlan": "content/knowledge/production-planning/plans/kpp-pilot-production-plan-v2.json",
+  "selectedExecutionScope": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "dispatchTarget": "PJA",
+      "readinessReference": "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json"
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "dispatchTarget": "PJA",
+      "readinessReference": "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json"
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "dispatchTarget": "CAR",
+      "readinessReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json"
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "dispatchTarget": "CAR",
+      "readinessReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json"
+    }
+  ],
+  "gateSnapshot": {
+    "selectedItemCount": 4,
+    "productionReadyCount": 0,
+    "blockedCount": 4,
+    "sharedBlockingCode": "C2_THESIS_BOUNDARY_NOT_FROZEN",
+    "humanProductionDecisionAllowed": false,
+    "productionPlanFreezeAllowed": false,
+    "productionWaveFreezeAllowed": false,
+    "dispatchAllowed": false
+  },
+  "requiredNextAuthority": "PJA_C2_HUMAN_EDITORIAL_FREEZE",
+  "effects": {
+    "humanProductionDecisionCreated": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "pjaCandidateCreated": false,
+    "carAssetCreated": false,
+    "publicationCreated": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-W86-CONTINUITY-MACHINE-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "38f53227d0ce8a0d6980091f84a9511930194c58",
+  "status": "MACHINE_VERIFIED",
+  "requiredCases": 24,
+  "passedCases": 24,
+  "gate": "check:continuity:w86-machine",
+  "scenarios": [
+    "active subscription",
+    "renewal",
+    "grace",
+    "payment failure",
+    "cancel at period end",
+    "canceled",
+    "resume",
+    "plan change",
+    "no Current Reality update",
+    "partial Current Reality update",
+    "major Current Reality contradiction",
+    "timing change",
+    "no meaningful timing change",
+    "Ask quota exhaustion",
+    "reopen past month",
+    "no regeneration of past accepted narrative",
+    "profile new assessment delta",
+    "profile no forced retest",
+    "relationship delta",
+    "relationship Reality contradiction",
+    "relationship timing change",
+    "one-time narrative survives cancel",
+    "continuity context deletion",
+    "suspended access"
+  ],
+  "verified": {
+    "noMonthlyNatalRegeneration": true,
+    "explicitContextSelection": true,
+    "profileNoForcedRetest": true,
+    "relationshipDeltaOnly": true,
+    "pastAcceptedNarrativeStable": true,
+    "serverQuota": true
+  }
+}

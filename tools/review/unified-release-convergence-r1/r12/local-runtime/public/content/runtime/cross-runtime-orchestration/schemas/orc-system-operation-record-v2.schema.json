@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/orc-system-operation-record-v2.schema.json",
+  "title": "PHI OS ORC v2 System Operation Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "operationId",
+    "caseId",
+    "operationClass",
+    "operationCode",
+    "idempotencyKey",
+    "status",
+    "domainAuthorityReference",
+    "orchestrationOnly"
+  ],
+  "properties": {
+    "operationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operationClass": {
+      "type": "string",
+      "enum": [
+        "CASE",
+        "REPORT",
+        "PAYMENT",
+        "PROJECTION",
+        "ACTION",
+        "STATE_TRANSITION"
+      ]
+    },
+    "operationCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "COMMITTED",
+        "REPLAYED_NO_DUPLICATE",
+        "BLOCKED",
+        "FAILED"
+      ]
+    },
+    "domainAuthorityReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "orchestrationOnly": {
+      "const": true
+    }
+  }
+}

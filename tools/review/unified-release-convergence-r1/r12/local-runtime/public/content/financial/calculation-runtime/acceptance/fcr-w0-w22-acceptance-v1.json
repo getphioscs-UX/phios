@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-FCR-W22-ACCEPTANCE-v1.0.0",
+  "phase": "FCR",
+  "work": "FCR-W22",
+  "baselineCommit": "3e4f22c",
+  "status": "ACCEPTED_READY_FOR_V1_FREEZE",
+  "gates": {
+    "deterministic": true,
+    "noRecommendationText": true,
+    "noProfessionalJudgment": true,
+    "noHiddenAssumption": true,
+    "noInventedMissingValue": true,
+    "rangeInputRemainsRange": true,
+    "traceableCalculations": true,
+    "fdrSnapshotOnlyFactAuthority": true,
+    "consumesVersionedAssumptions": true,
+    "scenarioAssumptionBindingExplicit": true
+  },
+  "proof": {
+    "authorityChecker": "scripts/check-fcr-authority.mjs",
+    "contractChecker": "scripts/check-fcr-contracts.mjs",
+    "runtimeChecker": "scripts/check-fcr-runtime.mjs",
+    "scenarioChecker": "scripts/check-fcr-scenarios.mjs",
+    "determinismChecker": "scripts/check-fcr-determinism.mjs",
+    "fdrBoundaryChecker": "scripts/check-fcr-fdr-boundary.mjs",
+    "finalGate": "npm run check:fcr"
+  },
+  "engineCoverage": [
+    "CURRENCY",
+    "NET_WORTH",
+    "LIQUIDITY",
+    "CASH_FLOW",
+    "DEBT",
+    "CONTINGENT_EXPOSURE",
+    "EMERGENCY_RESERVE",
+    "PROTECTION_NEED",
+    "EDUCATION_FUNDING",
+    "RETIREMENT",
+    "INVESTMENT_PROJECTION",
+    "ESTATE_LIQUIDITY",
+    "BUSINESS_WEALTH",
+    "ALLOCATION"
+  ],
+  "fixtureCoverage": [
+    "zero-debt",
+    "negative-cashflow",
+    "range-input",
+    "multi-currency",
+    "large-guarantee",
+    "business-owner",
+    "missing-value",
+    "retirement",
+    "education",
+    "estate"
+  ],
+  "permanentBoundary": "FCR converts canonical FDR facts + explicit versioned assumptions into deterministic numeric projections only; FCR is not analysis, advice or professional judgment."
+}

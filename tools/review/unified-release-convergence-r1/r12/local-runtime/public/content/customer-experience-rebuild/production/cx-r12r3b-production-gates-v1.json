@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-PRODUCTION-GATES-v1.0.0",
+  "work": "CX-R12R3B-W61-W67",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "BLOCKED_EXTERNAL_ACCEPTANCE_REQUIRED",
+  "prerequisites": {
+    "developmentAccepted": true,
+    "humanReview96DualAccepted": false,
+    "customerPublishableCoverageComplete": false,
+    "machineReacceptanceAfterHumanReview": false,
+    "deploymentCandidateCaptured": false,
+    "liveBrowserAccepted": false,
+    "ordinaryReaderFiveMinuteAccepted": false
+  },
+  "controlledProduction": {
+    "AST": {
+      "status": "NOT_PROMOTED",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false
+    },
+    "NUM": {
+      "status": "NOT_PROMOTED",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false
+    },
+    "BZR": {
+      "status": "NOT_PROMOTED",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false
+    },
+    "ZWR": {
+      "status": "NOT_PROMOTED",
+      "minimumHumanCases": "20/24",
+      "criticalFailuresAllowed": 0,
+      "publicRunAllowed": false
+    }
+  },
+  "liveBrowserAcceptance": {
+    "status": "NOT_RUN",
+    "required": [
+      "production URL",
+      "production SHA",
+      "desktop",
+      "375px",
+      "390px",
+      "430px",
+      "768px",
+      "English",
+      "zh-Hans",
+      "graph interactions",
+      "text fallback",
+      "missing birth time",
+      "long Chinese labels",
+      "slow network",
+      "refresh/replay"
+    ],
+    "evidenceRef": null
+  },
+  "ordinaryReaderFiveMinuteTest": {
+    "status": "NOT_RUN",
+    "requiredBeforeProductionFreeze": true,
+    "evidenceRef": null
+  },
+  "productionFreeze": {
+    "status": "BLOCKED",
+    "freezeAllowed": false,
+    "required": [
+      "calculation versions",
+      "projection versions",
+      "meaning versions",
+      "composition versions",
+      "adapter versions",
+      "graph contract version",
+      "customer projection version",
+      "review campaign version",
+      "production SHA",
+      "acceptance evidence"
+    ]
+  },
+  "fullProduction": false
+}

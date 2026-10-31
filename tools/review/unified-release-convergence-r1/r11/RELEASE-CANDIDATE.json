@@ -1,8 +1,8 @@
 {
   "at": "2026-10-31T03:58:13.311Z",
   "status": "LOCAL_INTEGRATED_REVIEW_CANDIDATE_NOT_PREVIEW_READY",
-  "candidateSha": "91ba31bfb6ae3190a8bd6a33d8a825dc7a6a2477",
-  "candidateTree": "2a86ccab4069a723dbfd3ed2a179763adfd4bbc4",
+  "candidateSha": "ee38ff8acc8dcbaaadc4fc356b2c65c4f210fea6",
+  "candidateTree": "390086e03d77b803c8e9a7cdbaec3e01f260ddc2",
   "baseMain": "f3ab1a9602155e3618184adf2b82bed540a7cc7a",
   "production": "0d9089af4d0227f19867777a30eccd2c4515eb88",
   "mainNow": "f3ab1a9602155e3618184adf2b82bed540a7cc7a",
@@ -701,25 +701,23 @@
     "sharedCore": 11,
     "securityWatchdog": 12,
     "functionsBuild": {
-      "status": "PASS_LOCAL_WRANGLER_FUNCTIONS_COMPILE",
-      "candidate": "91ba31bf",
-      "command": "wrangler pages functions build --outdir <isolated evidence>/worker-final --compatibility-date 2026-07-14 --compatibility-flags nodejs_compat",
-      "exitCode": 0,
-      "initialFailure": "21 missing sparse materialization inputs; paths added from same Git source, final compile passes",
-      "outputs": [
-        {
-          "name": "index.js",
-          "bytes": 18573225,
-          "sha256": "3c60445a1d7208f4fb6deb7b183db0c3716c6282b04d3b01fb22e7be77cf4183"
-        }
-      ],
-      "deployed": false,
-      "staticPagesBuild": false,
-      "cloudRuntimeQA": false
+      "status": "PREVIOUS_SHA_PASS_CURRENT_SHA_NOT_RERUN",
+      "previousSha": "91ba31bfb6ae3190a8bd6a33d8a825dc7a6a2477"
     }
   },
   "evidence": {
     "remoteMain": "git ls-remote origin refs/heads/main independently returned f3ab1a9602155e3618184adf2b82bed540a7cc7a",
     "visualManifestUnchanged": true
+  },
+  "jsonImportCorrection": {
+    "previousSha": "91ba31bfb6ae3190a8bd6a33d8a825dc7a6a2477",
+    "reason": "Repository deployability invariant prohibits JSON import attributes in Functions; previous direct-attribute fix withdrawn.",
+    "functions": "ordinary JSON imports only",
+    "node": "existing Node-only JSON hooks before dynamic linking in build-bazi-r9-review.mjs",
+    "rootImportCompat": "PASS npm run check:cloudflare-function-import-compat",
+    "node22RootBuild": "PASS outputs redirected to json-import-correction/root-review-build",
+    "node22IntegrationBuild": "PASS BAZI-NODE22-NO-ATTRIBUTES.json",
+    "githubActions": "NOT_RUN",
+    "fullWorkerCompile": "Previous SHA passed; not rerun for two-line attribute removal. Do not inherit exact-SHA compile evidence."
   }
 }

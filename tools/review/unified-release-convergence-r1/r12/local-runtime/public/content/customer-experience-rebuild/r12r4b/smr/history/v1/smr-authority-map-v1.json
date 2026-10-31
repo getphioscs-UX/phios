@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-SMR-AUTHORITY-MAP-v1.0.0",
+  "upstream": {
+    "customerMethodResult": "functions/customer-projection/method-customer-reading-v2.js#buildAcceptedMethodCustomerResult",
+    "meaning": "functions/canonical-meaning-production/",
+    "interpretation": "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+    "methodCompositionAdmission": "functions/interpretation-runtime/customer-composition-admission-resolver-v1.js",
+    "admittedExecutor": "functions/interpretation-runtime/admitted-customer-interpretation-runtime-v1.js"
+  },
+  "smr": {
+    "eligibility": "functions/single-method-reading/single-method-reading-eligibility.js",
+    "acceptedResultAdapter": "functions/single-method-reading/accepted-method-result-adapter.js",
+    "priority": "functions/single-method-reading/single-method-priority-resolver.js",
+    "themes": "functions/single-method-reading/single-method-theme-clusterer.js",
+    "sections": "functions/single-method-reading/single-method-section-resolver.js",
+    "reportIR": "functions/single-method-reading/single-method-reading-ir.js"
+  },
+  "authorityBoundary": {
+    "acceptedInterpretationUnitsOnly": true,
+    "rawProjectionToCustomerConclusion": false,
+    "rendererCreatesMeaning": false,
+    "crossMethodComposition": false,
+    "productionRequiresNewSmrHumanAcceptance": true
+  }
+}
+

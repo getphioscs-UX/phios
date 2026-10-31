@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/journey-meaning-context-projection-v1.schema.json",
+  "title": "PHI OS Journey Meaning Context Projection v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "projectionCode",
+    "meanings",
+    "knowledgeCoverage",
+    "limitations",
+    "authority",
+    "projectionDigest",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-JOURNEY-MEANING-CONTEXT-PROJECTION-v1.0.0"
+    },
+    "projectionCode": {
+      "type": "string"
+    },
+    "meanings": {
+      "type": "array"
+    },
+    "knowledgeCoverage": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array"
+    },
+    "authority": {
+      "type": "object"
+    },
+    "projectionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  },
+  "additionalProperties": true
+}

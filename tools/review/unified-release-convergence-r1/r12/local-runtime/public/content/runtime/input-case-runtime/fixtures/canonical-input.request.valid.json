@@ -1,0 +1,50 @@
+{
+  "canonicalInputCode": "ICR-INPUT-BIRTH-VALIDATION-0001",
+  "canonicalInputVersion": "1.0.0",
+  "inputType": "BIRTH_DATA",
+  "subjectReference": "SUBJECT-VALIDATION-0001",
+  "sourceChannel": "PROFESSIONAL_INTAKE",
+  "declaredAt": "2026-08-10T06:00:00.000Z",
+  "locale": "en",
+  "payload": {
+    "birthData": {
+      "localDate": "1990-01-15",
+      "localTime": "10:30:00",
+      "precision": "exact",
+      "calendarCode": "PROLEPTIC_GREGORIAN",
+      "placeName": "Kuala Lumpur, Malaysia",
+      "sourceTimezoneText": "Asia/Kuala_Lumpur",
+      "uncertaintyMinutes": 0,
+      "coordinate": {
+        "latitude": 3.139,
+        "longitude": 101.6869,
+        "datum": "WGS84",
+        "sourceMethod": "VERIFIED_GEOCODE"
+      },
+      "subjectConfirmed": true,
+      "evidenceReferences": ["EVIDENCE-BIRTH-CERTIFICATE-VALIDATION-0001"]
+    }
+  },
+  "provenance": {
+    "sourceType": "VERIFIED_DOCUMENT_REFERENCE",
+    "sourceReferences": ["SOURCE-BIRTH-CERTIFICATE-VALIDATION-0001"],
+    "capturedBy": "ICR_OPERATIONAL_INTAKE",
+    "providerUsed": false,
+    "aiUsed": false
+  },
+  "governanceBindings": {
+    "dataType": "REALITY_INPUT_RECORD",
+    "purposeCodes": ["SERVICE_DELIVERY"],
+    "consentClass": "EXPLICIT_CONSENT",
+    "consentReference": "CONSENT-VALIDATION-0001",
+    "persistenceClass": "SERVICE_SCOPED",
+    "retentionClass": "SERVICE_LIFECYCLE",
+    "sensitivityClass": "HIGHLY_SENSITIVE",
+    "deletionState": "ACTIVE",
+    "rdgAuthorityReference": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"
+  },
+  "lineage": {
+    "upstreamIntakeReferences": ["EXTERNAL-READER-INTAKE-VALIDATION-0001"],
+    "previousCanonicalInputReference": null
+  }
+}

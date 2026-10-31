@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-CX-R0-FREEZE-CHECKER-RECONCILIATION-v1.0.0",
+  "work": "CX-R4-PREREQUISITE-REPAIR",
+  "reconciledAtCommit": "d35486b9dfc077020c50bb232ac29e233c01ce92",
+  "recordedAt": "2026-09-03T05:20:00Z",
+  "status": "HISTORICAL_R0_FREEZE_CHECK_SEPARATED_FROM_LIVE_WORKING_TREE_CENSUS",
+  "problem": "The historical CX-R0 checker path was able to invoke the R0 generator in --check mode. That generator rescans the later working tree, so legitimate R3/R4 changes make the frozen R0 surface inventory appear stale.",
+  "resolution": {
+    "r0SnapshotBaseline": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+    "r0ArtifactsRemainFrozen": true,
+    "checkCxR0RegeneratesFromCurrentWorkingTree": false,
+    "liveGuardsRemain": [
+      "scripts/check-cx-no-legacy-css.mjs",
+      "scripts/check-cx-no-legacy-selectors.mjs",
+      "scripts/check-cx-no-old-component-copy.mjs",
+      "scripts/check-cx-no-legacy-route-reference.mjs"
+    ],
+    "intentionalNewR0ReconciliationRequiresExplicitRegeneration": true
+  },
+  "rules": {
+    "phaseFreezeMayBeSilentlyRewritten": false,
+    "laterPhaseMutationIsR0Staleness": false,
+    "liveGuardCoverageRemoved": false
+  }
+}

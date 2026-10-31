@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CUSTOMER-SURFACE-ACTIVATION-AUTHORITY-v1.0.0",
+  "work": "ZIWEI-CX-R1-W17",
+  "integrationBaselineCommit": "402735ec373fba021235187312e4f526ba919807",
+  "semanticBaselineCommit": "d16d757a477e2a9f7e3c7a38e4e5d044ce7e4aaf",
+  "status": "ACTIVE_FINAL_CUSTOMER_SURFACE_AUTHORITY",
+  "predecessorAuthority": "content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-w16-customer-surface-activation-authority-v1.json",
+  "canonicalRoute": "/perspectives/personal/",
+  "canonicalApi": "/api/customer-personal-reality",
+  "sharedHostAuthority": "PPR-R3",
+  "currentRendererId": "ZIWEI_CX_R1_W12_W13_SPECIALIST_WORKSPACE",
+  "proof": {
+    "w23SemanticProduction": {
+      "passed": true,
+      "ref": "content/professional/zi-wei-full-production/acceptance/ziwei-fp-w23-production-cutover-acceptance-v1.json",
+      "expectedStatus": "PRODUCTION_CUTOVER_ALLOWED"
+    },
+    "serverFacadeBound": {
+      "passed": true,
+      "path": "functions/zi-wei-full-production/ziwei-full-production-customer-runtime.js",
+      "schema": "PHI-OS-ZIWEI-CX-R1-FULL-PRODUCTION-CUSTOMER-RUNTIME-v1.0.0"
+    },
+    "customerApiBound": {
+      "passed": true,
+      "path": "functions/api/customer-personal-reality.js",
+      "api": "/api/customer-personal-reality"
+    },
+    "w18RendererBound": {
+      "passed": true,
+      "projection": "functions/personal-reality-product/adapters/ziwei-w18-full-report-projection.js",
+      "renderer": "assets/customer-ui/js/specialists/ziwei/ziwei-specialist-workspace.js"
+    },
+    "w19RendererBound": {
+      "passed": true,
+      "visualType": "ZIWEI_TWELVE_PALACE_CHART",
+      "requiredPalaceCount": 12
+    },
+    "w20TopicsBound": {
+      "passed": true,
+      "visualType": "ZIWEI_TOPIC_READING_INDEX",
+      "requiredTopicCount": 8
+    },
+    "canonicalRouteBound": {
+      "passed": true,
+      "routeAuthorityRef": "content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-customer-route-authority-v1.json",
+      "pageOwnerCount": 1
+    },
+    "legacyZwrPrimaryRendererSuppressed": {
+      "passed": true,
+      "legacyRegistryRef": "content/customer-experience-rebuild/ziwei-cx-r1/legacy/ziwei-cx-r1-legacy-renderer-registry-v2.json",
+      "legacyVisibleOwnerCases": 0
+    },
+    "customerRouteMachineCampaign": {
+      "passed": true,
+      "ref": "content/customer-experience-rebuild/ziwei-cx-r1/campaign/ziwei-cx-r1-w14-real-api-dom-machine-campaign-v1.json",
+      "result": "96/96"
+    },
+    "humanVisualAcceptance": {
+      "passed": true,
+      "ref": "content/customer-experience-rebuild/ziwei-cx-r1/admission/ziwei-cx-r1-w15-human-visual-admission-v1.json",
+      "result": "12/12 ACCEPT"
+    },
+    "printableCustomerProduct": {
+      "passed": true,
+      "contractRef": "content/customer-experience-rebuild/ziwei-cx-r1/contracts/ziwei-cx-r1-w17-print-product-contract-v1.json",
+      "printContract": "PHI-OS-ZIWEI-CX-R1-PRINT-PRODUCT-v1.0.0"
+    },
+    "currentBaselineCustomerRouteReplay": {
+      "passed": true,
+      "ref": "content/customer-experience-rebuild/ziwei-cx-r1/campaign/ziwei-cx-r1-w17-current-route-replay-v1.json",
+      "result": "96/96",
+      "campaignDigest": "fd9e5699f017142029465df0644e8ff6b7682773179c48a2e4c436b1b03afd13"
+    }
+  },
+  "fullProductionVisibleToCustomer": true,
+  "customerSurfaceActivationAllowed": true,
+  "printableCustomerProduct": true,
+  "legacyGenericFallbackAllowed": false,
+  "sharedPersonalRealityMutationRequired": false,
+  "preservedBoundaries": {
+    "fortunePrediction": false,
+    "guaranteedEventPrediction": false,
+    "goodBadScore": false,
+    "overallStrongWeakWinner": false,
+    "medicalDiagnosis": false,
+    "financialAdvice": false,
+    "relationshipCompatibilityScore": false,
+    "silentSchoolMerge": false,
+    "unadmittedStandaloneStarMeaningFallback": false
+  },
+  "currentRouteReplayDigest": "fd9e5699f017142029465df0644e8ff6b7682773179c48a2e4c436b1b03afd13"
+}

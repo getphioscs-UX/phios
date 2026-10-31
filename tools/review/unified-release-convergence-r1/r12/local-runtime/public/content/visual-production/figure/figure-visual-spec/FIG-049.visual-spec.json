@@ -1,0 +1,83 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-PROFESSIONAL-ACTION-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-049-E01",
+      "from": "FIG-049-N01",
+      "relation": "AUTHORIZES",
+      "required": true,
+      "sourceBindingId": "FIG-049-SRC-01",
+      "to": "FIG-049-N02"
+    },
+    {
+      "edgeId": "FIG-049-E02",
+      "from": "FIG-049-N02",
+      "relation": "PRODUCES",
+      "required": true,
+      "sourceBindingId": "FIG-049-SRC-02",
+      "to": "FIG-049-N03"
+    },
+    {
+      "edgeId": "FIG-049-E03",
+      "from": "FIG-049-N03",
+      "relation": "SUPPORTS_REVIEW_OF",
+      "required": true,
+      "sourceBindingId": "FIG-049-SRC-02",
+      "to": "FIG-049-N04"
+    }
+  ],
+  "figureId": "FIG-049",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-049-N01",
+    "FIG-049-N02",
+    "FIG-049-N03",
+    "FIG-049-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Approved Decision",
+      "nodeId": "FIG-049-N01",
+      "required": true,
+      "semanticKey": "APPROVED_DECISION",
+      "sourceBindingId": "FIG-049-SRC-01"
+    },
+    {
+      "displayLabel": "Professional Action",
+      "nodeId": "FIG-049-N02",
+      "required": true,
+      "semanticKey": "PROFESSIONAL_ACTION",
+      "sourceBindingId": "FIG-049-SRC-01"
+    },
+    {
+      "displayLabel": "Implementation Evidence",
+      "nodeId": "FIG-049-N03",
+      "required": true,
+      "semanticKey": "IMPLEMENTATION_EVIDENCE",
+      "sourceBindingId": "FIG-049-SRC-01"
+    },
+    {
+      "displayLabel": "Outcome",
+      "nodeId": "FIG-049-N04",
+      "required": true,
+      "semanticKey": "OUTCOME",
+      "sourceBindingId": "FIG-049-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "PROFESSIONAL-ACTION",
+  "title": "Professional Action"
+}

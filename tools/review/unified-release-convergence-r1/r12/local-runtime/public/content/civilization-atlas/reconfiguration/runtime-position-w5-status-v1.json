@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W5-STATUS-v1.0.0",
+  "version": "1.1.0",
+  "status": "REPRESENTATIVE_SEMANTIC_ALIGNMENT_HUMAN_ACCEPTED__CURRENT_DATA_PENDING",
+  "completed": {
+    "sourceWindows": 48,
+    "bookVTemporalAlignments": 48,
+    "bookVOverlapPositions": 35,
+    "bookVOutsideTimelinePositions": [
+      "RP-01",
+      "RP-02",
+      "RP-03",
+      "RP-04",
+      "RP-05",
+      "RP-06",
+      "RP-07",
+      "RP-08"
+    ],
+    "bookVFutureExcluded": [
+      "RP-45",
+      "RP-46",
+      "RP-47",
+      "RP-48"
+    ],
+    "phase44Boundary": "RP-44",
+    "dossierCorrespondenceRecords": 12,
+    "currentPositionAssignments": 0,
+    "globalSearchRegistered": true,
+    "atlasUiRegistered": true,
+    "askRegistered": true,
+    "representativeSemanticReviewRecords": 11,
+    "representativeSemanticReviewPack": "content/civilization-atlas/reconfiguration/runtime-position-w5-human-review-v1.json",
+    "representativeSemanticReviewHtml": "tools/review/PHI-OS-48-RUNTIME-POSITION-W5-HUMAN-REVIEW.html",
+    "sourceTimeReferenceBoundaryExplicit": true,
+    "representativeSemanticAccepted": 11,
+    "historicalSemanticPrecedentsAccepted": 10,
+    "forwardProjectionBoundaryAccepted": [
+      "RP-45"
+    ],
+    "humanAcceptanceReceipt": "content/civilization-atlas/reconfiguration/runtime-position-w5-human-acceptance-v1.json",
+    "bookVTemporalOverlapPositions": 35,
+    "bookVHistoricalCoveredPositions": 36,
+    "bookVBoundaryPositions": [
+      "RP-44"
+    ]
+  },
+  "authorityBoundary": {
+    "bookV": "Ten reviewed historical positions are human-accepted as structural precedents; all non-reviewed rows remain temporal-navigation crosswalk only. Semantic equivalence, causality and deterministic succession remain prohibited.",
+    "bookVI": "Current entity-to-position correspondence remains UNKNOWN until admitted current evidence and human review.",
+    "future": "RP-45 is human-accepted as the forward-projection boundary only; RP-45–RP-48 remain outside Book V historical admission and reachable positions remain CONDITIONAL_PROJECTION.",
+    "source": "Source phase labels are preserved literally; anomalies are marked rather than corrected."
+  },
+  "pending": [
+    "Semantic admission of non-reviewed Book V historical correspondences remains pending; temporal overlap continues to be the only authority for those rows.",
+    "Admission of current-data evidence before any dossier receives a current runtime-position correspondence.",
+    "Representative dossier UNKNOWN/evidence-gate human review moved to W6 and is ready.",
+    "Browser verification of runtime-position UI, URL state, global search and Ask scope.",
+    "Visual rebind/live verification for FIG_13H and FIG_13I remains separate from W5 semantic/data wiring."
+  ],
+  "checks": {
+    "backbone": "npm run check:runtime-position-48:backbone",
+    "w5": "npm run check:runtime-position-48:w5",
+    "aggregate": "npm run check:runtime-position-48"
+  }
+}

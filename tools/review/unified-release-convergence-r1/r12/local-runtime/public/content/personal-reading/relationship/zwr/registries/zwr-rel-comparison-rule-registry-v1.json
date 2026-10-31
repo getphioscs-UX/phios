@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-REL-COMPARISON-RULE-REGISTRY-v1.0.0",
+  "status": "CANDIDATE_NEUTRAL_COMPARISON_NOT_CUSTOMER_AUTHORITY",
+  "rules": [
+    {
+      "ruleId": "ZWR-REL-SHARED-RELATIONSHIP-FUNCTIONS-v1",
+      "dimension": "RELATIONSHIP_DOMAIN_STAR_FUNCTION_SET",
+      "when": "INTERSECTION_NONEMPTY",
+      "claimClass": "OPEN"
+    },
+    {
+      "ruleId": "ZWR-REL-DISTINCT-RELATIONSHIP-FUNCTIONS-v1",
+      "dimension": "RELATIONSHIP_DOMAIN_STAR_FUNCTION_SET",
+      "when": "SYMMETRIC_DIFFERENCE_NONEMPTY",
+      "claimClass": "OPEN"
+    },
+    {
+      "ruleId": "ZWR-REL-CURRENT-ANNUAL-FOCUS-v1",
+      "dimension": "CURRENT_ANNUAL_FOCUS_DOMAIN",
+      "when": "ALWAYS",
+      "claimClass": "TIMING_CONTEXT"
+    },
+    {
+      "ruleId": "ZWR-REL-CURRENT-DA-XIAN-FOCUS-v1",
+      "dimension": "CURRENT_DA_XIAN_FOCUS_DOMAIN",
+      "when": "ALWAYS",
+      "claimClass": "TIMING_CONTEXT"
+    }
+  ],
+  "semanticBoundary": "These rules compare already-admitted relationship-domain outputs. Shared does not mean compatible; different does not mean conflict. No hidden partner state or relationship verdict is inferred."
+}

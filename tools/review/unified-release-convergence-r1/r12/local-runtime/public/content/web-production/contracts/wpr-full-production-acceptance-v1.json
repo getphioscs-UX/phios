@@ -1,0 +1,37 @@
+{
+  "contractCode": "PHI-OS-WPR-W29-FULL-PRODUCTION-ACCEPTANCE-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W29",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "ACTIVE_FULL_SCOPE_ACCEPTANCE",
+  "scope": [
+    "WPR-W0-W6",
+    "WPR-W7-W10",
+    "WPR-W11-W13",
+    "WPR-W14-W19",
+    "WPR-W20",
+    "WPR-W21",
+    "WPR-W22",
+    "WPR-W23",
+    "WPR-W24-W27",
+    "WPR-W28"
+  ],
+  "requiredTruth": {
+    "fullScopeMustBeEvaluated": true,
+    "limitedProductionMayBeAcceptedWithoutProductionPromotion": true,
+    "externalGateMayNotBeWaived": true,
+    "upstreamAuthorityMayNotBePromotedByWpr": true
+  },
+  "productionPromotionCriteria": [
+    "CURRENT_MAIN_EXACTLY_DEPLOYED",
+    "PUBLIC_ASSET_BASE_URL_VERIFIED",
+    "CUSTOM_DOMAIN_DECISION_VERIFIED_OR_EXPLICITLY_DEFERRED",
+    "PDS_BROWSER_MATRIX_PASSED",
+    "UPSTREAM_AUTHORITY_REQUIREMENTS_SATISFIED_FOR_EACH_PROMOTED_SURFACE"
+  ],
+  "rules": {
+    "fullAcceptanceDoesNotMeanAllSurfacesPromoted": true,
+    "acceptanceRecordsObservedState": true,
+    "wprCreatesNoUpstreamAuthority": true
+  }
+}

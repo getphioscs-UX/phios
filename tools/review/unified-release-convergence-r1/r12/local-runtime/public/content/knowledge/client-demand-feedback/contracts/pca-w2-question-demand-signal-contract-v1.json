@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-PCA-W2-QUESTION-DEMAND-SIGNAL-CONTRACT-v1.0.0",
+  "phase": "PCA",
+  "step": "PCA-W2",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "status": "ACTIVE_NON_AUTHORITATIVE_AGGREGATE_SIGNAL",
+  "object": "QuestionDemandSignal",
+  "requiredFields": [
+    "questionClusterCode",
+    "matchedNodes",
+    "frequency",
+    "coverageGap",
+    "followUpRate",
+    "answerDifficulty",
+    "journeyEscalationRate"
+  ],
+  "privacy": {
+    "aggregationRequired": true,
+    "anonymousRequired": true,
+    "forbiddenFields": [
+      "question",
+      "rawQuestion",
+      "questionText",
+      "prompt",
+      "userId",
+      "accountId",
+      "email",
+      "phone",
+      "sessionId",
+      "caseId",
+      "birthData",
+      "ipAddress"
+    ],
+    "rawQuestionRetentionAllowed": false,
+    "personalAnswerRetentionAllowed": false
+  },
+  "authority": {
+    "createsCanonicalKnowledge": false,
+    "createsCanonicalNode": false,
+    "changesThesis": false,
+    "changesRelationship": false,
+    "publishes": false
+  }
+}

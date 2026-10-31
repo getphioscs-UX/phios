@@ -1,0 +1,37 @@
+{
+  "contractCode": "PHI-OS-ICR-W6-RDG-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W6",
+  "status": "contract_complete",
+  "integrationMode": "REFERENCE_ONLY",
+  "legacyPrivacyAndRetentionStatus": "MOVED_TO_RDG",
+  "referenceRegistry": "content/runtime/input-case-runtime/registries/icr-rdg-reference-registry-v1.json",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/icr-rdg-lifecycle-reference-v1.schema.json",
+  "icrReferences": [
+    "RDG persistence",
+    "RDG consent",
+    "RDG retention",
+    "RDG deletion"
+  ],
+  "icrDoesNotOwn": [
+    "Privacy policy",
+    "Consent grant",
+    "Persistence eligibility",
+    "Retention duration",
+    "Deletion execution",
+    "Tombstone creation",
+    "Legal hold decision"
+  ],
+  "rules": {
+    "rdgAuthorityMustResolve": true,
+    "persistenceDecisionMustBeReferenced": true,
+    "consentMustBeReferenced": true,
+    "retentionClassMustBeReferenced": true,
+    "deletionStateMustBeReferenced": true,
+    "icrMayCopyRdgPolicyEntries": false,
+    "icrMayGrantPersistence": false,
+    "icrMayExtendRetention": false,
+    "icrMayExecuteDeletion": false,
+    "inactiveDeletionStateBlocksRmoHandoff": true
+  }
+}

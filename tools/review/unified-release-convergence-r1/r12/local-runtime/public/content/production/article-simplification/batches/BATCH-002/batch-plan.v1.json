@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "PHI-OS-APS-3-BFA-SUCCESSOR-ARTICLE-BATCH-PLAN-v1.0.0",
+  "work": "APS-3",
+  "status": "READY_FOR_APS_4_CANDIDATE_ORCHESTRATION",
+  "implementationBaselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "contractReference": "content/production/bilingual-final-approval/contracts/bfa-article-readiness-successor-v1.json",
+  "batchCode": "BATCH-002",
+  "createdAt": "2026-08-17T03:09:23.365Z",
+  "request": {
+    "bookCode": "BOOK-1",
+    "locale": "zh-Hans",
+    "requestedCount": 30,
+    "requestedCountMeaning": "maximum_not_quota"
+  },
+  "sourceReadiness": {
+    "work": "BFA-BATCH2-ARTICLE-READINESS-ACTIVATION",
+    "schemaVersion": "PHI-OS-BFA-ARTICLE-ACTIVATION-READINESS-v1.0.0",
+    "readinessDigest": "sha256:0f18ed07160ac6d46a28bed6b6c2faee6227e3a732a13ca308cf56c464e62694",
+    "readyStateConsumed": "ARTICLE_READY",
+    "readyCount": 3
+  },
+  "selection": {
+    "availableReadyCount": 3,
+    "selectedCount": 3,
+    "shortfallCount": 27,
+    "unselectedReadyCount": 0,
+    "downstreamPjaWaveMaximum": 24,
+    "chunks": [
+      {
+        "chunkCode": "CHUNK-001",
+        "maximum": 24,
+        "nodeCodes": [
+          "KN-B1-P1-003",
+          "KN-B1-P4-003",
+          "KN-B1-P4-004"
+        ]
+      }
+    ]
+  },
+  "entries": [
+    {
+      "batchIndex": 1,
+      "nodeCode": "KN-B1-P1-003",
+      "bookCode": "BOOK-1",
+      "partCode": "P1",
+      "locale": "zh-Hans",
+      "title": "为什么现实需要结构",
+      "readinessState": "ARTICLE_READY",
+      "readinessBlockers": [],
+      "readinessAuthorityEvidence": {
+        "canonicalNode": "content/knowledge/registry/nodes.json",
+        "c2FrozenRecord": "content/knowledge/editorial/c2/frozen/kn-b1-p1-003.json",
+        "c2Digest": "sha256:2293cc5e5e54a97cb57d097d86cc4e0a6a1449192e13fdd97140971ad7a9e63e",
+        "c3Assessment": "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json",
+        "c3Digest": "sha256:bcd126774bb38111a62f0b120218cc31bbc9e3bb99b59447d529ef04bc37b991",
+        "humanEditorialResolution": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json",
+        "manuscriptMappingHumanVerified": true,
+        "localeRegistry": "content/knowledge/registry/localized-content.json",
+        "successorContract": "content/production/bilingual-final-approval/contracts/bfa-article-readiness-successor-v1.json",
+        "historicalProductionRolePreserved": true,
+        "successorArticleProjection": "ADDITIVE_OPERATOR_REQUEST"
+      }
+    },
+    {
+      "batchIndex": 2,
+      "nodeCode": "KN-B1-P4-003",
+      "bookCode": "BOOK-1",
+      "partCode": "P4",
+      "locale": "zh-Hans",
+      "title": "初始化状态如何嵌入坐标并形成长期稳定",
+      "readinessState": "ARTICLE_READY",
+      "readinessBlockers": [],
+      "readinessAuthorityEvidence": {
+        "canonicalNode": "content/knowledge/registry/nodes.json",
+        "c2FrozenRecord": "content/knowledge/editorial/c2/frozen/kn-b1-p4-003.json",
+        "c2Digest": "sha256:b4339a6698d193e50c723bb40a96a6e50968f5e7f39874ec1b37965bd6a53cca",
+        "c3Assessment": "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json",
+        "c3Digest": "sha256:3de28b4bca31992c5b7f0fe5676969141de9f91b70c39805271cb97b48d00e45",
+        "humanEditorialResolution": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json",
+        "manuscriptMappingHumanVerified": true,
+        "localeRegistry": "content/knowledge/registry/localized-content.json",
+        "successorContract": "content/production/bilingual-final-approval/contracts/bfa-article-readiness-successor-v1.json",
+        "historicalProductionRolePreserved": true,
+        "successorArticleProjection": "ADDITIVE_OPERATOR_REQUEST"
+      }
+    },
+    {
+      "batchIndex": 3,
+      "nodeCode": "KN-B1-P4-004",
+      "bookCode": "BOOK-1",
+      "partCode": "P4",
+      "locale": "zh-Hans",
+      "title": "为什么身体是分层且有限的现实载体",
+      "readinessState": "ARTICLE_READY",
+      "readinessBlockers": [],
+      "readinessAuthorityEvidence": {
+        "canonicalNode": "content/knowledge/registry/nodes.json",
+        "c2FrozenRecord": "content/knowledge/editorial/c2/frozen/kn-b1-p4-004.json",
+        "c2Digest": "sha256:8505c546d7cb19a4c5348a9a4017b825a5d99e4ac5388afa57d3bb091def3be3",
+        "c3Assessment": "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json",
+        "c3Digest": "sha256:01d73044647f332353084a96cd45d25c2bd0a829fd2e6242f6a77559893bf814",
+        "humanEditorialResolution": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json",
+        "manuscriptMappingHumanVerified": true,
+        "localeRegistry": "content/knowledge/registry/localized-content.json",
+        "successorContract": "content/production/bilingual-final-approval/contracts/bfa-article-readiness-successor-v1.json",
+        "historicalProductionRolePreserved": true,
+        "successorArticleProjection": "ADDITIVE_OPERATOR_REQUEST"
+      }
+    }
+  ],
+  "governance": {
+    "nonAuthoritativeOrchestrationPlan": true,
+    "consumesHumanGovernedC2C3AndMappingOnly": true,
+    "historicalProductionRoleRewritten": false,
+    "createsCanonicalKnowledgeAuthority": false,
+    "createsHumanDecisionAuthority": false,
+    "createsCandidate": false,
+    "invokesProvider": false,
+    "createsPublication": false,
+    "countIsMaximumNotQuota": true
+  },
+  "nextWork": "APS-4_CANDIDATE_ORCHESTRATION",
+  "batchDigest": "sha256:93693c19cb0ed8143f583e377fc64a80bdff18a0c19667e2886b670ffed1e808"
+}

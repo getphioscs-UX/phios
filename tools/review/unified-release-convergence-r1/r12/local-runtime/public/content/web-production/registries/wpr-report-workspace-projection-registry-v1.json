@@ -1,0 +1,44 @@
+{
+  "registryCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-PROJECTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W23",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "status": "canonical_limited_production_authorized_shell",
+  "entries": [
+    {
+      "projectionCode": "PROFESSIONAL_WORKSPACE_AUTHORIZED_SHELL",
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "routeCode": "PROFESSIONAL_WORKSPACE",
+      "authorityReferences": [
+        "PR",
+        "RDG",
+        "FINANCIAL_RUNTIME"
+      ],
+      "projectionState": "LIMITED_PRODUCTION",
+      "authorizedPayloadRequired": true,
+      "wprPrivatePayloadFetchAllowed": false,
+      "professionalJudgmentCreationAllowed": false
+    },
+    {
+      "projectionCode": "PROFESSIONAL_REPORT_VIEWER_AUTHORIZED_SHELL",
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "routeCode": "PROFESSIONAL_REPORTS",
+      "authorityReferences": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "projectionState": "LIMITED_PRODUCTION",
+      "authorizedPayloadRequired": true,
+      "wprPrivatePayloadFetchAllowed": false,
+      "reportGenerationAllowed": false,
+      "reportApprovalAllowed": false
+    }
+  ],
+  "rules": {
+    "absenceOfAuthorizedPayloadShowsUnavailableState": true,
+    "workspaceShellDoesNotGrantProfessionalPermission": true,
+    "reportViewerDoesNotAssembleReport": true,
+    "printingExistingAuthorizedProjectionDoesNotCreateNewReport": true
+  }
+}

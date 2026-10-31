@@ -1,0 +1,48 @@
+{
+  "reconciliationCode": "CAR-W0-EXISTING-ARTICLE-RUNTIME-RECONCILIATION-v1",
+  "version": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W0",
+  "status": "reconciled",
+  "baselineCommit": "f85bf43bf2d3069700008ac2c9f4b0ffab20f47a",
+  "existingRuntime": {
+    "productionManifest": "content/knowledge/production/manifests/production-runtime-manifest.json",
+    "publicationManifest": "content/knowledge/production/manifests/publication-manifest.json",
+    "publishedAuthority": "content/knowledge/public/authority/published-knowledge-authority.json",
+    "articleRenderer": "assets/js/knowledge/article-renderer.js",
+    "candidateRegistry": "content/knowledge/production/registry/candidate-registry.json",
+    "reviewRegistry": "content/knowledge/production/registry/review-registry.json",
+    "approvalRegistry": "content/knowledge/production/registry/approval-registry.json",
+    "publicationRegistry": "content/knowledge/production/registry/publication-registry.json"
+  },
+  "decisions": [
+    {
+      "decision": "reuse_existing_pja",
+      "result": true
+    },
+    {
+      "decision": "reuse_existing_article_renderer",
+      "result": true
+    },
+    {
+      "decision": "register_existing_published_articles_as_future_article_assets_by_reference_only",
+      "result": true
+    },
+    {
+      "decision": "preserve_pja_review_approval_publication_authority",
+      "result": true
+    },
+    {
+      "decision": "car_must_not_mutate_article_body_or_publication_state",
+      "result": true
+    }
+  ],
+  "futureIntegration": {
+    "assetType": "ARTICLE",
+    "authorityMode": "reference_only",
+    "publicationAuthority": "PJA",
+    "contentAuthority": "Published Knowledge Authority",
+    "rendererAuthority": "Existing Article Renderer"
+  },
+  "conclusion": "CAR will reconcile ARTICLE as a referenced asset type. It will not replace or duplicate PJA candidate, review, approval, publication, or rendering authorities."
+}

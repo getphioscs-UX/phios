@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-LIVE-TARGET-CONTEXT-CONTRACT-v1.0.0",
+  "work": "ZIWEI-CX-R1-W2",
+  "integrationBaselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "status": "ENGINEERING_CONTRACT_ACTIVE",
+  "requiredFields": ["targetDate","targetTime","targetTimezone.iana","targetTimezone.utcOffsetAtTarget","source"],
+  "allowedSources": ["DEVICE_DEFAULT","CUSTOMER_EDITED","EXPLICIT_REQUEST"],
+  "presentation": {
+    "visibleToCustomer": true,
+    "customerEditable": true,
+    "deviceTimezoneMaySeedDefault": true
+  },
+  "forbiddenFallbacks": [
+    "BIRTH_TIMEZONE_AS_TARGET_TIMEZONE",
+    "BIRTH_DATE_AS_TARGET_DATE",
+    "BIRTH_TIME_AS_TARGET_TIME",
+    "SERVER_TIMEZONE_GUESS"
+  ],
+  "dynamicAuthority": "functions/zi-wei-dynamic/dynamic-runtime.js"
+}

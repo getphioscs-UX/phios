@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-HDR-PROFESSIONAL-INTEGRATION-v1.0.0",
+  "stageCode": "HDR-W6",
+  "runtimeCode": "HDR_PROFESSIONAL_INTEGRATION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "status": "integration_established_release_blocked_by_current_governance",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "1b71b4f6343b598e43ecdb21e7a5777823163e06"
+  },
+  "input": {
+    "runtimeCode": "SHARED_INTERPRETATION_RUNTIME",
+    "schemaVersion": "PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0",
+    "candidateStatus": "candidate",
+    "allowedProjectionTypes": [
+      "GATE",
+      "CHANNEL",
+      "CENTER",
+      "AUTHORITY",
+      "PROFILE"
+    ]
+  },
+  "methodEligibilityGate": {
+    "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+    "allRequired": true,
+    "requiredFields": [
+      "productionReady",
+      "professionalReady",
+      "validationPassed",
+      "regressionPassed",
+      "commercialLicensePassed",
+      "sharedRuntimeImplemented",
+      "professionalBoundaryPassed",
+      "professionalWorkflowPassed"
+    ],
+    "currentHumanDesignReleaseAllowed": false
+  },
+  "professionalEligibilityGate": {
+    "decisionContract": "phi-os.professional-eligibility-decision.v1",
+    "requiredCapabilityCode": "HUMAN_DESIGN_PROFESSIONAL_REVIEW",
+    "activeAssignmentRequired": true,
+    "activeConsentRequired": true,
+    "boundaryAcknowledgementRequired": true,
+    "workspaceAccessRequired": true
+  },
+  "professionalAuthority": {
+    "runtimeCode": "SHARED_PROFESSIONAL_RUNTIME",
+    "parallelRuntimeAllowed": false,
+    "requiredSequence": [
+      "PROFESSIONAL_REVIEW",
+      "BOUNDARY_VALIDATION",
+      "DELIVERABLE_ASSEMBLY",
+      "PROFESSIONAL_SIGNATURE",
+      "RELEASE"
+    ]
+  },
+  "boundaries": {
+    "methodEligibilityCreatesReleaseAuthority": false,
+    "professionalEligibilityCreatesReleaseAuthority": false,
+    "interpretationCandidateMutationAllowed": false,
+    "directReleaseAllowed": false,
+    "productionEligibilityChanged": false
+  },
+  "currentGovernanceResult": {
+    "productionReady": false,
+    "professionalReady": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "releaseStatus": "blocked"
+  },
+  "nextStage": "HDR-W7"
+}

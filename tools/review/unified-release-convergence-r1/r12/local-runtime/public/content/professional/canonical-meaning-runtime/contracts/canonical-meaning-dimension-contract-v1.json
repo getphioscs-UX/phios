@@ -1,0 +1,30 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-MEANING-DIMENSION-v1.0.0",
+  "work": "CM-W4",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "authority": {
+    "dimensionAuthority": "canonical_meaning_dimension_registry",
+    "familyAuthority": "external_read_only",
+    "meaningCodeAuthority": "external_read_only",
+    "methodMappingAuthority": "reserved_for_cm_w6"
+  },
+  "rules": {
+    "meaningMustNotBeSingleLabel": true,
+    "familySpecificDimensionSetsRequired": true,
+    "dimensionRegistrationDoesNotPopulateMeaningCode": true,
+    "dimensionValueMustBeDeclaredByVersionedMeaningRecord": true,
+    "methodProjectionMayNotDefineDimensionSemantics": true,
+    "unknownFreeTextDimensionForbidden": true
+  },
+  "invariants": {
+    "registryLed": true,
+    "deterministic": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "methodMappingCreated": false,
+    "productionAuthorityCreated": false,
+    "khW4G6SemanticRuntimeFreezeUnchanged": true
+  }
+}

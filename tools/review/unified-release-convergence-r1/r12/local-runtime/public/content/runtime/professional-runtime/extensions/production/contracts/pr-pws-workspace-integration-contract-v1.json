@@ -1,0 +1,63 @@
+{
+  "contractCode": "PHI-OS-PR-E5-PWS-WORKSPACE-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extension": "PR-E5",
+  "status": "HANDOFF_INTENT_READY_PWS_EXECUTION_EXTERNAL",
+  "pwsAuthorities": {
+    "assignment": "runtime/assignment",
+    "deliverable": "runtime/deliverable",
+    "workspace": "Professional Workspace legacy contract projection"
+  },
+  "requiredBindings": [
+    "workspaceReference",
+    "assignmentReference",
+    "customerReference",
+    "professionalReference",
+    "serviceReference",
+    "deliverableReference",
+    "currentDeliverableState"
+  ],
+  "rules": {
+    "prCreatesPwsAssignment": false,
+    "prCreatesPwsDeliverable": false,
+    "prMutatesPwsWorkspace": false,
+    "prExecutesPwsOperation": false,
+    "prPersistsPwsState": false,
+    "existingDeliverableRequired": true,
+    "pwsCanonicalStateMustMatchDecisionStage": true,
+    "pwsOperationMustBeCanonical": true,
+    "idempotencyKeyRequired": true,
+    "contractOnlyPersistenceRemainsExplicit": true
+  },
+  "stageProjection": {
+    "DRAFT": {
+      "requiredPwsState": "draft",
+      "operation": null,
+      "handoff": "READY_FOR_WORKSPACE_DRAFT_PROJECTION"
+    },
+    "REVIEWED": {
+      "requiredPwsState": "review_required",
+      "operation": "deliverable.freeze",
+      "targetState": "approved",
+      "handoff": "READY_FOR_PWS_DELIVERABLE_FREEZE"
+    },
+    "APPROVED": {
+      "requiredPwsState": "approved",
+      "operation": "deliverable.sign",
+      "targetState": "signed",
+      "handoff": "READY_FOR_PWS_DELIVERABLE_SIGN"
+    },
+    "SIGNED": {
+      "requiredPwsState": "signed",
+      "operation": "deliverable.release",
+      "targetState": "released",
+      "handoff": "READY_FOR_PWS_DELIVERABLE_RELEASE"
+    },
+    "RELEASED": {
+      "requiredPwsState": "released",
+      "operation": null,
+      "handoff": "PWS_DELIVERABLE_RELEASE_ACKNOWLEDGED"
+    }
+  }
+}

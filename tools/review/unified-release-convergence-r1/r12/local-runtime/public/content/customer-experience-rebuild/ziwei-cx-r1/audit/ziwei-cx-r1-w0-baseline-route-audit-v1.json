@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-W0-BASELINE-ROUTE-AUDIT-v1.0.0",
+  "work": "ZIWEI-CX-R1-W0",
+  "integrationBaselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "ziweiFullProductionSemanticBaselineCommit": "d16d757a477e2a9f7e3c7a38e4e5d044ce7e4aaf",
+  "status": "AUDIT_COMPLETE_ROUTE_AUTHORITY_RECONCILED",
+  "baselineReconciliation": {
+    "latestMainAtWorkStart": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+    "latestMainMessage": "Update package.json",
+    "semanticBaselineRole": "UNIQUE_ZIWEI_FULL_PRODUCTION_CUTOVER_BASELINE",
+    "integrationBaselineRole": "CURRENT_DESCENDANT_CHECKOUT_FOR_CUSTOMER_SURFACE_BINDING",
+    "commitRelationship": "343773f IS 5 COMMITS AHEAD OF d16d757 AND DESCENDS FROM IT",
+    "semanticBaselineReplacedByLaterZiweiSemanticBaseline": false,
+    "archive": {
+      "name": "tools.zip",
+      "gitDirectoryPresent": false,
+      "userDeclaredAlignedToIntegrationBaseline": true,
+      "verifiedCurrentMainBlobMatches": [
+        {
+          "path": "_redirects",
+          "gitBlobSha": "2eeaaaa0bf755ffcf6eb363700cd7c7e5fcb4b6c"
+        },
+        {
+          "path": "package.json",
+          "gitBlobSha": "e91a0bb6224111a472f4138b6fed915ddd3699b5"
+        },
+        {
+          "path": "functions/api/customer-personal-reality.js",
+          "gitBlobSha": "2ac376ff08323f731c0fd5d3ccc07849bf527f4a"
+        }
+      ]
+    },
+    "preExistingDriftFound": [
+      {
+        "code": "ZIWEI_W22_V2_AUTHORITY_REFERENCE_MISSING",
+        "referenceOwner": "scripts/check-ziwei-fp-w22.mjs",
+        "missingPath": "content/professional/zi-wei-full-production/authority/ziwei-fp-w22-human-review-authority-v2.json",
+        "effect": "check:ziwei-fp-w22 references a file absent from both current main and aligned archive",
+        "reconciliation": "ADD_MISSING_CURRENT_W22_AUTHORITY_WITHOUT_MUTATING_HISTORICAL_V1"
+      },
+      {
+        "code": "ZIWEI_W23_V2_AUTHORITY_REFERENCE_MISSING",
+        "referenceOwner": "content/professional/zi-wei-full-production/admission/ziwei-fp-w23-full-production-cutover-v1.json",
+        "missingPath": "content/professional/zi-wei-full-production/authority/ziwei-fp-w23-production-cutover-authority-v2.json",
+        "effect": "check:ziwei-fp-w23 references a file absent from both current main and aligned archive",
+        "reconciliation": "ADD_MISSING_CURRENT_W23_AUTHORITY_WITHOUT_MUTATING_HISTORICAL_V1"
+      }
+    ]
+  },
+  "routeAudit": {
+    "canonicalCustomerRoute": "/perspectives/personal/",
+    "canonicalHtml": "perspectives/personal/index.html",
+    "canonicalApi": "/api/customer-personal-reality",
+    "canonicalApiModule": "functions/api/customer-personal-reality.js",
+    "canonicalClient": "assets/customer-ui/js/surfaces/personal-reality.js",
+    "customerPageOwnerCount": 1,
+    "customerPageOwner": "PPR-C1_CANONICAL_PERSONAL_SURFACE",
+    "redirectedLegacyRoutes": [
+      "/personal-runtime",
+      "/personal-runtime.html",
+      "/professional/personal-runtime",
+      "/professional/personal-runtime/"
+    ]
+  },
+  "finding": "Zi Wei W18-W23 production products exist upstream, but the canonical customer API did not consume the full-production W18/W19/W20 product before ZIWEI-CX-R1."
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "PHI-OS-BZR-SOLAR-CALENDAR-RUNTIME-v1.0.0",
+  "stageCode": "BZR-W1",
+  "runtimeCode": "BZR_SOLAR_CALENDAR_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "8f7a5b41d36ecc3e1b25ab1dbad2f8e19a87e8e2"
+  },
+  "input": {
+    "requiredRecordTypes": [
+      "BIRTH_RECORD",
+      "COORDINATE"
+    ],
+    "birthTimeKnownRequired": true,
+    "authority": "SHARED_DATA_AUTHORITY"
+  },
+  "authorities": {
+    "timezone": {
+      "authorityCode": "IANA_TZDB",
+      "versionRequired": true,
+      "licenseStatus": "review_required"
+    },
+    "trueSolarTime": {
+      "algorithmCode": "PHI_OS_TRUE_SOLAR_TIME",
+      "internal": true
+    },
+    "solarTerms": {
+      "engineCode": "ASTRONOMY_ENGINE_JS",
+      "licenseCode": "MIT",
+      "noticeRequired": true
+    },
+    "policy": {
+      "policyCode": "PHI_OS_BAZI_POLICY_V1",
+      "runtimeMayOverride": false
+    }
+  },
+  "scope": {
+    "preservesRecordedCivilTime": true,
+    "createsUtcInstant": true,
+    "createsTimezoneDstContext": true,
+    "createsTrueSolarTime": true,
+    "createsLiChunBoundary": true,
+    "createsTwelveJieBoundaries": true,
+    "createsStem": false,
+    "createsBranch": false,
+    "createsPillar": false,
+    "createsLuckCycle": false,
+    "createsProjection": false
+  },
+  "calendarPolicies": {
+    "yearBoundary": "exact_li_chun_instant",
+    "monthBoundary": "exact_twelve_jie_instants",
+    "dayBoundaryTimeBasis": "true_solar_time",
+    "dayBoundaryLocalTime": "00:00",
+    "fixedGregorianBoundaryAllowed": false,
+    "fixedDateLiChunAllowed": false,
+    "civilTimeSubstitutionAllowed": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "commercialLicensePassed": false,
+    "dependencyLicenseReviewComplete": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "BZR-W2"
+}

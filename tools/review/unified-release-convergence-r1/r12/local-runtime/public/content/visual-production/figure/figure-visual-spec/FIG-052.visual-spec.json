@@ -1,0 +1,113 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "PRIVACY_DATA_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-052-N01",
+        "FIG-052-N02",
+        "FIG-052-N03",
+        "FIG-052-N04",
+        "FIG-052-N05"
+      ],
+      "mustExclude": [],
+      "sourceBindingId": "FIG-052-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-PRIVACY-DATA-BOUNDARY-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-052-E01",
+      "from": "FIG-052-N01",
+      "relation": "REQUIRES",
+      "required": true,
+      "sourceBindingId": "FIG-052-SRC-01",
+      "to": "FIG-052-N02"
+    },
+    {
+      "edgeId": "FIG-052-E02",
+      "from": "FIG-052-N02",
+      "relation": "LIMITS",
+      "required": true,
+      "sourceBindingId": "FIG-052-SRC-02",
+      "to": "FIG-052-N03"
+    },
+    {
+      "edgeId": "FIG-052-E03",
+      "from": "FIG-052-N03",
+      "relation": "SUBJECT_TO",
+      "required": true,
+      "sourceBindingId": "FIG-052-SRC-02",
+      "to": "FIG-052-N04"
+    },
+    {
+      "edgeId": "FIG-052-E04",
+      "from": "FIG-052-N04",
+      "relation": "ENDS_BY_POLICY",
+      "required": true,
+      "sourceBindingId": "FIG-052-SRC-02",
+      "to": "FIG-052-N05"
+    }
+  ],
+  "figureId": "FIG-052",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-052-N01",
+    "FIG-052-N02",
+    "FIG-052-N03",
+    "FIG-052-N04",
+    "FIG-052-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Personal Data",
+      "nodeId": "FIG-052-N01",
+      "required": true,
+      "semanticKey": "PERSONAL_DATA",
+      "sourceBindingId": "FIG-052-SRC-01"
+    },
+    {
+      "displayLabel": "Purpose + Consent",
+      "nodeId": "FIG-052-N02",
+      "required": true,
+      "semanticKey": "PURPOSE_CONSENT",
+      "sourceBindingId": "FIG-052-SRC-01"
+    },
+    {
+      "displayLabel": "Authorized Access",
+      "nodeId": "FIG-052-N03",
+      "required": true,
+      "semanticKey": "AUTHORIZED_ACCESS",
+      "sourceBindingId": "FIG-052-SRC-01"
+    },
+    {
+      "displayLabel": "Retention",
+      "nodeId": "FIG-052-N04",
+      "required": true,
+      "semanticKey": "RETENTION",
+      "sourceBindingId": "FIG-052-SRC-01"
+    },
+    {
+      "displayLabel": "Deletion / Rights",
+      "nodeId": "FIG-052-N05",
+      "required": true,
+      "semanticKey": "DELETION",
+      "sourceBindingId": "FIG-052-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "PRIVACY-DATA-BOUNDARY",
+  "title": "Privacy / Data Boundary"
+}

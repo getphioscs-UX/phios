@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa-reference-fixture-corpus-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "work",
+    "baselineCommit",
+    "corpusVersion",
+    "status",
+    "methods",
+    "requiredFixtureTypes",
+    "requiredCoverage",
+    "fixtures",
+    "rules"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-W12-REFERENCE-FIXTURE-CORPUS-v1.0.0"
+    },
+    "work": {
+      "const": "MPA-W12"
+    },
+    "baselineCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "corpusVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "type": "string"
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 4
+    },
+    "requiredFixtureTypes": {
+      "type": "array",
+      "minItems": 4
+    },
+    "requiredCoverage": {
+      "type": "array"
+    },
+    "fixtures": {
+      "type": "array",
+      "minItems": 16,
+      "items": {
+        "type": "object",
+        "required": [
+          "fixtureId",
+          "methodCode",
+          "fixtureType",
+          "coverage",
+          "input",
+          "expected",
+          "authorityReferences",
+          "productionEvidence"
+        ]
+      }
+    },
+    "rules": {
+      "type": "object"
+    }
+  }
+}

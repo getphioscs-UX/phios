@@ -1,0 +1,217 @@
+{
+  "workId": "PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT",
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-01",
+  "baselineCommit": "611ddf2dd7e4bdced6358879a5bdb9656c0f0286",
+  "status": "ACCEPTED_FROZEN_REFERENCE",
+  "BAZI_CONTENT_STATE": "ACCEPT",
+  "BAZI_CONTENT_FROZEN": true,
+  "BAZI_REFERENCE_IMPLEMENTATION": true,
+  "referenceDesignation": "PHI OS REPORT PRODUCTION REFERENCE IMPLEMENTATION",
+  "designationScope": "BaZi remains the accepted content/physical-composition reference; PHI OS Report Print Shell V2 is the shared rendering/print/low-CPU reference. Method semantics, section architectures, page counts and visual identities remain method-specific.",
+  "humanDecision": "ACCEPT",
+  "allowedDecisions": [
+    "ACCEPT",
+    "REJECT"
+  ],
+  "acceptedSectionReceiptScope": "S02-S10; verified existing owner receipts are preserved; not a new full-report acceptance",
+  "allowedChanges": [
+    "concrete regression repair",
+    "subject-binding defect repair"
+  ],
+  "prohibitedChanges": [
+    "mass narrative rewrite",
+    "section architecture redesign",
+    "10 Section Master redesign",
+    "T2/T3 architecture restart",
+    "reopen accepted S01–S10 copy",
+    "reopen Career, Wealth or Guidance",
+    "reopen Composition R1"
+  ],
+  "owners": [
+    {
+      "owner": "subject",
+      "path": "functions/canonical-presentation-runtime/report-cover-subject.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_AS_IS",
+      "notes": "createReportSubjectPresentation / assertReportSubjectBinding; trusted identity and semantic fingerprints must match."
+    },
+    {
+      "owner": "calculation",
+      "path": "functions/bzr-full-production/bazi-chart-runtime.js",
+      "classification": "METHOD_SPECIFIC_BAZI",
+      "reuse": "BAZI_ONLY",
+      "notes": "BaZi chart owner; Zi Wei keeps zi-wei-runtime calculation authority."
+    },
+    {
+      "owner": "claim",
+      "path": "functions/personal-reading/narrative/bazi-explanatory-authority.js",
+      "classification": "METHOD_SPECIFIC_BAZI",
+      "reuse": "BAZI_ONLY",
+      "notes": "BaZi claim semantics; reuse shape, never wording."
+    },
+    {
+      "owner": "Publication IR",
+      "path": "functions/personal-reading/narrative/report-publication-ir-v2.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_WITH_ADAPTER",
+      "notes": "Claim links and evidence constraints need a Zi Wei adapter."
+    },
+    {
+      "owner": "narrative",
+      "path": "functions/personal-reading/bazi-section-publication.js",
+      "classification": "METHOD_SPECIFIC_BAZI",
+      "reuse": "BAZI_ONLY",
+      "notes": "Accepted-copy routing and section narratives remain BaZi-owned."
+    },
+    {
+      "owner": "locale",
+      "path": "functions/personal-reading/narrative/report-locale-parity.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_WITH_ADAPTER",
+      "notes": "Shared parity checks; method terminology must be independently defined."
+    },
+    {
+      "owner": "visual",
+      "path": "functions/canonical-presentation-runtime/bazi-publication-visuals.js",
+      "classification": "METHOD_SPECIFIC_BAZI",
+      "reuse": "BAZI_ONLY",
+      "notes": "BaZi dynamic structures are not Zi Wei palace diagrams."
+    },
+    {
+      "owner": "page composer",
+      "path": "functions/canonical-presentation-runtime/report-section-contract.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "SHOULD_GENERALIZE_LATER",
+      "notes": "Shared pagination/layout helpers coexist with BAZI_SECTION_REGISTRY; do not copy the ten-section assumption."
+    },
+    {
+      "owner": "snapshot",
+      "path": "functions/canonical-presentation-runtime/visual-report-page-runtime.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_WITH_ADAPTER",
+      "notes": "assemblePublicationSnapshot; supply method pages, locale, time and internal evidence."
+    },
+    {
+      "owner": "release",
+      "path": "functions/canonical-presentation-runtime/report-release-runtime.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_AS_IS",
+      "notes": "Release assertions and channels; existing authority is preserved."
+    },
+    {
+      "owner": "customer renderer",
+      "path": "assets/customer-ui/js/personal-products/publication-report-pages.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_WITH_ADAPTER",
+      "notes": "renderPublicationReport and method skins; BaZi frozen intro remains method-specific."
+    },
+    {
+      "owner": "review builder",
+      "path": "scripts/build-bazi-full-report-accepted-publication-review.mjs",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_WITH_ADAPTER",
+      "notes": "Existing builder extended for full customer order; fixture and composer remain method-specific."
+    },
+    {
+      "owner": "commerce mapping",
+      "path": "functions/report-delivery/report-delivery-contract.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_AS_IS",
+      "notes": "Existing eight-method mapping; pilot and production admission remain distinct."
+    },
+    {
+      "owner": "entitlement",
+      "path": "functions/report-delivery/report-access-resolver.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_AS_IS",
+      "notes": "Existing account purchase owner; full delivery limited by pilot/environment and release gates."
+    },
+    {
+      "owner": "account material",
+      "path": "functions/account/released-report-material-store.js",
+      "classification": "SHARED_REPORT_INFRASTRUCTURE",
+      "reuse": "REUSABLE_AS_IS",
+      "notes": "Persist released material without regenerating on refresh."
+    }
+  ],
+  "nextGate": "Independent production admission and commerce E2E; frozen historical sample remains unbound.",
+  "productionAdmissionGranted": false,
+  "BAZI_EDITORIAL": "ACCEPT",
+  "BAZI_COMPOSITION": "ACCEPT",
+  "BAZI_SUBJECT_BINDING": "CONTROLLED_PROOF_PASS",
+  "BAZI_PRODUCTION_ADMISSION": "PENDING",
+  "compositionReviewRef": "tools/review/BAZI-FULL-REPORT-COMPOSITION-R1-REVIEW.html",
+  "decisionSource": "Explicit user decision in current conversation, 2026-10-01",
+  "commerceE2E": "NOT_PROVEN",
+  "historicalSubjectBindingVerified": false,
+  "controlledSubjectProof": "docs/acceptance/bazi-paid-report/controlled-subject-r1/proof.json",
+  "controlledSubjectValidation": "docs/acceptance/bazi-paid-report/controlled-subject-r1/validation.json",
+  "physicalCompositionContract": "content/reports/shared/physical-composition-contract-r1.json",
+  "sharedPrintShell": {
+    "version": "PHI-OS-REPORT-PRINT-SHELL-V2",
+    "authority": "ZIWEI_QA_PRINT_SUCCESSOR_2026_10_02",
+    "status": "EXTRACTED_SHARED_OWNER_PENDING_BAZI_MIGRATION",
+    "referenceMethod": "ZWR",
+    "contract": {
+      "coordinateSystem": "A4_210MM_X_297MM_SINGLE_CONTRACT",
+      "screenPrintParity": "SAME_DOM_NO_SECOND_PRINT_LAYOUT",
+      "staticEditorialPages": "FULL_PAGE_WEBP",
+      "sectionMaster": "METHOD_SPECIFIC_WEBP_PLUS_DYNAMIC_OVERLAY",
+      "bodyPages": "METHOD_BODY_WEBP_PLUS_DYNAMIC_DATA_AND_NARRATIVE",
+      "browserFit": "ONE_PASS_FIXED_A4",
+      "customerOpen": "IMMUTABLE_HTML_NO_REGENERATION",
+      "pdf": "CUSTOMER_BROWSER_PRINT_SAVE_PDF",
+      "serverPdfGeneration": "NOT_REQUIRED_ON_CUSTOMER_HOT_PATH"
+    },
+    "sharedPaths": [
+      "assets/customer-ui/surfaces/report-print-shell-v2.css",
+      "assets/customer-ui/js/personal-products/publication-report-pages.js"
+    ],
+    "rolloutOrder": [
+      "BZR",
+      "ZWR",
+      "AST",
+      "NUM",
+      "PROFILE",
+      "HD",
+      "ECR",
+      "CROSS"
+    ],
+    "methodSkinExample": "assets/customer-ui/surfaces/ziwei-print-shell-v2.css",
+    "buildIntegration": "scripts/build-method-report-renderer.mjs",
+    "extraction": {
+      "sharedOwns": [
+        "A4 geometry",
+        "screen/print parity",
+        "static full-page assets",
+        "section master placement",
+        "body background placement",
+        "page breaks",
+        "print color adjustment"
+      ],
+      "methodOwns": [
+        "palette",
+        "typography",
+        "section artwork mapping",
+        "method evidence layout",
+        "method navigation/chart styling"
+      ],
+      "sharedMethodTokenForbidden": true
+    }
+  },
+  "BAZI_PRINT_SHELL_MIGRATION": "IN_PROGRESS_READY_FOR_REVIEW",
+  "ZIWEI_PRINT_SHELL_V2": "ACCEPT",
+  "BAZI_PRINT_SHELL_V2": {
+    "status": "READY_FOR_VISUAL_PRINT_REVIEW",
+    "content": "FROZEN_UNCHANGED",
+    "compositionR1": "FROZEN_UNCHANGED",
+    "targetPages": {
+      "zh-Hans": 38,
+      "en": 38
+    },
+    "reviewManifest": "docs/acceptance/bazi-paid-report/print-shell-v2/review-manifest.json",
+    "humanDecision": null
+  },
+  "ZIWEI_CONTENT_DEPTH_R3": "READY_FOR_HUMAN_REVIEW"
+}

@@ -1,0 +1,56 @@
+{
+  "contractCode": "PHI-OS-ALR-W9-CAPABILITY-GAP-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W9",
+  "status": "active",
+  "productionStatus": "deterministic_semantic_evaluation_only",
+  "semanticAuthority": "ALR",
+  "requiredInputFields": ["targetCapabilityCode", "currentCapabilityStates", "evidenceDecisions"],
+  "gapTypes": [
+    "PREREQUISITE_GAP",
+    "STATE_GAP",
+    "EVIDENCE_GAP",
+    "MAINTENANCE_GAP",
+    "DISPUTED_GAP",
+    "UNKNOWN_GAP"
+  ],
+  "gapPriority": [
+    "DISPUTED_GAP",
+    "UNKNOWN_GAP",
+    "PREREQUISITE_GAP",
+    "MAINTENANCE_GAP",
+    "EVIDENCE_GAP",
+    "STATE_GAP"
+  ],
+  "acceptedEvidenceDecisions": [
+    "READY_FOR_CAPABILITY_STATE_REVIEW",
+    "INSUFFICIENT_EVIDENCE",
+    "INELIGIBLE_EVIDENCE",
+    "DISPUTED",
+    "UNKNOWN",
+    "DENY_ALR_AUTHORITY"
+  ],
+  "supportedState": "SUPPORTED",
+  "forbiddenInputFields": [
+    "learnerReference",
+    "accountReference",
+    "subjectReference",
+    "credentialState",
+    "entitlementState",
+    "professionalEligibility",
+    "professionalJudgment"
+  ],
+  "rules": {
+    "gapIsDeficitJudgment": false,
+    "gapDeterminationIsRecommendation": false,
+    "gapMayAutoAssignLearning": false,
+    "gapMayGrantOrRevokeCredential": false,
+    "gapMayGrantOrRevokeEntitlement": false,
+    "gapMayDetermineProfessionalReadiness": false,
+    "unknownAndDisputedRemainExplicit": true,
+    "allDirectPrerequisitesRequired": true,
+    "deterministicPriorityRequired": true,
+    "evaluationPersistsLearnerData": false,
+    "unknownCapabilityOrStateFailsClosed": true
+  }
+}

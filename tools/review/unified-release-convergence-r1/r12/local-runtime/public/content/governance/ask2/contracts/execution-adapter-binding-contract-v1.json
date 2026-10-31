@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-ASK2-EXECUTION-ADAPTER-BINDING-v1.0.0",
+  "work": "ASK2-W4",
+  "baselineCommit": "cb396cc5b8ab75679e278e47a2a78cb7489f3b70",
+  "rules": {
+    "runtimeExecutionMustUseGovernedAdapter": true,
+    "missingRuntimeInputReturnsInputRequired": true,
+    "precomputedResultRequiresRuntimeFirstProvenance": true,
+    "modelMayCalculate": false,
+    "silentNatalFallbackForUnavailableDynamic": false,
+    "rawWebResultMayEnterRuntime": false
+  },
+  "boundPublicEndpoints": {
+    "AST.NATAL": "/api/ast-structural-execute",
+    "AST.CURRENT_DYNAMIC": "/api/ast-transit-execute",
+    "BZR.TEMPORAL": "/api/bzr-temporal-execute",
+    "ZWR.NATAL": "/api/zi-wei-execute",
+    "ZWR.DYNAMIC_DOMAIN": "/api/zi-wei-dynamic-execute",
+    "NUM": "/api/method-execute"
+  },
+  "nonEndpointAdapters": ["HDR.OPERATING_READING", "RELATIONAL_RUNTIME", "CCR", "CWA"],
+  "status": "EXECUTION_ADAPTER_BINDING_ACTIVE"
+}

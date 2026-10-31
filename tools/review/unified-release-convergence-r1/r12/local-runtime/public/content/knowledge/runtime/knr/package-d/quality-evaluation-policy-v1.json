@@ -1,0 +1,31 @@
+{
+  "policyCode": "KNR-W10-QUALITY-EVALUATION",
+  "version": "1.0.0",
+  "publishedOnly": true,
+  "dimensions": [
+    "authority_integrity",
+    "retrieval_integrity",
+    "locale_integrity",
+    "routing_quality",
+    "projection_integrity",
+    "reading_path_integrity",
+    "public_experience_readiness"
+  ],
+  "severityOrder": [
+    "info",
+    "warning",
+    "error",
+    "critical"
+  ],
+  "thresholds": {
+    "ready": 90,
+    "attention_required": 70,
+    "blocked": 0
+  },
+  "localeRules": {
+    "en": "English-facing title, summary and heading fragments must not contain substantial CJK text.",
+    "zh-Hans": "Chinese-facing content may contain controlled Latin terminology."
+  },
+  "providerAllowed": false,
+  "automaticRepairAllowed": false
+}

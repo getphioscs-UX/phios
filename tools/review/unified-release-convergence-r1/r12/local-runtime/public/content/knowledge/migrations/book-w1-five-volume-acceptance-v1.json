@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-W1-FIVE-VOLUME-ACCEPTANCE-v1.0.0",
+  "phase": "BOOK-W1",
+  "step": "BOOK-W1G",
+  "status": "HUMAN_APPROVED_FIVE_VOLUME_FREEZE",
+  "recordedAt": "2026-08-14",
+  "humanAcceptance": {
+    "actor": "TL",
+    "decision": "ACCEPT",
+    "decisionSource": "direct instruction to complete BOOK-W1E, BOOK-W1F and BOOK-W1G from main a3fb9ef",
+    "overrides": []
+  },
+  "prerequisiteGates": [
+    { "step": "BOOK-W1A", "status": "accepted", "checker": "check:book-w1-ownership" },
+    { "step": "BOOK-W1B", "status": "accepted", "checker": "check:book-w1-outline" },
+    { "step": "BOOK-W1C", "status": "accepted", "checker": "check:book-w1-blueprints" },
+    { "step": "BOOK-W1D", "status": "accepted", "checker": "check:book-w1-canonical" },
+    { "step": "BOOK-W1E", "status": "accepted", "checker": "check:book-w1-public-projection" },
+    { "step": "BOOK-W1F", "status": "accepted", "checker": "check:book-w1-compatibility" }
+  ],
+  "canonicalArchitecture": {
+    "bookCount": 5,
+    "partCount": 15,
+    "canonicalNodeCount": 931,
+    "books": [
+      { "bookCode": "BOOK-1", "volume": "Volume I", "titleEn": "Reality Formation", "titleZhHans": "世界如何形成", "partCodes": ["P1", "P2", "P3", "P4"], "canonicalRoute": "/books/reality-formation/" },
+      { "bookCode": "BOOK-2", "volume": "Volume II", "titleEn": "Reality Runtime", "titleZhHans": "世界如何运行", "partCodes": ["P5", "P6", "P7"], "canonicalRoute": "/books/reality-runtime/" },
+      { "bookCode": "BOOK-3", "volume": "Volume III", "titleEn": "Reality Continuity", "titleZhHans": "世界如何维持", "partCodes": ["P8", "P9"], "canonicalRoute": "/books/reality-continuity/" },
+      { "bookCode": "BOOK-4", "volume": "Volume IV", "titleEn": "Reality Civilization", "titleZhHans": "世界如何扩展", "partCodes": ["P10", "P11", "P12"], "canonicalRoute": "/books/reality-civilization/" },
+      { "bookCode": "BOOK-5", "volume": "Volume V", "titleEn": "Reality Navigation", "titleZhHans": "世界将如何继续", "partCodes": ["P13", "P14", "P15"], "canonicalRoute": "/books/reality-navigation/" }
+    ],
+    "partsP8ToP15": [
+      { "partCode": "P8", "titleEn": "Runtime Maintenance", "titleZhHans": "运行维持" },
+      { "partCode": "P9", "titleEn": "Coordination Runtime", "titleZhHans": "协调运行" },
+      { "partCode": "P10", "titleEn": "Runtime Expansion", "titleZhHans": "运行扩展" },
+      { "partCode": "P11", "titleEn": "Civilization Runtime", "titleZhHans": "文明运行" },
+      { "partCode": "P12", "titleEn": "Civilization Atlas", "titleZhHans": "文明图谱" },
+      { "partCode": "P13", "titleEn": "Reading Science", "titleZhHans": "读取科学" },
+      { "partCode": "P14", "titleEn": "Navigation Science", "titleZhHans": "导航科学" },
+      { "partCode": "P15", "titleEn": "Reality Continuation", "titleZhHans": "现实延续" }
+    ]
+  },
+  "authorityDigests": {
+    "booksRegistry": { "path": "content/registry/books.json", "sha256": "5b0ade2a3b3bf36e13691f1b99205bd94f33790daa0306a58422a7bbe8fe4830" },
+    "partsRegistry": { "path": "content/registry/parts.json", "sha256": "24bcafcf66f47cfdd914d37235d05976b79f2861bddadd12e4429cdbb264ec1e" },
+    "canonicalRegistry": { "path": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json", "sha256": "5156bf1a591754ce31efabd8648dacb1e4b5f61b2cd47674fa3055b0cb402932" },
+    "blueprintRegistry": { "path": "content/knowledge/blueprints/blueprint-registry.json", "sha256": "e234261da01a06a6098dfdbcc1319fe7f9fc5e63224e7c1c01d3eb18e2d20941" },
+    "w1dReconciliation": { "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json", "sha256": "ac3e5a744227829f8eab865b2c75ef41749bae4f077f8cca4b6359fa2869dece" },
+    "w1dPublicationOwnership": { "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json", "sha256": "07c6dc21defbbeb17a83de887e4299d39e42c56333b7a4ce69aa0a9b2c7da5cb" },
+    "w1ePublicProjection": { "path": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json", "sha256": "712171d2ae9934987baa514b98dfd8d0daf27823a4222fab2744bf6cd379c951" },
+    "w1fCompatibility": { "path": "content/knowledge/migrations/book-w1f/book-w1f-compatibility-reconciliation-v1.json", "sha256": "1236b331fddc0c74e59bce6f720f5cfb1028ceb78d5f4dc9e8b85bbf559760ae" }
+  },
+  "acceptanceProof": {
+    "existingCanonicalNodeAuthorityPreserved": true,
+    "orphanPartCount": 0,
+    "duplicateCurrentOwnershipCount": 0,
+    "ungovernedNodeCodeMutationCount": 0,
+    "semanticNodeLossCount": 0,
+    "brokenMigrationLineageCount": 0,
+    "activeFourVolumeProductionAssumptionCount": 0,
+    "duplicateActiveIdentityCount": 0,
+    "orphanMigrationEntryCount": 0,
+    "silentDeletionCount": 0
+  },
+  "successorFreeze": "content/knowledge/blueprints/knowledge-blueprint-freeze-v3.json",
+  "supersedes": {
+    "path": "content/knowledge/blueprints/successors/book-w1d/knowledge-blueprint-freeze-v1.json",
+    "sha256": "6111e3fcdd43a2ed61e4bb64d42a851353fce4a51020b77d34ab5a9ad9239455",
+    "historicalAuthorityMutationAllowed": false
+  },
+  "historicalFreezePolicy": {
+    "bookW0FreezePreserved": true,
+    "kauFreezePreserved": true,
+    "wprFreezePreserved": true,
+    "historicalHashRewriteAllowed": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-PTRC-W8-FINANCIAL-CAPABILITY-MATRIX-v1.0.0",
+  "baselineCommit": "bec576fef235e6a2896769a5b2aa89533185e919",
+  "status": "ACTIVE_DETERMINISTIC_FINANCIAL_RUNTIME",
+  "formulaVersion": "ptrc-financial-formulas.v1",
+  "allowedStatuses": ["IMPLEMENTED", "PARTIAL", "UNAVAILABLE", "PROHIBITED"],
+  "calculators": [
+    {"calculatorId":"CASH_FLOW","status":"IMPLEMENTED","purpose":"Monthly income, expense, surplus/deficit and savings-ratio arithmetic.","jurisdictionRequired":false},
+    {"calculatorId":"NET_WORTH","status":"IMPLEMENTED","purpose":"Assets minus liabilities.","jurisdictionRequired":false},
+    {"calculatorId":"DEBT","status":"IMPLEMENTED","purpose":"Deterministic amortization/payoff horizon for a fixed-rate debt and payment.","jurisdictionRequired":false},
+    {"calculatorId":"SAVINGS","status":"IMPLEMENTED","purpose":"Funding gap and required monthly contribution for a user-defined target/horizon.","jurisdictionRequired":false},
+    {"calculatorId":"RETIREMENT_SCENARIO","status":"IMPLEMENTED","purpose":"Scenario projection from caller-provided assets, contribution, horizon, return, inflation and target assumptions.","jurisdictionRequired":false},
+    {"calculatorId":"COMPOUNDING","status":"IMPLEMENTED","purpose":"Future value of principal plus periodic contributions.","jurisdictionRequired":false},
+    {"calculatorId":"INFLATION","status":"IMPLEMENTED","purpose":"Future equivalent cost and purchasing-power transformation.","jurisdictionRequired":false},
+    {"calculatorId":"DRAWDOWN","status":"IMPLEMENTED","purpose":"Deterministic balance drawdown simulation under caller-provided withdrawal and return assumptions.","jurisdictionRequired":false},
+    {"calculatorId":"AFFORDABILITY","status":"IMPLEMENTED","purpose":"Cash-capacity and expense-ratio arithmetic; any threshold must be supplied by the caller, never invented by PHI OS.","jurisdictionRequired":false},
+    {"calculatorId":"ESTATE_SUMMARY","status":"IMPLEMENTED","purpose":"Gross assets, liabilities and pre-tax/pre-fee net estate summary only.","jurisdictionRequired":true},
+    {"calculatorId":"FINANCIAL_POSITION","status":"IMPLEMENTED","purpose":"Preserves the existing M4A 16-metric financial-position calculation layer with evidence lineage.","jurisdictionRequired":false},
+    {"calculatorId":"TAX_ESTIMATE","status":"UNAVAILABLE","reason":"No governed jurisdiction-specific tax ruleset is activated in PTRC-W8. Tax values must not be guessed."},
+    {"calculatorId":"PRODUCT_RECOMMENDATION","status":"PROHIBITED","reason":"PTRC-W8 is a deterministic calculation runtime and does not automatically recommend or require financial products."}
+  ],
+  "advertisedCalculationCoverage": {
+    "promisedCalculationCount": 11,
+    "implementedPromisedCalculationCount": 11,
+    "partialPromisedCalculationCount": 0,
+    "coverageRatio": 1
+  },
+  "resultRequirements": ["assumptions", "formulaVersion", "asOfDate", "currency", "rounding", "nonAdviceNotice", "provenance"],
+  "boundaries": {
+    "modelMayInventNumericInputs": false,
+    "modelMayOverrideEngineResult": false,
+    "automaticRecommendationCreated": false,
+    "taxRulesGuessed": false,
+    "legalValidityDetermined": false,
+    "projectedOutcomeGuaranteed": false
+  }
+}

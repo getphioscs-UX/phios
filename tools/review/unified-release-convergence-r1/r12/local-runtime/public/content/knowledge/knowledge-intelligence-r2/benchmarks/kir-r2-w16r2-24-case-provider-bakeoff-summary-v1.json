@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2-24-CASE-PROVIDER-BAKEOFF-SUMMARY-v1.0.0",
+  "status": "EXPERIMENT_EVIDENCE_NOT_PRODUCTION_ACCEPTANCE",
+  "executedAt": "2026-09-08",
+  "sameEvidence": true,
+  "sameCompositionContract": true,
+  "caseCount": 24,
+  "caseMix": {"controlAccepted": 12, "challengeRejected": 12},
+  "providers": {
+    "DEEPSEEK_V4_FLASH": {"humanAccepted": 24, "humanAcceptanceRate": 1.0, "challengeRescued": 12, "controlRetained": 12, "totalCostUsdObserved": 0.0185658, "avgLatencyMsObserved": 3382, "pricingContext": "PEAK_WINDOW"},
+    "OPENAI_LUNA": {"humanAccepted": 21, "humanAcceptanceRate": 0.875, "challengeRescued": 10, "controlRetained": 11, "totalCostUsdObserved": 0.0123912, "avgLatencyMsObserved": 4454},
+    "MISTRAL_SMALL_4": {"humanAccepted": 20, "humanAcceptanceRate": 0.8333333333, "challengeRescued": 9, "controlRetained": 11, "totalCostUsdObserved": 0.01025535, "avgLatencyMsObserved": 3243},
+    "GEMINI_35_FLASH_LITE": {"humanAccepted": 19, "humanAcceptanceRate": 0.7916666667, "challengeRescued": 7, "controlRetained": 12, "totalCostUsdObserved": 0.0213725, "avgLatencyMsObserved": 4406}
+  },
+  "decision": {
+    "defaultComposer": "OPENAI_LUNA",
+    "complexEscalationComposer": "DEEPSEEK_V4_FLASH",
+    "reason": "QUALITY_ADJUSTED_COST_AND_CUSTOMER_LANGUAGE_BALANCE",
+    "doesNotAdmitProduction": true
+  }
+}

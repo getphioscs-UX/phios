@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-REPORT-DELIVERY-E2E-CONTRACT-v1.0.0",
+  "status": "READY_FOR_LIVE_QA_PROOF",
+  "proofEndpoint": "/api/shared-report-e2e-proof",
+  "proofStorage": "PRIVATE_REPORTS",
+  "proofKeyPattern": "qa/shared-report-e2e/<reportId>.json",
+  "sourceMethod": "ZWR",
+  "requiredSequence": [
+    "REAL_ENTITLEMENT",
+    "CANONICAL_PERSON",
+    "REFERENCE_GOVERNED_T3_COMPOSITION",
+    "SEMANTIC_VERIFIER_PASS",
+    "IMMUTABLE_CUSTOMER_SNAPSHOT",
+    "PRIVATE_BROWSER_RENDERER_PASS",
+    "RELEASED_MATERIAL",
+    "ACCOUNT_LIBRARY_POSITIVE_OPEN",
+    "LOGOUT",
+    "NEW_AUTHENTICATED_SESSION",
+    "REOPEN_SAME_REPORT_ID",
+    "SAME_SEMANTIC_SNAPSHOT",
+    "SAME_RENDERED_OUTPUT_DIGEST",
+    "NO_PROVIDER_REGENERATION_ON_REOPEN"
+  ],
+  "sourceRequirements": {
+    "compositionVersion": "ZIWEI-PROFESSIONAL-SYNTHESIS-R5",
+    "composerOwner": "REPORT-PRO-COMPOSER-R1",
+    "referenceId": "ZIWEI-PROFESSIONAL-SYNTHESIS-R5",
+    "model": "gpt-5.6-sol",
+    "naturalSections": 10,
+    "rendererPageCount": 39
+  },
+  "finalPass": {
+    "state": "PASS",
+    "sharedDeliveryAuthorityEligible": true,
+    "reopenedAfterDifferentAuthenticatedSession": true,
+    "sameImmutableSnapshot": true,
+    "sameImmutableRenderedMaterial": true,
+    "noProviderRegenerationOnReopen": true
+  },
+  "reusePolicy": {
+    "fullSharedInfrastructureProofRequiredOnce": true,
+    "repeatedPerMethodFullE2E": false,
+    "perMethodDeltaRequired": [
+      "METHOD_AUTHORITY_PACK",
+      "HUMAN_ACCEPTED_EDITORIAL_REFERENCE",
+      "REFERENCE_GOVERNED_COMPOSITION_PASS",
+      "METHOD_RENDER_CONTRACT_DELTA",
+      "METHOD_SPECIFIC_ACCESS_NEGATIVE_CASES_IF_ANY"
+    ]
+  },
+  "privacy": {
+    "rawAccountIdInRepo": false,
+    "rawSessionIdInRepo": false,
+    "liveProofRemainsPrivate": true
+  }
+}

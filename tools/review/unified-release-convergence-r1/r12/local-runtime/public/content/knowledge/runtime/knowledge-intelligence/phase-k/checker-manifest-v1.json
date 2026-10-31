@@ -1,0 +1,79 @@
+{
+  "manifestCode": "PHI-OS-KNOWLEDGE-INTELLIGENCE-PHASE-K-CHECKER-MANIFEST-v1.0.0",
+  "phase": "PHASE-K",
+  "status": "active",
+  "steps": [
+    "STEP74",
+    "STEP75",
+    "STEP76",
+    "STEP77",
+    "STEP78",
+    "STEP79",
+    "STEP80",
+    "STEP81"
+  ],
+  "packages": [
+    {
+      "packageCode": "K-A",
+      "steps": [
+        "STEP74",
+        "STEP75"
+      ],
+      "checker": "npm run check:knowledge-intelligence:k-a"
+    },
+    {
+      "packageCode": "K-B",
+      "steps": [
+        "STEP76",
+        "STEP77"
+      ],
+      "checker": "npm run check:knowledge-intelligence:k-b"
+    },
+    {
+      "packageCode": "K-C",
+      "steps": [
+        "STEP78",
+        "STEP79"
+      ],
+      "checker": "npm run check:knowledge-intelligence:k-c"
+    },
+    {
+      "packageCode": "K-D",
+      "steps": [
+        "STEP80",
+        "STEP81"
+      ],
+      "checker": "npm run check:knowledge-intelligence:k-d"
+    }
+  ],
+  "fullAcceptanceChecker": "npm run check:knowledge-intelligence:phase-k",
+  "checkerPermissions": {
+    "allowed": [
+      "read",
+      "validate",
+      "compare",
+      "fail",
+      "report"
+    ],
+    "prohibited": [
+      "write",
+      "repair",
+      "promote_state",
+      "publish",
+      "change_review",
+      "change_approval",
+      "generate_answer",
+      "call_provider"
+    ]
+  },
+  "authorityBoundaries": {
+    "publishedOnly": true,
+    "providerUsed": false,
+    "generatedAnswer": false,
+    "generatedSummary": false,
+    "newCanonicalMeaning": false,
+    "unpublishedPromotion": false,
+    "registryMutation": false,
+    "publicationMutation": false
+  }
+}

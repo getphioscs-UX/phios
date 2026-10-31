@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2-GAP-CLOSURE-v1.0.0",
+  "version": "1.1.0",
+  "status": "EXECUTABLE_GAP_CLOSURE_PLAN",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2",
+  "targets": [
+    {
+      "semanticBasisId": "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+      "targetPair": "G2+P3",
+      "currentRequiredEvidence": [
+        "Longitudinal capital-flow response during identified pressure intervals",
+        "Official/regulatory evidence showing financing, leverage, funding or risk constraints changed feasible behavior",
+        "Evidence linking market pressure observation to a concrete constraint mechanism rather than price movement alone"
+      ],
+      "preferredNextProviderCapabilities": [
+        "CAPITAL_FLOW",
+        "VALUATION"
+      ],
+      "requiredAuthorityMix": [
+        "MARKET_DATA_PROVIDER",
+        "REGULATOR_OR_OFFICIAL_PRIMARY"
+      ],
+      "productionRequests": [
+        "MOOMOO-US-CAPITAL-FLOW-01",
+        "MOOMOO-US-VALUATION-01"
+      ],
+      "closureState": "PROVIDER_MECHANISM_CONTEXT_PENDING_PLUS_REGULATOR_CROSSCHECK",
+      "nextAction": "Collect regulator/official evidence of operative lending/funding/credit constraint mechanism; provider context is already sufficient as context."
+    },
+    {
+      "semanticBasisId": "US-W8E-SEM-MACRO-RECONFIGURATION",
+      "targetPair": "G14+P2",
+      "currentRequiredEvidence": [
+        "Before/after sector or revenue composition",
+        "Sustained capital-flow or sector-weight migration",
+        "Evidence that carriers, routing, institutional organization or relationship topology changed under new conditions"
+      ],
+      "preferredNextProviderCapabilities": [
+        "CAPITAL_FLOW",
+        "SECTOR_PLATE",
+        "FINANCIAL_STATEMENTS",
+        "REVENUE_BREAKDOWN"
+      ],
+      "requiredAuthorityMix": [
+        "MULTI_SOURCE_LONGITUDINAL",
+        "PRIMARY_OR_OFFICIAL_CROSSCHECK"
+      ],
+      "productionRequests": [
+        "MOOMOO-US-CAPITAL-FLOW-01",
+        "MOOMOO-US-FINANCIALS-01",
+        "MOOMOO-US-REVENUE-BREAKDOWN-01"
+      ],
+      "closureState": "STRUCTURAL_CHANGE_EVIDENCE_PENDING",
+      "nextAction": "Rerun gap-closure importer with historical revenue-breakdown periods, then rebuild W8A→W8E-P3."
+    },
+    {
+      "semanticBasisId": "US-W8E-SEM-SYSTEM-CONTINUITY",
+      "targetPair": "G16+P3",
+      "currentRequiredEvidence": [
+        "Repeated organized function or capacity across time, not only repeated price observations",
+        "Maintenance/recovery/adaptation evidence across multiple observation periods",
+        "Primary-source or regulatory cross-check that the relevant system function persisted"
+      ],
+      "preferredNextProviderCapabilities": [
+        "FINANCIAL_STATEMENTS",
+        "REVENUE_BREAKDOWN",
+        "HISTORY_KLINE"
+      ],
+      "requiredAuthorityMix": [
+        "LONGITUDINAL_PROVIDER",
+        "PRIMARY_OR_OFFICIAL_CROSSCHECK"
+      ],
+      "productionRequests": [
+        "MOOMOO-US-FINANCIALS-01",
+        "MOOMOO-US-REVENUE-BREAKDOWN-01"
+      ],
+      "closureState": "SUBSYSTEM_CONTINUITY_HUMAN_REVIEW_READY__DOSSIER_GLOBAL_STILL_UNPROVEN",
+      "nextAction": "Run W8E-P4 human review for US-W8E-P3-SELECTED-ISSUER-CONTINUITY; do not generalize to DOSSIER-US."
+    }
+  ],
+  "productionPlan": {
+    "provider": "MOOMOO_OPENAPI",
+    "command": "npm run moomoo:pkce-gap-closure",
+    "requestIds": [
+      "MOOMOO-US-CAPITAL-FLOW-01",
+      "MOOMOO-US-VALUATION-01",
+      "MOOMOO-US-FINANCIALS-01",
+      "MOOMOO-US-REVENUE-BREAKDOWN-01"
+    ],
+    "rules": [
+      "CAPITAL_FLOW uses broad-market/sector ETFs because Moomoo historical capital flow supports US ETFs.",
+      "VALUATION uses common-stock pilots because Moomoo Valuation Detail does not support ETFs.",
+      "FINANCIAL_STATEMENTS and REVENUE_BREAKDOWN use company pilots and remain subsystem evidence only.",
+      "Provider observations do not themselves satisfy semantic thresholds; W8B/W8C/W8D-P2/W8E-P2 must be rerun."
+    ]
+  }
+}

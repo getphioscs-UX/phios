@@ -1,0 +1,29 @@
+{
+  "policy_version": "1.0.0",
+  "mode": "strict",
+  "rule": "所有数据键、标题、图注、导航标签和引擎输出必须使用 canonical；accepted_aliases 仅用于搜索、输入识别与旧资料迁移；forbidden_replacements 不得作为该概念的替代名称生成。",
+  "policies": [
+    {"concept":"runtime","canonical":{"zh-Hans":"运行","en":"Runtime"},"accepted_aliases":["运行时"],"forbidden_replacements":["程序","机制","流程"],"note":"“运行时”仅在技术上下文作为输入别名；PHI OS 正文统一使用“运行”。"},
+    {"concept":"reality_grammar","canonical":{"zh-Hans":"现实语法","en":"Reality Grammar"},"accepted_aliases":[],"forbidden_replacements":["宇宙语法","生命语法","现实法则","现实规则"]},
+    {"concept":"constraint","canonical":{"zh-Hans":"约束","en":"Constraint"},"accepted_aliases":[],"forbidden_replacements":["限制","阻碍","障碍"],"note":"限制可出现在解释句中，但不能替代概念名。"},
+    {"concept":"field","canonical":{"zh-Hans":"场域","en":"Field"},"accepted_aliases":[],"forbidden_replacements":["能量场","磁场","氛围"]},
+    {"concept":"projection","canonical":{"zh-Hans":"投影","en":"Projection"},"accepted_aliases":[],"forbidden_replacements":["幻觉","错觉","主观现实","映射"]},
+    {"concept":"navigation","canonical":{"zh-Hans":"现实导航","en":"Reality Navigation"},"accepted_aliases":["导航"],"forbidden_replacements":["人生指导","命运导航","预测","建议系统"]},
+    {"concept":"runtime_state","canonical":{"zh-Hans":"运行状态","en":"Runtime State"},"accepted_aliases":[],"forbidden_replacements":["心理状态","情绪状态","命运状态"]},
+    {"concept":"carrier","canonical":{"zh-Hans":"载体","en":"Carrier"},"accepted_aliases":[],"forbidden_replacements":["身体","容器","媒介"],"note":"身体是人类载体的一部分，不能与载体完全等同。"},
+    {"concept":"reality_initialization_state","canonical":{"zh-Hans":"现实初始化状态","en":"Reality Initialization State","abbreviation":"RIS"},"accepted_aliases":["RIS"],"forbidden_replacements":["命盘","出生蓝图","先天命运","人格类型"]},
+    {"concept":"experience","canonical":{"zh-Hans":"体验","en":"Experience"},"accepted_aliases":[],"forbidden_replacements":["感受","意识","经验"]},
+    {"concept":"expression","canonical":{"zh-Hans":"表达","en":"Expression"},"accepted_aliases":[],"forbidden_replacements":["沟通","输出","说话"]},
+    {"concept":"agency","canonical":{"zh-Hans":"行动","en":"Agency"},"accepted_aliases":["行动能力"],"forbidden_replacements":["行为","执行力","自由意志"]},
+    {"concept":"identity","canonical":{"zh-Hans":"身份","en":"Identity"},"accepted_aliases":[],"forbidden_replacements":["人格","自我","角色","标签"]},
+    {"concept":"continuity","canonical":{"zh-Hans":"持续","en":"Continuity"},"accepted_aliases":["连续性"],"forbidden_replacements":["永恒","稳定","维持"]}
+  ],
+  "validation": {
+    "fail_on_forbidden_in_identifiers": true,
+    "fail_on_unknown_core_term": true,
+    "warn_on_alias_in_display_copy": true,
+    "allow_alias_in_search_index": true,
+    "allow_narrative_words_in_body_copy": true
+  }
+}
+

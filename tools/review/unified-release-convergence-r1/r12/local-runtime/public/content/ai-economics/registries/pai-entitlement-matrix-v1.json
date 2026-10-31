@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "PHI-OS-PAI-R1-ENTITLEMENT-MATRIX-v1.0.0",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "status": "ENTITLEMENT_MATRIX_READY_FOR_PILOT",
+  "entitlements": [
+    {"code":"FREE","allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY"],"dailyAskAllowance":5,"deepAskAllowance":0,"contextAccess":"EXPLICIT_PUBLIC_ONLY","paidNarrativeAccess":false,"professionalAccess":false,"creditRequirement":0,"upgradePaths":["CREDIT_PACK","PLUS"]},
+    {"code":"CREDIT_PACK","allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY","T2_LIGHT_COMPOSITION","T3_DEEP_COMPOSITION"],"dailyAskAllowance":20,"deepAskAllowance":3,"contextAccess":"EXPLICIT_AUTHORIZED","paidNarrativeAccess":true,"professionalAccess":false,"creditRequirement":"BY_USAGE_CLASS","upgradePaths":["PLUS","REALITY"]},
+    {"code":"PLUS","allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY","T2_LIGHT_COMPOSITION"],"dailyAskAllowance":30,"deepAskAllowance":2,"contextAccess":"EXPLICIT_AUTHORIZED","paidNarrativeAccess":false,"professionalAccess":false,"creditRequirement":"PLAN_OR_CREDIT","upgradePaths":["REALITY"]},
+    {"code":"REALITY","allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY","T2_LIGHT_COMPOSITION","T3_DEEP_COMPOSITION"],"dailyAskAllowance":40,"deepAskAllowance":5,"contextAccess":"EXPLICIT_AUTHORIZED_REALITY","paidNarrativeAccess":true,"professionalAccess":false,"creditRequirement":"PLAN_OR_CREDIT","upgradePaths":["PROFESSIONAL"]},
+    {"code":"ONE_OFF","allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY","T2_LIGHT_COMPOSITION","T3_DEEP_COMPOSITION"],"dailyAskAllowance":10,"deepAskAllowance":1,"contextAccess":"PURCHASE_SCOPED_EXPLICIT","paidNarrativeAccess":true,"professionalAccess":false,"creditRequirement":"PURCHASE_VERIFIED","upgradePaths":[]},
+    {"code":"PROFESSIONAL","allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY","T2_LIGHT_COMPOSITION","T3_DEEP_COMPOSITION"],"dailyAskAllowance":50,"deepAskAllowance":10,"contextAccess":"CASE_AND_PARTICIPANT_SCOPED_EXPLICIT","paidNarrativeAccess":true,"professionalAccess":true,"creditRequirement":"SERVICE_ENTITLEMENT","upgradePaths":[]}
+  ],
+  "truthInvariant": "ENTITLEMENT_CHANGES_DEPTH_OR_ACCESS_NOT_TRUTH"
+}

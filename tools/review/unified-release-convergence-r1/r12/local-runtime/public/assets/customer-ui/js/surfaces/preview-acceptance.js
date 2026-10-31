@@ -1,0 +1,4 @@
+import {accountRequest} from './secure-drafts.js';
+const status=document.querySelector('#status'),report=document.querySelector('#report');
+async function run(action){status.textContent='Working · 处理中';try{const p=await accountRequest('/api/qa-fw-acceptance',{action,...(action==='materialize'?{locale:document.querySelector('#locale').value}:{reportId:report.value})});if(p.reportId)report.value=p.reportId;status.textContent='Completed on Preview · 已在 Preview 完成';}catch(e){status.textContent=e.status===401?'Sign in to Preview first · 请先登录 Preview':'Not available. Requires the exact QA origin and enabled Preview bindings. · 不可用，须在指定 QA 环境并配置 Preview 绑定。';}}
+document.querySelector('#create').addEventListener('click',()=>run('materialize'));document.querySelector('#release').addEventListener('click',()=>run('revoke-release'));document.querySelector('#consent').addEventListener('click',()=>run('revoke-consent'));

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-TIAOHOU-RULESET-v2.0.0",
+  "work": "BAZI-FP-W6",
+  "rulesetId": "BAZI-W6-DI-TIAN-SUI-CLIMATE-TIAOHOU-RULESET-v2",
+  "status": "FROZEN_SOURCE_ADMITTED_DETAILED_V2",
+  "active": true,
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "predecessor": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v1.json",
+  "claimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.1.json",
+  "thermalRules": [
+    {
+      "when": "COLD_BIAS_ESTABLISHED",
+      "candidateElementClasses": [
+        "WOOD",
+        "FIRE"
+      ],
+      "purpose": "WARMING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-THERMAL-ELEMENT-027"
+    },
+    {
+      "when": "WARM_BIAS_ESTABLISHED",
+      "candidateElementClasses": [
+        "METAL",
+        "WATER"
+      ],
+      "purpose": "COOLING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-THERMAL-ELEMENT-027"
+    }
+  ],
+  "moistureRules": [
+    {
+      "when": "EXCESS_WET_BIAS_ESTABLISHED",
+      "purpose": "DRYING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-DRY-WET-RECIPROCAL-028",
+      "elementSelection": "NOT_EXHAUSTIVELY_SUPPORTED"
+    },
+    {
+      "when": "EXCESS_DRY_BIAS_ESTABLISHED",
+      "purpose": "MOISTENING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-DRY-WET-RECIPROCAL-028",
+      "elementSelection": "NOT_EXHAUSTIVELY_SUPPORTED"
+    },
+    {
+      "when": "WOOD_FIRE_SHANG_GUAN_CONTEXT_ESTABLISHED",
+      "purpose": "MOISTENING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-SHANGGUAN-EXAMPLES-029"
+    },
+    {
+      "when": "METAL_WATER_SHANG_GUAN_CONTEXT_ESTABLISHED",
+      "purpose": "DRYING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-SHANGGUAN-EXAMPLES-029"
+    }
+  ],
+  "gates": {
+    "seasonAloneMayEstablishBias": false,
+    "humanAdmissionRequired": true,
+    "exhaustiveDayMasterMonthTableAvailable": false,
+    "unsupportedTableCompletionForbidden": true
+  },
+  "orderedElementExamples": [
+    {
+      "when": "SOURCE_SPECIFIC_FIRE_EARTH_DRYING_CASE_ESTABLISHED",
+      "orderedCandidateElements": [
+        "EARTH",
+        "FIRE"
+      ],
+      "purpose": "DRYING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-FIRE-EARTH-DRYING-PRIORITY-031",
+      "scope": "EXAMPLE_NOT_UNIVERSAL_TABLE"
+    },
+    {
+      "when": "SOURCE_SPECIFIC_DRY_METAL_MOISTENING_CASE_ESTABLISHED",
+      "orderedCandidateElements": [
+        "METAL",
+        "WATER"
+      ],
+      "purpose": "MOISTENING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-METAL-MOISTENING-PRIORITY-032",
+      "scope": "EXAMPLE_NOT_UNIVERSAL_TABLE"
+    }
+  ],
+  "freezeBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "predecessorCandidateRef": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v2.candidate.json",
+  "authority": {
+    "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+    "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-002-admission-v1.json",
+    "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-002-human-review-result-v1.json",
+    "allReferencedBatch002ClaimsHumanAdmitted": true
+  },
+  "decisionCoverage": {
+    "thermalElementClasses": "SUPPORTED_WHEN_BIAS_ESTABLISHED",
+    "dryWetReciprocity": "SUPPORTED",
+    "orderedSourceExamples": "SUPPORTED_EXAMPLE_SCOPE_ONLY",
+    "exhaustiveDayMasterMonthElementTable": "NOT_ESTABLISHED",
+    "finalUniversalTiaohouVerdict": "NOT_AUTHORIZED"
+  }
+}

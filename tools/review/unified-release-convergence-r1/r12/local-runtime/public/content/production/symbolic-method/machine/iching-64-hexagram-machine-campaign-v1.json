@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-64-HEXAGRAM-MACHINE-CAMPAIGN-v1.0.0",
+  "work": "ICH-PROD-W12",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "status": "READY_DETERMINISTIC_REGISTRY_DERIVED_CAMPAIGN",
+  "authority": "content/professional/core-method-runtime/iching-hexagram-registry-v1.json",
+  "expectedHexagramCount": 64,
+  "caseDerivation": {
+    "inputMode": "MANUAL_LINES",
+    "lineOrder": "BOTTOM_TO_TOP",
+    "stableYin": 8,
+    "stableYang": 7,
+    "expectedPrimary": "REGISTRY_ENTRY_HEXAGRAM_ID",
+    "expectedRelating": "REGISTRY_ENTRY_HEXAGRAM_ID",
+    "changingLineCount": 0
+  },
+  "requiredPipeline": [
+    "IDENTITY",
+    "CALCULATION",
+    "SHARED_PROJECTION",
+    "SOURCE_BOUND_INTERPRETATION",
+    "READING_IR",
+    "RCC",
+    "UNCERTAINTY",
+    "AGENCY",
+    "PUBLIC_VIEW"
+  ],
+  "sourceGapPolicy": {
+    "missingCommentaryMayFailCalculation": false,
+    "missingCommentaryMustRemainVisible": true,
+    "modelMayFillSourceGap": false
+  }
+}

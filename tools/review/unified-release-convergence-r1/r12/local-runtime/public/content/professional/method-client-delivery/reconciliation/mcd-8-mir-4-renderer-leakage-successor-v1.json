@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-MCD-8-MIR-4-RENDERER-LEAKAGE-SUCCESSOR-v1.0.0",
+  "work": "MIR-4 successor reconciliation",
+  "baselineCommit": "73ba874ecad0e452eb768a36af9f0c66241c906a",
+  "status": "ACTIVE_SCOPED_CANONICAL_PROJECTION_FIELD_RECONCILIATION",
+  "historicalChecker": "scripts/check-mcd-8-production-acceptance.mjs",
+  "historicalCheckerMutated": false,
+  "historicalRule": "Before MIR-3, raw HDR projection keys such as definedCenters/typeCode were forbidden across public renderer files because no PHI OS Personal Structure canonical projection contract existed.",
+  "successorRule": "MIR-4 may render those structural fields only when they arrive inside PHI-OS-PERSONAL-STRUCTURE-PROJECTION-BUNDLE-v1.0.0 produced by MIR-3 Shared Projection Runtime. Direct Core/Calculation runtime import remains forbidden.",
+  "scopedAllowedConsumer": "assets/js/method-client-delivery/renderers/personal-structure-renderer.js",
+  "allowedProjectedFields": [
+    "definedCenters",
+    "undefinedCenters",
+    "typeCode",
+    "definitionCode"
+  ],
+  "stillForbidden": [
+    "bodyGraph",
+    "humanDesignAuthorityCode",
+    "raw",
+    "rawResult",
+    "coreResults",
+    "calculationRuntimeImport",
+    "HDR_BRANDED_PUBLIC_SURFACE"
+  ],
+  "authority": {
+    "rendererCalculationAuthorityCreated": false,
+    "rendererProjectionAuthorityCreated": false,
+    "rendererInterpretationAuthorityCreated": false,
+    "rendererMeaningAuthorityCreated": false,
+    "mpaAuthorityChanged": false,
+    "mcd8GuidedReadingHandoffChanged": false
+  },
+  "packageAliasSuccessor": {
+    "check:mcd-8": "node scripts/check-mcd-8-mir-4-successor.mjs",
+    "historicalAliasWas": "node scripts/check-mcd-8-kap-w26-successor.mjs",
+    "historicalFrozenPackageEvidenceRewritten": false,
+    "currentPackageAliasUpdatedByVersionedSuccessor": true
+  }
+}

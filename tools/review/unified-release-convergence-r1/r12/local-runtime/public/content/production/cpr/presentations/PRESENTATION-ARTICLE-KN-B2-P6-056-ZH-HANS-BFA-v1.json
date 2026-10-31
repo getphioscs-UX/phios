@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-CPR-APS-ARTICLE-PRESENTATION-SUCCESSOR-v1.0.0",
+  "presentationCode": "PRESENTATION-ARTICLE-KN-B2-P6-056-ZH-HANS-APS-v1",
+  "presentationVersion": "1.0.0",
+  "work": "APS-7_CPR_SUCCESSOR_ORCHESTRATION",
+  "status": "active_production_instance",
+  "surface": "WEBSITE",
+  "presentationType": "ARTICLE_PAGE",
+  "renderState": "ready_for_render",
+  "locale": "zh-Hans",
+  "audience": "CUSTOMER",
+  "inputs": {
+    "publishedArticle": {
+      "authorityRecordCode": "PKA-KN-B2-P6-056-ZH-HANS",
+      "authorityDigest": "3f3bdee3cf01c96db39f0877e72aa19796a6c6a8b9f5d89cec64627d06aaafec",
+      "publicationCode": "PUBLICATION-BFA-KN-B2-P6-056-ZH-HANS-375e03e58a29",
+      "publicationDigest": "ce93737f192895b5c43fe6f4bd336d71561a0c15ab4225040d89e99ffec136f1",
+      "articleCode": "KA-B2-P6-056-ZH-HANS-ARTICLE",
+      "nodeCode": "KN-B2-P6-056",
+      "href": "/articles/shared-reality-exit-memory-collective-field-and-belief",
+      "version": "1.0.0"
+    },
+    "car": {
+      "required": false,
+      "state": "NOT_REQUIRED_NO_VISUAL_ASSET",
+      "publishedAssetReferences": []
+    }
+  },
+  "composition": [
+    {
+      "ordinal": 1,
+      "componentCode": "ARTICLE_HEADER",
+      "sourceReferences": [
+        "PKA-KN-B2-P6-056-ZH-HANS"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 2,
+      "componentCode": "ARTICLE_BODY",
+      "sourceReferences": [
+        "KA-B2-P6-056-ZH-HANS-ARTICLE"
+      ],
+      "bodyInsertions": [],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 3,
+      "componentCode": "SECONDARY_PROVENANCE",
+      "sourceReferences": [
+        "KN-B2-P6-056"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 4,
+      "componentCode": "FOOTER",
+      "sourceReferences": [
+        "PDS_PUBLIC_SHELL"
+      ],
+      "visibility": "VISIBLE"
+    }
+  ],
+  "pdsReferences": {
+    "authority": "PDS",
+    "contracts": [
+      "content/registry/pds-w2-design-token-contract.json",
+      "content/registry/pds-w3-core-component-shell-contract.json",
+      "content/registry/pds-w7-reading-experience.json",
+      "content/registry/pds-w9-knowledge-professional.json"
+    ],
+    "styleReferences": [
+      "assets/css/tokens.css",
+      "assets/css/design/foundation.css",
+      "assets/css/design/typography.css",
+      "assets/css/public-experience.css",
+      "assets/css/knowledge-release.css",
+      "assets/css/article-renderer.css",
+      "assets/css/pds-w9-knowledge-professional.css",
+      "assets/css/wpr-public-production.css"
+    ]
+  },
+  "governance": {
+    "cprDecidesKnowledge": false,
+    "cprDecidesPublication": false,
+    "apsCreatesCarAuthority": false,
+    "carBypassAllowedWhenVisualAssetRequired": false,
+    "articleOnlyNoAssetPathAllowed": true
+  }
+}

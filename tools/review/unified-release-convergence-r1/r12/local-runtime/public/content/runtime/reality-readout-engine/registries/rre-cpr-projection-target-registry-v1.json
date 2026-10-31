@@ -1,0 +1,31 @@
+{
+  "registryCode": "PHI-OS-RRE-W14-CPR-PROJECTION-TARGET-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RRE-W14",
+  "status": "canonical",
+  "targets": [
+    {
+      "targetCode": "WPR",
+      "targetRuntime": "WPR",
+      "cprSurface": "WEBSITE",
+      "handoffState": "READY_FOR_CPR_SELECTION"
+    },
+    {
+      "targetCode": "RR",
+      "targetRuntime": "RR",
+      "cprSurface": "CUSTOMER_REPORT",
+      "handoffState": "REQUIRES_RR_RELEASED_REPORT"
+    },
+    {
+      "targetCode": "PROFESSIONAL_WORKSPACE",
+      "targetRuntime": "PWS",
+      "cprSurface": "PROFESSIONAL_WORKSPACE",
+      "handoffState": "READY_FOR_CPR_SELECTION"
+    }
+  ],
+  "rules": {
+    "targetDoesNotGrantSurfaceAuthority": true,
+    "cprSelectionRequired": true,
+    "reportReleaseRequiredForCustomerReport": true
+  }
+}

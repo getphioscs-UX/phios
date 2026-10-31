@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/dar/person-role-contract-v1.json",
+  "title": "PHI OS DAR Person Role Contract v1",
+  "description": "Canonical reusable person entity for document assembly. A role does not create legal appointment or validity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "personId",
+    "fullName",
+    "idType",
+    "idNumber",
+    "address",
+    "roles"
+  ],
+  "properties": {
+    "personId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fullName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "idNumber": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date"
+    },
+    "address": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relationship": {
+      "type": "string"
+    },
+    "contact": {
+      "type": "string"
+    },
+    "nationality": {
+      "type": "string"
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "TESTATOR",
+          "EXECUTOR",
+          "GUARDIAN",
+          "BENEFICIARY",
+          "WITNESS",
+          "DIGITAL_FACILITATOR",
+          "TRANSLATOR"
+        ]
+      }
+    }
+  },
+  "x-phi-os": {
+    "work": "DAR-W4",
+    "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+    "roleIsNotAppointmentAuthority": true,
+    "singlePersonMayHoldMultipleDeclaredRoles": true,
+    "duplicatePersonStructureForbidden": true
+  }
+}

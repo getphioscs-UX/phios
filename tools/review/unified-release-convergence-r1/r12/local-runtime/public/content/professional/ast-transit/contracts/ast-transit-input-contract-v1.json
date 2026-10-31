@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-AST-TRANSIT-INPUT-CONTRACT-v1.0.0",
+  "work": "ASTT-W1",
+  "status": "FROZEN",
+  "natalSource": "Accepted PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0 / ASTROLOGY_PROJECTION",
+  "targetContext": {
+    "required": ["targetDate", "targetTime", "targetTimezone.iana", "targetTimezone.utcOffsetAtTarget"],
+    "targetDate": "YYYY-MM-DD",
+    "targetTime": "HH:mm:ss",
+    "targetTimezone.iana": "explicit user-declared IANA timezone label",
+    "targetTimezone.utcOffsetAtTarget": "explicit ±HH:MM offset for target instant"
+  },
+  "rules": {
+    "browserTimezoneInferenceAllowed": false,
+    "serverCurrentTimeInferenceAllowed": false,
+    "targetDateDefaultAllowed": false,
+    "targetTimeDefaultAllowed": false,
+    "natalProjectionMutationAllowed": false,
+    "natalRecalculationInsideTransitRuntimeAllowed": false
+  }
+}

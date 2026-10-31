@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-BZRA-W1-CALENDAR-AUTHORITY-v1.0.0",
+  "work": "BZRA-W1",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "PRODUCTION_BOUND_SCOPE_AUTHORITY_FROZEN",
+  "policyAuthority": "PHI_OS_BAZI_POLICY_V1",
+  "timezone": {
+    "authority": "IANA_TZDB",
+    "pinnedRelease": "2026c",
+    "explicitUtcOffsetAtBirthRequired": true,
+    "hostIntlInferenceAllowed": false
+  },
+  "solarTerms": {
+    "authority": "ASTRONOMY_ENGINE_JS",
+    "version": "2.1.19",
+    "yearBoundary": "EXACT_LI_CHUN_INSTANT",
+    "monthBoundary": "EXACT_TWELVE_JIE_INSTANTS"
+  },
+  "trueSolarTime": {
+    "authority": "PHI_OS_TRUE_SOLAR_TIME",
+    "dayBoundaryTimeBasis": "TRUE_SOLAR_TIME",
+    "dayBoundary": "00:00",
+    "coordinatesRequiredWhenBirthTimeKnown": true
+  },
+  "unknownBirthTime": {
+    "syntheticTimeAllowed": false,
+    "threePillarDegradationAllowed": true,
+    "boundaryAmbiguityFailsClosed": true
+  },
+  "evidence": [
+    "content/professional/method-production-activation/registries/mpa-bzr-timezone-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-solar-term-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-true-solar-time-reference-v1.json"
+  ]
+}

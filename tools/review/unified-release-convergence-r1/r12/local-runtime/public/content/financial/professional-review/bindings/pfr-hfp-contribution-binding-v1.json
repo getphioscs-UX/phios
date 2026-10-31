@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-PFR-W21-HFP-BINDING-v1.0.0",
+  "work": "PFR-W21",
+  "baselineCommit": "ec0f8d4b9ba37599affda909a47d1e41a1033037",
+  "status": "ACTIVE_POST_HFP_FREEZE_REFERENCE_BINDING",
+  "source": "ProfessionalFinancialReviewContribution",
+  "target": "HFP PFRContributionReference",
+  "targetContract": "content/financial/holistic-planning-product/contracts/hfp-pfr-contribution-reference-contract-v1.json",
+  "rules": {
+    "hfpFrozenArtifactsMutated": false,
+    "hfpBaseRuntimeAutoPromoted": false,
+    "pfrMayEmitHfpCompatibleReferences": true,
+    "hfpMustPreservePfrText": true,
+    "hfpMustPreserveProfessionalAttribution": true,
+    "fixturePfrDoesNotBecomeProductionPfr": true
+  },
+  "activationNote": "This binding establishes production PFR source semantics without silently rewriting the frozen HFP-W0-W28 baseline. A separately governed HFP successor may consume these references."
+}

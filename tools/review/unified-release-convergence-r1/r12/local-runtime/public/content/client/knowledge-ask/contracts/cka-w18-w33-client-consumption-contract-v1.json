@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W18-W33-CLIENT-CONSUMPTION-CONTRACT-v1.0.0",
+  "phase": "CKA_X_KAP_PHASE_18",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "works": [
+    {
+      "work": "CKA-W18",
+      "capability": "HOMEPAGE_INTEGRATION",
+      "rule": "CKA_ENTRY_NOT_FULL_ANSWER_UI_IN_HERO",
+      "placements": [
+        {
+          "placement": "H04_AFTER_PHI_OS_RUNTIME_EXPLANATION",
+          "state": "ACTIVE"
+        },
+        {
+          "placement": "H05_FIRST_INTERACTION_ALTERNATIVE",
+          "state": "ACTIVE"
+        },
+        {
+          "placement": "H07_KNOWLEDGE_ACTIONS",
+          "state": "ACTIVE"
+        },
+        {
+          "placement": "H09_CONTINUATION_SECONDARY_ACTION",
+          "state": "NONE_BY_DESIGN_HPC2_H09_DEFERRED"
+        }
+      ]
+    },
+    {
+      "work": "CKA-W19",
+      "capability": "ACCOUNT_INTEGRATION",
+      "accountOnly": [
+        "Recent Questions",
+        "Saved Answers",
+        "Saved Knowledge",
+        "Continue Context"
+      ],
+      "guestPersistentHiddenHistory": false,
+      "trustedAccountProviderRequired": true,
+      "retentionPolicyRequired": true
+    },
+    {
+      "work": "CKA-W20",
+      "capability": "REALITY_DASHBOARD_INTEGRATION",
+      "canReadCurrentCaseContext": true,
+      "explicitDisclosure": "Using current Reality context",
+      "contextDrawerRequired": true,
+      "silentPrivateContextConsumption": false,
+      "trustedServerAuthorizationRequired": true
+    },
+    {
+      "work": "CKA-W21",
+      "capability": "JOURNEY_HANDOFF_CONTRACT",
+      "artifact": "cka-rjx-handoff-contract-v1.json",
+      "preCreatedRealityTruth": false
+    },
+    {
+      "work": "CKA-W22",
+      "capability": "LOCALE",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "consistent": [
+        "Question",
+        "Answer",
+        "Knowledge Cards",
+        "CTA",
+        "Unknown",
+        "Grounding",
+        "Error"
+      ],
+      "mixedLocaleAnswerLabelsAllowed": false
+    },
+    {
+      "work": "CKA-W23",
+      "capability": "RESPONSIVE",
+      "authority": "BFR-H12",
+      "viewports": [
+        360,
+        390,
+        430,
+        768,
+        1024,
+        1280,
+        1440
+      ],
+      "checks": [
+        "composer width",
+        "textarea growth",
+        "submit control",
+        "answer hierarchy",
+        "knowledge cards",
+        "follow-up",
+        "context drawer",
+        "source disclosure",
+        "unknown section",
+        "mobile wrapping"
+      ]
+    },
+    {
+      "work": "CKA-W24",
+      "capability": "ACCESSIBILITY",
+      "composer": [
+        "label",
+        "keyboard",
+        "focus",
+        "error",
+        "submit state",
+        "loading state"
+      ],
+      "answer": [
+        "heading hierarchy",
+        "related card navigation",
+        "expand / collapse semantics",
+        "unknown section accessibility",
+        "source grounding accessibility",
+        "focus return after follow-up"
+      ]
+    },
+    {
+      "work": "CKA-W25",
+      "capability": "PRIVACY_ACCEPTANCE",
+      "checks": [
+        "Guest Ask does not persist unexpectedly",
+        "Account Ask respects retention policy",
+        "Reality-aware Ask requires authorization",
+        "Financial context does not leak Public",
+        "Professional context does not leak Customer/Public",
+        "No private context in analytics payload",
+        "No hidden case creation"
+      ],
+      "requestTransport": "POST_JSON_NO_STORE"
+    },
+    {
+      "work": "CKA-W26",
+      "capability": "ENTITLEMENT_ACCEPTANCE",
+      "matrix": {
+        "Guest": "Limited Ask",
+        "Account": "History / Save (retention-gated)",
+        "Eligible Customer": "Reality-aware context",
+        "Eligible Method User": "Method handoff",
+        "Journey User": "Continuity",
+        "Professional": "Separate professional surface"
+      }
+    },
+    {
+      "work": "CKA-W27",
+      "capability": "NO_CHATBOT_REGRESSION",
+      "genericUnlimitedChat": false,
+      "structuredAnswerRequired": true,
+      "requiredWhenAvailable": [
+        "Direct Answer",
+        "Unknown",
+        "Related Knowledge",
+        "Grounding"
+      ]
+    },
+    {
+      "work": "CKA-W28",
+      "capability": "NO_JOURNEY_OVER_ESCALATION",
+      "routing": {
+        "simple": "answer",
+        "needs context": "guided context",
+        "complex": "Reality Journey after KAP W24 YES + explicit consent"
+      }
+    },
+    {
+      "work": "CKA-W29",
+      "capability": "NO_ACCOUNT_OVER_GATING",
+      "simplePublicAskForcedLogin": false,
+      "accountRequirementAllowed": [
+        "save",
+        "history",
+        "method execution",
+        "persistent case",
+        "journey continuity"
+      ]
+    },
+    {
+      "work": "CKA-W30",
+      "capability": "KNOWLEDGE_CARD_ACCEPTANCE",
+      "fields": [
+        "concept",
+        "volume",
+        "part",
+        "description",
+        "publication state",
+        "locale",
+        "content type"
+      ],
+      "bookOwnershipInferredFromKnBPrefix": false
+    },
+    {
+      "work": "CKA-W31",
+      "capability": "ANSWER_GROUNDING_ACCEPTANCE",
+      "required": [
+        "grounding state",
+        "knowledge source",
+        "unknown",
+        "authority boundary"
+      ],
+      "unverifiedGeneralGenerationPresentedAsPhiosKnowledge": false
+    },
+    {
+      "work": "CKA-W32",
+      "capability": "SURFACE_CONSUMPTION_ACCEPTANCE",
+      "expected": [
+        "Homepage",
+        "Knowledge Search",
+        "Library",
+        "Article",
+        "Book",
+        "Account",
+        "Reality Dashboard",
+        "Figure if enabled"
+      ],
+      "allowedStates": [
+        "ACTIVE",
+        "NONE_BY_DESIGN"
+      ]
+    },
+    {
+      "work": "CKA-W33",
+      "capability": "CKA_PRODUCTION_ACCEPTANCE",
+      "artifact": "cka-production-acceptance-v1.json",
+      "status": "CKA_PRODUCTION_READY",
+      "globalProductionAccepted": false
+    }
+  ],
+  "authorityPreservation": {
+    "kapGroundedAnswerReused": true,
+    "secondAnswerRuntime": false,
+    "secondInterpretationRuntime": false,
+    "secondRealityRuntime": false,
+    "methodAuthorityUnchanged": true,
+    "journeyAuthorityOwners": [
+      "KAP",
+      "ICR",
+      "RDG",
+      "RMO"
+    ]
+  }
+}

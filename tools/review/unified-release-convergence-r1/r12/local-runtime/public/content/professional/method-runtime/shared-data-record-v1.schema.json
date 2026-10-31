@@ -1,0 +1,924 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/method-runtime/shared-data-record-v1.schema.json",
+  "title": "PHI OS Shared Data Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordId",
+    "recordType",
+    "authority",
+    "authorityVersion",
+    "recordVersion",
+    "status",
+    "methodOwner",
+    "pluginOwner",
+    "sourceClass",
+    "provenance",
+    "normalization",
+    "lineage",
+    "payload"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-SHARED-DATA-RECORD-v1.0.0"
+    },
+    "recordId": {
+      "type": "string",
+      "pattern": "^SDA-[A-Z0-9-]{4,64}$"
+    },
+    "recordType": {
+      "enum": [
+        "BIRTH_RECORD",
+        "COORDINATE",
+        "TIMEZONE",
+        "DST",
+        "TRUE_SOLAR_TIME",
+        "ASTRONOMY",
+        "CALENDAR",
+        "SOLAR_TERMS",
+        "REFERENCE_TABLES"
+      ]
+    },
+    "authority": {
+      "const": "SHARED_DATA_AUTHORITY"
+    },
+    "authorityVersion": {
+      "const": "1.0.0"
+    },
+    "recordVersion": {
+      "$ref": "#/$defs/semver"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "verified",
+        "superseded",
+        "invalidated"
+      ]
+    },
+    "methodOwner": {
+      "type": "null"
+    },
+    "pluginOwner": {
+      "type": "null"
+    },
+    "sourceClass": {
+      "enum": [
+        "declared",
+        "measured",
+        "governed_resolution",
+        "deterministic_derivation",
+        "governed_reference"
+      ]
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "normalization": {
+      "$ref": "#/$defs/normalization"
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "BIRTH_RECORD"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "declared"
+          },
+          "payload": {
+            "$ref": "#/$defs/birthRecordPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "COORDINATE"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "measured"
+          },
+          "payload": {
+            "$ref": "#/$defs/coordinatePayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "TIMEZONE"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "governed_resolution"
+          },
+          "payload": {
+            "$ref": "#/$defs/timezonePayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "DST"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "deterministic_derivation"
+          },
+          "payload": {
+            "$ref": "#/$defs/dstPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "TRUE_SOLAR_TIME"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "deterministic_derivation"
+          },
+          "payload": {
+            "$ref": "#/$defs/trueSolarTimePayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "ASTRONOMY"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "deterministic_derivation"
+          },
+          "payload": {
+            "$ref": "#/$defs/astronomyPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "CALENDAR"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "deterministic_derivation"
+          },
+          "payload": {
+            "$ref": "#/$defs/calendarPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "SOLAR_TERMS"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "deterministic_derivation"
+          },
+          "payload": {
+            "$ref": "#/$defs/solarTermsPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "recordType": {
+            "const": "REFERENCE_TABLES"
+          }
+        },
+        "required": [
+          "recordType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "sourceClass": {
+            "const": "governed_reference"
+          },
+          "payload": {
+            "$ref": "#/$defs/referenceTablesPayload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceClass": {
+            "enum": [
+              "governed_resolution",
+              "deterministic_derivation"
+            ]
+          }
+        },
+        "required": [
+          "sourceClass"
+        ]
+      },
+      "then": {
+        "properties": {
+          "lineage": {
+            "$ref": "#/$defs/derivedLineage"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "lineage": {
+            "$ref": "#/$defs/sourceLineage"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "recordId": {
+      "type": "string",
+      "pattern": "^SDA-[A-Z0-9-]{4,64}$"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceType",
+        "sourceId",
+        "sourceVersion",
+        "capturedAt",
+        "verificationStatus",
+        "licenseStatus"
+      ],
+      "properties": {
+        "sourceType": {
+          "enum": [
+            "human_declaration",
+            "verified_document",
+            "geodetic_dataset",
+            "iana_tzdb",
+            "deterministic_engine",
+            "ephemeris",
+            "calendar_standard",
+            "governed_reference_table"
+          ]
+        },
+        "sourceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capturedAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "verificationStatus": {
+          "enum": [
+            "declared",
+            "verified",
+            "contract_fixture"
+          ]
+        },
+        "licenseStatus": {
+          "enum": [
+            "approved",
+            "not_required",
+            "restricted"
+          ]
+        }
+      }
+    },
+    "normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "normalizedBy",
+        "normalizationVersion",
+        "normalizedAt"
+      ],
+      "properties": {
+        "normalizedBy": {
+          "const": "SHARED_DATA_AUTHORITY"
+        },
+        "normalizationVersion": {
+          "$ref": "#/$defs/semver"
+        },
+        "normalizedAt": {
+          "$ref": "#/$defs/timestamp"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputRecordIds",
+        "algorithmCode",
+        "algorithmVersion",
+        "providerCode",
+        "deterministic",
+        "aiUsed"
+      ],
+      "properties": {
+        "inputRecordIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/recordId"
+          }
+        },
+        "algorithmCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "algorithmVersion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "providerCode": {
+          "type": "null"
+        },
+        "deterministic": {
+          "type": "boolean"
+        },
+        "aiUsed": {
+          "const": false
+        }
+      }
+    },
+    "sourceLineage": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/lineage"
+        },
+        {
+          "properties": {
+            "inputRecordIds": {
+              "maxItems": 0
+            },
+            "algorithmCode": {
+              "const": null
+            },
+            "algorithmVersion": {
+              "const": null
+            },
+            "deterministic": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "derivedLineage": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/lineage"
+        },
+        {
+          "properties": {
+            "inputRecordIds": {
+              "minItems": 1
+            },
+            "algorithmCode": {
+              "type": "string",
+              "minLength": 1
+            },
+            "algorithmVersion": {
+              "$ref": "#/$defs/semver"
+            },
+            "providerCode": {
+              "const": null
+            },
+            "deterministic": {
+              "const": true
+            }
+          }
+        }
+      ]
+    },
+    "birthRecordPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "localDate",
+        "localTime",
+        "precision",
+        "sourceTimezoneText",
+        "calendarCode",
+        "placeName",
+        "uncertaintyMinutes"
+      ],
+      "properties": {
+        "localDate": {
+          "$ref": "#/$defs/date"
+        },
+        "localTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{2}:[0-9]{2}(:[0-9]{2})?$"
+        },
+        "precision": {
+          "enum": [
+            "exact",
+            "minute",
+            "hour",
+            "date_only",
+            "estimated",
+            "unknown"
+          ]
+        },
+        "sourceTimezoneText": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "calendarCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "placeName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uncertaintyMinutes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "coordinatePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latitude",
+        "longitude",
+        "elevationM",
+        "datum",
+        "accuracyM",
+        "sourceMethod"
+      ],
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "elevationM": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "datum": {
+          "const": "WGS84"
+        },
+        "accuracyM": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sourceMethod": {
+          "enum": [
+            "declared_place_geocode",
+            "verified_geocode",
+            "measured"
+          ]
+        }
+      }
+    },
+    "timezonePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ianaZoneId",
+        "tzdbVersion",
+        "resolvedAt",
+        "utcOffsetMinutes",
+        "resolutionStatus"
+      ],
+      "properties": {
+        "ianaZoneId": {
+          "type": "string",
+          "pattern": "^[A-Za-z_+-]+(?:/[A-Za-z0-9_+-]+)+$"
+        },
+        "tzdbVersion": {
+          "type": "string",
+          "pattern": "^[0-9]{4}[a-z]$"
+        },
+        "resolvedAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "utcOffsetMinutes": {
+          "type": "integer",
+          "minimum": -840,
+          "maximum": 840
+        },
+        "resolutionStatus": {
+          "enum": [
+            "exact",
+            "ambiguous",
+            "unresolved"
+          ]
+        }
+      }
+    },
+    "dstPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ianaZoneId",
+        "tzdbVersion",
+        "effectiveAt",
+        "isDst",
+        "dstOffsetMinutes",
+        "totalUtcOffsetMinutes",
+        "resolutionStatus"
+      ],
+      "properties": {
+        "ianaZoneId": {
+          "type": "string",
+          "minLength": 3
+        },
+        "tzdbVersion": {
+          "type": "string",
+          "pattern": "^[0-9]{4}[a-z]$"
+        },
+        "effectiveAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "isDst": {
+          "type": "boolean"
+        },
+        "dstOffsetMinutes": {
+          "type": "integer",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "totalUtcOffsetMinutes": {
+          "type": "integer",
+          "minimum": -840,
+          "maximum": 840
+        },
+        "resolutionStatus": {
+          "const": "exact"
+        }
+      }
+    },
+    "trueSolarTimePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputLocalDateTime",
+        "longitudeDegrees",
+        "zoneMeridianDegrees",
+        "equationOfTimeMinutes",
+        "longitudeCorrectionMinutes",
+        "trueSolarDateTime",
+        "timeScale",
+        "formulaPolicy"
+      ],
+      "properties": {
+        "inputLocalDateTime": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "longitudeDegrees": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "zoneMeridianDegrees": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "equationOfTimeMinutes": {
+          "type": "number",
+          "minimum": -30,
+          "maximum": 30
+        },
+        "longitudeCorrectionMinutes": {
+          "type": "number",
+          "minimum": -720,
+          "maximum": 720
+        },
+        "trueSolarDateTime": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "timeScale": {
+          "const": "LOCAL_APPARENT_SOLAR_TIME"
+        },
+        "formulaPolicy": {
+          "const": "EQUATION_OF_TIME_PLUS_LONGITUDE_CORRECTION"
+        }
+      }
+    },
+    "astronomyPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "epoch",
+        "timeScale",
+        "referenceFrame",
+        "ephemerisCode",
+        "ephemerisVersion",
+        "observerCoordinateRecordId",
+        "calculationStatus",
+        "outputs"
+      ],
+      "properties": {
+        "epoch": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "timeScale": {
+          "enum": [
+            "UTC",
+            "UT1",
+            "TT",
+            "TDB"
+          ]
+        },
+        "referenceFrame": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ephemerisCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ephemerisVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observerCoordinateRecordId": {
+          "$ref": "#/$defs/recordId"
+        },
+        "calculationStatus": {
+          "const": "contract_fixture_only"
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "bodyCode",
+              "longitudeDegrees",
+              "latitudeDegrees",
+              "distanceAu"
+            ],
+            "properties": {
+              "bodyCode": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_]{1,31}$"
+              },
+              "longitudeDegrees": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMaximum": 360
+              },
+              "latitudeDegrees": {
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90
+              },
+              "distanceAu": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    "calendarPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputDate",
+        "sourceCalendar",
+        "targetCalendar",
+        "targetDate",
+        "conventionCode",
+        "conventionVersion"
+      ],
+      "properties": {
+        "inputDate": {
+          "$ref": "#/$defs/date"
+        },
+        "sourceCalendar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetCalendar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targetDate": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conventionCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conventionVersion": {
+          "$ref": "#/$defs/semver"
+        }
+      }
+    },
+    "solarTermsPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "termCode",
+        "solarLongitudeDegrees",
+        "eventTime",
+        "timeScale",
+        "ephemerisCode",
+        "ephemerisVersion"
+      ],
+      "properties": {
+        "termCode": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,31}$"
+        },
+        "solarLongitudeDegrees": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "eventTime": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "timeScale": {
+          "const": "UTC"
+        },
+        "ephemerisCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ephemerisVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "referenceTablesPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tableCode",
+        "tableVersion",
+        "checksumAlgorithm",
+        "checksum",
+        "licenseStatus",
+        "sourceReference",
+        "rowCount"
+      ],
+      "properties": {
+        "tableCode": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+        },
+        "tableVersion": {
+          "$ref": "#/$defs/semver"
+        },
+        "checksumAlgorithm": {
+          "const": "SHA-256"
+        },
+        "checksum": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "licenseStatus": {
+          "enum": [
+            "approved",
+            "not_required",
+            "restricted"
+          ]
+        },
+        "sourceReference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rowCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

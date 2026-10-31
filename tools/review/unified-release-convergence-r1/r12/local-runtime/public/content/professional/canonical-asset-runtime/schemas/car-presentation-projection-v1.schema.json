@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/car-presentation-projection-v1.schema.json",
+  "title": "PHI OS CAR Presentation Projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "presentationCode",
+    "presentationVersion",
+    "presentationType",
+    "surfaceProjectionCode",
+    "qualityEvaluationCode",
+    "publishedAssetReferences",
+    "pdsContractVersion",
+    "locale",
+    "presentationState",
+    "presentationDigest"
+  ],
+  "properties": {
+    "presentationCode": {
+      "type": "string",
+      "pattern": "^CAR-PRESENT-[A-Z0-9-]+$"
+    },
+    "presentationVersion": {
+      "type": "string"
+    },
+    "presentationType": {
+      "enum": [
+        "KNOWLEDGE_CARD",
+        "FIGURE_CARD",
+        "SERVICE_CARD",
+        "ACADEMY_CARD",
+        "BOOK_CARD",
+        "READING_CARD",
+        "MEDIA_CARD",
+        "AUTHORITY_BADGE",
+        "PUBLICATION_BADGE",
+        "LOCALE_BADGE"
+      ]
+    },
+    "surfaceProjectionCode": {
+      "type": "string"
+    },
+    "qualityEvaluationCode": {
+      "type": "string"
+    },
+    "publishedAssetReferences": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "pdsContractVersion": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "presentationState": {
+      "const": "validation_projection"
+    },
+    "presentationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

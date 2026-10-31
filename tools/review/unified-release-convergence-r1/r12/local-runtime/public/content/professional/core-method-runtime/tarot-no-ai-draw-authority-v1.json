@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-NO-AI-DRAW-AUTHORITY-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W8",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "AI_DRAW_AUTHORITY_FORBIDDEN",
+  "allowedSelectionAuthorities": [
+    "USER_EXPLICIT_MANUAL_SELECTION",
+    "EXTERNAL_ENTROPY_SEEDED_SYSTEM_RANDOM"
+  ],
+  "forbiddenSelectionAuthorities": [
+    "LLM_CARD_CHOICE",
+    "PROMPT_MEANING_MATCH",
+    "MODEL_PREFERENCE",
+    "INTERPRETATION_DRIVEN_DRAW"
+  ],
+  "rules": {
+    "aiSelectedMustBeFalse": true,
+    "providerCallAllowed": false,
+    "promptInfluencedCardChoiceAllowed": false,
+    "selectionRuntimeMayInterpretCards": false,
+    "calculationRuntimeMayInterpretCards": false
+  }
+}

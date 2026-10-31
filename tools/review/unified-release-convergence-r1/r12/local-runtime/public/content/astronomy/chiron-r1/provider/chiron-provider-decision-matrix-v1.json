@@ -1,0 +1,62 @@
+{
+  "status": "BLOCKED_PROVIDER_DECISION",
+  "selectedProvider": null,
+  "decisionRule": "Every required gate must be evidenced before SELECTED/FROZEN; absence of evidence is not PASS.",
+  "criteria": [
+    "licensing",
+    "cloudflareRuntimeCompatibility",
+    "determinism",
+    "supportedDateRange",
+    "precision",
+    "productionReliability",
+    "independentValidation",
+    "provenance"
+  ],
+  "rows": [
+    {
+      "provider": "ASTRONOMY_ENGINE_JS_2.1.19",
+      "status": "UNSUPPORTED_BODY",
+      "licensing": "MIT_EXISTING",
+      "cloudflareRuntimeCompatibility": "EXISTING_CORE_PROVIDER",
+      "determinism": "EXISTING_CORE_ONLY",
+      "supportedDateRange": "NO_CHIRON_RANGE",
+      "precision": "NO_CHIRON_CAPABILITY",
+      "productionReliability": "CORE_ONLY",
+      "independentValidation": "NO_CHIRON_RESULTS",
+      "provenance": "EXISTING_PINNED_PROVIDER"
+    },
+    {
+      "provider": "SWISS_EPHEMERIS",
+      "status": "CANDIDATE_NOT_AUTHORIZED",
+      "licensing": "OWNER_DENIED_AGPL_NO_PROFESSIONAL_LICENSE",
+      "cloudflareRuntimeCompatibility": "NOT_VERIFIED",
+      "determinism": "NOT_VERIFIED",
+      "supportedDateRange": "NOT_ADMITTED",
+      "precision": "NOT_VALIDATED",
+      "productionReliability": "NOT_VERIFIED",
+      "independentValidation": "NOT_RUN",
+      "provenance": "NO_ADMITTED_PROVIDER_OR_DATA_VERSION"
+    },
+    {
+      "provider": "NASA_JPL_HORIZONS",
+      "status": "CANDIDATE_UNSELECTED",
+      "licensing": "DATA_AND_PRODUCTION_TERMS_REVIEW_PENDING",
+      "cloudflareRuntimeCompatibility": "NETWORK_ADAPTER_NOT_ADMITTED",
+      "determinism": "PINNED_ORBIT_SOLUTION_OR_OFFLINE_DATA_POLICY_REQUIRED",
+      "supportedDateRange": "OBJECT_SOLUTION_SPECIFIC_NOT_ADMITTED",
+      "precision": "INDEPENDENT_REFERENCE_REQUIRED_IF_SELECTED",
+      "productionReliability": "NO_APPROVED_TIMEOUT_CACHE_RATE_LIMIT_AVAILABILITY_POLICY",
+      "independentValidation": "ELIGIBLE_REFERENCE_NOT_SELF_VALIDATION",
+      "provenance": "API_AND_SOLUTION_VERSIONS_MUST_BE_PINNED"
+    }
+  ],
+  "sources": [
+    "https://ssd-api.jpl.nasa.gov/doc/horizons.html",
+    "https://www.astro.com/swisseph/swephprg.htm"
+  ],
+  "ownerBoundary": {
+    "projectLicenseUnchanged": true,
+    "swissNotInstalled": true,
+    "onlineRuntimeDependencyAdded": false
+  }
+}

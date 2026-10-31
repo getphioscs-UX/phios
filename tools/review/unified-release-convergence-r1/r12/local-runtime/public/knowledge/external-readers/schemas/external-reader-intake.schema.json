@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/external-reader-intake.schema.json",
+  "title": "PHI OS External Reader Intake",
+  "type": "object",
+  "required": ["schema_version", "intake_id", "client_id", "reader_type", "service_id", "current_reality_question", "known_chart_fields", "consent", "retention_choice", "status"],
+  "properties": {
+    "schema_version": {"const": "phi-os.external-reader-intake.v1"},
+    "intake_id": {"type": "string", "minLength": 1},
+    "workspace_id": {"type": ["string", "null"]},
+    "client_id": {"type": "string", "minLength": 1},
+    "reader_type": {"enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]},
+    "service_id": {"type": "string", "minLength": 1},
+    "current_reality_question": {"type": "string", "minLength": 1},
+    "known_chart_fields": {"type": "object", "additionalProperties": {"type": "string"}},
+    "consent": {"type": "object"},
+    "retention_choice": {"enum": ["service_only", "future_professional_sessions", "delete_after_service"]},
+    "status": {"const": "ready_for_professional_review"},
+    "automatic_chart_calculation_used": {"const": false},
+    "runtime_evidence_written": {"const": false},
+    "runtime_memory_written": {"const": false}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/production/visual-article/vap-w10-production-article-package-v1.schema.json",
+  "title": "PHI OS VAP-W10 Production Article Package v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "packageType", "packageCode", "work", "batchCode", "nodeCode", "locale", "packageState", "articlePackageContract", "binding", "article", "candidate", "review", "approval", "authority", "governance", "createdAt", "nextAuthority", "packageDigest"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VAP-W10-PRODUCTION-ARTICLE-PACKAGE-v1.0.0"},
+    "packageType": {"const": "approved_article_production_handoff"},
+    "packageCode": {"type": "string"}, "work": {"const": "VAP-W10"}, "batchCode": {"const": "VAP-ARTICLE-BATCH-001"}, "nodeCode": {"type": "string"}, "locale": {"const": "zh-Hans"},
+    "packageState": {"const": "human_approved_not_published"}, "articlePackageContract": {"const": "PHI-OS-PJA-R4E-ARTICLE-PACKAGE-v2.0.0"},
+    "binding": {"type": "object"}, "article": {"type": "object"}, "candidate": {"type": "object"}, "review": {"type": "object"}, "approval": {"type": "object"}, "authority": {"type": "object"}, "governance": {"type": "object"},
+    "createdAt": {"type": "string"}, "nextAuthority": {"type": "string"}, "packageDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

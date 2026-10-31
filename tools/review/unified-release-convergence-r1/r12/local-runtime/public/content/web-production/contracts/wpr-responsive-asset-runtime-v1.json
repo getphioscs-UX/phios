@@ -1,0 +1,56 @@
+{
+  "contractCode": "PHI-OS-WPR-W9-RESPONSIVE-ASSET-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W9",
+  "phase": "WPR-B_PUBLIC_ASSET_DELIVERY",
+  "baselineCommit": "39fb21c54768c2c247a73cf5f005cf25d73435fc",
+  "status": "active_registry_only_responsive_contract",
+  "runtime": {
+    "implementation": "assets/js/runtime/web-production/asset-resolver.js",
+    "variantAuthority": "PUBLIC_ASSET_REGISTRY_EXPLICIT_METADATA_ONLY",
+    "supportedVariantCodes": [
+      "ORIGINAL",
+      "THUMBNAIL",
+      "CARD",
+      "CONTENT",
+      "HERO",
+      "RETINA",
+      "MOBILE"
+    ],
+    "defaultVariant": "ORIGINAL"
+  },
+  "rules": {
+    "variantNameDoesNotCreateObjectKey": true,
+    "filenameConventionDoesNotCreateVariantAuthority": true,
+    "srcsetUsesRegisteredVariantsOnly": true,
+    "sizesRequiresRegisteredOrCompositionPolicy": true,
+    "widthHeightMustComeFromRegisteredMetadataWhenDeclared": true,
+    "missingResponsiveVariantsMayUseOriginalSingleSource": true,
+    "originalFallbackDoesNotCreateVariantRecord": true,
+    "unverifiedVariantIsNotRenderable": true
+  },
+  "currentState": {
+    "registeredAssetsHaveExplicitVariants": false,
+    "responsiveMode": "ORIGINAL_SINGLE_SOURCE_UNTIL_VARIANTS_REGISTERED",
+    "srcsetMayBeEmpty": true,
+    "noVariantMigrationPerformedByWprW9": true
+  },
+  "outputFields": [
+    "src",
+    "srcset",
+    "sizes",
+    "width",
+    "height",
+    "aspectRatio",
+    "loading",
+    "fetchPriority",
+    "renderable",
+    "deliveryState"
+  ],
+  "nonActivation": {
+    "assetDerivativeGeneration": false,
+    "r2Upload": false,
+    "registryVariantFabrication": false,
+    "surfaceActivation": false
+  }
+}

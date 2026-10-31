@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-RLR-TWO-PERSON-INPUT-CONSENT-CONTRACT-v1.0.0",
+  "work": "RLR-W0",
+  "baselineCommit": "b872c4463c3e34e180cea53061c1ddc8e5b6f92c",
+  "status": "FROZEN_V1",
+  "runtimeContextSchema": "PHI-OS-RELATIONAL-TWO-PERSON-CONTEXT-v1.0.0",
+  "requirements": {
+    "distinctSubjectRefsRequired": true,
+    "bilateralActiveConsentRequired": true,
+    "relationshipContextUseAllowedRequired": true,
+    "sourceDataUseAllowedRequired": true,
+    "internalHdrRelationalUseRequiresSeparateBilateralConsent": true,
+    "purposeMustBeExplicit": true,
+    "publicAndInternalPurposesSeparated": true,
+    "hiddenCrossAccountReuseAllowed": false,
+    "persistentStorageActivated": false
+  },
+  "purposes": [
+    "RELATIONAL_STRUCTURE_REVIEW",
+    "INTERNAL_RELATIONAL_STRUCTURE_REVIEW"
+  ],
+  "rules": {
+    "consentDoesNotCreateRelationshipTruth": true,
+    "onePersonConsentCannotAuthorizeTheOtherPerson": true,
+    "relationshipContextDoesNotMergePersonIdentity": true,
+    "realityEvidenceRemainsFinalAuthority": true
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-VISUAL-SYNTHESIS-LENS-REGISTRY-v1.0.0",
+  "work": "PROFILE-PPR-ALL-PFIG-AUTHORITY",
+  "baselineCommit": "3eea58913bb7188089a2912ba6de1a0a5bf91bf0",
+  "status": "PROFILE_PPR_OWNER_ADMITTED",
+  "owner": "PROFILE_PPR",
+  "purpose": "Provide stable customer-facing visual lenses without claiming that heterogeneous Profile sources are one psychometric scale or one universal personality model.",
+  "lenses": [
+    {
+      "lensId": "SELF_NAVIGATION",
+      "customerLabel": {
+        "en": "Self navigation",
+        "zh-Hans": "自我导航"
+      },
+      "sourceSelectors": [
+        "CUSTOMER_SELF_REPORT::COGNITIVE_NAVIGATION",
+        "CUSTOMER_SELF_REPORT::MEANING_VALUES",
+        "EXTERNAL_PROFILE_RESULT::* only when provider field explicitly concerns self-direction/values"
+      ],
+      "allowedVisuals": [
+        "PFIG-001",
+        "PFIG-002",
+        "PFIG-008",
+        "PFIG-009"
+      ],
+      "boundary": "A navigation lens, not a universal trait dimension."
+    },
+    {
+      "lensId": "REGULATION_RECOVERY",
+      "customerLabel": {
+        "en": "Regulation & recovery",
+        "zh-Hans": "调节与恢复"
+      },
+      "sourceSelectors": [
+        "CUSTOMER_SELF_REPORT::EMOTIONAL_SOCIAL_REGULATION",
+        "CUSTOMER_SELF_REPORT::ADAPTATION_COPING"
+      ],
+      "allowedVisuals": [
+        "PFIG-001",
+        "PFIG-002",
+        "PFIG-003",
+        "PFIG-004",
+        "PFIG-009"
+      ],
+      "boundary": "Self-report/current-context evidence only; not diagnosis or clinical resilience."
+    },
+    {
+      "lensId": "BODY_ENVIRONMENT",
+      "customerLabel": {
+        "en": "Body & environment",
+        "zh-Hans": "身体与环境"
+      },
+      "sourceSelectors": [
+        "CUSTOMER_SELF_REPORT::BODY_LIFESTYLE_STEWARDSHIP",
+        "CUSTOMER_SELF_REPORT::BODY_LIFESTYLE_STEWARDSHIP::ENVIRONMENT_FIT"
+      ],
+      "allowedVisuals": [
+        "PFIG-001",
+        "PFIG-002",
+        "PFIG-004",
+        "PFIG-009"
+      ],
+      "boundary": "Reported fit and stewardship evidence; not objective health/environment suitability."
+    },
+    {
+      "lensId": "DECISION_STEWARDSHIP",
+      "customerLabel": {
+        "en": "Decision & stewardship",
+        "zh-Hans": "决策与管理"
+      },
+      "sourceSelectors": [
+        "CUSTOMER_SELF_REPORT::FINANCIAL_CAPABILITY::PLANNING",
+        "CUSTOMER_SELF_REPORT::FINANCIAL_CAPABILITY::RISK_AWARENESS",
+        "CUSTOMER_SELF_REPORT::FINANCIAL_CAPABILITY::DECISION_DISCIPLINE",
+        "MEASURED_TASK_PERFORMANCE::* decision tasks when explicitly admitted"
+      ],
+      "allowedVisuals": [
+        "PFIG-001",
+        "PFIG-002",
+        "PFIG-008",
+        "PFIG-009"
+      ],
+      "boundary": "Observed or self-reported decision evidence; not a fixed global decision type."
+    },
+    {
+      "lensId": "WORK_INTEREST_EXPRESSION",
+      "customerLabel": {
+        "en": "Work interest & expression",
+        "zh-Hans": "工作兴趣与表达"
+      },
+      "sourceSelectors": [
+        "STANDARDIZED_SELF_REPORT::RIASEC::*",
+        "CUSTOMER_WORK_CONTEXT_OBSERVATION::*"
+      ],
+      "allowedVisuals": [
+        "PFIG-003",
+        "PFIG-004",
+        "PFIG-006",
+        "PFIG-009"
+      ],
+      "boundary": "Interest and observed work expression only; not job fit, ability, employability or career destiny."
+    },
+    {
+      "lensId": "RELATIONSHIP_INTERACTION",
+      "customerLabel": {
+        "en": "Relationship interaction",
+        "zh-Hans": "关系互动"
+      },
+      "sourceSelectors": [
+        "CUSTOMER_SELF_REPORT::EMOTIONAL_SOCIAL_REGULATION::RELATIONSHIP_REGULATION",
+        "RELATIONSHIP_PROFILE_EVIDENCE::*",
+        "CUSTOMER_RELATIONSHIP_CONTEXT_OBSERVATION::*"
+      ],
+      "allowedVisuals": [
+        "PFIG-003",
+        "PFIG-004",
+        "PFIG-007",
+        "PFIG-009"
+      ],
+      "boundary": "Evidence and observation targets only; not compatibility or partner hidden-state inference."
+    },
+    {
+      "lensId": "CROSS_SOURCE_CONTEXT",
+      "customerLabel": {
+        "en": "Cross-source context",
+        "zh-Hans": "跨来源情境"
+      },
+      "sourceSelectors": [
+        "CROSS_SOURCE_PERSPECTIVE::*",
+        "CURRENT_REALITY_OBSERVATION::*"
+      ],
+      "allowedVisuals": [
+        "PFIG-004",
+        "PFIG-005",
+        "PFIG-009"
+      ],
+      "boundary": "Displays agreement, divergence and context dependence while preserving source classes."
+    }
+  ],
+  "governance": {
+    "lensesAreNavigationConstructsNotUniversalTraits": true,
+    "crossInstrumentScoreEquivalenceCreated": false,
+    "masterScoreCreated": false,
+    "missingEvidenceMustRemainMissing": true,
+    "sourceProvenanceRequired": true,
+    "pvpMayAddNewLens": false
+  }
+}

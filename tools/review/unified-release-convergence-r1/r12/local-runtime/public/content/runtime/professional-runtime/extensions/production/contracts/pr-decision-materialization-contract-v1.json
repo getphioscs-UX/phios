@@ -1,0 +1,36 @@
+{
+  "contractCode": "PHI-OS-PR-E4-DECISION-MATERIALIZATION-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extension": "PR-E4",
+  "status": "ACTIVE_HUMAN_AUTHORED_MATERIALIZATION",
+  "sourceFoundation": "content/runtime/professional-runtime/extensions/production/freeze/pr-e1-e3-production-foundation-freeze-v1.json",
+  "requiredInputs": [
+    "PR_CASE_CONTEXT",
+    "PR_CASE_VERSION",
+    "PR_RESOLVED_EVIDENCE_PACKAGE",
+    "PROFESSIONAL_CAPABILITY_BOUNDARY_SATISFIED",
+    "HUMAN_AUTHORED_OBSERVATION",
+    "HUMAN_AUTHORED_JUDGMENT",
+    "HUMAN_AUTHORED_RECOMMENDATION"
+  ],
+  "materializes": [
+    "PROFESSIONAL_OBSERVATION",
+    "PROFESSIONAL_JUDGMENT_RECORD",
+    "PROFESSIONAL_RECOMMENDATION",
+    "PR_DECISION_PACKAGE"
+  ],
+  "rules": {
+    "onlyHumanProfessionalMayAuthorObservationJudgmentRecommendation": true,
+    "aiMayAuthorJudgment": false,
+    "providerMayAuthorJudgment": false,
+    "automaticRecommendationAllowed": false,
+    "resolvedEvidencePayloadCopied": false,
+    "readoutMayBecomeJudgment": false,
+    "metricMayBecomeJudgment": false,
+    "rawDataMayBecomeEvidence": false,
+    "decisionPackageStartsDraft": true,
+    "caseVersionBindingRequired": true,
+    "capabilityBoundaryRequired": true
+  }
+}

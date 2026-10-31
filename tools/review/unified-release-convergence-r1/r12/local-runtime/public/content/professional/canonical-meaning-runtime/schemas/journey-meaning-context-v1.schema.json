@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/journey-meaning-context-v1.schema.json",
+  "title": "PHI OS Journey Meaning Context v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "journeyCode",
+    "sourceBundleCode",
+    "sourceBundleVersion",
+    "journeyContext",
+    "readOnly",
+    "providerUsed",
+    "aiUsed",
+    "promptUsed",
+    "knowledgeQueried",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "realityDecisionCreated",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-JOURNEY-MEANING-CONTEXT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "JOURNEY_MEANING_PROJECTION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "journeyCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceBundleCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceBundleVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "journeyContext": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "meaningCode",
+          "meaningFamily",
+          "selectedDimensions",
+          "knowledgeCoverage",
+          "limitations",
+          "sourceLineage"
+        ],
+        "properties": {
+          "meaningCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "meaningFamily": {
+            "type": "string",
+            "minLength": 1
+          },
+          "selectedDimensions": {
+            "type": "object"
+          },
+          "knowledgeCoverage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "nodeCount",
+              "publishedFragmentCount",
+              "locale"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "none",
+                  "partial",
+                  "sufficient"
+                ]
+              },
+              "nodeCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "publishedFragmentCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "locale": {
+                "enum": [
+                  "zh-Hans",
+                  "en"
+                ]
+              }
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "sourceLineage": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "methodCode",
+              "projectionType",
+              "projectionCode",
+              "projectionVersion",
+              "projectionDigest"
+            ],
+            "properties": {
+              "methodCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "projectionType": {
+                "type": "string",
+                "minLength": 1
+              },
+              "projectionCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "projectionVersion": {
+                "type": "string",
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+              },
+              "projectionDigest": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "readOnly": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "promptUsed": {
+      "const": false
+    },
+    "knowledgeQueried": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "realityDecisionCreated": {
+      "const": false
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  }
+}

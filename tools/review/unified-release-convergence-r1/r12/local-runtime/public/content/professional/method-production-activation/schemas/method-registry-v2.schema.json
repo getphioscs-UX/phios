@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-METHOD-REGISTRY-v2.schema.json",
+  "title": "PHI OS Method Registry v2",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "registryCode",
+    "registryVersion",
+    "status",
+    "states",
+    "methods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-METHOD-REGISTRY-v2.0.0"
+    },
+    "registryCode": {
+      "const": "METHOD_REGISTRY_V2"
+    },
+    "registryVersion": {
+      "const": "2.0.0"
+    },
+    "states": {
+      "type": "array",
+      "uniqueItems": true
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "required": [
+          "methodCode",
+          "pluginCode",
+          "methodVersion",
+          "state",
+          "productionEligible",
+          "professionalEligible"
+        ],
+        "properties": {
+          "methodCode": {
+            "type": "string"
+          },
+          "pluginCode": {
+            "type": "string"
+          },
+          "methodVersion": {
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "REGISTERED",
+              "VALIDATION",
+              "ACTIVATION_CANDIDATE",
+              "PRODUCTION_ELIGIBLE",
+              "PROFESSIONAL_ELIGIBLE",
+              "BLOCKED",
+              "RETIRED"
+            ]
+          },
+          "productionEligible": {
+            "type": "boolean"
+          },
+          "professionalEligible": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

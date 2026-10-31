@@ -1,0 +1,52 @@
+{
+  "contractCode": "PHI-OS-ICR-W5-CANONICAL-CASE-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W5",
+  "status": "contract_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "ICR",
+  "objectType": "CANONICAL_CASE_SNAPSHOT",
+  "dataType": "REALITY_INPUT_RECORD",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/canonical-case-v1.schema.json",
+  "stateRegistryReference": "content/runtime/input-case-runtime/registries/case-state-transition-registry-v1.json",
+  "inputs": [
+    "Verified Input Decision references",
+    "RDG lifecycle references",
+    "Explicit Case identity and timestamp"
+  ],
+  "output": "Immutable Canonical Case snapshot",
+  "caseTypes": ["REALITY_INITIALIZATION"],
+  "initialStatus": "READY_FOR_RMO",
+  "authorityBoundary": {
+    "icrOwns": ["Case identity", "Case snapshot lineage", "Case readiness", "Case version sequence"],
+    "sharedDataAuthorityOwns": ["Verified facts referenced by Verified Inputs"],
+    "rdgOwns": ["Persistence", "Consent", "Retention", "Deletion"],
+    "rmoOwns": ["Reality v1 and later Reality versions"]
+  },
+  "forbiddenFields": [
+    "customerDb",
+    "customerDatabase",
+    "customerRecord",
+    "accountRecord",
+    "payload",
+    "rawInput",
+    "rawBirthData",
+    "reality",
+    "realityObject",
+    "runtimeState"
+  ],
+  "rules": {
+    "verifiedInputsRequired": true,
+    "unverifiedInputMayEnterCase": false,
+    "caseStoresVerifiedInputPayload": false,
+    "caseStoresSharedFactCopies": false,
+    "caseIsEvidence": false,
+    "caseIsReality": false,
+    "caseIsRuntimeState": false,
+    "caseDigestMustBeDeterministic": true,
+    "caseSnapshotIsImmutable": true,
+    "providerOrAiMayCreateCaseAuthority": false,
+    "persistentStoreActivated": false,
+    "registryStoresCaseInstances": false
+  }
+}

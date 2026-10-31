@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/authoring-node-match-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "matchCode",
+    "candidateCode",
+    "matchClass",
+    "nodeMatches",
+    "relationshipCandidates",
+    "duplicateRisk",
+    "newNodeNeed",
+    "matchingAuthority",
+    "automaticCreationAllowed"
+  ],
+  "properties": {
+    "matchCode": {
+      "type": "string"
+    },
+    "candidateCode": {
+      "type": "string"
+    },
+    "matchClass": {
+      "enum": [
+        "exact_existing_node",
+        "registry_related_node",
+        "supporting_question",
+        "no_match",
+        "conflicted"
+      ]
+    },
+    "nodeMatches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "relationshipCandidates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "duplicateRisk": {
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "newNodeNeed": {
+      "enum": [
+        "no",
+        "possible",
+        "human_decision_required"
+      ]
+    },
+    "matchingAuthority": {
+      "const": "registry_led_no_free_inference"
+    },
+    "automaticCreationAllowed": {
+      "const": false
+    }
+  }
+}

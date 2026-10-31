@@ -1,0 +1,157 @@
+/*
+ * PDS-W6 Reconstruction Experience
+ * Customer projection and interaction presentation only.
+ */
+
+.reconstruction-page {
+  --reconstruction-confirmed: var(--phi-state-success, #25755e);
+  --reconstruction-unknown: var(--phi-state-warning, #9b642d);
+}
+
+.reconstruction-update-notice {
+  margin: var(--phi-space-4, 1rem) var(--phi-space-5, 1.25rem) 0;
+  padding: var(--phi-space-3, .75rem) var(--phi-space-4, 1rem);
+  border: 1px solid color-mix(in srgb, var(--reconstruction-confirmed) 38%, transparent);
+  border-radius: var(--phi-radius-md, .75rem);
+  background: color-mix(in srgb, var(--reconstruction-confirmed) 8%, white);
+  color: var(--reconstruction-confirmed);
+  font-size: .88rem;
+  font-weight: 650;
+}
+
+.reconstruction-update-notice:focus {
+  outline: 3px solid color-mix(in srgb, var(--phi-action-primary, #242f7a) 24%, transparent);
+  outline-offset: 2px;
+}
+
+.reconstruction-page .customer-reconstruction {
+  padding-top: var(--phi-space-6, 1.5rem);
+}
+
+.reconstruction-page .w14-customer-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--phi-space-4, 1rem);
+}
+
+.reconstruction-page .w14-customer-card {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  gap: var(--phi-space-4, 1rem);
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--phi-border-subtle, #d8d4ca);
+  border-radius: var(--phi-radius-lg, 1rem);
+  background: var(--phi-surface-primary, #fff);
+  box-shadow: var(--phi-shadow-sm, 0 8px 24px rgba(17, 20, 26, .04));
+}
+
+.reconstruction-page .w14-customer-card > span {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid var(--phi-border-subtle, #d8d4ca);
+  border-radius: 999px;
+  color: var(--phi-text-muted, #686e79);
+  font-size: .72rem;
+  font-weight: 650;
+}
+
+.reconstruction-page .w14-customer-card h4 {
+  margin: .2rem 0 var(--phi-space-3, .75rem);
+  font-family: var(--phi-font-display, Newsreader, Georgia, serif);
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+}
+
+.reconstruction-page .w14-customer-card--change {
+  border-left: 4px solid var(--phi-action-primary, #242f7a);
+}
+
+.reconstruction-page .w14-customer-card--confirmed {
+  border-left: 4px solid var(--reconstruction-confirmed);
+}
+
+.reconstruction-page .w14-customer-card--unknown {
+  border-left: 4px solid var(--reconstruction-unknown);
+  background: color-mix(in srgb, var(--reconstruction-unknown) 5%, white);
+}
+
+.reconstruction-page .w14-condition-group {
+  padding-top: var(--phi-space-3, .75rem);
+  border-top: 1px solid var(--phi-border-subtle, #d8d4ca);
+}
+
+.reconstruction-page .w14-condition-group + .w14-condition-group {
+  margin-top: var(--phi-space-3, .75rem);
+}
+
+.reconstruction-page .w14-condition-group h5 {
+  margin: 0 0 var(--phi-space-2, .5rem);
+  color: var(--phi-text-muted, #686e79);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.reconstruction-page .w14-view-intro {
+  max-width: 46rem;
+  color: var(--phi-text-muted, #686e79);
+}
+
+.reconstruction-page .w14-evidence-list {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.reconstruction-page .w14-evidence-kind {
+  display: inline-flex;
+  margin: 0 0 var(--phi-space-2, .5rem);
+  padding: .25rem .55rem;
+  border-radius: 999px;
+  background: var(--phi-surface-muted, #f1efe9);
+  color: var(--phi-text-muted, #686e79);
+  font-size: .72rem;
+}
+
+.reconstruction-page .w14-evidence-details > summary,
+.reconstruction-page .w14-inline-editor > summary {
+  min-height: 2.75rem;
+}
+
+.reconstruction-page [data-w14-view="technical"][hidden],
+.reconstruction-page .technical-record[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .reconstruction-page .w14-view-tabs {
+    position: sticky;
+    top: var(--phi-header-height, 4.5rem);
+    z-index: 4;
+    padding: var(--phi-space-2, .5rem) 0;
+    background: color-mix(in srgb, var(--phi-surface-primary, #fff) 94%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .reconstruction-page .w14-customer-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .reconstruction-page .w14-view-tabs button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .reconstruction-page .w14-customer-grid {
+    max-width: 68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reconstruction-page *,
+  .reconstruction-page *::before,
+  .reconstruction-page *::after {
+    scroll-behavior: auto !important;
+  }
+}

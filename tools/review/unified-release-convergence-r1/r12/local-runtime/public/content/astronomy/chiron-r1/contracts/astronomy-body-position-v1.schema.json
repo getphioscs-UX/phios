@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Shared AstronomyBodyPositionV1 envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "authority", "bodyCode", "instantUtc", "calculationStatus", "position", "warnings", "inputHash", "outputDigest"],
+  "properties": {
+    "schemaVersion": {"const": "AstronomyBodyPositionV1"},
+    "authority": {"const": "SHARED_ASTRONOMY_MINOR_BODY_POSITION_V1"},
+    "bodyCode": {"const": "CHIRON"},
+    "instantUtc": {"type": ["string", "null"]},
+    "calculationStatus": {"enum": ["SUPPORTED", "UNSUPPORTED_DATE", "PROVIDER_ERROR", "EPHEMERIS_DATA_MISSING", "INVALID_INPUT"]},
+    "position": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/position"}]},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "inputHash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "outputDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  },
+  "allOf": [{"if": {"properties": {"calculationStatus": {"const": "SUPPORTED"}}}, "then": {"properties": {"position": {"$ref": "#/$defs/position"}}}, "else": {"properties": {"position": {"type": "null"}}}}],
+  "$defs": {
+    "position": {
+      "type": "object", "additionalProperties": false,
+      "required": ["bodyCode", "instantUtc", "julianDayUt", "observerMode", "coordinateFrame", "coordinateSystem", "longitudeDeg", "latitudeDeg", "longitudeSpeedDegPerDay", "retrograde", "distanceAu", "providerCode", "providerVersion", "ephemerisMode"],
+      "properties": {
+        "bodyCode": {"const": "CHIRON"}, "instantUtc": {"type": "string"},
+        "julianDayUt": {"type": "number"}, "observerMode": {"const": "GEOCENTRIC"},
+        "coordinateFrame": {"type": "string", "minLength": 1}, "coordinateSystem": {"const": "ECLIPTIC"},
+        "longitudeDeg": {"type": "number", "minimum": 0, "exclusiveMaximum": 360},
+        "latitudeDeg": {"type": "number", "minimum": -90, "maximum": 90},
+        "longitudeSpeedDegPerDay": {"type": "number"}, "retrograde": {"type": "boolean"},
+        "distanceAu": {"type": "number", "exclusiveMinimum": 0},
+        "providerCode": {"type": "string", "minLength": 1}, "providerVersion": {"type": "string", "minLength": 1},
+        "ephemerisMode": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

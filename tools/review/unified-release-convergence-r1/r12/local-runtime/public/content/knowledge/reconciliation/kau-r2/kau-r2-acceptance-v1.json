@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R2-ACCEPTANCE-v1.0.0",
+  "stage": "KAU-R2",
+  "status": "CANDIDATE_MATCHING_COMPLETE_HUMAN_ACCEPTANCE_PENDING",
+  "baselineCommit": "e69f22bc6a192ea02776abf05db78540c5556d4c",
+  "inputs": {
+    "completedManuscriptSections": 448,
+    "logicalMarkedSections": 446,
+    "existingCanonicalNodes": 716,
+    "completedVolumeCanonicalScope": 245,
+    "futureOutlineParts": [
+      "P8",
+      "P9",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15"
+    ],
+    "futureOutlineChapterCount": 621
+  },
+  "candidateStats": {
+    "SUPPORTING_ONLY": 7,
+    "EXACT_MATCH": 160,
+    "UNRESOLVED": 262,
+    "EXPANDED_MATCH": 12,
+    "REMAP": 4,
+    "MERGE_REQUIRED": 1,
+    "NEW_NODE_REQUIRED": 2
+  },
+  "bookStats": {
+    "BOOK-1": {
+      "SUPPORTING_ONLY": 5,
+      "EXACT_MATCH": 1,
+      "UNRESOLVED": 262,
+      "EXPANDED_MATCH": 7
+    },
+    "BOOK-2": {
+      "SUPPORTING_ONLY": 2,
+      "EXACT_MATCH": 159,
+      "EXPANDED_MATCH": 5,
+      "REMAP": 4,
+      "MERGE_REQUIRED": 1,
+      "NEW_NODE_REQUIRED": 2
+    }
+  },
+  "humanReviewQueueCount": 281,
+  "acceptance": {
+    "fullMaterializedContentUsedForCandidateGeneration": true,
+    "tocOnlyMatchingUsed": false,
+    "all448MaterializedSegmentsAccountedFor": true,
+    "all245ExistingP0P7NodesAccountedForInCoverageLedger": true,
+    "futureP8P15OutlineRegisteredAsNonManuscriptConstraint": true,
+    "nodesJsonModified": false,
+    "automaticCanonicalAcceptance": false,
+    "ksarCanonicalBindingRegistryPopulated": false,
+    "humanReviewRequiredBeforeBindingOrRegistryDelta": true
+  },
+  "nextStages": [
+    "KAU-R3 Volume I Reconciliation",
+    "KAU-R4 Volume II Reconciliation",
+    "KAU-R5 Canonical Registry Delta after human acceptance",
+    "KAU-R6 Five-Volume Blueprint Rebuild after accepted semantic decisions"
+  ]
+}

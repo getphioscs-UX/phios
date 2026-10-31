@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-canonical-production-plan-v1",
+  "type": "object",
+  "required": [
+    "planCode",
+    "nodeCode",
+    "productionRole",
+    "productionPriority",
+    "requiredOutputs",
+    "optionalOutputs",
+    "prohibitedOutputs",
+    "reason",
+    "knowledgeCoverageState",
+    "articleRequired",
+    "fragmentRequired",
+    "figureRequired",
+    "diagramRequired",
+    "journeyRequired",
+    "academyRequired",
+    "localeRequirements",
+    "productionReadiness",
+    "humanDecisionRequired"
+  ],
+  "properties": {
+    "planCode": {
+      "type": "string"
+    },
+    "nodeCode": {
+      "type": "string"
+    },
+    "productionRole": {
+      "enum": [
+        "ARTICLE",
+        "FRAGMENT",
+        "FIGURE",
+        "DIAGRAM",
+        "STRUCTURED_ONLY",
+        "JOURNEY_ONLY",
+        "ACADEMY",
+        "MULTI_ASSET",
+        "NO_PUBLIC_ASSET_REQUIRED",
+        "DEFERRED"
+      ]
+    },
+    "productionPriority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "DEFERRED"
+      ]
+    },
+    "requiredOutputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "optionalOutputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prohibitedOutputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "knowledgeCoverageState": {
+      "enum": [
+        "complete",
+        "partial",
+        "thin",
+        "conflicted",
+        "missing"
+      ]
+    },
+    "articleRequired": {
+      "type": "boolean"
+    },
+    "fragmentRequired": {
+      "type": "boolean"
+    },
+    "figureRequired": {
+      "type": "boolean"
+    },
+    "diagramRequired": {
+      "type": "boolean"
+    },
+    "journeyRequired": {
+      "type": "boolean"
+    },
+    "academyRequired": {
+      "type": "boolean"
+    },
+    "localeRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "productionReadiness": {
+      "enum": [
+        "ready",
+        "not_ready",
+        "blocked",
+        "deferred"
+      ]
+    },
+    "humanDecisionRequired": {
+      "const": true
+    }
+  },
+  "additionalProperties": false
+}

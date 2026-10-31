@@ -1,0 +1,10 @@
+import {MCD6_RENDERER_VERSION,MCD6_HDR_PUBLIC_LABEL,escapeHtml,renderSharedOverlay} from './renderer-core.js';
+const RESTRICTED_PUBLIC_TERMS=Object.freeze(['HUMAN_DESIGN','Human Design','human design','HDR']);
+export function renderHdrValidationProjection(c,{locale='en',lineage=[],validationFixture=false}={}){
+ if(validationFixture!==true)throw Object.assign(new Error('MCD6_HDR_VALIDATION_FIXTURE_REQUIRED'),{code:'MCD6_HDR_VALIDATION_FIXTURE_REQUIRED'});
+ if(c?.method?.publicMethodCode!=='PERSONAL_RUNTIME_PROJECTION'||c?.method?.status!=='VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE'||c?.projection?.status!=='VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE'||c?.projection?.productionResult!==false||c?.execution?.mpaDecision?.dispatchAllowed!==false)throw Object.assign(new Error('MCD6_HDR_VALIDATION_CONTRACT_REQUIRED'),{code:'MCD6_HDR_VALIDATION_CONTRACT_REQUIRED'});
+ const label=c.method?.publicLabels?.[locale]||MCD6_HDR_PUBLIC_LABEL[locale]||MCD6_HDR_PUBLIC_LABEL.en;const description=locale==='zh-Hans'?'仅用于 Renderer、无障碍与响应式验证；不连接 Production Dispatch，不代表真实客户结果。':'Renderer, accessibility and responsive validation only; not connected to Production Dispatch and not a real customer result.';
+ const html=`<section class="mcd6-renderer mcd6-renderer--hdr-validation" data-renderer="PERSONAL_RUNTIME_PROJECTION" data-renderer-mode="VALIDATION_ONLY" data-renderer-version="${MCD6_RENDERER_VERSION}"><header><h3>${escapeHtml(label)}</h3><p>${escapeHtml(description)}</p></header><div class="mcd6-hdr-validation__frame" role="img" aria-label="${escapeHtml(label)}"><span>VALIDATION ONLY</span></div>${renderSharedOverlay(c,{locale,lineage})}</section>`;
+ for(const term of RESTRICTED_PUBLIC_TERMS)if(html.includes(term))throw Object.assign(new Error('MCD6_HDR_RESTRICTED_PUBLIC_VOCABULARY_LEAK'),{code:'MCD6_HDR_RESTRICTED_PUBLIC_VOCABULARY_LEAK',term});
+ return Object.freeze({status:'RENDERED_VALIDATION_ONLY',renderer:'PERSONAL_RUNTIME_PROJECTION_VALIDATION',html,accessibleText:`${label}. ${description}`,rendererVersion:MCD6_RENDERER_VERSION});
+}

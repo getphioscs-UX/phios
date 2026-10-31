@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BZRA-W4-LUCK-CYCLE-POLICY-FREEZE-v1.0.0",
+  "work": "BZRA-W4",
+  "status": "FROZEN",
+  "authority": "PHI_OS_BAZI_POLICY_V1",
+  "direction": {
+    "rule": "YEAR_STEM_POLARITY_PLUS_TRADITIONAL_CALCULATION_SEX",
+    "forward": [
+      "YANG_MALE",
+      "YIN_FEMALE"
+    ],
+    "backward": [
+      "YIN_MALE",
+      "YANG_FEMALE"
+    ],
+    "identityInferenceAllowed": false
+  },
+  "startAge": {
+    "forwardReference": "NEXT_JIE",
+    "backwardReference": "PREVIOUS_JIE",
+    "threeDaysEqualYears": 1,
+    "oneDayEqualMonths": 4,
+    "twoHoursEqualDays": 10,
+    "rounding": "NO_ROUNDING_IN_ENGINE"
+  },
+  "sequence": {
+    "cycleDurationYears": 10,
+    "defaultProductionCycleCount": 8,
+    "maximumCycleCount": 12
+  },
+  "inputBoundary": {
+    "knownBirthTimeRequired": true,
+    "traditionalCalculationSexRequiredForLuckCycle": true,
+    "threePillarLuckCycleAllowed": false
+  },
+  "projectionBoundary": {
+    "sequenceProjected": true,
+    "directionProjectedPublicly": false,
+    "directionMeaningDeferred": true
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-REGRESSION-TRIGGER-REGISTRY-v2.0.0",
+  "work": "MPA-W14",
+  "baselineCommit": "4188ce3cb33fc4bb0ddf80b29a4ab546a74841d6",
+  "registryVersion": "2.0.0",
+  "status": "ACTIVE_METHOD_SCOPED_REVALIDATION_REQUIRED",
+  "triggers": [
+    "algorithm",
+    "dependency",
+    "registry",
+    "policy",
+    "timezone_library",
+    "ephemeris"
+  ],
+  "rules": {
+    "anyTriggerChangeRequiresRegression": true,
+    "regressionBeforeEligibilityDecision": true,
+    "digestDriftRequiresExplicitReview": true,
+    "silentDependencyUpgradeForbidden": true,
+    "timezoneLibraryUpgradeRequiresBoundaryFixtures": true,
+    "ephemerisUpgradeRequiresReferenceComparison": true,
+    "repositoryWidePackageFingerprintForbidden": true,
+    "packageScriptFingerprintForbidden": true,
+    "nonMethodDependencyFingerprintForbidden": true
+  },
+  "fingerprints": [
+    {
+      "trigger": "registry",
+      "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0"
+    },
+    {
+      "trigger": "policy",
+      "path": "content/professional/core-method-runtime/num-cycle-policy-registry-v1.json",
+      "sha256": "2946439f63396a737fb0e9b3693abf31064223e878c7d1cfcade1f7ed67517a0"
+    },
+    {
+      "trigger": "algorithm",
+      "path": "functions/core-method-runtime/num-birth-number-runtime.js",
+      "sha256": "e7de5630c7b2e6faef419ba697da22a7bf979de135eb236713ea0fe4aec3e70d"
+    },
+    {
+      "trigger": "algorithm",
+      "path": "functions/core-method-runtime/bzr-four-pillars-runtime.js",
+      "sha256": "70eeaf70469bfb4b6df2bb100ccef15312fe01aac0d4561455bbbd355f839a05"
+    },
+    {
+      "trigger": "algorithm",
+      "path": "functions/core-method-runtime/hdr-design-moment-runtime.js",
+      "sha256": "2d684ac53e2847d34094605f4dddb765566fb82e346643be9b8a46f3ef074e32"
+    },
+    {
+      "trigger": "dependency",
+      "registryPath": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+      "fingerprintMode": "METHOD_DEPENDENCY_ENTRIES_ONLY"
+    },
+    {
+      "trigger": "timezone_library",
+      "authorityCode": "IANA_TZDB",
+      "fingerprintStatus": "RUNTIME_VERSION_AND_DATASET_DIGEST_REQUIRED",
+      "sha256": null
+    },
+    {
+      "trigger": "ephemeris",
+      "authorityCode": "AST_EPHEMERIS_AUTHORITY",
+      "fingerprintStatus": "PINNED_PACKAGE_OR_DATASET_DIGEST_REQUIRED",
+      "sha256": null
+    }
+  ],
+  "productionEligibilityChanged": false
+}

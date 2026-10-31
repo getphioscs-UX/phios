@@ -1,0 +1,29 @@
+{
+  "registryCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W27",
+  "objectType": "LEARNING_FEEDBACK",
+  "status": "canonical",
+  "productionStatus": "controlled_deterministic_feedback_semantics",
+  "contractReference": "content/academy/academy-learning-runtime/contracts/learning-feedback-contract-v1.json",
+  "feedbackStateCodes": ["SUPPORTED", "PARTIALLY_SUPPORTED", "UNSUPPORTED", "OVER_INTERPRETED", "BOUNDARY_MISSED", "UNKNOWN_IGNORED", "EVIDENCE_MISSING", "CONSTRAINT_MISREAD"],
+  "evaluationPriority": ["EVIDENCE_MISSING", "UNKNOWN_IGNORED", "CONSTRAINT_MISREAD", "BOUNDARY_MISSED", "OVER_INTERPRETED", "UNSUPPORTED", "PARTIALLY_SUPPORTED", "SUPPORTED"],
+  "feedbackDefinitions": [
+    {"feedbackCode": "SUPPORTED", "priority": 8, "triggerDimension": "supportLevel", "triggerValue": "FULL", "criterionEvidenceStatus": "MET", "directiveCode": "PRESERVE_CURRENT_BOUNDARY", "definition": "The governed finding fully supports the criterion with required evidence and boundaries intact."},
+    {"feedbackCode": "PARTIALLY_SUPPORTED", "priority": 7, "triggerDimension": "supportLevel", "triggerValue": "PARTIAL", "criterionEvidenceStatus": "NOT_MET", "directiveCode": "COMPLETE_MISSING_CRITERION_SUPPORT", "definition": "The governed finding supports part, but not all, of the criterion."},
+    {"feedbackCode": "UNSUPPORTED", "priority": 6, "triggerDimension": "supportLevel", "triggerValue": "NONE", "criterionEvidenceStatus": "NOT_MET", "directiveCode": "RETURN_TO_CRITERION_AND_EVIDENCE", "definition": "The governed finding does not support the criterion."},
+    {"feedbackCode": "OVER_INTERPRETED", "priority": 5, "triggerDimension": "interpretationBounded", "triggerValue": false, "criterionEvidenceStatus": "NOT_MET", "directiveCode": "REDUCE_CLAIM_TO_EVIDENCE_BOUNDARY", "definition": "The interpretation exceeds the evidence or governed claim boundary."},
+    {"feedbackCode": "BOUNDARY_MISSED", "priority": 4, "triggerDimension": "boundaryPreserved", "triggerValue": false, "criterionEvidenceStatus": "NOT_MET", "directiveCode": "RESTORE_REQUIRED_AUTHORITY_OR_SCOPE_BOUNDARY", "definition": "A required authority, scope, uncertainty or lineage boundary is missing."},
+    {"feedbackCode": "UNKNOWN_IGNORED", "priority": 2, "triggerDimension": "unknownsPreserved", "triggerValue": false, "criterionEvidenceStatus": "NOT_MET", "directiveCode": "RESTORE_UNRESOLVED_UNKNOWN", "definition": "A material unknown was ignored or treated as resolved."},
+    {"feedbackCode": "EVIDENCE_MISSING", "priority": 1, "triggerDimension": "evidencePresent", "triggerValue": false, "criterionEvidenceStatus": "UNKNOWN", "directiveCode": "IDENTIFY_REQUIRED_EVIDENCE", "definition": "Required evidence is absent, so criterion support cannot be resolved safely."},
+    {"feedbackCode": "CONSTRAINT_MISREAD", "priority": 3, "triggerDimension": "constraintsCorrect", "triggerValue": false, "criterionEvidenceStatus": "NOT_MET", "directiveCode": "REMAP_MATERIAL_CONSTRAINT", "definition": "A material constraint was omitted, reversed or mapped incorrectly."}
+  ],
+  "rules": {
+    "allEightCanonicalFeedbackStatesRegisteredExactlyOnce": true,
+    "evaluationPriorityIsUniqueAndComplete": true,
+    "evidenceMissingMapsToUnknown": true,
+    "onlySupportedMapsToMet": true,
+    "feedbackDoesNotCreateScoreCapabilityStateOrAuthority": true,
+    "personalizedGenerativeFeedbackActivated": false
+  }
+}

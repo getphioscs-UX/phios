@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa/mpa-downstream-projection-reference-v1.schema.json",
+  "title": "PHI OS MPA Downstream Production Projection Reference v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodCode",
+    "methodVersion",
+    "projectionCode",
+    "projectionVersion",
+    "projectionDigest",
+    "projectionStatus",
+    "truthClaimed",
+    "professionalJudgmentCreated"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-DOWNSTREAM-PROJECTION-REFERENCE-v1.0.0"
+    },
+    "methodCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "methodVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectionCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectionVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "projectionStatus": {
+      "const": "PRODUCTION"
+    },
+    "truthClaimed": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    }
+  }
+}

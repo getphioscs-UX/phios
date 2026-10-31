@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/source.schema.json",
+  "title": "PHI OS Knowledge Source",
+  "description": "Governed source identity and metadata. Source presence never proves a Claim and never grants publication authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceCode",
+    "sourceSetVersion",
+    "sourceType",
+    "title",
+    "author",
+    "organization",
+    "publisher",
+    "publicationDate",
+    "accessedAt",
+    "locator",
+    "language",
+    "sourceScope",
+    "qualityAssessment",
+    "supportEligibility",
+    "review",
+    "publicationStatus",
+    "storagePolicy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KNOWLEDGE-SOURCE-v1.0.0"
+    },
+    "sourceCode": {
+      "$ref": "#/$defs/sourceCode"
+    },
+    "sourceSetVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "sourceType": {
+      "type": "string",
+      "enum": [
+        "official_documentation",
+        "official_report",
+        "academic_paper",
+        "academic_book",
+        "professional_book",
+        "standards_document",
+        "government_publication",
+        "institutional_publication",
+        "primary_historical_source",
+        "reputable_journalism",
+        "verified_dataset",
+        "phi_os_canonical_source",
+        "phi_os_book_source",
+        "phi_os_internal_research",
+        "professional_blog",
+        "conference_talk",
+        "expert_interview",
+        "secondary_summary"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "author": {
+      "type": "array",
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 160
+      }
+    },
+    "organization": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 240
+    },
+    "publisher": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 240
+    },
+    "publicationDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}(?:-\\d{2}(?:-\\d{2})?)?$"
+    },
+    "accessedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "locator": {
+      "$ref": "#/$defs/sourceLocator"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "zh-Hans",
+        "en",
+        "multilingual",
+        "other"
+      ]
+    },
+    "sourceScope": {
+      "$ref": "#/$defs/sourceScope"
+    },
+    "qualityAssessment": {
+      "$ref": "#/$defs/qualityAssessment"
+    },
+    "supportEligibility": {
+      "type": "string",
+      "enum": [
+        "eligible",
+        "reference_only",
+        "not_eligible_for_claim_support"
+      ]
+    },
+    "review": {
+      "$ref": "#/$defs/sourceReview"
+    },
+    "publicationStatus": {
+      "type": "string",
+      "enum": [
+        "internal_only",
+        "public_citation_allowed",
+        "public_metadata_only",
+        "restricted",
+        "deprecated"
+      ]
+    },
+    "storagePolicy": {
+      "type": "string",
+      "enum": [
+        "metadata_only",
+        "metadata_and_locator",
+        "controlled_internal_locator"
+      ]
+    }
+  },
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "sourceCode": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9]+(?:-[A-Z0-9]+)*$",
+      "maxLength": 96
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "not_reviewed",
+        "in_review",
+        "changes_required",
+        "conditionally_approved",
+        "approved",
+        "rejected"
+      ]
+    },
+    "reviewerType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "human",
+        "ai_assistant",
+        "automated_validator",
+        "system",
+        null
+      ]
+    },
+    "reviewedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$"
+    },
+    "reviewedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "sourceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "doi",
+        "isbn",
+        "edition",
+        "pageRange",
+        "section"
+      ],
+      "properties": {
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "maxLength": 1200
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "isbn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        },
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "pageRange": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        }
+      }
+    },
+    "sourceScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "topic",
+        "supports",
+        "doesNotSupport"
+      ],
+      "properties": {
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "supports": {
+          "type": "array",
+          "maxItems": 24,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          }
+        },
+        "doesNotSupport": {
+          "type": "array",
+          "maxItems": 24,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 600
+          }
+        }
+      }
+    },
+    "qualityAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorityLevel",
+        "reliability",
+        "currency",
+        "conflictOfInterest",
+        "notes"
+      ],
+      "properties": {
+        "authorityLevel": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "authoritative_secondary",
+            "reputable_secondary",
+            "contextual",
+            "reference_only"
+          ]
+        },
+        "reliability": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "not_assessed"
+          ]
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "current",
+            "historical",
+            "potentially_outdated",
+            "superseded",
+            "not_applicable",
+            "not_assessed"
+          ]
+        },
+        "conflictOfInterest": {
+          "type": "string",
+          "enum": [
+            "none_identified",
+            "disclosed",
+            "potential",
+            "not_assessed"
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1600
+        }
+      }
+    },
+    "sourceReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reviewerType",
+        "reviewedBy",
+        "reviewedAt",
+        "notes"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/reviewStatus"
+        },
+        "reviewerType": {
+          "$ref": "#/$defs/reviewerType"
+        },
+        "reviewedBy": {
+          "$ref": "#/$defs/reviewedBy"
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/reviewedAt"
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1600
+        }
+      }
+    }
+  }
+}

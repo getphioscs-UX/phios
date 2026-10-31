@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS Canonical Meaning Family Registry v1.1",
+  "type": "object",
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "productionStatus",
+    "families"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-CANONICAL-MEANING-FAMILY-REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.1.0"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "families": {
+      "type": "array",
+      "minItems": 24
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W21-NUM-ACTIVATION-FIXTURE-CORPUS-v1.1.0",
+  "work": "MPA-W21",
+  "baselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "corpusCode": "MPA_NUM_ACTIVATION_FIXTURE_CORPUS",
+  "corpusVersion": "1.1.0",
+  "status": "METHOD_ACTIVATION_EVIDENCE_SUCCESSOR",
+  "predecessor": {
+    "reference": "content/professional/method-production-activation/fixtures/mpa-reference-fixture-corpus-v1.json",
+    "sha256": "4fc6d5ac30b5628d7c517d7ef757648834f2975bb0c74fb50cc60c64876b754a",
+    "mutationAllowed": false
+  },
+  "reconciliationCode": "MPA-W21-NUM-FIXTURE-RECONCILIATION-v1",
+  "fixtures": [
+    {
+      "fixtureId": "NUM-W21-VALID-001",
+      "fixtureType": "valid",
+      "input": {
+        "birthDate": "1989-11-15"
+      },
+      "expected": {
+        "status": "PASS",
+        "lifePath": 8,
+        "birthdayNumber": 6,
+        "attitudeNumber": 8
+      },
+      "sourceFixtureId": "NUM-VALID-001"
+    },
+    {
+      "fixtureId": "NUM-W21-EDGE-LEAP-001",
+      "fixtureType": "edge",
+      "input": {
+        "birthDate": "2000-02-29"
+      },
+      "expected": {
+        "status": "PASS",
+        "lifePath": 6,
+        "birthdayNumber": 11,
+        "attitudeNumber": 4
+      },
+      "sourceFixtureId": "NUM-EDGE-LEAP-001",
+      "correction": {
+        "predecessorLifePath": 4,
+        "reason": "Legacy NUM deterministic runtime and independently coded governed reduction both produce 6; W12 v1 structural checker did not execute this edge expected output."
+      }
+    },
+    {
+      "fixtureId": "NUM-W21-INVALID-DATE-001",
+      "fixtureType": "invalid",
+      "input": {
+        "birthDate": "2025-02-29"
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INVALID"
+      },
+      "sourceFixtureId": "NUM-INVALID-DATE-001"
+    },
+    {
+      "fixtureId": "NUM-W21-REGRESSION-001",
+      "fixtureType": "regression",
+      "input": {
+        "birthDate": "1989-11-15"
+      },
+      "expected": {
+        "status": "PASS",
+        "repeatOutputMustMatch": true,
+        "lifePath": 8,
+        "birthdayNumber": 6,
+        "attitudeNumber": 8
+      },
+      "sourceFixtureId": "NUM-REGRESSION-001"
+    }
+  ],
+  "rules": {
+    "legacyCorpusRewritten": false,
+    "allPassFixturesMustMatchLegacyRuntime": true,
+    "allPassFixturesMustMatchIndependentImplementation": true,
+    "invalidFixtureMustFailWithoutPseudoResult": true,
+    "fixtureEvidenceCreatesProductionEligibility": false
+  }
+}

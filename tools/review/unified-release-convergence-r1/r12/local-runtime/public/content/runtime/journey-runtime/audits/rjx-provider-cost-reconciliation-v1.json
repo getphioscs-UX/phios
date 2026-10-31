@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-RJX-PROVIDER-COST-RECONCILIATION-v1.0.0",
+  "work": "RJX-W19",
+  "status": "RECONCILED_SUCCESSOR_POLICY_PRODUCTION_REPAIR_PENDING",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "recordedAt": "2026-08-21",
+  "sources": [
+    {
+      "path": "content/runtime/journey-runtime/policies/rjx-entry-openai-opt-in-repair-candidate-v1.json",
+      "finding": "Historical protected Entry defaults remain unchanged; prior direct repair was blocked by PDS-W5 authority."
+    },
+    {
+      "path": "content/provider/contracts/zero-cost-provider-foundation-v1.json",
+      "finding": "Public KNR provider calls remain disabled and paid Journey budget is not shared."
+    },
+    {
+      "path": "content/provider/contracts/atomic-budget-reservation-v1.json",
+      "finding": "Metered provider calls require atomic reservation before provider call."
+    },
+    {
+      "path": "content/runtime/journey-runtime/contracts/reading-projection-contract-v1.json",
+      "finding": "Reading remains rule-first and provider failure preserves the Rule Reading."
+    }
+  ],
+  "reconciliation": {
+    "runtimeEntryOpenAIDefault": "SUCCESSOR_FALSE_LEGACY_PROTECTED_IMPLEMENTATION_UNCHANGED",
+    "initialReading": "RULE_ONLY",
+    "publicKNRProviderDefault": "DISABLED",
+    "workersAIHardBudget": {
+      "units": 0,
+      "status": "FAIL_CLOSED_UNTIL_REVIEWED_NONZERO_BUDGET"
+    },
+    "workersAIUsageTracking": "REQUIRED_BEFORE_ENABLEMENT",
+    "autoRouteToOpenAI": "FORBIDDEN",
+    "providerFailureBaseJourney": "CONTINUES_RULE_ONLY"
+  },
+  "acceptanceCandidate": {
+    "defaultOpenAICallCount": 0,
+    "unreservedMeteredInferenceAllowed": false,
+    "workersAICostObservableByContract": true,
+    "baseJourneyRequiresModelProvider": false
+  },
+  "productionEffect": {
+    "providerEnablementChanged": false,
+    "meteredProviderActivated": false,
+    "historicalProtectedFileChanged": false
+  },
+  "result": "RJX_W19_SUCCESSOR_COST_POLICY_READY_PRODUCTION_ACTIVATION_PENDING"
+}

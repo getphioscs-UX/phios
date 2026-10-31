@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-STRUCTURAL-FINDING-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W12",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "purpose": "Convert W0-W11 governed Zi Wei calculation, relationship, pattern, temporal and meaning evidence into typed structural findings without generating customer narrative, hidden scores or fortune/event claims.",
+  "inputSchemas": [
+    "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-ZIWEI-PALACE-RELATIONSHIP-ENGINE-v1.0.0",
+    "PHI-OS-ZIWEI-STAR-COMBINATION-RUNTIME-v1.0.0",
+    "PHI-OS-ZIWEI-PATTERN-RUNTIME-v1.0.0",
+    "PHI-OS-ZIWEI-DA-XIAN-INTEGRATION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-LIU-NIAN-INTEGRATION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-FP-W11-MEANING-CONTEXT-v1.0.0"
+  ],
+  "collectionSchema": "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+  "findingSchema": "PHI-OS-ZIWEI-STRUCTURAL-FINDING-v1.0.0",
+  "requiredFindingFields": [
+    "findingId",
+    "findingType",
+    "scope",
+    "state",
+    "semanticDimension",
+    "technicalLabel",
+    "evidenceRefs",
+    "meaningRefs",
+    "authorityRefs",
+    "unknownRefs",
+    "counterEvidenceRefs",
+    "confidenceClass"
+  ],
+  "findingStates": [
+    "ESTABLISHED",
+    "PARTIAL",
+    "QUALIFIED"
+  ],
+  "rules": {
+    "onePalaceProfileInsteadOfOneParagraphPerStar": true,
+    "relationshipNetworkIsSeparateEvidenceButSharesPalaceSemanticKey": true,
+    "blockedExtensionStarMeaningMustRemainUnknown": true,
+    "starStateIsCategoricalModifierNotStrengthScore": true,
+    "huaJiMayBeCounterEvidenceOnlyWhenCoexistingWithOtherTransformationSignals": true,
+    "oppositeDoesNotMeanConflict": true,
+    "triadDoesNotMeanSupport": true,
+    "patternQualificationDoesNotCreateOutcome": true,
+    "temporalFocusDoesNotCreateEventPrediction": true,
+    "customerNarrativeForbidden": true
+  },
+  "runtimeRef": "functions/zi-wei-full-production/ziwei-structural-finding-runtime.js",
+  "registryRef": "content/professional/zi-wei-full-production/registries/ziwei-structural-finding-type-registry-v1.json",
+  "customerCutoverAllowed": false
+}

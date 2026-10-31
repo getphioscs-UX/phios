@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-CKA-PRODUCTION-ACCEPTANCE-v1.0.0",
+  "work": "CKA-W33",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "status": "CKA_PRODUCTION_READY",
+  "scope": "CKA_CLIENT_CONSUMPTION_ONLY",
+  "gates": {
+    "askEntryValid": true,
+    "questionComposerValid": true,
+    "groundedAnswerValid": true,
+    "answerStructureValid": true,
+    "unknownVisible": true,
+    "knowledgeCardsValid": true,
+    "followUpValid": true,
+    "guidedContextValid": true,
+    "journeyEscalationValid": true,
+    "accountBoundaryValid": true,
+    "privacyValid": true,
+    "entitlementValid": true,
+    "localeValid": true,
+    "responsiveValid": true,
+    "accessibilityValid": true,
+    "noGenericChatbotRegression": true,
+    "noAutomaticJourneyEscalation": true,
+    "noForcedLoginRegression": true,
+    "noMethodExecutionLeakage": true,
+    "noRealityCaseLeakage": true
+  },
+  "responsiveEvidence": {
+    "authority": "BFR-H12",
+    "repositoryContractReady": true,
+    "askMatrixStates": 14,
+    "productionBrowserState": "REVALIDATION_REQUIRED"
+  },
+  "accessibilityEvidence": {
+    "repositoryContractReady": true,
+    "browserAssistiveTechnologyRevalidationRequired": true
+  },
+  "privacyEvidence": {
+    "requestTransport": "POST_JSON_NO_STORE",
+    "guestHistoryPersisted": false,
+    "trustedRealityAuthorizationRequired": true,
+    "privateContextInAnalyticsPayload": false,
+    "hiddenCaseCreated": false
+  },
+  "authorityBoundary": {
+    "groundedAnswerOwner": "KAP",
+    "complexityOwner": "KAP W24",
+    "journeyConsentOwner": "KAP W27",
+    "persistentRealityOwners": [
+      "ICR",
+      "RDG",
+      "RMO"
+    ],
+    "methodOwner": "Personal Runtime / MPA",
+    "ckaCreatesAuthority": false
+  },
+  "globalProductionAccepted": false,
+  "globalProductionState": "NOT_CLAIMED"
+}

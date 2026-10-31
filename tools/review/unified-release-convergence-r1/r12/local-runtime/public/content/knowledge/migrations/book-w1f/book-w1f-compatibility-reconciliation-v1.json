@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-W1F-COMPATIBILITY-RECONCILIATION-v1.0.0",
+  "phase": "BOOK-W1",
+  "step": "BOOK-W1F",
+  "status": "accepted-successor-compatibility-active",
+  "recordedAt": "2026-08-14",
+  "sourceAuthorities": {
+    "bookIdentity": "content/registry/books.json",
+    "partOwnership": "content/registry/parts.json",
+    "canonicalKnowledge": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "blueprints": "content/knowledge/blueprints/blueprint-registry.json",
+    "publicProjection": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json"
+  },
+  "authorityRules": {
+    "canonicalNodeCodePrefixIsPublicationAuthority": false,
+    "publicationBookComesFromPartRegistryOrGovernedMigration": true,
+    "legacyUrlDeletionAllowed": false,
+    "historicalCheckerRewriteAllowed": false,
+    "historicalFreezeRewriteAllowed": false,
+    "failClosedOnSuccessorDigestDrift": true
+  },
+  "historicalCheckers": [
+    { "command": "check:book-w0", "disposition": "KEEP", "historicalAuthority": "BOOK-W0 four-volume freeze evidence", "mutatedToFiveVolume": false },
+    { "command": "check:kh-w4b.5-book-2", "disposition": "KEEP", "historicalAuthority": "KH-W4B.5 BOOK-2 historical validation", "mutatedToFiveVolume": false },
+    { "command": "check:kh-w4b.5-book-3", "disposition": "KEEP", "historicalAuthority": "KH-W4B.5 BOOK-3 historical validation", "mutatedToFiveVolume": false },
+    { "command": "check:kh-w4b.5-book-4", "disposition": "KEEP", "historicalAuthority": "KH-W4B.5 BOOK-4 historical validation", "mutatedToFiveVolume": false }
+  ],
+  "successorCheckers": [
+    "check:book-w1",
+    "check:book-w1-ownership",
+    "check:book-w1-outline",
+    "check:book-w1-blueprints",
+    "check:book-w1-canonical",
+    "check:book-w1-public-projection",
+    "check:book-w1-compatibility",
+    "check:book-w1-freeze"
+  ],
+  "consumers": [
+    { "consumer": "KNR", "authorityBinding": "scripts/lib/knowledge-runtime/registry-consumer.mjs", "projectionRule": "active W1D authority contract + active publication ledger", "covered": true },
+    { "consumer": "KAU", "authorityBinding": "content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json", "projectionRule": "successor canonical registry", "covered": true },
+    { "consumer": "KPP", "authorityBinding": "content/knowledge/blueprints/blueprint-registry.json", "projectionRule": "successor blueprint digests", "covered": true },
+    { "consumer": "PJA", "authorityBinding": "scripts/lib/knowledge-blueprint/registry-authority.mjs", "projectionRule": "publication ownership is not inferred from nodeCode", "covered": true },
+    { "consumer": "Published Knowledge", "authorityBinding": "scripts/lib/knowledge-public/public-projection.mjs", "projectionRule": "published-only successor read model", "covered": true },
+    { "consumer": "CAR", "authorityBinding": "content/production/car", "projectionRule": "node identity preserved; book metadata derived", "covered": true },
+    { "consumer": "CPR", "authorityBinding": "content/production/cpr", "projectionRule": "presentation retains canonical node identity", "covered": true },
+    { "consumer": "VAP", "authorityBinding": "content/production/visual-article", "projectionRule": "activation records retain canonical node authority", "covered": true },
+    { "consumer": "ALR", "authorityBinding": "content/academy/academy-learning-runtime", "projectionRule": "learning references resolve canonical node identity", "covered": true },
+    { "consumer": "WPR", "authorityBinding": "content/web-production/registries/wpr-route-registry-v1.json", "projectionRule": "five canonical routes + maintenance redirect", "covered": true },
+    { "consumer": "Academy", "authorityBinding": "content/web-production/composition/public/academy-discovery-composition-v1.json", "projectionRule": "five-volume public book metadata", "covered": true },
+    { "consumer": "Figures", "authorityBinding": "content/registry/figures.json", "projectionRule": "ownership resolves through canonical Part registry", "covered": true },
+    { "consumer": "Reading Paths", "authorityBinding": "content/knowledge/public/public-reading-paths.json", "projectionRule": "published node identities preserved", "covered": true },
+    { "consumer": "Collections", "authorityBinding": "content/knowledge/registry/collections.json", "projectionRule": "collection identities preserved", "covered": true },
+    { "consumer": "Themes", "authorityBinding": "content/knowledge/registry/themes.json", "projectionRule": "theme identities preserved", "covered": true },
+    { "consumer": "Knowledge Cards", "authorityBinding": "content/professional/canonical-presentation-runtime/contracts/cpr-w9-knowledge-card-presentation-v1.json", "projectionRule": "canonical node references preserved", "covered": true },
+    { "consumer": "Public Search", "authorityBinding": "content/knowledge/runtime/index/nodes-index.json", "projectionRule": "published-only index carries publicationBookCode/publicationPartCode", "covered": true }
+  ],
+  "compatibilityRoutes": [
+    { "legacyRoute": "/book-one", "target": "/books/reality-formation/", "preserved": true },
+    { "legacyRoute": "/book-one-preview", "target": "/book-one-preview", "preserved": true },
+    { "legacyRoute": "/books/reality-maintenance/", "target": "/books/reality-continuity/", "redirectStatus": 308, "canonicalAuthority": false, "preserved": true }
+  ],
+  "acceptance": {
+    "consumerCount": 17,
+    "coveredConsumerCount": 17,
+    "uncoveredConsumerCount": 0,
+    "historicalCheckerMutationCount": 0,
+    "activePublicBookInferenceFromNodePrefixCount": 0
+  }
+}

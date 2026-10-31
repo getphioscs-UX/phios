@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-decision-revision-cycle-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "revisionReference",
+    "caseReference",
+    "professionalReference",
+    "previousPackageReference",
+    "previousPackageDigest",
+    "previousReleaseReference",
+    "previousVersion",
+    "revisedPackageReference",
+    "revisedPackageDigest",
+    "revisedVersion",
+    "reason",
+    "changedBy",
+    "createdAt",
+    "requiresReReview",
+    "overwriteAllowed",
+    "previousContentPreserved",
+    "revisionDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_DECISION_REVISION"
+    },
+    "revisionReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "professionalReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previousPackageReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previousPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "previousReleaseReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previousVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revisedPackageReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revisedPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "revisedVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    },
+    "changedBy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requiresReReview": {
+      "const": true
+    },
+    "overwriteAllowed": {
+      "const": false
+    },
+    "previousContentPreserved": {
+      "const": true
+    },
+    "revisionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

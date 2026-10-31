@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCTION-SHA-ALIGNMENT-CONTRACT-v2.0.0",
+  "phase": "TPA-L",
+  "work": "L-V2-PHASE-M-RELEASE-REALIGNMENT",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "ACTIVE_FAIL_CLOSED_PHASE_M_RELEASE_ALIGNMENT_CONTRACT",
+  "predecessor": "content/production/symbolic-method/contracts/tarot-production-sha-alignment-contract-v1.json",
+  "predecessorMutated": false,
+  "cloudflare": {
+    "projectName": "phios-github",
+    "environment": "production",
+    "productionBranch": "main",
+    "productionUrl": "https://phios-github.pages.dev/",
+    "metadataAuthority": "CLOUDFLARE_PAGES_DEPLOYMENTS_REST_API_AUTHENTICATED_BY_WRANGLER",
+    "runtimeShaWitness": "/api/ask2-runtime-status"
+  },
+  "requiredVerification": {
+    "originMainAndDeploymentCommitMustExactlyMatch": true,
+    "deploymentCommitMustBeFullGitSha": true,
+    "deploymentEnvironmentMustBeProduction": true,
+    "deploymentBranchMustBeMain": true,
+    "deploymentCommitDirtyMustBeFalse": true,
+    "deploymentStageMustBeSuccessful": true,
+    "runtimeWitnessDeployedShaMustEqualDeploymentCommit": true,
+    "productionUrlMustBeReachable": true,
+    "remoteTarotHtmlJsCssMustMatchFrozenRuntimeManifest": true
+  },
+  "evidencePolicy": {
+    "path": ".runtime-evidence/tarot-production-sha-alignment-v2.json",
+    "committed": false,
+    "reason": "Avoid commit-SHA self-invalidation after live verification"
+  },
+  "effects": {
+    "cloudflareDeploymentMutationAllowed": false,
+    "repositoryMutationAllowedByVerifier": false,
+    "productionCapabilityPromotionAllowed": false,
+    "publicRunAllowedMayChange": false,
+    "clientMayGrantAuthority": false
+  }
+}

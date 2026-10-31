@@ -1,0 +1,1151 @@
+[
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/minimal-data.json",
+    "sha256": "2ca4d0eae7aadb4220f2bb6f599eb87db0cbb005fc4007ab9acfd9b992105bb4",
+    "evidence": [],
+    "perspectives": []
+  },
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/profile-rich.json",
+    "sha256": "970d3dd4226adfe1efb075e06ce571d5886f16f587a3f7c5a8eefcc073348b3e",
+    "evidence": [
+      {
+        "id": "measure-1",
+        "evidenceClass": "MEASURED",
+        "sourceRef": "fixture:assessment",
+        "statement": "Source-native assessment record / 保留原量纲的评估记录",
+        "nativeValue": 42,
+        "nativeScale": "instrument-native",
+        "personId": "fixture-person",
+        "authority": "MEASURED",
+        "objectiveFact": false
+      }
+    ],
+    "perspectives": []
+  },
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/current-reality-rich.json",
+    "sha256": "dfaa452352db1b587444122a9085188dec7fae81eb2ea4af7e97bb896f481b66",
+    "evidence": [
+      {
+        "id": "current:CR-OBS-01",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-01",
+        "statement": "Working from a new location / 工作地点发生变化",
+        "domain": "ENVIRONMENT",
+        "contextTag": "location",
+        "sensitive": false,
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      },
+      {
+        "id": "current:CR-OBS-02",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "CURRENT_REALITY_RUNTIME:CR-OBS-02",
+        "statement": "A heavier work week / 本周工作负荷增加",
+        "domain": "LOAD",
+        "contextTag": "work",
+        "sensitive": false,
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      }
+    ],
+    "perspectives": []
+  },
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/multi-method.json",
+    "sha256": "aa9799ebd4b27d7d7cb4a1ebe60895c2e6c8a65b9d95057589fb4e4db6a1ff8e",
+    "evidence": [],
+    "perspectives": [
+      {
+        "id": "method-product:0",
+        "methodId": "AST",
+        "sourceRef": "PPR_CURRENT_SHARED_RUNTIME",
+        "product": {
+          "methodId": "AST",
+          "state": "READY",
+          "summary": "Fixture perspective / 夹具视角"
+        },
+        "evidenceClass": "METHOD_DERIVED",
+        "objectiveFact": false
+      },
+      {
+        "id": "method-product:1",
+        "methodId": "BZR",
+        "sourceRef": "PPR_CURRENT_SHARED_RUNTIME",
+        "product": {
+          "methodId": "BZR",
+          "state": "READY",
+          "summary": "Another fixture perspective / 另一夹具视角"
+        },
+        "evidenceClass": "METHOD_DERIVED",
+        "objectiveFact": false
+      }
+    ]
+  },
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/conflicting-perspectives.json",
+    "sha256": "7c7691a5b5beef07622a0b83ea082a674fe607f1e78f4375472890683a9b92cb",
+    "evidence": [
+      {
+        "id": "source-1",
+        "evidenceClass": "DECLARED",
+        "sourceRef": "fixture:customer",
+        "statement": "A current decision / 当前的一项决定",
+        "personId": "fixture-person",
+        "authority": "DECLARED",
+        "objectiveFact": false
+      },
+      {
+        "id": "source-2",
+        "evidenceClass": "METHOD_DERIVED",
+        "sourceRef": "fixture:method",
+        "statement": "A current decision / 当前的一项决定",
+        "methodId": "AST",
+        "claimId": "fixture-claim",
+        "personId": "fixture-person",
+        "authority": "METHOD_DERIVED",
+        "objectiveFact": false
+      }
+    ],
+    "perspectives": []
+  },
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/personal/unknown-heavy.json",
+    "sha256": "2ca4d0eae7aadb4220f2bb6f599eb87db0cbb005fc4007ab9acfd9b992105bb4",
+    "evidence": [],
+    "perspectives": []
+  },
+  {
+    "scenario": "relationship/couple",
+    "shared": [
+      {
+        "entryId": "shared-1",
+        "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+        "sourceAuthority": "DECLARED",
+        "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+        "declaredBy": "a",
+        "confirmedByOtherParticipant": false
+      }
+    ],
+    "observations": [],
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ]
+  },
+  {
+    "scenario": "relationship/family",
+    "shared": [
+      {
+        "entryId": "shared-1",
+        "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+        "sourceAuthority": "DECLARED",
+        "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+        "declaredBy": "a",
+        "confirmedByOtherParticipant": false
+      }
+    ],
+    "observations": [],
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ]
+  },
+  {
+    "scenario": "relationship/parent-child",
+    "shared": [
+      {
+        "entryId": "shared-1",
+        "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+        "sourceAuthority": "DECLARED",
+        "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+        "declaredBy": "a",
+        "confirmedByOtherParticipant": false
+      }
+    ],
+    "observations": [],
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ]
+  },
+  {
+    "scenario": "relationship/business-partner",
+    "shared": [
+      {
+        "entryId": "shared-1",
+        "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+        "sourceAuthority": "DECLARED",
+        "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+        "declaredBy": "a",
+        "confirmedByOtherParticipant": false
+      }
+    ],
+    "observations": [],
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ]
+  },
+  {
+    "scenario": "relationship/low-data",
+    "shared": [],
+    "observations": [],
+    "methodClaims": []
+  },
+  {
+    "scenario": "relationship/conflicting-method",
+    "shared": [
+      {
+        "entryId": "shared-1",
+        "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+        "sourceAuthority": "DECLARED",
+        "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+        "declaredBy": "a",
+        "confirmedByOtherParticipant": false
+      }
+    ],
+    "observations": [],
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ]
+  },
+  {
+    "scenario": "relationship/current-reality-heavy",
+    "shared": [
+      {
+        "entryId": "shared-1",
+        "statement": "双方安排每周共同复查家务。 / The participants arrange a weekly review of household tasks.",
+        "sourceAuthority": "DECLARED",
+        "sourceRef": "LOCAL_REVIEW_FIXTURE:declaration",
+        "declaredBy": "a",
+        "confirmedByOtherParticipant": false
+      }
+    ],
+    "observations": [
+      {
+        "scope": "ME",
+        "statement": "客户自述的当前背景 / Customer reported current context",
+        "sourceClass": "CURRENT_REALITY_OBSERVATION"
+      },
+      {
+        "scope": "OTHER_AS_OBSERVED",
+        "statement": "客户自述的当前背景 / Customer reported current context",
+        "sourceClass": "CURRENT_REALITY_OBSERVATION",
+        "partnerInnerStateFact": false
+      },
+      {
+        "scope": "US",
+        "statement": "客户自述的当前背景 / Customer reported current context",
+        "sourceClass": "CURRENT_REALITY_OBSERVATION"
+      },
+      {
+        "scope": "CONTEXT",
+        "statement": "客户自述的当前背景 / Customer reported current context",
+        "sourceClass": "CURRENT_REALITY_OBSERVATION"
+      }
+    ],
+    "methodClaims": [
+      {
+        "kind": "METHOD_RELATIONSHIP_PERSPECTIVE",
+        "methodId": "AST",
+        "claimId": "RELCL-FE0F620FB9182346287F71DA",
+        "sourceAuthority": "REL-W4 structural claim",
+        "humanAdmissionRef": "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+        "confidence": "UNKNOWN",
+        "limitations": [
+          "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+          "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+          "REL-W4:AST:A:TIME_EXACT",
+          "REL-W4:AST:A:PLACE_CONFIRMED",
+          "REL-W4:AST:B:TIME_EXACT",
+          "REL-W4:AST:B:PLACE_CONFIRMED"
+        ],
+        "nativeClaim": {
+          "claimId": "RELCL-FE0F620FB9182346287F71DA",
+          "claimClass": "OPEN",
+          "headline": "SUN ↔ SUN · CONJUNCTION",
+          "summary": "The admitted AST relational runtime establishes a governed CONJUNCTION cross-person structural contact between Person A SUN and Person B SUN. No synastry meaning, polarity, compatibility verdict or relationship outcome is inferred.",
+          "compositionRuleId": "REL-W4-AST-RLR-MAJOR-ASPECT-STRUCTURE-v1",
+          "sourceRefs": [
+            "content/governance/relational/contracts/ast-relational-structural-contract-v1.json",
+            "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json"
+          ],
+          "precisionBoundaryRefs": [
+            "REL-W2:AST:EXACT_BIRTH_TIME_REQUIRED",
+            "REL-W2:AST:BIRTH_PLACE_REQUIRED",
+            "REL-W4:AST:A:TIME_EXACT",
+            "REL-W4:AST:A:PLACE_CONFIRMED",
+            "REL-W4:AST:B:TIME_EXACT",
+            "REL-W4:AST:B:PLACE_CONFIRMED"
+          ]
+        },
+        "domains": [
+          "Structure"
+        ],
+        "observationalAuthority": false
+      }
+    ]
+  },
+  {
+    "path": "content/product-convergence-r1/audits/w12-w95/financial/candidate-report.json",
+    "sha256": "6fd98b38164e286ded06a34e8a09cc541fd945bd3606b42d4d556e820a698918",
+    "facts": [
+      {
+        "assetId": "A-LIQ",
+        "assetType": "CASH",
+        "ownership": {
+          "ownershipId": "OWN-A-LIQ",
+          "assetId": "A-LIQ",
+          "ownershipMode": "SOLE",
+          "ownerReferences": [
+            "P1"
+          ],
+          "disclosureState": "SELF_REPORTED",
+          "evidence": {
+            "evidenceType": "SELF_DECLARATION",
+            "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+            "verifiedAt": null,
+            "effectiveDate": "2026-10-08",
+            "documentReference": null,
+            "confidence": 0.6
+          }
+        },
+        "valueFact": {
+          "factId": "F-A-LIQ",
+          "factCode": "ASSET_VALUE",
+          "value": 50000,
+          "valueRepresentation": "EXACT",
+          "disclosureState": "SELF_REPORTED",
+          "evidence": {
+            "evidenceType": "SELF_DECLARATION",
+            "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+            "verifiedAt": null,
+            "effectiveDate": "2026-10-08",
+            "documentReference": null,
+            "confidence": 0.6
+          },
+          "effectiveDate": "2026-10-08",
+          "recordedAt": "2026-10-08T00:00:00Z"
+        },
+        "jurisdiction": "UNSPECIFIED",
+        "disclosureState": "SELF_REPORTED",
+        "evidence": {
+          "evidenceType": "SELF_DECLARATION",
+          "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+          "verifiedAt": null,
+          "effectiveDate": "2026-10-08",
+          "documentReference": null,
+          "confidence": 0.6
+        }
+      },
+      {
+        "assetId": "A-INV",
+        "assetType": "LISTED_SECURITY",
+        "ownership": {
+          "ownershipId": "OWN-A-INV",
+          "assetId": "A-INV",
+          "ownershipMode": "SOLE",
+          "ownerReferences": [
+            "P1"
+          ],
+          "disclosureState": "SELF_REPORTED",
+          "evidence": {
+            "evidenceType": "SELF_DECLARATION",
+            "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+            "verifiedAt": null,
+            "effectiveDate": "2026-10-08",
+            "documentReference": null,
+            "confidence": 0.6
+          }
+        },
+        "valueFact": {
+          "factId": "F-A-INV",
+          "factCode": "ASSET_VALUE",
+          "value": 10000,
+          "valueRepresentation": "EXACT",
+          "disclosureState": "SELF_REPORTED",
+          "evidence": {
+            "evidenceType": "SELF_DECLARATION",
+            "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+            "verifiedAt": null,
+            "effectiveDate": "2026-10-08",
+            "documentReference": null,
+            "confidence": 0.6
+          },
+          "effectiveDate": "2026-10-08",
+          "recordedAt": "2026-10-08T00:00:00Z"
+        },
+        "jurisdiction": "UNSPECIFIED",
+        "disclosureState": "SELF_REPORTED",
+        "evidence": {
+          "evidenceType": "SELF_DECLARATION",
+          "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+          "verifiedAt": null,
+          "effectiveDate": "2026-10-08",
+          "documentReference": null,
+          "confidence": 0.6
+        }
+      },
+      {
+        "assetId": "A-PROP",
+        "assetType": "PROPERTY",
+        "ownership": {
+          "ownershipId": "OWN-A-PROP",
+          "assetId": "A-PROP",
+          "ownershipMode": "SOLE",
+          "ownerReferences": [
+            "P1"
+          ],
+          "disclosureState": "SELF_REPORTED",
+          "evidence": {
+            "evidenceType": "SELF_DECLARATION",
+            "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+            "verifiedAt": null,
+            "effectiveDate": "2026-10-08",
+            "documentReference": null,
+            "confidence": 0.6
+          }
+        },
+        "valueFact": {
+          "factId": "F-A-PROP",
+          "factCode": "ASSET_VALUE",
+          "value": 500000,
+          "valueRepresentation": "EXACT",
+          "disclosureState": "SELF_REPORTED",
+          "evidence": {
+            "evidenceType": "SELF_DECLARATION",
+            "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+            "verifiedAt": null,
+            "effectiveDate": "2026-10-08",
+            "documentReference": null,
+            "confidence": 0.6
+          },
+          "effectiveDate": "2026-10-08",
+          "recordedAt": "2026-10-08T00:00:00Z"
+        },
+        "jurisdiction": "UNSPECIFIED",
+        "disclosureState": "SELF_REPORTED",
+        "evidence": {
+          "evidenceType": "SELF_DECLARATION",
+          "source": "FINANCIAL_RUNTIME_QUICK_INTAKE",
+          "verifiedAt": null,
+          "effectiveDate": "2026-10-08",
+          "documentReference": null,
+          "confidence": 0.6
+        }
+      }
+    ],
+    "calculations": [
+      {
+        "engineCode": "CASH_FLOW",
+        "status": "PARTIAL",
+        "metrics": {
+          "grossIncome": {
+            "resultCode": "grossIncome",
+            "value": {
+              "kind": "EXACT",
+              "value": 6000
+            },
+            "traceId": "TRACE-CASH_FLOW-grossIncome",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-grossIncome",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "grossIncome",
+              "formula": "Σ normalized monthly gross income",
+              "inputReferences": [
+                "F-INC"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "netIncome": {
+            "resultCode": "netIncome",
+            "value": {
+              "kind": "UNKNOWN",
+              "reason": "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE"
+            },
+            "traceId": "TRACE-CASH_FLOW-netIncome",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-netIncome",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "netIncome",
+              "formula": "grossIncome × (1 - taxEffectiveRate)",
+              "inputReferences": [
+                "F-INC"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "expenses": {
+            "resultCode": "expenses",
+            "value": {
+              "kind": "EXACT",
+              "value": 4000
+            },
+            "traceId": "TRACE-CASH_FLOW-expenses",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-expenses",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "expenses",
+              "formula": "Σ normalized monthly expenses",
+              "inputReferences": [
+                "F-EXP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "debtService": {
+            "resultCode": "debtService",
+            "value": {
+              "kind": "EXACT",
+              "value": 0
+            },
+            "traceId": "TRACE-CASH_FLOW-debtService",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-debtService",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "debtService",
+              "formula": "Σ monthly DEBT_SERVICE expenses",
+              "inputReferences": [],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "savings": {
+            "resultCode": "savings",
+            "value": {
+              "kind": "UNKNOWN",
+              "reason": "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE"
+            },
+            "traceId": "TRACE-CASH_FLOW-savings",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-savings",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "savings",
+              "formula": "netIncome - expenses",
+              "inputReferences": [
+                "F-INC",
+                "F-EXP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "surplus": {
+            "resultCode": "surplus",
+            "value": {
+              "kind": "UNKNOWN",
+              "reason": "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE"
+            },
+            "traceId": "TRACE-CASH_FLOW-surplus",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-surplus",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "surplus",
+              "formula": "netIncome - expenses",
+              "inputReferences": [
+                "F-INC",
+                "F-EXP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "deficit": {
+            "resultCode": "deficit",
+            "value": {
+              "kind": "UNKNOWN",
+              "reason": "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE"
+            },
+            "traceId": "TRACE-CASH_FLOW-deficit",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-deficit",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "deficit",
+              "formula": "max(0, expenses - netIncome)",
+              "inputReferences": [
+                "F-INC",
+                "F-EXP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "savingsRate": {
+            "resultCode": "savingsRate",
+            "value": {
+              "kind": "UNKNOWN",
+              "reason": "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE"
+            },
+            "traceId": "TRACE-CASH_FLOW-savingsRate",
+            "trace": {
+              "traceId": "TRACE-CASH_FLOW-savingsRate",
+              "engineCode": "CASH_FLOW",
+              "resultCode": "savingsRate",
+              "formula": "savings / netIncome",
+              "inputReferences": [
+                "F-INC",
+                "F-EXP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          }
+        },
+        "recommendationCreated": false,
+        "professionalJudgmentCreated": false
+      },
+      {
+        "engineCode": "LIQUIDITY",
+        "status": "CALCULATED",
+        "metrics": {
+          "liquidityRatio": {
+            "resultCode": "liquidityRatio",
+            "value": {
+              "kind": "EXACT",
+              "value": 0.08928571
+            },
+            "traceId": "TRACE-LIQUIDITY-liquidityRatio",
+            "trace": {
+              "traceId": "TRACE-LIQUIDITY-liquidityRatio",
+              "engineCode": "LIQUIDITY",
+              "resultCode": "liquidityRatio",
+              "formula": "liquidAssets / grossAssets",
+              "inputReferences": [
+                "F-A-LIQ",
+                "F-A-INV",
+                "F-A-PROP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "liquidNetWorth": {
+            "resultCode": "liquidNetWorth",
+            "value": {
+              "kind": "EXACT",
+              "value": -200000
+            },
+            "traceId": "TRACE-LIQUIDITY-liquidNetWorth",
+            "trace": {
+              "traceId": "TRACE-LIQUIDITY-liquidNetWorth",
+              "engineCode": "LIQUIDITY",
+              "resultCode": "liquidNetWorth",
+              "formula": "liquidAssets - liabilities",
+              "inputReferences": [
+                "F-A-LIQ",
+                "F-LIAB-BAL"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          },
+          "monthsOfExpenses": {
+            "resultCode": "monthsOfExpenses",
+            "value": {
+              "kind": "EXACT",
+              "value": 12.5
+            },
+            "traceId": "TRACE-LIQUIDITY-monthsOfExpenses",
+            "trace": {
+              "traceId": "TRACE-LIQUIDITY-monthsOfExpenses",
+              "engineCode": "LIQUIDITY",
+              "resultCode": "monthsOfExpenses",
+              "formula": "liquidAssets / monthlyExpenses",
+              "inputReferences": [
+                "F-A-LIQ",
+                "F-EXP"
+              ],
+              "assumptionReferences": [],
+              "notes": [],
+              "recommendationCreated": false,
+              "professionalJudgmentCreated": false
+            }
+          }
+        },
+        "recommendationCreated": false,
+        "professionalJudgmentCreated": false
+      }
+    ],
+    "findings": [
+      {
+        "findingId": "FAR-0001-LIQUIDITY_STRENGTH",
+        "findingCode": "LIQUIDITY_STRENGTH",
+        "findingType": "STRENGTH",
+        "domain": "LIQUIDITY",
+        "sourceCalculationReferences": [
+          "FCR-PC-REPLAY:LIQUIDITY:monthsOfExpenses"
+        ],
+        "factReferences": [
+          "F-A-LIQ",
+          "F-EXP"
+        ],
+        "assumptionReferences": [],
+        "severityState": "UNSPECIFIED",
+        "confidence": {
+          "state": "MEDIUM",
+          "score": 0.6,
+          "basis": {
+            "valueKinds": [
+              "EXACT"
+            ],
+            "factCount": 2,
+            "evidenceState": "SELF_REPORTED_OR_UNVERIFIED"
+          }
+        },
+        "evidenceState": "SELF_REPORTED_OR_UNVERIFIED",
+        "limitations": [],
+        "policyReferences": [
+          "FAR-P-LIQ-STRONG"
+        ],
+        "summary": "Liquidity coverage exceeds the versioned strength threshold relative to current expenses.",
+        "provenance": {
+          "fcrResultDigest": "047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647",
+          "calculationReferences": [
+            "FCR-PC-REPLAY:LIQUIDITY:monthsOfExpenses"
+          ],
+          "fcrTraceReferences": [
+            "TRACE-LIQUIDITY-monthsOfExpenses"
+          ],
+          "fdrSnapshotId": "FRS-E9CE11B4B9E30C43685CE43F",
+          "fdrDigest": "6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a",
+          "comparisonResultDigests": [],
+          "factReferences": [
+            "F-A-LIQ",
+            "F-EXP"
+          ],
+          "assumptionReferences": []
+        }
+      },
+      {
+        "findingId": "FAR-0002-PROPERTY_CONCENTRATION",
+        "findingCode": "PROPERTY_CONCENTRATION",
+        "findingType": "CONCENTRATION",
+        "domain": "ASSET_CONCENTRATION",
+        "sourceCalculationReferences": [
+          "FCR-PC-REPLAY:ALLOCATION:propertyPercent"
+        ],
+        "factReferences": [
+          "F-A-PROP",
+          "F-A-LIQ",
+          "F-A-INV"
+        ],
+        "assumptionReferences": [],
+        "severityState": "UNSPECIFIED",
+        "confidence": {
+          "state": "MEDIUM",
+          "score": 0.6,
+          "basis": {
+            "valueKinds": [
+              "EXACT"
+            ],
+            "factCount": 3,
+            "evidenceState": "SELF_REPORTED_OR_UNVERIFIED"
+          }
+        },
+        "evidenceState": "SELF_REPORTED_OR_UNVERIFIED",
+        "limitations": [],
+        "policyReferences": [
+          "FAR-P-PROP-CONC"
+        ],
+        "summary": "Property allocation exceeds the versioned concentration threshold.",
+        "provenance": {
+          "fcrResultDigest": "047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647",
+          "calculationReferences": [
+            "FCR-PC-REPLAY:ALLOCATION:propertyPercent"
+          ],
+          "fcrTraceReferences": [
+            "TRACE-ALLOCATION-propertyPercent"
+          ],
+          "fdrSnapshotId": "FRS-E9CE11B4B9E30C43685CE43F",
+          "fdrDigest": "6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a",
+          "comparisonResultDigests": [],
+          "factReferences": [
+            "F-A-PROP",
+            "F-A-LIQ",
+            "F-A-INV"
+          ],
+          "assumptionReferences": []
+        }
+      },
+      {
+        "findingId": "FAR-0003-LOW_LIQUIDITY_CONCENTRATION",
+        "findingCode": "LOW_LIQUIDITY_CONCENTRATION",
+        "findingType": "CONCENTRATION",
+        "domain": "ASSET_CONCENTRATION",
+        "sourceCalculationReferences": [
+          "FCR-PC-REPLAY:ALLOCATION:cashPercent"
+        ],
+        "factReferences": [
+          "F-A-LIQ",
+          "F-A-INV",
+          "F-A-PROP"
+        ],
+        "assumptionReferences": [],
+        "severityState": "UNSPECIFIED",
+        "confidence": {
+          "state": "MEDIUM",
+          "score": 0.6,
+          "basis": {
+            "valueKinds": [
+              "EXACT"
+            ],
+            "factCount": 3,
+            "evidenceState": "SELF_REPORTED_OR_UNVERIFIED"
+          }
+        },
+        "evidenceState": "SELF_REPORTED_OR_UNVERIFIED",
+        "limitations": [],
+        "policyReferences": [
+          "FAR-P-LIQ-CONC"
+        ],
+        "summary": "Cash allocation is below the versioned liquidity-allocation threshold.",
+        "provenance": {
+          "fcrResultDigest": "047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647",
+          "calculationReferences": [
+            "FCR-PC-REPLAY:ALLOCATION:cashPercent"
+          ],
+          "fcrTraceReferences": [
+            "TRACE-ALLOCATION-cashPercent"
+          ],
+          "fdrSnapshotId": "FRS-E9CE11B4B9E30C43685CE43F",
+          "fdrDigest": "6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a",
+          "comparisonResultDigests": [],
+          "factReferences": [
+            "F-A-LIQ",
+            "F-A-INV",
+            "F-A-PROP"
+          ],
+          "assumptionReferences": []
+        }
+      },
+      {
+        "findingId": "FAR-0004-MISSING_CALCULATION_EVIDENCE",
+        "findingCode": "MISSING_CALCULATION_EVIDENCE",
+        "findingType": "MISSING_EVIDENCE",
+        "domain": "DISCLOSURE_EVIDENCE",
+        "sourceCalculationReferences": [
+          "FCR-PC-REPLAY:CASH_FLOW:netIncome",
+          "FCR-PC-REPLAY:CASH_FLOW:savings",
+          "FCR-PC-REPLAY:CASH_FLOW:surplus",
+          "FCR-PC-REPLAY:CASH_FLOW:deficit",
+          "FCR-PC-REPLAY:CASH_FLOW:savingsRate"
+        ],
+        "factReferences": [
+          "F-INC",
+          "F-EXP"
+        ],
+        "assumptionReferences": [],
+        "severityState": "UNSPECIFIED",
+        "confidence": {
+          "state": "LOW",
+          "score": 0.2,
+          "basis": {
+            "valueKinds": [
+              "UNKNOWN"
+            ],
+            "factCount": 2,
+            "evidenceState": "SELF_REPORTED_OR_UNVERIFIED"
+          }
+        },
+        "evidenceState": "SELF_REPORTED_OR_UNVERIFIED",
+        "limitations": [
+          "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE"
+        ],
+        "policyReferences": [],
+        "summary": "CASH_FLOW contains unavailable calculation output because required facts or assumptions are incomplete.",
+        "provenance": {
+          "fcrResultDigest": "047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647",
+          "calculationReferences": [
+            "FCR-PC-REPLAY:CASH_FLOW:netIncome",
+            "FCR-PC-REPLAY:CASH_FLOW:savings",
+            "FCR-PC-REPLAY:CASH_FLOW:surplus",
+            "FCR-PC-REPLAY:CASH_FLOW:deficit",
+            "FCR-PC-REPLAY:CASH_FLOW:savingsRate"
+          ],
+          "fcrTraceReferences": [
+            "TRACE-CASH_FLOW-netIncome",
+            "TRACE-CASH_FLOW-savings",
+            "TRACE-CASH_FLOW-surplus",
+            "TRACE-CASH_FLOW-deficit",
+            "TRACE-CASH_FLOW-savingsRate"
+          ],
+          "fdrSnapshotId": "FRS-E9CE11B4B9E30C43685CE43F",
+          "fdrDigest": "6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a",
+          "comparisonResultDigests": [],
+          "factReferences": [
+            "F-INC",
+            "F-EXP"
+          ],
+          "assumptionReferences": []
+        }
+      },
+      {
+        "findingId": "FAR-0005-MISSING_CALCULATION_EVIDENCE",
+        "findingCode": "MISSING_CALCULATION_EVIDENCE",
+        "findingType": "MISSING_EVIDENCE",
+        "domain": "DISCLOSURE_EVIDENCE",
+        "sourceCalculationReferences": [
+          "FCR-PC-REPLAY:DEBT:debtServiceRatio",
+          "FCR-PC-REPLAY:DEBT:loanBalanceProjection"
+        ],
+        "factReferences": [
+          "F-INC",
+          "F-LIAB-BAL"
+        ],
+        "assumptionReferences": [],
+        "severityState": "UNSPECIFIED",
+        "confidence": {
+          "state": "LOW",
+          "score": 0.2,
+          "basis": {
+            "valueKinds": [
+              "UNKNOWN"
+            ],
+            "factCount": 2,
+            "evidenceState": "SELF_REPORTED_OR_UNVERIFIED"
+          }
+        },
+        "evidenceState": "SELF_REPORTED_OR_UNVERIFIED",
+        "limitations": [
+          "MISSING_ASSUMPTION:TAX_EFFECTIVE_RATE",
+          "MISSING_LOAN_PROJECTION_INPUT"
+        ],
+        "policyReferences": [],
+        "summary": "DEBT contains unavailable calculation output because required facts or assumptions are incomplete.",
+        "provenance": {
+          "fcrResultDigest": "047705b3fe7e453e3b76f055fe2e615fd30e2e8c3ef69d9dfd06162abffb5647",
+          "calculationReferences": [
+            "FCR-PC-REPLAY:DEBT:debtServiceRatio",
+            "FCR-PC-REPLAY:DEBT:loanBalanceProjection"
+          ],
+          "fcrTraceReferences": [
+            "TRACE-DEBT-debtServiceRatio",
+            "TRACE-DEBT-loanBalanceProjection"
+          ],
+          "fdrSnapshotId": "FRS-E9CE11B4B9E30C43685CE43F",
+          "fdrDigest": "6381d0d8602f28f161856d33c32491047c141de286bd4c01c9d94b5d06663d8a",
+          "comparisonResultDigests": [],
+          "factReferences": [
+            "F-INC",
+            "F-LIAB-BAL"
+          ],
+          "assumptionReferences": []
+        }
+      }
+    ]
+  }
+]

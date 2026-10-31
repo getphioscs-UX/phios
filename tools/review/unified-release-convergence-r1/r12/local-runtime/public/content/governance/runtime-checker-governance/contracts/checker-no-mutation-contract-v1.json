@@ -1,0 +1,9 @@
+{
+  "contractCode": "PHI-OS-RG-W14-CHECKER-NO-MUTATION-v1",
+  "work": "RG-W14",
+  "status": "frozen",
+  "allowedOperations": ["read", "resolve", "validate", "execute", "report"],
+  "forbiddenOperations": ["repair", "write_registry", "update_digest", "publish", "promote_state", "change_approval", "generate_freeze", "delete", "rename"],
+  "governanceImplementationScope": ["scripts/run-runtime-checker-v2.mjs", "scripts/run-runtime-checker-v3.mjs", "scripts/check-rg-w3-w8-runtime-family-registration.mjs", "scripts/check-rg-w9-w15-checker-governance.mjs"],
+  "rules": {"legacyRuntimeCheckerExecutionDoesNotGrantGovernanceMutation": true, "detectedMutationFailsClosed": true}
+}

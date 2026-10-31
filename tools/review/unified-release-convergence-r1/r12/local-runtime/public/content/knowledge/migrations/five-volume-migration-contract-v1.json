@@ -1,0 +1,238 @@
+{
+  "contract": "PHI-OS-FIVE-VOLUME-MIGRATION-CONTRACT-v1.0.0",
+  "schemaVersion": "1.0.0",
+  "phase": "BOOK-W1",
+  "status": "FROZEN_BOOK_W1G_SUCCESSOR",
+  "authority": {
+    "bookIdentity": "content/registry/books.json",
+    "partIdentityAndPublicationOwnership": "content/registry/parts.json",
+    "canonicalNodeIdentity": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "blueprintAuthority": "content/knowledge/blueprints/blueprint-registry.json",
+    "historicalFourVolumeAudit": "docs/audits/BOOK-W0-four-volume-migration.md",
+    "successorMigrationAudit": "docs/audits/BOOK-W1-five-volume-migration.md"
+  },
+  "identityPolicy": {
+    "bookVolumeDirectoryAlignmentRequired": true,
+    "canonicalBookIds": [
+      "book-1",
+      "book-2",
+      "book-3",
+      "book-4",
+      "book-5"
+    ],
+    "canonicalBookCodes": [
+      "BOOK-1",
+      "BOOK-2",
+      "BOOK-3",
+      "BOOK-4",
+      "BOOK-5"
+    ],
+    "partCodeChangesWithPublicationOwnership": false,
+    "canonicalNodeIdentityChangesWithPublicationOwnership": false,
+    "nodeCodePrefixIsPublicationAuthority": false,
+    "legacyIdentityMayRemainAsAliasOnly": true
+  },
+  "manifestCompatibility": {
+    "currentBookIdentityField": "canonical_book_id",
+    "currentBookCodeField": "bookCode",
+    "legacySchemaBoundField": "book_id",
+    "legacySchemaBoundPattern": "phios-volume-{n}",
+    "reason": "BOOK-W1F reconciles the legacy schema-bound identifier as a compatibility alias while the five canonical book identities remain explicit.",
+    "schemaReconciliationGate": "BOOK-W1F",
+    "status": "reconciled-compatibility-alias-preserved"
+  },
+  "implementationSteps": [
+    {
+      "step": "BOOK-W1A",
+      "name": "Five-Volume Registry Ownership",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1B",
+      "name": "Part 8-15 Canonical Outline Reconciliation",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1C",
+      "name": "Successor Blueprint Generation",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1D",
+      "name": "Canonical Registry Reconciliation",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1E",
+      "name": "Public Book, Locale and Icon Projection",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1F",
+      "name": "Compatibility and Checker",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1G",
+      "name": "Five-Volume Acceptance and Freeze",
+      "status": "accepted"
+    }
+  ],
+  "boundaries": {
+    "historicalFreezeRewriteAllowed": false,
+    "canonicalNodeRegistryMutationAllowedInW1A": false,
+    "canonicalNodeRegistryMutationAllowedInW1B": false,
+    "canonicalNodeCodeRenumberAllowed": false,
+    "finalSuccessorBlueprintGenerationAllowedInW1A": false,
+    "successorBlueprintGenerationAllowedBeforeW1BAcceptance": false,
+    "successorBlueprintCandidatePreparationCreatesAuthority": false,
+    "canonicalRegistryReconciliationAllowedBeforeW1BAndW1CAcceptance": false,
+    "publicProjectionMutationAllowedInW1A": false,
+    "articlePublicationAllowedInW1A": false,
+    "productionAuthorityCreatedByW1A": false
+  },
+  "gatePolicy": {
+    "stepsAreSequential": true,
+    "eachStepRequiresIndependentAcceptance": true,
+    "fullRepositoryCheckRequiredAfterW1A": true,
+    "finalFreezeRequiresW1AToW1F": true
+  },
+  "progress": {
+    "currentStep": "BOOK-W1G",
+    "status": "five-volume-human-approved-frozen-successor",
+    "migrationMapCount": 8,
+    "upgradedOutlineChapterCount": 621,
+    "accountedExistingCanonicalNodeCount": 471,
+    "outlineChapterMinusExistingNodeCount": 150,
+    "approvedNewCanonicalNodeCandidateCount": 213,
+    "fullChapterInventoryAvailableForParts": [
+      "P8",
+      "P9",
+      "P10",
+      "P11",
+      "P12",
+      "P13",
+      "P14",
+      "P15"
+    ],
+    "fullChapterInventoryMissingForParts": [],
+    "sourceOutlineAuthorityPath": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "sourceOutlineSourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "sourceOutlineAuthorityAuthorizedByTl": true,
+    "w1bHumanAcceptanceSatisfied": true,
+    "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
+    "nextPermittedStep": null,
+    "activeCanonicalNodeRecordCount": 931,
+    "activeCanonicalBookCount": 5,
+    "activeCanonicalPartCount": 15,
+    "freezePath": "content/knowledge/blueprints/knowledge-blueprint-freeze-v3.json"
+  },
+  "w1cCandidatePreparation": {
+    "status": "human-approved-ready-for-w1d-review-not-active",
+    "candidateRegistryPath": "content/knowledge/blueprints/successors/book-w1c/successor-blueprint-candidate-registry-v1.json",
+    "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json",
+    "candidateCount": 4,
+    "w1bAcceptanceSatisfied": true,
+    "canonicalAdmissionReviewAuthorizationPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-authorization-v1.json",
+    "canonicalAdmissionReviewPartialHumanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
+    "canonicalAdmissionReviewHumanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json",
+    "canonicalAdmissionReviewLedgerPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
+    "canonicalAdmissionReviewAuthorizedByTl": true,
+    "canonicalAdmissionCandidateCount": 323,
+    "canonicalAdmissionRecommendationCounts": {
+      "promote": 192,
+      "linkToExisting": 66,
+      "supersede": 21,
+      "defer": 44
+    },
+    "acceptedCanonicalAdmissionRecommendationCount": 279,
+    "acceptedCanonicalAdmissionRecommendationCounts": {
+      "promote": 192,
+      "linkToExisting": 66,
+      "supersede": 21
+    },
+    "canonicalAdmissionRecommendationCount": 213,
+    "acceptedLinkToExistingRecommendationCount": 66,
+    "acceptedDeferredDispositionCount": 44,
+    "resolvedHumanDispositionCount": 323,
+    "pendingCanonicalAdmissionRecommendationCount": 0,
+    "pendingCanonicalAdmissionRecommendationCounts": {
+      "linkToExisting": 0,
+      "defer": 0
+    },
+    "approvedCanonicalNodeCount": 0,
+    "humanBlueprintAcceptanceSatisfied": true,
+    "activeBlueprintRegistryMutated": false,
+    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
+  },
+  "w1dCandidatePreparation": {
+    "status": "human-approved-active-successor",
+    "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
+    "canonicalReconciliationPath": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
+    "publicationOwnershipPath": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
+    "humanAcceptancePath": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
+    "existingCanonicalAuthorityAccountedFor": 716,
+    "postBaselineKauR5AdmissionsAccountedFor": 2,
+    "upstreamW1cAdmissionReviewCandidateCount": 323,
+    "upstreamW1cResolvedHumanDispositionCount": 323,
+    "w1dAdmissionCandidateCount": 213,
+    "acceptedLinkRelationshipCount": 66,
+    "deferredAdmissionCandidateCount": 44,
+    "upstreamW1cPendingAdmissionRecommendationCount": 0,
+    "w1dCanonicalAdmissionDecisionCount": 213,
+    "w1bAcceptanceSatisfied": true,
+    "w1cAcceptanceSatisfied": true,
+    "activeCanonicalRegistryMutated": true,
+    "nextPermittedGate": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE",
+    "activeReconciliationPath": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json",
+    "activePublicationOwnershipPath": "content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json",
+    "successorCanonicalRegistryPath": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "successorBlueprintRegistryPath": "content/knowledge/blueprints/blueprint-registry.json",
+    "w1dHumanAcceptanceSatisfied": true,
+    "appliedPublicationOwnershipRecordCount": 473,
+    "appliedRehomeRecordCount": 2,
+    "successorCanonicalNodeRecordCount": 931
+  },
+  "w1eCandidatePreparation": {
+    "status": "human-approved-active-public-projection",
+    "projectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
+    "humanAcceptancePath": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
+    "w1dTlActivationReviewPath": "content/knowledge/migrations/book-w1d/book-w1d-tl-activation-review-v1.json",
+    "w1dActiveReconciliationSatisfied": true,
+    "mandatoryProjectionSourceCount": 10,
+    "canonicalRouteCount": 5,
+    "compatibilityAliasCount": 1,
+    "activePublicProjectionMutated": true,
+    "activeProjectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+    "nextPermittedGate": "BOOK-W1F-COMPATIBILITY-AND-CHECKER"
+  },
+  "w1eActivation": {
+    "status": "human-approved-active-public-projection",
+    "humanAcceptancePath": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
+    "activeProjectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+    "canonicalRouteCount": 5,
+    "compatibilityAliasCount": 1,
+    "activeFourVolumeProductionAssumptionCount": 0
+  },
+  "w1fCompatibility": {
+    "status": "accepted-successor-compatibility-active",
+    "path": "content/knowledge/migrations/book-w1f/book-w1f-compatibility-reconciliation-v1.json",
+    "coveredConsumerCount": 17,
+    "uncoveredConsumerCount": 0,
+    "historicalCheckerMutationCount": 0
+  },
+  "w1gFreeze": {
+    "status": "human-approved-five-volume-frozen-successor",
+    "acceptancePath": "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json",
+    "freezePath": "content/knowledge/blueprints/knowledge-blueprint-freeze-v3.json",
+    "canonicalBookCount": 5,
+    "canonicalPartCount": 15,
+    "canonicalNodeCount": 931
+  },
+  "w1dAcceptance": {
+    "path": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
+    "sha256": "f54f5011143264dbd5cad224f5d3a8efec338783047ee42d6c2604048835efa7",
+    "activeReconciliationSha256": "ac3e5a744227829f8eab865b2c75ef41749bae4f077f8cca4b6359fa2869dece",
+    "activePublicationOwnershipSha256": "07c6dc21defbbeb17a83de887e4299d39e42c56333b7a4ce69aa0a9b2c7da5cb"
+  }
+}

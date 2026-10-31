@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/production/visual-article/vap-w11-publication-handoff-v1.schema.json",
+  "title": "PHI OS VAP-W11 Publication Handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "handoffType", "handoffCode", "work", "batchCode", "nodeCode", "locale", "authorizationState", "pjaPublicationRuntimeExecutionEligible", "publicationDecision", "productionArticlePackage", "candidate", "review", "approval", "canonicalBrief", "targetPublication", "authority", "governance", "nextAuthority", "nextWork", "handoffDigest"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VAP-W11-PUBLICATION-HANDOFF-v1.0.0"},
+    "handoffType": {"const": "human_publication_decision_to_pja_publication_runtime"},
+    "handoffCode": {"type": "string"},
+    "work": {"const": "VAP-W11"},
+    "batchCode": {"const": "VAP-ARTICLE-BATCH-001"},
+    "nodeCode": {"type": "string"},
+    "locale": {"const": "zh-Hans"},
+    "authorizationState": {"enum": ["authorized_for_pja_publication_runtime", "not_authorized_by_human_publication_authority", "deferred_by_human_publication_authority"]},
+    "pjaPublicationRuntimeExecutionEligible": {"type": "boolean"},
+    "publicationDecision": {"type": "object"},
+    "productionArticlePackage": {"type": "object"},
+    "candidate": {"type": "object"},
+    "review": {"type": "object"},
+    "approval": {"type": "object"},
+    "canonicalBrief": {"type": "object"},
+    "targetPublication": {"type": "object"},
+    "authority": {"type": "object"},
+    "governance": {"type": "object"},
+    "nextAuthority": {"type": "string"},
+    "nextWork": {"type": "string"},
+    "handoffDigest": {"pattern": "^sha256:[a-f0-9]{64}$", "type": "string"}
+  }
+}

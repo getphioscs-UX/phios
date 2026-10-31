@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/authoring-extraction-candidate-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidateCode",
+    "sourceSections",
+    "candidateMechanism",
+    "candidateQuestion",
+    "candidateBoundary",
+    "candidateDifference",
+    "candidateDependencies",
+    "possibleExistingNodes",
+    "possibleSupportingQuestions",
+    "confidence",
+    "status"
+  ],
+  "properties": {
+    "candidateCode": {
+      "type": "string",
+      "pattern": "^KAU-EC-[A-Z0-9-]+$"
+    },
+    "sourceSections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "candidateMechanism": {
+      "type": "string"
+    },
+    "candidateQuestion": {
+      "type": "string"
+    },
+    "candidateBoundary": {
+      "type": "string"
+    },
+    "candidateDifference": {
+      "type": "string"
+    },
+    "candidateDependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "possibleExistingNodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "possibleSupportingQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "human_review_required",
+        "matched_existing",
+        "proposal_required",
+        "rejected",
+        "deferred"
+      ]
+    }
+  }
+}

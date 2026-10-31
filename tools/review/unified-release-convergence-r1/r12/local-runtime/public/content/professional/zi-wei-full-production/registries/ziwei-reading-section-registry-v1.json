@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-READING-SECTION-REGISTRY-v1.0.0",
+  "work": "ZIWEI-FP-W17",
+  "status": "FROZEN_ENGINEERING_REGISTRY",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "sections": [
+    {
+      "sectionCode": "FOUNDATION",
+      "order": 10,
+      "title": {"zh-Hans": "命身基础", "en": "Life and body foundation"},
+      "semanticSelectors": ["ZWR:FOUNDATION:LIFE_BODY"],
+      "required": true
+    },
+    {
+      "sectionCode": "PALACES",
+      "order": 20,
+      "title": {"zh-Hans": "十二宫结构", "en": "Twelve-palace structure"},
+      "semanticPrefix": "ZWR:PALACE:",
+      "required": true,
+      "expectedPrimaryUnitCount": 12
+    },
+    {
+      "sectionCode": "PATTERNS",
+      "order": 30,
+      "title": {"zh-Hans": "已成立格局", "en": "Qualified patterns"},
+      "semanticSelectors": ["ZWR:PATTERN:QUALIFIED_SET"],
+      "required": true,
+      "mayBeEmpty": true
+    },
+    {
+      "sectionCode": "TIMING",
+      "order": 40,
+      "title": {"zh-Hans": "大限与流年结构", "en": "Da Xian and Liu Nian structure"},
+      "semanticPrefix": "ZWR:TEMPORAL:",
+      "required": true
+    },
+    {
+      "sectionCode": "OPEN_QUESTIONS",
+      "order": 50,
+      "title": {"zh-Hans": "仍未获准解释的部分", "en": "Open interpretation boundaries"},
+      "source": "W12_UNKNOWN_CATALOG",
+      "required": true
+    },
+    {
+      "sectionCode": "EVIDENCE",
+      "order": 60,
+      "title": {"zh-Hans": "解释依据", "en": "Interpretation evidence"},
+      "source": "W13_EVIDENCE_GRAPH_AND_W12_AUTHORITY_CATALOG",
+      "required": true
+    }
+  ],
+  "governance": {
+    "sectionRegistryCreatesMeaning": false,
+    "sectionRegistryCreatesCustomerNarrative": false,
+    "sectionRegistryMayCreateSecondPalaceExplanation": false,
+    "rendererMayReorderSemanticPriorityWithoutW18Policy": false,
+    "customerCutoverAllowed": false
+  }
+}

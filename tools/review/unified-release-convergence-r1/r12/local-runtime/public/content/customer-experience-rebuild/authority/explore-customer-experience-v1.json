@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "1.0.0",
+  "program": "CX-R",
+  "phase": "CX-R7",
+  "baselineCommit": "bc6e1591abfecf7baf86488810a5f869b76a392f",
+  "status": "ACCEPTANCE_CANDIDATE",
+  "principle": "Explore explains PHI OS and routes by customer intent; it is not a product catalogue and does not create a second backend authority.",
+  "routes": [
+    {
+      "id": "EXPLORE",
+      "path": "/explore/",
+      "file": "explore/index.html",
+      "workStep": "W0"
+    },
+    {
+      "id": "EXPLORE_WHY",
+      "path": "/explore/why-phios/",
+      "file": "explore/why-phios/index.html",
+      "workStep": "W1",
+      "contentMigration": "semantic copy only from preserved V8 positioning; no DOM/CSS composition copied"
+    },
+    {
+      "id": "EXPLORE_HOW",
+      "path": "/explore/how-it-works/",
+      "file": "explore/how-it-works/index.html",
+      "workStep": "W2"
+    },
+    {
+      "id": "EXPLORE_START",
+      "path": "/explore/start/",
+      "file": "explore/start/index.html",
+      "workStep": "W3"
+    },
+    {
+      "id": "ABOUT",
+      "path": "/about/",
+      "file": "about/index.html",
+      "workStep": "W0-owned supporting surface"
+    }
+  ],
+  "landingQuestions": [
+    "What is PHI OS?",
+    "Why does it exist?",
+    "How is it different?",
+    "Where do I start?"
+  ],
+  "howItWorks": [
+    "Understand",
+    "Read",
+    "Navigate",
+    "Act",
+    "Review",
+    "Continue"
+  ],
+  "startIntents": [
+    "Question",
+    "Perspective",
+    "Reality",
+    "Professional",
+    "Learning"
+  ],
+  "invariants": {
+    "singleCustomerShell": true,
+    "legacyStylesheets": 0,
+    "legacyClassNamespaces": 0,
+    "pageSpecificAuthority": false,
+    "backendAuthorityRebuilt": false,
+    "productCatalogueFirst": false,
+    "englishAndSimplifiedChinese": true
+  },
+  "compatibility": {
+    "/explore": "308 /explore/",
+    "/explore.html": "308 /explore/",
+    "/about/why-phios/": "308 /explore/why-phios/",
+    "/about/why-phios": "308 /explore/why-phios/",
+    "/about.html": "308 /about/"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCTION-SHA-ALIGNMENT-CONTRACT-v1.0.0",
+  "phase": "TPA-L",
+  "work": "L-W51-L-W56",
+  "baselineCommit": "526547698894de0d33d09447aed0b93b83558114",
+  "status": "ACTIVE_FAIL_CLOSED_PRODUCTION_SHA_ALIGNMENT_CONTRACT",
+  "prerequisites": {
+    "phaseKLiveBrowserAcceptanceComplete": true,
+    "humanAcceptance24Of24": true,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false
+  },
+  "cloudflare": {
+    "projectName": "phios-github",
+    "environment": "production",
+    "productionBranch": "main",
+    "productionUrl": "https://phios-github.pages.dev/",
+    "metadataAuthority": "CLOUDFLARE_PAGES_DEPLOYMENTS_REST_API_AUTHENTICATED_BY_WRANGLER",
+    "apiOperation": "GET /accounts/{account_id}/pages/projects/phios-github/deployments?env=production",
+    "runtimeShaWitness": "/api/ask2-runtime-status",
+    "wranglerSevenCharacterSourceIsNotCommitAuthority": true
+  },
+  "requiredVerification": {
+    "originMainAndDeploymentCommitMustExactlyMatch": true,
+    "deploymentCommitMustBeFullGitSha": true,
+    "deploymentEnvironmentMustBeProduction": true,
+    "deploymentBranchMustBeMain": true,
+    "deploymentCommitDirtyMustBeFalse": true,
+    "deploymentStageMustBeSuccessful": true,
+    "runtimeWitnessDeployedShaMustEqualDeploymentCommit": true,
+    "productionUrlMustBeReachable": true,
+    "remoteTarotHtmlJsCssMustMatchFrozenRuntimeManifest": true
+  },
+  "remoteRuntimeAssets": [
+    "/readings/symbolic/",
+    "/assets/js/pages/symbolic-perspective.js",
+    "/assets/css/symbolic-perspective.css"
+  ],
+  "failClosedStates": [
+    "GIT_ORIGIN_MAIN_UNAVAILABLE",
+    "CLOUDFLARE_AUTH_OR_NETWORK_UNAVAILABLE",
+    "CLOUDFLARE_PROJECT_NOT_FOUND",
+    "NO_PRODUCTION_DEPLOYMENT_FOUND",
+    "PRODUCTION_DEPLOYMENT_NOT_SUCCESSFUL",
+    "PRODUCTION_BRANCH_MISMATCH",
+    "PRODUCTION_COMMIT_METADATA_INCOMPLETE",
+    "PRODUCTION_COMMIT_DIRTY",
+    "PRODUCTION_BEHIND_OR_DIVERGED_FROM_MAIN",
+    "RUNTIME_SHA_WITNESS_MISMATCH",
+    "PRODUCTION_URL_UNREACHABLE",
+    "REMOTE_RUNTIME_ASSET_DRIFT"
+  ],
+  "effects": {
+    "cloudflareDeploymentMutationAllowed": false,
+    "cloudflareRollbackAllowed": false,
+    "repositoryMutationAllowedByVerifier": false,
+    "productionCapabilityPromotionAllowed": false,
+    "publicRunAllowedMayChange": false,
+    "clientMayGrantAuthority": false
+  }
+}

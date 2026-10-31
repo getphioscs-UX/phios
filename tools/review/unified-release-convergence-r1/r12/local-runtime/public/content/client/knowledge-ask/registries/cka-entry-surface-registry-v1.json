@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-CKA-ENTRY-SURFACE-REGISTRY-v1.0.0",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "route": "/knowledge-search",
+  "records": [
+    {
+      "entrySurface": "HOMEPAGE",
+      "defaultMode": "GLOBAL",
+      "consumerState": "ACTIVE_CKA_W0",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "KNOWLEDGE_SEARCH",
+      "defaultMode": "GLOBAL",
+      "consumerState": "ACTIVE_CKA_W0",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "LIBRARY",
+      "defaultMode": "CONTEXTUAL",
+      "consumerState": "CONTRACT_READY",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "ARTICLE",
+      "defaultMode": "CONTEXTUAL",
+      "consumerState": "CONTRACT_READY",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "BOOK",
+      "defaultMode": "CONTEXTUAL",
+      "consumerState": "CONTRACT_READY",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "ACCOUNT",
+      "defaultMode": "GLOBAL",
+      "consumerState": "CONTRACT_READY_ACCOUNT_POLICY_REQUIRED",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "REALITY_DASHBOARD",
+      "defaultMode": "REALITY_AWARE",
+      "consumerState": "CONTRACT_READY_AUTHORIZATION_REQUIRED",
+      "contextualOnly": false
+    },
+    {
+      "entrySurface": "FIGURE",
+      "defaultMode": "CONTEXTUAL",
+      "consumerState": "CONTRACT_READY",
+      "contextualOnly": true
+    }
+  ],
+  "rules": {
+    "singleDestinationRoute": true,
+    "figureRequiresFigureCode": true,
+    "realityAwareFailClosed": true
+  }
+}
+

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "PHI-OS-RELATIONSHIP-INTENT-CONTRACT-v1.0.0",
+  "work": "REL-W0",
+  "productObject": "PHI-OS-RELATIONSHIP-INTENT-v1",
+  "modes": ["SELF_RELATIONSHIP_PATTERN", "SPECIFIC_PERSON_RELATIONSHIP"],
+  "relationshipTypes": ["PARTNER", "SPOUSE", "DATING", "FORMER_PARTNER", "PARENT_CHILD", "SIBLING", "FAMILY", "FRIEND", "BUSINESS_PARTNER", "COLLABORATOR", "COLLEAGUE", "OTHER"],
+  "focusAreas": ["ATTRACTION_CONNECTION", "COMMUNICATION", "UNDERSTANDING", "INTIMACY_DISTANCE", "DECISION_MAKING", "SHARED_LIFE", "FAMILY_HOME", "RESOURCES_MONEY", "WORK_COLLABORATION", "CONFLICT_REPAIR", "CURRENT_PHASE", "TIMING", "SPECIFIC_DECISION", "OPEN_QUESTION"],
+  "focusSelection": {"minimum": 1, "maximum": 3, "freeTextQuestionOptional": true},
+  "rules": {"specificPersonRequiresPersonB": true, "selfRelationshipPatternRequiresPersonB": false, "relationshipTypeMayBeInferred": false, "focusMayBeInferred": false, "outcomeMayBeInferred": false},
+  "forbidden": ["compatibility score", "guaranteed outcome", "soulmate or destined verdict", "stay or leave directive", "partner hidden-feeling inference", "diagnosis"],
+  "predecessorRefs": ["content/governance/relational/contracts/two-person-input-consent-contract-v1.json", "content/governance/relational/freeze/relational-runtime-freeze-v1.json"]
+}

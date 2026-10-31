@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-rr-professional-approval-handoff-v1.schema.json",
+  "title": "PHI OS PR to RR Professional Approval Handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "handoffReference",
+    "caseReference",
+    "customerReference",
+    "serviceReference",
+    "decisionPackageReference",
+    "decisionPackageDigest",
+    "professionalApproval",
+    "professionalSources",
+    "handoffState",
+    "authorityFlags",
+    "handoffDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_RR_PROFESSIONAL_APPROVAL_HANDOFF"
+    },
+    "handoffReference": {
+      "type": "string"
+    },
+    "caseReference": {
+      "type": "string"
+    },
+    "customerReference": {
+      "type": "string"
+    },
+    "serviceReference": {
+      "type": "string"
+    },
+    "decisionPackageReference": {
+      "type": "string"
+    },
+    "decisionPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "professionalApproval": {
+      "type": "object",
+      "required": [
+        "authorityRuntime",
+        "approvalReference",
+        "approvedBy",
+        "approvedAt",
+        "signatureReference"
+      ],
+      "properties": {
+        "authorityRuntime": {
+          "const": "PR"
+        },
+        "approvalReference": {
+          "type": "string"
+        },
+        "approvedBy": {
+          "type": "string"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signatureReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "professionalSources": {
+      "type": "array",
+      "minItems": 3
+    },
+    "handoffState": {
+      "const": "READY_FOR_RR_PROFESSIONAL_APPROVAL_GATE"
+    },
+    "authorityFlags": {
+      "type": "object",
+      "required": [
+        "rrCreatesProfessionalApproval",
+        "prCreatesReportApproval",
+        "prCreatesReport",
+        "reportAssemblyAuthorityRemainsRr"
+      ],
+      "properties": {
+        "rrCreatesProfessionalApproval": {
+          "const": false
+        },
+        "prCreatesReportApproval": {
+          "const": false
+        },
+        "prCreatesReport": {
+          "const": false
+        },
+        "reportAssemblyAuthorityRemainsRr": {
+          "const": true
+        }
+      }
+    },
+    "handoffDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

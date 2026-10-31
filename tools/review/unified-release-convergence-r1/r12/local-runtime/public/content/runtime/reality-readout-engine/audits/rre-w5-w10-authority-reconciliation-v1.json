@@ -1,0 +1,67 @@
+{
+  "auditCode": "PHI-OS-RRE-W5-W10-AUTHORITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "works": [
+    "RRE-W5",
+    "RRE-W6",
+    "RRE-W7",
+    "RRE-W8",
+    "RRE-W9",
+    "RRE-W10"
+  ],
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "reconciled_validation_only",
+  "inspectedAuthorities": [
+    {
+      "runtime": "RRE",
+      "role": "readout boundary",
+      "reference": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json"
+    },
+    {
+      "runtime": "RMO",
+      "role": "constraint identity, type and scope",
+      "reference": "content/runtime/reality-model-runtime/contracts/constraint-runtime-contract-v1.json"
+    },
+    {
+      "runtime": "RMO",
+      "role": "deterministic Reality Diff identity and structural comparison",
+      "reference": "content/runtime/reality-model-runtime/contracts/reality-diff-contract-v1.json"
+    },
+    {
+      "runtime": "RMO",
+      "role": "formal Reality Unknown identity and resolution requirements",
+      "reference": "content/runtime/reality-model-runtime/contracts/unknown-runtime-contract-v1.json"
+    },
+    {
+      "runtime": "RDG",
+      "role": "Unknown/Disputed governance and authorized resolution transition requirements",
+      "reference": "content/governance/reality-data-governance/contracts/unknown-disputed-runtime-v1.json"
+    },
+    {
+      "runtime": "RDG",
+      "role": "sensitive inference firewall",
+      "reference": "content/governance/reality-data-governance/contracts/sensitive-inference-firewall-v1.json"
+    }
+  ],
+  "authorityDecision": {
+    "rreCreatesRealityConstraint": false,
+    "rreRecomputesRealityDiff": false,
+    "rreResolvesRealityUnknown": false,
+    "rrePromotesEvidence": false,
+    "rreCreatesDiagnosis": false,
+    "rreCreatesProfessionalJudgment": false,
+    "rreCreatesNavigationDecision": false,
+    "rreCreatesMetric": false,
+    "rrePersistsCanonicalReadout": false,
+    "rmoConstraintAuthorityPreserved": true,
+    "rmoDiffAuthorityPreserved": true,
+    "rmoUnknownAuthorityPreserved": true,
+    "rdgUnknownDisputedAuthorityPreserved": true,
+    "rdgSensitiveInferenceFirewallPreserved": true
+  },
+  "crossRuntimeConsumption": {
+    "constraintReading": "reference-only consumption of RMO Constraint and RRE supported observable references",
+    "driftReading": "consumes an existing RMO Reality Diff view; never compares raw Reality components",
+    "unknownReading": "projects RMO Unknown and RDG resolution limits without state transition"
+  }
+}

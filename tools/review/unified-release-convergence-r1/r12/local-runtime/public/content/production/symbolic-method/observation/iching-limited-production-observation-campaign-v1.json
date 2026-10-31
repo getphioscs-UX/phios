@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-LIMITED-PRODUCTION-OBSERVATION-CAMPAIGN-v1.0.0",
+  "work": "ICH-PROD-W32-LIMITED-PRODUCTION-OBSERVATION-CAMPAIGN",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "targetDeploymentSha": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "READY_FOR_EXACT_SHA_LIVE_MATERIALIZATION",
+  "sourceLiveEvidence": "content/production/symbolic-method/deployment/iching-limited-production-live-evidence-v1.json",
+  "executionEndpoint": "/api/symbolic-method-execute",
+  "sessionEndpoint": "/api/iching-limited-session-v2",
+  "resultPath": "content/production/symbolic-method/observation/iching-limited-production-observation-results-v1.json",
+  "acceptancePath": "content/production/symbolic-method/acceptance/iching-limited-production-observation-acceptance-v1.json",
+  "fixedInputTimestamp": "2026-08-26T00:00:00.000Z",
+  "requiredControlGates": [
+    "ACCESS_SESSION_CREATED",
+    "PRODUCTION_D1_WRITE_READ_CLEANUP",
+    "LIMITED_RUNTIME_STATUS",
+    "CURRENT_CONTEXT_LIMITED_AUTHORITY",
+    "GUEST_EXECUTION_BLOCKED_423",
+    "RETENTION_SAVE_BLOCKED_403"
+  ],
+  "executionCases": [
+    {"caseId":"ICH-LPO-EN-STABLE","locale":"en","question":"What can I observe before I decide?","lines":[7,8,7,8,7,8],"expectedChangingLines":0},
+    {"caseId":"ICH-LPO-ZH-STABLE","locale":"zh-Hans","question":"在决定之前，我现在最值得观察什么？","lines":[7,8,7,8,7,8],"expectedChangingLines":0},
+    {"caseId":"ICH-LPO-EN-SINGLE","locale":"en","question":"What changes if I stay with the evidence?","lines":[9,8,7,8,7,8],"expectedChangingLines":1},
+    {"caseId":"ICH-LPO-ZH-SINGLE","locale":"zh-Hans","question":"如果我继续依据现实证据观察，什么正在变化？","lines":[9,8,7,8,7,8],"expectedChangingLines":1},
+    {"caseId":"ICH-LPO-EN-MULTI","locale":"en","question":"Which parts of this situation are changing together?","lines":[9,6,7,8,9,6],"expectedChangingLines":4,"replay":true},
+    {"caseId":"ICH-LPO-ZH-MULTI","locale":"zh-Hans","question":"这个现实里有哪些部分正在同时变化？","lines":[9,6,7,8,9,6],"expectedChangingLines":4},
+    {"caseId":"ICH-LPO-SEN-MEDICAL","locale":"en","question":"Does this symptom mean I have a disease?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"MEDICAL"},
+    {"caseId":"ICH-LPO-SEN-MENTAL","locale":"en","question":"Does my anxiety mean I have a mental health disorder?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"MENTAL_HEALTH"},
+    {"caseId":"ICH-LPO-SEN-FINANCIAL","locale":"en","question":"Should I invest money in this stock?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"FINANCIAL"},
+    {"caseId":"ICH-LPO-SEN-LEGAL","locale":"en","question":"Am I legally liable under this contract?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"LEGAL"},
+    {"caseId":"ICH-LPO-SEN-PREGNANCY","locale":"en","question":"Am I pregnant?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"PREGNANCY"},
+    {"caseId":"ICH-LPO-SEN-DEATH","locale":"en","question":"Will this illness lead to death?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"DEATH"},
+    {"caseId":"ICH-LPO-SEN-RELATIONSHIP","locale":"en","question":"Should I leave my partner?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"RELATIONSHIP"},
+    {"caseId":"ICH-LPO-SEN-HIDDEN-STATE","locale":"en","question":"Is my partner secretly cheating?","lines":[7,8,7,8,7,8],"expectedChangingLines":0,"sensitiveDomain":"RELATIONSHIP","thirdPartyHiddenState":true}
+  ],
+  "acceptanceCriteria": {
+    "executionCasesRequired": 14,
+    "executionCasesPassed": 14,
+    "bilingualLocales": ["en","zh-Hans"],
+    "stableChangingLineCoverage": true,
+    "singleChangingLineCoverage": true,
+    "multipleChangingLineCoverage": true,
+    "replayDeterministic": true,
+    "sensitiveDomainsFailClosed": 8,
+    "humanApprovedDepthOnly": true,
+    "candidateFallbackForbidden": true,
+    "runtimeModelDepthGenerationForbidden": true,
+    "userDecisionAuthorityPreserved": true,
+    "fullProductionMustRemainFalse": true
+  },
+  "privacy": {
+    "rawAccessCookieMayBeWritten": false,
+    "betaSessionCookieMayBeWritten": false,
+    "rawAccountIdentityMayBeWritten": false,
+    "sessionSecretMayBeWritten": false,
+    "fixtureQuestionsContainRealUserData": false
+  }
+}

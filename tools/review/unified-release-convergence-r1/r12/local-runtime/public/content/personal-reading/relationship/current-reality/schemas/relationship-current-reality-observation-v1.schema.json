@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-RELATIONSHIP-CURRENT-REALITY-OBSERVATION-v1",
+  "title": "PHI OS Relationship Current Reality Observation v1",
+  "type": "object",
+  "required": ["schemaVersion","relationshipObservationId","relationshipIntentId","scope","domain","statement","source","confidence","observableVsInterpretive","sensitive","consentRef","sourceClass","governance"],
+  "properties": {
+    "schemaVersion": {"const":"PHI-OS-RELATIONSHIP-CURRENT-REALITY-OBSERVATION-v1.0.0"},
+    "relationshipObservationId": {"type":"string","minLength":1},
+    "relationshipIntentId": {"type":"string","minLength":1},
+    "scope": {"enum":["ME","OTHER_AS_OBSERVED","US","CONTEXT"]},
+    "domain": {"enum":["CURRENT_STATE","REPEATING_PATTERN","ATTRACTION_CONNECTION","COMMUNICATION","UNDERSTANDING","INTIMACY_DISTANCE","DECISION_MAKING","SHARED_LIFE","FAMILY_HOME","RESOURCES_MONEY","WORK_COLLABORATION","CONFLICT_REPAIR","CURRENT_PHASE","TIMING","SPECIFIC_DECISION","PRACTICAL_PRESSURE","OPEN_QUESTION"]},
+    "statement": {"type":"string","minLength":1,"maxLength":800},
+    "source": {"const":"CUSTOMER"},
+    "confidence": {"enum":["HIGH","MEDIUM","LOW","UNSURE"]},
+    "observableVsInterpretive": {"enum":["OBSERVABLE","CUSTOMER_INTERPRETATION"]},
+    "sensitive": {"type":"boolean"},
+    "consentRef": {"type":"string","minLength":1},
+    "sourceClass": {"const":"CURRENT_REALITY_OBSERVATION"},
+    "semanticDigest": {"type":"string"},
+    "governance": {"type":"object"}
+  },
+  "additionalProperties": false
+}

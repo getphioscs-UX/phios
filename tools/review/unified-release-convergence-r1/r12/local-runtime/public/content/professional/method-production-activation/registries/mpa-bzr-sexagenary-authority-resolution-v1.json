@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-SEXAGENARY-AUTHORITY-RESOLUTION-v1.0.0",
+  "work": "MPA-W23",
+  "methodCode": "BAZI",
+  "authorityBinding": {
+    "authorityCode": "BZR_STEM_BRANCH_TABLES_V1",
+    "version": "1.0.0-candidate",
+    "stems": [
+      "JIA",
+      "YI",
+      "BING",
+      "DING",
+      "WU",
+      "JI",
+      "GENG",
+      "XIN",
+      "REN",
+      "GUI"
+    ],
+    "branches": [
+      "ZI",
+      "CHOU",
+      "YIN",
+      "MAO",
+      "CHEN",
+      "SI",
+      "WU",
+      "WEI",
+      "SHEN",
+      "YOU",
+      "XU",
+      "HAI"
+    ],
+    "payloadDigest": "2db010cb6d5da3559e0f0b85a63ef95b70cc918779e20f54047d509c5ff80b77",
+    "algorithmCode": "PHI_OS_SEXAGENARY_CALENDAR",
+    "algorithmAuthorityOwner": "BZR_METHOD_GOVERNANCE_NOT_MPA"
+  },
+  "authorityBindingDigest": "799d84c36a3b1d440e5e834393e538d830a40c4212f93bb6b5a1fc540045323b",
+  "independentReferenceImplementation": {
+    "role": "INDEPENDENT_RECALCULATION_NOT_RUNTIME_AUTHORITY",
+    "rules": [
+      "Gregorian JDN day index",
+      "Li Chun year boundary",
+      "12 Jie month boundary",
+      "five-tiger month stem rule",
+      "five-rat hour stem rule",
+      "true-solar local hour branch"
+    ],
+    "fixture": {
+      "date": "1989-11-15",
+      "trueSolarLocalTime": "21:48:19.059296",
+      "year": "JI-SI",
+      "month": "YI-HAI",
+      "day": "JI-MAO",
+      "hour": "YI-HAI"
+    }
+  },
+  "externalIndependentImplementationEvidence": {
+    "name": "lunar-javascript",
+    "version": "1.7.7",
+    "releaseCommit": "4c45a59f79b856125516f31aefa8295035c16afd",
+    "license": "MIT",
+    "packageJsonGitBlobSha1": "beb7028e74aa4186eaef997e372fcf05fb4d1888",
+    "sourceGitBlobSha1": "355b7bcd6fcc773b79e8bd179f0df3c5fb73a4f1",
+    "testGitBlobSha1": "c6911bb11268885eb990bf2349a77a8354b32992",
+    "role": "SECONDARY_INDEPENDENT_IMPLEMENTATION_EVIDENCE_NOT_TRUSTED_AUTHORITY",
+    "boundaryEvidence": "Immutable tests distinguish exact Li Chun/Jie transition within the same Gregorian date."
+  },
+  "resolution": {
+    "independentImplementationBound": true,
+    "productionAdapterBindingRequiredAt": "MPA-W27"
+  },
+  "effects": {
+    "historicalW15Rewritten": false,
+    "productionEligibilityCreated": false
+  }
+}

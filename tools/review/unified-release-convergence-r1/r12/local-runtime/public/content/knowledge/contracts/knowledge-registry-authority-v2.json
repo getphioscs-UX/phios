@@ -1,0 +1,80 @@
+{
+  "contract": "PHI-OS-KNOWLEDGE-REGISTRY-AUTHORITY-v2.0.0",
+  "stage": "KH-W4B",
+  "status": "implemented",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7906432"
+  },
+  "authorities": {
+    "bookIdentity": {
+      "path": "content/registry/books.json",
+      "ownedFields": [
+        "book_id",
+        "volume",
+        "title",
+        "subtitle",
+        "status",
+        "content_status",
+        "parts",
+        "manifest",
+        "content_root",
+        "asset",
+        "publication_version"
+      ]
+    },
+    "partIdentityAndPublicationOwnership": {
+      "path": "content/registry/parts.json",
+      "ownedFields": [
+        "part_id",
+        "number",
+        "book",
+        "title",
+        "status",
+        "content_status",
+        "boundary",
+        "deprecated_aliases"
+      ]
+    },
+    "canonicalKnowledge": {
+      "path": "content/knowledge/registry/nodes.json",
+      "ownedFields": [
+        "nodeCode",
+        "canonicalQuestionKey",
+        "collectionCode",
+        "themeCode",
+        "registryStatus",
+        "relationships",
+        "sourceReferences"
+      ]
+    },
+    "blueprintDiscoveryAndBinding": {
+      "path": "content/knowledge/blueprints/blueprint-registry.json",
+      "ownedFields": [
+        "bookCode",
+        "blueprintPath",
+        "contract",
+        "schemaVersion",
+        "status",
+        "sha256",
+        "productionEligibility"
+      ]
+    }
+  },
+  "projectionRules": {
+    "blueprintRegistryPartCodes": "validated_projection_from_book_and_part_registries",
+    "blueprintRegistryCanonicalNodeCount": "validated_projection_from_blueprint_and_canonical_node_registry",
+    "blueprintMayCreateCanonicalNode": false,
+    "nodeIdentityChangesWithPublication": false,
+    "runtimeMustUseUniversalLoader": true,
+    "historicalEvidenceMayRetainLegacyPaths": true
+  },
+  "forbiddenAuthorities": [
+    "individual book blueprint",
+    "nodeCode prefix",
+    "browser hardcode",
+    "historical freeze document",
+    "generated editorial candidate"
+  ]
+}

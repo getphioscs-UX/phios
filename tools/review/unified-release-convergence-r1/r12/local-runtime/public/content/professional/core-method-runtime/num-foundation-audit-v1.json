@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-NUM-FOUNDATION-AUDIT-v1.0.0",
+  "stageCode": "NUM-W0",
+  "methodCode": "NUMEROLOGY",
+  "pluginCode": "NUM",
+  "status": "proposal_bound_validation_candidate_not_registered",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "47c923d52046f9777e6d800834ac2e5355f2b0dd"
+  },
+  "existingAuthority": {
+    "proposalCode": "IMR-PROP-NUMEROLOGY-001",
+    "proposalStatus": "proposal_only",
+    "registeredInMR": false,
+    "registeredInIMR": false,
+    "pluginReserved": false,
+    "commercialLicenseAssessed": false,
+    "algorithmGoverned": false,
+    "productionEligible": false
+  },
+  "candidateScope": {
+    "birthDateOnly": true,
+    "targetDateAllowedForCycles": true,
+    "nameCalculationAllowed": false,
+    "phoneNumberCalculationAllowed": false,
+    "addressNumberCalculationAllowed": false,
+    "gamblingNumberGenerationAllowed": false,
+    "futureEventPredictionAllowed": false
+  },
+  "candidatePolicies": {
+    "dateFormat": "YYYY-MM-DD",
+    "baseDigits": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "masterNumbers": [
+      11,
+      22,
+      33
+    ],
+    "zeroCreatesCoreNumber": false,
+    "reductionPolicyCode": "PHI_OS_NUMERIC_REDUCTION_V1",
+    "cyclePolicyCode": "PHI_OS_NUMERIC_CYCLE_V1"
+  },
+  "activationBoundary": {
+    "validationRuntimeMayExist": true,
+    "sharedCalculationRuntimeRequired": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "pluginActivated": false,
+    "productionExecutionAllowed": false,
+    "professionalReleaseAllowed": false,
+    "requiredBeforeNUMW4": "VERSIONED_IMR_NUMEROLOGY_REGISTRATION_EXTENSION"
+  },
+  "nextStage": "NUM-W1"
+}

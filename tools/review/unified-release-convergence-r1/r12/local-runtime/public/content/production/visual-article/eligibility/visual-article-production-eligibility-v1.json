@@ -1,0 +1,246 @@
+{
+  "authorityGate": {
+    "candidateCreationAllowed": false,
+    "dispatchAllowed": true,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false,
+    "sequence": [
+      "C2_FROZEN",
+      "C3_PRODUCTION_READY",
+      "HUMAN_PRODUCTION_DECISION",
+      "PRODUCTION_PLAN_FROZEN",
+      "PRODUCTION_WAVE_FROZEN",
+      "EXECUTION_AUTHORITY_VALID",
+      "DISPATCH_ALLOWED_TRUE"
+    ]
+  },
+  "baselineCommit": "cdcb11be3e2db494fa1c40c7814604e2de31f34e",
+  "contractReference": "content/production/visual-article/contracts/vap-w4-node-production-eligibility-v1.json",
+  "eligibilityCode": "PHI-OS-VAP-W4-VISUAL-ARTICLE-PRODUCTION-ELIGIBILITY-v1",
+  "eligibilityDigest": "sha256:83724d8cae2c1485dcd1701a4b4a39a8c54260dd55ace4ccda0a15a73ee0d2d2",
+  "eligibilityVersion": "1.0.0",
+  "entries": [
+    {
+      "articleProductionEligible": true,
+      "authorityGatePassed": true,
+      "c2ContentHash": "sha256:6a77357a3d60841b205a202d77defbf0528c5b7ca6de2d78855276387ac02ece",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json",
+      "canonicalNodeStatus": "frozen",
+      "dispatchTarget": "PJA",
+      "eligibilityStatus": "ARTICLE_PRODUCTION_ELIGIBLE",
+      "executionBoundary": {
+        "adapterRequirement": "PJA_EXISTING_ARTICLE_RECONCILIATION_BRIEF_ADAPTER_REQUIRED",
+        "directBriefExecutionReady": false,
+        "eligibilityDoesNotOverrideW3AdapterRequirement": true,
+        "standardPjaArticleDraftExporterAllowed": false,
+        "w3ExecutionMode": "EXISTING_ARTICLE_RECONCILIATION_FOR_VISUAL_RELEASE",
+        "w3PrimaryAuthority": "PJA"
+      },
+      "failureCodes": [],
+      "gates": {
+        "boundaryFrozen": true,
+        "canonicalNodeExists": true,
+        "canonicalThesisFrozen": true,
+        "dispatchAllowed": true,
+        "executionAuthorityValid": true,
+        "humanProductionDecisionApproved": true,
+        "localeSupported": true,
+        "productionPlanFrozen": true,
+        "productionReadinessPassed": true,
+        "productionRoleEligible": true,
+        "productionWaveFrozen": true
+      },
+      "knowledgeVersion": "1.1.0",
+      "locale": "zh-Hans",
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "requiredOutputs": [
+        "ARTICLE_RECONCILIATION_FOR_VISUAL_RELEASE"
+      ]
+    },
+    {
+      "articleProductionEligible": false,
+      "authorityGatePassed": false,
+      "c2ContentHash": "sha256:311ab65885cab32b37e08e36a88bbb10c631b5c4d8bac32c53a1613564685bbf",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json",
+      "canonicalNodeStatus": "planned",
+      "dispatchTarget": "PJA",
+      "eligibilityStatus": "WAVE1_SUPPORTING_OUTPUT_NOT_ARTICLE_ELIGIBLE",
+      "executionBoundary": {
+        "adapterRequirement": "PJA_FRAGMENT_PRODUCTION_BRIEF_ADAPTER_REQUIRED",
+        "directBriefExecutionReady": false,
+        "eligibilityDoesNotOverrideW3AdapterRequirement": true,
+        "standardPjaArticleDraftExporterAllowed": false,
+        "w3ExecutionMode": "NEW_FRAGMENT_PRODUCTION_BRIEF",
+        "w3PrimaryAuthority": "PJA"
+      },
+      "failureCodes": [
+        "KPP_ROLE_NOT_ARTICLE_OR_MULTI_ASSET"
+      ],
+      "gates": {
+        "boundaryFrozen": true,
+        "canonicalNodeExists": true,
+        "canonicalThesisFrozen": true,
+        "dispatchAllowed": true,
+        "executionAuthorityValid": true,
+        "humanProductionDecisionApproved": true,
+        "localeSupported": true,
+        "productionPlanFrozen": true,
+        "productionReadinessPassed": true,
+        "productionRoleEligible": false,
+        "productionWaveFrozen": true
+      },
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "requiredOutputs": [
+        "FRAGMENT"
+      ]
+    },
+    {
+      "articleProductionEligible": false,
+      "authorityGatePassed": false,
+      "c2ContentHash": "sha256:9908fe44f909a3437e83636f353185209760bbd540a87a79762c3d1e58a35d49",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json",
+      "canonicalNodeStatus": "planned",
+      "dispatchTarget": "CAR",
+      "eligibilityStatus": "WAVE1_SUPPORTING_OUTPUT_NOT_ARTICLE_ELIGIBLE",
+      "executionBoundary": {
+        "adapterRequirement": "CAR_PREPUBLICATION_ASSET_BRIEF_ADAPTER_REQUIRED",
+        "directBriefExecutionReady": false,
+        "eligibilityDoesNotOverrideW3AdapterRequirement": true,
+        "standardPjaArticleDraftExporterAllowed": false,
+        "w3ExecutionMode": "PREPUBLICATION_FIGURE_ASSET_BRIEF",
+        "w3PrimaryAuthority": "CAR"
+      },
+      "failureCodes": [
+        "KPP_ROLE_NOT_ARTICLE_OR_MULTI_ASSET"
+      ],
+      "gates": {
+        "boundaryFrozen": true,
+        "canonicalNodeExists": true,
+        "canonicalThesisFrozen": true,
+        "dispatchAllowed": true,
+        "executionAuthorityValid": true,
+        "humanProductionDecisionApproved": true,
+        "localeSupported": true,
+        "productionPlanFrozen": true,
+        "productionReadinessPassed": true,
+        "productionRoleEligible": false,
+        "productionWaveFrozen": true
+      },
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "requiredOutputs": [
+        "FIGURE"
+      ]
+    },
+    {
+      "articleProductionEligible": true,
+      "authorityGatePassed": true,
+      "c2ContentHash": "sha256:0e13e5306fd57ab9a6f71133db4c986126f158775714517485e1692bb7cf2e81",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json",
+      "canonicalNodeStatus": "planned",
+      "dispatchTarget": "CAR",
+      "eligibilityStatus": "ARTICLE_PRODUCTION_ELIGIBLE",
+      "executionBoundary": {
+        "adapterRequirement": "CAR_PREPUBLICATION_ASSET_BRIEF_ADAPTER_REQUIRED",
+        "directBriefExecutionReady": false,
+        "eligibilityDoesNotOverrideW3AdapterRequirement": true,
+        "standardPjaArticleDraftExporterAllowed": false,
+        "w3ExecutionMode": "PREPUBLICATION_MULTI_ASSET_BRIEF",
+        "w3PrimaryAuthority": "CAR"
+      },
+      "failureCodes": [],
+      "gates": {
+        "boundaryFrozen": true,
+        "canonicalNodeExists": true,
+        "canonicalThesisFrozen": true,
+        "dispatchAllowed": true,
+        "executionAuthorityValid": true,
+        "humanProductionDecisionApproved": true,
+        "localeSupported": true,
+        "productionPlanFrozen": true,
+        "productionReadinessPassed": true,
+        "productionRoleEligible": true,
+        "productionWaveFrozen": true
+      },
+      "knowledgeVersion": "1.0.0",
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "requiredOutputs": [
+        "FIGURE",
+        "DIAGRAM"
+      ]
+    }
+  ],
+  "gateOrder": [
+    "canonicalNodeExists",
+    "canonicalThesisFrozen",
+    "boundaryFrozen",
+    "productionReadinessPassed",
+    "humanProductionDecisionApproved",
+    "productionPlanFrozen",
+    "productionWaveFrozen",
+    "executionAuthorityValid",
+    "dispatchAllowed",
+    "productionRoleEligible",
+    "localeSupported"
+  ],
+  "invariants": {
+    "c2ThesisBoundaryFailureCode": "C2_THESIS_BOUNDARY_NOT_FROZEN",
+    "c2ThesisBoundaryGatePreserved": true,
+    "eligibilityDoesNotCreateCandidate": true,
+    "eligibilityDoesNotCreateProductionBrief": true,
+    "eligibilityDoesNotInvokeProvider": true,
+    "eligibilityDoesNotPublish": true,
+    "eligibilityDoesNotResolveW3AdapterGaps": true,
+    "fragmentAndFigureRemainWaveOutputsButNotArticleEligible": true,
+    "kppRoleMustBeArticleOrMultiAsset": true,
+    "localeAvailabilityMustBeExplicit": true
+  },
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "schemaVersion": "PHI-OS-VAP-W4-VISUAL-ARTICLE-PRODUCTION-ELIGIBILITY-v1.0.0",
+  "scope": {
+    "articleEligibleNodeCodes": [
+      "KN-PREFACE-004",
+      "KN-B1-P4-004"
+    ],
+    "articleEligibleNodeCount": 2,
+    "eligibleProductionRoles": [
+      "ARTICLE",
+      "MULTI_ASSET"
+    ],
+    "evaluatedLocale": "zh-Hans",
+    "evaluatedNodeCount": 4,
+    "supportingWaveOutputNodeCodes": [
+      "KN-B1-P1-003",
+      "KN-B1-P4-003"
+    ],
+    "waveCode": "KPP-WAVE-WAVE1-001"
+  },
+  "sourceDigests": {
+    "content/knowledge/editorial/c2/frozen/kn-b1-p1-003.json": "sha256:2c736ff25b8907c84d0b5b43bafcc5103e769e003cb562e14c4b095f5147cd9b",
+    "content/knowledge/editorial/c2/frozen/kn-b1-p4-003.json": "sha256:f3eb79d6506c77e45646546876a27b4d923a7ab2d4262ac253ff4cbebcdee37c",
+    "content/knowledge/editorial/c2/frozen/kn-b1-p4-004.json": "sha256:5c13200435f74d04f9457e33d11ccabd1d3d4ef35564cda7eed5829618770ee6",
+    "content/knowledge/editorial/c2/frozen/kn-preface-004.json": "sha256:bac00d47af96d561e7b19ad413765e8cde9c311e4531350db81f9e1f725e0b9d",
+    "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json": "sha256:01a384d29784dc50b320f9bd2399c893d27a449bafe792c2daa2a3527709979e",
+    "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json": "sha256:a1e573b6491426e01127eb4361b5768d312174777a80d34a905f37ecc670a1bc",
+    "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json": "sha256:d394ae03f1b02493162a40ea0df4849dd1ad484d21b1f164996181639ddadbee",
+    "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json": "sha256:60631dac08cbdee1b01666f16fe0bb792a6a3f8db072cf139c10422513638ce8",
+    "content/knowledge/l10n/multilingual-node-projection-registry.json": "sha256:ae686b4d900197fadb27c2cf93664638b39c5d59ba80d0ef1737a749f28a3999",
+    "content/knowledge/production-planning/activation/wave1-production-authorized-v1.json": "sha256:242d9a1ed1fa932608d3edb374291df24fcdf05fb0fab1020d3b4ce9d0292a6f",
+    "content/knowledge/production-planning/production/wave1/execution-authority-reconciliation-v1.json": "sha256:81caef26989a722b5462ede6f784317d1826ec0a80f9b51c33c92df4dd2b0af4",
+    "content/knowledge/production-planning/production/wave1/frozen-production-plan-v1.json": "sha256:68c85415b6f6c942b9690c6702b7b4f07dd12f9d340d79f0d98e7ac55054f749",
+    "content/knowledge/production-planning/production/wave1/frozen-production-wave-v1.json": "sha256:af7ec32408f94926a154d01e7781f0f1909c3b3dfb7ca0db5c55efe8b0057320",
+    "content/knowledge/production-planning/production/wave1/human-production-decision-v1.json": "sha256:a947f91431dc02e4a21adef6347c2cd86353d405455f1aa0532f7413afb759c4",
+    "content/knowledge/registry/nodes.json": "sha256:61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+    "content/production/visual-article/authority/vap-w3-visual-production-authority-v1.json": "sha256:481ab8b76d65654a08dc4bfbbe62667e7313e8f01993728710d69c72d4103437"
+  },
+  "status": "ARTICLE_PRODUCTION_ELIGIBILITY_ACTIVE",
+  "work": "VAP-W4"
+}

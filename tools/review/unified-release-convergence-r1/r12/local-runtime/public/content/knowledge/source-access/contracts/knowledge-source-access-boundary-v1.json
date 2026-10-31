@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-KNOWLEDGE-SOURCE-ACCESS-BOUNDARY-v1.0.0",
+  "stage": "KSAR-W0",
+  "status": "ACTIVE_DEVELOPMENT_BOUNDARY",
+  "purpose": "Allow client-facing question-based access to completed manuscript knowledge without waiting for Canonical Article publication and without treating manuscript source text as Published Article authority.",
+  "authorityOrder": [
+    "PUBLISHED_CANONICAL_ARTICLE",
+    "CANONICAL_BOUND_COMPLETED_MANUSCRIPT",
+    "SOURCE_NATIVE_COMPLETED_MANUSCRIPT"
+  ],
+  "rules": {
+    "publishedArticleAuthorityUnchanged": true,
+    "canonicalNodeAuthorityUnchanged": true,
+    "completedManuscriptMayGroundClientKnowledge": true,
+    "unmappedSectionMayBeReturnedAsSourceNative": true,
+    "unmappedSectionMayClaimCanonicalNode": false,
+    "manuscriptSourceMayAutoPublishArticle": false,
+    "manuscriptSourceMayMutateCanonicalNode": false,
+    "rawFullBookDeliveryThroughKnowledgeApi": false,
+    "questionScopedExcerptsOnly": true,
+    "bookPurchaseAndKnowledgeAccessAreSeparateCapabilities": true
+  },
+  "exposure": {
+    "maximumResults": 4,
+    "maximumExcerptCharsPerResult": 1200,
+    "maximumTotalExcerptChars": 3600,
+    "rawSectionBodyReturned": false,
+    "rawFullManuscriptReturned": false,
+    "pageRangeAttributionRequired": true,
+    "sourceDigestRequired": true,
+    "canonicalBindingStatusRequired": true
+  }
+}

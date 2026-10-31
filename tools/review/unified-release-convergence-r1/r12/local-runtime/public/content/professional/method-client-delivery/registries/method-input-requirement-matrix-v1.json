@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "PHI-OS-MCD-3-METHOD-INPUT-REQUIREMENT-MATRIX-v1.0.0",
+  "work": "MCD-3D-MCD-3E",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "status": "ACTIVE_CAPABILITY_SCOPED_REQUIREMENTS_NO_EXECUTION_GRANT",
+  "canonicalInputReference": "content/professional/method-client-delivery/contracts/canonical-birth-input-contract-v1.json",
+  "classificationVocabulary": [
+    "REQUIRED",
+    "OPTIONAL",
+    "UNKNOWN_SAFE",
+    "DEGRADE_SUPPORTED",
+    "BLOCKING",
+    "POLICY_DEPENDENT"
+  ],
+  "globalRules": {
+    "requirementsAreMethodSpecific": true,
+    "requirementsAreCapabilityScoped": true,
+    "oneCanonicalInputMayServeMultipleMethods": true,
+    "methodMayDeriveInternalInputOnlyFromPresentOrGovernedResolvedValues": true,
+    "missingValuesMayNotBeGuessed": true,
+    "browserTimezoneMayNotSatisfyBirthTimezoneRequirement": true,
+    "currentUtcOffsetMayNotSatisfyHistoricalOffsetRequirement": true,
+    "inputReadinessDoesNotEqualDispatchAuthority": true,
+    "mpaDecisionPrecedesExecution": true
+  },
+  "methods": [
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "currentMcd1Scope": "CORE_10_PLANET_PROJECTION_NO_HOUSES_NO_ASPECTS_NO_NODES",
+      "required": [
+        "birthDate",
+        "birthTime",
+        "birthPlace",
+        "timezone.iana",
+        "timezone.utcOffsetAtBirth"
+      ],
+      "optional": [
+        "birthPlace.latitude",
+        "birthPlace.longitude"
+      ],
+      "unknownSafe": [],
+      "degradeSupported": [
+        "APPROXIMATE_BIRTH_TIME_WITH_PRECISION_WARNING"
+      ],
+      "blocking": [
+        "UNKNOWN_BIRTH_DATE",
+        "UNKNOWN_BIRTH_TIME",
+        "UNKNOWN_BIRTH_PLACE",
+        "UNRESOLVED_HISTORICAL_TIMEZONE",
+        "UNRESOLVED_UTC_OFFSET_AT_BIRTH_FOR_REQUIRED_INSTANT"
+      ],
+      "fieldMatrix": {
+        "date": "REQUIRED",
+        "time": "REQUIRED",
+        "place": "REQUIRED",
+        "coordinates": "POLICY_DEPENDENT",
+        "birthTimezone": "REQUIRED",
+        "utcOffsetAtBirth": "REQUIRED",
+        "unknownTime": "BLOCKING",
+        "approximateTime": "DEGRADE_SUPPORTED"
+      },
+      "notes": [
+        "Coordinates are not required by the current MCD-1 planet-only scope, but remain capability-dependent for later location-sensitive AST scopes.",
+        "No house/aspect/node input policy is activated by MCD-3."
+      ]
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "currentMcd1Scope": "GOVERNED_BZR_CORE_RUNTIME",
+      "required": [
+        "birthDate",
+        "birthPlace",
+        "timezone.iana"
+      ],
+      "optional": [
+        "birthTime",
+        "birthPlace.latitude",
+        "birthPlace.longitude"
+      ],
+      "unknownSafe": [
+        "birthTime for THREE_PILLARS only"
+      ],
+      "degradeSupported": [
+        "UNKNOWN_BIRTH_TIME_TO_THREE_PILLARS_HOUR_UNRESOLVED"
+      ],
+      "blocking": [
+        "UNKNOWN_BIRTH_DATE",
+        "UNKNOWN_BIRTH_PLACE",
+        "UNRESOLVED_HISTORICAL_TIMEZONE",
+        "UNKNOWN_BIRTH_TIME_FOR_FOUR_PILLARS",
+        "UNKNOWN_BIRTH_TIME_FOR_LUCK_CYCLE",
+        "UNRESOLVED_REQUIRED_COORDINATE_OR_TRUE_SOLAR_CONTEXT_WHEN_SELECTED_POLICY_REQUIRES_IT"
+      ],
+      "fieldMatrix": {
+        "date": "REQUIRED",
+        "time": "POLICY_DEPENDENT",
+        "place": "REQUIRED",
+        "coordinates": "POLICY_DEPENDENT",
+        "birthTimezone": "REQUIRED",
+        "utcOffsetAtBirth": "POLICY_DEPENDENT",
+        "unknownTime": "DEGRADE_SUPPORTED",
+        "approximateTime": "DEGRADE_SUPPORTED"
+      },
+      "notes": [
+        "Unknown birth time must preserve hourPillar = unresolved; it may never synthesize an hour pillar.",
+        "Four Pillars and Luck Cycle remain birth-time dependent under the frozen BZR boundary."
+      ]
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "currentMcd1Scope": "BIRTH_NUMBER_NUMBER_STRUCTURE_CYCLE",
+      "required": [
+        "birthDate"
+      ],
+      "optional": [
+        "birthTime",
+        "birthPlace",
+        "birthPlace.latitude",
+        "birthPlace.longitude",
+        "timezone.iana",
+        "timezone.utcOffsetAtBirth"
+      ],
+      "unknownSafe": [
+        "birthTime",
+        "birthPlace",
+        "coordinates for date-only numeric facts"
+      ],
+      "degradeSupported": [
+        "DATE_ONLY_NUMERIC_FACTS_WITHOUT_BIRTH_TIME"
+      ],
+      "blocking": [
+        "UNKNOWN_BIRTH_DATE",
+        "UNRESOLVED_TIMEZONE_WHEN_A_SELECTED_DATE_SELECTION_OR_CYCLE_CAPABILITY_REQUIRES_CIVIL_DATE_CONTEXT"
+      ],
+      "fieldMatrix": {
+        "date": "REQUIRED",
+        "time": "OPTIONAL",
+        "place": "OPTIONAL",
+        "coordinates": "OPTIONAL",
+        "birthTimezone": "POLICY_DEPENDENT",
+        "utcOffsetAtBirth": "POLICY_DEPENDENT",
+        "unknownTime": "UNKNOWN_SAFE",
+        "approximateTime": "UNKNOWN_SAFE"
+      },
+      "notes": [
+        "The current MPA canonical birth-number path is date based.",
+        "The NUM core boundary still requires timezone for date selection; capability-scoped cycle/date operations must therefore require governed timezone context when applicable."
+      ]
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "currentMcd1Scope": "BLOCKED_VALIDATION_ONLY",
+      "required": [
+        "birthDate",
+        "birthTime",
+        "birthPlace",
+        "birthPlace.latitude",
+        "birthPlace.longitude",
+        "timezone.iana",
+        "timezone.utcOffsetAtBirth"
+      ],
+      "optional": [],
+      "unknownSafe": [],
+      "degradeSupported": [
+        "VALIDATION_POLICY_MAY_RECORD_APPROXIMATE_TIME_WITHOUT_CREATING_PRODUCTION_AUTHORITY"
+      ],
+      "blocking": [
+        "MPA_POLICY_BLOCKED",
+        "UNKNOWN_BIRTH_DATE",
+        "UNKNOWN_BIRTH_TIME_FOR_FULL_INTERNAL_PATH",
+        "UNKNOWN_BIRTH_PLACE",
+        "UNRESOLVED_HISTORICAL_TIMEZONE",
+        "RIGHTS_AND_MAPPING_AUTHORITY_UNRESOLVED"
+      ],
+      "fieldMatrix": {
+        "date": "REQUIRED",
+        "time": "REQUIRED",
+        "place": "REQUIRED",
+        "coordinates": "REQUIRED",
+        "birthTimezone": "REQUIRED",
+        "utcOffsetAtBirth": "REQUIRED",
+        "unknownTime": "BLOCKING",
+        "approximateTime": "POLICY_DEPENDENT"
+      },
+      "notes": [
+        "HDR full internal validation path records coordinates as required; this stricter MCD input profile does not create algorithm, mapping, license, Production, or Professional authority.",
+        "MPA block takes precedence over input completeness."
+      ]
+    }
+  ],
+  "derivedInputBoundary": {
+    "source": "CanonicalBirthInput",
+    "allowedTargets": [
+      "ASTInternalInput",
+      "BZRInternalInput",
+      "NUMInternalInput",
+      "HDRInternalInput"
+    ],
+    "mustPreserveUnknowns": true,
+    "mustAttachRequirementEvaluation": true,
+    "hdrTargetProductionInvocationAllowedNow": false
+  },
+  "authorityReferences": {
+    "mpaCanonicalInput": "content/professional/method-production-activation/contracts/mpa-canonical-method-input-contract-v1.json",
+    "astBoundary": "content/professional/core-method-runtime/ast-runtime-boundary-v1.json",
+    "bzrBoundary": "content/professional/core-method-runtime/bzr-runtime-boundary-v1.json",
+    "numBoundary": "content/professional/core-method-runtime/num-runtime-boundary-v1.json",
+    "hdrBoundary": "content/professional/method-client-delivery/resolutions/mcd-1-hdr-restricted-method-resolution-v1.json"
+  },
+  "nextWork": "MCD-4"
+}

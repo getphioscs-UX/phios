@@ -1,0 +1,23 @@
+{
+  "contract": "PHI-OS-KNOWLEDGE-CHECKER-MANIFEST-v1.0.0",
+  "status": "frozen",
+  "authority": "validation-only",
+  "allowedCapabilities": ["read", "validate", "compare", "fail", "report"],
+  "forbiddenCapabilities": ["update_hash", "write_registry", "repair_data", "promote_state", "publish", "change_approval", "generate_freeze"],
+  "writeBoundary": {
+    "repositoryWritesAllowed": false,
+    "temporaryFixtureWritesAllowed": true,
+    "protectedRoots": ["content/knowledge/registry", "content/knowledge/blueprints", "content/knowledge/editorial", "content/knowledge/articles", "content/knowledge/public"]
+  },
+  "checkers": [
+    {"checkerCode":"KH-W4A","command":"node scripts/check-kh-w4a-knowledge-runtime-v2.mjs"},
+    {"checkerCode":"KH-W4B-W4C","command":"node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs"},
+    {"checkerCode":"KH-W4D-W4E","command":"node scripts/check-kh-w4d-w4e-freeze-ownership.mjs"},
+    {"checkerCode":"KH-W4G","command":"node scripts/check-kh-w4g-knr-registry-consumption-migration.mjs"},
+    {"checkerCode":"KH-W4G5","command":"node scripts/check-kh-w4g5-semantic-graph-foundation.mjs"},
+    {"checkerCode":"KH-W4G6-W4H","command":"node scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs"},
+    {"checkerCode":"KH-W4H-E","command":"node scripts/check-kh-w4h-phase-e-private-manuscript-pja-revalidation.mjs"},
+    {"checkerCode":"KH-W4H-F","command":"node scripts/check-kh-w4h-phase-f-production-intelligence.mjs"},
+    {"checkerCode":"KH-W4I-W4K","command":"node scripts/check-kh-w4i-w4k-public-foundation-acceptance.mjs"}
+  ]
+}

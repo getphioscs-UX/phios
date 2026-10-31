@@ -1,0 +1,33 @@
+{
+  "contractCode": "PHI-OS-ALR-W32-LEARNING-RECOMMENDATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W32",
+  "status": "active",
+  "productionStatus": "deterministic_explainable_option_only",
+  "semanticAuthority": "ALR",
+  "identityPrefix": "ALR-LREC-",
+  "requiredEvaluationInputFields": ["recommendationCode", "recommendationVersion", "progressState", "continuityDecision", "reviewDecision", "capabilityGapType"],
+  "capabilityGapTypes": ["NO_GAP", "PREREQUISITE_GAP", "STATE_GAP", "EVIDENCE_GAP", "MAINTENANCE_GAP", "DISPUTED_GAP", "UNKNOWN_GAP"],
+  "recommendationActions": ["HOLD_DISPUTED", "HOLD_UNKNOWN", "REVIEW_RETENTION", "REVIEW_SOURCE", "REVIEW_CONTINUITY", "REVISIT_PREREQUISITE", "REINFORCE_PRACTICE", "REVIEW_ASSESSMENT", "START_CURRENT_LESSON", "CONTINUE_CURRENT_LESSON", "COMPLETE_NO_AUTOMATIC_NEXT_STEP"],
+  "forbiddenInputFields": ["learnerReference", "subjectReference", "accountReference", "profile", "diagnosis", "rawResponse", "response", "score", "capabilityAchieved", "credentialState", "entitlementState", "professionalJudgment", "automaticEnrollment", "selectedForLearner", "providerPrompt", "providerResponse", "modelOutput", "networkRequest", "persist", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "recommendationUsesControlledProgressContinuityReviewAndGapSemantics": true,
+    "recommendationMustExposeReasonAndTargetScope": true,
+    "recommendationIsOptionNotDecision": true,
+    "humanOrLearnerChoiceRequired": true,
+    "recommendationMayNotInferIdentityDiagnosisOrProfessionalReadiness": true,
+    "recommendationMayNotAutoEnrollAssignPurchaseOrUnlock": true,
+    "recommendationMayNotGrantCapabilityCredentialEntitlementOrAuthority": true,
+    "providerAiPersonalizationAndNetworkCallsForbidden": true,
+    "recommendationEvaluationPersistsLearnerData": false,
+    "unknownDisputedOrRetentionBoundaryFailsClosed": true
+  },
+  "activation": {
+    "deterministicRecommendationSemanticsActive": true,
+    "learnerPersonalizationRuntimeActive": false,
+    "automaticEnrollmentOrAssignmentActive": false,
+    "providerAiOrNetworkActive": false,
+    "recommendationPersistenceActive": false,
+    "learnerDeliveryRuntimeActive": false
+  }
+}

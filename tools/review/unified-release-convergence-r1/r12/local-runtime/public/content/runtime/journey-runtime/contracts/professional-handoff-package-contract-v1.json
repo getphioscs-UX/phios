@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-JR-W9-PROFESSIONAL-HANDOFF-PACKAGE-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W9",
+  "status": "active_reference_only",
+  "schemaReference": "content/runtime/journey-runtime/schemas/professional-handoff-package-v1.schema.json",
+  "requiredReferenceGroups": [
+    "realityReferences",
+    "readoutReferences",
+    "evidenceReferences",
+    "unknownReferences",
+    "journeyContextReference",
+    "customerQuestionReference",
+    "consentReferences"
+  ],
+  "pwsBoundaryReference": "docs/pws/architecture/pws-entry-professional-handoff-boundary-v1.json",
+  "rules": {
+    "minimumNecessaryDataOnly": true,
+    "sourceLineageVisible": true,
+    "serviceSpecificConsentRequired": true,
+    "handoffCreatesProfessionalResponsibility": false,
+    "handoffCreatesProfessionalEntitlement": false,
+    "handoffCreatesAssignment": false,
+    "professionalAcceptanceRequiredSeparately": true,
+    "journeyReadingBecomesProfessionalConclusion": false
+  }
+}

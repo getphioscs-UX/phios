@@ -1,0 +1,98 @@
+/* WPR-W20 · JR v2 Reality Journey production projection.
+ * Presentation only. JR owns workflow authority; WPR does not create Journey state.
+ */
+.wpr-jr-authority {
+  border-block: 1px solid var(--phi-border, rgba(22, 28, 38, .12));
+}
+.wpr-jr-authority__head {
+  display: grid;
+  gap: 1rem;
+  max-width: 58rem;
+}
+.wpr-jr-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.wpr-jr-statuses li {
+  padding: .45rem .7rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: .82rem;
+}
+.wpr-jr-canonical-stages {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: jr-stage;
+}
+.wpr-jr-canonical-stage {
+  min-height: 11rem;
+  padding: 1.1rem;
+  border: 1px solid var(--phi-border, rgba(22, 28, 38, .12));
+  border-radius: 1rem;
+  background: var(--phi-surface, #fff);
+}
+.wpr-jr-canonical-stage__number {
+  display: block;
+  margin-bottom: .8rem;
+  font-variant-numeric: tabular-nums;
+  opacity: .68;
+}
+.wpr-jr-canonical-stage h3 {
+  margin: 0 0 .55rem;
+}
+.wpr-jr-canonical-stage p {
+  margin: 0;
+}
+.wpr-jr-authority__error {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid currentColor;
+  border-radius: .8rem;
+}
+.wpr-jr-dashboard-authority {
+  margin-top: 1.25rem;
+  padding: 1.2rem;
+  border: 1px solid var(--phi-border, rgba(22, 28, 38, .12));
+  border-radius: 1rem;
+}
+.wpr-jr-dashboard-authority__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .85rem 1.4rem;
+  margin-top: 1rem;
+}
+.wpr-jr-dashboard-authority__grid div {
+  min-width: 0;
+}
+.wpr-jr-dashboard-authority dt {
+  font-size: .78rem;
+  opacity: .66;
+}
+.wpr-jr-dashboard-authority dd {
+  margin: .2rem 0 0;
+  font-weight: 600;
+}
+.wpr-jr-compatibility-note {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-inline-start: 3px solid currentColor;
+}
+@media (max-width: 900px) {
+  .wpr-jr-canonical-stages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .wpr-jr-canonical-stages,
+  .wpr-jr-dashboard-authority__grid {
+    grid-template-columns: 1fr;
+  }
+}

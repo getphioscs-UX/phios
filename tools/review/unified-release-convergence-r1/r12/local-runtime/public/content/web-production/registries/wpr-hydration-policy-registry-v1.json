@@ -1,0 +1,67 @@
+{
+  "registryCode": "PHI-OS-WPR-W24-HYDRATION-POLICY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W24",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "status": "canonical_limited_production",
+  "entries": [
+    {
+      "surfaceCodes": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE",
+        "FIGURE",
+        "BOOK",
+        "ACADEMY_DISCOVERY",
+        "REALITY_JOURNEY_OVERVIEW",
+        "FINANCIAL"
+      ],
+      "mode": "PUBLIC_CANONICAL_READ",
+      "accessClasses": [
+        "PUBLIC"
+      ]
+    },
+    {
+      "surfaceCodes": [
+        "PROFESSIONAL"
+      ],
+      "mode": "PUBLIC_STATIC_METADATA",
+      "accessClasses": [
+        "PUBLIC"
+      ]
+    },
+    {
+      "surfaceCodes": [
+        "REALITY_JOURNEY_LOCAL"
+      ],
+      "mode": "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY",
+      "accessClasses": [
+        "PUBLIC"
+      ]
+    },
+    {
+      "surfaceCodes": [
+        "PERSONAL_RUNTIME_SETUP"
+      ],
+      "mode": "BROWSER_EPHEMERAL_INPUT_READINESS",
+      "accessClasses": [
+        "PUBLIC"
+      ]
+    },
+    {
+      "surfaceCodes": [
+        "PROFESSIONAL_WORKSPACE",
+        "PROFESSIONAL_REPORT_VIEWER"
+      ],
+      "mode": "PROFESSIONAL_AUTHORIZED_EXTERNAL_PAYLOAD",
+      "accessClasses": [
+        "PROFESSIONAL_AUTHORIZED"
+      ]
+    }
+  ],
+  "rules": {
+    "everyProductionRecordMustResolveExactlyOneMode": true,
+    "modeMayNarrowButNeverExpandRecordHydrationPolicy": true,
+    "wprPrivateFetchAuthority": false
+  }
+}

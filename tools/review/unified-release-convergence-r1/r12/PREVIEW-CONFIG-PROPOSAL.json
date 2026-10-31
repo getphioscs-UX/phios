@@ -1,0 +1,17 @@
+{
+  "status": "PREPARED_NOT_APPLIED_AWAITING_SEPARATE_AUTHORIZATION",
+  "environment": "Cloudflare Pages phios-github deployment_configs.preview only",
+  "variable": "PHIOS_PUBLIC_ASSET_BASE_URL",
+  "value": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev",
+  "type": "plain_text_public_nonsecret",
+  "source": "content/registry/public-assets.json: bucket phios-public-assets, existing remote.requested_url HTTP200 identities; corroborated by current-client-visual-registry pointer v1.8",
+  "runtimeRead": "functions/api/public-asset-config.js reads env on each Functions Runtime request; browser Asset Resolver GETs this endpoint",
+  "buildTimeRead": "build-cloudflare-pages.mjs does not consume this variable; selected live verification tools do, but normal static/Worker build does not. Configuration is required at Functions runtime.",
+  "productionChange": false,
+  "privateBindingsChanged": false,
+  "R2ObjectWrites": 0,
+  "secretValuesCopied": false,
+  "scopeImpact": "Preview project-level variable would affect future Preview deployments; existing deployments may require rebuild. Do not rewrite whole env_vars map; change only this key with production config compare guard.",
+  "branch": "codex/unified-release-preview-r12",
+  "deploymentAuthorized": false
+}

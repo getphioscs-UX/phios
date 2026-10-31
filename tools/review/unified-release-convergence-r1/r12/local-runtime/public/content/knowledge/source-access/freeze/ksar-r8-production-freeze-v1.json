@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-KSAR-R8-PRODUCTION-FREEZE-v1.0.0",
+  "stage": "KSAR-R8",
+  "status": "PRODUCTION_FROZEN",
+  "successorOf": "content/knowledge/source-access/freeze/ksar-r1-r8-reconciliation-v1.json",
+  "predecessorStatus": "HUMAN_REVIEW_GATE_CLOSED_REMOTE_R2_GATE_PENDING",
+  "authority": "SUCCESSOR_FREEZE_ONLY",
+  "acceptance": {
+    "humanReviewGateClosed": true,
+    "all448HumanReadabilityReviewsComplete": true,
+    "reviewedCorpusPromotionComplete": true,
+    "reviewedCorpusActiveForKnowledgeAccess": true,
+    "remoteR2GetVerificationComplete": true,
+    "reviewedCorpusRemoteBytesMatchExpectedHashes": true,
+    "rawFullBookDeliveryBlocked": true,
+    "canonicalKnowledgeAuthorityUnchanged": true,
+    "publishedArticleAuthorityUnchanged": true,
+    "productionFreezeEligible": true,
+    "productionFreezeComplete": true
+  },
+  "corpusVerification": [
+    {
+      "sourceCode": "MKS-BOOK-1-V2-ZH-HANS",
+      "bookCode": "BOOK-1",
+      "reviewedCorpusCode": "RMC-BOOK-1-v2-ZH-HANS",
+      "r2ObjectKey": "books/book-1/materialized/v2/reviewed/retrieval-corpus.json",
+      "expectedRetrievalCorpusSha256": "286fecbd38a67b765d83647b36a19e9484b7b228a34235ee4a0f2cb3856a19d6",
+      "remoteBytesSha256": "286fecbd38a67b765d83647b36a19e9484b7b228a34235ee4a0f2cb3856a19d6",
+      "remoteObjectGetVerified": true,
+      "productionEligible": true
+    },
+    {
+      "sourceCode": "MKS-BOOK-2-V1-ZH-HANS",
+      "bookCode": "BOOK-2",
+      "reviewedCorpusCode": "RMC-BOOK-2-v1-ZH-HANS",
+      "r2ObjectKey": "books/book-2/materialized/v1/reviewed/retrieval-corpus.json",
+      "expectedRetrievalCorpusSha256": "cb843896992792db44e98795ed8a4fa8edbb057f59148d4d20f42321557cc3ef",
+      "remoteBytesSha256": "cb843896992792db44e98795ed8a4fa8edbb057f59148d4d20f42321557cc3ef",
+      "remoteObjectGetVerified": true,
+      "productionEligible": true
+    }
+  ],
+  "evidence": {
+    "humanReviewClosure": {
+      "path": "content/knowledge/review/ksar-r4-human-review-closure-v1.json",
+      "sha256": "1fe863a0755fbc51f33153211e15c98432c34c9955d922935ffb8feec393e86d"
+    },
+    "reviewedCorpusRegistry": {
+      "path": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+      "sha256": "87ad2425427f3583b890b2b8b785d4f52caa8969e3b986c7fa0b4c9c9027cefa"
+    },
+    "remoteR2Verification": {
+      "path": "content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json",
+      "sha256": "49f6c9443a3ac00b39ade7449dea7f24156c1050c800a13df489d65c3cfe38fc"
+    },
+    "runtimeManifest": {
+      "path": "content/knowledge/source-access/registries/ksar-runtime-manifest-v1.json",
+      "sha256": "731d3209e59b69b21e7eb04bed912871cb252e5e7ef390725d7413b8a2c5049f"
+    },
+    "predecessorReconciliation": {
+      "path": "content/knowledge/source-access/freeze/ksar-r1-r8-reconciliation-v1.json",
+      "sha256": "7f6c6a363155d4111cddaee6537aa188810cf91b15394fdcc10a0e5a5339d388"
+    }
+  },
+  "boundaries": {
+    "manuscriptReadabilityApprovalDoesNotCreateCanonicalNodeAuthority": true,
+    "manuscriptAccessDoesNotPublishArticle": true,
+    "questionScopedGroundingOnly": true,
+    "rawFullBookDeliveryRemainsBlocked": true,
+    "predecessorFreezeEvidencePreserved": true
+  },
+  "productionBlockers": []
+}

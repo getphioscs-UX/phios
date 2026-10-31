@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-NARRATIVE-COMMERCE-ENTITLEMENT-CONTRACT-v1.0.0",
+  "work": "W54N6",
+  "baselineCommit": "8331a81358531a1a80c077ac65dc5e3bd588ae15",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "productAuthority": "PAID_NARRATIVE_READING_V1",
+  "flow": [
+    "PREVIEW",
+    "CHECKOUT",
+    "SERVER_VERIFIED_PAYMENT_EVENT",
+    "PURCHASE_RECORD",
+    "NARRATIVE_ENTITLEMENT",
+    "GENERATION",
+    "STORED_NARRATIVE_READING_IR"
+  ],
+  "states": [
+    "NOT_PURCHASED",
+    "PAYMENT_PENDING",
+    "PURCHASED",
+    "GENERATION_PENDING",
+    "GENERATING",
+    "VERIFYING",
+    "REPAIRING",
+    "READY",
+    "GENERATION_FAILED_RETRYABLE",
+    "GENERATION_FAILED_TERMINAL",
+    "REFUNDED"
+  ],
+  "rules": {
+    "clientSuccessPagePaymentAuthority": false,
+    "generationRequiresEntitlement": true,
+    "quotaAuthority": "ENTITLEMENT_POLICY",
+    "recurringQuotaAuthority": "CONTINUITY"
+  },
+  "gate": "check:ppr-narrative:w54n6-commerce-entitlement"
+}

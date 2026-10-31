@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/published-knowledge-record-v1.schema.json",
+  "title": "PHI OS Published Knowledge Authority Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authorityRecordCode",
+    "nodeCode",
+    "locale",
+    "article",
+    "eligibility",
+    "lineage",
+    "publicStatus",
+    "authorityDigest"
+  ],
+  "properties": {
+    "authorityRecordCode": {
+      "type": "string",
+      "pattern": "^PKA-[A-Z0-9-]+$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "article": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "articleCode",
+        "title",
+        "summary",
+        "bodyMarkdown",
+        "version"
+      ],
+      "properties": {
+        "articleCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string"
+        },
+        "bodyMarkdown": {
+          "type": "string",
+          "minLength": 100
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "slug": {
+          "type": "string"
+        },
+        "href": {
+          "type": "string"
+        }
+      }
+    },
+    "eligibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contentReviewed",
+        "approved",
+        "published"
+      ],
+      "properties": {
+        "contentReviewed": {
+          "const": true
+        },
+        "approved": {
+          "const": true
+        },
+        "published": {
+          "const": true
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateCode",
+        "candidateDigest",
+        "reviewCode",
+        "reviewDigest",
+        "approvalCode",
+        "approvalDigest",
+        "publicationCode",
+        "publicationDigest"
+      ],
+      "properties": {
+        "candidateCode": {
+          "type": "string"
+        },
+        "candidateDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewCode": {
+          "type": "string"
+        },
+        "reviewDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "approvalCode": {
+          "type": "string"
+        },
+        "approvalDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "publicationCode": {
+          "type": "string"
+        },
+        "publicationDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "publicStatus": {
+      "const": "eligible_for_public_projection"
+    },
+    "authorityDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

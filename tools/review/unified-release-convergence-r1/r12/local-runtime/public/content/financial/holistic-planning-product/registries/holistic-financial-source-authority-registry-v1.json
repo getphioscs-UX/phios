@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W2-SOURCE-AUTHORITY-REGISTRY-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W2",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_CANONICAL_SOURCE_REGISTRY",
+  "sources": [
+    {
+      "code": "FDR",
+      "role": "CANONICAL_FINANCIAL_FACTS",
+      "status": "ACTIVE_CANONICAL",
+      "reference": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+      "allowedStatementTypes": [
+        "FINANCIAL_FACT",
+        "UNKNOWN"
+      ]
+    },
+    {
+      "code": "FCR",
+      "role": "DETERMINISTIC_NUMERIC_PROJECTIONS",
+      "status": "ACTIVE_CANONICAL",
+      "reference": "content/financial/calculation-runtime/authority/fcr-w0-w22-freeze-manifest-v1.json",
+      "allowedStatementTypes": [
+        "CALCULATED_RESULT",
+        "SCENARIO_RESULT",
+        "UNKNOWN"
+      ]
+    },
+    {
+      "code": "FAR",
+      "role": "STRUCTURAL_FINDINGS",
+      "status": "ACTIVE_CANONICAL",
+      "reference": "content/financial/analysis-runtime/authority/far-w0-w22-freeze-manifest-v1.json",
+      "allowedStatementTypes": [
+        "ANALYTICAL_FINDING",
+        "UNKNOWN"
+      ]
+    },
+    {
+      "code": "PFR",
+      "role": "HUMAN_ATTRIBUTABLE_PROFESSIONAL_CONTRIBUTIONS",
+      "status": "RESERVED_UPSTREAM_AUTHORITY_NOT_INSTALLED",
+      "reference": null,
+      "allowedStatementTypes": [
+        "PROFESSIONAL_RECOMMENDATION",
+        "PROFESSIONAL_WARNING",
+        "ACTION"
+      ]
+    },
+    {
+      "code": "DAR",
+      "role": "ESTATE_DOCUMENT_STATE_REFERENCE_ONLY",
+      "status": "ACTIVE_CANONICAL",
+      "reference": "content/document-assembly/freeze/dar-production-freeze-v1.json",
+      "allowedStatementTypes": [
+        "FINANCIAL_FACT",
+        "UNKNOWN",
+        "BOUNDARY"
+      ]
+    },
+    {
+      "code": "ACCOUNT",
+      "role": "SUBJECT_AND_ACCOUNT_REFERENCE_ONLY",
+      "status": "ACTIVE_REFERENCE_ONLY",
+      "reference": "ACCOUNT_RUNTIME",
+      "allowedStatementTypes": [
+        "BOUNDARY"
+      ]
+    },
+    {
+      "code": "HFP",
+      "role": "INTERNAL_COMPOSITION_BOUNDARY_ONLY",
+      "status": "ACTIVE_INTERNAL_NON_UPSTREAM",
+      "reference": "content/financial/holistic-planning-product/authority/holistic-financial-planning-authority-baseline-v1.json",
+      "allowedStatementTypes": [
+        "BOUNDARY"
+      ]
+    }
+  ],
+  "rules": {
+    "unknownAuthorityFailClosed": true,
+    "sourceDigestRequiredForFdrFcrFar": true,
+    "pfrCannotBeSubstitutedByHfp": true,
+    "legacyProfessionalFinancialIsNotSilentlyPromotedToPfr": true,
+    "accountDoesNotBecomeFinancialFactAuthority": true
+  }
+}

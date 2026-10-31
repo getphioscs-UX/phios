@@ -1,0 +1,77 @@
+{
+  "contractCode": "PHI-OS-CMR-HDR-STRUCTURE-MAPPING-v1",
+  "contractVersion": "1.0.0",
+  "work": "CM-W7A",
+  "productionStatus": "validation_only",
+  "purpose": "Freeze the HDR structural Projection-to-Meaning mapping boundary without creating mappings before target Meaning Codes and projection coverage exist.",
+  "soleInputAuthority": {
+    "schemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "methodCode": "HUMAN_DESIGN",
+    "pluginCode": "HDR"
+  },
+  "structureScopes": [
+    {
+      "scopeCode": "SDU",
+      "projectionType": "GATE",
+      "expectedSourceCount": 64,
+      "targetNamespace": "CM-FORMATION-SDU",
+      "sourceAvailability": "projection_value_available",
+      "mappingPopulation": "blocked"
+    },
+    {
+      "scopeCode": "SCU",
+      "projectionType": "CHANNEL",
+      "expectedSourceCount": 36,
+      "targetNamespace": "CM-CONNECTION-SCU",
+      "sourceAvailability": "projection_value_available",
+      "mappingPopulation": "blocked"
+    },
+    {
+      "scopeCode": "RESOURCE_CENTER",
+      "projectionType": "CENTER",
+      "expectedSourceCount": 9,
+      "targetNamespace": "CM-RESOURCE-CENTER",
+      "sourceAvailability": "projection_value_available",
+      "mappingPopulation": "blocked"
+    },
+    {
+      "scopeCode": "PROCESSING_NETWORK",
+      "projectionType": null,
+      "expectedSourceCount": 5,
+      "targetNamespace": "CM-PROCESSING-NETWORK",
+      "sourceAvailability": "canonical_projection_missing",
+      "mappingPopulation": "blocked"
+    }
+  ],
+  "requiredMappingShape": [
+    "projectionCode",
+    "meaningCode",
+    "mappingVersion",
+    "mappingAuthority",
+    "mappingConfidence",
+    "boundary"
+  ],
+  "forbiddenContent": [
+    "GATE_DESCRIPTION",
+    "CHANNEL_DESCRIPTION",
+    "CENTER_DESCRIPTION",
+    "NETWORK_DESCRIPTION",
+    "ORIGINAL_METHOD_INTERPRETATION_TEXT",
+    "RAW_METHOD_OBJECT",
+    "METHOD_CALCULATION_INTERNALS"
+  ],
+  "activationRequirements": [
+    "registered_target_meaning_code",
+    "valid_meaning_identity",
+    "knowledge_authority_reference",
+    "canonical_projection_support",
+    "cm_w6_foundation_valid"
+  ],
+  "invariants": {
+    "projectionToMeaningOnly": true,
+    "interpretationCreated": false,
+    "knowledgeCreated": false,
+    "professionalConclusionCreated": false,
+    "actualMappingsCreated": false
+  }
+}

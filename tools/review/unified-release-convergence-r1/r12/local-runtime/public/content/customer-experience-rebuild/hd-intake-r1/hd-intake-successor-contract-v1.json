@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-HD-INTAKE-SUCCESSOR-R1-v1.0.0",
+  "baseline": "ca80d9f5a33955d6e222777ccb8c92b01f5cd4e2",
+  "owner": "EXISTING_EXTERNAL_PROFILE_INTAKE_CONFIRMATION",
+  "identity": "existing intakeId; currentReadingId is a provenance alias",
+  "policyModule": "functions/external-profile/hd-intake-reconciliation.js",
+  "sources": ["CURRENT_OFFICIAL_CHART", "CURRENT_BIRTH_CALCULATION", "CURRENT_SESSION_MANUAL_CONFIRMATION", "DERIVED_FROM_CONFIRMED_STRUCTURE", "UNKNOWN"],
+  "statuses": ["CONFIRMED", "CALCULATED", "EXTRACTED", "DERIVED", "NEEDS_CONFIRMATION", "UNKNOWN", "CONFLICT"],
+  "legacyUnprovenSource": "UNKNOWN",
+  "namedCrossCalculation": "NOT_AVAILABLE_IN_EXISTING_GATE_CONFIGURATION_AUTHORITY",
+  "variablePersistence": "existing variable scalar; Pxx Dxx",
+  "storage": "EPHEMERAL_NO_NEW_BROWSER_CACHE",
+  "machineChecker": "scripts/check-hd-intake-r1.mjs",
+  "browserChecker": "scripts/check-hd-intake-r1-browser.mjs",
+  "humanReview": "PENDING_FINAL_REVIEW_WITH_PIS_R1",
+  "liveConversionProviderTest": "NOT_RUN",
+  "newHdRuntime": false,
+  "reportProductionAdmissionChanged": false,
+  "crossProductionAdmissionChanged": false,
+  "paymentActivationChanged": false
+}

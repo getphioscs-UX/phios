@@ -1,0 +1,75 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "missing-assets",
+  "description": "Assets domain not yet provided; absence is not interpreted as zero assets.",
+  "synthetic": true,
+  "sourceAdapter": "FORM",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "missingAssetsNotZero": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-MISS-S0",
+      "financialRealityId": "FR-MISS",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-MISS",
+        "householdReference": "HH-MISS",
+        "customerReferences": [
+          "CUST-MISS"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-MISS",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK",
+          "assets": "NOT_YET_PROVIDED"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "42f70e3292c972392e19fbc110add42d172e81561b9490f7765f3df0a5e4e361"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "MISSING_ASSET_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "baf35778cb52d5124e017440e0178b2366fd16dc147a1cad34e9192458354b30"
+    }
+  ],
+  "changeEvents": []
+}

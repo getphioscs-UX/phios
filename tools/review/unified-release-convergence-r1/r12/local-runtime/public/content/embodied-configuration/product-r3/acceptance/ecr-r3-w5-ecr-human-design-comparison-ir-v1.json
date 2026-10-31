@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "PHI-OS-ECR-R3-W5-ECR-HD-COMPARISON-IR-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "ccac579a7e81dc27f7f6403df1c6446fba38bc25",
+  "status": "ENGINEERING_COMPLETE",
+  "scope": [
+    "ECR-R3-W5 ECR × Human Design Comparison IR"
+  ],
+  "predecessors": {
+    "w4ConfirmedHumanDesignTransport": "content/embodied-configuration/product-r3/acceptance/ecr-r3-w4-confirmed-human-design-context-transport-v1.json",
+    "ecrProductionAdmission": "content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json#methodAdmission/ECR",
+    "humanDesignExternalReadingAuthority": "functions/external-profile/human-design-reading-runtime.js"
+  },
+  "runtimeAuthority": {
+    "path": "functions/external-profile/ecr-human-design-comparison-ir.js",
+    "comparisonIrSchemaVersion": "PHI-OS-ECR-R3-ECR-HD-COMPARISON-IR-v1.0.0",
+    "comparisonRuleVersion": "PHI-OS-ECR-R3-ECR-HD-COMPARISON-RULES-v1.0.0",
+    "inputAuthority": {
+      "ecr": "CUSTOMER_PUBLISHABLE_ACCEPTED_ECR_INTERPRETATION",
+      "humanDesign": "CUSTOMER_CONFIRMED_SERVER_REBUILT_EXTERNAL_CONTEXT"
+    },
+    "outputAuthority": "COMPARISON_IR_ONLY"
+  },
+  "comparisonDimensions": [
+    {
+      "dimensionId": "DECISION_NAVIGATION",
+      "relationClass": "SHARED_OBSERVATION_DOMAIN"
+    },
+    {
+      "dimensionId": "CARRIER_ACTION_RESPONSE",
+      "relationClass": "COMPLEMENTARY_LENSES"
+    },
+    {
+      "dimensionId": "ENVIRONMENT_CONTEXT",
+      "relationClass": "SHARED_OBSERVATION_DOMAIN"
+    },
+    {
+      "dimensionId": "EXPRESSION_RELATIONSHIP_INTEGRATION",
+      "relationClass": "COMPLEMENTARY_LENSES"
+    },
+    {
+      "dimensionId": "CHANGE_TIMING_NON_EQUIVALENCE",
+      "relationClass": "NO_DIRECT_EQUIVALENCE"
+    }
+  ],
+  "comparisonModel": {
+    "fieldToFieldMapping": false,
+    "pairwiseCoordinateEquivalence": false,
+    "sharedObservationDomainMayBeReported": true,
+    "complementaryLensMayBeReported": true,
+    "noDirectEquivalenceMustBePreserved": true,
+    "agreementClaimMayBeCreated": false,
+    "compatibilityScoreMayBeCreated": false,
+    "contradictionMayBeResolvedAutomatically": false,
+    "methodVotingMayBeCreated": false,
+    "currentRealityEvidenceMayBeCreated": false
+  },
+  "canonicalCustomerRoute": {
+    "route": "/perspectives/personal/",
+    "responseField": "view.ecrHumanDesignComparison",
+    "createdOnlyWhenEcrAcceptedReadingAndConfirmedHumanDesignContextAreBothPresent": true,
+    "customerRendererCreated": false,
+    "rendererReservedFor": "ECR-R3-W6 Customer Comparison Renderer"
+  },
+  "lineage": {
+    "ecr": [
+      "interpretationResultId",
+      "projectionId",
+      "semanticDigest",
+      "derivationDigest",
+      "compositionRuleVersion",
+      "admissionRef",
+      "humanReviewEvidenceRef"
+    ],
+    "humanDesign": [
+      "profileDigest",
+      "chartDigest",
+      "readingDigest",
+      "compositionDigest",
+      "transportDigest",
+      "authorityClass"
+    ],
+    "comparison": [
+      "comparisonRuleVersion",
+      "comparisonDigest"
+    ]
+  },
+  "boundaries": {
+    "ecrRemainsPhiOsNative": true,
+    "humanDesignRemainsCustomerSuppliedExternalContext": true,
+    "phiosHumanDesignCalculationAuthorityCreated": false,
+    "humanDesignRecalculated": false,
+    "hdrPublicExecutionUsed": false,
+    "directFieldEquivalenceCreated": false,
+    "ecrCoordinateToHumanDesignFieldMappingCreated": false,
+    "humanDesignFieldToEcrCoordinateMappingCreated": false,
+    "methodAgreementClaimed": false,
+    "convergenceClaimed": false,
+    "compatibilityScoreCreated": false,
+    "methodVoteCreated": false,
+    "xpfCountsTowardMethodAgreement": false,
+    "newEcrMeaningCreated": false,
+    "newHumanDesignMeaningCreated": false,
+    "currentRealityEvidenceCreated": false,
+    "customerRendererCreated": false,
+    "automaticPersistence": false,
+    "runtimeMemoryWritten": false
+  },
+  "successorBoundary": {
+    "w6CustomerComparisonRendererCreated": false,
+    "w7CurrentRealityBridgeCreated": false,
+    "reservedFor": [
+      "ECR-R3-W6 Customer Comparison Renderer",
+      "ECR-R3-W7 Reality Bridge"
+    ]
+  },
+  "validation": {
+    "checker": "scripts/check-ecr-product-r3-w5.mjs",
+    "directIrRegression": true,
+    "partialExternalProfileRegression": true,
+    "failClosedAuthorityRegression": true,
+    "canonicalApiBindingRegression": true,
+    "w4NonVotingBoundaryRegression": true
+  }
+}

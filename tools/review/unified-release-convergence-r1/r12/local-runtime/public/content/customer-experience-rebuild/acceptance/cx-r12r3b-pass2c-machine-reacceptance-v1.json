@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-PASS2C-MACHINE-REACCEPTANCE-v1.0.0",
+  "work": "CX-R12R3B-PASS2C",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "POST_HUMAN_MACHINE_REACCEPTED_DEPLOYMENT_READY",
+  "humanReviewResultsRef": "content/customer-experience-rebuild/review/cx-r12r3b-human-review-results-v1.json",
+  "checks": {
+    "developmentW0W60": "PASS",
+    "pass2HistoricalAudit": "PASS",
+    "pass2aMaterialization": "PASS",
+    "pass2bHumanAcceptance": "PASS",
+    "aggregateCommand": "npm run check:cx-r12r3b-pass2b",
+    "aggregateExitCode": 0
+  },
+  "claims": {
+    "humanAccepted": true,
+    "customerPublishableCoverageComplete": true,
+    "machineReacceptedAfterHumanReview": true,
+    "deploymentCandidateCaptured": true,
+    "liveBrowserAccepted": false,
+    "ordinaryReaderAccepted": false,
+    "controlledProductionPromoted": false,
+    "productionFrozen": false,
+    "fullProduction": false
+  },
+  "environmentNote": "Full repository npm run check was not re-executed in the archive workspace because node_modules/.git are not part of the supplied archive. The supplied baseline was stated to pass npm run check; this acceptance records the post-human CX-R12R3B aggregate checker result only.",
+  "nextRequiredState": "DEPLOY_EXACT_CANDIDATE_AND_RUN_LIVE_BROWSER_ACCEPTANCE"
+}

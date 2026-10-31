@@ -1,0 +1,7 @@
+// Source-only COUNTRY adapter; existing private Navigation state and persistence remain untouched.
+export function projectPublicCountryResearchNavigation({subject,dimension,sourceRefs,sourceVersion,locale='en',countryCode,year}={}){
+ if(subject?.subjectType!=='COUNTRY'||subject.visibility!=='PUBLIC'||subject.subjectId!=='WORLD:COUNTRY:'+countryCode||!Array.isArray(sourceRefs)||!sourceVersion)throw Error('PUBLIC_COUNTRY_NAVIGATION_SCOPE_REQUIRED');
+ const zh=locale==='zh-Hans',t=(z,e)=>zh?z:e,base='/perspectives/profile/?subjectType=COUNTRY&country='+countryCode+'&dimension='+encodeURIComponent(dimension)+'&locale='+locale;
+ const projected=projectNavigationForCustomer({state:'SOURCE_BOUND_OPTIONS',options:[{id:'COMPARE_COUNTRY',label:t('比较另一个国家的同年资料','Compare another country for the same year'),href:base+'&view=compare&year='+year},{id:'COMPARE_PERIOD',label:t('选择另一统计期间并复核来源','Select another statistical period and inspect sources'),href:base+'&view=reading'},{id:'INSPECT_SOURCE',label:t('核对当前维度的来源与缺口','Inspect this dimension’s sources and gaps'),href:base+'&view=reading'}],actions:[]},{locale});
+ return {...projected,subjectRef:subject.subjectId,subjectType:'COUNTRY',dimension,sourceRefs,sourceVersion,authority:'PUBLIC_OBSERVER_RESEARCH_ONLY',createsCase:false,createsCheckpoint:false,policyDecisionAuthority:false,savesPersonalFacts:false,persistence:false,automaticAction:false};
+}

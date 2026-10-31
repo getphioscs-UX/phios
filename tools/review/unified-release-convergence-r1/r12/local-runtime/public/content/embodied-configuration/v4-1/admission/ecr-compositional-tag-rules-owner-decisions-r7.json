@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "ECR-V4.1A-R7-W4-COMPOSITION-OWNER-DECISIONS-v1",
+  "baselineCommit": "41b430f9c4a43b4a5b52e4b2ed44928e92dbc183",
+  "reviewedAt": "2026-09-28",
+  "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W4_12_RULES",
+  "status": "R7_W4_CLOSED_12_OF_12_ACCEPTED",
+  "decisions": [
+    {
+      "ruleId": "COMP-R1",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R1",
+        "name": "FOUR_FACTOR_COMPLETENESS",
+        "statement": {
+          "en": "A compositional reading requires Gate Base, Line Modifier, Driver Role and Personality/Design Layer to be present. Missing any required factor returns UNKNOWN for compositional tags.",
+          "zh-Hans": "组合读取必须同时具有 Gate Base、Line Modifier、Driver Role 与 Personality/Design Layer；任何必需因子缺失时，组合标签结果必须为 UNKNOWN。"
+        },
+        "requirements": [
+          "GATE_BASE_PRESENT",
+          "LINE_MODIFIER_PRESENT",
+          "DRIVER_ROLE_ACCEPTED",
+          "LAYER_ROLE_ACCEPTED"
+        ],
+        "onFailure": "UNKNOWN",
+        "forbidden": [
+          "PARTIAL_FACTOR_GUESS",
+          "MISSING_FACTOR_FILLED_BY_LLM"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R2",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R2",
+        "name": "GATE_BASE_IS_SEMANTIC_ANCHOR",
+        "statement": {
+          "en": "Gate Base is the semantic anchor. Line, Driver and Layer may modify emphasis, mode or visibility but may not replace the Gate Base with an unrelated meaning.",
+          "zh-Hans": "Gate Base 是语义锚点。Line、Driver 与 Layer 可以调节重点、方式或可见性，但不能用无关意义取代 Gate Base。"
+        },
+        "requirements": [
+          "GATE_BASE_SOURCE_CANONICALIZED",
+          "EXPLICIT_MEANING_REF"
+        ],
+        "onFailure": "UNKNOWN",
+        "forbidden": [
+          "DRIVER_OVERRIDES_GATE",
+          "LAYER_OVERRIDES_GATE",
+          "LINE_CREATES_UNRELATED_GATE_MEANING"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R3",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R3",
+        "name": "LINE_IS_MODIFIER_NOT_OWNER",
+        "statement": {
+          "en": "Line modifies how a Gate meaning is expressed or operated. A Line number alone cannot create a semantic tag, topic, Runtime Owner or personal conclusion.",
+          "zh-Hans": "Line 只调节 Gate 意义如何表达或运行。单独的爻位数字不能产生 semantic tag、topic、Runtime Owner 或个人结论。"
+        },
+        "requirements": [
+          "LINE_SOURCE_CANONICALIZED",
+          "LINE_ROLE_EVIDENCE_IF_USED"
+        ],
+        "onFailure": "NO_LINE_DERIVED_TAG",
+        "forbidden": [
+          "LINE_NUMBER_TO_TAG",
+          "LINE_NUMBER_TO_OWNER",
+          "LINE_NUMBER_TO_PERSONALITY_CLAIM"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R4",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R4",
+        "name": "DRIVER_MODULATES_FUNCTION_WITHOUT_DIRECT_TAGGING",
+        "statement": {
+          "en": "Driver Role may change which function of the Gate meaning is emphasized, but a Driver identity or same-named role cannot automatically emit a same-named semantic tag.",
+          "zh-Hans": "Driver Role 可以改变 Gate 意义中哪一种运行功能被强调，但 Driver 身份或同名角色不能自动产生同名 semantic tag。"
+        },
+        "requirements": [
+          "DRIVER_ROLE_ACCEPTED",
+          "EXPLICIT_DRIVER_CONTRIBUTION_IF_USED"
+        ],
+        "onFailure": "NO_DRIVER_DERIVED_TAG",
+        "forbidden": [
+          "DRIVER_NAME_TO_TAG",
+          "PLANET_TO_TAG",
+          "PLANET_TO_TOPIC",
+          "DRIVER_TO_RUNTIME_OWNER"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R5",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R5",
+        "name": "LAYER_MODULATES_ACCESS_NOT_TOPIC",
+        "statement": {
+          "en": "Personality/Design changes access, visibility and mode of carrying the composed meaning. Layer identity cannot by itself create a topic tag or psychological verdict.",
+          "zh-Hans": "Personality/Design 调节组合意义的进入方式、可见性与承载方式；Layer 身份本身不能创造 topic tag 或心理结论。"
+        },
+        "requirements": [
+          "LAYER_ROLE_ACCEPTED",
+          "LAYER_BOUNDARY_PRESERVED"
+        ],
+        "onFailure": "NO_LAYER_DERIVED_TAG",
+        "forbidden": [
+          "PERSONALITY_TO_TOPIC",
+          "DESIGN_TO_TOPIC",
+          "PERSONALITY_EQUALS_CONSCIOUS_VERDICT",
+          "DESIGN_EQUALS_UNCONSCIOUS_VERDICT"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R6",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R6",
+        "name": "EXPLICIT_TAG_EVIDENCE_REQUIRED",
+        "statement": {
+          "en": "A semantic tag may be emitted only when an admitted tag-evidence record explicitly links the composed source meaning to that tag. Keyword similarity, label overlap or free LLM interpretation are insufficient.",
+          "zh-Hans": "只有存在已 admission 的 tag-evidence record，明确把组合后的来源意义连接到该 tag 时，才允许输出 semantic tag。关键词相似、名称重叠或 LLM 自由解释均不足以成立。"
+        },
+        "requirements": [
+          "TAG_CANON_ACCEPTED",
+          "TAG_EVIDENCE_RECORD_ACCEPTED"
+        ],
+        "onFailure": "TAG_NOT_EMITTED",
+        "forbidden": [
+          "KEYWORD_SIMILARITY_TO_TAG",
+          "LABEL_OVERLAP_TO_TAG",
+          "LLM_FREE_TAGGING"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R7",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R7",
+        "name": "COMPOSITIONAL_SUPPORT_NOT_384_OWNER_TABLE",
+        "statement": {
+          "en": "Operational composition uses factor-level evidence: 64 Gate Base meanings, 6 Line modifiers, 12 Driver roles and 2 Layer roles. It must not create 384 Gate×Line owner mappings as a disguised direct table.",
+          "zh-Hans": "运行组合使用 factor-level evidence：64 个 Gate Base、6 个 Line modifier、12 个 Driver role 与 2 个 Layer role；不得建立 384 个 Gate×Line owner mapping 作为伪装的直接映射表。"
+        },
+        "requirements": [
+          "FACTOR_LEVEL_MODEL"
+        ],
+        "onFailure": "REJECT_MAPPING",
+        "forbidden": [
+          "384_GATE_LINE_OWNER_TABLE",
+          "GATE_LINE_PAIR_TO_OWNER",
+          "GATE_LINE_PAIR_TO_FIXED_TAG_SET"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R8",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R8",
+        "name": "MULTI_TAG_WITHOUT_PRIORITY_INFERENCE",
+        "statement": {
+          "en": "Multiple admitted tags may coexist. Tag presence does not establish priority, severity, positivity, negativity or Runtime Owner.",
+          "zh-Hans": "多个已 admission 的 tag 可以同时存在。Tag 的出现本身不代表优先级、严重程度、正负价值或 Runtime Owner。"
+        },
+        "requirements": [
+          "ALL_EMITTED_TAGS_ACCEPTED"
+        ],
+        "onFailure": "DROP_UNADMITTED_TAG",
+        "forbidden": [
+          "TAG_TO_PRIORITY",
+          "TAG_TO_SEVERITY",
+          "TAG_TO_GOOD_BAD",
+          "TAG_TO_OWNER"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R9",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R9",
+        "name": "CONFLICT_AND_AMBIGUITY_PRESERVE_UNKNOWN",
+        "statement": {
+          "en": "If admitted factor evidence supports incompatible tag interpretations and no governed precedence resolves the conflict, the disputed tag result remains UNKNOWN.",
+          "zh-Hans": "如果已 admission 的 factor evidence 支持彼此冲突的 tag 解释，而没有受治理的优先规则可以解决冲突，则争议 tag 必须保持 UNKNOWN。"
+        },
+        "requirements": [
+          "CONFLICT_CHECK"
+        ],
+        "onFailure": "UNKNOWN",
+        "forbidden": [
+          "RANDOM_TIE_BREAK",
+          "MODEL_PREFERENCE_TIE_BREAK",
+          "FIRST_MATCH_WINS"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R10",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R10",
+        "name": "GENE_KEYS_IS_STRUCTURAL_INTERPRETATION_INPUT_ONLY",
+        "statement": {
+          "en": "Gene Keys structural correspondences may contribute admitted interpretation context, but Shadow/Gift/Siddhi labels or sphere names cannot directly become PHI tags, customer verdicts or Runtime Owners.",
+          "zh-Hans": "Gene Keys 的结构对应可以贡献已 admission 的解释背景，但 Shadow/Gift/Siddhi 标签或 sphere 名称不能直接变成 PHI tags、客户结论或 Runtime Owner。"
+        },
+        "requirements": [
+          "STRUCTURAL_CORRESPONDENCE_BOUNDARY"
+        ],
+        "onFailure": "IGNORE_DIRECT_EXTERNAL_LABEL_INFERENCE",
+        "forbidden": [
+          "SHADOW_TO_NEGATIVE_TAG",
+          "GIFT_TO_CAPABILITY_VERDICT",
+          "SIDDHI_TO_ACHIEVEMENT_VERDICT",
+          "SPHERE_NAME_TO_RUNTIME_OWNER"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R11",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R11",
+        "name": "RECOVERY_AUTHORITY_BOUNDARY",
+        "statement": {
+          "en": "RECOVERY may appear only when the composed evidence supports the accepted Recovery tag definition. It is not inherited from Earth, any planet, or former Chiron material; its semantic authority remains Book IV Part 8 Maintenance Runtime.",
+          "zh-Hans": "只有组合证据支持已 ACCEPT 的 RECOVERY 定义时才允许出现 RECOVERY。它不能从 Earth、任何行星或旧 Chiron 内容继承；其语义 authority 继续属于第四册 Part 8 Maintenance Runtime。"
+        },
+        "requirements": [
+          "RECOVERY_TAG_CANON_ACCEPTED",
+          "BOOK4_MAINTENANCE_AUTHORITY_PRESERVED"
+        ],
+        "onFailure": "RECOVERY_NOT_EMITTED",
+        "forbidden": [
+          "EARTH_TO_RECOVERY",
+          "CHIRON_TO_RECOVERY",
+          "PLANET_TO_RECOVERY"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    },
+    {
+      "ruleId": "COMP-R12",
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "exactContentBinding": true,
+      "acceptedRecordSnapshot": {
+        "ruleId": "COMP-R12",
+        "name": "RUNTIME_OWNER_DEFERRED",
+        "statement": {
+          "en": "R7-W4 produces governed semantic tags only. Runtime Owner selection is a separate R7-W5 step and must consume admitted tag composition rather than raw Gate, Line, Driver, Layer or external labels.",
+          "zh-Hans": "R7-W4 只产生受治理的 semantic tags。Runtime Owner 选择属于独立的 R7-W5，并且必须读取已 admission 的 tag composition，而不能直接读取 Gate、Line、Driver、Layer 或外部标签。"
+        },
+        "requirements": [
+          "NO_OWNER_ASSIGNMENT_IN_W4"
+        ],
+        "onFailure": "BLOCK_OWNER_OUTPUT",
+        "forbidden": [
+          "RAW_FACTOR_TO_OWNER",
+          "EXTERNAL_LABEL_TO_OWNER",
+          "TAG_RULE_EMBEDS_OWNER"
+        ]
+      },
+      "invalidationRule": "ANY_CHANGE_TO_ACCEPTED_RECORD_SNAPSHOT_INVALIDATES_ACCEPT"
+    }
+  ]
+}

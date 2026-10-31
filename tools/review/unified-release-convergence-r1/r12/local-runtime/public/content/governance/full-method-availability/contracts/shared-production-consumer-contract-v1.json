@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-FMA-SHARED-PRODUCTION-CONSUMER-CONTRACT-v1.0.0",
+  "work": "FMA-W4",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE_FINAL_SHARED_CONSUMER_CONTRACT",
+  "methods": [
+    {
+      "pluginCode": "AST",
+      "methodCode": "ASTROLOGY",
+      "projectionSchemas": [
+        "PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0"
+      ],
+      "meaningBundle": "CanonicalMeaningProductionBundle",
+      "readingSchema": "PHI-OS-AST-RUNTIME-READING-IR-v1.0.0"
+    },
+    {
+      "pluginCode": "BZR",
+      "methodCode": "BAZI",
+      "projectionSchemas": [
+        "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0"
+      ],
+      "meaningBundle": "CanonicalMeaningProductionBundle",
+      "readingSchema": "PHI-OS-BZR-RUNTIME-READING-IR-v1.0.0"
+    },
+    {
+      "pluginCode": "NUM",
+      "methodCode": "NUMEROLOGY",
+      "projectionSchemas": [
+        "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0"
+      ],
+      "meaningBundle": "CanonicalMeaningProductionBundle",
+      "readingSchema": "PHI-OS-NUM-RUNTIME-READING-IR-v1.0.0"
+    }
+  ],
+  "requiredFlow": [
+    "CANONICAL_METHOD_PROJECTION",
+    "CANONICAL_MEANING_PRODUCTION_BUNDLE",
+    "RUNTIME_READING_IR"
+  ],
+  "rules": {
+    "frontendMayNotConsumeRawCalculation": true,
+    "readingMayNotRecalculate": true,
+    "meaningMayNotInventProjectionFacts": true,
+    "professionalJudgmentSeparate": true,
+    "methodSpecificFrontendSpecialCasesMayOnlyBindAfterSharedObjects": true
+  }
+}

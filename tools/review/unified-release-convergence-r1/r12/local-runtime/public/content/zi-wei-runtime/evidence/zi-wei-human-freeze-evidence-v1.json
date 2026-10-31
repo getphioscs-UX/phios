@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-HUMAN-FREEZE-EVIDENCE-v1.0.0",
+  "work": "ZWR-W2H",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "HUMAN_POLICY_EVIDENCE_ONLY_NOT_RUNTIME_AUTHORITY",
+  "rules": {
+    "externalWebsiteAsRuntimeAuthority": false,
+    "evidenceSupportsHumanChoiceNotUniversalTruth": true,
+    "futureAlgorithmAdmissionRequiresOfflineFixtureValidation": true
+  },
+  "entries": [
+    {
+      "evidenceId": "ZWR-HF-EV-001",
+      "title": "Hong Kong Observatory Gregorian-Lunar Calendar Conversion Table",
+      "kind": "OFFICIAL_CALENDAR_REFERENCE",
+      "source": "Hong Kong Observatory",
+      "url": "https://www.hko.gov.hk/en/gts/time/conversion.htm",
+      "supports": [
+        "CALENDAR_CONVENTION",
+        "LUNAR_CONVERSION"
+      ],
+      "calculationRuleAuthority": false
+    },
+    {
+      "evidenceId": "ZWR-HF-EV-002",
+      "title": "Zi Wei Dou Shu calculation sequence: palaces, five-element bureau and 14 main stars",
+      "kind": "TRADITIONAL_METHOD_CROSS_REFERENCE",
+      "source": "Chinese Text Project / Zi Wei Dou Shu datawiki",
+      "url": "https://ctext.org/datawiki.pl?if=en&res=8418262",
+      "supports": [
+        "CALENDAR_CONVENTION",
+        "BIRTH_HOUR_BOUNDARY",
+        "PALACE_CONSTRUCTION",
+        "MAIN_STAR_SYSTEM"
+      ],
+      "calculationRuleAuthority": false
+    },
+    {
+      "evidenceId": "ZWR-HF-EV-003",
+      "title": "Zi Wei leap-month rule variants",
+      "kind": "VARIANT_DISCLOSURE_REFERENCE",
+      "source": "OpenFate Wiki",
+      "url": "https://wiki.openfate.ai/zh-hans/ziwei/calculation-variants/leap-month-rule-variants",
+      "supports": [
+        "LEAP_MONTH_POLICY"
+      ],
+      "calculationRuleAuthority": false
+    },
+    {
+      "evidenceId": "ZWR-HF-EV-004",
+      "title": "Zi-hour day-boundary variants and 23:00 convention",
+      "kind": "VARIANT_DISCLOSURE_REFERENCE",
+      "source": "Chinese Text Project / OpenFate cross-reference",
+      "url": "https://ctext.org/datawiki.pl?if=en&res=8418262",
+      "supports": [
+        "DAY_BOUNDARY",
+        "BIRTH_HOUR_BOUNDARY"
+      ],
+      "calculationRuleAuthority": false
+    },
+    {
+      "evidenceId": "ZWR-HF-EV-005",
+      "title": "Zi Wei star setup: six support stars and Southern four-transformations table",
+      "kind": "SCHOOL_LABELED_RULE_CROSS_REFERENCE",
+      "source": "Zi Wei Study / setup reference",
+      "url": "https://www.ziwei.pro/learn/setup",
+      "supports": [
+        "AUXILIARY_STAR_SCOPE",
+        "TRANSFORMATION_SCOPE"
+      ],
+      "calculationRuleAuthority": false
+    },
+    {
+      "evidenceId": "ZWR-HF-EV-006",
+      "title": "PHI OS Zi Wei Natal Structural Runtime v1 scope",
+      "kind": "INTERNAL_SCOPE_AUTHORITY",
+      "source": "PHI OS",
+      "path": "content/professional/zi-wei-runtime/contracts/zi-wei-natal-structural-runtime-scope-v1.json",
+      "supports": [
+        "DYNAMIC_PERIOD_SCOPE"
+      ],
+      "calculationRuleAuthority": false
+    }
+  ]
+}

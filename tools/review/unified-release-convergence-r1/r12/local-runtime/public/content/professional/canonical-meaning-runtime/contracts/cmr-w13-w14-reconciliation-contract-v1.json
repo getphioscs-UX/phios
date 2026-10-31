@@ -1,0 +1,21 @@
+{
+  "contractCode": "CMR-W13-W14-RECONCILIATION-v1",
+  "contractVersion": "1.0.0",
+  "baselineCommit": "14c910b2170ab372a0194739921ffc607a0f365a",
+  "status": "validation_only",
+  "purpose": "Reconcile CM-W13 availability with the already-frozen CM-W14 v1 without modifying or retrofitting CM-W14.",
+  "rules": {
+    "cmW13Available": true,
+    "cmW14V1Frozen": true,
+    "cmW14V1MayQueryCMW13": false,
+    "cmW14V1KnowledgeCoverageMode": "inherited_bundle_summary",
+    "futureLiveCMW13JourneyIntegrationRequiresVersionedSuccessor": true,
+    "cmW14ArtifactsMayBeModifiedByReconciliation": false
+  },
+  "authorityBoundary": [
+    "CM-W13 is a read-only Meaning-to-Knowledge Reference / Query Bridge.",
+    "CM-W14 v1 remains a read-only Meaning Bundle -> Journey Context Projection.",
+    "The existence of CM-W13 does not retroactively change CM-W14 v1 input authority.",
+    "Any Journey projection that performs live CM-W13 queries must be a versioned CM-W14 successor."
+  ]
+}

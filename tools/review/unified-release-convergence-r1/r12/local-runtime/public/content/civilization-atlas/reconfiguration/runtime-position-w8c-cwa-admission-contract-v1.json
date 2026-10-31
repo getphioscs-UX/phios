@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C-CWA-ADMISSION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_CURRENT_WEB_AUTHORITY_ADMISSION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8C",
+  "title": "Current Web Authority Admission",
+  "purpose": "Apply the existing Current Web Authority runtime to W8B source-bounded claim candidates and produce governed Current Evidence IR without creating derived runtime readings or positions.",
+  "predecessorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B",
+  "predecessorClaims": "content/civilization-atlas/reconfiguration/runtime-position-w8b-cwa-ready-claims-v1.json",
+  "authorityOwner": "CURRENT_WEB_AUTHORITY",
+  "authorityRuntime": "functions/current-web-authority/current-web-authority-runtime.js",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8D",
+  "stages": [
+    "ADMISSION_WORK_ORDER",
+    "AUTHORITY_DECISION_INTAKE",
+    "CWA_SOURCE_ADMISSION",
+    "CURRENT_EVIDENCE_IR",
+    "CONFLICT_RESOLUTION",
+    "RRE_ELIGIBLE_HANDOFF"
+  ],
+  "decisionRequiredFields": [
+    "claimCandidateId",
+    "authorityClass",
+    "domain",
+    "reviewedAt",
+    "reviewerRole",
+    "decisionBasis"
+  ],
+  "decisionOptionalFields": [
+    "sourceVersionCurrent",
+    "superseded",
+    "notes"
+  ],
+  "rules": [
+    "authorityClassHint from W8B is not authority admission and cannot be silently promoted.",
+    "Each CWA-ready claim requires an explicit authority/domain decision before source admission is attempted.",
+    "Freshness is evaluated by the canonical Current Web Authority runtime at the W8C production time.",
+    "Only CWA ADMITTED sources may create Current Evidence IR.",
+    "Conflict groups are resolved by CWA authority precedence and never by source-count voting.",
+    "UNKNOWN_CONFLICTED evidence remains auditable but is blocked from RRE-eligible handoff.",
+    "PARTIAL support may be admitted as evidence but does not enter RRE-eligible handoff.",
+    "RRE-eligible handoff requires DIRECT support and a non-conflicted selected evidence outcome.",
+    "W8C does not infer grammar, reality domain, Phase, current position, transition, threshold or projection."
+  ],
+  "admissionStates": [
+    "PENDING_AUTHORITY_DECISION",
+    "ADMITTED",
+    "REJECTED",
+    "STALE"
+  ],
+  "conflictStates": [
+    "NO_CONFLICT",
+    "CORROBORATED_SAME_CLAIM",
+    "RESOLVED_BY_AUTHORITY",
+    "UNKNOWN_CONFLICTED"
+  ],
+  "boundaries": {
+    "authorityHintIsDecision": false,
+    "admittedEvidenceIsDerivedReadout": false,
+    "sourceVotingAllowed": false,
+    "proseGenerationAllowed": false,
+    "rreExecuted": false,
+    "runtimePositionCandidateCreated": false,
+    "autoPopulateDossiersAllowed": false,
+    "mutatesW8EvidenceBatches": false
+  },
+  "failClosed": true
+}

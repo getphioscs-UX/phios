@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W17-DOCUMENT-EVIDENCE-CONTRACT-v1.0.0",
+  "work": "FDR-W17",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "documentTypes": [
+    "BANK_STATEMENT",
+    "LOAN_STATEMENT",
+    "PROPERTY_TITLE",
+    "POLICY_SCHEDULE",
+    "EPF",
+    "PORTFOLIO_STATEMENT",
+    "COMPANY_ACCOUNTS",
+    "SHARE_REGISTER",
+    "TAX_RECORD",
+    "WILL",
+    "TRUST_DEED"
+  ],
+  "requiredFields": [
+    "documentEvidenceId",
+    "documentType",
+    "documentReference",
+    "subjectReferences",
+    "effectiveDate",
+    "receivedAt",
+    "verificationState",
+    "consentReference",
+    "retentionReference"
+  ],
+  "optionalFields": [
+    "issuer",
+    "periodStart",
+    "periodEnd",
+    "extractedFactReferences",
+    "hash",
+    "maskedDisplayName"
+  ],
+  "verificationStates": [
+    "RECEIVED",
+    "EXTRACTED_UNVERIFIED",
+    "HUMAN_VERIFIED",
+    "EXPIRED_OR_SUPERSEDED",
+    "REJECTED"
+  ],
+  "rules": {
+    "rawDocumentContentEmbeddedInFdrObject": false,
+    "privateStorageRequired": true,
+    "publicUrlAllowed": false,
+    "extractionMayCreateAuthority": false,
+    "willDocumentDoesNotGrantWillValidity": true,
+    "trustDeedDoesNotGrantTrustValidity": true,
+    "documentAccessRequiresConsentAndRetentionScope": true
+  }
+}

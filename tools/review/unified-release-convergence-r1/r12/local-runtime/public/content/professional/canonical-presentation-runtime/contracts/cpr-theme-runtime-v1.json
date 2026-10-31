@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-CPR-THEME-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "CPR-W6",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "requiredFields": [
+    "themeCode",
+    "tokenSet",
+    "surfaceEligibility",
+    "contrastRequirement",
+    "localeCompatibility"
+  ],
+  "sourceAuthority": "content/professional/canonical-presentation-runtime/registries/pds-token-reference-registry-v1.json",
+  "projectionRule": "resolve only token references already controlled by PDS; never materialize or persist a second visual value authority",
+  "semanticIsolation": {
+    "themeIsKnowledgeMeaning": false,
+    "themeIsKnowledgeTaxonomyTheme": false,
+    "themeIsRuntimeState": false,
+    "themeIsPermission": false,
+    "stateNamedPrimitiveTokenDoesNotTransferStateMeaning": true
+  },
+  "invariants": {
+    "hardcodedColorAllowed": false,
+    "hardcodedSpacingAllowed": false,
+    "knowledgeMeaningChanged": false,
+    "publicationStateChanged": false
+  }
+}

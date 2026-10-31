@@ -1,0 +1,43 @@
+{
+  "auditCode": "PHI-OS-WPR-D-LEGACY-ASSET-PATH-MIGRATION-v1",
+  "auditVersion": "1.0.0",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "partial_migration",
+  "findings": [
+    {
+      "file": "assets/js/pages/atlas.js",
+      "needle": "/assets/images/figures/book-1/web/",
+      "remainingOccurrences": 15,
+      "state": "OPEN_LATER_ATLAS_MIGRATION"
+    },
+    {
+      "file": "assets/js/pages/book-one.js",
+      "needle": "/assets/images/figures/book-1/web/",
+      "remainingOccurrences": 0,
+      "state": "CLOSED_WPR_D"
+    },
+    {
+      "file": "assets/js/pages/figure-detail.js",
+      "needle": "/assets/images/figures/book-1/web/",
+      "remainingOccurrences": 0,
+      "state": "CLOSED_WPR_D"
+    },
+    {
+      "file": "assets/js/pages/figures.js",
+      "needle": "/assets/images/figures/book-1/web/",
+      "remainingOccurrences": 0,
+      "state": "CLOSED_WPR_D"
+    },
+    {
+      "file": "book-one.html",
+      "needle": "/assets/images/books/book-1/product/",
+      "remainingOccurrences": 0,
+      "state": "CLOSED_WPR_D"
+    }
+  ],
+  "rules": {
+    "pageControllersUseRegistryLedPathsWhereMigrated": true,
+    "atlasMigrationDeferred": true,
+    "r2MemberInventoryNotFabricated": true
+  }
+}

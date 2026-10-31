@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/core-method-runtime/iching-input-v1.schema.json",
+  "title": "PHI OS I Ching Structural Input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodId",
+    "sessionId",
+    "inputMode",
+    "selectionMode",
+    "selectionEvidence",
+    "timestamp",
+    "runtimeVersion",
+    "projectionVersion"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-SYMBOLIC-METHOD-EVIDENCE-v1.0.0"
+    },
+    "methodId": {
+      "const": "I_CHING"
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputMode": {
+      "enum": [
+        "MANUAL_LINES",
+        "COIN_CAST",
+        "SYSTEM_RANDOM"
+      ]
+    },
+    "selectionMode": {
+      "enum": [
+        "MANUAL_SELECTION",
+        "SYSTEM_RANDOM"
+      ]
+    },
+    "selectionEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectionOrder",
+        "selectedSymbols",
+        "runtimeVersion",
+        "aiSelected"
+      ],
+      "properties": {
+        "selectionOrder": {
+          "const": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "selectedSymbols": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "runtimeVersion": {
+          "const": "1.0.0"
+        },
+        "aiSelected": {
+          "const": false
+        },
+        "seed": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entropyEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "digest"
+          ],
+          "properties": {
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "replayToken": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "projectionVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "inputMode": {
+            "enum": [
+              "MANUAL_LINES",
+              "COIN_CAST"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selectionMode": {
+            "const": "MANUAL_SELECTION"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "inputMode": {
+            "const": "SYSTEM_RANDOM"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selectionMode": {
+            "const": "SYSTEM_RANDOM"
+          },
+          "selectionEvidence": {
+            "required": [
+              "selectionOrder",
+              "selectedSymbols",
+              "runtimeVersion",
+              "aiSelected",
+              "seed",
+              "entropyEvidence",
+              "replayToken"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

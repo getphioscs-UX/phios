@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-SECTION-INFORMATION-GAIN-REGISTRY-v1.0.0",
+  "work": "R2-W6",
+  "bodyInformationFields": ["newClaimRefs", "newRelationRefs", "newConditionRefs", "newCounterEvidenceRefs", "newObservationRefs"],
+  "sections": [
+    {"sectionId":"OVERVIEW","order":10,"sectionClass":"CORE"},
+    {"sectionId":"CORE_THEMES","order":20,"sectionClass":"CORE"},
+    {"sectionId":"SUPPORT_TENSION","order":30,"sectionClass":"CORE"},
+    {"sectionId":"REALITY_QUESTIONS","order":40,"sectionClass":"CORE"},
+    {"sectionId":"WORK","order":50,"sectionClass":"CONDITIONAL"},
+    {"sectionId":"RELATIONSHIP","order":60,"sectionClass":"CONDITIONAL"},
+    {"sectionId":"RESOURCES","order":70,"sectionClass":"CONDITIONAL"},
+    {"sectionId":"ENVIRONMENT","order":80,"sectionClass":"CONDITIONAL"},
+    {"sectionId":"TIMING","order":90,"sectionClass":"TEMPORAL"},
+    {"sectionId":"METHOD_DETAIL","order":100,"sectionClass":"TECHNICAL","defaultCollapsed":true},
+    {"sectionId":"SOURCE_LINEAGE","order":110,"sectionClass":"TECHNICAL","defaultCollapsed":true},
+    {"sectionId":"RULE_LINEAGE","order":120,"sectionClass":"TECHNICAL","defaultCollapsed":true},
+    {"sectionId":"CALCULATION_DETAIL","order":130,"sectionClass":"TECHNICAL","defaultCollapsed":true}
+  ],
+  "eligibilityStates": ["SECTION_ELIGIBLE", "SECTION_NOT_ELIGIBLE"],
+  "boundary": {
+    "technicalSectionsMayBypassBodyInformationGainGate": false,
+    "technicalAppendixMayExposeGovernedLineage": true,
+    "suppressedSectionMayReceiveFiller": false
+  }
+}

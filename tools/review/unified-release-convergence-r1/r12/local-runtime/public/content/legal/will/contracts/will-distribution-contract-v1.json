@@ -1,0 +1,39 @@
+{
+  "contractCode": "PHI-OS-DAR-W6-WILL-DISTRIBUTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W6",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_STRUCTURED_DISTRIBUTION_INPUT_NO_LEGAL_EFFECT",
+  "distributionModels": [
+    "SPECIFIC_GIFT",
+    "PERCENTAGE_GIFT",
+    "EQUAL_SHARE_GIFT",
+    "RESIDUE_SHARE",
+    "SUBSTITUTE_BENEFICIARY",
+    "PER_ASSET_DISTRIBUTION",
+    "CLASS_DISTRIBUTION",
+    "SURVIVORSHIP_CONDITION",
+    "AGE_CONDITION",
+    "TRUST_CONDITION"
+  ],
+  "entryFields": [
+    "distributionId",
+    "distributionType",
+    "assetId?",
+    "beneficiaryPersonIds[]",
+    "percentageShares[]?",
+    "substituteBeneficiaryPersonIds[]?",
+    "classDefinition?",
+    "survivorshipCondition?",
+    "ageCondition?",
+    "trustCondition?",
+    "sourceConfirmation"
+  ],
+  "rules": {
+    "mainSubBeneficiaryOnlyModelForbidden": true,
+    "beneficiaryMustResolveToDeclaredPerson": true,
+    "conditionsAreInputsNotLegalClauses": true,
+    "complexConditionRequiresLaterClauseEligibilityAndReview": true,
+    "noAutomaticRebalancing": true
+  }
+}

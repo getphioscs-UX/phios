@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-MIR-8-GUIDED-READING-ELIGIBILITY-CONTRACT-v1.0.0",
+  "work": "MIR-8A",
+  "baselineCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa",
+  "status": "ACTIVE_SUCCESSOR",
+  "soleInterpretationInput": "Accepted CanonicalInterpretationResult",
+  "acceptedSchema": "PHI-OS-CANONICAL-INTERPRETATION-RESULT-v1.0.0",
+  "requiredBeforeGuidedReading": [
+    "accepted interpretation result",
+    "reading permitted",
+    "valid reading consent",
+    "relevant context available from accepted result and/or minimal client context"
+  ],
+  "clientMayChooseResultOnly": true,
+  "resultOnlyDoesNotCreateReading": true,
+  "forbiddenInputs": [
+    "RAW_METHOD_RUNTIME",
+    "RAW_AST_ENGINE_OBJECT",
+    "RAW_BZR_INTERNAL_OBJECT",
+    "RAW_NUM_CALCULATION_STATE",
+    "RAW_HDR_OBJECT",
+    "METHOD_CALCULATION_RESULT",
+    "UNACCEPTED_INTERPRETATION_RESULT"
+  ],
+  "authorityBoundary": {
+    "methodRecalculationAllowed": false,
+    "newInterpretationDerivationAllowed": false,
+    "unknownOverrideAllowed": false,
+    "secondInterpretationRuntimeCreated": false
+  }
+}

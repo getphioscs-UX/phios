@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "PHI-OS-PART-H5-CLIENT-VISUAL-CONSUMPTION-CONTRACT-v1.0.0",
+  "work": "PART-H.5",
+  "baselineCommit": "4e018485935ab090f1bd72eb9636b28686b42693",
+  "status": "ACTIVE_CLIENT_VISUAL_CONSUMPTION_SUCCESSOR",
+  "purpose": "Close the final governed Client visual consumption gap without reopening frozen Homepage, V8 destination, WPR, CKA or asset authorities.",
+  "authority": {
+    "clientVisualIdentityRegistry": "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+    "publicAssetDeliveryRegistry": "content/registry/public-assets.json",
+    "logoAuthority": "content/web-production/registries/phios-logo-registry-v1.json",
+    "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+    "consumerMap": "content/web-production/registries/client-visual-consumer-map-v1.json",
+    "secondVisualRegistryCreated": false,
+    "secondAssetResolverCreated": false,
+    "frozenDestinationHtmlMutationAllowed": false
+  },
+  "scope": {
+    "heroIdentities": "HERO-001..HERO-023",
+    "iconIdentities": "ICON-001..ICON-043",
+    "activeClientSurfaceConsumption": "REQUIRED",
+    "futureBlockedOrCompatibilityOnly": "MAY_REMAIN_EXPLICITLY_DEFERRED",
+    "existingManagedHeroOwners": [
+      "HOME",
+      "LIBRARY"
+    ],
+    "additiveMastheadConsumer": "ALL_OTHER_HERO_BOUND_ACTIVE_SURFACES",
+    "semanticDestinationUpgradeCount": 7
+  },
+  "branding": {
+    "requiredProductionBranding": [
+      "LOGO-003",
+      "LOGO-010",
+      "LOGO-011"
+    ],
+    "roles": {
+      "LOGO-003": "PRIMARY_HORIZONTAL_HEADER_AND_PROFESSIONAL_LIGHT_SURFACE",
+      "LOGO-010": "MONO_LIGHT_DARK_FOOTER_OR_DARK_SHELL",
+      "LOGO-011": "FAVICON_BROWSER_CHROME"
+    },
+    "currentBaselineState": {
+      "LOGO-003": {
+        "status": "uploaded-reported-by-owner",
+        "verification": "pending-remote-verification",
+        "liveAccepted": false
+      },
+      "LOGO-010": {
+        "status": "uploaded-reported-by-owner",
+        "verification": "pending-remote-verification",
+        "liveAccepted": false
+      },
+      "LOGO-011": {
+        "status": "production-ready-awaiting-upload",
+        "verification": "pending-owner-upload",
+        "liveAccepted": false
+      }
+    },
+    "rule": "Textual PHI OS fallback remains fail-closed only until the canonical logo identity is verified and renderable."
+  },
+  "runtime": {
+    "bootstrap": "assets/js/i18n.js -> dynamic import assets/js/client-visual-consumption.js",
+    "styles": "assets/css/client-visual-consumption.css",
+    "heroModes": [
+      "EXISTING_MANAGED",
+      "AUTO_MASTHEAD"
+    ],
+    "iconMode": "SUPPORT_RAIL",
+    "contentMutation": "NONE",
+    "semanticTextRewrite": "NONE"
+  },
+  "destinationBoundary": {
+    "frozenAuthority": "content/web/homepage/hpc2/freeze/hpc2-w11-v8-destination-page-migration-freeze-v1.json",
+    "policy": "BYTE_FROZEN_HTML_PRESERVED_ADDITIVE_RUNTIME_AND_CSS_ONLY",
+    "contentLossAllowed": false
+  },
+  "liveBoundary": {
+    "repositoryCompletionMayPrecedeExternalR2BrandingVerification": true,
+    "brandingVerificationCommand": "npm run client-visual:verify-branding",
+    "repositoryCurrentChecker": "npm run check:client-visual-consumption-current",
+    "liveBrandingChecker": "npm run check:client-visual-consumption-live",
+    "pocARevalidationRequiredAfterDeployment": true,
+    "pocAResponsiveOwner": "POC-A10",
+    "customDomainRequired": false,
+    "brandingVerifierMode": "LIVE_EVIDENCE_ONLY_NO_REGISTRY_MUTATION",
+    "brandingRegistryMaterializationOwner": "POC-A_CURRENT_PUBLIC_ASSET_VERIFICATION_SUCCESSOR"
+  },
+  "forbidden": [
+    "HARDCODE_R2_PUBLIC_HOST",
+    "SECOND_ASSET_RESOLVER",
+    "SECOND_VISUAL_IDENTITY_AUTHORITY",
+    "MUTATE_HPC2_W11_FROZEN_DESTINATION_HTML",
+    "DISPLAY_UNVERIFIED_LOGO_AS_VERIFIED",
+    "COUNT_PENDING_AS_ACTUAL_RENDERED_CONSUMER",
+    "REMOVE_V8_SEMANTIC_CONTENT_FOR_VISUAL_UPGRADE"
+  ]
+}

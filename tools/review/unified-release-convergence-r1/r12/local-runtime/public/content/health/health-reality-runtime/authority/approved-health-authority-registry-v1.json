@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "PHI-OS-HRX-APPROVED-HEALTH-AUTHORITY-v1.0.0",
+  "runtimeCode": "HRX",
+  "status": "APPROVED_AUTHORITY_POLICY_ACTIVE_SOURCE_CONTENT_NOT_BUNDLED",
+  "principles": [
+    "AUTHORITY_IDENTITY_DOES_NOT_EQUAL_CLAIM_APPROVAL",
+    "EACH_HEALTH_CLAIM_REQUIRES_SOURCE_LEVEL_PROVENANCE",
+    "GENERAL_MODEL_CANNOT_SUBSTITUTE_FOR_APPROVED_HEALTH_AUTHORITY",
+    "PROFESSIONAL_JUDGMENT_REMAINS_OUTSIDE_HRX"
+  ],
+  "publishers": [
+    {
+      "authorityId": "WHO",
+      "name": "World Health Organization",
+      "hosts": [
+        "who.int",
+        "www.who.int"
+      ],
+      "jurisdiction": "GLOBAL",
+      "classes": [
+        "PUBLIC_HEALTH",
+        "PATIENT_INFORMATION",
+        "GUIDANCE"
+      ],
+      "admissionState": "APPROVED_PUBLISHER"
+    },
+    {
+      "authorityId": "MOH_MY",
+      "name": "Ministry of Health Malaysia",
+      "hosts": [
+        "moh.gov.my",
+        "www.moh.gov.my"
+      ],
+      "jurisdiction": "MY",
+      "classes": [
+        "PUBLIC_HEALTH",
+        "PATIENT_INFORMATION",
+        "NATIONAL_GUIDANCE"
+      ],
+      "admissionState": "APPROVED_PUBLISHER"
+    },
+    {
+      "authorityId": "NICE_UK",
+      "name": "National Institute for Health and Care Excellence",
+      "hosts": [
+        "nice.org.uk",
+        "www.nice.org.uk"
+      ],
+      "jurisdiction": "UK",
+      "classes": [
+        "CLINICAL_GUIDANCE",
+        "PATIENT_INFORMATION"
+      ],
+      "admissionState": "APPROVED_PUBLISHER"
+    },
+    {
+      "authorityId": "NHS_UK",
+      "name": "National Health Service",
+      "hosts": [
+        "nhs.uk",
+        "www.nhs.uk"
+      ],
+      "jurisdiction": "UK",
+      "classes": [
+        "PATIENT_INFORMATION",
+        "SERVICE_INFORMATION"
+      ],
+      "admissionState": "APPROVED_PUBLISHER"
+    },
+    {
+      "authorityId": "CDC_US",
+      "name": "Centers for Disease Control and Prevention",
+      "hosts": [
+        "cdc.gov",
+        "www.cdc.gov"
+      ],
+      "jurisdiction": "US",
+      "classes": [
+        "PUBLIC_HEALTH",
+        "PATIENT_INFORMATION"
+      ],
+      "admissionState": "APPROVED_PUBLISHER"
+    },
+    {
+      "authorityId": "NIH_US",
+      "name": "National Institutes of Health",
+      "hosts": [
+        "nih.gov",
+        "www.nih.gov"
+      ],
+      "jurisdiction": "US",
+      "classes": [
+        "RESEARCH_INFORMATION",
+        "PATIENT_INFORMATION"
+      ],
+      "admissionState": "APPROVED_PUBLISHER"
+    }
+  ],
+  "claimPolicy": {
+    "requiresExactSourceUrl": true,
+    "requiresRetrievedAt": true,
+    "requiresContentDigest": true,
+    "requiresClaimType": true,
+    "requiresLocale": true,
+    "staleSourceMustFailClosed": true,
+    "crossSourceSynthesisRequiresSourceRefs": true
+  },
+  "activation": {
+    "liveRetrievalAdapterConnected": false,
+    "productionHealthFactsAllowed": false,
+    "publicExecutionAllowed": false
+  }
+}

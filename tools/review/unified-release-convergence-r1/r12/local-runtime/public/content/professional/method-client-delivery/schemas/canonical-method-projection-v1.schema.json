@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mcd/canonical-method-projection-v1.schema.json",
+  "title": "PHI OS MCD-5 CanonicalMethodProjection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","projectionId","method","calculation","projection","unknown","evidence","version","execution","interpretation"],
+  "properties": {
+    "schemaVersion": {"const":"PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0"},
+    "projectionId": {"type":"string","pattern":"^CMP-[A-F0-9]{24}$"},
+    "method": {
+      "type":"object","additionalProperties":false,
+      "required":["publicMethodCode","publicLabel","publicLabels","internalReference","version","status","calculationMode"],
+      "properties": {
+        "publicMethodCode":{"enum":["ASTROLOGY_PROJECTION","BAZI_PROJECTION","NUMEROLOGY_PROJECTION","PERSONAL_RUNTIME_PROJECTION"]},
+        "publicLabel":{"type":["string","null"]},
+        "publicLabels":{"type":"object","additionalProperties":false,"required":["en","zh-Hans"],"properties":{"en":{"type":"string"},"zh-Hans":{"type":"string"}}},
+        "internalReference":{"type":"object","additionalProperties":false,"required":["opaqueId","protected","rawIdentityExposed"],"properties":{"opaqueId":{"type":"string","pattern":"^MREF-[A-F0-9]{16}$"},"protected":{"const":true},"rawIdentityExposed":{"const":false}}},
+        "version":{"type":"string","minLength":1},
+        "status":{"enum":["PRODUCTION_BOUND_SCOPE","VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE"]},
+        "calculationMode":{"enum":["DETERMINISTIC_BOUND_SCOPE","PARTIAL_DEFERRED","NOT_CALCULATED","VALIDATION_ONLY"]}
+      }
+    },
+    "calculation": {
+      "type":"object","additionalProperties":false,
+      "required":["status","deterministic","values","coordinates","structures","cycles","positions"],
+      "properties": {
+        "status":{"enum":["COMPLETE","PARTIAL","NOT_CALCULATED","BLOCKED_INPUT"]},
+        "deterministic":{"type":["boolean","null"]},
+        "values":{"type":"array","items":{"$ref":"#/$defs/valueFact"}},
+        "coordinates":{"anyOf":[{"type":"null"},{"type":"object","additionalProperties":false,"required":["latitude","longitude"],"properties":{"latitude":{"type":"number","minimum":-90,"maximum":90},"longitude":{"type":"number","minimum":-180,"maximum":180}}}]},
+        "structures":{"type":"array","items":{"$ref":"#/$defs/structureGroup"}},
+        "cycles":{"type":"array","items":{"$ref":"#/$defs/cycleFact"}},
+        "positions":{"type":"array","items":{"$ref":"#/$defs/positionFact"}}
+      }
+    },
+    "projection": {
+      "type":"object","additionalProperties":false,
+      "required":["contract","status","clientRenderable","productionResult","coreSchemaExposed","unknownDisclosureRequired"],
+      "properties": {
+        "contract":{"const":"CANONICAL_METHOD_PROJECTION"},
+        "status":{"enum":["COMPLETE","PARTIAL","BLOCKED_INPUT","VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE"]},
+        "clientRenderable":{"type":"boolean"},
+        "productionResult":{"type":"boolean"},
+        "coreSchemaExposed":{"const":false},
+        "unknownDisclosureRequired":{"type":"boolean"}
+      }
+    },
+    "unknown":{"type":"array","items":{"$ref":"#/$defs/unknownItem"}},
+    "evidence":{"type":"array","minItems":6,"items":{"$ref":"#/$defs/evidenceItem"}},
+    "version": {
+      "type":"object","additionalProperties":false,
+      "required":["methodRegistryVersion","runtimeVersion","adapterVersion","inputContractVersion","projectionContractVersion"],
+      "properties": {
+        "methodRegistryVersion":{"type":"string","minLength":1},
+        "runtimeVersion":{"type":"string","minLength":1},
+        "adapterVersion":{"type":"string","minLength":1},
+        "inputContractVersion":{"type":"string","minLength":1},
+        "projectionContractVersion":{"type":"string","minLength":1}
+      }
+    },
+    "execution": {
+      "type":"object","additionalProperties":false,
+      "required":["requestId","status","mpaDecision","runtimeIdentity","executedAt"],
+      "properties": {
+        "requestId":{"type":"string","minLength":1},
+        "status":{"type":"string","minLength":1},
+        "mpaDecision":{"type":"object","additionalProperties":false,"required":["authorityOwner","decision","dispatchAllowed"],"properties":{"authorityOwner":{"const":"MPA"},"decision":{"type":"string"},"dispatchAllowed":{"type":"boolean"},"state":{"type":["string","null"]}}},
+        "runtimeIdentity":{"const":"MCD_CANONICAL_PROJECTION_RUNTIME@1.0.0"},
+        "executedAt":{"type":["string","null"],"format":"date-time"}
+      }
+    },
+    "interpretation": {
+      "type":"object","additionalProperties":false,
+      "required":["included","principle","meaningAuthorityCreated","realityReadingCreated","professionalJudgmentCreated"],
+      "properties": {
+        "included":{"const":false},
+        "principle":{"const":"CALCULATION_NOT_EQUAL_INTERPRETATION"},
+        "meaningAuthorityCreated":{"const":false},
+        "realityReadingCreated":{"const":false},
+        "professionalJudgmentCreated":{"const":false}
+      }
+    }
+  },
+  "$defs": {
+    "valueFact": {
+      "type":"object","additionalProperties":false,
+      "required":["code","value","certainty"],
+      "properties": {
+        "code":{"type":"string","minLength":1},
+        "value":{"type":["number","string","boolean","null"]},
+        "rawValue":{"type":["number","string","null"]},
+        "reductionSteps":{"type":"array","items":{"type":"number"}},
+        "masterNumberPreserved":{"type":"boolean"},
+        "certainty":{"enum":["DETERMINISTIC","UNKNOWN","UNAVAILABLE"]}
+      }
+    },
+    "structureItem": {
+      "type":"object","additionalProperties":false,
+      "required":["code","value"],
+      "properties":{"code":{"type":"string"},"value":{"type":["number","string","boolean","null"]},"rawValue":{"type":["number","null"]},"meta":{"type":"object"}}
+    },
+    "structureGroup": {
+      "type":"object","additionalProperties":false,
+      "required":["code","items"],
+      "properties":{"code":{"type":"string"},"items":{"type":"array","items":{"$ref":"#/$defs/structureItem"}}}
+    },
+    "cycleFact": {
+      "type":"object","additionalProperties":false,
+      "required":["code","value"],
+      "properties":{"code":{"type":"string"},"value":{"type":["number","string","null"]},"rawValue":{"type":["number","null"]},"startAge":{"type":["number","null"]},"endAge":{"type":["number","null"]},"cycleNumber":{"type":["number","null"]},"certainty":{"enum":["DETERMINISTIC","UNKNOWN","UNAVAILABLE"]}}
+    },
+    "positionFact": {
+      "type":"object","additionalProperties":false,
+      "required":["code","value","unit"],
+      "properties":{"code":{"type":"string"},"value":{"type":["number","string","null"]},"unit":{"type":["string","null"]},"certainty":{"enum":["DETERMINISTIC","UNKNOWN","UNAVAILABLE"]}}
+    },
+    "unknownItem": {
+      "type":"object","additionalProperties":false,
+      "required":["code","category","scope","reasonCodes","rendererMustDisplay"],
+      "properties": {
+        "code":{"type":"string","minLength":1},
+        "category":{"enum":["MISSING_INPUT","UNCERTAIN_VALUE","UNAVAILABLE_CALCULATION","POLICY_LIMITED_RESULT","NOT_CALCULABLE_STATE"]},
+        "scope":{"type":"string","minLength":1},
+        "reasonCodes":{"type":"array","items":{"type":"string"}},
+        "rendererMustDisplay":{"const":true}
+      }
+    },
+    "evidenceItem": {
+      "type":"object","additionalProperties":false,
+      "required":["type","status","sourceCode","reference","version","confidence"],
+      "properties": {
+        "type":{"enum":["INPUT_SOURCE","TIMEZONE_SOURCE","COORDINATES_SOURCE","RULE_SOURCE","CALCULATION_AUTHORITY","RUNTIME_AUTHORITY","PRODUCTION_DISPATCH_AUTHORITY"]},
+        "status":{"enum":["AVAILABLE","UNAVAILABLE","NOT_APPLICABLE"]},
+        "sourceCode":{"type":["string","null"]},
+        "reference":{"type":["string","null"]},
+        "version":{"type":["string","null"]},
+        "confidence":{"enum":["HIGH","MEDIUM","LOW","UNKNOWN","NOT_APPLICABLE"]}
+      }
+    }
+  }
+}

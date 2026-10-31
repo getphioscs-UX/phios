@@ -1,0 +1,21 @@
+/* Account delivery surface: existing personal artwork and governed method icons. */
+body[data-cx-surface="ACCOUNT"] .cx-account-hero{position:relative;isolation:isolate;overflow:hidden;min-height:23rem;padding:clamp(2rem,5vw,4.5rem);border-radius:1.5rem;background:#111b25;color:#f4eee0;justify-content:center;margin-top:1rem}
+.cx-account-hero__art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.cx-account-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,20,29,.94),rgba(12,20,29,.73) 55%,rgba(12,20,29,.16))}
+body[data-cx-surface="ACCOUNT"] .cx-account-hero .cx-display{font-size:clamp(2.4rem,4.5vw,4.2rem);line-height:1.13;max-width:13ch;color:inherit;margin:.5rem 0}
+body[data-cx-surface="ACCOUNT"] .cx-account-hero .cx-lead{max-width:38rem;color:#e4ddcf;font-size:1.05rem}
+body[data-cx-surface="ACCOUNT"] .cx-account-hero .cx-eyebrow{color:#d8b777}
+body[data-cx-surface="ACCOUNT"] .cx-account-shortcuts{grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.cx-account-shortcuts article{position:relative;padding:1.4rem;display:flex;flex-direction:column;align-items:flex-start;gap:.8rem}
+.cx-account-shortcuts h2{font-size:1.25rem!important;margin:0}.cx-account-shortcuts p{font-size:.9rem;margin:0}.cx-account-shortcuts .cx-button{margin-top:auto}
+.cx-account-shortcut-icon{width:2.5rem;height:2.5rem;object-fit:contain}
+.cx-account-editor{border:1px solid var(--cx-color-border);border-radius:1rem;background:var(--cx-color-surface-raised);overflow:hidden}
+.cx-account-editor>summary{padding:1.2rem 1.4rem;font-weight:650;cursor:pointer}.cx-account-editor[open]>summary{border-bottom:1px solid var(--cx-color-border)}
+.cx-account-editor .cx-person-form,.cx-account-editor .cx-person-generate{border:0;margin:0;border-radius:0;background:transparent}
+.cx-account-reports{padding:1.5rem 0!important;border-top:1px solid var(--cx-color-border)}
+.cx-account-reports__heading{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}.cx-account-reports__heading h3{margin:0;font-size:1.5rem}
+.cx-account-report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.cx-account-report-card{display:flex;flex-direction:column;align-items:flex-start;gap:.8rem;padding:1.5rem;border:1px solid var(--cx-color-border);border-radius:1rem;background:linear-gradient(135deg,#fffefa,#f3ecdd)}
+.cx-account-report-card>img{width:3rem;height:3rem;object-fit:contain}.cx-account-report-card h4{font-size:1.15rem;line-height:1.5;margin:0}.cx-account-report-card p{font-size:.9rem;color:var(--cx-color-ink-muted);margin:0}.cx-account-report-card .cx-button{margin-top:auto}
+@media(max-width:48rem){body[data-cx-surface="ACCOUNT"] .cx-account-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}.cx-account-report-grid{grid-template-columns:1fr}.cx-account-reports__heading{align-items:flex-start}.cx-account-hero{min-height:20rem!important}}
+@media(max-width:28rem){body[data-cx-surface="ACCOUNT"] .cx-account-shortcuts{grid-template-columns:1fr}.cx-account-reports__heading{flex-wrap:wrap}}

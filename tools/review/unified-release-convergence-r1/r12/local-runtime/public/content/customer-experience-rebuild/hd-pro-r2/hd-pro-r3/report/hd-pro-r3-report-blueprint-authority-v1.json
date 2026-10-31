@@ -1,0 +1,441 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W3R-REPORT-BLUEPRINT-AUTHORITY-v1.0.0",
+  "work": "HD-PRO-R3-W3R",
+  "baselineCommit": "791e1a130750affa13831f248e89a8b921e54743",
+  "status": "REPORT_BLUEPRINT_AUTHORITY_ESTABLISHED_R3_SHADOW",
+  "publication": {
+    "r2State": "CUSTOMER_PUBLISHED",
+    "r3State": "SHADOW_CANDIDATE",
+    "generatedR3ReportCustomerPublicationAllowed": false
+  },
+  "templateAuthorities": [
+    {
+      "sourceId": "HD-UA-REPORT-001",
+      "title": "生产者，3分人，51 Template - Teresa(3).pdf",
+      "sha256": "d9b1df31082fa873f78a60b608f8317b3291ed8f781943e2b2d368d986200d93",
+      "pageCount": 58,
+      "authorityRoles": [
+        "REPORT_PRODUCT_BLUEPRINT",
+        "EDITORIAL_GRAMMAR",
+        "VISUAL_GRAMMAR",
+        "MODULE_SELECTION_EVIDENCE"
+      ],
+      "authorityBoundary": "TEMPLATE_STRUCTURE_AND_PRODUCT_GRAMMAR_ONLY; INDIVIDUAL CLAIMS MUST STILL COME THROUGH W2/W3 SOURCE AND CLAIM IR"
+    },
+    {
+      "sourceId": "HD-DRIVE-TEMPLATE-CANDIDATE-001",
+      "title": "Human Design Template.pptx",
+      "driveFileId": "1E3PCkLcuRRbTSRLFmo2SijqBNYgbDUtx",
+      "authorityRoles": [
+        "VISUAL_TEMPLATE_RECONCILIATION_CANDIDATE"
+      ],
+      "admissionStatus": "SOURCE_PENDING",
+      "authorshipNotInferredFromDrivePresence": true
+    }
+  ],
+  "blueprintPolicy": {
+    "fixedLegacyPageCount": false,
+    "legacyPageCountForReference": 58,
+    "mailMergeTemplate": false,
+    "modularCompositionRequired": true,
+    "wholeChartPriorityRequiredBeforeModuleExpansion": true,
+    "rawAtomicInventoryMayNotBecomeDefaultReport": true,
+    "moduleStates": [
+      "ACTIVATE",
+      "SUPPRESS",
+      "CONDENSE",
+      "EXPAND"
+    ],
+    "defaultPrimaryFindingTarget": {
+      "min": 5,
+      "max": 8
+    },
+    "specialistModulesDefaultOff": true,
+    "technicalIdsHiddenFromCustomerDefault": true
+  },
+  "editorialGrammar": {
+    "customerBlockOrder": [
+      "FINDING",
+      "WHY_THIS_APPEARS",
+      "HOW_STRUCTURES_COMBINE",
+      "REALITY_EXPRESSION",
+      "WHAT_TO_OBSERVE",
+      "WHAT_WOULD_CONTRADICT"
+    ],
+    "forbiddenDefaultLanguage": [
+      "claim IR",
+      "semantic owner",
+      "SOURCE_ADMITTED",
+      "composition supported",
+      "projection digest",
+      "authority registry"
+    ],
+    "sourceObservedPattern": "ONE_MAJOR_CONCEPT_PER_VISUAL_SECTION_WITH_SUMMARY_CALLOUTS_AND_DETAILED_EXPLANATION",
+    "successorRule": "Do not mechanically repeat the same six headings in every card; preserve varied editorial rhythm while retaining evidence traceability."
+  },
+  "visualGrammar": {
+    "sourceObserved": [
+      "TOP_GEOMETRIC_IDENTITY_RIBBON",
+      "GRADIENT_PAGE_FIELD",
+      "SECTION_TITLE_RIBBON",
+      "DIAGRAM_OR_BODYGRAPH_ANCHOR",
+      "KEY_DATA_HIGHLIGHT",
+      "SUMMARY_CALLOUT",
+      "LONG_FORM_EXPLANATION"
+    ],
+    "generationPrinciple": "RECREATE_AS_PHI_OS_COMPONENT_SYSTEM_NOT_SCREENSHOT_OR_FIXED_IMAGE_MAIL_MERGE",
+    "webAndReportShareReadingIr": true,
+    "printSafeRequired": true,
+    "mobileWebSafeRequired": true
+  },
+  "modules": [
+    {
+      "moduleId": "COVER",
+      "customerTitle": "专属你的人生说明书",
+      "legacySourcePages": [
+        1
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "ALWAYS",
+      "priority": "PRODUCT_FRAME",
+      "stateDefault": "ACTIVATE"
+    },
+    {
+      "moduleId": "HOW_TO_READ",
+      "customerTitle": "如何阅读这份人类图",
+      "legacySourcePages": [
+        2,
+        3,
+        5,
+        6
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "ALWAYS",
+      "priority": "PRODUCT_FRAME",
+      "stateDefault": "CONDENSE",
+      "boundary": "Metaphysical or historical framing from the legacy report is source material, not established fact; successor copy must distinguish method framing from verified evidence."
+    },
+    {
+      "moduleId": "CHART_OVERVIEW",
+      "customerTitle": "你的图表",
+      "legacySourcePages": [
+        4,
+        6,
+        7
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "CONFIRMED_CHART",
+      "priority": "CORE",
+      "stateDefault": "ACTIVATE"
+    },
+    {
+      "moduleId": "CORE_READING",
+      "customerTitle": "你的核心运行方式",
+      "legacySourcePages": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "origin": "USER_TEMPLATE_PLUS_R3_COMPOSITION",
+      "activation": "TYPE_AND_AUTHORITY_CONFIRMED",
+      "priority": "CORE",
+      "stateDefault": "EXPAND",
+      "compositionRequired": [
+        "TYPE_X_AUTHORITY",
+        "TYPE_X_PROFILE",
+        "AUTHORITY_X_DEFINITION"
+      ]
+    },
+    {
+      "moduleId": "TYPE_STRATEGY",
+      "customerTitle": "投入与回应",
+      "legacySourcePages": [
+        7,
+        8
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "TYPE_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "CORE",
+      "stateDefault": "ACTIVATE"
+    },
+    {
+      "moduleId": "AUTHORITY",
+      "customerTitle": "你的决策过程",
+      "legacySourcePages": [
+        9
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "AUTHORITY_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "CORE",
+      "stateDefault": "EXPAND"
+    },
+    {
+      "moduleId": "DEFINITION",
+      "customerTitle": "内部如何整合",
+      "legacySourcePages": [
+        10
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "DEFINITION_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "CORE",
+      "stateDefault": "ACTIVATE"
+    },
+    {
+      "moduleId": "CENTERS",
+      "customerTitle": "稳定与开放的中心",
+      "legacySourcePages": [
+        11,
+        12
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "CENTER_CLASSIFICATION_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "STRUCTURE",
+      "stateDefault": "ACTIVATE",
+      "boundary": "DEFINED, UNDEFINED and completely OPEN must remain distinct when the canonical successor can represent them; R2 openCenters alone is insufficient for deterministic three-state projection."
+    },
+    {
+      "moduleId": "PRIMARY_CHANNELS",
+      "customerTitle": "塑造整张图的主要通道",
+      "legacySourcePages": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "CHANNELS_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "STRUCTURE",
+      "stateDefault": "EXPAND",
+      "selectionRule": "WHOLE_CHART_PRIORITY_ONLY; do not dump all 36 channel meanings."
+    },
+    {
+      "moduleId": "PRIORITY_GATES",
+      "customerTitle": "关键闸门",
+      "legacySourcePages": [
+        32,
+        33,
+        34,
+        42,
+        43,
+        44
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "GATE_ACTIVATIONS_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "DETAIL",
+      "stateDefault": "CONDENSE",
+      "selectionRule": "Only priority gates supporting primary semantic clusters; full gate inventory belongs in technical detail."
+    },
+    {
+      "moduleId": "LIFE_THEME_CROSS",
+      "customerTitle": "人生主题与轮回交叉",
+      "legacySourcePages": [
+        17,
+        18,
+        19
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "INCARNATION_CROSS_CONFIRMED_AND_SOURCE_ADMITTED",
+      "priority": "CONTEXT",
+      "stateDefault": "ACTIVATE",
+      "currentR3State": "SOURCE_PENDING_VALUE_SPECIFIC_CORPUS"
+    },
+    {
+      "moduleId": "PROFILE",
+      "customerTitle": "角色与互动方式",
+      "legacySourcePages": [
+        20,
+        21
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "PROFILE_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "CORE",
+      "stateDefault": "EXPAND"
+    },
+    {
+      "moduleId": "PHS_DETERMINATION",
+      "customerTitle": "身体与摄取条件",
+      "legacySourcePages": [
+        22,
+        23,
+        24
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "DETERMINATION_EXTERNALLY_CONFIRMED_AND_SPECIALIST_SEMANTIC_ADMITTED",
+      "priority": "ADVANCED",
+      "stateDefault": "CONDENSE",
+      "specialistScope": "PHS_RAVE",
+      "boundary": "EXPERIMENT_AND_OBSERVATION_ONLY; NOT MEDICAL, NUTRITIONAL OR THERAPEUTIC ADVICE."
+    },
+    {
+      "moduleId": "ADVANCED_VARIABLES",
+      "customerTitle": "环境、感知与视角",
+      "legacySourcePages": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "ADVANCED_FIELDS_EXTERNALLY_CONFIRMED_AND_SEMANTIC_ADMITTED",
+      "priority": "ADVANCED",
+      "stateDefault": "CONDENSE",
+      "fields": [
+        "COGNITION",
+        "ENVIRONMENT",
+        "PERSPECTIVE",
+        "MOTIVATION",
+        "TRAJECTORY",
+        "SENSE"
+      ]
+    },
+    {
+      "moduleId": "WORK_WEALTH_STRUCTURE",
+      "customerTitle": "工作与资源方式",
+      "legacySourcePages": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "OPTIONAL_SPECIALIST_AND_CUSTOMER_SCOPE",
+      "priority": "SPECIALIST",
+      "stateDefault": "SUPPRESS",
+      "specialistScope": "GENE_KEYS_OR_PROSPERITY_ADJACENT",
+      "boundary": "No wealth promise, income prediction or deterministic financial outcome."
+    },
+    {
+      "moduleId": "DREAMRAVE",
+      "customerTitle": "睡眠与梦境图层",
+      "legacySourcePages": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "EXPLICIT_SPECIALIST_INPUT_AND_SOURCE_ADMISSION",
+      "priority": "SPECIALIST",
+      "stateDefault": "SUPPRESS",
+      "specialistScope": "DREAMRAVE",
+      "boundary": "Not inferred from ordinary external chart data; not medical or sleep-treatment advice."
+    },
+    {
+      "moduleId": "CAREER_BG5",
+      "customerTitle": "事业与协作",
+      "legacySourcePages": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "CUSTOMER_WORK_SCOPE_AND_BG5_SPECIALIST_ADMISSION",
+      "priority": "SPECIALIST",
+      "stateDefault": "SUPPRESS",
+      "specialistScope": "BG5",
+      "dashboardFields": [
+        "CAREER_ROLE",
+        "INTERACTION_MODE",
+        "DECISION_PROCESS",
+        "KEY_INDICATOR",
+        "INFORMATION_PROCESSING",
+        "BUSINESS_SKILLS",
+        "STABLE_ENERGY_OPERATION",
+        "INTERFERENCE",
+        "WORK_ROLE",
+        "LIFELONG_VOCATION",
+        "MISSION_THEME",
+        "TALENT_STRENGTHS",
+        "TRAITS"
+      ],
+      "boundary": "Career interpretation may support reflection and role fit; no guaranteed material success."
+    },
+    {
+      "moduleId": "REALITY_COMPARISON",
+      "customerTitle": "现实对照",
+      "legacySourcePages": [],
+      "origin": "PHI_OS_R3_SUCCESSOR_ADDITION",
+      "activation": "PROFESSIONAL_READING_IR_AVAILABLE",
+      "priority": "CORE",
+      "stateDefault": "ACTIVATE",
+      "requiredResponseStates": [
+        "CONFIRMS",
+        "PARTIALLY_CONFIRMS",
+        "CONTRADICTS",
+        "NOT_OBSERVED",
+        "CONTEXT_DEPENDENT"
+      ]
+    },
+    {
+      "moduleId": "REFLECTION_PRACTICE",
+      "customerTitle": "观察与练习",
+      "legacySourcePages": [
+        56,
+        57
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "AT_LEAST_ONE_PRIMARY_FINDING",
+      "priority": "FOLLOW_UP",
+      "stateDefault": "ACTIVATE",
+      "boundary": "Practice prompts must remain optional, reversible, and derived from admitted findings."
+    },
+    {
+      "moduleId": "SOURCES_BOUNDARIES",
+      "customerTitle": "来源与边界",
+      "legacySourcePages": [],
+      "origin": "PHI_OS_R3_SUCCESSOR_ADDITION",
+      "activation": "ALWAYS",
+      "priority": "TECHNICAL",
+      "stateDefault": "ACTIVATE"
+    },
+    {
+      "moduleId": "LEGACY_COMMERCIAL_FOOTER",
+      "customerTitle": "Legacy commercial/agent page",
+      "legacySourcePages": [
+        58
+      ],
+      "origin": "USER_TEMPLATE",
+      "activation": "NEVER",
+      "priority": "OMIT",
+      "stateDefault": "SUPPRESS",
+      "disposition": "OMIT_FROM_GENERATED_REPORT",
+      "reason": "Legacy pricing, payment, contact and agent instructions are not part of the professional reading blueprint."
+    }
+  ],
+  "outputTargets": {
+    "interactiveWebReading": {
+      "planned": true,
+      "sameReadingIr": true
+    },
+    "professionalGeneratedReport": {
+      "planned": true,
+      "sameReadingIr": true
+    },
+    "reportGenerationRuntimeImplementedInW3R": false,
+    "futureOwner": "HD-PRO-R3 report composition/visual projection work after semantic and composition admission"
+  },
+  "qualityGate": {
+    "atomicMeaningMayEqualModule": false,
+    "moduleMayPublishWithoutAdmittedClaims": false,
+    "specialistModuleMayAutoActivate": false,
+    "r2MayBeOverwrittenBeforeR3HumanAccepted": false
+  }
+}

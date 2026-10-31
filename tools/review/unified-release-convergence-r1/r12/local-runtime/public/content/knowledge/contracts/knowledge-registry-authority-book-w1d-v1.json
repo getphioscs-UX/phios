@@ -1,0 +1,102 @@
+{
+  "contract": "PHI-OS-KNOWLEDGE-REGISTRY-AUTHORITY-v3.0.0",
+  "stage": "BOOK-W1D",
+  "status": "human-approved-active-successor",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "1cbc50f7590759774944a577d3082c13ef59c40b"
+  },
+  "authorities": {
+    "bookIdentity": {
+      "path": "content/registry/books.json",
+      "ownedFields": [
+        "book_id",
+        "volume",
+        "title",
+        "subtitle",
+        "status",
+        "content_status",
+        "parts",
+        "manifest",
+        "content_root",
+        "asset",
+        "publication_version"
+      ]
+    },
+    "partIdentityAndPublicationOwnership": {
+      "path": "content/registry/parts.json",
+      "ownedFields": [
+        "part_id",
+        "number",
+        "book",
+        "title",
+        "status",
+        "content_status",
+        "boundary",
+        "deprecated_aliases"
+      ]
+    },
+    "canonicalKnowledge": {
+      "path": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+      "ownedFields": [
+        "nodeCode",
+        "canonicalQuestionKey",
+        "collectionCode",
+        "themeCode",
+        "registryStatus",
+        "relationships",
+        "sourceReferences"
+      ]
+    },
+    "blueprintDiscoveryAndBinding": {
+      "path": "content/knowledge/blueprints/blueprint-registry.json",
+      "ownedFields": [
+        "bookCode",
+        "blueprintPath",
+        "contract",
+        "schemaVersion",
+        "status",
+        "sha256",
+        "productionEligibility"
+      ]
+    }
+  },
+  "projectionRules": {
+    "blueprintRegistryPartCodes": "validated_projection_from_book_and_part_registries",
+    "blueprintRegistryCanonicalNodeCount": "validated_projection_from_blueprint_and_canonical_node_registry",
+    "blueprintMayCreateCanonicalNode": false,
+    "nodeIdentityChangesWithPublication": false,
+    "runtimeMustUseUniversalLoader": true,
+    "historicalEvidenceMayRetainLegacyPaths": true,
+    "canonicalAdmissionRequiresBookW1DHumanAcceptance": true,
+    "supersededIdentityRequiresLineageAndCompatibility": true,
+    "deferredCandidateMayEnterCanonicalAuthority": false,
+    "publicProjectionRequiresIndependentBookW1EAcceptance": true
+  },
+  "forbiddenAuthorities": [
+    "individual book blueprint",
+    "nodeCode prefix",
+    "browser hardcode",
+    "historical freeze document",
+    "generated editorial candidate"
+  ],
+  "schemaVersion": "PHI-OS-KNOWLEDGE-REGISTRY-AUTHORITY-v3.0.0",
+  "contractVersion": "3.0.0",
+  "supersedes": {
+    "path": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+    "sha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13",
+    "contract": "PHI-OS-KNOWLEDGE-REGISTRY-AUTHORITY-v2.0.0",
+    "historicalAuthorityMutationAllowed": false
+  },
+  "migrationRecord": [
+    "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
+    "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json"
+  ],
+  "sourceOutlineAuthority": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+  "humanAcceptance": {
+    "path": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
+    "actor": "TL",
+    "decision": "ACCEPT"
+  }
+}

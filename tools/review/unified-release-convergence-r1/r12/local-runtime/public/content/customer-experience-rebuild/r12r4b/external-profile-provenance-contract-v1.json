@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-EXTERNAL-PROFILE-PROVENANCE-CONTRACT-v1.0.0",
+  "work": "CX-R12R4B-R2-W18R-W19R",
+  "baselineCommit": "6afe4a602659155b8419bdfc0345313376dbe28e",
+  "status": "ACTIVE",
+  "authorityClass": "CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT",
+  "requiredRecordFields": ["field", "value", "sourceType", "customerConfirmed", "phiosCalculated"],
+  "allowedSourceTypes": [
+    "CUSTOMER_UPLOADED_DOCUMENT",
+    "CUSTOMER_UPLOADED_IMAGE",
+    "CUSTOMER_PASTED_TEXT",
+    "CUSTOMER_MANUAL_ENTRY",
+    "CUSTOMER_CORRECTED",
+    "CUSTOMER_CONFIRMED_UPLOAD",
+    "CUSTOMER_CONFIRMED"
+  ],
+  "confirmation": {
+    "machineExtractionAuthority": false,
+    "customerConfirmationCreatesExternalContextAuthority": true,
+    "customerConfirmationCreatesCalculationAuthority": false,
+    "customerConfirmationCreatesMeaningAuthority": false,
+    "customerCorrectionPreservesSourceValue": true
+  },
+  "privacy": {
+    "persistence": "NONE",
+    "fileContentPersisted": false,
+    "runtimeMemoryWritten": false
+  }
+}

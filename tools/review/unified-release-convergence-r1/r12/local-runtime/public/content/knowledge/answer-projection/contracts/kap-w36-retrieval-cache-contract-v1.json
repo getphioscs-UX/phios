@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W36-RETRIEVAL-CACHE-CONTRACT-v1.0.0",
+  "phase": "KAP",
+  "work": "KAP-W36",
+  "baselineCommit": "a6395ad926ce1bcd318b596d6f6ce028f5b96ae9",
+  "status": "ACTIVE_GOVERNED_RETRIEVAL_CACHE_POLICY",
+  "consumerStatus": "BACKEND_ACTIVE",
+  "rules": {
+    "cacheable": [
+      "normalization",
+      "node relation",
+      "grounding fragments",
+      "published refs"
+    ],
+    "cacheKeyMustBind": [
+      "locale",
+      "knowledgeRevision"
+    ],
+    "sharedCachePrivateContextForbidden": true,
+    "cacheMayNotChangeAuthority": true
+  }
+}

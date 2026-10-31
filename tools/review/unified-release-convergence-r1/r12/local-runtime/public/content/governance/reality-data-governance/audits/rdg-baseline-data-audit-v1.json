@@ -1,0 +1,123 @@
+{
+  "auditCode": "PHI-OS-RDG-W0-BASELINE-DATA-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "RDG-W0",
+  "status": "audit",
+  "baselineCommit": "c6ff0a9d0481cafeb57f6c3248b6377d78444859",
+  "sources": [
+    {
+      "path": "terms.html",
+      "present": true
+    },
+    {
+      "path": "professional-data-privacy.html",
+      "present": true
+    },
+    {
+      "path": "external-reader-intake.html",
+      "present": true
+    },
+    {
+      "path": "account.html",
+      "present": true
+    },
+    {
+      "path": "account-my-reality.html",
+      "present": true
+    },
+    {
+      "path": "reality-entry.html",
+      "present": true
+    },
+    {
+      "path": "reality-journey.html",
+      "present": true
+    },
+    {
+      "path": "my-reality.html",
+      "present": true
+    },
+    {
+      "path": "content/registry/runtime-security-privacy.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m3c-entry-recovery-consent.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m3c-memory.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m4a-w3-consent-sharing.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m4a-w7-professional-data-privacy.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m4b-consent-sharing.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m4b-external-reader-data-privacy.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/m4c-account-payment-membership.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/professional-consent-sharing.json",
+      "present": true
+    },
+    {
+      "path": "content/registry/professional-data-governance.json",
+      "present": true
+    },
+    {
+      "path": "docs/runtime/M2-W2-PERSISTENCE-CONTRACT.md",
+      "present": true
+    },
+    {
+      "path": "docs/runtime/M2-W8-SECURITY-AND-PRIVACY.md",
+      "present": true
+    },
+    {
+      "path": "docs/professional/M4A-W3-CONSENT-AND-SHARING.md",
+      "present": true
+    },
+    {
+      "path": "docs/professional/M4A-W7-PROFESSIONAL-DATA-PRIVACY.md",
+      "present": true
+    },
+    {
+      "path": "docs/public/M3C-W3.2-ENTRY-RECOVERY-CONSENT.md",
+      "present": true
+    },
+    {
+      "path": "docs/public/M3C-W8-MEMORY.md",
+      "present": true
+    }
+  ],
+  "questions": [
+    "where_data_is_created",
+    "where_data_is_persisted",
+    "where_data_is_presentation_only",
+    "where_derived_data_may_exist",
+    "where_deletion_is_supported",
+    "where_consent_exists",
+    "where_retention_exists",
+    "where_authority_is_unresolved"
+  ],
+  "noNewDatabaseCreated": true,
+  "invariants": {
+    "runtimePersistenceIsNotDataAuthority": true,
+    "uiStateIsNotCanonicalData": true,
+    "telemetryIsNotEvidence": true,
+    "professionalDataIsNotRuntimeMemory": true,
+    "academyScoreIsNotCapabilityTruth": true
+  }
+}

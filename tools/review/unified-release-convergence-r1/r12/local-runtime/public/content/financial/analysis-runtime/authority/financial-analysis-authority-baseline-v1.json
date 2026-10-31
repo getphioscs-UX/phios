@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W0-AUTHORITY-BASELINE-v1.0.0",
+  "phase": "FAR",
+  "work": "FAR-W0",
+  "baselineCommit": "f010b29",
+  "status": "ACTIVE_CANONICAL_FINANCIAL_ANALYSIS_AUTHORITY",
+  "authority": {
+    "runtimeCode": "FAR",
+    "owns": [
+      "STRUCTURAL_FINANCIAL_FINDINGS",
+      "FINANCIAL_FINDING_CONFIDENCE",
+      "FINANCIAL_FINDING_PROVENANCE",
+      "CROSS_DOMAIN_FINANCIAL_FINDINGS",
+      "SCENARIO_INTERPRETATION"
+    ],
+    "doesNotOwn": [
+      "CANONICAL_FINANCIAL_FACTS",
+      "DETERMINISTIC_FINANCIAL_CALCULATION",
+      "FINANCIAL_ADVICE",
+      "PROFESSIONAL_JUDGMENT",
+      "PROFESSIONAL_RECOMMENDATION",
+      "PRODUCT_SELECTION",
+      "LEGAL_OR_TAX_ADVICE"
+    ]
+  },
+  "reconciliation": {
+    "FCR": {
+      "path": "content/financial/calculation-runtime/authority/fcr-w0-w22-freeze-manifest-v1.json",
+      "relationship": "SOLE_CANONICAL_NUMERIC_PROJECTION_INPUT_AUTHORITY",
+      "independentRecalculationAllowed": false
+    },
+    "FDR": {
+      "path": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+      "relationship": "READ_ONLY_EVIDENCE_AND_DISCLOSURE_PROVENANCE",
+      "mutationAllowed": false
+    },
+    "legacyProfessionalFinancial": {
+      "path": "functions/professional/financial",
+      "relationship": "DOWNSTREAM_OR_COMPATIBILITY_CONSUMER_NOT_FAR_AUTHORITY",
+      "adviceAuthorityGrantedToFar": false
+    },
+    "CARC": {
+      "path": "content/governance/current-authority-reconciliation/carc-w8-exit-gate-v1.json",
+      "relationship": "CURRENT_AUTHORITY_CHAIN_GOVERNANCE_ONLY"
+    }
+  },
+  "invariants": {
+    "fcrResultsRecalculated": false,
+    "fdrFactsMutated": false,
+    "recommendationAllowed": false,
+    "professionalJudgmentAllowed": false,
+    "unknownPreserved": true,
+    "policyThresholdsVersioned": true,
+    "crossDomainAnalysisAllowed": true
+  },
+  "frozenPredecessors": [
+    {
+      "code": "FCR_FREEZE",
+      "path": "content/financial/calculation-runtime/authority/fcr-w0-w22-freeze-manifest-v1.json",
+      "sha256": "d0ba76e6442f54b71603e264bf2e54bf990421bf58b27b124f386d81478cb3b9"
+    },
+    {
+      "code": "FDR_FREEZE",
+      "path": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+      "sha256": "921a5cbc4ff0102d4d26bd37d71a5fafcabca82bd608e6bc985660bb000ac1b1"
+    },
+    {
+      "code": "LEGACY_PROFESSIONAL_FINANCIAL_CALCULATION",
+      "path": "functions/professional/financial/financial-calculation-layer.js",
+      "sha256": "6e4fc8da92c17c0b25feb24d9dbb09e1d6fab1cbe5c225b20da1b7acfd92536e"
+    },
+    {
+      "code": "CARC_EXIT_GATE",
+      "path": "content/governance/current-authority-reconciliation/carc-w8-exit-gate-v1.json",
+      "sha256": "9e9a11ad15a9923e91b1fe622fb87bd6623d186ffe0e77b2c7ae70f715c93549"
+    }
+  ]
+}

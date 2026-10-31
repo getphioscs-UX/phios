@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R2-W11-OFFICIAL-CHART-PDF-INTAKE-ADAPTER-SUCCESSOR-v1.0.0",
+  "work": "HD-PRO-R2-W11",
+  "baselineCommit": "ccac579a7e81dc27f7f6403df1c6446fba38bc25",
+  "status": "OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE",
+  "goal": "Adapt customer-supplied Jovian Archive and Maia Mechanics chart PDFs with column or stacked text layouts into the existing external-profile confirmation authority without creating Human Design calculation authority.",
+  "supportedLayoutFamilies": [
+    "MAIA_MECHANICS_PROPERTIES_THREE_COLUMN",
+    "JOVIAN_ARCHIVE_ADVANCED_RAVE_TWO_COLUMN",
+    "FLATTENED_STACKED_LABEL_VALUE",
+    "EXPLICIT_LABEL_VALUE"
+  ],
+  "basicConfirmationFields": [
+    "type",
+    "strategy",
+    "authority",
+    "profile",
+    "definition",
+    "signature",
+    "notSelfTheme",
+    "incarnationCross",
+    "variable"
+  ],
+  "advancedOptionalFields": [
+    "cognition",
+    "determination",
+    "environment",
+    "perspective",
+    "motivation",
+    "trajectory"
+  ],
+  "customerFlow": [
+    "UPLOAD_OFFICIAL_CHART",
+    "READ_AND_EXTRACT_CANDIDATES",
+    "SHOW_RECOGNITION_SUMMARY",
+    "CUSTOMER_VERIFY_OR_EDIT",
+    "DECLARE_ADVANCED_DATA_AVAILABILITY",
+    "CUSTOMER_FINAL_CONFIRMATION",
+    "BUILD_CANONICAL_EXTERNAL_CHART",
+    "PUBLISH_ADMITTED_READING_IF_AVAILABLE"
+  ],
+  "runtimeSuccessorProof": {
+    "functions/external-profile/hd-profile-parser.js": {
+      "predecessorSha256": "2ee72ecbdf696e2afe50982a6554ad929a7eca40ae5f44b159207c2d9ce3af0b",
+      "successorSha256": "274e6f2b267440b6686663779643dd2216c27879cb62dfe97ebf3a0662ae9c7c",
+      "changeClass": "JOVIAN_MAIA_COLUMN_AND_STACKED_TEXT_ADAPTER"
+    },
+    "functions/external-profile/external-profile-contract.js": {
+      "predecessorSha256": "9c8d0e5c7f653176a7c5f36628cfedcbe2c5cb73a9803c4aac4e959eec8c70b2",
+      "successorSha256": "cd323f88935ad6fd70e36bf6814e770d7329a726a03fe82f335d207f71df5c4b",
+      "changeClass": "VARIABLE_CONFIRMATION_FIELD_ADMISSION"
+    },
+    "functions/external-profile/human-design-canonical-chart.js": {
+      "predecessorSha256": "9aaf13eb94a899822382f175382a49011f66b34f16bcf5fccc0d89fde5091115",
+      "successorSha256": "655ccb26ad1032c50ac3e2421eda71b1cd7df7d3be059db99121bbce04d4dc03",
+      "changeClass": "VARIABLE_CANONICAL_ADVANCED_TRANSPORT"
+    },
+    "functions/external-profile/human-design-reading-runtime.js": {
+      "predecessorSha256": "7c9622dc5bf927c39463391971b8e948a4159f620059f4f1bfe9f4f03844902f",
+      "successorSha256": "bb3f0448e4cb397bbc3549c7f1ee600be4f03c41d16c3e1e6a4d39dff65c6d3b",
+      "changeClass": "CONFIRMED_VARIABLE_READING_PROJECTION"
+    },
+    "functions/api/customer-external-profile-intake.js": {
+      "predecessorSha256": "98675fb3757c5c84940d451020de2c7c02d43cffd1575c415193c74b497b4033",
+      "successorSha256": "f8c921dc7f5c0b27db000ecadb526a15c25237d05634d5dbcecabd2a2afaa134",
+      "changeClass": "RECOGNITION_SUMMARY_AND_BASIC_PENDING_COUNTS"
+    },
+    "perspectives/personal/index.html": {
+      "predecessorSha256": "6941a38ed01cb7353d63217c2b40ca1c95a6e081e3a5fd512d6c56c1e256428b",
+      "successorSha256": "881a45a6b9c730ed1d61ba2ca30355b21548fddb6e645c873cd5e407662d400b",
+      "changeClass": "OFFICIAL_CHART_UPLOAD_CONFIRMATION_UX"
+    },
+    "assets/customer-ui/js/surfaces/personal-reality.js": {
+      "predecessorSha256": "efa88dcefa9a0c7d63f986108f25d55731b50fa4a0f7a82e0af0ae1b2cd36da9",
+      "successorSha256": "3fe7a5269609e3923df48f5d934aa2b7437ccff7cdd51f3339cf69a832975e30",
+      "changeClass": "RECOGNITION_CONFIRMATION_STATE_MACHINE"
+    },
+    "assets/customer-ui/surfaces/personal-reality.css": {
+      "predecessorSha256": "ce68243d5500f4c52c1613a0d6bc17e3f997fe01336a4831a8a6a5c8edcdf1fe",
+      "successorSha256": "4cc4e6d9c1e5950b037e3822fe7e1c2a059169127b960648ea7b179819d53cfe",
+      "changeClass": "OFFICIAL_CHART_CONFIRMATION_VISUALS"
+    },
+    "content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json": {
+      "predecessorSha256": "e3aebad6591110120ad4116bb989409b9990b2319bab624f9a5db9e8fd0c57ce",
+      "successorSha256": "10032bed10bded074b9523dc9e31ff10f29c34ea09f0b1115f9a48bd5fac4bd5",
+      "changeClass": "CURRENT_SHARED_OWNER_SUCCESSOR_REGISTRATION"
+    }
+  },
+  "validation": {
+    "checker": "scripts/check-hd-pro-r2-w0-w10.mjs",
+    "checkerSha256": "6a54adeea3258248524bcdb212ade88591eabc52643c4635d81e2a4d7687b273",
+    "maiaStackedNineFieldRegression": true,
+    "maiaThreeColumnNineFieldRegression": true,
+    "jovianTwoColumnAdvancedRegression": true,
+    "uploadedPdfApiRegression": true,
+    "r3CurrentAuthorityChecker": "scripts/check-hd-pro-r3-w0-current-authority.mjs",
+    "r3CurrentAuthorityCheckerSha256": "edd3b4162366bc193c68ce64cfd9f69a8d0a8c03a3f5deb3b3a7be759bc58a7d",
+    "r3OwnerReconciliation": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/audit/HD-PRO-R3-W11-current-owner-reconciliation-v1.json",
+    "r3OwnerReconciliationSha256": "f66b49f57cf901224b5a32d31875ac0e263a8ca332c60dcbdc06465b14ba1eba"
+  },
+  "boundaries": {
+    "customerSuppliedExternalChartRemainsAuthority": true,
+    "phiosHumanDesignCalculationAuthorityCreated": false,
+    "bodyGraphReconstructionServiceCreated": false,
+    "missingBasicFieldsGuessed": false,
+    "missingAdvancedFieldsInferred": false,
+    "automaticVariablePhsCalculationAllowed": false,
+    "customerConfirmationRequiredBeforeUse": true,
+    "fileContentPersisted": false,
+    "runtimeMemoryWritten": false,
+    "historicalFreezeRewritten": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W17-MACHINE-CAMPAIGN-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W17",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "status": "FROZEN_ENGINEERING_CONTRACT",
+  "requiredCaseCount": 96,
+  "scope": "W1-W16 downstream structural reading, composition, contradiction, deduplication, report and customer-surface behavior",
+  "notInScope": [
+    "re-validating raw birth-date astronomy or calendar conversion",
+    "re-validating solar terms, timezone resolution or true-solar-time algorithms",
+    "re-validating Luck Cycle start-age calculation",
+    "claiming live-customer correctness or human acceptance"
+  ],
+  "requiredCoverage": {
+    "monthBranches": 12,
+    "dayMasters": 10,
+    "threePillarCases": true,
+    "fourPillarCases": true,
+    "activeLuckCycle": true,
+    "transitionDay": true,
+    "currentLuckUnavailable": true,
+    "annualUnavailable": true,
+    "locales": ["zh-Hans", "en"],
+    "relationshipFamilies": ["clash", "six-combination", "harm", "break", "punishment", "self-punishment", "three-harmony", "three-meeting"]
+  },
+  "passCriteria": [
+    "pipeline executes without hidden fallback",
+    "same governed input produces same Reading IR and report digest",
+    "six-section customer IA remains stable",
+    "school authorities remain separate",
+    "unknown verdicts remain visible",
+    "presentation has no repeated full explanation inside one case",
+    "default customer surface does not leak raw internal authority codes",
+    "no good/bad score, guaranteed event prediction or fortune certainty is created"
+  ],
+  "humanAcceptanceSubstitutionAllowed": false
+}

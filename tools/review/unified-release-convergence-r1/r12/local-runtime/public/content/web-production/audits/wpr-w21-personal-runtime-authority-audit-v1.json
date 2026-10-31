@@ -1,0 +1,49 @@
+{
+  "auditCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-AUTHORITY-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "WPR-W21",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "status": "authority_reconciled_fail_closed",
+  "observed": {
+    "methodRegistryV2Count": 7,
+    "productionEligibleMethodCount": 0,
+    "professionalEligibleMethodCount": 0,
+    "numMethodSpecificReady": true,
+    "numReadinessDecision": "READY_FOR_MPA_W26_ELIGIBILITY_DECISION",
+    "numGlobalEligibilityGate": "MPA-W26_REQUIRED",
+    "numExecutionGate": "MPA-W27_REQUIRED",
+    "wprVocabularyV1NumerologyNote": "HISTORICAL_SUPERSEDED_BY_MPA_METHOD_REGISTRY_V2",
+    "wprVocabularyV1Mutated": false,
+    "birthDataCategoryRegisteredByRdg": true,
+    "birthInputSurfacePersistence": "EPHEMERAL"
+  },
+  "findings": [
+    {
+      "code": "WPR-W21-F01",
+      "severity": "P0",
+      "finding": "No Method is production/public execution eligible at this baseline; UI must not expose Calculate/Generate execution."
+    },
+    {
+      "code": "WPR-W21-F02",
+      "severity": "P1",
+      "finding": "NUM is method-specific ready for MPA-W26 but remains globally blocked by W26/W27."
+    },
+    {
+      "code": "WPR-W21-F03",
+      "severity": "P1",
+      "finding": "WPR public vocabulary v1 predates MPA method-registry-v2 NUM registration; v2 successor is required without rewriting v1."
+    },
+    {
+      "code": "WPR-W21-F04",
+      "severity": "P0",
+      "finding": "Birth data is RDG-governed; this unauthenticated setup surface may validate only ephemeral browser input and must not persist or submit it."
+    }
+  ],
+  "nonActivation": {
+    "methodExecutionActivated": false,
+    "canonicalConsentCreated": false,
+    "birthDataPersisted": false,
+    "professionalAuthorityCreated": false,
+    "wprPostcheckRegistered": false
+  }
+}

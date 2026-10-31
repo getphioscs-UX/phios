@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-CURRENT-REALITY-CORRELATION-CONTRACT-v1.0.0",
+  "work": "PRF-W7",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "runtimeSchema": "PHI-OS-PROFILE-CURRENT-REALITY-CORRELATION-v1",
+  "runtimeOwner": "functions/profile/profile-context-runtime.js",
+  "inputs": [
+    "PHI-OS-PROFILE-SIGNAL-ENVELOPE-v1[]",
+    "PHI-OS-CURRENT-REALITY-OBSERVATION-v1"
+  ],
+  "allowedStates": [
+    "CURRENTLY_RESONANT",
+    "PARTIALLY_RESONANT",
+    "CURRENTLY_NOT_RESONANT",
+    "OPEN"
+  ],
+  "basis": "EXPLICIT_CUSTOMER_COMPARISON",
+  "rules": {
+    "currentRealityMayContextualizeProfileSignal": true,
+    "currentRealityMayContradictProfileSignal": true,
+    "currentRealityProvesProfileModel": false,
+    "currentRealityDisprovesProfileModel": false,
+    "automaticSemanticMatching": false,
+    "unansweredRemainsOpen": true,
+    "assessmentDateDisclosureRequired": true,
+    "oldResultMaySilentlyPresentAsCurrent": false,
+    "profileSignalMayBeRewritten": false,
+    "customerPublishableBeforePrfW12": false,
+    "singleParticipantScopeRequired": true
+  },
+  "gate": "check:profile:w7-current-reality-correlation"
+}

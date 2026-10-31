@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-31T05:20:08.881Z",
+  "previousSha": "91ba31bfb6ae3190a8bd6a33d8a825dc7a6a2477",
+  "reason": "Repository deployability invariant prohibits JSON import attributes in Functions; previous direct-attribute fix withdrawn.",
+  "functions": "ordinary JSON imports only",
+  "node": "existing Node-only JSON hooks before dynamic linking in build-bazi-r9-review.mjs",
+  "rootImportCompat": "PASS npm run check:cloudflare-function-import-compat",
+  "node22RootBuild": "PASS outputs redirected to json-import-correction/root-review-build",
+  "node22IntegrationBuild": "PASS BAZI-NODE22-NO-ATTRIBUTES.json",
+  "githubActions": "NOT_RUN",
+  "fullWorkerCompile": "Previous SHA passed; not rerun for two-line attribute removal. Do not inherit exact-SHA compile evidence.",
+  "candidate": "ee38ff8acc8dcbaaadc4fc356b2c65c4f210fea6",
+  "rootSourceFiles": [
+    "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+    "scripts/build-bazi-r9-review.mjs"
+  ],
+  "integrationSourceFiles": [
+    "functions/canonical-presentation-runtime/report-editorial-resolver.js",
+    "functions/canonical-presentation-runtime/report-editorial-registry.js"
+  ],
+  "fullCheckRun": false,
+  "push": 0,
+  "deploy": 0
+}

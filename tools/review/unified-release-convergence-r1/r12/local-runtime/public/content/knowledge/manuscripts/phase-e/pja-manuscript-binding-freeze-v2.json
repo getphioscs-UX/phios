@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2.0.0",
+  "contract": "PHI-OS-PJA-MANUSCRIPT-BINDING-FREEZE-v2.0.0",
+  "stage": "KH-W4H-PHASE-E-FROZEN",
+  "authorities": {
+    "approvedMapping": "content/knowledge/manuscripts/approved-mapping-registry.json",
+    "approvedExtraction": "content/knowledge/manuscripts/phase-e/extraction-candidate-registry.json",
+    "c1": "content/knowledge/manuscripts/phase-e/pja-c1-manuscript-binding-registry.json",
+    "c2": "content/knowledge/manuscripts/phase-e/pja-c2-canonical-content-freeze-registry.json",
+    "c3": "content/knowledge/manuscripts/phase-e/pja-c3-production-readiness-registry.json",
+    "publicationContext": "content/knowledge/migrations/node-publication-ownership-v2.json",
+    "sourceManifestRegistry": "content/knowledge/manuscripts/manuscript-registry.json"
+  },
+  "invariants": {
+    "humanApprovalRequired": true,
+    "mappingDoesNotPromoteReadiness": true,
+    "candidateDoesNotCreatePublicFragment": true,
+    "allC3GatesRequired": true,
+    "automaticPublicationForbidden": true
+  },
+  "status": "frozen"
+}

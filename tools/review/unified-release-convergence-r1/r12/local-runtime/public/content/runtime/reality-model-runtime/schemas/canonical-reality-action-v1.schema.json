@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-action-v1.schema.json",
+  "title": "PHI OS Canonical Reality Action v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "actionCode", "actionVersion", "componentType", "dataType",
+    "actionClass", "actionStateSnapshot", "actionDefinitionReference", "realityReference",
+    "actorEntityReference", "componentReferences", "evidenceBindingReferences",
+    "unknownReferences", "sourceReferences", "dataNature", "certainty", "occurredAt",
+    "recordStatus", "navigationPathSelected", "requiredActionCreated", "actionExecutionPerformed",
+    "recommendationCreated", "professionalJudgmentCreated", "outcomePredicted",
+    "evidencePromotionPerformed", "authorityReference", "navigationExecutionAuthority",
+    "operationalMode", "persistentStoreWriteAllowed", "createdAt", "actionDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-ACTION-v1.0.0"},
+    "actionCode": {"type": "string", "pattern": "^RMO-ACTION-[A-Z0-9-]{4,100}$"},
+    "actionVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_ACTION"},
+    "dataType": {"const": "RUNTIME_STATE_RECORD"},
+    "actionClass": {"enum": ["OBSERVED_ACTION", "REPORTED_ACTION", "DECLARED_INTENT", "UNKNOWN_ACTION"]},
+    "actionStateSnapshot": {"enum": ["OBSERVED_COMPLETED", "REPORTED_IN_PROGRESS", "REPORTED_COMPLETED", "DECLARED_NOT_EXECUTED", "UNKNOWN"]},
+    "actionDefinitionReference": {"type": "string", "pattern": "^RMO-ACTION-DEFINITION-[A-Z0-9-]{4,140}$"},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "actorEntityReference": {"type": "string", "pattern": "^RMO-ENTITY-[A-Z0-9-]{4,100}$"},
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceBindingReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "unknownReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "dataNature": {"enum": ["OBSERVED", "USER_REPORTED", "SYSTEM_STATE"]},
+    "certainty": {"enum": ["OBSERVED", "REPORTED", "DISPUTED", "UNKNOWN", "UNRESOLVED"]},
+    "occurredAt": {"type": ["string", "null"], "format": "date-time"},
+    "recordStatus": {"const": "RECORDED"},
+    "navigationPathSelected": {"const": false},
+    "requiredActionCreated": {"const": false},
+    "actionExecutionPerformed": {"const": false},
+    "recommendationCreated": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "outcomePredicted": {"const": false},
+    "evidencePromotionPerformed": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/action-runtime-contract-v1.json"},
+    "navigationExecutionAuthority": {"const": "JR_RNE_EXISTING_RUNTIME"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "actionDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

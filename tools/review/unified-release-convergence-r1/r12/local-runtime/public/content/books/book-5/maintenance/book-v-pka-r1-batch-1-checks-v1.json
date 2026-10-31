@@ -1,0 +1,45 @@
+{
+  "work": "BOOK-V-PKA-R1",
+  "batch": 1,
+  "scope": [
+    "W0",
+    "W1"
+  ],
+  "baselineHead": "8fa4a9111e5cbcc6583c1905545d4a352c13e982",
+  "checks": [
+    {
+      "command": "node scripts/check-book-v-pka-r1.mjs",
+      "status": "PASS",
+      "scope": "SOURCE_AND_CANDIDATE_MAPPING_ONLY"
+    },
+    {
+      "command": "npm run check:book-v-atlas:r1:m1:current",
+      "status": "PASS",
+      "evidenceLog": ".tmp/book-v-pka-r1-atlas-check.log"
+    },
+    {
+      "command": "node scripts/check-customer-publication-sitemap.mjs",
+      "status": "FAIL",
+      "reason": "Existing staticRoutes helper omits the active eight-volume /books/reality-configuration/ route already present in sitemap.xml.",
+      "evidence": "docs/customer-activation-r1/sitemap-diff.json",
+      "introducedByThisBatch": false
+    },
+    {
+      "command": "npm run check",
+      "status": "FAIL",
+      "failureClass": "ENVIRONMENT",
+      "reason": "Initial sandbox runs could not launch Git. An authorized execution outside the sandbox progressed through repository checks, then nested check:cx-r1 failed because npm was not recognized by the child shell.",
+      "evidenceLog": ".tmp/book-v-pka-r1-npm-check.log",
+      "fullSuiteCompleted": false
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASS"
+    }
+  ],
+  "browser": "NOT_RUN",
+  "remoteR2Validation": "NOT_RUN",
+  "humanDecision": "PENDING_HUMAN_REVIEW",
+  "productionAdmission": "NOT_RUN",
+  "nextBatch": "W2–W5: editorial bodies, semantic parity, shared Article routes and Book reading index"
+}

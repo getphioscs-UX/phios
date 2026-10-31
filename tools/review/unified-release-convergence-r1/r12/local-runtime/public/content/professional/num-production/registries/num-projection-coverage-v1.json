@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-NUM-PROJECTION-COVERAGE-v1.0.0",
+  "work": "NUMA-W3",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "PRODUCTION_SCOPE_COVERED",
+  "canonicalProjection": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+  "calculatedRoles": {
+    "values": [
+      "LIFE_PATH",
+      "BIRTHDAY_NUMBER",
+      "ATTITUDE_NUMBER",
+      "BIRTH_YEAR_NUMBER",
+      "BIRTH_MONTH_NUMBER",
+      "BIRTH_DAY_NUMBER"
+    ],
+    "structures": [
+      "NUMBER_FACTS",
+      "DIGIT_FREQUENCY",
+      "MASTER_NUMBER_STATE"
+    ],
+    "cycles": [
+      "UNIVERSAL_YEAR",
+      "PERSONAL_YEAR",
+      "PERSONAL_MONTH",
+      "PERSONAL_DAY",
+      "PINNACLE_CYCLE",
+      "CHALLENGE_CYCLE"
+    ]
+  },
+  "semanticCoverage": {
+    "meaningRequiredRoles": [
+      "LIFE_PATH",
+      "BIRTHDAY_NUMBER",
+      "ATTITUDE_NUMBER",
+      "BIRTH_YEAR_NUMBER",
+      "BIRTH_MONTH_NUMBER",
+      "BIRTH_DAY_NUMBER",
+      "UNIVERSAL_YEAR",
+      "PERSONAL_YEAR",
+      "PERSONAL_MONTH",
+      "PERSONAL_DAY",
+      "PINNACLE_CYCLE",
+      "CHALLENGE_CYCLE"
+    ],
+    "calculatedFactOnlyRoles": [
+      "NUMBER_FACTS",
+      "DIGIT_FREQUENCY",
+      "MASTER_NUMBER_STATE"
+    ],
+    "governedNoMeaningStates": [
+      "CHALLENGE_CYCLE_VALUE_0"
+    ]
+  },
+  "rules": {
+    "runtimeCalculatedFieldMayNotDisappearSilently": true,
+    "calculatedFactDoesNotRequireInventedMeaning": true
+  }
+}

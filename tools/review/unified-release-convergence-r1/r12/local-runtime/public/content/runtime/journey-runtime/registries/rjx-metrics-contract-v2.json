@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "PHI-OS-RJX-METRICS-CONTRACT-v2.0.0",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "OPERATIONAL_DEFINITIONS_READY_PRODUCTION_VALUES_NOT_FABRICATED",
+  "predecessor": {
+    "path": "content/runtime/journey-runtime/registries/rjx-metrics-contract-v1.json",
+    "sha256": "41b52504d27adb31ce1abf599dcb5b39f7f221bbd10c4e7727302ab35db972bd",
+    "rewritten": false
+  },
+  "measurementBoundary": {
+    "productionTelemetryRequiredForValues": true,
+    "syntheticProductionValuesAllowed": false,
+    "candidateFixturesMayValidateSemanticsButNotProductionRates": true,
+    "privacySafeAggregationRequired": true,
+    "caseContentInMetricsPayloadAllowed": false
+  },
+  "productMetrics": [
+    {
+      "name": "journeyEligibilityRate",
+      "definition": "eligible Reality Journey requests / governed requests",
+      "source": "reality_request_route_decision",
+      "productionValue": null
+    },
+    {
+      "name": "simpleCaseRate",
+      "definition": "SIMPLE_REALITY_CASE requests / governed Reality case requests",
+      "source": "reality_request_route_decision",
+      "productionValue": null
+    },
+    {
+      "name": "complexCaseRate",
+      "definition": "COMPLEX_REALITY_CASE requests / governed Reality case requests",
+      "source": "reality_request_route_decision",
+      "productionValue": null
+    },
+    {
+      "name": "firstMeaningfulResultLatency",
+      "definition": "duration from governed intake acceptance to first rule-only meaningful result",
+      "source": "journey_stage_transition",
+      "productionValue": null
+    },
+    {
+      "name": "UnderstandCompletionRate",
+      "definition": "Understand completions / Understand starts",
+      "source": "journey_stage_transition",
+      "productionValue": null
+    },
+    {
+      "name": "ChooseCompletionRate",
+      "definition": "Choose completions / Choose starts",
+      "source": "journey_stage_transition",
+      "productionValue": null
+    },
+    {
+      "name": "ReviewReturnRate",
+      "definition": "cases returning to Review / eligible actioned cases",
+      "source": "journey_review_recorded",
+      "productionValue": null
+    },
+    {
+      "name": "RealityNextCreationRate",
+      "definition": "Reality vNext creations / completed Reviews",
+      "source": "reality_version_created",
+      "productionValue": null
+    },
+    {
+      "name": "professionalHandoffRate",
+      "definition": "governed professional handoffs / Reality cases",
+      "source": "professional_handoff_created",
+      "productionValue": null
+    }
+  ],
+  "ruleMetrics": [
+    {
+      "name": "ruleCoverageRate",
+      "definition": "case-relevant human-accepted active rule bindings / eligible case predicates",
+      "source": "rule_evaluation",
+      "productionValue": null
+    },
+    {
+      "name": "ruleOnlyCompletionRate",
+      "definition": "completed journeys with zero model requests / completed journeys",
+      "source": "journey_completion",
+      "productionValue": null
+    },
+    {
+      "name": "unknownPreservationRate",
+      "definition": "unresolved Unknowns preserved / unresolved Unknowns encountered",
+      "source": "unknown_state",
+      "productionValue": null
+    },
+    {
+      "name": "counterEvidenceRetentionRate",
+      "definition": "counter-evidence retained / counter-evidence encountered",
+      "source": "reading_trace",
+      "productionValue": null
+    },
+    {
+      "name": "nodeRuleTraceabilityRate",
+      "definition": "active rule outputs with sourceNodeCodes / active rule outputs",
+      "source": "reading_trace",
+      "productionValue": null
+    },
+    {
+      "name": "humanOverrideRate",
+      "definition": "human overrides / rule recommendations shown",
+      "source": "human_override",
+      "productionValue": null
+    },
+    {
+      "name": "ruleConflictRate",
+      "definition": "rule conflict records / rule evaluations",
+      "source": "rule_evaluation",
+      "productionValue": null
+    }
+  ],
+  "aiCostMetrics": [
+    {
+      "name": "zeroModelRequestRate",
+      "definition": "completed journeys with zero model requests / completed journeys",
+      "source": "provider_usage",
+      "productionValue": null
+    },
+    {
+      "name": "workersAIRequestRate",
+      "definition": "Workers AI requests / completed journeys",
+      "source": "provider_usage",
+      "productionValue": null
+    },
+    {
+      "name": "workersAIAcceptedCandidateRate",
+      "definition": "accepted Workers AI candidates / Workers AI candidates",
+      "source": "provider_candidate_review",
+      "productionValue": null
+    },
+    {
+      "name": "workersAIMeteredCost",
+      "definition": "sum metered Workers AI cost",
+      "source": "provider_usage",
+      "productionValue": null
+    },
+    {
+      "name": "openAIRequestRate",
+      "definition": "OpenAI requests / completed journeys",
+      "source": "provider_usage",
+      "productionValue": null
+    },
+    {
+      "name": "openAIAcceptedCandidateRate",
+      "definition": "accepted OpenAI candidates / OpenAI candidates",
+      "source": "provider_candidate_review",
+      "productionValue": null
+    },
+    {
+      "name": "openAICost",
+      "definition": "sum metered OpenAI cost",
+      "source": "provider_usage",
+      "productionValue": null
+    },
+    {
+      "name": "providerFallbackRate",
+      "definition": "provider fallbacks to rule engine / provider attempts",
+      "source": "provider_usage",
+      "productionValue": null
+    },
+    {
+      "name": "providerValidationFailureRate",
+      "definition": "provider validation failures / provider candidate responses",
+      "source": "provider_candidate_validation",
+      "productionValue": null
+    },
+    {
+      "name": "costPerCompletedJourney",
+      "definition": "total metered provider cost / completed journeys",
+      "source": "provider_usage_and_journey_completion",
+      "productionValue": null
+    }
+  ],
+  "safetyMetrics": [
+    {
+      "name": "observedEvidenceMutationCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "unknownFillCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "methodObservedMutationCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "HDRLeakCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "professionalBoundaryViolationCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "silentVersionOverwriteCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "untraceableReadingClaimCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    },
+    {
+      "name": "automaticIrreversibleActionCount",
+      "target": 0,
+      "productionValue": null,
+      "zeroIsRequired": true
+    }
+  ],
+  "providerUsageLedgerSchema": "content/provider/schemas/provider-usage-ledger-v1.schema.json",
+  "journeyEventRegistry": "content/runtime/journey-runtime/registries/journey-event-type-registry-v1.json"
+}

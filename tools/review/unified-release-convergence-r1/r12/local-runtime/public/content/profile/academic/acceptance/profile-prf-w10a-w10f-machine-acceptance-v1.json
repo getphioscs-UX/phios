@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-PRF-W10A-W10F-MACHINE-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "scope": [
+    "PRF-W10A",
+    "PRF-W10B",
+    "PRF-W10C",
+    "PRF-W10D",
+    "PRF-W10E",
+    "PRF-W10F"
+  ],
+  "status": "MACHINE_VERIFIED",
+  "expected": {
+    "ipip50Items": 50,
+    "ipipNeo120Items": 120,
+    "reasoningItems": 25,
+    "reasoningFamilies": 5,
+    "onetForms": [
+      30,
+      60
+    ],
+    "onetExternalScoring": true,
+    "financialAdaptedItems": 16,
+    "sourceClassesPreserved": true,
+    "allFourActivationLanesAvailableOrConfigurable": true
+  },
+  "customerPublication": {
+    "allowed": false,
+    "reason": "PRF-W11 progressive UX and PRF-W12 machine/human acceptance + freeze remain required.",
+    "nextRequiredGate": "PRF-W11_W12"
+  },
+  "gate": "check:profile:w10a-w10f"
+}

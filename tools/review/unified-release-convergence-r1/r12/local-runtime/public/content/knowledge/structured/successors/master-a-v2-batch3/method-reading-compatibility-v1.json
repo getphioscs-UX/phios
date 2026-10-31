@@ -1,0 +1,36 @@
+{
+  "status": "PENDING_HUMAN_REVIEW",
+  "canonicalNodeRefs": [
+    "KN-B7-14-065",
+    "KN-B7-14-066",
+    "KN-B7-14-071",
+    "KN-B7-14-072"
+  ],
+  "layers": [
+    {
+      "kind": "method calculation",
+      "output": "structured result",
+      "evidenceClass": null
+    },
+    {
+      "kind": "method interpretation",
+      "output": "interpreted reading",
+      "signalKind": "INTERPRETED",
+      "evidenceClass": null
+    },
+    {
+      "kind": "real-world observation",
+      "output": "evidence candidate",
+      "evaluationRequired": true
+    }
+  ],
+  "invariants": [
+    "CALCULATION != INTERPRETATION",
+    "INTERPRETATION != EVIDENCE",
+    "INTERPRETATION != PERSONAL_REALITY_FACT",
+    "MODEL_OUTPUT != EVIDENCE",
+    "MODEL_CONVERGENCE != INDEPENDENT_EVIDENCE"
+  ],
+  "modelOutputUniversalEvidenceClassCreated": false,
+  "methodTeachingAdded": false
+}

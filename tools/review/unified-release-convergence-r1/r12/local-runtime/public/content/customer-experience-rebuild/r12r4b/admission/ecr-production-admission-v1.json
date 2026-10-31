@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-R5-ECR-PRODUCTION-ADMISSION-v1.0.0",
+  "work": "CX-R12R4B-R5-W33R",
+  "baselineCommit": "850b382f363a83e2968b16db7942da6af9432377",
+  "status": "ECR_PRODUCTION_COMPOSITION_ADMITTED",
+  "methodAdmission": {
+    "ECR": {
+      "acceptedCases": 48,
+      "requiredCases": 48,
+      "humanReviewed": true,
+      "compositionCustomerPublishable": true,
+      "acceptanceBasis": "ADMITTED_COMPOSITION_RULESET"
+    }
+  },
+  "evidence": {
+    "machineCampaignRef": "content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json",
+    "machineCampaignSha256": "3348c6f3d4b734b183c4604428a5dc9ccbba57035dbfb8b62fb4d6fbdedad75a",
+    "machineCaseCount": 64,
+    "humanReviewCasesRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-cases-v1.json",
+    "humanReviewCasesSha256": "b0c429eac11ef1b0b4b64633929a9bb4d63e3cc0385e97f69ca0e1aad4047be7",
+    "humanReviewResultsRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json",
+    "humanReviewResultsSha256": "68abdc5873db6a504b10a0c3a93b8ed87f7d9bf2c2ea0d1e97b49354f4b3ec0d",
+    "humanAcceptedCaseCount": 48,
+    "d11EarthDeltaAcceptanceRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-r4-d11-earth-delta-owner-acceptance-v1.json",
+    "d11EarthDeltaAcceptanceSha256": "a0b6ccb4bccec18b7271f6561923b73eecb1d0ef71124335e9a6f255a5e83dbc",
+    "meaningAuthorityRef": "content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json",
+    "meaningAuthoritySha256": "8e72e457162352f0b0b3fda983b114997a4d70c32b5bc566b1d3a2004272bd52",
+    "atomicMeaningCount": 145,
+    "calculationAuthorityRef": "content/embodied-configuration/ecr-calculation-spec-v1.json",
+    "calculationAuthoritySha256": "98ce791c9a0f459b6b16d3a31f73bca70f20834ab381ae7ea5d94188ebf7db44"
+  },
+  "composition": {
+    "sharedRuntimeVersion": "2.0.0",
+    "compositionRuleVersion": "CX-R12R3B-COMPOSITION-RULES-v1.0.0",
+    "ecrRuleRefs": [
+      "CX-COMP-ECR-CONTEXT-GRAMMAR-QUESTION-v1",
+      "CX-COMP-ECR-QUESTION-CAPABILITY-v1",
+      "CX-COMP-ECR-DRIVER-PRIORITY-v1",
+      "CX-COMP-ECR-MOTION-CONFIGURATION-v1",
+      "CX-COMP-ECR-CONFIGURATION-ACTIVATION-v1"
+    ]
+  },
+  "boundaries": {
+    "calculationAuthorityChanged": false,
+    "atomicMeaningAuthorityChanged": false,
+    "compositionRulesChangedByAdmission": false,
+    "admissionCreatesNewMeaning": false,
+    "liveCustomerHumanReviewClaimed": false,
+    "currentRealityAssumed": false,
+    "humanDesignAuthorityConsumed": false,
+    "xpfExternalProfileConsumed": false,
+    "crossPerspectiveCompositionStarted": false,
+    "rendererCreatesMeaning": false,
+    "aiCreatesMeaning": false
+  },
+  "successor": {
+    "d11Identity": "Earth",
+    "d11CanonicalRole": "Embodiment",
+    "retiredPredecessorIdentity": "Chiron",
+    "retiredPredecessorMeaning": "Recovery",
+    "deltaAcceptanceRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-r4-d11-earth-delta-owner-acceptance-v1.json"
+  },
+  "publication": {
+    "publicationAllowed": true,
+    "customerPublishable": true,
+    "methodId": "ECR",
+    "publicMethodCode": "EMBODIED_CONFIGURATION_PROJECTION"
+  }
+}

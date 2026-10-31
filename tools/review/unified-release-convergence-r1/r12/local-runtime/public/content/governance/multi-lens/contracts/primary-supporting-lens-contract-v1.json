@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-PRIMARY-SUPPORTING-LENS-CONTRACT-v1.0.0",
+  "work": "ML-W1",
+  "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+  "status": "FROZEN_ROLE_SEMANTICS_ROUTER_NOT_YET_ACTIVATED",
+  "roleEnum": [
+    "PRIMARY",
+    "SUPPORTING",
+    "CONTEXTUAL",
+    "NOT_APPLICABLE"
+  ],
+  "definitions": {
+    "PRIMARY": "The lens whose canonical responsibility most directly matches the dimension currently being examined.",
+    "SUPPORTING": "A lens that adds a different bounded dimension without overriding the primary lens.",
+    "CONTEXTUAL": "A lens that may provide background but must not lead the answer.",
+    "NOT_APPLICABLE": "The lens is outside the bounded question dimension or its required capability is unavailable."
+  },
+  "rules": {
+    "primaryIsTruthAuthority": false,
+    "supportingIsValidationVote": false,
+    "contextualMayOverridePrimary": false,
+    "roleAssignmentMayCreateMissingCapability": false,
+    "roleAssignmentMaySubstituteNatalForDeferredDynamicRuntime": false,
+    "realityEvidenceRemainsFinalAuthority": true,
+    "questionRoutingActivatedByThisContract": false,
+    "futureRouterOwner": "LRR_W0_W3"
+  },
+  "capabilityExamples": [
+    {
+      "questionDimension": "FUNCTIONAL_STRUCTURE",
+      "eligiblePrimaryLens": "FUNCTION",
+      "note": "AST natal structure may serve this dimension."
+    },
+    {
+      "questionDimension": "LONG_RANGE_TIME_STRUCTURE",
+      "eligiblePrimaryLens": "TIME",
+      "note": "BZR owns the temporal role; full BZR Temporal v2 remains a separate future capability."
+    },
+    {
+      "questionDimension": "LIFE_DOMAIN_STRUCTURE",
+      "eligiblePrimaryLens": "DOMAIN",
+      "note": "Zi Wei natal domain topology may serve this dimension."
+    },
+    {
+      "questionDimension": "OPERATING_AND_DECISION_PROCESS",
+      "eligiblePrimaryLens": "OPERATION",
+      "note": "HDR is internal/restricted until HDR2 access and public-rights gates are separately activated."
+    },
+    {
+      "questionDimension": "CYCLE_RHYTHM",
+      "eligiblePrimaryLens": "RHYTHM",
+      "note": "NUM may describe rhythm but cannot become event-prediction authority."
+    }
+  ]
+}

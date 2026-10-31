@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-VFR-R1-VISUAL-FIRST-REPORT-CONTRACT-v1",
+  "work": "PHI-OS-VFR-R1",
+  "status": "PRE_LIVE_SHARED_CORE",
+  "methods": [
+    "BZR",
+    "ZWR"
+  ],
+  "product": {
+    "visualFirst": true,
+    "diagramFirst": true,
+    "maxPhysicalPages": 50,
+    "targetPhysicalPagesMin": 40,
+    "targetPhysicalPagesMax": 48,
+    "textRole": "SUPPORTING_INTERPRETATION",
+    "longFormSourceMayExist": true,
+    "longFormSourceIsNotPhysicalComposition": true
+  },
+  "provider": {
+    "budgetUsdPerReport": 1,
+    "firstCallPrecheckCeilingUsd": 0.8,
+    "repairReserveFloorUsd": 0.1,
+    "repairForbiddenAtOrAboveUsd": 0.9,
+    "normalProviderCalls": 1,
+    "absoluteMaxProviderCalls": 2,
+    "aiSemanticVerifierInCustomerHotPath": false,
+    "automaticRetry": false,
+    "perSectionProviderGeneration": false,
+    "providerDiagramGeneration": false,
+    "providerAuthorityCalculation": false,
+    "defaultLiveAllowed": false
+  },
+  "bilingual": {
+    "oneProviderCallForBilingualReport": true,
+    "splitLocaleProviderCallsForbidden": true
+  },
+  "generation": [
+    "DETERMINISTIC_METHOD_AUTHORITY",
+    "COMPACT_AUTHORING_PACK",
+    "ONE_BILINGUAL_PROVIDER_COMPOSITION",
+    "DETERMINISTIC_HARD_GUARD",
+    "DETERMINISTIC_DIAGRAM_DATA",
+    "VISUAL_REPORT_IR",
+    "SHARED_PAGE_COMPOSER",
+    "IMMUTABLE_SNAPSHOT"
+  ],
+  "failClosedOnlyOn": [
+    "INVALID_AUTHORITY_FACT",
+    "UNKNOWN_PROMOTED_TO_FACT",
+    "TIMING_IDENTITY_MISMATCH",
+    "FORBIDDEN_EVENT_CERTAINTY",
+    "REPORT_IR_SCHEMA_INVALID",
+    "PAGE_LIMIT_EXCEEDED",
+    "PROVIDER_BUDGET_EXCEEDED",
+    "DIAGRAM_DATA_MISSING"
+  ],
+  "mustNotFailOn": [
+    "PROSE_STYLE_SLIGHTLY_DIFFERENT",
+    "SEMANTIC_REVIEW_MODEL_DISAGREES",
+    "VERIFIER_PREFERS_MORE_CAUTION"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schemaVersion":"PHI-OS-MPA-W30-MCD4-EXECUTION-SUCCESSOR-v1.0.0",
+  "work":"MPA-W30-SUCCESSOR-MCD-4",
+  "baselineCommit":"655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "status":"ACTIVE_VERSIONED_SUCCESSOR_AUTHORIZING_MCD4_EXECUTION_API_ONLY",
+  "authorityOwner":"MPA",
+  "predecessor":{"path":"content/professional/method-production-activation/successors/mpa-w30-mcd2-adapter-successor-v1.json","sha256":"f7d7ac866a47a7da8edde0f337db1ab18aa1b0825ff1b2bcbfd64db59780f4e8","predecessorMutated":false},
+  "authorizedDrift":[{"path":"functions/api/method-execute.js","predecessorSha256":"a19eca9e907b6da69eb63c35837597dad15a4726eedebfa572dd094e51478821","successorSha256":"3f2b115fd2680b0b38da8829ab273b8069b6109ce40945140afaef6955445878","reason":"MCD-4 upgrades the canonical endpoint from adapter-binding probe to MPA-first governed partial execution while preserving MPA as the sole Production dispatch authority.","authorityExpansion":"NONE_BEYOND_MCD_1_MPA_SUCCESSOR"}],
+  "productionAuthority":{"AST":{"dispatchAllowed":true},"BZR":{"dispatchAllowed":true},"NUM":{"dispatchAllowed":true},"HDR":{"dispatchAllowed":false,"state":"BLOCKED","executionMode":"validation_only"}},
+  "executionBoundary":{"mpaEvaluatedBeforeInput":true,"mpaBlockedMayNotReachCore":true,"coreHistoricalValidationModePreserved":true,"canonicalProjectionDeferredTo":"MCD-5","interpretationAllowed":false,"professionalJudgmentAllowed":false,"hdrProductionInvocationAllowed":false}
+}

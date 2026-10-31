@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-MCD-1-PRODUCTION-METHOD-SELECTION-v1.0.0",
+  "work": "MCD-1",
+  "baselineCommit": "29dc486571862b530c374e61d883e594dad1d27d",
+  "status": "SELECTED_AUTHORITY_RESOLVED_ADAPTER_BINDING_PENDING",
+  "authoritySource": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+  "rules": {
+    "mcdDoesNotGrantAuthority": true,
+    "mpaControlsDispatchAllowed": true,
+    "mcd2RequiredBeforeAnyProductionInvocation": true,
+    "interpretationSeparated": true,
+    "professionalSeparated": true,
+    "hdrCompleteRegistrationRequiredEvenWhenBlocked": true
+  },
+  "methods": [
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "mcdStatus": "SELECTED_PRODUCTION_AUTHORITY_READY",
+      "dispatchAllowedByMpa": true,
+      "productionDispatchActive": false,
+      "adapterBinding": "PENDING_MCD_2",
+      "calculationScope": [
+        "ASTRONOMY_CONTEXT",
+        "PLANET_EPHEMERIS_CORE_10"
+      ],
+      "projectionScope": [
+        "PLANET"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "mcdStatus": "SELECTED_PRODUCTION_AUTHORITY_READY",
+      "dispatchAllowedByMpa": true,
+      "productionDispatchActive": false,
+      "adapterBinding": "PENDING_MCD_2",
+      "calculationScope": [
+        "GOVERNED_BZR_CORE_RUNTIME"
+      ],
+      "projectionScope": [
+        "CANONICAL_BZR_PROJECTION"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "mcdStatus": "SELECTED_PRODUCTION_AUTHORITY_READY",
+      "dispatchAllowedByMpa": true,
+      "productionDispatchActive": false,
+      "adapterBinding": "PENDING_MCD_2",
+      "calculationScope": [
+        "BIRTH_NUMBER",
+        "NUMBER_STRUCTURE",
+        "CYCLE"
+      ],
+      "projectionScope": [
+        "CANONICAL_NUM_PROJECTION"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "mcdStatus": "BLOCKED_VALIDATION_ONLY",
+      "dispatchAllowedByMpa": false,
+      "productionDispatchActive": false,
+      "adapterBinding": "NOT_PRODUCTION_BINDABLE",
+      "calculationScope": [
+        "VALIDATION_ONLY"
+      ],
+      "projectionScope": [
+        "VALIDATION_ONLY"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false,
+      "publicSurfaceIncluded": false
+    }
+  ],
+  "nextWork": "MCD-2",
+  "sourceAttachmentBaseline": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "latestMainCompatibility": {
+    "commit": "29dc486571862b530c374e61d883e594dad1d27d",
+    "precedingCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+    "reconciliation": "SAFE_NON_OVERLAPPING_VAP_L10N_DELTA_PACKAGE_SCRIPTS_MERGED"
+  }
+}

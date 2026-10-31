@@ -1,0 +1,37 @@
+{
+  "contractCode": "PHI-OS-ICR-W8-CASE-VERSIONING-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W8",
+  "status": "contract_complete",
+  "productionStatus": "validation_only",
+  "snapshotSchemaReference": "content/runtime/input-case-runtime/schemas/canonical-case-v1.schema.json",
+  "requestSchemaReference": "content/runtime/input-case-runtime/schemas/case-version-request-v1.schema.json",
+  "versionIdentity": {
+    "stableIdentity": "caseCode",
+    "semanticVersion": "caseVersion",
+    "monotonicSequence": "caseVersionSequence",
+    "contentIdentity": "caseDigest"
+  },
+  "changeTypes": [
+    "STATUS_TRANSITION",
+    "VERIFIED_INPUT_ADDED",
+    "VERIFIED_INPUT_REPLACED",
+    "VERIFIED_INPUT_REMOVED",
+    "GOVERNANCE_REBIND",
+    "CASE_CORRECTION"
+  ],
+  "rules": {
+    "caseIdentityStableAcrossVersions": true,
+    "versionSequenceMustIncreaseByOne": true,
+    "semanticVersionMustIncrease": true,
+    "previousDigestRequiredAfterFirstVersion": true,
+    "revisionTimestampMustIncrease": true,
+    "versionMutationInPlaceForbidden": true,
+    "historyRewriteForbidden": true,
+    "changeReferenceRequired": true,
+    "closedCaseMayBeReopened": false,
+    "providerOrAiMayReviseCase": false,
+    "versioningCreatesRealityVersion": false,
+    "persistentVersionStoreActivated": false
+  }
+}

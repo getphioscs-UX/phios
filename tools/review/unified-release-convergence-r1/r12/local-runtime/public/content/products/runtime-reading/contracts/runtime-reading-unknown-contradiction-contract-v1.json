@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W19-UNKNOWN-CONTRADICTION-ENGINE-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W19",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_FAIL_CLOSED_UNCERTAINTY_COMPOSITION_BOUNDARY",
+  "canonicalStates": [
+    "UNKNOWN",
+    "CONTRADICTION",
+    "INSUFFICIENT_EVIDENCE"
+  ],
+  "reasonCodes": [
+    "METHOD_NOT_INCLUDED",
+    "METHOD_NOT_PRODUCTION_AVAILABLE",
+    "MEANING_UNAVAILABLE",
+    "REQUIRED_INPUT_UNKNOWN",
+    "INSUFFICIENT_REALITY_INPUT",
+    "SOURCE_CONFLICT",
+    "NON_COMPARABLE_EVIDENCE",
+    "AUTHORITY_NOT_ADMITTED"
+  ],
+  "neutralCustomerProjectionExamples": {
+    "METHOD_NOT_INCLUDED": "This method was not included.",
+    "METHOD_NOT_PRODUCTION_AVAILABLE": "This method was not included.",
+    "MEANING_UNAVAILABLE": "A governed interpretation is not available for this evidence."
+  },
+  "contradictionRecordMinimum": [
+    "contradictionId",
+    "sourceReferences",
+    "statementReferences",
+    "classification",
+    "resolutionState"
+  ],
+  "unknownRecordMinimum": [
+    "unknownId",
+    "reasonCode",
+    "sourceReferences",
+    "affectedSectionIds",
+    "resolutionState"
+  ],
+  "rules": {
+    "unknownIsFirstClass": true,
+    "contradictionIsFirstClass": true,
+    "insufficientEvidenceIsFirstClass": true,
+    "unknownMayBeSilentlyRemoved": false,
+    "contradictionMayBeForcedIntoConvergence": false,
+    "missingMethodMayBeBackfilledByLLM": false,
+    "manyUnknownsInvalidateWholeReport": false,
+    "absenceMayBePresentedAsEvidence": false,
+    "unresolvedStateDefaultsTo": "PRESERVE"
+  }
+}

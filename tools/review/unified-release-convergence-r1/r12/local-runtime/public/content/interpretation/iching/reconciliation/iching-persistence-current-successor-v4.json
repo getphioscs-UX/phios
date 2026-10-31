@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-PERSISTENCE-CURRENT-SUCCESSOR-v4.0.0",
+  "work": "ICH-PROD-W30-PERSISTENCE-CURRENT-V4-RECONCILIATION",
+  "baselineCommit": "252cc66eb6902b2752a001e53087dee40ef635cc",
+  "status": "CURRENT_SHARED_CONTEXT_SEMANTICALLY_RECONCILED_AFTER_TAROT_PHASE_M_I_CHING_PERSISTENCE_FAIL_CLOSED",
+  "successorOf": "content/interpretation/iching/reconciliation/iching-persistence-current-successor-v3.json",
+  "historicalPredecessorMutated": false,
+  "reconciliationReason": {
+    "trigger": "SHARED_SYMBOLIC_CONTEXT_WHOLE_FILE_SHA_DRIFT_AFTER_LEGITIMATE_TAROT_PHASE_M_SERVER_AUTHORITY_EVOLUTION",
+    "historicalV3ExpectedSharedContextSha256": "f3389cf8975208d7fe90c009d6fcf2ce99fd4ec961c918da4ae32d49f2e4ff7a",
+    "observedCurrentSharedContextSha256": "30c29a02ccf32f97112cb5f99c84f0da8bad98342dfe008f4ee3fa3cf3324386",
+    "iChingPersistenceSemanticDriftObserved": false,
+    "iChingExecutionAuthoritySemanticDriftObserved": false,
+    "sharedContextOwnership": "MULTI_METHOD_SHARED_SURFACE_NOT_I_CHING_EXCLUSIVE_ARTIFACT"
+  },
+  "sharedContextGovernance": {
+    "path": "functions/api/symbolic-method-context.js",
+    "mode": "SEMANTIC_CONTRACT_ONLY",
+    "wholeFileShaFrozen": false,
+    "observedShaIsEvidenceOnly": true,
+    "requiredSemanticMarkers": [
+      "METHODS=new Set(['I_CHING','TAROT'])",
+      "inspectIChingExecutionAuthority(context)",
+      "symbolicPersistenceProviderState(context)",
+      "verifiedIdentityBound:persistence.verifiedIdentityBound",
+      "persistenceProviderBound:persistence.d1Bound",
+      "saveContractAvailable=access.accountState==='ACCOUNT'&&access.retentionPolicyAccepted&&persistence.providerReady",
+      "automaticPersistence:false",
+      "hiddenPersistentReadingHistory:false",
+      "localBrowserReadingHistory:false"
+    ],
+    "forbiddenSemanticMarkers": [
+      "localStorage",
+      "sessionStorage",
+      "indexedDB"
+    ],
+    "futureUnrelatedSharedMethodEvolutionMayInvalidateIChingPersistenceCurrent": false
+  },
+  "evolutionAuthority": {
+    "path": "content/production/symbolic-method/deployment/tarot-production-runtime-source-manifest-v2.json",
+    "sha256": "b97d2ad04fd4f0bbc935dfccca25309f3216a5a5e2b418cb3c1811a9a22fc63e",
+    "reason": "Tarot Phase M formally evolved the shared symbolic context to dynamic server-gated Tarot authority while preserving the I Ching branch and persistence contract."
+  },
+  "immutablePersistenceArtifacts": [
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+      "sha256": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-envelope-v1.js",
+      "sha256": "ae486a2330c8fddf8bc4bbd6c7d414c1eefe55289e5c5911c4939ba5af6d0fa2"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js",
+      "sha256": "f37a4229050c878dbbc95374f03b9405aa60fee4373eab048513a9481aaaa6f9"
+    },
+    {
+      "path": "functions/api/symbolic-method-save.js",
+      "sha256": "b4b61f820ed83ca6cb96d4eab7b573744c54f0611906b408d742486b5f7672a7"
+    },
+    {
+      "path": "functions/api/symbolic-method-readings.js",
+      "sha256": "f73dc8df6fabd506ebc78300fc15e7295b0210f07837ce8fd84d96598f8f1a97"
+    }
+  ],
+  "accepted": {
+    "sharedIChingTarotContext": true,
+    "verifiedServerIdentityRequired": true,
+    "existingRuntimeDbD1Reused": true,
+    "crossAccountIsolationPreserved": true,
+    "guestPersistenceFailClosed": true,
+    "automaticPersistenceCreated": false,
+    "sharedContextCheckedSemantically": true,
+    "historicalV3WholeFileHashPreservedAsEvidence": true
+  },
+  "productionBoundary": {
+    "persistenceMayGrantExecutionAuthority": false,
+    "humanAcceptanceMayGrantPersistenceAuthority": false,
+    "staticSuccessorMayGrantRunAllowed": false,
+    "publicRunAllowed": false,
+    "limitedProductionActivatedByThisSuccessor": false,
+    "fullProductionActivatedByThisSuccessor": false
+  },
+  "currentChecker": "scripts/check-iching-persistence-current-v4.mjs",
+  "historicalChecker": "scripts/check-iching-persistence-current-v3.mjs",
+  "nextAction": "RUN_CURRENT_V6_CHAIN_THEN_COMPLETE_LIVE_LIMITED_PRODUCTION_V2_AGAINST_EXACT_ACTIVE_DEPLOYMENT_SHA"
+}

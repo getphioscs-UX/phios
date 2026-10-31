@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-READING-IR-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W17",
+  "status": "ENGINEERING_FROZEN",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "purpose": "Assemble the governed W11-W16 Zi Wei interpretation state into one deterministic, renderer-neutral Reading IR. W17 chooses section ownership and preserves evidence/qualification lineage; it does not author the W18 customer report.",
+  "inputSchemas": [
+    "PHI-OS-ZIWEI-FP-W11-MEANING-CONTEXT-v1.0.0",
+    "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+    "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0",
+    "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-CONTRADICTION-RESOLUTION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-SEMANTIC-DEDUP-IR-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-ZIWEI-FULL-READING-IR-v1.0.0",
+  "readingUnitSchema": "PHI-OS-ZIWEI-READING-UNIT-v1.0.0",
+  "requiredSections": [
+    "FOUNDATION",
+    "PALACES",
+    "PATTERNS",
+    "TIMING",
+    "OPEN_QUESTIONS",
+    "EVIDENCE"
+  ],
+  "renderOwnerPolicy": {
+    "oneReadingUnitPerW16SemanticCluster": true,
+    "primaryExplanationOwnsFullExplanation": true,
+    "contextDerivativeMayOnlyAttachContext": true,
+    "referenceOnlyMayNotCreateSeparateReadingBlock": true,
+    "oneFullExplanationPerSemanticCluster": true
+  },
+  "mustPreserve": [
+    "semanticClusterId",
+    "semanticKey",
+    "compositionRef",
+    "resolutionState",
+    "qualifierCodes",
+    "unknownRefs",
+    "counterEvidenceRefs",
+    "findingRefs",
+    "evidenceRefs",
+    "meaningRefs",
+    "authorityRefs",
+    "temporalContext"
+  ],
+  "rules": {
+    "allW16SemanticClustersRepresentedExactlyOnce": true,
+    "allPrimaryRenderOwnersRepresented": true,
+    "contextDerivativeLineagePreservedInsidePrimaryUnit": true,
+    "governedMeaningPayloadMayBeCarriedWithoutRewrite": true,
+    "blockedMeaningUnknownMustRemainVisible": true,
+    "counterEvidenceMustRemainVisible": true,
+    "palaceNetworkMustNotBecomeSecondFullExplanation": true,
+    "patternQualificationMustNotBecomeOutcomePrediction": true,
+    "timingContextMustNotBecomeEventPrediction": true,
+    "rendererMayNotInventMeaning": true,
+    "readingIrMayNotCreateGoodBadScore": true,
+    "readingIrMayNotSelectOverallStrongWeakWinner": true,
+    "readingIrMayNotCreateCustomerNarrative": true
+  },
+  "runtimeRef": "functions/zi-wei-full-production/ziwei-reading-ir-runtime.js",
+  "sectionRegistryRef": "content/professional/zi-wei-full-production/registries/ziwei-reading-section-registry-v1.json",
+  "nextWork": "ZIWEI-FP-W18｜Customer Report Composition",
+  "customerCutoverAllowed": false
+}

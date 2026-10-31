@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PROG-0-CANONICAL-PRODUCTION-CORPUS-v1.0.0",
+  "work": "BFA-PROG-0",
+  "baselineCommit": "51ff68497f70df2bfe0a7869ed84646872bddb70",
+  "status": "ACTIVE_SUCCESSOR_RECONCILIATION",
+  "historicalRegistry": {
+    "path": "content/knowledge/registry/nodes.json",
+    "recordCount": 718,
+    "role": "IMMUTABLE_PRE_BOOK_W1D_HISTORY"
+  },
+  "successorRegistry": {
+    "path": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "recordCount": 931,
+    "status": "HUMAN_APPROVED_ACTIVE_BOOK_W1D_SUCCESSOR",
+    "humanAcceptance": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json"
+  },
+  "accounting": {
+    "historicalRecords": 718,
+    "bookW1DAdmissions": 213,
+    "successorRegistryRecords": 931,
+    "supersededCompatibilityRecords": 13,
+    "deprecatedCompatibilityRecords": 5,
+    "productionActiveArticleNodes": 913,
+    "alreadyPublishedActiveNodes": 13,
+    "remainingPlannedArticleNodes": 900
+  },
+  "productionCorpusRule": {
+    "includeRegistryStatus": [
+      "frozen",
+      "planned"
+    ],
+    "excludeRegistryStatus": [
+      "superseded",
+      "deprecated"
+    ],
+    "primaryAssetTypeRequired": "article",
+    "canonicalRecordCountIsNotProductionCount": true,
+    "productionActiveCount": 913
+  },
+  "authorityBoundary": {
+    "doesNotRewriteHistorical718": true,
+    "doesNotReactivateSupersededOrDeprecated": true,
+    "bookW1DCanonicalAuthorityReused": true,
+    "articleProductionAuthorityCreatedByCorpusMembership": false
+  }
+}

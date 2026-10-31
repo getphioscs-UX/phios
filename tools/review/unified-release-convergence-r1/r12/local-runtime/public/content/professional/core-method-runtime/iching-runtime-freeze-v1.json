@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-RUNTIME-FREEZE-v1.0.0",
+  "phase": "ICH",
+  "work": "ICH-W13",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "I Ching Runtime Frozen v1",
+  "freezeVersion": "1.0.0",
+  "productionStatus": "NOT_ACTIVATED",
+  "executionBoundary": "STRUCTURAL_VALIDATION_ONLY",
+  "sourceNeutral": true,
+  "frozenScope": [
+    {
+      "path": "content/professional/core-method-runtime/iching-identity-reconciliation-v1.json",
+      "sha256": "62b8084f611f5323978211367fa9a4d471ba65f3a771b2551a07a0c61575b36b"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-input-contract-v1.json",
+      "sha256": "c5ef8eac566eb568a8dc8e12cee89f5a6686d3691789d13fd8818d5fcc5e241f"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-input-v1.schema.json",
+      "sha256": "c2d30e29345e61051eb4c6e64b275fa466cb76cc33e1d5133ccf914f47cba861"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-line-model-v1.json",
+      "sha256": "0e014e588d57a2cb9725d3188914dabd14ae4e6a15bbe07977e2d0ef1289fb4e"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-trigram-registry-v1.json",
+      "sha256": "1b9763bd2dc45f871fd07cef8f481325ca94957c44157da18150e63bfedff60f"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-hexagram-registry-v1.json",
+      "sha256": "6d359cadfe5555ce6892b88dc6eb32708fe9b6a43dd74b9c72579c398dc83902"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-transformation-runtime-v1.json",
+      "sha256": "53fff6a6142fecb46661f259a3da90ec0fa8fdc8537849f113f9bd9bd0326ac1"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-calculation-result-v1.schema.json",
+      "sha256": "cf335e503af96d3e9a97330a0303227af41d631d468e8a59c9d736d3166274a5"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-shared-projection-binding-v1.json",
+      "sha256": "89f37bc8975cf9fa6ec7415b5939424f40811a329f29dc49f2a2792a3a300683"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-replay-contract-v1.json",
+      "sha256": "703fe3815d320abdf39dd2ec3f34a0469951f688009eb1b31b3a945c452c9a93"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-source-neutral-runtime-v1.json",
+      "sha256": "ab7f429291aa178265a0894f4953d1fbe65f5e223fd55c7a9aa62fe0043c9178"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-edge-case-fixtures-v1.json",
+      "sha256": "afc4ebaac2e7a2c085e053782dc1ec38b0efad0bdfb860820eb4ce62f70280c8"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-runtime-state-successor-v1.json",
+      "sha256": "546c23895cb801c297b34f4bdee71633c29ca9b78d8e8d1a2b1970887faf31f9"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-runtime-manifest-v1.json",
+      "sha256": "5485fd1d553ab111fcfd77abdcedb20e3c0d4f9e7e925d56997e23b0d1c32230"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-machine-acceptance-v1.json",
+      "sha256": "a8d258e4e5f46dd9a0c88cb7766b5ac498f426bb4164cfd84a02b00c4808f40a"
+    },
+    {
+      "path": "functions/core-method-runtime/iching-runtime.js",
+      "sha256": "9240d91917840cca6f74d3e865a289a9d77d4fb595cea9282893f6289da63ead"
+    },
+    {
+      "path": "functions/core-method-runtime/iching-hexagram-projection-mapper.js",
+      "sha256": "5b6b1e31f86e72ac25b26fcea897f282f9ecd59e230dedfcf7905bd4163a54d9"
+    }
+  ],
+  "completedWorks": [
+    "ICH-W0",
+    "ICH-W1",
+    "ICH-W2",
+    "ICH-W3",
+    "ICH-W4",
+    "ICH-W5",
+    "ICH-W6",
+    "ICH-W7",
+    "ICH-W8",
+    "ICH-W9",
+    "ICH-W10",
+    "ICH-W11",
+    "ICH-W12",
+    "ICH-W13"
+  ],
+  "invariants": {
+    "methodIdentity": "I_CHING",
+    "pluginIdentity": "ICH",
+    "projectionType": "HEXAGRAM",
+    "secondIChingIdentityAllowed": false,
+    "dedicatedIChingProjectionRuntimeAllowed": false,
+    "sharedProjectionRuntimeRequired": true,
+    "systemRandomRerollInsideCalculationAllowed": false,
+    "interpretationInsideCalculationAllowed": false,
+    "sourceTextRequiredForStructuralRuntime": false,
+    "productionActivationGranted": false,
+    "publicActivationGranted": false,
+    "professionalActivationGranted": false
+  },
+  "successorPolicy": {
+    "inPlaceMutationAllowed": false,
+    "futureChangeRequiresVersionedSuccessor": true,
+    "nextPhase": "I_CHING_INTERPRETATION_AND_REALITY"
+  }
+}

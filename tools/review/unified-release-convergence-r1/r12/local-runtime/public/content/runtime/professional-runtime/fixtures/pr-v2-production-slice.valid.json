@@ -1,0 +1,123 @@
+{
+  "case": {
+    "caseId": "PR-CASE-001",
+    "customer": {
+      "customerId": "CUSTOMER-001"
+    },
+    "professional": {
+      "professionalId": "PRO-001"
+    },
+    "scope": [
+      "runtime_review"
+    ],
+    "consent": {
+      "reference": "CONSENT-001",
+      "state": "ACTIVE",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scopes": [
+        "runtime_review"
+      ]
+    },
+    "service": {
+      "serviceId": "SERVICE-PR-001",
+      "purpose": "PROFESSIONAL_SERVICE"
+    },
+    "status": "ACTIVE",
+    "assignmentReference": {
+      "assignmentId": "ASSIGNMENT-001",
+      "state": "active"
+    },
+    "workspaceReference": "WORKSPACE-001",
+    "createdAt": "2026-08-11T06:00:00.000Z"
+  },
+  "capability": {
+    "capabilityAuthority": "runtime/capability",
+    "professionalId": "PRO-001",
+    "state": "ACTIVE",
+    "capabilityCodes": [
+      "CAP-RUNTIME-REVIEW"
+    ],
+    "scope": [
+      "runtime_review"
+    ]
+  },
+  "credential": {
+    "credentialAuthority": "runtime/credential",
+    "professionalId": "PRO-001",
+    "state": "ACTIVE",
+    "credentialCodes": [
+      "CRED-RUNTIME-REVIEW"
+    ]
+  },
+  "evidencePackage": {
+    "packageReference": "PR-EVIDENCE-001",
+    "rawDataReferences": [
+      {
+        "reference": "REALITY-INPUT-001",
+        "dataType": "REALITY_INPUT_RECORD",
+        "authority": "ICR"
+      }
+    ],
+    "realityReferences": [
+      {
+        "reference": "REALITY-STATE-001",
+        "dataType": "RUNTIME_STATE_RECORD",
+        "authority": "RMO"
+      }
+    ],
+    "evidenceReferences": [
+      {
+        "reference": "EVIDENCE-001",
+        "dataType": "REALITY_EVIDENCE_RECORD",
+        "authority": "RRE"
+      }
+    ],
+    "readoutReferences": [
+      {
+        "reference": "READOUT-001",
+        "dataType": "REALITY_READOUT_RECORD",
+        "authority": "RRE"
+      }
+    ],
+    "metricReferences": [
+      {
+        "reference": "METRIC-001",
+        "referenceKind": "GOVERNED_METRIC_REFERENCE",
+        "authority": "METRIC_AUTHORITY"
+      }
+    ],
+    "meaningReferences": [
+      {
+        "reference": "MEANING-001",
+        "dataType": "MEANING_PROJECTION_RECORD",
+        "authority": "CMR"
+      }
+    ],
+    "knowledgeReferences": [
+      {
+        "reference": "KNOWLEDGE-001",
+        "referenceKind": "PUBLISHED_KNOWLEDGE_REFERENCE",
+        "authority": "KNOWLEDGE_AUTHORITY"
+      }
+    ],
+    "journeyReferences": [
+      {
+        "reference": "NAV-001",
+        "dataType": "NAVIGATION_RECORD",
+        "authority": "JR"
+      }
+    ],
+    "unknownReferences": [
+      {
+        "reference": "READOUT-UNKNOWN-001",
+        "dataType": "REALITY_READOUT_RECORD",
+        "authority": "RRE"
+      }
+    ]
+  },
+  "texts": {
+    "observation": "The professional observes a persistent mismatch between stated priority and current allocation pattern.",
+    "judgment": "Within the agreed service scope, the mismatch is material to the present professional review.",
+    "recommendation": "Review the stated priority against the current allocation before making the next bounded decision."
+  }
+}

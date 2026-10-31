@@ -1,0 +1,23 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"PHI-OS-PTRC-W8-FINANCIAL-CALCULATOR-RESULT-v1",
+  "type":"object",
+  "required":["ok","status","calculatorId"],
+  "properties":{
+    "ok":{"type":"boolean"},
+    "status":{"enum":["CALCULATED","NEEDS_INPUT"]},
+    "calculatorId":{"type":"string"},
+    "formulaVersion":{"type":"string"},
+    "asOfDate":{"type":"string"},
+    "currency":{"type":"string"},
+    "jurisdiction":{"type":["string","null"]},
+    "rounding":{"type":"object"},
+    "assumptions":{"type":"array","items":{"type":"string"}},
+    "values":{"type":"object"},
+    "provenance":{"type":"object"},
+    "notices":{"type":"array","items":{"type":"string"}},
+    "missing":{"type":"array","items":{"type":"string"}},
+    "prompt":{"type":"string"}
+  },
+  "additionalProperties":true
+}

@@ -1,0 +1,24 @@
+{
+  "contractCode": "PHI-OS-PR-E6-RR-PROFESSIONAL-APPROVAL-HANDOFF-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extension": "PR-E6",
+  "status": "ACTIVE_REFERENCE_HANDOFF",
+  "targetRuntime": "RR",
+  "targetGate": "RR-W6 Professional Approval / Signature",
+  "requiredSourceStates": [
+    "APPROVED",
+    "SIGNED",
+    "RELEASED"
+  ],
+  "rules": {
+    "prApprovalRequired": true,
+    "signatureRequiredWhenServiceRequiresIt": true,
+    "rrMayCreateProfessionalApproval": false,
+    "prMayCreateReportApproval": false,
+    "prMayCreateReport": false,
+    "handoffIsReferenceOnly": true,
+    "observationJudgmentRecommendationMayBeReferenced": true,
+    "reportAssemblyAuthorityRemainsRr": true
+  }
+}

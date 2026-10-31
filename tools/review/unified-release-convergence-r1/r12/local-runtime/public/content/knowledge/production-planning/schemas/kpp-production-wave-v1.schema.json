@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-production-wave-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "waveCode",
+    "waveVersion",
+    "title",
+    "status",
+    "items",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "waveCode": {
+      "type": "string",
+      "pattern": "^KPP-WAVE-"
+    },
+    "waveVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "approved",
+        "active",
+        "completed",
+        "archived"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nodeCode",
+          "productionRole",
+          "priority",
+          "requiredOutputs"
+        ],
+        "properties": {
+          "nodeCode": {
+            "type": "string",
+            "pattern": "^KN-"
+          },
+          "productionRole": {
+            "enum": [
+              "ARTICLE",
+              "FRAGMENT",
+              "FIGURE",
+              "DIAGRAM",
+              "STRUCTURED_ONLY",
+              "JOURNEY_ONLY",
+              "ACADEMY",
+              "MULTI_ASSET",
+              "NO_PUBLIC_ASSET_REQUIRED",
+              "DEFERRED"
+            ]
+          },
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2",
+              "P3",
+              "DEFERRED"
+            ]
+          },
+          "requiredOutputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

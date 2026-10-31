@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "PHI-OS-PRX-W0-REAL-USER-CAPABILITY-AUDIT-v1.0.0",
+  "work": "PRX-W0",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "AUDITED",
+  "principle": "A capability is not product-ready until a real user can provide input, execute the governed runtime, receive a result, and continue from that result.",
+  "capabilities": {
+    "ASK_PHIOS": {
+      "publicRoute": "/knowledge-search",
+      "inputSurface": "PRESENT",
+      "runtimeBinding": "PRESENT",
+      "resultSurface": "PRESENT",
+      "userAccepted": "NO",
+      "readiness": "PRODUCT_WIRED_BUT_BEHAVIORALLY_BLOCKED",
+      "evidence": [
+        "knowledge-search.html contains question/guided-context forms and loads assets/js/pages/knowledge-search-b.js",
+        "assets/js/pages/knowledge-search-b.js calls askPhios()",
+        "functions/_lib/client-knowledge-ask-b.js resolveCkaAnswerState() converts ungrounded or insufficient coverage to NEEDS_CONTEXT for unguided questions",
+        "This makes general knowledge questions such as relationship-pattern questions liable to be refused when retrieval/grounding is weak, even when the question itself does not require personal context."
+      ],
+      "nextWork": [
+        "PRX-W2 Ask Intent Router",
+        "PRX-W3 Ask Knowledge Answer Recovery",
+        "PRX-W4 Real Question Acceptance Suite"
+      ]
+    },
+    "PERSONAL_RUNTIME": {
+      "canonicalPublicRoute": "/personal-runtime",
+      "px2MarketingRoute": "/professional/personal-runtime/",
+      "inputSurface": "PRESENT_AT_CANONICAL_ROUTE",
+      "runtimeBinding": "PRESENT_AT_CANONICAL_ROUTE",
+      "resultSurface": "PRESENT_AT_CANONICAL_ROUTE",
+      "userAccepted": "PARTIAL_NOT_LIVE_VERIFIED",
+      "readiness": "RUNTIME_AND_PRODUCT_SURFACE_EXIST_BUT_DISCOVERY_IS_BROKEN",
+      "evidence": [
+        "personal-runtime.html contains 1 form, 11 inputs, 5 selects and 8 buttons",
+        "assets/js/pages/personal-runtime.js builds canonical birth input and POSTs governed requests through /api/method-execute",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json declares /personal-runtime and production tabs for Astrology, BaZi and Numeric",
+        "professional/personal-runtime/index.html contains no form/input/select and is presentation-only",
+        "PX2 navigation does not expose /personal-runtime as the primary action, so an existing product surface is hidden behind an explanatory successor page."
+      ],
+      "nextWork": [
+        "PRX-W5 Personal Runtime Input Surface Reconciliation",
+        "PRX-W6 Personal Runtime Execution Binding Live Acceptance",
+        "PRX-W7 Personal Runtime Result Surface Acceptance"
+      ]
+    },
+    "FINANCIAL_RUNTIME": {
+      "publicRoute": "/professional/financial/",
+      "inputSurface": "ABSENT",
+      "runtimeBinding": "BACKEND_ONLY",
+      "resultSurface": "ABSENT_FOR_GENERAL_USER",
+      "userAccepted": "NO",
+      "readiness": "RUNTIME_READY_NOT_PRODUCT_READY",
+      "evidence": [
+        "professional/financial/index.html contains no form/input/select",
+        "functions/professional/financial contains intake, schema, calculation, evidence, assumption, risk and authority modules",
+        "functions/financial contains calculation, analysis, holistic planning and professional review runtimes",
+        "There is no public financial API endpoint or general-user input-to-snapshot surface in this baseline.",
+        "Existing professional-workspace.html exposes professional queue/filter controls, not a general-user financial intake."
+      ],
+      "nextWork": [
+        "PRX-W8 Financial Input Surface",
+        "PRX-W9 Financial Runtime Execution Binding",
+        "PRX-W10 Financial Snapshot Result Surface",
+        "PRX-W11 Scenario Surface"
+      ]
+    },
+    "SEARCH": {
+      "publicRoute": "/search/",
+      "inputSurface": "PRESENT",
+      "runtimeBinding": "PRESENT",
+      "readiness": "PUBLICLY_USABLE_STATIC_KNOWLEDGE_DISCOVERY"
+    },
+    "REALITY": {
+      "publicRoute": "/reality/",
+      "inputSurface": "ABSENT",
+      "runtimeBinding": "PRESENT_ELSEWHERE",
+      "readiness": "PRESENTATION_ONLY_AT_PX2_ROUTE",
+      "nextWork": [
+        "PRX-W12 My Reality Save / Continue"
+      ]
+    }
+  },
+  "detourInventory": {
+    "MODIFY_NOW": [
+      {
+        "path": "assets/js/public-shell-v2.js",
+        "reason": "Financial points to an explanation-only route; Personal Runtime product route is not a first-class action."
+      },
+      {
+        "path": "professional/personal-runtime/index.html",
+        "reason": "Presentation-only duplicate hides the already functional /personal-runtime surface; reconcile or redirect, do not keep as the main runtime entry."
+      },
+      {
+        "path": "personal-runtime.html",
+        "reason": "Preserve functionality but migrate presentation/shell to current public experience and make it discoverable; do not delete."
+      },
+      {
+        "path": "assets/js/pages/personal-runtime.js",
+        "reason": "Preserve execution logic; future work should add user-acceptance instrumentation and simplify product language, not replace the runtime."
+      },
+      {
+        "path": "professional/financial/index.html",
+        "reason": "Currently explanation-only; must become real financial intake/start surface."
+      },
+      {
+        "path": "functions/_lib/client-knowledge-ask-b.js",
+        "reason": "Current answer-state fallback conflates weak grounding with missing personal context; requires intent-aware answer-state routing."
+      },
+      {
+        "path": "assets/js/pages/knowledge-search-b.js",
+        "reason": "UI should distinguish knowledge mode from case mode instead of presenting NEEDS_CONTEXT as a generic failure."
+      },
+      {
+        "path": "knowledge-search.html",
+        "reason": "Keep the surface, simplify state presentation, and expose knowledge-vs-case mode clearly."
+      },
+      {
+        "path": "readings/index.html",
+        "reason": "Currently catalog-only; must provide a direct Create/Run Personal Runtime action and method readiness sourced from execution authority."
+      },
+      {
+        "path": "reality/index.html",
+        "reason": "Currently presentation-only; needs start/continue action bound to actual Reality state."
+      },
+      {
+        "path": "index.html",
+        "reason": "Homepage actions must route to executable product starts, not explanatory pages."
+      }
+    ],
+    "SUCCESSOR_THEN_DELETE_OR_ARCHIVE": [
+      {
+        "path": "assets/css/pxr-public-experience.css",
+        "reason": "No HTML consumer detected; retained by PXR checker lineage only."
+      },
+      {
+        "path": "assets/js/public-experience/pxr-public-experience.js",
+        "reason": "No HTML consumer detected; retained by PXR checker lineage only."
+      },
+      {
+        "path": "assets/css/hpc2-pre-home-visuals.css",
+        "reason": "Historical homepage composition artifact with many checker/freeze references; archive after checker successor, not immediate delete."
+      },
+      {
+        "path": "assets/css/runtime-spine.css",
+        "reason": "Legacy presentation layer still consumed by secondary pages; migrate consumers before deletion."
+      },
+      {
+        "path": "assets/js/pages/runtime-spine-visuals.js",
+        "reason": "Legacy visual layer still consumed by secondary runtime pages; migrate consumers first."
+      },
+      {
+        "path": "assets/css/service-continuity.css",
+        "reason": "Legacy presentation layer still consumed by account/academy/professional pages; migrate first."
+      },
+      {
+        "path": "assets/js/pages/service-continuity-visuals.js",
+        "reason": "Legacy visual layer still consumed by account/academy/professional pages; migrate first."
+      },
+      {
+        "path": "assets/css/client-production-surfaces.css",
+        "reason": "Legacy consolidated presentation still consumed by academy and root personal-runtime page; migrate first."
+      },
+      {
+        "path": "assets/js/pages/client-production-surfaces.js",
+        "reason": "Legacy consolidated presentation still consumed by academy and root personal-runtime page; migrate first."
+      },
+      {
+        "path": "assets/js/pages/knowledge-spine-visuals.js",
+        "reason": "Legacy knowledge visual layer still consumed by figures and five individual book pages; migrate first."
+      },
+      {
+        "path": "assets/js/public-shell.js",
+        "reason": "134 references remain across legacy/secondary surfaces and checkers; cannot delete until secondary public surface migration completes."
+      }
+    ],
+    "KEEP_AS_AUTHORITY_OR_RUNTIME": [
+      "functions/api/method-execute.js",
+      "functions/method-client-delivery/",
+      "functions/core-method-runtime/",
+      "functions/method-runtime/",
+      "functions/professional/financial/",
+      "functions/financial/",
+      "content/professional/method-client-delivery/",
+      "content/knowledge/public/",
+      "content/registry/books.json",
+      "content/registry/parts.json"
+    ],
+    "ARCHIVE_NOT_PRODUCT_COMPOSITION": [
+      "content/web/homepage/hpc2/",
+      "content/web/homepage/hpc2-pre/",
+      "scripts/check-hpc2-*.mjs"
+    ]
+  },
+  "acceptanceModel": {
+    "states": [
+      "ARCHITECTURE_READY",
+      "RUNTIME_READY",
+      "PRODUCT_WIRED",
+      "USER_ACCEPTED"
+    ],
+    "rule": "Only USER_ACCEPTED may be called production-complete from a customer capability perspective."
+  }
+}

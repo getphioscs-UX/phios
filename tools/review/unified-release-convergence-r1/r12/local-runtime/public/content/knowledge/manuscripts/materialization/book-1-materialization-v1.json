@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R1B-MATERIALIZATION-SUMMARY-v1.0.0",
+  "stage": "KAU-R1B",
+  "status": "FULLY_MATERIALIZED",
+  "bookCode": "BOOK-1",
+  "sourceBinary": {
+    "fileName": "PHI-OS-Book-I-v2.pdf",
+    "mediaType": "application/pdf",
+    "byteSize": 122565526,
+    "pageCount": 402,
+    "sha256": "7f7ed51199302b83d5bb5e48224a5f5995123171645e820925508fb31d97174d"
+  },
+  "extraction": {
+    "method": "searchable_pdf_text_layer",
+    "engine": "pdftotext-layout",
+    "ocrUsed": false,
+    "semanticRewrite": false,
+    "pageCount": 402,
+    "emptyTextPages": [],
+    "duplicatePageGroups": [],
+    "corpusCharCount": 485229,
+    "corpusSha256": "37c581f4ffcce1dc47501166b04954cbc7dd6a726dd8ba6e2bad773e59fcafe5",
+    "pageHashChainSha256": "6f999c10fb59bb0c17772eca3134cc65e2d0f32891e039bc1e322530ad8f04ae"
+  },
+  "privateArtifacts": {
+    "publicRepositoryBodyStorageAllowed": false,
+    "r2TargetPrefix": "books/book-1/materialized/v2/",
+    "files": [
+      "pages.ndjson",
+      "full-manuscript.md",
+      "sections/",
+      "materialization-report.json",
+      "section-inventory.json",
+      "section-integrity.json"
+    ]
+  },
+  "integrity": {
+    "sourceBinaryMatchedCompletedRegistry": true,
+    "everyPdfPageMaterialized": true,
+    "searchableTextLayerRequired": true,
+    "fullCorpusDigestFrozen": true
+  }
+}

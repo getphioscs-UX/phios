@@ -1,0 +1,3 @@
+// Presentation-only failure and locale handling; no service or entitlement state.
+const image=document.querySelector('.cx-professional-scene img');
+if(image){const holder=image.closest('figure');image.addEventListener('error',()=>holder.dataset.imageState='failed');image.addEventListener('load',()=>holder.dataset.imageState='loaded');const update=()=>image.alt=document.documentElement.lang.startsWith('zh')?'人们在工作空间共同核对资料的情境示意':'Illustrative scene of people examining documents together';update();new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});}

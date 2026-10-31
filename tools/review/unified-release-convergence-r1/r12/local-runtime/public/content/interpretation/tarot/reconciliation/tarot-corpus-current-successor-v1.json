@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-CORPUS-CURRENT-SUCCESSOR-v1.0.0",
+  "phase": "TPA-E",
+  "work": "TPA-W16-W20",
+  "baselineCommit": "f10a0bc30526b5551ca00ffa9c674f2798d7fd7e",
+  "status": "CANONICAL_CORPUS_FROZEN_TARI_REBIND_DEFERRED",
+  "successorVersion": "1.0.0",
+  "currentAuthority": {
+    "cardRegistry": "content/professional/core-method-runtime/tarot-card-registry-v1.json",
+    "visualCorpus": "content/interpretation/tarot/corpus/tarot-rws-visual-observation-corpus-v1.json",
+    "waiteSourceCorpus": "content/interpretation/tarot/corpus/tarot-waite-source-bound-corpus-v1.json",
+    "reflectiveLens": "content/interpretation/tarot/registries/tarot-reflective-lens-registry-v1.json",
+    "perspectiveRegistry": "content/interpretation/tarot/registries/tarot-interpretation-perspective-registry-v2.json",
+    "noSourceBlending": "content/interpretation/tarot/contracts/tarot-no-source-blending-contract-v1.json",
+    "coverageMatrix": "content/interpretation/tarot/coverage/tarot-corpus-coverage-matrix-v1.json",
+    "freeze": "content/interpretation/tarot/freeze/tarot-corpus-freeze-v1.json",
+    "freezeSha256": "6c8ee89154491f762bf44b0f1e8b645feb6705d466c1379d40d5ecefe6aa9d46"
+  },
+  "preservedPredecessors": {
+    "tariPerspectiveV1": {
+      "path": "content/interpretation/tarot/registries/tarot-interpretation-perspective-registry-v1.json",
+      "sha256": "f212304d2dcd627d01501925871f2a5bc48b58bb02704878462ae9f7048f5c46"
+    },
+    "tariMeaningCorpusV1": {
+      "path": "content/interpretation/tarot/corpus/tarot-minimum-source-bound-corpus-v1.json",
+      "sha256": "39204cad71fa4b2b6840fd0309c555b995729054ddb1c718911bc1ac3d631a0c"
+    },
+    "sourceCorpusSuccessorV1": {
+      "path": "content/interpretation/tarot/reconciliation/tarot-source-corpus-current-successor-v1.json",
+      "sha256": "2ea3d63fffc6690aaa668777d340dc9bab4ac99935f15a9dfca37da50943756a"
+    }
+  },
+  "runtimeBinding": {
+    "tariRuntimeConsumerRebound": false,
+    "existingTariV1MayContinueUsingFrozenPredecessorMeaningCorpus": true,
+    "rebindRequiredAt": "TPA-W21",
+    "newPerspectiveRegistryMayNotBeConsumedBeforeRebind": true
+  },
+  "productionBoundary": {
+    "runAllowedChanged": false,
+    "productionCapabilityPromoted": false,
+    "persistenceActivated": false,
+    "humanAcceptanceClaimed": false,
+    "liveBrowserAcceptanceClaimed": false,
+    "liveProductionShaAlignmentClaimed": false
+  },
+  "nextPhase": "PHASE_F_TARI_SUCCESSOR_TPA_W21_W26"
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/core-method-runtime/zi-wei-calculation-policy-v1.schema.json",
+  "title": "PHI OS Zi Wei Calculation Policy Authority v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "phase",
+    "work",
+    "baselineCommit",
+    "status",
+    "authorityCode",
+    "authorityVersion",
+    "authorityType",
+    "methodCode",
+    "runtimeCode",
+    "policyPurpose",
+    "freezeGate",
+    "humanFreezeRequirements",
+    "requiredPolicies",
+    "invariants",
+    "successorPolicy"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "PHI-OS-ZI-WEI-CALCULATION-POLICY-v1.0.0" },
+    "phase": { "const": "ZWR" },
+    "work": { "const": "ZWR-W2" },
+    "baselineCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "status": { "enum": ["PENDING_HUMAN_FREEZE", "HUMAN_FROZEN"] },
+    "authorityCode": { "const": "ZI_WEI_CALCULATION_POLICY" },
+    "authorityVersion": { "const": "1.0.0" },
+    "authorityType": { "const": "CALCULATION_POLICY_AUTHORITY" },
+    "methodCode": { "const": "ZI_WEI_DOU_SHU" },
+    "runtimeCode": { "const": "ZI_WEI_RUNTIME" },
+    "policyPurpose": { "type": "string", "minLength": 1 },
+    "freezeGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "state",
+        "requiredDecisionCount",
+        "frozenDecisionCount",
+        "allRequiredDecisionsFrozen",
+        "downstreamPolicyConsumptionAllowed",
+        "calculationRuntimeActivationGranted",
+        "productionActivationGranted",
+        "automatedSelectionAllowed",
+        "externalSourceInferenceAllowed",
+        "failClosed"
+      ],
+      "properties": {
+        "mode": { "const": "HUMAN_ONLY" },
+        "state": { "enum": ["BLOCKED_PENDING_HUMAN_FREEZE", "HUMAN_FROZEN"] },
+        "requiredDecisionCount": { "const": 10 },
+        "frozenDecisionCount": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "allRequiredDecisionsFrozen": { "type": "boolean" },
+        "downstreamPolicyConsumptionAllowed": { "type": "boolean" },
+        "calculationRuntimeActivationGranted": { "const": false },
+        "productionActivationGranted": { "const": false },
+        "automatedSelectionAllowed": { "const": false },
+        "externalSourceInferenceAllowed": { "const": false },
+        "failClosed": { "const": true }
+      }
+    },
+    "humanFreezeRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyValueRequired",
+        "rationaleRequired",
+        "evidenceRefsRequired",
+        "approverRequired",
+        "approvedAtRequired",
+        "immutableAfterFreeze",
+        "futureChangeRequiresVersionedSuccessor"
+      ],
+      "properties": {
+        "policyValueRequired": { "const": true },
+        "rationaleRequired": { "const": true },
+        "evidenceRefsRequired": { "const": true },
+        "approverRequired": { "const": true },
+        "approvedAtRequired": { "const": true },
+        "immutableAfterFreeze": { "const": true },
+        "futureChangeRequiresVersionedSuccessor": { "const": true }
+      }
+    },
+    "requiredPolicies": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "policyCode",
+          "label",
+          "humanFreezeRequired",
+          "decisionScope",
+          "status",
+          "decision",
+          "rationale",
+          "evidenceRefs",
+          "approver",
+          "approvedAt",
+          "frozen"
+        ],
+        "properties": {
+          "policyCode": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "humanFreezeRequired": { "const": true },
+          "decisionScope": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["PENDING_HUMAN_FREEZE", "HUMAN_FROZEN"] },
+          "decision": { "type": ["string", "object", "array", "null"] },
+          "rationale": { "type": ["string", "null"] },
+          "evidenceRefs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "approver": { "type": ["string", "null"] },
+          "approvedAt": { "type": ["string", "null"] },
+          "frozen": { "type": "boolean" }
+        }
+      }
+    },
+    "invariants": { "type": "object" },
+    "successorPolicy": { "type": "object" }
+  }
+}

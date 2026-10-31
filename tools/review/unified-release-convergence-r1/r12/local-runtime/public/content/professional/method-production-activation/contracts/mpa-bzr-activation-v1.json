@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-ACTIVATION-CONTRACT-v1.0.0",
+  "work": "MPA-W23",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "method": {
+    "methodCode": "BAZI",
+    "pluginCode": "BZR",
+    "methodVersion": "0.1.0",
+    "successorPath": "MPA_W23_VALIDATED_SUCCESSOR"
+  },
+  "purpose": "Close BZR method-specific activation evidence with corrected true-solar-time semantics, pinned timezone/solar-term authorities, independent sexagenary/reference validation, exact boundary fixtures, and regression evidence without rewriting legacy BZR/MR/IMR/MPA authority or bypassing MPA-W26/W27.",
+  "prerequisites": [
+    "MPA-W0-W22"
+  ],
+  "activationSemantics": {
+    "legacyBzrRuntimeRemainsValidationOnly": true,
+    "successorEvidenceMayReconcileHistoricalSyntheticFixtures": true,
+    "createsProductionEligibility": false,
+    "createsProductionExecutionAuthority": false,
+    "createsProfessionalEligibility": false,
+    "createsPublicEligibility": false,
+    "nextGlobalEligibilityGate": "MPA-W26",
+    "nextProductionExecutionGate": "MPA-W27"
+  },
+  "methodAuthorityBoundary": {
+    "policyAuthority": "PHI_OS_BAZI_POLICY_V1",
+    "preservedPolicies": [
+      "true_solar_time",
+      "exact_li_chun_instant",
+      "exact_twelve_jie_instants",
+      "true_solar_midnight_day_boundary",
+      "unknown_time_three_pillars_only",
+      "year_stem_polarity_plus_traditional_calculation_sex",
+      "next_or_previous_jie_luck_start",
+      "no_rounding_in_engine"
+    ],
+    "mpaMayInventAlternativeBaziPolicies": false
+  },
+  "successorCorrections": {
+    "historicalW12TrueSolarCorrectionIsProductionEvidence": false,
+    "historicalW1SyntheticSolarTermInstantsAreProductionEvidence": false,
+    "trueSolarClockMustBeSeparatedFromPhysicalInstant": true,
+    "luckStartExactRationalMustBePreserved": true
+  },
+  "rules": {
+    "legacyBzrManifestMutationAllowed": false,
+    "historicalW12MutationAllowed": false,
+    "historicalW15MutationAllowed": false,
+    "frozenMrMutationAllowed": false,
+    "frozenImrMutationAllowed": false,
+    "aiCalculationAuthorityAllowed": false,
+    "providerCalculationAuthorityAllowed": false,
+    "productionExecutionBeforeW27Forbidden": true
+  }
+}

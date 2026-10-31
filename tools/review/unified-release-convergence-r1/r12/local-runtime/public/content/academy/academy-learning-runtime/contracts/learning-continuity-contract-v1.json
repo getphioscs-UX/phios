@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-ALR-W30-LEARNING-CONTINUITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W30",
+  "status": "active",
+  "productionStatus": "deterministic_continuity_projection_only",
+  "semanticAuthority": "ALR",
+  "identityPrefix": "ALR-LC-",
+  "requiredEvaluationInputFields": ["continuityCode", "continuityVersion", "previousProgressState", "currentProgressState", "lineagePreserved", "interruptionState", "sourceVersionState"],
+  "interruptionStates": ["UNINTERRUPTED", "INTERRUPTED_RESUMABLE", "INTERRUPTED_REVIEW_REQUIRED", "DISPUTED", "UNKNOWN"],
+  "sourceVersionStates": ["CURRENT", "CHANGED_REVIEW_REQUIRED", "DISPUTED", "UNKNOWN"],
+  "continuityDecisions": ["HOLD_DISPUTED", "HOLD_UNKNOWN", "REVIEW_REQUIRED", "START_AVAILABLE", "RESUME_AVAILABLE", "CONTINUE_AVAILABLE", "COMPLETE_NO_CONTINUATION"],
+  "forbiddenInputFields": ["learnerReference", "subjectReference", "accountReference", "rawResponse", "response", "score", "capabilityState", "credentialState", "entitlementState", "professionalJudgment", "automaticNextLesson", "providerPrompt", "providerResponse", "modelOutput", "persist", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "continuityRequiresRegisteredProgressScope": true,
+    "continuityPreservesPriorProgressLineage": true,
+    "continuityMayNotRewritePriorProgress": true,
+    "sourceVersionChangeRequiresReview": true,
+    "completedProgressCreatesAutomaticNextStep": false,
+    "continuityMayAutoEnrollOrAssignLearning": false,
+    "continuityMaySetCapabilityCredentialEntitlementOrAuthority": false,
+    "continuityEvaluationPersistsLearnerData": false,
+    "unknownDisputedRegressionOrLineageLossFailsClosed": true
+  },
+  "activation": {
+    "continuitySemanticEvaluationActive": true,
+    "continuityPersistenceActive": false,
+    "automaticResumeOrAssignmentActive": false,
+    "learnerDeliveryRuntimeActive": false
+  }
+}

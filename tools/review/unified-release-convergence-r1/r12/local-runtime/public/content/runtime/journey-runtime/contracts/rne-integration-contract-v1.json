@@ -1,0 +1,40 @@
+{
+  "contractCode": "PHI-OS-JR-W11-RNE-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W11",
+  "status": "CONTRACT_READY_RNE_EXECUTION_NOT_ACTIVATED",
+  "separation": {
+    "jr": "WORKFLOW_RUNTIME",
+    "rne": "NAVIGATION_INTELLIGENCE"
+  },
+  "requestEnvelope": [
+    "journeyReference",
+    "realityReference",
+    "readoutReferences",
+    "constraintReferences",
+    "unknownReferences",
+    "customerGoalReference",
+    "dataPurpose",
+    "consentReferences"
+  ],
+  "responseConsumption": [
+    "navigationOptionReferences",
+    "tradeoffReferences",
+    "riskReferences",
+    "reversibilityReferences",
+    "scenarioReferences"
+  ],
+  "rules": {
+    "jrMayCallRneWhenActivated": true,
+    "jrMayImplementRneReasoning": false,
+    "rneMayMutateJourneyStage": false,
+    "rneMayCreateProfessionalJudgment": false,
+    "rneUnavailableFallback": "WORKFLOW_ONLY_NO_NAVIGATION_INTELLIGENCE",
+    "fabricatedRneResponseForbidden": true
+  },
+  "currentBaseline": {
+    "dedicatedRneRuntimeImplementationObserved": false,
+    "executionActivated": false
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-HDR-PROJECTION-RUNTIME-v1.0.0",
+  "stageCode": "HDR-W5",
+  "runtimeCode": "HDR_PROJECTION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "f1b075d38b13bb3138bc2e116f7bc61d9bcfe05e"
+  },
+  "input": {
+    "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+    "algorithmCode": "HDR_BODYGRAPH_STRUCTURE_RESOLUTION",
+    "outputRuntimeCode": "HDR_BODYGRAPH_RUNTIME",
+    "executionMode": "validation",
+    "bodyGraphCreated": true,
+    "projectionCreated": false
+  },
+  "projectionAuthority": {
+    "runtimeCode": "SHARED_PROJECTION_RUNTIME",
+    "canonicalSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "localProjectionSchemaAllowed": false,
+    "localProjectionIdentityAllowed": false,
+    "fullCalculationLineageRequired": true
+  },
+  "projectionTypes": [
+    "GATE",
+    "CHANNEL",
+    "CENTER",
+    "AUTHORITY",
+    "PROFILE"
+  ],
+  "excludedProjectionTypes": {
+    "BODYGRAPH": "Not part of MR Frozen v1 Canonical Projection Type values.",
+    "TYPE": "Represented within CENTER and AUTHORITY projection values; no new canonical type is created.",
+    "DEFINITION": "Represented within CENTER projection value; no new canonical type is created."
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "boundaries": {
+    "createsProjection": true,
+    "createsInterpretation": false,
+    "createsKnowledge": false,
+    "createsRealityConclusion": false,
+    "createsProfessionalConclusion": false,
+    "changesProductionEligibility": false
+  },
+  "nextStage": "HDR-W6"
+}

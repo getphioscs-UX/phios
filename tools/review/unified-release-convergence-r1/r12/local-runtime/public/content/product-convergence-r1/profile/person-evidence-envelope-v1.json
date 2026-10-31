@@ -1,0 +1,52 @@
+{
+  "work": "PHI-OS-PRODUCT-CONVERGENCE-R1",
+  "baselineCommit": "8888f647bd85f21a45397690fb3479de9b339c17",
+  "kind": "PERSON_EVIDENCE_SIGNAL",
+  "sourceClasses": [
+    "SELF_REPORTED",
+    "STANDARDIZED_SELF_REPORT",
+    "MEASURED_TASK",
+    "EXTERNAL_ASSESSMENT",
+    "FINANCIAL_CAPABILITY",
+    "CAREER_INTEREST"
+  ],
+  "fields": [
+    "signalId",
+    "personId",
+    "sourceClass",
+    "provider",
+    "domain",
+    "facet",
+    "observedAt",
+    "assessmentDate",
+    "value",
+    "range",
+    "confidence",
+    "provenance",
+    "limitations",
+    "freshnessState"
+  ],
+  "forbiddenFields": [
+    "masterScore",
+    "overallTruth",
+    "objectivePersonality",
+    "universalRanking"
+  ],
+  "runtime": "functions/profile/profile-person-evidence-adapter.js",
+  "nativeSourceClassPreserved": true,
+  "nativeValuesPreserved": true,
+  "unknownFieldsRemainNull": true,
+  "methodSignalsExcluded": true,
+  "realityFact": false,
+  "consumers": [
+    "functions/api/profile-progressive.js",
+    "functions/profile/personal-evidence-handoffs.js"
+  ],
+  "customerSurface": "/perspectives/profile/",
+  "customerAction": "SELECT_EVIDENCE_FOR_PERSONAL_REALITY",
+  "notAuthorized": [
+    "REALITY_FACT",
+    "PROFESSIONAL_ADVICE",
+    "AUTOMATIC_PERSISTENCE"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "contractCode": "PHI-OS-RNE-W13-NAVIGATION-EFFECTIVENESS-VALIDATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W13",
+  "runtimeCode": "RNE",
+  "status": "VAL_HANDOFF_READY",
+  "validatorRuntime": "VAL",
+  "validationScope": "NAVIGATION_EFFECTIVENESS",
+  "validationRegistry": "content/runtime/reality-navigation-engine/registries/canonical-navigation-validation-check-registry-v1.json",
+  "rdgExtension": "content/governance/reality-data-governance/extensions/rne-navigation/registries/rne-navigation-consumer-read-successor-v1.json",
+  "rules": {
+    "rneMayRequestValidation": true,
+    "rneMayPerformEffectivenessValidation": false,
+    "rneMayClaimSuccess": false,
+    "rneMayClaimCausality": false,
+    "valResultExpectedDataType": "SYSTEM_OPERATION_RECORD",
+    "valResultMayBeBoundByReferenceOnly": true,
+    "productionEffectivenessClaimRequiresValResult": true,
+    "productionExecutionActivated": false
+  }
+}

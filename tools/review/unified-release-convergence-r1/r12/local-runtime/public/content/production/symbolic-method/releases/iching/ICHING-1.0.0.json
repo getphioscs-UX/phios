@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-RELEASE-MANIFEST-v1.0.0",
+  "releaseId": "ICHING-1.0.0",
+  "methodCode": "I_CHING",
+  "baselineCommit": "6b1f2d53cd7a061bbcd2f420d0c9df9d51426250",
+  "status": "SOURCE_FROZEN_FULL_PRODUCTION_PROMOTABLE",
+  "authorityModel": {
+    "singleCurrentPointer": "content/production/symbolic-method/authority/iching-current-authority.json",
+    "singleCurrentChecker": "scripts/check-iching-release-current.mjs",
+    "historicalCurrentVFilesAuditOnly": true,
+    "futureDeploymentDoesNotCreateNewCurrentVersion": true,
+    "newReleaseRequiredForSemanticChangeOnly": true
+  },
+  "acceptedEvidence": {
+    "baseHumanAcceptance": "24/24",
+    "depthHumanAcceptance": "448/448",
+    "hexagrams": "64/64",
+    "lines": "384/384",
+    "bilingualRuntimeCases": "896/896",
+    "w31HistoricalFirstLivePreserved": true,
+    "w32R1Controls": "6/6",
+    "w32R1Execution": "14/14",
+    "w32R1Sensitive": "8/8",
+    "w33FinalLimitedProductionAccepted": true
+  },
+  "productionContract": {
+    "targetState": "FULL_PRODUCTION",
+    "globalPublicExecution": true,
+    "guestPersistenceAllowed": true,
+    "guestPersistenceRequiresExplicitConsent": true,
+    "automaticPersistence": false,
+    "liveAuthorityProvider": "RUNTIME_DB_D1",
+    "exactDeployedCommitRequired": true,
+    "globalRightsAttestationRequiredAtPromotion": true,
+    "operationalEvidencePath": ".runtime-evidence/iching-full-production-live-evidence-v1.json",
+    "operationalEvidenceCommitted": false
+  },
+  "boundaries": {
+    "fortuneTellingAuthority": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "decisionAuthority": "USER",
+    "candidateFallbackAllowed": false,
+    "runtimeModelGapFillAllowed": false
+  },
+  "artifacts": [
+    {
+      "path": "content/production/symbolic-method/acceptance/iching-final-limited-production-acceptance-v1.json",
+      "sha256": "90e1374db4cf592963f2e1cafff7ed254889c00befcd87b67d039358ec09a7f3"
+    },
+    {
+      "path": "content/production/symbolic-method/observation/iching-limited-production-observation-results-v2.json",
+      "sha256": "833858565a906b22b7d5913ab2f5c8b3e85c31b9b2de93f257c4e5f6c6662170"
+    },
+    {
+      "path": "content/production/symbolic-method/acceptance/iching-limited-production-observation-acceptance-v2.json",
+      "sha256": "baf11d2e32c2a15114de2c568646e0fc037e10402c1c75a5c7c2ce291e1e01bc"
+    },
+    {
+      "path": "content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v2.json",
+      "sha256": "cd32a92b8b7b98051d056c2e6d4fac1479db44a8528f931041bd1b164598addd"
+    },
+    {
+      "path": "content/interpretation/iching/corpus/iching-public-domain-canonical-corpus-v2.json",
+      "sha256": "af59615e4aba68a61f680275b7cc8d58a30884699e0b1bd4028eb1cffaa6b1f5"
+    },
+    {
+      "path": "content/interpretation/iching/registries/iching-source-registry-v2.json",
+      "sha256": "0b5e7001dce719d177593264cf64351fb73d8e0c3c4167c3924fe415b7a0cdeb"
+    },
+    {
+      "path": "content/interpretation/iching/registries/iching-interpretation-perspective-registry-v2.json",
+      "sha256": "33bfdf1078f1d45f5c209db2237ba46006ad8e3f1d2c8714b28f6422ceb5bf70"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-hexagram-registry-v1.json",
+      "sha256": "6d359cadfe5555ce6892b88dc6eb32708fe9b6a43dd74b9c72579c398dc83902"
+    },
+    {
+      "path": "functions/iching-product-runtime/iching-product-runtime-v2.js",
+      "sha256": "15bff68db3e0e46d0f9a96ae4571ca68fe53fb9d73469c01c31483a5957ebbaa"
+    },
+    {
+      "path": "functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js",
+      "sha256": "dce0cd4cba1006c8a790b835c03c666f7664ac38cf449ec3e5b6f3c2f308cf9b"
+    },
+    {
+      "path": "functions/symbolic-method-public-ux/iching-product-view-model-v2.js",
+      "sha256": "6457f15db26e80c6a8983d936a833a76329fbce03f4455e64c0cb3a6ac98ba71"
+    },
+    {
+      "path": "functions/iching-full-production/iching-full-production-v1.js",
+      "sha256": "ee61ee656a0a315152290291658638d57807d147e6d7e0f355ac405b23c17a1d"
+    },
+    {
+      "path": "functions/iching-full-production/iching-full-persistence-v1.js",
+      "sha256": "c7c14e30fa943a6826cef0d51c040023e047b9de8b2899c3493a162ada73b64f"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js",
+      "sha256": "c790114cb0fc9fc9ad6794fd90fac3a68e91d1b094bad89d201e5e5626e068a2"
+    },
+    {
+      "path": "functions/api/iching-full-production-status.js",
+      "sha256": "12907e1ec2e1462ffd3d302c57aa9ce995f95e9cd2afb785aba44f26b341069f"
+    },
+    {
+      "path": "functions/api/iching-full-context.js",
+      "sha256": "a421abd64c40edb8a3bf92564a95df4544f42f1320703b61861ca2c1dae91ed3"
+    },
+    {
+      "path": "functions/api/iching-full-execute.js",
+      "sha256": "ba6ecdabd7866b35fb5f71d881d2db5cc2473f0929313b6e1c512d7056d03853"
+    },
+    {
+      "path": "functions/api/iching-full-save.js",
+      "sha256": "ee5d31fbca1ab1a23b4b4dbfa4cc30b0f2fbff04a16c8187da61e1d56779af7a"
+    },
+    {
+      "path": "functions/api/iching-full-readings.js",
+      "sha256": "2eeca6dd4d9de29007d0041cac6cb5f445da8e7b8cec194039d9f6d65e69e2d9"
+    },
+    {
+      "path": "content/production/symbolic-method/contracts/iching-full-production-contract-v1.json",
+      "sha256": "c0efa7688e16fa51d340b68948c85835ddba0d4d04f0990200682c9bd2665b39"
+    },
+    {
+      "path": "content/production/symbolic-method/rights/iching-full-production-rights-scope-v1.json",
+      "sha256": "d5f4de2e58a15975e175d4aeb0ea2bf311f14774bc3075d78f90da0673e2d449"
+    },
+    {
+      "path": "perspectives/iching/run/index.html",
+      "sha256": "993a2f4338abf61c51e426b5a526c30ab2796fc79f1cbc17f2dcf297a8e29887"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/iching-full.js",
+      "sha256": "a3630311a602bbc7c1c52e6db946bed1db12c98ae18288b6fd873c23abaea8c6"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/iching-entry.js",
+      "sha256": "fdee1514387b946d65030f71fbeea9217a8a06f151f4d036b9cc626f9a28c867"
+    },
+    {
+      "path": "scripts/check-iching-full-production-static-v1.mjs",
+      "sha256": "5c32770db9501b220651998e5b0cd129dcc868fbccd2d588312f116a3f3bec79"
+    },
+    {
+      "path": "scripts/promote-iching-full-production.mjs",
+      "sha256": "f3bf422d2de2b306b262ad932b50ab3177e50f073e6e4e2364495376fdcf02c6"
+    },
+    {
+      "path": "scripts/lib/iching/full-production-promotion-v1.mjs",
+      "sha256": "d6fdca10b4eb0c160465cd2fc08aa325d8ddcb7f7487eb943042f07d04c5e529"
+    }
+  ]
+}

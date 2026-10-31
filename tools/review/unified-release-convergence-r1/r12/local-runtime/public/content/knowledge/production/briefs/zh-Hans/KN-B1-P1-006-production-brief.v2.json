@@ -1,0 +1,159 @@
+{
+  "articleBoundary": {
+    "excludedScope": [
+      "不展开具体导航算法、测绘学、控制工程或定位设备原理。",
+      "不进入个人 Reading、诊断、预测或服务建议。"
+    ],
+    "includedScope": [
+      "方向、位置、参照系、坐标比较、状态更新与导航修正。"
+    ],
+    "mustEstablish": [
+      {
+        "label": null,
+        "requirement": "导航同时依赖当前位置、变化方向与共同坐标参照。"
+      },
+      {
+        "label": null,
+        "requirement": "坐标不是附加标签，而是让位置与方向可以重复比较的关系结构。"
+      },
+      {
+        "label": null,
+        "requirement": "导航是持续比较与修正，而不是一次性的目标选择。"
+      }
+    ],
+    "mustNotClaim": [
+      "不得把 PHI OS 的坐标概念等同于 GPS、物理空间或任何单一技术坐标系统。",
+      "不得声称只要拥有坐标就能保证正确决策或确定未来。",
+      "不得从一般导航机制直接推断个人状态或给出专业建议。",
+      "坐标能够消除不确定性。",
+      "导航必然产生唯一正确路径。"
+    ],
+    "requiredDistinctions": [
+      "位置 ≠ 方向",
+      "坐标 ≠ 地理坐标的单一形式",
+      "导航 ≠ 预测未来",
+      "结构分辨率 ≠ 导航本身"
+    ]
+  },
+  "authority": {
+    "approval": "independent_human_approval",
+    "canonicalMeaning": "TL",
+    "localizedIdentity": "KNR-L10N-W1",
+    "publication": "independent_publication",
+    "review": "independent_human_review"
+  },
+  "briefCode": "BRIEF-KN-B1-P1-006-ZH-HANS-V1",
+  "briefDigest": "00b14ad45cb10812505ad4e01cc8e9c2de6eb6dbc84ad80b2807a6ac9b5853cb",
+  "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+  "briefType": "canonical_article_production_brief",
+  "canonicalMeaning": {
+    "canonicalQuestion": "方向、位置与坐标如何共同形成导航",
+    "canonicalTitle": "为什么导航需要方向、位置与坐标",
+    "centralThesis": "导航之所以需要方向、位置与坐标，是因为任何从当前状态走向另一状态的行动，都必须同时知道“现在在哪里”“朝哪里变化”以及“这些差异在什么共同参照中被比较”。",
+    "domainCode": null,
+    "nodeType": "mechanism_question",
+    "relationships": {
+      "childNodeCodes": [],
+      "nextNodeCodes": [
+        "KN-B1-P1-007"
+      ],
+      "parentNodeCodes": [],
+      "prerequisiteNodeCodes": [
+        "KN-B1-P1-005"
+      ],
+      "relatedNodeCodes": []
+    },
+    "themeCode": "TH-BOOK1-P1-01"
+  },
+  "governance": {
+    "approvalInheritanceAllowed": false,
+    "generatedContentAuthority": "candidate_only",
+    "publicationInheritanceAllowed": false,
+    "publishedContentAllowed": false,
+    "registryMutationAllowed": false,
+    "reviewInheritanceAllowed": false
+  },
+  "locale": "zh-Hans",
+  "localizedIdentity": {
+    "displayQuestion": "方向、位置与坐标如何共同形成导航",
+    "localizedSummary": null,
+    "searchAliases": [],
+    "slug": "direction-position-and-coordinates-form-navigation"
+  },
+  "nodeCode": "KN-B1-P1-006",
+  "outputContract": {
+    "allowedCandidateStates": [
+      "draft",
+      "ready_for_human_review",
+      "changes_required"
+    ],
+    "candidateLocale": "zh-Hans",
+    "forbiddenCandidateStates": [
+      "approved",
+      "publication_ready",
+      "published",
+      "human_approved"
+    ],
+    "requiredIndependentApproval": true,
+    "requiredIndependentPublication": true,
+    "requiredIndependentReview": true
+  },
+  "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "sourceSnapshot": {
+    "inputDigest": "363609dea5aed994d35bf5b91dc35709dab6048d2523f4cbb457aaed55e44825",
+    "inputFiles": [
+      "content/knowledge/blueprints/blueprint-registry.json",
+      "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+      "content/knowledge/editorial/readiness/kn-b1-p1-006-production-readiness.json",
+      "content/knowledge/l10n/bilingual-terminology-registry.json",
+      "content/knowledge/l10n/knr-l10n-w1-freeze-v1.json",
+      "content/knowledge/l10n/locale-readiness-gate.json",
+      "content/knowledge/l10n/multilingual-node-projection-registry.json",
+      "content/knowledge/migrations/node-publication-ownership-v2.json",
+      "content/knowledge/registry/localized-content.json",
+      "content/knowledge/registry/nodes.json",
+      "content/knowledge/registry/sources.json",
+      "content/knowledge/registry/supporting-questions.json"
+    ]
+  },
+  "terminologyProjection": {
+    "registryVersion": "1.0.0",
+    "terms": [
+      {
+        "en": "Agency",
+        "key": "agency",
+        "termCode": "TERM-002",
+        "translationLock": true,
+        "zh-Hans": "行动"
+      },
+      {
+        "en": "Continuity",
+        "key": "continuity",
+        "termCode": "TERM-009",
+        "translationLock": true,
+        "zh-Hans": "持续"
+      },
+      {
+        "en": "Coordinate",
+        "key": "coordinate",
+        "termCode": "TERM-010",
+        "translationLock": true,
+        "zh-Hans": "坐标"
+      },
+      {
+        "en": "Difference",
+        "key": "difference",
+        "termCode": "TERM-011",
+        "translationLock": true,
+        "zh-Hans": "差异"
+      },
+      {
+        "en": "Structure",
+        "key": "structure",
+        "termCode": "TERM-039",
+        "translationLock": true,
+        "zh-Hans": "结构"
+      }
+    ]
+  }
+}

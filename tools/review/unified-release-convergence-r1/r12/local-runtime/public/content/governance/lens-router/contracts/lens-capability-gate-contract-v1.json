@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-LRR-LENS-CAPABILITY-GATE-CONTRACT-v1.0.0",
+  "work": "LRR-W3",
+  "status": "FROZEN_V1",
+  "capabilityAuthority": "content/governance/multi-lens/successors/multi-lens-capability-state-registry-v5.json",
+  "rules": {
+    "routeRoleDoesNotEqualCapabilityAvailability": true,
+    "capabilityAvailabilityDoesNotEqualExecutionCompleteness": true,
+    "publicRequestMustUsePublicCapabilityAvailability": true,
+    "internalRequestMustUseInternalCapabilityAvailability": true,
+    "restrictedInternalCannotFallbackToAnotherMethod": true,
+    "notActivatedSubCapabilityFailsClosed": true,
+    "missingExecutionInputsAreReportedAsInputRequirementsNotGlobalCapabilityFailure": true,
+    "relationshipRequiresFutureRelationalRuntime": true,
+    "realityFactBypassesSymbolicMethods": true,
+    "professionalRequiresProfessionalHandoff": true
+  },
+  "routeStates": [
+    "ROUTABLE",
+    "ROUTABLE_INTERNAL_ONLY",
+    "REALITY_EVIDENCE_ONLY",
+    "PROFESSIONAL_HANDOFF_REQUIRED",
+    "REQUIRED_RUNTIME_NOT_ACTIVATED",
+    "BLOCKED_CAPABILITY",
+    "NEEDS_CONTEXT"
+  ],
+  "hdrInternalAllowedAccessClasses": ["GOVERNED_INTERNAL_PROFESSIONAL","GOVERNED_INTERNAL_QA"]
+}

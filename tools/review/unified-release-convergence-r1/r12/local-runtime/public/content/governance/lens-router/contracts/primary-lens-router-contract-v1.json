@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-LRR-PRIMARY-LENS-ROUTER-CONTRACT-v1.0.0",
+  "work": "LRR-W1",
+  "status": "FROZEN_V1",
+  "routes": {
+    "STRUCTURE": {"primary":{"lensCode":"FUNCTION","pluginCode":"AST","subCapability":"NATAL"}},
+    "TIME": {"primary":{"lensCode":"TIME","pluginCode":"BZR","subCapability":"TEMPORAL"}},
+    "CURRENT": {"primary":{"lensCode":"FUNCTION","pluginCode":"AST","subCapability":"CURRENT_DYNAMIC"}},
+    "DOMAIN": {"primary":{"lensCode":"DOMAIN","pluginCode":"ZWR","subCapability":"NATAL"}},
+    "DECISION": {"primary":{"lensCode":"OPERATION","pluginCode":"HDR","subCapability":"OPERATING_READING"},"realityEvidenceRequired":true},
+    "RHYTHM": {"primary":{"lensCode":"RHYTHM","pluginCode":"NUM","subCapability":null}},
+    "RELATIONSHIP": {"primary":null,"routeState":"REQUIRED_RUNTIME_NOT_ACTIVATED","requiredRuntime":"RELATIONAL_RUNTIME"},
+    "REALITY_FACT": {"primary":null,"routeState":"REALITY_EVIDENCE_ONLY"},
+    "PROFESSIONAL": {"primary":null,"routeState":"PROFESSIONAL_HANDOFF_REQUIRED"}
+  },
+  "rules": {
+    "onePrimaryLensMaximum": true,
+    "primaryMeansQuestionResponsibilityNotTruthRank": true,
+    "noMethodVoting": true,
+    "noSilentFallback": true,
+    "noDeferredCapabilityImpersonation": true,
+    "realityEvidenceFinalAuthority": true
+  }
+}

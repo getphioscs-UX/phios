@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-PAI-R1-PROVIDER-COST-REGISTRY-v1.0.0",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "status": "PAI_R1_ENGINEERING_ACTIVE_PILOT_RATE_REVALIDATION_REQUIRED",
+  "currency": "USD",
+  "priceUnit": "ONE_MILLION_TOKENS",
+  "rateAuthority": "PAI_PROVIDER_ECONOMICS_CONFIGURATION",
+  "productionPriceAuthority": false,
+  "planningRatesOnly": true,
+  "models": [
+    {"providerId":"OPENAI","modelId":"gpt-5.6-luna","routingCode":"LUNA","capabilityClass":"LIGHT","inputPricePerMillion":0.25,"cachedInputPricePerMillion":0.025,"outputPricePerMillion":2,"effectiveFrom":"2026-09-10","effectiveTo":null,"source":"PAI_R1_CONSERVATIVE_PLANNING_ASSUMPTION","status":"AVAILABLE","planningCostRank":1},
+    {"providerId":"OPENAI","modelId":"gpt-5.6-terra","routingCode":"TERRA","capabilityClass":"LIGHT","inputPricePerMillion":1.25,"cachedInputPricePerMillion":0.125,"outputPricePerMillion":10,"effectiveFrom":"2026-09-10","effectiveTo":null,"source":"PAI_R1_CONSERVATIVE_PLANNING_ASSUMPTION","status":"AVAILABLE","planningCostRank":2},
+    {"providerId":"OPENAI","modelId":"gpt-5.6-sol","routingCode":"SOL","capabilityClass":"DEEP","inputPricePerMillion":2.5,"cachedInputPricePerMillion":0.25,"outputPricePerMillion":15,"effectiveFrom":"2026-09-10","effectiveTo":null,"source":"PAI_R1_CONSERVATIVE_PLANNING_ASSUMPTION","status":"AVAILABLE","planningCostRank":3},
+    {"providerId":"DEEPSEEK","modelId":"deepseek-v4-flash","routingCode":"DEEPSEEK_V4_FLASH","capabilityClass":"LIGHT","inputPricePerMillion":0.3,"cachedInputPricePerMillion":0.03,"outputPricePerMillion":1.2,"effectiveFrom":"2026-09-10","effectiveTo":null,"source":"PAI_R1_CONSERVATIVE_PLANNING_ASSUMPTION","status":"DEGRADED","planningCostRank":1}
+  ],
+  "availabilityStates": ["AVAILABLE","DEGRADED","DISABLED","UNAVAILABLE"],
+  "invariants": {
+    "t0T1SurviveAllProvidersDisabled": true,
+    "uiMayHardCodeProviderCost": false,
+    "composerMayOwnProviderPricing": false,
+    "ratesMustBeRevalidatedBeforePaidPilot": true
+  }
+}

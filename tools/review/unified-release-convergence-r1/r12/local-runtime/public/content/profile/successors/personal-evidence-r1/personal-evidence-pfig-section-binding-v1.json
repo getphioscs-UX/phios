@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-EVIDENCE-PFIG-SECTION-BINDING-v1.0.0",
+  "work": "PRD-W5",
+  "baselineCommit": "1074926aa590705e22d68d229a0e833d7b0364f6",
+  "status": "ALL_9_PFIG_BOUND_TO_PERSONAL_EVIDENCE_SECTIONS",
+  "projectionContract": "content/product-visual-platform-r1/profile/ir/profile-customer-visual-projection-v1.json",
+  "renderer": "assets/customer-ui/js/visuals/profile-visual-mvp.js",
+  "truthOwner": "PROFILE_PPR",
+  "projectionOwner": "PVP_R1",
+  "consumerRole": "PERSONAL_EVIDENCE_DOSSIER",
+  "bindings": [
+    {
+      "pfig": "PFIG-001",
+      "primarySection": "SEC-01",
+      "role": "Evidence source/dimension overview",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-002",
+      "primarySection": "SEC-07",
+      "role": "Source-native assessment pattern",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-003",
+      "primarySection": "SEC-03",
+      "role": "Observed resources and frictions",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-004",
+      "primarySection": "SEC-09",
+      "role": "Context variation",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-005",
+      "primarySection": "SEC-09",
+      "role": "Cross-source convergence/divergence",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-006",
+      "primarySection": "SEC-06",
+      "role": "Work interest and observed expression",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-007",
+      "primarySection": "SEC-05",
+      "role": "Relationship interaction evidence",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-008",
+      "primarySection": "SEC-04",
+      "role": "Decision evidence",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    },
+    {
+      "pfig": "PFIG-009",
+      "primarySection": "SEC-09",
+      "role": "Personal Evidence → Current Reality bridge",
+      "renderOnceInDossier": true,
+      "authority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json"
+    }
+  ],
+  "nonPfigSections": {
+    "SEC-02": [
+      "sourceLegend",
+      "sourceScopedDimensions",
+      "provenance"
+    ],
+    "SEC-08": [
+      "financialSummary",
+      "externalProfileResults",
+      "sourceScopedFinancialEvidence"
+    ],
+    "SEC-10": [
+      "boundaries",
+      "unknowns",
+      "sourceProvenance",
+      "limitations"
+    ]
+  },
+  "rules": {
+    "everyPfigHasExactlyOnePrimarySection": true,
+    "pfigMayBeCrossReferencedElsewhere": true,
+    "pfigMayNotBeDuplicatedAsFullRendererAcrossSections": true,
+    "missingEvidenceRendersUnknownOrEmpty": true,
+    "noNewMeaningAuthority": true,
+    "noCrossInstrumentMasterScore": true,
+    "noCompatibilityScore": true,
+    "noJobFitVerdict": true,
+    "noFinancialAdvice": true
+  }
+}

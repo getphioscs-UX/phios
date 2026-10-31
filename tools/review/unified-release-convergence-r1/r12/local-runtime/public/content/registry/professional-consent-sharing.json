@@ -1,0 +1,138 @@
+{
+  "id": "phi-os.professional-consent-sharing",
+  "version": "1.0.0",
+  "milestone": "M4A-W3",
+  "status": "consent-contract-ready-persistence-pending",
+  "defaultPolicy": {
+    "allScopesGrantedByDefault": false,
+    "wildcardScopeAllowed": false,
+    "professionalAccessIsOwnership": false,
+    "consentAuthorisesRetention": false,
+    "consentAuthorisesRegulatedAdvice": false,
+    "futureAccessRevocable": true,
+    "auditRecordRetainedAfterRevocation": true
+  },
+  "resourceScopes": [
+    "entry",
+    "reconstruction",
+    "reading",
+    "navigation",
+    "runtime_memory",
+    "uploaded_files",
+    "human_design_chart",
+    "birth_information",
+    "previous_reports"
+  ],
+  "financialDataScopes": [
+    "income",
+    "expenses",
+    "bank_balances",
+    "investments",
+    "properties",
+    "liabilities",
+    "insurance",
+    "tax_information",
+    "retirement_information",
+    "education_information",
+    "estate_information",
+    "uploaded_documents",
+    "previous_financial_reports"
+  ],
+  "humanDesignScopes": [
+    "birth_date",
+    "birth_time",
+    "birth_place",
+    "chart_image",
+    "chart_pdf",
+    "derived_chart_fields",
+    "professional_interpretation"
+  ],
+  "durationOptions": [
+    "one_time",
+    "seven_days",
+    "thirty_days",
+    "ninety_days",
+    "until_service_completion",
+    "custom_date"
+  ],
+  "revocationScopes": [
+    "professional_runtime_access",
+    "financial_data_access",
+    "human_design_chart_access",
+    "uploaded_file_access",
+    "report_sharing",
+    "follow_up_access",
+    "all_professional_access"
+  ],
+  "jointHouseholdRoles": [
+    "main_client",
+    "joint_client",
+    "spouse",
+    "parent",
+    "child",
+    "business_partner",
+    "other_stakeholder"
+  ],
+  "jointHouseholdRules": {
+    "separateAdultConsentRequired": true,
+    "oneSpouseMayAuthoriseOtherAdult": false,
+    "resourceScopesArePerDataSubject": true,
+    "minorRequiresRecordedAuthorityBasis": true
+  },
+  "requiredAcknowledgements": {
+    "general": [
+      "scope_selected",
+      "data_accuracy",
+      "future_access_revocable"
+    ],
+    "humanDesign": [
+      "birth_data_voluntarily_submitted",
+      "birth_time_accuracy_affects_result",
+      "interpretive_not_diagnostic",
+      "future_access_revocation_understood"
+    ],
+    "recommendation": [
+      "information_and_date_basis",
+      "missing_or_incorrect_data_affects_analysis",
+      "projections_use_assumptions",
+      "future_results_not_guaranteed",
+      "client_retains_final_decision",
+      "regulated_professional_may_be_required"
+    ]
+  },
+  "accessEventFields": [
+    "event_id",
+    "professional_id",
+    "client_id",
+    "resource_type",
+    "resource_scope",
+    "access_purpose",
+    "access_time",
+    "access_duration",
+    "consent_id",
+    "service_id",
+    "action",
+    "status"
+  ],
+  "humanDesignAccessActions": [
+    "birth_data_accessed",
+    "chart_viewed",
+    "chart_downloaded",
+    "interpretation_edited",
+    "report_exported"
+  ],
+  "revocationEffects": {
+    "newProfessionalAccessStops": true,
+    "necessaryAuditRecordRemains": true,
+    "copiesFollowDeletionPolicy": true,
+    "lawfullyDeliveredReportAutomaticallyDeleted": false
+  },
+  "implementationBoundary": {
+    "browserConsentUiEnabled": false,
+    "financialIntakeEnabled": false,
+    "sensitiveUploadEnabled": false,
+    "d1PersistenceEnabled": false,
+    "emailSharingEnabled": false,
+    "professionalWorkspaceEnabled": false
+  }
+}

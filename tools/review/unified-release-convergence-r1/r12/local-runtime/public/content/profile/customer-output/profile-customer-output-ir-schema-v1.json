@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-CUSTOMER-OUTPUT-IR-v1.0.0",
+  "owner": "PROFILE_PPR",
+  "status": "PROJECTION_SAFE_SUBSET_SCHEMA",
+  "fields": {
+    "profileOverview": {
+      "type": "object|null",
+      "authority": "CONTAINER_ONLY"
+    },
+    "sourceScopedDimensions": {
+      "type": "array",
+      "authority": "SOURCE_SCOPED_ONLY"
+    },
+    "tensionSignals": {
+      "type": "array",
+      "authority": "ADMITTED_EVIDENCE_ONLY"
+    },
+    "relationshipEvidence": {
+      "type": "object|null",
+      "authority": "EXISTING_RELATIONSHIP_EVIDENCE_ONLY"
+    },
+    "careerInterest": {
+      "type": "object|null",
+      "authority": "EXISTING_CAREER_INTEREST_ONLY"
+    },
+    "contextEvidence": {
+      "type": "object|null",
+      "authority": "CURRENT_REALITY_AND_CROSS_SOURCE_EVIDENCE_ONLY"
+    },
+    "contradictions": {
+      "type": "array",
+      "authority": "SOURCE_SCOPED_ONLY"
+    },
+    "realityQuestions": {
+      "type": "array",
+      "authority": "EXISTING_PROMPTS_ONLY"
+    }
+  },
+  "explicitlyAbsentGenericFields": [
+    "strengthPatterns",
+    "decisionStyle",
+    "relationshipStyle",
+    "workStyle",
+    "stressPattern",
+    "environmentFit",
+    "universalCoreDimensions",
+    "universalProfileScore"
+  ],
+  "rules": {
+    "sourceClassRequired": true,
+    "provenanceMustBePreservedWhereAvailable": true,
+    "crossSourceNormalizationAllowed": false,
+    "syntheticNarrativeAuthority": false,
+    "visualConsumerMayRenameSemantics": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W25-VISUAL-REFERENCE-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W25.2-W25.6",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_SEMANTIC_VISUAL_REFERENCE_BOUNDARY",
+  "canonicalType": "RuntimeReadingVisualReference",
+  "visualRoleRegistry": "content/products/runtime-reading/registries/runtime-reading-visual-role-registry-v1.json",
+  "canonicalVisualAuthority": {
+    "runtime": "CAR",
+    "canonicalAssetContract": "content/professional/canonical-asset-runtime/contracts/canonical-asset-contract-v1.json",
+    "figureDiagramContract": "content/professional/canonical-asset-runtime/contracts/car-figure-diagram-contract-v1.json",
+    "publicationRuntime": "content/professional/canonical-asset-runtime/contracts/car-asset-publication-runtime-v1.json",
+    "mfigBindingRegistry": "content/professional/canonical-asset-runtime/registries/mfig-car-binding-registry-v1.json",
+    "assetMediaRegistry": "content/professional/canonical-asset-runtime/registries/asset-media-registry-v1.json"
+  },
+  "requiredFields": [
+    "visualReferenceId",
+    "sectionId",
+    "visualRole",
+    "visualType",
+    "sourceAuthority",
+    "semanticRequired",
+    "optional",
+    "sourceProjectionReferences",
+    "visualState"
+  ],
+  "optionalFields": [
+    "assetIdentity",
+    "figureIdentity",
+    "captionSemanticCode",
+    "longDescriptionSemanticCode",
+    "sourceKnowledgeReferences"
+  ],
+  "visualTypes": [
+    "CALCULATED_VISUAL",
+    "EXPLANATORY_VISUAL"
+  ],
+  "visualStates": [
+    "AVAILABLE",
+    "UNAVAILABLE",
+    "NOT_REQUIRED"
+  ],
+  "rules": {
+    "allFigureIdentityMustComeFromCARAuthority": true,
+    "calculatedVisualRequiresCanonicalMethodProjection": true,
+    "explanatoryVisualRequiresCARPublicationOrKnowledgeAuthority": true,
+    "carValidationOnlyCannotBeSilentlyPromotedToPublished": true,
+    "missingCalculatedCapabilityCannotDrawCompleteChart": true,
+    "missingVisualState": "UNAVAILABLE",
+    "rrpGeneratesAdHocSvg": false,
+    "rrpHardcodesLocalImage": false,
+    "rrpInventsChartContent": false,
+    "rrpOwnsPlacement": false,
+    "rrpOwnsSizing": false,
+    "rrpOwnsPagination": false
+  },
+  "forbiddenFields": [
+    "position",
+    "width",
+    "height",
+    "page",
+    "column",
+    "mobileOrder",
+    "printScale",
+    "style",
+    "fontSize",
+    "pageBreak",
+    "heroPosition"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W5-QUESTION-NORMALIZATION-POLICY-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W5",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "normalizations": [
+    "UNICODE_NFKC",
+    "TRIM",
+    "COLLAPSE_WHITESPACE",
+    "LOWERCASE_SEARCH_PROJECTION",
+    "KSAR_QUERY_TERMS"
+  ],
+  "nonAuthoritativeHints": [
+    "intent",
+    "questionType",
+    "subject",
+    "timeScope",
+    "containsPersonalContextHint"
+  ],
+  "questionTypes": [
+    "CAUSAL",
+    "HOW",
+    "DEFINITION",
+    "COMPARISON",
+    "OTHER"
+  ],
+  "subjectHints": [
+    "SELF",
+    "GROUP_OR_RELATIONSHIP",
+    "GENERAL"
+  ],
+  "timeScopeHints": [
+    "RECENT",
+    "LONG_TERM",
+    "UNSPECIFIED"
+  ],
+  "rules": {
+    "hintsAreMeaningAuthority": false,
+    "hintsAreRealityEvidence": false,
+    "automaticDomainTruthInferenceAllowed": false,
+    "automaticDiagnosisAllowed": false,
+    "automaticCaseRoutingAllowed": false,
+    "normalizationMayChangeQuestionMeaning": false
+  }
+}

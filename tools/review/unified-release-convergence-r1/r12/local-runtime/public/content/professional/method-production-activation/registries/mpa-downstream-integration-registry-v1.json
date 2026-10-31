@@ -1,0 +1,122 @@
+{
+  "registryCode": "PHI-OS-MPA-W28-DOWNSTREAM-INTEGRATION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "MPA-W28",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "status": "CANONICAL_REFERENCE_ONLY_INTEGRATION",
+  "canonicalFlow": [
+    "METHOD_PROJECTION",
+    "RMO",
+    "RRE",
+    "JR_PR_RNE",
+    "CPR",
+    "WPR"
+  ],
+  "entries": [
+    {
+      "stage": 1,
+      "from": "MPA",
+      "object": "METHOD_PROJECTION_RECORD",
+      "to": "RMO",
+      "authorityReference": "content/runtime/reality-model-runtime/extensions/mpa-method-projection/contracts/rmo-method-projection-reference-integration-v1.json",
+      "dataGovernanceReference": "content/governance/reality-data-governance/extensions/mpa-rmo-method-projection/registries/rmo-method-projection-consumer-read-successor-v1.json",
+      "mode": "REFERENCE_ONLY",
+      "customerReadoutCreated": false
+    },
+    {
+      "stage": 2,
+      "from": "RMO",
+      "object": "RUNTIME_STATE_RECORD / CANONICAL_REALITY_REFERENCE",
+      "to": "RRE",
+      "authorityReference": "content/runtime/reality-readout-engine/contracts/reality-readout-input-contract-v1.json",
+      "mode": "GOVERNED_REFERENCE_INPUT",
+      "customerReadoutCreatedByMpa": false
+    },
+    {
+      "stage": 3,
+      "from": "RRE",
+      "object": "REALITY_READOUT_RECORD",
+      "to": [
+        "JR",
+        "PR",
+        "RNE"
+      ],
+      "authorityReferences": [
+        "content/runtime/journey-runtime/contracts/journey-context-contract-v2.json",
+        "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+        "content/runtime/reality-navigation-engine/contracts/rne-readout-integration-gap-resolution-v1.json"
+      ],
+      "mode": "READOUT_REFERENCE_ONLY"
+    },
+    {
+      "stage": 4,
+      "from": [
+        "JR",
+        "PR",
+        "RNE"
+      ],
+      "object": "GOVERNED_REFERENCE_OR_RELEASED_UPSTREAM_OUTPUT",
+      "to": "CPR",
+      "authorityReferences": [
+        "content/professional/canonical-presentation-runtime/audits/cpr-authority-boundary-v1.json",
+        "content/runtime/reality-readout-engine/contracts/rre-cpr-projection-contract-v1.json"
+      ],
+      "mode": "PRESENTATION_CONSUMPTION_ONLY"
+    },
+    {
+      "stage": 5,
+      "from": "CPR",
+      "object": "CANONICAL_PRESENTATION / COMPOSITION_REFERENCE",
+      "to": "WPR",
+      "authorityReferences": [
+        "content/web-production/registries/wpr-runtime-consumption-registry-v1.json",
+        "content/web-production/freeze/wpr-v1-freeze-v1.json"
+      ],
+      "mode": "WEB_PROJECTION_ONLY"
+    }
+  ],
+  "preservedFrozenAuthorities": {
+    "rdgBase": {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996"
+    },
+    "rmoFreeze": {
+      "reference": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "sha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81"
+    },
+    "rreFreeze": {
+      "reference": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+      "sha256": "4d7c7f4f1d233c5ad149a8fc300cc842a9dfc045a5afc2f9f9247f165a79a92b"
+    },
+    "jrFreeze": {
+      "reference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "sha256": "0f63eb01bd9af5a0ec7b8d912a2cabcd3ef25e67c515a84bbc0a99bc4dc2b47c"
+    },
+    "prFreeze": {
+      "reference": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "sha256": "4563bf9cdd98cb178a8e93809616477c8a31050b3d6c95d2012016bd4c6ad805"
+    },
+    "rneFreeze": {
+      "reference": "content/runtime/reality-navigation-engine/freeze/rne-v1-freeze-v1.json",
+      "sha256": "89003a9ae8b8965a981e7dd0dbbc4754289c6cb1a44d4c620cb2236fe7dbef15"
+    },
+    "cprFreeze": {
+      "reference": "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+      "sha256": "03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60"
+    },
+    "wprFreeze": {
+      "reference": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+      "sha256": "405efc8d15e0c604ca9797267ff405e4fa38591f5b9b2f76a0a230720f980c66"
+    }
+  },
+  "rules": {
+    "noFrozenDownstreamAuthorityRewritten": true,
+    "mpaDoesNotCreateReadout": true,
+    "mpaDoesNotCreateRealityFact": true,
+    "mpaDoesNotCreateProfessionalJudgment": true,
+    "mpaDoesNotChooseJourney": true,
+    "mpaDoesNotChooseNavigation": true,
+    "mpaDoesNotComposePresentation": true,
+    "mpaDoesNotRenderWeb": true
+  }
+}

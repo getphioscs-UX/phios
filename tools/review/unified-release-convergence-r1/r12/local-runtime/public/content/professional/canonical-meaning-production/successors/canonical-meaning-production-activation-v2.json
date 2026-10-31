@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-PRODUCTION-ACTIVATION-v2.0.0",
+  "work": "BZRA-W6/BZRA-W7/BZRA-W8/BZRA-W11",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "ACTIVE_METHOD_SCOPED_PRODUCTION_RUNTIME_NUM_AND_BZR",
+  "predecessor": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+  "predecessorMutated": false,
+  "runtimeOperational": true,
+  "blanketActivationForbidden": true,
+  "authorities": {
+    "admissionRegistry": "content/professional/canonical-meaning-production/registries/canonical-meaning-admission-registry-v1.json",
+    "mappingRegistry": "content/professional/canonical-meaning-production/successors/canonical-method-meaning-mapping-v3.json",
+    "localeRegistry": "content/professional/canonical-meaning-production/successors/canonical-meaning-locale-registry-v2.json"
+  },
+  "methods": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "publicMethodCode": "NUMEROLOGY_PROJECTION",
+      "productionActivated": true,
+      "meaningCoverageComplete": true,
+      "localeCoverageComplete": true,
+      "readingConsumerBound": true,
+      "frontendConsumerBound": true,
+      "acceptancePassed": true,
+      "activationState": "PRODUCTION_ACTIVE"
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "publicMethodCode": "BAZI_PROJECTION",
+      "productionActivated": true,
+      "meaningCoverageComplete": true,
+      "localeCoverageComplete": true,
+      "readingConsumerBound": true,
+      "frontendConsumerBound": true,
+      "acceptancePassed": true,
+      "activationState": "PRODUCTION_ACTIVE_BZRA_V1"
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "publicMethodCode": "ASTROLOGY_PROJECTION",
+      "productionActivated": false,
+      "meaningCoverageComplete": false,
+      "localeCoverageComplete": false,
+      "readingConsumerBound": false,
+      "frontendConsumerBound": false,
+      "acceptancePassed": false,
+      "activationState": "BLOCKED_PENDING_ASTA"
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "publicMethodCode": "PERSONAL_RUNTIME_PROJECTION",
+      "productionActivated": false,
+      "meaningCoverageComplete": false,
+      "localeCoverageComplete": false,
+      "readingConsumerBound": false,
+      "frontendConsumerBound": false,
+      "acceptancePassed": false,
+      "activationState": "BLOCKED_BY_METHOD_AUTHORITY"
+    }
+  ],
+  "rules": {
+    "methodActivationRequired": true,
+    "foundationAdmissionAloneCannotActivate": true,
+    "activationCannotGrantCalculationAuthority": true,
+    "activationCannotGrantProjectionAuthority": true,
+    "activationCannotGrantProfessionalAuthority": true,
+    "bzrCurrentProjectionScopeOnly": true,
+    "bzrDeferredDirectionMeaningDoesNotBlockV1Availability": true
+  }
+}

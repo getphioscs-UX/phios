@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W9-TEMPORAL-SPATIAL-RESOLUTION-v1.0.0",
+  "work": "MPA-W9",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "ACTIVE_GOVERNED_RESOLUTION_CONTRACT_NO_METHOD_CALCULATION",
+  "responsibilities": [
+    "timezone",
+    "historical timezone",
+    "DST",
+    "coordinates",
+    "calendar conversion",
+    "date boundary",
+    "local solar considerations where Method requires"
+  ],
+  "requiredAuthorities": {
+    "timezone": "IANA_TZDB",
+    "coordinates": "GOVERNED_COORDINATE_AUTHORITY",
+    "calendar": "GOVERNED_CALENDAR_AUTHORITY",
+    "trueSolarTime": "SHARED_CALCULATION_RUNTIME_GOVERNED_POLICY"
+  },
+  "canonicalOutputFields": [
+    "resolvedTimezone",
+    "resolvedCoordinates",
+    "resolvedCalendar",
+    "resolvedTrueSolarContext",
+    "utcInstant",
+    "resolutionStatus",
+    "limitations",
+    "policyVersion",
+    "inputDigest",
+    "outputDigest"
+  ],
+  "resolutionStatuses": [
+    "FULLY_RESOLVED",
+    "PARTIAL_DATE_ONLY",
+    "UNRESOLVED"
+  ],
+  "rules": {
+    "historicalTimezoneVersionRequired": true,
+    "dstMustBeExplicitlyResolvedWhenInstantKnown": true,
+    "dateBoundaryPolicyRequired": true,
+    "trueSolarResolutionOnlyWhenMethodPolicyRequires": true,
+    "allAdaptersMustBeDeterministic": true,
+    "aiResolverForbidden": true,
+    "providerAuthorityForbidden": true,
+    "missingRequiredResolutionFailsClosed": true,
+    "unknownTimeMayNotCreateUtcInstant": true,
+    "unknownLocationMayNotCreateCoordinates": true,
+    "currentTimezoneFallbackForbidden": true
+  },
+  "handoff": "MPA-W10_DETERMINISTIC_CALCULATION_CONTRACT"
+}

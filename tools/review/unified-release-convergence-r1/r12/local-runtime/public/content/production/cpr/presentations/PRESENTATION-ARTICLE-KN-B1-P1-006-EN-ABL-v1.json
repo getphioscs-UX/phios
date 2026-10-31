@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-CPR-APS-ARTICLE-PRESENTATION-SUCCESSOR-v1.0.0",
+  "presentationCode": "PRESENTATION-ARTICLE-KN-B1-P1-006-EN-ABL-v1",
+  "presentationVersion": "1.0.0",
+  "work": "ABL-5_CPR_SUCCESSOR_ORCHESTRATION",
+  "status": "active_production_instance",
+  "surface": "WEBSITE",
+  "presentationType": "ARTICLE_PAGE",
+  "renderState": "ready_for_render",
+  "locale": "en",
+  "audience": "CUSTOMER",
+  "inputs": {
+    "publishedArticle": {
+      "authorityRecordCode": "PKA-KN-B1-P1-006-EN",
+      "authorityDigest": "9cefb182986fd3f64ac95777395ba946c32863f57f4b3b82a3637cb6dd624ff7",
+      "publicationCode": "PUBLICATION-APPROVAL-CANDIDATE-KN-B1-P1-006-EN-V1-V1-V1",
+      "publicationDigest": "0a646271d4da3c9f176ccf1385d5221c118573454a2129dff2f12eba0237f0bd",
+      "articleCode": "KA-B1-P1-006-EN-ARTICLE",
+      "nodeCode": "KN-B1-P1-006",
+      "href": "/articles/direction-position-and-coordinates-form-navigation",
+      "version": "1.0.0"
+    },
+    "car": {
+      "required": false,
+      "state": "NOT_REQUIRED_NO_VISUAL_ASSET",
+      "publishedAssetReferences": []
+    }
+  },
+  "composition": [
+    {
+      "ordinal": 1,
+      "componentCode": "ARTICLE_HEADER",
+      "sourceReferences": [
+        "PKA-KN-B1-P1-006-EN"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 2,
+      "componentCode": "ARTICLE_BODY",
+      "sourceReferences": [
+        "KA-B1-P1-006-EN-ARTICLE"
+      ],
+      "bodyInsertions": [],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 3,
+      "componentCode": "SECONDARY_PROVENANCE",
+      "sourceReferences": [
+        "KN-B1-P1-006"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 4,
+      "componentCode": "FOOTER",
+      "sourceReferences": [
+        "PDS_PUBLIC_SHELL"
+      ],
+      "visibility": "VISIBLE"
+    }
+  ],
+  "pdsReferences": {
+    "authority": "PDS",
+    "contracts": [
+      "content/registry/pds-w2-design-token-contract.json",
+      "content/registry/pds-w3-core-component-shell-contract.json",
+      "content/registry/pds-w7-reading-experience.json",
+      "content/registry/pds-w9-knowledge-professional.json"
+    ],
+    "styleReferences": [
+      "assets/css/tokens.css",
+      "assets/css/design/foundation.css",
+      "assets/css/design/typography.css",
+      "assets/css/public-experience.css",
+      "assets/css/knowledge-release.css",
+      "assets/css/article-renderer.css",
+      "assets/css/pds-w9-knowledge-professional.css",
+      "assets/css/wpr-public-production.css"
+    ]
+  },
+  "governance": {
+    "cprDecidesKnowledge": false,
+    "cprDecidesPublication": false,
+    "apsCreatesCarAuthority": false,
+    "carBypassAllowedWhenVisualAssetRequired": false,
+    "articleOnlyNoAssetPathAllowed": true
+  }
+}

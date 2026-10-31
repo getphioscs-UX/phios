@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/production/visual-article/vap-w11-human-publication-decisions-v1.schema.json",
+  "title": "PHI OS VAP-W11 Human Publication Decisions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "work", "batchCode", "locale", "decisionEnvelopeCode", "publicationQueueDigest", "bulkPublicationDecisionAllowed", "oneIndependentDecisionPerNode", "status", "entries"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VAP-W11-HUMAN-PUBLICATION-DECISIONS-v1.0.0"},
+    "work": {"const": "VAP-W11"},
+    "batchCode": {"const": "VAP-ARTICLE-BATCH-001"},
+    "locale": {"const": "zh-Hans"},
+    "decisionEnvelopeCode": {"type": "string"},
+    "publicationQueueDigest": {"pattern": "^sha256:[a-f0-9]{64}$", "type": "string"},
+    "bulkPublicationDecisionAllowed": {"const": false},
+    "oneIndependentDecisionPerNode": {"const": true},
+    "status": {"enum": ["PENDING_HUMAN_PUBLICATION_DECISION", "HUMAN_PUBLICATION_DECISIONS_RECORDED"]},
+    "entries": {
+      "type": "array", "minItems": 6, "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["nodeCode", "decisionCode", "productionArticlePackageCode", "productionArticlePackageDigest", "candidateCode", "candidateDigest", "approvalCode", "approvalDigest", "targetArticleCode", "targetSlug", "decisionState", "decision", "publisherCode", "publisherAuthority", "decidedAt", "summary"]
+      }
+    }
+  }
+}

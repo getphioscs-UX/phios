@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "PHI-OS-HEALTH-K1-SOURCE-REGISTRY-v1.0.0",
+  "work": "HEALTH-K1-W2-W4",
+  "sources": [
+    {
+      "sourceId": "HK1-NHS-HIVES",
+      "authorityId": "NHS_UK",
+      "url": "https://www.nhs.uk/conditions/hives/",
+      "title": "Hives",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:d3dab98beebf994b5017a2ef9ce9b41cda549bd871d66af207f9716db091f1ca",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NHS-ANGIOEDEMA",
+      "authorityId": "NHS_UK",
+      "url": "https://www.nhs.uk/conditions/angioedema/",
+      "title": "Angioedema",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:003244061f666276ce3dc64d6a7c7f6ca030a341b213d85c05ecda3f45ec62f8",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NHS-FOOD-ALLERGY",
+      "authorityId": "NHS_UK",
+      "url": "https://www.nhs.uk/conditions/food-allergy/",
+      "title": "Food allergy",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:f5e7f169753aef7189c1807c27ebbb6ccb4b90d8c87c66c52ec4ac802b43733d",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NHS-ITCHY-SKIN",
+      "authorityId": "NHS_UK",
+      "url": "https://www.nhs.uk/symptoms/itchy-skin/",
+      "title": "Itchy skin",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:9fdb082e47478572aace36b2c60967a808f0c2278d0d6396a647fbfa044af325",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NHS-ANAPHYLAXIS",
+      "authorityId": "NHS_UK",
+      "url": "https://www.nhs.uk/conditions/anaphylaxis/",
+      "title": "Anaphylaxis",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:304b137a4b377f3b6fe1477717289333bd9caf59e903539853e33e07754e92cc",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NHS-DIARRHOEA-VOMITING",
+      "authorityId": "NHS_UK",
+      "url": "https://www.nhs.uk/symptoms/diarrhoea-and-vomiting/",
+      "title": "Diarrhoea and vomiting",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:a74666857a6752f9c6bfa47959b10b950874bc1c0a15d1b66ab53c9591561765",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NIDDK-A1C",
+      "authorityId": "NIH_US",
+      "url": "https://www.niddk.nih.gov/health-information/diagnostic-tests/a1c-test",
+      "title": "The A1C Test & Diabetes",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:1f5cb2d6b0d8fd806e0851ea0d5ddde12eb388db1226ee901e55374b5d1d0634",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NHLBI-CHOLESTEROL",
+      "authorityId": "NIH_US",
+      "url": "https://www.nhlbi.nih.gov/health/blood-cholesterol/diagnosis",
+      "title": "Blood Cholesterol - Diagnosis",
+      "locale": "en",
+      "claimTypes": [
+        "PATIENT_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:848a41323a2a47cb6696ba1c0dddab6b69d4354b430ec58abdc40b87eee75add",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    },
+    {
+      "sourceId": "HK1-NIDDK-EGFR",
+      "authorityId": "NIH_US",
+      "url": "https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/factors-affecting-egfr-accuracy/clinical-measurements",
+      "title": "Clinical Measurements & eGFR Accuracy",
+      "locale": "en",
+      "claimTypes": [
+        "RESEARCH_INFORMATION"
+      ],
+      "curatedReferenceDigest": "sha256:6886bd91da32b63615357b63c35a3eaa9409ab8fdbf988d6377addcbe71d4931",
+      "sourceAdmissionState": "LIVE_RETRIEVAL_REQUIRED",
+      "rawSourceContentDigestBundled": false
+    }
+  ],
+  "rules": [
+    "APPROVED_PUBLISHER_DOES_NOT_EQUAL_SOURCE_ADMISSION",
+    "CURATED_REFERENCE_DIGEST_DOES_NOT_EQUAL_RAW_SOURCE_CONTENT_DIGEST",
+    "LIVE_RETRIEVAL_MUST_PRODUCE_HRX_ADMISSION_RECORD_BEFORE_FACTUAL_EXECUTION"
+  ]
+}

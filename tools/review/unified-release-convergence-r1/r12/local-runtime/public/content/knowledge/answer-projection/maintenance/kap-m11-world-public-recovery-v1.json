@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-KAP-MAINTENANCE-SUCCESSOR-v2.0.0",
+  "work": "KAP-M11-WORLD-PUBLIC-RECOVERY",
+  "status": "MAINTENANCE_RECONCILIATION",
+  "changes": [
+    {
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "predecessorSha256": "3af85a3f2f9038f64c307a834efc3067610fd8eeb2dae707a8dc95ff7dd38ab5",
+      "successorSha256": "bd14911027119f76014329da2b112de0cef6fbb5b53a884a02765b1a8b4083d4",
+      "changeClass": "BUILD_GOVERNED_WORLD_SEARCH_INDEX_AND_COPY_PUBLIC_RECOVERY_MODULES"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "bcd78f56f07a2b61ed88fb97895f0ba873405f87272629466ae9f6a07cc36c1d",
+      "successorSha256": "9d07cf37b49f86b07e2dc2411d5f4eba9c975848bc6c2c895390e4ffea61bb02",
+      "changeClass": "REGISTER_WORLD_PUBLIC_RECOVERY_BUILD_SUCCESSOR"
+    }
+  ],
+  "evidence": [
+    "scripts/check-world-recovery.mjs",
+    "scripts/check-world-recovery-browser.mjs",
+    "scripts/check-world-recovery-visuals.mjs"
+  ],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false
+  },
+  "productionAdmission": false
+}

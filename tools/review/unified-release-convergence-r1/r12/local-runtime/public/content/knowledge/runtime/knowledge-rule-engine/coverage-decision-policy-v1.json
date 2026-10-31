@@ -1,0 +1,29 @@
+{
+  "outcomes": [
+    "direct_match",
+    "multi_node_match",
+    "partial_coverage",
+    "no_coverage"
+  ],
+  "policyCode": "KRE-COVERAGE-DECISION-v1",
+  "providerEscalationAllowed": false,
+  "rules": [
+    {
+      "outcome": "no_coverage",
+      "when": "coverage.level = none OR no ranked published result"
+    },
+    {
+      "outcome": "multi_node_match",
+      "when": "two or more ranked published nodes meet partial threshold"
+    },
+    {
+      "outcome": "direct_match",
+      "when": "top result exactMatch = true AND coverage.level = exact"
+    },
+    {
+      "outcome": "partial_coverage",
+      "when": "published result exists but direct or multi-node conditions are not met"
+    }
+  ],
+  "version": "1.0.0"
+}

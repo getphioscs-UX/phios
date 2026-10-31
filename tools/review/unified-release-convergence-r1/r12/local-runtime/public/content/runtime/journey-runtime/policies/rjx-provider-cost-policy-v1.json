@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-RJX-PROVIDER-COST-POLICY-v1.0.0",
+  "work": "RJX-W19",
+  "status": "SUCCESSOR_POLICY_READY_PRODUCTION_INTEGRATION_PENDING",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "recordedAt": "2026-08-21",
+  "scope": "REALITY_JOURNEY_SUCCESSOR_ORCHESTRATION",
+  "historicalProtectedEntryMutation": false,
+  "default": {
+    "initialResult": "RULE_ENGINE_ONLY",
+    "initialReadingModelAllowed": false,
+    "automaticOpenAIEscalation": false,
+    "providerFailureBlocksBaseJourney": false
+  },
+  "runtimeEntry": {
+    "openAIDefaultAllowed": false,
+    "openAIExplicitOptInRequired": true,
+    "legacyProtectedEntryFilesRemainHistorical": true,
+    "successorGate": "functions/reality-journey-runtime/provider-cost-gate-v1.js"
+  },
+  "reading": {
+    "initialRuleOnly": true,
+    "modelEnhancementOptional": true,
+    "ruleReadingPreservedOnProviderFailure": true
+  },
+  "publicKNR": {
+    "providerEnabledByDefault": false,
+    "openAIEnabled": false,
+    "paidJourneyBudgetShared": false,
+    "authority": "content/provider/contracts/zero-cost-provider-foundation-v1.json"
+  },
+  "workersAI": {
+    "enabledInSuccessor": false,
+    "hardBudgetUnits": 0,
+    "activationRequiresReviewedNonZeroBudget": true,
+    "atomicBudgetReservationRequired": true,
+    "usageTrackingRequired": true,
+    "meteredCostObservable": true,
+    "paidOverageAllowed": false,
+    "budgetAuthority": "content/provider/contracts/atomic-budget-reservation-v1.json",
+    "usageLedgerSchema": "content/provider/schemas/provider-usage-ledger-v1.schema.json"
+  },
+  "openAI": {
+    "enabledInSuccessor": false,
+    "explicitOptInRequired": true,
+    "entitlementRequired": true,
+    "budgetReservationRequired": true,
+    "usageTrackingRequired": true,
+    "paidOverageAllowed": false
+  },
+  "modelOutput": {
+    "authority": "CANDIDATE_ONLY",
+    "mayCreateObservedEvidence": false,
+    "mayFillUnknown": false,
+    "maySelectNavigationAction": false
+  },
+  "activationGate": [
+    "TL_HUMAN_PROVIDER_COST_ACCEPTANCE",
+    "PRODUCTION_BUDGET_AUTHORITY",
+    "PRODUCTION_USAGE_LEDGER",
+    "SUCCESSOR_RUNTIME_CONSUMPTION_INTEGRATION",
+    "CHECK_RJX_PROVIDER_COST_PASS"
+  ]
+}

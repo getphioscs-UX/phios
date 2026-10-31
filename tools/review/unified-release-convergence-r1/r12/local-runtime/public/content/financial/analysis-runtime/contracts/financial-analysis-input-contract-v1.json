@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W0-W2-INPUT-CONTRACT-v1.0.0",
+  "phase": "FAR",
+  "work": [
+    "FAR-W0",
+    "FAR-W2",
+    "FAR-W18",
+    "FAR-W19"
+  ],
+  "status": "ACTIVE",
+  "authorityOwner": "FAR",
+  "requiredFields": [
+    "analysisId",
+    "fcrResult",
+    "fdrSnapshot",
+    "analysisPolicySet"
+  ],
+  "optionalFields": [
+    "comparisonResults"
+  ],
+  "rules": {
+    "fcrResultMustBeCanonicalFcrOutput": true,
+    "fdrSnapshotReadOnlyEvidenceMetadataOnly": true,
+    "fdrDigestMustMatchFcrResult": true,
+    "independentFinancialRecalculationAllowed": false,
+    "fdrMutationAllowed": false,
+    "recommendationAllowed": false,
+    "professionalJudgmentAllowed": false,
+    "comparisonResultsMustShareFdrDigest": true,
+    "thresholdsMustComeFromVersionedPolicySet": true
+  }
+}

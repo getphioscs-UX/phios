@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-PPR-C1-CANONICAL-PERSONAL-SURFACE-AUTHORITY-v1.0.0",
+  "work": "PPR-C1-W0",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "status": "FROZEN_CANONICAL_CUSTOMER_AUTHORITY",
+  "canonicalCustomerSurface": {
+    "route": "/perspectives/personal/",
+    "html": "perspectives/personal/index.html",
+    "api": "/api/customer-personal-reality",
+    "apiModule": "functions/api/customer-personal-reality.js",
+    "client": "assets/customer-ui/js/surfaces/personal-reality.js",
+    "singleMethodRenderer": "assets/customer-ui/js/surfaces/single-method-reading.js",
+    "singleMethodCss": "assets/customer-ui/surfaces/single-method-reading.css"
+  },
+  "redirectedLegacyRoutes": [
+    {
+      "route": "/personal-runtime",
+      "target": "/perspectives/personal/",
+      "status": 308
+    },
+    {
+      "route": "/personal-runtime.html",
+      "target": "/perspectives/personal/",
+      "status": 308
+    },
+    {
+      "route": "/professional/personal-runtime",
+      "target": "/perspectives/personal/",
+      "status": 308
+    },
+    {
+      "route": "/professional/personal-runtime/",
+      "target": "/perspectives/personal/",
+      "status": 308
+    }
+  ],
+  "legacyPhysicalArtifacts": [
+    {
+      "path": "personal-runtime.html",
+      "role": "REDIRECTED_LEGACY_IMPLEMENTATION_NOT_CUSTOMER_AUTHORITY"
+    },
+    {
+      "path": "assets/js/pages/personal-runtime.js",
+      "role": "LEGACY_PAGE_CLIENT_NOT_CANONICAL_CONSUMER"
+    },
+    {
+      "path": "assets/js/pages/bazi-full-reading.js",
+      "role": "LEGACY_PAGE_BAZI_BRIDGE_NOT_CANONICAL_CONSUMER"
+    }
+  ],
+  "rules": {
+    "redirectedRouteMayBeProductionTarget": false,
+    "legacyPhysicalPageMayOwnCurrentCustomerAuthority": false,
+    "canonicalPageMustConsumeMethodNativeProductsThroughCustomerPersonalRealityApi": true,
+    "methodSpecificBackendMayRemainUpstreamAuthority": true,
+    "customerRendererMayCreateMeaning": false
+  }
+}

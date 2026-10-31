@@ -1,0 +1,37 @@
+{
+  "contractCode": "PHI-OS-PR-E8-PRODUCTION-SECURITY-RDG-ENFORCEMENT-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extension": "PR-E8",
+  "status": "ACTIVE_OPERATION_SCOPED_ENFORCEMENT",
+  "consumesAuthorities": [
+    "runtime/assignment",
+    "runtime/consent",
+    "runtime/capability",
+    "runtime/credential",
+    "PR",
+    "RDG"
+  ],
+  "requiredConditions": [
+    "ALLOW_MINIMUM_NECESSARY_PROFESSIONAL_ACCESS",
+    "PROFESSIONAL_CAPABILITY_BOUNDARY_SATISFIED",
+    "RDG_PERMISSION_ALLOW",
+    "PROFESSIONAL_SERVICE_PURPOSE",
+    "ACTIVE_CONSENT",
+    "ACTIVE_ASSIGNMENT",
+    "CASE_SCOPE_BOUND",
+    "PROFESSIONAL_DATA_ISOLATION",
+    "PAYLOAD_FREE_AUDIT"
+  ],
+  "rules": {
+    "permissionMayBeInferredFromRole": false,
+    "permissionMayBeGrantedByAi": false,
+    "permissionMayBeGrantedByProvider": false,
+    "crossCaseAccessAllowed": false,
+    "customerSurfaceMayReadUnreleasedProfessionalData": false,
+    "sourcePayloadCopiedIntoSecurityEnvelope": false,
+    "missingGovernanceFailsClosed": true,
+    "securityEnvelopeIsOperationScoped": true,
+    "securityEnvelopeDoesNotCreateBusinessAuthority": true
+  }
+}

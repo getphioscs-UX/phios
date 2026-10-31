@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-CUSTOMER-SELF-CASTING-GUIDE-v1.0.0",
+  "releaseId": "ICHING-1.0.1",
+  "methodCode": "I_CHING",
+  "status": "CUSTOMER_GUIDE_COMPLETE",
+  "purpose": "Explain how customers may form or record a six-line I Ching cast without assuming prior knowledge of 6/7/8/9 or changing lines.",
+  "lineOrder": "BOTTOM_TO_TOP",
+  "canonicalValues": [
+    {
+      "value": 6,
+      "nameZh": "老阴",
+      "nameEn": "old yin",
+      "polarity": "YIN",
+      "line": "BROKEN",
+      "changing": true,
+      "changesTo": "YANG"
+    },
+    {
+      "value": 7,
+      "nameZh": "少阳",
+      "nameEn": "young yang",
+      "polarity": "YANG",
+      "line": "SOLID",
+      "changing": false,
+      "changesTo": null
+    },
+    {
+      "value": 8,
+      "nameZh": "少阴",
+      "nameEn": "young yin",
+      "polarity": "YIN",
+      "line": "BROKEN",
+      "changing": false,
+      "changesTo": null
+    },
+    {
+      "value": 9,
+      "nameZh": "老阳",
+      "nameEn": "old yang",
+      "polarity": "YANG",
+      "line": "SOLID",
+      "changing": true,
+      "changesTo": "YIN"
+    }
+  ],
+  "methods": {
+    "THREE_COIN": {
+      "recommendedForSelfCasting": true,
+      "coins": 3,
+      "casts": 6,
+      "steps": [
+        "Choose one face as 3/Yang and the other as 2/Yin; keep that convention unchanged for the whole cast.",
+        "Toss three coins once for each line.",
+        "Add the three values: 6, 7, 8 or 9.",
+        "The first toss is the bottom line; the sixth toss is the top line."
+      ],
+      "mapping": {
+        "2+2+2": 6,
+        "2+2+3": 7,
+        "2+3+3": 8,
+        "3+3+3": 9
+      },
+      "probabilities": {
+        "6": "1/8",
+        "7": "3/8",
+        "8": "3/8",
+        "9": "1/8"
+      }
+    },
+    "SIX_COIN_STATIC": {
+      "sourceBasis": "USER_SUPPLIED_SIX_COIN_REFERENCE",
+      "coins": 6,
+      "casts": 1,
+      "steps": [
+        "Choose and keep a consistent Yin/Yang face convention.",
+        "Toss six coins together and keep their left-to-right order.",
+        "Record the first/leftmost outcome as the bottom line and continue upward through the sixth/top line."
+      ],
+      "defaultEncoding": {
+        "YANG": 7,
+        "YIN": 8
+      },
+      "changingLinesProducedByDefault": false,
+      "note": "This static six-coin arrangement yields a primary hexagram only unless a specific separately defined moving-line rule is used."
+    },
+    "YARROW": {
+      "traditional": true,
+      "stalks": 50,
+      "workingStalks": 49,
+      "changesPerLine": 3,
+      "lines": 6,
+      "steps": [
+        "Set one of 50 stalks aside and work with 49.",
+        "For each change, divide the working stalks into two heaps, take one stalk aside from one heap, count each heap by fours, and set aside the remainders.",
+        "Repeat the operation three times for one line.",
+        "The remaining working total will be 24, 28, 32 or 36; divide by four to obtain 6, 7, 8 or 9.",
+        "Restore the 49 working stalks and repeat for the next line, from bottom to top."
+      ],
+      "remainingToValue": {
+        "24": 6,
+        "28": 7,
+        "32": 8,
+        "36": 9
+      },
+      "probabilities": {
+        "6": "1/16",
+        "7": "5/16",
+        "8": "7/16",
+        "9": "3/16"
+      }
+    }
+  },
+  "boundaries": {
+    "methodsHaveDifferentProbabilityDistributions": true,
+    "methodEquivalenceClaimed": false,
+    "symbolicSamplingEvidenceOnly": true,
+    "predictionAuthority": false,
+    "decisionAuthority": "USER"
+  },
+  "sourceHandling": {
+    "userReferenceParaphrasedNotCopied": true,
+    "externalMethodFactsUsed": "COMMON_PROCEDURAL_KNOWLEDGE",
+    "rawSourceImagesPublished": false
+  }
+}

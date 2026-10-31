@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-HDR-INTERNAL-PROFESSIONAL-VALIDATION-REPORT-SUCCESSOR-v1.0.0",
+  "status": "ACTIVE_INTERNAL_PROFESSIONAL_VALIDATION_REPORT_ONLY",
+  "recordedAt": "2026-08-21",
+  "baselineCommit": "85a6cf68a4ca458142f20b8a5bd9a58f3e7b8d67",
+  "predecessorFreeze": "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+  "predecessorMutationAllowed": false,
+  "objective": "Permit real internal deterministic HDR/Personal Structure report generation and professional inspection without changing HDR Production or Professional release eligibility.",
+  "runtimeArtifacts": [
+    "functions/professional/hdr-internal/hdr-internal-astronomy-adapter.js",
+    "functions/professional/hdr-internal/hdr-internal-validation-report-runtime.js"
+  ],
+  "operatorScripts": [
+    "scripts/generate-hdr-internal-validation-report.mjs",
+    "scripts/review-hdr-internal-validation-report.mjs",
+    "scripts/check-hdr-internal-professional-validation-report.mjs"
+  ],
+  "authorityBoundary": {
+    "hdrProductionStatusRemainsBlocked": true,
+    "hdrHistoricalExecutionModeRemainsValidationOnly": true,
+    "personalStructureCurrentSuccessorReused": true,
+    "sharedCalculationRuntimeReused": true,
+    "sharedProjectionRuntimeReused": true,
+    "existingAstAstronomyAuthorityReused": true,
+    "secondEphemerisAuthorityCreated": false,
+    "publicHdrMethodAuthorityCreated": false,
+    "clientSelfServiceHdrCreated": false,
+    "automaticInterpretationCreated": false,
+    "professionalJudgmentCreated": false,
+    "automaticProfessionalReleaseCreated": false,
+    "humanReviewRequired": true
+  },
+  "allowedStateTransition": "CANONICAL_BIRTH_INPUT -> INTERNAL_DETERMINISTIC_CALCULATION -> INTERNAL_VALIDATION_REPORT -> PROFESSIONAL_REVIEW",
+  "forbiddenTransitions": [
+    "INTERNAL_VALIDATION_REPORT -> CLIENT_DELIVERY",
+    "INTERNAL_VALIDATION_REPORT -> PUBLIC_EXPOSURE",
+    "INTERNAL_VALIDATION_REPORT -> AUTOMATIC_RELEASE",
+    "INTERNAL_VALIDATION_REPORT -> AUTOMATIC_PROFESSIONAL_JUDGMENT"
+  ]
+}

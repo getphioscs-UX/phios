@@ -1,0 +1,46 @@
+{
+  "contractCode": "PHI-OS-WAVE1-HUMAN-PRODUCTION-DECISION-ELIGIBILITY-v1",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "baselineCommit": "335ccbaed4e8210119e2935001e571790ec2fcd1",
+  "extends": "content/knowledge/production-planning/contracts/wave1-production-activation-gate-v1.json",
+  "purpose": "Resolve the pre-Human Production Decision readiness boundary without treating the Human Production Decision itself as a prerequisite for its own eligibility.",
+  "circularityResolution": {
+    "baseC3ProductionReadyRequiresHumanProductionApproval": true,
+    "humanProductionDecisionCannotRequireItsOwnRecordedApproval": true,
+    "eligibilityUsesNonHumanC3GatesOnly": true,
+    "humanProductionApprovalExpectedStateBeforeDecision": "failed:HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+    "exportabilityExpectedStateBeforeDecision": "failed:EXPORTABILITY_NOT_ALLOWED"
+  },
+  "requiredPassedGatesBeforeHumanProductionDecision": [
+    "c0RegistryIdentity",
+    "c1ReadinessIdentity",
+    "c2FrozenThesisBoundary",
+    "claimSufficiency",
+    "sourceSufficiency",
+    "supportingQuestionTreatment",
+    "figureDecision",
+    "editorialReview",
+    "noBlockingFindings"
+  ],
+  "expectedPendingGatesBeforeHumanProductionDecision": [
+    "humanProductionApproval",
+    "exportability"
+  ],
+  "eligibleAssessmentStatus": "human_approval_required",
+  "allowedHumanDecisions": [
+    "approve_for_production",
+    "defer",
+    "reject"
+  ],
+  "downstreamEffectsBeforeDecision": {
+    "productionReady": false,
+    "exportAllowed": false,
+    "planFreezeAllowed": false,
+    "waveFreezeAllowed": false,
+    "dispatchAllowed": false,
+    "candidateCreationAllowed": false,
+    "assetBriefCreationAllowed": false,
+    "publicationAllowed": false
+  }
+}

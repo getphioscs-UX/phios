@@ -1,0 +1,48 @@
+{
+  "contractCode": "PHI-OS-VAP-W21-STRUCTURED-FIGURE-BLOCK-PROJECTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W21",
+  "phase": "VAP-D_ARTICLE_FIGURE_BINDING",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "projection_capability_ready_live_projection_upstream_blocked",
+  "chain": [
+    "VAP-W20 Article↔Published Asset Binding",
+    "CAR Published Asset Authority Validation",
+    "Published Visual Asset Projection",
+    "Structured Figure Block Projection",
+    "Existing Article Renderer",
+    "picture/img DOM"
+  ],
+  "existingCapabilitiesReused": {
+    "blockNormalizer": "assets/js/knowledge/article-blocks.js#prepareArticleBlockForRendering",
+    "figureBlockType": "figure",
+    "publishedVisualResolver": "assets/js/knowledge/article-assets.js#resolvePublishedVisualAsset",
+    "pictureFactory": "assets/js/knowledge/article-assets.js#createPublishedPicture",
+    "articleRenderer": "assets/js/knowledge/article-renderer.js#renderArticleDocument",
+    "secondImageRendererCreated": false
+  },
+  "figureBlockProjection": {
+    "sourceFields": ["assetCode", "placement"],
+    "resolvedFields": ["altText", "caption", "width", "height", "publicSrc"],
+    "blockFields": ["type", "assetCode", "altText", "caption", "displayMode", "creditLabel"],
+    "defaultDisplayMode": "wide",
+    "targetPlacement": "END_OF_REFERENCED_SECTION",
+    "legacyParagraphSectionMayBeProjectedToParagraphBlocks": true,
+    "canonicalArticleBodyMutated": false
+  },
+  "rendererBoundary": {
+    "rendererOwnsAssetPublication": false,
+    "rendererMayFetchArbitraryExternalUrl": false,
+    "rendererMayRenderUnpublishedAsset": false,
+    "rendererMayRenderMissingAlt": false,
+    "rendererMayCreateKnowledge": false
+  },
+  "currentBaseline": {
+    "liveStructuredFigureProjectionCount": 0,
+    "acceptanceFixtureProvesExistingRendererCapability": true,
+    "liveProjectionBlockedBy": [
+      "CAR_PUBLISHED_FIGURE_ABSENT",
+      "PUBLISHED_ARTICLE_STABLE_SECTION_CODE_ABSENT"
+    ]
+  }
+}

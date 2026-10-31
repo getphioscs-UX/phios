@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-production-readiness.schema.json",
+  "title": "PHI OS Universal Canonical Production Readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "readinessSchemaVersion",
+    "recordType",
+    "nodeCode",
+    "locale",
+    "canonicalIdentity",
+    "hierarchy",
+    "canonicalThesis",
+    "articleBoundary",
+    "supportingQuestionBoundary",
+    "sequenceBoundary",
+    "claimBoundary",
+    "sourceBoundary",
+    "figureBoundary",
+    "publicContentBoundary",
+    "localizationReadiness",
+    "productionReadiness",
+    "contentVersions",
+    "versionBinding",
+    "review"
+  ],
+  "properties": {
+    "readinessSchemaVersion": {
+      "const": "PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0"
+    },
+    "recordType": {
+      "const": "canonical_production_readiness"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "canonicalIdentity": {
+      "$ref": "#/$defs/object"
+    },
+    "hierarchy": {
+      "type": "object",
+      "required": [
+        "bookCode",
+        "bookTitle",
+        "partCode",
+        "partTitle",
+        "domainCode",
+        "themeCode",
+        "nodeCode",
+        "nodeType"
+      ]
+    },
+    "canonicalThesis": {
+      "type": "object",
+      "required": [
+        "thesisVersion",
+        "statement",
+        "mechanism",
+        "necessity",
+        "systemRole",
+        "continuity"
+      ]
+    },
+    "articleBoundary": {
+      "type": "object",
+      "required": [
+        "boundaryVersion",
+        "mustEstablish",
+        "requiredDistinctions",
+        "mustNotClaim",
+        "includedScope",
+        "excludedScope",
+        "assumptions",
+        "unresolvedQuestions"
+      ]
+    },
+    "supportingQuestionBoundary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "questionCode",
+          "questionText",
+          "primaryNodeCode",
+          "relatedNodeCodes",
+          "relationshipType",
+          "coverageRole",
+          "articleTreatment",
+          "searchAliasEligibility",
+          "supportingContentEligibility",
+          "fieldSemantics"
+        ]
+      }
+    },
+    "sequenceBoundary": {
+      "$ref": "#/$defs/object"
+    },
+    "claimBoundary": {
+      "$ref": "#/$defs/object"
+    },
+    "sourceBoundary": {
+      "$ref": "#/$defs/object"
+    },
+    "figureBoundary": {
+      "$ref": "#/$defs/object"
+    },
+    "publicContentBoundary": {
+      "$ref": "#/$defs/object"
+    },
+    "localizationReadiness": {
+      "$ref": "#/$defs/object"
+    },
+    "productionReadiness": {
+      "type": "object",
+      "required": [
+        "status",
+        "productionPriority",
+        "registryStatus",
+        "blueprintMembership",
+        "exportability",
+        "blockingFindings",
+        "missingFields"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_assessed",
+            "identity_ready",
+            "thesis_draft",
+            "boundary_draft",
+            "ready_for_editorial_review",
+            "changes_required",
+            "production_ready",
+            "production_blocked",
+            "retired"
+          ]
+        },
+        "productionPriority": {},
+        "registryStatus": {
+          "type": "string"
+        },
+        "blueprintMembership": {
+          "enum": [
+            "registered",
+            "mismatch"
+          ]
+        },
+        "exportability": {
+          "enum": [
+            "exportable",
+            "blocked"
+          ]
+        },
+        "blockingFindings": {
+          "type": "array"
+        },
+        "missingFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "contentVersions": {
+      "$ref": "#/$defs/object"
+    },
+    "versionBinding": {
+      "$ref": "#/$defs/object"
+    },
+    "review": {
+      "$ref": "#/$defs/object"
+    }
+  },
+  "$defs": {
+    "object": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-CN-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+  "status": "ACCEPTED_CURRENT_DOSSIER",
+  "dossierId": "DOSSIER-CN",
+  "stage": "W8-I",
+  "entity": {
+    "en": "China",
+    "zh-Hans": "中国"
+  },
+  "admittedPositions": [
+    {
+      "runtimePositionId": "RP-23",
+      "phase": 23,
+      "arc": "ACTIVATION",
+      "shortLabel": {
+        "en": "Runtime · Routing",
+        "zh-Hans": "运行 · 路径"
+      },
+      "scope": "SUBSYSTEM",
+      "subsystem": "ECONOMIC_LOGISTICS_RUNTIME",
+      "grammarId": "G7",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "CN-CARRIER-STRUCTURE-2026-001",
+        "CN-EXTERNAL-DEPENDENCY-2026-001",
+        "CN-INDUSTRY-2026-001",
+        "CN-INFRASTRUCTURE-2026-001"
+      ],
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-CN-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "dd903415622cf8390634eeaf758b432489868352eb6a79a5f3e024e67c7fe871"
+      },
+      "candidateId": "CN-RP-23-CN-W8F-SEM-ECONOMIC-LOGISTICS-RUNTIME",
+      "humanDecisionReference": "content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json"
+    },
+    {
+      "runtimePositionId": "RP-22",
+      "phase": 22,
+      "arc": "ACTIVATION",
+      "shortLabel": {
+        "en": "Carrier · Routing",
+        "zh-Hans": "载体 · 路径"
+      },
+      "scope": "SUBSYSTEM",
+      "subsystem": "BUSINESS_LOGISTICS_CARRIER",
+      "grammarId": "G6",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "CN-CARRIER-STRUCTURE-2026-001",
+        "CN-INDUSTRY-2026-001",
+        "CN-INFRASTRUCTURE-2026-001"
+      ],
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-CN-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "dd903415622cf8390634eeaf758b432489868352eb6a79a5f3e024e67c7fe871"
+      },
+      "candidateId": "CN-RP-22-CN-W8F-SEM-BUSINESS-LOGISTICS-CARRIER",
+      "humanDecisionReference": "content/civilization-atlas/reconfiguration/dossier-cn-w8h-human-decisions-v1.json"
+    }
+  ],
+  "projectionBoundary": {
+    "subsystemPositionsDoNotImplySingleWholeDossierPosition": true,
+    "evidenceRefsPreserved": true,
+    "currentDossierOnly": true,
+    "prediction": false,
+    "historicalPositionShortcut": false,
+    "usPositionReuse": false,
+    "unresolvedSemanticBasisRemainExcluded": true
+  },
+  "unresolvedSemanticBasis": [
+    "CN-W8F-SEM-DEMOGRAPHIC-CONTINUITY",
+    "CN-W8F-SEM-TECHNOLOGY-CAPABILITY",
+    "CN-W8F-SEM-STRUCTURAL-PRESSURE"
+  ],
+  "lineage": {
+    "source": "W8-A",
+    "claims": "W8-B",
+    "cwa": "W8-C",
+    "observableFeatures": "W8-D",
+    "rre": "W8-E",
+    "grammarDomain": "W8-F",
+    "rpCandidates": "W8-G",
+    "humanReview": "W8-H"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-MIR-5-TO-MIR-6-BASELINE-RECONCILIATION-v1.0.0",
+  "work": "MIR-6-PREDECESSOR-RECONCILIATION",
+  "baselineCommit": "51ff68497f70df2bfe0a7869ed84646872bddb70",
+  "status": "RESTORED_BYTE_IDENTICAL_MIR5_GOVERNANCE_ARTIFACTS",
+  "reason": "51ff684 contains MIR-5 aggregate/checkers/runtime but omitted six MIR-5 governance artifacts required by the frozen MIR-5 artifact SHA manifest.",
+  "restoredArtifacts": [
+    {
+      "path": "content/interpretation/governance/interpretation-authority-conflict-policy-v2.json",
+      "expectedSha256": "8bea88ad4c952ad1d31fc2823aa15e3ee2b5e207cdab373f82c3d342379559b5",
+      "actualSha256": "8bea88ad4c952ad1d31fc2823aa15e3ee2b5e207cdab373f82c3d342379559b5",
+      "byteIdenticalToMIR5Freeze": true
+    },
+    {
+      "path": "content/interpretation/governance/interpretation-confidence-vocabulary-v1.json",
+      "expectedSha256": "5f22c9a61fc504f9c25cbfda27a882ce14114517b88f69858f8e0f2b9c65b981",
+      "actualSha256": "5f22c9a61fc504f9c25cbfda27a882ce14114517b88f69858f8e0f2b9c65b981",
+      "byteIdenticalToMIR5Freeze": true
+    },
+    {
+      "path": "content/interpretation/governance/interpretation-human-review-contract-v1.json",
+      "expectedSha256": "070be8c6d08992f7706e13cceae4d338408fbdd69af90ade3c13c3708fdcc53c",
+      "actualSha256": "070be8c6d08992f7706e13cceae4d338408fbdd69af90ade3c13c3708fdcc53c",
+      "byteIdenticalToMIR5Freeze": true
+    },
+    {
+      "path": "content/interpretation/governance/interpretation-hypothesis-lifecycle-v1.json",
+      "expectedSha256": "81684c6304689e05e62aec69734566865397196967a069d7509ea198560b4af3",
+      "actualSha256": "81684c6304689e05e62aec69734566865397196967a069d7509ea198560b4af3",
+      "byteIdenticalToMIR5Freeze": true
+    },
+    {
+      "path": "content/interpretation/governance/interpretation-registry-manifest-v1.json",
+      "expectedSha256": "a4125f72562ea67a8b5a521e2ec8360866945084136de2dff571178b27b43a8f",
+      "actualSha256": "a4125f72562ea67a8b5a521e2ec8360866945084136de2dff571178b27b43a8f",
+      "byteIdenticalToMIR5Freeze": true
+    },
+    {
+      "path": "content/interpretation/governance/interpretation-rule-lifecycle-v1.json",
+      "expectedSha256": "b18ab53baff508ac10e1f0b6de2e959104b12d5a8676581e8f22b72d88ee27de",
+      "actualSha256": "b18ab53baff508ac10e1f0b6de2e959104b12d5a8676581e8f22b72d88ee27de",
+      "byteIdenticalToMIR5Freeze": true
+    }
+  ],
+  "authority": {
+    "mir5Rewritten": false,
+    "mir5MeaningAuthorityChanged": false,
+    "mir5InterpretationBoundaryChanged": false,
+    "restorationCreatesNewAuthority": false
+  },
+  "requiredPredecessorCheck": "npm run check:mir-5"
+}

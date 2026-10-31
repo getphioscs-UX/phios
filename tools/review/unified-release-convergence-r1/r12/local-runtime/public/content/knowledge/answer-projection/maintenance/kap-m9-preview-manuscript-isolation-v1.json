@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-KAP-MAINTENANCE-SUCCESSOR-v2.0.0",
+  "work": "FW-PREVIEW-BINDING-RECONCILIATION",
+  "status": "OWNER_AUTHORIZED_PREVIEW_ISOLATION",
+  "baselineCommit": "c50d336b",
+  "changes": [
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "5ed99d9c388f5f464ed9eac2fb23175476950c98a67485600420c04ac4d5df5d",
+      "successorSha256": "a6264d0cd83098561126b25a5fd3e52cd549fce4e129a8bfc54ade26e6adc2d6",
+      "changeClass": "DISABLE_PRIVATE_MANUSCRIPT_RETRIEVAL_IN_QA_UNLESS_EXPLICITLY_ENABLED"
+    }
+  ],
+  "evidence": ["docs/financial-will-successor-r1/fw-production/PREVIEW-CHECKPOINT.md", "scripts/check-pages-preview-commerce.mjs"],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false
+  }
+}

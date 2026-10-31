@@ -1,0 +1,95 @@
+{
+  "id": "phi-os.m4a-w7-professional-data-privacy",
+  "version": "1.0.0",
+  "milestone": "M4A-W7",
+  "status": "professional-data-privacy-contract-closed-next-infrastructure",
+  "baseline": {
+    "branch": "main",
+    "commit": "de8f804ce426194a7d4c9b83096887770584b841",
+    "label": "M4A-W3 Consent and Sharing"
+  },
+  "registry": "content/registry/professional-data-governance.json",
+  "contracts": [
+    "functions/professional/privacy/professional-data-classification.js",
+    "functions/professional/privacy/professional-data-minimization.js",
+    "functions/professional/privacy/professional-retention-contract.js",
+    "functions/professional/privacy/professional-file-security-contract.js",
+    "functions/professional/privacy/professional-records-rights-contract.js"
+  ],
+  "tasks": {
+    "M4A-W7-T01": "human-design-data-classification",
+    "M4A-W7-T02": "human-design-retention",
+    "M4A-W7-T03": "human-design-file-security",
+    "M4A-W7-T04": "human-design-export-and-deletion",
+    "M4A-W7-T05": "human-design-no-default-runtime-memory",
+    "M4A-W7-T06": "financial-data-classification",
+    "M4A-W7-T07": "financial-data-minimization",
+    "M4A-W7-T08": "financial-file-security",
+    "M4A-W7-T09": "professional-retention-and-legal-exception",
+    "M4A-W7-T10": "financial-no-default-runtime-memory"
+  },
+  "completion": {
+    "humanDesignGovernanceDefined": true,
+    "financialGovernanceDefined": true,
+    "professionalNotesGovernanceDefined": true,
+    "reportGovernanceDefined": true,
+    "fileGovernanceDefined": true,
+    "retentionGovernanceDefined": true,
+    "exportDeletionRightsDefined": true,
+    "consentWithdrawalHandlingDefined": true,
+    "m2SecurityClassificationCompatible": true,
+    "m4aW3ConsentCompatible": true
+  },
+  "legalPolicyBoundary": {
+    "jurisdictionReference": "Malaysia",
+    "privacyPrinciple": "retain_only_while_necessary_for_stated_purpose",
+    "accountingRetentionScope": "phi_os_transaction_and_accounting_records_only",
+    "accountingRetentionYears": 7,
+    "clientSourceDocumentsAutomaticallyAccountingRecords": false,
+    "productionLegalReviewCompleted": false
+  },
+  "nextWorkPackage": "M4A-W8 Financial Professional Infrastructure",
+  "implementationBoundary": {
+    "dataGovernanceUiImplemented": false,
+    "fileUploadImplemented": false,
+    "objectStorageImplemented": false,
+    "malwareScanImplemented": false,
+    "signedUrlImplemented": false,
+    "retentionAutomationImplemented": false,
+    "deletionAutomationImplemented": false,
+    "exportAutomationImplemented": false,
+    "financialIntakeImplemented": false,
+    "professionalWorkspaceImplemented": false,
+    "d1PersistenceImplemented": false,
+    "regulatedAdviceImplemented": false
+  },
+  "guardrails": {
+    "runtimeContractsChanged": false,
+    "m2ProfessionalAccessChanged": false,
+    "m4aW3ConsentChanged": false,
+    "runtimeStageAdded": false,
+    "d1SchemaChanged": false,
+    "migrationAdded": false,
+    "productionBindingChanged": false,
+    "publicFileUrlEnabled": false,
+    "ordinaryEmailSensitiveUploadEnabled": false,
+    "realClientDataIncluded": false,
+    "rawSourceDocumentInRuntimeMemory": false,
+    "indefiniteRetentionEnabled": false
+  },
+  "frozenArtifacts": {
+    "content/registry/m4a-w3-consent-sharing.json": "0ec415a4937446d958697c0fd529ca37e30579320e1285eb460fe07089c3485d",
+    "content/registry/professional-consent-sharing.json": "b258ce68c103e45dbc9739ce606bd2f361631664e5393da329d598370652d3e1",
+    "functions/professional/consent/professional-consent-contract.js": "d4e7d27b99aeb520370d05ee147c07422168e86f33ea8ac1e94db15e11592880",
+    "functions/professional/consent/joint-household-consent.js": "7782f4a4cd774dbf16d389f420facadd508627da18c4cc93c6d011276a8a965f",
+    "functions/professional/consent/professional-access-event-contract.js": "fcd693118a5ef36b989f96c488ce5850e340340ea9cd5b240f46d320752aaa37",
+    "functions/runtime/security/access-boundary.js": "bab14ff4844864912cd8a489e48ef5d92a8fa436701af8dbbd25b00bf8ca52bd",
+    "content/registry/runtime-security-privacy.json": "fc55fa2b8d0c0906e9b52cc48eb93122d6da2e21f651e0722a7eacadb9298aa6",
+    "content/registry/runtime-contracts.json": "32a630972e4978725e7efe1a0bdc58d96fb7a6bb1145f5c5b7f308d9909745d2",
+    "wrangler.jsonc": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
+  },
+  "migrationInventory": [
+    "0001_platform_foundation.sql",
+    "0002_initial_runtime.sql"
+  ]
+}

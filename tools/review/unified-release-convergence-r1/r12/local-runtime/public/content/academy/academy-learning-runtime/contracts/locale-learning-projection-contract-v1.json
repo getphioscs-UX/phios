@@ -1,0 +1,40 @@
+{
+  "contractCode": "PHI-OS-ALR-W41-LOCALE-LEARNING-PROJECTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W41",
+  "status": "active",
+  "productionStatus": "governed_learning_projection",
+  "supportedLocales": [
+    "en",
+    "zh-Hans"
+  ],
+  "sourceLocale": "en",
+  "fallbackPolicy": "explicit_only",
+  "mixedLocaleDefault": "forbidden",
+  "cprReference": "content/professional/canonical-presentation-runtime/contracts/cpr-locale-presentation-runtime-v1.json",
+  "requiredProjectionFields": [
+    "learningPathCode",
+    "moduleCode",
+    "lessonCode",
+    "sequence",
+    "locales"
+  ],
+  "requiredLocaleFields": [
+    "pathTitle",
+    "moduleTitle",
+    "lessonTitle",
+    "summary",
+    "objectives"
+  ],
+  "rules": {
+    "sameLearningIdentityAcrossLocales": true,
+    "sameObjectiveIdentityAndOrderAcrossLocales": true,
+    "sameActionHierarchyAndStateMeaningAcrossLocales": true,
+    "localeSwitchMayWriteProgressOrAssessment": false,
+    "missingLocaleMayAuthorizeAutomaticTranslation": false,
+    "fallbackMayClaimGovernedProjection": false,
+    "localeProjectionMayChangeKnowledgeAuthority": false,
+    "localeProjectionMayChangeCapabilityAssessmentOrProfessionalMeaning": false,
+    "allRegisteredLessonsRequireBothLocales": true
+  }
+}

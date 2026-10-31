@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W6-PROFILE-AUTHORITY-GAP-REGISTRY-v1.0.0",
+  "work": "PVP-R1-VIS-W6",
+  "baselineCommit": "b0bc35d27f1379ec24f11200874b1f32b2135ad8",
+  "status": "OWNER_GAPS_OPEN",
+  "owner": "PROFILE_PPR",
+  "pvpMayCloseTheseGaps": false,
+  "gaps": [
+    {
+      "gapId": "PRF-OUT-001",
+      "field": "PROFILE_OVERVIEW",
+      "requiredFor": [
+        "FREE_PROFILE_SNAPSHOT",
+        "PAID_DEEP_PROFILE"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-002",
+      "field": "CORE_DIMENSIONS_UNIVERSAL",
+      "requiredFor": [
+        "PFIG-001",
+        "PFIG-002",
+        "FREE_STRONGEST_DIMENSIONS"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-003",
+      "field": "STRENGTH_PATTERNS",
+      "requiredFor": [
+        "PFIG-003",
+        "FREE_STRONGEST_DIMENSIONS"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-004",
+      "field": "COST_TENSION_PATTERNS",
+      "requiredFor": [
+        "PFIG-003",
+        "FREE_RECURRING_TENSION"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-005",
+      "field": "WORK_STYLE",
+      "requiredFor": [
+        "PFIG-006",
+        "FREE_WORK_TENDENCY"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-006",
+      "field": "RELATIONSHIP_STYLE",
+      "requiredFor": [
+        "PFIG-007",
+        "FREE_RELATIONSHIP_TENDENCY"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-007",
+      "field": "DECISION_STYLE",
+      "requiredFor": [
+        "PFIG-008"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-008",
+      "field": "STRESS_PATTERN",
+      "requiredFor": [
+        "PAID_DEEP_PROFILE"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-009",
+      "field": "ENVIRONMENT_FIT",
+      "requiredFor": [
+        "PAID_DEEP_PROFILE"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-010",
+      "field": "CONTEXT_VARIATION_CLASSIFICATION",
+      "requiredFor": [
+        "PFIG-004",
+        "PFIG-005"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-011",
+      "field": "PFIG005_PROJECTION_STATE_MAPPING",
+      "requiredFor": [
+        "PFIG-005"
+      ]
+    },
+    {
+      "gapId": "PRF-OUT-012",
+      "field": "GENERIC_REALITY_QUESTIONS",
+      "requiredFor": [
+        "PFIG-009",
+        "FREE_REALITY_OBSERVATION_QUESTION"
+      ]
+    }
+  ],
+  "notAGapBecauseExistingTruthIsSufficient": [
+    {
+      "field": "CONTRADICTION_STATE",
+      "truth": [
+        "SOURCE_CONTRADICTION",
+        "CURRENTLY_NOT_RESONANT"
+      ]
+    },
+    {
+      "field": "SOURCE_PROVENANCE",
+      "truth": [
+        "sourceLegend",
+        "signalCards.provenance",
+        "signalCards.sourceClass"
+      ]
+    },
+    {
+      "field": "ASSESSMENT_FRESHNESS",
+      "truth": [
+        "freshness.oldSignalRefs",
+        "freshness.oldResultWarningRequired"
+      ]
+    }
+  ],
+  "closureRule": "Only a Profile/PPR-owned successor may define missing meaning/scoring/output truth. PVP may consume the resulting fields after that successor is admitted."
+}

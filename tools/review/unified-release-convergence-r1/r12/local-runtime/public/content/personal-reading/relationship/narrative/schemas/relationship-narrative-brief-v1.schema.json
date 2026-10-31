@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-RELATIONSHIP-NARRATIVE-BRIEF-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "briefId",
+    "briefType",
+    "genericNarrativeBriefSchemaRef",
+    "genericNarrativeBriefContractRef",
+    "relationshipIntent",
+    "participantA",
+    "participantB",
+    "profileSignals",
+    "profileSourceClassLocks",
+    "sourceClassLocks",
+    "relationshipCoreThemes",
+    "connectionDynamics",
+    "complementaryDynamics",
+    "tensions",
+    "asymmetries",
+    "misreadRisks",
+    "sharedLifeThemes",
+    "resourceThemes",
+    "decisionThemes",
+    "currentReality",
+    "timingContext",
+    "counterEvidence",
+    "nonConvergence",
+    "openQuestions",
+    "factsAiMustNotAlter",
+    "factsAiDoesNotKnow",
+    "partnerMindStateForbidden",
+    "sensitiveBoundaries",
+    "prohibitedClaimClasses",
+    "phiOsLensTargets",
+    "relationshipOpeningSeed",
+    "dynamicCuriosityQuestions",
+    "styleIntent",
+    "customerContext",
+    "narrativeFreedom",
+    "sourceSemanticDigest",
+    "briefSemanticDigest",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-RELATIONSHIP-NARRATIVE-BRIEF-v1.0.0"},
+    "briefId": {"type": "string", "pattern": "^REL-NBR-[A-F0-9]{24}$"},
+    "briefType": {"const": "RELATIONSHIP"},
+    "genericNarrativeBriefSchemaRef": {"const": "PHI-OS-NARRATIVE-BRIEF-v1.0.0"},
+    "genericNarrativeBriefContractRef": {"type": "string", "minLength": 1},
+    "relationshipIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relationshipIntentId","mode","relationshipType","focusAreas","customerQuestion","locale","purpose"],
+      "properties": {
+        "relationshipIntentId": {"type":"string","minLength":1},
+        "mode": {"enum":["SELF_RELATIONSHIP_PATTERN","SPECIFIC_PERSON_RELATIONSHIP"]},
+        "relationshipType": {"type":"string","minLength":1},
+        "focusAreas": {"type":"array","items":{"type":"string"},"minItems":1,"maxItems":3,"uniqueItems":true},
+        "customerQuestion": {"type":["string","null"]},
+        "locale": {"enum":["en","zh-Hans"]},
+        "purpose": {"const":"RELATIONSHIP_READING"}
+      }
+    },
+    "participantA": {"$ref":"#/$defs/participantA"},
+    "participantB": {"oneOf":[{"$ref":"#/$defs/participantB"},{"type":"null"}]},
+    "profileSignals": {
+      "type":"object","additionalProperties":false,"required":["A","B"],
+      "properties":{"A":{"type":"array","items":{"$ref":"#/$defs/profileSignal"},"maxItems":16},"B":{"type":"array","items":{"$ref":"#/$defs/profileSignal"},"maxItems":16}}
+    },
+    "profileSourceClassLocks": {"type":"array","items":{"$ref":"#/$defs/profileSourceClassLock"},"maxItems":32},
+    "sourceClassLocks": {"type":"array","items":{"$ref":"#/$defs/sourceClassLock"},"maxItems":96},
+    "relationshipCoreThemes": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":12},
+    "connectionDynamics": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":24},
+    "complementaryDynamics": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":24},
+    "tensions": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":24},
+    "asymmetries": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":16},
+    "misreadRisks": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":16},
+    "sharedLifeThemes": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":16},
+    "resourceThemes": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":16},
+    "decisionThemes": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":16},
+    "currentReality": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":24},
+    "timingContext": {"type":"array","items":{"type":"string"},"maxItems":32,"uniqueItems":true},
+    "counterEvidence": {"type":"array","items":{"type":"string"},"maxItems":32,"uniqueItems":true},
+    "nonConvergence": {"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":16},
+    "openQuestions": {"type":"array","items":{"type":"string"},"maxItems":16,"uniqueItems":true},
+    "factsAiMustNotAlter": {"type":"array","items":{"$ref":"#/$defs/factLock"},"minItems":3,"maxItems":160},
+    "factsAiDoesNotKnow": {"type":"array","items":{"type":"string"},"minItems":1,"maxItems":48,"uniqueItems":true},
+    "partnerMindStateForbidden": {"type":"array","items":{"type":"string"},"maxItems":12,"uniqueItems":true},
+    "sensitiveBoundaries": {"type":"array","items":{"type":"string"},"minItems":1,"maxItems":32,"uniqueItems":true},
+    "prohibitedClaimClasses": {"type":"array","items":{"type":"string"},"minItems":1,"uniqueItems":true},
+    "phiOsLensTargets": {"type":"array","items":{"type":"string"},"minItems":1,"maxItems":12,"uniqueItems":true},
+    "relationshipOpeningSeed": {"type":"string","minLength":1,"maxLength":900},
+    "dynamicCuriosityQuestions": {"type":"array","items":{"type":"string","minLength":1,"maxLength":900},"minItems":3,"maxItems":3},
+    "styleIntent": {"type":"object"},
+    "customerContext": {"type":["object","null"]},
+    "narrativeFreedom": {"type":"object"},
+    "sourceSemanticDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "briefSemanticDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "governance": {"type":"object"}
+  },
+  "$defs": {
+    "participantA": {
+      "type":"object","additionalProperties":false,"required":["participantRef","baselineThemes","relevantMethodRefs"],
+      "properties":{"participantRef":{"type":"string","minLength":1},"baselineThemes":{"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":12},"relevantMethodRefs":{"type":"array","items":{"type":"string"},"uniqueItems":true}}
+    },
+    "participantB": {
+      "type":"object","additionalProperties":false,"required":["participantRef","baselineThemes","relevantMethodRefs","precisionBoundary"],
+      "properties":{"participantRef":{"type":"string","minLength":1},"baselineThemes":{"type":"array","items":{"$ref":"#/$defs/signal"},"maxItems":12},"relevantMethodRefs":{"type":"array","items":{"type":"string"},"uniqueItems":true},"precisionBoundary":{"type":"array","items":{"type":"string"},"maxItems":32,"uniqueItems":true}}
+    },
+    "signal": {
+      "type":"object","additionalProperties":false,"required":["signalId","kind","statement","refs","methods","sourceClasses"],
+      "properties":{"signalId":{"type":"string","minLength":1},"kind":{"type":"string","minLength":1},"statement":{"type":"string","minLength":1,"maxLength":900},"refs":{"type":"array","items":{"type":"string"},"maxItems":32,"uniqueItems":true},"methods":{"type":"array","items":{"type":"string"},"maxItems":6,"uniqueItems":true},"sourceClasses":{"type":"array","items":{"type":"string"},"maxItems":12,"uniqueItems":true},"qualifier":{}}
+    },
+    "profileSignal": {
+      "type":"object","additionalProperties":false,"required":["signalId","kind","statement","refs","sourceClasses","precisionBoundary"],
+      "properties":{"signalId":{"type":"string","minLength":1},"kind":{"const":"PROFILE_SIGNAL"},"statement":{"type":"string","minLength":1,"maxLength":700},"refs":{"type":"array","items":{"type":"string"},"uniqueItems":true},"sourceClasses":{"type":"array","items":{"type":"string"},"minItems":1,"maxItems":1},"precisionBoundary":{"type":"array","items":{"type":"string"},"maxItems":12,"uniqueItems":true}}
+    },
+    "profileSourceClassLock": {
+      "type":"object","additionalProperties":false,"required":["participantRef","profileSignalRef","sourceClass","semanticDigest","mayBecomeOtherSourceClass"],
+      "properties":{"participantRef":{"type":"string","minLength":1},"profileSignalRef":{"type":"string","minLength":1},"sourceClass":{"type":"string","minLength":1},"semanticDigest":{"type":"string","minLength":1},"mayBecomeOtherSourceClass":{"const":false}}
+    },
+    "sourceClassLock": {
+      "type":"object","additionalProperties":false,"required":["sourceClass","sourceRef","semanticDigest","mayBecomeOtherSourceClass"],
+      "properties":{"sourceClass":{"type":"string","minLength":1},"sourceRef":{"type":"string","minLength":1},"semanticDigest":{"type":["string","null"]},"mayBecomeOtherSourceClass":{"const":false}}
+    },
+    "factLock": {
+      "type":"object","additionalProperties":false,"required":["lockType","value"],
+      "properties":{"lockType":{"type":"string","minLength":1},"value":{"type":"string","minLength":1,"maxLength":1800}}
+    }
+  }
+}

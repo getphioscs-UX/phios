@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-HD-REL-R1-W8-PRODUCTION-ADMISSION-v1.0.0",
+  "work": "HD-REL-R1-W8",
+  "baselineCommit": "2b660066669190eee55de54a2bb87b10be0eb3c4",
+  "status": "PRODUCTION_ADMITTED_CUSTOMER_PUBLISHABLE",
+  "gates": {
+    "w0SourceOntology": "PASS",
+    "w1CompositeStructure": "PASS",
+    "w2FourClassAdmission": "PASS",
+    "w3SemanticClaimCorpus": "PASS",
+    "w4OwnershipDedup": "PASS",
+    "w5RealityComposition": "PASS",
+    "w6MachineCampaign": "PASS_24_OF_24",
+    "w7HumanReview": "PASS_24_OF_24"
+  },
+  "machine": {
+    "requiredCases": 24,
+    "passed": 24,
+    "atomicChannelClassProbes": "144/144",
+    "atomicGateCompanionshipProbes": "64/64"
+  },
+  "human": {
+    "requiredCases": 24,
+    "accepted": 24,
+    "revised": 0,
+    "rejected": 0,
+    "pending": 0,
+    "inheritedFromHdProR3": false,
+    "admissionRef": "content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-admission-v1.json"
+  },
+  "authorityEffect": {
+    "relW4HdProductionAdmitted": true,
+    "relationshipMethodCapabilityPromotionAllowed": true,
+    "relationshipMethodCompositionExecutable": true,
+    "methodSpecificClaimsCustomerPublishable": true,
+    "wholeRelationshipProductCustomerPublished": false,
+    "relW5Eligible": true,
+    "individualHdR3CustomerPublishedUnaffected": true
+  },
+  "boundaries": {
+    "phiosHumanDesignBirthCalculationAllowed": false,
+    "dualChartCompatibilityScoreAllowed": false,
+    "partnerHiddenStateInferenceAllowed": false,
+    "soulmateVerdictAllowed": false,
+    "compositeAuthorityMayReplaceIndividualAuthority": false,
+    "pentaIncluded": false,
+    "bg5Included": false
+  },
+  "next": "Create one all-method REL-W4 current reconciliation/freeze, then REL-W5 Relationship Current Reality may begin.",
+  "admissionCommitContext": "3a8e0658e26fa931257b491204a6ed2dcb345725"
+}

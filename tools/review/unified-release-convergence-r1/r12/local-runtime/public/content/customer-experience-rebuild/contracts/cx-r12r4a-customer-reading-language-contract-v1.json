@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4A-CUSTOMER-READING-LANGUAGE-CONTRACT-v1.0.0",
+  "work": "CX-R12R4A",
+  "baselineCommit": "5c1d05f400bd01e5d278327c97dffb5322940129",
+  "status": "PRESENTATION_CUTOVER_ACTIVE",
+  "authorityBoundary": {
+    "createsInterpretationAuthority": false,
+    "changesR12R3BMeaningAuthority": false,
+    "changesCalculationOrProjection": false,
+    "consumesHumanReviewedCompositionAdmission": true,
+    "presentationOnly": true
+  },
+  "methodLabels": {
+    "AST": {"en": "Astrology", "zh-Hans": "占星"},
+    "BZR": {"en": "BaZi", "zh-Hans": "八字"},
+    "NUM": {"en": "Numerology", "zh-Hans": "数字学"},
+    "ZWR": {"en": "Zi Wei", "zh-Hans": "紫微斗数"}
+  },
+  "customerStates": [
+    "Ready to read",
+    "Some readings are ready",
+    "Needs more information",
+    "Not ready to read this time",
+    "Still open"
+  ],
+  "forbiddenDefaultDisplay": [
+    "AVAILABLE",
+    "PARTIAL",
+    "DETERMINISTIC",
+    "AST",
+    "BZR",
+    "NUM",
+    "ZWR",
+    "projectionId",
+    "projectionDigest",
+    "missing-data code"
+  ],
+  "progressiveDisclosure": {
+    "summaryLabel": "Technical Details",
+    "allowedFields": [
+      "internal method code",
+      "projection reference",
+      "result fingerprint",
+      "lifecycle record",
+      "house-system code",
+      "human-review evidence reference"
+    ],
+    "collapsedByDefault": true
+  },
+  "readingMap": [
+    "WHAT_HAS_BEEN_ESTABLISHED",
+    "WHAT_CAN_BE_READ_NOW",
+    "WHAT_STILL_NEEDS_MORE_INFORMATION"
+  ],
+  "crossPerspectiveRule": {
+    "requiresAcceptedMethods": ["AST", "BZR", "NUM", "ZWR"],
+    "rawSymbolComparisonForbidden": true,
+    "unifiedPersonalityConclusionForbidden": true
+  }
+}

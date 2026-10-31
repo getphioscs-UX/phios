@@ -1,0 +1,53 @@
+{
+  "id": "phi-os.runtime-recovery.v1",
+  "version": "1.0.0",
+  "status": "stable",
+  "milestone": "M2-W5",
+  "owner": "runtime-infrastructure",
+  "dependencies": [
+    "phi-os.runtime-persistence.v1",
+    "phi-os.runtime-snapshot.v1"
+  ],
+  "methods": [
+    "recoverSession",
+    "recoverPartialWrite",
+    "beginProviderRequest",
+    "completeProviderRequest",
+    "recordProviderFailure",
+    "executeProviderOperation"
+  ],
+  "session_recovery": {
+    "restores": [
+      "runtime_id",
+      "current_stage",
+      "latest_snapshot",
+      "conversation"
+    ],
+    "provider_call_allowed": false,
+    "regeneration_allowed": false
+  },
+  "partial_write_recovery": {
+    "source": "runtime_events",
+    "target": "runtime_snapshots",
+    "event_cursor_required": true,
+    "audit_event": "runtime.partial_write_recovered"
+  },
+  "provider_failure_recovery": {
+    "preserve_existing_state": true,
+    "automatic_retry": false,
+    "completed_request_cache": true,
+    "failure_event": "provider.failed"
+  },
+  "page_refresh_recovery": {
+    "preserve_input": true,
+    "reuse_completed_response": true,
+    "automatic_regeneration": false,
+    "automatic_duplicate_provider_call": false,
+    "explicit_retry_required_after_interruption": true
+  },
+  "guardrails": {
+    "new_runtime_stage": false,
+    "historical_overwrite": false,
+    "raw_provider_error_persisted": false
+  }
+}

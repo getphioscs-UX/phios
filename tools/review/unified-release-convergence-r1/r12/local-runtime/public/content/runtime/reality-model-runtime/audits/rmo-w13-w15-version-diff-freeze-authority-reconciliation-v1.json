@@ -1,0 +1,67 @@
+{
+  "auditCode": "PHI-OS-RMO-W13-W15-VERSION-DIFF-FREEZE-AUTHORITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "RMO-W13 Reality Versioning, RMO-W14 Reality Diff and RMO-W15 RMO Freeze",
+  "status": "reconciled",
+  "baselineCommit": "94fd1887e75c4b4c95a9c2dc4fe010c3e350d0ec",
+  "digestMode": "UTF8_NO_BOM_LF",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/runtime/reality-model-runtime/freeze/rmo-w10-w12-reality-lifecycle-freeze-v1.json",
+      "sha256": "7e17df556c255b3cde481bcaa258f8fcd1908b9bb2ba169bede062690b2d5138",
+      "classification": "FROZEN_RMO_LIFECYCLE",
+      "finding": "RMO-W0-W12 remain preserved inputs; W13-W15 may version and compare immutable snapshots but may not rewrite prior Reality components."
+    },
+    {
+      "reference": "content/runtime/reality-model-runtime/schemas/canonical-reality-v1.schema.json",
+      "sha256": "40484d26717019725d5f19f48be3275ac9f17dd754863a3b64b675d48c15aeda",
+      "classification": "INITIAL_REALITY_SNAPSHOT_SCHEMA",
+      "finding": "Reality v1 is immutable; later Reality versions require a successor snapshot schema and exact previous digest lineage."
+    },
+    {
+      "reference": "content/runtime/reality-model-runtime/contracts/unknown-runtime-contract-v1.json",
+      "sha256": "3cdd277521bd487aa847ee0c0dfc08af8c6ba97d7fddbbee1c059490bbdaf7b5",
+      "classification": "RMO_UNKNOWN_RUNTIME_BOUNDARY",
+      "finding": "Unknown resolution cannot occur in W10 and requires Evidence authority, RDG governance and a later Reality version."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996",
+      "classification": "RDG_CROSS_RUNTIME_DATA_CONTRACT",
+      "finding": "RMO may write RUNTIME_STATE_RECORD only and may not write professional data or promote Evidence."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/unknown-disputed-runtime-v1.json",
+      "sha256": "db9beae9d75bca39310c8ff7944cbe79100ec63f20890295c3e6c5a10c4900a2",
+      "classification": "RDG_UNKNOWN_DISPUTED_AUTHORITY",
+      "finding": "UNKNOWN, UNRESOLVED and DISPUTED cannot be silently defaulted, inferred away or treated as errors."
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/contracts/case-versioning-contract-v1.json",
+      "sha256": "8bbe8442ff328ce18bf2e14d04cf37d3cc24cb4d36cee933ab36aedeea335d57",
+      "classification": "ICR_IMMUTABLE_VERSIONING_PRECEDENT",
+      "finding": "Canonical versioning preserves stable identity, increasing semantic version, contiguous sequence and previous digest without snapshot mutation."
+    },
+    {
+      "reference": "content/governance/operational-architecture/runtime-authority-map-v1.json",
+      "sha256": "fb57cec8df6cbe3b47f7f0d842a2fcbc32ce62e00ea16a11057299977737c82e",
+      "classification": "CANONICAL_AUTHORITY_MAP",
+      "finding": "Dependency and structural comparison never grant Meaning, Evidence, Professional Judgment, Presentation or Navigation authority."
+    }
+  ],
+  "authorityDecision": {
+    "realitySnapshotAndVersionLineageOwner": "RMO",
+    "realityStructuralDiffOwner": "RMO",
+    "realityVersionAndDiffDataType": "RUNTIME_STATE_RECORD",
+    "evidenceAuthorityOwner": "RRE",
+    "dataAndUnknownGovernanceOwner": "RDG",
+    "professionalJudgmentOwner": "PR",
+    "journeyAndNavigationOwner": "JR_RNE_EXISTING_RUNTIME",
+    "realityDiffMayInterpretOrDiagnose": false,
+    "realityDiffMayClaimCausalityOrSuccess": false,
+    "unknownMayBeSilentlyResolved": false,
+    "providerOrAiMayGrantAuthority": false,
+    "sharedAuthorityOrOperationalRuntimeMutated": false
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W0-W3-AUTHORITY-FOUNDATION-FREEZE-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W0",
+    "KAP-W1",
+    "KAP-W2",
+    "KAP-W3"
+  ],
+  "baselineCommit": "00b5d580c9dbc4fc460694095b7519afad4b0b61",
+  "status": "FROZEN_AUTHORITY_FOUNDATION_NO_RUNTIME_ACTIVATION",
+  "frozenOutputs": [
+    {
+      "path": "content/knowledge/answer-projection/audits/kap-w0-existing-runtime-capability-audit-v1.json",
+      "sha256": "231c6958958c769996fe3dc236e06d70b4c99a227600e90e5b6f8a9ea8e04b90"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w1-authority-boundary-v1.json",
+      "sha256": "11f3f06ae114374501d0582f749d0c4003048f85b67ef1049d5b9a4e1c6b77ef"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/question-scoped-knowledge-answer-v1.schema.json",
+      "sha256": "f50e0332728aeff40c5e89b31235d6f821851d2be94e7e04064e2fa31f85a051"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w2-question-scoped-answer-contract-v1.json",
+      "sha256": "16524e321c29d555820af1dd57558d6e01669c2e458053a22f1bb812a11dbd65"
+    },
+    {
+      "path": "content/knowledge/answer-projection/fixtures/question-scoped-knowledge-answer.foundation.valid.json",
+      "sha256": "336b8624fa47e299e5b669abfbb3b82cc301b871e6b1cf0a436fb451b1bc34b1"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w3-client-answer-level-registry-v1.json",
+      "sha256": "be4b873e7906647eab89d770c024cb78ca49ea0036b65689a806c91bab19cadb"
+    },
+    {
+      "path": "content/knowledge/answer-projection/acceptance/kap-w0-w3-authority-foundation-acceptance-v1.json",
+      "sha256": "eb2ff51b2262c7be4f2b475f64d0e918b3f4d330b26938503dea7dc332108d8f"
+    }
+  ],
+  "predecessorEvidence": [
+    {
+      "name": "ksarProductionFreeze",
+      "path": "content/knowledge/source-access/freeze/ksar-r8-production-freeze-v1.json",
+      "sha256": "c5d16ad6d9aa6c95bc4143962c9ea1fc3cd26b70bc3114ddb7876b461dbc55cf"
+    },
+    {
+      "name": "knowledgeAccessBoundary",
+      "path": "content/knowledge/source-access/contracts/knowledge-source-access-boundary-v1.json",
+      "sha256": "25deb64016002e62f0f9a2ab42b1122fbc9abe09e248a55c288380917544f9d9"
+    },
+    {
+      "name": "knowledgeAccessApi",
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "0d1192a081849761a6a88e8623f14e95d70c9f94f007f2b99deeb9f723202fd5"
+    },
+    {
+      "name": "pjaPublicationFreeze",
+      "path": "content/knowledge/production/freeze/pja-publication-w1-freeze-v1.json",
+      "sha256": "2fe75eae06530a19cb02597f842229af8a3408a6a17bc624a4c79ad65ea7fe73"
+    },
+    {
+      "name": "pjaPublishedKnowledgeAuthorityFreeze",
+      "path": "content/knowledge/production/freeze/pja-published-knowledge-authority-w1-freeze-v1.json",
+      "sha256": "277c9d4d7033979b1624068186638db06fdb92beddd489b5d6e4cce33f436313"
+    },
+    {
+      "name": "carAuthorityBoundary",
+      "path": "content/professional/canonical-asset-runtime/audits/car-authority-boundary-v1.json",
+      "sha256": "d42dca01a97f8fe272ba90eb34b9916dbdaa96cca656c273a47d9e8f7f9ef0d2"
+    },
+    {
+      "name": "rmoAuthorityAudit",
+      "path": "content/runtime/reality-model-runtime/audits/rmo-reality-model-authority-audit-v1.json",
+      "sha256": "f8b87ec8026ef3cb9e014efadfbdbb5249b61a5a9841f6fe0011652f251d0cfb"
+    },
+    {
+      "name": "rdgAuthorityBoundary",
+      "path": "content/governance/reality-data-governance/audits/rdg-data-authority-boundary-v1.json",
+      "sha256": "91bc679d3b0f9146771c28b5fcc120fcbf6e0b90aacd5e3e51ead5b3898f13fa"
+    },
+    {
+      "name": "rreReadingFreeze",
+      "path": "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json",
+      "sha256": "ce435f7b8e7464314af264cf7e1d796cabaadbadd53ab6531019f463509bd302"
+    }
+  ],
+  "authorityFreeze": {
+    "knowledge": "PRESERVED",
+    "answer": "NON_AUTHORITATIVE_PROJECTION_ONLY",
+    "publication": "PRESERVED_PJA_CAR",
+    "realityReading": "PRESERVED_CASE_EVIDENCE_SCOPED",
+    "rreActivation": "UNCHANGED_VALIDATION_ONLY"
+  },
+  "nonActivation": {
+    "answerRetrievalImplementation": false,
+    "answerComposition": false,
+    "aiRouting": false,
+    "guidedReading": false,
+    "mcd": false,
+    "realityJourneyMutation": false,
+    "publication": false,
+    "clientSurface": false
+  },
+  "successorRule": "Any future change to the frozen KAP-W0-W3 authority semantics must use a versioned successor; later KAP implementation may consume these contracts without rewriting them."
+}

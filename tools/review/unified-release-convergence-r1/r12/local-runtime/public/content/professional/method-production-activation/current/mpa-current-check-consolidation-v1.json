@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-MPA-CURRENT-CHECK-CONSOLIDATION-v1.0.0",
+  "work": "MPA-CURRENT-CHECK-CONSOLIDATION",
+  "baselineCommit": "4188ce3cb33fc4bb0ddf80b29a4ab546a74841d6",
+  "status": "ACTIVE_CURRENT_SINGLE_ENTRY_NO_REPOSITORY_FINGERPRINT_COUPLING",
+  "canonicalNpmEntry": {
+    "script": "check:mpa",
+    "command": "node scripts/check-mpa-current.mjs"
+  },
+  "postcheckIntegration": {
+    "command": "npm run check:mpa",
+    "mustPrecede": "npm run check:web-production-runtime"
+  },
+  "currentRegression": {
+    "contract": "content/professional/method-production-activation/contracts/mpa-regression-runtime-v2.json",
+    "triggerRegistry": "content/professional/method-production-activation/registries/mpa-regression-trigger-registry-v2.json",
+    "methodDependencyRegistry": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json"
+  },
+  "forbiddenCurrentFingerprintScopes": [
+    "WHOLE_PACKAGE_JSON_SHA256",
+    "WHOLE_PACKAGE_LOCK_SHA256",
+    "PXR_PACKAGE_SCRIPT_SHA256",
+    "BFR_PACKAGE_SCRIPT_SHA256",
+    "VISUAL_RASTER_DEPENDENCY_SHA256",
+    "CURRENT_CHECKER_SELF_SHA256"
+  ],
+  "retiredFromCurrentChain": [
+    "content/professional/method-production-activation/successors/mpa-w14-mir3-dependency-regression-successor-v1.json",
+    "content/professional/method-production-activation/successors/mpa-w14-visual-raster-dependency-regression-successor-v2.json",
+    "content/professional/method-production-activation/successors/mpa-w14-mcd-package-script-regression-successor-v3.json",
+    "content/professional/method-production-activation/successors/mpa-w14-bfr-h-central-checker-package-script-successor-v4.json",
+    "content/professional/method-production-activation/successors/mpa-w14-pxr-checker-package-script-successor-v5.json",
+    "content/professional/method-production-activation/successors/mpa-w14-pxr-package-fingerprint-reconciliation-successor-v6.json",
+    "content/professional/method-production-activation/successors/mpa-w30-w14-dependency-successor-v2.json",
+    "content/professional/method-production-activation/successors/mpa-w30-current-checker-and-mcd-ast-bzr-successor-v3.json",
+    "content/professional/method-production-activation/successors/mpa-w30-pxr-w14-v5-successor-v4.json",
+    "content/professional/method-production-activation/successors/mpa-w30-pxr-w14-v6-successor-v5.json"
+  ],
+  "historicalPreservation": {
+    "retiredFilesRemainAvailableForAudit": true,
+    "historicalFreezeMutated": false,
+    "historicalW14CheckerMutated": false,
+    "historicalW30CheckerMutated": false
+  },
+  "boundaries": {
+    "methodAuthorityChanged": false,
+    "calculationAuthorityChanged": false,
+    "projectionAuthorityChanged": false,
+    "interpretationAuthorityChanged": false,
+    "professionalAuthorityChanged": false,
+    "productionEligibilityChanged": false,
+    "productionExecutionChanged": false
+  }
+}

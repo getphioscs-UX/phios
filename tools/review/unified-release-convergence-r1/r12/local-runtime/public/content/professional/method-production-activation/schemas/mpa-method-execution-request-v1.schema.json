@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa-method-execution-request-v1.schema.json",
+  "title": "MPA Method Execution Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodCode",
+    "methodVersion",
+    "capability",
+    "purposeCode",
+    "input"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-METHOD-EXECUTION-REQUEST-v1.0.0"
+    },
+    "methodCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "methodVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability": {
+      "enum": [
+        "CALCULATION",
+        "PROJECTION"
+      ]
+    },
+    "purposeCode": {
+      "enum": [
+        "SERVICE_DELIVERY",
+        "PROFESSIONAL_SERVICE"
+      ]
+    },
+    "input": {
+      "type": "object"
+    },
+    "consentRecordId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requestId": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

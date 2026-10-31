@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-CALENDAR-RUNTIME-SUCCESSOR-v2.0.0",
+  "work": "ZWR-W5A",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "VALIDATED_INTERNAL_SUCCESSOR",
+  "predecessor": "content/professional/zi-wei-runtime/contracts/zi-wei-calendar-conversion-runtime-contract-v1.json",
+  "runtime": "functions/zi-wei-runtime/zi-wei-calendar-conversion-runtime-v2.js",
+  "policyAuthority": "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
+  "scope": {
+    "gregorianYears": [
+      1901,
+      2100
+    ],
+    "dayBoundary": "23:00 local civil -> next Zi Wei calculation date",
+    "leapMonth": "1-15 same numbered month; 16-end next month for month-dependent rules",
+    "birthHour": "12 local-civil double hours",
+    "yearStemBranch": "lunar year"
+  },
+  "execution": {
+    "internalValidationAllowed": true,
+    "productionDispatchAllowed": false,
+    "frontendConsumerAllowed": false
+  },
+  "invariants": {
+    "exactBirthTimeRequired": true,
+    "governedTimezoneRequired": true,
+    "outOfRangeFailClosed": true,
+    "interpretationCreated": false
+  }
+}

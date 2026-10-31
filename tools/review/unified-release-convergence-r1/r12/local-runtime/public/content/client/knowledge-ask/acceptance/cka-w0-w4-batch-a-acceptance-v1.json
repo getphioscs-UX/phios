@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W0-W4-BATCH-A-ACCEPTANCE-v1.0.0",
+  "batch": "BATCH-CKA-A",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "state": "REPOSITORY_IMPLEMENTATION_ACCEPTED_HUMAN_BROWSER_ACCEPTANCE_PENDING",
+  "works": [
+    {
+      "work": "CKA-W0",
+      "state": "ACCEPTED",
+      "evidence": "ENTRY_CONTEXT_AND_HOMEPAGE_CONSUMER_ACTIVE"
+    },
+    {
+      "work": "CKA-W1",
+      "state": "ACCEPTED",
+      "evidence": "SINGLE_QUESTION_FIRST_SCREEN_ACTIVE"
+    },
+    {
+      "work": "CKA-W2",
+      "state": "ACCEPTED",
+      "evidence": "SIX_SECTION_STRUCTURED_ANSWER_ACTIVE"
+    },
+    {
+      "work": "CKA-W3",
+      "state": "ACCEPTED",
+      "evidence": "PUBLIC_KNOWLEDGE_CARD_PROJECTION_ACTIVE_NO_INTERNAL_CODES"
+    },
+    {
+      "work": "CKA-W4",
+      "state": "ACCEPTED",
+      "evidence": "ONE_TEMPORARY_GUEST_FOLLOW_UP_ACTIVE_STOP_BOUNDARY_ENFORCED"
+    }
+  ],
+  "exitGate": {
+    "simpleAskWithoutJourney": true,
+    "simpleAskWithoutAccount": true,
+    "structuredAnswer": true,
+    "groundedAnswer": true
+  },
+  "counts": {
+    "newAnswerRuntimes": 0,
+    "newRetrievalRuntimes": 0,
+    "automaticJourneyStarts": 0,
+    "persistentCasesCreated": 0,
+    "shadowAccountsCreated": 0,
+    "guestFollowUpDepth": 1
+  },
+  "deferred": [
+    "CKA-W5_GUIDED_CTA",
+    "CKA-W6_JOURNEY_CTA",
+    "CKA-W7_ACCOUNT_BOUNDARY",
+    "CKA-W8_RETRIEVAL_CONTRACT",
+    "CKA-W9_RUNTIME_BINDING"
+  ],
+  "humanAcceptance": {
+    "claimed": false
+  },
+  "browserAcceptance": {
+    "claimed": false
+  },
+  "productionDeploymentAcceptance": {
+    "claimed": false
+  }
+}
+

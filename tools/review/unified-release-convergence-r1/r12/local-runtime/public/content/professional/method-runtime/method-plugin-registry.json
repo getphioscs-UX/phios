@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-PLUGIN-REGISTRY-v1.0.0",
+  "stageCode": "MR-W0",
+  "registryCode": "METHOD_PLUGIN_REGISTRY",
+  "status": "contract_frozen",
+  "runtimes": [
+    {
+      "runtimeCode": "METHOD_RUNTIME",
+      "runtimeVersion": "1.0.0",
+      "singleton": true
+    }
+  ],
+  "registrations": [],
+  "registrationPolicy": {
+    "contractSchema": "content/professional/method-runtime/method-plugin-contract.schema.json",
+    "registeredBeforeExecution": true,
+    "imrEligibilityBeforeProduction": true,
+    "registrationCreatesProductionAuthority": false,
+    "duplicatePluginCodeAllowed": false,
+    "runtimeForkAllowed": false,
+    "methodSpecificCalculationEngineRunsInsideSharedRuntime": true
+  },
+  "futurePlugins": [
+    {
+      "pluginCode": "HDR",
+      "method": "Human Design",
+      "category": "core",
+      "registered": false
+    },
+    {
+      "pluginCode": "AST",
+      "method": "Astrology",
+      "category": "core",
+      "registered": false
+    },
+    {
+      "pluginCode": "BZR",
+      "method": "BaZi",
+      "category": "core",
+      "registered": false
+    },
+    {
+      "pluginCode": "ICH",
+      "method": "I Ching",
+      "category": "planned",
+      "registered": false
+    },
+    {
+      "pluginCode": "TAR",
+      "method": "Tarot",
+      "category": "planned",
+      "registered": false
+    },
+    {
+      "pluginCode": "PSY",
+      "method": "Psychology",
+      "category": "planned",
+      "registered": false
+    },
+    {
+      "pluginCode": "DISC",
+      "method": "DISC",
+      "category": "psychology_plugin",
+      "registered": false
+    },
+    {
+      "pluginCode": "MBTI",
+      "method": "MBTI",
+      "category": "psychology_plugin",
+      "registered": false
+    },
+    {
+      "pluginCode": "BIG-FIVE",
+      "method": "Big Five",
+      "category": "psychology_plugin",
+      "registered": false
+    },
+    {
+      "pluginCode": "CLIFTON",
+      "method": "CliftonStrengths",
+      "category": "psychology_plugin",
+      "registered": false
+    },
+    {
+      "pluginCode": "ENNEAGRAM",
+      "method": "Enneagram",
+      "category": "personality_plugin",
+      "registered": false
+    },
+    {
+      "pluginCode": "ZI-WEI",
+      "method": "Zi Wei Dou Shu",
+      "category": "deferred",
+      "registered": false
+    }
+  ],
+  "translationLayers": [
+    {
+      "layerCode": "GENE_KEYS",
+      "sourceProjection": "HUMAN_DESIGN",
+      "createsRuntime": false,
+      "category": "translation_layer"
+    }
+  ]
+}
+

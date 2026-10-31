@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-STRUCTURE-CANONICAL-ASTRONOMY-BINDING-v1.0.0",
+  "work": "MIR-3",
+  "status": "ACTIVE_UPSTREAM_AUTHORITY_ONLY",
+  "authorityOwner": "EXISTING_SHARED_AST_ASTRONOMY_AUTHORITY",
+  "secondEphemerisAuthorityCreated": false,
+  "bodies": [
+    "SUN",
+    "EARTH",
+    "MOON",
+    "NORTH_NODE",
+    "SOUTH_NODE",
+    "MERCURY",
+    "VENUS",
+    "MARS",
+    "JUPITER",
+    "SATURN",
+    "URANUS",
+    "NEPTUNE",
+    "PLUTO"
+  ],
+  "derivedOpposites": {
+    "EARTH": "normalize(SUN + 180°)",
+    "SOUTH_NODE": "normalize(NORTH_NODE + 180°)"
+  },
+  "astCanonicalNodePolicy": {
+    "source": "content/professional/method-governance/successors/ast-production-policy-successor-v1.json",
+    "policyCode": "PHI_OS_AST_NODE_NONE_V1",
+    "included": false,
+    "effect": "NORTH_NODE_AND_SOUTH_NODE_ACTIVATIONS_UNKNOWN_UNTIL_VERSIONED_AST_NODE_SUCCESSOR"
+  },
+  "nonNodeCalculationContinuesWhenNodeUnavailable": true,
+  "nodeSpecificActivationMayBeUnknown": true
+}

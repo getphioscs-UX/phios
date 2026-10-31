@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-SOURCE-ADMISSION-REGISTRY-v1.0.0",
+  "work": "ZIWEI-SOURCE-CLAIM-ADMISSION-001",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "status": "CLAIM_BATCH_EXTRACTED_PENDING_HUMAN_ADMISSION_PRODUCTION_GATES_CLOSED",
+  "states": [
+    "REGISTERED_PUBLIC_DOMAIN_UNDERLYING_WORK",
+    "WITNESS_REGISTERED",
+    "CLAIM_EXTRACTED_PENDING_HUMAN_REVIEW",
+    "HUMAN_ADMITTED_RULE_CLAIM",
+    "RESEARCH_ONLY",
+    "EXCLUDED"
+  ],
+  "sources": [
+    {
+      "sourceId": "ZWR-SRC-ZIWEI-DOUSHU-QUANSHU",
+      "state": "CLAIM_EXTRACTED_PENDING_HUMAN_REVIEW",
+      "extractedClaimCount": 29,
+      "humanAdmittedClaimCount": 0
+    },
+    {
+      "sourceId": "ZWR-SRC-IZTRO-PUBLIC-IMPLEMENTATION",
+      "state": "RESEARCH_ONLY",
+      "extractedClaimCount": 0,
+      "humanAdmittedClaimCount": 0
+    }
+  ],
+  "claimBatches": [
+    {
+      "batchId": "ZIWEI-SOURCE-CLAIM-BATCH-001",
+      "path": "content/professional/zi-wei-full-production/source-admission/claims/ziwei-source-claim-batch-001-v1.json",
+      "state": "PENDING_HUMAN_SOURCE_FIDELITY_REVIEW",
+      "extractedClaims": 29,
+      "humanAdmittedClaims": 0,
+      "runtimeUseAllowedClaims": 0
+    }
+  ],
+  "productionGates": {
+    "w3ExtensionStarPlacement": false,
+    "w4StarState": false,
+    "w5FourTransformationExpansion": false,
+    "w6PalaceRelationshipEngine": false,
+    "reason": "W3_W4_SOURCE_CLAIMS_REQUIRE_HUMAN_ADMISSION_BEFORE_DOWNSTREAM_RULESET_EXPANSION"
+  },
+  "governance": {
+    "metadataMayEnableProduction": false,
+    "modelMayApproveSourceClaim": false,
+    "humanSourceFidelityReviewRequired": true,
+    "runtimeGapFillAllowed": false
+  }
+}

@@ -1,0 +1,4172 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W21-MACHINE-CAMPAIGN-v1.0.0",
+  "work": "ZIWEI-FP-W21",
+  "baselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "status": "MACHINE_ACCEPTED_96_OF_96",
+  "purpose": "Diversity and deterministic validation of W18 customer report + W19 interactive chart + W20 topic readings. Machine acceptance is not Human acceptance.",
+  "summary": {
+    "requiredCaseCount": 96,
+    "executedCaseCount": 96,
+    "passed": 96,
+    "failed": 0,
+    "passRate": "96/96",
+    "localeCounts": {
+      "zh-Hans": 48,
+      "en": 48
+    },
+    "sexCounts": {
+      "MALE": 48,
+      "FEMALE": 48
+    },
+    "uniqueBirthMonths": 12,
+    "uniqueBirthHours": 4,
+    "uniqueLifeBranches": [
+      "CHEN",
+      "CHOU",
+      "HAI",
+      "MAO",
+      "SHEN",
+      "SI",
+      "WEI",
+      "WU",
+      "XU",
+      "YIN",
+      "YOU",
+      "ZI"
+    ],
+    "uniqueBodyBranches": [
+      "CHEN",
+      "CHOU",
+      "HAI",
+      "MAO",
+      "SHEN",
+      "SI",
+      "WEI",
+      "WU",
+      "XU",
+      "YIN",
+      "YOU",
+      "ZI"
+    ],
+    "uniquePatternCodes": [
+      "JUN_CHEN_QING_HUI",
+      "JU_JI_TONG_GONG",
+      "LU_MA_JIAO_CHI",
+      "TAN_LING_BING_SHOU",
+      "WU_QU_SHOU_YUAN",
+      "ZI_FU_TONG_GONG"
+    ],
+    "deterministicReplayCases": 8,
+    "deterministicReplayPassed": 8
+  },
+  "cases": [
+    {
+      "caseId": "ZWR-W21-001",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "3410cf88a5b7ea4db1b5acc431d6b9db16f9eb485e95891c0076dd7209edbce2",
+        "report": "54ae7cf74b6c76de1640af527ccbc87394b5231ebb1c66fc4b193f9fb07ddd44",
+        "surface": "0773dc355952dcc6ee8ee89a171cccd60292cef4be7e52b460d5bb9ae041e206",
+        "topics": "db24864b2d9d705ab4e0b9bd51185cb2c902e63ca5d91754bbe8accdf9d546bf"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-002",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "0c91706b5a7ee5f850984bff5f1eb0ad683733ad294ab8f1cbe56225e74ce3ab",
+        "report": "46603c63f13fb0d5f40c648ae1d2ac23cb2929b5e0712f107356820be5aad424",
+        "surface": "c315442f3b5617da036bfd8c14cb9636f58d7a2b9d4bf1664b4a086f49ded572",
+        "topics": "e7f8f88025fd6883e4ec7a0a8d09d3f1e705455ad4ea05d9dfe333e205d8ce48"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-003",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "be03b118b88e0f990935dd31b807f4f8c1f765e2244e7efd53e6385663bf5185",
+        "report": "761730c7d04588b5dc3cf56bda01f7ae65b76a6a7e459099e9b99811fb70be7c",
+        "surface": "b885957faa1c63c16fd3688561c23399e15cec441713e04fb6e8b91523d79365",
+        "topics": "dba84d7d17f690d242241cba4864637282af3e1553ed9a556ad1b5bedb49c571"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-004",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "26ff7c04da9287260a93525154b1e2ffffde3568f7d39bd9fb436165ec9675a7",
+        "report": "2069f373309a70dd8cf4b1698cd32fc16eb4033fa03707b346baad8f1ee8681a",
+        "surface": "c0d6960b71397fbba349d04ad289742e8dc8cf6ecf1c2998c5d3f9f5d5705827",
+        "topics": "7676ac74852c6a469b49a33b9f97909a3917c37a812249e2460d4ec83698711f"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-005",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WEI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "2be231806b9449a75fecb5e25f493d0d8c62785c1b668001f650636206b6634c",
+        "report": "b6e8da5b6e8529709f00c953e0bac92c1987267acf32d781a814764cdb2c4627",
+        "surface": "526026eca10191c626d7e41461919c2f0ac9f7300cd6e24f8df49d1f9cc9e852",
+        "topics": "b93c7634966d5447b40594a8911ea4ba3d6e44a21b4fcded2e2d7d51b13b8348"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-006",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WEI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "5fbec594af3112007cdb8383cb4a27e2be474a17744cbb330aec984a1500077c",
+        "report": "efd1af132183207ed86cf1f9e853105845446fc5dec7508050b198875806bb31",
+        "surface": "f774cd44f63725145bb08bb4b8d4caf3d5d8f3e18a07788e2824f3b6674dcf0a",
+        "topics": "3fc447d984a981c7e58e9b03aa4883750044f50069bbe93209c66daaab179f62"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-007",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "XU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "8e0d3d3c8d52bc8cf87f402571c91b9984dd02f6f8de6340c533dd47b945a1d3",
+        "report": "be2f419e4550f23fce36e916d8e96b5dd52073ceaabbe0ff51e850105b5a6517",
+        "surface": "cbc5a90c2f35d5851207b3a49b061ed9aa2dd44c17a6d522e9063122e924efe3",
+        "topics": "917d0b826ac7b989589e99ea336b743c07487f6563b6104a3ac0b51f001b6d35"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-008",
+      "input": {
+        "birthDate": "1988-01-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "XU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "d6ed32b1e4f6b0b043aaac704e65f7584e828a17e7866547424659c5101a7ec8",
+        "report": "236fd5d5864d3dc6a3998835c0aad5b60a2480836b3b9bb510ba558356d4759e",
+        "surface": "9af5bec22ee690087c76926adcd1f1b1f8bda0f8a86732ae19ef6f8d5419f139",
+        "topics": "5054bcf2d6f844435b286d7bad05ac68ea78f28cb12526af4b9697ee0bd78eb5"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-009",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "MAO",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "be359220ecd07569c1ddc7c54d8a5e5990875679578d695841cdfcc476531243",
+        "report": "1fe7365c2d5129d0389e5c650a8bc4ef8f86dc2d206cce7f787617e91adebf5b",
+        "surface": "b5af7bcf37f0ad25fc2550995c8c608312937c3ff55e9a535c08d33152a68d3d",
+        "topics": "e3b20695e168b6f5d2327e85651a52549244ef9644001b673d1ab5b9055c6947"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-010",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "MAO",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "cee39b2f6e81ba80449a1fe29e4f7b3aecf7ce42a423ad10a17a231670c3157e",
+        "report": "392a659b078ec64bf4b6b69c22b7307398e16d94ccc7b9cd96c2e64ab93df5e5",
+        "surface": "48b54aafdd42143a1737afcfd2c052e51405c82b0b0a2c42521c0ab9ca0be16c",
+        "topics": "b4a230aaeb1e3930e17e1827df791860d943785e50b85550b63aac8b605bd262"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-011",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "dc419605eda2419efab8e52f3f38ec9805158b1343022aa3c18a455dc6f087cf",
+        "report": "2035bf87c290f5b4e23bfc6025d1563469ce518b750f7a7c4dc9429ba4812623",
+        "surface": "82e7711178c4ce32d2eeff4970e73dd77713427a9b2ad8306fd636e1efb8c7a9",
+        "topics": "5cc5a97650f38628e1903b247a0c7898ed50f0cfe773f8443ed2880fca015fd9"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-012",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "4b042c8eff1f000ab73326d6d46f040652dc63af943628c02ca7fcbec0ee02df",
+        "report": "95f3daae6f7ff45f06ccdc5270000fcb04dc382890910e27f6668b60c24606a6",
+        "surface": "31e90ba14f238e9531e2d0d7869f4e72f9a5d745fcfc9240de4511d4bb99c4c2",
+        "topics": "88abcba0ceb5216fea9b36a51c9a9f0ca951798e678a1f393517f54ada1e08d0"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 0
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-013",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "YOU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "198e4050f29b5e079ccfd4c2f4de5743681d6b54f6e254b2e5d2dd61a9bcf752",
+        "report": "98a9557bce3a48583d95e7477e30078f91c8c730d687e4f31cbb850fa1326443",
+        "surface": "c27d2809e3f3d572d416b94be2c554e3bc91b6759e1ebff9cf159f528bda8bf9",
+        "topics": "ed5fa1266293267d7a4a001ab7ef2d4c69e1fbe11d48424e32be92b24d0770a8"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-014",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "YOU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "afd5cb1ecd0dcbc6287c35223f5bc5beda37f3c5d1e5790fee0adf4695c79cc3",
+        "report": "466e52daacca4ffe5fa12f33e9ef745bf0aad65a4516db43ad022e90d2bc5f36",
+        "surface": "018b1096d13d182983e6377d6933e72345dd959a8573b6677c954cbb8b97576c",
+        "topics": "1b2113a69e4a017fce22b0bcc3ebcdefd8306208180e16ec4c957851596b4b5e"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-015",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "ZI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "40cfee2c09121ac77fd491b0dcb32b4a3bbfca89e4715c4b567c3faf321c2628",
+        "report": "81594554cef198104cbe71f71b47fa7c4ff51c28a49cc4df65d5a6d68d745fe9",
+        "surface": "aaf9ba02d843992a24aee18ae5190459f5378772f07f9db75f8eb76e06ebd5e2",
+        "topics": "ed8e6b82681fbdbf157ad59c3a154c2095a75396bdb3a3b149cf17e8e5ca0e92"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-016",
+      "input": {
+        "birthDate": "1989-02-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "ZI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "9c4da0e8588670b783c7f2b63319d28e8f638f9dc4caa01c7b69aa10e4e107c0",
+        "report": "f3c9e0167f5a2dd19a2a86a79259e2de2ada5d8b5acc35ee936f63a3aff3432c",
+        "surface": "45983201378fd2c9b478b33db4b488bf6ecd475ae4e190ca85af70a44472cffa",
+        "topics": "6e8cc9369c49f2be02560c078ecbd43de50a115581f4e369a9c26c3a5bd29863"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-017",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHEN",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "LU_MA_JIAO_CHI"
+        ]
+      },
+      "digests": {
+        "chart": "cb89f4154fab6b7454156189a274f318bf2471c8ec8a8e3a87422d0dae62bde6",
+        "report": "33439af195b1e67db4c797608495b73899c003a8c6f22ed657434ee0bda0f933",
+        "surface": "6d8b3a406a58bde40f553e3b8b353629169b060f01986eb407028a6cc543dc3b",
+        "topics": "7cca4efb5d2e46c77d21139a705eeb2fa5f791f1d723d20dd5d73126d92aa263"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-018",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHEN",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "LU_MA_JIAO_CHI"
+        ]
+      },
+      "digests": {
+        "chart": "bdee4229644c247bef290f52a489699b8e707fc4b536c62a92f4d8a7cb588b17",
+        "report": "5849abb1fd3e580b416e1c7e2e0481bb598f673490f5b594321303cae67f5fbc",
+        "surface": "2c18966c70f84ae0b19ad2ce2d8cc85b4f3e9d4dacfcb24b6f9ec27df7d922ad",
+        "topics": "2855d41ca9aefbaba1626f677435491b9e95b7407bb7ba63be09cdcff61121a6"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-019",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WEI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "LU_MA_JIAO_CHI"
+        ]
+      },
+      "digests": {
+        "chart": "5adb096dde4a2c36070c86e30180120389a7a8d804e4101f2a7f423e8472c7b4",
+        "report": "e86d9a172bf294f4b7004c9255db4a1247c41109ca824429864ed7d6b9193aeb",
+        "surface": "22cc95dddfabfe3206bf418a9c81dff8bb2902fc2879494087a1f9babc9b149b",
+        "topics": "443cebebc0441ed543f1aa4616ebc6687a701d3ec0850bac875edd58da1fbfdf"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-020",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WEI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "LU_MA_JIAO_CHI"
+        ]
+      },
+      "digests": {
+        "chart": "db00a731643ab9edf6548374cab7f375cfe6312aad3f80426bd2c455d81c9e8f",
+        "report": "4bda834b006424dedead31e20f3a833b8ba12c47b7fcb29da6e6c1cb3a0c1311",
+        "surface": "170d86218e4b2a4c922352d187d35d1a54fd0938f7a4ba5d49e7b35be9ef29cc",
+        "topics": "6e8b5207b3e19654143628f729d5f12420752efc99c7572596d28354b401496d"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-021",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "XU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "LU_MA_JIAO_CHI"
+        ]
+      },
+      "digests": {
+        "chart": "bfcb5232f6855763496cb44dfff1e9ce41fee6c87051cfe5b335077bf4fb6440",
+        "report": "85457d3241ef2cb36895e93ec26f4fc07dd1263b2e5945bbe2d2a62347a9bd83",
+        "surface": "29fec469ce1293a647aaba789dc7d3367b39e11601ecbdcf4f1a91f98e8c6e6a",
+        "topics": "7fb6af1f9ea3d87d4370eaac358555706bb43c27e121789b64f4167d5381eec9"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-022",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "XU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "LU_MA_JIAO_CHI"
+        ]
+      },
+      "digests": {
+        "chart": "d477950c214d2b7c4aa9210884a3692b2f49e7b6ccadb0d9f674a70baecc2721",
+        "report": "4e6fa0abdcb4868a91d6d0024617b10aef247f2c89b99064749318318742bf70",
+        "surface": "7cb4830c9843db79ede8b1624ea0582190cb3cf660fff4fcdee476d0d43841c1",
+        "topics": "576698f5878314861f0c6cb49614b06d0f29d2999836771df82d978aa7b71688"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-023",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "LU_MA_JIAO_CHI",
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "d6f21e47c0b0724558b31c3cbc0ee7c3f2244860f76f792c96b2ed0763e6fd10",
+        "report": "d22128abcf2c682e5220dc6588bf5c928b0bc332b95982806e396f6a0afe8ce8",
+        "surface": "4960e9146d7814a329668ce575b0fe4be7467347cb9ba50650996a7909e58dc7",
+        "topics": "1b24ad82e6e4e9ab0c48adc46b0e6ccf76b491ad8f30e2d8d85fe46f679ff1ab"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-024",
+      "input": {
+        "birthDate": "1990-03-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "LU_MA_JIAO_CHI",
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "cad7db6b214d7e4fe19b194e01b64e376ca76a60f01e59bfb41856b6d9ba8d52",
+        "report": "7af73f0fe92bc254d3ac7d7a0e5816e14eb607e4ea94e67bbe6a12a216bf3013",
+        "surface": "1807731f7d3de5ae731efaef05b557d07c70ff81a327800ec247269f3b468d9a",
+        "topics": "134dee2a6d30308ca76e5ab4da21f2f0ba90f62f05360d3047a62973845559b7"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-025",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "c6d2a7e77fbe1b437d7c7a3c3a3a74a5390268032269ced5cf99f2883018cb73",
+        "report": "d9a197d64b295bfdc85fc75de12aa46693c2fffa2d3c71ab4b7309dc6862fc46",
+        "surface": "4a8e529b1de5026a307fdfd770eade1a089f7cff166729d982951cfb43f64044",
+        "topics": "5be04dcf03a655f41b232137b965a1919e7330eaad72d44da8a5fa94cba60182"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-026",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "6aeabe27958e6d87f93b7cb7d6e3b981cd75f7d5c3074c151b55a50a9e203313",
+        "report": "eb2fd2fa7a011e112dc45d48d719701710d2d6f808cb8ed067ba81156fbbaeda",
+        "surface": "28a66323aadef83da7aeefab4f708db6e78d8392e2ec3e3c6c7aaabdf44c50fc",
+        "topics": "30bb1762a8aa7a8e2387a84b170a290670f57696fab1e36c489b65690a604297"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-027",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "41bda91aca5e52a5e88626363312562d12aa52e25706140f05b26303f7113b34",
+        "report": "855031544b3e95bf39e7bff70912668955f047bec8dd34f088f063af196fb15e",
+        "surface": "f4315a07bb6f82b6cb017556e56f09fbbe8c2f673bf0932e366d57ba091e6172",
+        "topics": "aaa0884b2eb17ab4d5e80dbfb114de91ce862e922d6da0c235fdb5d98a1b7158"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-028",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "41381edc64375247bbc33ad36fef2a973dd2ab660c10fc6fb0052e605a581b79",
+        "report": "ae20904b2293a13a82de63d11bce9dc28726f9e727ff07bc9e6425ca0ea194d3",
+        "surface": "79085582113973dde3cdc1b4185339ad760bdfa0eaabd2fd09fa52c40f38ed90",
+        "topics": "7cece7e1ca5f0c1149b55d93145561859d99f597a76efde667b7af267b023c84"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-029",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "HAI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "14491ff1dc07deb9eb5ad10a3d55f20063ce0b387a5e0348ceeccd4caae4d2d8",
+        "report": "bf3e1415ff5e25843e7ad7dd3c957dee078a44f866cae8f9b1e9aefa3000b87e",
+        "surface": "8b9dbae2f40301144025c9790795962dfa3f546493be4f1e9ccb55207fe79592",
+        "topics": "0335b7b567b763d48719c5cbe65f543212a0dc3bbc876e4b9d37797a00779d82"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-030",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "HAI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "c9c4858665b7d722cc21f4c079fe0e615823baf1ddda0f4e312e50c6b14a2ca8",
+        "report": "a0c24d902f8961e998861c8b58a3143df57f19b4634089069cf6f95ac7d50081",
+        "surface": "ccc66ce49c0e396e050fed60dd6569a471c915146417c941653e5c8e0bbc2de8",
+        "topics": "4662fb20e50de33017b31e5d4c502315edb34cd3a9493208ed44021a52d2d0c7"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-031",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YIN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "ee9ce8aa7ecbea9ee1fb4ca9e6c0ece2c44154ba2d563dd5406155403189179d",
+        "report": "758bfc6fe0735e9bef769277f67d6ab377f588fb71c5e7f26f9998d8ab888a44",
+        "surface": "0fce4fc418b9bcedbe2b4b955609d4f3ed70d7a8499ba14abf8871e7b87de27a",
+        "topics": "1bc91b5ad66e8911428de254ace8e4b51583123652e8be700af7e6179537ffbd"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-032",
+      "input": {
+        "birthDate": "1991-04-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YIN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "fa1afbe1cf3b16fc11861e77550898662f9e53d1706604c1c3cb490c1fa5efcb",
+        "report": "af1596461b3ad56d6c98a1f4f0278ad01607acceecae0775bdfcdd5c19e9fbce",
+        "surface": "e0bebfd66b2ff270aef9bb9ab690adae9d5190c889e6024473fc1fb86c3839f5",
+        "topics": "3ea80350ba14700e1b03cece28fda2e5e5e7ad956fa7994bbb2e955d1c21671e"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-033",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "a88d4111be451312cae50876587a3ce24a1ac0c9d81082eec2dc4bb8367517c4",
+        "report": "f82246234d9d7a02e21394d6642b4b7475933d939939ce29076864b003e38c7b",
+        "surface": "aae54b384f20ffb1d672ef10a5c74e1a3c7edeeff615104467f0a2c42aacaced",
+        "topics": "9e919d2c701b283b3f45adaee28626c244738ecb7b8dceabaf097faf1b78b43c"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-034",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "3dcbc850ea9ef3205af29150966e1a43f0a75d04754bf023bf3ee47548d87291",
+        "report": "284fd909d573fab662f5658b0901d871c0e35aae57594bb7a99df1a6ad876601",
+        "surface": "bbfa5c0cf0bbed2163ef41bc5a1d38ee355675fa5af3f05c87d82ad852e528c3",
+        "topics": "6ff0c0e0e4a64718b9734eb8b2bd4106360e06f14239781cf0b48ef6f3531924"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-035",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YOU",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "d4f3979fe231fe1750e88599d502503af850522bc2a7324158e7583388f21f5f",
+        "report": "9f50a4e7bc00d5a45747fe214bdc53f4dccec8ce415c88fced4dea5025fe99b8",
+        "surface": "2f3d3d70efe391aa2e5b8dedce7de201f8db10998dcbfe7c3d9775d1ba771751",
+        "topics": "fa72042684d6953084b89511e1bb9088abdbbfe7889d59cc4957c751899bd3d8"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-036",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YOU",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "dcee8744d9c52f2fd4ac8db77f2f8b7d93b1c2ae931744dac63be86163d01800",
+        "report": "04b15ce189872455ff3d34cb825b5b7311a7e969668eadaa42c5fa50fdeb5efc",
+        "surface": "382d06098b4278ee45182553ec7cf7f5abedec15eb7d8008b2a61e285f343958",
+        "topics": "0fdf312aac35b6e8bf993effe1ccd0bac0ac0a61067d31e7bf8ff5cb3e1526c5"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-037",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "ZI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "952cb768aea30e9d55d4e65e3abea5724db8a95ce3dc7b46d5d2b4b6e502a647",
+        "report": "ca21acc40e9cd5fa85197969aee98fc0b9b1d1525662110dd053e13da2e6688b",
+        "surface": "ddb7375ca4d0d0b98612f7c1111c855cfb8f529cb81950dff250175990663a1e",
+        "topics": "58eb8095d7471cc61d2a8c2c7b9a53e4cd5662c6a813113b51c28fb352828392"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 0
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-038",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "ZI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "d65d254cca8656309ce3a060b3ccd995d82a1747617b0294d18f3035fcbd3b1b",
+        "report": "eb32fea7f5429a6bb4586da748fb82d856318ef2314f20af722989ea5ce73091",
+        "surface": "84bdd1b6a060bc4a4ba2e0f23db3b91cd67a92b07a74dfb6e9f6e34908d84e6a",
+        "topics": "1c96fbfc4d08bb34267050c50756cad2d6106779fc671979895af91fa6db4291"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 0
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-039",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "MAO",
+        "patternCodes": [
+          "JUN_CHEN_QING_HUI"
+        ]
+      },
+      "digests": {
+        "chart": "f6f0ca76ca06b27f1e2c84e5994633457c3627f236e3bbb00e9e811008f57132",
+        "report": "5e7e133b68cd6240416ae23f037dd6fd5537d74c7fd489c592d5be5149f61c54",
+        "surface": "44c216234a7d82790ebf2a69b4976fd8b046f52cba6aac474a1c31f96b2097c6",
+        "topics": "a3364e40e7b7695d112eb5eb1ae0c310803c6ee165d8a52b03c63c17f8b660c1"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-040",
+      "input": {
+        "birthDate": "1992-05-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "MAO",
+        "patternCodes": [
+          "JUN_CHEN_QING_HUI"
+        ]
+      },
+      "digests": {
+        "chart": "e9b77f8932fda0168287b19ecaea0ad53bfdbd0fa6a10e21f6ebc1bcf01eb456",
+        "report": "48a1105a1a7f8890ab9996fa080576aabcb75f467cf0df72cae283830565f9cd",
+        "surface": "67f82f797855843eb4062331b75d04aec482beb038d9ab9d3b7a4ceaa25bd578",
+        "topics": "7ca4c1a0aa4053b1f919d0acc34e9b0d5ad318d72cb6327560ce48a5b0624fdf"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-041",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "f6016066cdf2ecdccd54d228fe41d8a6791d9aa38d03e7ab2488cbd362d5497d",
+        "report": "069c1bd9e3492e1bcf0e77ff317d349493880a8243bcf2d3d9c347608a3e91e9",
+        "surface": "b8fce7fb1028157c5a579ade39fab990c9d3f023f26dae3f9b7bcd08c0a2a603",
+        "topics": "a705a1521219dd2d6b2be75f01535fb858bb82b0d29f3a742dd557f403f88058"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-042",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "4f4d9450d918bd7bcef576ad9a0451e490468499150595d303d5f6c02d66cfb1",
+        "report": "78ca7d85ce80398f96d53cca553aa1660d1f577b2b7198256eb74d3dc13f42de",
+        "surface": "567b51461bab54811cc09d6a19d264462fe36de6e7ee463d5c1f4afee4a73519",
+        "topics": "f97f773245943b08a19158df05aa25d1b0352dafbfb79fbb81dbace0b23b6f44"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-043",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YOU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "de4b8ccb3dd91838c1c1c193d81a90b5fbde3bdcb64d4842af0a00700ee57048",
+        "report": "400ff17598c8b8bcd036b8d359bf91be7721448713983f0f011e28533b298447",
+        "surface": "a67f0f6ee28f189feaa5e37029ab47db9d4b6ae0f47208776ac7fbeb599d941b",
+        "topics": "b12574380a3fc8e4150346a455a6639716d28961f8fcd69dfc899f5673755fc6"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-044",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YOU",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "bf8201cb1135056d247474f258e2f8c71b072494541fe3dae0404624c0fe34be",
+        "report": "49746496a62bb428f4bba0568e03270ce4db565773ac07c585ac0a7fb971bf7c",
+        "surface": "6162e40c598cb07f2ca3804a7b8b1d7b7a67b91692d7ecb5b6e0fc51ca79ccb6",
+        "topics": "8b0aaef8fa15fa020a5f0713b8fd66d642220ae8a27340acc7189b6a8b6db9cc"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-045",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "ZI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "705b21e521d55060038733fabb6086655098a4455539d1fd26799194fbe080ad",
+        "report": "86460cae1d4409b785f985b70fda44ab3954fbc0b8ff440a8593721438408c9f",
+        "surface": "acd354ff4048864612761716f3198855aa2b2eaa132fa44a48353a87c74ccb8b",
+        "topics": "832f703bbdf9acda4d0a778cf39e0ca2bcfec930600c9dfcf90d1bbaae809d64"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-046",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "ZI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "0f7784b0438d304d34ce57327cf739164d54db19b6b8fb88b19f08e03d66dc78",
+        "report": "398f5f846dd673cac0a6b25bf2cff2e0a8b65c5c81f111100b72683a93a7e8a3",
+        "surface": "cd0751fba596ec0632ca42ae290b29b0ba459bae10cccfdc9d080df8f7e10429",
+        "topics": "f554252f6f645536b4b9cd5e58f4ced034abe1f3f5d4dac63f69faf671ab14e8"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-047",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "MAO",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "f2194ebf21ca973b2291b4a4ff8ebdbd1a633371e8b11c37ba1e74ea30a71a91",
+        "report": "ed578783c449de9176b3f9fdea8c5cf7503fcb02dc8415b882aab19613aeb62c",
+        "surface": "59892e3e6af30ffbb7ae5d482c04c266126f40a2ef1def883c8affc262385033",
+        "topics": "e5a9336a0a267b9ecfac4aad0be4fc8b9a0b6e12a6343e1001e4ca71f12d8d58"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-048",
+      "input": {
+        "birthDate": "1993-06-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "MAO",
+        "patternCodes": [
+          "JU_JI_TONG_GONG",
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "41c43d179638c496f3b26f7aa4c23742e3352ba3db8fc0aa3a73d404b8b36efe",
+        "report": "aef0c7da722dbd2e003f559cbf03cd3b02e3fefb575110fd17f99b34a030df13",
+        "surface": "60784fdfba803969eb465a02d7a67a351993771b3cf43ce83573b30c1073dfd2",
+        "topics": "dcb0a87accf5e7aec817b711a0b4fff22b3dc53a233f0e654d74b056b4779a2b"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-049",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "84ffa19f86d30efaba0055b65cfd190e908aecdf16615ab01ffbb37f54563f1f",
+        "report": "425bd9b5592a0d7507ecb260f8529d6ce4822e99e96bada5ca892cf823553765",
+        "surface": "c39830bdc72dd3d8051043d8f234bcc14abeb119875fe98a04acae816137de73",
+        "topics": "fa12d772338a517e590164b4f3bf1cae58798f47877ec7d31b351a358644ec00"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-050",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "cc92017818b698aba332a00fc91eaa5582d38f6e6425d6268acefbc8f9b1083b",
+        "report": "94cac148c1af83d03265ee78e8f2fcd9f9499b3a63276a17ad03adcfd7a4e6c7",
+        "surface": "508338adfd2218b555c01cfca2a775828676e96e4211bbb209032b70c6ea9e63",
+        "topics": "1b16e23a9a99121de414a5f5f89153ca07bf817f681f3cd1a4508619a2c9df3a"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-051",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "HAI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "344be22b1c743c1f55cc3df013df1e6095077eb00946196b315bb5cfb7922290",
+        "report": "914fbe31c12aa0b61627c80f38a257dd3a4df4457c9c170f4075005225f27cc9",
+        "surface": "059d25e1c460169a4d607e75661422ab8a2ae312a939fa6de79376e852d82185",
+        "topics": "6dea236cc67afa3a030f9d37d847300bfc623943ac255ebe8c966076ec500412"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-052",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "HAI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "41f214ca87199023a10daa80a1f1393b5033c88157dfea166c45415f5a3203b5",
+        "report": "63a6eeeab9ebc31c92a4f4cc2ecc022981f407afaa75f8edeb50fa328fa64435",
+        "surface": "529892fd75604eab86b54e1aa4adb1cdea81c0b9f966ec2141a8e43bd7d44c1e",
+        "topics": "aa290cf4a14219479573cf5c942a7d5b52d92ec8e89d28bcba5ea13f5e8744e6"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-053",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "YIN",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "431a11fb3701670cd985155ca6747bb54aef73078a4a51bf0ef0f72d0c79d096",
+        "report": "408155181310a8aa6d3d77d6236ae6e262b8e6583758360b5cd692ef28ed1897",
+        "surface": "97107e38aa3995d3861c728eb5966044330e65ca100287c835e85169c4af48d5",
+        "topics": "148b3b0a82017ff999d5c5dba8845304f115dc675248714c3e7c1ebe1d3c7a0a"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-054",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "YIN",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "62df441c362cc27e4a38c9007a57152f73197b15b9100ff0d7213cf7a72b3cf4",
+        "report": "1addabe7676f2f5f38b34728ebeb386e8960c7b15b61fae479ef4dd50a80bf3d",
+        "surface": "9aa5e1fa161296b6b660ea564e88c48ab186e9d15ce4edaa38341e0c805be6b3",
+        "topics": "5bee75054adccf8da854329f18fe7b302888e658471e2ac3d88fd39381f3f434"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-055",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "a6701b3645057819e5c62aeea0e2a6970e271f44d656b9dae8bcb0f6d63ecfad",
+        "report": "a8d469098a1a41f761a3e8e2374c2bc868fc254cdf299e4509cf3d290d7173d1",
+        "surface": "02b6614f4c1db2c4abaf2a7f44c86cc1479d8bcd4aae0f3ce856862719b25bf6",
+        "topics": "be2c88d338af5d66b85ff7015ae4963f3d88f86cd20ab288d719369526ede0fd"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-056",
+      "input": {
+        "birthDate": "1994-07-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "6883d47c3b2f26f8b64b4695bb061320c7ab4de36ab8c61277de2e8721636b6a",
+        "report": "b5632e3aa784650e588ade36e3a012c74ef95b66dd81914ed4182cb226d1669e",
+        "surface": "4a69b241d2688f0975c3b1ccd6bcc4a7c2f97eafb85f309291d35058602993f4",
+        "topics": "3aa9b4d0ebafb584ef61003b7de779bbbc62b13a3b34598038ca1ea7b02d820a"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-057",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "YOU",
+        "patternCodes": [
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "896b09c554010001cbcebd4d3215129a7e57f77c730d0602c0666a2545318a41",
+        "report": "480d3a3a0ed2eb91c69de45b58001b7ae696a5879928dac7275babf07df5dee4",
+        "surface": "71d44ca763f587eef3326190cd1d0dfe434c8fa047b4564d1d5455d8b1efad1d",
+        "topics": "a78b788f51121016e2c7d22ddf40b21a397e0012970cc820c1085e606729294e"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-058",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WEI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "YOU",
+        "patternCodes": [
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "93ab2961e8599813b178106b2c337c5329dce5bbc66ed4a028ee4f487450d443",
+        "report": "c19437c2fc7ab1ca21eaabd0c9ef15e5198e6bc050411a5475cd15ef39bbda74",
+        "surface": "e8e236ba73d5ec2f8f5fbb27082139436aa9dda21ed4d486e4d1bc9fd4dc4574",
+        "topics": "fdfa257f22ddd59986521aba329c7feac577e67a9183e49077764e0e4b29e56b"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-059",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "ZI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "f589e0c19d1ad0a8dd762af593403050818b6d879b28b6bb0a49e170984665db",
+        "report": "7920cc33e5c320703e7a9ef34c416e96acccb95b3d61c55eab38b8c3e4d6fb08",
+        "surface": "e4fc9602c4be4ca8b449c5ff1b11112af34544e53473b96c966ba461002cdf89",
+        "topics": "fdbb4dbfc0b2a23e871a76a3dfbf9e679a2464f376e329ff7aa3037946e834fa"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-060",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "ZI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "bcd5de6161db99fd20174961cc445b6f2bb3699250f458812e77aed5e96d493c",
+        "report": "b3fc5d1a0c0177a1de5741178915a78b0c0f27ab6694c0a86546cceabe1e215f",
+        "surface": "a9e0618fb7f4529b5540ce1c20780268cb258a8f9e7e35508405e4366884d2a5",
+        "topics": "7820c7e4e6c159e62ef87c9e7c1343759d17459ec5d029c470007b6fa01eedd7"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-061",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "MAO",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "8879589312b2a19a396038a69f656ddb8ca57b31d9f602be6f10befd108fd8d4",
+        "report": "d79ce6ea6df5edf0b4964038cf7871ed307a4b3e4b568e19838e392126823b79",
+        "surface": "c35bd71fc2bb5bb9a5941cbccbbd3b0a01eae5a9717eb9ef3ab760b0041b76dd",
+        "topics": "a9a7ed6a8b527502a949480df5d83520e06493f4dc63b0d82781bab6eb931bd6"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-062",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "CHOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "MAO",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "8e519075fc3278a8f75b365c8678a62aaf456863d83a89d746e9f61110c86e5a",
+        "report": "27ecf5082c64f5b229b418b34fd8ff3b63cfd6f05347d4bb006245fdb62f1289",
+        "surface": "6b11183e6c1fdd215de0eceb849849bfffd7d42f7f5f8e609ec2ee55620be79c",
+        "topics": "a65d7024b0d9ee347708b64c1581a21b05ecfd7c156db81c57ec2ee88e4c3c0d"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-063",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "086614bc12ff1dac209caf50734d8f1ddf73a703522900d99a86db927066b962",
+        "report": "822bdd3007892e1c96fc1cfa0c2395be6636091cc213fd1f974b954071423692",
+        "surface": "6855c5c430c0b7506869d2e5ef399f79c2ada6cb99548d236ff12616a1f94d93",
+        "topics": "d967d655b438222923242bca19f08c30a6bf487bbcc5de263b9cf1eb42007c7e"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-064",
+      "input": {
+        "birthDate": "1995-08-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "XU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "4446519aa83ee8fbfc955d1fd8bb4025b430228997470d3b7b9e392143c1a928",
+        "report": "c675b7b89b7eb54ebdca94a79459a53b34a76fd01757782051ae117de6e879b0",
+        "surface": "50f6ae7eed32b4196183c2af3e388311d8c516189d29698d490a613b31283656",
+        "topics": "09c38e7f1adf6cfe31b9390659d3683a88a7955177d30f075eaaa1d4b090d34e"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-065",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "XU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "805c272a53e4dcd55b08d9b16da72d89f238e72b4314a02710e473b26fc4c24d",
+        "report": "a862c0b16d0a925af68921d3fd37ffca691446e2a805860d2d8b0ef0e18c65b6",
+        "surface": "b019924416646a8eb5640ab5b4129c78d3c210eb22aa9620670b5255387a85e7",
+        "topics": "a04b9207c76ac96cb748083db2b688791b03e6b4b446cfde54e73f5277467572"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-066",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "XU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "31bb3f888e14b05c4bad4f27949c958d1fed48f99d466a96c378905e5f523052",
+        "report": "66327e737c9a1287e9ff339b5cdf1a4ac075bae0f3ae722a5dceac85af056fed",
+        "surface": "3f29f60dd4d86b90d4c7c0de41f537928dedbaa3d60e179125f3dc159b59df9c",
+        "topics": "f8609bac2371280dbaf3d755b394620328be87bcb1308daa2c38b2a292fa6fe5"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-067",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "d1abe364853288e872c668b7b04e81782f8ca14e1bc9cd860493d9d7312bf076",
+        "report": "7c06b2a6ba7d64f74373ea0fd9897fe11f4bbff432aefc19068215c00315230c",
+        "surface": "c75de02b51e746d4d458dfc90a05b34f75b1e8592e5418f337437297593389dd",
+        "topics": "6839a00e7951f5d0465e5da45c5efdccd3287c3bbcc185aeaa537d26515fe58a"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-068",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "5b76a8301525b5e75732a7cc35de16d00034030cdb54e209ec9df2835f0956b2",
+        "report": "b21077a7299e65061a2d117db8a589305eacc5d760a334139a2067994101a8ae",
+        "surface": "9b612bf5a78e40e60b3460e6e7a96c24d02b0d2f967b7f3cd25051ff7c2ccd8d",
+        "topics": "b96848384ff2f7531958250419d497955db567d19b2fb2454d0117acb6522691"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-069",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHEN",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "d918faf51ecf7d93fe53387b1613b8dbb17a9ef40d7885fc1153ce0902e17839",
+        "report": "d0f18e4225861dae0d2a4846c257c3309a8dc4acdf8d966e824257a1a30cdd6b",
+        "surface": "1ac5da865190c4a02a485d7f6a52c7ab58b8f9053d358e0983afb7c9e5f7b732",
+        "topics": "2576309596696d8f7dd1c7736840c934fd02c567cde4ff4dd298c1f25b0059ff"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-070",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHEN",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "1e0b1440a7bb0e718f30019b85037c814ea31bb60b2dfeb7f305ae906abd2073",
+        "report": "e07f435519e37377f0b5beca15ac8be88320d423250e3964fa94dee5dc02a2f8",
+        "surface": "9f4eab8936f4f2310416ec0e6b97e91cf6b8091693f8a9465458bb3169daba9d",
+        "topics": "20d8e61c46e63978d16430a606ae3364f49763cffe394e7c5bc9e0c4f7e63b0b"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-071",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WEI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "c55adda462fca16786e2d6a2fcdb5486ade4229a9af8a8e2d8e5c7f15fa4ca16",
+        "report": "e9608cf1fdc3269db9872ee2be0e489efc04eab7197adb121950ea5ab0045420",
+        "surface": "164e9acfb8bd3db6cb2885cf54e67d74a912a5c4bf3648882210cf8c10630ce1",
+        "topics": "f3270e21b18a040fc524022b632747e94f1b8894e77ed1b63c4e46a6c42b636b"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-072",
+      "input": {
+        "birthDate": "1996-09-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "WEI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "b9391f84edb8314f17c60587a67dc25b2df5c76c27e309ce0af9091f037a7696",
+        "report": "cb5b05cfd0ed0e50d707cf3b9c43f82dfde297078e31a9a8ae441ed6436fe871",
+        "surface": "281391f43b8643b6ce54f7b69f5a5a43a31b356703cf4c95635f78ba1e6ebae5",
+        "topics": "b9d597e8b3ec498b99de5c124089b074246061f5696212618224c2dfb3d54f6d"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-073",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "HAI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "ae6c2eaf633d55dd0cfd6653693ca83fe443b014e61080e86c258822ff7dfbe7",
+        "report": "9a4c75f8a093f973b4b5b4266a831149e825a38531fb0675db519ed24acc25d4",
+        "surface": "340c9ba94e288bf2590804de75fd22aabaee3bed175499052cc7f8f39e72b49e",
+        "topics": "07b4ca71af2046d79d8d071e457ab4d5e017822428087e74982867dc9f6de2f5"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-074",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "HAI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "7c6d4cc2eb5d5117982e4891d36758c137c809dcc2c325238aefd21eec2dd3ea",
+        "report": "aeeb6b31e5b67349c6abf4b768be6be29043dbca23a2ddf94725916864a7e338",
+        "surface": "4888d033180f7e0b3b55aa58d4183fd2272aed06257dd63f3ce7bded9dd90b15",
+        "topics": "edd30cdcaa6b3aef87d2b27f534bf2eabc06d7700e9db9adfb294725fc3e6e82"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-075",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YIN",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "937b846f645cd4bcc034f79b388c2fd204022362dd4715644860e8ed69401bcc",
+        "report": "d74dae3340f96a9f7882c13070f62783e44b041e17cb441d8da6df7f32889647",
+        "surface": "f628f7c1a46018ff72bc4a21553ae02a0846037d434c09cbe195a0d7141da6e6",
+        "topics": "72589b8f034be47e9de8691ba04ee94301a4a3a5fa568874eae82abacbc1ff37"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-076",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YIN",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "5be39923a2d25df54293f223cf121d3952f8c751f32ce62b6d62660f55f4c40a",
+        "report": "564b31fa0782a0979549c8321b42d7132b7ec6ec172b1bea741bcf555d9f0d98",
+        "surface": "9d7744a68d2a489ecd4ad2de6bd4a1301880fb0c22f13c31cfa7f689348a4473",
+        "topics": "8469bf0ccca24f44a168a087204ecb680d3e59a2681cbfb344e4930597b39e21"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-077",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "WU_QU_SHOU_YUAN"
+        ]
+      },
+      "digests": {
+        "chart": "95adbf3c7d08692320ed06a96000f248a1d6079009feb1b7c8a208a4024b6d76",
+        "report": "3236659ad3d43cc37919be00504823eb73ea5ae44bc11636028e913ba54a5ecd",
+        "surface": "1ae15d577de7ec6e1551bb79d9e83d2fe070937b620b37782f2a050607aac1a2",
+        "topics": "b75a86b5748061d04b61a5f381d6a5addd70241690c0c4c7287719e282847a6c"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-078",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "WU_QU_SHOU_YUAN"
+        ]
+      },
+      "digests": {
+        "chart": "a946c2de3b27a03dfd1c929d46cd4c39ca15e41444f4af9d93869433983a957e",
+        "report": "d601d6d6b70a82f9c455867f38fce480807dec9f630e2574ecc37bc09da4b205",
+        "surface": "1e10c526bb77f96abc846c915867229bdddb0a4fc54e435f1625b5e98464a9af",
+        "topics": "ea0d5291cda119212974def7972a9710195ad0cff957bcc47ff4a059dde0385a"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-079",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "3927d9b73d45d9351ab154738156fe26ea3d988011fd58017ae35856ed2e69a8",
+        "report": "e6c8223000ece85e8bfae6b380b69e17c118e1727e82b76fc3df3064a521c007",
+        "surface": "cc7b4a9b6ba1aa6529a5ad9be9ab056ff80ab1b08926eaa2b1d84b3a9b670526",
+        "topics": "48b0148c46e20028e164123c343aedb51f34b842d52ab3c5ed204f1e8c9551cb"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-080",
+      "input": {
+        "birthDate": "1997-10-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "2976e398f4812b7bf05532e5371649c21b727bee3da42ecf1d92ab7f31db68e3",
+        "report": "2494e51cc19119cb85b08b51671ff85034cab782c5b2fc699c6afdf97bee1fca",
+        "surface": "b560a3238dae903857e41ab73e530c1b4b4e453f3682e4d479f5754f0bc5e07f",
+        "topics": "e02f677454283733e93513ae8368bd0e9c5d5ffe7909d8b1de6eb84236877662"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 0
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-081",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "HAI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "9fa4780a4ce17b668d455289065bbd450100dd5936a4386da6734d041f87f469",
+        "report": "819ad30b0817099b877cc9e45728f43f914416eebc53e9df263805c6a7cfdf64",
+        "surface": "0236833ad6a066871f8191dad2d82174c31b14c64c43974bb9653bd20a3d8142",
+        "topics": "cc1fb79f9e61cbbe9a0926c61ebd7c7d9a51cc1cb35a142f3647a8aa85be841b"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-082",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YOU",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "HAI",
+        "patternCodes": [
+          "JU_JI_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "88c54a72e408db04806b7bfff3807cee3221568d5032492db8f322fc8c0fcc19",
+        "report": "c9ab248d2f5b302617983914ea82e7c598556bde494388f727cf633578edcb1b",
+        "surface": "962ce47d9b446d679656961e44fb862ebb89b01ae0d7f3378ad76e2165a2e724",
+        "topics": "874c903be55db08de30a32153a71475f7b64611c02503115fa358360eee505ef"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-083",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YIN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "1b99aec1e4f9bcd1f0fe0993d56a409102a0d829f12ae25fd37b4646b72c13e9",
+        "report": "2c1cf00f430d70ce9eb52c3bdecbf76c77e809afb4e77c11795d991227f391bf",
+        "surface": "7f572d84204ea747662b193117b8d59af002f1b554caf876cf4b520fd4886a2d",
+        "topics": "a60a47c2252e5b71b0bccd17b5e65bef1404aad3ebe470ad96a722d9e396ce9d"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-084",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "WU",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "YIN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "e38f9605bd98f64efb4cbd240aa782a7fe94a52882f66802868bc8208a24135b",
+        "report": "eed8326572e053947ff1b2810ac6a4802d5d2e84483a6a298602260672aa0c78",
+        "surface": "e484c1e1c7db95a4f482b0f242b8445e13a72f2b3a26bfad7c328703fbeae6d8",
+        "topics": "d8cddb8d1f6715687965e2453b2c26772a29b6a75a9e5208e9f0f2c31e75342e"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-085",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "3c821b23175bde5f54e981c3ca85f9dff68a9f6c721844ebefcd0af433b109cd",
+        "report": "e65f273aa6bfc444c4055f3bbde3128390ae70c3b4b9ccac3c07abb61e556257",
+        "surface": "59d2744aab5abe2700b2638825d3a99d9b15839e0628102b68b3895bd1ed9df0",
+        "topics": "daac1f48faf10f8a9da811e4c4597989037990a7651f1e2a32b59f33f75b2bf1"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-086",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "MAO",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "SI",
+        "patternCodes": [
+          "ZI_FU_TONG_GONG"
+        ]
+      },
+      "digests": {
+        "chart": "a88602c11c0c4b96962a3fd9aba7857e11f585d1624ba33b0df33ec052bf1de1",
+        "report": "08286f19e765b3a1e2f0dc0409480efa04f508542028797959ec9bc1a1287746",
+        "surface": "61835a6941e05c3dacb71309f633af70d39dc7ff9b3217dedaf71bb0657b269a",
+        "topics": "6c5f4a2b4afb556f20d03f84b4883a0ab22d3d12645ad411139c8c70915b7e2b"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-087",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "9c8627497e4d7a2ee4d08c364d529056e55c94deae734a95496616b07261d0de",
+        "report": "84709136527ef08e9dcc159daffd86f42a52bd0db803d63bccda46b91457c0da",
+        "surface": "ed9c4af54324101a67986e0fe886b11a30b23a0e5aebd54abc7ea4f82ebd6005",
+        "topics": "8d7dd8e7de432e6c0561f67f714b9a87ff9e371ec41938a8a2c199555ee240eb"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-088",
+      "input": {
+        "birthDate": "1998-11-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "ZI",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "SHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "38f7d9a9256d1e03a6bdfc60712130d199878fa51a49a3af5ee73e5b5fbc2a9b",
+        "report": "d8bd0ef4606a08308ec54d1c627215aecfae0df5247018f3dac8c23c5cb13af1",
+        "surface": "e4d8bd8c45385502f3e2b138d0711b23b62ab79e37358e7f3fe5cecbb08b22f6",
+        "topics": "c289a7c13e58af495ed20eb09807f7e41ad87caa338ca503c463d2b4996707c9"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-089",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "c0b63c1fcad40758f2bc5197b70433a8006009d531abc0339d91910840b59e61",
+        "report": "7a0e6993a8f2c6e289d796257e71ebdc2d9ee2e96290d728074cb9c1726bacc0",
+        "surface": "288f84700cd107372a18e5de96cbe47117a461a470679d2f89657ffd96bd9a40",
+        "topics": "be440ed7b864fc23cfee83870f77e0f7e77a2e16ca7d03d07981d9ee779c9f7c"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-090",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "01:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "HAI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "CHOU",
+        "patternCodes": [
+          "TAN_LING_BING_SHOU"
+        ]
+      },
+      "digests": {
+        "chart": "295c768cdb3876738cf0549f490537468f44eca197e9cb74c36c65682942b3b3",
+        "report": "f2b5ba66396e1edb015b896027381e4ac76c1eac616708cb1d78ff9c7bd88044",
+        "surface": "c05ae621e386b359c32df4623b702b3cf1944fc142f5e1737866f2e0f586a526",
+        "topics": "7e27145cfbcdcf7ea8558bdb2c7c334b216e6e0739d6919a98f672ffeabfc507"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-091",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "7bc26324b4285e85f0a865cf36374ac4b68592456eb437908d338cdce0e7eca3",
+        "report": "841caeefaa534e6776c6ec36c296539823558590b1d18cd3a3d75d7076e3f11b",
+        "surface": "6d5b9786fe19e8783a1c3b7f2422d12b041567073809c17d27d8226e87b330da",
+        "topics": "995a6e6dca94ef60fdfdc3cfa91b45187890d83627cc0ae9bc7b050661cb5563"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-092",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "07:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SHEN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "CHEN",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "a6a45d7d90e804bf0975a7652473f3a2eaf370d77d2ffa6c48eb46cd868cf954",
+        "report": "aaebe9629cdb13ad7f272df6fad7648f47864c65d14e26cbe2e848ade0537acd",
+        "surface": "3d9a267c0b5db733e5d7489b33f6e87888ff29e66ff394a9ef7f265748bb01cf",
+        "topics": "29643a7f1f4958c278af18253a62a15ab3d6ae45cb691361c2da8caff8defb3a"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-093",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WEI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "bc26cb30222b4ef6cb758f28bcd7b5fdc3a9ef2e8fdcf1a532f1b6bc0a5187e8",
+        "report": "8959d4e5863f1c18a043eaeab44d4a63cd0fcf9f3564fc4cf07c191535737b42",
+        "surface": "add3a392eed6dd1d78550791bf304508d32811b544f78192451ef2d0141b368a",
+        "topics": "8e87e7a0149c09cd88464850bc1dfb58817360076928c6e88cb7819cb8b7be24"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 1
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-094",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "13:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "zh-Hans"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "SI",
+        "bodyPalaceCode": "WELLBEING",
+        "bodyBranch": "WEI",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "4a51242d9a2c24ca9a5d54d5fd0ba1e350babc2c2b3fc9244c76d7ce97267222",
+        "report": "991c1c554a2907a3c22f040e5de22ee08ae2946dc65d47376bfc5e2f0c5df8c4",
+        "surface": "f7932d50c28c40ce58d6a2e21595fd8d6922cc79051cc4129eb3553123bd9c56",
+        "topics": "fe3ddbb9a2fbc4f45ec775480bffdb8086b264b78b17da8ee2fdb34338d94977"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-095",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "MALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "XU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "34dff94ba7c341015c7ad8dc5b8f41bdf548d3fb397f5e6a56b433892e296a8e",
+        "report": "b544498e6db8d163f2b00854a9eab4757dde3401604319f20496ce60d7cdd9f6",
+        "surface": "8299f3c595a7093a80fd28e4bf94f2a69f2d3e613cccce64237f24dec588ba87",
+        "topics": "00b2947a563a1f8e3aeb39f4da0f6142c2dc28e4f342559bbbded35bd9ad1c79"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    },
+    {
+      "caseId": "ZWR-W21-096",
+      "input": {
+        "birthDate": "1999-12-15",
+        "birthTime": "19:00:00",
+        "traditionalCalculationSex": "FEMALE",
+        "locale": "en"
+      },
+      "structure": {
+        "lifePalaceCode": "LIFE",
+        "lifeBranch": "YIN",
+        "bodyPalaceCode": "WEALTH",
+        "bodyBranch": "XU",
+        "patternCodes": []
+      },
+      "digests": {
+        "chart": "0343b0ab2c0ee5c531dea231120032b675ec213bd7049d47eae3ed8825d601f5",
+        "report": "5934617f63dcf7e5702a85f761c7f28037134091ca51ee5b19514d5a98c4a1e5",
+        "surface": "15ebdb42a6d43865ca61501fe7548943938a8e3aeb54fa408ba40172c818f90b",
+        "topics": "7c39c11b335e017b505dac9635dac929a2d9e0d6534db332c0781750ee5dfd89"
+      },
+      "counts": {
+        "reportPalaces": 12,
+        "interactivePalaces": 12,
+        "topics": 8,
+        "openBoundaries": 8,
+        "counterbalancedBlocks": 2
+      },
+      "invariant": {
+        "reportPalaces12": true,
+        "reportExactDuplicateCustomerText0": true,
+        "surfacePalaces12": true,
+        "oneInspectorOwnerPerPalace": true,
+        "topicCount8": true,
+        "openBoundariesVisible": true,
+        "noNewMeaning": true,
+        "noGoodBadScore": true,
+        "noFortuneEventPrediction": true
+      },
+      "passed": true
+    }
+  ],
+  "deterministicReplay": [
+    {
+      "caseId": "ZWR-W21-001",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-013",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-025",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-037",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-049",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-061",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-073",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    },
+    {
+      "caseId": "ZWR-W21-085",
+      "reportDigestMatch": true,
+      "surfaceDigestMatch": true,
+      "topicDigestMatch": true
+    }
+  ],
+  "boundaries": {
+    "humanAccepted": false,
+    "humanAcceptanceCreatedByMachine": false,
+    "customerCutoverAllowed": false
+  },
+  "campaignDigest": "f7fa7e64f000eb2416e9f4b04b29a759a699d86053b2f3006319d98b0d0e2541"
+}

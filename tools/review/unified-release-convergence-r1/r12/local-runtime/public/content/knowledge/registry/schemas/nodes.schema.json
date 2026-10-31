@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nodes.schema.json",
+  "title": "PKR Canonical Knowledge Nodes",
+  "type": "object",
+  "required": [
+    "version",
+    "nodes"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "nodeCode",
+          "collectionCode",
+          "themeCode",
+          "canonicalQuestionKey",
+          "productionTier",
+          "supportingQuestionCodes",
+          "relationships",
+          "version"
+        ],
+        "properties": {
+          "nodeCode": {
+            "type": "string",
+            "pattern": "^KN-[A-Z0-9-]+$"
+          },
+          "collectionCode": {
+            "type": "string"
+          },
+          "themeCode": {
+            "type": "string"
+          },
+          "canonicalQuestionKey": {
+            "type": "string"
+          },
+          "productionTier": {
+            "enum": [
+              "tier_a",
+              "tier_b",
+              "tier_c"
+            ]
+          },
+          "supportingQuestionCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "legacyNodeCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "relationships": {
+            "type": "object"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-MCD-6-HDR-RENDERER-READINESS-v1.0.0",
+  "work": "MCD-6",
+  "baselineCommit": "2bd7fd80da907a53f5f4a0f5c0e2db0a87100a4e",
+  "status": "VALIDATION_ONLY_PRODUCTION_BINDING_FORBIDDEN",
+  "current": {
+    "rendererDevelopment": true,
+    "validationFixture": true,
+    "accessibilityDevelopment": true,
+    "responsiveDevelopment": true,
+    "projectionContractValidation": true,
+    "productionDispatchBinding": false,
+    "realCustomerProductionResult": false,
+    "professionalResult": false
+  },
+  "publicNaming": {
+    "en": "Personal Runtime Projection",
+    "zh-Hans": "个人运行投射",
+    "restrictedInternalMethodBrandAllowedOnPublicRenderer": false
+  },
+  "activationGate": {
+    "allRequired": true,
+    "requirements": [
+      "RIGHTS_RESOLVED",
+      "MAPPING_AUTHORITY_RESOLVED",
+      "COMMERCIAL_APPROVAL",
+      "MPA_PRODUCTION_GRANT",
+      "CANONICAL_PROJECTION_ACCEPTED",
+      "PUBLIC_VOCABULARY_ACCEPTED",
+      "SECURITY_ACCEPTED",
+      "CLIENT_PROJECTION_ACCEPTED"
+    ],
+    "currentlySatisfied": [],
+    "productionState": "BLOCKED"
+  },
+  "invariants": {
+    "rendererFileExistsDoesNotEnableProduction": true,
+    "validationFixtureMayNotBecomeCustomerResult": true,
+    "mpaBlockHasPriority": true,
+    "publicLabelDoesNotCreateEligibility": true
+  },
+  "mcd5ValidationFixture": {
+    "path": "content/professional/method-client-delivery/fixtures/hdr-validation-only-canonical-projection.renderer-fixture.v1.json",
+    "sha256": "80380edf0906ac6ab03e565569e08e76c572cf7d49b3309b5483d05623ba73a8"
+  }
+}

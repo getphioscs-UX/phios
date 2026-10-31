@@ -1,0 +1,2 @@
+// Public Chinese wording only. Canonical registry identities and evidence stay intact.
+export function worldPublicCopy(value,locale){const text=String(value??'');if(locale!=='zh-Hans')return text;return text.replaceAll('第一代文明 Runtime','第一代文明运行体系').replaceAll('第一代全球 Runtime','第一代全球运行体系').replaceAll('苏联 Runtime','苏联运行体系').replaceAll('Atlas 只描述','图谱只描述').replaceAll('政治 Runtime','政治运行体系').replaceAll('文明 Reality','文明现实');}

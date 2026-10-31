@@ -1,0 +1,140 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "joint-assets",
+  "description": "Joint asset with no silent 50/50 share inference.",
+  "synthetic": true,
+  "sourceAdapter": "EXCEL",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "jointShareInferenceForbidden": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-JOINT-S0",
+      "financialRealityId": "FR-JOINT",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-JOINT",
+        "householdReference": "HH-JOINT",
+        "customerReferences": [
+          "CUST-J1"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-J1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-J2",
+            "roles": [
+              "SPOUSE"
+            ],
+            "relationshipToHousehold": "SPOUSE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-J2",
+            "assetType": "BANK_ACCOUNT",
+            "ownership": {
+              "ownershipId": "OWN-J2",
+              "assetId": "A-J2",
+              "ownershipMode": "JOINT",
+              "ownerReferences": [
+                "P-J1",
+                "P-J2"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-J2",
+              "factCode": "ASSET_VALUE",
+              "value": 80000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "7918422059e232894f24b0ad2b6c1ad62f9e126ce0b69324b34b19a3375b4eac"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "790895f0cfabb622eae8cbb641d2162607b36d146524ac53beae7858bdff2b6d"
+    }
+  ],
+  "changeEvents": []
+}

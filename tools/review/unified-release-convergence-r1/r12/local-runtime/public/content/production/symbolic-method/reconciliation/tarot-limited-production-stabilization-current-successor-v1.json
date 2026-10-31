@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-LIMITED-PRODUCTION-STABILIZATION-CURRENT-SUCCESSOR-v1.0.0",
+  "phase": "TPA-N",
+  "work": "N-W59-N-W67",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "CURRENT_LIMITED_PRODUCTION_STABILIZATION_SOURCE_READY_LIVE_WINDOW_REQUIRED",
+  "methodCode": "TAROT",
+  "predecessor": "content/production/symbolic-method/reconciliation/tarot-production-capability-current-successor-v2.json",
+  "predecessorMutated": false,
+  "authority": {
+    "currentProductionState": "LIMITED_PRODUCTION",
+    "currentApprovedShaAtPhaseStart": "a9556d446cb289787fceea611341d7dd67de5dcf",
+    "canonicalRoute": "/perspectives/tarot/",
+    "fullProduction": false,
+    "stabilizationMayAutoPromote": false,
+    "clientMayGrantAuthority": false
+  },
+  "source": {
+    "contract": "content/production/symbolic-method/stabilization/tarot-limited-production-stabilization-contract-v1.json",
+    "errorTaxonomy": "content/production/symbolic-method/stabilization/tarot-production-error-taxonomy-v1.json",
+    "campaign": "content/production/symbolic-method/stabilization/tarot-limited-production-observation-campaign-v1.json"
+  },
+  "operationalEvidence": {
+    "committed": false,
+    "rolloverRequiredAfterSuccessorDeployment": true,
+    "stabilityWindowHours": 24,
+    "minimumObservations": 3
+  },
+  "currentChecker": "scripts/check-tarot-current-v5.mjs",
+  "nextAction": "DEPLOY_PHASE_N_SUCCESSOR_SHA_VERIFY_FAIL_CLOSED_ROLLOVER_THEN_REPROMOTE_AND_OBSERVE"
+}

@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "PHI-OS-HEALTH-K1-MINIMUM-CORE-CORPUS-v1.0.0",
+  "work": "HEALTH-K1-W5-W9",
+  "status": "CURATED_SOURCE_BOUND_CANDIDATE_REQUIRES_LIVE_SOURCE_ADMISSION",
+  "packetCount": 14,
+  "packets": [
+    {
+      "conceptId": "SKIN_RASH",
+      "sourceIds": [
+        "HK1-NHS-HIVES",
+        "HK1-NHS-ITCHY-SKIN"
+      ],
+      "observe": [
+        "location",
+        "appearance",
+        "itching",
+        "pain",
+        "swelling",
+        "spread",
+        "new products or exposures",
+        "new medicines",
+        "fever or feeling unwell"
+      ],
+      "warningSignals": [
+        "LIP_TONGUE_THROAT_SWELLING",
+        "BREATHING_DIFFICULTY",
+        "RAPIDLY_WORSENING_SYSTEMIC_REACTION"
+      ],
+      "careNavigation": "CONTEXT_DEPENDENT",
+      "answerBoundary": "CAUSE_NOT_ESTABLISHED"
+    },
+    {
+      "conceptId": "ITCHING",
+      "sourceIds": [
+        "HK1-NHS-ITCHY-SKIN"
+      ],
+      "observe": [
+        "location",
+        "new rash",
+        "swelling",
+        "severity",
+        "duration",
+        "recurrence",
+        "pregnancy context"
+      ],
+      "warningSignals": [
+        "SEVERE_OR_GENERALIZED_WITH_SYSTEMIC_CHANGE"
+      ],
+      "careNavigation": "CONTEXT_DEPENDENT",
+      "answerBoundary": "CAUSE_NOT_ESTABLISHED"
+    },
+    {
+      "conceptId": "HIVES",
+      "sourceIds": [
+        "HK1-NHS-HIVES"
+      ],
+      "observe": [
+        "itchy raised rash",
+        "spread",
+        "duration",
+        "recurrence",
+        "temperature or feeling unwell",
+        "swelling under skin"
+      ],
+      "warningSignals": [
+        "LIP_TONGUE_THROAT_SWELLING",
+        "BREATHING_DIFFICULTY",
+        "FAINT_OR_CONFUSED"
+      ],
+      "careNavigation": "CONTEXT_DEPENDENT",
+      "answerBoundary": "CAUSE_NOT_ESTABLISHED"
+    },
+    {
+      "conceptId": "FACIAL_SWELLING",
+      "sourceIds": [
+        "HK1-NHS-ANGIOEDEMA",
+        "HK1-NHS-ANAPHYLAXIS"
+      ],
+      "observe": [
+        "location",
+        "sudden onset",
+        "rash",
+        "throat symptoms",
+        "breathing",
+        "swallowing"
+      ],
+      "warningSignals": [
+        "LIP_TONGUE_THROAT_SWELLING",
+        "BREATHING_DIFFICULTY"
+      ],
+      "careNavigation": "PROMPT_TO_EMERGENCY_DEPENDING_ON_WARNING_SIGNALS",
+      "answerBoundary": "CAUSE_NOT_ESTABLISHED"
+    },
+    {
+      "conceptId": "LIP_TONGUE_SWELLING",
+      "sourceIds": [
+        "HK1-NHS-ANAPHYLAXIS",
+        "HK1-NHS-ANGIOEDEMA"
+      ],
+      "observe": [
+        "sudden onset",
+        "breathing",
+        "swallowing",
+        "wheeze",
+        "confusion or fainting"
+      ],
+      "warningSignals": [
+        "LIP_TONGUE_THROAT_SWELLING",
+        "BREATHING_DIFFICULTY"
+      ],
+      "careNavigation": "EMERGENCY_IF_SUDDEN_WITH_AIRWAY_OR_SYSTEMIC_SIGNS",
+      "answerBoundary": "NO_DIAGNOSIS"
+    },
+    {
+      "conceptId": "RAPID_ALLERGIC_REACTION",
+      "sourceIds": [
+        "HK1-NHS-ANAPHYLAXIS",
+        "HK1-NHS-FOOD-ALLERGY"
+      ],
+      "observe": [
+        "possible exposure",
+        "rash",
+        "swelling",
+        "breathing",
+        "swallowing",
+        "dizziness or fainting"
+      ],
+      "warningSignals": [
+        "LIP_TONGUE_THROAT_SWELLING",
+        "BREATHING_DIFFICULTY",
+        "FAINT_OR_CONFUSED"
+      ],
+      "careNavigation": "EMERGENCY_IF_ANAPHYLAXIS_WARNING_PATTERN",
+      "answerBoundary": "NO_DIAGNOSIS"
+    },
+    {
+      "conceptId": "VOMITING",
+      "sourceIds": [
+        "HK1-NHS-DIARRHOEA-VOMITING"
+      ],
+      "observe": [
+        "duration",
+        "blood or coffee-ground appearance",
+        "green vomit",
+        "severe pain",
+        "breathing",
+        "confusion",
+        "hydration"
+      ],
+      "warningSignals": [
+        "VOMIT_BLOOD",
+        "GREEN_VOMIT_WITH_SEVERE_ILLNESS",
+        "SEVERE_ABDOMINAL_PAIN",
+        "SEVERE_BREATHING_DIFFICULTY",
+        "CONFUSION"
+      ],
+      "careNavigation": "CONTEXT_DEPENDENT",
+      "answerBoundary": "CAUSE_NOT_ESTABLISHED"
+    },
+    {
+      "conceptId": "DIARRHEA",
+      "sourceIds": [
+        "HK1-NHS-DIARRHOEA-VOMITING"
+      ],
+      "observe": [
+        "duration",
+        "blood",
+        "hydration",
+        "vomiting",
+        "severe pain",
+        "confusion"
+      ],
+      "warningSignals": [
+        "BLOODY_DIARRHEA",
+        "SEVERE_ABDOMINAL_PAIN",
+        "CONFUSION"
+      ],
+      "careNavigation": "CONTEXT_DEPENDENT",
+      "answerBoundary": "CAUSE_NOT_ESTABLISHED"
+    },
+    {
+      "conceptId": "HBA1C",
+      "sourceIds": [
+        "HK1-NIDDK-A1C"
+      ],
+      "observe": [
+        "value",
+        "unit",
+        "date",
+        "laboratory method if known",
+        "previous values",
+        "conditions affecting red cells or hemoglobin if documented"
+      ],
+      "warningSignals": [],
+      "careNavigation": "CLINICIAN_CONTEXT_FOR_DIAGNOSTIC_INTERPRETATION",
+      "answerBoundary": "NO_AUTONOMOUS_DIAGNOSIS"
+    },
+    {
+      "conceptId": "LDL_C",
+      "sourceIds": [
+        "HK1-NHLBI-CHOLESTEROL"
+      ],
+      "observe": [
+        "value",
+        "unit",
+        "date",
+        "other lipid panel values",
+        "personal clinical context"
+      ],
+      "warningSignals": [],
+      "careNavigation": "CLINICIAN_CONTEXT_FOR_TARGETS",
+      "answerBoundary": "NO_PERSONAL_TARGET_INFERENCE"
+    },
+    {
+      "conceptId": "HDL_C",
+      "sourceIds": [
+        "HK1-NHLBI-CHOLESTEROL"
+      ],
+      "observe": [
+        "value",
+        "unit",
+        "date",
+        "other lipid panel values",
+        "personal clinical context"
+      ],
+      "warningSignals": [],
+      "careNavigation": "CLINICIAN_CONTEXT_FOR_TARGETS",
+      "answerBoundary": "NO_PERSONAL_TARGET_INFERENCE"
+    },
+    {
+      "conceptId": "TRIGLYCERIDES",
+      "sourceIds": [
+        "HK1-NHLBI-CHOLESTEROL"
+      ],
+      "observe": [
+        "value",
+        "unit",
+        "date",
+        "other lipid panel values",
+        "personal clinical context"
+      ],
+      "warningSignals": [],
+      "careNavigation": "CLINICIAN_CONTEXT_FOR_TARGETS",
+      "answerBoundary": "NO_PERSONAL_TARGET_INFERENCE"
+    },
+    {
+      "conceptId": "CREATININE",
+      "sourceIds": [
+        "HK1-NIDDK-EGFR"
+      ],
+      "observe": [
+        "value",
+        "unit",
+        "date",
+        "eGFR if reported",
+        "age/sex context only when already provided for clinical calculation"
+      ],
+      "warningSignals": [],
+      "careNavigation": "CLINICIAN_CONTEXT_FOR_KIDNEY_FUNCTION",
+      "answerBoundary": "CREATININE_ALONE_NOT_DIAGNOSIS"
+    },
+    {
+      "conceptId": "EGFR",
+      "sourceIds": [
+        "HK1-NIDDK-EGFR"
+      ],
+      "observe": [
+        "value",
+        "unit",
+        "date",
+        "creatinine or cystatin C basis if known",
+        "trend"
+      ],
+      "warningSignals": [],
+      "careNavigation": "CLINICIAN_CONTEXT_FOR_KIDNEY_FUNCTION",
+      "answerBoundary": "NO_AUTONOMOUS_CKD_DIAGNOSIS"
+    }
+  ]
+}

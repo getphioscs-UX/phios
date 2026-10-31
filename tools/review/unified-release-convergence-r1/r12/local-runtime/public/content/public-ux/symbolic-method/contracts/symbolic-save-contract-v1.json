@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-SYMBOLIC-SAVE-CONTRACT-v1.0.0",
+  "phase": "UX",
+  "work": "UX-W6",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "CONTRACT_READY_PROVIDER_BINDING_REQUIRED",
+  "accountOnly": true,
+  "retentionPolicyRequired": true,
+  "verifiedIdentityRequired": true,
+  "allowedPayload": [
+    "question",
+    "methodEvidence",
+    "projection",
+    "reading",
+    "userNotes"
+  ],
+  "forbiddenPersistence": [
+    "guestHiddenHistory",
+    "browserLocalHiddenReadingHistory",
+    "unverifiedUserIdentity"
+  ],
+  "rules": {
+    "guestPersistenceAllowed": false,
+    "localStorageReadingPersistenceAllowed": false,
+    "sessionStorageReadingPersistenceAllowed": false,
+    "providerMayBeAssumedWhenMissing": false
+  }
+}

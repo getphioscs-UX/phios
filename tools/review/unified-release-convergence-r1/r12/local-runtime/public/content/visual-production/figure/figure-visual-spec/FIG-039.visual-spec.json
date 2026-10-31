@@ -1,0 +1,97 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "EVIDENCE_INFERENCE_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-039-N01",
+        "FIG-039-N03"
+      ],
+      "mustExclude": [
+        "FIG-039-N02",
+        "FIG-039-N04"
+      ],
+      "sourceBindingId": "FIG-039-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-EVIDENCE-INFERENCE-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "ACADEMY",
+  "edges": [
+    {
+      "edgeId": "FIG-039-E01",
+      "from": "FIG-039-N01",
+      "relation": "BOUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-039-SRC-01",
+      "to": "FIG-039-N02"
+    },
+    {
+      "edgeId": "FIG-039-E02",
+      "from": "FIG-039-N02",
+      "relation": "MAY_SUPPORT",
+      "required": true,
+      "sourceBindingId": "FIG-039-SRC-02",
+      "to": "FIG-039-N03"
+    },
+    {
+      "edgeId": "FIG-039-E03",
+      "from": "FIG-039-N03",
+      "relation": "MAY_UPDATE",
+      "required": true,
+      "sourceBindingId": "FIG-039-SRC-02",
+      "to": "FIG-039-N04"
+    }
+  ],
+  "figureId": "FIG-039",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-039-N01",
+    "FIG-039-N02",
+    "FIG-039-N03",
+    "FIG-039-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Evidence",
+      "nodeId": "FIG-039-N01",
+      "required": true,
+      "semanticKey": "EVIDENCE",
+      "sourceBindingId": "FIG-039-SRC-01"
+    },
+    {
+      "displayLabel": "Inference",
+      "nodeId": "FIG-039-N02",
+      "required": true,
+      "semanticKey": "INFERENCE",
+      "sourceBindingId": "FIG-039-SRC-01"
+    },
+    {
+      "displayLabel": "Assessment Evidence",
+      "nodeId": "FIG-039-N03",
+      "required": true,
+      "semanticKey": "ASSESSMENT_EVIDENCE",
+      "sourceBindingId": "FIG-039-SRC-01"
+    },
+    {
+      "displayLabel": "Capability State",
+      "nodeId": "FIG-039-N04",
+      "required": true,
+      "semanticKey": "CAPABILITY_STATE",
+      "sourceBindingId": "FIG-039-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "EVIDENCE-INFERENCE",
+  "title": "Evidence vs Inference"
+}

@@ -1,0 +1,134 @@
+{
+  "ok": true,
+  "status": 200,
+  "authority": "KSAR_KNOWLEDGE_ACCESS",
+  "retrievalRequest": {
+    "params": {
+      "q": "为什么人工智能是文明能力长期累积的结果？",
+      "locale": "zh-Hans",
+      "mode": "auto",
+      "source": "hybrid"
+    }
+  },
+  "coverage": {
+    "level": "hybrid",
+    "published": "exact",
+    "manuscript": "covered",
+    "answerGroundingAllowed": true
+  },
+  "published": {
+    "coverage": {
+      "level": "exact",
+      "score": 1000,
+      "answerGenerationAllowed": false
+    },
+    "results": [
+      {
+        "nodeCode": "KN-PREFACE-001",
+        "locale": "zh-Hans",
+        "title": "为什么人工智能是文明能力长期累积的结果",
+        "summary": "summary",
+        "href": "/articles/ai-formation-from-civilizational-capability",
+        "score": 1000
+      }
+    ],
+    "projection": {
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "mode": "focused",
+      "fragments": []
+    },
+    "readingPath": null,
+    "indexDigest": "fixture-index"
+  },
+  "manuscript": {
+    "status": "covered",
+    "records": [
+      {
+        "sourceType": "COMPLETED_MANUSCRIPT",
+        "bookCode": "BOOK-1",
+        "partCode": "P0",
+        "sectionCode": "CM-B1V2-P0-S001",
+        "pageRange": {
+          "start": 1,
+          "end": 2
+        },
+        "sourceDigest": "fixture-manuscript-1",
+        "score": 420,
+        "excerpt": "文明能力通过知识表达、基础设施与组织协作长期累积。",
+        "canonicalBinding": {
+          "status": "APPROVED",
+          "nodeCodes": [
+            "KN-PREFACE-004"
+          ],
+          "mappingCodes": [
+            "KAU-R3-B1-MAP-001"
+          ]
+        }
+      },
+      {
+        "sourceType": "COMPLETED_MANUSCRIPT",
+        "bookCode": "BOOK-1",
+        "partCode": "P1",
+        "sectionCode": "CM-B1V2-P1-S999",
+        "pageRange": {
+          "start": 20,
+          "end": 20
+        },
+        "sourceDigest": "fixture-manuscript-2",
+        "score": 220,
+        "excerpt": "这是一个仍没有 canonical binding 的受审阅 manuscript excerpt。",
+        "canonicalBinding": {
+          "status": "PENDING",
+          "nodeCodes": []
+        }
+      }
+    ],
+    "errors": []
+  },
+  "groundingSources": [
+    {
+      "sourceType": "PUBLISHED_CANONICAL_ARTICLE",
+      "nodeCode": "KN-PREFACE-001",
+      "fragmentCode": "FRAGMENT-KN-PREFACE-001-ZH-HANS-002",
+      "digest": "fixture-fragment",
+      "text": "人工智能依赖文明长期累积的知识表达、物质基础、组织制度与反馈机制。"
+    },
+    {
+      "sourceType": "COMPLETED_MANUSCRIPT",
+      "bookCode": "BOOK-1",
+      "partCode": "P0",
+      "sectionCode": "CM-B1V2-P0-S001",
+      "pageRange": {
+        "start": 1,
+        "end": 2
+      },
+      "sourceDigest": "fixture-manuscript-1",
+      "canonicalBinding": {
+        "status": "APPROVED",
+        "nodeCodes": [
+          "KN-PREFACE-004"
+        ],
+        "mappingCodes": [
+          "KAU-R3-B1-MAP-001"
+        ]
+      },
+      "text": "文明能力通过知识表达、基础设施与组织协作长期累积。"
+    }
+  ],
+  "authorityBoundary": {
+    "publishedArticleAuthorityUnchanged": true,
+    "completedManuscriptIsValidKnowledgeSource": true,
+    "activeManuscriptCorpusIsHumanReviewed": true,
+    "sourceNativeSectionMayAnswerWithoutCanonicalNodeClaim": true,
+    "pendingCanonicalBindingIsNotCanonicalAuthority": true
+  },
+  "upstreamGroundedAnswerPresent": true,
+  "upstreamGroundedAnswerConsumed": false,
+  "governance": {
+    "rawFullBookAvailable": false,
+    "rawSectionBodyAvailable": false,
+    "answerComposedByKapPhase2": false,
+    "canonicalAuthorityCreated": false
+  }
+}

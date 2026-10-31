@@ -1,0 +1,83 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-INPUT-METHOD-CALCULATION-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "PERSONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-023-E01",
+      "from": "FIG-023-N01",
+      "relation": "ELIGIBLE_FOR",
+      "required": true,
+      "sourceBindingId": "FIG-023-SRC-01",
+      "to": "FIG-023-N02"
+    },
+    {
+      "edgeId": "FIG-023-E02",
+      "from": "FIG-023-N02",
+      "relation": "DISPATCHES_TO",
+      "required": true,
+      "sourceBindingId": "FIG-023-SRC-02",
+      "to": "FIG-023-N03"
+    },
+    {
+      "edgeId": "FIG-023-E03",
+      "from": "FIG-023-N03",
+      "relation": "PRODUCES",
+      "required": true,
+      "sourceBindingId": "FIG-023-SRC-02",
+      "to": "FIG-023-N04"
+    }
+  ],
+  "figureId": "FIG-023",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-023-N01",
+    "FIG-023-N02",
+    "FIG-023-N03",
+    "FIG-023-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Verified Input",
+      "nodeId": "FIG-023-N01",
+      "required": true,
+      "semanticKey": "VERIFIED_INPUT",
+      "sourceBindingId": "FIG-023-SRC-01"
+    },
+    {
+      "displayLabel": "Method Selection",
+      "nodeId": "FIG-023-N02",
+      "required": true,
+      "semanticKey": "METHOD_SELECTION",
+      "sourceBindingId": "FIG-023-SRC-01"
+    },
+    {
+      "displayLabel": "Calculation Runtime",
+      "nodeId": "FIG-023-N03",
+      "required": true,
+      "semanticKey": "CALCULATION_RUNTIME",
+      "sourceBindingId": "FIG-023-SRC-01"
+    },
+    {
+      "displayLabel": "Trace / Output",
+      "nodeId": "FIG-023-N04",
+      "required": true,
+      "semanticKey": "TRACE_OUTPUT",
+      "sourceBindingId": "FIG-023-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "INPUT-METHOD-CALCULATION",
+  "title": "Input → Method → Calculation"
+}

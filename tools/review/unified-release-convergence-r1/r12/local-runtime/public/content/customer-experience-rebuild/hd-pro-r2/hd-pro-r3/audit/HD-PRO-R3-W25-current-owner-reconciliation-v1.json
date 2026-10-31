@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W25-CURRENT-OWNER-RECONCILIATION-v1.0.0",
+  "work": "HD-PRO-R3-W25",
+  "baselineCommit": "896a01a24f904bee337cfa89a5aa5069cb143a58",
+  "status": "SAME_OWNER_PATH_DRIFT_RECONCILED_NO_HD_OWNER_FORK",
+  "w0FreezeBaselineCommit": "dae24c1dd8de49a6c238ddffb8d52b388e8da10d",
+  "policy": {
+    "historicalW0FreezeRewritten": false,
+    "sameOwnerPathMayReconcileDigestOnNewMain": true,
+    "ownerPathMayChangeWithoutExplicitSuccessor": false,
+    "protectedR2AuthorityFilesRemainStrictlyFrozen": true,
+    "secondCustomerRendererCreated": false,
+    "secondCustomerRouteCreated": false,
+    "secondHdParserCreated": false,
+    "secondReadingEngineCreated": false,
+    "sharedCustomerRendererAndRouteUsePprCurrentSharedOwnerRegistry": true
+  },
+  "reconciledOwners": [
+    {
+      "role": "customerConfirmApiOwner",
+      "path": "functions/api/customer-external-profile-confirm.js",
+      "w0FrozenSha256": "aca7f07ce56c3e940c012784fe424104a794a977b6406f596af6ac54c380d45d",
+      "currentMainSha256": "3da4d03f785df609a0c420a953d1b3109174bb744812f1e4e8f9367bcbf70ead",
+      "ownerPathChanged": false,
+      "reason": "W25 extends the existing customer confirmation API to expose the admitted R3 professional product while preserving the R2 reading payload as compatibility fallback; no replacement API, renderer, route or calculation authority is created.",
+      "recognizedPredecessors": [
+        "aca7f07ce56c3e940c012784fe424104a794a977b6406f596af6ac54c380d45d"
+      ]
+    }
+  ],
+  "publication": {
+    "r2State": "CUSTOMER_PUBLISHED_FALLBACK",
+    "r3State": "CUSTOMER_PUBLISHED",
+    "r3HumanAdmission": "24/24",
+    "r3MachineVerification": "96/96",
+    "r3Benchmark": "12/12"
+  }
+}

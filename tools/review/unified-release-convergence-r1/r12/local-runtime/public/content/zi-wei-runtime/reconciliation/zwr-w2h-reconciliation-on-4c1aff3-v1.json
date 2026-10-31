@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-W2H-BASELINE-RECONCILIATION-v1.0.0",
+  "work": "ZWR-W2H-RECONCILIATION",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "PRIOR_HUMAN_FREEZE_RESTORED_AS_EXPLICIT_PREDECESSOR_EVIDENCE",
+  "methodCode": "ZI_WEI_DOU_SHU",
+  "finding": {
+    "baselineDistContainedHumanFreeze": false,
+    "baselinePolicyStateObserved": "PENDING_HUMAN_FREEZE",
+    "baselineFrozenDecisionCountObserved": 0,
+    "approvedHumanFreezePredecessorBaseline": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+    "approvedDecisionCount": 10,
+    "reconciliationAction": "RESTORE_EXACT_PRIOR_HUMAN_APPROVED_POLICY_AND_EVIDENCE_BEFORE_W7_W13"
+  },
+  "authority": {
+    "policy": "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
+    "humanFreezeEvidence": "content/professional/zi-wei-runtime/evidence/zi-wei-human-freeze-evidence-v1.json",
+    "humanFreezeAcceptance": "content/professional/zi-wei-runtime/acceptance/zwr-w2h-human-policy-freeze-acceptance-v1.json"
+  },
+  "invariants": {
+    "noNewHumanDecisionInvented": true,
+    "noSilentRuleChange": true,
+    "w7w13CannotProceedWithoutFrozen10Of10": true,
+    "productionActivationStillSeparate": true
+  }
+}

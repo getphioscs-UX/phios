@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-LRR-QUESTION-TAXONOMY-v1.0.0",
+  "work": "LRR-W0",
+  "baselineCommit": "359c4715062fc078d167275a6fe4b23834e655d0",
+  "status": "FROZEN_V1",
+  "taxonomy": [
+    {"code":"STRUCTURE","question":"What stable or natal structure is being examined?","defaultPrimaryLens":"FUNCTION","methodRoutingAllowed":true},
+    {"code":"TIME","question":"What longer-running temporal condition or period is being examined?","defaultPrimaryLens":"TIME","methodRoutingAllowed":true},
+    {"code":"CURRENT","question":"What is being dynamically activated at the specified current or target moment?","defaultPrimaryLens":"FUNCTION","methodRoutingAllowed":true},
+    {"code":"DOMAIN","question":"Which lived-reality domain is structurally emphasized?","defaultPrimaryLens":"DOMAIN","methodRoutingAllowed":true},
+    {"code":"DECISION","question":"How should the system engage with or process a decision?","defaultPrimaryLens":"OPERATION","methodRoutingAllowed":true,"realityEvidenceRequired":true},
+    {"code":"RELATIONSHIP","question":"How are two explicitly identified systems interacting?","defaultPrimaryLens":null,"methodRoutingAllowed":false,"requiredFutureRuntime":"RELATIONAL_RUNTIME"},
+    {"code":"RHYTHM","question":"What bounded cycle rhythm or phase marker is active?","defaultPrimaryLens":"RHYTHM","methodRoutingAllowed":true},
+    {"code":"REALITY_FACT","question":"What externally verifiable fact or current reality evidence is required?","defaultPrimaryLens":null,"methodRoutingAllowed":false,"authority":"REALITY_EVIDENCE"},
+    {"code":"PROFESSIONAL","question":"Does the request require regulated, licensed or professional judgment rather than a method lens?","defaultPrimaryLens":null,"methodRoutingAllowed":false,"authority":"PROFESSIONAL_HANDOFF"}
+  ],
+  "nonTaxonomyOutcomes": ["NEEDS_CONTEXT","AMBIGUOUS"],
+  "globalRules": {
+    "taxonomyDoesNotCreateMeaning": true,
+    "taxonomyDoesNotExecuteRuntime": true,
+    "realityFactNeverRoutesToSymbolicMethod": true,
+    "professionalNeverRoutesToSelfServiceMethod": true,
+    "relationshipDoesNotFallbackToNatalDomainOrNatalFunction": true,
+    "classificationMayPreserveSecondaryCategories": true,
+    "ambiguousQuestionFailsClosed": true
+  }
+}

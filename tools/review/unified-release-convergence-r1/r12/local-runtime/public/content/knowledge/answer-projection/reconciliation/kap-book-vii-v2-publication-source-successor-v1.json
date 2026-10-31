@@ -1,0 +1,102 @@
+{
+  "work": "BOOK-VII-V2-CANONICAL-PUBLICATION-CUTOVER",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "proposedAdmissionStatus": "BOOK_VII_V2_CANONICAL_PUBLICATION_ADMITTED",
+  "predecessor": {
+    "path": "content/knowledge/answer-projection/freeze/kap-book-vii-production-admission-r1-freeze.json",
+    "sha256": "ddc016eee5c8dbdb547ce78fd1531430fd0313279e53b889dee9e6e14852c2be"
+  },
+  "source": {
+    "version": "v2",
+    "sha256": "e19b662d8928df7608f4f1814f14f83d0397e3822d4d289f5ab2fd41f9b60c1d"
+  },
+  "release": {
+    "path": "content/knowledge/public/successors/book-vii-v2-source-refresh-v1/published-projection.json",
+    "sha256": "26f74ddf738af280e8a0a3a767f0e77fff30e4dd7c8b835b07c93557dff82b72"
+  },
+  "affectedNodes": [
+    {
+      "nodeCode": "KN-B7-14-065",
+      "beforeSha256": "5fc0fe2b74f4468e06ad6b96ad0cfeaf27b67dc5b1ba1136a481754c002a3ab1",
+      "afterSha256": "fbde7bc680a62d29c5eef59b0a8d19abe849cdc75600f90302c784dc03c85ef6",
+      "sectionDigest": "4dc5bb6b6ad52b8f039fd0b923caee39c3cce5ea1dd6e67b87c6f212d842c6c0"
+    },
+    {
+      "nodeCode": "KN-B7-14-066",
+      "beforeSha256": "30fabc3778f53f9c17181ee092e76c1477ff900155b313f7a8064f670e2ec8a4",
+      "afterSha256": "819833d0f68090ba8cac085764421cb40b969dc253772b0826160e2e3e69dc77",
+      "sectionDigest": "024be254856b26851b52d974e96be28ea5957f4720b0075d00d6ed1229eddeb7"
+    },
+    {
+      "nodeCode": "KN-B7-14-071",
+      "beforeSha256": "1b676f1e0ad064546b0559fc82fcc7650f6c5cfdea49bf3e7a58b524db8e2082",
+      "afterSha256": "b7b30bb9870ba4c6ad0ff489ad8089d2b7d76a45b61e96d95858c6542486d2ec",
+      "sectionDigest": "823805f709bc0c4866066da6782abdd5be3d6df3fffcf5e359f9d58e2a1580b7"
+    },
+    {
+      "nodeCode": "KN-B7-14-072",
+      "beforeSha256": "58fea9557ced84e1e75bce7e6032159ea7edc8b571a4dfd5e998705eabfde28b",
+      "afterSha256": "edf0f79e1f73e478f095756a736c3af7d312f0ccf1c90d949142db1551c3119c",
+      "sectionDigest": "7e7699037d924bd6dc29b1c4b3ca6e7cb8d41b9c6647bdc1cf40046cab428e9f"
+    }
+  ],
+  "unchangedNodeCount": 96,
+  "changes": [
+    {
+      "path": "functions/_lib/book-vii-published-admission.js",
+      "predecessorSha256": "3811113fd867626909ef42cbaa66db17d371c3979b80f44737190be768fbea98",
+      "successorSha256": "bd3f84cb3fdbe21c9949802adefe3e374e05687547d67922c7492e86029ca738"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "56d30179d92b633a38d4d22ce0ef231ded931cbd55be822efbeba6952297d4af",
+      "successorSha256": "46d970c593a5fcbb3383f00bbf1fdd55f679476fb2d5ccf3984bc32d22496a4d"
+    },
+    {
+      "path": "scripts/check-kap-book-vii-production-admission-r1.mjs",
+      "predecessorSha256": "c614644ee10322ed597ef6e2d034dc11257080448824f2e4b530a5d182d2e77c",
+      "successorSha256": "4f03ef4e8ff1f048c5ab91f1be8c37b6c4829b41095e1b137f2f2e72b38faeb6"
+    },
+    {
+      "path": "scripts/lib/knowledge-public/book-vii-current-projection.mjs",
+      "predecessorSha256": "260cca8ec1e34577de0f9b778845ccf160dc9a9392f70f102ed8b63787b3db2c",
+      "successorSha256": "8378d29141a95f1c2a871a4d47a6e89dff836b6cd29251e412d741f1652b4c98"
+    },
+    {
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "predecessorSha256": "62772b4f566afd2f3b755c03dbbc65aa6ac956c7826d6dac4c8fa13421311013",
+      "successorSha256": "bf94c4ef3aeb47f7047b90174021bed4485f2661aaf8c4dd3f2ea21602d22fc3"
+    }
+  ],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false
+  },
+  "humanAcceptance": null,
+  "masterAExecuted": false,
+  "cloudDeploymentPerformed": false,
+  "validation": [
+    {
+      "path": "content/knowledge/book-vii/v2-cutover/verified-source-v2.json",
+      "sha256": "ed0b051780e4752e23bb2b78c8b0adf655347fde43269c3d2f7231059728b8b2"
+    },
+    {
+      "path": "content/knowledge/book-vii/v2-cutover/ask-acceptance-v2.json",
+      "sha256": "c63638f87fc2d2e18dda3ff201c3282b56213e73431dcdd0eb98cc549318b4b1"
+    },
+    {
+      "path": "content/knowledge/book-vii/v2-cutover/live-http-acceptance-v2.json",
+      "sha256": "29bd5e2312b132ec4710dedc14693d6fbe5698b02c99641edeea9273ee3793b2"
+    },
+    {
+      "path": "content/knowledge/book-vii/v2-cutover/full-regression-v1.json",
+      "sha256": "3daa0b541a4b96f3e6b4d7a0cca7709cd0cbe74cf315f933ca7b99316448c7c8"
+    },
+    {
+      "path": "content/knowledge/book-vii/v2-cutover/final-projection-build-v1.json",
+      "sha256": "1be11d516005ca9fb648f847c88761dd3455f85c81164c087070e397439ef6c9"
+    }
+  ]
+}

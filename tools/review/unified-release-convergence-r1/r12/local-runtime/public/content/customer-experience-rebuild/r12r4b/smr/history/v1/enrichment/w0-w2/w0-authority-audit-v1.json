@@ -1,0 +1,232 @@
+{
+  "schemaVersion": "PHIOS-SMR-AUTHORITY-AUDIT-v1",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "work": "CX-R12R4B-SMR-ENRICHMENT-W0-W2",
+  "recordedAt": "2026-08-28",
+  "status": "RESEARCH_ONLY_NOT_PRODUCTION",
+  "productionAllowed": false,
+  "customerCutoverAllowed": false,
+  "authorityDecision": "PRESERVE_SINGLE_CANONICAL_PROJECTION_MEANING_COMPOSITION_CHAIN",
+  "authorities": {
+    "projection": "functions/method-client-delivery/canonical-projection-runtime-ast-v2.js",
+    "mapping": "content/professional/canonical-meaning-production/successors/canonical-method-meaning-mapping-v4.json",
+    "bundle": "functions/canonical-meaning-production/meaning-bundle-builder-ast-v2.js",
+    "runtime": "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+    "admitted": "functions/interpretation-runtime/admitted-customer-interpretation-runtime-v1.js",
+    "resolver": "functions/interpretation-runtime/customer-composition-admission-resolver-v1.js",
+    "customer": "functions/customer-projection/method-customer-reading-v2.js",
+    "adapter": "functions/single-method-reading/accepted-method-result-adapter.js",
+    "composer": "functions/single-method-reading/method-composer-base.js",
+    "ast": "functions/single-method-reading/astrology-single-method-composer.js",
+    "ir": "functions/single-method-reading/single-method-reading-ir.js",
+    "quality": "functions/single-method-reading/single-method-reading-quality.js",
+    "campaign": "scripts/smr-campaign-support.mjs",
+    "completed": "content/knowledge/manuscripts/completed/completed-manuscript-registry-v1.json",
+    "sourceRegistry": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json",
+    "sourceRuntime": "functions/knowledge-runtime/manuscript-source-runtime.js"
+  },
+  "findings": [
+    {
+      "findingId": "F01",
+      "title": "AST候选最多三项，优先级未来自全盘比较",
+      "paths": [
+        "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js"
+      ],
+      "evidence": "composeAst: preferred SUN/MOON/ASC; subjects.slice(0,Math.min(3,positions.length)); all generated units PRIMARY",
+      "next": "先制定主次、反向线索、独立证据与缺失维度政策。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F02",
+      "title": "已准入表达字段在传递链中丢失或被替代",
+      "paths": [
+        "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+        "functions/interpretation-runtime/admitted-customer-interpretation-runtime-v1.js",
+        "functions/customer-projection/method-customer-reading-v2.js",
+        "functions/single-method-reading/accepted-method-result-adapter.js"
+      ],
+      "evidence": "distinct constructive/friction/uncertainties in upstream; customer insights omit them; adapter uses body / first alternative / []",
+      "next": "W3才处理字段保真；本批不改运行时。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F03",
+      "title": "章节复用正文，数量不等于内容深度",
+      "paths": [
+        "functions/single-method-reading/method-composer-base.js"
+      ],
+      "evidence": "AST zh-Hans: 32 paragraphs,16 unique,max repeat5; six intents share one ordered body",
+      "next": "按章节职责消费不同字段；不能只延长字数。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F04",
+      "title": "具体性标签不能证明语义完整",
+      "paths": [
+        "functions/single-method-reading/single-method-reading-ir.js",
+        "functions/single-method-reading/single-method-reading-quality.js"
+      ],
+      "evidence": "dimensions assigned by section ID; quality checks dimension presence and narrow generic patterns",
+      "next": "增加可回答问句、反例、语义重复与人工价值判据。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F05",
+      "title": "AST覆盖检查未独立检查星座表达",
+      "paths": [
+        "functions/single-method-reading/astrology-single-method-composer.js"
+      ],
+      "evidence": "coverageMatchers contains planetFunction/actualHouse/aspects/wholeChartPriority; no signExpression",
+      "next": "后续用只变星座/宫位的对照盘检查差异。",
+      "severity": "MEDIUM",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F06",
+      "title": "64/48例不是64/48张独立盘",
+      "paths": [
+        "scripts/smr-campaign-support.mjs"
+      ],
+      "evidence": "synthetic astronomy; per-method projection cache; intent × locale variants",
+      "next": "保留结构回归，再新增真实结构差异与缺失输入负例。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F07",
+      "title": "相位回退与关系语义存在风险",
+      "paths": [
+        "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js"
+      ],
+      "evidence": "incident aspect find falls back to indexed aspect; non-square/opposition present aspect treated as SUPPORT",
+      "next": "代码路径可能绑定无关边；不是线上事故复现。W3需端点归属负例与合相语义审查。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F08",
+      "title": "外部参考书不能继承完成稿身份",
+      "paths": [
+        "content/knowledge/manuscripts/completed/completed-manuscript-registry-v1.json",
+        "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json",
+        "functions/knowledge-runtime/manuscript-source-runtime.js"
+      ],
+      "evidence": "existing PHI OS Book1/2 completed-manuscript identity; source runtime emits COMPLETED_MANUSCRIPT",
+      "next": "独立研究登记，不增加第二套生产meaning runtime，不改完成稿入口。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    },
+    {
+      "findingId": "F09",
+      "title": "当前AST41映射不等于高阶能力已准入",
+      "paths": [
+        "content/professional/canonical-meaning-production/successors/canonical-method-meaning-mapping-v4.json"
+      ],
+      "evidence": "10 planet functions +12 signs +12 houses +5 aspects +2 nodes",
+      "next": "元素聚合、模式、ASC专用意义、守护和图形须另有上游权威；此结论限当前消费路径。",
+      "severity": "HIGH",
+      "remediationPerformed": false
+    }
+  ],
+  "astMappingSnapshot": {
+    "count": 41,
+    "meaningCodes": [
+      "CM-AST-FUNCTION-01",
+      "CM-AST-FUNCTION-02",
+      "CM-AST-FUNCTION-03",
+      "CM-AST-FUNCTION-04",
+      "CM-AST-FUNCTION-05",
+      "CM-AST-FUNCTION-06",
+      "CM-AST-FUNCTION-07",
+      "CM-AST-FUNCTION-08",
+      "CM-AST-FUNCTION-09",
+      "CM-AST-FUNCTION-10",
+      "CM-AST-DIRECTION-01",
+      "CM-AST-DIRECTION-02",
+      "CM-AST-DIRECTION-03",
+      "CM-AST-DIRECTION-04",
+      "CM-AST-DIRECTION-05",
+      "CM-AST-DIRECTION-06",
+      "CM-AST-DIRECTION-07",
+      "CM-AST-DIRECTION-08",
+      "CM-AST-DIRECTION-09",
+      "CM-AST-DIRECTION-10",
+      "CM-AST-DIRECTION-11",
+      "CM-AST-DIRECTION-12",
+      "CM-AST-DOMAIN-01",
+      "CM-AST-DOMAIN-02",
+      "CM-AST-DOMAIN-03",
+      "CM-AST-DOMAIN-04",
+      "CM-AST-DOMAIN-05",
+      "CM-AST-DOMAIN-06",
+      "CM-AST-DOMAIN-07",
+      "CM-AST-DOMAIN-08",
+      "CM-AST-DOMAIN-09",
+      "CM-AST-DOMAIN-10",
+      "CM-AST-DOMAIN-11",
+      "CM-AST-DOMAIN-12",
+      "CM-AST-RELATION-01",
+      "CM-AST-RELATION-02",
+      "CM-AST-RELATION-03",
+      "CM-AST-RELATION-04",
+      "CM-AST-RELATION-05",
+      "CM-AST-NODE-01",
+      "CM-AST-NODE-02"
+    ],
+    "mappingCodes": [
+      "CMP-MAP-AST-PLANET-SUN-TO-CM-AST-FUNCTION-01",
+      "CMP-MAP-AST-PLANET-MOON-TO-CM-AST-FUNCTION-02",
+      "CMP-MAP-AST-PLANET-MERCURY-TO-CM-AST-FUNCTION-03",
+      "CMP-MAP-AST-PLANET-VENUS-TO-CM-AST-FUNCTION-04",
+      "CMP-MAP-AST-PLANET-MARS-TO-CM-AST-FUNCTION-05",
+      "CMP-MAP-AST-PLANET-JUPITER-TO-CM-AST-FUNCTION-06",
+      "CMP-MAP-AST-PLANET-SATURN-TO-CM-AST-FUNCTION-07",
+      "CMP-MAP-AST-PLANET-URANUS-TO-CM-AST-FUNCTION-08",
+      "CMP-MAP-AST-PLANET-NEPTUNE-TO-CM-AST-FUNCTION-09",
+      "CMP-MAP-AST-PLANET-PLUTO-TO-CM-AST-FUNCTION-10",
+      "CMP-MAP-AST-SIGN-ARIES-TO-CM-AST-DIRECTION-01",
+      "CMP-MAP-AST-SIGN-TAURUS-TO-CM-AST-DIRECTION-02",
+      "CMP-MAP-AST-SIGN-GEMINI-TO-CM-AST-DIRECTION-03",
+      "CMP-MAP-AST-SIGN-CANCER-TO-CM-AST-DIRECTION-04",
+      "CMP-MAP-AST-SIGN-LEO-TO-CM-AST-DIRECTION-05",
+      "CMP-MAP-AST-SIGN-VIRGO-TO-CM-AST-DIRECTION-06",
+      "CMP-MAP-AST-SIGN-LIBRA-TO-CM-AST-DIRECTION-07",
+      "CMP-MAP-AST-SIGN-SCORPIO-TO-CM-AST-DIRECTION-08",
+      "CMP-MAP-AST-SIGN-SAGITTARIUS-TO-CM-AST-DIRECTION-09",
+      "CMP-MAP-AST-SIGN-CAPRICORN-TO-CM-AST-DIRECTION-10",
+      "CMP-MAP-AST-SIGN-AQUARIUS-TO-CM-AST-DIRECTION-11",
+      "CMP-MAP-AST-SIGN-PISCES-TO-CM-AST-DIRECTION-12",
+      "CMP-MAP-AST-HOUSE-1-TO-CM-AST-DOMAIN-01",
+      "CMP-MAP-AST-HOUSE-2-TO-CM-AST-DOMAIN-02",
+      "CMP-MAP-AST-HOUSE-3-TO-CM-AST-DOMAIN-03",
+      "CMP-MAP-AST-HOUSE-4-TO-CM-AST-DOMAIN-04",
+      "CMP-MAP-AST-HOUSE-5-TO-CM-AST-DOMAIN-05",
+      "CMP-MAP-AST-HOUSE-6-TO-CM-AST-DOMAIN-06",
+      "CMP-MAP-AST-HOUSE-7-TO-CM-AST-DOMAIN-07",
+      "CMP-MAP-AST-HOUSE-8-TO-CM-AST-DOMAIN-08",
+      "CMP-MAP-AST-HOUSE-9-TO-CM-AST-DOMAIN-09",
+      "CMP-MAP-AST-HOUSE-10-TO-CM-AST-DOMAIN-10",
+      "CMP-MAP-AST-HOUSE-11-TO-CM-AST-DOMAIN-11",
+      "CMP-MAP-AST-HOUSE-12-TO-CM-AST-DOMAIN-12",
+      "CMP-MAP-AST-ASPECT-CONJUNCTION-TO-CM-AST-RELATION-01",
+      "CMP-MAP-AST-ASPECT-OPPOSITION-TO-CM-AST-RELATION-02",
+      "CMP-MAP-AST-ASPECT-TRINE-TO-CM-AST-RELATION-03",
+      "CMP-MAP-AST-ASPECT-SQUARE-TO-CM-AST-RELATION-04",
+      "CMP-MAP-AST-ASPECT-SEXTILE-TO-CM-AST-RELATION-05",
+      "CMP-MAP-AST-NODE-NORTH_NODE-TO-CM-AST-NODE-01",
+      "CMP-MAP-AST-NODE-SOUTH_NODE-TO-CM-AST-NODE-02"
+    ]
+  },
+  "gates": {
+    "humanAccepted": 0,
+    "humanRejected": 0,
+    "humanPending": 48,
+    "productionAllowed": false,
+    "customerCutoverAllowed": false
+  },
+  "newRuntimeCreated": false
+}

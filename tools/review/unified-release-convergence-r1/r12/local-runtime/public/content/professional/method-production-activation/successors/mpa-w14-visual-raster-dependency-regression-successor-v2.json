@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-VISUAL-RASTER-DEPENDENCY-REGRESSION-SUCCESSOR-v2.0.0",
+  "work": "MPA-W14-DEPENDENCY-SUCCESSOR",
+  "baselineCommit": "4e1ae1fe55725f7968acee6109dfa840069eb805",
+  "status": "AUTHORIZED_EXPLICIT_NON_METHOD_DEPENDENCY_FINGERPRINT_SUCCESSOR",
+  "objective": "Reconcile the current package-lock fingerprint after the repository added the pinned sharp raster backend for Figure/MFIG production, while preserving the MIR-3 astronomy-engine dependency freeze and all Method Production eligibility boundaries.",
+  "predecessor": {
+    "source": "content/professional/method-production-activation/successors/mpa-w14-mir3-dependency-regression-successor-v1.json",
+    "sourceSha256": "75363b60c8f9176e599822795c1361fbaa5d6b48e3f5db7bf3b33c6a8c961c00",
+    "packageLockSha256": "a4e12509421e1c61d6a8ebcdf6213e80096005ad73d5dc215a8711d7842cb1e5",
+    "checkerSha256": "d60de4632c80ea3fba03da553e60323b0312d1a1a58ec00f2d5ccabc5d6f3de1"
+  },
+  "successor": {
+    "packageJsonSha256": "83610766134dd5d4af1575411b407450d844b0151000a8bdb7560a335bf4d0f2",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176",
+    "checkerPath": "scripts/check-mpa-w14-regression-runtime.mjs",
+    "checkerSha256": "10828045552e59e47e5df772b954ca4cfcf42e6c3115789f5cde086fdb95a1b6"
+  },
+  "methodDependencyFreeze": {
+    "engine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "npmIntegrity": "sha512-8yWKNf7UeNbH458h3sAJ6ZgAjE5jTXp/mNNRFoC20j2SHwZIjAQeEsBB2Q3uCFRaTCCJRv33K2XhkhZQMXoX6w==",
+    "algorithmChanged": false,
+    "timezoneAuthorityChanged": false,
+    "ephemerisAuthorityChanged": false
+  },
+  "authorizedNonMethodDependency": {
+    "package": "sharp",
+    "purpose": "REPOSITORY_FIGURE_AND_MFIG_RASTER_BACKEND",
+    "packageJsonRange": "0.35.2",
+    "packageLockRange": "0.35.2",
+    "resolvedVersion": "0.35.2",
+    "methodRuntimeConsumerAllowed": false,
+    "allowedConsumers": [
+      {
+        "path": "scripts/figure/figure-lib.mjs",
+        "sha256": "6d6acd0c8aad4ea94843c4b506e481f76762eb8e9a4cb90ad068f166485b90f7"
+      },
+      {
+        "path": "scripts/mfig/mfig-lib.mjs",
+        "sha256": "84eb6d3eb9ba84927b8f9f8d1148de5146f30b59f67e052d1726573e6aff6a95"
+      },
+      {
+        "path": "scripts/check-figure-raster-backend.mjs",
+        "sha256": "9ca24bf33ac1e1f4fe37a7e9ac47a5cb7f8f534b5cefb6dfbb795b6c5f30197b"
+      },
+      {
+        "path": "scripts/check-mfig-raster-backend.mjs",
+        "sha256": "b39771ee0f9ec611d89e7b7423a1c028bb366c0a23d87b46cb5c2eb00fa36284"
+      }
+    ]
+  },
+  "boundaries": {
+    "historicalRegressionRegistryMutated": false,
+    "mir3SuccessorMutated": false,
+    "silentDependencyUpgradeAllowed": false,
+    "futureDependencyDriftRequiresVersionedSuccessor": true,
+    "methodProductionEligibilityChanged": false,
+    "professionalEligibilityChanged": false,
+    "secondAstronomyAuthorityCreated": false,
+    "visualRasterDependencyMayBecomeMethodAuthority": false
+  }
+}

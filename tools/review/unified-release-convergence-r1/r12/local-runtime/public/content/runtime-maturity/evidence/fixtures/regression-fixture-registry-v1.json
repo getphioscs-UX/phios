@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S9-REGRESSION-FIXTURE-REGISTRY-RRP-SUBSET-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S9_SYNC_RRP-W27",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_RRP_W27_FIXTURE_SUBSET_GLOBAL_MRM_S9_NOT_FROZEN",
+  "evidenceObjects": [
+    {
+      "evidenceId": "MRM-RRP-W27-REG-REPORT-COMPOSITION-F04-v1",
+      "runtimeCode": "RRP",
+      "capabilityCode": "RRP-REPORT-COMPOSITION",
+      "evidenceClass": "REGRESSION_FIXTURE",
+      "source": "RRP_W26_REGRESSION_FIXTURE",
+      "environment": "REPOSITORY_BASELINE_f010b292e2c778c744913f1789148c53db89926f",
+      "version": "1.0.0",
+      "createdAt": "2026-08-22",
+      "producer": "RRP-W27_MRM_S_SYNC",
+      "reviewStatus": "MACHINE_VERIFIED",
+      "result": "PASS",
+      "artifactDigest": "e86f651a1d51670ebd68ba269e39bf4bf565d54b3f0bfdcf1f092cdd06bb1a74",
+      "scope": [
+        "RRP-REPORT-COMPOSITION"
+      ],
+      "limitations": [
+        "FIXTURE_OR_DETERMINISM_EVIDENCE_ONLY",
+        "NOT_PILOT_EVIDENCE"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "content/products/runtime-reading/fixtures/cases/F04/expected-candidate.json",
+          "sha256": "e86f651a1d51670ebd68ba269e39bf4bf565d54b3f0bfdcf1f092cdd06bb1a74"
+        }
+      ],
+      "fixtureId": "F04"
+    }
+  ],
+  "rules": {
+    "subsetDoesNotCompleteGlobalMRMS9": true,
+    "fixturesAreNotPilotCases": true,
+    "passAloneDoesNotPromote": true
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-INTERPRETATION-PERSPECTIVE-REGISTRY-v1.0.0",
+  "phase": "ICHI",
+  "work": "ICHI-W3",
+  "baselineCommit": "ec0f8d4b9ba37599affda909a47d1e41a1033037",
+  "status": "ACTIVE_VALIDATION_ONLY_SOURCE_PERSPECTIVES",
+  "registryVersion": "1.0.0",
+  "perspectives": [
+    {
+      "perspectiveId": "ICH-PERSPECTIVE-LEGGE-TEXTUAL",
+      "label": "Legge translated core text",
+      "sourceIds": [
+        "ICH-SRC-LEGGE-1882-TEXT"
+      ],
+      "scope": [
+        "HEXAGRAM",
+        "LINE"
+      ],
+      "sourceBound": true,
+      "mayOverrideCanonicalStructure": false,
+      "mayClaimRealityTruth": false
+    },
+    {
+      "perspectiveId": "ICH-PERSPECTIVE-LEGGE-THWAN",
+      "label": "Legge translated traditional Thwan commentary",
+      "sourceIds": [
+        "ICH-SRC-LEGGE-1882-THWAN"
+      ],
+      "scope": [
+        "HEXAGRAM_COMMENTARY"
+      ],
+      "sourceBound": true,
+      "mayOverrideCanonicalStructure": false,
+      "mayClaimRealityTruth": false
+    }
+  ],
+  "requiredEntryShape": [
+    "hexagramId",
+    "sourceId",
+    "perspectiveId",
+    "claim",
+    "scope",
+    "provenance"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "contractCode": "PHI-OS-CAR-ARTICLE-RECONCILIATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W3",
+  "status": "frozen",
+  "assetType": "ARTICLE",
+  "authorityMode": "reference_only",
+  "formalChain": [
+    "Canonical Asset Brief",
+    "Existing PJA",
+    "Canonical Article",
+    "Published Knowledge Authority",
+    "CAR Article Reference"
+  ],
+  "authorityAssignments": {
+    "candidateAuthority": "PJA Candidate Runtime",
+    "reviewAuthority": "PJA Human Review Runtime",
+    "approvalAuthority": "PJA Approval Runtime",
+    "publicationAuthority": "PJA Publication Runtime",
+    "contentAuthority": "Published Knowledge Authority",
+    "rendererAuthority": "Existing Article Renderer",
+    "referenceAuthority": "CAR Article Reference Registry"
+  },
+  "carPermissions": [
+    "read published article authority metadata",
+    "validate complete PJA lineage",
+    "register immutable references",
+    "project ARTICLE metadata to later CAR consumers"
+  ],
+  "carProhibitions": [
+    "create article candidate",
+    "review article",
+    "approve article",
+    "publish article",
+    "mutate article body",
+    "mutate PJA lineage",
+    "copy article body into CAR registry",
+    "replace article renderer"
+  ],
+  "invariants": {
+    "articleContinuesToBelongToPJA": true,
+    "carOnlyCreatesReferenceRelationship": true,
+    "articleBodyStoredInCAR": false,
+    "articleLifecycleStateStoredInCAR": false,
+    "pjaAuthorityTransferred": false,
+    "publishedArticleRuntimeRebuilt": false,
+    "articleRendererRebuilt": false
+  }
+}

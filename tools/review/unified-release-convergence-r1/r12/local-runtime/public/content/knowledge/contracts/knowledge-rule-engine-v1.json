@@ -1,0 +1,53 @@
+{
+  "allowed": [
+    "read",
+    "normalize",
+    "classify_intent",
+    "match_published_questions",
+    "match_aliases",
+    "rank_published_fragments",
+    "expand_published_relationships",
+    "evaluate_coverage",
+    "recommend_published_articles",
+    "issue_projection_contract",
+    "validate",
+    "digest",
+    "report"
+  ],
+  "authority": {
+    "answerGenerationAllowed": false,
+    "providerAllowed": false,
+    "publishedOnly": true,
+    "runtime": "Static JSON + Deterministic Rules"
+  },
+  "contractCode": "PHI-OS-KNOWLEDGE-RULE-ENGINE-v1.0.0",
+  "inputs": [
+    "KNR Package A published routing, ranking and coverage",
+    "PHASE K controlled Knowledge Blocks and adaptive projection",
+    "Published relationship and mechanism expansion"
+  ],
+  "outcomes": [
+    "direct_match",
+    "multi_node_match",
+    "partial_coverage",
+    "no_coverage"
+  ],
+  "package": "L-A",
+  "phase": "PHASE-L",
+  "prohibited": [
+    "provider_call",
+    "translation",
+    "embedding",
+    "generated_answer",
+    "generated_summary",
+    "new_canonical_meaning",
+    "unpublished_promotion",
+    "registry_mutation",
+    "review_mutation",
+    "approval_mutation",
+    "publication_mutation"
+  ],
+  "purpose": "Deterministically normalize public questions, match published knowledge, evaluate coverage and issue a controlled projection contract without Provider use.",
+  "step": "STEP82",
+  "version": "1.0.0"
+}

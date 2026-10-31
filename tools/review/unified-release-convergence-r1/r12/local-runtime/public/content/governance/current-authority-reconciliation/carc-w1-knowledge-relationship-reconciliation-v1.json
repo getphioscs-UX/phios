@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W1-KNOWLEDGE-RELATIONSHIP-RECONCILIATION-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W1",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "result": "EXPECTED_SUCCESSOR_CHANGE",
+  "status": "RECONCILED_EXPECTED_SUCCESSOR_CHANGE",
+  "relationshipSource": {
+    "path": "content/knowledge/public/retrieval/relationships.json",
+    "sha256": "d3bb01791faaf21081b254dc361c2fd76c07bd45286869f2bfddcc310138898f",
+    "recordCount": 184
+  },
+  "predecessorFreeze": {
+    "path": "content/knowledge/answer-projection/freeze/kap-w4-w10-knowledge-grounding-freeze-v1.json",
+    "sha256": "bfee6a7b4efdfcb8c895dcc8240b40c1d2b3976d202dcb75f7e7bc047f7446a4",
+    "relationshipSnapshot": {
+      "freezePath": "content/knowledge/answer-projection/freeze/kap-w4-w10-knowledge-grounding-freeze-v1.json",
+      "artifactPath": "content/knowledge/public/retrieval/relationships.json",
+      "sha256": "b7564ebc297b4a35ece504ffc8872991c857fee90b71b59ae32d3a1914806065",
+      "recordCount": 4,
+      "historicalObservationRewritten": false
+    }
+  },
+  "successorEvidence": {
+    "path": "content/knowledge/answer-projection/reconciliation/kap-w4-w10-current-grounding-successor-v1.json",
+    "sha256": "bc9b7f10a005895df66ec1790d0f910804a2b695c2b658baeb92398200dcc7e4",
+    "status": "ACTIVE_ADDITIVE_PUBLISHED_COVERAGE_SUCCESSOR",
+    "current": {
+      "artifactPath": "content/knowledge/public/retrieval/relationships.json",
+      "sha256": "d3bb01791faaf21081b254dc361c2fd76c07bd45286869f2bfddcc310138898f",
+      "recordCount": 184,
+      "change": "PUBLISHED_COVERAGE_GROWTH_AND_TARGET_PUBLICATION_STATUS_PROMOTION"
+    }
+  },
+  "canonicalNodeAuthority": {
+    "path": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "sha256": "5156bf1a591754ce31efabd8648dacb1e4b5f61b2cd47674fa3055b0cb402932",
+    "count": 931
+  },
+  "publicationAuthority": {
+    "path": "content/knowledge/public/retrieval/nodes.json",
+    "sha256": "aba48f300bd9014049d19c888841b5c801a4d2df9b00bfcc4cf3e1209b9fe345",
+    "publishedRecordCount": 90
+  },
+  "consumerEvidence": [
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "sha256": "b251475a4ff303b6c7428290d7ed231af5416b8fffa14077b9defe37952e5011",
+      "role": "RELATIONSHIP_EXPANSION_CONSUMER"
+    },
+    {
+      "path": "scripts/check-kap-w8-relationship-expansion.mjs",
+      "sha256": "e24643ba31ad891cb35f4d10ce2ee88e6a635c3e54cfb5b28842bd16f3ab7210",
+      "role": "CURRENT_RELATIONSHIP_CHECKER"
+    }
+  ],
+  "validation": {
+    "unknownCanonicalNodeReferenceCount": 0,
+    "publicationFlagMismatchCount": 0,
+    "directDigestAcceptance": false,
+    "predecessorFreezeMutated": false
+  },
+  "rules": {
+    "allowedResults": [
+      "EXPECTED_SUCCESSOR_CHANGE",
+      "UNEXPECTED_DRIFT"
+    ],
+    "digestChangeMustHaveSuccessorEvidence": true,
+    "futureUnexpectedDriftFailsClosed": true
+  }
+}

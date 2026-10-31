@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-MCD-7-PERSONAL-RUNTIME-CURRENT-SUCCESSOR-RECONCILIATION-v2.0.0",
+  "work": "MCD-7-PXR-PRESENTATION-SUCCESSOR-RECONCILIATION",
+  "baselineCommit": "f968210",
+  "status": "ACTIVE_VERSIONED_SUCCESSOR_MCD7_RUNTIME_PRESERVED_PXR_PRESENTATION_ACTIVE",
+  "predecessor": {
+    "path": "content/professional/method-client-delivery/reconciliation/mcd-7-personal-runtime-result-surface-current-successor-v1.json",
+    "sha256": "10c6a4766e15e569e1de1a6e0ee2f1130b5bccaca8ab5cbdbc58cb51dcd60f72",
+    "mutated": false
+  },
+  "predecessorFreeze": "content/professional/method-client-delivery/freeze/mcd-7-personal-runtime-result-surface-freeze-v1.json",
+  "governedRuntimeSuccessor": "content/web-production/successors/wpr-w21-mcd7-personal-runtime-result-surface-successor-v1.json",
+  "presentationSuccessor": {
+    "contract": "content/web-production/pxr/contracts/pxr-public-experience-contract-v1.json",
+    "contractSha256": "da2e4df40a39fcbc5962c7739cb820d29cfceecce3bf29aa227ac68ff09df6ac",
+    "surfaceRegistry": "content/web-production/pxr/registries/pxr-public-surface-registry-v1.json",
+    "surfaceRegistrySha256": "18c2db51d7396ada3579dfc9f438365d2a7bb2ae57146a5cf9751105d2c8494b",
+    "acceptance": "content/web-production/pxr/acceptance/pxr-public-experience-acceptance-v1.json",
+    "acceptanceSha256": "56199798e592ce82a36ca91908251c23c11692f027ffb0eed942394bb8a1a3c3",
+    "surfaceCode": "PERSONAL_RUNTIME",
+    "route": "/personal-runtime",
+    "presentationOnly": true
+  },
+  "artifacts": [
+    {
+      "path": "assets/js/pages/personal-runtime.js",
+      "predecessorSha256": "d97fe1fa809f0b49e1b89f5b7d4a97a1ddb4a5df4b0fb5706b232bba14eb2028",
+      "previousSuccessorSha256": "fbec293d2b1ac0f0f92400ecd7a0ba3e01863e22903578c23fec76d9022667b9",
+      "currentSuccessorSha256": "fbec293d2b1ac0f0f92400ecd7a0ba3e01863e22903578c23fec76d9022667b9",
+      "change": "UNCHANGED_MCD7_RESULT_SURFACE_CLIENT_RUNTIME"
+    },
+    {
+      "path": "personal-runtime.html",
+      "predecessorSha256": "adda7bf23352a30d54700de77bbadd7ecfb14d73a8085a53c7af2d0124545f32",
+      "previousSuccessorSha256": "893063f457313fc8b91878e6df1055a76e9ff57d0255b7ec85855770f788b146",
+      "currentSuccessorSha256": "e6646a09148850ac32b786199a9b8d181c2ee8be21498b1fe10202e465f87da3",
+      "change": "PXR_CUSTOMER_PRESENTATION_RECOMPOSITION_ONLY"
+    },
+    {
+      "path": "assets/js/locales/en/personal-runtime.js",
+      "predecessorSha256": "0737234f55c4dd82bcdc0c1f1f04b9f5a0575f456f5943a8db145dbc510ca6d9",
+      "previousSuccessorSha256": "2df7af0ffd2355a141e16085949a36534986c35a0a66ca82e25d0a60461e6914",
+      "currentSuccessorSha256": "2df7af0ffd2355a141e16085949a36534986c35a0a66ca82e25d0a60461e6914",
+      "change": "UNCHANGED_MCD7_EN_LOCALE_AUTHORITY"
+    },
+    {
+      "path": "assets/js/locales/zh-Hans/personal-runtime.js",
+      "predecessorSha256": "eb23a55d07c01c6382210558bb06eeb305ca5f01ab73bd609af0a4dfc1217536",
+      "previousSuccessorSha256": "0d4f8f6099c740a0989ff024679edaee2d7be6685aa20bc846a71a53ee9ff3e2",
+      "currentSuccessorSha256": "0d4f8f6099c740a0989ff024679edaee2d7be6685aa20bc846a71a53ee9ff3e2",
+      "change": "UNCHANGED_MCD7_ZH_HANS_LOCALE_AUTHORITY"
+    }
+  ],
+  "authorityBoundary": {
+    "historicalFreezeMutated": false,
+    "v1SuccessorMutated": false,
+    "mpaDispatchAuthorityChanged": false,
+    "mcd5ProjectionAuthorityChanged": false,
+    "mcd6RendererAuthorityChanged": false,
+    "mcd7ResultContractChanged": false,
+    "interpretationAuthorityCreated": false,
+    "hdrProductionResultTabCreated": false,
+    "persistenceAuthorityCreated": false,
+    "methodExecutionConsentChanged": false,
+    "pxrPresentationMayBecomeMethodAuthority": false
+  },
+  "reconciliation": {
+    "reason": "PXR re-composed the Personal Runtime customer-facing HTML to remove internal governance language and hide technical-only panels while preserving every MCD-7 input, consent, eligibility, processing and result runtime selector and authority.",
+    "policy": "Historical MCD-7 freeze and v1 current-successor evidence remain immutable. Only the explicitly listed HTML presentation digest advances; runtime JS and locale authority remain byte-identical to the v1 successor. Future drift requires another versioned successor."
+  }
+}

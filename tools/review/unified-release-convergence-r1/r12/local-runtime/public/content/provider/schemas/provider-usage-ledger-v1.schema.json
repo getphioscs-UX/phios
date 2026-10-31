@@ -1,0 +1,91 @@
+{
+  "$id": "PHI-OS-PROVIDER-USAGE-LEDGER-v1.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "entries": {
+      "items": {
+        "properties": {
+          "actualUnits": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "budgetPeriod": {
+            "type": "string"
+          },
+          "cacheHitCount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "cacheMissCount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "failedRequestCount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "operation": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "remainingUnits": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "requestCount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "reservedUnits": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "warning",
+              "reserved",
+              "exhausted",
+              "blocked",
+              "reconciling",
+              "closed"
+            ]
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "provider",
+          "operation",
+          "budgetPeriod",
+          "reservedUnits",
+          "actualUnits",
+          "requestCount",
+          "failedRequestCount",
+          "cacheHitCount",
+          "cacheMissCount",
+          "remainingUnits",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "ledgerCode": {
+      "const": "PHI-OS-PUBLIC-KNR-USAGE-LEDGER-v1.0.0"
+    }
+  },
+  "required": [
+    "ledgerCode",
+    "entries"
+  ],
+  "type": "object"
+}

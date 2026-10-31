@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-B6-FR3-DOSSIER-LIVED-DEPTH-EVIDENCE-v1.0.0",
+  "successor": "B6-FR3-DOSSIER-LIVED-REALITY-KNOWLEDGE-DEPTH",
+  "date": "2026-09-29",
+  "status": "IMPLEMENTED_HUMAN_REVIEW_READY",
+  "ownerDecision": "PENDING",
+  "scope": {
+    "steps": [
+      "FR3-A Dossier semantic model",
+      "FR3-B Historical → structural derivation",
+      "FR3-C Structural pressure layer",
+      "FR3-D Observed reconfiguration layer",
+      "FR3-E Signal layer",
+      "FR3-F Unknown containment",
+      "FR3-G Lived Reality transmission model",
+      "FR3-H 5 lived dimensions deep copy",
+      "FR3-I Current-value optional overlay",
+      "FR3-J bilingual + renderer + regression",
+      "FR3-K representative dossier human review"
+    ],
+    "representativeReview": {
+      "dossierId": "DOSSIER-SEA",
+      "routes": [
+        "/books/reality-configuration/?atlas=dossiers&dossier=DOSSIER-SEA#atlas",
+        "/books/reality-configuration/?atlas=lived&dossier=DOSSIER-SEA#atlas"
+      ],
+      "decision": "PENDING"
+    }
+  },
+  "invariants": [
+    "No current value is fabricated.",
+    "Structural knowledge remains readable when CURRENT_DATA is absent.",
+    "UNKNOWN is scoped to unresolved fields instead of blanking the customer page.",
+    "Observation signals are not forecasts.",
+    "The five primary lived-reality dimensions contain substantive bilingual transmission copy."
+  ],
+  "files": [
+    "content/civilization-atlas/reconfiguration/dossier-knowledge-depth-v1.json",
+    "content/civilization-atlas/reconfiguration/knowledge-state-contract-v1.json",
+    "assets/js/pages/civilization-atlas/atlas-data.js",
+    "assets/js/pages/civilization-atlas/reconfiguration-renderer.js",
+    "scripts/check-b6-fr3-dossier-lived-depth.mjs",
+    "package.json"
+  ],
+  "acceptance": {
+    "machineGate": "npm run check:b6-fr3-dossier-lived-depth",
+    "fullCutover": "npm run check:book6-reconfiguration-customer-cutover",
+    "humanGate": "OWNER_ACCEPT / OWNER_REVISE"
+  }
+}

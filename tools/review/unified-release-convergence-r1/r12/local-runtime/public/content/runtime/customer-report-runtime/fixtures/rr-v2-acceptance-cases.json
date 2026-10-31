@@ -1,0 +1,529 @@
+{
+  "fixtureCode": "PHI-OS-RR-W11-ACCEPTANCE-CASES-v1",
+  "syntheticOnly": true,
+  "liveCustomerDataUsed": false,
+  "cases": {
+    "customer-only": {
+      "reportCode": "RR-FIXTURE-CUSTOMER-001",
+      "case": "CASE-FIXTURE-001",
+      "customer": "CUSTOMER-FIXTURE-001",
+      "locale": "en",
+      "consentReferences": [
+        "CONSENT-FIXTURE-001"
+      ],
+      "serviceContract": {
+        "reference": "SERVICE-CONTRACT-FIXTURE-CUSTOMER",
+        "requiredSectionTypes": [
+          "CONTEXT",
+          "REALITY",
+          "EVIDENCE",
+          "READOUT",
+          "UNKNOWN",
+          "BOUNDARY"
+        ],
+        "optionalSectionTypes": [
+          "METHOD_PROJECTION",
+          "MEANING",
+          "KNOWLEDGE",
+          "METRICS",
+          "FOLLOW_UP"
+        ],
+        "professionalReviewRequired": false,
+        "signatureRequired": false,
+        "requiresConsent": true,
+        "allowedLocales": [
+          "en",
+          "zh-Hans"
+        ],
+        "allowedChannels": [
+          "HTML",
+          "PDF",
+          "WORKSPACE"
+        ]
+      },
+      "sections": [
+        {
+          "sectionCode": "CONTEXT",
+          "sourceReferences": [
+            {
+              "reference": "CASE-FIXTURE-001",
+              "kind": "EXTERNAL",
+              "externalKind": "CASE_REFERENCE",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "REALITY",
+          "sourceReferences": [
+            {
+              "reference": "REALITY-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "RUNTIME_STATE_RECORD",
+              "authority": "RMO",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "EVIDENCE",
+          "sourceReferences": [
+            {
+              "reference": "EVIDENCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_EVIDENCE_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "READOUT",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE",
+              "confidenceClass": "HIGH"
+            }
+          ]
+        },
+        {
+          "sectionCode": "UNKNOWN",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-001#unknowns",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "BOUNDARY",
+          "sourceReferences": [
+            {
+              "reference": "GOVERNANCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "GOVERNANCE_RECORD",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        }
+      ],
+      "unavailableSources": []
+    },
+    "professional": {
+      "reportCode": "RR-FIXTURE-PROFESSIONAL-001",
+      "case": "CASE-FIXTURE-002",
+      "customer": "CUSTOMER-FIXTURE-002",
+      "locale": "zh-Hans",
+      "consentReferences": [
+        "CONSENT-FIXTURE-002"
+      ],
+      "serviceContract": {
+        "reference": "SERVICE-CONTRACT-FIXTURE-PROFESSIONAL",
+        "requiredSectionTypes": [
+          "CONTEXT",
+          "REALITY",
+          "EVIDENCE",
+          "READOUT",
+          "PROFESSIONAL_OBSERVATION",
+          "PROFESSIONAL_JUDGMENT",
+          "BOUNDARY"
+        ],
+        "optionalSectionTypes": [
+          "METHOD_PROJECTION",
+          "MEANING",
+          "KNOWLEDGE",
+          "METRICS",
+          "RECOMMENDATION",
+          "NAVIGATION",
+          "UNKNOWN",
+          "FOLLOW_UP"
+        ],
+        "professionalReviewRequired": true,
+        "signatureRequired": true,
+        "requiresConsent": true,
+        "allowedLocales": [
+          "en",
+          "zh-Hans"
+        ],
+        "allowedChannels": [
+          "HTML",
+          "PDF",
+          "WORKSPACE"
+        ]
+      },
+      "sections": [
+        {
+          "sectionCode": "CONTEXT",
+          "sourceReferences": [
+            {
+              "reference": "CASE-FIXTURE-001",
+              "kind": "EXTERNAL",
+              "externalKind": "CASE_REFERENCE",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "REALITY",
+          "sourceReferences": [
+            {
+              "reference": "REALITY-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "RUNTIME_STATE_RECORD",
+              "authority": "RMO",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "EVIDENCE",
+          "sourceReferences": [
+            {
+              "reference": "EVIDENCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_EVIDENCE_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "READOUT",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE",
+              "confidenceClass": "HIGH"
+            }
+          ]
+        },
+        {
+          "sectionCode": "PROFESSIONAL_OBSERVATION",
+          "sourceReferences": [
+            {
+              "reference": "OUTCOME-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "OUTCOME_RECORD",
+              "authority": "PR",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "PROFESSIONAL_JUDGMENT",
+          "sourceReferences": [
+            {
+              "reference": "JUDGMENT-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "PROFESSIONAL_JUDGMENT_RECORD",
+              "authority": "PR",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "BOUNDARY",
+          "sourceReferences": [
+            {
+              "reference": "GOVERNANCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "GOVERNANCE_RECORD",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        }
+      ],
+      "unavailableSources": [],
+      "professionalApproval": {
+        "approvalReference": "PR-APPROVAL-FIXTURE-001",
+        "authorityRuntime": "PR",
+        "approvedBy": "PRO-FIXTURE-001",
+        "approvedAt": "2026-08-11T05:00:00Z",
+        "signatureReference": "PR-SIGNATURE-FIXTURE-001"
+      }
+    },
+    "low-confidence": {
+      "reportCode": "RR-FIXTURE-LOW-CONFIDENCE-001",
+      "case": "CASE-FIXTURE-003",
+      "customer": "CUSTOMER-FIXTURE-003",
+      "locale": "en",
+      "consentReferences": [
+        "CONSENT-FIXTURE-003"
+      ],
+      "serviceContract": {
+        "reference": "SERVICE-CONTRACT-FIXTURE-CUSTOMER",
+        "requiredSectionTypes": [
+          "CONTEXT",
+          "REALITY",
+          "EVIDENCE",
+          "READOUT",
+          "UNKNOWN",
+          "BOUNDARY"
+        ],
+        "optionalSectionTypes": [
+          "METHOD_PROJECTION",
+          "MEANING",
+          "KNOWLEDGE",
+          "METRICS",
+          "FOLLOW_UP"
+        ],
+        "professionalReviewRequired": false,
+        "signatureRequired": false,
+        "requiresConsent": true,
+        "allowedLocales": [
+          "en",
+          "zh-Hans"
+        ],
+        "allowedChannels": [
+          "HTML",
+          "PDF",
+          "WORKSPACE"
+        ]
+      },
+      "sections": [
+        {
+          "sectionCode": "CONTEXT",
+          "sourceReferences": [
+            {
+              "reference": "CASE-FIXTURE-001",
+              "kind": "EXTERNAL",
+              "externalKind": "CASE_REFERENCE",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "REALITY",
+          "sourceReferences": [
+            {
+              "reference": "REALITY-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "RUNTIME_STATE_RECORD",
+              "authority": "RMO",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "EVIDENCE",
+          "sourceReferences": [
+            {
+              "reference": "EVIDENCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_EVIDENCE_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "READOUT",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-LOW-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE",
+              "confidenceClass": "LOW"
+            }
+          ]
+        },
+        {
+          "sectionCode": "UNKNOWN",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-LOW-001#unknowns",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "BOUNDARY",
+          "sourceReferences": [
+            {
+              "reference": "GOVERNANCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "GOVERNANCE_RECORD",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        }
+      ],
+      "unavailableSources": []
+    },
+    "metric-unavailable": {
+      "reportCode": "RR-FIXTURE-METRIC-UNAVAILABLE-001",
+      "case": "CASE-FIXTURE-004",
+      "customer": "CUSTOMER-FIXTURE-004",
+      "locale": "en",
+      "consentReferences": [
+        "CONSENT-FIXTURE-004"
+      ],
+      "serviceContract": {
+        "reference": "SERVICE-CONTRACT-FIXTURE-CUSTOMER",
+        "requiredSectionTypes": [
+          "CONTEXT",
+          "REALITY",
+          "EVIDENCE",
+          "READOUT",
+          "UNKNOWN",
+          "BOUNDARY"
+        ],
+        "optionalSectionTypes": [
+          "METHOD_PROJECTION",
+          "MEANING",
+          "KNOWLEDGE",
+          "METRICS",
+          "FOLLOW_UP"
+        ],
+        "professionalReviewRequired": false,
+        "signatureRequired": false,
+        "requiresConsent": true,
+        "allowedLocales": [
+          "en",
+          "zh-Hans"
+        ],
+        "allowedChannels": [
+          "HTML",
+          "PDF",
+          "WORKSPACE"
+        ]
+      },
+      "sections": [
+        {
+          "sectionCode": "CONTEXT",
+          "sourceReferences": [
+            {
+              "reference": "CASE-FIXTURE-001",
+              "kind": "EXTERNAL",
+              "externalKind": "CASE_REFERENCE",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "REALITY",
+          "sourceReferences": [
+            {
+              "reference": "REALITY-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "RUNTIME_STATE_RECORD",
+              "authority": "RMO",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "EVIDENCE",
+          "sourceReferences": [
+            {
+              "reference": "EVIDENCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_EVIDENCE_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "READOUT",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE",
+              "confidenceClass": "HIGH"
+            }
+          ]
+        },
+        {
+          "sectionCode": "UNKNOWN",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-FIXTURE-001#unknowns",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "BOUNDARY",
+          "sourceReferences": [
+            {
+              "reference": "GOVERNANCE-FIXTURE-001",
+              "kind": "RDG_DATA",
+              "dataType": "GOVERNANCE_RECORD",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        }
+      ],
+      "unavailableSources": [
+        {
+          "sectionCode": "METRICS",
+          "reason": "NO_GOVERNED_METRIC_SOURCE",
+          "state": "UNAVAILABLE"
+        }
+      ]
+    },
+    "revised": {
+      "baseCase": "customer-only",
+      "nextVersion": "2.0.0",
+      "revisionCode": "RR-REV-FIXTURE-001",
+      "changeReason": "New governed evidence became available.",
+      "changedBy": "RR-REVIEW-FIXTURE",
+      "createdAt": "2026-08-11T05:20:00Z"
+    }
+  }
+}

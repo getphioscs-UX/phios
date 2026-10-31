@@ -1,0 +1,97 @@
+{
+  "auditCode": "PHI-OS-ALR-W0-ACADEMY-FOUNDATION-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "ALR-W0",
+  "status": "reconciled",
+  "baselineCommit": "d5266251b43fc1497ab60959203c7a21b129acdf",
+  "canonicalPhase": "PHASE ALR v2｜Academy Learning & Capability Runtime",
+  "migration": {
+    "legacyScope": "ALR-W0-W32",
+    "canonicalScope": "ALR-W0-W46",
+    "migrationStatus": "SUPERSEDED",
+    "migrationAuthority": "content/governance/canonical-master-work/registries/canonical-master-work-migration-registry-v1.json",
+    "legacyFreezeMutated": false
+  },
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "classification": "MASTER_WORK_AUTHORITY",
+      "finding": "ALR-W0 through ALR-W46 are registered as the canonical planned work family."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-runtime-dependency-registry-v1.json",
+      "sha256": "f69a1954d0f9191cfabeb69a1e175df87670b3fd65ffe83f5ff51ee2250da2e6",
+      "classification": "RUNTIME_DEPENDENCY_AUTHORITY",
+      "finding": "ALR reads governed Published Knowledge and Published Assets, is governed by RG/RDG/PDS, and is presented by CPR."
+    },
+    {
+      "reference": "content/knowledge/production-planning/policies/kpp-academy-production-need-v1.json",
+      "sha256": "a6110e14c274b45fc1826d16d998702d7d4cfe3c5c88555afd440334dfd299c1",
+      "classification": "KPP_REQUIREMENT_PROJECTION",
+      "finding": "KPP declares Academy production need; it does not create Lesson, Assessment or Capability semantics."
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/contracts/car-slides-academy-contract-v1.json",
+      "sha256": "c064604c64ef6ea835fe2df29f9f720fca932b834e49ff09ee117fd81f0be6ea",
+      "classification": "CAR_ASSET_PRODUCTION_CONTRACT",
+      "finding": "Lesson, Slides, Quiz and Assignment Briefs remain CAR asset-production outputs, not ALR Runtime objects."
+    },
+    {
+      "reference": "content/professional/canonical-presentation-runtime/contracts/canonical-presentation-contract-v1.json",
+      "sha256": "3a5021ba3932b47b8a61eeaffc749cf75b57c8787a67dd0e50b03cefa9cedf93",
+      "classification": "CPR_PRESENTATION_CONTRACT",
+      "finding": "CPR owns Academy presentation composition and rendering, never Learning or Capability semantics."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+      "sha256": "015fd9cc8265ccc3bc7c61254b6c70b2ca680c40979f4c35b6a0f77b2b92aac2",
+      "classification": "RDG_LEARNING_DATA_CONTRACT",
+      "finding": "RDG governs Learning Data; assessment score and lesson completion do not create Capability State."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json",
+      "sha256": "2d6d00c17237f10c2a79fa19ab20b13fb97499796fbf2ad408c6a722a47c5243",
+      "classification": "RDG_CAPABILITY_EVIDENCE_BOUNDARY",
+      "finding": "RDG governs Capability Evidence data while ALR remains the future semantic authority for Capability State."
+    },
+    {
+      "reference": "content/knowledge/registry/learning-paths.json",
+      "sha256": "b66cb7bd4201bfffb5d9d0fa1b5053186399a4775bddb3f36a2ca76523f420ec",
+      "classification": "LEGACY_KNOWLEDGE_PATH_PROJECTION",
+      "finding": "Existing PKR learning paths remain frozen Knowledge navigation projections and are not ALR Learning Path authority."
+    },
+    {
+      "reference": "functions/pws/registry/capability-credential-registry.js",
+      "sha256": "e1e297f3166391d474e5c228942af62f76e7b995b6a595086b9716820b2386d3",
+      "classification": "PWS_PROFESSIONAL_CAPABILITY_AUTHORITY",
+      "finding": "PWS Capability and Credential definitions govern professional eligibility and remain a separate namespace from ALR Learning Capability."
+    },
+    {
+      "reference": "academy.html",
+      "sha256": "1e45051d5104113670378d9f9ca561c0e3b1dab6a8cd662b11ce96e79acd7bc3",
+      "classification": "EXISTING_PUBLIC_ORIENTATION_SURFACE",
+      "finding": "The current Academy page is a public orientation surface, not a Lesson Runtime, learner dashboard or Capability store."
+    }
+  ],
+  "baselineFindings": {
+    "alrV2RuntimePresent": false,
+    "alrLearningObjectRegistryPresent": false,
+    "alrCapabilityRegistryPresent": false,
+    "alrLearningStateStorePresent": false,
+    "alrAssessmentRuntimePresent": false,
+    "alrCredentialRuntimePresent": false,
+    "academyPageIsAlrRuntime": false,
+    "legacyKnowledgeLearningPathsAreAlrAuthority": false,
+    "pwsProfessionalCapabilityIsAlrLearningCapability": false
+  },
+  "foundationDecision": {
+    "foundationMayBeEstablished": true,
+    "liveLearningDataMayBeWritten": false,
+    "capabilityStateMayBeSet": false,
+    "courseContentMayBeCreated": false,
+    "academySurfaceMayBeChanged": false,
+    "nextWorkScope": "ALR-W1-W4"
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

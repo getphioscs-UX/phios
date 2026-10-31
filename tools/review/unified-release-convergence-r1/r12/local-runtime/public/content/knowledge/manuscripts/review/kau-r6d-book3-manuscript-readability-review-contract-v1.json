@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R6D-BOOK3-MANUSCRIPT-READABILITY-REVIEW-CONTRACT-v1.0.0",
+  "stage": "KAU-R6D",
+  "status": "REVIEW_WORKFLOW_READY_HUMAN_DECISIONS_PENDING",
+  "bookCode": "BOOK-3",
+  "source": {
+    "fileName": "PHI-OS-Book-3-v1.pdf",
+    "byteSize": 126399935,
+    "pageCount": 397,
+    "sha256": "75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b",
+    "corpusCharCount": 411937,
+    "corpusSha256": "c430ce84acdbacf4323710f771ceb1b49e879bb20e198a88de3bdf297bf44eb5"
+  },
+  "inventory": {
+    "path": "content/knowledge/manuscripts/extraction/book-3-full-section-inventory-v1.json",
+    "totalSegments": 106,
+    "sectionSegments": 103,
+    "partSectionCounts": {
+      "P8": 60,
+      "P9": 43
+    }
+  },
+  "generation": {
+    "command": "npm run kau:r6d:review -- --pdf /private/path/PHI-OS-Book-3-v1.pdf",
+    "acceptedInputs": [
+      "exact source PDF bound by byte size and SHA-256",
+      "private R2 retrieval corpus bound section-by-section by SHA-256"
+    ],
+    "outputs": [
+      "review-index.html",
+      "book-3-readability-review-metadata-v1.json",
+      "review-projection-manifest.json"
+    ]
+  },
+  "authorityBoundary": {
+    "automatedTriageIsHumanApproval": false,
+    "humanReadabilityDecisionsRequired": true,
+    "manuscriptBodyMayBeCommittedToPublicRepository": false,
+    "canonicalNodeMutationPerformed": false,
+    "publicationAuthorityCreated": false
+  },
+  "nextGate": "KAU-R6D human decisions export and acceptance"
+}

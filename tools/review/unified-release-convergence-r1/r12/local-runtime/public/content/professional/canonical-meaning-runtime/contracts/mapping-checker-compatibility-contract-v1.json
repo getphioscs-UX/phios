@@ -1,0 +1,52 @@
+{
+  "contractCode": "PHI-OS-MAPPING-CHECKER-COMPATIBILITY-CONTRACT-v1.0.0",
+  "work": "CM-W6C",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "dependsOn": [
+    "PHI-OS-METHOD-TO-MEANING-MAPPING-CONTRACT-v1.0.0",
+    "PHI-OS-VERSIONED-METHOD-MEANING-MAPPING-REGISTRY-CONTRACT-v1.0.0"
+  ],
+  "checkerAuthority": {
+    "allowed": ["read", "validate", "compare", "fail", "report"],
+    "forbidden": [
+      "write_registry", "repair_mapping", "update_digest", "promote_state",
+      "create_mapping", "create_meaning", "change_approval", "activate_production"
+    ]
+  },
+  "validationOrder": [
+    "registry_shape",
+    "mapping_identity_uniqueness",
+    "version_identity_uniqueness",
+    "canonical_projection_boundary",
+    "target_meaning_existence",
+    "digest_integrity",
+    "version_progression",
+    "compatibility_declaration",
+    "deprecation_state",
+    "successor_resolution"
+  ],
+  "compatibilityOutcomes": [
+    "identical",
+    "backward_compatible_patch",
+    "backward_compatible_minor",
+    "breaking_major",
+    "invalid_version_transition"
+  ],
+  "rules": {
+    "canonicalProjectionOnly": true,
+    "rawMethodObjectAllowed": false,
+    "interpretationTextAllowed": false,
+    "sameVersionMutationAllowed": false,
+    "breakingChangeRequiresMajor": true,
+    "compatibleExtensionRequiresMinorOrMajor": true,
+    "metadataOnlyChangeRequiresPatchOrHigher": true,
+    "deprecatedRecordMustRemainResolvable": true,
+    "successorMustExistWhenDeclared": true,
+    "successorMustUseDifferentMappingId": true,
+    "actualMethodMappingPopulationAllowedInW6C": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "productionAuthorityCreated": false
+  }
+}

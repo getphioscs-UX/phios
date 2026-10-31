@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/reading/mir-8-accepted-interpretation-handoff-v1.schema.json",
+  "title": "MIR-8 Accepted Interpretation Handoff",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "interpretationResultId",
+    "resultStatus",
+    "acceptance",
+    "authority",
+    "lineage",
+    "uncertainties"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CANONICAL-INTERPRETATION-RESULT-v1.0.0"
+    },
+    "interpretationResultId": {
+      "type": "string",
+      "pattern": "^CIR-[A-F0-9]{24}$"
+    },
+    "resultStatus": {
+      "enum": [
+        "ACCEPTED_GOVERNED_INTERPRETATION",
+        "ACCEPTED_WITH_UNKNOWNS"
+      ]
+    },
+    "acceptance": {
+      "type": "object"
+    },
+    "authority": {
+      "type": "object"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "uncertainties": {
+      "type": "array"
+    }
+  }
+}

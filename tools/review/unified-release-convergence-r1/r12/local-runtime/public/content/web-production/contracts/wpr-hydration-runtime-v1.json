@@ -1,0 +1,51 @@
+{
+  "contractCode": "PHI-OS-WPR-W24-HYDRATION-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W24",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "status": "ACTIVE_LIMITED_PRODUCTION_HYDRATION_INTEGRITY",
+  "authority": "WEB_HYDRATION_EXECUTION_ONLY",
+  "sourceAuthority": "content/web-production/registries/canonical-web-production-registry-v1.json",
+  "modes": {
+    "PUBLIC_CANONICAL_READ": {
+      "networkReadAllowed": true,
+      "method": "GET_ONLY",
+      "origin": "SAME_ORIGIN_ONLY",
+      "privatePayloadAllowed": false,
+      "storageAllowed": false
+    },
+    "PUBLIC_STATIC_METADATA": {
+      "networkReadAllowed": false,
+      "privatePayloadAllowed": false,
+      "storageAllowed": false
+    },
+    "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY": {
+      "networkReadAllowed": false,
+      "serverCustomerDataAllowed": false,
+      "storageAuthority": "EXISTING_LEGACY_BROWSER_STATE_ONLY"
+    },
+    "BROWSER_EPHEMERAL_INPUT_READINESS": {
+      "networkReadAllowed": "PUBLIC_AUTHORITY_ONLY",
+      "serverCustomerDataAllowed": false,
+      "domMemoryOnly": true,
+      "localStorageAllowed": false,
+      "sessionStorageAllowed": false
+    },
+    "PROFESSIONAL_AUTHORIZED_EXTERNAL_PAYLOAD": {
+      "wprFetchAllowed": false,
+      "authorizedPayloadRequired": true,
+      "cache": "NO_STORE",
+      "privatePayloadAuthority": "PWS_PR_RDG_UPSTREAM_ONLY"
+    }
+  },
+  "rules": {
+    "hydrationDoesNotCreateAuthority": true,
+    "hydrationDoesNotElevateAccess": true,
+    "publicSurfaceMayNotHydratePrivatePayload": true,
+    "customerOrProfessionalPayloadMayNotEnterPublicCache": true,
+    "postMutationForbiddenByWprHydration": true,
+    "crossLocaleStateLeakageForbidden": true,
+    "privateHydrationFailureFailsClosed": true,
+    "publicHydrationFailureMayDegradeToStaticShellOnlyWhereCompositionAllows": true
+  }
+}

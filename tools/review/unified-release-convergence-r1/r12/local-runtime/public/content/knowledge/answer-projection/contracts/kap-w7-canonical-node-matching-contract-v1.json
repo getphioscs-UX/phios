@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W7-CANONICAL-NODE-MATCHING-CONTRACT-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W7",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "status": "ACTIVE_MATCH_PROJECTION_NO_CANONICAL_MUTATION",
+  "input": "KAP_KNOWLEDGE_RETRIEVAL_RESULT",
+  "output": "KAP_NODE_MATCH_SET",
+  "maximumMatches": 8,
+  "eligibleMatchEvidence": [
+    "PUBLISHED_RETRIEVAL_RESULT",
+    "APPROVED_MANUSCRIPT_CANONICAL_BINDING"
+  ],
+  "rules": {
+    "publishedResultMayIdentifyCanonicalNode": true,
+    "approvedManuscriptBindingMayIdentifyCanonicalNode": true,
+    "pendingManuscriptBindingMayClaimNodeCode": false,
+    "automaticSemanticBindingAllowed": false,
+    "unboundSourceNativeManuscriptMayStillGroundAnswer": true,
+    "matchCreatesCanonicalAuthority": false,
+    "primaryNodeIsHighestRankedGovernedMatch": true,
+    "remainingMatchesAreSupporting": true
+  },
+  "nextStep": "KAP-W8_RELATIONSHIP_EXPANSION"
+}

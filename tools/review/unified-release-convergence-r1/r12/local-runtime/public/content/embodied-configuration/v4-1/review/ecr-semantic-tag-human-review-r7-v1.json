@@ -1,0 +1,503 @@
+{
+  "schemaVersion": "ECR-V4.1A-R7-W3-SEMANTIC-TAG-HUMAN-REVIEW-v1",
+  "baselineCommit": "c92eea091da3e512443c5fe4af594ba810f93124",
+  "reviewUnit": "SEMANTIC_TAG",
+  "decisionVocabulary": [
+    "ACCEPT",
+    "REVISE",
+    "REJECT"
+  ],
+  "items": [
+    {
+      "tagId": "ATTENTION",
+      "label": {
+        "en": "ATTENTION",
+        "zh-Hans": "注意"
+      },
+      "definition": {
+        "en": "Marks what receives sustained runtime notice or observation relative to competing signals.",
+        "zh-Hans": "标记在多个讯号或条件之间，什么获得持续的运行注意或观察。"
+      },
+      "scope": [
+        "observational_focus",
+        "signal_salience",
+        "runtime_notice"
+      ],
+      "boundary": [
+        "Does not mean importance, truth or urgency by itself.",
+        "Does not imply conscious attention when the evidence comes only from Design/background operation."
+      ],
+      "forbiddenInference": [
+        "ATTENTION_EQUALS_IMPORTANCE",
+        "ATTENTION_EQUALS_TRUTH",
+        "ATTENTION_AUTOMATICALLY_EQUALS_PERSONALITY"
+      ],
+      "sourceRefs": [
+        "content/interpretation/source/book-2-conscious-runtime-source-inventory-v1.json",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/personality-design-layer-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "SELECTION",
+      "label": {
+        "en": "SELECTION",
+        "zh-Hans": "选择"
+      },
+      "definition": {
+        "en": "Marks that one option, signal, direction or response is being distinguished from alternatives for further runtime processing.",
+        "zh-Hans": "标记系统从多个选项、讯号、方向或回应中区分出某一项，进入下一步运行。"
+      },
+      "scope": [
+        "option_discrimination",
+        "priority_selection",
+        "response_selection"
+      ],
+      "boundary": [
+        "Does not prove free choice or preference.",
+        "Does not itself authorize action."
+      ],
+      "forbiddenInference": [
+        "SELECTION_EQUALS_FREE_WILL",
+        "SELECTION_EQUALS_PREFERENCE",
+        "SELECTION_TO_ACTION_WITHOUT_COMPOSITION"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#capabilities"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "BOUNDARY",
+      "label": {
+        "en": "BOUNDARY",
+        "zh-Hans": "边界"
+      },
+      "definition": {
+        "en": "Marks a distinction that separates, contains or regulates what may cross between runtime regions, roles, resources or conditions.",
+        "zh-Hans": "标记用于分隔、容纳或调节不同运行区域、角色、资源或条件之间可否跨越的界线。"
+      },
+      "scope": [
+        "separation",
+        "containment",
+        "permeability_control",
+        "role_limit"
+      ],
+      "boundary": [
+        "Does not mean isolation.",
+        "A boundary may be permeable, temporary or context-dependent."
+      ],
+      "forbiddenInference": [
+        "BOUNDARY_EQUALS_ISOLATION",
+        "BOUNDARY_EQUALS_PERMANENT_LIMIT",
+        "BOUNDARY_EQUALS_GOOD_OR_BAD"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "EXPRESSION",
+      "label": {
+        "en": "EXPRESSION",
+        "zh-Hans": "表达"
+      },
+      "definition": {
+        "en": "Marks the translation of an internal or processed state into an observable, communicable or externally carried form.",
+        "zh-Hans": "标记内部或已处理状态如何转化为可观察、可交流或可由外部载体承接的形式。"
+      },
+      "scope": [
+        "communication",
+        "externalization",
+        "observable_form"
+      ],
+      "boundary": [
+        "Does not guarantee accurate representation of Reality.",
+        "Does not equal communication skill."
+      ],
+      "forbiddenInference": [
+        "EXPRESSION_EQUALS_TRUTH",
+        "EXPRESSION_EQUALS_SKILL",
+        "EXPRESSION_EQUALS_IDENTITY"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#capabilities",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "COMMITMENT",
+      "label": {
+        "en": "COMMITMENT",
+        "zh-Hans": "承诺"
+      },
+      "definition": {
+        "en": "Marks sustained allocation of position, time, resource or action to a selected runtime direction.",
+        "zh-Hans": "标记系统将位置、时间、资源或行动持续投入某个已选择的运行方向。"
+      },
+      "scope": [
+        "sustained_allocation",
+        "follow_through",
+        "resource_binding"
+      ],
+      "boundary": [
+        "Does not imply moral obligation.",
+        "Does not prove permanence or success."
+      ],
+      "forbiddenInference": [
+        "COMMITMENT_EQUALS_MORAL_DUTY",
+        "COMMITMENT_EQUALS_PERMANENCE",
+        "COMMITMENT_EQUALS_SUCCESS"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#capabilities"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "ADAPTATION",
+      "label": {
+        "en": "ADAPTATION",
+        "zh-Hans": "适应"
+      },
+      "definition": {
+        "en": "Marks a change in operating pattern that improves fit with changed conditions without requiring the system to return to a previous state.",
+        "zh-Hans": "标记系统因条件改变而调整运行方式，以提高适配度，而不要求回到原有状态。"
+      },
+      "scope": [
+        "operational_adjustment",
+        "condition_fit",
+        "adaptive_change"
+      ],
+      "boundary": [
+        "Does not mean compliance or improvement in every dimension.",
+        "Does not prove that the adapted state is healthy or optimal."
+      ],
+      "forbiddenInference": [
+        "ADAPTATION_EQUALS_COMPLIANCE",
+        "ADAPTATION_EQUALS_IMPROVEMENT",
+        "ADAPTATION_EQUALS_RECOVERY"
+      ],
+      "sourceRefs": [
+        "content/interpretation/source/book-2-conscious-runtime-source-inventory-v1.json",
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "OWNER_MANUSCRIPT_AUTHORITY:BOOK4_PART8_MAINTENANCE_RUNTIME"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "REORGANIZATION",
+      "label": {
+        "en": "REORGANIZATION",
+        "zh-Hans": "重组"
+      },
+      "definition": {
+        "en": "Marks redistribution of roles, resources, relations, boundaries or structure within an existing runtime.",
+        "zh-Hans": "标记既有运行中角色、资源、关系、边界或结构的重新配置。"
+      },
+      "scope": [
+        "role_redistribution",
+        "resource_redistribution",
+        "structural_reconfiguration"
+      ],
+      "boundary": [
+        "Does not mean complete transformation.",
+        "Does not establish that the new arrangement is stable."
+      ],
+      "forbiddenInference": [
+        "REORGANIZATION_EQUALS_TRANSFORMATION",
+        "REORGANIZATION_EQUALS_STABILITY",
+        "REORGANIZATION_EQUALS_IMPROVEMENT"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "CONTINUITY",
+      "label": {
+        "en": "CONTINUITY",
+        "zh-Hans": "延续"
+      },
+      "definition": {
+        "en": "Marks persistence, transfer, recurrence or maintained connection of runtime across time, contexts, versions or carriers.",
+        "zh-Hans": "标记运行如何跨越时间、情境、版本或载体保持持续、转移、重复或连接。"
+      },
+      "scope": [
+        "persistence",
+        "transfer",
+        "recurrence",
+        "cross_carrier_continuation"
+      ],
+      "boundary": [
+        "Does not prove permanence.",
+        "Does not imply metaphysical or biological inheritance without separate evidence."
+      ],
+      "forbiddenInference": [
+        "CONTINUITY_EQUALS_PERMANENCE",
+        "CONTINUITY_EQUALS_DESTINY",
+        "CONTINUITY_EQUALS_INHERITANCE_WITHOUT_EVIDENCE"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "RECOVERY",
+      "label": {
+        "en": "RECOVERY",
+        "zh-Hans": "恢复"
+      },
+      "definition": {
+        "en": "Marks restoration of sufficient operating capacity after loss, strain, disruption or degradation so that runtime can continue.",
+        "zh-Hans": "标记系统在损耗、压力、中断或退化之后，恢复足够运行能力以继续运作。"
+      },
+      "scope": [
+        "capacity_restoration",
+        "post_disruption_function",
+        "maintenance_recovery"
+      ],
+      "boundary": [
+        "Belongs to Book IV Part 8 Maintenance Runtime authority, not a celestial Driver.",
+        "Does not imply return to the previous state, trauma, healing diagnosis or full restoration."
+      ],
+      "forbiddenInference": [
+        "RECOVERY_EQUALS_DRIVER",
+        "RECOVERY_EQUALS_EARTH",
+        "RECOVERY_EQUALS_TRAUMA",
+        "RECOVERY_EQUALS_RETURN_TO_PAST"
+      ],
+      "sourceRefs": [
+        "OWNER_MANUSCRIPT_AUTHORITY:BOOK4_PART8_MAINTENANCE_RUNTIME"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "VALUE",
+      "label": {
+        "en": "VALUE",
+        "zh-Hans": "价值"
+      },
+      "definition": {
+        "en": "Marks what a runtime treats as worth preserving, exchanging, protecting, prioritizing or refusing under current conditions.",
+        "zh-Hans": "标记在当前条件下，系统把什么视为值得保存、交换、保护、优先处理或拒绝。"
+      },
+      "scope": [
+        "worth",
+        "preservation_priority",
+        "exchange_criterion"
+      ],
+      "boundary": [
+        "Does not establish universal morality or objective worth.",
+        "Does not reduce to romance, money or preference."
+      ],
+      "forbiddenInference": [
+        "VALUE_EQUALS_MORAL_TRUTH",
+        "VALUE_EQUALS_MONEY",
+        "VALUE_EQUALS_RELATIONSHIP"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "RELATION",
+      "label": {
+        "en": "RELATION",
+        "zh-Hans": "关系"
+      },
+      "definition": {
+        "en": "Marks a dependency, exchange, influence or coordinated position between two or more runtime elements.",
+        "zh-Hans": "标记两个或多个运行元素之间的依赖、交换、影响或协调位置。"
+      },
+      "scope": [
+        "dependency",
+        "exchange",
+        "coordination",
+        "mutual_position"
+      ],
+      "boundary": [
+        "Does not automatically mean interpersonal relationship.",
+        "Correlation or proximity alone does not establish a meaningful relation."
+      ],
+      "forbiddenInference": [
+        "RELATION_EQUALS_ROMANCE",
+        "RELATION_EQUALS_CAUSATION",
+        "RELATION_FROM_PROXIMITY_ONLY"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#capabilities",
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "INPUT",
+      "label": {
+        "en": "INPUT",
+        "zh-Hans": "输入"
+      },
+      "definition": {
+        "en": "Marks information, resource, condition or signal entering a runtime boundary for possible processing.",
+        "zh-Hans": "标记进入运行边界、等待被处理的信息、资源、条件或讯号。"
+      },
+      "scope": [
+        "incoming_signal",
+        "incoming_resource",
+        "incoming_condition"
+      ],
+      "boundary": [
+        "Input is not the same as accepted meaning, truth or action.",
+        "Presence of input does not prove salience."
+      ],
+      "forbiddenInference": [
+        "INPUT_EQUALS_TRUTH",
+        "INPUT_EQUALS_MEANING",
+        "INPUT_EQUALS_PRIORITY"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/interpretation/source/book-2-conscious-runtime-source-inventory-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "CAPACITY",
+      "label": {
+        "en": "CAPACITY",
+        "zh-Hans": "容量"
+      },
+      "definition": {
+        "en": "Marks the amount or range of load, complexity, resource demand or operation a carrier or system can currently sustain.",
+        "zh-Hans": "标记载体或系统当前能够持续承担的负载、复杂度、资源需求或运行范围。"
+      },
+      "scope": [
+        "sustainable_load",
+        "resource_capacity",
+        "operational_range",
+        "carrier_support"
+      ],
+      "boundary": [
+        "Does not equal potential, talent or worth.",
+        "Capacity is conditional and may change."
+      ],
+      "forbiddenInference": [
+        "CAPACITY_EQUALS_POTENTIAL",
+        "CAPACITY_EQUALS_TALENT",
+        "CAPACITY_EQUALS_WORTH",
+        "CAPACITY_IS_PERMANENT"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#capabilities",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json",
+        "OWNER_MANUSCRIPT_AUTHORITY:BOOK4_PART8_MAINTENANCE_RUNTIME"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    },
+    {
+      "tagId": "CONSTRAINT",
+      "label": {
+        "en": "CONSTRAINT",
+        "zh-Hans": "约束"
+      },
+      "definition": {
+        "en": "Marks a condition that narrows available options, movement, resources, timing or configuration within runtime.",
+        "zh-Hans": "标记限制运行中可用选项、移动、资源、时间或配置空间的条件。"
+      },
+      "scope": [
+        "limitation",
+        "narrowing_condition",
+        "resource_limit",
+        "timing_limit"
+      ],
+      "boundary": [
+        "Does not mean punishment or failure.",
+        "A constraint may enable form as well as restrict it."
+      ],
+      "forbiddenInference": [
+        "CONSTRAINT_EQUALS_PUNISHMENT",
+        "CONSTRAINT_EQUALS_FAILURE",
+        "CONSTRAINT_IS_ALWAYS_NEGATIVE"
+      ],
+      "sourceRefs": [
+        "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar",
+        "content/embodied-configuration/v4-1/semantic-admission-r2/driver-role-canon-r7-v1.json"
+      ],
+      "decision": "ACCEPT",
+      "reviewer": "OWNER",
+      "reviewedAt": "2026-09-28",
+      "evidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS",
+      "exactContentBinding": true
+    }
+  ],
+  "completion": {
+    "total": 14,
+    "accepted": 14,
+    "pending": 0,
+    "complete": true
+  },
+  "closedAt": "2026-09-28",
+  "ownerDecisionEvidenceRef": "OWNER_ACCEPT_ALL_CHAT_2026-09-28:R7_W3_14_TAGS"
+}

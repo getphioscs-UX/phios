@@ -1,0 +1,66 @@
+{
+  "id": "phi-os.m4b-w2b-professional-workspace-views",
+  "version": "1.0.0",
+  "milestone": "M4B-W2B",
+  "status": "read-only-projection-ready-auth-and-persistence-pending",
+  "baseline": {
+    "commit": "5441a4fc29d894e3e470319a53bc1954c4a35765",
+    "foundation": "M4B-W2A"
+  },
+  "route": "/professional-workspace",
+  "views": [
+    "client_list",
+    "runtime_view",
+    "professional_notes",
+    "review_queue"
+  ],
+  "contracts": {
+    "runtimeProjection": "phi-os.professional-runtime-projection.v1",
+    "professionalNote": "phi-os.professional-note.v1",
+    "clientIndex": "phi-os.professional-client-index.v1",
+    "reviewTask": "phi-os.professional-task.v1"
+  },
+  "runtimeStages": [
+    "entry",
+    "reconstruction",
+    "reading",
+    "navigation",
+    "runtime_memory"
+  ],
+  "noteTypes": [
+    "private_professional_note",
+    "client_visible_note",
+    "evidence_clarification",
+    "interpretive_observation",
+    "consultation_note",
+    "follow_up_note",
+    "chart_accuracy_note",
+    "birth_time_reliability",
+    "human_design_observation",
+    "possible_runtime_correspondence",
+    "unverified_interpretation",
+    "client_confirmation"
+  ],
+  "boundaries": {
+    "authenticatedDataLoaderImplemented": false,
+    "realClientDataIncluded": false,
+    "browserRuntimeScanned": false,
+    "apiCalled": false,
+    "sessionStorageUsed": false,
+    "localStorageUsedForWorkspace": false,
+    "d1WorkspacePersistenceEnabled": false,
+    "professionalNotesPersisted": false,
+    "runtimeViewReadOnly": true,
+    "runtimeMutationAllowed": false,
+    "externalReaderMergedIntoRuntimeEvidence": false,
+    "automaticTaskAssignment": false,
+    "automaticPriorityChange": false,
+    "professionalRecommendationActivated": false
+  },
+  "responsiveAcceptance": [
+    360,
+    768,
+    1440
+  ],
+  "nextWorkPackage": "M4B-W2C Reading Revision, Navigation Considerations and Follow-up Timeline"
+}

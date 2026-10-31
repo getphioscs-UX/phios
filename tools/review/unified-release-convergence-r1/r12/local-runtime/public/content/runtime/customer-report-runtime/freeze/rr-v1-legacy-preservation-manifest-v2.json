@@ -1,0 +1,85 @@
+{
+  "manifestCode": "PHI-OS-RR-V2-LEGACY-PRESERVATION-v1",
+  "manifestVersion": "1.0.0",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "FROZEN_COMPATIBILITY_PRESERVATION",
+  "purpose": "Preserve legacy M4A/M4B report adapters and upstream RR/RRE/JR/CPR/RDG authority artifacts while RR v2 establishes the canonical REPORT_RECORD assembly lifecycle.",
+  "entries": [
+    {
+      "path": "functions/professional/reports/professional-report-constants.js",
+      "sha256": "e2e1ac43c04625aed67fe1ac563dd4377d51dd3934da1a9cb7808b17dd98337f"
+    },
+    {
+      "path": "functions/professional/reports/professional-report-contract.js",
+      "sha256": "540eba09a72359f80206eb7fe691dcd21d5b282c81e83cb1a69013f0f8f793a2"
+    },
+    {
+      "path": "functions/professional/reports/professional-report-version-contract.js",
+      "sha256": "2a48948b68737572aca6c9ed084b5fb36c600b9fbf616382216cae9060790513"
+    },
+    {
+      "path": "functions/professional/reports/report-template-registry.js",
+      "sha256": "67ecac25c39c3c0c2ee3f9950e399a178637066c96bd2a85c466558acd2a37dc"
+    },
+    {
+      "path": "functions/professional/reports/financial-report-contract.js",
+      "sha256": "e9ac32f57358e6eaad4dfaefb4faf67924928800084ac87ef29fc6b754a37323"
+    },
+    {
+      "path": "functions/professional/reports/financial-report-pdf-contract.js",
+      "sha256": "be7b5cf78e7ebb910b4a2ffc29185df720ae6adb23c089cefcf56c4b0c391eaf"
+    },
+    {
+      "path": "scripts/check-m4b-professional-reports.mjs",
+      "sha256": "42a12d2dda5c2c5453b4ec9bc5249d536c6dce2641a2c2bb26365e8484872339"
+    },
+    {
+      "path": "scripts/check-m4a-w4-financial-reports.mjs",
+      "sha256": "d9f4a5c9c3ad722bfcb661685684da4e9668457f0472b5df9a434268374bb9e8"
+    },
+    {
+      "path": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996"
+    },
+    {
+      "path": "content/governance/reality-data-governance/extensions/rre-readout/registries/rre-readout-data-contract-successor-v1.json",
+      "sha256": "664c11bec26ec50d7df98d3dab5a1b1e950b4716e767ab07736ec5f1f1e4ecda"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+      "sha256": "568cda919515f825b229698046c24998783b2c9a96ca644d4ca5031b5879bdfe"
+    },
+    {
+      "path": "content/runtime/journey-runtime/contracts/lrm-integration-contract-v1.json",
+      "sha256": "34f9ece360b5d9f909d9eba641fac0cff77e0fa138c1c2396c1ff459fd061c11"
+    },
+    {
+      "path": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "sha256": "0f63eb01bd9af5a0ec7b8d912a2cabcd3ef25e67c515a84bbc0a99bc4dc2b47c"
+    },
+    {
+      "path": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+      "sha256": "4d7c7f4f1d233c5ad149a8fc300cc842a9dfc045a5afc2f9f9247f165a79a92b"
+    },
+    {
+      "path": "content/governance/canonical-master-work/registries/canonical-runtime-dependency-registry-v1.json",
+      "sha256": "f69a1954d0f9191cfabeb69a1e175df87670b3fd65ffe83f5ff51ee2250da2e6"
+    },
+    {
+      "path": "content/governance/operational-architecture/runtime-authority-map-v1.json",
+      "sha256": "fb57cec8df6cbe3b47f7f0d842a2fcbc32ce62e00ea16a11057299977737c82e"
+    },
+    {
+      "path": "content/governance/operational-architecture/runtime-dependency-map-v1.json",
+      "sha256": "ffa41e1d95b679b47f7dddc2b1bf3badc829713396f232815d5ace1c79c2c588"
+    }
+  ],
+  "rules": {
+    "legacyProfessionalReportAdaptersRemainCompatible": true,
+    "legacyAdaptersDoNotBecomeRrV2Authority": true,
+    "rdgV1RegistryRewritten": false,
+    "rreReadoutSuccessorRewritten": false,
+    "cprRegistryRewritten": false,
+    "jrFreezeRewritten": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W5-CURRENT-OWNER-RECONCILIATION-v1.0.0",
+  "work": "HD-PRO-R3-W5",
+  "baselineCommit": "ccac579a7e81dc27f7f6403df1c6446fba38bc25",
+  "status": "SAME_OWNER_PATH_DRIFT_RECONCILED_NO_HD_OWNER_FORK",
+  "w0FreezeBaselineCommit": "dae24c1dd8de49a6c238ddffb8d52b388e8da10d",
+  "policy": {
+    "historicalW0FreezeRewritten": false,
+    "historicalW4ReconciliationRewritten": false,
+    "sameOwnerPathMayReconcileDigestOnNewMain": true,
+    "ownerPathMayChangeWithoutExplicitSuccessor": false,
+    "protectedR2AuthorityFilesRemainStrictlyFrozen": true,
+    "secondCustomerRendererCreated": false,
+    "secondCustomerRouteCreated": false
+  },
+  "reconciledOwners": [
+    {
+      "role": "customerRendererOwner",
+      "path": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "w0FrozenSha256": "83899a7aaf6382b1d1395a0a68c9c4f5e8950852355b0e09cd5c02a7e5ca6952",
+      "currentMainSha256": "efa88dcefa9a0c7d63f986108f25d55731b50fa4a0f7a82e0af0ae1b2cd36da9",
+      "ownerPathChanged": false,
+      "reason": "Current main changed the existing shared Personal Reality owner while preserving the canonical path. W5 records digest drift only; it creates no replacement renderer or route."
+    },
+    {
+      "role": "customerRouteOwner",
+      "path": "perspectives/personal/index.html",
+      "w0FrozenSha256": "880ccf69ce172dbd615c47f70507f02351c66083ed4e6ebe9ae25cefeae897a9",
+      "currentMainSha256": "6941a38ed01cb7353d63217c2b40ca1c95a6e081e3a5fd512d6c56c1e256428b",
+      "ownerPathChanged": false,
+      "reason": "Current main changed the existing shared Personal Reality owner while preserving the canonical path. W5 records digest drift only; it creates no replacement renderer or route."
+    }
+  ],
+  "publication": {
+    "r2State": "CUSTOMER_PUBLISHED",
+    "r3State": "SHADOW_CANDIDATE"
+  }
+}

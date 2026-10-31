@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W8-BIRTH-INITIALIZATION-DATA-RUNTIME-v1.0.0",
+  "work": "MPA-W8",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "ACTIVE_CANONICAL_INITIALIZATION_NO_RESOLUTION_NO_PRODUCTION",
+  "canonicalFields": [
+    "BirthDate",
+    "BirthTime",
+    "BirthPlace",
+    "Timezone",
+    "Coordinates",
+    "InputPrecision",
+    "Source",
+    "CustomerConfirmation"
+  ],
+  "precisionValues": [
+    "exact",
+    "approximate",
+    "unknown"
+  ],
+  "ownership": {
+    "canonicalInitializationOwner": "MPA_W8",
+    "sharedDataAuthorityRemains": "SHARED_DATA_AUTHORITY",
+    "timezoneResolutionOwner": "MPA_W9_WITH_SHARED_DATA_AUTHORITY",
+    "methodOwner": false
+  },
+  "rules": {
+    "unknownRepresentedAsNull": true,
+    "unknownBirthTimeMayNotBecome1200": true,
+    "unknownTimezoneMayNotUseCurrentTimezone": true,
+    "unknownCoordinatesMayNotUsePlaceCentroidWithoutGovernedResolution": true,
+    "sourceRequired": true,
+    "customerConfirmationExplicit": true,
+    "initializationCreatesCalculationFact": false,
+    "initializationCreatesProjection": false,
+    "initializationCreatesInterpretation": false
+  },
+  "handoff": "MPA-W9_TEMPORAL_SPATIAL_RESOLUTION"
+}

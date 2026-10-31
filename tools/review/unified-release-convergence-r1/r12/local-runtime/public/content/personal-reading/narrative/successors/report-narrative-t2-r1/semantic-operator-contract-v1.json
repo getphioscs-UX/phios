@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-REPORT-SEMANTIC-OPERATOR-CONTRACT-v1.0.0",
+  "work": "RNT2-W8",
+  "status": "SUCCESSOR_CANDIDATE",
+  "operators": [
+    "ASSOCIATED_WITH",
+    "CO_OCCURS_WITH",
+    "MODIFIES",
+    "CONTEXTUALIZES",
+    "SUPPORTS",
+    "CONSTRAINS",
+    "TIMING_RELEVANCE",
+    "OPEN",
+    "QUESTION",
+    "CANDIDATE",
+    "ESTABLISHED",
+    "OBSERVED",
+    "CUSTOMER_SUPPLIED",
+    "CAUSES",
+    "PRECEDES",
+    "DEVELOPS_INTO",
+    "MANIFESTS_AS"
+  ],
+  "defaultForbidden": [
+    "CAUSES",
+    "PRECEDES",
+    "DEVELOPS_INTO",
+    "MANIFESTS_AS"
+  ],
+  "preservationRules": {
+    "associationIsNotCause": true,
+    "dimensionsAreNotSequence": true,
+    "questionIsNotFact": true,
+    "openIsNotResolved": true,
+    "candidateIsNotEstablished": true,
+    "structuralRelevanceIsNotEventPrediction": true,
+    "counterSignalIsNotInventedCounterexample": true
+  },
+  "machineRejectCodes": [
+    "UNLICENSED_CAUSAL",
+    "UNLICENSED_SEQUENCE",
+    "QUESTION_TO_FACT",
+    "OPEN_TO_CLOSED",
+    "CERTAINTY_STRENGTHENING",
+    "RANK_FLATTENING",
+    "RANK_INVERSION",
+    "DIRECTION_CHANGE",
+    "PAIRWISE_COLLAPSE",
+    "REALITY_INFERENCE",
+    "TIMING_EVENT_PROMOTION",
+    "UNSUPPORTED_MANIFESTATION",
+    "SOURCE_LINEAGE_LOSS"
+  ]
+}

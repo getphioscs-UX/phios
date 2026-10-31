@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-LRR-SUPPORTING-LENS-RESOLVER-CONTRACT-v1.0.0",
+  "work": "LRR-W2",
+  "status": "FROZEN_V1",
+  "maxSupportingLenses": 2,
+  "secondaryCategoryMappings": {
+    "STRUCTURE": {"lensCode":"FUNCTION","pluginCode":"AST","subCapability":"NATAL"},
+    "TIME": {"lensCode":"TIME","pluginCode":"BZR","subCapability":"TEMPORAL"},
+    "CURRENT": {"lensCode":"FUNCTION","pluginCode":"AST","subCapability":"CURRENT_DYNAMIC"},
+    "DOMAIN": {"lensCode":"DOMAIN","pluginCode":"ZWR","subCapability":"DYNAMIC_DOMAIN"},
+    "RHYTHM": {"lensCode":"RHYTHM","pluginCode":"NUM","subCapability":null}
+  },
+  "defaultSupporting": {
+    "TIME": [{"lensCode":"RHYTHM","pluginCode":"NUM","subCapability":null,"role":"SUPPORTING"}],
+    "RHYTHM": [{"lensCode":"TIME","pluginCode":"BZR","subCapability":"TEMPORAL","role":"CONTEXTUAL"}]
+  },
+  "rules": {
+    "supportingCannotDuplicatePrimary": true,
+    "secondaryQuestionCategoryTakesPriorityOverDefaultSupporting": true,
+    "defaultSupportingIsOptionalNotMandatoryTruthEvidence": true,
+    "supportingCannotOverridePrimary": true,
+    "supportingCannotIncreaseTruthConfidence": true,
+    "supportingCannotResolveDivergenceByVote": true,
+    "blockedSupportingLensIsDroppedWithDisclosureNotSilentlyReplaced": true
+  }
+}

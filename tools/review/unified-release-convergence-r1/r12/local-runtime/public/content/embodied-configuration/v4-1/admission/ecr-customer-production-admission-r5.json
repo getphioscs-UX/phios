@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "ECR-V4.1A-CUSTOMER-PRODUCTION-ADMISSION-R5-v1",
+  "baselineCommit": "120f2968d55ecd245abc214ada40c964f9b479ac",
+  "status": "BLOCKED_ON_GOVERNED_HUMAN_AND_SEMANTIC_GATES",
+  "scope": "ECR_V4.1_BASELINE_PRODUCT",
+  "explicitOwnerDecisionsAlreadyRecorded": {
+    "bilingualPairs": {
+      "accepted": 5,
+      "revised": 9,
+      "rejected": 0
+    },
+    "phiCardEligibility": {
+      "accepted": 43,
+      "revised": 5,
+      "rejected": 0,
+      "keep48": true
+    },
+    "topicSelectors": {
+      "accepted": 2,
+      "revised": 1,
+      "rejected": 0
+    },
+    "currentRealityScope": "OBSERVATION_AND_COMPARISON_ONLY"
+  },
+  "machineReadyGates": {
+    "p64Mechanics": "PASS",
+    "visualOrientation": "OWNER_DECIDED_MACHINE_PASS",
+    "gqrStaticIdentityProof": "134_IDENTITY_INVARIANT",
+    "topicStaticRelations": "222_PRESERVED",
+    "chironD11": "UNKNOWN_NON_BLOCKING",
+    "currentRealityDynamicInference": "DEFERRED_TO_V4.2_NON_BLOCKING"
+  },
+  "blockingGates": [
+    {
+      "code": "BILINGUAL_REVISED_PAIR_ACCEPTANCE",
+      "remaining": 9,
+      "required": "Digest-bound owner ACCEPT of the revised bilingual copy."
+    },
+    {
+      "code": "COMPOSITIONAL_SEMANTIC_ADMISSION",
+      "remaining": {
+        "gateBases": 64,
+        "lineModifiers": 6,
+        "planetaryDriverRoles": 12,
+        "layerRoles": 2,
+        "tagRules": "REQUIRED",
+        "runtimeOwnerRules": "REQUIRED"
+      },
+      "required": "Source-grounded canonical meaning/tag/owner admission. Source identity coverage alone is insufficient."
+    },
+    {
+      "code": "PHI_CARD_OPERATIONAL_BINDING",
+      "remaining": {
+        "revisedEligibilityMappings": 5,
+        "requiredSemanticTags": "REQUIRED_FOR_SELECTION",
+        "deterministicPriorities": "REQUIRED_FOR_SELECTION"
+      },
+      "required": "Second owner review for five revisions plus admitted tags/priorities; selector must remain UNKNOWN before this."
+    },
+    {
+      "code": "TOPIC_D_SELECTOR_SECOND_REVIEW",
+      "remaining": 1,
+      "required": "Accept a revised D rule that uses physical body binding only as structural evidence and requires semantic composition/salience before personal selection."
+    },
+    {
+      "code": "RENDERED_VISUAL_ACCEPTANCE",
+      "remaining": 1,
+      "required": "Human review of actual EN/zh-Hans rendered customer candidate."
+    },
+    {
+      "code": "DEPLOYED_PREVIEW_E2E",
+      "remaining": 1,
+      "required": "Real deployed Preview route, locale, entitlement/report rendering and browser acceptance."
+    }
+  ],
+  "semanticSourceStatus": {
+    "repoGateLineSourceRegistry": "SOURCE_IDENTITY_COVERAGE_NOT_CANONICAL_MEANING",
+    "existingOwnerCuratedSourceAudit": {
+      "logicalName": "PHI-OS-HDR-Gene-Keys-Interpretation-Source-Audit-v1.json",
+      "sourceWorkbook": "Human Design Summary.xlsx",
+      "role": "USER_CURATED_INTERPRETATION_SOURCE_CANDIDATE",
+      "coverage": {
+        "geneKeyBaseSpectrum": "64/64",
+        "geneKeyLongFormSpectrum": "64/64",
+        "gateLineKeywords": "384/384",
+        "sphereRoleLineArchetypes": "6 lines x 14 roles"
+      },
+      "canonicalMeaningAuthority": false,
+      "permissionManifestRequired": true
+    }
+  },
+  "customerProductionAdmitted": false,
+  "releaseDecisionAllowed": false,
+  "nextState": "SEMANTIC_SOURCE_CANONICALIZATION_AND_SECOND_OWNER_REVIEW"
+}

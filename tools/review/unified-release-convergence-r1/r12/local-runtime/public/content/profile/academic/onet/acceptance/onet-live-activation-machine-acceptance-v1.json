@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-ONET-LIVE-ACTIVATION-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "PRF-ONET-LIVE-ACTIVATION-W0-W8",
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "status": "MACHINE_VERIFIED_WITH_USER_EXECUTED_LIVE_PROVIDER_EVIDENCE",
+  "gate": "check:profile:onet-live",
+  "works": {
+    "W0": "PASS",
+    "W1": "PASS",
+    "W2": "PASS",
+    "W3": "PASS",
+    "W4": "PASS",
+    "W5": "PASS",
+    "W6": "PASS",
+    "W7": "PASS",
+    "W8": "PASS"
+  },
+  "liveProviderEvidence": {
+    "questions30": "PASS_LIVE_USER_OBSERVED",
+    "riaSecResults": "PASS_LIVE_USER_OBSERVED",
+    "careerMatching": "PASS_LIVE_USER_OBSERVED",
+    "jobZones": "PASS_LIVE_USER_OBSERVED",
+    "careerDetail": "PASS_LIVE_USER_OBSERVED",
+    "questions60": "NOT_DIRECTLY_LIVE_OBSERVED"
+  },
+  "machineProviderContract": {
+    "questions30": "PASS",
+    "questions60": "PASS",
+    "riaSecResults": "PASS",
+    "careerMatching": "PASS",
+    "jobZones": "PASS",
+    "careerDetail": "PASS"
+  },
+  "boundaries": {
+    "apiKeyStored": false,
+    "clientCredentialExposure": false,
+    "providerScoringPreserved": true,
+    "sourceClassPreserved": true,
+    "careerFitGuarantee": false,
+    "employmentDecisionAuthority": false,
+    "currentRealityProofTransfer": false,
+    "crossSourceScientificValidationTransfer": false
+  },
+  "deployment": {
+    "cloudflareSecretBindingObserved": false,
+    "customerExecutionWithoutSecret": false,
+    "nextDeploymentAction": "Bind ONET_WEB_SERVICES_API_KEY as a Cloudflare server-side secret, then run deployed live smoke."
+  }
+}

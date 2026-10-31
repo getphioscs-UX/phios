@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W11-CALCULATION-DATA-AUTHORITY-REGISTRY-v1.0.0",
+  "work": "MPA-W11",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_VALIDATION_AUTHORITY_BINDING_PRODUCTION_FAIL_CLOSED",
+  "rule": "Algorithms may not depend on ungoverned magic constants. Validation implementations may duplicate a governed literal only when exact value/digest binding is recorded; Production adapters must resolve canonical authority by authorityCode.",
+  "requiredAuthorityFields": [
+    "source",
+    "version",
+    "license",
+    "digest",
+    "digestStatus"
+  ],
+  "authorities": [
+    {
+      "authorityCode": "NUMERIC_REDUCTION_RULES_V1",
+      "category": "numeric_rules",
+      "methods": [
+        "NUMEROLOGY"
+      ],
+      "source": "content/professional/core-method-runtime/num-birth-number-runtime-v1.json",
+      "version": "1.0.0",
+      "license": "PHI_OS_INTERNAL",
+      "payload": {
+        "masterNumbers": [
+          11,
+          22,
+          33
+        ],
+        "zeroCreatesCoreNumber": false,
+        "policyCode": "PHI_OS_NUMERIC_REDUCTION_V1"
+      },
+      "digestAlgorithm": "sha256",
+      "digest": "0ad09e8321920bcdad35c3f875bf1deeb0c62a706e65f0f4b9a5b2b8329a1a9a",
+      "digestStatus": "VERIFIED_CANONICAL_PAYLOAD",
+      "productionUse": "REQUIRES_AUTHORITY_RESOLVER"
+    },
+    {
+      "authorityCode": "NUMERIC_CYCLE_RULES_V1",
+      "category": "numeric_rules",
+      "methods": [
+        "NUMEROLOGY"
+      ],
+      "source": "content/professional/core-method-runtime/num-cycle-policy-registry-v1.json",
+      "version": "1.0.0",
+      "license": "PHI_OS_INTERNAL",
+      "digestAlgorithm": "sha256",
+      "digest": "2946439f63396a737fb0e9b3693abf31064223e878c7d1cfcade1f7ed67517a0",
+      "digestStatus": "VERIFIED_REPOSITORY_ARTIFACT",
+      "productionUse": "REQUIRES_AUTHORITY_RESOLVER"
+    },
+    {
+      "authorityCode": "AST_EPHEMERIS_AUTHORITY",
+      "category": "ephemeris",
+      "methods": [
+        "ASTROLOGY"
+      ],
+      "source": "ASTRONOMY_ENGINE_JS via governed injected adapter",
+      "version": "UNPINNED",
+      "license": "MIT",
+      "governanceSource": "content/professional/core-method-runtime/ast-astronomy-runtime-v1.json",
+      "digestAlgorithm": "sha256",
+      "digest": null,
+      "digestStatus": "BLOCKED_DATASET_OR_PACKAGE_DIGEST_UNAVAILABLE",
+      "validationReference": "NASA_JPL_HORIZONS",
+      "productionUse": "BLOCKED"
+    },
+    {
+      "authorityCode": "AST_ASPECT_POLICY_V1",
+      "category": "method_constants",
+      "methods": [
+        "ASTROLOGY"
+      ],
+      "source": "content/professional/core-method-runtime/ast-aspect-governance-freeze-v1.json",
+      "version": "1.0.0",
+      "license": "PHI_OS_INTERNAL",
+      "digestAlgorithm": "sha256",
+      "digest": "036ca598ef9b6cbc74f0499ab114aa33368532f454ddf9119aaaa90b6e035182",
+      "digestStatus": "VERIFIED_REPOSITORY_ARTIFACT",
+      "productionUse": "GOVERNED_VALIDATION_ONLY"
+    },
+    {
+      "authorityCode": "IANA_TZDB",
+      "category": "calendar_tables",
+      "methods": [
+        "ASTROLOGY",
+        "BAZI",
+        "HUMAN_DESIGN"
+      ],
+      "source": "IANA_TZDB resolved by MPA-W9 adapter",
+      "version": "RUNTIME_VERSION_REQUIRED",
+      "license": "LICENSE_REVIEW_REQUIRED",
+      "digestAlgorithm": "sha256",
+      "digest": null,
+      "digestStatus": "BLOCKED_DATASET_DIGEST_UNAVAILABLE",
+      "productionUse": "BLOCKED"
+    },
+    {
+      "authorityCode": "BZR_STEM_BRANCH_TABLES_V1",
+      "category": "stem_branch_tables",
+      "methods": [
+        "BAZI"
+      ],
+      "source": "PHI_OS_SEXAGENARY_CALENDAR governed canonical sequence",
+      "version": "1.0.0-candidate",
+      "license": "PHI_OS_INTERNAL",
+      "payload": {
+        "stems": [
+          "JIA",
+          "YI",
+          "BING",
+          "DING",
+          "WU",
+          "JI",
+          "GENG",
+          "XIN",
+          "REN",
+          "GUI"
+        ],
+        "branches": [
+          "ZI",
+          "CHOU",
+          "YIN",
+          "MAO",
+          "CHEN",
+          "SI",
+          "WU",
+          "WEI",
+          "SHEN",
+          "YOU",
+          "XU",
+          "HAI"
+        ]
+      },
+      "digestAlgorithm": "sha256",
+      "digest": "2db010cb6d5da3559e0f0b85a63ef95b70cc918779e20f54047d509c5ff80b77",
+      "digestStatus": "VERIFIED_CANONICAL_PAYLOAD",
+      "productionUse": "REQUIRES_AUTHORITY_RESOLVER"
+    },
+    {
+      "authorityCode": "BZR_CALENDAR_POLICY_V1",
+      "category": "calendar_tables",
+      "methods": [
+        "BAZI"
+      ],
+      "source": "content/professional/core-method-runtime/bzr-solar-calendar-runtime-v1.json",
+      "version": "1.0.0",
+      "license": "PHI_OS_INTERNAL_WITH_EXTERNAL_DEPENDENCIES",
+      "digestAlgorithm": "sha256",
+      "digest": "ebe69bf554d623f5a02b0e913f10a81724ba047455f76486e5fb3c5ec1836fee",
+      "digestStatus": "VERIFIED_GOVERNANCE_ARTIFACT_EXTERNAL_DATA_PENDING",
+      "productionUse": "BLOCKED_EXTERNAL_DATA_AUTHORITY"
+    },
+    {
+      "authorityCode": "HDR_SOLAR_ARC_CONSTANTS_V1",
+      "category": "method_constants",
+      "methods": [
+        "HUMAN_DESIGN"
+      ],
+      "source": "content/professional/core-method-runtime/hdr-design-moment-runtime-v1.json",
+      "version": "1.0.0",
+      "license": "RESTRICTED_METHOD_TRACK",
+      "payload": {
+        "targetSolarArcDegrees": 88,
+        "earliestDaysBefore": 100,
+        "latestDaysBefore": 70,
+        "angleToleranceDegrees": 1e-07,
+        "timeToleranceMs": 1,
+        "maxIterations": 80,
+        "dayMs": 86400000
+      },
+      "digestAlgorithm": "sha256",
+      "digest": "43f2e095d8c305b676abf858920c67085f92b23401e5bef8b179f3ab49a66cf0",
+      "digestStatus": "VERIFIED_CANONICAL_PAYLOAD_RESTRICTED",
+      "productionUse": "BLOCKED_LICENSE_AND_ACTIVATION"
+    },
+    {
+      "authorityCode": "HDR_ASTRONOMY_BODY_SET_V1",
+      "category": "method_constants",
+      "methods": [
+        "HUMAN_DESIGN"
+      ],
+      "source": "content/professional/core-method-runtime/hdr-astronomy-runtime-v1.json",
+      "version": "1.0.0",
+      "license": "RESTRICTED_METHOD_TRACK",
+      "payload": {
+        "requiredBodies": [
+          "SUN",
+          "MOON",
+          "NORTH_NODE",
+          "MERCURY",
+          "VENUS",
+          "MARS",
+          "JUPITER",
+          "SATURN",
+          "URANUS",
+          "NEPTUNE",
+          "PLUTO"
+        ]
+      },
+      "digestAlgorithm": "sha256",
+      "digest": "d8bbe35fef5a6827539a336cc4ebbb7d7429dee2987cc760ded762ece42d0130",
+      "digestStatus": "VERIFIED_CANONICAL_PAYLOAD_RESTRICTED",
+      "productionUse": "BLOCKED_LICENSE_AND_ACTIVATION"
+    },
+    {
+      "authorityCode": "HDR_GATE_MAPPING_AUTHORITY",
+      "category": "method_constants",
+      "methods": [
+        "HUMAN_DESIGN"
+      ],
+      "source": "VERSIONED_GOVERNED_ADAPTER_REQUIRED",
+      "version": "UNRESOLVED",
+      "license": "RESTRICTED_OR_UNRESOLVED",
+      "governanceSource": "content/professional/core-method-runtime/hdr-gate-runtime-v1.json",
+      "digestAlgorithm": "sha256",
+      "digest": null,
+      "digestStatus": "BLOCKED_MAPPING_DATA_NOT_AUTHORIZED",
+      "productionUse": "BLOCKED"
+    }
+  ],
+  "methodAuthorityStatus": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "status": "VALIDATION_AUTHORITY_BOUND_PRODUCTION_RESOLVER_REQUIRED"
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "status": "BLOCKED_EPHEMERIS_VERSION_AND_DIGEST"
+    },
+    {
+      "methodCode": "BAZI",
+      "status": "BLOCKED_TZDB_LICENSE_DIGEST_AND_EXTERNAL_SOLAR_DATA"
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "status": "BLOCKED_LICENSE_EPHEMERIS_AND_MAPPING_AUTHORITY"
+    }
+  ],
+  "productionEligibilityChanged": false
+}

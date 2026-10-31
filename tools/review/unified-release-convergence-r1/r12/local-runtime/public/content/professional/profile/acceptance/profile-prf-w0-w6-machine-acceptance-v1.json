@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-PRF-W0-W6-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "PRF-W0-W6",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "FOUNDATION_MACHINE_VERIFIED",
+  "requiredGates": [
+    "check:profile:w0-source-class-contract",
+    "check:profile:w1-external-profile-input",
+    "check:profile:w2-provider-registry",
+    "check:profile:w3-self-assessment-instrument-v2",
+    "check:profile:w4-scoring-boundary",
+    "check:profile:w5-reasoning-task-performance",
+    "check:profile:w6-signal-envelope"
+  ],
+  "customerPublication": {
+    "allowed": false,
+    "nextRequiredGate": "PRF-W12",
+    "humanAcceptanceRequiredBeforePublication": true
+  },
+  "boundaries": {
+    "noProfileTruthAuthority": true,
+    "noDiagnosticAuthority": true,
+    "noFirstPartyProprietaryScoring": true,
+    "noProductionReasoningTaskBank": true,
+    "explicitSelfAssessmentConsentRequired": true,
+    "sensitiveSelfAssessmentConsentRequired": true
+  },
+  "summary": {
+    "gatesPassed": 7,
+    "gatesFailed": 0,
+    "runtimeFixtureSignalCount": 11,
+    "assessmentFacetCount": 30,
+    "providerFamilyCount": 5
+  },
+  "verifiedAt": "2026-09-01"
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-TARI-SYMBOL-DIMENSION-REGISTRY-v1.0.0",
+  "phase": "TARI",
+  "work": "TARI-W1",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE_SOURCE_NEUTRAL_LOW_LEVEL_DIMENSIONS",
+  "registryVersion": "1.0.0",
+  "dimensions": [
+    {
+      "dimensionId": "VISUAL_OBJECT",
+      "sourceNeutralEligibility": "CONDITIONAL_ON_DIRECT_OBSERVATION_RECORD",
+      "v1Availability": "NOT_INGESTED",
+      "derivation": "NO_INFERENCE_FROM_CARD_TITLE_OR_INTERPRETATION",
+      "meaningAttached": false
+    },
+    {
+      "dimensionId": "NUMBER",
+      "sourceNeutralEligibility": "YES",
+      "derivation": "CANONICAL_CARD_REGISTRY_NUMBER_OR_RANK_ORDER",
+      "meaningAttached": false
+    },
+    {
+      "dimensionId": "SUIT",
+      "sourceNeutralEligibility": "YES",
+      "derivation": "CANONICAL_CARD_REGISTRY_SUIT",
+      "meaningAttached": false
+    },
+    {
+      "dimensionId": "FIGURE",
+      "sourceNeutralEligibility": "YES_STRUCTURAL_ONLY",
+      "derivation": "COURT_RANK_CLASSIFICATION_ONLY",
+      "meaningAttached": false
+    },
+    {
+      "dimensionId": "ORIENTATION",
+      "sourceNeutralEligibility": "YES",
+      "derivation": "CANONICAL_CARD_PROJECTION_ORIENTATION",
+      "meaningAttached": false
+    },
+    {
+      "dimensionId": "POSITION",
+      "sourceNeutralEligibility": "YES",
+      "derivation": "GOVERNED_SPREAD_POSITION",
+      "meaningAttached": false
+    }
+  ],
+  "rules": {
+    "semanticKeywordMappingAllowed": false,
+    "universalMeaningLookupAllowed": false,
+    "visualObjectMayBeInventedFromTitle": false,
+    "visualObjectMayBeInferredByLLMWithoutEvidence": false,
+    "deathEqualsTransformationUniversalMappingAllowed": false,
+    "dimensionMayOverrideSourceInterpretation": false
+  }
+}

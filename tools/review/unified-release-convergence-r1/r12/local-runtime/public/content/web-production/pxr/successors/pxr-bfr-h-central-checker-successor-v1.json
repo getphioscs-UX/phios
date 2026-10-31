@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-PXR-BFR-H-CENTRAL-CHECKER-SUCCESSOR-v1.0.0",
+  "work": "PXR-P3",
+  "baselineCommit": "f968210",
+  "status": "ACTIVE_ADDITIVE_PXR_BEFORE_BFR_H16_SUCCESSOR",
+  "predecessor": {
+    "architecturePath": "content/web-production/contracts/bfr-h-central-checker-architecture-v1.json",
+    "architectureSha256": "020efc22d1f7e1b046f116f45cd0a999ec0b301581dee35cc65a8a759b5aacff",
+    "postcheckCommand": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:bfr-h16",
+    "rewritten": false
+  },
+  "successor": {
+    "postcheckCommand": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:pxr && npm run check:bfr-h16",
+    "sequence": [
+      "HPC2_CKA_DIRECT_MAPPING",
+      "BFR_H_CKA_DIRECT_MAPPING",
+      "BFR_H15",
+      "PXR_P0_P3",
+      "BFR_H16"
+    ],
+    "pxrEntry": "npm run check:pxr"
+  },
+  "boundaries": {
+    "checkBfrHPredecessorCommandChanged": false,
+    "partHArchitecturePredecessorRewritten": false,
+    "bfrH16AuthorityRecreated": false,
+    "pxrPresentationOnly": true,
+    "runtimeSemanticAuthorityChanged": false,
+    "globalProductionAccepted": false
+  }
+}

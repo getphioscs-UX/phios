@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W24-HDR-PUBLIC-VOCABULARY-BOUNDARY-v1.0.0",
+  "work": "MPA-W24",
+  "status": "PUBLIC_CUSTOMER_PRESENTATION_RECONCILED_FAIL_CLOSED",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "internalIdentity": {
+    "methodCode": "HUMAN_DESIGN",
+    "pluginCode": "HDR",
+    "internalOnly": true
+  },
+  "presentationAuthority": {
+    "registry": "content/web-production/registries/wpr-public-vocabulary-registry-v2.json",
+    "vocabularyCode": "METHOD_HUMAN_DESIGN",
+    "publicLabels": {
+      "en": "Personal Runtime Projection",
+      "zh-Hans": "个人运行投射"
+    },
+    "audiences": [
+      "PUBLIC",
+      "CUSTOMER"
+    ],
+    "renderPolicy": "CONTROLLED_PUBLIC_LABEL_ONLY"
+  },
+  "restrictedTerms": [
+    "Human Design",
+    "人类图"
+  ],
+  "publicCustomerRules": {
+    "directInternalNameExposureAllowed": false,
+    "rawHdrProjectionVocabularyExposureAllowed": false,
+    "rawHdrMappingPayloadExposureAllowed": false,
+    "publicLabelCreatesMethodProductionEligibility": false,
+    "publicLabelCreatesRightsOrLicense": false,
+    "publicLabelCreatesMeaningEquivalenceToRestrictedMethod": false
+  },
+  "surfaceAudit": {
+    "files": [
+      "index.html",
+      "personal-runtime.html",
+      "professional/personal-runtime/index.html",
+      "professional/human-design/index.html"
+    ],
+    "restrictedRenderedTermCountExpected": 0,
+    "compatibilityRoute": "/professional/human-design",
+    "compatibilityRoutePolicy": "NOINDEX_REDIRECT_ONLY_TO_/professional/personal-runtime"
+  },
+  "internalProfessionalBoundary": {
+    "legacyAuthenticatedProfessionalArtifactsMayRetainInternalIdentityForGovernanceTraceability": true,
+    "legacyInternalIdentityDoesNotCreatePublicPresentationAuthority": true,
+    "futureBrowserExposureRequiresDedicatedRightsAndSurfaceReview": true
+  }
+}

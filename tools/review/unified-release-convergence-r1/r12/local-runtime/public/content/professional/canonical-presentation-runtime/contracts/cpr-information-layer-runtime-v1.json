@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-CPR-INFORMATION-LAYER-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "CPR-W4",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "inputs": [
+    "audience",
+    "surface",
+    "journeyStage",
+    "presentationPurpose"
+  ],
+  "algorithm": [
+    "resolve audience foundation cap",
+    "resolve surface cap",
+    "resolve presentation purpose cap",
+    "apply journey-stage cap only for CUSTOMER audience when journeyStage is not NOT_APPLICABLE",
+    "take minimum cap",
+    "project ordered PDS-backed information layers without changing source semantics"
+  ],
+  "customerDisclosure": {
+    "layer1": "visible",
+    "layer2": "visible_when_required_by_purpose_or_stage",
+    "layer3": "explicit_expansion_only",
+    "layer4": "not_customer_default"
+  },
+  "invariants": {
+    "contentDeletedForSpace": false,
+    "boundaryDeletedForSpace": false,
+    "unknownDeletedForSpace": false,
+    "publicationStateChanged": false,
+    "runtimeStateInferred": false
+  }
+}

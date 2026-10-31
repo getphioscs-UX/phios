@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "PHI-OS-CPR-CUSTOMER-PRODUCTION-FREEZE-v1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W12",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "FROZEN_CUSTOMER_PRESENTATION_SUCCESSOR_GLOBAL_CURRENT_GATE_PENDING",
+  "artifacts": [
+    {
+      "path": "content/professional/canonical-presentation-runtime/audits/customer-presentation-authority-audit-v1.json",
+      "sha256": "404d0d53dfd9d2869568d4161c98ca945cbfc21b214b17b51889cacb899ddb02"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/audits/customer-presentation-dependency-map-v1.json",
+      "sha256": "cddbb27c8df50e7385db62f8b99ceeb746932ddad6f5098d52e5c5d10de7dc07"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/audits/customer-presentation-gap-report-v1.json",
+      "sha256": "12ae3292198d4f91c8f183f566a24ca52e7b437bfc1e8d0fba787f65ca72f57c"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/contracts/report-release-assertion-contract-v1.json",
+      "sha256": "4fefd740a4245a7b86975f2ecce50f6b1ab6ed6723dcd39592814694d846f240"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/contracts/released-customer-report-contract-v1.json",
+      "sha256": "9bf8f284080c0caff7f32819ee5fc26e8f4635b824100db55cf552da6beed1b1"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/contracts/customer-report-presentation-contract-v1.json",
+      "sha256": "6e84f03144a9d230e4364f37b19aa57c8a0f9e14f264245b4c05172d9818038c"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/contracts/customer-report-visibility-contract-v1.json",
+      "sha256": "a6f26eebc96f110a5964623e66801d4ab20d8acacbe936b5aec1b571776b733d"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/successors/canonical-presentation-customer-successor-v1.json",
+      "sha256": "69a963edca007f605a01cac4831df95a30f99709e7faf8bbef89ae2b9cb2e5b3"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/successors/canonical-presentation-contract-v2-successor.json",
+      "sha256": "680945afd62a252112950993aabbe3394f820967ffa5738d8f0dc1e4001a0a10"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-production-registry-v2.json",
+      "sha256": "c7297bbe0a10d5421b4b2e46815d47089ff7716ad652dc32e5714005910ca5f2"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/acceptance/cpr-customer-production-acceptance-v1.json",
+      "sha256": "a5a7c2180c8785fc95598c3f7a280998cb85650300b9db93e5de9d14f9306216"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/report-release-runtime.js",
+      "sha256": "594a3b381d23ad53614f5da4e169615f02da0bce6c451bd6e98d89ce53e9872c"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/released-report-projection-runtime.js",
+      "sha256": "318fdeed342293d42193d30efe234efb310c369804cde1f5e0a176d1da398637"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/customer-report-presentation-runtime.js",
+      "sha256": "435be00b8b9b4a748802a60ee51a84e0c576072e03866777c4d092c4c0144d25"
+    },
+    {
+      "path": "functions/canonical-presentation-runtime/customer-report-visibility-runtime.js",
+      "sha256": "f0ebe7b661c6687902181f68cec6fd98aa7bdc7c6a5bff6f4002b96a5092d80b"
+    },
+    {
+      "path": "scripts/check-cpr-customer.mjs",
+      "sha256": "b51218c07d2a6b1428e9ced63cda6ad96b26d98d78ba47ee802331709c5d7bdf"
+    }
+  ],
+  "predecessorFreeze": {
+    "path": "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+    "sha256": "03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60",
+    "mutated": false
+  },
+  "exitGate": {
+    "secondReportAuthorityCreated": false,
+    "secondPresentationAuthorityCreated": false,
+    "hdrProductionActivated": false,
+    "frozenCprMutated": false,
+    "customerReleaseRequired": true,
+    "customerAuthorizationRequired": true,
+    "workspacePdfSemanticSourceShared": true,
+    "machineAcceptanceScenariosPassed": 12
+  },
+  "production": {
+    "presentationRecord": "CPR-PRESENT-HDR-FOUNDATION-REPORT",
+    "workspaceEligible": true,
+    "pdfEligible": true,
+    "publicWebsiteEligible": false,
+    "publicSelfServiceEligible": false,
+    "deploymentAcceptanceClaimed": false,
+    "activationScope": "CUSTOMER_PRESENTATION_SLICE_ONLY",
+    "globalRepositoryCurrentGateGreen": false
+  },
+  "globalRepositoryGate": {
+    "checkCurrentGreen": false,
+    "blocker": "PREEXISTING_MIR_GUIDED_READING_PRESENTATION_FINGERPRINT_DRIFT",
+    "causedByCprCust": false,
+    "historicalDigestRewritePerformed": false,
+    "customerPresentationSliceMachineAccepted": true,
+    "deploymentAcceptanceClaimed": false
+  }
+}

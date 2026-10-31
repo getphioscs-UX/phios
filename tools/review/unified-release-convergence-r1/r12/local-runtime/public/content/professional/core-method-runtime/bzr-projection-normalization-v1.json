@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-BZR-PROJECTION-NORMALIZATION-v1.0.0",
+  "stageCode": "BZR-W2A",
+  "runtimeCode": "BZR_PROJECTION_NORMALIZATION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "projection_ready_normalization_validation_only",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "f85bf43"
+  },
+  "input": {
+    "algorithmCode": "BZR_FOUR_PILLARS",
+    "outputRuntimeCode": "BZR_FOUR_PILLARS_RUNTIME"
+  },
+  "normalization": {
+    "normalizationCode": "BZR_CANONICAL_PROJECTION_INPUT_V1",
+    "stableOrder": [
+      "YEAR",
+      "MONTH",
+      "DAY",
+      "HOUR"
+    ],
+    "stableFactCodes": true,
+    "completeCalculationLineageRequired": true
+  },
+  "authorityBoundary": {
+    "sharedProjectionRuntimeInvoked": false,
+    "canonicalProjectionCreated": false,
+    "formalProjectionStage": "BZR-W4",
+    "cmrMayReadNormalizedFacts": true
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "boundaries": {
+    "createsProjectionReadyFacts": true,
+    "createsCanonicalProjection": false,
+    "createsInterpretation": false,
+    "createsKnowledge": false,
+    "createsProfessionalConclusion": false
+  },
+  "nextStage": "BZR-W3"
+}

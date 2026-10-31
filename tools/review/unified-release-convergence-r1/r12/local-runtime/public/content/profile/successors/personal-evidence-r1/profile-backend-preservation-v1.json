@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-EVIDENCE-BACKEND-PRESERVATION-v1.0.0",
+  "work": "PRD-W2",
+  "baselineCommit": "4f711e3548fb3540b70c8e377601baa88112ed93",
+  "status": "BACKEND_PRESERVATION_DECLARED",
+  "decision": "CHANGE_PRODUCT_ROLE_NOT_BACKEND_AUTHORITY",
+  "preserve": [
+    "QUICK_PROFILE",
+    "FULL_SELF_ASSESSMENT",
+    "REASONING_TASKS",
+    "IMPORT_EXTERNAL_RESULT",
+    "BIG_FIVE_IPIP",
+    "CAREER_INTERESTS_ONET",
+    "FINANCIAL_CAPABILITY"
+  ],
+  "doNotRebuild": [
+    "profile-source-class-contract",
+    "profile-signal-envelope-contract",
+    "self-assessment-instrument",
+    "self-assessment-scoring",
+    "reasoning-task-performance",
+    "IPIP scoring",
+    "O*NET normalization/provider",
+    "financial-capability scoring",
+    "external-profile provider registry",
+    "current-reality correlation",
+    "cross-source translation",
+    "relationship-profile evidence"
+  ],
+  "preserveProductionFreezes": [
+    "content/profile/freeze/profile-source-class-freeze-v1.json",
+    "content/profile/freeze/external-profile-provider-freeze-v1.json",
+    "content/profile/freeze/self-assessment-instrument-freeze-v2.json",
+    "content/profile/freeze/self-assessment-scoring-freeze-v1.json",
+    "content/profile/freeze/reasoning-task-performance-freeze-v1.json",
+    "content/profile/freeze/profile-signal-envelope-freeze-v1.json",
+    "content/profile/freeze/cross-source-perspective-freeze-v1.json",
+    "content/profile/freeze/profile-human-acceptance-v1.json"
+  ],
+  "boundaries": {
+    "automaticPersistenceAllowed": false,
+    "onetFailClosedWithoutSecret": true,
+    "universalMasterScoreAllowed": false,
+    "reasoningIqOrPercentileAllowed": false,
+    "diagnosticClaimsAllowed": false,
+    "jobFitGuaranteeAllowed": false,
+    "financialAdviceAllowed": false
+  }
+}

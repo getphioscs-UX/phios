@@ -1,0 +1,20 @@
+{
+  "contract": "KNR-L10N-CROSS-LOCALE-RETRIEVAL-v1",
+  "version": "1.0.0",
+  "queryFlow": [
+    "normalize_requested_locale",
+    "search_same_locale_published_content",
+    "resolve_approved_bilingual_terms",
+    "search_cross_locale_node_identity",
+    "apply_locale_fallback_policy",
+    "return_locale_disclosure"
+  ],
+  "rules": {
+    "publishedOnly": true,
+    "nodeIdentityShared": true,
+    "articleBodiesShared": false,
+    "approvalShared": false,
+    "publicationShared": false,
+    "semanticParityRequiredForLocalizedExpansion": true
+  }
+}

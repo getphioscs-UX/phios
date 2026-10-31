@@ -1,0 +1,37 @@
+{
+  "contractCode": "PUBLISHED-KNOWLEDGE-AUTHORITY",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "authority": "Published Knowledge Authority",
+  "sourceOfTruth": "Publication Packages",
+  "eligibility": {
+    "contentReviewed": "review.decision = accept",
+    "approved": "approval.decision = approve",
+    "published": "publication.decision = publish"
+  },
+  "allowedOperations": [
+    "read",
+    "validate",
+    "project",
+    "rebuild",
+    "digest",
+    "report"
+  ],
+  "forbiddenOperations": [
+    "modify_candidate",
+    "modify_review",
+    "modify_approval",
+    "modify_publication",
+    "modify_knowledge_registry",
+    "inherit_locale_state",
+    "publish_without_package",
+    "project_unreviewed_content"
+  ],
+  "policy": {
+    "registryPresenceEqualsPublicAvailability": false,
+    "publicationPackageEqualsPublicProjection": false,
+    "allThreeConditionsRequired": true,
+    "localeAuthorityIndependent": true,
+    "deterministicRebuildRequired": true
+  }
+}

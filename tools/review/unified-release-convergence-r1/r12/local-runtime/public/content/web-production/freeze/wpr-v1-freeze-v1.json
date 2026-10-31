@@ -1,0 +1,48 @@
+{
+  "freezeCode": "WPR-v1.0.0-FROZEN",
+  "freezeVersion": "1.0.0",
+  "work": "WPR-W30",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "scope": "WPR-W0-W30",
+  "status": "FROZEN",
+  "authority": "WEB_PRODUCTION_PROJECTION_DELIVERY_ONLY",
+  "productionStateAtFreeze": "LIMITED_PRODUCTION",
+  "productionRecordCountAtFreeze": 38,
+  "productionPromotionPerformed": false,
+  "checkerManifestReference": "content/web-production/registries/wpr-checker-manifest-v1.json",
+  "fullAcceptanceReference": "content/web-production/acceptance/wpr-w29-full-production-acceptance-v1.json",
+  "observabilityReference": "content/web-production/observability/wpr-production-observation-v1.json",
+  "deploymentObservationFrozenAsAuthority": false,
+  "openOperationalGates": [
+    "DEPLOYMENT_SHA_REVALIDATION_REQUIRED",
+    "PHIOS_PUBLIC_ASSET_BASE_URL_UPSTREAM_VERIFICATION",
+    "CUSTOM_DOMAIN_GETPHIOS_COM_DEPLOYMENT_VERIFICATION",
+    "PDS_PRODUCTION_BROWSER_MATRIX_360_768_1440_EN_ZH_HANS"
+  ],
+  "upstreamStateAtFreeze": {
+    "cprProductionRecords": 0,
+    "carPublications": 0
+  },
+  "centralGovernance": {
+    "postcheckIntegrated": true,
+    "postcheckAlias": "npm run check:web-production-runtime",
+    "historicalPreW30CheckerGuardsRewritten": false
+  },
+  "frozenBoundaries": {
+    "knowledgeAuthority": false,
+    "meaningAuthority": false,
+    "realityTruthAuthority": false,
+    "methodAuthority": false,
+    "professionalJudgmentAuthority": false,
+    "reportAssemblyAuthority": false,
+    "publicationAuthority": false,
+    "pdsAuthority": false,
+    "cprAuthority": false
+  },
+  "successorRules": {
+    "operationalDeploymentObservationMayRefresh": true,
+    "authorityExpansionRequiresSuccessor": true,
+    "productionPromotionRequiresSuccessorAcceptance": true,
+    "checkerMutationRequiresReconciliation": true
+  }
+}

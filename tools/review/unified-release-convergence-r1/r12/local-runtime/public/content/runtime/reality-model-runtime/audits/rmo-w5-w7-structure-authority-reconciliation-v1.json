@@ -1,0 +1,86 @@
+{
+  "auditCode": "PHI-OS-RMO-W5-W7-STRUCTURE-AUTHORITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "RMO-W5-W7 Relationship, Constraint and Reality State Runtime",
+  "status": "reconciled",
+  "baselineCommit": "5430224d5fb21232d77c19b0f854ba4f802a73a7",
+  "digestMode": "UTF8_NO_BOM_LF",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/runtime/reality-model-runtime/freeze/rmo-w0-w4-reality-foundation-freeze-v1.json",
+      "sha256": "83c39270ceaf2493c56b3bc79d66354a3f849ea2bb2f0e316e0c2b5748c058d3",
+      "classification": "FROZEN_RMO_FOUNDATION",
+      "finding": "Reality v1, Entity, Event and Signal remain the preserved RMO foundation; W5-W7 add immutable components without mutating Reality v1."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-nature-registry-v1.json",
+      "sha256": "4251781634baafbb4963f4901def5adca0110ca72b63649a74d468cf60a18490",
+      "classification": "RDG_DATA_NATURE_AUTHORITY",
+      "finding": "RDG continues to own OBSERVED, CALCULATED, DERIVED, INFERRED and INTERPRETED data-nature semantics."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-certainty-registry-v1.json",
+      "sha256": "0854cd9860e58eec2b98c7c9c64c4a70d7e8558c7020cb807176f43a0711f07c",
+      "classification": "RDG_CERTAINTY_AUTHORITY",
+      "finding": "Certainty remains independent from RMO Reality State class."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/inference-boundary-registry-v1.json",
+      "sha256": "560cf745c8e088e9b62a4487377d89fc2755a11c32b919f763a4cf02a829ee5e",
+      "classification": "RDG_INFERENCE_BOUNDARY",
+      "finding": "DERIVED requires method, input lineage and version; it must remain distinguishable from INFERRED and INTERPRETED."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json",
+      "sha256": "c61bef5b68141f7135b7d44c232b7260dc438c5f35f9d028673dbfcaeba920da",
+      "classification": "RDG_EVIDENCE_ELIGIBILITY_AUTHORITY",
+      "finding": "Relationship, Constraint and Reality State creation cannot establish Evidence eligibility or truth."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/evidence-promotion-runtime-v1.json",
+      "sha256": "b24ca97d7bad28731c1f02a856154672d02d2a54c952f4e507686ae12436b9c4",
+      "classification": "RDG_EVIDENCE_PROMOTION_AUTHORITY",
+      "finding": "RMO-W5-W7 does not promote Evidence automatically or otherwise."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/sensitive-inference-firewall-v1.json",
+      "sha256": "2faf5f39063b6728c4892c47fd57d35f470943916d44f6852a5bd7e29add8de8",
+      "classification": "RDG_SENSITIVE_INFERENCE_FIREWALL",
+      "finding": "Relationship and family inference stays denied by default; no W5-W7 record can bypass purpose, consent or professional authority."
+    },
+    {
+      "reference": "functions/pws/registry/relationship-store.js",
+      "sha256": "5118035eb65ff1d52edb6687d2992b45c1a997182766f8b67c4655edcc7cb10e",
+      "classification": "PWS_REGISTRY_RELATIONSHIP_AUTHORITY",
+      "finding": "PWS Registry object topology is not an RMO Reality Relationship and remains unmodified."
+    },
+    {
+      "reference": "functions/runtime/lineage/lineage-records.js",
+      "sha256": "71c1b6d154b854eac22cfc4e59e24bf9daf14341af822bd51b98fb2be14c0284",
+      "classification": "EXISTING_RUNTIME_LINEAGE_AUTHORITY",
+      "finding": "Operational Runtime branch lineage is not an RMO Reality Relationship and remains unmodified."
+    },
+    {
+      "reference": "functions/runtime/navigation/navigation-path-rules.js",
+      "sha256": "3c12f9dfef398a2bac10fcc60a8ecc8e8203a09e9801c29ee2e6b43f18f178e7",
+      "classification": "EXISTING_NAVIGATION_CONSTRAINT_CONSUMER",
+      "finding": "Navigation constraints remain operational inputs; an RMO Constraint creates no path, recommendation or enforcement."
+    }
+  ],
+  "authorityDecision": {
+    "realityRelationshipOwner": "RMO",
+    "pwsRegistryRelationshipOwner": "PWS",
+    "operationalLineageOwner": "EXISTING_RUNTIME",
+    "realityConstraintOwner": "RMO",
+    "navigationConstraintOwner": "EXISTING_RUNTIME",
+    "realityStateClassOwner": "RMO",
+    "dataNatureAndCertaintyOwner": "RDG",
+    "stateClasses": ["OBSERVED", "DERIVED", "PROJECTED"],
+    "projectedIsRdgDataNature": false,
+    "projectedIsPredictionAuthority": false,
+    "relationshipOrConstraintMayCreateProfessionalJudgment": false,
+    "w5W7MayCreateInferenceOrInterpretation": false,
+    "sharedAuthorityOrOperationalRuntimeMutated": false
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

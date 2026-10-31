@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-MPA-BZR-ACTIVATION-READINESS-v1.schema.json",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "work",
+    "methodCode",
+    "decision",
+    "methodSpecificReady",
+    "productionEligible",
+    "productionExecutionAllowed"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-BZR-ACTIVATION-DECISION-v1.0.0"
+    },
+    "work": {
+      "const": "MPA-W23"
+    },
+    "methodCode": {
+      "const": "BAZI"
+    },
+    "productionEligible": {
+      "const": false
+    },
+    "productionExecutionAllowed": {
+      "const": false
+    },
+    "professionalEligible": {
+      "const": false
+    }
+  }
+}

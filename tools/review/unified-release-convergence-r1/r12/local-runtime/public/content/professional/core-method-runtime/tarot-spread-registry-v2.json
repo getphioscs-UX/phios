@@ -1,0 +1,508 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-SPREAD-REGISTRY-v2.0.0",
+  "phase": "TSCP",
+  "work": "TSCP-W0",
+  "baselineCommit": "b6e16749b1d5c7c139614d17f05b52350889c9bd",
+  "registryVersion": "2.0.0",
+  "status": "TSCP_CURRENT_EIGHT_GOVERNED_CUSTOMER_SPREADS",
+  "methodCode": "TAROT",
+  "sourceLineage": {
+    "operatorReference": "Tarot.pdf supplied 2026-08-28",
+    "note": "Reference topology informed traditional spreads; PHI OS customer semantics remove guaranteed prediction and third-party hidden-state certainty."
+  },
+  "supportedManualCardCounts": [
+    1,
+    3,
+    5,
+    6,
+    7,
+    10
+  ],
+  "entries": [
+    {
+      "spreadId": "ONE_CARD_FOCUS",
+      "legacyAliases": [
+        "ONE_CARD"
+      ],
+      "cardCount": 1,
+      "category": "QUICK",
+      "titleEn": "One card · quick focus",
+      "titleZhHans": "一张牌 · 快速聚焦",
+      "summaryEn": "One clear symbolic focus for what deserves attention now.",
+      "summaryZhHans": "用一个象征焦点，看此刻最值得注意什么。",
+      "systemRandomAllowed": true,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "WHAT_DESERVES_ATTENTION",
+          "order": 1,
+          "labelEn": "What deserves attention",
+          "labelZhHans": "最值得注意什么",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "THREE_CARD_SITUATION",
+      "legacyAliases": [
+        "THREE_CARD"
+      ],
+      "cardCount": 3,
+      "category": "QUICK",
+      "titleEn": "Three cards · situation",
+      "titleZhHans": "三张牌 · 局面展开",
+      "summaryEn": "Background, current situation, and what deserves consideration next.",
+      "summaryZhHans": "形成背景、当前局面、接下来值得考虑什么。",
+      "systemRandomAllowed": true,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "BACKGROUND",
+          "order": 1,
+          "labelEn": "What shaped this situation",
+          "labelZhHans": "形成背景",
+          "semanticRole": "BACKGROUND",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CURRENT_SITUATION",
+          "order": 2,
+          "labelEn": "What is most present now",
+          "labelZhHans": "当前局面",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "NEXT_CONSIDERATION",
+          "order": 3,
+          "labelEn": "What deserves consideration next",
+          "labelZhHans": "接下来值得考虑",
+          "semanticRole": "NEXT_OBSERVATION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "TWO_PATH_CHOICE",
+      "legacyAliases": [],
+      "cardCount": 5,
+      "category": "DECISION",
+      "titleEn": "Five cards · compare two paths",
+      "titleZhHans": "五张牌 · 二选一",
+      "summaryEn": "Compare two paths without turning Tarot into a decision maker.",
+      "summaryZhHans": "比较两条路径，而不是让塔罗替你决定。",
+      "systemRandomAllowed": false,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "CURRENT_POSITION",
+          "order": 1,
+          "labelEn": "Your current position",
+          "labelZhHans": "你当前的位置",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "PATH_A_NEED",
+          "order": 2,
+          "labelEn": "What Path A may answer in you",
+          "labelZhHans": "A 路径回应的需要",
+          "semanticRole": "NEED",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "PATH_B_NEED",
+          "order": 3,
+          "labelEn": "What Path B may answer in you",
+          "labelZhHans": "B 路径回应的需要",
+          "semanticRole": "NEED",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "PATH_A_DIRECTION",
+          "order": 4,
+          "labelEn": "What Path A may develop",
+          "labelZhHans": "A 路径可能形成什么",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "PATH_B_DIRECTION",
+          "order": 5,
+          "labelEn": "What Path B may develop",
+          "labelZhHans": "B 路径可能形成什么",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "RELATIONSHIP_CROSS",
+      "legacyAliases": [],
+      "cardCount": 5,
+      "category": "RELATIONSHIP",
+      "titleEn": "Five cards · relationship cross",
+      "titleZhHans": "五张牌 · 关系十字",
+      "summaryEn": "Explore your position, the relationship structure, the other person’s visible position, direction, and what needs discussion.",
+      "summaryZhHans": "看自己的位置、关系结构、对方可见的位置、发展方向与值得讨论的问题。",
+      "systemRandomAllowed": false,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "MY_POSITION",
+          "order": 1,
+          "labelEn": "My current position",
+          "labelZhHans": "我的当前立场",
+          "semanticRole": "SELF_POSITION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "RELATIONSHIP_STRUCTURE",
+          "order": 2,
+          "labelEn": "The relationship as it is operating now",
+          "labelZhHans": "关系当前结构",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "OTHER_VISIBLE_POSITION",
+          "order": 3,
+          "labelEn": "The other person’s visible position",
+          "labelZhHans": "对方在关系中的可见位置",
+          "semanticRole": "OTHER_VISIBLE",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "EMERGING_DIRECTION",
+          "order": 4,
+          "labelEn": "What direction is emerging",
+          "labelZhHans": "正在形成的方向",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "DISCUSSION_POINT",
+          "order": 5,
+          "labelEn": "What deserves discussion or verification",
+          "labelZhHans": "值得讨论或验证的问题",
+          "semanticRole": "NEXT_OBSERVATION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "CAREER_X",
+      "legacyAliases": [],
+      "cardCount": 5,
+      "category": "CAREER",
+      "titleEn": "Five cards · career / project X",
+      "titleZhHans": "五张牌 · 事业 / 项目 X 阵",
+      "summaryEn": "Current state, timing, influences, success conditions, and likely direction if the pattern continues.",
+      "summaryZhHans": "当前状态、时机、影响因素、成功条件，以及当前模式持续时的可能方向。",
+      "systemRandomAllowed": false,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "CURRENT_STATE",
+          "order": 1,
+          "labelEn": "Current state",
+          "labelZhHans": "当下状态",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "TIMING",
+          "order": 2,
+          "labelEn": "What the timing is asking of you",
+          "labelZhHans": "当前时机",
+          "semanticRole": "TIMING",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "INFLUENCES",
+          "order": 3,
+          "labelEn": "What is influencing the situation",
+          "labelZhHans": "影响因素",
+          "semanticRole": "TENSION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "SUCCESS_CONDITIONS",
+          "order": 4,
+          "labelEn": "What conditions support success",
+          "labelZhHans": "支持成功的条件",
+          "semanticRole": "SUPPORT",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "DEVELOPMENT_DIRECTION",
+          "order": 5,
+          "labelEn": "What direction may form if the current pattern continues",
+          "labelZhHans": "当前模式持续时的发展方向",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "REALITY_NAVIGATION_6",
+      "legacyAliases": [],
+      "cardCount": 6,
+      "category": "PHI_OS",
+      "titleEn": "Six cards · Reality Navigation",
+      "titleZhHans": "六张牌 · Reality Navigation",
+      "summaryEn": "A PHI OS signature spread that turns symbolism back toward reality checking and next observation.",
+      "summaryZhHans": "PHI OS 标志性牌阵：把象征重新带回现实验证与下一步观察。",
+      "systemRandomAllowed": false,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "CURRENT_REALITY",
+          "order": 1,
+          "labelEn": "Current Reality",
+          "labelZhHans": "当前现实",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "MOST_VISIBLE",
+          "order": 2,
+          "labelEn": "What is most visible",
+          "labelZhHans": "最容易看见什么",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "POSSIBLE_MISREAD",
+          "order": 3,
+          "labelEn": "What may be misread",
+          "labelZhHans": "哪里可能被误读",
+          "semanticRole": "TENSION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "DESERVES_ATTENTION",
+          "order": 4,
+          "labelEn": "What deserves attention",
+          "labelZhHans": "什么最值得注意",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "REALITY_CHECK",
+          "order": 5,
+          "labelEn": "What needs reality verification",
+          "labelZhHans": "什么需要回到现实验证",
+          "semanticRole": "REALITY_CHECK",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "NEXT_OBSERVATION",
+          "order": 6,
+          "labelEn": "Next observation or action",
+          "labelZhHans": "下一步观察或行动",
+          "semanticRole": "NEXT_OBSERVATION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "CAUSE_AND_RESPONSE_7",
+      "legacyAliases": [],
+      "cardCount": 7,
+      "category": "PROBLEM",
+      "titleEn": "Seven cards · cause and response",
+      "titleZhHans": "七张牌 · 原因与应对",
+      "summaryEn": "Trace background, current state, emerging change, response, environment, obstacle, and likely direction if nothing changes.",
+      "summaryZhHans": "追踪背景、当前状态、正在形成的变化、回应、环境、障碍与当前模式持续时的可能方向。",
+      "systemRandomAllowed": false,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "BACKGROUND",
+          "order": 1,
+          "labelEn": "Background",
+          "labelZhHans": "背景",
+          "semanticRole": "BACKGROUND",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CURRENT_STATE",
+          "order": 2,
+          "labelEn": "Current state",
+          "labelZhHans": "当前状态",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "EMERGING_CHANGE",
+          "order": 3,
+          "labelEn": "What is changing",
+          "labelZhHans": "正在形成的变化",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "POSSIBLE_RESPONSE",
+          "order": 4,
+          "labelEn": "A response worth considering",
+          "labelZhHans": "可以考虑的回应",
+          "semanticRole": "NEXT_OBSERVATION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "ENVIRONMENT",
+          "order": 5,
+          "labelEn": "Environment / other visible factors",
+          "labelZhHans": "环境 / 他人可见因素",
+          "semanticRole": "ENVIRONMENT",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CORE_OBSTACLE",
+          "order": 6,
+          "labelEn": "Core obstacle",
+          "labelZhHans": "核心障碍",
+          "semanticRole": "TENSION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CONTINUATION_DIRECTION",
+          "order": 7,
+          "labelEn": "If the current pattern continues",
+          "labelZhHans": "如果当前模式继续",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "CELTIC_CROSS_10",
+      "legacyAliases": [],
+      "cardCount": 10,
+      "category": "DEEP",
+      "titleEn": "Ten cards · Celtic Cross",
+      "titleZhHans": "十张牌 · 凯尔特十字",
+      "summaryEn": "A deep reading of the core situation, tensions, understanding, background, emerging direction, position, environment, hopes and likely continuation.",
+      "summaryZhHans": "深入读取核心局面、张力、理解、背景、发展、个人位置、环境、希望与当前模式的可能延续。",
+      "systemRandomAllowed": false,
+      "spreadVersion": "2.0.0",
+      "customerSelectable": true,
+      "manualSelectionRequiredForCustomer": true,
+      "temporalPredictionRole": false,
+      "positions": [
+        {
+          "positionId": "CORE_SITUATION",
+          "order": 1,
+          "labelEn": "Core situation",
+          "labelZhHans": "核心局面",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "PRIMARY_TENSION",
+          "order": 2,
+          "labelEn": "Primary tension",
+          "labelZhHans": "主要张力",
+          "semanticRole": "TENSION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CONSCIOUS_VIEW",
+          "order": 3,
+          "labelEn": "What you consciously understand",
+          "labelZhHans": "显性理解",
+          "semanticRole": "ATTENTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "DEEP_DRIVER",
+          "order": 4,
+          "labelEn": "A deeper driver to examine",
+          "labelZhHans": "值得检视的深层驱动力",
+          "semanticRole": "TENSION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "FORMED_BACKGROUND",
+          "order": 5,
+          "labelEn": "What has already shaped the situation",
+          "labelZhHans": "已经形成的背景",
+          "semanticRole": "BACKGROUND",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "EMERGING_NEXT",
+          "order": 6,
+          "labelEn": "What is beginning to emerge",
+          "labelZhHans": "接下来正在出现什么",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "YOUR_POSITION",
+          "order": 7,
+          "labelEn": "Your position in it",
+          "labelZhHans": "你在其中的位置",
+          "semanticRole": "SELF_POSITION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "ENVIRONMENT",
+          "order": 8,
+          "labelEn": "Environment / others’ visible role",
+          "labelZhHans": "环境 / 他人的可见作用",
+          "semanticRole": "ENVIRONMENT",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "HOPES_CONCERNS",
+          "order": 9,
+          "labelEn": "Hopes and concerns",
+          "labelZhHans": "希望与顾虑",
+          "semanticRole": "TENSION",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CONTINUATION_DIRECTION",
+          "order": 10,
+          "labelEn": "If the current pattern continues",
+          "labelZhHans": "当前模式持续时的可能方向",
+          "semanticRole": "DIRECTION",
+          "temporalPredictionRole": false
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "arbitraryPromptDefinedSpreadAllowed": false,
+    "unregisteredSpreadAllowed": false,
+    "spreadPositionMutationByPageAllowed": false,
+    "guaranteedFuturePositionAllowed": false,
+    "thirdPartyHiddenStatePositionAllowed": false,
+    "customerManualSelectionRequired": true,
+    "aiCardSelectionAllowed": false
+  }
+}

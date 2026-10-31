@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "PTRC-W0.route-consumer-graph.v1",
+  "baselineCommit": "f9ba2940fd80553686833e068e03a74e72a825d3",
+  "routes": [
+    {"id":"HOME","path":"/","owner":"WEB_SHELL","consumers":["HEADER","HERO","BRAND_ASSETS","LOCALE"]},
+    {"id":"ASK","path":"/knowledge/ask/","owner":"ASK2_CKA","consumers":["REQUEST_CONTRACT","RETRIEVAL","EVIDENCE_GATE","ANSWER_RENDERER"]},
+    {"id":"KNOWLEDGE","pathPattern":"/knowledge/**","owner":"KNOWLEDGE_RUNTIME","consumers":["ARTICLE_JSON","CLAIMS","SOURCES","ASSETS"]},
+    {"id":"FINANCIAL","pathPattern":"/financial/**","owner":"FINANCIAL_RUNTIME","consumers":["CALCULATION_ENGINE","ASSUMPTIONS","REPORTING"]},
+    {"id":"WILL","pathPattern":"/will/**","owner":"WILL_RUNTIME","consumers":["INTAKE_SCHEMA","PRIVACY","REPORT_ASSEMBLY"]},
+    {"id":"API","pathPattern":"/api/**","owner":"CLOUDFLARE_WORKER","consumers":["AI","RUNTIME_DB","MANUSCRIPTS"]}
+  ],
+  "retrievalChain": ["ATLAS_ENTITY", "ATLAS_EVIDENCE", "PART_12", "BROADER_GOVERNED_KNOWLEDGE"],
+  "availableRetrievalScope": "CIVILIZATION_ATLAS/LAYERS_2_TO_8_WHERE_REGISTERED",
+  "unavailableRetrievalScope": ["BOOK_5_MANUSCRIPT", "BOOK_5_EXTRACTED_BODY", "BOOK_5_PRODUCTION_ARTICLE"],
+  "requiredRule": "EVERY_PRODUCTION_ROUTE_HAS_EXACTLY_ONE_DECLARED_OWNER"
+}

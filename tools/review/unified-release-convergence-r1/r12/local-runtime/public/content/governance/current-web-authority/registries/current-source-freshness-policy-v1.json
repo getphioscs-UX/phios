@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-CWA-FRESHNESS-v1.0.0",
+  "work": "CWA-W5",
+  "policies": [
+    {
+      "claimType": "STOCK_OR_MARKET_PRICE",
+      "mode": "TTL",
+      "ttlSeconds": 900
+    },
+    {
+      "claimType": "WEATHER_CURRENT",
+      "mode": "TTL",
+      "ttlSeconds": 10800
+    },
+    {
+      "claimType": "BREAKING_NEWS",
+      "mode": "TTL",
+      "ttlSeconds": 86400
+    },
+    {
+      "claimType": "NEWS_DEVELOPMENT",
+      "mode": "TTL",
+      "ttlSeconds": 604800
+    },
+    {
+      "claimType": "PUBLIC_HEALTH_ALERT",
+      "mode": "TTL",
+      "ttlSeconds": 86400
+    },
+    {
+      "claimType": "POLICY_OR_REGULATION",
+      "mode": "UNTIL_SUPERSEDED"
+    },
+    {
+      "claimType": "MEDICAL_GUIDELINE",
+      "mode": "VERSION_BOUND"
+    },
+    {
+      "claimType": "COMPANY_PRODUCT_SPEC",
+      "mode": "CURRENT_RELEASE"
+    },
+    {
+      "claimType": "GENERAL_CURRENT_FACT",
+      "mode": "TTL",
+      "ttlSeconds": 604800
+    }
+  ],
+  "defaultPolicy": "REJECT_IF_NO_FRESHNESS_POLICY"
+}

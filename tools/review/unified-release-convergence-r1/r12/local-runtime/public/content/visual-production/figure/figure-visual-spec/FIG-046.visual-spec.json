@@ -1,0 +1,97 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "PROFESSIONAL_JUDGMENT_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-046-N03",
+        "FIG-046-N04"
+      ],
+      "mustExclude": [
+        "FIG-046-N01",
+        "FIG-046-N02"
+      ],
+      "sourceBindingId": "FIG-046-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-PROFESSIONAL-JUDGMENT-BOUNDARY-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-046-E01",
+      "from": "FIG-046-N01",
+      "relation": "MAY_INFORM",
+      "required": true,
+      "sourceBindingId": "FIG-046-SRC-01",
+      "to": "FIG-046-N02"
+    },
+    {
+      "edgeId": "FIG-046-E02",
+      "from": "FIG-046-N02",
+      "relation": "INFORMS",
+      "required": true,
+      "sourceBindingId": "FIG-046-SRC-01",
+      "to": "FIG-046-N03"
+    },
+    {
+      "edgeId": "FIG-046-E03",
+      "from": "FIG-046-N03",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-046-SRC-01",
+      "to": "FIG-046-N04"
+    }
+  ],
+  "figureId": "FIG-046",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-046-N01",
+    "FIG-046-N02",
+    "FIG-046-N03",
+    "FIG-046-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "System Readout",
+      "nodeId": "FIG-046-N01",
+      "required": true,
+      "semanticKey": "SYSTEM_READOUT",
+      "sourceBindingId": "FIG-046-SRC-01"
+    },
+    {
+      "displayLabel": "Professional Observation",
+      "nodeId": "FIG-046-N02",
+      "required": true,
+      "semanticKey": "PRO_OBSERVATION",
+      "sourceBindingId": "FIG-046-SRC-01"
+    },
+    {
+      "displayLabel": "Professional Judgment",
+      "nodeId": "FIG-046-N03",
+      "required": true,
+      "semanticKey": "PRO_JUDGMENT",
+      "sourceBindingId": "FIG-046-SRC-01"
+    },
+    {
+      "displayLabel": "Recommendation",
+      "nodeId": "FIG-046-N04",
+      "required": true,
+      "semanticKey": "RECOMMENDATION",
+      "sourceBindingId": "FIG-046-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "PROFESSIONAL-JUDGMENT-BOUNDARY",
+  "title": "Professional Judgment Boundary"
+}

@@ -1,0 +1,31 @@
+{
+  "contractCode": "KNR-PACKAGE-A-ROUTING-RANKING-COVERAGE",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "authority": "Published Knowledge Runtime",
+  "sourceIndex": "content/knowledge/public/retrieval/published-retrieval-index.json",
+  "responsibilities": {
+    "routing": ["normalize_query", "resolve_locale", "select_published_candidates"],
+    "ranking": ["deterministic_scoring", "stable_tie_breaking", "published_only_results"],
+    "coverage": ["measure_query_support", "report_locale_availability", "fail_closed_when_unsupported"]
+  },
+  "allowedOperations": ["read", "normalize", "route", "rank", "measure", "report"],
+  "prohibitedOperations": [
+    "generate_answer",
+    "call_provider",
+    "translate_content",
+    "modify_registry",
+    "modify_publication",
+    "index_unpublished_content",
+    "promote_relationship_target",
+    "write_canonical_state"
+  ],
+  "policies": {
+    "publishedOnly": true,
+    "deterministic": true,
+    "localeAware": true,
+    "providerFree": true,
+    "unpublishedRelationshipTargetsExcluded": true,
+    "registryPresenceEqualsRetrievability": false
+  }
+}

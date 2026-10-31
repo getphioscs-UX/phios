@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-ONET-LIVE-ACTIVATION-CONTRACT-v1.0.0",
+  "work": "PRF-ONET-LIVE-ACTIVATION-W0-W8",
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "predecessor": "content/profile/academic/onet/onet-interest-profiler-adapter-contract-v1.json",
+  "provider": "O_NET_WEB_SERVICES_V2",
+  "credentialAuthority": {
+    "environmentVariable": "ONET_WEB_SERVICES_API_KEY",
+    "transportHeader": "X-API-Key",
+    "serverSideOnly": true,
+    "clientExposureAllowed": false,
+    "repositoryPersistenceAllowed": false
+  },
+  "admittedLiveCapabilities": [
+    "MINI_30_QUESTIONS",
+    "SHORT_60_QUESTIONS",
+    "RIASEC_RESULTS",
+    "CAREER_MATCHING",
+    "JOB_ZONES",
+    "CAREER_DETAIL"
+  ],
+  "sourceClass": "STANDARDIZED_SELF_REPORT",
+  "scoringState": "EXTERNALLY_SCORED",
+  "normingState": "NOT_NORMED",
+  "boundaries": {
+    "providerQuestionTextMayBeAltered": false,
+    "providerScoresMayBeRescoredByPhios": false,
+    "riaSecIsAbilityScore": false,
+    "riaSecIsObjectivePersonalityFact": false,
+    "careerMatchIsJobFitGuarantee": false,
+    "employmentDecisionAuthority": false,
+    "careerDestinyClaimAllowed": false,
+    "automaticPersistence": false,
+    "crossSourceConvergenceMayCreateProof": false,
+    "currentRealityMayProveOnet": false
+  }
+}

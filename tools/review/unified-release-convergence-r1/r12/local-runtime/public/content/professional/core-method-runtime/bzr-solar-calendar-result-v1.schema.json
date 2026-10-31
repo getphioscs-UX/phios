@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/bzr/bzr-solar-calendar-result-v1.schema.json",
+  "title": "PHI OS BZR Solar Calendar Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "executionMode",
+    "recordedCivilTime",
+    "utcIso",
+    "timezone",
+    "coordinate",
+    "trueSolarTime",
+    "solarCalendar",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "stemCreated",
+    "branchCreated",
+    "pillarCreated",
+    "luckCycleCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-BZR-SOLAR-CALENDAR-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "BZR_SOLAR_CALENDAR_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "BAZI"
+    },
+    "pluginCode": {
+      "const": "BZR"
+    },
+    "calculationType": {
+      "const": "SOLAR_CALENDAR_CONTEXT"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "recordedCivilTime": {
+      "type": "object"
+    },
+    "utcIso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timezone": {
+      "type": "object"
+    },
+    "coordinate": {
+      "type": "object"
+    },
+    "trueSolarTime": {
+      "type": "object"
+    },
+    "solarCalendar": {
+      "type": "object",
+      "required": [
+        "liChunUtcIso",
+        "jieBoundaries",
+        "yearBoundaryPolicy",
+        "monthBoundaryPolicy",
+        "dayBoundaryTimeBasis",
+        "dayBoundaryLocalTime"
+      ],
+      "properties": {
+        "liChunUtcIso": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "jieBoundaries": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12
+        },
+        "yearBoundaryPolicy": {
+          "const": "exact_li_chun_instant"
+        },
+        "monthBoundaryPolicy": {
+          "const": "exact_twelve_jie_instants"
+        },
+        "dayBoundaryTimeBasis": {
+          "const": "true_solar_time"
+        },
+        "dayBoundaryLocalTime": {
+          "const": "00:00"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "stemCreated": {
+      "const": false
+    },
+    "branchCreated": {
+      "const": false
+    },
+    "pillarCreated": {
+      "const": false
+    },
+    "luckCycleCreated": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

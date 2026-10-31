@@ -1,0 +1,477 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "single-person",
+  "description": "Single customer with immutable t0/t1/t2 history.",
+  "synthetic": true,
+  "sourceAdapter": "FORM",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "supportsT0T1T2": true,
+    "soleOwnership": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-SINGLE-S0",
+      "financialRealityId": "FR-SINGLE",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-SINGLE",
+        "householdReference": "HH-SINGLE",
+        "customerReferences": [
+          "CUST-SINGLE"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-SINGLE",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-CASH",
+            "assetType": "CASH",
+            "ownership": {
+              "ownershipId": "OWN-CASH",
+              "assetId": "A-CASH",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-SINGLE"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-A-CASH-V1",
+              "factCode": "ASSET_VALUE",
+              "value": 100000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "adc7d56dff6dc2b65d219d606a520bbb8bd8464bf46569fdac660018ea102ed6"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "5d2e823f2e0ebcc246deccdfda6adea31eb04b4403b886b9eef11c073b5e5023"
+    },
+    {
+      "snapshotId": "FR-SINGLE-S1",
+      "financialRealityId": "FR-SINGLE",
+      "sequence": 1,
+      "timepoint": "t1",
+      "asOfDate": "2026-02-01",
+      "financialRealityVersion": 2,
+      "snapshotPayload": {
+        "financialRealityId": "FR-SINGLE",
+        "householdReference": "HH-SINGLE",
+        "customerReferences": [
+          "CUST-SINGLE"
+        ],
+        "asOfDate": "2026-02-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-SINGLE",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-CASH",
+            "assetType": "CASH",
+            "ownership": {
+              "ownershipId": "OWN-CASH",
+              "assetId": "A-CASH",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-SINGLE"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-A-CASH-V1",
+              "factCode": "ASSET_VALUE",
+              "value": 100000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "A-FD",
+            "assetType": "FIXED_DEPOSIT",
+            "ownership": {
+              "ownershipId": "OWN-FD",
+              "assetId": "A-FD",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-SINGLE"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-A-FD-V1",
+              "factCode": "ASSET_VALUE",
+              "value": 50000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-01",
+              "recordedAt": "2026-02-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-02-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 2,
+        "digest": "44c90823bf73c65a8025777f018bf1a8d8d036ec721371cacfdd1b80bb4f24ae"
+      },
+      "previousSnapshotDigest": "5d2e823f2e0ebcc246deccdfda6adea31eb04b4403b886b9eef11c073b5e5023",
+      "changeEventReferences": [
+        "EV-SINGLE-1"
+      ],
+      "createdAt": "2026-02-01T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "a75c6cc22a8531d6dae63e87793e2af049e3af16ab5ee6f1ac74d8473f30530c"
+    },
+    {
+      "snapshotId": "FR-SINGLE-S2",
+      "financialRealityId": "FR-SINGLE",
+      "sequence": 2,
+      "timepoint": "t2",
+      "asOfDate": "2026-03-01",
+      "financialRealityVersion": 3,
+      "snapshotPayload": {
+        "financialRealityId": "FR-SINGLE",
+        "householdReference": "HH-SINGLE",
+        "customerReferences": [
+          "CUST-SINGLE"
+        ],
+        "asOfDate": "2026-03-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-SINGLE",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-CASH",
+            "assetType": "CASH",
+            "ownership": {
+              "ownershipId": "OWN-CASH",
+              "assetId": "A-CASH",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-SINGLE"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-A-CASH-V2",
+              "factCode": "ASSET_VALUE",
+              "value": 120000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-03-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-03-01",
+              "recordedAt": "2026-03-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "assetId": "A-FD",
+            "assetType": "FIXED_DEPOSIT",
+            "ownership": {
+              "ownershipId": "OWN-FD",
+              "assetId": "A-FD",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-SINGLE"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-A-FD-V1",
+              "factCode": "ASSET_VALUE",
+              "value": 50000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-01",
+              "recordedAt": "2026-02-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-02-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 3,
+        "digest": "28348d746548983689c4d5f3e3a911221ad912cdf5b5a191756651e5c3490bfe"
+      },
+      "previousSnapshotDigest": "a75c6cc22a8531d6dae63e87793e2af049e3af16ab5ee6f1ac74d8473f30530c",
+      "changeEventReferences": [
+        "EV-SINGLE-2"
+      ],
+      "createdAt": "2026-03-01T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "61e90f06443ec4b3b9e2b8f0b39eb1898cb15111ee89207bcddba8555546e56f"
+    }
+  ],
+  "changeEvents": [
+    {
+      "eventId": "EV-SINGLE-1",
+      "financialRealityId": "FR-SINGLE",
+      "eventType": "ASSET_ADDED",
+      "occurredAt": "2026-02-01",
+      "recordedAt": "2026-02-01T12:00:00Z",
+      "subjectReference": "A-FD",
+      "factReferences": [
+        "F-A-FD-V1"
+      ],
+      "fromSnapshotId": "FR-SINGLE-S0",
+      "toSnapshotId": "FR-SINGLE-S1",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "ab5042664afc5b5ceed5af074842c8d989c23c4b3e0c3693a767fb80824b7570"
+    },
+    {
+      "eventId": "EV-SINGLE-2",
+      "financialRealityId": "FR-SINGLE",
+      "eventType": "ASSET_VALUE_UPDATED",
+      "occurredAt": "2026-03-01",
+      "recordedAt": "2026-03-01T12:00:00Z",
+      "subjectReference": "A-CASH",
+      "factReferences": [
+        "F-A-CASH-V2"
+      ],
+      "fromSnapshotId": "FR-SINGLE-S1",
+      "toSnapshotId": "FR-SINGLE-S2",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "b72dc36ce7ef680ca3fd2964732b26e6d55be7a965544813c5b281809b1f9271"
+    }
+  ]
+}

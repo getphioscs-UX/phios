@@ -1,11 +1,14 @@
 import fs from 'node:fs';
-import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
-import {assemblePublicationSnapshot} from '../functions/canonical-presentation-runtime/visual-report-page-runtime.js';
-import {SECTION_LAYOUT} from '../functions/canonical-presentation-runtime/report-section-contract.js';
-import {resolveReportEditorialAsset} from '../functions/canonical-presentation-runtime/report-editorial-resolver.js';
-import {REPORT_EDITORIAL_ASSETS} from '../functions/canonical-presentation-runtime/report-editorial-registry.js';
-import {renderFrozenBaziIntro} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
-import {renderVisualReportPages} from '../assets/customer-ui/js/personal-products/visual-report-pages.js';
+// Install Node-only JSON hooks before linking the Pages module graph.
+// Deployable Functions keep the bundler-compatible ordinary JSON imports.
+await import('./lib/pages-json-import-preload.mjs');
+const {projectBaziSectionPublication}=await import('../functions/personal-reading/bazi-section-publication.js');
+const {assemblePublicationSnapshot}=await import('../functions/canonical-presentation-runtime/visual-report-page-runtime.js');
+const {SECTION_LAYOUT}=await import('../functions/canonical-presentation-runtime/report-section-contract.js');
+const {resolveReportEditorialAsset}=await import('../functions/canonical-presentation-runtime/report-editorial-resolver.js');
+const {REPORT_EDITORIAL_ASSETS}=await import('../functions/canonical-presentation-runtime/report-editorial-registry.js');
+const {renderFrozenBaziIntro}=await import('../assets/customer-ui/js/personal-products/publication-report-pages.js');
+const {renderVisualReportPages}=await import('../assets/customer-ui/js/personal-products/visual-report-pages.js');
 
 const out='docs/acceptance/bazi-paid-report/r11';
 fs.mkdirSync(out,{recursive:true});

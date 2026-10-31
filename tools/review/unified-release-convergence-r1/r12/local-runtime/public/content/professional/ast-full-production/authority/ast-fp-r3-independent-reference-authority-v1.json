@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-INDEPENDENT-REFERENCE-AUTHORITY-v1.0.0",
+  "workCode": "AST-FP-R3",
+  "sourceMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "subjectUnderCertification": {
+    "productionEphemeris": "astronomy-engine@2.1.19",
+    "productionPlanetAdapter": "functions/method-client-delivery/production-adapters/astronomy-engine-production-adapter.js",
+    "productionStructuralRuntime": "functions/ast-production/ast-structural-calculation-runtime.js",
+    "productionNodeAdapter": "functions/core-method-runtime/ast-lunar-node-adapter.js",
+    "zodiac": "TROPICAL",
+    "observerMode": "GEOCENTRIC"
+  },
+  "independentReference": {
+    "library": "Swiss Ephemeris",
+    "libraryVersion": "2.10.03",
+    "binding": "PySwissEph",
+    "bindingBuild": "20230604",
+    "planetaryBackend": "MOSEPH_MOSHIER_FALLBACK",
+    "planetaryFlags": ["FLG_MOSEPH", "FLG_SPEED"],
+    "houseApi": "houses_ex",
+    "houseSystems": ["PLACIDUS", "WHOLE_SIGN"],
+    "referenceFixture": "content/professional/ast-full-production/fixtures/ast-fp-r3-independent-reference-v1.json",
+    "referenceBinarySha256": "9663f57768a61c7c736290c732c0d856654972197edb3b2f84ca6d7e77c718f3"
+  },
+  "independence": {
+    "referenceNumbersGeneratedOutsidePhiOsAstRuntime": true,
+    "referencePlanetModelIsNotAstronomyEngine": true,
+    "referenceHouseImplementationIsNotPhiOsHouseRuntime": true,
+    "staticReferenceOnly": true,
+    "runtimeDependencyCreated": false,
+    "referenceSoftwareBundledInCustomerRuntime": false,
+    "referenceSoftwareRedistributedByThisWork": false
+  },
+  "useBasis": {
+    "role": "OFFLINE_NUMERIC_CROSS_VALIDATION_ONLY",
+    "createsAstrologyMeaningAuthority": false,
+    "createsCustomerInterpretationAuthority": false,
+    "createsCommercialSwissEphemerisRuntimeDependency": false,
+    "licenseLegalOpinionCreated": false
+  },
+  "productionEngineContext": {
+    "astronomyEngineLicense": "MIT",
+    "astronomyEngineVersionPinnedByRepository": "2.1.19",
+    "astronomyEnginePublicAccuracyTargetIsNotSubstitutedForIndependentAcceptance": true
+  }
+}

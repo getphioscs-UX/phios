@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI-OS-AST-R5-THREE-CALL-MANUSCRIPT-RESULT-v1.0.0",
+  "type": "object",
+  "required": ["schemaVersion", "customerRef", "locale", "authoringPackDigest", "callResults", "sectionManuscripts", "integratedClose", "completeness", "providerTelemetry", "sourceBinding"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-AST-R5-THREE-CALL-MANUSCRIPT-RESULT-v1.0.0"},
+    "customerRef": {"type": "string", "minLength": 1},
+    "locale": {"type": "string", "minLength": 1},
+    "authoringPackDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "callResults": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "object"}},
+    "sectionManuscripts": {"type": "array", "minItems": 10, "maxItems": 10, "items": {"type": "object", "required": ["sectionId", "sourceCall", "text", "sourceThemeRefs", "sourceRouteRefs"], "properties": {
+      "sectionId": {"enum": ["SEC-01", "SEC-02", "SEC-03", "SEC-04", "SEC-05", "SEC-06", "SEC-07", "SEC-08", "SEC-09", "SEC-10"]},
+      "sourceCall": {"enum": ["AST_CORE_ARCHITECTURE_WRITER", "AST_APPLIED_LIFE_DOMAINS_WRITER", "AST_INTEGRATION_NAVIGATION_WRITER"]},
+      "text": {"type": "string", "minLength": 400},
+      "sourceThemeRefs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+      "sourceRouteRefs": {"type": "array", "items": {"type": "string"}}
+    }}},
+    "integratedClose": {"type": "string", "minLength": 200},
+    "completeness": {"type": "object", "required": ["status", "defects"]},
+    "providerTelemetry": {"type": "array", "minItems": 3, "maxItems": 3},
+    "sourceBinding": {"type": "object", "required": ["authoringPackDigest", "canonicalProjectionDigest", "r4ProjectionDigest"]}
+  }
+}

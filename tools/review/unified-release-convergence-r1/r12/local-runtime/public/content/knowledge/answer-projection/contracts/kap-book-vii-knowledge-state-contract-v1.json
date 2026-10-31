@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-KAP-BOOK-VII-KNOWLEDGE-STATE-v1.0.0",
+  "states": {
+    "KNOWN": "Observed / realized reality with sufficient evidence",
+    "RECONSTRUCTED": "Past reality inferred from surviving evidence",
+    "PROJECTED": "Unrealized future discussed conditionally",
+    "CONTESTED": "Multiple high-quality readings remain materially live",
+    "UNKNOWN": "Current evidence does not support reliable resolution"
+  },
+  "invariants": [
+    "KNOWN != RECONSTRUCTED",
+    "RECONSTRUCTED != PROJECTED",
+    "PROJECTED != FACT",
+    "CONTESTED != UNKNOWN",
+    "UNKNOWN != ZERO",
+    "UNOBSERVED != NONEXISTENT",
+    "FLUENT_GENERATION != HIGHER_AUTHORITY",
+    "MODEL != REALITY",
+    "PRIMARY_READING != ONLY_READING"
+  ],
+  "REALITY_HAS_FINAL_CORRECTION_AUTHORITY": true,
+  "unknownReasonCodes": [
+    "INSUFFICIENT_EVIDENCE",
+    "LOW_RESOLUTION",
+    "TIME_WINDOW_TOO_SHORT",
+    "SOURCE_CONFLICT",
+    "CONTESTED",
+    "MODEL_BLIND_SPOT",
+    "IRREDUCIBLE_UNCERTAINTY"
+  ],
+  "automaticRealityIntake": false,
+  "contestedForcesWinner": false
+}

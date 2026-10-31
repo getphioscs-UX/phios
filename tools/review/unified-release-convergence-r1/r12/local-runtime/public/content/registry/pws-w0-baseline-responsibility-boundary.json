@@ -1,0 +1,107 @@
+{
+  "id": "phi-os.pws-w0-baseline-responsibility-boundary",
+  "version": "1.0.0",
+  "milestone": "PWS-W0",
+  "status": "baseline-and-responsibility-boundary-frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "ad34f1047d59b9271754573b0c45bba3003a1c14",
+    "prerequisite": "PDS-W10"
+  },
+  "journeyContract": {
+    "sharedWithCustomerJourney": true,
+    "independentProfessionalRealityStoreAllowed": false,
+    "customerJourneyMutationAllowed": false,
+    "runtimeReadingMutationAllowed": false,
+    "runtimeEvidenceMutationAllowed": false,
+    "runtimeMemoryMutationAllowed": false
+  },
+  "dataLayers": [
+    "customer_original_material",
+    "customer_formal_record",
+    "professional_working_notes",
+    "candidate_revision",
+    "formally_signed_output",
+    "professional_responsibility_period"
+  ],
+  "accessBoundary": {
+    "authenticatedProfessionalRequired": true,
+    "assignedProfessionalRequired": true,
+    "activeExplicitConsentRequired": true,
+    "resourceScopeRequired": true,
+    "purposeRequired": true,
+    "consentVersionRequired": true,
+    "accessBeforeConsentAllowed": false,
+    "revokedOrExpiredConsentClosesAccess": true,
+    "clientListMayContainUnauthorisedClients": false
+  },
+  "responsibilityLifecycle": {
+    "purchaseCreatesResponsibility": false,
+    "entitlementCreatesResponsibility": false,
+    "startsAfter": [
+      "eligible_human_service",
+      "scope_confirmed",
+      "consent_granted",
+      "professional_assigned"
+    ],
+    "signedOutputBinds": [
+      "professional_id",
+      "client_id",
+      "source_versions",
+      "consent_reference",
+      "service_scope",
+      "signed_at"
+    ],
+    "endsOn": [
+      "service_completed",
+      "assignment_closed",
+      "consent_revoked",
+      "consent_expired"
+    ],
+    "accessAfterResponsibilityEndsAllowed": false
+  },
+  "projectionBoundary": {
+    "runtimeViewReadOnly": true,
+    "professionalNotesSeparateFromFormalRecord": true,
+    "candidateRevisionIsNotFormalReading": true,
+    "professionalObservationIsNotObservedEvidence": true,
+    "externalReaderInterpretationIsNotRuntimeEvidence": true,
+    "reviewQueueStateMustBeContractDerived": true,
+    "automaticRecommendationAllowed": false,
+    "automaticSigningAllowed": false,
+    "regulatedAdviceEnabled": false
+  },
+  "implementationState": {
+    "existingWorkspaceContractsReused": true,
+    "existingWorkspacePageReused": true,
+    "realClientPayloadEnabled": false,
+    "workspacePersistenceEnabled": false,
+    "professionalNotesPersistenceEnabled": false,
+    "productionAuthorisedPayloadAcceptance": "pending"
+  },
+  "migrationGovernanceClosure": {
+    "registry": "content/registry/runtime-migrations.json",
+    "registeredVersions": [1, 2, 3, 4],
+    "addedSqlMigration": false,
+    "modifiedSqlMigration": false,
+    "registeredExistingMigration": "db/migrations/0004_book_commerce.sql",
+    "canonicalChecksum": "9e62f3d176bc3c3085b126e2386fd846b016e56fa4eee5f3fb0d547b8aed6b9e",
+    "schemaId": "phi-os.book-commerce-schema.v1"
+  },
+  "protectedArtifacts": {
+    "content/registry/m4b-w2-professional-workspace-foundation.json": "0db8adb1ac4ae08259683fdcf5d744472bffa580d0b550f2442d5de15d2641dd",
+    "content/registry/m4b-w2b-professional-workspace-views.json": "5fa8ea746990dbb262943b8d930677f945e372206dee4b0ded44ac97dc575c32",
+    "content/registry/m4b-w2c-professional-revision-navigation-follow-up.json": "abef5ccd99e457141f720741674be45322384ac829cb830c834e639a78d19e56",
+    "content/registry/professional-consent-sharing.json": "b258ce68c103e45dbc9739ce606bd2f361631664e5393da329d598370652d3e1",
+    "content/registry/pws-w1a-revenue-architecture.json": "e9373e2e61c79ef5a671e278df68ec1117fce869e3e9f93d3189c696d3be73a6",
+    "functions/professional/workspace/professional-workspace-contract.js": "81975712aafc80660c440b015669bb1f4a2a1e4383ccaeef6a984b42724e6d03",
+    "functions/professional/workspace/professional-client-contract.js": "6488d26ab1c94332babb73bced5a4fbb629cdaf9c1ce24f75bf4604c90b5d22d",
+    "functions/professional/workspace/professional-note-contract.js": "b4d5ad8f4651398c20d8fc102da1882b116fbc9e343bc0bdc1813af83d984614",
+    "functions/professional/workspace/professional-task-contract.js": "d4a7ce7af32225b55c9f7ee4e9d884009cc5e51b6ebafe94e4964391e8258ebb",
+    "functions/professional/workspace/professional-reading-revision-contract.js": "3a949a1a02d2898ef4cb5db7d5c6220f1cc5373f79cf7c8c0d8daabe7c08b90e",
+    "functions/professional/consent/professional-consent-contract.js": "d4e7d27b99aeb520370d05ee147c07422168e86f33ea8ac1e94db15e11592880",
+    "functions/professional/consent/professional-access-event-contract.js": "fcd693118a5ef36b989f96c488ce5850e340340ea9cd5b240f46d320752aaa37"
+  },
+  "nextWorkPackage": "PWS-W1 Identity, Assignment, Consent and Authorised Data Loader"
+}

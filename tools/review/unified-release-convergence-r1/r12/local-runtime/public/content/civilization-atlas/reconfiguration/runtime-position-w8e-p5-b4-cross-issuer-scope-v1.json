@@ -1,0 +1,324 @@
+{
+  "version": "1.0.0",
+  "work": "R1-W8E-P5-B4",
+  "status": "CROSS_ISSUER_SCOPE_REVIEW_COMPLETE_SUBSYSTEM_ONLY",
+  "cohort": {
+    "issuers": [
+      "AAPL",
+      "MSFT",
+      "AMZN",
+      "NVDA",
+      "JPM"
+    ],
+    "selection": "FIXED_NON_PROBABILITY_WORK_ORDER_COHORT",
+    "selectionProbability": null,
+    "coverageDenominator": null,
+    "coverageWeight": null,
+    "economicCoverageRatio": null,
+    "sampleRepresentativeness": "NOT_ESTABLISHED",
+    "fiscalLabels": "FY2023–FY2025",
+    "periodsSynchronized": false,
+    "geography": "Issuer consolidated businesses; US domestic attribution is not extracted.",
+    "observationOnlyIssuers": [
+      "AAPL",
+      "AMZN"
+    ],
+    "observationOnlyMeaning": "No B3 candidate under this extraction/screen; not proof of no structural change."
+  },
+  "candidates": [
+    {
+      "candidateId": "US-W8E-P5-B3-MSFT-STRUCTURAL-CHANGE",
+      "issuer": "MSFT",
+      "types": [
+        "SEGMENT_RECLASSIFICATION"
+      ],
+      "scope": "SUBSYSTEM",
+      "scopeTarget": "SELECTED_ISSUER_REPORTABLE_SEGMENT_STRUCTURE",
+      "periods": [
+        {
+          "fiscalYear": 2023,
+          "periodEnd": "2023-06-30",
+          "sourceId": "W8E-P5-B1-MSFT-FY2023"
+        },
+        {
+          "fiscalYear": 2024,
+          "periodEnd": "2024-06-30",
+          "sourceId": "W8E-P5-B1-MSFT-FY2024"
+        },
+        {
+          "fiscalYear": 2025,
+          "periodEnd": "2025-06-30",
+          "sourceId": "W8E-P5-B1-MSFT-FY2025"
+        }
+      ],
+      "metric": "SEGMENT_REVENUE_OR_NET_SALES",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-MSFT-FY2023",
+          "sha256": "8516a20601bba95932ba4401af662314e98524ade32a868d756f4f520f2e7147",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-MSFT-FY2024",
+          "sha256": "78030528fe04de8076e61fafb7e7f86e1f06512b87f3739bee45a21e0c315766",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-MSFT-FY2025",
+          "sha256": "89ad7e9d9a76aee545ea49e8128db1bff56de2e8f7a23cdf118427a52a0854cd",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        }
+      ],
+      "admissionState": "W8A_W8B_W8C_W8D_PENDING",
+      "directIssuerEvidence": "SOURCE_BOUNDED_HISTORICAL_CANDIDATE",
+      "crossIssuerCommonMechanism": "NOT_ESTABLISHED",
+      "sectorRepresentativeness": "NOT_ESTABLISHED",
+      "nationalRepresentativeness": "NOT_ESTABLISHED",
+      "geographicalAttribution": "ISSUER_CONSOLIDATED_BUSINESS_NOT_US_DOMESTIC_ACTIVITY",
+      "allowedReading": {
+        "zh": "Microsoft 报告了分部组成调整，并对历史分部数据重列。证据支持这家企业的报告与管理分部组成变化，尚不证明美国经济的共同重组机制。",
+        "en": "Microsoft reports a change in segment composition and recasts prior segment information. This supports an issuer reporting/management-composition event, not a common US macro mechanism."
+      },
+      "g14Pair": null,
+      "runtimePosition": null,
+      "reviewState": "SCOPE_GUARD_COMPLETE_ADMISSION_AND_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "candidateId": "US-W8E-P5-B3-NVDA-STRUCTURAL-CHANGE",
+      "issuer": "NVDA",
+      "types": [
+        "BUSINESS_MIX_MIGRATION",
+        "CARRIER_CONCENTRATION_SHIFT"
+      ],
+      "scope": "SUBSYSTEM",
+      "scopeTarget": "SELECTED_ISSUER_REPORTABLE_SEGMENT_STRUCTURE",
+      "periods": [
+        {
+          "fiscalYear": 2023,
+          "periodEnd": "2023-01-29",
+          "sourceId": "W8E-P5-B1-NVDA-FY2023"
+        },
+        {
+          "fiscalYear": 2024,
+          "periodEnd": "2024-01-28",
+          "sourceId": "W8E-P5-B1-NVDA-FY2024"
+        },
+        {
+          "fiscalYear": 2025,
+          "periodEnd": "2025-01-26",
+          "sourceId": "W8E-P5-B1-NVDA-FY2025"
+        }
+      ],
+      "metric": "SEGMENT_REVENUE_OR_NET_SALES",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-NVDA-FY2023",
+          "sha256": "241cb72e75d11d4bca670eba0642c36353a189e6c570cb716d19a5269f240b71",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000017/nvda-20230129.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-NVDA-FY2024",
+          "sha256": "fc26122b619646282369be10ef1b675e17e910f12895674cbe3353c6a304fde7",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-NVDA-FY2025",
+          "sha256": "427e28d187bf3be253dea05277695a7b935fd6b36a9fd8c3340ef734ca2adc22",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
+        }
+      ],
+      "admissionState": "W8A_W8B_W8C_W8D_PENDING",
+      "directIssuerEvidence": "SOURCE_BOUNDED_HISTORICAL_CANDIDATE",
+      "crossIssuerCommonMechanism": "NOT_ESTABLISHED",
+      "sectorRepresentativeness": "NOT_ESTABLISHED",
+      "nationalRepresentativeness": "NOT_ESTABLISHED",
+      "geographicalAttribution": "ISSUER_CONSOLIDATED_BUSINESS_NOT_US_DOMESTIC_ACTIVITY",
+      "allowedReading": {
+        "zh": "NVIDIA 的可比报告分部收入明显向 Compute & Networking 集中。这是收入组合的历史变化，未直接确认产能、资本或国家载体迁移。",
+        "en": "NVIDIA’s comparable reportable-segment revenue shifts toward Compute & Networking. This is historical revenue-composition evidence, not direct proof of capacity, capital or national carrier migration."
+      },
+      "g14Pair": null,
+      "runtimePosition": null,
+      "reviewState": "SCOPE_GUARD_COMPLETE_ADMISSION_AND_SEMANTIC_REVIEW_PENDING"
+    },
+    {
+      "candidateId": "US-W8E-P5-B3-JPM-STRUCTURAL-CHANGE",
+      "issuer": "JPM",
+      "types": [
+        "ISSUER_STRUCTURE_SHIFT"
+      ],
+      "scope": "SUBSYSTEM",
+      "scopeTarget": "SELECTED_ISSUER_REPORTABLE_SEGMENT_STRUCTURE",
+      "periods": [
+        {
+          "fiscalYear": 2023,
+          "periodEnd": "2023-12-31",
+          "sourceId": "W8E-P5-B1-JPM-FY2023"
+        },
+        {
+          "fiscalYear": 2024,
+          "periodEnd": "2024-12-31",
+          "sourceId": "W8E-P5-B1-JPM-FY2024"
+        },
+        {
+          "fiscalYear": 2025,
+          "periodEnd": "2025-12-31",
+          "sourceId": "W8E-P5-B1-JPM-FY2025"
+        }
+      ],
+      "metric": "TOTAL_NET_REVENUE_MANAGED_FTE",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS_EXCLUDES_CORPORATE",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-JPM-FY2023",
+          "sha256": "b82a3f479ff6576d01dc97a558aaf641632c9132e23b936da954311b3f168aee",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961724000225/jpm-20231231.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-JPM-FY2024",
+          "sha256": "64969ed3dd3682bb1c006ffe4317a29a1584eb24c4c4de661c5cbe4c565ec6a0",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-JPM-FY2025",
+          "sha256": "c2988ee57180367c69cb58fb65ae42b4b3fa764f2a5aabe04a2a984621bd3c92",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+        }
+      ],
+      "admissionState": "W8A_W8B_W8C_W8D_PENDING",
+      "directIssuerEvidence": "SOURCE_BOUNDED_HISTORICAL_CANDIDATE",
+      "crossIssuerCommonMechanism": "NOT_ESTABLISHED",
+      "sectorRepresentativeness": "NOT_ESTABLISHED",
+      "nationalRepresentativeness": "NOT_ESTABLISHED",
+      "geographicalAttribution": "ISSUER_CONSOLIDATED_BUSINESS_NOT_US_DOMESTIC_ACTIVITY",
+      "allowedReading": {
+        "zh": "JPM 报告将两个原有业务分部合并。分部收入采用 managed/FTE 口径，占比不含 Corporate；不能与其他企业的净销售额合并成经济份额。",
+        "en": "JPM reports combining two former business segments. Managed/FTE segment revenue and a denominator excluding Corporate cannot be pooled with other issuers’ net sales as an economic share."
+      },
+      "g14Pair": null,
+      "runtimePosition": null,
+      "reviewState": "SCOPE_GUARD_COMPLETE_ADMISSION_AND_SEMANTIC_REVIEW_PENDING"
+    }
+  ],
+  "pairAssessments": [
+    {
+      "issuers": [
+        "MSFT",
+        "NVDA"
+      ],
+      "sharedConclusion": "LOCAL_ISSUER_STRUCTURE_OR_REVENUE_COMPOSITION_CHANGES",
+      "commonMechanism": "NOT_ESTABLISHED",
+      "sameMetricAndDenominator": true,
+      "synchronousPeriodEnds": false,
+      "pooledRevenuePermitted": false,
+      "pooledHhiPermitted": false,
+      "scopePromotionPermitted": false,
+      "reason": "Different segment partitions and mechanism classes; matching currency or metric labels do not establish additive economic exposure, synchronized events or a common national mechanism."
+    },
+    {
+      "issuers": [
+        "MSFT",
+        "JPM"
+      ],
+      "sharedConclusion": "LOCAL_ISSUER_STRUCTURE_OR_REVENUE_COMPOSITION_CHANGES",
+      "commonMechanism": "NOT_ESTABLISHED",
+      "sameMetricAndDenominator": false,
+      "synchronousPeriodEnds": false,
+      "pooledRevenuePermitted": false,
+      "pooledHhiPermitted": false,
+      "scopePromotionPermitted": false,
+      "reason": "Different segment partitions and mechanism classes; matching currency or metric labels do not establish additive economic exposure, synchronized events or a common national mechanism."
+    },
+    {
+      "issuers": [
+        "NVDA",
+        "JPM"
+      ],
+      "sharedConclusion": "LOCAL_ISSUER_STRUCTURE_OR_REVENUE_COMPOSITION_CHANGES",
+      "commonMechanism": "NOT_ESTABLISHED",
+      "sameMetricAndDenominator": false,
+      "synchronousPeriodEnds": false,
+      "pooledRevenuePermitted": false,
+      "pooledHhiPermitted": false,
+      "scopePromotionPermitted": false,
+      "reason": "Different segment partitions and mechanism classes; matching currency or metric labels do not establish additive economic exposure, synchronized events or a common national mechanism."
+    }
+  ],
+  "boundedSynthesis": {
+    "scope": "ENUMERATED_SELECTED_ISSUER_EVIDENCE_COLLECTION",
+    "semanticPair": null,
+    "knowledgeState": "HISTORICAL",
+    "zh": "固定的五家公司样本中，Microsoft 与 JPM 报告了不同的分部结构调整，NVIDIA 出现了可比口径下的收入组合迁移。这些是局部、异质的历史候选证据，尚未建立共同机制、行业代表性或美国经济代表性。",
+    "en": "Within the fixed five-issuer cohort, Microsoft and JPM report different segment-structure changes, while NVIDIA shows comparable-basis revenue-composition movement. These are local, heterogeneous historical candidate findings; a common mechanism, sector representativeness and US economy representativeness are not established.",
+    "aggregateCandidateCreated": false,
+    "acceptanceByIssuerCountAllowed": false
+  },
+  "guardContract": {
+    "sourceCountVotingAllowed": false,
+    "candidateRateAsPopulationEstimateAllowed": false,
+    "multinationalRevenueAsUsDomesticRevenueAllowed": false,
+    "commonCurrencyAsAdditivityProofAllowed": false,
+    "uniformFyLabelsAsSynchronizationProofAllowed": false,
+    "reclassificationAsNewRevenueAllowed": false,
+    "provisionalMixScreenAsG14RuleAllowed": false,
+    "sourceScopeAsNationalScopeAllowed": false,
+    "humanScopeAcceptanceAsSourceAdmissionAllowed": false,
+    "current2026InferenceAllowed": false
+  },
+  "representativenessGaps": [
+    {
+      "id": "TARGET_POPULATION",
+      "state": "UNDEFINED",
+      "needed": "Define the sector or national activity population and unit of analysis before seeking broader inference."
+    },
+    {
+      "id": "SAMPLING_COVERAGE",
+      "state": "NOT_ESTABLISHED",
+      "needed": "Supply a documented sampling frame, exclusions and coverage denominator; large issuer selection alone is insufficient."
+    },
+    {
+      "id": "DOMESTIC_ATTRIBUTION",
+      "state": "NOT_EXTRACTED",
+      "needed": "Separate domestic activity from issuer consolidated global activity using documented compatible evidence."
+    },
+    {
+      "id": "COMMON_MECHANISM",
+      "state": "NOT_ESTABLISHED",
+      "needed": "Establish a supported transmission or structural linkage across issuer events, rather than count heterogeneous findings."
+    },
+    {
+      "id": "TIME_ALIGNMENT",
+      "state": "NOT_ESTABLISHED",
+      "needed": "Align event dates and observation periods explicitly; fiscal labels do not synchronize windows."
+    },
+    {
+      "id": "METRIC_AND_DOUBLE_COUNTING",
+      "state": "NOT_ESTABLISHED",
+      "needed": "Establish consistent metrics and handle inter-issuer flows and segment partition differences before aggregation."
+    },
+    {
+      "id": "SOURCE_AND_CLAIM_ADMISSION",
+      "state": "PENDING",
+      "needed": "Admit bounded filing sources and factual/derived claims through W8A/W8B/W8C/W8D before semantic promotion."
+    }
+  ],
+  "completed": {
+    "issuerScopeChecks": 5,
+    "candidateScopeChecks": 3,
+    "pairScopeChecks": 3,
+    "boundedEvidenceCollections": 1,
+    "aggregateStructuralCandidates": 0,
+    "nationalRepresentativeCandidates": 0,
+    "g14Candidates": 0,
+    "dossierGlobalPromotions": 0,
+    "runtimePositionCandidates": 0
+  },
+  "next": "Proceed with bounded primary-filing source/claim admission through W8A–W8D and then G14 grammar/domain review. Broader representativeness is separately gated; no national promotion.",
+  "predecessors": {
+    "b3Sha256": "c97bd2ee43166b24831322fd44545a52243d45aedfb9497f6225342a6dfe877a",
+    "b2Sha256": "413982b98652db6b05933c6e091f571bc75519edce03b6fa2f19cc7ced71c7a8",
+    "b1ManifestSha256": "6243a7ac57b052e924c9f262074b69daa7c92f76f941ce6c933653fabd1319b9"
+  }
+}

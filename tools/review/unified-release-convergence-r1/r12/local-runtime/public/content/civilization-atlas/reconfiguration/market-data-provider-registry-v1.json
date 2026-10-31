@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-MARKET-DATA-PROVIDER-REGISTRY-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-P2",
+  "providers": [
+    {
+      "providerId": "MOOMOO_OPENAPI",
+      "displayName": "Moomoo OpenAPI",
+      "authorityClass": "MARKET_DATA_PROVIDER",
+      "cwaDomain": "FINANCIAL_MARKETS",
+      "productionState": "REGISTERED_AUTH_REQUIRED",
+      "apiHost": "https://webapi.moomoo.com",
+      "websocketQuoteHost": "wss://webapi-quote.moomoo.com/ws",
+      "auth": {
+        "preferred": "OAUTH_2_1_PKCE",
+        "supported": [
+          "OAUTH_2_1_PKCE",
+          "API_KEY"
+        ],
+        "secretsPersisted": false
+      },
+      "capabilities": [
+        "REALTIME_QUOTE",
+        "ORDER_BOOK",
+        "HISTORY_KLINE",
+        "CAPITAL_FLOW",
+        "CAPITAL_DISTRIBUTION",
+        "SECTOR_PLATE",
+        "VALUATION",
+        "FINANCIAL_STATEMENTS",
+        "REVENUE_BREAKDOWN",
+        "ANALYST_RATINGS",
+        "CORPORATE_ACTIONS",
+        "SHAREHOLDERS",
+        "COMPANY_PROFILE"
+      ],
+      "officialDocumentation": [
+        "https://open.moomoo.com/api/overview/",
+        "https://open.moomoo.com/api/overview/getting-started",
+        "https://open.moomoo.com/api/overview/api-reference"
+      ],
+      "authorityBoundary": "Use provider observations for market/runtime evidence. Prefer regulator/exchange/filing/company-primary sources for formal legal, filing, policy or issuer-authoritative claims."
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-DEPTH-EDITORIAL-AUTHORITY-CONTRACT-v1.0.0",
+  "phase": "ICHI-DEPTH",
+  "work": "ICHI-DEPTH-W2",
+  "baselineCommit": "d2c485af29481179d8e4530780148a1d32981e92",
+  "status": "ACTIVE_FAIL_CLOSED_NO_DEPTH_ENTRY_HUMAN_APPROVED",
+  "authorityOwner": "PHI_OS_ICHING_HUMAN_EDITORIAL_REVIEW",
+  "humanApprovalAuthority": {
+    "required": true,
+    "eligibleReviewers": [
+      "TL",
+      "NAMED_ICHING_EDITOR"
+    ],
+    "anonymousApprovalAllowed": false,
+    "modelApprovalAllowed": false,
+    "automatedApprovalAllowed": false,
+    "approvalRequiresSourceFidelityReview": true,
+    "approvalRequiresLocaleFidelityReview": true,
+    "approvalRequiresBoundaryReview": true
+  },
+  "editorialPipeline": [
+    {
+      "order": 1,
+      "stage": "SOURCE_REGISTRATION",
+      "outputAuthority": "METADATA_ONLY"
+    },
+    {
+      "order": 2,
+      "stage": "RIGHTS_AND_PROVENANCE_DECISION",
+      "outputAuthority": "SOURCE_ADMISSION_DECISION"
+    },
+    {
+      "order": 3,
+      "stage": "SOURCE_CLAIM_EXTRACTION",
+      "outputAuthority": "SOURCE_BOUND_CLAIM_CANDIDATE"
+    },
+    {
+      "order": 4,
+      "stage": "EDITORIAL_CANDIDATE_AUTHORING",
+      "outputAuthority": "CANDIDATE_ONLY"
+    },
+    {
+      "order": 5,
+      "stage": "AUTOMATED_SCHEMA_AND_BOUNDARY_CHECK",
+      "outputAuthority": "VALIDATION_EVIDENCE_ONLY"
+    },
+    {
+      "order": 6,
+      "stage": "HUMAN_SOURCE_AND_LOCALE_REVIEW",
+      "outputAuthority": "HUMAN_REVIEW_DECISION"
+    },
+    {
+      "order": 7,
+      "stage": "VERSIONED_EDITORIAL_ADMISSION",
+      "outputAuthority": "ADMITTED_PHIOS_EDITORIAL_INTERPRETATION"
+    }
+  ],
+  "modelRole": {
+    "offlineCandidateDraftingAllowed": true,
+    "sourceClaimRefsRequired": true,
+    "generatedCandidateMustRemainLabeled": true,
+    "runtimeGapFillAllowed": false,
+    "runtimeFreeformMeaningGenerationAllowed": false,
+    "modelMayApproveOwnCandidate": false,
+    "modelMayInventSourceClaim": false
+  },
+  "authorityBoundaries": {
+    "mayOverrideCanonicalStructure": false,
+    "mayRewriteCanonicalTextWitness": false,
+    "mayCreateUniversalTrueMeaning": false,
+    "mayCreateRealityTruth": false,
+    "mayCreateFateConclusion": false,
+    "mayDiagnose": false,
+    "mayCreateProfessionalJudgment": false,
+    "maySilentlyFuseConflictingSources": false,
+    "mayHideSourceDisagreement": false
+  },
+  "admissionGate": {
+    "requiredEntrySchema": "content/interpretation/iching/contracts/iching-depth-interpretation-entry-v1.schema.json",
+    "requiredSourceRegistry": "content/interpretation/iching/registries/iching-depth-source-admission-registry-v1.json",
+    "requiredDimensionRegistry": "content/interpretation/iching/registries/iching-depth-interpretation-dimension-registry-v1.json",
+    "humanApprovedEntryCount": 0,
+    "publicDepthReady": false,
+    "activationAuthorityChanged": false
+  }
+}
+

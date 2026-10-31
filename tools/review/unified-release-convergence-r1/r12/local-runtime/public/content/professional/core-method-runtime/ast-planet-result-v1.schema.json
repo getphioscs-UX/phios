@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/ast/ast-planet-result-v1.schema.json",
+  "title": "PHI OS AST Planet Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "executionMode",
+    "utcIso",
+    "timeScale",
+    "referenceFrame",
+    "observerMode",
+    "planetSetCode",
+    "nodePolicyCode",
+    "retrogradePolicyCode",
+    "precisionPolicyCode",
+    "bodies",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "planetRuntimeCreated",
+    "houseRuntimeCreated",
+    "aspectRuntimeCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-AST-PLANET-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "AST_PLANET_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "ASTROLOGY"
+    },
+    "pluginCode": {
+      "const": "AST"
+    },
+    "calculationType": {
+      "const": "PLANET_EPHEMERIS"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "utcIso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "timeScale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "referenceFrame": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observerMode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "planetSetCode": {
+      "type": "string",
+      "minLength": 3
+    },
+    "nodePolicyCode": {
+      "type": "string",
+      "minLength": 3
+    },
+    "retrogradePolicyCode": {
+      "type": "string",
+      "minLength": 3
+    },
+    "precisionPolicyCode": {
+      "type": "string",
+      "minLength": 3
+    },
+    "bodies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bodyCode",
+          "longitude",
+          "latitude",
+          "distanceAu",
+          "speedLongitudeDegreesPerDay",
+          "retrograde",
+          "nodeType"
+        ],
+        "properties": {
+          "bodyCode": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{1,47}$"
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMaximum": 360
+          },
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "distanceAu": {
+            "type": "number",
+            "minimum": 0
+          },
+          "speedLongitudeDegreesPerDay": {
+            "type": "number"
+          },
+          "retrograde": {
+            "type": "boolean"
+          },
+          "nodeType": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "planetRuntimeCreated": {
+      "const": true
+    },
+    "houseRuntimeCreated": {
+      "const": false
+    },
+    "aspectRuntimeCreated": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

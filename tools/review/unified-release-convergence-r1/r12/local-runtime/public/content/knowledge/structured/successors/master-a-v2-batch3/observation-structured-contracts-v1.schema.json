@@ -1,0 +1,589 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Book VII structured review candidate schemas; no KAP state definition",
+  "$defs": {
+    "observationObject": {
+      "type": "object",
+      "required": [
+        "objectId",
+        "bookCode",
+        "partCode",
+        "canonicalNodeRefs",
+        "objectType",
+        "title",
+        "definition",
+        "observableBoundary",
+        "possibleSignals",
+        "requiredEvidence",
+        "observationWindow",
+        "sourceRefs",
+        "provenance",
+        "relationships",
+        "unknownConditions",
+        "runtimeEligibility",
+        "knowledgeStateEligibility",
+        "authorityOwner",
+        "authorityBoundary",
+        "status",
+        "projectionState",
+        "version",
+        "nodeCode",
+        "dataClass",
+        "evidenceState",
+        "unknownState",
+        "asOfDate",
+        "sourceFreshness",
+        "lastReviewedAt",
+        "supersedes",
+        "supersededBy",
+        "runtimeHandoffType",
+        "operationalAdmissionState",
+        "claimAuthorityClass",
+        "observationTimeClass",
+        "knowledgeState"
+      ],
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bookCode": {
+          "const": "BOOK-7"
+        },
+        "partCode": {
+          "const": "PART-14"
+        },
+        "canonicalNodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "objectType": {
+          "enum": [
+            "OBSERVATION_OBJECT",
+            "SIGNAL",
+            "INDICATOR",
+            "EVENT",
+            "STATE",
+            "EVIDENCE",
+            "SOURCE",
+            "MEASUREMENT",
+            "COMPARISON",
+            "PERSPECTIVE",
+            "UNCERTAINTY",
+            "UNKNOWN",
+            "BIAS",
+            "CONFOUND",
+            "OBSERVATION_WINDOW",
+            "CHANGE",
+            "DIFFERENCE"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observableBoundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "possibleSignals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredEvidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "observationWindow": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceRefs": {
+          "$ref": "../../schema/structured-knowledge-common-v1.schema.json#/properties/sourceRefs"
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "kind",
+            "canonicalMetadata",
+            "publishedKnowledge",
+            "rawManuscriptRead",
+            "definitionIsCanonicalProse",
+            "definitionHumanReviewed"
+          ],
+          "properties": {
+            "rawManuscriptRead": {
+              "const": false
+            },
+            "definitionIsCanonicalProse": {
+              "const": false
+            },
+            "definitionHumanReviewed": {
+              "const": false
+            }
+          }
+        },
+        "relationships": {
+          "type": "array"
+        },
+        "unknownConditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "runtimeEligibility": {
+          "const": "REFERENCE_ONLY"
+        },
+        "knowledgeStateEligibility": {
+          "type": "object",
+          "required": [
+            "evaluationOwner",
+            "eligibleForEvaluation",
+            "doesNotAssignState"
+          ],
+          "properties": {
+            "evaluationOwner": {
+              "type": "object"
+            },
+            "eligibleForEvaluation": {
+              "const": true
+            },
+            "doesNotAssignState": {
+              "const": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "authorityOwner": {
+          "const": "EXISTING_STRUCTURED_KNOWLEDGE_OWNER"
+        },
+        "authorityBoundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "const": "IN_REVIEW"
+        },
+        "projectionState": {
+          "const": "WITHHELD"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nodeCode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataClass": {
+          "enum": [
+            "CANONICAL_PUBLICATION",
+            "CANONICAL_HISTORY",
+            "HISTORICAL_RECONSTRUCTION",
+            "STRUCTURED_KNOWLEDGE",
+            "CURRENT_DATA",
+            "DERIVED_RUNTIME_READOUT",
+            "CONDITIONAL_PROJECTION",
+            "UNKNOWN"
+          ]
+        },
+        "evidenceState": {
+          "enum": [
+            "OBSERVED",
+            "REPORTED",
+            "MEASURED",
+            "DOCUMENTED",
+            "DERIVED",
+            "INTERPRETED",
+            "RECONSTRUCTED",
+            "CONCEPTUAL",
+            "PARTIAL",
+            "CONTESTED",
+            "UNKNOWN",
+            "INSUFFICIENT_EVIDENCE",
+            "CONFLICTING_EVIDENCE",
+            "OUTSIDE_AUTHORITY",
+            "CURRENT_DATA_REQUIRED"
+          ]
+        },
+        "unknownState": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asOfDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "sourceFreshness": {
+          "type": "object",
+          "required": [
+            "state",
+            "asOfDate"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "CURRENT",
+                "STALE",
+                "UNKNOWN",
+                "NOT_APPLICABLE"
+              ]
+            },
+            "asOfDate": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date"
+            }
+          },
+          "additionalProperties": false
+        },
+        "lastReviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supersededBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "runtimeHandoffType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operationalAdmissionState": {
+          "const": "NOT_ADMITTED"
+        },
+        "claimAuthorityClass": {
+          "const": null
+        },
+        "observationTimeClass": {
+          "const": null
+        },
+        "knowledgeState": {
+          "const": null
+        }
+      },
+      "additionalProperties": false
+    },
+    "indicator": {
+      "type": "object",
+      "required": [
+        "indicatorId",
+        "construct",
+        "signalInputs",
+        "calculationType",
+        "observationWindow",
+        "missingnessRule",
+        "interpretationBoundary",
+        "validationStatus",
+        "canonicalNodeRefs"
+      ],
+      "properties": {
+        "indicatorId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "construct": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signalInputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "calculationType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observationWindow": {
+          "type": "string",
+          "minLength": 1
+        },
+        "missingnessRule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "interpretationBoundary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validationStatus": {
+          "const": "UNVALIDATED_REVIEW_CANDIDATE"
+        },
+        "canonicalNodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "evidenceClass",
+        "authorityClass",
+        "provenance",
+        "freshness",
+        "directness",
+        "limitations",
+        "conflictHandling",
+        "expiry"
+      ],
+      "properties": {
+        "evidenceClass": {
+          "enum": [
+            "SELF_REPORT",
+            "DIRECT_OBSERVATION",
+            "DOCUMENT",
+            "MEASUREMENT",
+            "SYSTEM_EVENT",
+            "PROFESSIONAL_OBSERVATION",
+            "EXTERNAL_PUBLIC_DATA",
+            "DERIVED_EVIDENCE"
+          ]
+        },
+        "authorityClass": {
+          "type": "object"
+        },
+        "provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "freshness": {
+          "type": "string",
+          "minLength": 1
+        },
+        "directness": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conflictHandling": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expiry": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "required": [
+        "construct",
+        "unit",
+        "method",
+        "sampling",
+        "time",
+        "precision",
+        "missingness",
+        "source",
+        "version",
+        "measurementError",
+        "resolutionBoundary"
+      ],
+      "properties": {
+        "construct": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sampling": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "time": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "precision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "missingness": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "measurementError": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolutionBoundary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "sourceReliability": {
+      "type": "object",
+      "required": [
+        "sourceType",
+        "provenance",
+        "freshness",
+        "directness",
+        "independence",
+        "coverage",
+        "conflictState",
+        "unknowns"
+      ],
+      "properties": {
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "score"
+            ]
+          },
+          {
+            "required": [
+              "confidenceScore"
+            ]
+          }
+        ]
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "required": [
+        "leftRef",
+        "rightRef",
+        "scope",
+        "time",
+        "units",
+        "observedDifference",
+        "interpretedCause",
+        "limitations",
+        "unknowns"
+      ],
+      "properties": {
+        "interpretedCause": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "perspectives": {
+      "type": "object",
+      "required": [
+        "realityObjectRef",
+        "perspectives",
+        "sharedObservation",
+        "differences",
+        "conflict",
+        "unknown"
+      ],
+      "properties": {
+        "perspectives": {
+          "type": "array",
+          "minItems": 2
+        },
+        "unknown": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

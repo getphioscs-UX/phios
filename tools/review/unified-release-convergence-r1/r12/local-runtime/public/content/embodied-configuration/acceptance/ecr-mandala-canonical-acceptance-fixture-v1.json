@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-ECR-MANDALA-CANONICAL-ACCEPTANCE-FIXTURE-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W22",
+  "baselineCommit": "402735ec373fba021235187312e4f526ba919807",
+  "status": "CANONICAL_MACHINE_AND_VISUAL_ACCEPTANCE_FIXTURE",
+  "locale": "zh-Hans",
+  "anchorLongitude": 225.3515625,
+  "expectedSelection": {
+    "contextId": "CC08",
+    "grammarId": "G11",
+    "questionId": "Q11",
+    "primaryCapabilityId": "R7",
+    "supportingCapabilityIds": ["R5"],
+    "topDriverId": "D8",
+    "motionId": "M6",
+    "configurationId": "ECR-H41",
+    "activationId": "A1"
+  },
+  "expectedDriverPriority": [
+    {"driverId":"D8","rank":1,"baselineAffinity":0.245169495,"angularDistanceDegrees":0.3515625},
+    {"driverId":"D9","rank":2,"baselineAffinity":0.124752258,"angularDistanceDegrees":29.6484375},
+    {"driverId":"D7","rank":3,"baselineAffinity":0.123298833,"angularDistanceDegrees":30.3515625},
+    {"driverId":"D10","rank":4,"baselineAffinity":0.083005097,"angularDistanceDegrees":59.6484375},
+    {"driverId":"D6","rank":5,"baselineAffinity":0.082359143,"angularDistanceDegrees":60.3515625},
+    {"driverId":"D11","rank":6,"baselineAffinity":0.062192849,"angularDistanceDegrees":89.6484375},
+    {"driverId":"D5","rank":7,"baselineAffinity":0.061829503,"angularDistanceDegrees":90.3515625},
+    {"driverId":"D12","rank":8,"baselineAffinity":0.049725058,"angularDistanceDegrees":119.6484375},
+    {"driverId":"D4","rank":9,"baselineAffinity":0.049492517,"angularDistanceDegrees":120.3515625},
+    {"driverId":"D1","rank":10,"baselineAffinity":0.04142133,"angularDistanceDegrees":149.6484375},
+    {"driverId":"D3","rank":11,"baselineAffinity":0.041259843,"angularDistanceDegrees":150.3515625},
+    {"driverId":"D2","rank":12,"baselineAffinity":0.035494074,"angularDistanceDegrees":179.6484375}
+  ],
+  "expectedCatalogCounts": {
+    "contexts": 12,
+    "grammars": 16,
+    "questions": 16,
+    "capabilities": 9,
+    "drivers": 12,
+    "motions": 8,
+    "configurations": 64,
+    "activations": 8
+  },
+  "responsiveProfiles": [
+    {"name":"desktop","width":1440,"mandalaMode":"TWO_COLUMN"},
+    {"name":"laptop","width":1280,"mandalaMode":"TWO_COLUMN"},
+    {"name":"tablet-landscape","width":1024,"mandalaMode":"STACKED"},
+    {"name":"tablet","width":768,"mandalaMode":"STACKED"},
+    {"name":"mobile","width":430,"mandalaMode":"COMPACT_SUMMARY_WITH_EXPANDABLE_FULL_MANDALA"},
+    {"name":"small-mobile","width":390,"mandalaMode":"COMPACT_SUMMARY_WITH_EXPANDABLE_FULL_MANDALA"}
+  ],
+  "humanAcceptanceQuestions": [
+    "Why is the long-range context CC08?",
+    "Why do G11 and Q11 appear together?",
+    "Why does Q11 map to R7 as primary and R5 as supporting?",
+    "Why is D8 ranked first while all twelve drivers remain visible?",
+    "Why is the selected change motion M6?",
+    "What do the upper-trigram environment priority and lower-trigram embodied response mean in ECR-H41?",
+    "What does A1 mean without turning it into a good/bad score?",
+    "Can a keyboard-only user inspect the same governed Mandala nodes as a pointer user?",
+    "Can a mobile user read the selected coordinate without first opening the full Mandala?"
+  ],
+  "boundaries": {
+    "rendererRecalculatesEcr": false,
+    "visualLayerCreatesMeaning": false,
+    "astrologyPersonalityMeaningImported": false,
+    "ichingFortuneMeaningImported": false,
+    "driverAffinityEqualsCurrentRealityPriority": false,
+    "activationEqualsGoodBadScore": false
+  }
+}

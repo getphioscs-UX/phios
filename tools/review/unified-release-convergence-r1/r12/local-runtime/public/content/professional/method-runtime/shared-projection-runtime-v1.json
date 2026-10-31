@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-PROJECTION-RUNTIME-v1.0.0",
+  "stageCode": "MR-W4",
+  "runtimeCode": "SHARED_PROJECTION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "da57caf6fcd9926b21f51198ace2f77bf7f6db41"
+  },
+  "authority": {
+    "execution": "SHARED_PROJECTION_RUNTIME",
+    "input": "SHARED_CALCULATION_RUNTIME",
+    "schema": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "registryLed": true
+  },
+  "projectionTypes": {
+    "HUMAN_DESIGN": ["GATE", "CHANNEL", "CENTER", "AUTHORITY", "PROFILE"],
+    "ASTROLOGY": ["PLANET", "HOUSE", "ASPECT"],
+    "BAZI": ["STEM", "BRANCH", "PILLAR", "LUCK_CYCLE"],
+    "I_CHING": ["HEXAGRAM"],
+    "TAROT": ["CARD"]
+  },
+  "lineageRequired": [
+    "calculationId", "calculationRuntimeCode", "calculationRuntimeVersion",
+    "methodCode", "pluginCode", "algorithmCode", "algorithmVersion",
+    "inputDigest", "outputDigest"
+  ],
+  "calculationBoundary": {
+    "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+    "deterministic": true,
+    "providerUsed": false,
+    "aiUsed": false,
+    "projectionCreated": false,
+    "interpretationCreated": false,
+    "professionalConclusionCreated": false,
+    "mutationAllowed": false,
+    "failClosed": true
+  },
+  "confidenceBoundary": {
+    "meaning": "PROJECTION_MAPPING_CERTAINTY_ONLY",
+    "levels": ["exact", "derived", "conditional"],
+    "aiConfidenceAllowed": false,
+    "interpretationConfidenceAllowed": false,
+    "professionalConfidenceAllowed": false,
+    "realityConfidenceAllowed": false
+  },
+  "forbidden": {
+    "provider": true,
+    "prompt": true,
+    "interpretation": true,
+    "knowledge": true,
+    "realityConclusion": true,
+    "professionalConclusion": true
+  },
+  "compatibility": {
+    "methodRegistry": "content/professional/method-runtime/method-registry-v1.json",
+    "calculationRuntime": "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+    "calculationResultSchema": "content/professional/method-runtime/shared-calculation-result-v1.schema.json",
+    "canonicalProjectionSchema": "content/professional/method-runtime/canonical-projection-v1.schema.json",
+    "modifiesFrozenRuntime": false
+  },
+  "productionContract": {
+    "runtimeContractEstablished": true,
+    "productionMappersActivated": false,
+    "methodInterpretationActivated": false,
+    "nextGate": "MR-W5"
+  }
+}

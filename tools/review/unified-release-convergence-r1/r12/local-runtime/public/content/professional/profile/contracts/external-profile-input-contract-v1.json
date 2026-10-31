@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-EXTERNAL-PROFILE-INPUT-CONTRACT-v1.0.0",
+  "runtimeSchema": "PHI-OS-EXTERNAL-PROFILE-INPUT-v1",
+  "work": "PRF-W1",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "FOUNDATION_CONTRACT",
+  "providerFamilies": [
+    "MBTI_OFFICIAL",
+    "16P_NERIS",
+    "IPIP_BIG_FIVE",
+    "OTHER_BIG_FIVE",
+    "OTHER_EXTERNAL_PROFILE"
+  ],
+  "requiredFields": [
+    "externalProfileId",
+    "participantRef",
+    "providerFamily",
+    "providerName",
+    "resultLabel",
+    "resultDimensions",
+    "assessmentDate",
+    "resultPrecision",
+    "customerConfirmed",
+    "sourceClass",
+    "purpose",
+    "consent",
+    "persistencePreference",
+    "provenance"
+  ],
+  "rules": {
+    "sourceClass": "EXTERNAL_PROFILE_RESULT",
+    "customerSuppliesExistingResult": true,
+    "proprietaryItemBankReproduction": false,
+    "officialMbtiEquals16pNeris": false,
+    "manualImportEqualsProviderRescoring": false,
+    "automaticPersistence": false
+  }
+}

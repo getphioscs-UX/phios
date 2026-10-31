@@ -1,0 +1,76 @@
+{
+  "contractCode": "PHI-OS-ICR-W1-CANONICAL-INPUT-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ICR-W1",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "runtimeCode": "ICR",
+  "objectType": "CANONICAL_INPUT_ENVELOPE",
+  "schemaReference": "content/runtime/input-case-runtime/schemas/canonical-input-v1.schema.json",
+  "inputTypeRegistry": "content/runtime/input-case-runtime/registries/canonical-input-type-registry-v1.json",
+  "authorityBoundary": {
+    "icrOwns": [
+      "Canonical Input envelope identity",
+      "Operational intake normalization",
+      "Input verification decision",
+      "Method Input projection"
+    ],
+    "sharedDataAuthorityOwns": [
+      "Verified Birth Record",
+      "Verified Coordinate Record",
+      "Governed Timezone Record",
+      "Other shared governed Method facts"
+    ],
+    "rdgOwns": [
+      "Purpose",
+      "Consent",
+      "Sensitivity",
+      "Persistence",
+      "Retention",
+      "Deletion"
+    ]
+  },
+  "requiredFields": [
+    "schemaVersion",
+    "canonicalInputCode",
+    "canonicalInputVersion",
+    "inputType",
+    "inputStatus",
+    "subjectReference",
+    "sourceChannel",
+    "declaredAt",
+    "locale",
+    "payload",
+    "provenance",
+    "governanceBindings",
+    "lineage",
+    "canonicalInputDigest"
+  ],
+  "statusValues": ["DECLARED"],
+  "forbiddenPayloadFields": [
+    "customerDb",
+    "customerDatabase",
+    "customerRecord",
+    "accountRecord",
+    "password",
+    "accessToken",
+    "refreshToken",
+    "identityNumber",
+    "fullBankAccountNumber",
+    "rawDocument"
+  ],
+  "rules": {
+    "canonicalInputIsVerifiedFactAuthority": false,
+    "canonicalInputIsMethodInput": false,
+    "canonicalInputIsEvidence": false,
+    "canonicalInputIsRuntimeState": false,
+    "unknownMustRemainRepresentable": true,
+    "silentInferenceAllowed": false,
+    "providerMayCreateCanonicalInput": false,
+    "aiMayRepairInput": false,
+    "governanceBindingsMustResolveToRdg": true,
+    "digestMustBeDeterministic": true,
+    "correctionCreatesNewVersion": true,
+    "registryMayStoreUserData": false
+  }
+}

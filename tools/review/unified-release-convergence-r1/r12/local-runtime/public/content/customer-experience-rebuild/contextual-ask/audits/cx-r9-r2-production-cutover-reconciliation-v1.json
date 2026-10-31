@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-CX-R9-R2-PRODUCTION-CUTOVER-RECONCILIATION-v1.0.0",
+  "work": "CX-R9-R2-CUSTOMER-CUTOVER-REFINEMENT",
+  "baselineCommit": "429ec91ec8529b45d8c789aae48779344fe2e789",
+  "status": "CURRENT_MAIN_RECONCILED_TO_P1_ACCEPTED_CUTOVER",
+  "historicalEvidencePreserved": {
+    "contract": "content/customer-experience-rebuild/contextual-ask/contracts/contextual-ask-contract-v2.json",
+    "machineAcceptance": "content/customer-experience-rebuild/contextual-ask/acceptance/cx-r9-r2-machine-acceptance-v1.json",
+    "humanAcceptanceAtW15": "content/customer-experience-rebuild/contextual-ask/acceptance/cx-r9-r2-human-acceptance-v1.json",
+    "freeze": "content/customer-experience-rebuild/contextual-ask/freeze/contextual-ask-contract-freeze-v2.json",
+    "mutated": false
+  },
+  "currentFacts": {
+    "canonicalRoute": "/knowledge/ask/",
+    "currentOperationalPath": "/knowledge/ask/",
+    "routeAuthority": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json",
+    "routeState": "P1_CANONICAL_ROUTE_ACTIVE_BROWSER_ACCEPTED_LEGACY_PRESENTATION_DELETED",
+    "routeCutoverActor": "P1",
+    "routeCutoverPerformedByR9R2": false,
+    "productionBrowserAcceptance": "content/customer-experience-rebuild/acceptance/p1-production-browser-acceptance-v1.json",
+    "productionBrowserAccepted": true,
+    "legacyAskPresentationDeleted": true,
+    "priorityCutoverRegistry": "content/customer-experience-rebuild/migration/priority-route-cutover-registry-v3.json"
+  },
+  "customerRefinement": {
+    "internalLifecycleLanguageVisibleByDefault": false,
+    "rawSourceAuthorityCodeVisibleByDefault": false,
+    "rawEntitlementCodeVisibleByDefault": false,
+    "rawFreshnessCodeVisibleByDefault": false,
+    "explicitContextSelectionVisible": true,
+    "explicitKnowledgePageHandoff": true,
+    "serverAuthorizedProtectedContextOnly": true,
+    "clientSelfAuthorization": false,
+    "genericChatbotIdentity": false,
+    "silentAccountContextSweep": false,
+    "automaticPersistence": false
+  },
+  "compatibilityAliases": [
+    "/ask",
+    "/ask.html",
+    "/knowledge-search",
+    "/knowledge-search.html"
+  ],
+  "redirectStatus": 308,
+  "authorityBoundary": {
+    "backendAuthorityCreated": false,
+    "knowledgeAuthorityCreated": false,
+    "relationshipAuthorityCreated": false,
+    "profileAuthorityCreated": false,
+    "entitlementAuthorityCreated": false,
+    "professionalAuthorityCreated": false
+  },
+  "historicalEvidenceDigests": {
+    "contextualAskContractV2": "b040ca24a89f77a6d1c4a348bb9cbc1d9a0125439eae36c451a63964d57b50fa",
+    "machineAcceptanceV1": "eed33146b55b7c64a30877452c9f72b9ef041ee1e4a853aca12f250e9fb3b490",
+    "humanAcceptanceV1": "997e09c833b1c1b731d8277b637e788675d5a820b7d63756e16f2aa0b47e1e5f",
+    "contextualAskFreezeV2": "c15105630f6f4ba31fddf933a31a9b77f6215c625460518df4c06b649f281cd7"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W7-CALCULATION-INTAKE-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W7",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_CANONICAL_METHOD_INTAKE_BOUNDARY",
+  "requiredExecutionPath": [
+    "RRP_SELECTED_METHOD",
+    "MCD_METHOD_EXECUTION_REQUEST",
+    "MPA_ELIGIBILITY_AND_DISPATCH_GATE",
+    "CORE_METHOD_RUNTIME_INTERNAL_TO_MCD",
+    "MCD_CANONICAL_METHOD_PROJECTION",
+    "RRP_PROJECTION_INTAKE"
+  ],
+  "authorityReferences": {
+    "mcdExecutionRequestSchema": "content/professional/method-client-delivery/schemas/mcd-method-execution-request-v1.schema.json",
+    "mpaExecutionSuccessor": "content/professional/method-production-activation/successors/mpa-w30-mcd4-execution-successor-v1.json",
+    "mcdCanonicalProjectionContract": "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json"
+  },
+  "rules": {
+    "rrpMayCallCoreMethodRuntimeDirectly": false,
+    "rrpMayImportAstEngineInternalFunction": false,
+    "rrpMayImportBzrEngineInternalFunction": false,
+    "rrpMayBypassMpa": false,
+    "rrpMayBypassMcd": false,
+    "canonicalMethodProjectionIsOnlyAcceptedMethodResult": true,
+    "rawCoreResultAccepted": false,
+    "unselectedMethodMayBeRequested": false,
+    "unconsentedMethodMayBeRequested": false
+  }
+}

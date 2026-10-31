@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-VAP-W22-W24-RETRIEVAL-PROJECTION-SUCCESSOR-v1.0.0",
+  "work": "VAP-W22-W24-CURRENT-RETRIEVAL-PROJECTION-RECONCILIATION",
+  "status": "GOVERNED_PUBLIC_RETRIEVAL_SUCCESSOR_ACTIVE_HISTORICAL_PRESENTATION_CONTEXT_PRESERVED",
+  "historicalBaselineCommit": "807efc359a0d1477bc697044f55970fc5e6e8500",
+  "currentBaselineCommit": "4e1ae1fe55725f7968acee6109dfa840069eb805",
+  "nodeProjection": {
+    "path": "content/knowledge/public/retrieval/nodes.json",
+    "historical": {
+      "digest": "7bbee1b2fc6ee7ee78a1c50f94e0710f4c35b103a6f3cf0b299dd59c76897198",
+      "recordCount": 2,
+      "meaning": "VAP-W22 presentation-time published-node projection snapshot"
+    },
+    "current": {
+      "digest": "931732eae5be9382b1c8f6ff9337b33ccd5d16f2375012847792924e87b12dc7",
+      "recordCount": 90,
+      "meaning": "Current governed multilingual published retrieval projection after later publications"
+    },
+    "preservedPresentationRecord": {
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "authorityRecordCode": "PKA-KN-PREFACE-001-ZH-HANS",
+      "authorityDigest": "fb1e5401f259caecbdac1d7088a5982876d48c1879b27bdb00a0063bf3824d0a",
+      "publicationCode": "PUBLICATION-APPROVAL-REVIEW-CANDIDATE-KN-PREFACE-001-ZH-HANS-V1-V1-V1-V1",
+      "bookCode": "BOOK-1",
+      "partCode": "P0",
+      "href": "/articles/ai-formation-from-civilizational-capability"
+    }
+  },
+  "relationshipProjection": {
+    "path": "content/knowledge/public/retrieval/relationships.json",
+    "historical": {
+      "digest": "097daefc577fc76f9504680f6f73f7c9a25bca2fccdbf70a3985038e6aacdf78",
+      "recordCount": 4,
+      "meaning": "VAP-W22 presentation-time relationship projection snapshot"
+    },
+    "current": {
+      "digest": "bb03dff9bd281e4899a297e4c2a1bf88867ee9d755190d743a54d83440501a01",
+      "recordCount": 184,
+      "meaning": "Current governed relationship projection after later publications"
+    },
+    "preservedPresentationRelationships": [
+      {
+        "locale": "zh-Hans",
+        "relationshipCode": "REL-KN-PREFACE-001-ZH-HANS-nextNodeCodes-KN-PREFACE-002",
+        "sourceNodeCode": "KN-PREFACE-001",
+        "targetNodeCode": "KN-PREFACE-002",
+        "targetPublished": false,
+        "type": "nextNodeCodes"
+      },
+      {
+        "locale": "zh-Hans",
+        "relationshipCode": "REL-KN-PREFACE-001-ZH-HANS-relatedNodeCodes-KN-PREFACE-002",
+        "sourceNodeCode": "KN-PREFACE-001",
+        "targetNodeCode": "KN-PREFACE-002",
+        "targetPublished": false,
+        "type": "relatedNodeCodes"
+      }
+    ]
+  },
+  "rules": {
+    "historicalPresentationDigestMayBeRewritten": false,
+    "historicalProjectionSnapshotMayBeRewritten": false,
+    "currentRetrievalProjectionMayAdvanceThroughGovernedPublication": true,
+    "relationshipTargetPublishedMayAdvanceOnlyWhenTargetIsCurrentPublishedNode": true,
+    "presentationNodeIdentityMustRemainResolvable": true,
+    "presentationNodeAuthorityMustRemainIdentical": true,
+    "unknownOrUnreconciledNodeMutationFailsClosed": true,
+    "cprMeaningAuthorityRecreated": false,
+    "pdsVisualAuthorityRecreated": false
+  }
+}

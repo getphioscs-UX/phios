@@ -1,0 +1,8 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#","$id":"https://getphios.com/schemas/guided-answer-context-v1.schema.json","title":"PHI OS GuidedAnswerContext","type":"object","additionalProperties":false,
+  "required":["schemaVersion","objectType","contextId","authorityClass","originalQuestion","locale","clarifyingAnswers","temporaryObservations","candidateMechanisms","confirmedRelevantMechanisms","excludedMechanisms","unknownMechanisms","optionalMethodProjectionRefs","escalationSignals","governance"],
+  "properties":{
+    "schemaVersion":{"const":"PHI-OS-GUIDED-ANSWER-CONTEXT-v1.0.0"},"objectType":{"const":"GuidedAnswerContext"},"contextId":{"type":"string","minLength":1},"authorityClass":{"const":"TEMPORARY_NON_CANONICAL_GUIDED_CONTEXT"},"originalQuestion":{"type":"string","minLength":1},"locale":{"enum":["zh-Hans","en"]},
+    "clarifyingAnswers":{"type":"array","maxItems":3},"temporaryObservations":{"type":"array","maxItems":6},"candidateMechanisms":{"type":"array","maxItems":4},"confirmedRelevantMechanisms":{"type":"array"},"excludedMechanisms":{"type":"array"},"unknownMechanisms":{"type":"array"},"optionalMethodProjectionRefs":{"type":"array"},"escalationSignals":{"type":"object"},"governance":{"type":"object"}
+  }
+}

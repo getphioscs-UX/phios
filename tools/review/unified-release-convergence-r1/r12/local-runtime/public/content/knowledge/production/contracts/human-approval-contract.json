@@ -1,0 +1,45 @@
+{
+  "allowedOperations": [
+    "read_candidate",
+    "read_accepted_review",
+    "record_approval_decision",
+    "record_conditions",
+    "validate",
+    "digest",
+    "register_approval_projection",
+    "report"
+  ],
+  "approvalAuthority": "TL Human Approval Authority",
+  "authority": "Approval Runtime",
+  "boundaries": {
+    "approvalDoesNotImplyPublication": true,
+    "candidateContentRemainsImmutable": true,
+    "canonicalMeaningRemainsTLAuthority": true,
+    "localeApprovalIsIndependent": true,
+    "publicationRequiresSeparateRuntime": true,
+    "reviewRecordRemainsImmutable": true
+  },
+  "contractCode": "PJA-APPROVAL-W1",
+  "contractVersion": "1.0.0",
+  "decisions": [
+    "approve",
+    "decline",
+    "defer"
+  ],
+  "eligibleReviewDecisions": [
+    "accept"
+  ],
+  "inputAuthority": "Human Review Runtime",
+  "outputAuthority": "approval_only",
+  "prohibitedOperations": [
+    "rewrite_candidate",
+    "modify_review",
+    "modify_canonical_meaning",
+    "modify_knowledge_registry",
+    "publish",
+    "promote_locale_state",
+    "inherit_approval_across_locale",
+    "call_provider"
+  ],
+  "status": "active"
+}

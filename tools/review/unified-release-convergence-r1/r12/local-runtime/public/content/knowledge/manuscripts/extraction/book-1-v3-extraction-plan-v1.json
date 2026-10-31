@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-I-V3-EXTRACTION-PLAN-v1.0.0",
+  "status": "READY_FOR_BINARY_VERIFICATION",
+  "bookCode": "BOOK-1",
+  "sourceAdmission": "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v3.json",
+  "source": {
+    "bucket": "phios-private-manuscripts",
+    "objectKey": "books/book-1/source/PHI-OS-Book-I-v3.pdf",
+    "fileName": "PHI-OS-Book-I-v3.pdf",
+    "authority": "OWNER_CONFIRMED_FINAL_MANUSCRIPT"
+  },
+  "predecessor": {
+    "completedRecord": "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v2.json",
+    "extractionInventory": "content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json",
+    "role": "HISTORICAL_BASELINE_ONLY",
+    "automaticReuse": false
+  },
+  "requiredSequence": [
+    {
+      "step": "V3_BINARY_VERIFICATION",
+      "requires": [
+        "exact byteSize",
+        "exact sha256",
+        "exact pageCount"
+      ],
+      "writes": [
+        "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v3.json"
+      ],
+      "canonicalMutation": false
+    },
+    {
+      "step": "V3_LOSSLESS_SECTION_EXTRACTION",
+      "requires": [
+        "verified v3 binary"
+      ],
+      "outputs": [
+        "content/knowledge/manuscripts/extraction/book-1-v3-full-section-inventory-v1.json",
+        "content/knowledge/manuscripts/extraction/book-1-v3-section-integrity-v1.json"
+      ],
+      "semanticRewrite": false,
+      "canonicalMutation": false
+    },
+    {
+      "step": "V3_MANUSCRIPT_HUMAN_REVIEW",
+      "requires": [
+        "complete section inventory",
+        "part boundaries",
+        "method additions visible",
+        "figure headings reconciled"
+      ],
+      "automaticAcceptance": false,
+      "canonicalMutation": false
+    },
+    {
+      "step": "V3_TO_CANONICAL_RECONCILIATION",
+      "requires": [
+        "human-reviewed v3 section inventory"
+      ],
+      "actions": [
+        "match existing canonical nodes",
+        "identify genuinely new knowledge requiring new nodes",
+        "identify obsolete manuscript-to-node bindings",
+        "preserve canonical identities unless owner-approved change is required"
+      ],
+      "automaticNodeCreation": false,
+      "ownerDecisionRequired": true
+    },
+    {
+      "step": "V3_PRODUCTION_CUTOVER",
+      "requires": [
+        "binary verified",
+        "manuscript human accepted",
+        "canonical reconciliation accepted"
+      ],
+      "actions": [
+        "promote v3 completed manuscript record",
+        "update completed manuscript registry successor",
+        "update Book I publication manifest metadata",
+        "retire v2 from current status while preserving historical evidence"
+      ]
+    }
+  ],
+  "publicAssets": {
+    "preview": {
+      "prefix": "books/previews/book-1/",
+      "namingPattern": "page-{NNN}.webp",
+      "state": "OWNER_CONFIRMED_FINAL_UPLOAD"
+    },
+    "figures": {
+      "prefix": "images/figures/books/book-1/",
+      "finalUploadedSet": [
+        "4A.webp",
+        "4B.webp",
+        "4C.webp",
+        "4D.webp",
+        "4E.webp",
+        "4F.webp"
+      ],
+      "semanticCanonicalizationFor4E4F": "DEFERRED_TO_V3_MANUSCRIPT_EXTRACTION"
+    }
+  },
+  "safety": {
+    "v2ExtractionMayBeUsedAsFinal": false,
+    "canonicalNodesMayBeAutoUpdated": false,
+    "unknownV3MetadataMayBeCopiedFromV2": false,
+    "publicAssetUploadDoesNotProvePrivatePdfDigest": true
+  }
+}

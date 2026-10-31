@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "search-aliases.schema.json",
+  "title": "PKR Search Aliases",
+  "type": "object",
+  "required": [
+    "version",
+    "searchAliases"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "searchAliases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "aliasCode",
+          "canonicalNodeCode",
+          "locale",
+          "query"
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

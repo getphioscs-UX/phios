@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-AST-R2-W18-FINAL-CUSTOMER-HUMAN-ACCEPTANCE-CONTRACT-v1.0.0",
+  "workCode": "R2-W18",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "requiredCaseCount": 24,
+  "selectionPolicy": "12 STRUCTURAL/INTENT SCENARIOS × EN/ZH-HANS PAIRS",
+  "requiredCriteria": [
+    "WHOLE_CHART_SYNTHESIS_USEFUL",
+    "READER_LANGUAGE_CLEAR",
+    "INTENT_PRIORITY_RELEVANT_WITHOUT_MEANING_REWRITE",
+    "ONE_FULL_NARRATIVE_OWNER_NO_RESTATEMENT",
+    "SUPPORT_TENSION_DISTINCT_FROM_CORE_THEME_PROSE",
+    "TIMING_BOUNDARY_NOT_EVENT_PREDICTION",
+    "DEEP_DIVE_TECHNICAL_SEPARATION_CLEAR",
+    "CUSTOMER_LAYOUT_READABLE"
+  ],
+  "bindingFields": [
+    "caseId",
+    "locale",
+    "houseSystem",
+    "intentId",
+    "canonicalProjectionDigest",
+    "customerReadingDigest",
+    "workspaceDigest",
+    "reviewPayloadDigest",
+    "decision"
+  ],
+  "acceptanceRule": "All 24 exact digest-bound final customer report cases must be ACCEPT by an authorized human reviewer.",
+  "invalidation": [
+    "customerReadingDigest changes",
+    "workspaceDigest changes",
+    "reviewPayloadDigest changes",
+    "locale changes",
+    "intent routing changes",
+    "house system changes"
+  ],
+  "boundaries": {
+    "r2Candidate16MaySubstitute": false,
+    "r4aSemantic21MaySubstitute": false,
+    "oldSmr48MaySubstitute": false,
+    "machineCampaignMaySubstitute": false,
+    "modelMayFillHumanDecision": false
+  }
+}

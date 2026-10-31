@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-KNOWLEDGE-GAP-SIGNAL-v1",
+  "title": "KAP Knowledge Gap Signal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "coverageGap"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-W41-KNOWLEDGE-GAP-SIGNAL-v1.0.0"
+    },
+    "status": {
+      "enum": [
+        "NO_GAP_SIGNAL",
+        "OBSERVE_ONLY",
+        "KNOWLEDGE_GAP_REGISTRY_ELIGIBLE"
+      ]
+    },
+    "coverageGap": {
+      "type": "string"
+    },
+    "frequency": {
+      "type": "number",
+      "minimum": 0
+    },
+    "clusterCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "matchedNodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

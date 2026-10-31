@@ -1,0 +1,135 @@
+{
+  "authorityCode": "PHI-OS-DAR-W0-AUTHORITY-BASELINE-v1",
+  "authorityVersion": "1.0.0",
+  "runtimeCode": "DAR",
+  "work": "DAR-W0",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "FROZEN_FOUNDATION_AUTHORITY_NO_LEGAL_JUDGMENT_NO_AI_CLAUSE_AUTHORITY",
+  "canonicalDefinition": {
+    "DAR": "APPROVED_STRUCTURED_INPUTS + APPROVED_CLAUSE_AUTHORITY + DETERMINISTIC_ASSEMBLY + DOCUMENT_LIFECYCLE",
+    "notAuthorities": [
+      "LEGAL_JUDGMENT_RUNTIME",
+      "AI_CLAUSE_GENERATOR",
+      "WILL_EXECUTION_AUTHORITY",
+      "REPORT_ASSEMBLY_AUTHORITY",
+      "PRESENTATION_AUTHORITY"
+    ]
+  },
+  "may": [
+    "validate document input structure",
+    "evaluate declared deterministic integrity rules",
+    "select only already-approved clause components when later admitted",
+    "assemble governed document state",
+    "manage document lifecycle state",
+    "handoff assembled state to downstream renderers after later DAR stages"
+  ],
+  "mayNot": [
+    "invent legal clause",
+    "change legal effect",
+    "guess beneficiary",
+    "guess executor",
+    "silently rebalance shares",
+    "infer jurisdiction",
+    "silently replace missing data",
+    "make professional or legal judgment",
+    "claim exported document is legally executed",
+    "render by acquiring clause authority"
+  ],
+  "reconciledAuthorities": [
+    {
+      "code": "RR",
+      "path": "content/runtime/customer-report-runtime/audits/rr-w0-report-authority-audit-v2.json",
+      "existingAuthority": "REPORT_ASSEMBLY",
+      "darBoundary": "DAR assembles governed documents, not customer reports; RR remains canonical report assembly authority."
+    },
+    {
+      "code": "PR",
+      "path": "content/professional/professional-runtime/extensions/production/contracts/pr-production-authority-boundary-v1.json",
+      "existingAuthority": "HUMAN_ATTRIBUTABLE_PROFESSIONAL_JUDGMENT",
+      "darBoundary": "DAR cannot convert data, clauses, or exports into professional judgment."
+    },
+    {
+      "code": "ACCOUNT",
+      "path": "content/registry/m4c-account-payment-membership.json",
+      "existingAuthority": "ACCOUNT_CAPABILITY_AND_ENTITLEMENT_SURFACE",
+      "darBoundary": "DAR may reference authenticated ownership later but does not create account or entitlement authority."
+    },
+    {
+      "code": "COMMERCE",
+      "path": "content/registry/book-commerce-schema.json",
+      "existingAuthority": "COMMERCE_PURCHASE_AND_DOWNLOAD_TOKEN_DATA",
+      "darBoundary": "DAR private document access must not create purchase or entitlement authority."
+    },
+    {
+      "code": "RDG_PRIVACY",
+      "path": "content/governance/reality-data-governance/audits/rdg-privacy-reconciliation-v1.json",
+      "existingAuthority": "DATA_PRIVACY_GOVERNANCE",
+      "darBoundary": "DAR classifies and binds will data to RDG; it does not create a second privacy authority."
+    },
+    {
+      "code": "RDG_CONSENT",
+      "path": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json",
+      "existingAuthority": "CANONICAL_CONSENT_CLASSES",
+      "darBoundary": "DAR explicit save consent must consume RDG consent semantics."
+    },
+    {
+      "code": "RDG_RETENTION",
+      "path": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+      "existingAuthority": "PURPOSE_BOUND_RETENTION",
+      "darBoundary": "DAR cannot silently create indefinite retention."
+    },
+    {
+      "code": "DOCUMENT_PDF_UTILITY",
+      "path": "functions/professional/reports/financial-report-pdf-contract.js",
+      "existingAuthority": "FINANCIAL_REPORT_PDF_PROJECTION_ONLY",
+      "darBoundary": "Existing PDF utility is not legal clause authority and is not a canonical DAR renderer."
+    },
+    {
+      "code": "R2_PUBLIC_DELIVERY",
+      "path": "content/web-production/production/wpr-r2-public-delivery-v1.json",
+      "existingAuthority": "PUBLIC_ASSET_DELIVERY",
+      "darBoundary": "Public R2 delivery is explicitly not authority for private will storage or downloads."
+    },
+    {
+      "code": "CPR",
+      "path": "content/professional/canonical-presentation-runtime/audits/cpr-authority-boundary-v1.json",
+      "existingAuthority": "PRESENTATION_COMPOSITION",
+      "darBoundary": "CPR and future DAR renderers may present/format only; neither may author legal clauses."
+    },
+    {
+      "code": "WPR",
+      "path": "content/web-production/contracts/wpr-authority-boundary-v1.json",
+      "existingAuthority": "WEB_PRODUCTION_BOUNDARY",
+      "darBoundary": "WPR remains web production authority and cannot grant legal validity."
+    },
+    {
+      "code": "WPR_PRIVACY",
+      "path": "content/web-production/contracts/wpr-privacy-security-production-v1.json",
+      "existingAuthority": "FAIL_CLOSED_PRIVATE_RESPONSE_BOUNDARY",
+      "darBoundary": "DAR private responses must consume this boundary without changing consent or retention."
+    }
+  ],
+  "rendererBoundary": {
+    "rendererMayConsume": "ASSEMBLY_IR_ONLY_AFTER_DAR_W15",
+    "rendererMayNot": [
+      "select legal effect",
+      "invent clause text",
+      "change approved clause text",
+      "repair missing data"
+    ]
+  },
+  "aiBoundary": {
+    "allowed": "assist with non-authoritative explanation or UX only when clearly separated from clause authority",
+    "forbidden": [
+      "draft canonical clause text",
+      "alter approved clause text",
+      "resolve ambiguous legal effect",
+      "infer missing legal facts"
+    ]
+  },
+  "exitGate": {
+    "duplicateAuthorityCount": 0,
+    "rendererLegalAuthorityCount": 0,
+    "aiClauseAuthorityCount": 0
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-RDG-W10-PERSISTENCE-ELIGIBILITY-GATE-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W10",
+  "status": "active",
+  "inputs": [
+    "Data",
+    "Purpose",
+    "Sensitivity",
+    "Consent",
+    "RuntimeAuthority",
+    "RetentionRule"
+  ],
+  "outputs": [
+    "ALLOW_SESSION",
+    "ALLOW_RECOVERY",
+    "ALLOW_RUNTIME",
+    "ALLOW_SERVICE_SCOPE",
+    "ALLOW_LONG_TERM",
+    "ALLOW_ANONYMIZED_AGGREGATE",
+    "DENY",
+    "REQUIRE_CONSENT",
+    "UNRESOLVED"
+  ],
+  "rules": {
+    "providerMayDecide": false,
+    "missingRequiredGovernanceFailsClosed": true,
+    "longTermRequiresExplicitEligibility": true,
+    "decisionMustBeTraceable": true
+  }
+}

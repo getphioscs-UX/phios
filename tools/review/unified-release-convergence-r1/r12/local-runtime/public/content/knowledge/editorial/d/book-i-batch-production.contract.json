@@ -1,0 +1,40 @@
+{
+  "contract": "PHI-OS-PJA-W2F-D-BOOK-I-BATCH-PRODUCTION-v1.0.0",
+  "stage": "PJA-W2F-D",
+  "subStages": ["D0_contract", "D1_selection_planning", "D2_package_generation", "D3_validation_import", "D4_acceptance_freeze"],
+  "systemStatus": "frozen",
+  "freezeLabel": "PJA-W2F-D-v1.0.0-Frozen",
+  "productionDefinition": "governed_batch_production_package_generation",
+  "selectionAuthority": "PJA-W2F-C3",
+  "selectionRules": [
+    "productionReady is true",
+    "status is production_ready",
+    "exportability is allowed",
+    "blocking is empty",
+    "humanProductionApproval gate passed",
+    "C2 frozen thesis/boundary gate passed",
+    "C2 freeze hash matched"
+  ],
+  "grouping": {
+    "keys": ["Part", "canonical registry sequence", "maximum batch size", "production package compatibility"],
+    "maximumBatchSize": 12,
+    "canonicalOrderRequired": true,
+    "forbiddenOrderingInputs": ["title similarity", "model judgment", "marketing priority", "Blueprint priority"]
+  },
+  "zeroEligibleNodes": {
+    "status": "no_eligible_nodes",
+    "success": true,
+    "applyWrites": 0,
+    "error": false
+  },
+  "packageContract": {
+    "allowed": ["Production Manifest", "Governed Production Input Package", "Node Production Brief reference", "Source Claim Boundary bindings", "Expected output paths", "Validation requirements"],
+    "forbidden": ["Canonical Thesis generation", "Boundary modification", "Source research", "Source creation", "Supporting Question creation", "Production approval", "C3 state mutation", "Article body generation", "Production Export", "Publication package", "Publication", "Public website modification"]
+  },
+  "applyContract": {
+    "explicitApplyRequired": true,
+    "atomic": true,
+    "idempotent": true,
+    "conflictsFailBeforeWrites": true
+  }
+}

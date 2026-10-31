@@ -1,0 +1,141 @@
+/* PHI OS Design System — CPR ARTICLE_PAGE production presentation v1 */
+
+.phi-article-page,
+.phi-article-page * {
+  min-width: var(--phi-space-0);
+}
+
+.phi-article-page {
+  color: var(--phi-text-primary);
+  background: var(--phi-surface-canvas);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-base);
+  line-height: var(--phi-leading-body);
+}
+
+.phi-article-context,
+.phi-article-header,
+.phi-article-body,
+.phi-article-knowledge-context,
+.phi-article-continuity {
+  width: calc(100% - (var(--phi-space-4) * 2));
+  max-width: var(--phi-container-reading);
+  margin-inline: auto;
+}
+
+.phi-article-header,
+.phi-article-continuity {
+  margin-block-start: var(--phi-space-8);
+}
+
+.phi-article-layout {
+  display: grid;
+  grid-template-columns: minmax(var(--phi-space-0), 1fr);
+  gap: var(--phi-space-8);
+  width: calc(100% - (var(--phi-space-4) * 2));
+  max-width: var(--phi-container-wide);
+  margin-block-start: var(--phi-space-8);
+  margin-inline: auto;
+}
+
+.phi-article-layout > .phi-article-body,
+.phi-article-layout > .phi-article-knowledge-context {
+  width: 100%;
+}
+
+.phi-article-title,
+.phi-article-section-title {
+  margin-block: var(--phi-space-0);
+  font-family: var(--phi-font-display);
+  letter-spacing: var(--phi-tracking-tight);
+}
+
+.phi-article-title {
+  font-size: var(--phi-text-3xl);
+  line-height: var(--phi-leading-tight);
+}
+
+.phi-article-lead {
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-lg);
+  line-height: var(--phi-leading-relaxed);
+}
+
+.phi-article-meta,
+.phi-article-caption {
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-sm);
+  line-height: var(--phi-leading-body);
+}
+
+.phi-article-body {
+  display: grid;
+  gap: var(--phi-space-8);
+}
+
+.phi-article-callout,
+.phi-article-knowledge-context {
+  padding: var(--phi-space-6);
+  border: var(--phi-focus-width) solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-raised);
+  box-shadow: var(--phi-shadow-sm);
+}
+
+.phi-article-figure {
+  width: calc(100% - (var(--phi-space-4) * 2));
+  max-width: var(--phi-container-wide);
+  margin-inline: auto;
+  overflow: clip;
+}
+
+.phi-article-figure picture,
+.phi-article-figure img {
+  display: block;
+  max-width: 100%;
+}
+
+.phi-article-figure img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--phi-radius-md);
+}
+
+.phi-article-caption {
+  display: block;
+  margin-block-start: var(--phi-space-3);
+  overflow-wrap: anywhere;
+}
+
+.phi-article-continuity {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--phi-grid-min-card)), 1fr)
+  );
+  gap: var(--phi-space-6);
+}
+
+@media (min-width: 90rem) {
+  .phi-article-layout {
+    grid-template-columns:
+      minmax(var(--phi-space-0), var(--phi-container-reading))
+      minmax(var(--phi-grid-min-card), 1fr);
+    align-items: start;
+  }
+}
+
+.phi-article-page :focus-visible {
+  outline: var(--phi-focus-width) solid var(--phi-focus-ring);
+  outline-offset: var(--phi-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phi-article-page *,
+  .phi-article-page *::before,
+  .phi-article-page *::after {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}

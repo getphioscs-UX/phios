@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-AST-HOUSE-RUNTIME-v1.0.0",
+  "stageCode": "AST-W3",
+  "runtimeCode": "AST_HOUSE_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "validation_only_policy_explicit_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7446f97a8ba13833320d8d7659d0380562a31b3b"
+  },
+  "requiredInputs": [
+    "AST_ASTRONOMY_CONTEXT",
+    "AST_PLANET_RESULT"
+  ],
+  "houseReadiness": {
+    "topocentricObserverRequired": true,
+    "exactBirthTimeRequired": true,
+    "coordinateRequired": true,
+    "fabricatedBirthTimeAllowed": false
+  },
+  "requiredPolicies": {
+    "houseSystemCode": "explicit_versioned_code",
+    "zodiacPolicyCode": "explicit_versioned_code",
+    "anglePolicyCode": "explicit_versioned_code",
+    "precisionPolicyCode": "explicit_versioned_code",
+    "implicitDefaultsAllowed": false
+  },
+  "scope": {
+    "createsAscendant": true,
+    "createsMidheaven": true,
+    "createsDescendant": true,
+    "createsImumCoeli": true,
+    "createsHouseCusps": true,
+    "createsPlanetHousePlacements": true,
+    "createsAspects": false,
+    "createsProjection": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "houseSystemFrozen": false,
+    "zodiacPolicyFrozen": false,
+    "anglePolicyFrozen": false,
+    "precisionPolicyFrozen": false,
+    "toleranceDefined": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "AST-W4"
+}

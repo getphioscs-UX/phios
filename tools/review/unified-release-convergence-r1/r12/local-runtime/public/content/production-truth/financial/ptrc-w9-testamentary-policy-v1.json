@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-PTRC-W9-TESTAMENTARY-POLICY-v1.0.0",
+  "status": "ACTIVE_REVIEWABLE_DRAFT_ONLY",
+  "jurisdictionMode": "REQUIRED_CALLER_PROVIDED_NO_INFERENCE",
+  "requiredSections": ["identity", "family", "executors", "guardians", "beneficiaries", "assets", "liabilities", "trusts", "gifts", "exclusions", "digital_assets", "funeral_wishes", "advisors", "documents", "review_consent"],
+  "dataLayers": ["rawUserInput", "normalizedFacts", "derivedCalculations", "warnings", "generatedNarrative"],
+  "calculationAuthority": "PTRC-W8-ESTATE_SUMMARY",
+  "reportAssembly": "DETERMINISTIC_OUTLINE_BEFORE_RENDER",
+  "exports": ["HTML_PRINT", "PDF_PROJECTION"],
+  "security": {
+    "encryptionAtRestRequired": true,
+    "leastPrivilegeRequired": true,
+    "auditEventsRequired": true,
+    "retentionUntilRequired": true,
+    "redactionRequired": true,
+    "downloadExpiryRequired": true,
+    "maxDownloadTtlMinutes": 60
+  },
+  "boundaries": {
+    "executedWillCreated": false,
+    "automaticLegalExecution": false,
+    "legalValidityDetermined": false,
+    "missingFieldsInvented": false,
+    "modelMayOverrideW8": false,
+    "rawDocumentsEmbedded": false
+  }
+}

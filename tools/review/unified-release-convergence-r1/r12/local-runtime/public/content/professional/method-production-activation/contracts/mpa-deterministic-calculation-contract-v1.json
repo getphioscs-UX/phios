@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W10-DETERMINISTIC-CALCULATION-CONTRACT-v1.0.0",
+  "work": "MPA-W10",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "ACTIVE_VALIDATION_EXECUTION_ONLY_PRODUCTION_GATE_NOT_ESTABLISHED",
+  "requiredRuntime": "SHARED_CALCULATION_RUNTIME",
+  "determinismFormula": "same canonical input + same policy version + same method version -> same deterministic output",
+  "requiredLineage": [
+    "methodCode",
+    "methodVersion",
+    "policyVersion",
+    "algorithmCode",
+    "algorithmVersion",
+    "inputDigest",
+    "outputDigest",
+    "referenceVersions",
+    "resolvedContextDigest"
+  ],
+  "rules": {
+    "sharedCalculationRuntimeMandatory": true,
+    "directMethodArithmeticAuthorityForbidden": true,
+    "aiCalculationForbidden": true,
+    "promptCalculationForbidden": true,
+    "llmArithmeticAuthorityForbidden": true,
+    "canonicalResolvedContextRequired": true,
+    "validConsentAndPurposeRequired": true,
+    "customerConfirmationRequired": true,
+    "productionExecutionAllowed": false,
+    "productionMustWaitForMpaW27": true,
+    "calculationDoesNotCreateProjection": true,
+    "calculationDoesNotCreateInterpretation": true,
+    "calculationDoesNotCreateRealityFact": true
+  },
+  "executionModes": [
+    "validation"
+  ],
+  "failureCodes": [
+    "MPA_CONSENT_INVALID",
+    "MPA_PURPOSE_INVALID",
+    "MPA_CUSTOMER_CONFIRMATION_REQUIRED",
+    "MPA_RESOLVED_CONTEXT_REQUIRED",
+    "MPA_PRODUCTION_EXECUTION_GATE_NOT_ESTABLISHED",
+    "MPA_SHARED_CALCULATION_RUNTIME_REQUIRED",
+    "MPA_NON_DETERMINISTIC_RESULT"
+  ],
+  "nextGate": "MPA-W11_CALCULATION_DATA_AUTHORITY"
+}

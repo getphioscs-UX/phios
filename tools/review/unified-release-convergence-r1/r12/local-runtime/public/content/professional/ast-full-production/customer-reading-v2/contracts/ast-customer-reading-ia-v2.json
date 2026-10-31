@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-AST-CUSTOMER-READING-IA-CONTRACT-v2.0.0",
+  "workCode": "R2-W9",
+  "methodId": "AST",
+  "sourceMainCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "status": "FROZEN_ENGINEERING_CONTRACT",
+  "outputSchemaVersion": "PHI-OS-AST-CUSTOMER-READING-IA-v2.0.0",
+  "sectionOrder": [
+    "OVERVIEW",
+    "CORE_THEMES",
+    "SUPPORT_TENSION",
+    "INTENT",
+    "TIMING",
+    "DEEP_DIVE",
+    "TECHNICAL"
+  ],
+  "sections": [
+    {
+      "sectionId": "OVERVIEW",
+      "purpose": "Orient the reader to the whole chart with one concise synthesis; no object directory.",
+      "disclosureLevel": "READING",
+      "required": true
+    },
+    {
+      "sectionId": "CORE_THEMES",
+      "purpose": "Present three to five ranked whole-chart themes that combine distinct structural evidence.",
+      "disclosureLevel": "READING",
+      "required": true
+    },
+    {
+      "sectionId": "SUPPORT_TENSION",
+      "purpose": "Show concise supportive and friction-bearing links without replaying core-theme explanations.",
+      "disclosureLevel": "READING",
+      "required": false
+    },
+    {
+      "sectionId": "INTENT",
+      "purpose": "Explain which existing themes were prioritized for the selected customer intent; priority changes, meaning does not.",
+      "disclosureLevel": "READING",
+      "required": false
+    },
+    {
+      "sectionId": "TIMING",
+      "purpose": "Reserve a separate location for governed temporal claims only when a separately authorized AST temporal input exists.",
+      "disclosureLevel": "READING",
+      "required": false
+    },
+    {
+      "sectionId": "DEEP_DIVE",
+      "purpose": "Expose method-native chart objects, geometry and technical labels as drill-down anchors without duplicating full explanations.",
+      "disclosureLevel": "DETAIL",
+      "required": true
+    },
+    {
+      "sectionId": "TECHNICAL",
+      "purpose": "Expose source lineage, rule versions, digests, school choices and admission status in a collapsed technical layer.",
+      "disclosureLevel": "TECHNICAL",
+      "required": true
+    }
+  ],
+  "rules": {
+    "oneSectionOnePurpose": true,
+    "overviewBeforeObjectDirectory": true,
+    "timingRequiresSeparateTemporalAuthority": true,
+    "deepDiveMayReplayFullExplanation": false,
+    "technicalMayLeadReading": false,
+    "rendererMayCreateMeaning": false,
+    "customerIntentChangesPriorityOnly": true,
+    "emptyOptionalSectionRendered": false
+  }
+}

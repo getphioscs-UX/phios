@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W19-FINDING-PROVENANCE-CONTRACT-v1.0.0",
+  "phase": "FAR",
+  "work": "FAR-W19",
+  "status": "ACTIVE",
+  "authorityOwner": "FAR",
+  "chain": [
+    "FAR_FINDING",
+    "FCR_RESULT",
+    "FCR_TRACE",
+    "FDR_FACT"
+  ],
+  "requiredFields": [
+    "fcrResultDigest",
+    "calculationReferences",
+    "fcrTraceReferences",
+    "fdrSnapshotId",
+    "fdrDigest",
+    "comparisonResultDigests",
+    "factReferences",
+    "assumptionReferences"
+  ],
+  "rules": {
+    "traceMaySkipFcr": false,
+    "factMayBeRecalculatedByFar": false,
+    "fdrFactMayBeMutated": false
+  }
+}

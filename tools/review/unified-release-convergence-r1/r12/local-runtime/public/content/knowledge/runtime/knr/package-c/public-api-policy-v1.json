@@ -1,0 +1,29 @@
+{
+  "policyCode": "KNR-PACKAGE-C-PUBLIC-API",
+  "version": "1.0.0",
+  "method": "GET",
+  "path": "/api/public-knowledge",
+  "requiredParameters": [
+    "q",
+    "locale"
+  ],
+  "optionalParameters": [
+    "mode"
+  ],
+  "supportedLocales": [
+    "zh-Hans",
+    "en"
+  ],
+  "supportedModes": [
+    "auto",
+    "overview",
+    "focused",
+    "full_article",
+    "continuity"
+  ],
+  "maxQueryLength": 500,
+  "cacheControl": "public, max-age=60, stale-while-revalidate=300",
+  "publishedOnly": true,
+  "providerAllowed": false,
+  "answerGenerationAllowed": false
+}

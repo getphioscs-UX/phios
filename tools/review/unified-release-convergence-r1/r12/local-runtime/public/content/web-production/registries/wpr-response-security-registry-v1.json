@@ -1,0 +1,30 @@
+{
+  "registryCode": "PHI-OS-WPR-W26-RESPONSE-SECURITY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W26",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "status": "canonical_response_boundary",
+  "privateNoStoreRoutes": [
+    "/reality-dashboard*",
+    "/personal-runtime*",
+    "/professional-workspace*",
+    "/professional-reports*",
+    "/account*",
+    "/checkout*",
+    "/payment-success*",
+    "/payment-failure*",
+    "/read/book-one/*"
+  ],
+  "publicAssetOrigins": [
+    "self",
+    "data:",
+    "https://*.r2.dev",
+    "https://*.getphios.com"
+  ],
+  "rules": {
+    "privateRoutesNoStore": true,
+    "privateRoutesNoIndex": true,
+    "credentialsInPublicAssetUrlForbidden": true,
+    "queryOrHashInPublicAssetBaseForbidden": true
+  }
+}

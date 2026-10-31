@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS MPA Method Activation Readiness Decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "work",
+    "methodCode",
+    "pluginCode",
+    "methodVersion",
+    "decision",
+    "methodSpecificReady",
+    "productionEligible",
+    "productionExecutionAllowed",
+    "professionalEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-NUM-ACTIVATION-DECISION-v1.0.0"
+    },
+    "work": {
+      "const": "MPA-W21"
+    },
+    "methodCode": {
+      "const": "NUMEROLOGY"
+    },
+    "pluginCode": {
+      "const": "NUM"
+    },
+    "methodVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision": {
+      "enum": [
+        "READY_FOR_MPA_W26_ELIGIBILITY_DECISION",
+        "NUM_METHOD_SPECIFIC_ACTIVATION_BLOCKED"
+      ]
+    },
+    "methodSpecificReady": {
+      "type": "boolean"
+    },
+    "gates": {
+      "type": "object"
+    },
+    "failedMethodSpecificGates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "productionEligible": {
+      "const": false
+    },
+    "productionEligibilityDecisionCreated": {
+      "const": false
+    },
+    "productionExecutionAllowed": {
+      "const": false
+    },
+    "productionExecutionGate": {
+      "const": "MPA-W27_REQUIRED"
+    },
+    "globalEligibilityGate": {
+      "const": "MPA-W26_REQUIRED"
+    },
+    "professionalEligible": {
+      "const": false
+    },
+    "professionalReleaseAllowed": {
+      "const": false
+    },
+    "publicEligible": {
+      "const": false
+    },
+    "legacyNumFreezeRewritten": {
+      "const": false
+    },
+    "frozenMrOrImrRewritten": {
+      "const": false
+    }
+  }
+}

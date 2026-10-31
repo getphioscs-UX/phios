@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W31-REMOTE-VERIFICATION-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W31",
+  "baselineCommit": "f7377b736910e0845dc8a8bf3bfee708f4840c9e",
+  "status": "READY_FOR_LIVE_REMOTE_VERIFICATION",
+  "selectedAssetCount": 12,
+  "requiredChecks": [
+    "HTTPS_REACHABLE",
+    "HTTP_200",
+    "CONTENT_TYPE_MATCH",
+    "EXACT_OBJECT_KEY",
+    "ALL_SELECTED_ASSETS_VERIFIED"
+  ],
+  "networkExecution": {
+    "currentEnvironment": "DNS_UNAVAILABLE",
+    "knownHistoricalAssetProbeResult": "HOST_RESOLUTION_FAILED",
+    "ownerUploadClaimIsNotRemoteVerification": true
+  },
+  "evidencePath": "content/product-visual-platform-r1/static-assets/evidence/pvp-r1-vis-w31-remote-verification-v1.json",
+  "command": "PHIOS_PUBLIC_ASSET_BASE_URL=<R2_BASE_URL> npm run verify:pvp-r1:static-assets:remote",
+  "successExit": "PVP_R1_VIS_STATIC_ASSETS_W29_W31_PHASE12_FROZEN",
+  "failureBehavior": "FAIL_CLOSED_PHASE13_NOT_AUTHORIZED"
+}

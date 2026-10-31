@@ -1,0 +1,434 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "declined-information",
+  "description": "Declined beneficiary information remains null until explicitly provided later.",
+  "synthetic": true,
+  "sourceAdapter": "DOCUMENT_EXTRACTION",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "declinedNotZero": true,
+    "declinedNotInvented": true,
+    "beneficiaryFactUpdateNotDistributionInstruction": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-DECL-S0",
+      "financialRealityId": "FR-DECL",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-DECL",
+        "householdReference": "HH-DECL",
+        "customerReferences": [
+          "CUST-DECL"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-DECL",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [
+          {
+            "policyId": "POL-D",
+            "owner": "P-DECL",
+            "insured": [
+              "P-DECL"
+            ],
+            "beneficiary": {
+              "factId": "F-BEN-0",
+              "factCode": "POLICY_BENEFICIARY",
+              "value": null,
+              "valueRepresentation": "UNKNOWN",
+              "disclosureState": "DECLINED_TO_PROVIDE",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "policyType": "LIFE",
+            "provider": "SYNTHETIC_PROVIDER",
+            "sumAssured": {
+              "factId": "POL-D-SA",
+              "factCode": "POLICY_SUM_ASSURED",
+              "value": 500000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "premium": {
+              "factId": "POL-D-PREM",
+              "factCode": "POLICY_PREMIUM",
+              "value": 300,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "cashValue": {
+              "factId": "POL-D-CV",
+              "factCode": "POLICY_CASH_VALUE",
+              "value": null,
+              "valueRepresentation": "UNKNOWN",
+              "disclosureState": "UNKNOWN",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "term": {
+              "factId": "POL-D-TERM",
+              "factCode": "POLICY_TERM",
+              "value": "20Y",
+              "valueRepresentation": "TEXT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "nominationStatus": {
+              "factId": "POL-D-NOM",
+              "factCode": "POLICY_NOMINATION_STATUS",
+              "value": "REPORTED",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "coverageScope": {
+              "factId": "POL-D-COV",
+              "factCode": "POLICY_COVERAGE_SCOPE",
+              "value": "LIFE",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK",
+          "declinedCount": 1
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "e270a44b0f36e36dd35c54b16d9458839a1a7418947e48aae03a43d254191c52"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "DECLINED_INFORMATION",
+      "consentReference": "CONSENT-FP",
+      "digest": "af7208037de4021c2c9ca395ca110366bc0c967022e80deae651891d6cbf19e6"
+    },
+    {
+      "snapshotId": "FR-DECL-S1",
+      "financialRealityId": "FR-DECL",
+      "sequence": 1,
+      "timepoint": "t1",
+      "asOfDate": "2026-07-01",
+      "financialRealityVersion": 2,
+      "snapshotPayload": {
+        "financialRealityId": "FR-DECL",
+        "householdReference": "HH-DECL",
+        "customerReferences": [
+          "CUST-DECL"
+        ],
+        "asOfDate": "2026-07-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-DECL",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [
+          {
+            "policyId": "POL-D",
+            "owner": "P-DECL",
+            "insured": [
+              "P-DECL"
+            ],
+            "beneficiary": {
+              "factId": "F-BEN-1",
+              "factCode": "POLICY_BENEFICIARY",
+              "value": "P-DECL",
+              "valueRepresentation": "REFERENCE",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-07-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-07-01",
+              "recordedAt": "2026-07-01T00:00:00Z"
+            },
+            "policyType": "LIFE",
+            "provider": "SYNTHETIC_PROVIDER",
+            "sumAssured": {
+              "factId": "POL-D-SA",
+              "factCode": "POLICY_SUM_ASSURED",
+              "value": 500000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "premium": {
+              "factId": "POL-D-PREM",
+              "factCode": "POLICY_PREMIUM",
+              "value": 300,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "cashValue": {
+              "factId": "POL-D-CV",
+              "factCode": "POLICY_CASH_VALUE",
+              "value": null,
+              "valueRepresentation": "UNKNOWN",
+              "disclosureState": "UNKNOWN",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "term": {
+              "factId": "POL-D-TERM",
+              "factCode": "POLICY_TERM",
+              "value": "20Y",
+              "valueRepresentation": "TEXT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "nominationStatus": {
+              "factId": "POL-D-NOM",
+              "factCode": "POLICY_NOMINATION_STATUS",
+              "value": "REPORTED",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "coverageScope": {
+              "factId": "POL-D-COV",
+              "factCode": "POLICY_COVERAGE_SCOPE",
+              "value": "LIFE",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK",
+          "declinedCount": 1
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 2,
+        "digest": "2b92601a0705d37d6ee36f5ddc78048ed4d416fbee1e257336ca6ba411215fa5"
+      },
+      "previousSnapshotDigest": "af7208037de4021c2c9ca395ca110366bc0c967022e80deae651891d6cbf19e6",
+      "changeEventReferences": [
+        "EV-DECL-1"
+      ],
+      "createdAt": "2026-07-01T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "01b3fc9f8e0878fab615068aa39487d35cb34a3b7d7b1edc148c5da214d4b039"
+    }
+  ],
+  "changeEvents": [
+    {
+      "eventId": "EV-DECL-1",
+      "financialRealityId": "FR-DECL",
+      "eventType": "BENEFICIARY_FACT_UPDATED",
+      "occurredAt": "2026-07-01",
+      "recordedAt": "2026-07-01T12:00:00Z",
+      "subjectReference": "POL-D",
+      "factReferences": [
+        "F-BEN-1"
+      ],
+      "fromSnapshotId": "FR-DECL-S0",
+      "toSnapshotId": "FR-DECL-S1",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "b68a7f477ac8ff113e49efbfc82b76a51587ca78bada0b884521aa9f65660cb0"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.reasoning-task-performance.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "performanceId",
+    "participantRef",
+    "taskBankAuthorityRef",
+    "taskBankVersion",
+    "assessmentDate",
+    "rawCorrect",
+    "rawAttempted",
+    "taskFamilyPerformance",
+    "completionTime",
+    "itemVersion",
+    "sourceClass",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-REASONING-TASK-PERFORMANCE-v1"
+    },
+    "performanceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "participantRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taskBankAuthorityRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taskBankVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assessmentDate": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rawCorrect": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rawAttempted": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "taskFamilyPerformance": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "completionTime": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "itemVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceClass": {
+      "const": "MEASURED_TASK_PERFORMANCE"
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

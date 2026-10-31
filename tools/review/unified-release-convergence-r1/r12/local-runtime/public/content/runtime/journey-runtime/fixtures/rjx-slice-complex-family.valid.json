@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "PHI-OS-RJX-VERTICAL-SLICE-COMPLEX-FAMILY-v1.0.0",
+  "status": "VALIDATION_ONLY_VERTICAL_SLICE_FIXTURE",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "mode": "COMPLEX_REALITY_CASE",
+  "scope": "FAMILY",
+  "entities": [
+    {
+      "id": "PERSON-A"
+    },
+    {
+      "id": "PERSON-B"
+    },
+    {
+      "id": "PERSON-C"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "REL-A-B",
+      "from": "PERSON-A",
+      "to": "PERSON-B",
+      "source": "STATEMENT-A",
+      "inventedByAI": false
+    },
+    {
+      "id": "REL-B-C",
+      "from": "PERSON-B",
+      "to": "PERSON-C",
+      "source": "STATEMENT-B",
+      "inventedByAI": false
+    },
+    {
+      "id": "REL-A-C",
+      "from": "PERSON-A",
+      "to": "PERSON-C",
+      "source": "STATEMENT-C",
+      "inventedByAI": false
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "P-A",
+      "sourceEntityId": "PERSON-A",
+      "sourceRef": "STATEMENT-A",
+      "position": "CHANGE_NOW"
+    },
+    {
+      "id": "P-B",
+      "sourceEntityId": "PERSON-B",
+      "sourceRef": "STATEMENT-B",
+      "position": "WAIT"
+    },
+    {
+      "id": "P-C",
+      "sourceEntityId": "PERSON-C",
+      "sourceRef": "STATEMENT-C",
+      "position": "PROTECT_CAPACITY"
+    }
+  ],
+  "events": [
+    {
+      "id": "EV-1",
+      "occurredAt": "2024-01-10",
+      "sourceRef": "STATEMENT-A",
+      "repeatedPatternId": "PATTERN-1"
+    },
+    {
+      "id": "EV-2",
+      "occurredAt": "2025-02-14",
+      "sourceRef": "STATEMENT-B",
+      "repeatedPatternId": "PATTERN-1"
+    },
+    {
+      "id": "EV-3",
+      "occurredAt": "2026-07-20",
+      "sourceRef": "STATEMENT-C",
+      "repeatedPatternId": "PATTERN-1"
+    }
+  ],
+  "sharedConstraints": [
+    {
+      "id": "C-FAMILY-1",
+      "scopeType": "FAMILY",
+      "scopeId": "FAMILY-1",
+      "sourceRef": "HOUSEHOLD-RECORD-1"
+    }
+  ],
+  "timeline": {
+    "start": "2024-01-10",
+    "end": "2026-07-20",
+    "longTimeline": true
+  },
+  "unknown": [
+    {
+      "id": "U-REL",
+      "scopeType": "RELATIONSHIP",
+      "scopeId": "REL-A-B",
+      "resolved": false
+    },
+    {
+      "id": "U-PERSON",
+      "scopeType": "ENTITY",
+      "scopeId": "PERSON-C",
+      "resolved": false
+    }
+  ],
+  "candidateRuleScope": [
+    {
+      "nodeCode": "KN-B2-P6-032",
+      "bookCode": "BOOK-2",
+      "scope": "RELATIONAL",
+      "ruleActivationRequested": false
+    },
+    {
+      "nodeCode": "KN-B2-P8-043",
+      "bookCode": "BOOK-3",
+      "scope": "MAINTENANCE",
+      "ruleActivationRequested": false
+    }
+  ],
+  "boundaries": {
+    "mergePerspectivesIntoSingleFact": false,
+    "aiMayInventMissingRelationship": false,
+    "allRelationshipsSourceBound": true,
+    "allEventsSourceBound": true
+  }
+}

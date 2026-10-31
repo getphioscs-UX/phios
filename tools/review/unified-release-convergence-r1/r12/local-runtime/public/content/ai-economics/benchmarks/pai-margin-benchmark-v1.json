@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-PAI-R1-MARGIN-BENCHMARK-v1.0.0",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "status": "MARGIN_BENCHMARK_READY_FOR_PAID_ASK_PILOT",
+  "currency": "MYR",
+  "usdToMyrPlanningRate": 4.3,
+  "planningOnly": true,
+  "actualEconomicsObserved": false,
+  "perRequestProviderCostUsd": {"T0_DETERMINISTIC":0,"T1_CANONICAL_ASSEMBLY":0,"T2_LIGHT_COMPOSITION":0.00135,"T3_DEEP_COMPOSITION":0.0165},
+  "scenarios": [
+    {"code":"LIGHT","requestsPerUser":10,"executionClassMix":{"T0_DETERMINISTIC":0.7,"T1_CANONICAL_ASSEMBLY":0.2,"T2_LIGHT_COMPOSITION":0.09,"T3_DEEP_COMPOSITION":0.01}},
+    {"code":"NORMAL","requestsPerUser":30,"executionClassMix":{"T0_DETERMINISTIC":0.5,"T1_CANONICAL_ASSEMBLY":0.25,"T2_LIGHT_COMPOSITION":0.2,"T3_DEEP_COMPOSITION":0.05}},
+    {"code":"HEAVY","requestsPerUser":100,"executionClassMix":{"T0_DETERMINISTIC":0.35,"T1_CANONICAL_ASSEMBLY":0.25,"T2_LIGHT_COMPOSITION":0.3,"T3_DEEP_COMPOSITION":0.1}},
+    {"code":"EXTREME","requestsPerUser":500,"executionClassMix":{"T0_DETERMINISTIC":0.2,"T1_CANONICAL_ASSEMBLY":0.2,"T2_LIGHT_COMPOSITION":0.4,"T3_DEEP_COMPOSITION":0.2}}
+  ],
+  "plans": [
+    {"code":"FREE","revenueMyr":0,"allowedExecutionClasses":["T0_DETERMINISTIC","T1_CANONICAL_ASSEMBLY"],"costCeilingMyr":0},
+    {"code":"PLUS_RM39","revenueMyr":39,"scenario":"NORMAL","commercialAssumption":true},
+    {"code":"REALITY_RM99","revenueMyr":99,"scenario":"HEAVY","commercialAssumption":true},
+    {"code":"CREDIT_PACK","revenueMyr":20,"scenario":"HEAVY","commercialAssumption":true},
+    {"code":"ONE_OFF","revenueMyr":28,"scenario":"LIGHT","commerceAuthorityRef":"content/personal-reading/narrative/registries/paid-narrative-product-registry-v1.json"}
+  ],
+  "pilotRequirements": ["REVALIDATE_PROVIDER_RATES","REPLACE_EXECUTION_MIX_WITH_OBSERVED_DATA","OBSERVE_ACTUAL_PROVIDER_COST","OBSERVE_ACTUAL_MARGIN","COMMERCE_APPROVE_PRODUCTION_PRICES"]
+}

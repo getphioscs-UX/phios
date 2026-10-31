@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W7-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_FOUNDATION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W7",
+  "title": "Current Evidence Admission and Runtime Position Candidate Workflow",
+  "purpose": "Turn W6 evidence readiness into an auditable admission workflow for current evidence and runtime-position candidates without auto-populating current facts.",
+  "owners": {
+    "sourceDiscovery": "CURRENT_WEB_AUTHORITY",
+    "sourceAdmission": "CURRENT_WEB_AUTHORITY",
+    "evidenceIR": "CURRENT_WEB_AUTHORITY",
+    "derivedReadout": "REALITY_READOUT_ENGINE",
+    "positionCanon": "content/registry/runtime-position-48-v1.json",
+    "positionAdmission": "BOOK_VI_RUNTIME_POSITION_CORRESPONDENCE",
+    "humanAuthority": "OWNER_REVIEW"
+  },
+  "sourceLanes": [
+    {
+      "id": "DEMOGRAPHY",
+      "labelZh": "人口",
+      "labelEn": "Demography",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "INDUSTRY",
+      "labelZh": "产业",
+      "labelEn": "Industry",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "INFRASTRUCTURE",
+      "labelZh": "基础设施",
+      "labelEn": "Infrastructure",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR"
+      ],
+      "direct": true
+    },
+    {
+      "id": "ENERGY",
+      "labelZh": "能源",
+      "labelEn": "Energy",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "TRADE_SUPPLY_CHAIN",
+      "labelZh": "贸易与供应链",
+      "labelEn": "Trade & supply chain",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "FINANCE_FISCAL",
+      "labelZh": "金融与财政",
+      "labelEn": "Finance & fiscal",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "MARKET_DATA_PROVIDER"
+      ],
+      "direct": true
+    },
+    {
+      "id": "TECHNOLOGY",
+      "labelZh": "科技",
+      "labelEn": "Technology",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "OFFICIAL_COMPANY",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "LABOUR_SKILLS",
+      "labelZh": "劳动与技能",
+      "labelEn": "Labour & skills",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "HOUSING_URBAN",
+      "labelZh": "住房与城市",
+      "labelEn": "Housing & urban",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "EXTERNAL_DEPENDENCY",
+      "labelZh": "外部依赖",
+      "labelEn": "External dependency",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "CARRIER_STRUCTURE",
+      "labelZh": "载体结构",
+      "labelEn": "Carrier structure",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "OFFICIAL_COMPANY",
+        "ACADEMIC"
+      ],
+      "direct": true
+    },
+    {
+      "id": "PRESSURE_FIELD",
+      "labelZh": "压力场",
+      "labelEn": "Pressure field",
+      "preferred": [
+        "OFFICIAL_PRIMARY",
+        "GOVERNMENT",
+        "REGULATOR",
+        "ACADEMIC",
+        "REPUTABLE_NEWS"
+      ],
+      "direct": true
+    }
+  ],
+  "derivedReadingDimensions": [
+    "capacity",
+    "load",
+    "alignment",
+    "resilience",
+    "adaptability",
+    "futureCapacity"
+  ],
+  "stateMachine": [
+    "NOT_STARTED",
+    "SOURCE_CANDIDATES_DISCOVERED",
+    "SOURCE_ADMISSION_READY",
+    "CURRENT_EVIDENCE_ADMITTED",
+    "RRE_READY",
+    "POSITION_CANDIDATE_READY",
+    "POSITION_HUMAN_REVIEW",
+    "POSITION_ADMITTED",
+    "TRANSITION_SIGNAL_REVIEW",
+    "THRESHOLD_REVIEW",
+    "CONDITIONAL_PROJECTION_READY"
+  ],
+  "admissionRules": [
+    "Discovery results never become CURRENT_DATA by search rank or source count.",
+    "Every admitted current claim must satisfy Current Web Authority source, domain, freshness, claim-type and provenance contracts.",
+    "Direct evidence lanes may contain admitted facts; capacity/load/alignment/resilience/adaptability/futureCapacity remain derived readings.",
+    "A runtime-position candidate must cite admitted evidence references and an RRE lineage reference.",
+    "A runtime-position candidate may be primary, secondary or subsystem-scoped; no forced single global position.",
+    "Conflicted evidence blocks promotion unless conflict resolution returns an admitted authority outcome.",
+    "Position candidate generation is not position admission; owner human review remains mandatory.",
+    "Position admission does not itself establish transition or threshold crossing.",
+    "No weighted score, probability or civilization ranking is created."
+  ],
+  "candidateRecordRequired": [
+    "dossierId",
+    "candidateId",
+    "scope",
+    "candidatePositionId",
+    "candidateRole",
+    "evidenceRefs",
+    "rreReadoutRef",
+    "grammarRationale",
+    "domainRationale",
+    "supportState",
+    "conflicts",
+    "unknowns",
+    "humanDecision"
+  ],
+  "allowedCandidateRoles": [
+    "PRIMARY_CANDIDATE",
+    "SECONDARY_CANDIDATE",
+    "SUBSYSTEM_CANDIDATE"
+  ],
+  "supportStates": [
+    "INSUFFICIENT_EVIDENCE",
+    "EVIDENCE_READY",
+    "CONFLICTED",
+    "HUMAN_REVIEW_READY",
+    "ADMITTED",
+    "REJECTED"
+  ],
+  "failClosed": true
+}

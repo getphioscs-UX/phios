@@ -1,0 +1,66 @@
+{
+  "contractCode": "PHI-OS-KAU-E0-LEGACY-SUPPORTING-SOURCE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "KAU-E0",
+  "status": "active",
+  "baselineCommit": "c6ff0a9d0481cafeb57f6c3248b6377d78444859",
+  "sourceTypes": [
+    "LEGACY_MANUSCRIPT",
+    "LEGACY_AUTHORING_NOTE",
+    "LEGACY_TERMINOLOGY",
+    "LEGACY_FRAMEWORK"
+  ],
+  "requiredFields": [
+    "sourceCode",
+    "sourceVersion",
+    "title",
+    "sourceType",
+    "originDate",
+    "historicalPeriod",
+    "language",
+    "fileReference",
+    "contentDigest",
+    "supportingOnly",
+    "canonicalAuthority",
+    "meaningAuthority",
+    "publicationAuthority",
+    "reviewStatus"
+  ],
+  "optionalFields": [
+    "supersededByReferences",
+    "candidateNodeReferences",
+    "matchedNodeReferences",
+    "terminologyStatus",
+    "notes"
+  ],
+  "fixedAuthority": {
+    "supportingOnly": true,
+    "canonicalAuthority": false,
+    "meaningAuthority": false,
+    "publicationAuthority": false,
+    "nodeAuthority": false
+  },
+  "allowedActions": [
+    "register_source_identity",
+    "inventory_sections",
+    "suggest_existing_node_match",
+    "suggest_supporting_relationship",
+    "detect_terminology_drift",
+    "detect_boundary_overlap",
+    "submit_human_review"
+  ],
+  "forbiddenActions": [
+    "overwrite_canonical_node",
+    "create_canonical_node_automatically",
+    "write_meaning_authority",
+    "promote_production_readiness",
+    "create_article_requirement",
+    "mutate_frozen_wave",
+    "publish"
+  ],
+  "rules": {
+    "humanReviewRequiredBeforeAcceptedSupportingRelationship": true,
+    "rawLegacySourceMayNotEnterKPP": true,
+    "acceptedSupportingRelationshipMayInformCanonicalReview": true
+  }
+}

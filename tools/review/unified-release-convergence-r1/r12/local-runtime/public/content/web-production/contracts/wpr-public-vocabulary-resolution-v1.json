@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-WPR-W13-PUBLIC-VOCABULARY-RESOLUTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W13",
+  "phase": "WPR-C_COMPOSITION_INFRASTRUCTURE",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "active_fail_closed_public_vocabulary_contract",
+  "registryReference": "content/web-production/registries/wpr-public-vocabulary-registry-v1.json",
+  "resolver": {
+    "implementation": "assets/js/runtime/web-production/vocabulary-resolver.js",
+    "functions": [
+      "resolvePublicVocabulary",
+      "assertNoRestrictedPublicTerm"
+    ]
+  },
+  "rules": {
+    "publicAndCustomerUseControlledLabel": true,
+    "professionalInternalLabelNotChangedByWprC": true,
+    "restrictedTermWithoutApprovedMapping": "DO_NOT_RENDER",
+    "unknownCode": "DO_NOT_RENDER",
+    "methodAvailabilityStillGovernedByMpa": true
+  },
+  "failureCodes": [
+    "WPR_VOCABULARY_ENTRY_NOT_FOUND",
+    "WPR_PUBLIC_LABEL_NOT_APPROVED",
+    "WPR_PUBLIC_LABEL_MISSING",
+    "WPR_RESTRICTED_TERM_PRESENT"
+  ]
+}

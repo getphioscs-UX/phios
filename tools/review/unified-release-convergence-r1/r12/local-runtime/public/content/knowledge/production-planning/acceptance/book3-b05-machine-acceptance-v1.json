@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-BOOK3-B05-MACHINE-ACCEPTANCE-v1.0.0",
+  "stage": "BOOK3-B05-MACHINE-ACCEPTANCE",
+  "status": "MACHINE_ACCEPTED_ZH_HANS_EDITORIAL_CANDIDATES_HUMAN_PENDING",
+  "baselineCommit": "d49dd16b38d7f858c9bad861b788919d0dec4c33",
+  "batchCode": "B3-B05",
+  "manifestPath": "content/knowledge/production-planning/production/book3-b05/manifest-v1.json",
+  "checkerPath": "scripts/check-book3-b05-zh-hans-production.mjs",
+  "counts": {
+    "articleCandidates": 4,
+    "finalCanonicalNodes": 8,
+    "sourceSections": 8,
+    "humanAcceptedArticles": 0
+  },
+  "machineGates": {
+    "frozenW5ArticleGroupingExact": true,
+    "sourceSectionDigestAndPageBindingsExact": true,
+    "finalCanonicalNodeBindingsExact": true,
+    "articleBlockContractValid": true,
+    "medicalAuthorityNotCreated": true,
+    "canonicalMutationDetected": false,
+    "englishCandidateCreated": false,
+    "publicationAuthorityCreated": false
+  },
+  "candidateDigests": [
+    {
+      "candidateId": "B3-B05-A23",
+      "path": "content/knowledge/production-planning/production/book3-b05/candidates/zh-Hans/b3-b05-a23.zh-Hans.v1.json",
+      "sha256": "93f1c70d478bd4621f6caa690709c901630496b5891e74425038a1a477064885"
+    },
+    {
+      "candidateId": "B3-B05-A24",
+      "path": "content/knowledge/production-planning/production/book3-b05/candidates/zh-Hans/b3-b05-a24.zh-Hans.v1.json",
+      "sha256": "ae07e2ada5484e5d8b62b870cb4f3842495fce77c15926d6010d41ff4cd51727"
+    },
+    {
+      "candidateId": "B3-B05-A25",
+      "path": "content/knowledge/production-planning/production/book3-b05/candidates/zh-Hans/b3-b05-a25.zh-Hans.v1.json",
+      "sha256": "c734a3c70a9d042e560b64278971e761536d383667b983c896b5c824a814d201"
+    },
+    {
+      "candidateId": "B3-B05-A26",
+      "path": "content/knowledge/production-planning/production/book3-b05/candidates/zh-Hans/b3-b05-a26.zh-Hans.v1.json",
+      "sha256": "72a980ce51efe1110a3ae5e3229f8beb8c98921ec5aaf8d44b92575e6c2c9b56"
+    }
+  ],
+  "humanGate": {
+    "status": "PENDING_0_OF_4",
+    "machineAcceptanceCannotSelfAcceptHumanGate": true,
+    "requiredExplicitAcceptCount": 4
+  },
+  "nextGate": "Human editorial review of the four zh-Hans B05 Articles."
+}

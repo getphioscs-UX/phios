@@ -1,0 +1,50 @@
+{
+  "contractCode": "PHI-OS-WAVE1-C3-READINESS-CLOSURE-v1",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "baselineCommit": "335ccbaed4e8210119e2935001e571790ec2fcd1",
+  "purpose": "Close Wave 1 non-human C3 blockers without creating Human Production Decision, exportability, dispatch, asset, article, or publication authority.",
+  "scope": [
+    "KN-PREFACE-004",
+    "KN-B1-P1-003",
+    "KN-B1-P4-003",
+    "KN-B1-P4-004"
+  ],
+  "authorityRules": {
+    "c2FrozenAuthorityMustRemainUnchanged": true,
+    "humanEditorialFreezeMayBeConsumed": true,
+    "humanProductionDecisionMayBeCreated": false,
+    "productionApprovalMayBeInferredFromC2": false,
+    "sourceClosureMayNarrowCandidateScope": true,
+    "sourceClosureMayInventExternalEvidence": false,
+    "legacySupportingSourceMayBecomeCanonicalSource": false,
+    "figureDecisionMayDefineRequirement": true,
+    "figureDecisionMayCreateAssetBrief": false,
+    "figureDecisionMayCreateAsset": false,
+    "closureMayPublish": false
+  },
+  "sourceSufficiencyRule": {
+    "canonicalCandidateMayPassWhen": [
+      "C2 thesis and boundaries are Human-frozen and hash-valid",
+      "the mapped manuscript range is Human-verified for the C2 scope",
+      "the candidate is restricted to internal Canonical framework claims",
+      "unresolved external examples remain claim-scoped and source-required before review/publication"
+    ],
+    "externalResearchTreatment": "DEFERRED_CLAIM_SCOPED_NOT_CANONICAL_SOURCE_CLOSURE",
+    "externalFactsRequire": "primary research, clinical/technical guideline, or official institutional source as required by the C2 Source Boundary",
+    "publicationSourceReviewStillRequired": true
+  },
+  "figureDecisionRule": {
+    "decisionClosesC3GateOnly": true,
+    "requiredFigureDoesNotCreateAsset": true,
+    "existingPublicationMayRemainValidWithoutRetroactiveInvalidation": true,
+    "carBriefRequiresLaterHumanProductionDecisionAndExecutionAuthority": true
+  },
+  "eligibilityRule": {
+    "humanProductionDecisionEligibleWhen": "all C3 required gates except humanProductionApproval and exportability are passed",
+    "eligibleStatus": "human_approval_required",
+    "productionReadyBeforeHumanDecision": false,
+    "exportabilityBeforeHumanDecision": "blocked",
+    "dispatchBeforeHumanDecision": false
+  }
+}

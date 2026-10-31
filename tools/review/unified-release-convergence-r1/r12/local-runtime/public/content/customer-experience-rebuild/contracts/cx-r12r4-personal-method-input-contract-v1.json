@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4-PERSONAL-METHOD-INPUT-CONTRACT-v1.0.0",
+  "work": "CX-R12R4-W3",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "METHOD_FIRST_ADAPTIVE_INPUT_ACTIVE",
+  "rules": {
+    "methodSelectionBeforeInput": true,
+    "onlyAskForRequiredOrExplicitlyUsefulFields": true,
+    "unknownMayRemainUnknown": true,
+    "hiddenFieldMustNotBecomeRequired": true,
+    "symbolicMethodsUseSeparateExperience": true
+  },
+  "methods": [
+    {
+      "methodId": "ASTROLOGY",
+      "formValue": "astrology",
+      "required": [
+        "birthDate",
+        "birthTime",
+        "birthPlace"
+      ],
+      "optional": [
+        "intent"
+      ],
+      "unknownTimeOutcome": "METHOD_MAY_BE_BLOCKED_OR_DEGRADED_NO_SYNTHETIC_TIME"
+    },
+    {
+      "methodId": "BAZI",
+      "formValue": "bazi",
+      "required": [
+        "birthDate",
+        "birthPlace"
+      ],
+      "optional": [
+        "birthTime",
+        "intent"
+      ],
+      "unknownTimeOutcome": "DEGRADE_WHERE_EXISTING_RUNTIME_SUPPORTS_IT"
+    },
+    {
+      "methodId": "NUMEROLOGY",
+      "formValue": "numeric",
+      "required": [
+        "birthDate"
+      ],
+      "optional": [
+        "intent"
+      ],
+      "birthPlaceRequired": false,
+      "birthTimeRequired": false
+    },
+    {
+      "methodId": "ZI_WEI_DOU_SHU",
+      "formValue": "ziwei",
+      "required": [
+        "birthDate",
+        "birthTime",
+        "birthPlace",
+        "traditionalCalculationSex"
+      ],
+      "optional": [
+        "intent"
+      ],
+      "unknownTimeOutcome": "METHOD_NOT_READY_NO_SYNTHETIC_TIME"
+    },
+    {
+      "methodId": "HUMAN_DESIGN",
+      "publicSelectionAllowed": false
+    },
+    {
+      "methodId": "I_CHING",
+      "separateRoute": "/perspectives/iching/",
+      "inputMode": "QUESTION_CONTEXT"
+    },
+    {
+      "methodId": "TAROT",
+      "separateRoute": "/perspectives/tarot/",
+      "inputMode": "QUESTION_CONTEXT"
+    }
+  ]
+}

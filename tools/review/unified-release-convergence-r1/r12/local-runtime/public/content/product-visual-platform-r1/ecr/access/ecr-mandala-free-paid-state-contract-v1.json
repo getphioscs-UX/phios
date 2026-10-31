@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W14-ECR-MANDALA-FREE-PAID-STATE-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W14",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "FREE_PAID_PRESENTATION_STATES_FROZEN_FAIL_CLOSED",
+  "states": {
+    "FREE_SNAPSHOT": {
+      "default": true,
+      "personalizedPrimaryStoryVisible": true,
+      "supportingCapabilities": "LOCKED_DEPTH",
+      "driverRank2To3": "LOCKED_DEPTH",
+      "deepSelectedLayers": [
+        "M8",
+        "H64",
+        "A8"
+      ],
+      "deepSelectedState": "LOCKED_DEPTH",
+      "deepPersonalizedCopyExposed": false
+    },
+    "PAID_DEPTH": {
+      "default": false,
+      "requiresExplicitUpstreamAuthorizationInProduction": true,
+      "supportingCapabilities": "SUPPORTING_ACTIVE",
+      "driverRank2To3": "SUPPORTING_ACTIVE",
+      "deepSelectedLayers": [
+        "M8",
+        "H64",
+        "A8"
+      ],
+      "deepSelectedState": "SUPPORTING_ACTIVE"
+    }
+  },
+  "failClosedResolution": {
+    "gapFound": true,
+    "gap": "Current adapter, product renderer and Mandala normalizer defaulted to PAID_DEPTH when no explicit experience state was supplied.",
+    "resolution": "Default/unknown presentation state now resolves to FREE_SNAPSHOT. Explicit PAID_DEPTH remains presentation-only and production delivery still requires upstream server entitlement authority.",
+    "runtimeFiles": [
+      "assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js",
+      "assets/customer-ui/js/specialists/ecr/mandala-renderer.js",
+      "assets/customer-ui/js/specialists/ecr/product-renderer.js",
+      "functions/personal-reality-product/adapters/ecr-production-adapter.js"
+    ]
+  },
+  "commerceBoundary": {
+    "pvpCreatesPrice": false,
+    "pvpCreatesPurchaseAuthority": false,
+    "paidStateIsEntitlement": false,
+    "serverEntitlementStillRequiredForPaidData": true,
+    "phase8ActivatesPaidCommerce": false
+  },
+  "truthBoundary": {
+    "freeAndPaidShareSameEcrTruth": true,
+    "freeMayNotInventSimplerTruth": true,
+    "paidMayNotInventExtraTruth": true
+  },
+  "nextGate": "PVP-R1-VIS-W15 TOPIC LENS"
+}

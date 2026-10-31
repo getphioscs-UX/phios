@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W13",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "purpose": "Make every W12 Zi Wei finding traceable to calculation evidence, governed meanings, authorities, counter-evidence and visible unknowns before any narrative composition.",
+  "inputSchema": "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+  "outputSchema": "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0",
+  "nodeTypes": [
+    "FINDING",
+    "EVIDENCE",
+    "MEANING",
+    "AUTHORITY",
+    "UNKNOWN"
+  ],
+  "edgeTypes": [
+    "SUPPORTS",
+    "COUNTERS",
+    "QUALIFIES",
+    "GOVERNS",
+    "BOUNDS"
+  ],
+  "rules": {
+    "everyFindingRequiresEvidenceEdge": true,
+    "everyFindingRequiresMeaningEdge": true,
+    "everyFindingRequiresAuthorityEdge": true,
+    "counterEvidenceMayNotBeDropped": true,
+    "unknownBoundaryMayNotBeDropped": true,
+    "graphMayNotCreateNewFinding": true,
+    "graphMayNotResolveContradictions": true,
+    "graphMayNotComposeNarrative": true,
+    "graphTopologyIsNotProbability": true,
+    "eventPredictionForbidden": true
+  },
+  "runtimeRef": "functions/zi-wei-full-production/ziwei-interpretation-evidence-graph-runtime.js",
+  "customerCutoverAllowed": false
+}

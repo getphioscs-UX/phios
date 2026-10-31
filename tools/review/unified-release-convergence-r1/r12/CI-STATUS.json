@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-31T05:27:32.149Z",
+  "main": "d15ae4c8480cf46f81152fb8c87e623f1b8fb13c",
+  "run": 41171421602,
+  "url": "https://github.com/getphioscs-UX/phios/actions/runs/41171421602",
+  "status": "FAILURE",
+  "steps": {
+    "npmCi": "PASS",
+    "ptrcMachine": "PASS",
+    "pagesBuild": "PASS",
+    "fullCheck": "FAIL",
+    "gitDiff": "SKIPPED"
+  },
+  "failureLines": [
+    "2026-10-31T05:11:49.4294147Z > check:cloudflare-function-import-compat",
+    "2026-10-31T05:11:49.4294717Z > node scripts/run-zero-cost-regression.mjs check:cloudflare-function-import-compat",
+    "2026-10-31T05:11:49.5765183Z ✗ Cloudflare Pages Functions source deployability invariant failed.",
+    "2026-10-31T05:11:49.5766866Z   UNSUPPORTED_JSON_IMPORT_WITH_ATTRIBUTE"
+  ],
+  "candidateFix": "Functions JSON imports restored to ordinary bundler syntax; Node-only review loader retained. Targeted invariant will be rerun, no full npm check by Codex.",
+  "candidateCI": "NOT_RUN_NO_PUSH_AUTHORIZATION",
+  "pr14": {
+    "draft": true,
+    "head": "9005a87671e8d448ee995e599977d0d312796eac",
+    "included": false,
+    "human": "REVISE_PENDING_RECHECK"
+  }
+}

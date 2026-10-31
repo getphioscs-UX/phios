@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-family-registry-v1.schema.json",
+  "title": "PHI OS Canonical Meaning Family Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "productionStatus",
+    "authority",
+    "families"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-CANONICAL-MEANING-FAMILY-REGISTRY"
+    },
+    "registryVersion": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "familyAuthority",
+        "meaningCodeAuthority",
+        "methodMappingAuthority"
+      ],
+      "properties": {
+        "familyAuthority": {
+          "const": "canonical_meaning_family_registry"
+        },
+        "meaningCodeAuthority": {
+          "const": "not_created"
+        },
+        "methodMappingAuthority": {
+          "const": "not_created"
+        }
+      }
+    },
+    "families": {
+      "type": "array",
+      "minItems": 19,
+      "maxItems": 19,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "familyId",
+          "familyCode",
+          "familyVersion",
+          "definition",
+          "status",
+          "meaningCodePopulationAllowed",
+          "methodMappingAllowed",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "familyId": {
+            "pattern": "^CMF-[A-Z0-9-]+$"
+          },
+          "familyCode": {
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          },
+          "familyVersion": {
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 20
+          },
+          "status": {
+            "enum": [
+              "registered",
+              "deprecated"
+            ]
+          },
+          "meaningCodePopulationAllowed": {
+            "const": false
+          },
+          "methodMappingAllowed": {
+            "const": false
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

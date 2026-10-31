@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.jr-professional-handoff.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handoffId",
+    "journeyReference",
+    "realityReferences",
+    "readoutReferences",
+    "evidenceReferences",
+    "unknownReferences",
+    "journeyContextReference",
+    "customerQuestionReference",
+    "consentReferences",
+    "dataPurpose"
+  ],
+  "properties": {
+    "handoffId": {
+      "type": "string"
+    },
+    "journeyReference": {
+      "type": "string"
+    },
+    "realityReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "readoutReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evidenceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "unknownReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "consentReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "journeyContextReference": {
+      "type": "string"
+    },
+    "customerQuestionReference": {
+      "type": "string"
+    },
+    "dataPurpose": {
+      "const": "PROFESSIONAL_SERVICE"
+    }
+  }
+}

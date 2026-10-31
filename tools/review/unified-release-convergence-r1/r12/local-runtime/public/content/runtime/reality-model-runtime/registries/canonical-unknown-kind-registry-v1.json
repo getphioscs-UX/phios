@@ -1,0 +1,61 @@
+{
+  "registryCode": "PHI-OS-RMO-W10-CANONICAL-UNKNOWN-KIND-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W10",
+  "status": "canonical_boundary",
+  "runtimeAuthority": "RMO",
+  "dataGovernanceAuthority": "RDG",
+  "professionalJudgmentAuthority": "PR",
+  "containsUserData": false,
+  "containsUnknownInstances": false,
+  "unknownKinds": [
+    {
+      "unknownKind": "MISSING_DATA",
+      "allowedStates": ["UNKNOWN", "UNRESOLVED"],
+      "minimumResolutionEvidenceCount": 1,
+      "professionalAuthorityRequired": false
+    },
+    {
+      "unknownKind": "UNVERIFIED_CLAIM",
+      "allowedStates": ["UNKNOWN", "UNRESOLVED", "DISPUTED"],
+      "minimumResolutionEvidenceCount": 1,
+      "professionalAuthorityRequired": false
+    },
+    {
+      "unknownKind": "CONFLICTING_EVIDENCE",
+      "allowedStates": ["DISPUTED", "UNRESOLVED"],
+      "minimumResolutionEvidenceCount": 2,
+      "professionalAuthorityRequired": false
+    },
+    {
+      "unknownKind": "UNBOUNDED_UNCERTAINTY",
+      "allowedStates": ["UNKNOWN", "UNRESOLVED"],
+      "minimumResolutionEvidenceCount": 2,
+      "professionalAuthorityRequired": false
+    },
+    {
+      "unknownKind": "OPEN_QUESTION",
+      "allowedStates": ["UNKNOWN", "UNRESOLVED"],
+      "minimumResolutionEvidenceCount": 1,
+      "professionalAuthorityRequired": false
+    },
+    {
+      "unknownKind": "PROFESSIONAL_BOUNDARY",
+      "allowedStates": ["UNKNOWN", "UNRESOLVED", "DISPUTED"],
+      "minimumResolutionEvidenceCount": 1,
+      "professionalAuthorityRequired": true
+    }
+  ],
+  "unknownStates": ["UNKNOWN", "UNRESOLVED", "DISPUTED"],
+  "allowedResolutionEvidenceRoles": ["SUPPORTS", "CONTRADICTS", "QUALIFIES", "CONTEXTUALIZES"],
+  "instances": [],
+  "rules": {
+    "registryDefinesKindsOnly": true,
+    "unknownIsNotNullOrDefault": true,
+    "unknownCannotBeSilentlyResolved": true,
+    "inferenceCannotFillUnknown": true,
+    "resolutionTransitionDeferredToRealityVersioning": true,
+    "professionalBoundaryRoutesToPr": true,
+    "providerOrAiCannotResolveUnknown": true
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "m3c-journey-dashboard",
+  "version": "1.0.0-w2",
+  "status": "w2-journey-dashboard-ready",
+  "baseline": {
+    "branch": "main",
+    "commit": "c3f399022b7ffc261775de8a94e51b34eb9204ba",
+    "milestone": "M3C-W1 Journey Overview",
+    "runtimeContractsFrozen": true,
+    "runtimeInfrastructureVerified": true
+  },
+  "dashboard": {
+    "page": "reality-dashboard.html",
+    "publicRoute": "/reality-dashboard",
+    "overviewRoute": "/reality-journey",
+    "bilingual": [
+      "en",
+      "zh-Hans"
+    ],
+    "robots": "noindex,follow",
+    "projectionMode": "read-only",
+    "automaticRuntimeCreation": false
+  },
+  "summary": {
+    "fields": [
+      "currentStage",
+      "completedStages",
+      "nextStep",
+      "latestUpdate",
+      "recoveryStatus"
+    ],
+    "stageSource": "assets/js/modules/runtime-workspace-state.js",
+    "recoverySource": "assets/js/modules/runtime-persistence.js",
+    "timelineSource": "assets/js/modules/runtime-lineage.js",
+    "secondStateSystemCreated": false
+  },
+  "actions": {
+    "resume": {
+      "behavior": "open-current-stage",
+      "createsRevision": false,
+      "createsRuntime": false
+    },
+    "revise": {
+      "route": "/my-reality.html#continuity",
+      "requiresExplicitContinuityChoice": true,
+      "historicalOverwrite": false
+    },
+    "startNewJourney": {
+      "existingRuntimeRoute": "/my-reality.html#continuity",
+      "emptyStateRoute": "/reality-entry.html",
+      "requiresExplicitContinuityChoiceWhenRuntimeExists": true,
+      "preservesLineage": true
+    }
+  },
+  "timeline": {
+    "source": "runtime-lineage.v1",
+    "maximumVisibleEvents": 12,
+    "appendOnly": true,
+    "historicalReferenceOnly": true,
+    "promotesReportedExperienceToEvidence": false
+  },
+  "recovery": {
+    "states": [
+      "restored",
+      "protected",
+      "sessionOnly",
+      "recoverable",
+      "attention",
+      "empty"
+    ],
+    "claimsCloudRecoveryWithoutEvidence": false,
+    "writesDuringDashboardProjection": false
+  },
+  "acceptance": {
+    "runtimeContractsChanged": false,
+    "runtimeSchemasChanged": false,
+    "d1BindingChanged": false,
+    "runtimeMigrationsChanged": false,
+    "dashboardMutatesRuntime": false,
+    "dashboardExecutesTransition": false,
+    "mobileContractsPresent": true,
+    "languageParityRequired": true
+  }
+}

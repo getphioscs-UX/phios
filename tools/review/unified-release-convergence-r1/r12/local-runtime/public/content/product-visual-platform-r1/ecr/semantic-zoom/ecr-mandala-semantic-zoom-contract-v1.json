@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W13-ECR-MANDALA-SEMANTIC-ZOOM-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W13",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "SEMANTIC_ZOOM_FROZEN_CURRENT_RENDERER_REUSED",
+  "definition": "Semantic zoom changes customer-readable information density and disclosure, not ECR truth or coordinate selection.",
+  "levels": [
+    {
+      "level": "Z0_SUMMARY",
+      "surface": "data-ecr-mandala-summary",
+      "purpose": "Human-readable selected story before technical exploration."
+    },
+    {
+      "level": "Z1_COMPLETE_MANDALA",
+      "surface": "data-ecr-mandala-explore",
+      "purpose": "All 145 governed addressable visual nodes remain available."
+    },
+    {
+      "level": "Z2_FOCUSED_NODE",
+      "surface": "data-ecr-mandala-detail",
+      "purpose": "Focus/hover/keyboard reveals the already-bound node explanation."
+    },
+    {
+      "level": "Z3_DEEP_STRUCTURE",
+      "surface": "cx-ecr-mandala__summary-deeper",
+      "purpose": "Deeper personalized structure is disclosed only by the experience state."
+    }
+  ],
+  "freeDepthRule": "FREE_SNAPSHOT may name the existence/categories of deeper structure but locked selected nodes must use generic locked detail and must not expose personalized deep labels through semantic zoom.",
+  "paidDepthRule": "PAID_DEPTH may reveal governed selected deep labels/details already present in the ECR projection.",
+  "languageRule": {
+    "customerMeaningFirst": true,
+    "technicalCodesSecondary": true,
+    "technicalTraceabilityPreserved": true
+  },
+  "interactionRule": {
+    "pointerFocusParity": true,
+    "keyboardEnterSpaceActivation": true,
+    "escapeReturnsToInitialSelectedNode": true
+  },
+  "boundaries": {
+    "zoomCreatesMeaning": false,
+    "zoomChangesCoordinate": false,
+    "zoomChangesAuthority": false,
+    "zoomMayUnlockPaidDepth": false,
+    "rendererRecalculates": false
+  },
+  "nextGate": "PVP-R1-VIS-W14 FREE / PAID MANDALA STATES"
+}

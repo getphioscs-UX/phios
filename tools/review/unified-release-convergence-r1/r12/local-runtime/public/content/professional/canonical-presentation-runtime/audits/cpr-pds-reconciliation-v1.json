@@ -1,0 +1,53 @@
+{
+  "reconciliationCode": "PHI-OS-CPR-PDS-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "work": "CPR-W0",
+  "status": "reconciled",
+  "productionStatus": "validation_only",
+  "pdsAuthorityReferences": {
+    "experienceContract": "content/registry/pds-w1-experience-contract.json",
+    "designTokenContract": "content/registry/pds-w2-design-token-contract.json",
+    "componentShellContract": "content/registry/pds-w3-core-component-shell-contract.json",
+    "knowledgeProfessionalContract": "content/registry/pds-w9-knowledge-professional.json",
+    "fullSiteAcceptance": "content/registry/pds-w10-full-site-acceptance.json",
+    "canonicalTokenSource": "assets/css/tokens.css"
+  },
+  "informationLayerReconciliation": [
+    {
+      "cprLayer": "L1_IMMEDIATE_UNDERSTANDING",
+      "pdsLayer": "customer-primary",
+      "pdsOrder": 1
+    },
+    {
+      "cprLayer": "L2_CONFIRMATION",
+      "pdsLayer": "customer-confirmation",
+      "pdsOrder": 2
+    },
+    {
+      "cprLayer": "L3_PROFESSIONAL_EVIDENCE",
+      "pdsLayer": "professional-analysis",
+      "pdsOrder": 3
+    },
+    {
+      "cprLayer": "L4_TECHNICAL_RECORD",
+      "pdsLayer": "technical-record",
+      "pdsOrder": 4
+    }
+  ],
+  "rules": {
+    "pdsTokensReferencedNotCopied": true,
+    "visualTokensCannotRepresentRuntimeObjectOrStateAuthority": true,
+    "customerDefaultDensityPreserved": true,
+    "professionalAndTechnicalMayReadSameRealityAtHigherDensity": true,
+    "unknownIsNotFailure": true,
+    "certaintyMustRemainDistinguishable": true,
+    "legacyHardcodedValuesAreNotCprAuthority": true,
+    "cprThemeIsNotKnowledgeTaxonomyTheme": true
+  },
+  "invariants": {
+    "pdsRebuilt": false,
+    "secondDesignAuthorityCreated": false,
+    "runtimeTokenAuthorityTransferred": false,
+    "knowledgeThemeAuthorityTransferred": false
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/birth-data.v1.json",
+  "title": "PHI OS Shared External Reader Birth Data",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "birth_date",
+    "birth_time",
+    "birth_place",
+    "birth_timezone",
+    "latitude",
+    "longitude",
+    "birth_time_accuracy",
+    "source",
+    "client_confirmed"
+  ],
+    "properties": {
+    "birth_data_id": {"type": "string", "minLength": 1},
+    "client_id": {"type": "string", "minLength": 1},
+    "birth_date": {"type": ["string", "null"], "format": "date"},
+    "birth_time": {
+      "type": ["string", "null"],
+      "pattern": "^([01]\\d|2[0-3]):[0-5]\\d(:[0-5]\\d)?$"
+    },
+    "birth_place": {"type": ["string", "null"]},
+    "birth_timezone": {"type": ["string", "null"]},
+    "daylight_saving_status": {"type": ["string", "null"]},
+    "latitude": {"type": ["number", "null"], "minimum": -90, "maximum": 90},
+    "longitude": {"type": ["number", "null"], "minimum": -180, "maximum": 180},
+    "birth_time_accuracy": {
+      "enum": ["exact", "documented", "approximate", "unknown", "rectified"]
+    },
+    "source": {"$ref": "source-label.schema.json"},
+    "client_confirmed": {"type": "boolean"},
+    "calculation_settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "calendar_system": {"type": ["string", "null"]},
+        "timezone_method": {"type": ["string", "null"]},
+        "solar_time_method": {"type": ["string", "null"]},
+        "school_or_lineage": {"type": ["string", "null"]},
+        "calculation_method": {"type": ["string", "null"]}
+      }
+    },
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"}
+  }
+}

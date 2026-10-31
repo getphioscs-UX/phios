@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W5-INPUT-BUNDLE-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W5",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_STRUCTURED_INPUT_BUNDLE_CONTRACT",
+  "canonicalObject": "RuntimeReadingInputBundle",
+  "definition": "A reference-led bundle that composes governed input and runtime references for one Runtime Reading case without becoming a second fact store.",
+  "requiredRootFields": [
+    "bundleId",
+    "bundleVersion",
+    "caseReference",
+    "identity",
+    "birthData",
+    "selectedMethods",
+    "currentReality",
+    "timeline",
+    "environment",
+    "carrier",
+    "relationships",
+    "financial",
+    "professionalContext",
+    "governanceBindings",
+    "unknowns",
+    "bundleDigest"
+  ],
+  "fieldContracts": {
+    "identity": {
+      "mode": "REFERENCE_ONLY",
+      "authority": "ICR_OR_ACCOUNT_SUBJECT_REFERENCE",
+      "rawCredentialAllowed": false
+    },
+    "birthData": {
+      "mode": "ICR_REFERENCE_ONLY",
+      "authority": "content/runtime/input-case-runtime/contracts/birth-data-contract-v1.json",
+      "rawBirthFactDuplicationAllowed": false
+    },
+    "selectedMethods": {
+      "mode": "EXPLICIT_SELECTION_LIST",
+      "consentReferenceRequiredPerMethod": true
+    },
+    "currentReality": {
+      "mode": "RMO_RRE_REFERENCE_SET",
+      "initialStructureSubstitutionAllowed": false
+    },
+    "timeline": {
+      "mode": "PROVENANCE_TYPED_REFERENCE_SET"
+    },
+    "environment": {
+      "mode": "ICR_OR_RMO_REFERENCE_SET"
+    },
+    "carrier": {
+      "mode": "ICR_OR_RMO_REFERENCE_SET",
+      "personalityInferenceAllowed": false
+    },
+    "relationships": {
+      "mode": "OPTIONAL_REFERENCE_SET"
+    },
+    "financial": {
+      "mode": "OPTIONAL_REFERENCE_SET",
+      "currentAuthorityState": "FDR_NOT_YET_ADMITTED"
+    },
+    "professionalContext": {
+      "mode": "OPTIONAL_PR_REFERENCE_SET",
+      "selfServiceAllowed": false
+    }
+  },
+  "rules": {
+    "bundleMayBecomeSecondFactAuthority": false,
+    "manualWordTemplateIsCanonicalInput": false,
+    "rawInputCopyRequired": false,
+    "unknownMustRemainExplicit": true,
+    "optionalMissingFieldMayBeGuessed": false,
+    "aiMayFillMissingField": false,
+    "providerMayRepairInput": false,
+    "bundleDigestMustBeDeterministic": true
+  }
+}

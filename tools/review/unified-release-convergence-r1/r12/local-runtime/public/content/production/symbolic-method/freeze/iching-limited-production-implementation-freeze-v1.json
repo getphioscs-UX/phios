@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-LIMITED-PRODUCTION-IMPLEMENTATION-FREEZE-v1.0.0",
+  "work": "ICH-PROD-W28",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "IMPLEMENTATION_FROZEN_DEPLOYMENT_CONFIGURATION_AND_LIVE_LIMITED_ACCEPTANCE_PENDING",
+  "artifacts": [
+    {
+      "path": "functions/iching-limited-production/iching-limited-production-v1.js",
+      "sha256": "d1150295d7f6bf0f33f3d683d9ef7d695ee263789e6439792eb58d8d0e91c537"
+    },
+    {
+      "path": "functions/api/iching-limited-session.js",
+      "sha256": "9c83e619180d4398037b2246feb8a53ad09589459fb27fcf8fc86af99cb384e1"
+    },
+    {
+      "path": "functions/api/symbolic-method-execute-v4.js",
+      "sha256": "c123b691936deef605813914359869cae9d1d6da47662bbf14bcfdcdf1167c51"
+    },
+    {
+      "path": "functions/api/_middleware.js",
+      "sha256": "0708478f16141f80cb24865be007d98cecc0c451cf2887f8cff4bd635daa1a2a"
+    },
+    {
+      "path": "content/production/symbolic-method/rights/iching-limited-production-rights-scope-v1.json",
+      "sha256": "a28dbb38c4a804d840f911f2ba84583e81084f4efa35aab11f1a4daa63163a77"
+    },
+    {
+      "path": "content/production/symbolic-method/reconciliation/iching-limited-production-readiness-v1.json",
+      "sha256": "7b9ac9847470d98b56c558746ab3cf55678990a8c9f78bf3d91e494b20042bd5"
+    },
+    {
+      "path": "scripts/check-iching-limited-production-static.mjs",
+      "sha256": "e83048560a10e9b78443a6949a53e3a03d8970b16f818cd8ca36e7aa13127142"
+    },
+    {
+      "path": "scripts/check-iching-limited-production-live.mjs",
+      "sha256": "d931b3cf59317677e7bd9e9bfefd38bab1936873439ea529518dabff3fc2784b"
+    },
+    {
+      "path": "docs/ICHING-LIMITED-PRODUCTION-ACTIVATION.md",
+      "sha256": "07334f883d5abd7a6d50da895beaf921c79f6ab432e4bc9668cf0bb8325d1463"
+    }
+  ],
+  "acceptance": {
+    "humanBase": "24/24",
+    "humanDepth": "448/448",
+    "admittedDepth": "448/448",
+    "bilingualRuntimeCases": "896/896",
+    "accessJwtCryptographicVerificationRequired": true,
+    "runtimeDbWriteReadCleanupProbeRequired": true,
+    "stableExecutePathPromotedOnlyForSignedBetaSession": true,
+    "guestRunAllowed": false,
+    "retentionImplicitlyGranted": false,
+    "fullProductionAllowed": false
+  },
+  "deploymentBoundary": {
+    "sourceImplementationComplete": true,
+    "newCommitDeploymentRequired": true,
+    "exactLiveShaAcceptanceRequired": true,
+    "cloudflareAccessConfigurationRequired": true,
+    "productionD1BindingRequired": true,
+    "rightsAttestationRequired": true,
+    "liveLimitedProductionClaimed": false
+  }
+}

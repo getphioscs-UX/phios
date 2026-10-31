@@ -1,0 +1,25 @@
+{
+  "registryCode": "PHI-OS-PR-E6-RR-HANDOFF-STATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "status": "canonical_extension",
+  "states": [
+    {
+      "code": "BLOCKED_PR_APPROVAL_REQUIRED",
+      "ready": false
+    },
+    {
+      "code": "BLOCKED_PR_SIGNATURE_REQUIRED",
+      "ready": false
+    },
+    {
+      "code": "READY_FOR_RR_PROFESSIONAL_APPROVAL_GATE",
+      "ready": true
+    }
+  ],
+  "rules": {
+    "approvedStateMinimumWhenNoSignatureRequired": true,
+    "signedOrReleasedRequiredWhenSignatureRequired": true,
+    "rrProfessionalApprovalCreationForbidden": true
+  }
+}

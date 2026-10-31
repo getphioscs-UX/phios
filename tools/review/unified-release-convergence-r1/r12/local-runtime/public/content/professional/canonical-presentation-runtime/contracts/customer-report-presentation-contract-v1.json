@@ -1,0 +1,41 @@
+{
+  "contractCode": "PHI-OS-CUSTOMER-REPORT-PRESENTATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W4",
+  "status": "CURRENT_CUSTOMER_SAFE_PROJECTION_CONTRACT",
+  "requiredFields": [
+    "presentationCode",
+    "presentationVersion",
+    "reportReference",
+    "releaseReference",
+    "customerReference",
+    "surface",
+    "presentationType",
+    "locale",
+    "audience",
+    "informationLayer",
+    "sections",
+    "sourceAssetReferences",
+    "sourceProjectionReferences",
+    "pdsReferences",
+    "accessibilityContract",
+    "responsiveContract",
+    "renderState"
+  ],
+  "constants": {
+    "audience": "CUSTOMER",
+    "presentationType": "REPORT_SECTION"
+  },
+  "authorizationOrder": [
+    "CUSTOMER_AUTHORIZATION",
+    "RELEASE_ELIGIBILITY",
+    "CPR_AUDIENCE_PROJECTION"
+  ],
+  "rules": {
+    "audienceDoesNotGrantDataAccess": true,
+    "reportContentAuthorityPreserved": true,
+    "professionalJudgmentPreserved": true,
+    "technicalInternalsForbidden": true
+  }
+}

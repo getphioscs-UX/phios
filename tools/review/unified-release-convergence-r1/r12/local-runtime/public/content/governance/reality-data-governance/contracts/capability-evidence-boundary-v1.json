@@ -1,0 +1,33 @@
+{
+  "contractCode": "PHI-OS-RDG-W24-CAPABILITY-EVIDENCE-BOUNDARY-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W24",
+  "status": "active",
+  "sequence": [
+    "LEARNING_EXPOSURE",
+    "PRACTICE",
+    "ASSESSMENT",
+    "CAPABILITY_EVIDENCE",
+    "CAPABILITY_STATE"
+  ],
+  "evidenceRequiredInputs": [
+    "capabilityEvidenceCode",
+    "learningRecordReference",
+    "practiceReference",
+    "assessmentReference",
+    "criterionResults",
+    "lineageReferences",
+    "recordedAt"
+  ],
+  "eligibilityOutputs": ["ELIGIBLE_FOR_ALR_REVIEW", "INSUFFICIENT", "INELIGIBLE", "DISPUTED", "UNKNOWN", "DENY_ALR_AUTHORITY"],
+  "finalCapabilityAuthority": "ALR Capability Runtime",
+  "rules": {
+    "watchedLessonIsCapabilityAchieved": false,
+    "assessmentScoreAloneIsCapabilityEvidence": false,
+    "capabilityEvidenceIsCapabilityState": false,
+    "rdgGovernsEvidenceDataOnly": true,
+    "onlyAlrMayDetermineCapabilityState": true,
+    "unknownAndDisputedRemainGovernedStates": true,
+    "evidenceEligibilityDoesNotGrantCredential": true
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/cx/customer-reading-ia-v2.schema.json",
+  "title": "PHI OS Customer Reading IA v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodId",
+    "readingAuthorityRef",
+    "semanticDigest",
+    "sections",
+    "progressiveDisclosure",
+    "methodDetail",
+    "boundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CUSTOMER-READING-IA-v2.0.0"
+    },
+    "methodId": {
+      "type": "string"
+    },
+    "readingAuthorityRef": {
+      "type": "string"
+    },
+    "semanticDigest": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sectionId",
+          "order",
+          "customerLabel",
+          "disclosureLevel",
+          "eligibility",
+          "items",
+          "itemCount"
+        ],
+        "properties": {
+          "sectionId": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
+          },
+          "customerLabel": {
+            "type": "string"
+          },
+          "disclosureLevel": {
+            "type": "string"
+          },
+          "eligibility": {
+            "enum": [
+              "SECTION_ELIGIBLE",
+              "SECTION_NOT_ELIGIBLE"
+            ]
+          },
+          "items": {
+            "type": "array"
+          },
+          "itemCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "progressiveDisclosure": {
+      "type": "array"
+    },
+    "methodDetail": {
+      "type": "object"
+    },
+    "boundary": {
+      "type": "object"
+    }
+  }
+}

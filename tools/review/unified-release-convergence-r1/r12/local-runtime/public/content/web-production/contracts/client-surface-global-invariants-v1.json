@@ -1,0 +1,281 @@
+{
+  "schemaVersion": "PHI-OS-CLIENT-SURFACE-GLOBAL-INVARIANTS-v1.0.0",
+  "work": "CLIENT-SURFACE-INV-01-INV-10",
+  "baselineCommit": "a6395ad926ce1bcd318b596d6f6ce028f5b96ae9",
+  "status": "ACTIVE_CROSS_AUTHORITY_INVARIANT_CONTRACT",
+  "purpose": "Freeze the ten Client Surface Production global invariants before BFR-H, HPC2 and CKA implementation. This layer governs reconciliation and downstream acceptance only; it creates no second Knowledge, Method, Meaning, Reality, Reading, Interpretation or Professional authority.",
+  "authorityBoundary": {
+    "owns": [
+      "CROSS_SURFACE_GUARDRAIL",
+      "DOWNSTREAM_ACCEPTANCE_REQUIREMENT"
+    ],
+    "doesNotOwn": [
+      "CANONICAL_KNOWLEDGE",
+      "PUBLISHED_KNOWLEDGE",
+      "METHOD_DEFINITION",
+      "METHOD_PRODUCTION_ELIGIBILITY",
+      "METHOD_EXECUTION",
+      "METHOD_PROJECTION",
+      "INTERPRETATION",
+      "CANONICAL_MEANING",
+      "READING",
+      "REALITY_CASE",
+      "REALITY_VERSION",
+      "REALITY_CONTINUITY",
+      "PROFESSIONAL_JUDGMENT",
+      "PDS",
+      "CPR",
+      "WPR_V1"
+    ],
+    "upstreamContractsMutatedByThisWork": false,
+    "secondRuntimeCreated": false,
+    "productionSurfaceActivationGranted": false
+  },
+  "invariants": [
+    {
+      "code": "INV-01",
+      "title": "Backend exists ≠ Frontend consumes it",
+      "statement": "BACKEND_EXISTS_NOT_EQUAL_FRONTEND_CONSUMES_IT",
+      "requirements": [
+        "EVERY_PRODUCTION_BACKEND_CAPABILITY_HAS_ACTUAL_CLIENT_CONSUMER_OR_NONE_BY_DESIGN",
+        "SILENT_ORPHAN_FORBIDDEN"
+      ],
+      "forbidden": [
+        "BACKEND_EXISTENCE_AS_PROOF_OF_CLIENT_CONSUMPTION"
+      ],
+      "currentAuthorityEvidence": [
+        "content/web-production/registries/wpr-runtime-consumption-registry-v1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "BFR-H0_BACKEND_CAPABILITY_INVENTORY",
+        "BFR-H2_CAPABILITY_SURFACE_GAP_MATRIX",
+        "BFR-H15_CAPABILITY_CONSUMPTION_ACCEPTANCE"
+      ]
+    },
+    {
+      "code": "INV-02",
+      "title": "R2 asset exists ≠ Frontend integration complete",
+      "statement": "R2_ASSET_EXISTS_NOT_EQUAL_FRONTEND_INTEGRATION_COMPLETE",
+      "requiredLineage": [
+        "R2_ASSET",
+        "REGISTRY",
+        "RESOLVER",
+        "CONSUMER",
+        "VISIBLE"
+      ],
+      "requirements": [
+        "ASSET_EXISTENCE_ALONE_MAY_NOT_MARK_INTEGRATION_COMPLETE",
+        "CONSUMER_AND_VISIBLE_EVIDENCE_REQUIRED"
+      ],
+      "currentAuthorityEvidence": [
+        "content/registry/public-assets.json",
+        "content/web-production/contracts/wpr-public-asset-resolution-v1.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "downstreamEvidenceRequired": [
+        "BFR-H11_R2_VISUAL_ASSET_INTEGRATION",
+        "BFR-H15_CAPABILITY_CONSUMPTION_ACCEPTANCE",
+        "BFR-H16_VISUAL_PRODUCTION_ACCEPTANCE"
+      ]
+    },
+    {
+      "code": "INV-03",
+      "title": "Homepage capability coverage HIGH ≠ information density HIGH",
+      "statement": "HOMEPAGE_CAPABILITY_COVERAGE_HIGH_NOT_EQUAL_INFORMATION_DENSITY_HIGH",
+      "requirements": [
+        "HOMEPAGE_CAPABILITY_COVERAGE_HIGH",
+        "HOMEPAGE_VISUAL_COVERAGE_HIGH",
+        "INFORMATION_DENSITY_DECIDED_SEPARATELY"
+      ],
+      "forbidden": [
+        "ONE_HOMEPAGE_SECTION_PER_BACKEND_CAPABILITY"
+      ],
+      "currentAuthorityEvidence": [
+        "content/web-production/composition/public/homepage-composition-v1.1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "BFR-H7_HOMEPAGE_RECOMPOSITION_REQUIREMENT",
+        "HPC2-P0_HOMEPAGE_CAPABILITY_INTAKE",
+        "HPC2-W1_HOMEPAGE_NARRATIVE_SPINE"
+      ]
+    },
+    {
+      "code": "INV-04",
+      "title": "Runtime added ≠ Homepage section added",
+      "statement": "RUNTIME_ADDED_NOT_EQUAL_HOMEPAGE_SECTION_ADDED",
+      "requirements": [
+        "EVERY_NEW_RUNTIME_DECLARE_HOME_SCENE_CONSUMER_OR_NONE_BY_DESIGN"
+      ],
+      "allowedDeclarations": [
+        "HOME_SCENE_CONSUMER",
+        "NONE_BY_DESIGN"
+      ],
+      "forbidden": [
+        "NEW_RUNTIME_AUTOMATICALLY_CREATES_HOMEPAGE_SECTION"
+      ],
+      "currentAuthorityEvidence": [
+        "content/web-production/registries/wpr-runtime-consumption-registry-v1.json",
+        "content/web-production/composition/public/homepage-composition-v1.1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "BFR-H0_BACKEND_CAPABILITY_INVENTORY",
+        "HPC2-P0_HOMEPAGE_CAPABILITY_INTAKE",
+        "HPC2-W1_HOMEPAGE_SCENE_REGISTRY"
+      ]
+    },
+    {
+      "code": "INV-05",
+      "title": "Ask PHI OS ≠ Generic chatbot",
+      "statement": "ASK_PHIOS_NOT_EQUAL_GENERIC_CHATBOT",
+      "requiredFlow": [
+        "QUESTION",
+        "GROUNDED_ANSWER",
+        "OBSERVATION",
+        "UNKNOWN",
+        "RELATED_KNOWLEDGE",
+        "CONTEXT_IF_NEEDED",
+        "JOURNEY_ONLY_WHEN_COMPLEXITY_REQUIRES"
+      ],
+      "forbidden": [
+        "UNLIMITED_GENERAL_CHAT_AUTHORITY"
+      ],
+      "currentAuthorityEvidence": [
+        "content/knowledge/answer-projection/acceptance/kap-w11-w17-answer-composition-acceptance-v1.json",
+        "content/knowledge/answer-projection/contracts/kap-w22-guided-stop-condition-contract-v1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "CKA-W1_QUESTION_COMPOSER",
+        "CKA-W2_ANSWER_SURFACE",
+        "CKA-W4_FOLLOW_UP"
+      ]
+    },
+    {
+      "code": "INV-06",
+      "title": "Ask PHI OS ≠ Reality Journey",
+      "statement": "ASK_PHIOS_NOT_EQUAL_REALITY_JOURNEY",
+      "routing": {
+        "SIMPLE_QUESTION": "ANSWER",
+        "NEEDS_SOME_CONTEXT": "GUIDED_CONTEXT",
+        "COMPLEX_PERSISTENT_MULTI_FACTOR": "REALITY_JOURNEY_CANDIDATE"
+      },
+      "requirements": [
+        "AUTOMATIC_REALITY_JOURNEY_FORBIDDEN",
+        "EXPLICIT_HANDOFF_REQUIRED"
+      ],
+      "currentAuthorityEvidence": [
+        "content/knowledge/answer-projection/contracts/kap-w22-guided-stop-condition-contract-v1.json",
+        "content/knowledge/answer-projection/acceptance/kap-w23-w25-reality-complexity-acceptance-v1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "CKA-W5_GUIDED_CTA",
+        "CKA-W6_JOURNEY_CTA"
+      ]
+    },
+    {
+      "code": "INV-07",
+      "title": "Question Context ≠ Canonical Reality Case",
+      "statement": "QUESTION_CONTEXT_NOT_EQUAL_CANONICAL_REALITY_CASE",
+      "requirements": [
+        "SIMPLE_ASK_CONTEXT_IS_EPHEMERAL",
+        "CANONICAL_CASE_ONLY_INSIDE_REALITY_FLOW",
+        "REALITY_VERSION_ONLY_INSIDE_REALITY_FLOW",
+        "CONTINUITY_ONLY_INSIDE_REALITY_FLOW"
+      ],
+      "forbidden": [
+        "ASK_CONTEXT_SILENTLY_BECOMES_CANONICAL_REALITY"
+      ],
+      "currentAuthorityEvidence": [
+        "content/knowledge/answer-projection/contracts/kap-w20-guided-answer-context-contract-v1.json",
+        "content/knowledge/answer-projection/acceptance/kap-w23-w25-reality-complexity-acceptance-v1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "CKA-W5_GUIDED_CONTEXT_INTAKE",
+        "CKA-W6_JOURNEY_HANDOFF",
+        "ICR_CASE_INITIALIZATION_AUTHORITY"
+      ]
+    },
+    {
+      "code": "INV-08",
+      "title": "Ask ≠ Method Execution",
+      "statement": "ASK_NOT_EQUAL_METHOD_EXECUTION",
+      "requirements": [
+        "BIRTH_INPUT_DOES_NOT_AUTOMATICALLY_EXECUTE_ALL_METHODS",
+        "CKA_MAY_NOT_OWN_METHOD_EXECUTION"
+      ],
+      "requiredExecutionSequence": [
+        "READINESS",
+        "DISCLOSURE",
+        "CONSENT",
+        "MPA_ELIGIBILITY",
+        "EXECUTION",
+        "NORMALIZATION"
+      ],
+      "currentAuthorityEvidence": [
+        "content/knowledge/answer-projection/contracts/kap-w18b-method-consent-gate-contract-v1.json",
+        "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+        "content/professional/method-production-activation/contracts/mpa-production-eligibility-decision-v1.json",
+        "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "CKA_METHOD_HANDOFF_NO_DIRECT_EXECUTION",
+        "MCD_DISCLOSURE_CONSUMER",
+        "MCD_CANONICAL_NORMALIZATION_CONSUMER"
+      ]
+    },
+    {
+      "code": "INV-09",
+      "title": "Simple public Ask ≠ Account required",
+      "statement": "SIMPLE_PUBLIC_ASK_NOT_EQUAL_ACCOUNT_REQUIRED",
+      "guestAllowed": [
+        "ASK",
+        "ANSWER",
+        "LIMITED_FOLLOW_UP",
+        "RELATED_KNOWLEDGE",
+        "TEMPORARY_CONTEXT"
+      ],
+      "accountOrEntitlementRequiredFor": [
+        "HISTORY",
+        "SAVED_RESULT",
+        "METHOD_EXECUTION",
+        "CASE_PERSISTENCE",
+        "JOURNEY_CONTINUITY"
+      ],
+      "currentAuthorityEvidence": [
+        "functions/api/ask-phios.js",
+        "content/knowledge/answer-projection/acceptance/kap-w11-w17-answer-composition-acceptance-v1.json"
+      ],
+      "downstreamEvidenceRequired": [
+        "CKA-W7_ACCOUNT_BOUNDARY",
+        "BFR-H15_PUBLIC_GUEST_ASK_ACCEPTANCE"
+      ]
+    },
+    {
+      "code": "INV-10",
+      "title": "Homepage simplification ≠ V8 content deletion",
+      "statement": "HOMEPAGE_SIMPLIFICATION_NOT_EQUAL_V8_CONTENT_DELETION",
+      "requirements": [
+        "EVERY_V8_SEMANTIC_BLOCK_HAS_SUCCESSOR_DESTINATION_BEFORE_HOMEPAGE_REMOVAL",
+        "SUCCESSOR_VERIFIED_BEFORE_DELETION_ALLOWED_FROM_HOMEPAGE"
+      ],
+      "sourceArtifact": "PHIOS-market-positioning-founder-v8-no-pricing.html",
+      "forbidden": [
+        "SEMANTIC_BLOCK_DELETION_WITHOUT_SUCCESSOR"
+      ],
+      "currentAuthorityEvidence": [],
+      "downstreamEvidenceRequired": [
+        "HPC2-W0_V8_CONTENT_PRESERVATION_MANIFEST",
+        "HPC2-W0_V8_CONTENT_DESTINATION_MAP",
+        "HPC2-W0_V8_CONTENT_PRESERVATION_ACCEPTANCE"
+      ]
+    }
+  ],
+  "globalRules": {
+    "allTenInvariantsMustRemainEnforced": true,
+    "downstreamCheckerMayStrengthenButNotWeakenWithoutVersionedSuccessor": true,
+    "futureBfrHCheckerMustConsumeThisContract": true,
+    "futureHpc2CheckerMustConsumeThisContract": true,
+    "futureCkaCheckerMustConsumeThisContract": true,
+    "foundationAcceptanceDoesNotEqualProductionAcceptance": true
+  }
+}

@@ -1,0 +1,236 @@
+
+--- 2026-10-31T05:40:56.792Z debug
+🪵  Writing logs to "C:\phios\tools\review\unified-release-convergence-r1\r12\local-runtime.log"
+---
+
+--- 2026-10-31T05:40:56.792Z debug
+.env file not found at "C:\phios\tools\review\unified-release-convergence-r1\r12\local-runtime\.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-31T05:40:56.815Z debug
+.env file not found at "C:\phios\tools\review\unified-release-convergence-r1\r12\local-runtime\.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-31T05:40:56.889Z log
+
+ ⛅️ wrangler 4.120.0 (update available 4.156.0)
+───────────────────────────────────────────────
+---
+
+--- 2026-10-31T05:40:56.967Z debug
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"6dffebde-dc16-4758-b849-a06200e2db79","event":"wrangler command started","timestamp":1793425256967,"properties":{"amplitude_session_id":1793425256891,"amplitude_event_id":0,"wranglerVersion":"4.120.0","wranglerMajorVersion":4,"wranglerMinorVersion":120,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Home Single Language","nodeVersion":24,"isFirstUsage":false,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":"codex","argsUsed":["inspectorPort","ip","port"],"argsCombination":"inspectorPort, ip, port","sanitizedCommand":"pages dev","sanitizedArgs":{},"currentAgentSkillsInstalled":false}}.
+---
+
+--- 2026-10-31T05:41:00.414Z log
+✨ Compiled Worker successfully
+---
+
+--- 2026-10-31T05:41:00.920Z log
+✨ Parsed 76 valid redirect rules.
+---
+
+--- 2026-10-31T05:41:00.921Z log
+✨ Parsed 11 valid header rules.
+---
+
+--- 2026-10-31T05:41:00.924Z debug
+setting config
+---
+
+--- 2026-10-31T05:41:00.924Z debug
+Updating config... undefined undefined
+---
+
+--- 2026-10-31T05:41:00.966Z debug
+local dev variables file not found at "..\..\..\..\..\.dev.vars". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-31T05:41:00.966Z debug
+.env file not found at "C:\phios\.env". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-31T05:41:00.967Z debug
+.env file not found at "C:\phios\.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+---
+
+--- 2026-10-31T05:41:00.972Z log
+Your Worker has access to the following bindings:
+---
+
+--- 2026-10-31T05:41:00.973Z log
+Binding                                                                                Resource                  Mode
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.RUNTIME_DB (phios-runtime-production)                                              D1 Database               local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.MANUSCRIPTS (phios-private-manuscripts)                                            R2 Bucket                 local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.PRIVATE_REPORTS (phios-private-reports)                                            R2 Bucket                 local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.METHOD_REPORT_RENDERER (phios-method-report-renderer-production)                   Worker                    local [not connected]
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.AI                                                                                 AI                        remote
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.CF_PAGES ("1")                                                                     Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.CF_PAGES_BRANCH ("main")                                                           Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.CF_PAGES_COMMIT_SHA ("d15ae4c8480cf46f81152fb8c87e623f1b8fb...")                   Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.CF_PAGES_URL ("https://d15ae4c8.phios-unified-r12-lo...")                          Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.PHIOS_D1_MAINTENANCE_MODE ("READ_ONLY")                                            Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.PHIOS_ENVIRONMENT ("production")                                                   Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.STRIPE_ENVIRONMENT ("LIVE")                                                        Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.PHIOS_SHARED_PAID_REPORT_ENABLED ("true")                                          Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.PHIOS_P9_CANARY_ENABLED ("false")                                                  Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.973Z log
+env.PHIOS_P9_CHECKOUT_ENABLED ("false")                                                Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.974Z log
+env.PHIOS_P9_REFUND_ENABLED ("false")                                                  Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.974Z log
+env.REPORT_PROVIDER_LIVE_ALLOWED ("false")                                             Environment Variable      local
+---
+
+--- 2026-10-31T05:41:00.974Z log
+
+---
+
+--- 2026-10-31T05:41:00.974Z log
+
+Service bindings, Durable Object bindings, and Tail consumers connect to other Wrangler or Vite dev processes running locally, with their connection status indicated by [connected] or [not connected]. For more details, refer to https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings/#local-development
+
+---
+
+--- 2026-10-31T05:41:01.019Z debug
+Metrics dispatcher: Dispatching disabled - would have sent {"deviceId":"6dffebde-dc16-4758-b849-a06200e2db79","event":"run pages dev","timestamp":1793425261019,"properties":{"amplitude_session_id":1793425261017,"amplitude_event_id":0,"wranglerVersion":"4.120.0","wranglerMajorVersion":4,"wranglerMinorVersion":120,"wranglerPatchVersion":0,"osPlatform":"Windows","osVersion":"Windows 11 Home Single Language","nodeVersion":24,"isFirstUsage":false,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"agent":"codex","category":"Workers","os":"win32:x64","currentAgentSkillsInstalled":false}}.
+---
+
+--- 2026-10-31T05:41:07.734Z debug
+RemoteRuntimeController teardown beginning...
+---
+
+--- 2026-10-31T05:41:07.735Z debug
+RemoteRuntimeController teardown complete
+---
+
+--- 2026-10-31T05:41:07.751Z log
+⎔ Establishing remote connection...
+---
+
+--- 2026-10-31T05:41:08.175Z debug
+[InspectorProxyWorker] handleProxyControllerIncomingMessage {"type":"reloadStart"}
+---
+
+--- 2026-10-31T05:41:11.973Z warn
+▲ [WARNING] AI bindings always access remote resources, and so may incur usage charges even in local dev. To suppress this warning, set `remote: true` for the binding definition in your configuration file.
+
+
+---
+
+--- 2026-10-31T05:41:11.976Z log
+⎔ Starting local server...
+---
+
+--- 2026-10-31T05:41:18.967Z debug
+[InspectorProxyWorker] reconnectRuntimeWebSocket
+---
+
+--- 2026-10-31T05:41:18.971Z debug
+[InspectorProxyWorker] NEW RUNTIME WEBSOCKET http://127.0.0.1:52141/core:user:phios-github
+---
+
+--- 2026-10-31T05:41:18.973Z debug
+[InspectorProxyWorker] SEND TO DEVTOOLS {"method":"Runtime.executionContextsCleared"}
+---
+
+--- 2026-10-31T05:41:18.975Z debug
+[InspectorProxyWorker] handleProxyControllerIncomingMessage {"type":"reloadComplete","proxyData":{"userWorkerUrl":{"protocol":"http:","hostname":"127.0.0.1","port":"52142"},"userWorkerInspectorUrl":{"protocol":"ws:","hostname":"127.0.0.1","port":"52141","pathname":"/core:user:phios-github"},"userWorkerInnerUrlOverrides":{"protocol":"http:"},"headers":{"MF-Proxy-Shared-Secret":"785f4cf4-f63b-4e11-b238-59df1002c2b2"},"liveReload":false,"proxyLogsToController":false}}
+---
+
+--- 2026-10-31T05:41:18.983Z debug
+[InspectorProxyWorker] RUNTIME WEBSOCKET OPENED
+---
+
+--- 2026-10-31T05:41:18.985Z debug
+[InspectorProxyWorker] SEND TO RUNTIME {"method":"Runtime.enable","id":100000001}
+---
+
+--- 2026-10-31T05:41:19.002Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE {
+  method: 'Runtime.executionContextCreated',
+  params: {
+    context: {
+      id: 314905281,
+      origin: '',
+      name: 'Worker',
+      uniqueId: '-8970019531357586572.-3476190946569878812'
+    }
+  }
+}
+---
+
+--- 2026-10-31T05:41:19.019Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE { id: 100000001, result: {} }
+---
+
+--- 2026-10-31T05:41:28.985Z debug
+[InspectorProxyWorker] SEND TO RUNTIME {"method":"Runtime.getIsolateId","id":100000002}
+---
+
+--- 2026-10-31T05:41:29.052Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE { id: 100000002, result: { id: '11071f480dc3afcb' } }
+---
+
+--- 2026-10-31T05:41:38.998Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE { id: 100000003, result: { id: '11071f480dc3afcb' } }
+---
+
+--- 2026-10-31T05:41:38.999Z debug
+[InspectorProxyWorker] SEND TO RUNTIME {"method":"Runtime.getIsolateId","id":100000003}
+---
+
+--- 2026-10-31T05:41:49.005Z debug
+[InspectorProxyWorker] SEND TO RUNTIME {"method":"Runtime.getIsolateId","id":100000004}
+---
+
+--- 2026-10-31T05:41:49.041Z debug
+[InspectorProxyWorker] RUNTIME INCOMING MESSAGE { id: 100000004, result: { id: '11071f480dc3afcb' } }
+---

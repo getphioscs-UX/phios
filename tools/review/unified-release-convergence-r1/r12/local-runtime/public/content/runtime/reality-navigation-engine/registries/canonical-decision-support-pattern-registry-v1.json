@@ -1,0 +1,39 @@
+{
+  "registryCode": "PHI-OS-RNE-CANONICAL-DECISION-SUPPORT-PATTERN-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "containsUserData": false,
+  "patterns": [
+    {
+      "optionClass": "OBSERVE",
+      "tradeoffCode": "MORE_OBSERVATION_BEFORE_CHANGE",
+      "observationPoint": "AFTER_NEW_OBSERVATION"
+    },
+    {
+      "optionClass": "CLARIFY",
+      "tradeoffCode": "DEFER_COMMITMENT_UNTIL_UNKNOWN_REVIEW",
+      "observationPoint": "AFTER_UNKNOWN_REVIEW"
+    },
+    {
+      "optionClass": "VERIFY",
+      "tradeoffCode": "ADD_VERIFICATION_BEFORE_TRANSITION",
+      "observationPoint": "AFTER_DEPENDENCY_VERIFICATION"
+    },
+    {
+      "optionClass": "REPOSITION",
+      "tradeoffCode": "NARROW_ROUTE_TO_RESPECT_HARD_BOUNDARY",
+      "observationPoint": "AFTER_BOUNDARY_REPOSITION"
+    },
+    {
+      "optionClass": "RECONFIGURE",
+      "tradeoffCode": "CHANGE_CONFIGURATION_WITHIN_RECORDED_LIMITS",
+      "observationPoint": "AFTER_RECONFIGURATION_CHECK"
+    }
+  ],
+  "rules": {
+    "patternsAreGenericNavigationDescriptions": true,
+    "rankingImplied": false,
+    "recommendationCreated": false,
+    "professionalJudgmentCreated": false
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-SHARED-CALCULATION-RUNTIME-v1.0.0",
+  "stageCode": "MR-W3",
+  "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "595a0c8e0a1e0745734694a938268d32e35ea1b7"
+  },
+  "authority": {
+    "execution": "SHARED_CALCULATION_RUNTIME",
+    "input": "SHARED_DATA_AUTHORITY",
+    "algorithm": "IMR_ALGORITHM_GOVERNANCE",
+    "projection": false,
+    "interpretation": false,
+    "professional": false
+  },
+  "determinism": {
+    "repeatExecutionRequired": true,
+    "canonicalInputDigestRequired": true,
+    "outputDigestRequired": true,
+    "algorithmVersionRequired": true,
+    "referenceVersionsRequiredWhenUsed": true,
+    "silentRepairAllowed": false,
+    "unknownValuesRemainExplicit": true
+  },
+  "providerBoundary": {
+    "openAIAllowed": false,
+    "workersAIAllowed": false,
+    "promptAllowed": false,
+    "providerAllowed": false,
+    "aiUsed": false
+  },
+  "executionContract": {
+    "sharedAcrossMethods": true,
+    "methodSpecificRuntimeAllowed": false,
+    "pluginMayRegisterAlgorithm": true,
+    "pluginMayOverrideSharedData": false,
+    "inputRecordAuthority": "SHARED_DATA_AUTHORITY",
+    "resultContract": "PHI-OS-SHARED-CALCULATION-RESULT-v1.0.0"
+  },
+  "resultBoundary": {
+    "createsCalculationFact": true,
+    "createsProjection": false,
+    "createsInterpretation": false,
+    "createsProfessionalConclusion": false,
+    "createsRealityFact": false
+  },
+  "productionContract": {
+    "runtimeContractEstablished": true,
+    "productionAlgorithmsActivated": false,
+    "methodPluginActivated": false,
+    "nextGate": "MR-W4"
+  }
+}

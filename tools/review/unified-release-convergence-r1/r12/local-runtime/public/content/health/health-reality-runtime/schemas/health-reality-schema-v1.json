@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phios://health/health-reality-v1",
+  "title": "PHI OS Health Reality",
+  "type": "object",
+  "required": ["schemaVersion", "caseRef", "concerns", "observations", "evidence", "unknowns", "careState", "governance"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-HEALTH-REALITY-v1.0.0"},
+    "caseRef": {"type": "string", "minLength": 1},
+    "concerns": {"type": "array", "items": {"type": "string"}},
+    "symptoms": {"type": "array", "items": {"type": "object"}},
+    "observations": {"type": "array", "items": {"type": "object"}},
+    "measurements": {"type": "array", "items": {"type": "object"}},
+    "timeline": {"type": "array", "items": {"type": "object"}},
+    "knownDiagnoses": {"type": "array", "items": {"type": "object"}},
+    "medications": {"type": "array", "items": {"type": "object"}},
+    "allergies": {"type": "array", "items": {"type": "object"}},
+    "investigations": {"type": "array", "items": {"type": "object"}},
+    "clinicianFindings": {"type": "array", "items": {"type": "object"}},
+    "lifestyleContext": {"type": "array", "items": {"type": "object"}},
+    "recentChanges": {"type": "array", "items": {"type": "object"}},
+    "evidence": {"type": "array", "items": {"type": "object"}},
+    "warningSignals": {"type": "array", "items": {"type": "object"}},
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "contradictions": {"type": "array", "items": {"type": "string"}},
+    "careState": {"enum": ["INFORMATIONAL", "ROUTINE_REVIEW", "PROMPT_MEDICAL_REVIEW", "URGENT_EVALUATION", "EMERGENCY"]},
+    "nextReview": {"type": ["string", "null"]},
+    "governance": {
+      "type": "object",
+      "required": ["diagnosisEstablished", "treatmentPrescribed", "symbolicMethodUsedAsHealthAuthority"],
+      "properties": {
+        "diagnosisEstablished": {"const": false},
+        "treatmentPrescribed": {"const": false},
+        "symbolicMethodUsedAsHealthAuthority": {"const": false}
+      }
+    }
+  },
+  "additionalProperties": true
+}

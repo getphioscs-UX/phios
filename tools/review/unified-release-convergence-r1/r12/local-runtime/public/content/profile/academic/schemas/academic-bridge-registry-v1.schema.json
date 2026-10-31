@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.academic-bridge-registry.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "work", "baselineCommit", "status", "principle", "instruments", "governance", "gate"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-ACADEMIC-BRIDGE-REGISTRY-v1.0.0"},
+    "work": {"const": "PRF-W10"},
+    "baselineCommit": {"type": "string"},
+    "status": {"type": "string"},
+    "principle": {"type": "string"},
+    "instruments": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["priority", "instrumentFamily", "sourceClass", "sourceRefs", "sourceReviewState", "licenseUsageStatus", "scoringAuthority", "normingStatus", "customerAvailability", "admissionState", "customerClaimBoundary", "relationshipUseBoundary", "professionalUseBoundary"]
+      }
+    },
+    "governance": {"type": "object"},
+    "gate": {"const": "check:profile:w10-academic-bridge-registry"}
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "auditCode": "PHI-OS-ICR-W0-INPUT-AUTHORITY-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "ICR-W0",
+  "status": "reconciled",
+  "baselineCommit": "c1ded91129cea2e9406f49c5066fdf041df0c1eb",
+  "canonicalPhase": "PHASE ICR v2｜Input & Case Runtime",
+  "scope": "ICR-W0-W4 Input Foundation",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "classification": "MASTER_WORK_AUTHORITY",
+      "finding": "ICR-W0 through ICR-W9 are registered as the canonical planned ICR family."
+    },
+    {
+      "reference": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+      "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76",
+      "classification": "FROZEN_CROSS_RUNTIME_AUTHORITY",
+      "finding": "INPUT_RECORD fact authority remains SHARED_DATA_AUTHORITY; ICR must not create a second governed-fact authority."
+    },
+    {
+      "reference": "content/professional/method-runtime/shared-data-authority-v1.json",
+      "sha256": "a9acf53273a43088e4a191060e00250d8d8773c71ac653ee23a18f006a5b107c",
+      "classification": "SHARED_DATA_AUTHORITY",
+      "finding": "Birth, Coordinate, Timezone and other shared governed records remain method-neutral and cannot be method-owned or copied persistently per method."
+    },
+    {
+      "reference": "content/professional/method-runtime/shared-data-record-v1.schema.json",
+      "sha256": "01cab7ac21585c6bf95d4f05d3861fbeed769b60c481f6bc543a2dade69bcdd4",
+      "classification": "SHARED_DATA_RECORD_SCHEMA",
+      "finding": "Verified shared facts already have a canonical record identity, provenance, normalization and lineage contract."
+    },
+    {
+      "reference": "content/professional/method-runtime/method-registry-v1.json",
+      "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1",
+      "classification": "METHOD_REGISTRY_AUTHORITY",
+      "finding": "ICR may bind method requirements but may not register, activate or make a Method production-eligible."
+    },
+    {
+      "reference": "functions/_lib/runtime-entry.js",
+      "sha256": "5e3fd8c66d213c9ba8382f856c3523b99003d567d8345d16edad2fb0db45f916",
+      "classification": "EXISTING_REALITY_ENTRY_RUNTIME",
+      "finding": "Existing customer Reality Entry is preserved as operational intake and is not replaced by ICR-W0-W4."
+    },
+    {
+      "reference": "functions/runtime/entry/provider-contract.js",
+      "sha256": "90a44f93d1dfa291871d8028da24628c9f4b1fe9fb53da9a00a619a9439f93d8",
+      "classification": "ENTRY_PROVIDER_CANDIDATE_CONTRACT",
+      "finding": "Provider output remains a bounded candidate and can never become Verified Input or input authority."
+    },
+    {
+      "reference": "functions/professional/external-readers/external-reader-intake-contract.js",
+      "sha256": "f195edfe5c0e0180142741608c98c9ca162fec0e15052c855c4963bc903bd854",
+      "classification": "EXISTING_EXTERNAL_READER_INTAKE",
+      "finding": "External Reader Intake remains an operational source contract and does not become Method Input directly."
+    },
+    {
+      "reference": "functions/professional/external-readers/shared-birth-data-contract.js",
+      "sha256": "4171dce6cfab0032bc4e3bd3c38cca9fc76d554c16f689e325c4027327f29552",
+      "classification": "EXISTING_SHARED_BIRTH_DATA",
+      "finding": "Existing birth data capture semantics are preserved and reconciled into the ICR Birth Data Contract."
+    },
+    {
+      "reference": "knowledge/external-readers/schemas/birth-data.schema.json",
+      "sha256": "3f931b313c28e35808b1c174e518ae62d68780169d76ebaa845daf8554389a27",
+      "classification": "EXISTING_BIRTH_DATA_SCHEMA",
+      "finding": "External Reader birth fields overlap with MR Birth Record and require one ICR intake normalization boundary."
+    },
+    {
+      "reference": "functions/professional/financial/financial-intake-contract.js",
+      "sha256": "9f7af390ac9a1c5a8f8122c5f64d8721009b64872f88680d5e853ddae7a6fae9",
+      "classification": "EXISTING_FINANCIAL_INTAKE",
+      "finding": "Financial Intake remains domain-specific operational intake and is not rewritten by the ICR Birth foundation."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996",
+      "classification": "RDG_CROSS_RUNTIME_DATA_CONTRACT",
+      "finding": "ICR is already allowed to produce REALITY_INPUT_RECORD and METHOD_INPUT_RECORD while Methods consume only METHOD_INPUT_RECORD."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json",
+      "sha256": "aa022977faeb68379588bc850221e97573c461d3a43a5152dee1446b2fa7ce4d",
+      "classification": "RDG_AUTHORITY_ENTRYPOINT",
+      "finding": "Purpose, consent, persistence, retention and deletion remain RDG references, not ICR-owned policy."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json",
+      "sha256": "498838a91799bc89167b65765d6bec710327e0e29be32ba92a43a5e541990708",
+      "classification": "RDG_RETENTION_AUTHORITY",
+      "finding": "ICR may bind a governed retention class but may not create or extend retention."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/deletion-tombstone-runtime-v1.json",
+      "sha256": "9e39a5c88caff145b35057fdd243e90153e9568b7226e1330f5487c8c9bed7db",
+      "classification": "RDG_DELETION_AUTHORITY",
+      "finding": "ICR does not delete, restore or reverse deletion state."
+    }
+  ],
+  "baselineFindings": {
+    "existingOperationalIntakePresent": true,
+    "sharedDataAuthorityPresent": true,
+    "rdgDataGovernanceAuthorityPresent": true,
+    "canonicalInputEnvelopePresent": false,
+    "canonicalBirthInputContractPresent": false,
+    "verifiedInputContractPresent": false,
+    "methodInputProjectionContractPresent": false,
+    "birthInputShapesRequireReconciliation": true,
+    "providerCandidateIsVerifiedInput": false,
+    "methodMayReadCustomerDatabaseDirectly": false,
+    "icrOwnsPrivacyOrRetention": false,
+    "alrStandaloneCheckerIntegratedInPostcheck": false
+  },
+  "foundationDecision": {
+    "preserveOperationalIntake": true,
+    "establishCanonicalInputEnvelope": true,
+    "reuseSharedDataAuthorityForVerifiedFacts": true,
+    "establishReferenceOnlyMethodInputProjection": true,
+    "createCustomerDatabaseAdapter": false,
+    "activatePersistentInputStore": false,
+    "activateCaseRuntime": false,
+    "initializeCanonicalReality": false,
+    "nextWorkScope": "ICR-W1-W4"
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

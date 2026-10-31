@@ -1,0 +1,260 @@
+{
+  "id": "phi-os.professional-data-governance",
+  "version": "1.0.0",
+  "milestone": "M4A-W7",
+  "status": "governance-contract-ready-infrastructure-pending",
+  "principles": {
+    "privateByDefault": true,
+    "purposeBoundProcessing": true,
+    "minimumNecessaryData": true,
+    "explicitRetentionChoiceRequired": true,
+    "retentionIsNotAuthorisedByAccessConsent": true,
+    "sourceDocumentsInRuntimeMemory": false,
+    "publicFileUrlsAllowed": false,
+    "ordinaryEmailForHighlyRestrictedFiles": false,
+    "realClientDataInTestsOrDemos": false,
+    "indefiniteRetentionAllowed": false
+  },
+  "classifications": {
+    "professionalPrivate": {
+      "runtimeClassification": "private",
+      "examples": [
+        "service_preference",
+        "appointment_metadata"
+      ]
+    },
+    "professionalRestricted": {
+      "runtimeClassification": "sensitive",
+      "examples": [
+        "birth_date",
+        "birth_time",
+        "birth_place",
+        "chart_image",
+        "chart_pdf",
+        "derived_chart_fields",
+        "income",
+        "bank_balance",
+        "investment_value",
+        "property_value",
+        "debt",
+        "insurance",
+        "tax",
+        "net_worth",
+        "financial_report"
+      ]
+    },
+    "professionalHighlyRestricted": {
+      "runtimeClassification": "sensitive",
+      "examples": [
+        "identity_number",
+        "bank_account_number",
+        "policy_number",
+        "tax_number",
+        "signature",
+        "exact_address",
+        "minor_data"
+      ]
+    },
+    "professionalRecord": {
+      "runtimeClassification": "professional",
+      "examples": [
+        "professional_note",
+        "professional_interpretation",
+        "report_governance_record"
+      ]
+    },
+    "professionalAudit": {
+      "runtimeClassification": "professional",
+      "examples": [
+        "consent_event",
+        "access_event",
+        "download_event",
+        "deletion_event"
+      ]
+    }
+  },
+  "humanDesignGovernance": {
+    "fields": [
+      "birth_date",
+      "birth_time",
+      "birth_place",
+      "chart_image",
+      "chart_pdf",
+      "derived_chart_fields",
+      "professional_interpretation"
+    ],
+    "retentionChoices": [
+      "service_only",
+      "future_professional_sessions",
+      "do_not_retain_after_completion"
+    ],
+    "exportActions": [
+      "export_birth_data",
+      "export_uploaded_chart",
+      "export_reports"
+    ],
+    "deletionActions": [
+      "delete_uploaded_chart",
+      "request_professional_notes_review",
+      "request_account_deletion"
+    ],
+    "defaultRuntimeMemory": false
+  },
+  "financialGovernance": {
+    "restrictedData": [
+      "income",
+      "bank_balance",
+      "investment_value",
+      "property_value",
+      "debt",
+      "insurance",
+      "tax",
+      "net_worth",
+      "financial_report"
+    ],
+    "highlyRestrictedIdentifiers": [
+      "identity_number",
+      "bank_account_number",
+      "policy_number",
+      "tax_number",
+      "signature",
+      "exact_address",
+      "minor_data"
+    ],
+    "defaultStoredFields": [
+      "masked_account_number",
+      "masked_policy_number",
+      "general_property_location",
+      "required_financial_value",
+      "evidence_date",
+      "ownership"
+    ],
+    "runtimeMemoryChoices": [
+      "service_only",
+      "scheduled_annual_reviews",
+      "selected_summaries_only",
+      "no_retain_after_required_service_period"
+    ],
+    "sourceDocumentDeletionOption": "delete_source_after_report",
+    "confirmedSummaryFields": [
+      "financial_position_date",
+      "income_range",
+      "expense_range",
+      "net_worth_range",
+      "major_liabilities",
+      "primary_goals",
+      "professional_review_date"
+    ],
+    "defaultRuntimeMemory": false
+  },
+  "professionalNotesGovernance": {
+    "noteTypes": [
+      "financial_fact_note",
+      "document_verification_note",
+      "assumption_note",
+      "calculation_note",
+      "risk_observation",
+      "product_neutral_recommendation",
+      "regulated_advice_note",
+      "client_decision",
+      "implementation_note",
+      "review_note",
+      "human_design_interpretation_note",
+      "runtime_professional_note"
+    ],
+    "singleContentClassRequired": true,
+    "rawSourceDocumentAllowed": false,
+    "regulatedAdviceEnabled": false
+  },
+  "reportGovernance": {
+    "statuses": [
+      "draft",
+      "professional_review_required",
+      "approved",
+      "delivered",
+      "superseded",
+      "withdrawn"
+    ],
+    "requiredMetadata": [
+      "report_id",
+      "client_id",
+      "service_id",
+      "report_type",
+      "version",
+      "data_date",
+      "generated_at",
+      "source_references",
+      "assumptions",
+      "review_status"
+    ],
+    "restrictedByDefault": true,
+    "publicByDefault": false,
+    "exportLogged": true
+  },
+  "fileGovernance": {
+    "allowedExtensions": [
+      "pdf",
+      "jpg",
+      "jpeg",
+      "png",
+      "csv",
+      "xlsx"
+    ],
+    "maximumBytesPerFile": 26214400,
+    "signedAccessMaximumSeconds": 900,
+    "requirements": [
+      "private_storage",
+      "encryption_at_rest",
+      "encryption_in_transit",
+      "malware_scan",
+      "signed_temporary_access",
+      "access_expiry",
+      "download_logging",
+      "no_public_url",
+      "deletion_workflow"
+    ],
+    "implementationEnabled": false
+  },
+  "retentionGovernance": {
+    "activeService": {
+      "trigger": "service_completion",
+      "fixedIndefiniteRetention": false
+    },
+    "sourceDocument": {
+      "defaultDeletionDaysAfterReport": 30,
+      "annualReviewRequiresFreshConsent": true
+    },
+    "professionalWorkingFile": {
+      "defaultDeletionDaysAfterService": 90
+    },
+    "finalReport": {
+      "defaultRetentionDaysAfterDelivery": 365,
+      "clientExportAvailableBeforeDeletion": true
+    },
+    "accountingRecord": {
+      "retentionYears": 7,
+      "scope": "phi_os_transaction_and_accounting_records_only",
+      "clientSourceDocumentsIncludedByDefault": false
+    },
+    "legalRetentionException": {
+      "specificLegalBasisRequired": true,
+      "specificRecordClassesRequired": true,
+      "expiryRequired": true,
+      "approvalRoleRequired": true,
+      "indefiniteExceptionAllowed": false
+    }
+  },
+  "implementationBoundary": {
+    "fileUploadEnabled": false,
+    "privateObjectStorageEnabled": false,
+    "malwareScannerEnabled": false,
+    "signedUrlServiceEnabled": false,
+    "retentionSchedulerEnabled": false,
+    "deletionWorkerEnabled": false,
+    "exportWorkerEnabled": false,
+    "professionalWorkspaceEnabled": false,
+    "financialIntakeEnabled": false,
+    "d1PersistenceEnabled": false,
+    "regulatedAdviceEnabled": false
+  }
+}

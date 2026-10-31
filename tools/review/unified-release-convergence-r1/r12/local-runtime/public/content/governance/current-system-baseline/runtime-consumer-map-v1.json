@@ -1,0 +1,318 @@
+{
+  "schemaVersion": "PHI-OS-RUNTIME-CONSUMER-MAP-v1.0.0",
+  "work": "CBS-W3",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "RUNTIME_TO_FRONTEND_TRACED",
+  "direction": "RUNTIME_TO_PROJECTION_TO_ROUTE_TO_COMPONENT_TO_USER_ACTION",
+  "entries": [
+    {
+      "runtimeId": "MCD",
+      "projection": "CANONICAL_METHOD_PROJECTION",
+      "routes": [
+        "/personal-runtime"
+      ],
+      "components": [
+        "assets/js/pages/personal-runtime.js",
+        "assets/js/method-client-delivery/personal-runtime-surface-runtime.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/personal-runtime.js": true,
+        "assets/js/method-client-delivery/personal-runtime-surface-runtime.js": true
+      },
+      "userAction": "Run a governed method and view bounded results",
+      "consumerMode": "FRONTEND",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": false
+    },
+    {
+      "runtimeId": "MIR",
+      "projection": "INTERPRETATION_RESULT",
+      "routes": [
+        "/personal-runtime",
+        "/reality"
+      ],
+      "components": [
+        "assets/js/pages/personal-runtime.js",
+        "assets/js/pages/reality-workspace-phase19.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/personal-runtime.js": true,
+        "assets/js/pages/reality-workspace-phase19.js": true
+      },
+      "userAction": "Consume governed interpretation as a lens, not calculation authority",
+      "consumerMode": "DOWNSTREAM_FRONTEND",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "KAP",
+      "projection": "GROUNDED_ANSWER_PROJECTION",
+      "routes": [
+        "/knowledge-search"
+      ],
+      "components": [
+        "assets/js/pages/knowledge-search-b.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/knowledge-search-b.js": true
+      },
+      "userAction": "Ask PHI OS and inspect grounded answer",
+      "consumerMode": "FRONTEND",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "KAU",
+      "projection": "AUTHORING_PROJECTION",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Internal authoring handoff to governed knowledge authority",
+      "consumerMode": "INTERNAL_CHAIN",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": false
+    },
+    {
+      "runtimeId": "CAR",
+      "projection": "PUBLISHED_ASSET_ELIGIBILITY",
+      "routes": [
+        "/figure"
+      ],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Consume canonical asset through presentation/publication surfaces",
+      "consumerMode": "DOWNSTREAM_FRONTEND",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "CPR",
+      "projection": "CANONICAL_PRESENTATION",
+      "routes": [
+        "/articles",
+        "/figure",
+        "/books"
+      ],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "View canonical presentation surfaces",
+      "consumerMode": "FRONTEND_FAMILY",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "RDG",
+      "projection": "DATA_GOVERNANCE_BOUNDARY",
+      "routes": [
+        "/privacy",
+        "/reality-entry",
+        "/professional-workspace"
+      ],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Apply consent/privacy/persistence boundaries",
+      "consumerMode": "BOUNDARY_CONSUMER",
+      "productionAccepted": true,
+      "blocked": false,
+      "deferred": false
+    },
+    {
+      "runtimeId": "ICR",
+      "projection": "CANONICAL_CASE",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Normalize input for downstream Reality runtimes",
+      "consumerMode": "INTERNAL_CHAIN",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": false
+    },
+    {
+      "runtimeId": "RMO",
+      "projection": "REALITY_MODEL",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "No direct production surface; downstream RJX only while activation is blocked",
+      "consumerMode": "NO_DIRECT_SURFACE_BY_DESIGN",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "RJX",
+      "projection": "CLIENT_STAGE_PROJECTION",
+      "routes": [
+        "/reality",
+        "/reality-journey",
+        "/reality-dashboard"
+      ],
+      "components": [
+        "assets/js/pages/reality-workspace-phase19.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/reality-workspace-phase19.js": true
+      },
+      "userAction": "Understand → Choose → Review",
+      "consumerMode": "FRONTEND",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "WPR",
+      "projection": "WEB_PRODUCTION_SURFACE",
+      "routes": [
+        "/",
+        "/knowledge-search",
+        "/reality",
+        "/personal-runtime"
+      ],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Browse governed public/customer surfaces",
+      "consumerMode": "FRONTEND_FAMILY",
+      "productionAccepted": true,
+      "blocked": false,
+      "deferred": false
+    },
+    {
+      "runtimeId": "CKA",
+      "projection": "ANSWER_SURFACE",
+      "routes": [
+        "/knowledge-search"
+      ],
+      "components": [
+        "assets/js/pages/knowledge-search-b.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/knowledge-search-b.js": true
+      },
+      "userAction": "Ask PHI OS",
+      "consumerMode": "FRONTEND",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "HPC2",
+      "projection": "HOMEPAGE_PRESENTATION",
+      "routes": [
+        "/"
+      ],
+      "components": [
+        "assets/js/pages/home-production.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/home-production.js": true
+      },
+      "userAction": "Start with reality / Ask PHI OS / Explore PHI OS",
+      "consumerMode": "FRONTEND",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "MPA",
+      "projection": "METHOD_ELIGIBILITY_PROJECTION",
+      "routes": [
+        "/personal-runtime"
+      ],
+      "components": [
+        "assets/js/pages/personal-runtime.js"
+      ],
+      "componentExistence": {
+        "assets/js/pages/personal-runtime.js": true
+      },
+      "userAction": "See method availability; execution remains separately gated",
+      "consumerMode": "FRONTEND",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "HDR",
+      "projection": "METHOD_VALIDATION_PROJECTION",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Validation-only; no production user execution",
+      "consumerMode": "NO_DIRECT_SURFACE_BY_DESIGN",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "AST",
+      "projection": "METHOD_VALIDATION_PROJECTION",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Validation-only; no production user execution",
+      "consumerMode": "NO_DIRECT_SURFACE_BY_DESIGN",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "BZR",
+      "projection": "METHOD_VALIDATION_PROJECTION",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Validation-only; no production user execution",
+      "consumerMode": "NO_DIRECT_SURFACE_BY_DESIGN",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "NUM",
+      "projection": "METHOD_VALIDATION_PROJECTION",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Validation-only; no production user execution",
+      "consumerMode": "NO_DIRECT_SURFACE_BY_DESIGN",
+      "productionAccepted": false,
+      "blocked": true,
+      "deferred": false
+    },
+    {
+      "runtimeId": "ICH",
+      "projection": "NONE",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Registered identity only; no runtime consumer until implementation",
+      "consumerMode": "REGISTERED_ONLY",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    },
+    {
+      "runtimeId": "TAR",
+      "projection": "NONE",
+      "routes": [],
+      "components": [],
+      "componentExistence": {},
+      "userAction": "Registered identity only; no runtime consumer until implementation",
+      "consumerMode": "REGISTERED_ONLY",
+      "productionAccepted": false,
+      "blocked": false,
+      "deferred": true
+    }
+  ],
+  "rules": {
+    "routeDoesNotProveRuntimeLive": true,
+    "traceStartsAtRuntime": true,
+    "noDirectSurfaceRequiresExplicitDesignState": true
+  }
+}

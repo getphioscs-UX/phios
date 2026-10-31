@@ -1,0 +1,31 @@
+{
+  "status": "TARGETED_PASS_FULL_CHECK_FAILED",
+  "targetedCheck": {
+    "command": "node --import ./scripts/lib/report-zero-cost-preload.mjs scripts/check-pja-w2a-canonical-article-editorial-contract.mjs",
+    "exitCode": 0
+  },
+  "fullCheck": {
+    "command": "npm run check",
+    "finished": true,
+    "exitCode": 1,
+    "log": "tools/review/MASTER-A-V2-A-BATCH-3-RELOCATION-FULL-CHECK.log",
+    "logSha256": "3856b8957ea3496c3a86bcdf905ac074aa700b992e257b9b74400d8313cd219b",
+    "blocker": "scripts/check-ziwei-natural-composer-r4.mjs:51",
+    "assertion": "binding.includes(\"ziwei-professional-synthesis-r5-generation.js\")",
+    "postcheck": "NOT_RUN"
+  },
+  "artifact": {
+    "path": "tools/review/MASTER-A-V2-A-BATCH-3-VALIDATION-CAPTURE-R1-REGRESSION-REVIEW.html",
+    "sha256": "ccfcd73f55d207d819206973fba1e8ce372adfb0ce14433e3076ad734bf099d1",
+    "bytesUnchanged": true
+  },
+  "knowledgeHtmlExemptionChanged": false,
+  "providerCalls": 0,
+  "providerProtection": "Absolute inherited zero-cost preload; live provider disallowed",
+  "unrelatedZiweiBindingEdited": false,
+  "baziR2ImplementationOrPublicationEdited": false,
+  "commit": false,
+  "push": false,
+  "deploy": false,
+  "globalPassClaim": false
+}

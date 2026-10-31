@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/asset-review-package-v1.schema.json",
+  "title": "PHI OS Asset Review Package v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reviewCode",
+    "reviewVersion",
+    "candidateCode",
+    "candidateDigest",
+    "reviewerCode",
+    "reviewerIndependent",
+    "dimensions",
+    "decision",
+    "reviewNotes",
+    "reviewDigest",
+    "reviewedAt"
+  ],
+  "properties": {
+    "reviewCode": {
+      "type": "string",
+      "pattern": "^CAR-REV-[A-Z0-9-]+$"
+    },
+    "reviewVersion": {
+      "type": "string"
+    },
+    "candidateCode": {
+      "type": "string"
+    },
+    "candidateDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reviewerCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewerIndependent": {
+      "const": true
+    },
+    "dimensions": {
+      "type": "object",
+      "required": [
+        "semanticAccuracy",
+        "knowledgeTraceability",
+        "brandCompliance",
+        "accessibility",
+        "rightsLicense"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "semanticAccuracy": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        },
+        "knowledgeTraceability": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        },
+        "brandCompliance": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        },
+        "accessibility": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        },
+        "rightsLicense": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "decision": {
+      "enum": [
+        "accept",
+        "changes_required",
+        "reject",
+        "defer"
+      ]
+    },
+    "reviewNotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reviewedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

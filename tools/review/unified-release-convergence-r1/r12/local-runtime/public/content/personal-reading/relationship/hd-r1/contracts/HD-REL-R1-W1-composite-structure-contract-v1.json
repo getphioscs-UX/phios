@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-HD-REL-R1-W1-COMPOSITE-STRUCTURE-CONTRACT-v1.0.0",
+  "work": "HD-REL-R1-W1",
+  "baselineCommit": "2b660066669190eee55de54a2bb87b10be0eb3c4",
+  "status": "CONTRACT_ACTIVE_SHADOW",
+  "input": {
+    "acceptedReadingA": "PHI-OS-ACCEPTED-METHOD-READING-ENVELOPE-v1.0.0 / HD",
+    "acceptedReadingB": "PHI-OS-ACCEPTED-METHOD-READING-ENVELOPE-v1.0.0 / HD",
+    "chartA": "PHI-OS-HD-PRO-R2-CANONICAL-EXTERNAL-CHART-v1.0.0",
+    "chartB": "PHI-OS-HD-PRO-R2-CANONICAL-EXTERNAL-CHART-v1.0.0",
+    "customerConfirmationRequiredForBoth": true
+  },
+  "output": "PHI-OS-HD-REL-R1-COMPOSITE-STRUCTURE-IR-v1.0.0",
+  "requiredFields": [
+    "participantRefs",
+    "chartRefs",
+    "gateContributions",
+    "channelInteractions",
+    "gateCompanionships",
+    "centerField",
+    "sourceRefs",
+    "boundaries",
+    "semanticDigest"
+  ],
+  "channelDetectionRules": [
+    "CONFIRMED_FULL_CHANNEL_IMPLIES_BOTH_ENDPOINT_GATES_PRESENT_FOR_STRUCTURAL_COMPOSITION_ONLY",
+    "ELECTROMAGNETIC_REQUIRES_COMPLEMENTARY_SINGLE_ENDPOINT_CONTRIBUTIONS_AND_NO_FULL_CHANNEL_ON_EITHER_SIDE",
+    "DOMINANCE_REQUIRES_ONE_FULL_CHANNEL_AND_ZERO_ENDPOINT_GATES_ON_THE_OTHER_SIDE",
+    "COMPROMISE_REQUIRES_ONE_FULL_CHANNEL_AND_EXACTLY_ONE_ENDPOINT_GATE_ON_THE_OTHER_SIDE",
+    "COMPANIONSHIP_CHANNEL_REQUIRES_BOTH_PARTICIPANTS_HAVE_THE_SAME_FULL_CHANNEL",
+    "COMPANIONSHIP_GATE_MAY_RECORD_A_SHARED_GATE_WHEN_NO_PRIMARY_CHANNEL_RELATION_OWNS_THAT_SAME_EVIDENCE"
+  ],
+  "centerFieldRule": "A relationship field may be structurally connected by a participant-owned or jointly completed channel. This contextual field does not rewrite either participant natal center state.",
+  "failClosed": [
+    "unconfirmed chart",
+    "wrong authority class",
+    "same participant ref on both sides",
+    "unknown/noncanonical channel",
+    "inconsistent both-endpoint-without-confirmed-channel is never silently promoted to a natal full channel",
+    "missing accepted HD reading envelope"
+  ],
+  "boundaries": {
+    "phiosHumanDesignBirthCalculationAllowed": false,
+    "compositeTypeCalculated": false,
+    "compositeAuthorityCalculated": false,
+    "compatibilityScoreAllowed": false,
+    "partnerMindReadingAllowed": false,
+    "outcomePredictionAllowed": false
+  }
+}

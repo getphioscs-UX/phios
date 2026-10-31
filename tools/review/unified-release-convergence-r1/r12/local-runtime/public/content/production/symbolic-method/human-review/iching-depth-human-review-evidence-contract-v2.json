@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-DEPTH-HUMAN-REVIEW-EVIDENCE-CONTRACT-v2.0.0",
+  "phase": "ICHI-DEPTH",
+  "work": "ICHI-DEPTH-W9",
+  "baselineCommit": "526547698894de0d33d09447aed0b93b83558114",
+  "status": "ACTIVE_AGGREGATE_ATTESTATION_SUCCESSOR_FOR_OFFLINE_448_REVIEW",
+  "campaign": "content/production/symbolic-method/human-review/iching-depth-human-review-campaign-v1.json",
+  "rubric": "content/production/symbolic-method/human-review/iching-depth-human-review-rubric-v1.json",
+  "historicalReviewResults": "content/production/symbolic-method/human-review/iching-depth-human-review-results-v1.json",
+  "historicalArtifactsMutated": false,
+  "evidenceModes": {
+    "perUnitVisualEvidence": {
+      "allowed": true,
+      "requirements": [
+        "REAL_HUMAN_REVIEW",
+        "EXPLICIT_CRITERIA",
+        "REVIEWER_CONTROLLED_SCREENSHOT_REFERENCE"
+      ]
+    },
+    "aggregateReviewerAttestation": {
+      "allowed": true,
+      "scope": "OFFLINE_GROUPED_448_UNIT_REVIEW_WHERE_PER_UNIT_EXPORT_IS_UNAVAILABLE",
+      "requirements": [
+        "REAL_HUMAN_REVIEWER_ID",
+        "EXPLICIT_ALL_448_ACCEPTED_ATTESTATION",
+        "EXACT_448_CANDIDATE_DIGEST_BINDINGS",
+        "BOTH_LOCALES_INCLUDED",
+        "ZERO_CRITICAL_BOUNDARY_FAILURES",
+        "SOURCE_SHA_BINDING",
+        "REVIEWER_CONTROLLED_ATTESTATION_SOURCE_REFERENCE"
+      ]
+    }
+  },
+  "carrierSuccessor": {
+    "supersedesOnly": "iching-depth-human-review-rubric-v1.acceptanceRule.acceptedRequiresAtLeastOneScreenshot",
+    "onlyWhenEvidenceMode": "AGGREGATE_REVIEWER_ATTESTATION",
+    "replacement": "ONE_REVIEWER_CONTROLLED_AGGREGATE_ATTESTATION_BOUND_TO_ALL_448_EXACT_CANDIDATE_DIGESTS",
+    "semanticRubricCriteriaChanged": false,
+    "acceptanceThresholdChanged": false,
+    "criticalBoundaryToleranceChanged": false
+  },
+  "authority": {
+    "aiMayActAsReviewer": false,
+    "machinePreflightIsHumanAcceptance": false,
+    "aggregateAttestationMayFabricateReview": false,
+    "humanAcceptanceMayActivatePublicRuntime": false,
+    "externalActivationGatesRemainSeparate": true
+  }
+}

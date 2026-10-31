@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas evidence authority v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "status",
+    "authorityClasses",
+    "confidenceLevels",
+    "knowledgeStates",
+    "trajectoryUnitModes",
+    "customerBoundary",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-BOOK-V-CIV-ATLAS-EVIDENCE-AUTHORITY-v1.0.0"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "FROZEN"
+      ]
+    },
+    "authorityClasses": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "historicalFactEligible",
+          "requiresSourceRefs"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "EVIDENCE_SERIES",
+              "HISTORICAL_RECONSTRUCTION",
+              "CONCEPTUAL_TRAJECTORY"
+            ]
+          },
+          "label": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "zh-Hans",
+              "en"
+            ],
+            "properties": {
+              "zh-Hans": {
+                "type": "string",
+                "minLength": 1
+              },
+              "en": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "historicalFactEligible": {
+            "type": "boolean"
+          },
+          "requiresSourceRefs": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "confidenceLevels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "NOT_APPLICABLE"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "knowledgeStates": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "UNKNOWN",
+          "CONTESTED",
+          "PARTIAL",
+          "RECONSTRUCTED",
+          "OBSERVED"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "trajectoryUnitModes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "ABSOLUTE_MEASURED",
+          "ESTIMATED_RANGE",
+          "NORMALIZED_INDEX",
+          "CONCEPTUAL_ONLY"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "customerBoundary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidenceRecord"
+      }
+    }
+  },
+  "$defs": {
+    "evidenceRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceId",
+        "authorityClass",
+        "confidence",
+        "sourceRefs",
+        "dateRange",
+        "methodNote",
+        "uncertaintyNote",
+        "unknown"
+      ],
+      "properties": {
+        "evidenceId": {
+          "type": "string",
+          "pattern": "^EV-[A-Z0-9-]+$"
+        },
+        "authorityClass": {
+          "enum": [
+            "EVIDENCE_SERIES",
+            "HISTORICAL_RECONSTRUCTION",
+            "CONCEPTUAL_TRAJECTORY"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "dateRange": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "startYear",
+                "endYear"
+              ],
+              "properties": {
+                "startYear": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "endYear": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "approximate": {
+                  "type": "boolean"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "methodNote": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "zh-Hans",
+                "en"
+              ],
+              "properties": {
+                "zh-Hans": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "en": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "uncertaintyNote": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "zh-Hans",
+                "en"
+              ],
+              "properties": {
+                "zh-Hans": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "en": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "unknown": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

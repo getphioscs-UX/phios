@@ -1,0 +1,44 @@
+{
+  "registryCode": "PHI-OS-RMO-W7-CANONICAL-REALITY-STATE-CLASS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W7",
+  "status": "canonical_structure",
+  "runtimeAuthority": "RMO",
+  "dataNatureAuthority": "RDG",
+  "containsUserData": false,
+  "containsStateInstances": false,
+  "stateClasses": [
+    {
+      "stateClass": "OBSERVED",
+      "bindingMode": "OBSERVATION",
+      "allowedDataNatures": ["OBSERVED", "USER_REPORTED", "IMPORTED"],
+      "requires": ["observedAt", "source lineage"],
+      "doesNotMean": ["TRUTH", "ACCEPTED_EVIDENCE"]
+    },
+    {
+      "stateClass": "DERIVED",
+      "bindingMode": "DERIVATION",
+      "allowedDataNatures": ["CALCULATED", "DERIVED"],
+      "requires": ["methodReference", "methodVersion", "exact input lineage", "deterministic execution"],
+      "doesNotMean": ["INFERRED", "INTERPRETED", "ACCEPTED_EVIDENCE"]
+    },
+    {
+      "stateClass": "PROJECTED",
+      "bindingMode": "PROJECTION",
+      "allowedDataNatures": ["CALCULATED", "DERIVED"],
+      "requires": ["methodReference", "methodVersion", "exact basis lineage", "scenarioReference", "future horizon", "deterministic execution"],
+      "doesNotMean": ["RDG_DATA_NATURE", "OBSERVED_TRUTH", "PREDICTION_AUTHORITY", "ACTION", "NAVIGATION_CHOICE"]
+    }
+  ],
+  "instances": [],
+  "rules": {
+    "registryDefinesClassesOnly": true,
+    "registryMayStoreStateInstances": false,
+    "stateClassIndependentFromDataNature": true,
+    "stateClassIndependentFromCertainty": true,
+    "projectedIsNotRdgDataNature": true,
+    "derivedOrProjectedCannotUseInferredOrInterpretedNature": true,
+    "projectedBasisMayIncludeProjectedState": false,
+    "unknownStateClassFailsClosed": true
+  }
+}

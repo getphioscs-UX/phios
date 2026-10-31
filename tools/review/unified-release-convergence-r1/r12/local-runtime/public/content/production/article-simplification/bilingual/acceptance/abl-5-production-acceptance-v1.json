@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-ABL-5-PRODUCTION-ACCEPTANCE-v1.0.0",
+  "work": "ABL-1-ABL-5",
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "ACCEPTED_CAPABILITY_CURRENT_BATCH_AWAITING_TL_IDENTITY_REVIEW",
+  "operatorSurface": {
+    "advance": "npm run article:bilingual -- --batch BATCH-001",
+    "publish": "npm run article:bilingual:publish -- --batch BATCH-001"
+  },
+  "stages": {
+    "ABL-1": "Locale Identity Discovery & explicit TL review successor",
+    "ABL-2": "Independent English brief + prompt batch",
+    "ABL-3": "Independent English Candidate batch import",
+    "ABL-4": "Independent English Human Review / Approval / Publication decision bridge",
+    "ABL-5": "Publication-backed PKA + CPR + same-route locale release successor"
+  },
+  "currentBatch": {
+    "batchCode": "BATCH-001",
+    "zhHansPublished": 6,
+    "englishIdentityProposals": 6,
+    "englishIdentityAuthority": 0,
+    "pendingTlIdentityReviews": 6,
+    "englishCandidatesCreatedByRealBatch": 0,
+    "englishReviewsCreatedByRealBatch": 0,
+    "englishApprovalsCreatedByRealBatch": 0,
+    "englishPublicationsCreatedByRealBatch": 0,
+    "currentStatus": "AWAITING_TL_IDENTITY_REVIEW"
+  },
+  "fixtureAcceptance": {
+    "englishIdentityAuthorities": 6,
+    "englishBriefPromptPairs": 6,
+    "englishCandidates": 6,
+    "englishAcceptedReviews": 6,
+    "englishApprovals": 6,
+    "englishExplicitPublicationDecisions": 6,
+    "englishPublications": 6,
+    "sameRouteEnglishReleases": 6,
+    "expectedPublishedKnowledgeAuthorityRecordsAfterFixture": 14,
+    "blockedPublishHasZeroPublicationAuthoritySideEffects": true,
+    "publicationRerunIdempotent": true,
+    "existingZhHansRoutesRemainByteIdentical": true,
+    "frozenVapL10nManifestRemainsByteIdentical": true
+  },
+  "authorityAcceptance": {
+    "localeIdentityProposalEqualsAuthority": false,
+    "explicitTlIdentityReviewRequired": true,
+    "independentEnglishAuthoringRequired": true,
+    "zhHansReviewInherited": false,
+    "zhHansApprovalInherited": false,
+    "zhHansPublicationInherited": false,
+    "explicitEnglishReviewRequired": true,
+    "explicitEnglishApprovalRequired": true,
+    "explicitEnglishPublicationDecisionRequired": true,
+    "publishedKnowledgeAuthorityRequiresPublicationPackage": true,
+    "carBypassWhenVisualAssetExists": false,
+    "articleOnlyNoVisualAssetPathAllowed": true,
+    "implicitPaidAiInvocationAllowed": false
+  },
+  "registryAcceptance": {
+    "frozenKnrL10nRegistriesMutated": false,
+    "frozenVapL10nManifestMutated": false,
+    "additiveAblReleaseManifest": "content/knowledge/public/abl-bilingual-release.json",
+    "sameRouteLocaleRuntimeMerge": true
+  },
+  "regressionsPassed": [
+    "npm run check:abl",
+    "npm run check:aps",
+    "npm run check:pja-l10n-w5",
+    "npm run check:vap-l10n:r1-r5",
+    "npm run check:published-article-format",
+    "npm run check:pja-published-authority-w1"
+  ],
+  "preExistingBaselineFinding": {
+    "checker": "npm run check:pja-l10n-w4",
+    "status": "PRE_EXISTING_BASELINE_DRIFT_NOT_INTRODUCED_OR_REWRITTEN_BY_ABL",
+    "frozenExpectedEnglishBriefSha256": "10024c8577901c420fa2b9165d388280b61442f2f158d3bf4e3ccfe2d58f9409",
+    "baselineAndCurrentEnglishBriefSha256": "075b2493a30be5227b2b258fc87be36701bc19256a1b96602482fc668de76723"
+  }
+}

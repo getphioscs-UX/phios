@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W22-FIXTURE-REGISTRY-v1.0.0",
+  "work": "FDR-W22",
+  "status": "ACTIVE_SYNTHETIC_ACCEPTANCE_FIXTURES",
+  "syntheticOnly": true,
+  "fixtures": [
+    {
+      "scenario": "single-person",
+      "path": "content/financial/data-runtime/fixtures/single-person.json"
+    },
+    {
+      "scenario": "couple",
+      "path": "content/financial/data-runtime/fixtures/couple.json"
+    },
+    {
+      "scenario": "family-with-children",
+      "path": "content/financial/data-runtime/fixtures/family-with-children.json"
+    },
+    {
+      "scenario": "business-owner",
+      "path": "content/financial/data-runtime/fixtures/business-owner.json"
+    },
+    {
+      "scenario": "cross-border",
+      "path": "content/financial/data-runtime/fixtures/cross-border.json"
+    },
+    {
+      "scenario": "partial-disclosure",
+      "path": "content/financial/data-runtime/fixtures/partial-disclosure.json"
+    },
+    {
+      "scenario": "range-only",
+      "path": "content/financial/data-runtime/fixtures/range-only.json"
+    },
+    {
+      "scenario": "high-net-worth",
+      "path": "content/financial/data-runtime/fixtures/high-net-worth.json"
+    },
+    {
+      "scenario": "missing-assets",
+      "path": "content/financial/data-runtime/fixtures/missing-assets.json"
+    },
+    {
+      "scenario": "joint-assets",
+      "path": "content/financial/data-runtime/fixtures/joint-assets.json"
+    },
+    {
+      "scenario": "declined-information",
+      "path": "content/financial/data-runtime/fixtures/declined-information.json"
+    }
+  ],
+  "requiredScenarios": [
+    "single-person",
+    "couple",
+    "family-with-children",
+    "business-owner",
+    "cross-border",
+    "partial-disclosure",
+    "range-only",
+    "high-net-worth",
+    "missing-assets",
+    "joint-assets",
+    "declined-information"
+  ],
+  "rules": {
+    "productionCustomerDataIncluded": false,
+    "fixturesMayCreateFactAuthority": false,
+    "declinedValuesMustRemainNull": true,
+    "rangeValuesMustRemainRanges": true,
+    "historyFixturesMustUseImmutableSnapshots": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W3-ENTITY-CONTRACT-v1.0.0",
+  "work": "FDR-W3",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "entityId",
+    "entityType",
+    "jurisdiction",
+    "ownershipReferences",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "name",
+    "registrationReferenceMasked",
+    "directorPersonIds",
+    "shareholderPersonIds",
+    "revenueFact",
+    "profitFact",
+    "dividendFact",
+    "debtReferences",
+    "guaranteeReferences",
+    "valuationFact"
+  ],
+  "factOnlyFields": [
+    "jurisdiction",
+    "revenueFact",
+    "profitFact",
+    "dividendFact",
+    "valuationFact"
+  ],
+  "rules": {
+    "revenueProfitDividendAreStoredFactsNotCalculatedByFdr": true,
+    "valuationIsObservedOrReportedFactOnly": true,
+    "guaranteeMustUseDedicatedContract": true,
+    "jurisdictionMayBeUnknown": true,
+    "jurisdictionMayBeInferred": false,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

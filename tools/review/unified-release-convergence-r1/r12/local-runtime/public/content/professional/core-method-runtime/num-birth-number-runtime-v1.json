@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-NUM-BIRTH-NUMBER-RUNTIME-v1.0.0",
+  "stageCode": "NUM-W1",
+  "runtimeCode": "NUM_BIRTH_NUMBER_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "NUMEROLOGY",
+  "pluginCode": "NUM",
+  "status": "proposal_bound_validation_candidate",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "47c923d52046f9777e6d800834ac2e5355f2b0dd"
+  },
+  "calculationPolicy": {
+    "policyCode": "PHI_OS_NUMERIC_REDUCTION_V1",
+    "masterNumbers": [
+      11,
+      22,
+      33
+    ],
+    "dateFormat": "YYYY-MM-DD",
+    "zeroCreatesCoreNumber": false
+  },
+  "outputs": [
+    "LIFE_PATH",
+    "BIRTHDAY_NUMBER",
+    "ATTITUDE_NUMBER",
+    "BIRTH_YEAR_NUMBER",
+    "BIRTH_MONTH_NUMBER",
+    "BIRTH_DAY_NUMBER"
+  ],
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "governance": {
+    "methodRegistered": false,
+    "pluginActivated": false,
+    "productionEligible": false
+  },
+  "nextStage": "NUM-W2"
+}

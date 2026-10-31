@@ -1,0 +1,45 @@
+{
+  "contractCode": "PHI-OS-DAR-W22-DOWNLOAD-RUNTIME-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W22",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_PRIVATE_TIME_LIMITED_DOWNLOAD_BOUNDARY",
+  "runtime": "functions/document-assembly/download-runtime.js",
+  "formats": [
+    "PDF",
+    "DOCX"
+  ],
+  "defaults": {
+    "private": true,
+    "authenticated": true,
+    "timeLimited": true,
+    "cacheControl": "private, no-store",
+    "contentDisposition": "attachment",
+    "robots": "noindex, nofollow, noarchive",
+    "queryStringTokenForbidden": true,
+    "publicR2ForbiddenForWill": true
+  },
+  "tokenPayloadMayContain": [
+    "opaque documentId",
+    "documentVersion",
+    "outputDigest",
+    "format",
+    "subjectDigest",
+    "expiresAt"
+  ],
+  "tokenPayloadMustNotContain": [
+    "name",
+    "NRIC",
+    "address",
+    "beneficiary",
+    "asset payload",
+    "bank reference",
+    "insurance data"
+  ],
+  "rules": {
+    "transport": "Authorization header or HttpOnly cookie",
+    "downloadGrantDoesNotEqualLegalExecution": true,
+    "remoteStorageMustBePrivate": true,
+    "analyticsMayReceiveMetadataOnly": true
+  }
+}

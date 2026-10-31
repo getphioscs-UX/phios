@@ -1,0 +1,37 @@
+{
+  "status": "CANDIDATE_NOT_INSTALLED",
+  "canonicalRoute": "/api/ask-phios",
+  "canonicalOwner": {
+    "path": "functions/api/ask-phios.js",
+    "sha256": "114dcc0fcf88ca8e3f741caac43a95e84e391eb071316edc7f6a057f98a4e760"
+  },
+  "composerOwner": {
+    "path": "functions/_lib/knowledge-answer-composition.js",
+    "sha256": "a2d7c3066e358da75b7cd01d87054a4e5c47b68d641974dc9fab498dfa486800"
+  },
+  "contextOwner": {
+    "path": "functions/_lib/client-knowledge-ask-b.js",
+    "sha256": "ccba8da9bf302b4f7f20d850e1044e3b9be5f40f81125e680d2fe3449915aa54"
+  },
+  "requestFields": [
+    "q",
+    "locale",
+    "bookCode",
+    "contextLabel",
+    "contextSummary",
+    "readingPath",
+    "relatedKnowledgeRef"
+  ],
+  "contextIsAuthority": false,
+  "authorityMustComeFrom": "EXISTING_KAP_CURRENT_RUNTIME",
+  "eligibilityGate": {
+    "activePublishedContextOnly": true,
+    "withheldObjectTextDenied": true,
+    "unboundCanonicalNodeDenied": true,
+    "noRawManuscript": true,
+    "noClientAuthorityGrant": true
+  },
+  "publicRetrievalActivated": false,
+  "secondAsk": false,
+  "secondComposer": false
+}

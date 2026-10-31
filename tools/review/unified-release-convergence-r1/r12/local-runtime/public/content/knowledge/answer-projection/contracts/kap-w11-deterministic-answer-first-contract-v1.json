@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W11-DETERMINISTIC-ANSWER-FIRST-CONTRACT-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W11",
+  "baselineCommit": "09d6ee76315cf7a8d6ab7e373d86fff816866845",
+  "status": "ACTIVE_DETERMINISTIC_QUESTION_SCOPED_ANSWER_COMPOSITION",
+  "input": [
+    "KnowledgeGroundingBundle",
+    "KAP_COVERAGE_DECISION"
+  ],
+  "output": "QuestionScopedKnowledgeAnswer",
+  "answerSchemaPath": "content/knowledge/answer-projection/schemas/question-scoped-knowledge-answer-v1.schema.json",
+  "policyPath": "content/knowledge/answer-projection/registries/kap-w11-deterministic-answer-policy-v1.json",
+  "rules": {
+    "deterministicFirst": true,
+    "groundingRequiredForSubstantiveClaims": true,
+    "upstreamGroundedAnswerConsumed": false,
+    "rawRepositoryAccessAllowed": false,
+    "aiRequired": false,
+    "providerRequired": false,
+    "createsCanonicalAuthority": false,
+    "createsPublication": false,
+    "createsRealityReading": false,
+    "createsPersistentCase": false
+  },
+  "nextStep": "KAP-W12_ANSWER_DEPTH_PROFILES"
+}

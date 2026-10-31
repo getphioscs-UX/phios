@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-PRF-W11-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "PRF-W11",
+  "baselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
+  "status": "PROGRESSIVE_PROFILE_UX_MACHINE_VERIFIED",
+  "route": "/perspectives/profile/",
+  "modes": ["QUICK_PROFILE", "FULL_SELF_ASSESSMENT", "REASONING_TASKS", "IMPORT_EXTERNAL_RESULT"],
+  "verified": {
+    "profileOptionalBeforePersonalReading": true,
+    "skipAllowed": true,
+    "sixDomainRadarHasNoMasterScore": true,
+    "sourceClassLegendVisible": true,
+    "oldAssessmentDateCannotSilentlyPresentAsCurrent": true,
+    "provenanceVisibleOnDemand": true,
+    "reasoningNotIq": true,
+    "externalProviderIdentityPreserved": true,
+    "noAutomaticPersistence": true,
+    "primaryNavigationCutoverStillClosed": true
+  },
+  "customerPublication": {
+    "allowed": false,
+    "reason": "PRF-W12 Human acceptance 24/24 remains required.",
+    "nextRequiredGate": "PRF-W12"
+  },
+  "gate": "check:profile:w11-progressive-profile-ux"
+}

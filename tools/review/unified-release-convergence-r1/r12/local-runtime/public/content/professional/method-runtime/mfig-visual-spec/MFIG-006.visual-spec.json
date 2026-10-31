@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-006",
+  "title": "SHARED-PROFESSIONAL-RUNTIME",
+  "scope": "SHARED",
+  "role": "ARCHITECTURE",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/shared-professional-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "INTERPRETATION_CANDIDATE",
+      "displayLabel": "INTERPRETATION CANDIDATE",
+      "nodeType": "RESULT",
+      "authorityClass": "INTERPRETATION",
+      "semanticRole": "PROFESSIONAL",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "PROFESSIONAL_REVIEW",
+      "displayLabel": "PROFESSIONAL REVIEW",
+      "nodeType": "PROCESS",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "BOUNDARY_VALIDATION",
+      "displayLabel": "BOUNDARY VALIDATION",
+      "nodeType": "PROCESS",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "DELIVERABLE_ASSEMBLY",
+      "displayLabel": "DELIVERABLE ASSEMBLY",
+      "nodeType": "PROCESS",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "PROFESSIONAL_SIGNATURE",
+      "displayLabel": "PROFESSIONAL SIGNATURE",
+      "nodeType": "PROCESS",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "RELEASE",
+      "displayLabel": "RELEASE",
+      "nodeType": "RESULT",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-006-E01",
+      "from": "INTERPRETATION_CANDIDATE",
+      "to": "PROFESSIONAL_REVIEW",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-006-E02",
+      "from": "PROFESSIONAL_REVIEW",
+      "to": "BOUNDARY_VALIDATION",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-006-E03",
+      "from": "BOUNDARY_VALIDATION",
+      "to": "DELIVERABLE_ASSEMBLY",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-006-E04",
+      "from": "DELIVERABLE_ASSEMBLY",
+      "to": "PROFESSIONAL_SIGNATURE",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-006-E05",
+      "from": "PROFESSIONAL_SIGNATURE",
+      "to": "RELEASE",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_PROFESSIONAL_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "INTERPRETATION_CANDIDATE",
+        "PROFESSIONAL_REVIEW",
+        "BOUNDARY_VALIDATION",
+        "DELIVERABLE_ASSEMBLY",
+        "PROFESSIONAL_SIGNATURE",
+        "RELEASE"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "INTERPRETATION_CANDIDATE",
+    "PROFESSIONAL_REVIEW",
+    "BOUNDARY_VALIDATION",
+    "DELIVERABLE_ASSEMBLY",
+    "PROFESSIONAL_SIGNATURE",
+    "RELEASE"
+  ],
+  "mustState": [
+    "Professional release is independent",
+    "bypassForbidden=true",
+    "inputMutationForbidden=true"
+  ],
+  "statementSources": {
+    "Professional release is independent": "SRC-002",
+    "bypassForbidden=true": "SRC-002",
+    "inputMutationForbidden=true": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

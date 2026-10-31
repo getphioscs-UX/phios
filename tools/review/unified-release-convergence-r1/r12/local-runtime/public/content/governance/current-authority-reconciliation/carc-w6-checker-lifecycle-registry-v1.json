@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W6-CHECKER-LIFECYCLE-REGISTRY-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W6",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "CURRENT_HISTORICAL_CHECKERS_ISOLATED",
+  "historicalFreeze": {
+    "cbsBaselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+    "checkerPath": "scripts/check-current-system-baseline.mjs",
+    "checkerSha256": "3216eaff8794855b12f4239e2130749449248578418f20fce81663023ec99e89",
+    "npmAlias": "check:current-system-baseline",
+    "preserved": true
+  },
+  "successorAliases": [
+    {
+      "domain": "CURRENT_SYSTEM_BASELINE",
+      "historicalAlias": "check:current-system-baseline",
+      "explicitHistoricalAlias": "check:current-system-baseline-historical",
+      "currentAlias": "check:current-system-baseline-current"
+    },
+    {
+      "domain": "CKA",
+      "historicalAlias": "check:cka",
+      "explicitHistoricalAlias": "check:cka-historical",
+      "currentAlias": "check:cka-current"
+    },
+    {
+      "domain": "CPR",
+      "historicalAlias": "check:cpr",
+      "explicitHistoricalAlias": "check:cpr-historical",
+      "currentAlias": "check:cpr-current"
+    }
+  ],
+  "postCbsPackageEvolution": {
+    "cbsPackageSha256": "4c831fb1c54550400e789895a5dfab4d92214ee0769659d82b9e5930a345f396",
+    "preCarcCurrentPackageSha256": "e996785bf48f7ec84d1af0f35b70588d20946410259da0e5be0b9e81c2ba51e2",
+    "addedScriptsBeforeCarc": [
+      "check:dar",
+      "check:dar-w0-w14",
+      "check:dar-w15-w24",
+      "check:fdr",
+      "check:fdr-authority",
+      "check:fdr-dar-boundary",
+      "check:fdr-disclosure",
+      "check:fdr-evidence",
+      "check:fdr-ownership",
+      "check:fdr-privacy",
+      "check:fdr-schema",
+      "check:fdr-versioning",
+      "check:part-k-historical",
+      "check:rrp-foundation",
+      "check:rrp-w0-w14",
+      "check:rrp-w0-w4",
+      "check:rrp-w10-w14",
+      "check:rrp-w5-w9",
+      "check:service-continuity-batch3"
+    ],
+    "changedScriptsBeforeCarc": [
+      "check:part-k"
+    ],
+    "removedScriptsBeforeCarc": [],
+    "authorizedCommitChain": [
+      {
+        "sha": "e62a1ad7d2956954f46cef11c0c856fe5ff0352c",
+        "message": "RRP-W0-W14"
+      },
+      {
+        "sha": "08f424583984dd6c561c29e244a92e83af3cbeee",
+        "message": "FDR"
+      },
+      {
+        "sha": "18627727a75b946d5ceeadc3370a3ecc9872b2e3",
+        "message": "DAR W15-24"
+      },
+      {
+        "sha": "0aad97a2ec967463fe820afc09e3b00aafede208",
+        "message": "Continuity Spine"
+      },
+      {
+        "sha": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+        "message": "current system baseline"
+      }
+    ]
+  },
+  "rules": {
+    "historicalCheckerMustRemainByteStable": true,
+    "historicalCheckerMayFailOnSuccessorWorktree": true,
+    "currentCheckerMustUseCurrentAuthority": true,
+    "currentAggregateMayNotCallHistoricalAlias": true,
+    "oldCheckerDoesNotControlNewProduction": true
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "supporting-questions.schema.json",
+  "title": "PKR Supporting Questions",
+  "type": "object",
+  "required": [
+    "version",
+    "supportingQuestions"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "supportingQuestions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "questionCode",
+          "canonicalNodeCode",
+          "locales",
+          "independentArticleRequired",
+          "version"
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

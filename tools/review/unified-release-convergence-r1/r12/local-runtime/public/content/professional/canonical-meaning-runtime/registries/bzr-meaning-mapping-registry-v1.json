@@ -1,0 +1,57 @@
+{
+  "registryCode": "PHI-OS-BZR-MEANING-MAPPING-REGISTRY",
+  "registryVersion": "1.0.0",
+  "work": "CM-W9",
+  "productionStatus": "validation_only",
+  "sourceMethodCode": "BAZI",
+  "sourcePluginCode": "BZR",
+  "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+  "sourceProjectionSurface": {
+    "STEM": {
+      "path": "projectionValue.stems",
+      "sourceField": "stemCode",
+      "status": "available",
+      "semanticTarget": "ACTIVATION_QUALITY"
+    },
+    "BRANCH": {
+      "path": "projectionValue.branches",
+      "sourceField": "branchCode",
+      "status": "available",
+      "semanticTarget": "CARRIER_CONTEXT"
+    },
+    "PILLAR": {
+      "path": "projectionValue.pillars",
+      "sourceFields": [
+        "pillarType",
+        "stemCode",
+        "branchCode",
+        "sexagenaryIndex"
+      ],
+      "status": "available",
+      "semanticTarget": "TEMPORAL_STRUCTURAL_POSITION"
+    },
+    "LUCK_CYCLE": {
+      "path": "projectionValue",
+      "sourceFields": [
+        "direction",
+        "startAge",
+        "cycles"
+      ],
+      "status": "available",
+      "semanticTarget": "RUNTIME_PHASE_CONTEXT"
+    }
+  },
+  "targetNamespaces": [
+    "CM-ACTIVATION-QUALITY",
+    "CM-CARRIER-CONTEXT",
+    "CM-TEMPORAL-POSITION",
+    "CM-RUNTIME-PHASE"
+  ],
+  "blockers": [
+    "BZR_TARGET_MEANING_CODES_NOT_REGISTERED",
+    "BZR_TARGET_MEANING_IDENTITIES_NOT_REGISTERED",
+    "BZR_TARGET_KNOWLEDGE_AUTHORITY_NOT_MAPPED"
+  ],
+  "mappingCount": 0,
+  "mappings": []
+}

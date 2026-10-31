@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/icr/method-input-projection-v1.schema.json",
+  "title": "PHI OS ICR Method Input Projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodInputCode",
+    "methodInputVersion",
+    "methodCode",
+    "pluginCode",
+    "inputType",
+    "status",
+    "sourceCanonicalInputCode",
+    "sourceCanonicalInputDigest",
+    "sourceVerifiedInputCode",
+    "sourceVerifiedInputDigest",
+    "bindingReferences",
+    "governanceBindings",
+    "dataAccessMode",
+    "customerDatabaseReadAllowed",
+    "canonicalInputDirectReadAllowed",
+    "persistentMethodCopyAllowed",
+    "productionExecutionAllowed",
+    "projectedAt",
+    "projectionPolicyVersion",
+    "methodInputDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-METHOD-INPUT-PROJECTION-v1.0.0"},
+    "methodInputCode": {"type": "string", "pattern": "^ICR-METHOD-INPUT-[A-Z0-9-]{4,100}$"},
+    "methodInputVersion": {"$ref": "#/$defs/semver"},
+    "methodCode": {"type": "string", "minLength": 1},
+    "pluginCode": {"type": "string", "pattern": "^[A-Z]{3}$"},
+    "inputType": {"type": "string"},
+    "status": {"const": "VALIDATION_ONLY"},
+    "sourceCanonicalInputCode": {"type": "string", "pattern": "^ICR-INPUT-[A-Z0-9-]{4,80}$"},
+    "sourceCanonicalInputDigest": {"$ref": "#/$defs/digest"},
+    "sourceVerifiedInputCode": {"type": "string", "pattern": "^ICR-VERIFIED-[A-Z0-9-]{4,80}$"},
+    "sourceVerifiedInputDigest": {"$ref": "#/$defs/digest"},
+    "bindingReferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["bindingCode", "authority", "recordType", "recordId", "recordVersion", "recordDigest"],
+        "properties": {
+          "bindingCode": {"type": "string"},
+          "authority": {"const": "SHARED_DATA_AUTHORITY"},
+          "recordType": {"type": "string"},
+          "recordId": {"type": "string", "pattern": "^SDA-[A-Z0-9-]{4,64}$"},
+          "recordVersion": {"$ref": "#/$defs/semver"},
+          "recordDigest": {"$ref": "#/$defs/digest"}
+        }
+      }
+    },
+    "governanceBindings": {"type": "object"},
+    "dataAccessMode": {"const": "REFERENCE_ONLY_VIA_ICR"},
+    "customerDatabaseReadAllowed": {"const": false},
+    "canonicalInputDirectReadAllowed": {"const": false},
+    "persistentMethodCopyAllowed": {"const": false},
+    "productionExecutionAllowed": {"const": false},
+    "projectedAt": {"type": "string", "format": "date-time"},
+    "projectionPolicyVersion": {"$ref": "#/$defs/semver"},
+    "methodInputDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

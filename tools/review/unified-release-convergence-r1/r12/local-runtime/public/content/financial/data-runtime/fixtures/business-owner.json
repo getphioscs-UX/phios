@@ -1,0 +1,360 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "business-owner",
+  "description": "Business owner with structured company facts and a material personal guarantee.",
+  "synthetic": true,
+  "sourceAdapter": "PROFESSIONAL_INTAKE",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "structuredGuaranteeRequired": true,
+    "incomeChanged": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-BIZ-S0",
+      "financialRealityId": "FR-BIZ",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-BIZ",
+        "householdReference": "HH-BIZ",
+        "customerReferences": [
+          "CUST-BIZ"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-BIZ",
+            "roles": [
+              "CUSTOMER",
+              "SHAREHOLDER",
+              "DIRECTOR"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [
+          {
+            "entityId": "E-BIZ",
+            "entityType": "COMPANY",
+            "jurisdiction": {
+              "factId": "F-E-J",
+              "factCode": "ENTITY_JURISDICTION",
+              "value": "MY",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "ownershipReferences": [
+              "EOWN-1"
+            ],
+            "directorPersonIds": [
+              "P-BIZ"
+            ],
+            "shareholderPersonIds": [
+              "P-BIZ"
+            ],
+            "guaranteeReferences": [
+              "GUA-1"
+            ],
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [
+          {
+            "incomeStreamId": "I-BIZ",
+            "incomeType": "BUSINESS_INCOME",
+            "recipientReference": "P-BIZ",
+            "amountFact": {
+              "factId": "F-I-BIZ",
+              "factCode": "INCOME_AMOUNT",
+              "value": 20000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "bcc8a60cd4fd5bab79115f71bf6f1f7e2ac62412537a876cbce07a6e080043fc"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "b6260b0a78dcc032ea7cfac609f1e7fa2c65b96fe5e6a093f0e34663602a7fb6"
+    },
+    {
+      "snapshotId": "FR-BIZ-S1",
+      "financialRealityId": "FR-BIZ",
+      "sequence": 1,
+      "timepoint": "t1",
+      "asOfDate": "2026-05-01",
+      "financialRealityVersion": 2,
+      "snapshotPayload": {
+        "financialRealityId": "FR-BIZ",
+        "householdReference": "HH-BIZ",
+        "customerReferences": [
+          "CUST-BIZ"
+        ],
+        "asOfDate": "2026-05-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-BIZ",
+            "roles": [
+              "CUSTOMER",
+              "SHAREHOLDER",
+              "DIRECTOR"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [
+          {
+            "entityId": "E-BIZ",
+            "entityType": "COMPANY",
+            "jurisdiction": {
+              "factId": "F-E-J",
+              "factCode": "ENTITY_JURISDICTION",
+              "value": "MY",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "ownershipReferences": [
+              "EOWN-1"
+            ],
+            "directorPersonIds": [
+              "P-BIZ"
+            ],
+            "shareholderPersonIds": [
+              "P-BIZ"
+            ],
+            "guaranteeReferences": [
+              "GUA-1"
+            ],
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [
+          {
+            "incomeStreamId": "I-BIZ",
+            "incomeType": "BUSINESS_INCOME",
+            "recipientReference": "P-BIZ",
+            "amountFact": {
+              "factId": "F-I-BIZ2",
+              "factCode": "INCOME_AMOUNT",
+              "value": 26000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-05-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-05-01",
+              "recordedAt": "2026-05-01T00:00:00Z"
+            },
+            "frequency": "MONTHLY",
+            "currency": "MYR",
+            "effectivePeriod": {
+              "from": "2026-01-01",
+              "to": null
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 2,
+        "digest": "a0f802804cc53f5cda11a5998986a93b43c0618b543f860c6b6c7bd40678a0c7"
+      },
+      "previousSnapshotDigest": "b6260b0a78dcc032ea7cfac609f1e7fa2c65b96fe5e6a093f0e34663602a7fb6",
+      "changeEventReferences": [
+        "EV-BIZ-1"
+      ],
+      "createdAt": "2026-05-01T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "0776d1ef8eaffe68fe2f257b2790e21b3257654c1b4c0ceb5c60174dad58ca9d"
+    }
+  ],
+  "changeEvents": [
+    {
+      "eventId": "EV-BIZ-1",
+      "financialRealityId": "FR-BIZ",
+      "eventType": "INCOME_CHANGED",
+      "occurredAt": "2026-05-01",
+      "recordedAt": "2026-05-01T12:00:00Z",
+      "subjectReference": "I-BIZ",
+      "factReferences": [
+        "F-I-BIZ2"
+      ],
+      "fromSnapshotId": "FR-BIZ-S0",
+      "toSnapshotId": "FR-BIZ-S1",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "087bc6692286bf06b71459df75e96aa669832a845809c2823ae488309117c79d"
+    }
+  ],
+  "guarantees": [
+    {
+      "guaranteeId": "GUA-1",
+      "guaranteeType": "PERSONAL_GUARANTEE",
+      "guarantorReferences": [
+        "P-BIZ"
+      ],
+      "obligorReferences": [
+        "E-BIZ"
+      ],
+      "exposureFact": {
+        "factId": "F-GUA",
+        "factCode": "GUARANTEE_EXPOSURE",
+        "value": 7500000,
+        "valueRepresentation": "EXACT",
+        "disclosureState": "SELF_REPORTED",
+        "evidence": {
+          "evidenceType": "SELF_DECLARATION",
+          "source": "SYNTHETIC_FIXTURE",
+          "verifiedAt": null,
+          "effectiveDate": "2026-01-01",
+          "documentReference": null,
+          "confidence": 0.7
+        },
+        "effectiveDate": "2026-01-01",
+        "recordedAt": "2026-01-01T00:00:00Z"
+      },
+      "currency": "MYR",
+      "disclosureState": "SELF_REPORTED",
+      "evidence": {
+        "evidenceType": "SELF_DECLARATION",
+        "source": "SYNTHETIC_FIXTURE",
+        "verifiedAt": null,
+        "effectiveDate": "2026-01-01",
+        "documentReference": null,
+        "confidence": 0.7
+      }
+    }
+  ]
+}

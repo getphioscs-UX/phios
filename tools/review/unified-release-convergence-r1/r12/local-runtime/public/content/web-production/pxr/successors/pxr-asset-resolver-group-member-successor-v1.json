@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-PXR-ASSET-RESOLVER-GROUP-MEMBER-SUCCESSOR-v1.0.0",
+  "work": "PXR-P0-P1-BOOK-PREVIEW-AND-UNIFIED-VISUAL-CONSUMPTION",
+  "baselineCommit": "f968210",
+  "status": "ACTIVE_ADDITIVE_EXISTING_RESOLVER_SUCCESSOR_REGISTERED_GROUP_MEMBER_RUNTIME_PROBE_ONLY",
+  "purpose": "Extend the single existing public asset resolver with registered collection-member URL resolution so Book I preview pages can use the governed asset group and public base without hardcoded local paths, a second resolver, or false remote-verification promotion.",
+  "predecessor": {
+    "path": "assets/js/runtime/web-production/asset-resolver.js",
+    "sha256": "6a44f5d3371f3dde0f0b51e95d97c74c1640d3767cb870a3fa5b7df75b8b64f0",
+    "existingSuccessorAuthority": "content/web-production/reconciliation/pds-w0-hpc2-pre-asset-resolver-successor-v1.json",
+    "rewritten": false
+  },
+  "current": {
+    "path": "assets/js/runtime/web-production/asset-resolver.js",
+    "sha256": "9c8b37b74f53bd8a54b9a730957627b1f96d9eeee8069d9b607c9112f2dcd23f",
+    "singleResolverIdentityPreserved": true,
+    "addedExports": [
+      "resolvePublicAssetGroupMember",
+      "resolvePublicAssetGroupMemberForWeb"
+    ],
+    "currentConsumer": "assets/js/pages/book-one-preview.js"
+  },
+  "semantics": {
+    "registeredGroupRequired": true,
+    "memberMustRemainWithinRegisteredObjectKeyPrefix": true,
+    "existingPublicBaseResolutionReused": true,
+    "runtimeProbeRequiredBeforePresentation": true,
+    "groupMemberRemoteVerificationPromoted": false,
+    "hardcodedR2HostAdded": false,
+    "existingResolvePublicAssetSemanticsChanged": false
+  },
+  "authorityBoundary": {
+    "secondResolverCreated": false,
+    "registryAuthorityChanged": false,
+    "verificationAuthorityChanged": false,
+    "publicBaseAuthorityChanged": false,
+    "homepageRuntimeAuthorityChanged": false,
+    "knowledgeAuthorityChanged": false,
+    "methodAuthorityChanged": false,
+    "historicalHpc2FreezeRewritten": false,
+    "historicalPdsSuccessorRewritten": false,
+    "globalProductionAcceptanceGranted": false
+  },
+  "successorPolicy": {
+    "failClosed": true,
+    "futureResolverDriftRequiresVersionedSuccessor": true
+  }
+}

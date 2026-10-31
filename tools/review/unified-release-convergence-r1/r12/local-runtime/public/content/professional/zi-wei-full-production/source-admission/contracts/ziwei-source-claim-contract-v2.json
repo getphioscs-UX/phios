@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/ziwei/ziwei-source-claim-v2.schema.json",
+  "title": "PHI OS Zi Wei Source Claim v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "claimId",
+    "work",
+    "authorityComponent",
+    "claimType",
+    "primarySourceId",
+    "witnessRefs",
+    "locator",
+    "sourceBoundParaphrase",
+    "schoolLayer",
+    "normalizedPayload",
+    "reviewState",
+    "runtimeUseAllowed",
+    "reviewFlags"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ZIWEI-SOURCE-CLAIM-v2.0.0"
+    },
+    "claimId": {
+      "type": "string",
+      "pattern": "^ZWR-SC-"
+    },
+    "work": {
+      "enum": [
+        "ZIWEI-FP-W8"
+      ]
+    },
+    "authorityComponent": {
+      "enum": [
+        "PATTERN_RUNTIME"
+      ]
+    },
+    "claimType": {
+      "enum": [
+        "PATTERN_QUALIFICATION_RULE"
+      ]
+    },
+    "primarySourceId": {
+      "type": "string",
+      "pattern": "^ZWR-SRC-"
+    },
+    "witnessRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^ZWR-WIT-"
+      }
+    },
+    "locator": {
+      "type": "object",
+      "required": [
+        "sectionOrHeading",
+        "witnessUrl"
+      ],
+      "properties": {
+        "sectionOrHeading": {
+          "type": "string"
+        },
+        "sourceRow": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "webLineSnapshot": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "witnessUrl": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceBoundParaphrase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schoolLayer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalizedPayload": {
+      "type": "object"
+    },
+    "reviewState": {
+      "enum": [
+        "EXTRACTED_PENDING_HUMAN_REVIEW",
+        "HUMAN_ADMITTED",
+        "HUMAN_REJECTED",
+        "NEEDS_REVISION"
+      ]
+    },
+    "runtimeUseAllowed": {
+      "type": "boolean"
+    },
+    "reviewFlags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewEvidenceRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

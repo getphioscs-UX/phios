@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-W17-CANONICAL-TIMING-REACHABILITY-CONTRACT-v1.0.0",
+  "workCode": "AST-CX-R3-W17",
+  "baselineCommit": "1189c0519f1c5e9376965324b6010c00c212a3a1",
+  "goal": "Prove whether an explicit Astrology targetContext can travel through the canonical Personal Reality request into the existing governed ASTT runtime without mutating the frozen PPR-R3 host.",
+  "canonicalPath": [
+    "/perspectives/personal/",
+    "POST /api/customer-personal-reality",
+    "PPR product assembly",
+    "buildAstCustomerWorkspaceCandidate",
+    "ASTT governed temporal reading",
+    "AST Customer Product Projection v3",
+    "PPR_R3_AST_PRODUCT_V1"
+  ],
+  "requiredInputShape": {
+    "targetDate": "YYYY-MM-DD",
+    "targetTime": "HH:mm:ss",
+    "targetTimezone": {
+      "iana": "IANA",
+      "utcOffsetAtTarget": "+08:00"
+    }
+  },
+  "currentFinding": "PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED",
+  "evidence": {
+    "astTargetFieldsAlreadyExistInFrozenHtml": true,
+    "sharedPersonalRealityJsActivatesAstTargetInput": false,
+    "sharedPersonalRealityJsSerializesAstTargetContext": false,
+    "customerApiConsumesAstTargetContext": false,
+    "productAssemblyAcceptsAstTargetContext": false,
+    "productAssemblyPassesAstTargetContextToAstWorkspace": false,
+    "astWorkspaceCandidateAlreadySupportsTargetContext": true
+  },
+  "requiredFutureSharedSuccessorCapability": [
+    "activate existing AST target fields only when Astrology is selected",
+    "validate all four target fields together",
+    "serialize one governed astTargetContext",
+    "pass it through customer API/product assembly without semantic interpretation"
+  ],
+  "stopRule": "Do not modify frozen PPR-R3 files from an AST specialist ticket. W18 customer timing activation remains blocked until a shared input successor is explicitly authorized.",
+  "boundaries": {
+    "newAstCalculator": false,
+    "newTransitCalculator": false,
+    "browserTransitCalculation": false,
+    "serverClockInference": false,
+    "browserClockInference": false,
+    "pprR3SharedMutation": false
+  },
+  "baselineExpectedAbsentFrozenPaths": [
+    "assets/customer-ui/js/surfaces/single-method-reading.js"
+  ],
+  "baselineNote": "main@1189c05 already lacks the historical shared single-method-reading JS renderer; AST-CX-R3 must not recreate it. Historical AST freeze checks are reconciled to accept this current-baseline absence while all remaining frozen files stay hash-stable."
+}

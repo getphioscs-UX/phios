@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-MIR-10-PCA-DEMAND-SOURCE-SURFACE-REGISTRY-v1.0.0",
+  "work": "MIR-10B",
+  "status": "ACTIVE_AGGREGATE_ONLY",
+  "sources": [
+    {
+      "code": "KAP",
+      "allowedSignal": "KNOWLEDGE_GAP",
+      "rawPayloadAllowed": false
+    },
+    {
+      "code": "GUIDED_READING",
+      "allowedSignal": "EXPLANATION_OR_KNOWLEDGE_GAP",
+      "rawPayloadAllowed": false
+    },
+    {
+      "code": "RJX",
+      "allowedSignal": "CASE_AGGREGATE_KNOWLEDGE_OR_FIGURE_GAP",
+      "rawPayloadAllowed": false
+    },
+    {
+      "code": "SEARCH",
+      "allowedSignal": "AGGREGATED_SEARCH_COVERAGE_GAP",
+      "rawPayloadAllowed": false
+    },
+    {
+      "code": "KNOWLEDGE_RETRIEVAL",
+      "allowedSignal": "AGGREGATED_RETRIEVAL_COVERAGE_GAP",
+      "rawPayloadAllowed": false
+    }
+  ],
+  "forbidden": [
+    "raw question",
+    "raw search query",
+    "case narrative",
+    "session transcript",
+    "personal identifiers",
+    "birth data",
+    "contact data"
+  ],
+  "kapW41Reconciliation": {
+    "path": "content/knowledge/answer-projection/reconciliation/kap-w41-pca-demand-gap-signal-handoff-v1.json",
+    "sha256": "2b84a195d1172f598c7441c3f81832c2317139f23d2acd825335485c6df68bac"
+  }
+}

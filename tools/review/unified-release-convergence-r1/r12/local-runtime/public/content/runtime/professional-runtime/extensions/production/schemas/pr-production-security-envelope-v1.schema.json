@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-production-security-envelope-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "securityEventReference",
+    "operationCode",
+    "caseVersionReference",
+    "professionalReference",
+    "assignmentReference",
+    "workspaceReference",
+    "consentReference",
+    "purpose",
+    "rdgPermissionDecision",
+    "decision",
+    "payloadCopied",
+    "evaluatedAt",
+    "securityDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_PRODUCTION_SECURITY_ENVELOPE"
+    },
+    "securityEventReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operationCode": {
+      "type": "string",
+      "enum": [
+        "REVISION_CREATE",
+        "REREVIEW",
+        "APPROVE",
+        "SIGN",
+        "RELEASE",
+        "PWS_HANDOFF",
+        "RR_HANDOFF"
+      ]
+    },
+    "caseVersionReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "professionalReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assignmentReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workspaceReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "consentReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "const": "PROFESSIONAL_SERVICE"
+    },
+    "rdgPermissionDecision": {
+      "const": "ALLOW"
+    },
+    "decision": {
+      "const": "ALLOW_PROFESSIONAL_PRODUCTION_OPERATION"
+    },
+    "payloadCopied": {
+      "const": false
+    },
+    "evaluatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "securityDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Target State v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "targetCode",
+    "targetVersion",
+    "objectType",
+    "dataType",
+    "currentPositionReference",
+    "source",
+    "targetStatement",
+    "targetCriteria",
+    "authorityBoundary",
+    "targetInventedByRne",
+    "predictionCreated",
+    "guaranteedOutcomeCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "targetDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-TARGET-STATE-v1.0.0"
+    },
+    "targetCode": {
+      "type": "string",
+      "pattern": "^RNE-TARGET-[A-Z0-9-]{4,120}$"
+    },
+    "targetVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "TARGET_STATE"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "currentPositionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceType",
+        "sourceReference",
+        "sourceAuthorityReference"
+      ],
+      "properties": {
+        "sourceType": {
+          "enum": [
+            "CUSTOMER",
+            "PROFESSIONAL",
+            "AUTHORIZED_SERVICE"
+          ]
+        },
+        "sourceReference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "sourceAuthorityReference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        }
+      }
+    },
+    "targetStatement": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "targetCriteria": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 600
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targetSourceAuthority",
+        "navigationAuthority",
+        "professionalJudgmentAuthority"
+      ],
+      "properties": {
+        "targetSourceAuthority": {
+          "enum": [
+            "CUSTOMER",
+            "PROFESSIONAL",
+            "AUTHORIZED_SERVICE"
+          ]
+        },
+        "navigationAuthority": {
+          "const": "RNE"
+        },
+        "professionalJudgmentAuthority": {
+          "const": "PR"
+        }
+      }
+    },
+    "targetInventedByRne": {
+      "const": false
+    },
+    "predictionCreated": {
+      "const": false
+    },
+    "guaranteedOutcomeCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "targetDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

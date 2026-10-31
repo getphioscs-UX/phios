@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-WORLD-OBSERVATION-ENVELOPE-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "work": "PHI-OS-WORLD-RECONFIGURATION-OBSERVATION-P1",
+  "requiredFields": [
+    "observationId",
+    "subject",
+    "observationClass",
+    "knowledgeState",
+    "observedAt",
+    "retrievedAt",
+    "sourceRefs",
+    "lineage",
+    "measurement",
+    "uncertainty",
+    "boundary"
+  ],
+  "observationClasses": [
+    "TRACE",
+    "MEASUREMENT",
+    "STATE_OBSERVATION",
+    "CHANGE_OBSERVATION",
+    "TREND_OBSERVATION",
+    "ANOMALY_OBSERVATION",
+    "SIGNAL_OBSERVATION",
+    "DERIVED_READOUT"
+  ],
+  "measurement": {
+    "objectDefinition": "string|null",
+    "unit": "string|null",
+    "scale": "INDIVIDUAL|HOUSEHOLD|ORGANIZATION|CITY|REGION|COUNTRY|NETWORK|GLOBAL|null",
+    "baseline": "object|null",
+    "window": "{start,end,samplingFrequency}|null",
+    "resolution": "string|null",
+    "calibration": "string|null",
+    "comparability": "COMPARABLE|PARTIALLY_COMPARABLE|NOT_COMPARABLE|UNKNOWN",
+    "error": "{known,description}|null",
+    "missingness": "{state,description}|null"
+  },
+  "uncertainty": {
+    "state": "KNOWN_BOUND|PARTIAL_BOUND|UNBOUNDED|UNKNOWN",
+    "description": "string",
+    "unresolved": "array"
+  },
+  "lineage": {
+    "sourceClass": "string",
+    "providerId": "string|null",
+    "rawSnapshotRef": "string|null",
+    "claimRefs": "array",
+    "evidenceRefs": "array",
+    "rreReadoutRef": "object|null",
+    "transformationRefs": "array"
+  },
+  "rules": [
+    "A provider snapshot cannot be projected as CURRENT_DATA unless admitted evidence exists.",
+    "A numeric observation without object/unit/window metadata cannot become a trend signal.",
+    "A change observation requires an explicit baseline.",
+    "A trend observation requires at least two comparable observation times and an explicit window.",
+    "A signal observation must preserve persistence/noise/threshold state separately from evidence authority.",
+    "Derived readout must carry the evidence refs and transformation lineage used to derive it.",
+    "Uncertainty and missingness remain customer-visible when material to interpretation."
+  ]
+}
