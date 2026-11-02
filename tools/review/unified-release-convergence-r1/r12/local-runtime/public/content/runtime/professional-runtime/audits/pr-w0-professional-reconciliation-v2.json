@@ -1,0 +1,88 @@
+{
+  "auditCode": "PHI-OS-PR-W0-PROFESSIONAL-RECONCILIATION-v2",
+  "auditVersion": "2.0.0",
+  "runtimeCode": "PR",
+  "work": "PR-W0",
+  "status": "reconciled",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "migrationAuthority": "content/governance/canonical-master-work/registries/canonical-master-work-migration-registry-v1.json",
+  "migrationDecision": {
+    "legacyWorkCode": "PR-W0-W10",
+    "legacyRuntime": "PR_V1",
+    "canonicalWorkCode": "PR-W0-W13",
+    "canonicalRuntime": "PR",
+    "migrationStatus": "UPGRADED",
+    "requiredReason": "Professional authority preserved with data/readout/capability boundaries."
+  },
+  "alignedAuthorities": [
+    {
+      "system": "existing PR / Professional Workspace",
+      "decision": "PRESERVE_EXISTING_ADAPTERS_AS_COMPATIBILITY_SURFACES",
+      "authorityEffect": "NONE"
+    },
+    {
+      "system": "Shared Professional Runtime",
+      "decision": "PRESERVE_METHOD_DELIVERABLE_REVIEW_SIGNATURE_RELEASE_PATH",
+      "authorityEffect": "NONE"
+    },
+    {
+      "system": "PWS",
+      "decision": "BIND_CASE_CONTEXT_TO_ASSIGNMENT_WORKSPACE_CAPABILITY_CREDENTIAL_AND_SIGNATURE_AUTHORITIES",
+      "authorityEffect": "PR_DOES_NOT_OWN_PWS_IDENTITIES"
+    },
+    {
+      "system": "RDG",
+      "decision": "PRESERVE_PROFESSIONAL_JUDGMENT_RECORD_AND_OUTCOME_RECORD_WRITE_AUTHORITY",
+      "authorityEffect": "READ_ONLY_SUCCESSOR_EXTENSION_ONLY"
+    },
+    {
+      "system": "RRE",
+      "decision": "READ_CANONICAL_READOUT_WITHOUT_MUTATION",
+      "authorityEffect": "READ_ONLY"
+    },
+    {
+      "system": "JR",
+      "decision": "READ_JOURNEY_NAVIGATION_WITHOUT_OWNING_JOURNEY",
+      "authorityEffect": "READ_ONLY"
+    },
+    {
+      "system": "RR",
+      "decision": "PROVIDE_APPROVAL_RELEASE_REFERENCES_TO_REPORT_ASSEMBLY",
+      "authorityEffect": "RR_REMAINS_REPORT_ASSEMBLY"
+    },
+    {
+      "system": "ALR",
+      "decision": "LEARNING_CAPABILITY_MAY_BE_LINEAGE_BUT_NOT_PROFESSIONAL_PERMISSION",
+      "authorityEffect": "NONE"
+    }
+  ],
+  "authorityBoundary": {
+    "prOwns": [
+      "human-attributable professional observation recording",
+      "professional judgment",
+      "bounded professional recommendation",
+      "professional decision-package lifecycle",
+      "professional review/approval/signature/release audit"
+    ],
+    "prDoesNotOwn": [
+      "raw data truth",
+      "Reality state",
+      "Reality Readout",
+      "Metric authority",
+      "Meaning authority",
+      "Knowledge authority",
+      "Journey authority",
+      "Report assembly",
+      "Capability issuance",
+      "Credential issuance",
+      "Entitlement",
+      "Assignment identity"
+    ]
+  },
+  "caseIdentityDecision": {
+    "canonicalPrCaseContextAllowed": true,
+    "newPwsCaseObjectCreated": false,
+    "caseIdMustBindActiveAssignment": true,
+    "pwsCaseAliasPromoted": false
+  }
+}

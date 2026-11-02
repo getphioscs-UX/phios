@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W6-KNOWLEDGE-RETRIEVAL-SOURCE-REGISTRY-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W6",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "retrievalAuthority": "KSAR_KNOWLEDGE_ACCESS",
+  "endpoint": "/api/knowledge-access",
+  "defaultMode": "auto",
+  "defaultSourceMode": "hybrid",
+  "eligibleSources": [
+    {
+      "source": "PUBLISHED_KNOWLEDGE",
+      "authority": "PUBLISHED_CANONICAL_AUTHORITY",
+      "via": "KSAR_PUBLIC_KNOWLEDGE"
+    },
+    {
+      "source": "REVIEWED_MANUSCRIPT",
+      "authority": "HUMAN_REVIEWED_MANUSCRIPT_DERIVATIVE",
+      "via": "KSAR_MANUSCRIPT_RETRIEVAL"
+    }
+  ],
+  "ineligibleDirectSources": [
+    "RAW_FULL_BOOK",
+    "RAW_SECTION_BODY",
+    "UNPUBLISHED_ARTICLE_CANDIDATE",
+    "UNREVIEWED_MANUSCRIPT",
+    "DIRECT_CANONICAL_REGISTRY_SCAN_BY_KAP"
+  ],
+  "rules": {
+    "reuseKsAR": true,
+    "kapMayReimplementRetrieval": false,
+    "noPublicArticleDoesNotMeanNoKnowledge": true,
+    "noPublicArticleDoesNotMeanNoAnswer": true,
+    "sourceNativeManuscriptMayGroundWithoutCanonicalNodeClaim": true,
+    "pendingBindingMayClaimCanonicalNode": false,
+    "kapConsumesUpstreamGroundedAnswerInPhase2": false
+  }
+}

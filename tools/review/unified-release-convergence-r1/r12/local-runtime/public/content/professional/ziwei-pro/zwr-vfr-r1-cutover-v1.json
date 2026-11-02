@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "ZWR-VFR-R1-CUTOVER-v1",
+  "work": "ZWR-VFR-R1",
+  "status": "PRE_LIVE_OLD_HOT_PATH_RETIRED_FROM_SUCCESSOR",
+  "predecessor": {
+    "pipeline": "ZWR-PRO-W4-W10",
+    "disposition": "OFFLINE_QA_DIAGNOSTIC_ONLY",
+    "customerHotPath": false,
+    "keepFiles": true,
+    "keepEvidence": true
+  },
+  "successor": {
+    "architecture": "PHI-OS-VFR-R1",
+    "providerCallsNormal": 1,
+    "providerCallsAbsoluteMax": 2,
+    "bilingualSingleCall": true,
+    "semanticAiReviewerCalls": 0,
+    "maxPhysicalPages": 50,
+    "providerBudgetUsd": 1
+  },
+  "liveProviderRule": {
+    "environmentFlag": "REPORT_PROVIDER_LIVE_ALLOWED",
+    "requiredValue": "true",
+    "default": "false",
+    "largeCampaignForbidden": true,
+    "oldCommandForbiddenForCutover": "run:zwr-pro:w10-live"
+  },
+  "canonicalAccountBindingChanged": false,
+  "productionCutover": false
+}

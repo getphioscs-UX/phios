@@ -1,0 +1,68 @@
+{
+  "contractCode": "PHI-OS-MPA-W26-PRODUCTION-ELIGIBILITY-DECISION-v1",
+  "contractVersion": "1.0.0",
+  "work": "MPA-W26",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "ACTIVE_CANONICAL_ELIGIBILITY_AUTHORITY_FAIL_CLOSED",
+  "authority": {
+    "ownsProductionEligibilityDecision": true,
+    "ownsMethodDefinition": false,
+    "ownsValidationEvidence": false,
+    "ownsRegressionEvidence": false,
+    "ownsLicenseAuthority": false,
+    "ownsDataGovernanceAuthority": false,
+    "ownsProfessionalJudgment": false,
+    "ownsPublicVocabularyAuthority": false,
+    "ownsProductionExecution": false
+  },
+  "canonicalFields": [
+    "methodCode",
+    "methodVersion",
+    "capability",
+    "validation",
+    "regression",
+    "license",
+    "dataGovernance",
+    "professionalBoundary",
+    "publicVocabulary",
+    "decision",
+    "blockingReasons"
+  ],
+  "decisions": [
+    "ELIGIBLE",
+    "CONDITIONALLY_ELIGIBLE",
+    "BLOCKED"
+  ],
+  "gateStatuses": [
+    "PASSED",
+    "CONDITIONAL",
+    "BLOCKED",
+    "NOT_APPLICABLE"
+  ],
+  "rules": {
+    "missingEvidenceFailsClosed": true,
+    "registeredDoesNotEqualEligible": true,
+    "implementedDoesNotEqualEligible": true,
+    "validatedDoesNotEqualEligible": true,
+    "capabilityGranularityRequired": true,
+    "conditionallyEligibleIsNotProductionExecutable": true,
+    "onlyEligibleDecisionMayReturnTrueFromIsMethodProductionEligible": true,
+    "professionalCapabilityRequiresSeparateProfessionalBoundary": true,
+    "publicCapabilityRequiresControlledPublicVocabularyAndSeparatePublicAuthority": true,
+    "holdingEntryCannotReachEligibilityWithoutIndependentActivation": true,
+    "futureChangeRequiresVersionedSuccessor": true
+  },
+  "sourceAuthorities": {
+    "methodRegistry": "content/professional/method-production-activation/registries/method-registry-v2.json",
+    "capabilityMatrix": "content/professional/method-production-activation/registries/mpa-method-capability-matrix-v1.json",
+    "methodReadiness": "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+    "astReadiness": "content/professional/method-production-activation/registries/mpa-ast-activation-readiness-v1.json",
+    "bzrReadiness": "content/professional/method-production-activation/registries/mpa-bzr-activation-readiness-v1.json",
+    "hdrReadiness": "content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json",
+    "holdingRegistry": "content/professional/method-production-activation/registries/mpa-future-method-holding-registry-v1.json",
+    "licenseRegistry": "content/professional/method-governance/imr-commercial-license-registry-v1.json",
+    "dataGovernance": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+    "professionalBoundary": "content/professional/method-production-activation/contracts/mpa-professional-integration-v1.json",
+    "publicVocabulary": "content/web-production/registries/wpr-public-vocabulary-registry-v2.json"
+  }
+}

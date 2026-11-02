@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-W17R-BROWSER-DELIVERY-RECOVERY-CONTRACT-v1.0.0",
+  "work": "ZIWEI-CX-R1-W17R",
+  "integrationBaselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "RECOVERY_CONTRACT_FROZEN",
+  "problem": "The approved Zi Wei specialist renderer was registered and the server returned a publishable full-production product, but the browser renderer module imported a server-only Functions module. On a static customer surface that dependency is not a public asset, so dynamic import can fail and the shared host remains on its generic governed-visual placeholder.",
+  "rootCause": {
+    "frontendModule": "assets/customer-ui/js/specialists/ziwei/product-renderer.js",
+    "forbiddenBrowserDependency": "functions/personal-reality-product/adapters/ziwei-customer-surface-activation.js",
+    "observableFallback": "GENERIC_FALLBACK / governed visual placeholder",
+    "semanticBackendFailure": false,
+    "specialistBrowserDeliveryFailure": true
+  },
+  "requiredRecovery": {
+    "specialistModuleGraphStaticAssetOnly": true,
+    "browserActivationPredicateReadsServerIssuedProductEvidenceOnly": true,
+    "browserActivationPredicateMayActivateProduct": false,
+    "browserActivationPredicateMayCreateMeaning": false,
+    "browserActivationPredicateMayRunCalculation": false,
+    "sharedPprMutationAllowed": false,
+    "legacyGenericZiweiPrimaryOwnerAllowed": false
+  },
+  "acceptance": {
+    "serverProductStillCustomerPublishable": true,
+    "specialistRendererDescriptorStillApproved": true,
+    "ziweiBrowserModuleClosureContainsFunctionsPath": false,
+    "w15W16CurrentSharedSuccessorPasses": true,
+    "w17CurrentSharedSuccessorPasses": true,
+    "specialistRenderPlanContainsTwelvePalaces": true,
+    "specialistRenderPlanContainsEightTopics": true,
+    "fullProductionVisibleToCustomer": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "matrixCode": "PHI-OS-WPR-W29-FULL-PRODUCTION-ACCEPTANCE-MATRIX-v1",
+  "work": "WPR-W29",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "phaseAcceptanceReferences": [
+    {
+      "scope": "WPR-A_W0_W6",
+      "reference": "content/web-production/acceptance/wpr-w0-w6-production-foundation-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-B_W7_W10",
+      "reference": "content/web-production/acceptance/wpr-w7-w10-public-asset-delivery-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-C_W11_W13",
+      "reference": "content/web-production/acceptance/wpr-w11-w13-composition-infrastructure-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-D_W14_W19",
+      "reference": "content/web-production/acceptance/wpr-w14-w19-public-production-surfaces-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-E_W20",
+      "reference": "content/web-production/acceptance/wpr-w20-reality-journey-production-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-E_W21",
+      "reference": "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-F_W22",
+      "reference": "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-F_W23",
+      "reference": "content/web-production/acceptance/wpr-w23-report-workspace-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-G_W24_W27",
+      "reference": "content/web-production/acceptance/wpr-w24-w27-web-runtime-integrity-acceptance-v1.json",
+      "evaluated": true
+    },
+    {
+      "scope": "WPR-W28",
+      "reference": "content/web-production/acceptance/wpr-w28-drift-observability-deployment-acceptance-v1.json",
+      "evaluated": true
+    }
+  ],
+  "internalRuntimeGates": {
+    "authorityBoundaryPreserved": true,
+    "canonicalWebProductionRecordCount": 38,
+    "allCurrentRecordsLimitedProduction": true,
+    "hydrationGoverned": true,
+    "discoveryGoverned": true,
+    "privacySecurityGoverned": true,
+    "pdsIntegrationGoverned": true,
+    "observabilityGoverned": true
+  },
+  "upstreamAuthorityState": {
+    "cprProductionRecords": 0,
+    "carPublications": 0,
+    "wprMayPromoteEither": false
+  },
+  "openOperationalGates": [
+    "DEPLOYMENT_SHA_REVALIDATION_REQUIRED",
+    "PHIOS_PUBLIC_ASSET_BASE_URL_UPSTREAM_VERIFICATION",
+    "CUSTOM_DOMAIN_GETPHIOS_COM_DEPLOYMENT_VERIFICATION",
+    "PDS_PRODUCTION_BROWSER_MATRIX_360_768_1440_EN_ZH_HANS"
+  ],
+  "decision": "FULL_SCOPE_ACCEPTED_LIMITED_PRODUCTION_NO_FULL_PRODUCTION_PROMOTION"
+}

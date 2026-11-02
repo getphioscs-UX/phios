@@ -1,0 +1,657 @@
+{
+  "version": "R3_1",
+  "charts": [
+    {
+      "chartId": "FPR3-P01-PRIMARY",
+      "type": "report_scope",
+      "sourceBindings": [
+        "report.sourceManifest"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_PERSONAL_FULL_ID"
+      ]
+    },
+    {
+      "chartId": "FPR3-P02-PRIMARY",
+      "type": "income_expense_net",
+      "sourceBindings": [
+        "metrics.netWorth",
+        "metrics.cashFlowSurplus",
+        "metrics.liquidityMonths"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_AUTO_ALLOCATION_RATIO"
+      ]
+    },
+    {
+      "chartId": "FPR3-P03-PRIMARY",
+      "type": "person_responsibility_graph",
+      "sourceBindings": [
+        "records.household",
+        "records.liabilities"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_UNCONSENTED_ADULT"
+      ]
+    },
+    {
+      "chartId": "FPR3-P04-PRIMARY",
+      "type": "gross_to_net_if_supported",
+      "sourceBindings": [
+        "metrics.monthlyIncome",
+        "metrics.monthlyExpenses",
+        "records.incomeStreams",
+        "records.expenses"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_DOUBLE_PAYROLL_DEDUCTION"
+      ]
+    },
+    {
+      "chartId": "FPR3-P05-PRIMARY",
+      "type": "net_income_to_cash_remain",
+      "sourceBindings": [
+        "metrics.cashFlowSurplus",
+        "derived.cashFlowBridge"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_LOAN_DOUBLE_COUNT"
+      ]
+    },
+    {
+      "chartId": "FPR3-P06-PRIMARY",
+      "type": "asof_timeline_or_before_after",
+      "sourceBindings": [
+        "history.verifiedSnapshots",
+        "scenarios.userSaved"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_SYNTHETIC_HISTORY"
+      ]
+    },
+    {
+      "chartId": "FPR3-P07-PRIMARY",
+      "type": "total_assets_minus_liabilities",
+      "sourceBindings": [
+        "metrics.grossAssets",
+        "metrics.totalLiabilities",
+        "metrics.netWorth",
+        "records.assets",
+        "records.liabilities"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_FULL_ASSET_ASSUMPTION"
+      ]
+    },
+    {
+      "chartId": "FPR3-P08-PRIMARY",
+      "type": "exclusive_asset_allocation",
+      "sourceBindings": [
+        "records.assets",
+        "derived.assetClassAllocation"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_UNREALIZED_TO_TOTAL_RETURN"
+      ]
+    },
+    {
+      "chartId": "FPR3-P09-PRIMARY",
+      "type": "two_coverage_denominators",
+      "sourceBindings": [
+        "derived.accessibleReserves",
+        "metrics.liquidityMonths",
+        "metrics.monthlyExpenses"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_RESTRICTED_CASH_AUTOMATIC"
+      ]
+    },
+    {
+      "chartId": "FPR3-P10-PRIMARY",
+      "type": "importance_vs_time_matrix",
+      "sourceBindings": [
+        "records.goals",
+        "derived.goalAllocations"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "OVERFUNDED_EXPLICIT",
+        "DUPLICATE_ALLOCATION_FLAG"
+      ]
+    },
+    {
+      "chartId": "FPR3-P11-PRIMARY",
+      "type": "debt_by_type",
+      "sourceBindings": [
+        "records.liabilities",
+        "metrics.totalLiabilities",
+        "metrics.debtServiceRatio"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_FUTURE_LOAN_WITHOUT_TERM"
+      ]
+    },
+    {
+      "chartId": "FPR3-P12-PRIMARY",
+      "type": "saved_scenario_comparison_or_evidence_map",
+      "sourceBindings": [
+        "metrics.cashFlowSurplus",
+        "derived.shockScenarios",
+        "scenarios.userSaved"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_UNDECLARED_SHOCK",
+        "UNKNOWN_GOAL_NOT_ZERO"
+      ]
+    },
+    {
+      "chartId": "FPR3-P13-PRIMARY",
+      "type": "person_by_insured_event",
+      "sourceBindings": [
+        "records.policies",
+        "derived.policyRolesAndEvents"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_POLICY_SUM_AS_FAMILY_COVER"
+      ]
+    },
+    {
+      "chartId": "FPR3-P14-PRIMARY",
+      "type": "validated_ratio_by_formula",
+      "sourceBindings": [
+        "derived.riskIndicators",
+        "metrics.cashFlowSurplus",
+        "metrics.liquidityMonths",
+        "metrics.debtServiceRatio"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_LEGACY_THRESHOLD_RISK_RATING"
+      ]
+    },
+    {
+      "chartId": "FPR3-P15-PRIMARY",
+      "type": "declared_priority_cards",
+      "sourceBindings": [
+        "derived.evidencePriorities",
+        "records.goals"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_PRODUCT_RECOMMENDATION"
+      ]
+    },
+    {
+      "chartId": "FPR3-P16-PRIMARY",
+      "type": "fact_to_goal_to_review_arrows",
+      "sourceBindings": [
+        "derived.customerRoadmap",
+        "records.goals"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_INVENTED_DATES"
+      ]
+    },
+    {
+      "chartId": "FPR3-P17-PRIMARY",
+      "type": "review_status_swimlanes",
+      "sourceBindings": [
+        "derived.followupChecklist",
+        "records.userActionItems"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_IMPLIED_COMPLETION"
+      ]
+    },
+    {
+      "chartId": "FPR3-P18-PRIMARY",
+      "type": "year_and_evidence_matrix",
+      "sourceBindings": [
+        "records.taxDocuments",
+        "derived.taxEvidenceStatus"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "UNAPPROVED_YA_BLOCKS_TAX_CALC"
+      ]
+    },
+    {
+      "chartId": "FPR3-P19-PRIMARY",
+      "type": "asset_role_nomination_will_wishes",
+      "sourceBindings": [
+        "records.estatePreparation",
+        "records.household",
+        "records.assets"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "NO_LEGAL_WILL_WITHOUT_APPROVED_TEMPLATE"
+      ]
+    },
+    {
+      "chartId": "FPR3-P20-PRIMARY",
+      "type": "fact_to_calculation_to_chart_flow",
+      "sourceBindings": [
+        "report.sourceManifest"
+      ],
+      "requiredEvidence": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "timeUnit": "MONTHLY_OR_AS_OF_SEPARATE_AXES",
+      "currencyBasis": "SAME_CURRENCY_WITHOUT_IMPLICIT_FX",
+      "fallbackType": "EVIDENCE_DIAGRAM",
+      "precisionLabels": [
+        "EXACT",
+        "APPROXIMATE",
+        "RANGE",
+        "UNKNOWN",
+        "CONFIRMED_ZERO",
+        "OUT_OF_DATE"
+      ],
+      "themeColors": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "prohibitedInferences": [
+        "TECHNICAL_HASH_IN_DETAIL"
+      ]
+    }
+  ]
+}

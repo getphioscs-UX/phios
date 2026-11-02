@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-W54N0-WORK-MANIFEST-v1.0.0",
+  "work": "W54N0",
+  "baselineCommit": "ac0c6f3b1cef05301f2140cdccf8209f5056638b",
+  "status": "ENGINEERING_COMPLETE_MACHINE_VERIFIED",
+  "files": [
+    "content/personal-reading/narrative/contracts/narrative-brief-contract-v1.json",
+    "content/personal-reading/narrative/schemas/narrative-brief-v1.schema.json",
+    "content/personal-reading/narrative/successors/w54n0-input-authority-snapshot-v1.json",
+    "content/personal-reading/narrative/acceptance/w54n0-machine-acceptance-v1.json",
+    "functions/personal-reading/narrative/narrative-brief-compiler.js",
+    "scripts/ppr-narrative-w54n0-fixtures.mjs",
+    "scripts/check-ppr-narrative-w54n0-brief-contract.mjs",
+    "package.json"
+  ],
+  "preconditions": {
+    "w47W54GovernedPersonalReadingMachineVerified": true,
+    "w51PersonalReadingReportIrV2Required": true,
+    "w53EvidenceRulesRequired": true,
+    "w54FactualGuardRequired": true
+  },
+  "next": "REL-W7 Relationship Narrative Brief extends this generic contract after W54N0; shared W54N1 Writer follows the generic/relationship brief according to narrative type."
+}

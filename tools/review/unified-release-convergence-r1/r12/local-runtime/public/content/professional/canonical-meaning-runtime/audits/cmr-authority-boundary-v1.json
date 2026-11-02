@@ -1,0 +1,68 @@
+{
+  "boundaryCode": "CM-W0-AUTHORITY-BOUNDARY-v1",
+  "version": "1.0.0",
+  "status": "frozen",
+  "phase": "PHASE-CM",
+  "work": "CM-W0",
+  "baselineCommit": "8f7a5b41d36ecc3e1b25ab1dbad2f8e19a87e8e2",
+  "authorities": {
+    "knowledgeSemanticAuthority": {
+      "owns": [
+        "semantic profiles",
+        "mechanisms",
+        "boundaries",
+        "distinctions",
+        "concept families",
+        "knowledge relationship graph"
+      ],
+      "doesNotOwn": [
+        "canonical meaning codes",
+        "method-to-meaning mappings",
+        "canonical meaning bundles"
+      ]
+    },
+    "canonicalMeaningAuthority": {
+      "owns": [
+        "canonical meaning codes",
+        "meaning families",
+        "meaning dimensions",
+        "method-to-meaning mappings",
+        "canonical meaning bundles"
+      ],
+      "doesNotOwn": [
+        "method projections",
+        "knowledge node definitions",
+        "published fragments",
+        "professional conclusions"
+      ]
+    }
+  },
+  "separations": [
+    {
+      "left": "Knowledge Semantic Authority",
+      "operator": "!=",
+      "right": "Canonical Meaning Authority"
+    },
+    {
+      "left": "Method Projection Authority",
+      "operator": "!=",
+      "right": "Canonical Meaning Authority"
+    },
+    {
+      "left": "Canonical Meaning Authority",
+      "operator": "!=",
+      "right": "Professional Conclusion Authority"
+    }
+  ],
+  "invariants": {
+    "khW4G6SemanticRuntimeFreezeModified": false,
+    "methodRuntimeFreezeModified": false,
+    "duplicateSourceOfTruthCreated": false,
+    "canonicalMeaningMayReferenceKnowledge": true,
+    "canonicalMeaningMayRewriteKnowledge": false,
+    "canonicalMeaningMayRewriteMethodProjection": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false
+  }
+}

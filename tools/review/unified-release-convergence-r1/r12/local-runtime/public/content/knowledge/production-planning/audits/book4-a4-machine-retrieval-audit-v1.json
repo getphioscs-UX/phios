@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "PHI-OS-BOOK4-A4-MACHINE-RETRIEVAL-AUDIT-v1.0.0",
+  "stage": "BOOK-IV-A4",
+  "status": "COMPLETE_MACHINE_ACCEPTED",
+  "baselineCommit": "1f81638d214bd946778e4ac721a0f7b265eac116",
+  "recordedAt": "2026-09-10",
+  "bookCode": "BOOK-4",
+  "benchmarkPath": "content/knowledge/knowledge-intelligence-r2/benchmarks/book4-a4-machine-retrieval-benchmark-v1.json",
+  "counts": {
+    "finalCanonicalNodes": 125,
+    "positiveCases": 250,
+    "zhHansCases": 125,
+    "enCases": 125,
+    "legacyBook123ControlCases": 100,
+    "articleIdentitiesMapped": 53,
+    "batches": 11
+  },
+  "gates": {
+    "retrievalRecall": true,
+    "retrievalPrecision": true,
+    "wrongBookRate": true,
+    "sourceGrounding": true,
+    "dedup": true,
+    "directAnswerPotential": true,
+    "legacyNoHijack": true
+  },
+  "residualDiagnostics": {
+    "top5Misses": [
+      {
+        "caseId": "BOOK4-A4-044",
+        "locale": "en",
+        "expectedNode": "KN-B4-P10-222",
+        "question": "What does “Expansion Boundary” mean in Reality Expansion?",
+        "topNode": "KN-B4-P10-201",
+        "topBook": "BOOK-4",
+        "top5": [
+          "KN-B4-P10-201",
+          "KN-B4-P10-202",
+          "KN-B4-P10-210",
+          "KN-B4-P10-212",
+          "KN-B4-P10-215"
+        ]
+      },
+      {
+        "caseId": "BOOK4-A4-164",
+        "locale": "en",
+        "expectedNode": "KN-B4-P11-203",
+        "question": "What does “Civilization Scale” mean in Reality Expansion?",
+        "topNode": "KN-B4-P11-202",
+        "topBook": "BOOK-4",
+        "top5": [
+          "KN-B4-P11-202",
+          "KN-B4-P11-208",
+          "KN-B4-P11-204",
+          "KN-B4-P11-217",
+          "KN-B4-P10-279"
+        ]
+      },
+      {
+        "caseId": "BOOK4-A4-248",
+        "locale": "en",
+        "expectedNode": "KN-B4-P11-245",
+        "question": "What does “Civilization Runtime” mean in Reality Expansion?",
+        "topNode": "KN-B4-P11-202",
+        "topBook": "BOOK-4",
+        "top5": [
+          "KN-B4-P11-202",
+          "KN-B4-P11-208",
+          "KN-B4-P11-204",
+          "KN-B4-P11-217",
+          "KN-B4-P10-279"
+        ]
+      }
+    ],
+    "wrongBookTop1": [
+      {
+        "caseId": "BOOK4-A4-094",
+        "locale": "en",
+        "expectedNode": "KN-B4-P10-247",
+        "question": "What does “Expansion Debt” mean in Reality Expansion?",
+        "topNode": "KN-B2-P7-018",
+        "topBook": "BOOK-2",
+        "expectedStillInTop5": true
+      }
+    ],
+    "interpretation": "Residual diagnostics are carried into BOOK-IV-A5 human acceptance; passing thresholds do not erase these cases."
+  },
+  "admissionBoundary": {
+    "bookIVAdmitted": false,
+    "publicationOpened": false,
+    "A5Required": true,
+    "A6Required": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS Canonical Meaning Code Registry v1.2",
+  "type": "object",
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "productionStatus",
+    "meaningCodes"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-CANONICAL-MEANING-CODE-REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.2.0"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "meaningCodes": {
+      "type": "array",
+      "minItems": 141
+    }
+  }
+}

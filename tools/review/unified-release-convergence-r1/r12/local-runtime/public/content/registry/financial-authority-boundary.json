@@ -1,0 +1,37 @@
+{
+  "id": "phi-os.financial-authority-boundary",
+  "version": "1.0.0",
+  "milestone": "M4A-W8",
+  "status": "authority-gate-ready-workspace-pending",
+  "authority": "functions/professional/financial/financial-professional-authority.js",
+  "requiredFields": [
+    "professional_qualification",
+    "licence_or_registration",
+    "jurisdiction",
+    "permitted_service_scopes",
+    "restricted_product_advice",
+    "insurance_scope",
+    "investment_scope",
+    "tax_scope",
+    "estate_scope",
+    "expiry_date"
+  ],
+  "serviceScopes": [
+    "financial_fact_finding",
+    "financial_position_reconstruction",
+    "financial_stamina_analysis",
+    "financial_risk_review",
+    "goal_prioritisation",
+    "product_neutral_navigation",
+    "implementation_review",
+    "scheduled_review"
+  ],
+  "rules": {
+    "expiredAuthorityAllowed": false,
+    "jurisdictionMismatchAllowed": false,
+    "outOfScopeSignOffAllowed": false,
+    "productSpecificAdviceEnabled": false,
+    "conflictDisclosureRequiredForLaterProductStep": true,
+    "commissionDisclosureRequiredForLaterProductStep": true
+  }
+}

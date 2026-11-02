@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHIOS-LOGO-JOURNEY-SHELL-RECONCILIATION-v1.0.0",
+  "baseline": "9e7c612 + LOGO Batch C integration",
+  "workstep": "LOGO-W2",
+  "status": "IMPLEMENTED_AWAITING_REMOTE_LOGO_VERIFICATION",
+  "scope": [
+    "/reality-entry",
+    "/reality-reconstruction",
+    "/reality-reading",
+    "/reality-navigation",
+    "/reality-review",
+    "/my-reality"
+  ],
+  "authority": {
+    "journeyHeaderLogo": "LOGO-010",
+    "runtimeSidebarLogo": "LOGO-010",
+    "browserFavicon": "LOGO-011",
+    "resolver": "assets/js/runtime/web-production/asset-resolver.js",
+    "directR2UrlsForbidden": true,
+    "textPhiOsFallbackRetained": true,
+    "fallbackRemovalAllowedOnlyAfterRenderableLogo": true
+  },
+  "notes": [
+    "Journey shell pages already load assets/js/journey-shell.js; no per-page duplicate logo loader is introduced.",
+    "Legacy textual Φ + PHI OS remains available as fail-closed fallback.",
+    "Runtime workspace branding is hydrated after dynamic sidebar render via MutationObserver.",
+    "No PWA manifest authority is introduced by LOGO-W2."
+  ]
+}

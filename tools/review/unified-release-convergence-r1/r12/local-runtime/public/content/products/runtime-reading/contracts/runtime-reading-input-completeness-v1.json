@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W6-INPUT-COMPLETENESS-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W6",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_INPUT_COMPLETENESS_MODEL",
+  "requiredDisclosureLabels": [
+    "REQUIRED",
+    "OPTIONAL",
+    "NOT_PROVIDED",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "requirementClassValues": [
+    "REQUIRED",
+    "OPTIONAL"
+  ],
+  "availabilityStateValues": [
+    "PROVIDED",
+    "NOT_PROVIDED",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "sectionDeclarationMinimumFields": [
+    "sectionSemanticCode",
+    "requirementClass",
+    "availabilityState",
+    "sourceReferences",
+    "unknownReasonCodes"
+  ],
+  "rules": {
+    "requiredAndOptionalArePolicyClassesNotFacts": true,
+    "notProvidedAndUnknownAreDistinct": true,
+    "notApplicableMustBeExplicit": true,
+    "missingDataMayBeSilentlyDefaulted": false,
+    "missingDataMayBeInferredByAi": false,
+    "missingBirthTimeMayDefaultToNoon": false,
+    "unknownMustPropagateDownstream": true
+  }
+}

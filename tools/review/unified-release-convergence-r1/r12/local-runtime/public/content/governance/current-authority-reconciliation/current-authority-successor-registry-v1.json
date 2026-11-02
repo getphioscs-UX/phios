@@ -1,0 +1,447 @@
+{
+  "schemaVersion": "PHI-OS-CURRENT-AUTHORITY-SUCCESSOR-REGISTRY-v1.0.0",
+  "phase": "CARC",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_CURRENT_AUTHORITY_SUCCESSOR_REGISTRY",
+  "predecessorRegistry": {
+    "path": "content/governance/current-system-baseline/current-authority-inventory.json",
+    "sha256": "0bd23c2b41c8322fc9dc6a040ac01094eb4d2cc84b6f7b5ff00eb8305ace4cb7",
+    "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf"
+  },
+  "authorities": [
+    {
+      "authorityId": "INPUT_AUTHORITY",
+      "domain": "CANONICAL_INPUT",
+      "currentFile": "content/professional/method-runtime/shared-data-authority-v1.json",
+      "currentSha256": "a9acf53273a43088e4a191060e00250d8d8773c71ac653ee23a18f006a5b107c",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "ICR",
+        "MPA",
+        "MCD"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_SHARED_INPUT_AUTHORITY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "METHOD_AUTHORITY",
+      "domain": "METHOD_DEFINITION",
+      "currentFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "currentSha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+      "successorFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/professional/method-runtime/method-registry-v1.json",
+          "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1"
+        }
+      ],
+      "consumers": [
+        "MPA",
+        "MCD",
+        "HDR",
+        "AST",
+        "BZR",
+        "NUM",
+        "ICH",
+        "TAR"
+      ],
+      "consumerCount": 8,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_ACTIVATION_SUCCESSOR",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PROJECTION_AUTHORITY",
+      "domain": "METHOD_PROJECTION",
+      "currentFile": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "currentSha256": "8ffa3bf46930025cbf8ec3352223e7cdc5cc420b9f40016aa9e3edde6e981f13",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MCD",
+        "MPA",
+        "MIR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_SHARED_PROJECTION_AUTHORITY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "INTERPRETATION_AUTHORITY",
+      "domain": "INTERPRETATION",
+      "currentFile": "content/interpretation/governance/interpretation-authority-boundary-v1.json",
+      "currentSha256": "7c390aa6e4987f415a6a8f2b7dc16a16fb0c25f84424fa128c88e16a76846a27",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MIR",
+        "KAP",
+        "RJX",
+        "MCD"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:interpretation-runtime",
+      "productionStatus": "MACHINE_ACCEPTED_CURRENT_SUCCESSOR_REPOSITORY_GATE_PENDING",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "MEANING_AUTHORITY",
+      "domain": "CANONICAL_MEANING",
+      "currentFile": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+      "currentSha256": "a88c8dd422e222fee7efd4ee4ce9f3cc4b9e780f4b7fbc11ac0c4d0250c55936",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MIR",
+        "KAP"
+      ],
+      "consumerCount": 2,
+      "checker": "npm run check:interpretation-runtime",
+      "productionStatus": "CURRENT_DISTINCT_FROM_INTERPRETATION",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "KNOWLEDGE_AUTHORITY",
+      "domain": "KNOWLEDGE",
+      "currentFile": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+      "currentSha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "KAU",
+        "KAP",
+        "CKA",
+        "WPR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:kap-current",
+      "productionStatus": "CURRENT_SUCCESSOR_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "ASSET_AUTHORITY",
+      "domain": "CANONICAL_ASSET",
+      "currentFile": "content/professional/canonical-asset-runtime/contracts/canonical-asset-contract-v1.json",
+      "currentSha256": "f2de620f429ad9d9b0d019d580ad5a3fe4f2c33bc792257b31a258e9c934c366",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CAR",
+        "CPR",
+        "WPR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:car-preserved",
+      "productionStatus": "CURRENT_PROVIDER_ACTIVATION_DISABLED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "JOURNEY_AUTHORITY",
+      "domain": "JOURNEY_STATE",
+      "currentFile": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+      "currentSha256": "5f6859209bbfe4a49d3d533f63b703e0d0199989c462c8ac9a11f9bcd910c044",
+      "successorFile": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/registry/journeys.json",
+          "sha256": "3682b1cf29b375f394228f26f491efcce7254876021a24c8e83d86ded6a4e83a"
+        }
+      ],
+      "consumers": [
+        "RJX",
+        "RMO",
+        "RDG",
+        "WPR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:rjx",
+      "productionStatus": "CURRENT_V2_LIMITED_READ_ONLY_PRODUCTION",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "REALITY_MODEL_AUTHORITY",
+      "domain": "REALITY_MODEL",
+      "currentFile": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "currentSha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "RMO",
+        "RJX",
+        "RDG"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:rmo",
+      "productionStatus": "FROZEN_NOT_ACTIVATED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "REALITY_DATA_GOVERNANCE_AUTHORITY",
+      "domain": "REALITY_DATA_GOVERNANCE",
+      "currentFile": "content/governance/reality-data-governance/freeze/reality-data-governance-freeze-v1.json",
+      "currentSha256": "79e5433ae73ff11ea6ead081f85f6b4a7e6573d3850756c52749c184eaf6d9a4",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "RDG",
+        "RMO",
+        "RJX",
+        "PR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:rdg",
+      "productionStatus": "GOVERNANCE_AUTHORITY_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PROFESSIONAL_AUTHORITY",
+      "domain": "PROFESSIONAL_JUDGMENT",
+      "currentFile": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+      "currentSha256": "b280fe736bcaa9802463c1941b9d1b3448f0848b7eb19dce9ff2dd7b645b6f7d",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "PR",
+        "RR",
+        "FDR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:professional-runtime",
+      "productionStatus": "CURRENT_V2_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "REPORT_AUTHORITY",
+      "domain": "REPORT_ASSEMBLY",
+      "currentFile": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "currentSha256": "1ffd7087e750104baf2d1be72117afb659145617d8a96c45d598cc227c36ef5e",
+      "successorFile": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/registry/professional-deliverable-catalog.json",
+          "sha256": "e9bab57d3c8ece0d4e00244aab30d1a7455c1c0ab5eb55671aeefecc4492f80d"
+        }
+      ],
+      "consumers": [
+        "RR",
+        "CPR",
+        "WPR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:customer-report-runtime",
+      "productionStatus": "CURRENT_V2_FROZEN",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "PRESENTATION_AUTHORITY",
+      "domain": "PRESENTATION",
+      "currentFile": "content/professional/canonical-presentation-runtime/audits/cpr-authority-boundary-v1.json",
+      "currentSha256": "cff89b9c43a6dc704cf7f1a855556423d4877108775563459aa5a0223515580d",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CPR",
+        "WPR",
+        "CKA",
+        "HPC2"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:cpr-current",
+      "productionStatus": "CURRENT_VALIDATION_ONLY_HISTORICAL_ASSET_DIGEST_ISOLATED",
+      "currentOwner": true,
+      "predecessorCurrentFile": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+      "successorReconciledBy": "CARC"
+    },
+    {
+      "authorityId": "PUBLICATION_AUTHORITY",
+      "domain": "PUBLICATION",
+      "currentFile": "content/knowledge/production/contracts/publication-contract.json",
+      "currentSha256": "545674a931d6f0db3015df65d9f6dae9ec281ee67816a2f67a90d2e7dadd3d69",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "WPR",
+        "CPR",
+        "KAP"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:wpr",
+      "productionStatus": "CURRENT_PUBLICATION_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "METHOD_ACTIVATION_AUTHORITY",
+      "domain": "METHOD_ACTIVATION",
+      "currentFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "currentSha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+      "successorFile": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/professional/method-runtime/method-registry-v1.json",
+          "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1"
+        }
+      ],
+      "consumers": [
+        "MPA",
+        "MCD"
+      ],
+      "consumerCount": 2,
+      "checker": "npm run check:mpa",
+      "productionStatus": "CURRENT_GLOBAL_EXECUTION_BLOCKED",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "METHOD_CLIENT_DELIVERY_AUTHORITY",
+      "domain": "METHOD_CLIENT_DELIVERY",
+      "currentFile": "content/professional/method-client-delivery/contracts/mcd-0-method-client-delivery-authority-boundary-v1.json",
+      "currentSha256": "ecf11e4d3c9bce7ea913d0912a2c73d74ed0a46357a3d0be4184bfc3e3e43ebf",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "MCD",
+        "MPA"
+      ],
+      "consumerCount": 2,
+      "checker": "npm run check:mcd-8",
+      "productionStatus": "CURRENT_CLIENT_DELIVERY_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "CLIENT_KNOWLEDGE_ASK_AUTHORITY",
+      "domain": "CLIENT_KNOWLEDGE_ASK",
+      "currentFile": "content/client/knowledge-ask/reconciliation/cka-w5-w17-current-successor-v1.json",
+      "currentSha256": "82701b2fd6d9fce972d196350adfba9f4b28f1efa21236e1142918554694ec60",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CKA",
+        "KAP",
+        "HPC2"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:cka-current",
+      "productionStatus": "CURRENT_ADDITIVE_CLIENT_SUCCESSOR_HISTORICAL_FINGERPRINT_ISOLATED",
+      "currentOwner": true,
+      "predecessorCurrentFile": "content/client/knowledge-ask/contracts/cka-grounded-answer-binding-v1.json",
+      "successorReconciledBy": "CARC"
+    },
+    {
+      "authorityId": "WEB_PRODUCTION_AUTHORITY",
+      "domain": "WEB_PRODUCTION",
+      "currentFile": "content/web-production/registries/wpr-route-registry-v1.json",
+      "currentSha256": "79cb71a17868ca127ec9e6151cd453a5d29cf541cc6366c9aa72b0c5e7ea9d74",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "WPR",
+        "CPR",
+        "RJX",
+        "CKA",
+        "HPC2"
+      ],
+      "consumerCount": 5,
+      "checker": "npm run check:wpr-w4",
+      "productionStatus": "CURRENT_ROUTE_AND_SURFACE_AUTHORITY_DEPLOYMENT_REVALIDATION_REQUIRED",
+      "currentOwner": true,
+      "predecessorCurrentFile": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+      "successorReconciledBy": "CARC"
+    },
+    {
+      "authorityId": "FINANCIAL_FACT_AUTHORITY",
+      "domain": "FINANCIAL_FACT",
+      "currentFile": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+      "currentSha256": "921a5cbc4ff0102d4d26bd37d71a5fafcabca82bd608e6bc985660bb000ac1b1",
+      "successorFile": "content/financial/data-runtime/authority/financial-data-authority-baseline-v1.json",
+      "legacyPredecessors": [
+        {
+          "path": "content/registry/financial-authority-boundary.json",
+          "sha256": "e8708450a169dc41f7cb26a1e83378a6ad06587f7b39d02fd90808e5bd73beb4"
+        },
+        {
+          "path": "content/registry/financial-schema-registry.json",
+          "sha256": "c5c0527c32fcb91844477c719f9865763ea5408c54ce6e7a3f547465b48e0eae"
+        }
+      ],
+      "consumers": [
+        "FDR",
+        "PR",
+        "RR",
+        "DAR"
+      ],
+      "consumerCount": 4,
+      "checker": "npm run check:fdr",
+      "productionStatus": "FROZEN_CANONICAL_FINANCIAL_REALITY_V1",
+      "currentOwner": true,
+      "predecessorCurrentFile": "content/financial/data-runtime/authority/financial-data-authority-baseline-v1.json",
+      "successorReconciledBy": "CARC"
+    },
+    {
+      "authorityId": "DOCUMENT_ASSEMBLY_AUTHORITY",
+      "domain": "DOCUMENT_ASSEMBLY",
+      "currentFile": "content/document-assembly/authority/dar-w15-w24-runtime-manifest-v1.json",
+      "currentSha256": "64d24c14ab15fdcb3c20841dda7b2a10065a7ee0d0090b293e28077de2e1633c",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "DAR",
+        "FDR",
+        "RR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:dar",
+      "productionStatus": "W15_W24_IMPLEMENTED_EXPORT_BLOCKED",
+      "currentOwner": true,
+      "predecessorCurrentFile": "content/document-assembly/authority/dar-authority-baseline-v1.json",
+      "successorReconciledBy": "CARC"
+    },
+    {
+      "authorityId": "ACCOUNT_AUTHORITY",
+      "domain": "ACCOUNT_IDENTITY",
+      "currentFile": "content/registry/m4c-account-payment-membership.json",
+      "currentSha256": "1c769b379e8340214887dc8e91edbadba42f0c22fdc395abd53b3cc66827882a",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "CKA",
+        "RJX",
+        "FDR"
+      ],
+      "consumerCount": 3,
+      "checker": "npm run check:account-system",
+      "productionStatus": "CURRENT_ACCOUNT_BOUNDARY",
+      "currentOwner": true
+    },
+    {
+      "authorityId": "RUNTIME_READING_PRODUCT_AUTHORITY",
+      "domain": "RUNTIME_READING_PRODUCT",
+      "currentFile": "content/products/runtime-reading/authority/runtime-reading-authority-baseline-v1.json",
+      "currentSha256": "e249974d8631c5b041174237db15ec13074bea0bb6f65ce97e9668abb2648bb6",
+      "successorFile": null,
+      "legacyPredecessors": [],
+      "consumers": [
+        "FUTURE_RRP_W27_PLUS"
+      ],
+      "consumerCount": 1,
+      "checker": "npm run check:rrp-foundation",
+      "productionStatus": "FOUNDATION_REGISTERED_DEFERRED_TO_RRP_W27",
+      "currentOwner": true,
+      "successorReconciledBy": "CARC"
+    }
+  ],
+  "summary": {
+    "authorityCount": 22,
+    "domainCount": 22,
+    "duplicateCurrentDomainCount": 0,
+    "unknownProductionAuthorityCount": 0
+  },
+  "rules": {
+    "doesNotRewriteCbs": true,
+    "oneCurrentOwnerPerDomain": true,
+    "newProductAuthorityCannotStealUpstreamAuthority": true,
+    "productionStatusMustBeExplicit": true
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "contractCode": "PHI-OS-RMO-W13-REALITY-VERSIONING-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W13",
+  "status": "versioning_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "objectType": "CANONICAL_REALITY_SNAPSHOT",
+  "dataType": "RUNTIME_STATE_RECORD",
+  "requestSchemaReference": "content/runtime/reality-model-runtime/schemas/reality-version-request-v1.schema.json",
+  "snapshotSchemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-version-v1.schema.json",
+  "changeTypeRegistryReference": "content/runtime/reality-model-runtime/registries/canonical-reality-change-type-registry-v1.json",
+  "authorityBoundary": {
+    "rmoOwns": ["Reality identity", "immutable Reality snapshots", "Reality version lineage", "component snapshot binding"],
+    "rreOwns": ["REALITY_EVIDENCE_RECORD", "Evidence acceptance authority"],
+    "rdgOwns": ["data governance", "unknown and disputed governance", "persistence", "consent", "retention", "deletion"],
+    "prOwns": ["Professional Judgment", "OUTCOME_RECORD"],
+    "jrRneOwns": ["Journey workflow", "Navigation intelligence", "Action execution"]
+  },
+  "rules": {
+    "realityIdentityStable": true,
+    "semanticVersionMustIncrease": true,
+    "versionSequenceMustBeContiguous": true,
+    "previousRealityDigestRequired": true,
+    "ancestorRealityLineageRequired": true,
+    "previousSnapshotImmutable": true,
+    "exactComponentCodeVersionDigestRequired": true,
+    "componentSourceRealityLineageRequired": true,
+    "completeComponentDependencyClosureRequired": true,
+    "statesAndReasoningBoundariesIncluded": true,
+    "unknownResolutionRequiresRemovedUnknownAndAcceptedEvidenceBinding": true,
+    "unknownResolutionMayUseInferenceOrSilentDefault": false,
+    "versioningCreatesInterpretationOrProfessionalJudgment": false,
+    "providerOrAiMayGrantVersionAuthority": false,
+    "persistentStoreActivated": false,
+    "productionExecutionActivated": false
+  }
+}

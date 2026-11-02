@@ -1,0 +1,23 @@
+{
+  "contractCode": "PHI-OS-ALR-W42-RG-CHECKER-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W42",
+  "status": "active",
+  "runtimeCode": "ALR",
+  "checkerIdentityAuthority": "RG",
+  "operationalIntegration": "ACTIVE_RUNTIME_OWNED_RG_CONFORMANT",
+  "centralRgRegistrationState": "DEFERRED_TO_RG_AUTHORIZED_EXPANSION",
+  "registryReference": "content/academy/academy-learning-runtime/registries/alr-checker-alias-registry-v1.json",
+  "runnerReference": "scripts/run-alr-checker-v1.mjs",
+  "rgIdentityContractReference": "content/governance/runtime-checker-governance/contracts/checker-identity-contract-v1.json",
+  "rgCiIntegrationContractReference": "content/governance/runtime-checker-governance/contracts/checker-ci-integration-contract-v1.json",
+  "rules": {
+    "workCodeIsStablePublicIdentity": true,
+    "implementationFileIsImplementationDetail": true,
+    "sharedImplementationExecutesOnceInAggregate": true,
+    "unknownWorkCodeFailsClosed": true,
+    "checkerMayMutateRuntimeOrData": false,
+    "alrMayMutateFrozenRgV3Registry": false,
+    "alrMayClaimCentralRegistrationBeforeRgExpansion": false
+  }
+}

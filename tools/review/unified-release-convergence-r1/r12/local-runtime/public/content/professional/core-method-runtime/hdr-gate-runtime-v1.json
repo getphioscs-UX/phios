@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "PHI-OS-HDR-GATE-RUNTIME-v1.0.0",
+  "stageCode": "HDR-W3",
+  "runtimeCode": "HDR_GATE_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "3b63f7df13ca27449172393f46da866b3f1922fb"
+  },
+  "requiredInputs": [
+    "HDR_PERSONALITY_ASTRONOMY",
+    "HDR_DESIGN_MOMENT",
+    "HDR_DESIGN_ASTRONOMY"
+  ],
+  "mappingAuthority": {
+    "strategy": "VERSIONED_GOVERNED_ADAPTER",
+    "embeddedGateSequenceAllowed": false,
+    "embeddedProprietaryMappingAllowed": false,
+    "sourceAuthorityRequired": true,
+    "mappingVersionRequired": true,
+    "licenseStatusRequired": true
+  },
+  "scope": {
+    "layers": [
+      "PERSONALITY",
+      "DESIGN"
+    ],
+    "bodies": [
+      "SUN",
+      "EARTH",
+      "MOON",
+      "NORTH_NODE",
+      "SOUTH_NODE",
+      "MERCURY",
+      "VENUS",
+      "MARS",
+      "JUPITER",
+      "SATURN",
+      "URANUS",
+      "NEPTUNE",
+      "PLUTO"
+    ],
+    "createsGate": true,
+    "createsLine": true,
+    "createsChannel": false,
+    "createsCenter": false,
+    "createsAuthority": false,
+    "createsProfile": false,
+    "createsBodyGraph": false,
+    "createsProjection": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "commercialLicenseApproved": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "HDR-W4"
+}

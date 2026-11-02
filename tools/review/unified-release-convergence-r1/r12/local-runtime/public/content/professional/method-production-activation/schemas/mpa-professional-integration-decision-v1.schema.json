@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.mpa.professional-integration-decision.v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "decision",
+    "methodCode",
+    "professionalRuntimeHandoffAllowed",
+    "professionalReleaseAllowed",
+    "professionalConclusionCreated",
+    "professionalAuthorityCreatedByMpa"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-PROFESSIONAL-INTEGRATION-DECISION-v1.0.0"
+    },
+    "decision": {
+      "enum": [
+        "CUSTOMER_CALCULATION_SEPARATE_FROM_PROFESSIONAL_INTERPRETATION",
+        "PROFESSIONAL_INTEGRATION_BLOCKED",
+        "READY_FOR_SHARED_PROFESSIONAL_RUNTIME_HANDOFF"
+      ]
+    },
+    "methodCode": {
+      "type": "string"
+    },
+    "blockingReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "professionalRuntimeHandoffAllowed": {
+      "type": "boolean"
+    },
+    "professionalReleaseAllowed": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "professionalAuthorityCreatedByMpa": {
+      "const": false
+    },
+    "releaseAuthority": {
+      "type": "string"
+    }
+  }
+}

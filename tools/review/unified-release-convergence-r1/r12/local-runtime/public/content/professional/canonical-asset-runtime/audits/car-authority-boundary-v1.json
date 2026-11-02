@@ -1,0 +1,109 @@
+{
+  "boundaryCode": "CAR-W0-AUTHORITY-BOUNDARY-v1",
+  "version": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W0",
+  "status": "frozen",
+  "baselineCommit": "f85bf43bf2d3069700008ac2c9f4b0ffab20f47a",
+  "authorities": {
+    "canonicalMeaningAuthority": {
+      "owns": [
+        "canonical meaning codes",
+        "meaning families",
+        "meaning dimensions",
+        "meaning mappings"
+      ],
+      "doesNotOwn": [
+        "knowledge prose",
+        "article publication",
+        "asset publication"
+      ]
+    },
+    "knowledgeAuthority": {
+      "owns": [
+        "knowledge nodes",
+        "semantic profiles",
+        "canonical assembly",
+        "published knowledge records"
+      ],
+      "doesNotOwn": [
+        "asset briefs",
+        "asset candidates",
+        "media publication"
+      ]
+    },
+    "pjaAuthority": {
+      "owns": [
+        "article candidate",
+        "article review",
+        "article approval",
+        "article publication"
+      ],
+      "doesNotOwn": [
+        "non-article asset approval",
+        "media registry"
+      ]
+    },
+    "canonicalAssetAuthority": {
+      "owns": [
+        "asset contracts",
+        "asset briefs",
+        "asset candidates",
+        "asset-specific lineage"
+      ],
+      "doesNotOwn": [
+        "canonical meaning",
+        "knowledge nodes",
+        "article publication authority",
+        "provider routing policy"
+      ]
+    },
+    "publicAssetRegistryAuthority": {
+      "owns": [
+        "public asset object metadata",
+        "storage resolution metadata"
+      ],
+      "doesNotOwn": [
+        "knowledge claims",
+        "canonical meaning",
+        "publication approval"
+      ]
+    },
+    "providerRoutingAuthority": {
+      "owns": [
+        "provider eligibility",
+        "budget and fallback policy",
+        "provider routing decisions"
+      ],
+      "doesNotOwn": [
+        "asset authority",
+        "knowledge authority",
+        "publication authority"
+      ]
+    },
+    "pdsAuthority": {
+      "owns": [
+        "presentation constraints",
+        "design tokens",
+        "component and accessibility contracts"
+      ],
+      "doesNotOwn": [
+        "knowledge meaning",
+        "asset approval",
+        "publication state"
+      ]
+    }
+  },
+  "invariants": {
+    "pjaRebuilt": false,
+    "publishedArticleRuntimeRebuilt": false,
+    "providerRoutingRebuilt": false,
+    "assetRegistryIsKnowledgeAuthority": false,
+    "canonicalAssetMayReferenceMeaning": true,
+    "canonicalAssetMayReferenceKnowledge": true,
+    "canonicalAssetMayRewriteKnowledge": false,
+    "canonicalAssetMayPublishArticle": false,
+    "providerMayCreatePublishedContent": false,
+    "duplicateSourceOfTruthCreated": false
+  }
+}

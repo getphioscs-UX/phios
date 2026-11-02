@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S8-DETERMINISM-SUCCESSOR-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S8",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "ACTIVE_CURRENT_GLOBAL_EM1_DETERMINISM_SUCCESSOR",
+  "predecessors": {
+    "authorityBaseline": {
+      "path": "content/runtime-maturity/authority/master-runtime-authority-baseline-v1.json",
+      "sha256": "bec5554b671f7c2b335865e5c7afcd75d7c0063a440910cd43350d0f40fc19ea"
+    },
+    "capabilityInventory": {
+      "path": "content/runtime-maturity/registries/master-runtime-capability-inventory-v1.1.json",
+      "sha256": "e9375dadf22129819473c2f7380247b191f2eb8b16ddae1a725768e7dce6dc22"
+    },
+    "architectureEvidence": {
+      "path": "content/runtime-maturity/evidence/architecture/architectural-evidence-registry-v1.1.json",
+      "sha256": "a0d1ed3ddb9f9b81d659e6ec0d26e11f5bcdfbe1b0b83e215ef3c563942ae1b0"
+    },
+    "determinismEvidence": {
+      "path": "content/runtime-maturity/evidence/determinism/determinism-evidence-registry-v1.json",
+      "sha256": "717f5df822474899238823e93baa8b2b29b6185a5ad977a057681033eecddcbc"
+    },
+    "runtimeMatrix": {
+      "path": "content/runtime-maturity/matrices/master-runtime-maturity-matrix-v1.1.json",
+      "sha256": "86eceda45aa071f7da4828e1095d93a0268c63dfc2df9e99cf892210a3aa5200"
+    },
+    "evidenceMatrix": {
+      "path": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.2.json",
+      "sha256": "1ada28b30a25e1dda7f4be68dba6ae02b0583fe06f9dce1dc32e765ad9291b7d"
+    },
+    "claimMatrix": {
+      "path": "content/runtime-maturity/matrices/runtime-claim-eligibility-matrix-v1.1.json",
+      "sha256": "41408eef0fd17c545d38fe565f28d062dd17f91d6ae97bb2f35142daf49a1229"
+    }
+  },
+  "successors": {
+    "authorityBaseline": "content/runtime-maturity/authority/master-runtime-authority-baseline-v1.1.json",
+    "capabilityInventory": "content/runtime-maturity/registries/master-runtime-capability-inventory-v1.2.json",
+    "architectureEvidence": "content/runtime-maturity/evidence/architecture/architectural-evidence-registry-v1.2.json",
+    "determinismEvidence": "content/runtime-maturity/evidence/determinism/determinism-evidence-registry-v2.json",
+    "runtimeMatrix": "content/runtime-maturity/matrices/master-runtime-maturity-matrix-v1.2.json",
+    "evidenceMatrix": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.3.json",
+    "claimMatrix": "content/runtime-maturity/matrices/runtime-claim-eligibility-matrix-v1.2.json",
+    "acceptance": "content/runtime-maturity/acceptance/mrm-s8-determinism-acceptance-v1.json"
+  },
+  "rules": {
+    "historicalMrmArtifactsMutated": false,
+    "globalMRMS8Complete": true,
+    "globalMRMS9Complete": false,
+    "emPromotionIsContiguous": true,
+    "em1RequiresFormalDeterminismEvidence": true,
+    "fixtureExistenceDoesNotPromoteToEM2": true,
+    "pilotRequiredForEM3": true,
+    "productionAuthorityChanged": false,
+    "packageJsonChanged": false
+  }
+}

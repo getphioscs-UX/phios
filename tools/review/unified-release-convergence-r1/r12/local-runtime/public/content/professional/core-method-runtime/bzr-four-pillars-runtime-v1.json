@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-BZR-FOUR-PILLARS-RUNTIME-v1.0.0",
+  "stageCode": "BZR-W2",
+  "runtimeCode": "BZR_FOUR_PILLARS_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "f85bf43"
+  },
+  "inputs": [
+    {
+      "recordType": "BZR_SOLAR_CALENDAR_CONTEXT",
+      "mode": "FOUR_PILLARS",
+      "birthTimeKnown": true
+    },
+    {
+      "recordType": "BZR_SOLAR_DATE_CONTEXT",
+      "mode": "THREE_PILLARS",
+      "birthTimeKnown": false,
+      "producerStatus": "reserved_contract"
+    }
+  ],
+  "algorithmAuthority": {
+    "algorithmCode": "PHI_OS_SEXAGENARY_CALENDAR",
+    "policyCode": "PHI_OS_BAZI_POLICY_V1",
+    "runtimeMayInventRules": false
+  },
+  "policies": {
+    "yearBoundary": "exact_li_chun_instant",
+    "monthBoundary": "exact_twelve_jie_instants",
+    "dayBoundaryTimeBasis": "true_solar_time",
+    "dayBoundaryLocalTime": "00:00",
+    "hourStemDerivedFromDayStem": true,
+    "fabricatedHourPillarAllowed": false
+  },
+  "scope": {
+    "createsStem": true,
+    "createsBranch": true,
+    "createsPillar": true,
+    "createsLuckCycle": false,
+    "createsProjection": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "commercialLicensePassed": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "BZR-W2A"
+}

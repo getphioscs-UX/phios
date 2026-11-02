@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W28-PRODUCT-ACCEPTANCE-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W28.3-W28.6",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ARCHITECTURALLY_ACCEPTED_FIXTURE_VALIDATED_NOT_YET_PILOT_VERIFIED",
+  "acceptanceStates": [
+    "ARCHITECTURALLY_ACCEPTED",
+    "FIXTURE_VALIDATED",
+    "NOT_YET_PILOT_VERIFIED"
+  ],
+  "productionMature": false,
+  "pilotVerified": false,
+  "scenarios": [
+    {
+      "scenario": "VALID_REALITY_ONLY_CANDIDATE",
+      "expectedResult": "PASS"
+    },
+    {
+      "scenario": "SELECTED_AST_ONLY",
+      "expectedResult": "PASS"
+    },
+    {
+      "scenario": "AST_BZR",
+      "expectedResult": "PASS"
+    },
+    {
+      "scenario": "MISSING_MEANING",
+      "expectedResult": "UNKNOWN_OR_PARTIAL"
+    },
+    {
+      "scenario": "UNSUPPORTED_ZI_WEI",
+      "expectedResult": "NOT_INCLUDED_OR_UNKNOWN"
+    },
+    {
+      "scenario": "HDR_CUSTOMER_AUTO_RUN",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "METHOD_WITHOUT_CONSENT",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "PROFESSIONAL_JUDGMENT_WITHOUT_SIGNATURE_OR_SOURCE",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "STATEMENT_WITHOUT_SOURCE",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "UNKNOWN_SILENTLY_DELETED",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "RRP_CONTAINS_RELEASE_AUTHORITY",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "RRP_CONTAINS_PRESENTATION_LAYOUT",
+      "expectedResult": "BLOCK"
+    },
+    {
+      "scenario": "VALID_RR_HANDOFF",
+      "expectedResult": "PASS"
+    }
+  ],
+  "crossAuthoritySeparations": [
+    "RRP_NE_MPA",
+    "RRP_NE_METHOD",
+    "RRP_NE_MEANING",
+    "RRP_NE_PR",
+    "RRP_NE_RR",
+    "RRP_NE_RELEASE",
+    "RRP_NE_CPR",
+    "RRP_NE_PDS",
+    "RRP_NE_RENDERER"
+  ],
+  "cprCustBoundary": {
+    "customerReferenceAllowedAsReportSubject": true,
+    "forbiddenRrpFields": [
+      "customerAuthorization",
+      "releaseEligibility",
+      "audienceAccess",
+      "clientVisibleFiltering",
+      "workspaceProjection",
+      "PDFProjection"
+    ],
+    "downstreamOrder": [
+      "AUTHORIZATION",
+      "RELEASE_ELIGIBILITY",
+      "CPR_AUDIENCE_PROJECTION"
+    ]
+  },
+  "maturityBinding": {
+    "successor": "content/runtime-maturity/successors/rrp-w27-mrm-binding-successor-v1.json",
+    "pilotEvidencePresent": false,
+    "highestRrpEvidenceMaturity": "EM-2",
+    "productionMatureClaimAllowed": false
+  },
+  "rules": {
+    "allBlockScenariosFailClosed": true,
+    "unknownPreserved": true,
+    "contradictionPreserved": true,
+    "meaningCannotBeInvented": true,
+    "professionalJudgmentCannotBeImpersonated": true,
+    "rrpCannotRelease": true,
+    "rrpCannotAuthorizeCustomer": true,
+    "rrpCannotDecideClientVisibility": true,
+    "rrpCannotOwnPdfOrWorkspaceLayout": true,
+    "rrRemainsFinalReportAuthority": true,
+    "cprCustRemainsCustomerPresentationAuthority": true,
+    "mrmSOwnsMaturityInterpretation": true
+  }
+}

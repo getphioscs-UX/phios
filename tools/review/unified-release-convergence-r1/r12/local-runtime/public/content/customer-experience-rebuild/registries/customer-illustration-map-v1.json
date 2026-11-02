@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "PHI-OS-CX-R4-ILLUSTRATION-MAP-v1.0.0",
+  "work": "CX-R4-W3",
+  "baselineCommit": "d35486b9dfc077020c50bb232ac29e233c01ce92",
+  "recordedAt": "2026-09-03T05:20:00Z",
+  "status": "SEMANTIC_ILLUSTRATION_ROLES_RECONCILED",
+  "bindings": [
+    {
+      "roleId": "ILL-001",
+      "semanticRole": "Knowledge Landscape",
+      "assetId": "ILL-001",
+      "sourceSequence": "ILL-001",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-002",
+      "semanticRole": "Reading Path",
+      "assetId": "ILL-002",
+      "sourceSequence": "ILL-002",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-003",
+      "semanticRole": "Knowledge Discovery",
+      "assetId": "ILL-003",
+      "sourceSequence": "ILL-003",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-004",
+      "semanticRole": "Membership",
+      "assetId": "ILL-009",
+      "sourceSequence": "ILL-009",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-005",
+      "semanticRole": "Personal Reality",
+      "assetId": "ILL-004",
+      "sourceSequence": "ILL-004",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-006",
+      "semanticRole": "Financial Reality",
+      "assetId": "ILL-005",
+      "sourceSequence": "ILL-005",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-007",
+      "semanticRole": "Academy",
+      "assetId": "ILL-006",
+      "sourceSequence": "ILL-006",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-008",
+      "semanticRole": "Professional Workspace",
+      "assetId": "ILL-007",
+      "sourceSequence": "ILL-007",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-009",
+      "semanticRole": "Digital Reading",
+      "assetId": "HERO-018",
+      "sourceSequence": "HERO-018",
+      "sourceFamily": "HERO",
+      "crossFamilySemanticReuse": true,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    },
+    {
+      "roleId": "ILL-010",
+      "semanticRole": "Reality Workspace Continuity",
+      "assetId": "ILL-010",
+      "sourceSequence": "ILL-010",
+      "sourceFamily": "ILLUSTRATION",
+      "crossFamilySemanticReuse": false,
+      "available": true,
+      "compatibilityNote": "roleId is a CX semantic role; assetId remains the upstream/customer asset identity and is not renamed"
+    }
+  ],
+  "reconciliation": {
+    "historicalSequenceDriftDetected": true,
+    "activeProductFreezeConflictHandled": true,
+    "rule": "The governing CX role IDs and upstream asset IDs are separate. Existing product-owned data-cx-asset IDs remain unchanged; new CX composition may use data-cx-asset-role to consume the semantic role without renaming upstream assets.",
+    "notableBindings": [
+      {
+        "roleId": "ILL-004",
+        "governingRole": "Membership",
+        "assetId": "ILL-009"
+      },
+      {
+        "roleId": "ILL-005",
+        "governingRole": "Personal Reality",
+        "assetId": "ILL-004",
+        "productFreezeNote": "Current PPR-owned Personal surface remains data-cx-asset=ILL-004; R4 does not mutate that frozen product owner."
+      },
+      {
+        "roleId": "ILL-006",
+        "governingRole": "Financial Reality",
+        "assetId": "ILL-005"
+      },
+      {
+        "roleId": "ILL-009",
+        "governingRole": "Digital Reading",
+        "assetId": "HERO-018",
+        "sourceFamily": "HERO",
+        "reason": "No dedicated admitted illustration with exact Digital Reading semantics exists in the current upstream illustration set; reuse is explicit and source-aware."
+      }
+    ]
+  },
+  "rules": {
+    "semanticRoleWinsForNewCxComposition": true,
+    "upstreamAssetIdentityIsNotRenamed": true,
+    "frozenProductSurfaceIsNotMutatedByCxR4": true,
+    "silentSubstitutionForbidden": true
+  }
+}

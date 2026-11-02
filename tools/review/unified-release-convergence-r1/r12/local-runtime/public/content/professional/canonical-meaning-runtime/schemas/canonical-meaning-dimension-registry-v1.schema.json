@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-dimension-registry-v1.schema.json",
+  "title": "Canonical Meaning Dimension Registry v1",
+  "type": "object",
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "productionStatus",
+    "dimensions",
+    "familyDimensionSets"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-CANONICAL-MEANING-DIMENSION-REGISTRY"
+    },
+    "registryVersion": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "dimensionId",
+          "dimensionCode",
+          "dimensionVersion",
+          "definition",
+          "status"
+        ]
+      }
+    },
+    "familyDimensionSets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "familyCode",
+          "dimensionSetVersion",
+          "requiredDimensionCodes",
+          "allowedDimensionCodes",
+          "populationStatus"
+        ]
+      }
+    }
+  },
+  "additionalProperties": true
+}

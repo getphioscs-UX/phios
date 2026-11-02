@@ -1,0 +1,47 @@
+{
+  "contractCode": "PHI-OS-VAP-W1-PUBLISHED-KNOWLEDGE-INTEGRITY-REPAIR-v1",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "work": "VAP-W1",
+  "authority": "Published Projection Integrity Repair",
+  "purpose": "Repair projection-layer corruption without mutating immutable Candidate, Review, Approval or Publication authority.",
+  "allowedOperations": [
+    "detect_projection_corruption",
+    "validate_historical_lineage",
+    "extract_replacement_from_approved_body",
+    "rebuild_published_authority_projection",
+    "rebuild_published_retrieval_projection",
+    "rebuild_quality_report",
+    "record_before_after_digests"
+  ],
+  "forbiddenOperations": [
+    "modify_candidate",
+    "modify_review",
+    "modify_approval",
+    "modify_publication",
+    "change_publication_decision",
+    "create_new_claim",
+    "create_new_knowledge",
+    "automatic_republish",
+    "change_human_authority",
+    "change_wave1_production_authorization"
+  ],
+  "repairEligibility": {
+    "targetFieldMustBeProjectionField": true,
+    "historicalSourceMustRemainByteStable": true,
+    "replacementMustBeExactSubstringOfApprovedPublishedBody": true,
+    "replacementMustRemoveDetectedArtifactPattern": true,
+    "semanticMutationAllowed": false,
+    "newKnowledgeAllowed": false,
+    "newHumanPublicationApprovalRequiredForExactExtractiveRepair": false
+  },
+  "acceptance": {
+    "historicalCandidateReviewApprovalPublicationUnchanged": true,
+    "publishedAuthorityDeterministicallyRebuilt": true,
+    "retrievalDeterministicallyRebuilt": true,
+    "authorityDigestRecomputed": true,
+    "zhSummaryArtifactFindingClosed": true,
+    "outOfScopeFindingsPreserved": true,
+    "step63Step64FreezeFilesRemainHistoricalAndUnmodified": true
+  }
+}

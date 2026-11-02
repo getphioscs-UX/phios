@@ -1,0 +1,316 @@
+/* PDS-W9 — shared presentation contract for Knowledge and Professional pages. */
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) {
+  color-scheme: light;
+  accent-color: var(--phi-action-platform);
+  text-rendering: optimizeLegibility;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--phi-action-platform) 55%, transparent);
+  outline-offset: 3px;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(button, select, input:not([type="checkbox"]):not([type="radio"]), .btn, .public-button) {
+  min-height: var(--phi-control-target-min, 44px);
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(button, .btn, .public-button, summary) {
+  touch-action: manipulation;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(.btn, .public-button, button) {
+  border-radius: var(--phi-radius-pill, 999px);
+  font-family: var(--phi-font-body, Inter, system-ui, sans-serif);
+  font-weight: 650;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(.btn, .public-button, button):disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(input, select, textarea) {
+  max-width: 100%;
+  border-radius: var(--phi-radius-sm, 12px);
+  font: inherit;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(label, legend) {
+  line-height: 1.45;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(details, summary) {
+  color: inherit;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) summary {
+  min-height: var(--phi-control-target-min, 44px);
+  cursor: pointer;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(img, svg, video, iframe) {
+  max-width: 100%;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section],
+  .professional-workspace-page
+) :is(p, li, dd) {
+  overflow-wrap: anywhere;
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section]
+) :is(
+  .question-card,
+  .entry-card,
+  .trust-card,
+  .book-card,
+  .knowledge-card,
+  .account-card,
+  .professional-service-card,
+  .service-card
+) {
+  border-color: var(--phi-border-subtle);
+  border-radius: var(--phi-radius-lg);
+  box-shadow: var(--phi-shadow-card);
+}
+
+:where(
+  .public-page,
+  .knowledge-page,
+  [data-public-section]
+) :is(
+  .question-card,
+  .entry-card,
+  .trust-card,
+  .book-card,
+  .knowledge-card,
+  .account-card,
+  .professional-service-card,
+  .service-card
+):has(a:hover) {
+  border-color: var(--phi-border-strong);
+}
+
+.professional-workspace-page :is(
+  .professional-workspace-unavailable,
+  .professional-workspace-panel,
+  .professional-workspace-boundary,
+  article
+) {
+  border-color: var(--professional-line, var(--phi-border-subtle));
+  border-radius: var(--phi-radius-lg);
+}
+
+.professional-workspace-page .professional-workspace-tabs {
+  scrollbar-width: thin;
+  scroll-snap-type: x proximity;
+}
+
+.professional-workspace-page .professional-workspace-tabs > * {
+  min-height: var(--phi-control-target-min, 44px);
+  scroll-snap-align: start;
+}
+
+.professional-workspace-page :is(
+  [role="status"],
+  output,
+  .professional-workspace-boundary
+) {
+  line-height: 1.55;
+}
+
+:where(.legal-hero, .legal-content, .privacy-content, .terms-content) {
+  text-wrap: pretty;
+}
+
+:where(.legal-hero, .legal-content, .privacy-content, .terms-content) :is(p, li) {
+  line-height: 1.75;
+}
+
+:where(.knowledge-page, [data-public-section="knowledge"]) :is(
+  .knowledge-section,
+  .thesis-section,
+  .atlas-section
+) {
+  scroll-margin-top: calc(var(--phi-shell-header-height, 72px) + var(--phi-space-5));
+}
+
+:where(.knowledge-page, [data-public-section="knowledge"]) :is(
+  .knowledge-actions,
+  .actions,
+  .atlas-hero-actions
+) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--phi-space-3);
+}
+
+:where(.public-page, .knowledge-page, [data-public-section]) table,
+.professional-workspace-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+:where(.public-page, .knowledge-page, [data-public-section]) :is(th, td),
+.professional-workspace-page :is(th, td) {
+  padding: var(--phi-space-3);
+  border-bottom: 1px solid var(--phi-border-subtle);
+  text-align: start;
+  vertical-align: top;
+}
+
+@media (max-width: 768px) {
+  :where(
+    .public-page,
+    .knowledge-page,
+    [data-public-section],
+    .professional-workspace-page
+  ) :is(.btn, .public-button) {
+    justify-content: center;
+  }
+
+  .professional-workspace-page .professional-workspace-tabs {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  .professional-workspace-page .professional-workspace-tabs > * {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 360px) {
+  :where(.public-page, .knowledge-page, [data-public-section]) :is(
+    .public-container,
+    .knowledge-shell,
+    .atlas-shell,
+    .thesis-shell
+  ) {
+    width: min(100% - 2rem, var(--phi-container-shell, 1440px));
+  }
+}
+
+@media (min-width: 1440px) {
+  .professional-workspace-page .professional-workspace-shell {
+    width: min(var(--phi-container-workspace, 1440px), calc(100% - 4rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(
+    .public-page,
+    .knowledge-page,
+    [data-public-section],
+    .professional-workspace-page
+  ) *,
+  :where(
+    .public-page,
+    .knowledge-page,
+    [data-public-section],
+    .professional-workspace-page
+  ) *::before,
+  :where(
+    .public-page,
+    .knowledge-page,
+    [data-public-section],
+    .professional-workspace-page
+  ) *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :where(
+    .public-page,
+    .knowledge-page,
+    [data-public-section],
+    .professional-workspace-page
+  ) :is(.btn, .public-button, button, input, select, textarea, summary) {
+    border-color: currentColor;
+  }
+}

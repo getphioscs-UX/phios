@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-CORPUS-COVERAGE-MATRIX-v1.0.0",
+  "phase": "TPA-E",
+  "work": "TPA-W19",
+  "baselineCommit": "f10a0bc30526b5551ca00ffa9c674f2798d7fd7e",
+  "status": "COMPLETE_STRUCTURAL_VISUAL_SOURCE_LOCATOR_BASE_WITH_BOUNDED_REFLECTIVE_LENS",
+  "matrixVersion": "1.0.0",
+  "methodCode": "TAROT",
+  "coverage": {
+    "canonicalCards": 78,
+    "majorArcana": 22,
+    "minorArcana": 56,
+    "visualObservationCards": 78,
+    "visualEvidenceLocators": 78,
+    "waiteSourceMappedCards": 78,
+    "waiteSourceUnits": 100,
+    "waiteEditorialRuntimeCardsFromFrozenPredecessor": 3,
+    "reflectiveLensUnits": 16,
+    "perspectiveClasses": 4,
+    "privateReferenceSources": 3,
+    "licensedModernSourcesAdmitted": 0,
+    "webDiscoverySourcesPromoted": 0
+  },
+  "perspectiveCoverage": [
+    {
+      "perspectiveClass": "AUTHOR_SPECIFIC",
+      "availability": "PARTIAL",
+      "sourceLocatorCards": 78,
+      "editorialRuntimeCards": 3,
+      "note": "Waite locator coverage is complete; runtime editorial coverage remains predecessor-partial until TPA-W21."
+    },
+    {
+      "perspectiveClass": "REFLECTIVE",
+      "availability": "AVAILABLE",
+      "governedLensUnits": 16,
+      "cardSpecificMeaningEntries": 0,
+      "note": "Availability is reflective question scaffolding, not universal card meaning coverage."
+    },
+    {
+      "perspectiveClass": "PSYCHOLOGICAL",
+      "availability": "AVAILABLE",
+      "governedLensUnits": 14,
+      "cardSpecificMeaningEntries": 0,
+      "clinicalAuthority": false,
+      "note": "Non-diagnostic reflective questioning only."
+    },
+    {
+      "perspectiveClass": "TRADITIONAL",
+      "availability": "NOT_INGESTED",
+      "cardSpecificMeaningEntries": 0,
+      "note": "No additional governed traditional corpus admitted."
+    }
+  ],
+  "coverageRules": {
+    "secondaryPerspectiveCoverageMayBeLessThan78": true,
+    "partialCoverageMustBeExplicit": true,
+    "missingCoverageMayNotBeFilledByModel": true,
+    "visualCoverageDoesNotCreateMeaningCoverage": true,
+    "sourceLocatorCoverageDoesNotEqualEditorialRuntimeCoverage": true,
+    "reflectiveLensAvailabilityDoesNotEqualSourceCoverage": true
+  },
+  "nextGate": "TPA-W20-CORPUS-FREEZE"
+}

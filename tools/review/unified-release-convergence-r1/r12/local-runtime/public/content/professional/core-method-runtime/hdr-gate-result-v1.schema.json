@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/hdr/hdr-gate-result-v1.schema.json",
+  "title": "PHI OS HDR Gate Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "executionMode",
+    "activations",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "gateMappingCreated",
+    "channelCreated",
+    "centerCreated",
+    "authorityCreated",
+    "profileCreated",
+    "bodyGraphCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-HDR-GATE-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "HDR_GATE_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "pluginCode": {
+      "const": "HDR"
+    },
+    "calculationType": {
+      "const": "GATE_LINE_MAPPING"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "activations": {
+      "type": "array",
+      "minItems": 26,
+      "maxItems": 26,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "layer",
+          "bodyCode",
+          "longitude",
+          "gate",
+          "line",
+          "positionWithinLine",
+          "mappingCode"
+        ],
+        "properties": {
+          "layer": {
+            "enum": [
+              "PERSONALITY",
+              "DESIGN"
+            ]
+          },
+          "bodyCode": {
+            "enum": [
+              "SUN",
+              "EARTH",
+              "MOON",
+              "NORTH_NODE",
+              "SOUTH_NODE",
+              "MERCURY",
+              "VENUS",
+              "MARS",
+              "JUPITER",
+              "SATURN",
+              "URANUS",
+              "NEPTUNE",
+              "PLUTO"
+            ]
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMaximum": 360
+          },
+          "gate": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 64
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "positionWithinLine": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMaximum": 1
+          },
+          "mappingCode": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "gateMappingCreated": {
+      "const": true
+    },
+    "channelCreated": {
+      "const": false
+    },
+    "centerCreated": {
+      "const": false
+    },
+    "authorityCreated": {
+      "const": false
+    },
+    "profileCreated": {
+      "const": false
+    },
+    "bodyGraphCreated": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

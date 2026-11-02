@@ -1,0 +1,175 @@
+{
+  "contractId": "PJA-W2F-A1-v1.0.0-Universal-Canonical-Production-Readiness",
+  "readinessSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0",
+  "status": "infrastructure_frozen",
+  "authority": {
+    "canonicalIdentity": "content/knowledge/registry/nodes.json",
+    "blueprintMembership": "content/knowledge/blueprints/*.json",
+    "localizedIdentity": "content/knowledge/registry/localized-content.json",
+    "supportingQuestions": "content/knowledge/registry/supporting-questions.json",
+    "claimGovernance": "content/knowledge/governance/policies/pja-w2c-claim-source-review-policy.json",
+    "articleSchema": "content/knowledge/schemas/article-v2.schema.json",
+    "exporter": "scripts/export-knowledge-production-brief.mjs"
+  },
+  "scope": {
+    "registeredCanonicalNodesOnly": true,
+    "blueprintPlannedNodesAreCanonicalIdentity": false,
+    "futureBooksAndPartsSupported": true,
+    "hardcodedNodeInventoryAllowed": false
+  },
+  "canonicalThesisContract": {
+    "requiredFields": [
+      "statement",
+      "mechanism",
+      "necessity",
+      "systemRole",
+      "continuity.fromPreviousNode",
+      "continuity.toNextNode"
+    ],
+    "titleRestatementAllowed": false,
+    "questionRestatementAllowed": false,
+    "supportingQuestionConcatenationAllowed": false,
+    "aiMayFreezeThesis": false
+  },
+  "articleBoundaryContract": {
+    "requiredFields": [
+      "mustEstablish",
+      "requiredDistinctions",
+      "mustNotClaim.global",
+      "mustNotClaim.partSpecific",
+      "mustNotClaim.nodeSpecific",
+      "includedScope",
+      "excludedScope",
+      "assumptions",
+      "unresolvedQuestions"
+    ],
+    "globalMustNotClaim": [
+      "不得将 PHI OS 描述为已经被科学证明的普遍真理。",
+      "不得把哲学与系统模型冒充医学结论。",
+      "不得提供个案心理诊断、医疗诊断、法律结论或财务建议。",
+      "不得把相关关系写成确定因果，或把类比当作证据。",
+      "不得把内部术语伪装为学界通用术语。",
+      "不得把尚未上线的能力写成现有产品能力。",
+      "不得把 AI 输出写成人类审批。",
+      "不得把公开文章写成付费书籍替代品。"
+    ],
+    "partBoundaryTemplates": {
+      "P0": {
+        "purpose": "建立 PHI OS 的必要性、问题背景与语言入口。",
+        "mustNot": "不得提前完整展开十四部理论体系。"
+      },
+      "P1": {
+        "purpose": "建立差异、约束、结构、场与导航的基础物理。",
+        "mustNot": "不得把模型写成传统自然物理学定律。"
+      },
+      "P2": {
+        "purpose": "建立投影、意义与共同现实机制。",
+        "mustNot": "不得把主观投影描述为现实不存在。"
+      },
+      "P3": {
+        "purpose": "建立时间、动力、能力、运动与运行网络。",
+        "mustNot": "不得把动力学语言冒充精确物理计算。"
+      },
+      "P4": {
+        "purpose": "建立生命载体、身体条件与生物运行边界。",
+        "mustNot": "不得提供医学诊断或治疗建议。"
+      },
+      "P5": {
+        "purpose": "建立意识、自我、情绪、体验与能动性。",
+        "mustNot": "不得提供心理诊断或把意识模型写成神经科学定论。"
+      }
+    },
+    "futurePartPolicy": "Part-specific theoretical content requires a formal Blueprint and human editorial freeze; tools must not invent it."
+  },
+  "supportingQuestionContract": {
+    "canonicalNodeCodeSemantics": "sole_canonical_ownership",
+    "sourceNodeCodeSemantics": "legacy_consolidation_or_origin_only",
+    "primaryOwnerCount": 1,
+    "allowedArticleTreatment": [
+      "integrate",
+      "briefly_address",
+      "defer",
+      "faq_candidate",
+      "supporting_article_candidate",
+      "video_candidate",
+      "exclude"
+    ],
+    "automaticCanonicalPromotionAllowed": false
+  },
+  "claimBoundaryContract": {
+    "taxonomyAuthority": "PJA-W2C",
+    "separateInternalCanonicalAndExternalVerifiableClaims": true,
+    "sourcePresenceEqualsClaimSupport": false,
+    "qualificationRequiredForInterpretationAndAnalogy": true
+  },
+  "sourceBoundaryContract": {
+    "internalCanonicalSourcePurpose": "Establish PHI OS Canonical Thesis.",
+    "externalVerifiableSourcePurpose": "Support externally verifiable reality claims.",
+    "crossSubstitutionAllowed": false,
+    "sourceFabricationAllowed": false
+  },
+  "figureBoundaryContract": {
+    "sequence": [
+      "media_brief",
+      "asset_registry",
+      "article_figure"
+    ],
+    "articleFigureBeforeAssetRegistryAllowed": false,
+    "figurelessArticleAllowedWhenExplicitlyDecided": true
+  },
+  "publicContentBoundaryContract": {
+    "requiredFields": [
+      "publicKnowledgeBoundary",
+      "paidBookBoundary",
+      "runtimeJourneyBoundary",
+      "professionalServiceBoundary",
+      "enterpriseBoundary",
+      "developerBoundary"
+    ],
+    "manipulativePurchasePressureAllowed": false
+  },
+  "localizationContract": {
+    "localeReadinessIndependent": true,
+    "canonicalProductionLocale": "zh-Hans",
+    "machineTranslationGrantsProductionReady": false
+  },
+  "stateContract": {
+    "allowedReadinessStatus": [
+      "not_assessed",
+      "identity_ready",
+      "thesis_draft",
+      "boundary_draft",
+      "ready_for_editorial_review",
+      "changes_required",
+      "production_ready",
+      "production_blocked",
+      "retired"
+    ],
+    "productionReadyEqualsArticleApproved": false,
+    "articleApprovedEqualsPublicationReady": false,
+    "publicationReadyEqualsPublished": false
+  },
+  "humanAuthorityBoundary": {
+    "toolsMayInitializeDeterministicFields": true,
+    "toolsMayValidateAndReport": true,
+    "toolsMayWriteCanonicalThesis": false,
+    "toolsMayWriteArticleBoundary": false,
+    "toolsMayApproveProductionReady": false,
+    "toolsMayApproveArticle": false,
+    "toolsMayPublish": false
+  },
+  "versionContract": {
+    "requiredBindings": [
+      "registryVersion",
+      "registryHash",
+      "blueprintVersion",
+      "blueprintPath",
+      "editorialContractVersion",
+      "articleSchemaVersion",
+      "claimGovernanceVersion",
+      "exporterVersion"
+    ],
+    "optionalExtensionsPreferred": true,
+    "bookSpecificSchemaAllowed": false
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-MCD-7-PERSONAL-RUNTIME-RESULT-SURFACE-CONTRACT-v1.0.0",
+  "work": "MCD-7",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "status": "ACTIVE_CANONICAL_PROJECTION_ONLY_RESULT_SURFACE",
+  "route": "/personal-runtime",
+  "clientFlow": ["INPUT", "ELIGIBILITY", "PROCESSING", "RESULTS"],
+  "resultTabs": ["OVERVIEW", "ASTROLOGY", "BAZI", "NUMERIC", "READING"],
+  "authority": {
+    "dispatchAuthorityOwner": "MPA",
+    "frontendMayGrantDispatch": false,
+    "apiMayGrantDispatch": false,
+    "adapterMayGrantDispatch": false,
+    "rendererMayGrantDispatch": false,
+    "frontendConsumesCanonicalProjectionOnly": true,
+    "frontendCoreRuntimeImportAllowed": false,
+    "calculationSeparatedFromReading": true,
+    "interpretationIncluded": false
+  },
+  "overview": {
+    "required": ["REQUESTED_METHODS", "EXECUTED_METHODS", "BLOCKED_METHODS", "INPUT_COMPLETENESS", "UNKNOWN", "CONSENT", "VERSION", "EXECUTION_STATUS"],
+    "hdrControlledAvailabilityOptional": true,
+    "hdrControlledLabelEn": "Personal Runtime Projection",
+    "hdrControlledLabelZhHans": "个人运行投射",
+    "hdrAvailabilityText": "Currently unavailable",
+    "fakeHdrResultAllowed": false
+  },
+  "methodTabs": {
+    "ASTROLOGY": {"input": "AST Canonical Projection", "renderer": "MCD-6 Dynamic Wheel", "coreSchemaAllowed": false},
+    "BAZI": {"input": "BZR Canonical Projection", "renderer": "MCD-6 Pillars and Cycles", "coreSchemaAllowed": false},
+    "NUMERIC": {"input": "NUM Canonical Projection", "renderer": "MCD-6 Number Structure and Cycles", "coreSchemaAllowed": false}
+  },
+  "reading": {
+    "state": "PLACEHOLDER_NOT_YET_CONSUMING",
+    "mayReferenceCompletedProjectionIds": true,
+    "calculationAllowed": false,
+    "interpretationAllowed": false,
+    "realityReadingCreated": false,
+    "futureInputs": ["AST_PROJECTION", "BZR_PROJECTION", "NUM_PROJECTION", "FUTURE_AUTHORIZED_PERSONAL_PROJECTION"]
+  },
+  "hdr": {
+    "productionResultTabAllowed": false,
+    "customerChartAllowed": false,
+    "interpretationResultAllowed": false,
+    "productionReportAllowed": false,
+    "controlledAvailabilityStatusAllowed": true,
+    "visibilityDoesNotEqualAvailability": true,
+    "futureTabRequiresNewAuthority": true,
+    "futureTabNameOwnedByWprVocabularyAuthority": true
+  },
+  "privacy": {
+    "browserStorageAllowed": false,
+    "birthPayloadLoggingAllowed": false,
+    "serverSubmission": "ONLY_ON_EXPLICIT_PROCESS_ACTION",
+    "serverPersistenceAllowed": false,
+    "transientPurpose": "PERSONAL_RUNTIME_METHOD_PROJECTION"
+  },
+  "predecessors": {
+    "canonicalProjection": "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json",
+    "renderer": "content/professional/method-client-delivery/contracts/mcd-6-visualization-authority-contract-v1.json",
+    "wprSetup": "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json"
+  },
+  "nextWork": "MCD-8"
+}

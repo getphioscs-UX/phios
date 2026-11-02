@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-W9-TOPIC-READING-SURFACE-CONTRACT-v1.0.0",
+  "work": "ZIWEI-CX-R1-W9",
+  "baselineCommit": "86854ae467ff7da836f45c424f3f6f0ce97b64ef",
+  "sharedHostAuthority": "PPR-R3",
+  "status": "ENGINEERING_FROZEN",
+  "input": {
+    "customerProduct": "ZIWEI_FULL_PRODUCTION",
+    "topicSchema": "PHI-OS-ZIWEI-TOPIC-READING-v1.0.0",
+    "palaceSurfaceSchema": "PHI-OS-ZIWEI-INTERACTIVE-CHART-SURFACE-v1.0.0"
+  },
+  "topicOrderZh": ["事业", "财富", "关系", "家庭", "健康／身心", "迁移／外部环境", "居所／资产承载", "社交／协作网络"],
+  "rules": {
+    "topicCount": 8,
+    "onDemandSelector": true,
+    "reusesExistingPalaceAuthority": true,
+    "reusesTimingEvidence": true,
+    "counterEvidenceVisible": true,
+    "unknownsVisible": true,
+    "palaceLinksReturnToInteractivePalace": true,
+    "topicCreatesSecondReport": false,
+    "topicCreatesNewMeaning": false,
+    "topicCreatesOutcomeVerdict": false
+  },
+  "implementationScope": [
+    "functions/personal-reality-product/adapters/ziwei-*",
+    "assets/customer-ui/js/specialists/ziwei/*",
+    "assets/customer-ui/surfaces/ziwei-*",
+    "content/customer-experience-rebuild/ziwei-cx-r1/*",
+    "scripts/check-ziwei-cx-r1-*"
+  ]
+}

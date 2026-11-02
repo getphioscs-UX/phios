@@ -1,0 +1,33 @@
+{
+  "startHead": "0262d43b708c6c893a00d98556a924606eb87855",
+  "endHead": "0262d43b708c6c893a00d98556a924606eb87855",
+  "headStable": true,
+  "historicalFreezeMutated": false,
+  "humanVisualAcceptanceGranted": false,
+  "providerCalls": 0,
+  "deployed": "RUNTIME_UNVERIFIED",
+  "liveCustomer": "RUNTIME_UNVERIFIED",
+  "checks": [
+    {
+      "command": "node scripts/check-ppr-current-shared-owner.mjs",
+      "exitCode": 0,
+      "status": "PASS",
+      "stdout": "✓ PPR current shared-owner registry 19/19 passed.\n  Historical freezes remain audit evidence; current runtime bytes are owned and checked once, with semantic and forbidden-behaviour gates.\n",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:hd-pro-r2",
+      "exitCode": 0,
+      "status": "PASS",
+      "stdout": "✓ HD-PRO-R2 W0-W10 machine campaign passed 24/24.\n  Customer-supplied chart intake now has explicit Read -> editable confirmation -> canonical chart flow; HDR public calculation and automatic Variable/PHS calculation remain blocked.\n  W9 human review is 24/24 accepted; the admitted external-chart reading and Reality Comparison are CUSTOMER_PUBLISHED on the canonical personal route.\nHD-INTAKE-R1 PASS: 15 cases\n",
+      "stderr": ""
+    },
+    {
+      "command": "node scripts/run-zero-cost-regression.mjs check:bazi-visual-commerce",
+      "exitCode": 0,
+      "status": "PASS",
+      "stdout": "Built six explicit synthetic review states; no entitlement written or activated.\nPASS: current account publication fails closed even for an owned purchase without admitted subject-specific copy; historical review renderer remains verified separately; forged client payment cannot unlock; Print Shell V2 body/section-master projection, registered motif fallbacks and category colours; Production release remains closed.\nPASS: twelve exact owner-approved product mappings; BaZi-only QA pilot; all production delivery flags remain false; no global cutover or new entitlement authority.\nPASS: section order, registered/deployed family alignment, variable locale-safe totals, deterministic section composition, frozen intro, bilingual semantic parity, text budgets, temporal data, 13-asset registry and fallback chain.\n\n> check:bazi-print-shell-v2\n> node scripts/run-zero-cost-regression.mjs check:bazi-print-shell-v2\n\nPASS BaZi Print Shell V2 migration contract: accepted copy digests unchanged, 38/38 pages, 10 masters, S07 right-side safe-zone, shared A4 shell bound.\n",
+      "stderr": ""
+    }
+  ]
+}

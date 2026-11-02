@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS KAP Reality Handoff Response",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "capability",
+    "status",
+    "escalationReason",
+    "consent",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-REALITY-HANDOFF-RESPONSE-v1.0.0"
+    },
+    "capability": {
+      "const": "REALITY_JOURNEY_HANDOFF"
+    },
+    "status": {
+      "enum": [
+        "CONSENT_REQUIRED",
+        "HANDOFF_READY"
+      ]
+    },
+    "escalationReason": {
+      "type": "object"
+    },
+    "consent": {
+      "type": "object"
+    },
+    "realityEntrySeed": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "knowledgeHandoff": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "methodHandoff": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

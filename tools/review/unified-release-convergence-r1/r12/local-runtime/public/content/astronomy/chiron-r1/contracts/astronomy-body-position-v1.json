@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "AstronomyBodyPositionV1",
+  "authority": "SHARED_ASTRONOMY_MINOR_BODY_POSITION_V1",
+  "implementation": "functions/method-client-delivery/production-adapters/shared-minor-body-capability.js",
+  "statuses": [
+    "SUPPORTED",
+    "UNSUPPORTED_DATE",
+    "PROVIDER_ERROR",
+    "EPHEMERIS_DATA_MISSING",
+    "INVALID_INPUT"
+  ],
+  "requiredPositionFields": [
+    "bodyCode",
+    "instantUtc",
+    "julianDayUt",
+    "observerMode",
+    "coordinateFrame",
+    "coordinateSystem",
+    "longitudeDeg",
+    "latitudeDeg",
+    "longitudeSpeedDegPerDay",
+    "retrograde",
+    "distanceAu",
+    "providerCode",
+    "providerVersion",
+    "ephemerisMode"
+  ],
+  "envelopeFields": [
+    "calculationStatus",
+    "warnings",
+    "inputHash",
+    "outputDigest"
+  ],
+  "failurePosition": null,
+  "retrogradeRule": "longitudeSpeedDegPerDay < 0",
+  "productionProviderAdmitted": false
+}

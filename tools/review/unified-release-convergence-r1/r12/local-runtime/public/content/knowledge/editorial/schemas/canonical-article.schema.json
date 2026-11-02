@@ -1,0 +1,670 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phios-github.pages.dev/schemas/canonical-article.schema.json",
+  "title": "PHI OS Canonical Article Content",
+  "description": "Strict, legacy-compatible schema for the single public article body stored as Article JSON.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "assetCode",
+    "nodeCode",
+    "locale",
+    "contentRole",
+    "version",
+    "contentStatus",
+    "reviewStatus",
+    "publicationStatus",
+    "publicationOrder",
+    "slug",
+    "title",
+    "displayQuestion",
+    "shortAnswer",
+    "summary",
+    "seo",
+    "keyConcepts",
+    "sections",
+    "knowledgeBoundary",
+    "sourceReferences",
+    "connections",
+    "masterMediaPost"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "contract": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assetCode": {
+      "type": "string",
+      "pattern": "^KA-[A-Z0-9-]+$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "contentRole": {
+      "enum": [
+        "canonical",
+        "localized"
+      ]
+    },
+    "localizationSourceLocale": {
+      "const": "zh-Hans"
+    },
+    "localizationSourceVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "terminologyReviewStatus": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semanticParityStatus": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "contentStatus": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewStatus": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publicationStatus": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publishedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "publicationOrder": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "$ref": "#/$defs/nonEmptyText"
+    },
+    "displayQuestion": {
+      "$ref": "#/$defs/nonEmptyText"
+    },
+    "shortAnswer": {
+      "$ref": "#/$defs/nonEmptyText"
+    },
+    "summary": {
+      "$ref": "#/$defs/nonEmptyText"
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "description": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "keyConcepts": {
+      "$ref": "#/$defs/nonEmptyTextArray"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "knowledgeBoundary": {
+      "$ref": "#/$defs/nonEmptyTextArray"
+    },
+    "sourceReferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/publicReference"
+      }
+    },
+    "connections": {
+      "$ref": "#/$defs/connections"
+    },
+    "masterMediaPost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetCode",
+        "title",
+        "body"
+      ],
+      "properties": {
+        "assetCode": {
+          "type": "string",
+          "pattern": "^KA-[A-Z0-9-]+$"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "body": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "contentRole": {
+            "const": "localized"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "localizationSourceLocale",
+          "localizationSourceVersion",
+          "terminologyReviewStatus",
+          "semanticParityStatus"
+        ],
+        "properties": {
+          "locale": {
+            "const": "en"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "contentRole": {
+            "const": "canonical"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "locale": {
+            "const": "zh-Hans"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "localizationSourceLocale"
+              ]
+            },
+            {
+              "required": [
+                "localizationSourceVersion"
+              ]
+            },
+            {
+              "required": [
+                "terminologyReviewStatus"
+              ]
+            },
+            {
+              "required": [
+                "semanticParityStatus"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonEmptyText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nonEmptyTextArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonEmptyText"
+      }
+    },
+    "publicReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceCode",
+        "label",
+        "href"
+      ],
+      "properties": {
+        "sourceCode": {
+          "type": "string",
+          "pattern": "^SRC-[A-Z0-9-]+$"
+        },
+        "label": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "href": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      }
+    },
+    "connectionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "href"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "href": {
+          "type": "string",
+          "pattern": "^/"
+        }
+      }
+    },
+    "connections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relatedArticles",
+        "relatedBooks",
+        "relatedTopics",
+        "relatedAtlasEntries",
+        "relatedFigures",
+        "relatedServices",
+        "journeyEntryTopics"
+      ],
+      "properties": {
+        "relatedArticles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^KN-[A-Z0-9-]+$"
+          }
+        },
+        "relatedBooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connectionReference"
+          }
+        },
+        "relatedTopics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyText"
+          }
+        },
+        "relatedAtlasEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connectionReference"
+          }
+        },
+        "relatedFigures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connectionReference"
+          }
+        },
+        "relatedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connectionReference"
+          }
+        },
+        "journeyEntryTopics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/connectionReference"
+          }
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading"
+      ],
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "paragraphs": {
+          "$ref": "#/$defs/nonEmptyTextArray"
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/articleBlock"
+          }
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "paragraphs"
+          ]
+        },
+        {
+          "required": [
+            "blocks"
+          ]
+        }
+      ]
+    },
+    "articleBlock": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/paragraphBlock"
+        },
+        {
+          "$ref": "#/$defs/leadBlock"
+        },
+        {
+          "$ref": "#/$defs/questionBlock"
+        },
+        {
+          "$ref": "#/$defs/insightBlock"
+        },
+        {
+          "$ref": "#/$defs/mechanismBlock"
+        },
+        {
+          "$ref": "#/$defs/timelineBlock"
+        },
+        {
+          "$ref": "#/$defs/comparisonBlock"
+        },
+        {
+          "$ref": "#/$defs/figureBlock"
+        },
+        {
+          "$ref": "#/$defs/transitionBlock"
+        },
+        {
+          "$ref": "#/$defs/nextNodeBlock"
+        }
+      ]
+    },
+    "paragraphBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "paragraph"
+        },
+        "text": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "leadBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "lead"
+        },
+        "text": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "questionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "question"
+      ],
+      "properties": {
+        "type": {
+          "const": "question"
+        },
+        "question": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "answer": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "insightBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "statement"
+      ],
+      "properties": {
+        "type": {
+          "const": "insight"
+        },
+        "heading": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "statement": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "mechanismBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "heading",
+        "steps"
+      ],
+      "properties": {
+        "type": {
+          "const": "mechanism"
+        },
+        "heading": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "description"
+            ],
+            "properties": {
+              "label": {
+                "$ref": "#/$defs/nonEmptyText"
+              },
+              "description": {
+                "$ref": "#/$defs/nonEmptyText"
+              }
+            }
+          }
+        }
+      }
+    },
+    "timelineBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "entries"
+      ],
+      "properties": {
+        "type": {
+          "const": "timeline"
+        },
+        "heading": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "period",
+              "title",
+              "description"
+            ],
+            "properties": {
+              "period": {
+                "$ref": "#/$defs/nonEmptyText"
+              },
+              "title": {
+                "$ref": "#/$defs/nonEmptyText"
+              },
+              "description": {
+                "$ref": "#/$defs/nonEmptyText"
+              }
+            }
+          }
+        }
+      }
+    },
+    "comparisonBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "left",
+        "right"
+      ],
+      "properties": {
+        "type": {
+          "const": "comparison"
+        },
+        "heading": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "left": {
+          "$ref": "#/$defs/comparisonSide"
+        },
+        "right": {
+          "$ref": "#/$defs/comparisonSide"
+        }
+      }
+    },
+    "comparisonSide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "items"
+      ],
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "items": {
+          "$ref": "#/$defs/nonEmptyTextArray"
+        }
+      }
+    },
+    "figureBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "assetCode"
+      ],
+      "properties": {
+        "type": {
+          "const": "figure"
+        },
+        "assetCode": {
+          "type": "string",
+          "pattern": "^KA-[A-Z0-9-]+$"
+        }
+      }
+    },
+    "transitionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "transition"
+        },
+        "text": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    },
+    "nextNodeBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "nodeCode",
+        "label"
+      ],
+      "properties": {
+        "type": {
+          "const": "next_node"
+        },
+        "nodeCode": {
+          "type": "string",
+          "pattern": "^KN-[A-Z0-9-]+$"
+        },
+        "label": {
+          "$ref": "#/$defs/nonEmptyText"
+        },
+        "description": {
+          "$ref": "#/$defs/nonEmptyText"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-LENS-CAPABILITY-STATE-CONTRACT-v1.0.0",
+  "work": "ML-W3",
+  "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+  "status": "FROZEN_THREE_DIMENSION_CAPABILITY_MODEL",
+  "dimensions": {
+    "internalCapabilityAvailability": {
+      "enum": [
+        "AVAILABLE",
+        "LIMITED",
+        "BLOCKED",
+        "COMING_LATER"
+      ],
+      "definition": "Whether a governed internal or authorized workspace may consume the capability within its explicitly bounded access class."
+    },
+    "publicCapabilityAvailability": {
+      "enum": [
+        "AVAILABLE",
+        "LIMITED",
+        "PREVIEW",
+        "RESTRICTED_INTERNAL",
+        "BLOCKED",
+        "COMING_LATER"
+      ],
+      "definition": "Whether a client/public surface may expose or execute the capability."
+    },
+    "executionCompleteness": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "INPUT_REQUIRED",
+        "FAILED",
+        "UNAVAILABLE"
+      ],
+      "definition": "Per-execution result state. It is never inferred from method-wide availability."
+    }
+  },
+  "rules": {
+    "internalAvailabilityImpliesPublicAvailability": false,
+    "publicAvailabilityImpliesCompleteExecution": false,
+    "completeExecutionImpliesPublicAvailability": false,
+    "capabilityAvailabilityNotEqualExecutionCompleteness": true,
+    "restrictedInternalMustNotExposePublicExecution": true,
+    "historicalPcmRemainsPublicProductionAuthority": true,
+    "multiLensStateMayAddInternalVisibilityWithoutMutatingPcm": true,
+    "futureStateChangeRequiresVersionedSuccessor": true
+  },
+  "hdrSpecificBoundary": {
+    "existingCalculationReimplementationRequired": false,
+    "automaticCalculationScope": "EXISTING_HDR_W1_W5_FROZEN_IMPLEMENTATION",
+    "phsAutomaticCalculationAllowed": false,
+    "dreamRaveAutomaticCalculationAllowed": false,
+    "phsInputMode": "PROFESSIONAL_MANUAL_INPUT_ONLY",
+    "dreamRaveInputMode": "PROFESSIONAL_MANUAL_INPUT_ONLY",
+    "publicTrademarkUseAllowed": false,
+    "publicSelfServiceAllowed": false,
+    "independentRightsReviewRequiredBeforeAnyFuturePublicActivation": true
+  }
+}

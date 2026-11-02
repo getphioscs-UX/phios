@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-TIAOHOU-CONTRACT-v1.2.0",
+  "work": "BAZI-FP-W6",
+  "status": "SOURCE_ADMITTED_MULTI_SCHOOL_DETAILED_V2_RULESETS_FROZEN",
+  "inputs": [
+    "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-BAZI-STRENGTH-SEASONAL-EVIDENCE-v1.0.0",
+    "PHI-OS-BAZI-PATTERN-CANDIDATE-IR-v1.0.0"
+  ],
+  "rules": {
+    "usefulGodTermMustBeSchoolQualified": true,
+    "ziPingMonthCommandUseMustNotBeMergedWithTiYongBalance": true,
+    "tiaohouMustRemainSeparateClimateLens": true,
+    "seasonAloneMayNotSelectUsefulGod": true,
+    "strengthEvidenceAloneMayNotSelectUsefulGod": true,
+    "numericUsefulGodScoreForbidden": true,
+    "silentCrossSchoolSynthesisForbidden": true,
+    "productionVerdictRequiresHumanAdmittedSourceClaims": true,
+    "humanAdmittedSourceClaimsAvailable": true,
+    "elementSelectionRequiresElementSpecificRuleCoverage": false,
+    "finalSelectionRequiresSchoolSpecificPrerequisitesResolved": true
+  },
+  "output": "PHI-OS-BAZI-USEFUL-GOD-TIAOHOU-MULTI-SCHOOL-IR-v1.0.0",
+  "predecessorRef": "content/professional/bzr-production/contracts/bazi-useful-god-tiaohou-contract-v1.1.json",
+  "currentBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "rulesetRefs": [
+    "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v2.json",
+    "content/interpretation/bazi/rulesets/bazi-di-tian-sui-ti-yong-ruleset-v2.json",
+    "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v2.json"
+  ],
+  "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+  "decisionCoverage": {
+    "ZI_PING_MONTH_COMMAND_USE_v1": {
+      "operativeFactorFromEstablishedPath": "SUPPORTED",
+      "finalSelection": "PATTERN_PATH_PREREQUISITE_GATED"
+    },
+    "DI_TIAN_SUI_TI_YONG_BALANCE_v1": {
+      "conditionalDirectionAndPriority": "SUPPORTED",
+      "finalSelection": "UPSTREAM_EXCESS_STATE_GATED"
+    },
+    "DI_TIAN_SUI_CLIMATE_TIAOHOU_v1": {
+      "thermalClassesAndOrderedExamples": "SUPPORTED_CONDITIONAL",
+      "finalSelection": "CLIMATE_BIAS_AND_NON_UNIVERSAL_TABLE_GATED"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-CROSS-SOURCE-VISUAL-STATE-MAPPING-v1.0.0",
+  "work": "PROFILE-PPR-ALL-PFIG-AUTHORITY",
+  "baselineCommit": "3eea58913bb7188089a2912ba6de1a0a5bf91bf0",
+  "status": "OWNER_MAPPING_ADMITTED",
+  "owner": "PROFILE_PPR",
+  "targetVisual": "PFIG-005",
+  "targetStates": [
+    "CONVERGES",
+    "CONTEXT_DEPENDENT",
+    "DIVERGES",
+    "UNKNOWN"
+  ],
+  "rules": [
+    {
+      "nativeGroup": "SOURCE_ALIGNED",
+      "projection": "CONVERGES",
+      "condition": "always when explicit comparison already produced SOURCE_ALIGNED"
+    },
+    {
+      "nativeGroup": "SOURCE_CONTRADICTION",
+      "projection": "DIVERGES",
+      "condition": "always when explicit comparison already produced SOURCE_CONTRADICTION"
+    },
+    {
+      "nativeGroup": "OPEN",
+      "projection": "UNKNOWN",
+      "condition": "always"
+    },
+    {
+      "nativeGroup": "SOURCE_COMPLEMENTARY",
+      "projection": "UNKNOWN",
+      "condition": "unless explicit Current Reality evidence demonstrates context-dependent expression; complementary is not equivalence"
+    },
+    {
+      "nativeGroup": "SOURCE_TENSION",
+      "projection": "CONTEXT_DEPENDENT",
+      "condition": "only when realityCorrelationRefs or explicit context observations explain different expression by context; otherwise UNKNOWN"
+    },
+    {
+      "nativeGroup": "CURRENTLY_SUPPORTED",
+      "projection": "CONTEXT_DEPENDENT",
+      "condition": "because the claim is explicitly scoped to Current Reality rather than universalized"
+    },
+    {
+      "nativeGroup": "CURRENTLY_CONTRADICTED",
+      "projection": "CONTEXT_DEPENDENT",
+      "condition": "because the contradiction is explicitly scoped to Current Reality rather than universalized"
+    }
+  ],
+  "fallback": "UNKNOWN",
+  "governance": {
+    "nativeGroupPreservedAlongsideProjection": true,
+    "sourceClassesRemainVisible": true,
+    "projectionMayCreateConsensusTruth": false,
+    "contextDependentRequiresExplicitContextEvidenceWhenSourceGroupIsTensionOrComplementary": true
+  }
+}

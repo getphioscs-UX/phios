@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-BOOK4-A4-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "BOOK-IV-A4",
+  "status": "MACHINE_ACCEPTED_A5_HUMAN_PENDING",
+  "baselineCommit": "1f81638d214bd946778e4ac721a0f7b265eac116",
+  "recordedAt": "2026-09-10",
+  "benchmarkPath": "content/knowledge/knowledge-intelligence-r2/benchmarks/book4-a4-machine-retrieval-benchmark-v1.json",
+  "authorityPath": "content/knowledge/contracts/book-4-machine-benchmark-authority-v1.json",
+  "summary": {
+    "book4PositiveCaseCount": 250,
+    "localeDistribution": {
+      "zh-Hans": 125,
+      "en": 125
+    },
+    "top1NodePrecision": 0.912,
+    "top5Recall": 0.988,
+    "book4Top1Precision": 0.996,
+    "wrongBookTop1Rate": 0.004,
+    "sourceGroundingRate": 1,
+    "dedupIntegrityRate": 1,
+    "directAnswerPotentialRate": 0.988,
+    "byLocale": {
+      "zh-Hans": {
+        "caseCount": 125,
+        "top1NodePrecision": 1,
+        "top5Recall": 1,
+        "wrongBookTop1Rate": 0
+      },
+      "en": {
+        "caseCount": 125,
+        "top1NodePrecision": 0.824,
+        "top5Recall": 0.976,
+        "wrongBookTop1Rate": 0.008
+      }
+    },
+    "legacyControl": {
+      "caseCount": 100,
+      "expectedNodeTop1Rate": 0.99,
+      "expectedNodeTop5Recall": 1,
+      "expectedBookTop1Rate": 1,
+      "book4HijackTop1Rate": 0
+    }
+  },
+  "thresholds": {
+    "minimumTop1NodePrecision": 0.9,
+    "minimumTop5Recall": 0.98,
+    "minimumBook4Top1Precision": 0.99,
+    "maximumWrongBookTop1Rate": 0.01,
+    "minimumSourceGroundingRate": 1,
+    "minimumDedupIntegrityRate": 1,
+    "minimumDirectAnswerPotentialRate": 0.98,
+    "minimumPerLocaleTop5Recall": 0.95,
+    "minimumPerLocaleTop1NodePrecision": 0.8,
+    "minimumLegacyControlTop5Recall": 1,
+    "maximumLegacyBook4HijackTop1Rate": 0.01
+  },
+  "machineAccepted": true,
+  "residualDiagnostics": {
+    "top5MissCount": 3,
+    "wrongBookTop1Count": 1,
+    "carriedToA5": true
+  },
+  "boundaries": {
+    "bookIVAdmitted": false,
+    "productionEligible": false,
+    "publicationOpened": false,
+    "activeKIRSourceRegistryMutationPerformed": false,
+    "canonicalMeaningMutationPerformed": false,
+    "articleTextGeneratedByA4": false,
+    "humanAcceptanceClaimed": false,
+    "integratedProgramPhaseAdvancedByA4": false,
+    "nextWorkStep": "BOOK-IV-A5_HUMAN_ACCEPTANCE"
+  },
+  "nextGate": "BOOK-IV-A5 Human Acceptance"
+}

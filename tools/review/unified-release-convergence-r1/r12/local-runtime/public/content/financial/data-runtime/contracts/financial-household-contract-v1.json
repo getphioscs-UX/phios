@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W2-HOUSEHOLD-CONTRACT-v1.0.0",
+  "work": "FDR-W2",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "householdId",
+    "memberPersonIds",
+    "primaryCustomerReferences",
+    "asOfDate",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "householdLabel",
+    "dependentPersonIds",
+    "sharedEntityIds",
+    "jurisdictionContexts"
+  ],
+  "rules": {
+    "householdIsFinancialGroupingNotAccountAuthority": true,
+    "adultMembersRetainSeparateConsent": true,
+    "membershipDoesNotImplyJointOwnership": true,
+    "membershipDoesNotImplyBeneficiaryStatus": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

@@ -1,0 +1,56 @@
+{
+  "contractCode": "PHI-OS-VAP-W6-BATCH-ARTICLE-SELECTION-PRODUCTION-BRIEF-EXPORT-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W6",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "status": "active",
+  "implementationBaselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "purpose": "Create a bounded, deterministic Article review cohort from the VAP-W5R scalable portfolio and activate batch orchestration over the existing PJA production-brief exporter without auto-assigning Article roles, auto-approving production, weakening C2/C3/Human gates, or reimplementing the single-node exporter.",
+  "inputs": {
+    "portfolio": "content/production/visual-article/portfolio/scalable-article-production-portfolio-v1.json",
+    "executionEligibility": "content/production/visual-article/eligibility/visual-article-execution-eligibility-v1.json",
+    "selectionPolicy": "content/production/visual-article/policies/vap-w6-batch-selection-policy-v1.json",
+    "pjaWaveContract": "content/knowledge/production/waves/wave-production-contract.json",
+    "localeProjectionRegistry": "content/knowledge/l10n/multilingual-node-projection-registry.json",
+    "existingPjaExporter": "scripts/export-knowledge-production-brief.mjs"
+  },
+  "selectionBoundary": {
+    "selectionIsRecommendationOnly": true,
+    "selectionIsNotHumanProductionDecision": true,
+    "selectionIsNotFrozenProductionPlan": true,
+    "selectionIsNotFrozenProductionWave": true,
+    "publishedArticleNodesExcluded": true,
+    "explicitNonArticleWaveOutputsExcluded": true,
+    "generalBacklogAutoFillForbiddenByDefault": true,
+    "canonicalOrderingRequired": true,
+    "maximumBatchSizeInheritedFromPjaMatureWave": 24
+  },
+  "productionBriefExportBoundary": {
+    "existingSingleNodeExporterMustBeReused": true,
+    "batchWrapperMayOnlyOrchestrateExistingExporter": true,
+    "perNodeW4rNewArticleExecutionEligibilityRequired": true,
+    "perNodeLocaleReadinessRequired": true,
+    "existingPublishedArticleRegenerationForbidden": true,
+    "blockedNodesMustBeSkipped": true,
+    "partialExportOfIndependentlyEligibleNodesAllowed": true,
+    "zeroEligibleNodesIsValidFailClosedState": true
+  },
+  "preservedGovernance": {
+    "kppArticleEligibilityAssessmentRequiredBeforeArticleDecision": true,
+    "humanProductionDecisionRequired": true,
+    "c2ThesisBoundaryGatePreserved": true,
+    "c2ThesisBoundaryFailureCode": "C2_THESIS_BOUNDARY_NOT_FROZEN",
+    "c3ProductionReadinessPreserved": true,
+    "frozenPlanRequiredBeforeExecution": true,
+    "frozenWaveRequiredBeforeExecution": true,
+    "candidateCreationAllowed": false,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false
+  },
+  "outputs": {
+    "batchSelection": "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json",
+    "activation": "content/production/visual-article/activation/vap-w6-batch-production-brief-export-v1.json",
+    "runtimeExportReportPattern": "dist/knowledge-production-briefs/batches/<BATCH_CODE>-export-report.json"
+  },
+  "nextWork": "VAP-W6A_BATCH_ARTICLE_DECISION_C2_C3_FORMATION"
+}

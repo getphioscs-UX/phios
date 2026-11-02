@@ -1,0 +1,41 @@
+{
+  "contractCode": "PHI-OS-ALR-W38-LESSON-EXPERIENCE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W38",
+  "status": "active",
+  "productionStatus": "validation_projection_only",
+  "viewCode": "ALR-ACADEMY-LESSON",
+  "route": "/academy-lesson",
+  "mission": "Present one governed Lesson structure, its objectives and source lineage without activating delivery or assessment.",
+  "sectionOrder": [
+    "LESSON_ORIENTATION",
+    "LEARNING_OBJECTIVES",
+    "SOURCE_READING",
+    "TEACHING_STRUCTURE",
+    "PRACTICE_BOUNDARY",
+    "ASSESSMENT_BOUNDARY",
+    "CONTINUATION_BOUNDARY"
+  ],
+  "requiredInputFields": [
+    "viewCode",
+    "projectionVersion",
+    "locale",
+    "lessonCode",
+    "generatedAt",
+    "providerUsed",
+    "aiUsed"
+  ],
+  "rules": {
+    "lessonMustBeRegisteredAndApproved": true,
+    "lessonObjectiveReferencesMustBeReciprocal": true,
+    "sourceReadingMustMatchRequestedLocale": true,
+    "missingLocaleFailsClosed": true,
+    "mixedLocaleLessonForbidden": true,
+    "teachingBodyMayBeInventedByPresentation": false,
+    "practiceResponseCaptureActivated": false,
+    "assessmentExecutionActivated": false,
+    "lessonCompletionWriteActivated": false,
+    "capabilityStateWriteActivated": false,
+    "credentialOrProfessionalAuthorityActivated": false
+  }
+}

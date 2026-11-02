@@ -1,0 +1,33 @@
+{
+  "budgetExhaustion": {
+    "continue": [
+      "local_en_retrieval",
+      "local_zh_hans_retrieval",
+      "published_content",
+      "deterministic_reading_paths"
+    ],
+    "paidFallbackAllowed": false,
+    "pause": [
+      "google_query_translation_fallback",
+      "workers_ai_semantic_reranking"
+    ]
+  },
+  "internalHardLimits": {
+    "google_query_translation": 0,
+    "openai_public_knr": 0,
+    "workers_ai_reranking": 0
+  },
+  "officialAllowanceNumbersEmbedded": false,
+  "officialAllowanceVerificationRequiredBeforeEnablement": true,
+  "policyCode": "KRA-BUDGET-W1-v1.0.0",
+  "principles": {
+    "failClosed": true,
+    "freeAllowanceOnly": true,
+    "paidOverageDisabled": true
+  },
+  "queryBoundary": {
+    "articleTranslationAllowed": false,
+    "fragmentTranslationAllowed": false,
+    "maxCharacters": 512
+  }
+}

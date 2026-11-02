@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas comparison family registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "status",
+    "families"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-BOOK-V-CIV-ATLAS-COMPARISON-v1.0.0"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "FROZEN"
+      ]
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/family"
+      }
+    }
+  },
+  "$defs": {
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "familyId",
+        "title",
+        "coreRuntimeProblem",
+        "caseIds",
+        "comparisonDimensions",
+        "crossFamilyRelations",
+        "relatedCanonicalNodes"
+      ],
+      "properties": {
+        "familyId": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "title": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "coreRuntimeProblem": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "caseIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^CA-T"
+          },
+          "uniqueItems": true
+        },
+        "comparisonDimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dimensionId",
+              "title",
+              "description"
+            ],
+            "properties": {
+              "dimensionId": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_]+$"
+              },
+              "title": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "zh-Hans",
+                  "en"
+                ],
+                "properties": {
+                  "zh-Hans": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "description": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "zh-Hans",
+                  "en"
+                ],
+                "properties": {
+                  "zh-Hans": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "en": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "crossFamilyRelations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "targetFamilyId",
+              "relationType"
+            ],
+            "properties": {
+              "targetFamilyId": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_]+$"
+              },
+              "relationType": {
+                "enum": [
+                  "CORE_COMPARISON",
+                  "CROSS_FAMILY",
+                  "SUCCESSOR_RELATION",
+                  "SHARED_RUNTIME_PROBLEM"
+                ]
+              }
+            }
+          }
+        },
+        "relatedCanonicalNodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^KN-"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

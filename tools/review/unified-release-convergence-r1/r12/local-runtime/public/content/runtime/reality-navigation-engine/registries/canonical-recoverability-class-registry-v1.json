@@ -1,0 +1,35 @@
+{
+  "registryCode": "PHI-OS-RNE-CANONICAL-RECOVERABILITY-CLASS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "containsUserData": false,
+  "classes": [
+    {
+      "recoverabilityClass": "NO_STATE_CHANGE_REQUIRED",
+      "meaning": "Option does not require a modeled state change before its observation point."
+    },
+    {
+      "recoverabilityClass": "RECOVERY_WINDOW_OPEN",
+      "meaning": "The governed RRE recovery view reports an open recovery window with available capacity and bounded uncertainty."
+    },
+    {
+      "recoverabilityClass": "RECOVERY_WINDOW_CONDITIONAL",
+      "meaning": "The governed RRE recovery view indicates a conditional or constrained recovery context."
+    },
+    {
+      "recoverabilityClass": "RECOVERY_NOT_OBSERVED",
+      "meaning": "Recoverability cannot be established because the governed recovery state is not observed."
+    },
+    {
+      "recoverabilityClass": "RECOVERY_UNKNOWN",
+      "meaning": "Recoverability remains unknown and must not be resolved by inference."
+    }
+  ],
+  "rules": {
+    "rreRecoveryReadingAuthorityPreserved": true,
+    "medicalAdviceCreated": false,
+    "treatmentAdviceCreated": false,
+    "guaranteedRecoveryCreated": false,
+    "optionSelectionAuthorityGranted": false
+  }
+}

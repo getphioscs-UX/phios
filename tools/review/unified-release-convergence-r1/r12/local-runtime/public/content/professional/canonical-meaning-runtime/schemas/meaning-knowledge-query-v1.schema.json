@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/meaning-knowledge-query-v1.schema.json",
+  "title": "PHI OS Meaning Knowledge Query Result v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "queryCode",
+    "meaningBundleCode",
+    "meaningCodes",
+    "references",
+    "knowledgeCoverage",
+    "authority",
+    "queryDigest",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MEANING-KNOWLEDGE-QUERY-v1.0.0"
+    },
+    "queryCode": {
+      "type": "string"
+    },
+    "meaningBundleCode": {
+      "type": "string"
+    },
+    "meaningCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "references": {
+      "type": "array"
+    },
+    "knowledgeCoverage": {
+      "type": "object",
+      "required": [
+        "status",
+        "referencedNodeCount",
+        "publishedNodeCount",
+        "sufficientForInterpretation"
+      ]
+    },
+    "authority": {
+      "type": "object"
+    },
+    "queryDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  },
+  "additionalProperties": true
+}

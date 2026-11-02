@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-PRODUCTION-AUTHORITY-BASELINE-v1.0.0",
+  "work": "CMP-W0",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "CMR_VALIDATION_BASELINE_RECONCILED_PRODUCTION_SUCCESSOR_FOUNDATION_OPENED",
+  "predecessorAuthority": {
+    "cmrFreeze": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+    "productionStatus": "validation_only",
+    "productionActivated": false,
+    "historicalMutationAllowed": false
+  },
+  "currentProjectionInputAuthority": {
+    "schemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+    "runtime": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+    "versionRegistry": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json"
+  },
+  "auditedAuthorities": [
+    {
+      "path": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+      "sha256": "a88c8dd422e222fee7efd4ee4ce9f3cc4b9e780f4b7fbc11ac0c4d0250c55936"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "sha256": "27349bccaf07cad0324ed701d4c16dd6e6ba1522ce2bc7cbc079fea94040f5eb"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/acceptance/cmr-w15-full-acceptance-v1.json",
+      "sha256": "4a97ee2809a5832a0e4d8375e7419f7866d755722b19a002fd054db301b84a83"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/registries/canonical-meaning-code-registry-v1.2.json",
+      "sha256": "3390219dac03a537edc68d7af98339cf352a8d4386dadd646039c1b769479bf9"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/identity/meaning-identity-registry-v1.2.json",
+      "sha256": "dd28da6ceffb4e13294f27d5c47b3909025fc54db7cc6c34c51d31a4206aeb61"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/registries/canonical-meaning-knowledge-map-v1.2.json",
+      "sha256": "1c01f39cdab68e05bfaea963b00ff21cbac9e2a24d5a6b8b10b8f5ef805ad1bc"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/registries/ast-meaning-mapping-registry-v1.json",
+      "sha256": "867425548808b58f5b858ff9622ae1742e95903a408bee1de83a4ca15f8bd90d"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/registries/bzr-meaning-mapping-registry-v1.1.json",
+      "sha256": "f35c1f2aed33ec35702e862e28dca7c0e7c8dc02a8c659ad4ca13686a5a38edb"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/registries/num-meaning-mapping-registry-v1.json",
+      "sha256": "ee1f30b3ac190369f5ab863eaab57428c0cb15825f326c61e3d8579d84b6b625"
+    },
+    {
+      "path": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+      "sha256": "4819d859750da671353397493834efc70171d7112a5d35f2bc8d5fb075ace662"
+    },
+    {
+      "path": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json",
+      "sha256": "d74d195de43736db36e89a04b99845a6f274517f937c3beee174e5f12178d85e"
+    },
+    {
+      "path": "content/products/runtime-reading/registries/runtime-reading-method-availability-v1.json",
+      "sha256": "d279a89f1c41a7319517c2e1e0152462e9eedd7318b7d3155bc9e80a80df27e6"
+    }
+  ],
+  "precedence": [
+    "CMP_VERSIONED_SUCCESSOR_WHEN_EXPLICITLY_ACTIVATED",
+    "CMR_W15_VALIDATION_BASELINE_AS_PREDECESSOR",
+    "MCD5_CANONICAL_METHOD_PROJECTION_AS_READ_ONLY_INPUT"
+  ],
+  "activationState": "NOT_ACTIVATED_FOR_USER_PRODUCTION",
+  "rules": {
+    "cmrW15RemainsBytePreserved": true,
+    "cmpDoesNotModifyCalculation": true,
+    "cmpDoesNotModifyCanonicalProjection": true,
+    "cmpDoesNotCreateInterpretation": true,
+    "cmpDoesNotCreateProfessionalJudgment": true
+  }
+}

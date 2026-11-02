@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-REPORT-COVER-IDENTITY-BINDING-CONTRACT-v1.0.0",
+  "work": "RNT2-W18-W24",
+  "status": "SUCCESSOR_CANDIDATE",
+  "authority": {
+    "birth": "MCD3_CANONICAL_BIRTH_INPUT",
+    "subjectReference": "MPA_SUBJECT_REFERENCE",
+    "displayName": "RDG_ACCOUNT_PERSON_REFERENCE.displayName | CUSTOMER_DECLARED_SELF_REPORT_DISPLAY_NAME",
+    "displayNameRule": "Prefer an existing AccountPersonReference when the surface has a governed person selector. Current Personal Reality SELF flow may use an explicit per-request reportSubjectName bound to the authenticated userId; it is presentation-only and never method input."
+  },
+  "rules": {
+    "coverBaseRemainsStatic": true,
+    "overlayIsCustomerSpecificPresentation": true,
+    "displayNameMayNotBeInferredFromEmail": true,
+    "birthTimeUnknownMustRemainUnknown": true,
+    "syntheticTimeDefaultsForbidden": true,
+    "rawPiiForbiddenInSnapshotId": true,
+    "htmlPdfSameOverlayData": true,
+    "methodInputRequirementDoesNotEraseSuppliedCoverField": true
+  },
+  "hardFailures": [
+    "COVER_SUBJECT_MISMATCH",
+    "COVER_BIRTH_DATE_MISMATCH",
+    "COVER_BIRTH_TIME_MISMATCH",
+    "COVER_UNKNOWN_TIME_FABRICATED",
+    "COVER_FIELD_CLIPPED",
+    "COVER_FIELD_MISSING"
+  ],
+  "currentAudit": {
+    "canonicalDisplayNameOwnerResolved": true,
+    "displayNameOwner": "content/governance/reality-data-governance/contracts/account-person-reference-v1.json",
+    "runtimeAdapter": "functions/canonical-presentation-runtime/report-cover-subject.js#createReportSubjectPresentationFromAccountPerson",
+    "blockProductionUntilTrustedDisplayNameBinding": false,
+    "currentSelfFlow": {
+      "page": "/perspectives/personal/",
+      "subjectClass": "SELF",
+      "explicitReportSubjectNameRequired": true,
+      "browserNameDoesNotGrantAccountIdentity": true,
+      "authenticatedUserIdBindsSubjectReference": true,
+      "nameNeverEntersCanonicalBirthInput": true
+    }
+  }
+}

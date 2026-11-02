@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W11-W13-FIXTURE-v1.0.0",
+  "work": "BAZI-FP-W11-W13",
+  "status": "ACTIVE_SYNTHETIC_COMPOSITION_RESOLUTION_DEDUP_FIXTURE",
+  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "predecessorFixtureRef": "content/professional/bzr-full-production/fixtures/bazi-structural-finding-evidence-graph-fixture-v1.json",
+  "expected": {
+    "w9FindingCount": 14,
+    "w11CompositionUnitCount": 7,
+    "w11CoveredFindingCount": 14,
+    "w11SchoolUnitCount": 3,
+    "w11CrossFindingUnitCount": 3,
+    "w11TypeCounts": {
+      "NATAL_FOUNDATION": 1,
+      "NATAL_RELATIONSHIP_STRUCTURE": 1,
+      "PATTERN_CANDIDATE_SET": 1,
+      "SCHOOL_QUALIFIED_VIEW": 3,
+      "CURRENT_TEMPORAL_STRUCTURE": 1
+    },
+    "w12StateCounts": {
+      "SUPPORTED": 1,
+      "QUALIFIED": 1,
+      "BOUNDED_BY_UNKNOWN": 1,
+      "ALTERNATIVES_OPEN": 1,
+      "SCHOOL_VIEW_OPEN": 3
+    },
+    "w12CounterEvidenceRefCount": 0,
+    "w12UnknownBoundResolutionCount": 5,
+    "w12AlternativeSetCount": 1,
+    "w12OpenSchoolViewCount": 3,
+    "w13SemanticClusterCount": 7,
+    "w13PrimaryExplanationCount": 7,
+    "w13ContextDerivativeCount": 0,
+    "w13ReferenceOnlyCount": 0,
+    "patternAlternativeCount": 3,
+    "schoolCodes": [
+      "DI_TIAN_SUI_CLIMATE_TIAOHOU_v1",
+      "DI_TIAN_SUI_TI_YONG_BALANCE_v1",
+      "ZI_PING_MONTH_COMMAND_USE_v1"
+    ]
+  },
+  "negativeCases": {
+    "explicitCounterEvidenceMustClassifyCounterbalanced": true,
+    "sameSemanticKeyExactDuplicateMustHaveOnlyOnePrimary": true,
+    "sameSemanticKeyWithNewInformationMayRemainContextDerivative": true,
+    "differentSchoolCodesMustNotShareDedupCluster": true,
+    "differentTemporalContextsMustNotShareDedupCluster": true,
+    "transitionDayUnknownMustRemainVisible": true
+  },
+  "boundaries": {
+    "customerNarrativeExpected": false,
+    "primaryPatternWinnerExpected": false,
+    "schoolWinnerExpected": false,
+    "goodBadScoreExpected": false,
+    "eventPredictionExpected": false,
+    "customerProductionEligibleExpected": false
+  }
+}

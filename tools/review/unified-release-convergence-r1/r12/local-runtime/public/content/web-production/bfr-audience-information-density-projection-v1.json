@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H6-AUDIENCE-INFORMATION-DENSITY-v1.0.0",
+  "work": "BFR-H6",
+  "baselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "status": "AUDIENCE_PROJECTION_CONTRACT_RECONCILED",
+  "sameAuthorityMultipleAudienceProjection": true,
+  "audiences": {
+    "PUBLIC": {
+      "show": [
+        "HIGH_LEVEL",
+        "ORIENTATION",
+        "PUBLISHED_KNOWLEDGE",
+        "SAFE_VISUAL_SUMMARY",
+        "PUBLIC_FIGURES",
+        "READING_ENTRY",
+        "ASK_PHIOS_ENTRY"
+      ],
+      "forbid": [
+        "PRIVATE_EVIDENCE",
+        "CUSTOMER_STATE",
+        "PROFESSIONAL_JUDGMENT",
+        "PRIVATE_PROVENANCE"
+      ]
+    },
+    "CUSTOMER": {
+      "show": [
+        "PERSONAL_CONTEXT",
+        "JOURNEY_STAGE",
+        "READOUT_PROJECTION",
+        "KNOWN_UNKNOWN",
+        "CONTINUITY",
+        "PERSONAL_NAVIGATION",
+        "RELEVANT_KNOWLEDGE",
+        "SAVED_ASK_HISTORY_WHEN_ENTITLED"
+      ],
+      "forbid": [
+        "OTHER_CUSTOMER_PRIVATE_STATE",
+        "UNAUTHORIZED_PROFESSIONAL_JUDGMENT"
+      ]
+    },
+    "PROFESSIONAL": {
+      "show": [
+        "EVIDENCE",
+        "UNCERTAINTY",
+        "LINEAGE",
+        "UNKNOWNS",
+        "PROVENANCE",
+        "PROFESSIONAL_JUDGMENT",
+        "APPROVAL_STATE",
+        "PROFESSIONAL_ACTION_CONTEXT"
+      ],
+      "forbid": [
+        "UNAUTHORIZED_CROSS_CASE_DATA"
+      ]
+    }
+  },
+  "exitGate": {
+    "correctDensity": true,
+    "correctDataContract": true,
+    "privacyBoundaryPreserved": true
+  }
+}

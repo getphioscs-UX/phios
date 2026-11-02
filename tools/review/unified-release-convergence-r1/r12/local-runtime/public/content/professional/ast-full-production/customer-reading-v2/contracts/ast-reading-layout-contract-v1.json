@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-AST-READING-LAYOUT-CONTRACT-v1.0.0",
+  "workCode": "R2-W11",
+  "methodId": "AST",
+  "sourceMainCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "status": "FROZEN_ENGINEERING_CONTRACT",
+  "desktop": {
+    "contentMaxCssPx": 920,
+    "readingTextMaxCh": 72,
+    "themeCardMinCssPx": 260,
+    "themeColumnsMax": 3,
+    "technicalDefaultCollapsed": true
+  },
+  "density": {
+    "paragraphMaxCharacters": 480,
+    "paragraphRecommendedCharacters": 300,
+    "maxConsecutiveTextBlocks": 3,
+    "firstScreenMaxBlocks": 6,
+    "firstScreenMaxThemes": 3
+  },
+  "firstScreenForbidden": [
+    "CHART_OBJECT_DIRECTORY",
+    "BIRTH_DATA_TABLE",
+    "TECHNICAL_IDS",
+    "SOURCE_REFS",
+    "RAW_ONTOLOGY_LABELS",
+    "FULL_DEEP_DIVE"
+  ],
+  "mobile": {
+    "singleColumn": true,
+    "nestedScrollForbidden": true,
+    "horizontalOverflowForbidden": true,
+    "minimumTapTargetCssPx": 44,
+    "technicalDefaultCollapsed": true
+  },
+  "print": {
+    "sameInformationArchitecture": true,
+    "sectionBreakPolicy": "AVOID_SPLIT_THEME_CARDS",
+    "widowOrphanProtection": true,
+    "technicalAsAppendix": true,
+    "interactiveControlsHidden": true
+  },
+  "progressiveDisclosure": [
+    {
+      "level": "READING",
+      "default": "OPEN"
+    },
+    {
+      "level": "DETAIL",
+      "default": "COLLAPSIBLE"
+    },
+    {
+      "level": "TECHNICAL",
+      "default": "COLLAPSED"
+    }
+  ]
+}

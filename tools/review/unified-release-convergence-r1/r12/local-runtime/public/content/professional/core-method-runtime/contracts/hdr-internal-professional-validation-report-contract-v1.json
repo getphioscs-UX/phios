@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-HDR-INTERNAL-PROFESSIONAL-VALIDATION-REPORT-CONTRACT-v1.0.0",
+  "status": "ACTIVE_INTERNAL_VALIDATION_ONLY",
+  "purpose": "Allow a governed internal professional to generate and inspect a deterministic Human Design validation report candidate from real canonical birth input without activating HDR Production, client delivery, automatic interpretation or professional release.",
+  "calculationAuthority": {
+    "personalStructureRuntime": "PHI_OS_PERSONAL_STRUCTURE_RUNTIME",
+    "sharedCalculationRuntime": "SHARED_CALCULATION_RUNTIME",
+    "designMomentRuntime": "HDR_DESIGN_MOMENT_RUNTIME",
+    "astronomyAuthority": "EXISTING_SHARED_AST_ASTRONOMY_AUTHORITY",
+    "engine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "nodeConvention": "TRUE_NODE.V1",
+    "secondCalculationAuthorityCreated": false
+  },
+  "requiredInput": {
+    "canonicalBirthInputVersion": "MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0",
+    "exactBirthTimeRequired": true,
+    "historicalUtcOffsetRequired": true,
+    "coordinatesRequired": true,
+    "explicitInternalValidationConsentRequired": true
+  },
+  "reportBoundary": {
+    "visibility": "INTERNAL_ONLY",
+    "professionalReviewRequired": true,
+    "automaticInterpretation": false,
+    "professionalJudgmentCreated": false,
+    "clientDeliveryAllowed": false,
+    "publicExposureAllowed": false,
+    "automaticReleaseAllowed": false,
+    "productionDispatchAuthorityCreated": false
+  },
+  "reportSections": [
+    "chart_overview", "type", "strategy", "authority", "profile", "definition",
+    "centers", "channels", "key_gates", "variables_phs", "environment",
+    "cognition", "motivation", "general_operating_conditions", "limitations"
+  ],
+  "unknownPolicy": "Unsupported interpretation fields remain explicit UNKNOWN/PENDING_REVIEW; no automatic fallback or synthetic meaning is allowed."
+}

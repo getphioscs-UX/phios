@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-CPR-APS-ARTICLE-PRESENTATION-SUCCESSOR-v1.0.0",
+  "presentationCode": "PRESENTATION-ARTICLE-KN-B1-P4-006-EN-ABL-v1",
+  "presentationVersion": "1.0.0",
+  "work": "ABL-5_CPR_SUCCESSOR_ORCHESTRATION",
+  "status": "active_production_instance",
+  "surface": "WEBSITE",
+  "presentationType": "ARTICLE_PAGE",
+  "renderState": "ready_for_render",
+  "locale": "en",
+  "audience": "CUSTOMER",
+  "inputs": {
+    "publishedArticle": {
+      "authorityRecordCode": "PKA-KN-B1-P4-006-EN",
+      "authorityDigest": "724c3dddecc2dfa9d15b937418699632f94b11f816a38a14e46335f080e1501c",
+      "publicationCode": "PUBLICATION-APPROVAL-CANDIDATE-KN-B1-P4-006-EN-V1-V1-V1",
+      "publicationDigest": "a6f56917bc04ce83e743d0ab699d9731fa1abb97d8fdba1676037732871ffb69",
+      "articleCode": "KA-B1-P4-006-EN-ARTICLE",
+      "nodeCode": "KN-B1-P4-006",
+      "href": "/articles/runtime-cost-recovery-and-internal-connection-sustain-body",
+      "version": "1.0.0"
+    },
+    "car": {
+      "required": false,
+      "state": "NOT_REQUIRED_NO_VISUAL_ASSET",
+      "publishedAssetReferences": []
+    }
+  },
+  "composition": [
+    {
+      "ordinal": 1,
+      "componentCode": "ARTICLE_HEADER",
+      "sourceReferences": [
+        "PKA-KN-B1-P4-006-EN"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 2,
+      "componentCode": "ARTICLE_BODY",
+      "sourceReferences": [
+        "KA-B1-P4-006-EN-ARTICLE"
+      ],
+      "bodyInsertions": [],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 3,
+      "componentCode": "SECONDARY_PROVENANCE",
+      "sourceReferences": [
+        "KN-B1-P4-006"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 4,
+      "componentCode": "FOOTER",
+      "sourceReferences": [
+        "PDS_PUBLIC_SHELL"
+      ],
+      "visibility": "VISIBLE"
+    }
+  ],
+  "pdsReferences": {
+    "authority": "PDS",
+    "contracts": [
+      "content/registry/pds-w2-design-token-contract.json",
+      "content/registry/pds-w3-core-component-shell-contract.json",
+      "content/registry/pds-w7-reading-experience.json",
+      "content/registry/pds-w9-knowledge-professional.json"
+    ],
+    "styleReferences": [
+      "assets/css/tokens.css",
+      "assets/css/design/foundation.css",
+      "assets/css/design/typography.css",
+      "assets/css/public-experience.css",
+      "assets/css/knowledge-release.css",
+      "assets/css/article-renderer.css",
+      "assets/css/pds-w9-knowledge-professional.css",
+      "assets/css/wpr-public-production.css"
+    ]
+  },
+  "governance": {
+    "cprDecidesKnowledge": false,
+    "cprDecidesPublication": false,
+    "apsCreatesCarAuthority": false,
+    "carBypassAllowedWhenVisualAssetRequired": false,
+    "articleOnlyNoAssetPathAllowed": true
+  }
+}

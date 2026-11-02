@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-PCM-BACKEND-FRONTEND-RULE-v1.0.0",
+  "work": "PCM-W1",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "rule": "runtimeImplemented=true never creates productionReady=true by itself.",
+  "productionReadyRequirements": [
+    "authority",
+    "runtime",
+    "projection",
+    "frontend",
+    "acceptance"
+  ],
+  "requirementSemantics": {
+    "authority": "Current versioned authority explicitly permits the Method capability and dispatch scope.",
+    "runtime": "A physical deterministic runtime/adapter exists for the permitted scope.",
+    "projection": "A governed client-safe canonical projection exists and raw Core schema is not the client contract.",
+    "frontend": "A real Production consumer route can request the capability without importing Core runtime code directly.",
+    "acceptance": "Current Production acceptance explicitly covers the capability and its restrictions."
+  },
+  "invariants": {
+    "implementedWithoutAuthorityMayBeProductionReady": false,
+    "implementedWithoutProjectionMayBeProductionReady": false,
+    "implementedWithoutFrontendMayBeProductionReady": false,
+    "implementedWithoutAcceptanceMayBeProductionReady": false,
+    "frontendMayGrantProductionAuthority": false,
+    "apiMayGrantProductionAuthority": false,
+    "rendererMayGrantProductionAuthority": false,
+    "registrationMayGrantProductionAuthority": false
+  }
+}

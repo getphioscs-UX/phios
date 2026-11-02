@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phios.example/schemas/iching-reading-ir-v1.schema.json",
+  "title": "PHI OS I Ching Reading IR v1",
+  "type": "object",
+  "required": ["schemaVersion", "readingIrVersion", "methodCode", "question", "methodEvidence", "structuralProjection", "sourceInterpretation", "rcc", "uncertainty", "agency", "compositionEvidence", "authority", "aiUsed", "providerUsed", "productionEligible"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-ICHING-READING-IR-v1.0.0"},
+    "readingIrVersion": {"const": "1.0.0"},
+    "methodCode": {"const": "I_CHING"},
+    "question": {"type": "string", "minLength": 1, "maxLength": 800},
+    "methodEvidence": {
+      "type": "object",
+      "required": ["inputMode", "lineOrder", "sixLines", "aiSelected", "rerolledInsideCalculation"],
+      "properties": {
+        "inputMode": {"enum": ["MANUAL_LINES", "COIN_CAST", "SYSTEM_RANDOM"]},
+        "lineOrder": {"const": "BOTTOM_TO_TOP"},
+        "sixLines": {"type": "array", "minItems": 6, "maxItems": 6},
+        "aiSelected": {"const": false},
+        "rerolledInsideCalculation": {"const": false}
+      }
+    },
+    "structuralProjection": {
+      "type": "object",
+      "required": ["type", "primary", "changingLines", "relating", "deterministic", "sourceNeutral"],
+      "properties": {
+        "type": {"const": "I_CHING_HEXAGRAM_PROJECTION"},
+        "changingLines": {"type": "array", "uniqueItems": true},
+        "deterministic": {"const": true},
+        "sourceNeutral": {"const": true}
+      }
+    },
+    "rcc": {"type": "object", "required": ["required", "supportingEvidence", "contradictoryEvidence", "unknown", "observation", "questions"]},
+    "uncertainty": {"type": "object", "required": ["required", "states", "mayRemainUnresolved", "modelMayNotEraseUncertainty"]},
+    "agency": {"type": "object", "required": ["decisionAuthority", "ichingMayDecide", "userDecisionRemainsYours"]},
+    "aiUsed": {"const": false},
+    "providerUsed": {"const": false},
+    "productionEligible": {"const": false}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2-MODEL-BACKED-PRODUCTION-SUCCESSOR-v1.0.0",
+  "work": "KIR-R2-W16R2",
+  "baselineCommit": "db794e5a22d8d0ecc36ebaab6420b3bca804a7ce",
+  "status": "ENGINEERING_READY_LIVE_100_CASE_AND_HUMAN_ACCEPTANCE_REQUIRED",
+  "historicalEvidence": {
+    "preserve": true,
+    "w16rV2Path": "content/knowledge/knowledge-intelligence-r2/review/kir-r2-w16r-100-question-human-review-v2.json",
+    "rewriteHistoricalReview": false
+  },
+  "authority": {
+    "knowledgeAuthority": "PHI_OS_ADMITTED_BOOK_ARTICLE_AND_CANONICAL_EVIDENCE_ONLY",
+    "modelAuthority": "COMPOSER_ONLY",
+    "providerMayCreatePhiMeaning": false,
+    "providerMayCreateMethodMeaning": false,
+    "providerMayInferRealityTruth": false
+  },
+  "routing": {
+    "gatewayFlag": "PHIOS_KIR_R2_MODEL_GATEWAY_ENABLED",
+    "defaultTier": {
+      "providerId": "OPENAI_LUNA",
+      "model": "gpt-5.6-luna",
+      "reasoningEffort": "none"
+    },
+    "complexTier": {
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "model": "deepseek-v4-flash",
+      "thinking": "disabled"
+    },
+    "escalation": "ROUTE_COMPLEX_FIRST_OR_RETRY_ON_SUCCESSOR_GUARD_REJECTION"
+  },
+  "productionGate": {
+    "enabledByDefault": false,
+    "liveProviderCampaignRequired": true,
+    "campaignCaseCount": 100,
+    "minimumHumanAccepted": 85,
+    "criticalFailuresAllowed": 0,
+    "productionCutoverAllowedNow": false
+  },
+  "works": {
+    "W0": "HISTORICAL_W16R_PRESERVATION",
+    "W1": "MODEL_GATEWAY_AND_PROVIDER_ABSTRACTION",
+    "W2": "LUNA_DEFAULT_DEEPSEEK_ESCALATION_ROUTING",
+    "W3": "EVIDENCE_ONLY_COMPOSITION_CONTRACT",
+    "W4": "OUTPUT_HYGIENE_AND_INTERNAL_LANGUAGE_GUARD",
+    "W5": "GUARD_REJECTION_ESCALATION",
+    "W6": "SHADOW_PRODUCTION_BRIDGE_BEHIND_EXPLICIT_FLAG",
+    "W7": "100_CASE_LIVE_CAMPAIGN_RUNNER",
+    "W8": "100_CASE_HUMAN_REVIEW_PACK_BUILDER",
+    "W9": "MACHINE_SUCCESSOR_CHECKER",
+    "W10": "HUMAN_ACCEPTANCE_AND_CUTOVER_NOT_YET_CLAIMED"
+  }
+}

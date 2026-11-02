@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W13-W14-FINANCIAL-FACT-CONTRACT-v1.0.0",
+  "work": [
+    "FDR-W13",
+    "FDR-W14"
+  ],
+  "status": "ACTIVE_ATOMIC_FACT_ENVELOPE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "factId",
+    "factCode",
+    "value",
+    "disclosureState",
+    "evidence",
+    "effectiveDate",
+    "recordedAt"
+  ],
+  "valueRepresentations": [
+    "EXACT",
+    "APPROXIMATE",
+    "RANGE",
+    "ENUM",
+    "BOOLEAN",
+    "TEXT",
+    "REFERENCE",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "evidenceObjectRequiredFields": [
+    "evidenceType",
+    "source",
+    "verifiedAt",
+    "effectiveDate",
+    "documentReference",
+    "confidence"
+  ],
+  "references": {
+    "disclosureState": "../registries/financial-disclosure-state-registry-v1.json",
+    "evidence": "financial-fact-evidence-contract-v1.json"
+  },
+  "rules": {
+    "everyAtomicFinancialFactUsesThisEnvelope": true,
+    "evidenceTravelsWithFact": true,
+    "disclosureStateTravelsWithFact": true,
+    "declinedFactValueMayBeNull": true,
+    "unknownFactValueMayBeNull": true,
+    "notProvidedFactValueMayBeNull": true,
+    "nullMayBeCoercedToZero": false,
+    "approximateMayBeSilentlyUpgradedToExact": false,
+    "rangeMayBeSilentlyCollapsedToExact": false
+  }
+}

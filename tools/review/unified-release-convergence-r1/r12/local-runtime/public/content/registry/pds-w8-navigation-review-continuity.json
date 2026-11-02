@@ -1,0 +1,37 @@
+{
+  "id": "pds-w8-navigation-review-continuity",
+  "status": "navigation-review-continuity-aligned",
+  "baseline": {
+    "branch": "main",
+    "commit": "7c7a633549224d41ca4107bb8f384458f7322c55",
+    "prerequisite": "pds-w7-reading-experience"
+  },
+  "scope": {
+    "presentationOnly": true,
+    "navigation": ["path-comparison", "selected-state", "action-readiness", "evidence-log", "review-gate", "pause-resume"],
+    "review": ["changed", "unchanged", "unknown", "customer-next-state"],
+    "continuity": ["same-journey", "new-journey", "pause-resume"]
+  },
+  "protectedPrinciples": {
+    "nonPrescriptiveNavigation": true,
+    "understandingBeforeAction": true,
+    "explicitUserSelection": true,
+    "reviewGate": true,
+    "persistenceRecovery": true,
+    "lineage": true,
+    "legacyCompatibility": true
+  },
+  "protectedArtifacts": {
+    "functions/runtime/navigation/navigation-contract.js": "e2231c43d98222efce013945720e208865f90a14727376a2a3dbe490d5c731d5",
+    "functions/runtime/navigation/navigation-path-rules.js": "3c12f9dfef398a2bac10fcc60a8ecc8e8203a09e9801c29ee2e6b43f18f178e7",
+    "functions/runtime/navigation/reading-navigation-contract.js": "e13cbe27699a2c8ace980eab46c7ba22c379ff97d82db7e121def2726b6f3001",
+    "functions/runtime/review/review-contract.js": "221e4e49ce112091f23d228d09c3e4047dd30e38cfb92a79bdd5dac71538229c",
+    "functions/runtime/continuity/reality-continuity-contract.js": "9ec3dcb59dbdabdd3f1e47ba952f4698da484f4b54c681e767ef0696aec04c74",
+    "assets/js/modules/navigation-execution.js": "a9e047b8bac55e80a220af94aab3234b30465d2c0824b2ee377098e65b87aac1",
+    "assets/js/modules/navigation-path-selection.js": "9acc65d92930c81a6596044f7da8d03afbcf934c674f6fded3615d670232c7d4",
+    "assets/js/modules/navigation-state.js": "626791e4c64d5b2745d4836ae362d0e27b82ddfd4af00f17d6a7165b034e2edb",
+    "assets/js/review.js": "92e1da1a482deb3ca368427a5b9f10c24a33ca91d0a23f3da8d64881085a5bfe",
+    "assets/js/pages/my-reality.js": "7df7399a885e62796369cf6faf1c608ee0bd39a82d9571f5ef937238970055e5"
+  },
+  "responsiveWidths": [360, 768, 1440]
+}

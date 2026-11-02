@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-MIR-10-DEMAND-PRIORITY-CONTRACT-v1.0.0",
+  "work": "MIR-10D",
+  "status": "ACTIVE_ADVISORY_PRIORITY_ONLY",
+  "inputs": [
+    "frequency",
+    "coverageGap",
+    "gapCounts",
+    "crossSurfaceCount",
+    "followUpRate",
+    "reusable",
+    "existingPublishedCoverage"
+  ],
+  "priorityClasses": [
+    "LOW",
+    "MEDIUM",
+    "HIGH"
+  ],
+  "rules": {
+    "deterministic": true,
+    "priorityIsTruth": false,
+    "priorityAssignsProductionRole": false,
+    "priorityMutatesKppPlan": false,
+    "priorityMutatesCanonicalKnowledge": false
+  },
+  "weights": {
+    "frequencyMax": 40,
+    "gapSeverityMax": 30,
+    "crossSurfaceMax": 15,
+    "followUpMax": 15
+  },
+  "thresholds": {
+    "HIGH": 70,
+    "MEDIUM": 40
+  }
+}

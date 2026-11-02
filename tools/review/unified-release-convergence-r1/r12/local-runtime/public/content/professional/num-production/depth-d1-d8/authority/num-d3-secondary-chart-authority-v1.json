@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "PHI-OS-NUM-D3-SECONDARY-CHART-AUTHORITY-v1.0.0",
+  "workCode": "NUM-D3",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "status": "CALCULATION_CANDIDATE_MACHINE_VALIDATED_HUMAN_SEMANTIC_ADMISSION_PENDING",
+  "school": "MODERN_WESTERN_PYTHAGOREAN_PRACTITIONER_LAYER",
+  "calculations": [
+    {
+      "code": "BALANCE",
+      "formula": "reduceSingle(sum(numerologyValue(initial of each birth-name part)))",
+      "masterPreservation": false,
+      "sourceId": "NUM-D-SRC-WN-BALANCE"
+    },
+    {
+      "code": "RATIONAL_THOUGHT",
+      "formula": "reduceSingle(sum(first birth-name letters) + reduced birthday day number)",
+      "masterPreservation": false,
+      "sourceId": "NUM-D-SRC-WN-RATIONAL"
+    },
+    {
+      "code": "HIDDEN_PASSION",
+      "formula": "name-value digit(s) with maximum frequency in full birth name",
+      "tiesAllowed": true,
+      "sourceId": "NUM-D-SRC-WN-HIDDEN-PASSION"
+    },
+    {
+      "code": "KARMIC_LESSONS",
+      "formula": "digits 1..9 absent from full birth-name letter values",
+      "multipleAllowed": true,
+      "sourceId": "NUM-D-SRC-WN-KARMIC-LESSONS"
+    },
+    {
+      "code": "SUBCONSCIOUS_SELF",
+      "formula": "9 - count(Karmic Lessons)",
+      "equivalentFormula": "count(distinct represented values 1..9)",
+      "sourceId": "NUM-D-SRC-WN-SUBCONSCIOUS"
+    },
+    {
+      "code": "LIFE_PATH_EXPRESSION_BRIDGE",
+      "formula": "abs(single(Life Path) - single(Expression))",
+      "sourceId": "NUM-D-SRC-WN-BRIDGE"
+    },
+    {
+      "code": "SOUL_URGE_PERSONALITY_BRIDGE",
+      "formula": "abs(single(Soul Urge) - single(Personality))",
+      "sourceId": "NUM-D-SRC-WN-BRIDGE"
+    },
+    {
+      "code": "PLANES_OF_EXPRESSION",
+      "formula": "classify birth-name letters into Physical/Mental/Emotional/Intuitive and Grounded/Vacillating/Creative; sum and reduce each plane/group",
+      "sourceId": "NUM-D-SRC-WN-PLANES"
+    }
+  ],
+  "planes": {
+    "levels": {
+      "PHYSICAL": [
+        "D",
+        "E",
+        "M",
+        "W"
+      ],
+      "MENTAL": [
+        "A",
+        "G",
+        "H",
+        "J",
+        "L",
+        "N",
+        "P"
+      ],
+      "EMOTIONAL": [
+        "B",
+        "I",
+        "O",
+        "R",
+        "S",
+        "T",
+        "X",
+        "Z"
+      ],
+      "INTUITIVE": [
+        "C",
+        "F",
+        "K",
+        "Q",
+        "U",
+        "V",
+        "Y"
+      ]
+    },
+    "groups": {
+      "GROUNDED": [
+        "C",
+        "D",
+        "G",
+        "L",
+        "M",
+        "V"
+      ],
+      "VACILLATING": [
+        "B",
+        "F",
+        "H",
+        "J",
+        "N",
+        "P",
+        "Q",
+        "S",
+        "T",
+        "U",
+        "W",
+        "X",
+        "Y"
+      ],
+      "CREATIVE": [
+        "A",
+        "E",
+        "I",
+        "K",
+        "O",
+        "R",
+        "Z"
+      ]
+    }
+  },
+  "semanticRoleClaims": [
+    {
+      "code": "BALANCE",
+      "sourceId": "NUM-D-SRC-WN-BALANCE",
+      "en": "A situational lens for how the tradition recommends regaining steadiness during emotionally difficult conditions.",
+      "zhHans": "这一传统用于观察人在情绪扰动或困难情境中如何重新取得稳定的情境性视角。"
+    },
+    {
+      "code": "RATIONAL_THOUGHT",
+      "sourceId": "NUM-D-SRC-WN-RATIONAL",
+      "en": "A lens on problem-solving and thinking style.",
+      "zhHans": "用于观察问题处理与思考方式的视角。"
+    },
+    {
+      "code": "PLANES_OF_EXPRESSION",
+      "sourceId": "NUM-D-SRC-WN-PLANES",
+      "en": "A name-based distribution across physical, mental, emotional and intuitive planes, plus grounded/vacillating/creative groupings.",
+      "zhHans": "把姓名字母分布到身体、心智、情绪、直觉四个层面，并同时观察稳定/摇摆/创造三类分布。"
+    },
+    {
+      "code": "BRIDGE",
+      "sourceId": "NUM-D-SRC-WN-BRIDGE",
+      "en": "A structural difference between two core numbers, used to discuss how distinct roles might be brought into closer alignment.",
+      "zhHans": "两个核心数字之间的结构差值，用于讨论不同角色如何可能更协调，而不是评分。"
+    },
+    {
+      "code": "SUBCONSCIOUS_SELF",
+      "sourceId": "NUM-D-SRC-WN-SUBCONSCIOUS",
+      "en": "A name-distribution lens on coping with changing or sudden circumstances.",
+      "zhHans": "由姓名数字分布形成、用于观察面对变化或突发情境时应对方式的视角。"
+    }
+  ],
+  "boundaries": {
+    "empiricalTraitFactCreated": false,
+    "medicalInferenceAllowed": false,
+    "masterNumbersInBalanceOrRationalThought": false,
+    "bridgeIsCompatibilityScore": false,
+    "sourceMeaningRuntimeUseAllowedBeforeD8": false
+  }
+}

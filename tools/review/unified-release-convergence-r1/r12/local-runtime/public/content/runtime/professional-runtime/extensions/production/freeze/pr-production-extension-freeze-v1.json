@@ -1,0 +1,72 @@
+{
+  "freezeCode": "PHI-OS-PR-PRODUCTION-EXTENSION-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "status": "PR-PRODUCTION-EXTENSION-v1.0.0-FROZEN",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "scope": "PR-E1-E10",
+  "sourceFreezes": [
+    "content/runtime/professional-runtime/extensions/production/freeze/pr-e1-e3-production-foundation-freeze-v1.json",
+    "content/runtime/professional-runtime/extensions/production/freeze/pr-e4-e6-decision-integration-freeze-v1.json"
+  ],
+  "completedExtensions": [
+    "PR-E1",
+    "PR-E2",
+    "PR-E3",
+    "PR-E4",
+    "PR-E5",
+    "PR-E6",
+    "PR-E7",
+    "PR-E8",
+    "PR-E9",
+    "PR-E10"
+  ],
+  "productionState": "GOVERNED_PROFESSIONAL_PRODUCTION_EXTENSION_FROZEN_EXTERNAL_STORAGE_AND_PWS_EXECUTION_GATED",
+  "active": {
+    "caseVersionMaterialization": true,
+    "evidenceReferenceResolution": true,
+    "decisionMaterialization": true,
+    "revisionRereviewRuntime": true,
+    "productionSecurityRdgEnforcement": true,
+    "pwsReferenceHandoff": true,
+    "rrProfessionalApprovalHandoff": true,
+    "syntheticProductionAcceptance": true
+  },
+  "nonActivation": {
+    "liveCustomerDataActivated": false,
+    "caseStorageExecutionActive": false,
+    "pwsMutationExecutionActive": false,
+    "pwsPersistenceExecutionActive": false,
+    "rrReportAssemblyMovedToPr": false,
+    "aiProfessionalJudgmentAuthorityActivated": false,
+    "accountRoleProfessionalAuthorityActivated": false
+  },
+  "authorityClosure": {
+    "professionalJudgment": "PR_HUMAN_ATTRIBUTABLE_ONLY",
+    "professionalPermission": "PWS_ASSIGNMENT_CONSENT_CAPABILITY_CREDENTIAL_RDG",
+    "readout": "RRE",
+    "report": "RR",
+    "workspaceExecution": "PWS",
+    "storageExecution": "PWS_OR_STORAGE_EXECUTOR"
+  },
+  "finalExtensionFreeze": true,
+  "successorRule": "FUTURE_CHANGE_REQUIRES_VERSIONED_PR_PRODUCTION_SUCCESSOR",
+  "outputs": [
+    "content/runtime/professional-runtime/extensions/production/contracts/pr-decision-revision-rereview-contract-v1.json",
+    "content/runtime/professional-runtime/extensions/production/contracts/pr-production-security-rdg-enforcement-contract-v1.json",
+    "content/runtime/professional-runtime/extensions/production/contracts/pr-production-acceptance-contract-v1.json",
+    "content/runtime/professional-runtime/extensions/production/registries/pr-revision-state-registry-v1.json",
+    "content/runtime/professional-runtime/extensions/production/registries/pr-production-security-operation-registry-v1.json",
+    "content/runtime/professional-runtime/extensions/production/schemas/pr-decision-revision-cycle-v1.schema.json",
+    "content/runtime/professional-runtime/extensions/production/schemas/pr-production-security-envelope-v1.schema.json",
+    "content/runtime/professional-runtime/extensions/production/schemas/pr-production-acceptance-v1.schema.json",
+    "content/runtime/professional-runtime/extensions/production/fixtures/pr-e7-e10-production-acceptance.valid.json",
+    "content/runtime/professional-runtime/extensions/production/audits/pr-e8-production-security-rdg-audit-v1.json",
+    "content/runtime/professional-runtime/extensions/production/acceptance/pr-e7-e10-acceptance-v1.json",
+    "content/runtime/professional-runtime/extensions/production/freeze/pr-e7-e10-final-extension-preservation-manifest-v1.json",
+    "scripts/lib/professional-runtime/pr-revision-security-acceptance-v1.mjs",
+    "scripts/check-pr-e7-e10-production-final-freeze.mjs",
+    "scripts/apply-pr-e7-e10-package-scripts.mjs",
+    "docs/runtime/PR-PRODUCTION-EXTENSION-FINAL.md"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W37-CONVERSION-PILOT-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W37",
+  "baselineCommit": "52dd1e46e28389a386abda37375a7aefb6c54a5b",
+  "requiredSignals": {
+    "click": {
+      "minimumRealEvents": 1,
+      "acceptedEvidence": [
+        "REAL_CLIENT_INTERACTION"
+      ]
+    },
+    "unlock": {
+      "minimumRealEvents": 1,
+      "acceptedEvidence": [
+        "REAL_SERVER_ENTITLEMENT_TRANSITION"
+      ]
+    },
+    "purchase": {
+      "minimumRealEvents": 1,
+      "acceptedEvidence": [
+        "REAL_COMMERCE_TRANSACTION"
+      ]
+    },
+    "upgrade": {
+      "minimumRealEvents": 1,
+      "acceptedEvidence": [
+        "REAL_SERVER_ENTITLEMENT_OR_PLAN_TRANSITION"
+      ]
+    },
+    "reality_return": {
+      "minimumRealEvents": 1,
+      "acceptedEvidence": [
+        "REAL_CLIENT_HANDOFF_AND_DESTINATION_ARRIVAL"
+      ]
+    }
+  },
+  "syntheticMaySatisfyGate": false,
+  "controlledReplayMaySatisfyGate": false,
+  "historicalPaidAskPilotMaySatisfyPurchaseGate": false,
+  "reasonHistoricalPaidAskInsufficient": "Stored Paid Ask pilot explicitly records zero commerce transactions and zero upgrade conversions."
+}

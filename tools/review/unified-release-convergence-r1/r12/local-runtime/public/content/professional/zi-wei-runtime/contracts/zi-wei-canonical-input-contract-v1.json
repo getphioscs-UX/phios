@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-CANONICAL-INPUT-CONTRACT-v1.0.0",
+  "work": "ZWR-W4",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE_ADAPTER_CONTRACT_NO_CALCULATION_AUTHORITY",
+  "methodCode": "ZI_WEI_DOU_SHU",
+  "sourceObject": "CanonicalBirthInput",
+  "sourceAuthority": "content/professional/method-client-delivery/contracts/canonical-birth-input-contract-v1.json",
+  "derivedObject": "ZiWeiInputCandidate",
+  "requiredRawFields": [
+    "birthDate",
+    "birthTime",
+    "timeAccuracy",
+    "timezone",
+    "locale",
+    "inputVersion"
+  ],
+  "readiness": {
+    "birthDateRequired": true,
+    "birthTimeRequiredForNatalPalaceRuntime": true,
+    "exactTimePolicy": "W2_DEPENDENT",
+    "timezoneConsumption": "W2_DEPENDENT",
+    "coordinatesConsumedInV1Foundation": false,
+    "lunarFieldsMayBeClientEntered": false
+  },
+  "adapterRules": {
+    "preserveRawCivilDate": true,
+    "preserveRawCivilTime": true,
+    "preserveTimezoneMetadata": true,
+    "deriveLunarDateBeforeW2Freeze": false,
+    "derivePalaceBeforeW2Freeze": false,
+    "guessMissingTime": false,
+    "guessMissingTimezone": false,
+    "mutateCanonicalBirthInput": false
+  },
+  "executionCompleteness": {
+    "missingBirthDate": "INPUT_REQUIRED",
+    "missingBirthTime": "INPUT_REQUIRED",
+    "policyNotFrozen": "BLOCKED_POLICY",
+    "completeRawInputButPolicyPending": "BLOCKED_POLICY"
+  },
+  "productionAuthorityGranted": false
+}

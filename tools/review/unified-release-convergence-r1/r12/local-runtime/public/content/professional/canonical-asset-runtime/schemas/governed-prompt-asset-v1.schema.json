@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/governed-prompt-asset-v1.json",
+  "title": "governed-prompt-asset-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "promptCode",
+    "promptVersion",
+    "assetType",
+    "briefCode",
+    "nodeCode",
+    "sourceMeaningCodes",
+    "sourceKnowledgeNodes",
+    "sourceFragmentDigests",
+    "locale",
+    "visualObjective",
+    "visualMetaphor",
+    "composition",
+    "mustInclude",
+    "mustNotInclude",
+    "brandConstraints",
+    "factualBoundary",
+    "accessibilityDescription",
+    "targetAspectRatio",
+    "targetSurface",
+    "outputContract",
+    "status"
+  ],
+  "properties": {
+    "promptCode": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]+$"
+    },
+    "promptVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "assetType": {
+      "enum": [
+        "ILLUSTRATION_PROMPT",
+        "HERO_IMAGE_PROMPT",
+        "ICON_PROMPT",
+        "THUMBNAIL_PROMPT"
+      ]
+    },
+    "briefCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "sourceMeaningCodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sourceKnowledgeNodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sourceFragmentDigests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "visualObjective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visualMetaphor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "composition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mustInclude": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "mustNotInclude": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "brandConstraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "pdsReferences"
+      ],
+      "properties": {
+        "authority": {
+          "const": "PDS"
+        },
+        "pdsReferences": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "factualBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publishedOnly",
+        "newClaimsAllowed"
+      ],
+      "properties": {
+        "publishedOnly": {
+          "const": true
+        },
+        "newClaimsAllowed": {
+          "const": false
+        }
+      }
+    },
+    "accessibilityDescription": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetAspectRatio": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetSurface": {
+      "enum": [
+        "website",
+        "book",
+        "academy",
+        "social",
+        "report"
+      ]
+    },
+    "outputContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateOnly",
+        "finalMedia"
+      ],
+      "properties": {
+        "candidateOnly": {
+          "const": true
+        },
+        "finalMedia": {
+          "const": false
+        }
+      }
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "PHI-OS-TARI-INTERPRETATION-PERSPECTIVE-REGISTRY-v2.0.0",
+  "phase": "TPA-E",
+  "work": "TPA-W17",
+  "baselineCommit": "f10a0bc30526b5551ca00ffa9c674f2798d7fd7e",
+  "status": "ACTIVE_PERSPECTIVE_AVAILABILITY_SUCCESSOR_RUNTIME_REBIND_DEFERRED",
+  "registryVersion": "2.0.0",
+  "predecessor": {
+    "path": "content/interpretation/tarot/registries/tarot-interpretation-perspective-registry-v1.json",
+    "sha256": "f212304d2dcd627d01501925871f2a5bc48b58bb02704878462ae9f7048f5c46",
+    "registryVersion": "1.0.0",
+    "preserved": true
+  },
+  "allowedPerspectiveClasses": [
+    "TRADITIONAL",
+    "PSYCHOLOGICAL",
+    "REFLECTIVE",
+    "AUTHOR_SPECIFIC"
+  ],
+  "availabilityStates": [
+    "AVAILABLE",
+    "PARTIAL",
+    "NOT_INGESTED",
+    "SOURCE_RESTRICTED",
+    "UNKNOWN"
+  ],
+  "perspectives": [
+    {
+      "perspectiveId": "TAR-PERSPECTIVE-WAITE-AUTHOR-SPECIFIC",
+      "label": "Waite author-specific perspective",
+      "perspectiveClass": "AUTHOR_SPECIFIC",
+      "authorityTier": "T1",
+      "sourceIds": [
+        "TAR-SRC-WAITE-PKT-1910"
+      ],
+      "availability": "PARTIAL",
+      "sourceLocatorCardCoverage": 78,
+      "sourceLocatorUnitCount": 100,
+      "editorialRuntimeCardCoverage": 3,
+      "sourceBound": true,
+      "reflectiveLensRegistry": null,
+      "mayOverrideCanonicalCardIdentity": false,
+      "mayClaimUniversalMeaning": false,
+      "mayClaimRealityTruth": false,
+      "mayPredictOutcome": false,
+      "mayDirectDecision": false,
+      "mayDiagnose": false,
+      "availabilityNote": "78/78 source locators are governed, while the frozen predecessor editorial runtime corpus contains 3 source-bound paraphrase entries; full runtime rebind is deferred to TPA-W21."
+    },
+    {
+      "perspectiveId": "TAR-PERSPECTIVE-PHI-REFLECTIVE",
+      "label": "PHI OS reflective inquiry",
+      "perspectiveClass": "REFLECTIVE",
+      "authorityTier": "T2",
+      "sourceIds": [],
+      "availability": "AVAILABLE",
+      "availabilityAppliesTo": "REFLECTIVE_QUESTION_GENERATION_ONLY",
+      "sourceBound": false,
+      "reflectiveLensRegistry": "content/interpretation/tarot/registries/tarot-reflective-lens-registry-v1.json",
+      "cardSpecificMeaningCoverage": 0,
+      "mayOverrideCanonicalCardIdentity": false,
+      "mayClaimUniversalMeaning": false,
+      "mayClaimRealityTruth": false,
+      "mayPredictOutcome": false,
+      "mayDirectDecision": false,
+      "mayDiagnose": false,
+      "mayInferHiddenState": false
+    },
+    {
+      "perspectiveId": "TAR-PERSPECTIVE-PHI-PSYCHOLOGICAL-REFLECTIVE",
+      "label": "PHI OS non-diagnostic psychological-reflective inquiry",
+      "perspectiveClass": "PSYCHOLOGICAL",
+      "authorityTier": "T2",
+      "sourceIds": [],
+      "availability": "AVAILABLE",
+      "availabilityAppliesTo": "NON_DIAGNOSTIC_REFLECTIVE_QUESTION_GENERATION_ONLY",
+      "sourceBound": false,
+      "reflectiveLensRegistry": "content/interpretation/tarot/registries/tarot-reflective-lens-registry-v1.json",
+      "cardSpecificMeaningCoverage": 0,
+      "mayOverrideCanonicalCardIdentity": false,
+      "mayClaimUniversalMeaning": false,
+      "mayClaimRealityTruth": false,
+      "mayPredictOutcome": false,
+      "mayDirectDecision": false,
+      "mayDiagnose": false,
+      "mayInferHiddenState": false,
+      "forbiddenClaims": [
+        "MENTAL_HEALTH_DIAGNOSIS",
+        "TRAUMA_DIAGNOSIS",
+        "PERSONALITY_DISORDER",
+        "UNCONSCIOUS_CERTAINTY",
+        "THIRD_PARTY_HIDDEN_STATE_CERTAINTY"
+      ]
+    },
+    {
+      "perspectiveId": "TAR-PERSPECTIVE-TRADITIONAL-UNINGESTED",
+      "label": "Traditional perspective",
+      "perspectiveClass": "TRADITIONAL",
+      "authorityTier": null,
+      "sourceIds": [],
+      "availability": "NOT_INGESTED",
+      "sourceBound": true,
+      "reflectiveLensRegistry": null,
+      "cardSpecificMeaningCoverage": 0,
+      "mayOverrideCanonicalCardIdentity": false,
+      "mayClaimUniversalMeaning": false,
+      "mayClaimRealityTruth": false,
+      "mayPredictOutcome": false,
+      "mayDirectDecision": false,
+      "mayDiagnose": false,
+      "availabilityNote": "No governed traditional source corpus beyond the separately labeled Waite author-specific source has been admitted in this version."
+    }
+  ],
+  "displayPolicy": {
+    "availabilityMustBeShown": true,
+    "missingPerspectiveMayBeInvented": false,
+    "unavailablePerspectiveMustRemainUnavailable": true,
+    "crossSourceFusionIntoTrueMeaningAllowed": false,
+    "reflectiveAvailabilityDoesNotEqualCardMeaningCoverage": true,
+    "psychologicalLabelDoesNotGrantClinicalAuthority": true
+  },
+  "runtimeBinding": {
+    "tariRuntimeConsumerRebound": false,
+    "rebindRequiredAt": "TPA-W21"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-DEPTH-HUMAN-REVIEW-RUBRIC-v1.0.0",
+  "phase": "ICHI-DEPTH",
+  "work": "ICHI-DEPTH-W7",
+  "status": "ACTIVE_FAIL_CLOSED_448_UNIT_EDITORIAL_RUBRIC",
+  "campaign": "content/production/symbolic-method/human-review/iching-depth-human-review-campaign-v1.json",
+  "reviewAuthority": "functions/iching-product-runtime/iching-human-review-authority-v1.js",
+  "criteria": [
+    {"id": "SOURCE_REF", "critical": true, "question": "Do all stated meanings remain supportable by the displayed canonical/source witness, without invented source claims?"},
+    {"id": "SCOPE_FIDELITY", "critical": true, "question": "Does the entry stay bound to the correct hexagram and, for a line entry, the exact bottom-to-top line position?"},
+    {"id": "DISTINCTIVE_DEPTH", "critical": false, "question": "Is this interpretation meaningfully specific rather than reusable boilerplate?"},
+    {"id": "PLAIN_LANGUAGE", "critical": false, "question": "Can an ordinary reader understand the language without specialist vocabulary?"},
+    {"id": "ZH_HANS_FIDELITY", "critical": true, "question": "Is the Simplified Chinese projection clear, faithful, natural, and complete?"},
+    {"id": "EN_FIDELITY", "critical": true, "question": "Is the English projection clear, faithful, natural, and complete?"},
+    {"id": "LOCALE_EQUIVALENCE", "critical": true, "question": "Do both locale projections preserve the same authority and material meaning?"},
+    {"id": "OBSERVABLE_REALITY", "critical": true, "question": "Does the entry turn symbolism into questions that can be checked against actual evidence?"},
+    {"id": "UNCERTAINTY", "critical": true, "question": "Does the entry preserve unknowns and avoid guaranteed outcomes or dates?"},
+    {"id": "USER_AGENCY", "critical": true, "question": "Does decision authority remain explicitly with the user?"},
+    {"id": "SENSITIVE_BOUNDARY", "critical": true, "question": "Does the entry avoid diagnosis, professional judgment, harmful directives, and third-party hidden-state certainty?"},
+    {"id": "NO_DIVINATION_AUTHORITY", "critical": true, "question": "Does the entry avoid fate, command, universal true meaning, and reality-truth framing?"}
+  ],
+  "acceptanceRule": {
+    "everyCriterionExplicit": true,
+    "acceptedRequiresEveryCriticalCriterionPass": true,
+    "acceptedRequiresSourceAndLocaleFidelityPass": true,
+    "acceptedRequiresAtLeastOneScreenshot": true,
+    "candidateTextMayBeEditedOutsideReviewResult": true,
+    "rejectedEvidenceMayNotBeSilentlyFlipped": true,
+    "publicDepthReadyRequiresAccepted": 448,
+    "criticalBoundaryFailuresAllowed": 0
+  },
+  "productionBoundary": {
+    "humanReviewAloneMayActivateProduct": false,
+    "publicRunAllowed": false,
+    "productionPromotionAllowed": false
+  }
+}

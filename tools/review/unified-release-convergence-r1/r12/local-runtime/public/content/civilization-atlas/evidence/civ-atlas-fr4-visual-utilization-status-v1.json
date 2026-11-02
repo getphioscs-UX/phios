@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-CIV-ATLAS-FR4-VISUAL-UTILIZATION-STATUS-v1.0.0",
+  "recordedAt": "2026-09-28",
+  "workstepRange": "0-88",
+  "status": "READY_FOR_L6_R2_DELIVERY_AND_HUMAN_REVIEW",
+  "repositoryImplementation": {
+    "genericVisualLibraryRemoved": true,
+    "customerEngineeringCopyRemoved": true,
+    "registeredSemanticAssetsRetained": 392,
+    "semanticDeepLinkReachability": "392/392",
+    "l2TemplateContract": "ACTIVE_VERIFIED_LIVE_R2",
+    "l5TemplateContract": "ACTIVE_VERIFIED_LIVE_R2",
+    "l6TemplateContract": "ADMITTED_PENDING_LIVE_R2",
+    "l6DynamicSvg": true,
+    "l6TrajectoryMotifs": "16/16_RETAINED",
+    "worldSnapshotAtmospheres": "15/15_RETAINED",
+    "mobileSemanticReflow": true,
+    "structuredFallback": true,
+    "regressionGate": "check:civilization-atlas:fr4-visual-utilization"
+  },
+  "templateAssets": [
+    "images/figures/books/book-5/VIS-B5-ATLAS-L2-TIMELINE-TEMPLATE-BASE.webp",
+    "images/figures/books/book-5/VIS-B5-ATLAS-L5-TEMPLATE-BASE.webp",
+    "images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp"
+  ],
+  "pendingExternalActions": [
+    {
+      "action": "UPLOAD_AND_VERIFY_R2",
+      "objectKey": "images/figures/books/book-5/VIS-B5-ATLAS-L6-TRAJECTORIES-TEMPLATE-BASE.webp",
+      "reason": "This chat environment has no Cloudflare R2 write connector."
+    },
+    {
+      "action": "HUMAN_VISUAL_REVIEW",
+      "scope": [
+        "L2 desktop/mobile",
+        "L5 desktop/mobile",
+        "L6 desktop/mobile",
+        "representative L3/L4/L7/L8 states"
+      ],
+      "reason": "Owner visual acceptance must follow live rendering."
+    }
+  ],
+  "productionAdmission": {
+    "machineImplementation": "IMPLEMENTED",
+    "liveL6Template": "PENDING",
+    "humanAcceptance": "PENDING",
+    "finalProductionVisualAcceptance": "NOT_YET_GRANTED"
+  }
+}

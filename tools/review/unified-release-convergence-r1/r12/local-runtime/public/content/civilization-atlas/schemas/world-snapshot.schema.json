@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas world snapshot registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "status",
+    "snapshots"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-BOOK-V-CIV-ATLAS-SNAPSHOTS-v1.0.0"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "FROZEN"
+      ]
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/snapshot"
+      }
+    }
+  },
+  "$defs": {
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshotId",
+        "year",
+        "approximate",
+        "title",
+        "summary",
+        "majorCaseIds",
+        "regionalGroups",
+        "tradeNetworks",
+        "knowledgeNetworks",
+        "religiousNetworks",
+        "majorCities",
+        "populationEvidence",
+        "technologyContext",
+        "energyContext",
+        "transitionWindows",
+        "evidenceRefs",
+        "unknown",
+        "posterAssetRef"
+      ],
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "pattern": "^WS-(?:M[0-9]{4}|[0-9]{4})$"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "approximate": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "majorCaseIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^CA-T"
+          },
+          "uniqueItems": true
+        },
+        "regionalGroups": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "tradeNetworks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "knowledgeNetworks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "religiousNetworks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "majorCities": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "populationEvidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^EV-[A-Z0-9-]+$"
+          },
+          "uniqueItems": true
+        },
+        "technologyContext": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "energyContext": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "transitionWindows": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^TW-"
+          },
+          "uniqueItems": true
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^EV-[A-Z0-9-]+$"
+          },
+          "uniqueItems": true
+        },
+        "unknown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "UNKNOWN",
+                "CONTESTED",
+                "PARTIAL",
+                "RECONSTRUCTED",
+                "OBSERVED"
+              ]
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "note": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "zh-Hans",
+                    "en"
+                  ],
+                  "properties": {
+                    "zh-Hans": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "en": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "posterAssetRef": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^VIS-B5-ATLAS-"
+        }
+      }
+    }
+  }
+}

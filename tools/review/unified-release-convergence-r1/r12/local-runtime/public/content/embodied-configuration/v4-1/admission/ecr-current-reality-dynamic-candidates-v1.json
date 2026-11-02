@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "ECR-V4.1A-DYNAMIC-CANDIDATE-BOUNDARY-v1",
+  "status": "DEFERRED_TO_ECR_V4.2",
+  "rules": [],
+  "requiredChain": [
+    "OBSERVATION",
+    "NORMALIZED_EVIDENCE",
+    "COMPARISON_STATE",
+    "CANDIDATE_HYPOTHESIS",
+    "CONFIDENCE_AND_COUNTEREVIDENCE",
+    "HUMAN_REVIEW",
+    "ADMISSION"
+  ],
+  "forbiddenAutomaticPromotions": [
+    "tired -> RECOVERY_REQUIRED",
+    "confused -> C2_BOTTLENECK",
+    "stuck -> AGENCY_FAILURE",
+    "changed job -> IDENTITY_DRIFT",
+    "birth Driver -> current Driver Priority"
+  ],
+  "customerDynamicStateAllowed": false,
+  "successor": "ECR_V4.2",
+  "blocksV41Production": false
+}

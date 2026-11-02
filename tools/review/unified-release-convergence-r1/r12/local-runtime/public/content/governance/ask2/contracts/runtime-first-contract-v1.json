@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-ASK2-RUNTIME-FIRST-CONTRACT-v1.0.0",
+  "work": "ASK2-W0",
+  "baselineCommit": "3ccbb60485c466e145ff33da0addfd6d991ac1c8",
+  "status": "FROZEN_RUNTIME_FIRST",
+  "rule": "MODEL_MAY_COMPOSE_GOVERNED_RUNTIME_OUTPUT_BUT_MAY_NOT_CREATE_RUNTIME_FACTS",
+  "runtimeOnlyFacts": [
+    "PLANET_POSITION",
+    "HOUSE_POSITION",
+    "ASPECT",
+    "BAZI_PILLAR",
+    "LUCK_CYCLE",
+    "ZI_WEI_PALACE",
+    "ZI_WEI_DYNAMIC_DOMAIN_STATE",
+    "HDR_STRUCTURE",
+    "HDR_OPERATING_PROJECTION",
+    "NUMERIC_CYCLE"
+  ],
+  "requiredExecutionEvidence": {
+    "sourceArtifactId": true,
+    "sourceSchemaVersion": true,
+    "originAllowed": [
+      "DETERMINISTIC_RUNTIME",
+      "GOVERNED_RUNTIME",
+      "PROFESSIONAL_MANUAL_INPUT"
+    ]
+  },
+  "forbidden": [
+    "MODEL_GENERATED_CALCULATION",
+    "MODEL_RECONSTRUCTED_PLANET_POSITION",
+    "MODEL_RECONSTRUCTED_BAZI_PILLAR",
+    "MODEL_RECONSTRUCTED_ZI_WEI_PALACE",
+    "MODEL_RECONSTRUCTED_HDR_STRUCTURE",
+    "MODEL_RECONSTRUCTED_NUMERIC_CYCLE",
+    "SILENT_RUNTIME_FALLBACK",
+    "NATAL_IMPERSONATES_DYNAMIC",
+    "UNAVAILABLE_CAPABILITY_IMPERSONATED_BY_AVAILABLE_CAPABILITY"
+  ],
+  "invariants": {
+    "runtimeFirst": true,
+    "noMethodVoting": true,
+    "noCrossMethodMutation": true,
+    "realityEvidenceFinalAuthority": true,
+    "currentExternalEvidenceImmutable": true
+  }
+}

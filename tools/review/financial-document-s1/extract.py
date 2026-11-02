@@ -14,6 +14,9 @@ try:
     for line in text.splitlines():
      m=re.fullmatch(r'(\d{4}-Q[1-4]) \| (\w+) \| (-?\d+\.\d{2}) \| ([A-Z]{3})',line)
      if m:out.append({'period':m[1],'field':m[2],'rawValue':m[3],'currency':m[4],'sourceLocation':{'page':i+1,'text':line}})
+     elif 'PHI OS · Synthetic source package' in text and 'S1.1 · MYR' in text and 'Presentation revision 2' in text:
+      v=re.fullmatch(r'(\d{4}-Q[1-4])\s+([A-Za-z][A-Za-z0-9]*)\s+(-?(?:\d{1,3}(?:,\d{3})+|\d+)\.\d{2})',line)
+      if v:out.append({'period':v[1],'field':v[2],'rawValue':v[3],'decimalValue':v[3].replace(',',''),'currency':'MYR','sourceLocation':{'page':i+1,'text':line},'templateVersion':'S1.1-SOURCE-VIEW-2'})
   if not out:raise ValueError('TEXT_TEMPLATE_NOT_RECOGNIZED_MANUAL_REVIEW_REQUIRED')
  elif kind=='xlsx':
   z=zipfile.ZipFile(io.BytesIO(b));items=z.infolist()

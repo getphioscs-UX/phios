@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-RULESET-CANDIDATE-v2.0.0",
+  "work": "BAZI-FP-W6",
+  "rulesetId": "BAZI-W6-DI-TIAN-SUI-TI-YONG-RULESET-v2-CANDIDATE",
+  "status": "DRAFT_SOURCE_CLAIMS_PENDING_HUMAN_ADMISSION",
+  "active": false,
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "predecessor": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-ti-yong-ruleset-v1.json",
+  "claimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.json",
+  "conditionalDirections": [
+    {
+      "when": "MONTH_COMMAND_CAI_GUAN_SHI_EXCESS_ESTABLISHED",
+      "candidateFactorClasses": [
+        "RESOURCE",
+        "PEER"
+      ],
+      "claimRef": "BZR-CLM-DTS-TIYONG-CAIGUANSHI-TO-YINBI-024"
+    },
+    {
+      "when": "MONTH_COMMAND_YIN_BI_EXCESS_ESTABLISHED",
+      "candidateFactorClasses": [
+        "OUTPUT",
+        "WEALTH",
+        "OFFICER"
+      ],
+      "claimRef": "BZR-CLM-DTS-TIYONG-YINBI-TO-XIEKE-025"
+    }
+  ],
+  "priorityPolicy": {
+    "claimRef": "BZR-CLM-DTS-TIYONG-PRIORITY-026",
+    "allowMultiple": true,
+    "qualitativePriorityLabels": [
+      "PRIMARY",
+      "SECONDARY",
+      "TERTIARY"
+    ],
+    "numericScoreForbidden": true
+  },
+  "blockingGap": "W2_CURRENTLY_HAS_NO_SOURCE_ADMITTED_EXCESS_OR_STRONG_WEAK_VERDICT; CONDITIONAL_DIRECTIONS_CANNOT_ACTIVATE YET",
+  "humanAdmissionRequired": true
+}

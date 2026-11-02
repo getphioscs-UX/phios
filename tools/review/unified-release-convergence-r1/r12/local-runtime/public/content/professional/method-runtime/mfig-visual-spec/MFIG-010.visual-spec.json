@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-010",
+  "title": "METHOD-LIFECYCLE",
+  "scope": "SHARED",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/method-runtime-lifecycle.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "STATE_DRAFT",
+      "displayLabel": "DRAFT",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "STATE_EXPERIMENTAL",
+      "displayLabel": "EXPERIMENTAL",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "STATE_INTERNAL",
+      "displayLabel": "INTERNAL",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "STATE_PILOT",
+      "displayLabel": "PILOT",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "STATE_PRODUCTION",
+      "displayLabel": "PRODUCTION",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "STATE_DEPRECATED",
+      "displayLabel": "DEPRECATED",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "STATE_ARCHIVED",
+      "displayLabel": "ARCHIVED",
+      "nodeType": "STATE",
+      "authorityClass": "LIFECYCLE",
+      "semanticRole": "LIFECYCLE",
+      "container": "METHOD_LIFECYCLE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-010-E01",
+      "from": "STATE_DRAFT",
+      "to": "STATE_EXPERIMENTAL",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-010-E02",
+      "from": "STATE_EXPERIMENTAL",
+      "to": "STATE_INTERNAL",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-010-E03",
+      "from": "STATE_INTERNAL",
+      "to": "STATE_PILOT",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-010-E04",
+      "from": "STATE_PILOT",
+      "to": "STATE_PRODUCTION",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-010-E05",
+      "from": "STATE_PRODUCTION",
+      "to": "STATE_DEPRECATED",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-010-E06",
+      "from": "STATE_DEPRECATED",
+      "to": "STATE_ARCHIVED",
+      "relation": "TRANSITIONS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_LIFECYCLE",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "STATE_DRAFT",
+        "STATE_EXPERIMENTAL",
+        "STATE_INTERNAL",
+        "STATE_PILOT",
+        "STATE_PRODUCTION",
+        "STATE_DEPRECATED",
+        "STATE_ARCHIVED"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "STATE_DRAFT",
+    "STATE_EXPERIMENTAL",
+    "STATE_INTERNAL",
+    "STATE_PILOT",
+    "STATE_PRODUCTION",
+    "STATE_DEPRECATED",
+    "STATE_ARCHIVED"
+  ],
+  "mustState": [
+    "Every Method follows one governed lifecycle",
+    "Lifecycle state does not grant interpretation or meaning authority"
+  ],
+  "statementSources": {
+    "Every Method follows one governed lifecycle": "SRC-002",
+    "Lifecycle state does not grant interpretation or meaning authority": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

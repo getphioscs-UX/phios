@@ -1,0 +1,65 @@
+{
+  "auditCode": "PHI-OS-RNE-W5-W9-AUTHORITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "works": [
+    "RNE-W5",
+    "RNE-W6",
+    "RNE-W7",
+    "RNE-W8",
+    "RNE-W9"
+  ],
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "reconciled_validation_only_decision_support",
+  "foundationDependency": {
+    "requiredWork": "RNE-W0-W4",
+    "approvedFoundationPackageSha256": "f654400e3b8cfe7879682b6a1b5eb2eff1e1c4c82fd18cbbeb7361c54df01fc7",
+    "baselineMainContainsFoundationFiles": false,
+    "deliveryIncludesApprovedFoundationByteForByte": true,
+    "foundationSemanticChangesByThisBatch": false
+  },
+  "authorityDecision": {
+    "rmoRealityTruthAndConstraintAuthorityPreserved": true,
+    "rreReadoutAndRecoveryAuthorityPreserved": true,
+    "rneRiskProbabilityAuthorityGranted": false,
+    "rneProfessionalJudgmentAuthorityGranted": false,
+    "rneOptionSelectionAuthorityGranted": false,
+    "rneExecutionAuthorityGranted": false,
+    "scenarioPredictionAuthorityGranted": false,
+    "jrStageMutationAuthorityGranted": false,
+    "jrIntegrationActivated": false,
+    "jrIntegrationDeferredTo": "RNE-W10",
+    "rdgRegistryMutationByThisBatch": false,
+    "persistentStoreActivated": false
+  },
+  "inspectedAuthorities": [
+    {
+      "reference": "content/runtime/reality-model-runtime/contracts/unknown-runtime-contract-v1.json",
+      "runtime": "RMO"
+    },
+    {
+      "reference": "content/runtime/reality-model-runtime/contracts/action-runtime-contract-v1.json",
+      "runtime": "RMO"
+    },
+    {
+      "reference": "content/runtime/reality-model-runtime/contracts/outcome-runtime-contract-v1.json",
+      "runtime": "RMO"
+    },
+    {
+      "reference": "content/runtime/reality-model-runtime/contracts/reality-diff-contract-v1.json",
+      "runtime": "RMO"
+    },
+    {
+      "reference": "content/runtime/reality-readout-engine/contracts/recovery-reading-contract-v1.json",
+      "runtime": "RRE"
+    },
+    {
+      "reference": "content/runtime/journey-runtime/contracts/rne-integration-contract-v1.json",
+      "runtime": "JR"
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "runtime": "RDG"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposalCode",
+    "sourceDriftCode",
+    "affectedNodes",
+    "proposedChangeTypes",
+    "reason",
+    "status",
+    "authorityMode"
+  ],
+  "properties": {
+    "proposalCode": {
+      "type": "string"
+    },
+    "sourceDriftCode": {
+      "type": "string"
+    },
+    "affectedNodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^KN-"
+      }
+    },
+    "proposedChangeTypes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "node_metadata_review",
+          "boundary_review",
+          "mechanism_review",
+          "terminology_review",
+          "ownership_review",
+          "relationship_review"
+        ]
+      }
+    },
+    "reason": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "human_review_required",
+        "accepted",
+        "rejected",
+        "deferred"
+      ]
+    },
+    "authorityMode": {
+      "const": "proposal_only"
+    }
+  }
+}

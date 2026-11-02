@@ -1,0 +1,30 @@
+{
+  "auditCode": "PHI-OS-RDG-W30-FULL-ACCEPTANCE-v1",
+  "auditVersion": "1.0.0",
+  "work": "RDG-W30",
+  "status": "accepted",
+  "baselineCommit": "ab07f77f1e389b7a99499b8f242751cc64ecc1ad",
+  "acceptanceGates": [
+    {"gateCode": "SINGLE_DATA_GOVERNANCE_AUTHORITY", "status": "PASS", "evidenceReferences": ["content/governance/operational-architecture/runtime-authority-map-v1.json", "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"]},
+    {"gateCode": "PERSISTENT_DATA_HAS_PURPOSE", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json", "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json"]},
+    {"gateCode": "SENSITIVITY_CLASSIFIED", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/canonical-data-sensitivity-registry-v1.json"]},
+    {"gateCode": "CONSENT_RETENTION_DELETION_VALID", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json", "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json", "content/governance/reality-data-governance/contracts/deletion-tombstone-runtime-v1.json"]},
+    {"gateCode": "PROFESSIONAL_AND_MEMORY_BOUNDARIES", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/contracts/professional-data-isolation-v1.json", "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json"]},
+    {"gateCode": "EVIDENCE_AND_INFERENCE_CONTROLLED", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/contracts/evidence-promotion-runtime-v1.json", "content/governance/reality-data-governance/contracts/sensitive-inference-firewall-v1.json"]},
+    {"gateCode": "UNKNOWN_AND_DISPUTED_REPRESENTABLE", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/canonical-data-certainty-registry-v1.json", "content/governance/reality-data-governance/contracts/unknown-disputed-runtime-v1.json"]},
+    {"gateCode": "ANALYTICS_NOT_TRUTH", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/contracts/product-analytics-boundary-v1.json", "content/governance/reality-data-governance/registries/data-event-layer-registry-v1.json"]},
+    {"gateCode": "ALR_SCORE_NOT_CAPABILITY", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json", "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json"]},
+    {"gateCode": "TELEMETRY_NOT_RUNTIME_STATE", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/data-event-layer-registry-v1.json"]},
+    {"gateCode": "CROSS_RUNTIME_WRITE_AUTHORITY_VALID", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json"]},
+    {"gateCode": "LINEAGE_REQUIRED", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/contracts/canonical-data-object-contract-v1.json", "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json"]},
+    {"gateCode": "NO_SILENT_PURPOSE_EXPANSION", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/contracts/data-drift-control-v1.json"]},
+    {"gateCode": "CHECKER_AND_CI_INTEGRATED", "status": "PASS", "evidenceReferences": ["content/governance/reality-data-governance/registries/rdg-checker-alias-registry-v1.json", "content/governance/reality-data-governance/audits/rdg-data-drift-reconciliation-v1.json"]}
+  ],
+  "secondDataAuthorityCreated": false,
+  "userDataWarehouseCreated": false,
+  "existingRuntimeOrUserDataMutated": false,
+  "liveAnalyticsCollectionActivated": false,
+  "liveResearchDatasetActivated": false,
+  "alrRuntimeImplemented": false,
+  "acceptanceDecision": "ACCEPTED_FOR_FREEZE"
+}

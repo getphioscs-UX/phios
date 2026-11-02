@@ -1,0 +1,12 @@
+{
+  "schemaVersion":"PHI-OS-KAP-W3-W18-CLIENT-ANSWER-LEVEL-SUCCESSOR-v1.0.0",
+  "status":"ACTIVE_VERSIONED_SUCCESSOR",
+  "baselineCommit":"fb8101fe74db0fb66432e06d0aa003c4c2e43b2c",
+  "predecessor":"content/knowledge/answer-projection/registries/kap-w3-client-answer-level-registry-v1.json",
+  "levels":[
+    {"level":1,"code":"ASK_PHIOS","implementationState":"PRODUCTION_INDEPENDENT_DETERMINISTIC","createsPersistentCase":false,"requiresRealityModel":false},
+    {"level":2,"code":"GUIDED_READING","implementationState":"PRODUCTION_LIMITED_CONTEXT_ACTIVE","createsPersistentCase":false,"requiresRealityModel":false,"optionalMethodInput":"MCD8_ACCEPTED_CANONICAL_METHOD_PROJECTION_ONLY"},
+    {"level":3,"code":"REALITY_JOURNEY","implementationState":"REFERENCE_ONLY_UNLESS_KAP_W22_REALITY_MODEL_REQUIRED","createsPersistentCase":true,"requiresRealityModel":true,"requiresExplicitEscalationConsent":true}
+  ],
+  "invariants":{"askPhiosStillIndependentlyDeliverable":true,"guidedReadingDoesNotAutoCreateCase":true,"personalRuntimeRemainsOrthogonal":true,"methodExecutionNotOwnedByKap":true}
+}

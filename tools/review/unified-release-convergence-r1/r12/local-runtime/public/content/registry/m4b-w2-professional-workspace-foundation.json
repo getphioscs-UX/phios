@@ -1,0 +1,101 @@
+{
+  "id": "phi-os.m4b-w2-professional-workspace-foundation",
+  "version": "1.0.0",
+  "milestone": "M4B-W2A",
+  "status": "contract-ready-ui-and-persistence-pending",
+  "baseline": {
+    "branch": "main",
+    "commit": "5441a4fc29d894e3e470319a53bc1954c4a35765"
+  },
+  "contracts": {
+    "workspace": "phi-os.professional-workspace.v1",
+    "clientIndex": "phi-os.professional-client-index.v1",
+    "task": "phi-os.professional-task.v1",
+    "source": "phi-os.professional-source.v1"
+  },
+  "workspaceStatuses": [
+    "awaiting_consent",
+    "awaiting_materials",
+    "ready_for_review",
+    "in_professional_review",
+    "client_clarification_required",
+    "report_draft",
+    "delivered",
+    "revision_requested",
+    "follow_up_due",
+    "completed",
+    "access_revoked"
+  ],
+  "clientFilters": [
+    "runtime_reading",
+    "human_design",
+    "consultation",
+    "navigation_follow_up",
+    "integrated_review",
+    "awaiting_consent",
+    "awaiting_chart",
+    "awaiting_professional_review"
+  ],
+  "taskTypes": [
+    "new_runtime_reading",
+    "human_design_intake_received",
+    "chart_awaiting_review",
+    "report_draft_ready",
+    "consultation_required",
+    "client_clarification_required",
+    "revision_requested",
+    "follow_up_due"
+  ],
+  "sourceLabels": {
+    "user_provided": {
+      "en": "User Provided",
+      "zh-Hans": "用户提供"
+    },
+    "system_extracted": {
+      "en": "System Extracted",
+      "zh-Hans": "系统提取"
+    },
+    "rule_inference": {
+      "en": "Rule Inference",
+      "zh-Hans": "规则推断"
+    },
+    "workers_ai_interpretation": {
+      "en": "Workers AI Interpretation",
+      "zh-Hans": "Workers AI 解释"
+    },
+    "professional_observation": {
+      "en": "Professional Observation",
+      "zh-Hans": "专业观察"
+    },
+    "external_reader_interpretation": {
+      "en": "External Reader Interpretation",
+      "zh-Hans": "外部解释系统观点"
+    }
+  },
+  "externalReaders": [
+    "human_design",
+    "astrology",
+    "bazi",
+    "zi_wei",
+    "i_ching",
+    "tarot",
+    "other_professional_system"
+  ],
+  "boundaries": {
+    "validConsentRequiredBeforeAccess": true,
+    "workspaceMayExistBeforeConsent": true,
+    "preConsentCapabilitiesEnabled": false,
+    "externalReaderBecomesRuntimeEvidence": false,
+    "professionalObservationBecomesObservedEvidence": false,
+    "automaticRecommendationEnabled": false,
+    "regulatedAdviceEnabled": false,
+    "sensitiveDataEmbeddedInClientIndex": false,
+    "workspacePersistenceEnabled": false,
+    "d1SchemaChanged": false,
+    "runtimeContractChanged": false,
+    "readingContractChanged": false,
+    "navigationContractChanged": false,
+    "reviewContractChanged": false
+  },
+  "nextWorkPackage": "M4B-W2B Client List, Runtime View, Notes and Review Queue"
+}

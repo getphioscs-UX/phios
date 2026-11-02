@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-NUM-R11-CANONICAL-NUMEROLOGY-IDENTITY-INPUT-v1.0.0",
+  "title": "CanonicalNumerologyIdentityInput",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "fullBirthName",
+    "customerConfirmed",
+    "alphabetSystemId",
+    "nameNormalizationPolicy"
+  ],
+  "properties": {
+    "fullBirthName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "customerConfirmed": {
+      "const": true
+    },
+    "alphabetSystemId": {
+      "const": "PYTHAGOREAN_LATIN_1_9_V1"
+    },
+    "nameNormalizationPolicy": {
+      "const": "ASCII_LATIN_LETTERS_ONLY_V1"
+    },
+    "sourceLocale": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 500
+    }
+  }
+}

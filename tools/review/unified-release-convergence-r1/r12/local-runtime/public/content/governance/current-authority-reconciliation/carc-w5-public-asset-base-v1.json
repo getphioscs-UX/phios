@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W5-PUBLIC-ASSET-BASE-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W5",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "RECONCILED_LAYERED_ASSET_OWNERSHIP",
+  "layers": [
+    {
+      "layer": "CANONICAL_ASSET_IDENTITY",
+      "owner": "CAR_CANONICAL_ASSET_RUNTIME",
+      "path": "content/professional/canonical-asset-runtime/contracts/canonical-asset-contract-v1.json",
+      "sha256": "f2de620f429ad9d9b0d019d580ad5a3fe4f2c33bc792257b31a258e9c934c366"
+    },
+    {
+      "layer": "PUBLISHED_ASSET_PRODUCTION_ACTIVATION",
+      "owner": "CAR_PRODUCTION_ACTIVATION",
+      "path": "content/production/car/registries/published-asset-production-registry-v1.json",
+      "sha256": "a359c807e5b53858757861446e9aaee65927dd5aad0eedfdeb066ae3d55f311d"
+    },
+    {
+      "layer": "PUBLIC_DELIVERY_REGISTRY",
+      "owner": "PUBLIC_ASSET_REGISTRY",
+      "path": "content/registry/public-assets.json",
+      "sha256": "4b3a01e259b4df39a45d56d1f9d0d9162fa9d7d8d31a59ab2488670a471a4d13"
+    },
+    {
+      "layer": "CLIENT_VISUAL_PRESENTATION",
+      "owner": "CLIENT_VISUAL_PRESENTATION_SUCCESSOR",
+      "path": "content/web-production/registries/client-visual-asset-registry-v1.6.json",
+      "sha256": "3b71043455c261db69244a94efbe0f3012152ec2fef8c5f286d1414da23644d1",
+      "createsSecondAssetAuthority": false
+    },
+    {
+      "layer": "R2_PUBLIC_DELIVERY",
+      "owner": "WPR_PUBLIC_DELIVERY",
+      "path": "content/web-production/production/wpr-r2-public-delivery-v1.json",
+      "sha256": "5a26866e09bbe83557399670159792683b4dfc23584061c9e346e1adc23732bd"
+    },
+    {
+      "layer": "R2_PRIVATE_MANUSCRIPT_CORPUS",
+      "owner": "KSAR_PRIVATE_SOURCE_ACCESS",
+      "path": "content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json",
+      "sha256": "49f6c9443a3ac00b39ade7449dea7f24156c1050c800a13df489d65c3cfe38fc"
+    }
+  ],
+  "publicRegistry": {
+    "assetCount": 149,
+    "categoryCounts": {
+      "book-cover": 5,
+      "book-preview": 2,
+      "thesis": 1,
+      "book-figures": 1,
+      "figure": 57,
+      "hero": 23,
+      "icon": 43,
+      "logo": 12,
+      "branding": 5
+    },
+    "bucket": "phios-public-assets",
+    "publicBaseUrl": null,
+    "publicDomainStatus": "partial-remote-verification"
+  },
+  "requiredAssetClasses": {
+    "hero": {
+      "count": 23,
+      "ownerLayer": "PUBLIC_DELIVERY_REGISTRY"
+    },
+    "figure": {
+      "count": 57,
+      "ownerLayer": "PUBLIC_DELIVERY_REGISTRY"
+    },
+    "icon": {
+      "count": 43,
+      "ownerLayer": "PUBLIC_DELIVERY_REGISTRY"
+    },
+    "bookCover": {
+      "count": 5,
+      "ownerLayer": "PUBLIC_DELIVERY_REGISTRY"
+    },
+    "localeAsset": {
+      "ownerLayer": "LOCALE_RUNTIME_RESOURCE_TREE",
+      "paths": [
+        "assets/js/locales/en",
+        "assets/js/locales/zh-Hans"
+      ],
+      "exists": [
+        true,
+        true
+      ]
+    },
+    "r2Public": {
+      "ownerLayer": "WPR_PUBLIC_DELIVERY",
+      "bucket": "phios-public-assets",
+      "productionDeliveryActivated": false
+    },
+    "r2Private": {
+      "ownerLayer": "KSAR_PRIVATE_SOURCE_ACCESS",
+      "bucket": "phios-private-manuscripts",
+      "recordCount": 2
+    }
+  },
+  "proof": {
+    "clientVisualCreatesSecondAssetResolver": false,
+    "clientVisualCreatesPublicationAuthority": false,
+    "duplicateCurrentOwnerPerLayer": false,
+    "canonicalAssetAuthorityDistinctFromPublicationAndDelivery": true
+  },
+  "rules": {
+    "oneOwnerPerLifecycleLayer": true,
+    "presentationRegistryIsNotAssetAuthority": true,
+    "privateR2IsNotPublicAssetProjection": true
+  }
+}

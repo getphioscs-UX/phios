@@ -1,0 +1,63 @@
+/* Method skin over PHI-OS-REPORT-PRINT-SHELL-V2. No physical shell owner here. */
+.num-publication{--num-cream:#fbf7ee;--num-navy:#152f4c;--num-gold:var(--cx-color-accent,#b18a47);--num-teal:var(--pvp-method-numerology,#235b64);--report-shell-line:#c9b989;color:var(--num-navy);font-family:ReportCJK,Arial,sans-serif;background:var(--num-cream)}
+.num-publication .num-publication-page{display:flex;flex-direction:column;background:var(--num-cream)}
+.num-publication .pub-heading h1{font:normal 22pt/1.15 Georgia,ReportCJK,serif;margin:2mm 0 1mm;color:var(--num-navy)}
+.num-publication .num-subtitle{font:11.5pt/1.2 Georgia,ReportCJK,serif;margin:0}
+.num-publication .num-section-heading{font-size:7.5pt;letter-spacing:.14em;color:#805a2b;margin:0}
+.num-publication .pub-header{font-size:8pt;align-items:center}.num-publication .pub-header small{font-size:7.5pt}
+.num-publication .num-brand{font:16pt Georgia,serif;letter-spacing:.12em}.num-publication .num-brand b{font-weight:normal;color:#805a2b}
+.num-publication .num-page-content{display:grid;gap:4mm;min-height:0;flex-shrink:0}.num-publication .num-diagram-frame{padding:3mm 0;margin:0;border-block:1px solid #c9b989}
+.num-publication .num-diagram-frame svg{display:block;width:100%;height:auto}.num-publication figcaption{font-size:8.5pt;line-height:1.35;margin:2mm 0 0;color:#536774}
+.num-publication .num-interpretation-panels{display:grid;gap:5mm}.num-publication [data-language-count="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.num-publication .num-interpretation h2{font:10pt Georgia,ReportCJK,serif;margin:0 0 2mm;color:#805a2b}.num-publication .num-interpretation p{font-size:10pt;line-height:1.45;margin:0 0 2.5mm;overflow-wrap:break-word;word-break:normal}
+.num-publication .num-text-lead{border-left:2px solid #b18a47;padding-left:3mm}.num-publication .pub-footer{font-size:7.5pt;padding-top:2mm;line-height:1.3}
+.num-publication .num-family-L1 .num-diagram-frame{background:linear-gradient(90deg,transparent,#f5edde,transparent)}
+.num-publication .num-family-L2 .num-diagram-frame{padding-inline:1mm;border-top:3px double #c9b989}
+.num-publication .num-family-L3 .num-page-content{grid-template-columns:1fr}.num-publication .num-family-L3 .num-interpretation-panels{border-inline-start:1px solid #c9b989;padding-inline-start:3mm}
+.num-publication .num-family-L4 .num-diagram-frame{border:1px solid #c9b989;padding:3mm;border-radius:50% 50% 0 0 / 4mm 4mm 0 0}
+.num-publication .num-family-L5 .num-diagram-frame{background:#fffdf5;border-bottom:3px double #c9b989}
+.num-publication[data-locale="bilingual"] .num-interpretation p{font-size:9.5pt;line-height:1.28;margin-bottom:1.3mm}
+.pub-report.num-publication[data-locale="bilingual"] .num-publication-page{padding:15mm 15mm 14mm!important;gap:2.5mm!important}
+.num-publication[data-locale="bilingual"] .num-page-content{gap:2.5mm}
+.num-publication[data-locale="bilingual"] .pub-header{padding-bottom:2mm}
+.num-publication .num-family-L5 .num-interpretation-panels{column-gap:8mm}
+@media screen{body{background:#e9e4d8}.num-publication .sheet{margin:0 auto 10mm;box-shadow:0 2px 16px #152f4c22}}
+
+/* Suppress legacy R20 footer-span sizing; inherit the method's 7.5pt target. */
+.num-publication .pub-footer span{font-size:inherit}
+
+/* R2.9: the artwork belongs to the canonical BODY layer, not an opaque skin. */
+.num-publication:is([data-edition="R29"],[data-edition="R30"]),.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-publication-page{background:transparent!important}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-header,.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-heading{background:rgba(255,253,246,.88);padding-inline:2mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation{background:rgba(255,253,246,.90);padding:2mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-diagram-frame{background:rgba(255,253,246,.82)}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-footer{background:rgba(255,253,246,.88)}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-footer span{font-size:7.5pt!important}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation p{font-size:11.5pt;line-height:1.40;margin-bottom:2.3mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation h2{font-size:13pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .pub-heading h1{font-size:24pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation p{font-size:10pt;line-height:1.28;margin-bottom:1.3mm}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation h2{font-size:10.5pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .pub-heading h1{font-size:21pt}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation{padding:1mm}
+
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) svg .note{font-size:14px}
+
+/* R29 measured-density refinement: fixed locale typography, never fit-to-page. */
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation p{font-size:12pt;line-height:1.5}
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] .num-interpretation p{font-size:10.5pt;line-height:1.34}
+.num-publication:is([data-edition="R29"],[data-edition="R30"]) .num-interpretation .num-text-body:last-child{border-top:1px solid rgba(177,138,71,.35);padding-top:2mm}
+
+.num-publication:is([data-edition="R29"],[data-edition="R30"])[data-locale="bilingual"] [data-page-id="P10"] .num-interpretation .num-text-body:last-child{padding-top:.5mm}
+
+/* R30: four-page proof only. Same body fonts; no fit-to-page routine. */
+.num-publication[data-edition="R30"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]){gap:1.5mm!important}
+.num-publication[data-edition="R30"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-diagram-frame{padding:1.5mm}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation p{line-height:1.28;margin-bottom:1mm}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation{padding:.5mm}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation h2{margin:0 0 1mm;line-height:1.1}
+.num-publication[data-edition="R30"][data-locale="bilingual"] [data-page-id]:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"]) .num-interpretation h2{display:none}
+
+/* Approved pilot rollout: the four accepted pages retain their exact rules. */
+.num-publication[data-publication-scope="FULL19"][data-locale="bilingual"] .num-publication-page:not(:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"])) .num-interpretation h2{display:none}
+.num-publication[data-publication-scope="FULL19"][data-locale="bilingual"] .num-publication-page:not(:is([data-page-id="P10"],[data-page-id="P12"],[data-page-id="P19"],[data-page-id="P20"])) .num-interpretation p{line-height:1.28;margin-bottom:1mm}

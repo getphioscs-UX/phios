@@ -1,0 +1,94 @@
+{
+  "auditCode": "PHI-OS-ALR-W5-W9-CAPABILITY-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "ALR-W5-W9",
+  "status": "reconciled",
+  "baselineCommit": "c1ded91129cea2e9406f49c5066fdf041df0c1eb",
+  "canonicalPhase": "PHASE ALR v2｜Academy Learning & Capability Runtime",
+  "canonicalWork": [
+    {"workCode": "ALR-W5", "title": "Capability Registry"},
+    {"workCode": "ALR-W6", "title": "Capability Dependency Graph"},
+    {"workCode": "ALR-W7", "title": "Capability Evidence Contract"},
+    {"workCode": "ALR-W8", "title": "Capability State"},
+    {"workCode": "ALR-W9", "title": "Capability Gap"}
+  ],
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "finding": "ALR-W5 through ALR-W9 are canonical planned runtime work and ALR-W10 remains the next work boundary."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json",
+      "sha256": "d47989ba38dd8df058387d4444e9e5752950bdbef5eaa3ec368aaf817c59b13d",
+      "finding": "ALR owns Learning Capability semantics but not Knowledge, Asset, Presentation, RDG, Professional Judgment, Credential or Entitlement authority."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/freeze/alr-w0-w4-foundation-freeze-v1.json",
+      "sha256": "145e134a9ee1b40d0b605f5a1da1b8caa8f86ef6c5bacbe6318f35c872f768ec",
+      "finding": "The W0-W4 foundation is frozen and names ALR-W5 Capability Registry as the next work."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/academy-level-registry-v1.json",
+      "sha256": "0f25891ed69901b0848af515277a9d3b72f27825d8385207137e90c94ece52d0",
+      "finding": "Academy Level is classification context and remains distinct from Capability State."
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-track-registry-v1.json",
+      "sha256": "04bdb8df21f5e86a154e54ce2dc97bdff692ccd193fe2fb0411d35e8b73ba490",
+      "finding": "Learning Track class remains distinct from a registered Learning Capability."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+      "sha256": "015fd9cc8265ccc3bc7c61254b6c70b2ca680c40979f4c35b6a0f77b2b92aac2",
+      "finding": "RDG governs Learning Data and forbids Learning records from setting Capability State."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json",
+      "sha256": "2d6d00c17237f10c2a79fa19ab20b13fb97499796fbf2ad408c6a722a47c5243",
+      "finding": "RDG governs Capability Evidence eligibility while ALR owns final semantic Capability decisions."
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/contracts/car-alr-cpr-authority-reconciliation-v1.json",
+      "sha256": "3f8ce8787728a2cec005289223a201c18421626ff9a6dbcb6748cab06497f662",
+      "finding": "CAR asset briefs cannot score Assessment, promote Capability or transfer asset authority into ALR."
+    },
+    {
+      "reference": "functions/pws/registry/capability-credential-registry.js",
+      "sha256": "e1e297f3166391d474e5c228942af62f76e7b995b6a595086b9716820b2386d3",
+      "finding": "PWS Professional Capability and Credential definitions remain a separate namespace and authority."
+    }
+  ],
+  "baselineFindings": {
+    "alrFoundationFrozen": true,
+    "alrCapabilityRegistryPresent": false,
+    "alrCapabilityDependencyGraphPresent": false,
+    "alrCapabilityEvidenceSemanticContractPresent": false,
+    "alrCapabilityStateSemanticsPresent": false,
+    "alrCapabilityGapSemanticsPresent": false,
+    "rdgAlrDataContractActivationState": "RESERVED_NOT_IMPLEMENTED",
+    "persistentCapabilityStateRuntimeActive": false,
+    "pwsProfessionalCapabilityIsAlrLearningCapability": false
+  },
+  "implementationDecision": {
+    "capabilityDefinitionsMayBeRegistered": true,
+    "acyclicDependenciesMayBeRegistered": true,
+    "rdgEligibleEvidenceMayBeSemanticallyEvaluated": true,
+    "capabilityTransitionsMayBeEvaluatedWithoutMutation": true,
+    "capabilityGapsMayBeDeterministicallyIdentified": true,
+    "learnerDataMayBePersisted": false,
+    "capabilityStateMayBePersisted": false,
+    "learningRecommendationMayBeGenerated": false,
+    "credentialOrEntitlementMayBeGranted": false,
+    "professionalReadinessMayBeDetermined": false,
+    "programModuleLessonOrAssessmentMayBeCreated": false
+  },
+  "preservation": {
+    "w0W4FreezeMutated": false,
+    "carReconciliationMutated": false,
+    "rdgContractsOrRegistriesMutated": false,
+    "pwsCapabilityCredentialRegistryMutated": false,
+    "academySurfaceModified": false,
+    "existingRuntimeOrUserDataMutated": false
+  }
+}

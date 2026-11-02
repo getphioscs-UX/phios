@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-WPR-PF-PRODUCTION-ASSURANCE-CONTRACT-v1.0.0",
+  "phase": "WPR-PF",
+  "baselineCommit": "cae0e6e56993bcf215e588fc7a3196ca33754eb5",
+  "status": "ACTIVE_POST_FREEZE_REPOSITORY_ASSURANCE",
+  "predecessor": "content/web-production/registries/wpr-production-drift-registry-v2.json",
+  "works": [
+    "WPR-PF1",
+    "WPR-PF2",
+    "WPR-PF3",
+    "WPR-PF4",
+    "WPR-PF5",
+    "WPR-PF6",
+    "WPR-PF7",
+    "WPR-PF8",
+    "WPR-PF9",
+    "WPR-PF10",
+    "WPR-PF11",
+    "WPR-PF12"
+  ],
+  "authorityBoundary": {
+    "mayRewriteCanonicalBookRegistry": false,
+    "mayInferBookFromCanonicalNodePrefix": false,
+    "mayCreateKnowledgeAuthority": false,
+    "mayCreateAssetAuthority": false,
+    "mayCreateRuntimeAuthority": false,
+    "mayCreateProfessionalJudgment": false,
+    "mayGrantMethodExecution": false,
+    "mayGrantDeploymentAcceptance": false,
+    "maySynthesizeLiveBrowserEvidence": false
+  },
+  "acceptanceBoundary": {
+    "repositoryLevelMayPass": true,
+    "deploymentAccepted": false,
+    "liveClosurePhase": "POC-A"
+  },
+  "rules": {
+    "allDriftDetectorsFailClosed": true,
+    "noneByDesignMustBeExplicit": true,
+    "candidateCannotRenderAsPublished": true,
+    "governedAssetsMustUseResolver": true,
+    "privateAudienceCannotUsePublicCache": true,
+    "publicVocabularyRegistryRequired": true,
+    "preDeploymentAcceptanceRequiresPF1ThroughPF11": true
+  }
+}

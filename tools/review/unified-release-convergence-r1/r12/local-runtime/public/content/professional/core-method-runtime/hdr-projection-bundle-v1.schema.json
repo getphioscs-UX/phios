@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/hdr/hdr-projection-bundle-v1.schema.json",
+  "title": "PHI OS HDR Projection Bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "executionMode",
+    "sourceCalculationId",
+    "sourceCalculationOutputDigest",
+    "projections",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "projectionCreated",
+    "interpretationCreated",
+    "knowledgeCreated",
+    "realityConclusionCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-HDR-PROJECTION-BUNDLE-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "HDR_PROJECTION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "pluginCode": {
+      "const": "HDR"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "sourceCalculationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceCalculationOutputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "projections": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        },
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        },
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        },
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        },
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        }
+      ],
+      "items": false
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": true
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "knowledgeCreated": {
+      "const": false
+    },
+    "realityConclusionCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

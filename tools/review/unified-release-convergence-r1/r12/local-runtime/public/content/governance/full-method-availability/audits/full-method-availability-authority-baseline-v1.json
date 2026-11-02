@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "PHI-OS-FULL-METHOD-AVAILABILITY-AUTHORITY-BASELINE-v1.0.0",
+  "work": "FMA-W0",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "AUTHORITY_RECONCILED_SUCCESSOR_FOUNDATION_NO_HISTORICAL_REWRITE",
+  "purpose": "Freeze the effective current authority chain that must be crossed before a Method may move from Limited/Scoped to Available.",
+  "sourcePrecedence": [
+    "CURRENT_VERSIONED_SUCCESSOR",
+    "CURRENT_CLIENT_DELIVERY_ACCEPTANCE",
+    "CURRENT_PCM_USER_EXECUTABILITY_AUTHORITY",
+    "FROZEN_PREDECESSOR_AS_LINEAGE_ONLY"
+  ],
+  "auditedAuthorities": [
+    {
+      "path": "content/governance/production-capability-matrix/registries/production-capability-registry-v1.json",
+      "sha256": "c9912a841bc6ff137cf5e82de13e2bda35d56adab951f42b6eeef0af7b9f0dbe"
+    },
+    {
+      "path": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+      "sha256": "a5991f4c552800234e559c8b36688df882118b29fec16867cf02e7ffee0e6fc6"
+    },
+    {
+      "path": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "sha256": "161bd90046f7fccad974ab4fc3a717f774aa7409cb875c7fac9fb69f1329f830"
+    },
+    {
+      "path": "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+      "sha256": "b3ab48af637c24359329f937a99487a83aabaa83d133e3733dace3efe821ab8a"
+    },
+    {
+      "path": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json",
+      "sha256": "d74d195de43736db36e89a04b99845a6f274517f937c3beee174e5f12178d85e"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "sha256": "27349bccaf07cad0324ed701d4c16dd6e6ba1522ce2bc7cbc079fea94040f5eb"
+    },
+    {
+      "path": "content/professional/canonical-meaning-runtime/acceptance/cmr-w15-full-acceptance-v1.json",
+      "sha256": "4a97ee2809a5832a0e4d8375e7419f7866d755722b19a002fd054db301b84a83"
+    },
+    {
+      "path": "content/products/runtime-reading/registries/runtime-reading-method-availability-v1.json",
+      "sha256": "d279a89f1c41a7319517c2e1e0152462e9eedd7318b7d3155bc9e80a80df27e6"
+    }
+  ],
+  "currentMeaningBoundary": {
+    "cmrFreeze": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+    "productionStatus": "validation_only",
+    "productionActivated": false,
+    "successorRequiredForActivation": true
+  },
+  "methods": [
+    {
+      "pluginCode": "HDR",
+      "methodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "pcmClassification": "BLOCKED",
+      "capabilityStatus": "Blocked",
+      "calculationAuthority": null,
+      "calculationProductionDispatch": false,
+      "projectionAuthority": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json",
+      "meaningAuthority": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "meaningProductionStatus": "validation_only",
+      "frontendAuthority": null,
+      "frontendRoute": null,
+      "productionAcceptanceAuthority": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "currentUserExecutable": false,
+      "currentFullyAvailable": false,
+      "knownBlockers": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+        "PRODUCTION_INVOCATION_FORBIDDEN"
+      ]
+    },
+    {
+      "pluginCode": "AST",
+      "methodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "pcmClassification": "LIMITED_SCOPED",
+      "capabilityStatus": "Limited",
+      "calculationAuthority": "content/professional/method-governance/successors/ast-production-policy-successor-v1.json",
+      "calculationProductionDispatch": true,
+      "projectionAuthority": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json",
+      "meaningAuthority": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "meaningProductionStatus": "validation_only",
+      "frontendAuthority": "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+      "frontendRoute": "/personal-runtime",
+      "productionAcceptanceAuthority": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "currentUserExecutable": true,
+      "currentFullyAvailable": false,
+      "knownBlockers": [
+        "HOUSES_NOT_INCLUDED",
+        "ASPECTS_NOT_INCLUDED",
+        "NODES_NOT_INCLUDED",
+        "INTERPRETATION_NOT_INCLUDED",
+        "PROFESSIONAL_JUDGMENT_NOT_INCLUDED"
+      ],
+      "validationMeaningMappingCount": 0,
+      "meaningBlockers": [
+        "DIRECTION_DRIVER_MEANING_CODES_NOT_POPULATED",
+        "ZODIAC_DIRECTION_CANONICAL_PROJECTION_OR_GOVERNED_RANGE_PREDICATE_MISSING",
+        "ACTIVATION_CARRIER_FUNCTIONAL_DRIVER_MEANING_FAMILY_MISSING",
+        "REALITY_DOMAIN_MEANING_FAMILY_MISSING",
+        "STRUCTURAL_RELATIONSHIP_SIGNAL_MEANING_FAMILY_MISSING"
+      ]
+    },
+    {
+      "pluginCode": "BZR",
+      "methodCode": "BAZI",
+      "methodVersion": "0.1.0",
+      "pcmClassification": "LIMITED_SCOPED",
+      "capabilityStatus": "Limited",
+      "calculationAuthority": "content/professional/method-governance/successors/bzr-commercial-license-successor-v1.json",
+      "calculationProductionDispatch": true,
+      "projectionAuthority": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json",
+      "meaningAuthority": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "meaningProductionStatus": "validation_only",
+      "frontendAuthority": "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+      "frontendRoute": "/personal-runtime",
+      "productionAcceptanceAuthority": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "currentUserExecutable": true,
+      "currentFullyAvailable": false,
+      "knownBlockers": [
+        "UNKNOWN_BIRTH_TIME_DEGRADES_WITHOUT_SYNTHETIC_HOUR",
+        "LUCK_CYCLE_REQUIRES_EXPLICIT_TRADITIONAL_CALCULATION_SEX",
+        "INTERPRETATION_NOT_INCLUDED",
+        "PROFESSIONAL_JUDGMENT_NOT_INCLUDED"
+      ],
+      "validationMeaningMappingCount": 29,
+      "meaningBlockers": []
+    },
+    {
+      "pluginCode": "NUM",
+      "methodCode": "NUMEROLOGY",
+      "methodVersion": "0.1.0-candidate",
+      "pcmClassification": "LIMITED_SCOPED",
+      "capabilityStatus": "Limited",
+      "calculationAuthority": "content/professional/method-governance/successors/num-commercial-scope-successor-v1.json",
+      "calculationProductionDispatch": true,
+      "projectionAuthority": "content/professional/method-client-delivery/registries/mcd-5-canonical-projection-version-registry-v1.json",
+      "meaningAuthority": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "meaningProductionStatus": "validation_only",
+      "frontendAuthority": "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+      "frontendRoute": "/personal-runtime",
+      "productionAcceptanceAuthority": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "currentUserExecutable": true,
+      "currentFullyAvailable": false,
+      "knownBlockers": [
+        "CYCLE_REQUIRES_EXPLICIT_TARGET_DATE_AND_GOVERNED_TIMEZONE_CONTEXT",
+        "INTERPRETATION_NOT_INCLUDED",
+        "PROFESSIONAL_JUDGMENT_NOT_INCLUDED"
+      ],
+      "validationMeaningMappingCount": 12,
+      "meaningBlockers": []
+    },
+    {
+      "pluginCode": "ICH",
+      "methodCode": "I_CHING",
+      "methodVersion": "0.1.0",
+      "pcmClassification": "REGISTERED_NOT_IMPLEMENTED",
+      "capabilityStatus": "Coming later",
+      "calculationAuthority": null,
+      "calculationProductionDispatch": false,
+      "projectionAuthority": null,
+      "meaningAuthority": null,
+      "meaningProductionStatus": "UNAVAILABLE",
+      "frontendAuthority": null,
+      "frontendRoute": null,
+      "productionAcceptanceAuthority": null,
+      "currentUserExecutable": false,
+      "currentFullyAvailable": false,
+      "knownBlockers": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "pluginCode": "TAR",
+      "methodCode": "TAROT",
+      "methodVersion": "0.1.0",
+      "pcmClassification": "REGISTERED_NOT_IMPLEMENTED",
+      "capabilityStatus": "Coming later",
+      "calculationAuthority": null,
+      "calculationProductionDispatch": false,
+      "projectionAuthority": null,
+      "meaningAuthority": null,
+      "meaningProductionStatus": "UNAVAILABLE",
+      "frontendAuthority": null,
+      "frontendRoute": null,
+      "productionAcceptanceAuthority": null,
+      "currentUserExecutable": false,
+      "currentFullyAvailable": false,
+      "knownBlockers": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    }
+  ],
+  "reservedFutureMethods": [
+    {
+      "runtimeCode": "ZWR",
+      "methodCode": "ZI_WEI",
+      "currentRuntimeAuthority": null,
+      "currentProjectionAuthority": null,
+      "currentMeaningAuthority": null,
+      "state": "DEFERRED_UNAVAILABLE_REQUIRES_INDEPENDENT_SUCCESSOR"
+    }
+  ],
+  "invariants": {
+    "historicalFreezeMutationAllowed": false,
+    "backendImplementationImpliesAvailability": false,
+    "projectionImpliesMeaning": false,
+    "meaningImpliesInterpretation": false,
+    "meaningImpliesProfessionalJudgment": false
+  }
+}

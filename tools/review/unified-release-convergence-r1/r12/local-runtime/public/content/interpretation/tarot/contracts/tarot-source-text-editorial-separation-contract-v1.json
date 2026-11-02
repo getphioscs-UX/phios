@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-SOURCE-TEXT-EDITORIAL-SEPARATION-CONTRACT-v1.0.0",
+  "phase": "TPA-D",
+  "work": "TPA-W12",
+  "baselineCommit": "3ccbb60485c466e145ff33da0addfd6d991ac1c8",
+  "status": "FROZEN_SOURCE_EDITORIAL_SYSTEM_SEPARATION",
+  "contractVersion": "1.0.0",
+  "layers": [
+    {
+      "layer": "SOURCE_RECORD",
+      "authority": "ATTRIBUTED_SOURCE_ONLY",
+      "required": [
+        "sourceId",
+        "edition",
+        "pageLocator",
+        "cardId",
+        "interpretationUnitId",
+        "rightsClass"
+      ],
+      "mayContain": [
+        "shortRightsClearedQuotationWhenExplicitlyApproved"
+      ],
+      "mustNotBecome": "UNIVERSAL_PHI_OS_TRUTH"
+    },
+    {
+      "layer": "EDITORIAL_PARAPHRASE",
+      "authority": "GOVERNED_EDITORIAL_PERSPECTIVE",
+      "required": [
+        "sourceId",
+        "cardId",
+        "provenance",
+        "editorialReviewState"
+      ],
+      "mustNotClaim": [
+        "UNIVERSAL_CARD_MEANING",
+        "PREDICTION_AUTHORITY",
+        "REALITY_TRUTH"
+      ]
+    },
+    {
+      "layer": "SYSTEM_COMPOSITION",
+      "authority": "REFLECTIVE_COMPOSITION_ONLY",
+      "required": [
+        "sourcePerspectiveIds",
+        "uncertainty",
+        "rcc",
+        "agency"
+      ],
+      "mustNotClaim": [
+        "SOURCE_AUTHORSHIP",
+        "FACT_AUTHORITY",
+        "HIDDEN_STATE_CERTAINTY"
+      ]
+    }
+  ],
+  "phaseDPolicy": {
+    "waiteSourceTextVendored": false,
+    "waiteLocatorMetadataOnly": true,
+    "editorialParaphrasesCreatedInPhaseD": false,
+    "systemCompositionCreatedInPhaseD": false,
+    "aiFillMissingSourceMaterialForbidden": true,
+    "sourceUnitMetadataIsNotRuntimeMeaning": true,
+    "runtimeRebindDeferredTo": "TPA-W21"
+  },
+  "invariants": {
+    "sourceTextNotEqualEditorialParaphrase": true,
+    "editorialParaphraseNotEqualSystemComposition": true,
+    "sourceLocatorRequiredBeforeSourceBoundClaim": true,
+    "sourceDisagreementMayRemain": true,
+    "missingSourceContentRemainsUnavailable": true,
+    "noSilentSourceBlending": true
+  }
+}

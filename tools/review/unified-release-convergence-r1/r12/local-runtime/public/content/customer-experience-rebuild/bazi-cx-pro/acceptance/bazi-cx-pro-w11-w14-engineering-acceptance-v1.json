@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-W11-W14-ENGINEERING-ACCEPTANCE-v1.0.0",
+  "workRange": [
+    "BAZI-CX-PRO-W11",
+    "BAZI-CX-PRO-W12",
+    "BAZI-CX-PRO-W13",
+    "BAZI-CX-PRO-W14"
+  ],
+  "baseline": {
+    "commit": "78ac0ae651133131d162e53c07cbccd793a55672",
+    "snapshot": "read(2).zip"
+  },
+  "status": "W11_W12_MACHINE_VERIFIED_W13_HUMAN_PENDING_W14_CANDIDATE_READY",
+  "w11": {
+    "status": "MACHINE_VERIFIED",
+    "realityBridgeAuthorized": true,
+    "oneOrTwoPromptsPerProfessionalChapter": true,
+    "genericQuestionBankDefault": false,
+    "exactPromptDuplicatesAllowed": 0
+  },
+  "w12": {
+    "status": "MACHINE_VERIFIED",
+    "sourcesTechnicalRelocationAuthorized": true,
+    "schoolAndTechnicalDetailRelocated": true,
+    "technicalSurfaceMode": "ON_DEMAND"
+  },
+  "w13": {
+    "status": "MACHINE_PREFLIGHT_COMPLETE_HUMAN_REVIEW_PENDING",
+    "caseCount": 24,
+    "rubricDimensionCount": 6,
+    "machinePreflightReady": true,
+    "humanAcceptedCount": 0,
+    "humanAcceptanceClaimed": false
+  },
+  "w14": {
+    "status": "CANDIDATE_READY_NOT_ACTIVE",
+    "customerDefaultSurface": "BAZI_PROFESSIONAL_READING",
+    "governanceSurfaceDefault": false,
+    "marketGradeCustomerCutoverActive": false,
+    "activationBlockedUntilW13HumanAccepted24Of24": true
+  },
+  "checks": [
+    {
+      "name": "check:bazi-cx-pro-w11-w14",
+      "status": "PASS"
+    },
+    {
+      "name": "check:ppr-c1",
+      "status": "PASS"
+    },
+    {
+      "name": "check:bazi-full-production",
+      "status": "PASS"
+    },
+    {
+      "name": "npm run check",
+      "status": "BLOCKED_BY_ARCHIVE_WITHOUT_GIT_METADATA",
+      "reason": "check-pds-w0-current.mjs invokes git rev-parse; uploaded ZIP contains no .git directory"
+    }
+  ]
+}

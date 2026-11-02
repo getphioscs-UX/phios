@@ -1,0 +1,79 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-MEANING-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE-CM",
+  "work": "CM-W1",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "authority": {
+    "canonicalMeaningAuthority": "PHI_OS_CANONICAL_MEANING_RUNTIME",
+    "methodProjectionAuthority": "external_read_only",
+    "knowledgeSemanticAuthority": "external_read_only",
+    "professionalConclusionAuthority": "forbidden"
+  },
+  "meaningDefinition": {
+    "is": [
+      "PHI OS semantic representation",
+      "versioned registry-led meaning record",
+      "bounded bridge between Canonical Projection and Knowledge references"
+    ],
+    "isNot": [
+      "Method original interpretation",
+      "Article",
+      "Reality fact",
+      "Professional conclusion",
+      "Reality decision"
+    ]
+  },
+  "inputs": [
+    "Canonical Projection",
+    "Versioned Mapping Lineage",
+    "Knowledge References",
+    "Boundary Registry"
+  ],
+  "outputs": [
+    "Canonical Meaning Record",
+    "Canonical Meaning Bundle"
+  ],
+  "requiredProperties": [
+    "meaningCode",
+    "meaningVersion",
+    "meaningFamily",
+    "meaningDimensions",
+    "sourceProjection",
+    "mappingLineage",
+    "knowledgeReferences",
+    "confidence",
+    "boundaries",
+    "status"
+  ],
+  "runtimeInvariants": {
+    "deterministic": true,
+    "registryLed": true,
+    "stableMeaningCodeRequired": true,
+    "completeProjectionLineageRequired": true,
+    "knowledgeReferencesOnly": true,
+    "mayRewriteMethodProjection": false,
+    "mayRewriteKnowledgeNode": false,
+    "mayStoreArticleBody": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "interpretationAllowed": false,
+    "professionalConclusionAllowed": false,
+    "realityDecisionAllowed": false
+  },
+  "lifecycle": [
+    "draft",
+    "validation_only",
+    "deprecated"
+  ],
+  "futureActivationRequirements": [
+    "Meaning Family Registry frozen",
+    "Meaning Code Registry frozen",
+    "Meaning Dimension Registry frozen",
+    "Method-to-Meaning Mapping registered",
+    "Knowledge Reference registered",
+    "CMR Full Acceptance passed"
+  ]
+}

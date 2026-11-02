@@ -1,0 +1,209 @@
+{
+  "case": {
+    "caseId": "PR-CASE-PROD-001",
+    "customer": {
+      "customerId": "CUSTOMER-001"
+    },
+    "professional": {
+      "professionalId": "PRO-001"
+    },
+    "scope": [
+      "runtime_review"
+    ],
+    "consent": {
+      "reference": "CONSENT-001",
+      "state": "ACTIVE",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scopes": [
+        "runtime_review"
+      ]
+    },
+    "service": {
+      "serviceId": "SERVICE-PR-001",
+      "purpose": "PROFESSIONAL_SERVICE"
+    },
+    "status": "ACTIVE",
+    "assignmentReference": {
+      "assignmentId": "ASSIGNMENT-001",
+      "state": "active",
+      "professionalId": "PRO-001",
+      "customerId": "CUSTOMER-001",
+      "serviceId": "SERVICE-PR-001"
+    },
+    "workspaceReference": "WORKSPACE-001",
+    "createdAt": "2026-08-11T08:00:00Z"
+  },
+  "access": {
+    "professionalId": "PRO-001",
+    "customerId": "CUSTOMER-001",
+    "purpose": "PROFESSIONAL_SERVICE",
+    "scopes": [
+      "runtime_review"
+    ]
+  },
+  "caseVersion": {
+    "caseVersion": 1,
+    "openedAt": "2026-08-11T08:00:00Z",
+    "status": "ACTIVE"
+  },
+  "evidenceRequest": {
+    "packageReference": "PR-RESOLVED-EVIDENCE-001",
+    "sources": [
+      {
+        "sourceClass": "RAW_DATA",
+        "reference": "REALITY-INPUT-001",
+        "requestedVersion": "1.0.0"
+      },
+      {
+        "sourceClass": "REALITY",
+        "reference": "REALITY-STATE-001",
+        "requestedVersion": "7"
+      },
+      {
+        "sourceClass": "EVIDENCE",
+        "reference": "EVIDENCE-001",
+        "requestedVersion": "3"
+      },
+      {
+        "sourceClass": "READOUT",
+        "reference": "READOUT-001",
+        "requestedVersion": "1"
+      },
+      {
+        "sourceClass": "METRICS",
+        "reference": "METRIC-001",
+        "requestedVersion": "1"
+      },
+      {
+        "sourceClass": "MEANING",
+        "reference": "MEANING-001",
+        "requestedVersion": "2"
+      },
+      {
+        "sourceClass": "KNOWLEDGE",
+        "reference": "KNOWLEDGE-001",
+        "requestedVersion": "1.0.0"
+      },
+      {
+        "sourceClass": "JOURNEY",
+        "reference": "NAV-001",
+        "requestedVersion": "4"
+      },
+      {
+        "sourceClass": "UNKNOWN",
+        "reference": "READOUT-UNKNOWN-001",
+        "requestedVersion": "1"
+      }
+    ]
+  },
+  "sourceCatalogue": [
+    {
+      "reference": "REALITY-INPUT-001",
+      "dataType": "REALITY_INPUT_RECORD",
+      "authority": "ICR",
+      "version": "1.0.0",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "reference": "REALITY-STATE-001",
+      "dataType": "RUNTIME_STATE_RECORD",
+      "authority": "RMO",
+      "version": "7",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+      "reference": "EVIDENCE-001",
+      "dataType": "REALITY_EVIDENCE_RECORD",
+      "authority": "RRE",
+      "version": "3",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    {
+      "reference": "READOUT-001",
+      "dataType": "REALITY_READOUT_RECORD",
+      "authority": "RRE",
+      "version": "1",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "3333333333333333333333333333333333333333333333333333333333333333"
+    },
+    {
+      "reference": "METRIC-001",
+      "referenceKind": "GOVERNED_METRIC_REFERENCE",
+      "authority": "UPSTREAM_METRIC_AUTHORITY_IF_AVAILABLE",
+      "version": "1",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "4444444444444444444444444444444444444444444444444444444444444444"
+    },
+    {
+      "reference": "MEANING-001",
+      "dataType": "MEANING_PROJECTION_RECORD",
+      "authority": "CMR",
+      "version": "2",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    {
+      "reference": "KNOWLEDGE-001",
+      "referenceKind": "PUBLISHED_KNOWLEDGE_REFERENCE",
+      "authority": "KNOWLEDGE_AUTHORITY",
+      "version": "1.0.0",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "6666666666666666666666666666666666666666666666666666666666666666"
+    },
+    {
+      "reference": "NAV-001",
+      "dataType": "NAVIGATION_RECORD",
+      "authority": "JR",
+      "version": "4",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "7777777777777777777777777777777777777777777777777777777777777777"
+    },
+    {
+      "reference": "READOUT-UNKNOWN-001",
+      "dataType": "REALITY_READOUT_RECORD",
+      "authority": "RRE",
+      "version": "1",
+      "permissionDecision": "ALLOW",
+      "purpose": "PROFESSIONAL_SERVICE",
+      "scope": [
+        "runtime_review"
+      ],
+      "sourceDigest": "8888888888888888888888888888888888888888888888888888888888888888"
+    }
+  ]
+}

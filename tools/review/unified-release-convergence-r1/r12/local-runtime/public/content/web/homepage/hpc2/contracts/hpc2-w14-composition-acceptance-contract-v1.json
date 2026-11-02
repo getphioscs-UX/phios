@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W14-COMPOSITION-ACCEPTANCE-CONTRACT-v1.0.0",
+  "work": "HPC2-W14",
+  "baselineCommit": "64ead9a9addf56f4f83c28736bf205cdc9380c10",
+  "allowedStatus": "HPC2_COMPOSITION_READY",
+  "forbiddenStatus": [
+    "GLOBAL_PRODUCTION_FREEZE",
+    "PRODUCTION_FROZEN",
+    "GLOBAL_PRODUCTION_ACCEPTED"
+  ],
+  "narrative": {
+    "maxScenes": 9,
+    "requiredOrder": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09"
+    ],
+    "singleContinuousNarrative": true,
+    "duplicatePositioningAllowed": false,
+    "researchDumpAllowed": false,
+    "repeatedServiceExplanationAllowed": false
+  },
+  "capability": {
+    "allRequiredHomepageCapabilitiesMapped": true,
+    "silentExpectedHomepageConsumerAllowed": false
+  },
+  "v8": {
+    "all39SemanticBlocksAccounted": true,
+    "completionEvidence": "content/web/homepage/hpc2/evidence/hpc2-w14-v8-successor-completion-v1.json",
+    "historicalManifestRewriteAllowed": false
+  },
+  "publicDensity": {
+    "privateEvidenceAllowed": false,
+    "professionalJudgmentLeakageAllowed": false,
+    "customerStateLeakageAllowed": false
+  },
+  "asset": {
+    "governedR2ReferencesRequired": true,
+    "hardcodedGovernedAssetAllowed": false,
+    "resolver": "assets/js/runtime/web-production/asset-resolver.js"
+  },
+  "cka": {
+    "entryRequiredWhereManifestRequires": true,
+    "heroPrimaryAllowed": false,
+    "requiredEntryScenes": [
+      "H04",
+      "H05",
+      "H07",
+      "H09"
+    ]
+  },
+  "globalProductionFreezeOwnedHere": false
+}

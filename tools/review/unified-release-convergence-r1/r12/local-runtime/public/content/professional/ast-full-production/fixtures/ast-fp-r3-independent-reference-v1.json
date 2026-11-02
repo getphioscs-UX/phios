@@ -1,0 +1,4596 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-INDEPENDENT-REFERENCE-v1.0.0",
+  "workCode": "AST-FP-R3",
+  "sourceMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "referenceAuthority": {
+    "library": "Swiss Ephemeris",
+    "libraryVersion": "2.10.03",
+    "pythonBinding": "PySwissEph",
+    "pythonBindingBuild": 20230604,
+    "planetaryBackend": "MOSEPH_MOSHIER_FALLBACK",
+    "requestedFlags": [
+      "FLG_MOSEPH",
+      "FLG_SPEED"
+    ],
+    "referenceFrame": "GEOCENTRIC_ECLIPTIC_OF_DATE_DEFAULT_APPARENT",
+    "houseReference": "Swiss Ephemeris houses_ex",
+    "houseSystems": [
+      "PLACIDUS",
+      "WHOLE_SIGN"
+    ],
+    "runtimeDependencyCreated": false,
+    "referenceNumbersOnly": true
+  },
+  "fixturePolicy": {
+    "independentReferenceNotGeneratedByPhiOsRuntime": true,
+    "explicitOffsetOwnsUtcNormalization": true,
+    "ianaDoesNotOverrideDeclaredOffset": true,
+    "placidusPolarGuardAbsoluteLatitudeDegrees": 66.5625,
+    "robustAspectBoundaryMarginDegrees": 0.15,
+    "retrogradeReferenceSpeedGuardDegreesPerDay": 0.01
+  },
+  "coverage": {
+    "cases": 10,
+    "existingR2Cases": 8,
+    "newR3EdgeCases": 2,
+    "naturalMajorAspectCounts": {
+      "CONJUNCTION": 33,
+      "SEXTILE": 30,
+      "SQUARE": 24,
+      "TRINE": 24,
+      "OPPOSITION": 17
+    },
+    "robustMajorAspectCounts": {
+      "CONJUNCTION": 32,
+      "SEXTILE": 29,
+      "SQUARE": 23,
+      "TRINE": 24,
+      "OPPOSITION": 17
+    },
+    "boundarySensitiveNaturalAspects": 3,
+    "allFiveMajorAspectTypesPresent": true
+  },
+  "cases": [
+    {
+      "caseId": "ASTFP-01",
+      "inputClass": "EXISTING_R2_FIXTURE",
+      "input": {
+        "birthDate": "1984-03-21",
+        "birthTime": "06:10:00",
+        "latitude": 1.35,
+        "longitude": 103.82,
+        "utcOffsetAtBirth": "+08:00",
+        "iana": "Asia/Singapore"
+      },
+      "expectedUtcIso": "1984-03-20T22:10:00.000Z",
+      "julianDayUt": 2445780.423611111,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 0.486534282,
+          "latitude": 3.0314e-05,
+          "distanceAu": 0.99620489721,
+          "speedLongitudeDegreesPerDay": 0.992693396,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 228.752670627,
+          "latitude": 1.757266608,
+          "distanceAu": 0.002481923785,
+          "speedLongitudeDegreesPerDay": 14.034433301,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 12.261814964,
+          "latitude": 0.150480021,
+          "distanceAu": 1.21216571825,
+          "speedLongitudeDegreesPerDay": 1.915785193,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 337.895790124,
+          "latitude": -1.22402741,
+          "distanceAu": 1.538778566972,
+          "speedLongitudeDegreesPerDay": 1.233868638,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 236.95010916,
+          "latitude": 1.442901405,
+          "distanceAu": 0.825177049123,
+          "speedLongitudeDegreesPerDay": 0.172109805,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 280.576411545,
+          "latitude": 0.234233365,
+          "distanceAu": 5.34062311768,
+          "speedLongitudeDegreesPerDay": 0.114848069,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 225.846751591,
+          "latitude": 2.549155602,
+          "distanceAu": 9.125254785056,
+          "speedLongitudeDegreesPerDay": -0.041124754,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 253.560999465,
+          "latitude": 0.045247756,
+          "distanceAu": 18.686321916611,
+          "speedLongitudeDegreesPerDay": -0.002306481,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 271.378888504,
+          "latitude": 1.187904479,
+          "distanceAu": 30.261949255068,
+          "speedLongitudeDegreesPerDay": 0.007097006,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 211.563929095,
+          "latitude": 17.361484888,
+          "distanceAu": 29.014591253774,
+          "speedLongitudeDegreesPerDay": -0.022929846,
+          "retrograde": true,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 69.047681187,
+        "southLongitude": 249.047681187,
+        "northSpeedLongitudeDegreesPerDay": -0.044429173,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 343.486091036,
+            "MC": 256.130271094,
+            "DSC": 163.486091036,
+            "IC": 76.130271094
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 343.486091036
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 16.321921711
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 47.539741577
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 76.130271094
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 103.577915728
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 132.195948877
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 163.486091036
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 196.321921711
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 227.539741577
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 256.130271094
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 283.577915728
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 312.195948877
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 9
+            }
+          ],
+          "ascendantSignIndex": 11
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 343.486091036,
+            "MC": 256.130271094,
+            "DSC": 163.486091036,
+            "IC": 76.130271094
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 300.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 10
+            }
+          ],
+          "ascendantSignIndex": 11
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MARS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 123.536425122,
+          "orbDegrees": 3.536425122,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.463574878,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 89.107645778,
+          "orbDegrees": 0.892354222,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.107645778,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "SATURN",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 2.905919036,
+          "orbDegrees": 2.905919036,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.094080964,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "JUPITER",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 91.685403419,
+          "orbDegrees": 1.685403419,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.314596581,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "URANUS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 118.700815499,
+          "orbDegrees": 1.299184501,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.700815499,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 57.319378579,
+          "orbDegrees": 2.680621421,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.319378579,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 84.334790659,
+          "orbDegrees": 5.665209341,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.334790659,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "NEPTUNE",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 59.814959409,
+          "orbDegrees": 0.185040591,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.814959409,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-02",
+      "inputClass": "EXISTING_R2_FIXTURE_DST_DECLARED_OFFSET",
+      "input": {
+        "birthDate": "1992-07-06",
+        "birthTime": "19:35:00",
+        "latitude": 51.51,
+        "longitude": -0.13,
+        "utcOffsetAtBirth": "+01:00",
+        "iana": "Europe/London"
+      },
+      "expectedUtcIso": "1992-07-06T18:35:00.000Z",
+      "julianDayUt": 2448810.274305556,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 104.917072041,
+          "latitude": -0.000107097,
+          "distanceAu": 1.016709848463,
+          "speedLongitudeDegreesPerDay": 0.953414374,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 190.56336348,
+          "latitude": -5.194743139,
+          "distanceAu": 0.002504785892,
+          "speedLongitudeDegreesPerDay": 13.849435098,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 130.987529872,
+          "latitude": -0.271740414,
+          "distanceAu": 0.824342130675,
+          "speedLongitudeDegreesPerDay": 0.913305099,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 111.263928657,
+          "latitude": 0.979410183,
+          "distanceAu": 1.719818469854,
+          "speedLongitudeDegreesPerDay": 1.229445666,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 46.043162778,
+          "latitude": -1.067342844,
+          "distanceAu": 1.620594926317,
+          "speedLongitudeDegreesPerDay": 0.711648413,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 160.636905216,
+          "latitude": 1.11522845,
+          "distanceAu": 5.933510927192,
+          "speedLongitudeDegreesPerDay": 0.16131391,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 317.308137766,
+          "latitude": -0.958376693,
+          "distanceAu": 9.027879364442,
+          "speedLongitudeDegreesPerDay": -0.056696242,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 286.078362002,
+          "latitude": -0.431875728,
+          "distanceAu": 18.52530478656,
+          "speedLongitudeDegreesPerDay": -0.040377069,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 287.647509386,
+          "latitude": 0.749984544,
+          "distanceAu": 29.175735109451,
+          "speedLongitudeDegreesPerDay": -0.027029772,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 230.306958223,
+          "latitude": 14.994632931,
+          "distanceAu": 29.121516145664,
+          "speedLongitudeDegreesPerDay": -0.012868191,
+          "retrograde": true,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 270.612916366,
+        "southLongitude": 90.612916366,
+        "northSpeedLongitudeDegreesPerDay": -0.005849235,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 261.752585376,
+            "MC": 205.473696317,
+            "DSC": 81.752585376,
+            "IC": 25.473696317
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 261.752585376
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 303.88988229
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 351.502085972
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 25.473696317
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 48.382423591
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 65.929017307
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 81.752585376
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 123.88988229
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 171.502085972
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 205.473696317
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 228.382423591
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 245.929017307
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 7
+            }
+          ],
+          "ascendantSignIndex": 8
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 261.752585376,
+            "MC": 205.473696317,
+            "DSC": 81.752585376,
+            "IC": 25.473696317
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 210.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 8
+            }
+          ],
+          "ascendantSignIndex": 8
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MOON",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 85.646291439,
+          "orbDegrees": 4.353708561,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 1.646291439,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "VENUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 6.346856616,
+          "orbDegrees": 6.346856616,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.653143384,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "MARS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 58.873909263,
+          "orbDegrees": 1.126090737,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 2.873909263,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "URANUS",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 178.838710039,
+          "orbDegrees": 1.161289961,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 6.838710039,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 177.269562655,
+          "orbDegrees": 2.730437345,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.269562655,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "PLUTO",
+          "aspectCode": "TRINE",
+          "separationDegrees": 125.389886182,
+          "orbDegrees": 5.389886182,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.610113818,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "MERCURY",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 59.575833608,
+          "orbDegrees": 0.424166392,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.575833608,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "URANUS",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 95.514998522,
+          "orbDegrees": 5.514998522,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.485001478,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "MARS",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 84.944367094,
+          "orbDegrees": 5.055632906,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.944367094,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "SATURN",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 173.679392106,
+          "orbDegrees": 6.320607894,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.679392106,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 174.814433345,
+          "orbDegrees": 5.185566655,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.814433345,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 176.383580729,
+          "orbDegrees": 3.616419271,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 4.383580729,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "PLUTO",
+          "aspectCode": "TRINE",
+          "separationDegrees": 119.043029566,
+          "orbDegrees": 0.956970434,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.043029566,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "JUPITER",
+          "aspectCode": "TRINE",
+          "separationDegrees": 114.593742438,
+          "orbDegrees": 5.406257562,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.593742438,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 88.735025012,
+          "orbDegrees": 1.264974988,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.735025012,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "URANUS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 119.964800776,
+          "orbDegrees": 0.035199224,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.964800776,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "TRINE",
+          "separationDegrees": 118.395653392,
+          "orbDegrees": 1.604346608,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.395653392,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "PLUTO",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 175.736204555,
+          "orbDegrees": 4.263795445,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.736204555,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "URANUS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 125.441456786,
+          "orbDegrees": 5.441456786,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.558543214,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "PLUTO",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 87.001179543,
+          "orbDegrees": 2.998820457,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.001179543,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "URANUS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 1.569147384,
+          "orbDegrees": 1.569147384,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 6.430852616,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "NEPTUNE",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 57.340551163,
+          "orbDegrees": 2.659448837,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.340551163,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-03",
+      "inputClass": "EXISTING_R2_FIXTURE_DST_DECLARED_OFFSET",
+      "input": {
+        "birthDate": "2001-12-18",
+        "birthTime": "03:20:00",
+        "latitude": -33.87,
+        "longitude": 151.21,
+        "utcOffsetAtBirth": "+11:00",
+        "iana": "Australia/Sydney"
+      },
+      "expectedUtcIso": "2001-12-17T16:20:00.000Z",
+      "julianDayUt": 2452261.180555556,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 265.798432521,
+          "latitude": -3.725e-05,
+          "distanceAu": 0.98405542323,
+          "speedLongitudeDegreesPerDay": 1.018108192,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 298.773777555,
+          "latitude": -2.777154237,
+          "distanceAu": 0.002650258108,
+          "speedLongitudeDegreesPerDay": 12.374626916,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 272.927707887,
+          "latitude": -1.945610543,
+          "distanceAu": 1.407270021881,
+          "speedLongitudeDegreesPerDay": 1.583443471,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 259.140552394,
+          "latitude": 0.16710091,
+          "distanceAu": 1.694040893949,
+          "speedLongitudeDegreesPerDay": 1.258652847,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 336.400062738,
+          "latitude": -0.997052946,
+          "distanceAu": 1.390481566659,
+          "speedLongitudeDegreesPerDay": 0.731262933,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 102.556727797,
+          "latitude": -0.031193085,
+          "distanceAu": 4.215518743152,
+          "speedLongitudeDegreesPerDay": -0.125095087,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 70.344356103,
+          "latitude": -1.846230097,
+          "distanceAu": 8.112440210205,
+          "speedLongitudeDegreesPerDay": -0.077480968,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 321.852472991,
+          "latitude": -0.708031357,
+          "distanceAu": 20.519637753077,
+          "speedLongitudeDegreesPerDay": 0.03796392,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 306.977415683,
+          "latitude": 0.108185803,
+          "distanceAu": 30.830013476661,
+          "speedLongitudeDegreesPerDay": 0.030377966,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 255.506186778,
+          "latitude": 9.760716035,
+          "distanceAu": 31.408609920669,
+          "speedLongitudeDegreesPerDay": 0.038058767,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 87.149809208,
+        "southLongitude": 267.149809208,
+        "northSpeedLongitudeDegreesPerDay": 0.004433964,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 226.758649775,
+            "MC": 120.371474554,
+            "DSC": 46.758649775,
+            "IC": 300.371474554
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 226.758649775
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 254.666496503
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 277.484002935
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 300.371474554
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 327.567441979
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 3.471214208
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 46.758649775
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 74.666496503
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 97.484002935
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 120.371474554
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 147.567441979
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 183.471214208
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 2
+            }
+          ],
+          "ascendantSignIndex": 7
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 226.758649775,
+            "MC": 120.371474554,
+            "DSC": 46.758649775,
+            "IC": 300.371474554
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 180.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 2
+            }
+          ],
+          "ascendantSignIndex": 7
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MERCURY",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 7.129275366,
+          "orbDegrees": 7.129275366,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 0.870724634,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "VENUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 6.657880127,
+          "orbDegrees": 6.657880127,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.342119873,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "URANUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 56.05404047,
+          "orbDegrees": 3.94595953,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 0.05404047,
+          "robustForCrossValidation": false
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "MARS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 63.472354851,
+          "orbDegrees": 3.472354851,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 0.527645149,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 62.711920597,
+          "orbDegrees": 2.711920597,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.288079403,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "PLUTO",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 3.634365616,
+          "orbDegrees": 3.634365616,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 4.365634384,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 93.944293365,
+          "orbDegrees": 3.944293365,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.055706635,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "TRINE",
+          "separationDegrees": 123.36694042,
+          "orbDegrees": 3.36694042,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.63305958,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "PLUTO",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 174.838169325,
+          "orbDegrees": 5.161830675,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.838169325,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-04",
+      "inputClass": "EXISTING_R2_FIXTURE_DST_DECLARED_OFFSET",
+      "input": {
+        "birthDate": "1978-09-24",
+        "birthTime": "13:45:00",
+        "latitude": 40.71,
+        "longitude": -74.01,
+        "utcOffsetAtBirth": "-04:00",
+        "iana": "America/New_York"
+      },
+      "expectedUtcIso": "1978-09-24T17:45:00.000Z",
+      "julianDayUt": 2443776.239583333,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 181.319009143,
+          "latitude": -0.000192239,
+          "distanceAu": 1.002992124027,
+          "speedLongitudeDegreesPerDay": 0.979668314,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 97.101354339,
+          "latitude": -5.202825054,
+          "distanceAu": 0.002695488097,
+          "speedLongitudeDegreesPerDay": 11.93836903,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 176.411063989,
+          "latitude": 1.715499324,
+          "distanceAu": 1.35212154811,
+          "speedLongitudeDegreesPerDay": 1.845121493,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 223.933132069,
+          "latitude": -5.029128016,
+          "distanceAu": 0.481476067057,
+          "speedLongitudeDegreesPerDay": 0.667937436,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 213.279548119,
+          "latitude": -0.087708372,
+          "distanceAu": 2.297350357063,
+          "speedLongitudeDegreesPerDay": 0.676583185,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 123.454601207,
+          "latitude": 0.288009126,
+          "distanceAu": 5.698163431958,
+          "speedLongitudeDegreesPerDay": 0.163217936,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 157.47651034,
+          "latitude": 1.500678356,
+          "distanceAu": 10.191947743804,
+          "speedLongitudeDegreesPerDay": 0.119745466,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 224.062060767,
+          "latitude": 0.346824503,
+          "distanceAu": 19.373479219832,
+          "speedLongitudeDegreesPerDay": 0.04972084,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 255.754024785,
+          "latitude": 1.421433143,
+          "distanceAu": 30.538123193631,
+          "speedLongitudeDegreesPerDay": 0.014913313,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 195.99048854,
+          "latitude": 16.586893069,
+          "distanceAu": 31.252754188077,
+          "speedLongitudeDegreesPerDay": 0.038486787,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 176.732933307,
+        "southLongitude": 356.732933307,
+        "northSpeedLongitudeDegreesPerDay": 0.002237593,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 264.196117752,
+            "MC": 196.756090276,
+            "DSC": 84.196117752,
+            "IC": 16.756090276
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 264.196117752
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 301.110257968
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 342.003042418
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 16.756090276
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 43.197365124
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 64.521006521
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 84.196117752
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 121.110257968
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 162.003042418
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 196.756090276
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 223.197365124
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 244.521006521
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 3
+            }
+          ],
+          "ascendantSignIndex": 8
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 264.196117752,
+            "MC": 196.756090276,
+            "DSC": 84.196117752,
+            "IC": 16.756090276
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 210.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 4
+            }
+          ],
+          "ascendantSignIndex": 8
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MOON",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 84.217654804,
+          "orbDegrees": 5.782345196,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.217654804,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "MERCURY",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 4.907945154,
+          "orbDegrees": 4.907945154,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.092054846,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "JUPITER",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 57.864407936,
+          "orbDegrees": 2.135592064,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.864407936,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "MARS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 116.17819378,
+          "orbDegrees": 3.82180622,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.17819378,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "SATURN",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 60.375156001,
+          "orbDegrees": 0.375156001,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.624843999,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 0.128928698,
+          "orbDegrees": 0.128928698,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 7.871071302,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "JUPITER",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 89.824946912,
+          "orbDegrees": 0.175053088,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.824946912,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "NEPTUNE",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 59.763536245,
+          "orbDegrees": 0.236463755,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.763536245,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-05",
+      "inputClass": "EXISTING_R2_FIXTURE",
+      "input": {
+        "birthDate": "1999-02-11",
+        "birthTime": "23:50:00",
+        "latitude": 35.68,
+        "longitude": 139.69,
+        "utcOffsetAtBirth": "+09:00",
+        "iana": "Asia/Tokyo"
+      },
+      "expectedUtcIso": "1999-02-11T14:50:00.000Z",
+      "julianDayUt": 2451221.118055556,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 322.423136598,
+          "latitude": 6.4091e-05,
+          "distanceAu": 0.987000969066,
+          "speedLongitudeDegreesPerDay": 1.011908403,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 266.752579636,
+          "latitude": 4.355581103,
+          "distanceAu": 0.002658981858,
+          "speedLongitudeDegreesPerDay": 12.278657934,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 328.128722884,
+          "latitude": -1.776541551,
+          "distanceAu": 1.343835254607,
+          "speedLongitudeDegreesPerDay": 1.820216676,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 347.327229079,
+          "latitude": -1.342755677,
+          "distanceAu": 1.488526745693,
+          "speedLongitudeDegreesPerDay": 1.239549398,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 215.933382488,
+          "latitude": 2.137931704,
+          "distanceAu": 1.07165036543,
+          "speedLongitudeDegreesPerDay": 0.322918513,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 359.686279729,
+          "latitude": -1.130801494,
+          "distanceAu": 5.702457419078,
+          "speedLongitudeDegreesPerDay": 0.217177752,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 28.491022107,
+          "latitude": -2.353677232,
+          "distanceAu": 9.615209236868,
+          "speedLongitudeDegreesPerDay": 0.07506068,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 313.31599165,
+          "latitude": -0.630537152,
+          "distanceAu": 20.864592776895,
+          "speedLongitudeDegreesPerDay": 0.057826418,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 302.61329105,
+          "latitude": 0.291984586,
+          "distanceAu": 31.058605139739,
+          "speedLongitudeDegreesPerDay": 0.036237314,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 250.234116687,
+          "latitude": 11.526944762,
+          "distanceAu": 30.412941909911,
+          "speedLongitudeDegreesPerDay": 0.017222919,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 142.145646507,
+        "southLongitude": 322.145646507,
+        "northSpeedLongitudeDegreesPerDay": 0.001102112,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 223.967629529,
+            "MC": 141.026753394,
+            "DSC": 43.967629529,
+            "IC": 321.026753394
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 223.967629529
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 253.342973713
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 286.286614734
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 321.026753394
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 353.500790503
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 21.049987733
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 43.967629529
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 73.342973713
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 106.286614734
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 141.026753394
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 173.500790503
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 201.049987733
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 4
+            }
+          ],
+          "ascendantSignIndex": 7
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 223.967629529,
+            "MC": 141.026753394,
+            "DSC": 43.967629529,
+            "IC": 321.026753394
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 180.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 4
+            }
+          ],
+          "ascendantSignIndex": 7
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MERCURY",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 5.705586286,
+          "orbDegrees": 5.705586286,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.294413714,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "MERCURY",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 61.376143248,
+          "orbDegrees": 1.376143248,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 2.623856752,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "JUPITER",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 92.933700093,
+          "orbDegrees": 2.933700093,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.066299907,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "SATURN",
+          "aspectCode": "TRINE",
+          "separationDegrees": 121.738442471,
+          "orbDegrees": 1.738442471,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.261557529,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "SATURN",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 60.362299223,
+          "orbDegrees": 0.362299223,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.637700777,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 172.557639619,
+          "orbDegrees": 7.442360381,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 0.557639619,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 86.679908562,
+          "orbDegrees": 3.320091438,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.679908562,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 57.072988679,
+          "orbDegrees": 2.927011321,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.072988679,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 85.877731057,
+          "orbDegrees": 4.122268943,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 1.877731057,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "URANUS",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 63.081874963,
+          "orbDegrees": 3.081874963,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 0.918125037,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-06",
+      "inputClass": "EXISTING_R2_FIXTURE",
+      "input": {
+        "birthDate": "1965-05-02",
+        "birthTime": "08:15:00",
+        "latitude": -1.29,
+        "longitude": 36.82,
+        "utcOffsetAtBirth": "+03:00",
+        "iana": "Africa/Nairobi"
+      },
+      "expectedUtcIso": "1965-05-02T05:15:00.000Z",
+      "julianDayUt": 2438882.71875,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 41.588850036,
+          "latitude": -1.6485e-05,
+          "distanceAu": 1.0079922037,
+          "speedLongitudeDegreesPerDay": 0.970391138,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 51.023335395,
+          "latitude": -2.040553778,
+          "distanceAu": 0.002481745351,
+          "speedLongitudeDegreesPerDay": 14.122144132,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 15.659467429,
+          "latitude": -2.732830436,
+          "distanceAu": 0.765649018686,
+          "speedLongitudeDegreesPerDay": 0.735071466,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 46.814472316,
+          "latitude": -0.539925327,
+          "distanceAu": 1.720054903856,
+          "speedLongitudeDegreesPerDay": 1.23345275,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 159.606807164,
+          "latitude": 2.014282075,
+          "distanceAu": 0.894341279363,
+          "speedLongitudeDegreesPerDay": 0.140345401,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 62.154724209,
+          "latitude": -0.615141403,
+          "distanceAu": 5.974240117782,
+          "speedLongitudeDegreesPerDay": 0.227037289,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 344.673242179,
+          "latitude": -1.70888335,
+          "distanceAu": 10.227072620684,
+          "speedLongitudeDegreesPerDay": 0.084172591,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 160.813307187,
+          "latitude": 0.79484048,
+          "distanceAu": 17.774630325411,
+          "speedLongitudeDegreesPerDay": -0.014358497,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 228.838426218,
+          "latitude": 1.819176234,
+          "distanceAu": 29.323064174801,
+          "speedLongitudeDegreesPerDay": -0.026920838,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 163.812619337,
+          "latitude": 14.510667944,
+          "distanceAu": 32.086518001721,
+          "speedLongitudeDegreesPerDay": -0.011424496,
+          "retrograde": true,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 74.052653018,
+        "southLongitude": 254.052653018,
+        "northSpeedLongitudeDegreesPerDay": -0.04219749,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 66.814511782,
+            "MC": 333.565798203,
+            "DSC": 246.814511782,
+            "IC": 153.565798203
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 66.814511782
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 94.690486626
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 123.036118458
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 153.565798203
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 185.952471056
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 217.624890796
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 246.814511782
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 274.690486626
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 303.036118458
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 333.565798203
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 5.952471056
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 37.624890796
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 7
+            }
+          ],
+          "ascendantSignIndex": 2
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 66.814511782,
+            "MC": 333.565798203,
+            "DSC": 246.814511782,
+            "IC": 153.565798203
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 30.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 7
+            }
+          ],
+          "ascendantSignIndex": 2
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "VENUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 5.22562228,
+          "orbDegrees": 5.22562228,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.77437772,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "MARS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 118.017957128,
+          "orbDegrees": 1.982042872,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.017957128,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "SATURN",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 56.915607857,
+          "orbDegrees": 3.084392143,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 0.915607857,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "URANUS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 119.224457151,
+          "orbDegrees": 0.775542849,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.224457151,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 172.750423818,
+          "orbDegrees": 7.249576182,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 0.750423818,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "PLUTO",
+          "aspectCode": "TRINE",
+          "separationDegrees": 122.223769301,
+          "orbDegrees": 2.223769301,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.776230699,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "VENUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 4.208863079,
+          "orbDegrees": 4.208863079,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.791136921,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "NEPTUNE",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 177.815090823,
+          "orbDegrees": 2.184909177,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.815090823,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 62.141230137,
+          "orbDegrees": 2.141230137,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.858769863,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 177.976046098,
+          "orbDegrees": 2.023953902,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.976046098,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "PLUTO",
+          "aspectCode": "TRINE",
+          "separationDegrees": 116.998147021,
+          "orbDegrees": 3.001852979,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.998147021,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 174.933564985,
+          "orbDegrees": 5.066435015,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.933564985,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "URANUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 1.206500023,
+          "orbDegrees": 1.206500023,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 6.793499977,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "PLUTO",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 4.205812173,
+          "orbDegrees": 4.205812173,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.794187827,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "URANUS",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 176.140065008,
+          "orbDegrees": 3.859934992,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 4.140065008,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "TRINE",
+          "separationDegrees": 115.834815961,
+          "orbDegrees": 4.165184039,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 1.834815961,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "PLUTO",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 179.139377158,
+          "orbDegrees": 0.860622842,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 7.139377158,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "URANUS",
+          "toCode": "PLUTO",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 2.99931215,
+          "orbDegrees": 2.99931215,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.00068785,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-07",
+      "inputClass": "EXISTING_R2_FIXTURE_HIGH_LATITUDE_PLACIDUS",
+      "input": {
+        "birthDate": "2008-11-08",
+        "birthTime": "16:40:00",
+        "latitude": 64.15,
+        "longitude": -21.94,
+        "utcOffsetAtBirth": "+00:00",
+        "iana": "Atlantic/Reykjavik"
+      },
+      "expectedUtcIso": "2008-11-08T16:40:00.000Z",
+      "julianDayUt": 2454779.194444444,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 226.651687171,
+          "latitude": 5.4008e-05,
+          "distanceAu": 0.990549689952,
+          "speedLongitudeDegreesPerDay": 1.004127054,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 346.120274352,
+          "latitude": 2.694377982,
+          "distanceAu": 0.002559319236,
+          "speedLongitudeDegreesPerDay": 13.199006051,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 216.533521858,
+          "latitude": 1.28943014,
+          "distanceAu": 1.33800241698,
+          "speedLongitudeDegreesPerDay": 1.6260713,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 265.265050217,
+          "latitude": -1.961867684,
+          "distanceAu": 1.15739526162,
+          "speedLongitudeDegreesPerDay": 1.201052783,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 234.555011408,
+          "latitude": -0.197015911,
+          "distanceAu": 2.501685095116,
+          "speedLongitudeDegreesPerDay": 0.70765813,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 288.055588659,
+          "latitude": -0.358193225,
+          "distanceAu": 5.533102763184,
+          "speedLongitudeDegreesPerDay": 0.165513792,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 169.326275142,
+          "latitude": 1.821864491,
+          "distanceAu": 9.849024496194,
+          "speedLongitudeDegreesPerDay": 0.086148077,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 348.889379257,
+          "latitude": -0.787485084,
+          "distanceAu": 19.552917047265,
+          "speedLongitudeDegreesPerDay": -0.015614075,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 321.479795425,
+          "latitude": -0.353503355,
+          "distanceAu": 29.935803161917,
+          "speedLongitudeDegreesPerDay": 0.003606152,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 269.42155999,
+          "latitude": 5.823212777,
+          "distanceAu": 32.265616952453,
+          "speedLongitudeDegreesPerDay": 0.02871779,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 313.806290291,
+        "southLongitude": 133.806290291,
+        "northSpeedLongitudeDegreesPerDay": -0.059420493,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 50.354675718,
+            "MC": 275.782501108,
+            "DSC": 230.354675718,
+            "IC": 95.782501108
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 50.354675718
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 77.727837533
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 87.63666077
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 95.782501108
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 105.315285168
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 122.465905077
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 230.354675718
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 257.727837533
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 267.63666077
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 275.782501108
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 285.315285168
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 302.465905077
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 6
+            }
+          ],
+          "ascendantSignIndex": 1
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 50.354675718,
+            "MC": 275.782501108,
+            "DSC": 230.354675718,
+            "IC": 95.782501108
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 0.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 4
+            }
+          ],
+          "ascendantSignIndex": 1
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MOON",
+          "aspectCode": "TRINE",
+          "separationDegrees": 119.468587181,
+          "orbDegrees": 0.531412819,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.468587181,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "MARS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 7.903324237,
+          "orbDegrees": 7.903324237,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 0.096675763,
+          "robustForCrossValidation": false
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "JUPITER",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 61.403901488,
+          "orbDegrees": 1.403901488,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 2.596098512,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "SATURN",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 57.325412029,
+          "orbDegrees": 2.674587971,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.325412029,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "URANUS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 122.237692086,
+          "orbDegrees": 2.237692086,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.762307914,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 94.828108254,
+          "orbDegrees": 4.828108254,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 1.171891746,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "JUPITER",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 58.064685693,
+          "orbDegrees": 1.935314307,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 2.064685693,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "SATURN",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 176.79399921,
+          "orbDegrees": 3.20600079,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 4.79399921,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "URANUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 2.769104905,
+          "orbDegrees": 2.769104905,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.230895095,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 95.938775075,
+          "orbDegrees": 5.938775075,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.061224925,
+          "robustForCrossValidation": false
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 56.214745208,
+          "orbDegrees": 3.785254792,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 0.214745208,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "PLUTO",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 4.156509773,
+          "orbDegrees": 4.156509773,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.843490227,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "URANUS",
+          "aspectCode": "TRINE",
+          "separationDegrees": 114.334367849,
+          "orbDegrees": 5.665632151,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.334367849,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 86.924784017,
+          "orbDegrees": 3.075215983,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.924784017,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "aspectCode": "TRINE",
+          "separationDegrees": 118.729313517,
+          "orbDegrees": 1.270686483,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 4.729313517,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "URANUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 60.833790598,
+          "orbDegrees": 0.833790598,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.166209402,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "URANUS",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 179.563104115,
+          "orbDegrees": 0.436895885,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 7.563104115,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTFP-08",
+      "inputClass": "EXISTING_R2_FIXTURE",
+      "input": {
+        "birthDate": "1987-01-30",
+        "birthTime": "12:00:00",
+        "latitude": -34.6,
+        "longitude": -58.38,
+        "utcOffsetAtBirth": "-03:00",
+        "iana": "America/Argentina/Buenos_Aires"
+      },
+      "expectedUtcIso": "1987-01-30T15:00:00.000Z",
+      "julianDayUt": 2446826.125,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 310.183881791,
+          "latitude": -6.0301e-05,
+          "distanceAu": 0.985117441593,
+          "speedLongitudeDegreesPerDay": 1.015973616,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 324.845290853,
+          "latitude": -3.799473307,
+          "distanceAu": 0.002427361096,
+          "speedLongitudeDegreesPerDay": 14.787421743,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 322.483696999,
+          "latitude": -1.51948988,
+          "distanceAu": 1.249094048927,
+          "speedLongitudeDegreesPerDay": 1.717961663,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 263.932601951,
+          "latitude": 2.999060765,
+          "distanceAu": 0.785093436078,
+          "speedLongitudeDegreesPerDay": 1.092892979,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 15.439812107,
+          "latitude": 0.096267222,
+          "distanceAu": 1.590098501044,
+          "speedLongitudeDegreesPerDay": 0.69688096,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 353.002774099,
+          "latitude": -1.132404398,
+          "distanceAu": 5.636924055903,
+          "speedLongitudeDegreesPerDay": 0.208844122,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 258.37112492,
+          "latitude": 1.498840323,
+          "distanceAu": 10.596740929875,
+          "speedLongitudeDegreesPerDay": 0.087583828,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 265.199096258,
+          "latitude": -0.118576707,
+          "distanceAu": 19.873117738339,
+          "speedLongitudeDegreesPerDay": 0.04728451,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 276.752673446,
+          "latitude": 1.011688225,
+          "distanceAu": 31.055682172458,
+          "speedLongitudeDegreesPerDay": 0.032886759,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 219.931436567,
+          "latitude": 16.374454171,
+          "distanceAu": 29.6762344381,
+          "speedLongitudeDegreesPerDay": 0.007309649,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 13.537907783,
+        "southLongitude": 193.537907783,
+        "northSpeedLongitudeDegreesPerDay": -0.138924429,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 21.689674691,
+            "MC": 294.044031728,
+            "DSC": 201.689674691,
+            "IC": 114.044031728
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 21.689674691
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 49.893407777
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 81.011821656
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 114.044031728
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 146.670921483
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 176.304866322
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 201.689674691
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 229.893407777
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 261.011821656
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 294.044031728
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 326.670921483
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 356.304866322
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 6
+            }
+          ],
+          "ascendantSignIndex": 0
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 21.689674691,
+            "MC": 294.044031728,
+            "DSC": 201.689674691,
+            "IC": 114.044031728
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 330.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 7
+            }
+          ],
+          "ascendantSignIndex": 0
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "PLUTO",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 90.252445224,
+          "orbDegrees": 0.252445224,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.747554776,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "MERCURY",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 2.361593854,
+          "orbDegrees": 2.361593854,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 5.638406146,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "VENUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 60.912688902,
+          "orbDegrees": 0.912688902,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.087311098,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "URANUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 59.646194595,
+          "orbDegrees": 0.353805405,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.646194595,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "VENUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 58.551095048,
+          "orbDegrees": 1.448904952,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 2.551095048,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "URANUS",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 57.284600741,
+          "orbDegrees": 2.715399259,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.284600741,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "JUPITER",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 89.070172148,
+          "orbDegrees": 0.929827852,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.070172148,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "SATURN",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 5.561477031,
+          "orbDegrees": 5.561477031,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.438522969,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "VENUS",
+          "toCode": "URANUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 1.266494307,
+          "orbDegrees": 1.266494307,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 6.733505693,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "SATURN",
+          "aspectCode": "TRINE",
+          "separationDegrees": 117.068687187,
+          "orbDegrees": 2.931312813,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.068687187,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 94.631649179,
+          "orbDegrees": 4.631649179,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 1.368350821,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "URANUS",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 87.803677841,
+          "orbDegrees": 2.196322159,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.803677841,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "URANUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 6.827971338,
+          "orbDegrees": 6.827971338,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.172028662,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "NEPTUNE",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 56.821236879,
+          "orbDegrees": 3.178763121,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 0.821236879,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTR3-09",
+      "inputClass": "R3_QUARTER_HOUR_OFFSET_EDGE",
+      "input": {
+        "birthDate": "1990-01-15",
+        "birthTime": "12:49:56",
+        "latitude": 27.7172,
+        "longitude": 85.324,
+        "utcOffsetAtBirth": "+05:45",
+        "iana": "Asia/Kathmandu"
+      },
+      "expectedUtcIso": "1990-01-15T07:04:56.000Z",
+      "julianDayUt": 2447906.795092592,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 294.869607122,
+          "latitude": -9.6446e-05,
+          "distanceAu": 0.983640627564,
+          "speedLongitudeDegreesPerDay": 1.018248698,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 164.935232662,
+          "latitude": -2.500308626,
+          "distanceAu": 0.002626023973,
+          "speedLongitudeDegreesPerDay": 12.552165736,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 281.495263815,
+          "latitude": 3.376000985,
+          "distanceAu": 0.705838526776,
+          "speedLongitudeDegreesPerDay": -0.752964494,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 300.807056863,
+          "latitude": 5.360178038,
+          "distanceAu": 0.268524585314,
+          "speedLongitudeDegreesPerDay": -0.591263217,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 259.763224976,
+          "latitude": -0.189670948,
+          "distanceAu": 2.225923358282,
+          "speedLongitudeDegreesPerDay": 0.711824051,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 93.390060402,
+          "latitude": -0.08318167,
+          "distanceAu": 4.228046885575,
+          "speedLongitudeDegreesPerDay": -0.117639981,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 287.29036716,
+          "latitude": 0.277065709,
+          "distanceAu": 11.000296786691,
+          "speedLongitudeDegreesPerDay": 0.117840514,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 276.601426552,
+          "latitude": -0.272636745,
+          "distanceAu": 20.314182319568,
+          "speedLongitudeDegreesPerDay": 0.057860852,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 282.558162822,
+          "latitude": 0.845771142,
+          "distanceAu": 31.170303503321,
+          "speedLongitudeDegreesPerDay": 0.037195254,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 227.424032643,
+          "latitude": 15.377175061,
+          "distanceAu": 30.00606784675,
+          "speedLongitudeDegreesPerDay": 0.02043233,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 316.574548556,
+        "southLongitude": 136.574548556,
+        "northSpeedLongitudeDegreesPerDay": 0.028939359,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 47.826922654,
+            "MC": 303.719487127,
+            "DSC": 227.826922654,
+            "IC": 123.719487127
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 47.826922654
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 75.713804569
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 99.512924149
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 123.719487127
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 152.143928594
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 187.743917772
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 227.826922654
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 255.713804569
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 279.512924149
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 303.719487127
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 332.143928594
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 7.743917772
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 6
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 4
+            }
+          ],
+          "ascendantSignIndex": 1
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 47.826922654,
+            "MC": 303.719487127,
+            "DSC": 227.826922654,
+            "IC": 123.719487127
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 270.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 0.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 8
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 9
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 7
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 10
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 4
+            }
+          ],
+          "ascendantSignIndex": 1
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "VENUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 5.937449741,
+          "orbDegrees": 5.937449741,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.062550259,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "SATURN",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 7.579239962,
+          "orbDegrees": 7.579239962,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 0.420760038,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "MERCURY",
+          "aspectCode": "TRINE",
+          "separationDegrees": 116.560031153,
+          "orbDegrees": 3.439968847,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 2.560031153,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "MARS",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 94.827992314,
+          "orbDegrees": 4.827992314,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 1.172007686,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "SATURN",
+          "aspectCode": "TRINE",
+          "separationDegrees": 122.355134498,
+          "orbDegrees": 2.355134498,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.644865502,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "NEPTUNE",
+          "aspectCode": "TRINE",
+          "separationDegrees": 117.62293016,
+          "orbDegrees": 2.37706984,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 3.62293016,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 62.488799981,
+          "orbDegrees": 2.488799981,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 1.511200019,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "SATURN",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 5.795103345,
+          "orbDegrees": 5.795103345,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.204896655,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "URANUS",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 4.893837263,
+          "orbDegrees": 4.893837263,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.106162737,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MERCURY",
+          "toCode": "NEPTUNE",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 1.062899007,
+          "orbDegrees": 1.062899007,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 6.937100993,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "URANUS",
+          "aspectCode": "OPPOSITION",
+          "separationDegrees": 176.78863385,
+          "orbDegrees": 3.21136615,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 4.78863385,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "NEPTUNE",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 4.732204338,
+          "orbDegrees": 4.732204338,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 3.267795662,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 59.866334517,
+          "orbDegrees": 0.133665483,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.866334517,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "URANUS",
+          "toCode": "NEPTUNE",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 5.95673627,
+          "orbDegrees": 5.95673627,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 2.04326373,
+          "robustForCrossValidation": true
+        }
+      ]
+    },
+    {
+      "caseId": "ASTR3-10",
+      "inputClass": "R3_POLAR_WHOLE_SIGN_ASCENDANT_BRANCH",
+      "input": {
+        "birthDate": "2020-12-21",
+        "birthTime": "13:00:00",
+        "latitude": 69.6492,
+        "longitude": 18.9553,
+        "utcOffsetAtBirth": "+01:00",
+        "iana": "Europe/Oslo"
+      },
+      "expectedUtcIso": "2020-12-21T12:00:00.000Z",
+      "julianDayUt": 2459205.0,
+      "core10": [
+        {
+          "bodyCode": "SUN",
+          "longitude": 270.083223741,
+          "latitude": -0.000220783,
+          "distanceAu": 0.983710336814,
+          "speedLongitudeDegreesPerDay": 1.018461173,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MOON",
+          "longitude": 354.661983826,
+          "latitude": -5.267340196,
+          "distanceAu": 0.002665714008,
+          "speedLongitudeDegreesPerDay": 12.208892582,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MERCURY",
+          "longitude": 270.850492822,
+          "latitude": -1.558357386,
+          "distanceAu": 1.444954133857,
+          "speedLongitudeDegreesPerDay": 1.585902541,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "VENUS",
+          "longitude": 247.271924988,
+          "latitude": 1.069013482,
+          "distanceAu": 1.520277217341,
+          "speedLongitudeDegreesPerDay": 1.250387236,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "MARS",
+          "longitude": 23.113131984,
+          "latitude": 0.634483653,
+          "distanceAu": 0.805814125412,
+          "speedLongitudeDegreesPerDay": 0.373805598,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "JUPITER",
+          "longitude": 300.427955895,
+          "latitude": -0.480065344,
+          "distanceAu": 5.923934780563,
+          "speedLongitudeDegreesPerDay": 0.219975663,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "SATURN",
+          "longitude": 300.457535722,
+          "latitude": -0.378282357,
+          "distanceAu": 10.824946389113,
+          "speedLongitudeDegreesPerDay": 0.108098805,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "URANUS",
+          "longitude": 36.964471133,
+          "latitude": -0.455518365,
+          "distanceAu": 19.167642746014,
+          "speedLongitudeDegreesPerDay": -0.019889272,
+          "retrograde": true,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "NEPTUNE",
+          "longitude": 348.30821261,
+          "latitude": -1.085839026,
+          "distanceAu": 30.112438936768,
+          "speedLongitudeDegreesPerDay": 0.012863999,
+          "retrograde": false,
+          "referenceFlags": 260
+        },
+        {
+          "bodyCode": "PLUTO",
+          "longitude": 293.853511082,
+          "latitude": -1.181822078,
+          "distanceAu": 35.082449351054,
+          "speedLongitudeDegreesPerDay": 0.030984301,
+          "retrograde": false,
+          "referenceFlags": 260
+        }
+      ],
+      "trueNode": {
+        "northLongitude": 79.870043088,
+        "southLongitude": 259.870043088,
+        "northSpeedLongitudeDegreesPerDay": -0.007531302,
+        "referenceFlags": 260
+      },
+      "houseSystems": {
+        "PLACIDUS_V1": {
+          "available": false,
+          "expectedReasonCode": "ASTA_PLACIDUS_POLAR_LIMIT"
+        },
+        "WHOLE_SIGN_V1": {
+          "available": true,
+          "angles": {
+            "ASC": 301.875386101,
+            "MC": 287.971590574,
+            "DSC": 121.875386101,
+            "IC": 107.971590574
+          },
+          "cusps": [
+            {
+              "houseNumber": 1,
+              "longitude": 300.0
+            },
+            {
+              "houseNumber": 2,
+              "longitude": 330.0
+            },
+            {
+              "houseNumber": 3,
+              "longitude": 0.0
+            },
+            {
+              "houseNumber": 4,
+              "longitude": 30.0
+            },
+            {
+              "houseNumber": 5,
+              "longitude": 60.0
+            },
+            {
+              "houseNumber": 6,
+              "longitude": 90.0
+            },
+            {
+              "houseNumber": 7,
+              "longitude": 120.0
+            },
+            {
+              "houseNumber": 8,
+              "longitude": 150.0
+            },
+            {
+              "houseNumber": 9,
+              "longitude": 180.0
+            },
+            {
+              "houseNumber": 10,
+              "longitude": 210.0
+            },
+            {
+              "houseNumber": 11,
+              "longitude": 240.0
+            },
+            {
+              "houseNumber": 12,
+              "longitude": 270.0
+            }
+          ],
+          "placements": [
+            {
+              "bodyCode": "SUN",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "MOON",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "MERCURY",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "VENUS",
+              "houseNumber": 11
+            },
+            {
+              "bodyCode": "MARS",
+              "houseNumber": 3
+            },
+            {
+              "bodyCode": "JUPITER",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "SATURN",
+              "houseNumber": 1
+            },
+            {
+              "bodyCode": "URANUS",
+              "houseNumber": 4
+            },
+            {
+              "bodyCode": "NEPTUNE",
+              "houseNumber": 2
+            },
+            {
+              "bodyCode": "PLUTO",
+              "houseNumber": 12
+            },
+            {
+              "bodyCode": "NORTH_NODE",
+              "houseNumber": 5
+            },
+            {
+              "bodyCode": "SOUTH_NODE",
+              "houseNumber": 11
+            }
+          ],
+          "ascendantSignIndex": 10
+        }
+      },
+      "majorAspects": [
+        {
+          "fromCode": "SUN",
+          "toCode": "MOON",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 84.578760085,
+          "orbDegrees": 5.421239915,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 0.578760085,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SUN",
+          "toCode": "MERCURY",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 0.767269081,
+          "orbDegrees": 0.767269081,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 7.232730919,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "NEPTUNE",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 6.353771216,
+          "orbDegrees": 6.353771216,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.646228784,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MOON",
+          "toCode": "PLUTO",
+          "aspectCode": "SEXTILE",
+          "separationDegrees": 60.808472744,
+          "orbDegrees": 0.808472744,
+          "authorizedOrbDegrees": 4,
+          "boundaryMarginDegrees": 3.191527256,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "MARS",
+          "toCode": "PLUTO",
+          "aspectCode": "SQUARE",
+          "separationDegrees": 89.259620902,
+          "orbDegrees": 0.740379098,
+          "authorizedOrbDegrees": 6,
+          "boundaryMarginDegrees": 5.259620902,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "SATURN",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 0.029579827,
+          "orbDegrees": 0.029579827,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 7.970420173,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "JUPITER",
+          "toCode": "PLUTO",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 6.574444813,
+          "orbDegrees": 6.574444813,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.425555187,
+          "robustForCrossValidation": true
+        },
+        {
+          "fromCode": "SATURN",
+          "toCode": "PLUTO",
+          "aspectCode": "CONJUNCTION",
+          "separationDegrees": 6.60402464,
+          "orbDegrees": 6.60402464,
+          "authorizedOrbDegrees": 8,
+          "boundaryMarginDegrees": 1.39597536,
+          "robustForCrossValidation": true
+        }
+      ]
+    }
+  ],
+  "boundary": {
+    "meaningCreated": false,
+    "interpretationCreated": false,
+    "customerPublicationChanged": false,
+    "swissEphemerisRuntimeBundled": false,
+    "licenseLegalOpinionCreated": false
+  }
+}

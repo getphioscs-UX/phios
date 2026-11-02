@@ -1,0 +1,36 @@
+{
+  "contractCode": "PHI-OS-ORC-W6-IDEMPOTENCY-CONTRACT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W6",
+  "status": "canonical",
+  "protectedOperationClasses": [
+    {
+      "operationClass": "CASE",
+      "domainOwner": "ICR"
+    },
+    {
+      "operationClass": "REPORT",
+      "domainOwner": "RR"
+    },
+    {
+      "operationClass": "PAYMENT",
+      "domainOwner": "COMMERCIAL"
+    },
+    {
+      "operationClass": "PROJECTION",
+      "domainOwner": "MPA"
+    },
+    {
+      "operationClass": "ACTION",
+      "domainOwner": "RMO"
+    }
+  ],
+  "idempotencyKey": "sha256(caseId|operationClass|operationCode|authorityReference|requestIdentity)",
+  "replayResult": "RETURN_COMMITTED_OPERATION_REFERENCE_NO_DUPLICATE",
+  "rules": {
+    "sameKeyCannotCreateSecondOperation": true,
+    "idempotencyDoesNotTransferDomainAuthority": true,
+    "paymentExecutionOwnedByCommercialRuntime": true
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "registryCode": "PHI-OS-ALR-W5-CAPABILITY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W5",
+  "status": "canonical",
+  "productionStatus": "semantic_registry_only",
+  "identityPrefix": "ALR-CAP-",
+  "requiredCapabilityFields": [
+    "capabilityCode",
+    "capabilityVersion",
+    "title",
+    "definition",
+    "academyLevelCode",
+    "capabilityKind",
+    "requiredEvidenceCriteria",
+    "status",
+    "authorityReference"
+  ],
+  "capabilityKinds": [
+    "FOUNDATIONAL_LITERACY",
+    "READING_LITERACY",
+    "APPLIED_NAVIGATION",
+    "CONTINUITY_PRACTICE",
+    "PROFESSIONAL_FORMATION"
+  ],
+  "capabilityStatusValues": ["DRAFT", "REVIEW_REQUIRED", "ACTIVE", "SUSPENDED", "RETIRED"],
+  "criterionStatusValues": ["MET", "NOT_MET", "DISPUTED", "UNKNOWN"],
+  "capabilities": [
+    {
+      "capabilityCode": "ALR-CAP-EVIDENCE-DISTINCTION",
+      "capabilityVersion": "1.0.0",
+      "title": "Evidence Distinction",
+      "definition": "Distinguish observation, report and inference while preserving source, uncertainty and lineage boundaries.",
+      "academyLevelCode": "FOUNDATION",
+      "capabilityKind": "FOUNDATIONAL_LITERACY",
+      "requiredEvidenceCriteria": [
+        {
+          "criterionCode": "OBSERVATION_REPORT_INFERENCE_SEPARATED",
+          "definition": "Observation, report and inference are explicitly separated."
+        },
+        {
+          "criterionCode": "SOURCE_LINEAGE_BOUNDARIES_PRESERVED",
+          "definition": "Source, uncertainty and lineage boundaries remain visible."
+        }
+      ],
+      "status": "ACTIVE",
+      "authorityReference": "ALR",
+      "boundaries": ["NOT_TRUTH_AUTHORITY", "NOT_REALITY_EVIDENCE_PROMOTION"]
+    },
+    {
+      "capabilityCode": "ALR-CAP-BOUNDED-READING",
+      "capabilityVersion": "1.0.0",
+      "title": "Bounded Reading",
+      "definition": "Form a bounded reading whose claims remain proportionate to governed evidence and declared uncertainty.",
+      "academyLevelCode": "READER",
+      "capabilityKind": "READING_LITERACY",
+      "requiredEvidenceCriteria": [
+        {
+          "criterionCode": "READING_CLAIMS_BOUND_TO_EVIDENCE",
+          "definition": "Reading claims do not exceed their governed evidence."
+        },
+        {
+          "criterionCode": "UNCERTAINTY_AND_LIMITS_PRESERVED",
+          "definition": "Uncertainty, limitations and competing interpretations remain visible."
+        }
+      ],
+      "status": "ACTIVE",
+      "authorityReference": "ALR",
+      "boundaries": ["NOT_DIAGNOSIS", "NOT_PROFESSIONAL_JUDGMENT"]
+    },
+    {
+      "capabilityCode": "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION",
+      "capabilityVersion": "1.0.0",
+      "title": "Constraint-aware Navigation",
+      "definition": "Form bounded options and actions while preserving constraints, authority limits and review conditions.",
+      "academyLevelCode": "NAVIGATOR",
+      "capabilityKind": "APPLIED_NAVIGATION",
+      "requiredEvidenceCriteria": [
+        {
+          "criterionCode": "OPTIONS_AND_CONSTRAINTS_MAPPED",
+          "definition": "Material options and constraints are explicitly mapped."
+        },
+        {
+          "criterionCode": "ACTION_REMAINS_WITHIN_AUTHORITY",
+          "definition": "The proposed action does not exceed the learner's declared authority boundary."
+        }
+      ],
+      "status": "ACTIVE",
+      "authorityReference": "ALR",
+      "boundaries": ["NOT_DECISION_FOR_LEARNER", "NOT_PROFESSIONAL_PERMISSION"]
+    },
+    {
+      "capabilityCode": "ALR-CAP-REVIEW-CONTINUITY",
+      "capabilityVersion": "1.0.0",
+      "title": "Review and Continuity",
+      "definition": "Review action and outcome with lineage intact, then form a bounded continuation state.",
+      "academyLevelCode": "NAVIGATOR",
+      "capabilityKind": "CONTINUITY_PRACTICE",
+      "requiredEvidenceCriteria": [
+        {
+          "criterionCode": "REVIEW_LINKS_ACTION_TO_OUTCOME",
+          "definition": "Review links the relevant action, observed outcome and unresolved uncertainty."
+        },
+        {
+          "criterionCode": "CONTINUATION_PRESERVES_LINEAGE",
+          "definition": "The continuation state preserves prior evidence, decision and revision lineage."
+        }
+      ],
+      "status": "ACTIVE",
+      "authorityReference": "ALR",
+      "boundaries": ["NOT_OUTCOME_AUTHORITY", "NOT_LONG_TERM_MEMORY_PERMISSION"]
+    },
+    {
+      "capabilityCode": "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION",
+      "capabilityVersion": "1.0.0",
+      "title": "Bounded Professional Formation",
+      "definition": "Apply advanced learning within explicit professional, credential, entitlement and jurisdiction boundaries.",
+      "academyLevelCode": "PROFESSIONAL",
+      "capabilityKind": "PROFESSIONAL_FORMATION",
+      "requiredEvidenceCriteria": [
+        {
+          "criterionCode": "PROFESSIONAL_BOUNDARIES_APPLIED",
+          "definition": "Professional, jurisdictional and assignment boundaries are correctly applied."
+        },
+        {
+          "criterionCode": "CREDENTIAL_ENTITLEMENT_SEPARATED",
+          "definition": "Learning capability, credential, entitlement and professional authority remain separate."
+        }
+      ],
+      "status": "ACTIVE",
+      "authorityReference": "ALR",
+      "boundaries": ["NOT_CREDENTIAL", "NOT_ENTITLEMENT", "NOT_PROFESSIONAL_READINESS_DECISION"]
+    }
+  ],
+  "rules": {
+    "capabilityDefinitionIsLearnerState": false,
+    "academyLevelIsCapabilityState": false,
+    "trackClassIsCapability": false,
+    "lessonCompletionIsCapability": false,
+    "assessmentScoreIsCapability": false,
+    "capabilityEvidenceIsCapabilityState": false,
+    "alrLearningCapabilityIsPwsProfessionalCapability": false,
+    "capabilityMayGrantCredential": false,
+    "capabilityMayGrantEntitlement": false,
+    "registryStoresLearnerData": false,
+    "unknownCapabilityFailsClosed": true
+  }
+}

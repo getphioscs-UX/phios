@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-US-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+  "status": "ACCEPTED_CURRENT_DOSSIER",
+  "dossierId": "DOSSIER-US",
+  "stage": "W8-I",
+  "entity": {
+    "en": "United States",
+    "zh-Hans": "美国"
+  },
+  "admittedPositions": [
+    {
+      "runtimePositionId": "RP-23",
+      "phase": 23,
+      "arc": "ACTIVATION",
+      "shortLabel": {
+        "en": "Runtime · Routing",
+        "zh-Hans": "运行 · 路径"
+      },
+      "scope": "SUBSYSTEM",
+      "subsystem": "ECONOMIC_RUNTIME",
+      "grammarId": "G7",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "US-CARRIER-STRUCTURE-2026-001",
+        "US-EXTERNAL-DEPENDENCY-2026-001",
+        "US-INDUSTRY-2026-001",
+        "US-INFRASTRUCTURE-2026-001"
+      ],
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-US-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "bdcd2690aba53b0dee677c7458174a575a9475b947e7e3b50aca67d54b74ffc7"
+      },
+      "candidateId": "US-RP-23-US-W8E-SEM-ECONOMIC-RUNTIME",
+      "humanDecisionReference": "content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json"
+    },
+    {
+      "runtimePositionId": "RP-22",
+      "phase": 22,
+      "arc": "ACTIVATION",
+      "shortLabel": {
+        "en": "Carrier · Routing",
+        "zh-Hans": "载体 · 路径"
+      },
+      "scope": "SUBSYSTEM",
+      "subsystem": "BUSINESS_INFRASTRUCTURE_CARRIER",
+      "grammarId": "G6",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "US-CARRIER-STRUCTURE-2026-001",
+        "US-INDUSTRY-2026-001",
+        "US-INFRASTRUCTURE-2026-001"
+      ],
+      "readoutReference": {
+        "code": "RRE-READOUT-B6-US-2026-1-CONTRACT",
+        "version": "2026.1-contract",
+        "digest": "bdcd2690aba53b0dee677c7458174a575a9475b947e7e3b50aca67d54b74ffc7"
+      },
+      "candidateId": "US-RP-22-US-W8E-SEM-BUSINESS-INFRASTRUCTURE-CARRIER",
+      "humanDecisionReference": "content/civilization-atlas/reconfiguration/dossier-us-w8h-human-decisions-v1.json"
+    }
+  ],
+  "projectionBoundary": {
+    "subsystemPositionsDoNotImplySingleWholeDossierPosition": true,
+    "evidenceRefsPreserved": true,
+    "currentDossierOnly": true,
+    "prediction": false,
+    "historicalPositionShortcut": false,
+    "unresolvedSemanticBasisRemainExcluded": true
+  },
+  "unresolvedSemanticBasis": [
+    "US-W8E-SEM-FINANCIAL-CONSTRAINT",
+    "US-W8E-SEM-MACRO-RECONFIGURATION",
+    "US-W8E-SEM-SYSTEM-CONTINUITY"
+  ],
+  "lineage": {
+    "source": "W8-A",
+    "claims": "W8-B",
+    "cwa": "W8-C",
+    "observableFeatures": "W8-D",
+    "rre": "W8-E",
+    "grammarDomain": "W8-F",
+    "rpCandidates": "W8-G",
+    "humanReview": "W8-H"
+  }
+}

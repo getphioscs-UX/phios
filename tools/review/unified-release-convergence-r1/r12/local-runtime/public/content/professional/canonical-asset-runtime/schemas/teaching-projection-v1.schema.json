@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/teaching-projection-v1.json",
+  "title": "teaching-projection-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "teachingCode",
+    "teachingVersion",
+    "assetType",
+    "briefCode",
+    "nodeCode",
+    "meaningReferences",
+    "knowledgeReferences",
+    "sourceFragmentDigests",
+    "locale",
+    "learningObjectives",
+    "teachingSequence",
+    "slideStructure",
+    "figureReferences",
+    "exercise",
+    "quizItems",
+    "assignmentBrief",
+    "limitations",
+    "candidateOnly",
+    "status"
+  ],
+  "properties": {
+    "teachingCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "teachingVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "assetType": {
+      "enum": [
+        "SLIDES",
+        "ACADEMY_LESSON",
+        "QUIZ"
+      ]
+    },
+    "briefCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodeCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "meaningReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sourceFragmentDigests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "learningObjectives": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "teachingSequence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "slideStructure": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "figureReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "exercise": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quizItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "question",
+          "answerReference"
+        ],
+        "properties": {
+          "question": {
+            "type": "string",
+            "minLength": 1
+          },
+          "answerReference": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "assignmentBrief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objective",
+        "submissionContract"
+      ],
+      "properties": {
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submissionContract": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "candidateOnly": {
+      "const": true
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  }
+}

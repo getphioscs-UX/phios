@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-TRANSFORMATION-RUNTIME-v1.0.0",
+  "phase": "ICH",
+  "works": [
+    "ICH-W5",
+    "ICH-W6",
+    "ICH-W7"
+  ],
+  "status": "STRUCTURAL_RUNTIME_IMPLEMENTED_VALIDATION_ONLY",
+  "runtimeCode": "ICHING_TRANSFORMATION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "algorithmCode": "ICHING_HEXAGRAM_TRANSFORMATION",
+  "algorithmVersion": "1.0.0",
+  "sharedCalculationRuntime": "SHARED_CALCULATION_RUNTIME",
+  "methodCode": "I_CHING",
+  "pluginCode": "ICH",
+  "input": "six bottom-to-top line values normalized from governed symbolic evidence",
+  "output": [
+    "primary",
+    "changingLines",
+    "relating",
+    "trace"
+  ],
+  "traceFields": [
+    "inputLines",
+    "normalization",
+    "primaryBinary",
+    "primaryId",
+    "changeMask",
+    "relatingBinary",
+    "relatingId"
+  ],
+  "determinism": {
+    "required": true,
+    "sameEvidenceSameResult": true,
+    "systemRandomRerollInsideCalculation": false
+  },
+  "authorityBoundary": {
+    "calculationOnly": true,
+    "sourceNeutral": true,
+    "projectionCreated": false,
+    "interpretationCreated": false,
+    "productionEligible": false
+  }
+}

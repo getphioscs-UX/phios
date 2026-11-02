@@ -1,0 +1,88 @@
+{
+  "work": "BOOK-V-PUBLICATION-KNOWLEDGE-ACTIVATION-R1",
+  "executionHead": "dc427746f91efd7d3680db617493bbe74caac7c5",
+  "predecessor": "content/books/book-5/maintenance/book-v-pka-r1-worktree-validation-v1.json",
+  "status": "MACHINE_VERIFIED_HUMAN_AND_LIVE_PROVIDER_GATES_PENDING",
+  "articlePairs": 42,
+  "localeRecords": 84,
+  "knowledgeBindings": 176,
+  "workPackages": {
+    "W0-W14": "IMPLEMENTED; current aggregate checker PASS",
+    "W15": "SUBSTANTIVE_REVIEW_AVAILABLE_PENDING_HUMAN_REVIEW",
+    "W16": "NOT_ADMITTED"
+  },
+  "visualBinding": {
+    "currentRuntimeBinding": "content/civilization-atlas/visuals/civilization-visual-approved-bindings-v2.json",
+    "acceptedAndResolvable": 392,
+    "unresolved": 0,
+    "book5": 380,
+    "book6Contextual": 12,
+    "articleObjectsReachable": 31,
+    "representativeFamiliesReachable": 15,
+    "old218MissingMappingClaim": "SUPERSEDED_BY_CURRENT_BINDING_AUDIT"
+  },
+  "humanDecision": "PENDING_HUMAN_REVIEW",
+  "liveModelProvider": "NOT_RUN",
+  "deploymentThisTask": "NOT_PERFORMED",
+  "reviewPage": "tools/review/BOOK-V-PKA-R1-HUMAN-REVIEW.html",
+  "machineChecks": [
+    {
+      "command": "npm run check:pages-build",
+      "result": "PASS",
+      "exitCode": 0,
+      "log": ".tmp/r2-260-pages-build.log",
+      "logSha256": "0998a98d5981b2b277ba5149370e4a1ff103a988a1ff64182c5a92393a823e24"
+    },
+    {
+      "command": "npm run check:r2-260-display",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run check:package-aliases",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/check-book-one-summary-browser.mjs",
+      "result": "PASS: 12/12 figures and 407 publication pages in all four combinations",
+      "exitCode": 0,
+      "log": ".tmp/book-one-summary-browser-v2.log",
+      "logSha256": "ce4ea289e1c0b7c296c9fdcba557c728d0699a36a2872264165d511429a400a0"
+    },
+    {
+      "command": "node scripts/check-book-v-pka-r1.mjs",
+      "result": "PASS: current existing Book V publication aggregate; no live provider claim",
+      "exitCode": 0,
+      "log": ".tmp/book-v-pka-current.log",
+      "logSha256": "8158c01fef5bb34977374ab92db6aac5de028c7faccad660c24808c76006c98e"
+    },
+    {
+      "command": "node scripts/audit-book-v-pka-r1-visuals.mjs --remote",
+      "result": "PASS: 392 resolved, 15 representative families, 31 article objects",
+      "exitCode": 0,
+      "log": ".tmp/book-v-visuals-current.log",
+      "logSha256": "f96a3b667c5c601ca70b54eb542cb833428fb6a580cca3aefa485362ea349574"
+    },
+    {
+      "command": "node .tmp/check-r2-review-pages.mjs",
+      "result": "PASS: 390/1440 review UI, 260 rows, 11-item filter, evidence links, current Book 1 / Book V notices",
+      "exitCode": 0,
+      "log": ".tmp/r2-review-pages.log",
+      "logSha256": "661d3b105940f3d682843b1da0fa60724c751c5d10a0ab5695573ecae08b8de4"
+    },
+    {
+      "command": "npm run check",
+      "result": "PASS: precheck + check + postcheck, final working tree",
+      "exitCode": 0,
+      "log": ".tmp/r2-260-npm-check-final.log",
+      "logSha256": "cde28a0e8f1bb5e4981a057ab94946040ebdcd84fcebf543251ce76e4ff3969c"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "scope": "Machine verification and visual reconciliation do not grant editorial human acceptance or production admission."
+}

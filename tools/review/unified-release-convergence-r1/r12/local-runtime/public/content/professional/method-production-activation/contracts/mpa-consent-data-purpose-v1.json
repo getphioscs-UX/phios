@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W7-CONSENT-DATA-PURPOSE-v1.0.0",
+  "work": "MPA-W7",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "ACTIVE_RDG_BOUND_FAIL_CLOSED",
+  "rdgAuthorities": {
+    "consentClasses": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json",
+    "purposeCodes": "content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json",
+    "retentionClasses": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json",
+    "visibilityScopes": "content/governance/reality-data-governance/registries/data-visibility-scope-registry-v1.json",
+    "permissionContract": "content/governance/reality-data-governance/contracts/data-permission-contract-v1.json"
+  },
+  "requiredExecutionState": {
+    "consentValid": true,
+    "withdrawalStatus": "AVAILABLE",
+    "purposeAllowed": true
+  },
+  "personalMethodExecutionPurposes": [
+    "SERVICE_DELIVERY",
+    "PROFESSIONAL_SERVICE"
+  ],
+  "requiredRecordFields": [
+    "consentRecordId",
+    "subjectReference",
+    "methodCode",
+    "purposeCode",
+    "consentClass",
+    "retentionClass",
+    "visibilityScope",
+    "professionalAccess",
+    "professionalReference",
+    "grantedAt",
+    "expiresAt",
+    "consentValid",
+    "withdrawal"
+  ],
+  "professionalRules": {
+    "professionalAccessRequiresProfessionalSharingConsent": true,
+    "professionalAccessRequiresAssignedProfessionalVisibility": true,
+    "professionalReferenceRequired": true,
+    "professionalReleaseAuthorityCreated": false
+  },
+  "rules": {
+    "singleGlobalConsentForbidden": true,
+    "purposeMustBeEnumeratedByRDG": true,
+    "retentionMustBeEnumeratedByRDG": true,
+    "visibilityMustBeEnumeratedByRDG": true,
+    "withdrawalMustBeRepresentable": true,
+    "withdrawnConsentCannotExecute": true,
+    "expiredConsentCannotExecute": true,
+    "mpaMayNotInventPurpose": true,
+    "mpaMayNotExpandRetention": true
+  },
+  "nextGate": "MPA-W8_BIRTH_INITIALIZATION_DATA_RUNTIME"
+}

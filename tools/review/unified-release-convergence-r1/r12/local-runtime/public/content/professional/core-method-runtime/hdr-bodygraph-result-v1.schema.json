@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/hdr/hdr-bodygraph-result-v1.schema.json",
+  "title": "PHI OS HDR BodyGraph Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "executionMode",
+    "activations",
+    "channels",
+    "definedCenters",
+    "undefinedCenters",
+    "typeCode",
+    "humanDesignAuthorityCode",
+    "profile",
+    "definitionCode",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "bodyGraphCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-HDR-BODYGRAPH-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "HDR_BODYGRAPH_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "pluginCode": {
+      "const": "HDR"
+    },
+    "calculationType": {
+      "const": "BODYGRAPH_STRUCTURE_RESOLUTION"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "activations": {
+      "type": "array",
+      "minItems": 26,
+      "maxItems": 26
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "channelCode",
+          "gates",
+          "centers",
+          "activationLayers"
+        ],
+        "properties": {
+          "channelCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "gates": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 64
+            }
+          },
+          "centers": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "enum": [
+                "HEAD",
+                "AJNA",
+                "THROAT",
+                "G",
+                "EGO",
+                "SACRAL",
+                "SPLEEN",
+                "SOLAR_PLEXUS",
+                "ROOT"
+              ]
+            }
+          },
+          "activationLayers": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "PERSONALITY",
+                "DESIGN"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "definedCenters": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "HEAD",
+          "AJNA",
+          "THROAT",
+          "G",
+          "EGO",
+          "SACRAL",
+          "SPLEEN",
+          "SOLAR_PLEXUS",
+          "ROOT"
+        ]
+      }
+    },
+    "undefinedCenters": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "HEAD",
+          "AJNA",
+          "THROAT",
+          "G",
+          "EGO",
+          "SACRAL",
+          "SPLEEN",
+          "SOLAR_PLEXUS",
+          "ROOT"
+        ]
+      }
+    },
+    "typeCode": {
+      "enum": [
+        "GENERATOR",
+        "MANIFESTING_GENERATOR",
+        "PROJECTOR",
+        "MANIFESTOR",
+        "REFLECTOR"
+      ]
+    },
+    "humanDesignAuthorityCode": {
+      "enum": [
+        "EMOTIONAL",
+        "SACRAL",
+        "SPLENIC",
+        "EGO_MANIFESTED",
+        "EGO_PROJECTED",
+        "SELF_PROJECTED",
+        "MENTAL",
+        "LUNAR"
+      ]
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "personalityLine",
+        "designLine",
+        "profileCode"
+      ],
+      "properties": {
+        "personalityLine": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "designLine": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "profileCode": {
+          "type": "string",
+          "pattern": "^[1-6]/[1-6]$"
+        }
+      }
+    },
+    "definitionCode": {
+      "enum": [
+        "NO_DEFINITION",
+        "SINGLE",
+        "SPLIT",
+        "TRIPLE_SPLIT",
+        "QUADRUPLE_SPLIT"
+      ]
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "bodyGraphCreated": {
+      "const": true
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

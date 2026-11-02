@@ -1,0 +1,106 @@
+{
+  "contractCode": "PHI-OS-ORC-W3-DEPENDENCY-ENFORCEMENT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W3",
+  "status": "canonical",
+  "rules": [
+    {
+      "ruleCode": "ORC-DEP-REALITY-BEFORE-READOUT",
+      "targetState": "READOUT_GENERATED",
+      "requiresCommittedStates": [
+        "REALITY_INITIALIZED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-MPA-BEFORE-METHOD",
+      "targetState": "METHOD_CALCULATED",
+      "requiresCommittedStates": [
+        "REALITY_INITIALIZED"
+      ],
+      "requiresEvents": [
+        "METHOD_ELIGIBILITY_CONFIRMED"
+      ]
+    },
+    {
+      "ruleCode": "ORC-DEP-CALC-BEFORE-PROJECTION",
+      "targetState": "PROJECTION_FROZEN",
+      "requiresCommittedStates": [
+        "METHOD_CALCULATED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-PROJECTION-BEFORE-MEANING",
+      "targetState": "MEANING_RESOLVED",
+      "requiresCommittedStates": [
+        "PROJECTION_FROZEN"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-MEANING-BEFORE-COVERAGE",
+      "targetState": "KNOWLEDGE_COVERAGE_CHECKED",
+      "requiresCommittedStates": [
+        "MEANING_RESOLVED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-READOUT-BEFORE-JOURNEY",
+      "targetState": "JOURNEY_ACTIVATED",
+      "requiresCommittedStates": [
+        "READOUT_GENERATED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-HANDOFF-BEFORE-PRO-DECISION",
+      "targetState": "PROFESSIONAL_DECISION",
+      "requiresCommittedStates": [
+        "PROFESSIONAL_HANDOFF"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-PRO-APPROVAL-BEFORE-REPORT-APPROVAL",
+      "targetState": "REPORT_APPROVED",
+      "conditional": "PROFILE_REQUIRES_PROFESSIONAL_DECISION",
+      "requiresCommittedStates": [
+        "PROFESSIONAL_DECISION",
+        "REPORT_ASSEMBLED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-APPROVAL-BEFORE-RELEASE",
+      "targetState": "REPORT_RELEASED",
+      "requiresCommittedStates": [
+        "REPORT_APPROVED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-ACTION-BEFORE-OUTCOME",
+      "targetState": "OUTCOME_OBSERVED",
+      "requiresCommittedStates": [
+        "ACTION_RECORDED"
+      ],
+      "requiresEvents": []
+    },
+    {
+      "ruleCode": "ORC-DEP-REVIEW-BEFORE-CONTINUITY",
+      "targetState": "CONTINUITY",
+      "requiresCommittedStates": [
+        "REVIEW"
+      ],
+      "requiresEvents": []
+    }
+  ],
+  "rulesBoundary": {
+    "orcChecksPrerequisitePresenceOnly": true,
+    "orcDoesNotReperformUpstreamDecision": true,
+    "missingDependencyBlocks": true
+  }
+}

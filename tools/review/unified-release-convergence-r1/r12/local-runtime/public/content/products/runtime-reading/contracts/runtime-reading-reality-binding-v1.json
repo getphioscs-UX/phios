@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W11-REALITY-BINDING-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W11",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_STRUCTURE_REALITY_SEPARATION",
+  "layers": {
+    "STRUCTURAL_ORIGIN": {
+      "reads": [
+        "BIRTH_DATA_REFERENCE",
+        "SELECTED_METHOD_CANONICAL_PROJECTION"
+      ],
+      "doesNotRepresent": "CURRENT_REALITY_STATE"
+    },
+    "CURRENT_REALITY": {
+      "reads": [
+        "RMO_REALITY_REFERENCE",
+        "RRE_GOVERNED_READOUT_REFERENCE",
+        "CURRENT_USER_REPORTED_INPUT_REFERENCES"
+      ],
+      "doesNotRepresent": "INITIAL_BIRTH_STRUCTURE"
+    }
+  },
+  "authorityReferences": {
+    "rmo": "content/runtime/reality-model-runtime/contracts/canonical-reality-object-v1.json",
+    "rre": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json"
+  },
+  "rules": {
+    "birthStructureAndCurrentRealityMustRemainDistinct": true,
+    "currentRealityMayBeInferredFromBirthStructure": false,
+    "birthStructureMayOverwriteCurrentReality": false,
+    "currentRealityReadsCurrentOperatingStateNotInitialStructure": true,
+    "unknownCurrentRealityMayBeFilledFromMethodProjection": false,
+    "realityTruthCreatedByRrp": false
+  }
+}

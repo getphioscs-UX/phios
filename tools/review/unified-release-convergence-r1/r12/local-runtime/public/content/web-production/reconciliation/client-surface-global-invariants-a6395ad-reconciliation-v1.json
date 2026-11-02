@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "PHI-OS-CLIENT-SURFACE-GLOBAL-INVARIANTS-RECONCILIATION-v1.0.0",
+  "work": "CLIENT-SURFACE-INV-01-INV-10",
+  "baselineCommit": "a6395ad926ce1bcd318b596d6f6ce028f5b96ae9",
+  "status": "RECONCILED_WITH_EXISTING_WPR_KAP_MPA_MCD_AUTHORITIES",
+  "upstreamEvidence": [
+    {
+      "path": "content/web-production/registries/wpr-runtime-consumption-registry-v1.json",
+      "sha256": "ca26ba8f698ed944c07cdaffa0e76ac8009df03720dc97e780c0a2804f9a2f1b"
+    },
+    {
+      "path": "content/web-production/contracts/wpr-public-asset-resolution-v1.json",
+      "sha256": "764d3ebcc34e9a284a0d2e1989f916055a01cbfc25513bb181efae48644b2ae6"
+    },
+    {
+      "path": "content/web-production/composition/public/homepage-composition-v1.1.json",
+      "sha256": "e8abbe8ef915b2e3cf98457039144dc227ce0bb74b5a40d66362e2609dd62e97"
+    },
+    {
+      "path": "content/knowledge/answer-projection/acceptance/kap-w11-w17-answer-composition-acceptance-v1.json",
+      "sha256": "dee3388e33d7c6721ad7ce25ebffad41aa5fd5dd668d83c866f0d3d73cdbdfef"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w20-guided-answer-context-contract-v1.json",
+      "sha256": "5482eab29ff26082b0edf3e35b7aa156134744d5473470d0d53a5f2c1b7c8532"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w22-guided-stop-condition-contract-v1.json",
+      "sha256": "75e6c7fa1063c5f0eb80c51ee194f73d90ff04642f440534c6a7151c8e6cbef8"
+    },
+    {
+      "path": "content/knowledge/answer-projection/acceptance/kap-w23-w25-reality-complexity-acceptance-v1.json",
+      "sha256": "9892279df551748876e8f4ef37563a6494daca63b95c799b224555f31946cedf"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w18b-method-consent-gate-contract-v1.json",
+      "sha256": "5ca93c6520eff360b3dd401fd7ca49307b3ee76ab3a67bd9712caf3865d2cfb6"
+    },
+    {
+      "path": "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+      "sha256": "7da25adc7f7934c48e02bb78f7f556dde91e5580ca6ce11e2e388d72c2f946bb"
+    },
+    {
+      "path": "content/professional/method-production-activation/contracts/mpa-production-eligibility-decision-v1.json",
+      "sha256": "6f75c99f0919fcca8b2a927b77b7546659efdb7f02c20bc01e06410177d3c9a4"
+    },
+    {
+      "path": "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json",
+      "sha256": "1cd446e35f56e120e6e01dc0e8c9b517606c6b70fbea212ba229ea161ebe156b"
+    },
+    {
+      "path": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+      "sha256": "161bd90046f7fccad974ab4fc3a717f774aa7409cb875c7fac9fb69f1329f830"
+    },
+    {
+      "path": "functions/api/ask-phios.js",
+      "sha256": "117199473adb10cfdc1d2dc33901d5dd181fc3b8052c68b6b87cfea729c5f21c"
+    }
+  ],
+  "observations": {
+    "INV-01": "WPR already encodes runtime surface consumers and an explicit no-web-surface-by-design orphan rule, but BFR-H0/H2 must broaden this from runtime inventory to every Production Backend Capability.",
+    "INV-02": "Public Asset Registry and fail-closed resolver already exist. Consumer and Visible evidence is intentionally not inferred and remains BFR-H11/H15/H16 work.",
+    "INV-03": "Existing WPR homepage composition is composed at scene/section level rather than one section per runtime. HIGH capability and visual coverage remain successor composition work.",
+    "INV-04": "Runtime existence is already separated from customer availability. HOME_SCENE_CONSUMER or NONE_BY_DESIGN becomes a mandatory successor declaration.",
+    "INV-05": "Ask PHI OS is already question-scoped, deterministic, non-authoritative and independently deliverable; the new CKA surface must preserve that boundary rather than replace KAP.",
+    "INV-06": "KAP already forbids automatic Reality Journey escalation and requires explicit escalation consent after complexity gating.",
+    "INV-07": "GuidedAnswerContext is already temporary and non-canonical; no persistent case or Reality truth is created by Ask/guided context.",
+    "INV-08": "KAP forbids auto-executing all methods; MPA owns eligibility/dispatch and MCD owns canonical projection. The explicit client disclosure step remains a downstream surface requirement, not a new Method authority.",
+    "INV-09": "Current Ask endpoint is publicly callable without account gating and creates no persistent case. History/saved result/method execution/case persistence/journey continuity entitlement must be enforced downstream.",
+    "INV-10": "The Master Work freezes the no-deletion rule now. The V8 source artifact is not treated as part of this aligned main baseline, so semantic block migration evidence must be created at HPC2-W0 before Homepage removal is permitted."
+  },
+  "noMutation": {
+    "wprV1AuthorityUnchanged": true,
+    "kapAuthorityUnchanged": true,
+    "mpaAuthorityUnchanged": true,
+    "mcdAuthorityUnchanged": true,
+    "pdsAuthorityUnchanged": true,
+    "cprAuthorityUnchanged": true,
+    "noSecondRuntimeCreated": true
+  }
+}

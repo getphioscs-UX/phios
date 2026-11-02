@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-PFR-W1-PLANNER-ELIGIBILITY-v1.0.0",
+  "work": "PFR-W1",
+  "requiredFields": [
+    "eligibilityId",
+    "professionalId",
+    "role",
+    "credentials",
+    "jurisdiction",
+    "scope",
+    "status",
+    "effectiveFrom",
+    "governedAdmissionReference",
+    "eligibilityDigest"
+  ],
+  "statusValues": [
+    "PENDING",
+    "ADMITTED",
+    "SUSPENDED",
+    "EXPIRED",
+    "REVOKED"
+  ],
+  "rules": {
+    "recordsGovernedAdmissionOnly": true,
+    "systemDeterminesLegalQualification": false,
+    "accountRoleGrantsEligibility": false,
+    "credentialReferencesRequired": true,
+    "jurisdictionRequired": true,
+    "scopeRequired": true,
+    "effectiveDatesRequired": true
+  }
+}

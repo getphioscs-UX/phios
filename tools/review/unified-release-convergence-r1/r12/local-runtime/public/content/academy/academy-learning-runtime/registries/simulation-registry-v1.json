@@ -1,0 +1,134 @@
+{
+  "registryCode": "PHI-OS-ALR-W22-SIMULATION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W22",
+  "objectType": "SIMULATION",
+  "status": "canonical",
+  "productionStatus": "synthetic_deterministic_branch_semantics",
+  "contractReference": "content/academy/academy-learning-runtime/contracts/simulation-runtime-contract-v1.json",
+  "simulations": [
+    {
+      "simulationCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION",
+      "simulationVersion": "1.0.0",
+      "practiceCode": "ALR-LO-PRACTICE-EVIDENCE-DISTINCTION",
+      "guidedPracticeCode": "ALR-LO-GUIDED-PRACTICE-EVIDENCE-DISTINCTION",
+      "caseStudyCode": "ALR-LO-CASE-STUDY-EVIDENCE-DISTINCTION",
+      "lessonCode": "ALR-LO-LESSON-EVIDENCE-DISTINCTION",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-SEPARATE-EVIDENCE-CLASSES", "ALR-LO-OBJECTIVE-PRESERVE-SOURCE-LINEAGE"],
+      "title": "Evidence-class boundary branch",
+      "simulationMode": "SYNTHETIC_DETERMINISTIC_BRANCHING",
+      "initialStateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-START",
+      "terminalStateCodes": ["ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-PRESERVED", "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-EXPOSED"],
+      "states": [
+        {"stateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-START", "stateType": "START", "prompt": "A synthetic report and an inference appear beside an observation. Choose the classification treatment to inspect.", "allowedTransitionCodes": ["ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-TRANSITION-PRESERVE", "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-TRANSITION-EXPOSE"]},
+        {"stateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-PRESERVED", "stateType": "TERMINAL_BOUNDARY_PRESERVED", "prompt": "Observation, report and inference remain distinct with source lineage.", "allowedTransitionCodes": []},
+        {"stateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-EXPOSED", "stateType": "TERMINAL_BOUNDARY_EXPOSED", "prompt": "The inference was presented as observed fact; the boundary breach is exposed for learning.", "allowedTransitionCodes": []}
+      ],
+      "transitions": [
+        {"transitionCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-TRANSITION-PRESERVE", "fromStateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-START", "toStateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-PRESERVED", "choiceFrame": "Retain each evidence class and source boundary.", "consequenceFrame": "The resulting learning path preserves evidence lineage and uncertainty.", "boundarySignal": "BOUNDARY_PRESERVED"},
+        {"transitionCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-TRANSITION-EXPOSE", "fromStateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-START", "toStateCode": "ALR-LO-SIMULATION-EVIDENCE-DISTINCTION-STATE-EXPOSED", "choiceFrame": "Merge the inference into the observation.", "consequenceFrame": "The path exposes an unsupported evidence promotion without treating it as a valid answer.", "boundarySignal": "BOUNDARY_BREACH_EXPOSED_FOR_LEARNING"}
+      ],
+      "resultContract": "PATH_TRACE_ONLY_NO_SCORE", "dataClassification": "SYNTHETIC_NON_PERSONAL", "realWorldActionState": "NO_REAL_WORLD_ACTION", "assessmentState": "NOT_ASSESSMENT", "status": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED", "authorityReference": "ALR"
+    },
+    {
+      "simulationCode": "ALR-LO-SIMULATION-BOUNDED-READING",
+      "simulationVersion": "1.0.0",
+      "practiceCode": "ALR-LO-PRACTICE-BOUNDED-READING",
+      "guidedPracticeCode": "ALR-LO-GUIDED-PRACTICE-BOUNDED-READING",
+      "caseStudyCode": "ALR-LO-CASE-STUDY-BOUNDED-READING",
+      "lessonCode": "ALR-LO-LESSON-BOUNDED-READING",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-BOUND-READING-CLAIMS", "ALR-LO-OBJECTIVE-PRESERVE-READING-LIMITS"],
+      "title": "Bounded Reading branch",
+      "simulationMode": "SYNTHETIC_DETERMINISTIC_BRANCHING",
+      "initialStateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-START",
+      "terminalStateCodes": ["ALR-LO-SIMULATION-BOUNDED-READING-STATE-PRESERVED", "ALR-LO-SIMULATION-BOUNDED-READING-STATE-EXPOSED"],
+      "states": [
+        {"stateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-START", "stateType": "START", "prompt": "A synthetic evidence packet supports several possible explanations. Choose the claim treatment to inspect.", "allowedTransitionCodes": ["ALR-LO-SIMULATION-BOUNDED-READING-TRANSITION-PRESERVE", "ALR-LO-SIMULATION-BOUNDED-READING-TRANSITION-EXPOSE"]},
+        {"stateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-PRESERVED", "stateType": "TERMINAL_BOUNDARY_PRESERVED", "prompt": "The Reading remains proportionate to evidence and names its limits.", "allowedTransitionCodes": []},
+        {"stateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-EXPOSED", "stateType": "TERMINAL_BOUNDARY_EXPOSED", "prompt": "A causal certainty exceeded the packet; the boundary breach is exposed for learning.", "allowedTransitionCodes": []}
+      ],
+      "transitions": [
+        {"transitionCode": "ALR-LO-SIMULATION-BOUNDED-READING-TRANSITION-PRESERVE", "fromStateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-START", "toStateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-PRESERVED", "choiceFrame": "State a bounded claim with alternatives and unknowns.", "consequenceFrame": "The Reading retains evidence scope and unresolved possibilities.", "boundarySignal": "BOUNDARY_PRESERVED"},
+        {"transitionCode": "ALR-LO-SIMULATION-BOUNDED-READING-TRANSITION-EXPOSE", "fromStateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-START", "toStateCode": "ALR-LO-SIMULATION-BOUNDED-READING-STATE-EXPOSED", "choiceFrame": "State one explanation as certain cause.", "consequenceFrame": "The path exposes an unbounded claim without issuing a diagnosis or judgment.", "boundarySignal": "BOUNDARY_BREACH_EXPOSED_FOR_LEARNING"}
+      ],
+      "resultContract": "PATH_TRACE_ONLY_NO_SCORE", "dataClassification": "SYNTHETIC_NON_PERSONAL", "realWorldActionState": "NO_REAL_WORLD_ACTION", "assessmentState": "NOT_ASSESSMENT", "status": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED", "authorityReference": "ALR"
+    },
+    {
+      "simulationCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION",
+      "simulationVersion": "1.0.0",
+      "practiceCode": "ALR-LO-PRACTICE-CONSTRAINT-AWARE-NAVIGATION",
+      "guidedPracticeCode": "ALR-LO-GUIDED-PRACTICE-CONSTRAINT-AWARE-NAVIGATION",
+      "caseStudyCode": "ALR-LO-CASE-STUDY-CONSTRAINT-AWARE-NAVIGATION",
+      "lessonCode": "ALR-LO-LESSON-CONSTRAINT-AWARE-NAVIGATION",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-MAP-OPTIONS-CONSTRAINTS", "ALR-LO-OBJECTIVE-BOUND-NAVIGATION-AUTHORITY"],
+      "title": "Constraint-aware navigation branch",
+      "simulationMode": "SYNTHETIC_DETERMINISTIC_BRANCHING",
+      "initialStateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-START",
+      "terminalStateCodes": ["ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-PRESERVED", "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-EXPOSED"],
+      "states": [
+        {"stateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-START", "stateType": "START", "prompt": "A synthetic scenario contains options, constraints and unresolved authority. Choose the navigation treatment to inspect.", "allowedTransitionCodes": ["ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-TRANSITION-PRESERVE", "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-TRANSITION-EXPOSE"]},
+        {"stateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-PRESERVED", "stateType": "TERMINAL_BOUNDARY_PRESERVED", "prompt": "Options and constraints are mapped while choice remains with the authorized decision-maker.", "allowedTransitionCodes": []},
+        {"stateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-EXPOSED", "stateType": "TERMINAL_BOUNDARY_EXPOSED", "prompt": "A mapped option became a selected action; the authority breach is exposed for learning.", "allowedTransitionCodes": []}
+      ],
+      "transitions": [
+        {"transitionCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-TRANSITION-PRESERVE", "fromStateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-START", "toStateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-PRESERVED", "choiceFrame": "Map options, constraints, authority and review conditions.", "consequenceFrame": "The path supports navigation without recommending or executing an action.", "boundarySignal": "BOUNDARY_PRESERVED"},
+        {"transitionCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-TRANSITION-EXPOSE", "fromStateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-START", "toStateCode": "ALR-LO-SIMULATION-CONSTRAINT-AWARE-NAVIGATION-STATE-EXPOSED", "choiceFrame": "Convert the option map into a selected action.", "consequenceFrame": "The path exposes an authority breach and performs no real-world action.", "boundarySignal": "BOUNDARY_BREACH_EXPOSED_FOR_LEARNING"}
+      ],
+      "resultContract": "PATH_TRACE_ONLY_NO_SCORE", "dataClassification": "SYNTHETIC_NON_PERSONAL", "realWorldActionState": "NO_REAL_WORLD_ACTION", "assessmentState": "NOT_ASSESSMENT", "status": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED", "authorityReference": "ALR"
+    },
+    {
+      "simulationCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY",
+      "simulationVersion": "1.0.0",
+      "practiceCode": "ALR-LO-PRACTICE-REVIEW-CONTINUITY",
+      "guidedPracticeCode": "ALR-LO-GUIDED-PRACTICE-REVIEW-CONTINUITY",
+      "caseStudyCode": "ALR-LO-CASE-STUDY-REVIEW-CONTINUITY",
+      "lessonCode": "ALR-LO-LESSON-REVIEW-CONTINUITY",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-LINK-ACTION-OUTCOME", "ALR-LO-OBJECTIVE-PRESERVE-CONTINUATION-LINEAGE"],
+      "title": "Review continuity branch",
+      "simulationMode": "SYNTHETIC_DETERMINISTIC_BRANCHING",
+      "initialStateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-START",
+      "terminalStateCodes": ["ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-PRESERVED", "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-EXPOSED"],
+      "states": [
+        {"stateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-START", "stateType": "START", "prompt": "A synthetic review has mixed outcomes and unresolved uncertainty. Choose the continuation treatment to inspect.", "allowedTransitionCodes": ["ALR-LO-SIMULATION-REVIEW-CONTINUITY-TRANSITION-PRESERVE", "ALR-LO-SIMULATION-REVIEW-CONTINUITY-TRANSITION-EXPOSE"]},
+        {"stateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-PRESERVED", "stateType": "TERMINAL_BOUNDARY_PRESERVED", "prompt": "Mixed outcomes, uncertainty and prior lineage remain visible in the next review state.", "allowedTransitionCodes": []},
+        {"stateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-EXPOSED", "stateType": "TERMINAL_BOUNDARY_EXPOSED", "prompt": "The earlier record was rewritten into a simple success state; the continuity breach is exposed.", "allowedTransitionCodes": []}
+      ],
+      "transitions": [
+        {"transitionCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-TRANSITION-PRESERVE", "fromStateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-START", "toStateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-PRESERVED", "choiceFrame": "Retain mixed outcomes, uncertainty and the earlier lineage.", "consequenceFrame": "The path forms a traceable bounded continuation state.", "boundarySignal": "BOUNDARY_PRESERVED"},
+        {"transitionCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-TRANSITION-EXPOSE", "fromStateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-START", "toStateCode": "ALR-LO-SIMULATION-REVIEW-CONTINUITY-STATE-EXPOSED", "choiceFrame": "Replace the mixed earlier record with a success conclusion.", "consequenceFrame": "The path exposes loss of uncertainty and lineage without writing Runtime Memory.", "boundarySignal": "BOUNDARY_BREACH_EXPOSED_FOR_LEARNING"}
+      ],
+      "resultContract": "PATH_TRACE_ONLY_NO_SCORE", "dataClassification": "SYNTHETIC_NON_PERSONAL", "realWorldActionState": "NO_REAL_WORLD_ACTION", "assessmentState": "NOT_ASSESSMENT", "status": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED", "authorityReference": "ALR"
+    },
+    {
+      "simulationCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION",
+      "simulationVersion": "1.0.0",
+      "practiceCode": "ALR-LO-PRACTICE-BOUNDED-PROFESSIONAL-FORMATION",
+      "guidedPracticeCode": "ALR-LO-GUIDED-PRACTICE-BOUNDED-PROFESSIONAL-FORMATION",
+      "caseStudyCode": "ALR-LO-CASE-STUDY-BOUNDED-PROFESSIONAL-FORMATION",
+      "lessonCode": "ALR-LO-LESSON-BOUNDED-PROFESSIONAL-FORMATION",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-APPLY-PROFESSIONAL-BOUNDARIES", "ALR-LO-OBJECTIVE-SEPARATE-CREDENTIAL-ENTITLEMENT"],
+      "title": "Professional formation boundary branch",
+      "simulationMode": "SYNTHETIC_DETERMINISTIC_BRANCHING",
+      "initialStateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-START",
+      "terminalStateCodes": ["ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-PRESERVED", "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-EXPOSED"],
+      "states": [
+        {"stateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-START", "stateType": "START", "prompt": "A fictional facilitator completed learning while credential, entitlement and assignment gates remain unresolved. Choose the state treatment to inspect.", "allowedTransitionCodes": ["ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-TRANSITION-PRESERVE", "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-TRANSITION-EXPOSE"]},
+        {"stateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-PRESERVED", "stateType": "TERMINAL_BOUNDARY_PRESERVED", "prompt": "Learning, capability, credential, entitlement and assignment remain independently governed.", "allowedTransitionCodes": []},
+        {"stateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-EXPOSED", "stateType": "TERMINAL_BOUNDARY_EXPOSED", "prompt": "Learning completion was treated as professional entitlement; the authority breach is exposed.", "allowedTransitionCodes": []}
+      ],
+      "transitions": [
+        {"transitionCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-TRANSITION-PRESERVE", "fromStateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-START", "toStateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-PRESERVED", "choiceFrame": "Keep every governed state distinct and unresolved until its authority acts.", "consequenceFrame": "The path preserves professional and jurisdictional boundaries.", "boundarySignal": "BOUNDARY_PRESERVED"},
+        {"transitionCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-TRANSITION-EXPOSE", "fromStateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-START", "toStateCode": "ALR-LO-SIMULATION-BOUNDED-PROFESSIONAL-FORMATION-STATE-EXPOSED", "choiceFrame": "Infer entitlement and assignment from learning completion.", "consequenceFrame": "The path exposes an unauthorized inference and grants no professional authority.", "boundarySignal": "BOUNDARY_BREACH_EXPOSED_FOR_LEARNING"}
+      ],
+      "resultContract": "PATH_TRACE_ONLY_NO_SCORE", "dataClassification": "SYNTHETIC_NON_PERSONAL", "realWorldActionState": "NO_REAL_WORLD_ACTION", "assessmentState": "NOT_ASSESSMENT", "status": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED", "authorityReference": "ALR"
+    }
+  ],
+  "rules": {
+    "oneSimulationPerCanonicalPractice": true,
+    "allGraphsClosedDeterministicAndSynthetic": true,
+    "transitionResolutionPersistsAttemptOrResponse": false,
+    "realWorldActionOrProfessionalDecisionCreated": false,
+    "assessmentOrCapabilityEvidenceCreated": false,
+    "learnerDeliveryActivated": false
+  }
+}

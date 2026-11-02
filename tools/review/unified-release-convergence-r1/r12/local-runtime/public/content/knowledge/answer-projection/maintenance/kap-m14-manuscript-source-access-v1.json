@@ -1,0 +1,287 @@
+{
+  "status": "ENGINEERING_RECONCILIATION",
+  "scope": "Existing manuscript retrieval gains source-acceptance digest checks, bounded book scope and semantic retrieval. Extractive retrieval is not promoted to validated comparative or predictive answers.",
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false,
+    "humanAccepted": false,
+    "productionAccepted": false
+  },
+  "changes": [
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "successorSha256": "229da3c35678ca5ea788c02055fd52f65c5fceb27afb906a11fc38637c11b999",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-knowledge-access-before.js"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "a9951dc8582d98877013e00961f1f8bbfb7daa4cc45a6823a45389f91e45a0a3",
+      "successorSha256": "8efa170a37be5f99b82d4ca5e4f9477d99838cdb5018ccbd24479ebdc1720649"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "01af76f0408d96088bbca8a4a13bdd714c863f6cc8a745097d5342a79f6b3336",
+      "successorSha256": "204936a922ca9c52888b007cb58314d1329bcb12277fac135e8e27a21dbd3548",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before.js",
+      "changeClass": "Bound BOOK-1 through BOOK-7 selection and transport upstream answer assessment without automatic consumption"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "29dc4fbbcb2e34a0bc45dc97fbbc7bc1dc540ca5011d07ab07251e80837b00fe",
+      "successorSha256": "ae5c90745800528f31543f16758ee03879280fe396ee59a9e606f340912dc06b",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-composition-before.js",
+      "changeClass": "Unsupported manuscript answers remain blocked; source-bound extractive unit requires accepted source digests and eligible coverage; provider prohibition unchanged"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "229da3c35678ca5ea788c02055fd52f65c5fceb27afb906a11fc38637c11b999",
+      "successorSha256": "a7b6caeab73451e9b6db38fc5139c0df98d5139d53957e0f39c8a3f4017ad04f",
+      "changeClass": "Registry v3 source identity verification; owner-final derivative retrieval requires explicit server QA flag, source acceptance identity and private storage. Production admission is not inferred from source acceptance.",
+      "dependencies": [
+        {
+          "path": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v3.json",
+          "sha256": "3c196eaf8b46f9b6e9865370f1516c09279dfbea607d8b1e2a3297628aab1605"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "204936a922ca9c52888b007cb58314d1329bcb12277fac135e8e27a21dbd3548",
+      "successorSha256": "34bfe5acf36a2c7c4616e180fc00a07e07e8927b7f17b16a28f8abee9e6bcef7",
+      "changeClass": "Explicit BOOK-4/BOOK-6 scope; derivative manuscript QA only with server opt-in and without selected article"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "ae5c90745800528f31543f16758ee03879280fe396ee59a9e606f340912dc06b",
+      "successorSha256": "182aabd4bde0570f3f365f08bf194cd235a6d8ccc6f5e35fb4dbbef6663cb8bc",
+      "changeClass": "Apply unsupported-answer stops and accepted-source extraction to server derivative QA; provider prohibition unchanged"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "a7b6caeab73451e9b6db38fc5139c0df98d5139d53957e0f39c8a3f4017ad04f",
+      "successorSha256": "4dacf7cad2fcd5ee5ffa367627bd642107cf6e183161cdd04af78778015af233",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-scoped-text.js",
+      "changeClass": "Server-owned bounded text-scope candidates, exact source/scope identity verification and source-order extractive prose; request input cannot enable scope, provider execution remains prohibited"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "4dacf7cad2fcd5ee5ffa367627bd642107cf6e183161cdd04af78778015af233",
+      "successorSha256": "c89cc2559a0e3d66b512d26a041fa8b1dd7a5ecad88e513e00c5bd0843a408a5",
+      "sourceCommit": "16db1180638a83c3c404a62bfda45c68c680c023",
+      "changeClass": "Committed source-bound manuscript comparison and prose maintenance; no provider authority"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "c89cc2559a0e3d66b512d26a041fa8b1dd7a5ecad88e513e00c5bd0843a408a5",
+      "successorSha256": "f32fd2233b8ebd0dc2a76f8f1d033c6ddea45ad6b77c1cc2840410cd435144a5",
+      "changeClass": "Registry v5 server-only scope activation denial; bounded contiguous native prose and comparison normalization; provider prohibition preserved"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "f32fd2233b8ebd0dc2a76f8f1d033c6ddea45ad6b77c1cc2840410cd435144a5",
+      "successorSha256": "65d6d140e4c557c24ee776cbbea19f5a1faac0d1b7689c780d20d3226d52c07a",
+      "sourceCommit": "040c62ea102831bccf0c9761f6ed135529a923f5",
+      "changeClass": "Reviewed corpus closure identity verification and heading/prose extraction boundaries; existing human review remains the source authority"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "65d6d140e4c557c24ee776cbbea19f5a1faac0d1b7689c780d20d3226d52c07a",
+      "successorSha256": "19ac89b5f819267b007b31098e41281440bcbcc6d761dbf38bf1061d6878ed85",
+      "changeClass": "Retain complete short source sentences including decisive negations; transport explicit excerpt boundary state and remove only certified omission markers"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "34bfe5acf36a2c7c4616e180fc00a07e07e8927b7f17b16a28f8abee9e6bcef7",
+      "successorSha256": "72b58dcf66659adc1ea005ed338ceeb22bf9e5686b2223548de1cf387d467bc5",
+      "sourceCommit": "2bd0ebbb8dc85f153f488d788ad6d4644f7dec10",
+      "changeClass": "Explicit selected-book source routing; selected article retains precedence and source access remains admission-gated"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "72b58dcf66659adc1ea005ed338ceeb22bf9e5686b2223548de1cf387d467bc5",
+      "successorSha256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8",
+      "sourceCommit": "040c62ea102831bccf0c9761f6ed135529a923f5",
+      "changeClass": "Explicit selected-book source routing; selected article retains precedence and source access remains admission-gated"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "182aabd4bde0570f3f365f08bf194cd235a6d8ccc6f5e35fb4dbbef6663cb8bc",
+      "successorSha256": "8b176a0a03f68cc0528c50fda2f7456240ffd5cd7ec06abfe867a5c192286798",
+      "sourceCommit": "2bd0ebbb8dc85f153f488d788ad6d4644f7dec10",
+      "changeClass": "Server-scoped source-native answer evidence and explicit unsupported prediction boundary; no provider synthesis"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "19ac89b5f819267b007b31098e41281440bcbcc6d761dbf38bf1061d6878ed85",
+      "successorSha256": "f72ddce2a48713c9b41e5999bf55e79d8e7f373b43c933b0146048d45ebda285",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-answer-fit.js",
+      "changeClass": "Server-owned active registry, admitted scope PDF ranges and definition subjects; bounded question-fit contiguous extraction; explicit unavailable causal explanation and stronger guaranteed-personal-outcome denial"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "f72ddce2a48713c9b41e5999bf55e79d8e7f373b43c933b0146048d45ebda285",
+      "successorSha256": "c6cb355ba5a893c92695b376072b03206371f5e363de2625c7dad2e754405028",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-qa-identity.js",
+      "changeClass": "QA-only source identity digest verification and production denial; transport existing accepted public knowledge unit projection; protected Book VII full-manuscript request remains unavailable. No new content or production admission."
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "1bd7566a79184c342e65619c7a3b9a1f6743161e2b5e4f2a796b680042593bc8",
+      "successorSha256": "06fdf3fd447d2732928f630d1f82c226feb2d4160b883dbf178843ed995002a5",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-book-v-vii.js",
+      "changeClass": "Selected Book V/VII uses admission-gated manuscript retrieval with published fallback; Atlas continues excluding full manuscript sources; source-unavailable markers retained when no admitted source exists"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "8b176a0a03f68cc0528c50fda2f7456240ffd5cd7ec06abfe867a5c192286798",
+      "successorSha256": "39f94eca6bfd3afdfa8ce47789138258ec51a43af201e147750c8e4dcb4f724c",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-composition-before-book-v-vii.js",
+      "changeClass": "Consume source-scope-admitted extractive answers and server-QA-only binary-identified sources; carry accepted public knowledge projection provenance explicitly; no production QA bypass or provider authority"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "c6cb355ba5a893c92695b376072b03206371f5e363de2625c7dad2e754405028",
+      "successorSha256": "8db23133afdb770a4ad4f0fd55556a0c06d68cd8c483dd13193bca7fd582721f",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-bounded-comparison.js",
+      "changeClass": "Transport verified scope-admission digest; comparison subjects and explicit distinguishing predicate must coexist in a bounded 500-character source passage; no generated comparison or provider authority"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "8db23133afdb770a4ad4f0fd55556a0c06d68cd8c483dd13193bca7fd582721f",
+      "successorSha256": "7fa7172cc06d68386152560f4980a72948a53bea380689338b61655ae3979591",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-chapter-arguments.js",
+      "changeClass": "Verify source identity for server-enabled scoped sources; reject QA-only production use; validate chapter concept support anchors and argument offsets; transport source-bound argument units and improve extractive sentence selection without generated prose or full-chapter publication"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "7fa7172cc06d68386152560f4980a72948a53bea380689338b61655ae3979591",
+      "successorSha256": "1b13a66c2bd37ada80e10c168772bc3f13f48c82b65948890e2cfed552c43580",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-concept-termsets.js",
+      "sourceCommit": "8ecbea951c8d50af29fe47d8448aaa987e7644a7",
+      "changeClass": "Chinese primary heading subject detection; source-declared concept term-set matching and bounded collapse/end synonyms; expose scopeMatch only with source-scope-admission digest. Existing scope, QA isolation and provider restrictions preserved."
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "1b13a66c2bd37ada80e10c168772bc3f13f48c82b65948890e2cfed552c43580",
+      "successorSha256": "f0c2159d11fd76532d82ac5f8dcef2c6992e6cfd45be80a1d4b29f15ea0f41d2",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-source-explanations.js",
+      "changeClass": "Verify exact argument-unit support bytes; preserve explicit chapter selection while allowing supported ordinary questions; scope-admitted comparison subjects and definition support checks; existing source-bound extraction, QA isolation and provider denial unchanged",
+      "dependencies": [
+        {
+          "path": "functions/knowledge-runtime/source-bound-explanation-units.js",
+          "sha256": "22accd9e58c14651feb29133b50825a3b61e438f6a2e8f41e91ac2de7451bc5f"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "f0c2159d11fd76532d82ac5f8dcef2c6992e6cfd45be80a1d4b29f15ea0f41d2",
+      "successorSha256": "b9fa37d5b4831c952c67eae56e503d598a9a6216e734531edcf998d05f886ce3",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-current-admission.js",
+      "sourceCommit": "890587f9cc830c1a4be80283618212266c70ae5b",
+      "changeClass": "Verify server-owned scope metadata and admitted scope records before reading R2 corpus; deny retrieval when no current source-bound scope is admitted; declaration of whole-chapter candidates alone does not grant admission",
+      "dependencies": [
+        {
+          "path": "functions/_lib/manuscript-current-admission.js",
+          "sha256": "f2832f9d5e966e860e948b19a68305637ff981942b348aca006fe3ad6cf0af3c"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "06fdf3fd447d2732928f630d1f82c226feb2d4160b883dbf178843ed995002a5",
+      "successorSha256": "fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-explicit-book-fallback.js",
+      "changeClass": "Source-scope-admitted concept aliases participate in relevance; explicit Book V context requires explicit opt-in for published fallback, preventing silent source switching"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "fee92913657c6954f8834c403c4245a11aeef366eb0950407f67423a018b22b1",
+      "successorSha256": "cb58342bff52c22375c5b6bd38748b14d5b8ea479d3694c58d08f69f9803ec38",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-approved-terminology.js",
+      "changeClass": "Match existing approved locale-specific terminology and bind terms only to retrieved manuscript or canonical article evidence; glossary alone grants no answer authority"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "b9fa37d5b4831c952c67eae56e503d598a9a6216e734531edcf998d05f886ce3",
+      "successorSha256": "320e60e6860c20c43e36164b6f173f74cf82c0942e3db2d8f6b3b3cc7138c269",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-isolated-experiment.js",
+      "changeClass": "In-process WeakMap capability for verified bounded fragments, accepted only under local isolated operator environment; public and production routes cannot grant experiment access; no provider dispatch or production admission",
+      "dependencies": [
+        {
+          "path": "functions/knowledge-runtime/manuscript-experiment-access.js",
+          "sha256": "4e546c39df4b327af8ae891e8c52b55fe16c5af81acbf38014a8a807d45432cf"
+        },
+        {
+          "path": "functions/_lib/manuscript-current-admission.js",
+          "sha256": "40f4b9ef67a8f623c99ea0d7acb7c1eec6221650912f3948640d935ecc8cfb0f"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "cb58342bff52c22375c5b6bd38748b14d5b8ea479d3694c58d08f69f9803ec38",
+      "successorSha256": "f29d60933ca030bbba3b625ce84f228ba0f45fe157c4899d1e6c7a4aa1eac595",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-safe-inputs.js",
+      "changeClass": "Grounding bundle validates missing/malformed input and filters sources through existing current source eligibility before projection; no new source admission or provider authority",
+      "dependencies": [
+        {
+          "path": "functions/_lib/knowledge-source-eligibility.js",
+          "sha256": "54d8a685ace3c78148c88b554ba92d000d1f2795ecc521e4a9cdab6080aca733"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "39f94eca6bfd3afdfa8ce47789138258ec51a43af201e147750c8e4dcb4f724c",
+      "successorSha256": "3de96383d13c1d13e77f20b43c13c76f7a9314bf50a766d6b095ca0cd2231bb5",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-composition-before-source-eligibility.js",
+      "sourceCommit": "d49b8bc92cf53e302a6c281294a8c87a7bc04b10",
+      "changeClass": "Filter source projections through current eligibility; missing or empty safe support denies composition; retain source digests and use public source labels and insufficient-support copy"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "predecessorSha256": "f29d60933ca030bbba3b625ce84f228ba0f45fe157c4899d1e6c7a4aa1eac595",
+      "successorSha256": "84eee54e12ee3133e93565174ed4799872f0cf115ea3c1b525676a031e0c9950",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-grounding-before-source-identity-preservation.js",
+      "changeClass": "Assign existing grounding source identifiers before eligibility filtering and preserve retrieval order after deduplication; current eligibility and malformed-input denial retained"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "320e60e6860c20c43e36164b6f173f74cf82c0942e3db2d8f6b3b3cc7138c269",
+      "successorSha256": "5a52c5519ba22b3fecff9845a736866c651d0277c820c22f4b540c10284ce0c5",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-corpus-permission-denial.js",
+      "changeClass": "Explicit MANUSCRIPT_CORPUS_PERMISSION_DENIED when admission-gated R2 retrieval returns null; avoids null corpus access and preserves fail-closed source denial, existing authority and provider boundaries"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "5a52c5519ba22b3fecff9845a736866c651d0277c820c22f4b540c10284ce0c5",
+      "successorSha256": "ba31968b32ca732ef078e3d7201dfa7dec05d1ef4e647822a60e0838883fb583",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-reviewed-experiment-fragments.js",
+      "changeClass": "Reviewed corpora without scope adapters gain local isolated capability-bound fragments; exact section digest, offset and fragment-byte hash checks required; fragments-only retrieval and existing human review retained; no production activation or provider dispatch",
+      "dependencies": [
+        {
+          "path": "functions/knowledge-runtime/manuscript-experiment-access.js",
+          "sha256": "4e546c39df4b327af8ae891e8c52b55fe16c5af81acbf38014a8a807d45432cf"
+        }
+      ]
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "ba31968b32ca732ef078e3d7201dfa7dec05d1ef4e647822a60e0838883fb583",
+      "successorSha256": "dd611af87908c2a4932b29d0894569501b08c41411ed75f42b216db9bc9ff6dc",
+      "previousPath": "content/knowledge/answer-projection/maintenance/kap-m14-access-before-isolated-source-registry.js",
+      "sourceCommit": "2a9b2574dff3024c46f216a87da4d947dcd93311",
+      "changeClass": "Use capability-bound source candidate registry only for local isolated manuscript experiments; fragment matching remains required, default registry remains fallback. No public admission, provider dispatch or production activation granted.",
+      "dependencies": [
+        {
+          "path": "functions/knowledge-runtime/manuscript-experiment-access.js",
+          "sha256": "b09214df43ee6f800ff7eee51383576b717578375cf1eec17d5e7af80705085e"
+        }
+      ]
+    }
+  ]
+}

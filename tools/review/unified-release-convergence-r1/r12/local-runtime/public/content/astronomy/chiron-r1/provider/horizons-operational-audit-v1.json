@@ -1,0 +1,21 @@
+{
+  "observedDate": "2026-09-24",
+  "documentationVersion": "1.3 (2025 June)",
+  "role": "DOCUMENTATION_AUDIT_ONLY",
+  "sources": [
+    "https://ssd-api.jpl.nasa.gov/doc/index.php",
+    "https://ssd-api.jpl.nasa.gov/doc/horizons.html"
+  ],
+  "documentedConstraints": [
+    "Serialize requests; no concurrent API calls",
+    "Cache reusable results and back off on failures or throttling",
+    "Supply application/version/contact User-Agent",
+    "No browser embedding under the stated CORS policy",
+    "Check response version because formats may change",
+    "Best-effort service with no indefinite-availability guarantee"
+  ],
+  "consequence": "A direct online production dependency has not passed reliability/determinism/operational admission. A separately reviewed offline-data or server-side policy would still need provenance, license/data-rights review, range, precision and independent validation.",
+  "liveEphemerisRequestsMade": false,
+  "customerBirthDataSent": false,
+  "productionProviderSelected": false
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KPP Canonical Production Plan v2",
+  "type": "object",
+  "required": [
+    "nodeCode",
+    "knowledgeVersion",
+    "productionRole",
+    "productionPriority",
+    "knowledgeCoverageState",
+    "meaningCoverageState",
+    "planStatus"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string"
+    },
+    "knowledgeVersion": {
+      "type": "string"
+    },
+    "productionRole": {
+      "type": "string"
+    },
+    "productionPriority": {
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "DEFERRED"
+      ]
+    },
+    "requiredOutputs": {
+      "type": "array"
+    },
+    "optionalOutputs": {
+      "type": "array"
+    },
+    "prohibitedOutputs": {
+      "type": "array"
+    },
+    "decisionFactors": {
+      "type": "object"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "knowledgeCoverageState": {
+      "type": "string"
+    },
+    "meaningCoverageState": {
+      "type": "string"
+    },
+    "articleRequired": {
+      "type": "boolean"
+    },
+    "fragmentRequired": {
+      "type": "boolean"
+    },
+    "figureRequired": {
+      "type": "boolean"
+    },
+    "diagramRequired": {
+      "type": "boolean"
+    },
+    "journeyRequired": {
+      "type": "boolean"
+    },
+    "academyRequired": {
+      "type": "boolean"
+    },
+    "localeRequirements": {
+      "type": "array"
+    },
+    "productionReadiness": {
+      "type": "string"
+    },
+    "planStatus": {
+      "enum": [
+        "PROPOSED",
+        "REVIEWED",
+        "FROZEN",
+        "SUPERSEDED"
+      ]
+    }
+  }
+}

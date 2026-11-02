@@ -1,0 +1,72 @@
+{
+  "contractCode": "PHI-OS-DAR-W14-WILL-SENSITIVE-DATA-CLASSIFICATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W14",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_RDG_BOUND_CLASSIFICATION",
+  "upstreamAuthority": "content/governance/reality-data-governance/registries/canonical-data-sensitivity-registry-v1.json",
+  "defaultSensitivity": "HIGHLY_SENSITIVE",
+  "fieldClasses": [
+    {
+      "fields": [
+        "idNumber",
+        "idType",
+        "dateOfBirth",
+        "address",
+        "nationality"
+      ],
+      "rdgCategories": [
+        "IDENTITY",
+        "LOCATION"
+      ],
+      "sensitivity": "HIGHLY_SENSITIVE"
+    },
+    {
+      "fields": [
+        "relationship",
+        "guardians",
+        "beneficiaries",
+        "family structure"
+      ],
+      "rdgCategories": [
+        "RELATIONSHIP",
+        "FAMILY"
+      ],
+      "sensitivity": "HIGHLY_SENSITIVE"
+    },
+    {
+      "fields": [
+        "properties",
+        "businessInterests",
+        "bankAssets",
+        "investments",
+        "insurance",
+        "epf",
+        "prs",
+        "vehicles",
+        "jewellery",
+        "digitalAssets",
+        "otherAssets"
+      ],
+      "rdgCategories": [
+        "FINANCIAL"
+      ],
+      "sensitivity": "HIGHLY_SENSITIVE"
+    },
+    {
+      "fields": [
+        "contact"
+      ],
+      "rdgCategories": [
+        "CONTACT"
+      ],
+      "sensitivity": "SENSITIVE"
+    }
+  ],
+  "rules": {
+    "classificationDoesNotLowerRDGSensitivity": true,
+    "analyticsPayloadLeakageForbidden": true,
+    "urlOrQueryPiiForbidden": true,
+    "logsMustNotContainRawSensitivePayload": true
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-MIR-9-BACKEND-FRONTEND-PROJECTION-CONTRACT-v1.0.0",
+  "work": "MIR-9D",
+  "status": "ACTIVE_DETERMINISTIC_READ_ONLY_PROJECTION",
+  "sourceRegistry": "content/runtime/journey-runtime/registries/client-stage-projection-registry-v1.json",
+  "projections": [
+    {
+      "runtimeState": "entry",
+      "clientStage": "Understand",
+      "defaultVisibleSections": [
+        "Your Situation"
+      ]
+    },
+    {
+      "runtimeState": "orientation",
+      "clientStage": "Understand",
+      "defaultVisibleSections": [
+        "Your Situation",
+        "What Is Missing"
+      ]
+    },
+    {
+      "runtimeState": "reading",
+      "clientStage": "Understand",
+      "defaultVisibleSections": [
+        "What Appears Important"
+      ]
+    },
+    {
+      "runtimeState": "reconstruction",
+      "clientStage": "Understand",
+      "defaultVisibleSections": [
+        "What PHI OS Knows",
+        "What May Be Connected"
+      ]
+    },
+    {
+      "runtimeState": "navigation",
+      "clientStage": "Choose",
+      "defaultVisibleSections": [
+        "What You Can Explore"
+      ]
+    },
+    {
+      "runtimeState": "review",
+      "clientStage": "Review",
+      "defaultVisibleSections": [
+        "What Changed"
+      ]
+    },
+    {
+      "runtimeState": "continuity",
+      "clientStage": "Review",
+      "defaultVisibleSections": [
+        "Reality Next"
+      ]
+    },
+    {
+      "runtimeState": "closed",
+      "clientStage": "Review",
+      "defaultVisibleSections": [
+        "Case Closure",
+        "Continuation Record"
+      ]
+    }
+  ],
+  "rules": {
+    "projectionMutatesBackendState": false,
+    "urlSelectsBackendState": false,
+    "screenOwnsRuntimeAuthority": false,
+    "understandMayChoose": false,
+    "readingMayNavigate": false,
+    "reviewMayRewriteHistory": false
+  }
+}

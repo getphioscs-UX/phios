@@ -1,0 +1,14 @@
+{
+  "schemaVersion":"PHI-OS-STAGE14-FINANCIAL-RUNTIME-PRODUCT-CAPABILITY-REGISTRY-v1.0.0",
+  "capabilities":[
+    {"code":"QUICK_INTAKE","state":"PUBLIC_AVAILABLE","authority":"STAGE14_PRODUCT_ADAPTER"},
+    {"code":"NORMALIZED_STATE","state":"PUBLIC_AVAILABLE_EPHEMERAL","authority":"FDR_COMPATIBLE_ADAPTER"},
+    {"code":"BASE_CALCULATION","state":"PUBLIC_AVAILABLE","authority":"FCR","engines":["NET_WORTH","LIQUIDITY","CASH_FLOW","DEBT","ALLOCATION"]},
+    {"code":"FINANCIAL_SNAPSHOT","state":"PUBLIC_AVAILABLE_EPHEMERAL","authority":"FDR+FCR"},
+    {"code":"SCENARIO","state":"EXPLICIT_ASSUMPTIONS_REQUIRED","authority":"FCR","hiddenDefaultsAllowed":false},
+    {"code":"STRUCTURAL_FINDINGS","state":"PUBLIC_AVAILABLE_BOUNDED","authority":"FAR"},
+    {"code":"PROFESSIONAL_RECOMMENDATION","state":"HANDOFF_REQUIRED","authority":"PFR"},
+    {"code":"HOLISTIC_PLAN","state":"DOWNSTREAM_CANDIDATE","authority":"HFP"},
+    {"code":"USE_MY_FINANCIAL_REALITY_IN_ASK","state":"HANDOFF_PREPARED_NOT_PERSISTENCE_BOUND","authority":"STAGE15_PENDING"}
+  ]
+}

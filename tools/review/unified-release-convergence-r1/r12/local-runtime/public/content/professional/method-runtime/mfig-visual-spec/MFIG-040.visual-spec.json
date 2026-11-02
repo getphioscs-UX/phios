@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-040",
+  "title": "NUM-PROFESSIONAL-INTEGRATION",
+  "scope": "NUM",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/core-method-runtime/num-professional-integration-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_PROJECTION",
+      "displayLabel": "CANONICAL PROJECTION",
+      "nodeType": "RESULT",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "INPUT",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "NUM_PROFESSIONAL_INTEGRATION",
+      "displayLabel": "NUM PROFESSIONAL INTEGRATION",
+      "nodeType": "GATE",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "METHOD_PROFESSIONAL_GATE",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_PROFESSIONAL_RUNTIME",
+      "displayLabel": "SHARED PROFESSIONAL RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL_HANDOFF",
+      "container": "SHARED_PROFESSIONAL_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-040-E01",
+      "from": "CANONICAL_PROJECTION",
+      "to": "NUM_PROFESSIONAL_INTEGRATION",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-040-E02",
+      "from": "NUM_PROFESSIONAL_INTEGRATION",
+      "to": "SHARED_PROFESSIONAL_RUNTIME",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "PROFESSIONAL_INTEGRATION_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "NUM_PROFESSIONAL_INTEGRATION",
+        "SHARED_PROFESSIONAL_RUNTIME"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_PROJECTION",
+    "NUM_PROFESSIONAL_INTEGRATION",
+    "SHARED_PROFESSIONAL_RUNTIME"
+  ],
+  "mustState": [
+    "Professional integration does not move Professional authority into the Method",
+    "Professional release remains separately governed"
+  ],
+  "statementSources": {
+    "Professional integration does not move Professional authority into the Method": "SRC-002",
+    "Professional release remains separately governed": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

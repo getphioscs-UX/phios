@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-W1E-PUBLIC-BOOK-LOCALE-ICON-PROJECTION-ACTIVE-v1.0.0",
+  "phase": "BOOK-W1",
+  "step": "BOOK-W1E",
+  "status": "HUMAN_APPROVED_ACTIVE_PUBLIC_PROJECTION",
+  "recordedAt": "2026-08-14",
+  "sourceCandidate": {
+    "path": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
+    "sha256": "bcd76914bbd7f493c9dc6c92ccea8501b2c36ddb9ac088a3cbe00c266a66e298"
+  },
+  "humanAcceptance": {
+    "path": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
+    "actor": "TL",
+    "decision": "ACCEPT"
+  },
+  "canonicalBookRoutes": {
+    "BOOK-1": "/books/reality-formation/",
+    "BOOK-2": "/books/reality-runtime/",
+    "BOOK-3": "/books/reality-continuity/",
+    "BOOK-4": "/books/reality-civilization/",
+    "BOOK-5": "/books/reality-navigation/"
+  },
+  "compatibilityRoutes": {
+    "/books/reality-maintenance/": {
+      "target": "/books/reality-continuity/",
+      "redirectStatus": 308,
+      "canonicalAuthority": false,
+      "historicalUrlPreserved": true
+    }
+  },
+  "ownership": {
+    "BOOK-1": ["P1", "P2", "P3", "P4"],
+    "BOOK-2": ["P5", "P6", "P7"],
+    "BOOK-3": ["P8", "P9"],
+    "BOOK-4": ["P10", "P11", "P12"],
+    "BOOK-5": ["P13", "P14", "P15"]
+  },
+  "visualVocabulary": {
+    "BOOK-3": {
+      "primary": ["maintenance", "reconfiguration", "recovery", "coordination", "emergence", "continuity"],
+      "legacy": []
+    },
+    "BOOK-4": {
+      "primary": ["scale", "replication", "distribution", "infrastructure", "civilization", "atlas"],
+      "legacy": ["migration", "cycles", "functions", "ecology", "coordinates", "succession"]
+    },
+    "BOOK-5": {
+      "primary": ["reading", "evidence", "navigation", "action", "outcome", "continuation", "formation"],
+      "legacy": ["continuity", "ai", "future", "evolution"],
+      "retainedNonPrimary": ["ai"]
+    }
+  },
+  "activatedSources": [
+    { "path": "assets/js/web-production/public-surface-data.js", "sha256": "8cd77cd7e5f5722ff4099cb00b68e3e947e48aa29826bef5247cb802452f2953" },
+    { "path": "assets/js/pages/books.js", "sha256": "a68a8bde342663715ab6e5a0a1b75b3b5ac6f5bfe70ccfde6ecbb9a1a482407e" },
+    { "path": "assets/js/pages/book-volume.js", "sha256": "f561dca41f712b354e5ec86a81ea86ab4a649169732a85cf031f094655e1e35b" },
+    { "path": "assets/js/locales/en/atlas.js", "sha256": "bfd47e2caae16dd9f0074bad9381cf85791e7cc634c3fea210b01bfe263725aa" },
+    { "path": "assets/js/locales/zh-Hans/atlas.js", "sha256": "d52eff5bacef7a9db265c23c7a4f0654b9136de52617f249cf6dcea092880d11" },
+    { "path": "assets/js/locales/en/public.js", "sha256": "b1d33b9a8c1f2646c092043c33f0a84933d8db84edfd153b0be7a12a55c0e6d1" },
+    { "path": "assets/js/locales/zh-Hans/public.js", "sha256": "71c2461dc6f553b5ebe7f314d28fe8d3425bf9e0f53bd8d54c0c6f4864515c27" },
+    { "path": "content/knowledge/public/public-book-metadata.json", "sha256": "c3ad8a40171bcb8d12a590e2042f41d03f24c377dbd27fff9167e08e940d01f6" },
+    { "path": "content/registry/public-assets.json", "sha256": "f35bda5cb70beb4c69d2bb9fffe9e237a7b49b00d529fb8bb5c1ea3cac81f0a8" },
+    { "path": "content/web-production/composition/public/book-composition-v1.json", "sha256": "ae4c626ecf595d53dd3525818d362591e262dabc8216e922b07913cd2792f4cf" }
+  ],
+  "currentProductionScan": {
+    "activeFourVolumeAssumptionCount": 0,
+    "staleVolumeIdentityCount": 0,
+    "bookTwoP5ToP9OwnershipCount": 0,
+    "stalePart8To15TitleCount": 0,
+    "publicBookInferenceFromNodeCodePrefixCount": 0
+  },
+  "historicalAllowed": [
+    { "path": "docs/audits/BOOK-W0-four-volume-migration.md", "marker": "HISTORICAL_ALLOWED" },
+    { "path": "content/knowledge/migrations/five-volume-book-ownership-migration-v1.json", "marker": "HISTORICAL_ALLOWED" },
+    { "path": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json", "marker": "HISTORICAL_ALLOWED" },
+    { "path": "content/registry/book-1-free-preview.json", "marker": "HISTORICAL_ALLOWED" }
+  ],
+  "boundaries": {
+    "historicalAuthorityMutationAllowed": false,
+    "canonicalNodeIdentityMutationAllowed": false,
+    "legacyVisualVocabularyMayRemainPrimary": false,
+    "aiIconDeleted": false,
+    "aiMayRemainBookLevelPrimary": false
+  }
+}

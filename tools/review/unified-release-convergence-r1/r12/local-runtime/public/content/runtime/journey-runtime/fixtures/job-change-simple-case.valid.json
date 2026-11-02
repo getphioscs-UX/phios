@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-RJX-SIMPLE-CASE-FIXTURE-v1.0.0",
+  "work": "RJX-W6",
+  "fixtureCode": "job-change-simple-case",
+  "mode": "SIMPLE_REALITY_CASE",
+  "status": "CANDIDATE_VALIDATION_FIXTURE",
+  "case": {
+    "caseId": "RJX-FIXTURE-SIMPLE-JOB-001",
+    "person": {
+      "id": "PERSON-1"
+    },
+    "currentSituation": {
+      "type": "CURRENT_JOB"
+    },
+    "alternative": {
+      "type": "ALTERNATIVE_JOB"
+    },
+    "constraints": [
+      {
+        "id": "C1",
+        "type": "INCOME_STABILITY"
+      },
+      {
+        "id": "C2",
+        "type": "TIME"
+      }
+    ],
+    "goals": [
+      {
+        "id": "G1",
+        "type": "SUSTAINABLE_WORK"
+      }
+    ],
+    "timeline": null,
+    "observedEvidence": [],
+    "reportedExperience": [
+      {
+        "id": "R1",
+        "classification": "REPORTED_EXPERIENCE",
+        "statement": "Current role feels persistently misaligned"
+      }
+    ],
+    "unknown": [
+      {
+        "id": "U1",
+        "question": "What would the alternative role actually require?",
+        "blocking": false
+      }
+    ]
+  },
+  "requirements": {
+    "aiRequired": false,
+    "methodRequired": false,
+    "singleDecisionOutputAllowed": false,
+    "minimumBoundedOptions": 2,
+    "expectedSignalRequired": true,
+    "reviewConditionRequired": true
+  }
+}

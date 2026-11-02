@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A-SOURCE-PRODUCTION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_SOURCE_PRODUCTION",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8A",
+  "title": "Current Evidence Source Production",
+  "purpose": "Turn W7 source-lane readiness into auditable current-source work orders and validated source candidates without creating claims, evidence, RRE readings or runtime positions.",
+  "predecessorAcceptance": "content/civilization-atlas/reconfiguration/runtime-position-w7-human-acceptance-v1.json",
+  "predecessorReadiness": "content/civilization-atlas/reconfiguration/runtime-position-w7-readiness-v1.json",
+  "successorWork": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8B",
+  "stages": [
+    "SOURCE_WORK_ORDER",
+    "SOURCE_CANDIDATE_INTAKE",
+    "SOURCE_STRUCTURAL_VALIDATION",
+    "SOURCE_HANDOFF_TO_CLAIM_EXTRACTION"
+  ],
+  "sourceIntakeRequiredFields": [
+    "intakeId",
+    "sourceId",
+    "dossierId",
+    "targetLanes",
+    "url",
+    "publisher",
+    "title",
+    "retrievedAt",
+    "authorityClassHint",
+    "sourceVersionOrDigest"
+  ],
+  "sourceIntakeOptionalFields": [
+    "publishedAt",
+    "jurisdiction",
+    "locale",
+    "notes"
+  ],
+  "validationRules": [
+    "Source URL must be HTTPS.",
+    "Dossier must exist in W7 readiness.",
+    "Every target lane must exist for that dossier.",
+    "Publisher, title, sourceId, sourceVersionOrDigest and retrievedAt are required.",
+    "authorityClassHint must be a known Current Web Authority class; it is still only a hint until CWA admission.",
+    "retrievedAt must not be later than the intake producedAt timestamp.",
+    "The same source may support more than one lane, but source IDs must remain globally unique inside the intake.",
+    "A source candidate is not a fact, claim, CURRENT_DATA or admitted evidence."
+  ],
+  "knownAuthorityClasses": [
+    "OFFICIAL_PRIMARY",
+    "REGULATOR",
+    "PUBLIC_HEALTH",
+    "GOVERNMENT",
+    "OFFICIAL_COMPANY",
+    "ACADEMIC",
+    "MARKET_DATA_PROVIDER",
+    "REPUTABLE_NEWS",
+    "SECONDARY_REFERENCE",
+    "COMMUNITY"
+  ],
+  "boundaries": {
+    "sourceWorkOrderIsSource": false,
+    "sourceCandidateIsFact": false,
+    "sourceCandidateIsEvidence": false,
+    "claimGenerationAllowed": false,
+    "currentDataAdmissionAllowed": false,
+    "rreAllowed": false,
+    "runtimePositionCandidateAllowed": false,
+    "autoSourceFabricationAllowed": false,
+    "autoPopulateDossiersAllowed": false,
+    "mutatesW8EvidenceBatches": false
+  },
+  "failClosed": true
+}

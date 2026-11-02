@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-QUESTION-INTAKE-v1.0.0",
+  "title": "KAP Question Intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "capability",
+    "question",
+    "locale",
+    "surfaceContext",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-QUESTION-INTAKE-v1.0.0"
+    },
+    "capability": {
+      "const": "ASK_PHIOS"
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "originalText",
+        "canonicalText"
+      ],
+      "properties": {
+        "originalText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "canonicalText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "sessionRef": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "surfaceContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "surfaceType": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "articleSlug": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "bookCode": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "nodeCode": {
+          "type": "string",
+          "maxLength": 120
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "createsCanonicalKnowledge",
+        "createsPublication",
+        "createsRealityReading",
+        "createsPersistentCase",
+        "requiresBirthInput",
+        "requiresMethodExecution"
+      ],
+      "properties": {
+        "createsCanonicalKnowledge": {
+          "const": false
+        },
+        "createsPublication": {
+          "const": false
+        },
+        "createsRealityReading": {
+          "const": false
+        },
+        "createsPersistentCase": {
+          "const": false
+        },
+        "requiresBirthInput": {
+          "const": false
+        },
+        "requiresMethodExecution": {
+          "const": false
+        }
+      }
+    }
+  }
+}

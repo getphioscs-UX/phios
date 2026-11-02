@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-MCD-8-KAP-W26-POST-SUCCESSOR-PACKAGE-SCOPE-RECONCILIATION-v1.0.0",
+  "status": "ACCEPTED_SCOPED_PACKAGE_RECONCILIATION",
+  "purpose": "Preserve the historical KAP-W26 package snapshot while validating only the MCD/KAP aliases owned by this successor after later independent work adds package scripts.",
+  "predecessorSuccessor": {
+    "path": "content/professional/method-client-delivery/successors/mcd-8-kap-w26-reality-handoff-successor-v1.json",
+    "sha256": "b141c9fa92a7fe242fcec4d5d9800f2e4a4d9d1c87048e58b191a955d856cfb1"
+  },
+  "historicalPackageLineage": {
+    "snapshotCommit": "80851a5",
+    "predecessorSha256": "f78c73dd089c2b4ceaf33d25a0d2315cb5ae52e7d26a4d9132cadcdee1bbf129",
+    "kapW26SuccessorSha256": "80409950184362be8a89545368c1f17c9efd7fb130ce83fef51f3dd79d55d335",
+    "historicalSnapshotRewritten": false
+  },
+  "packageScope": {
+    "wholePackageFileOwnedByMcdKapW26": false,
+    "unrelatedLaterPackageScriptsAllowed": true,
+    "requiredAliases": {
+      "check:mcd": "npm run check:mcd-1 && npm run check:mcd-2 && npm run check:mcd-3 && npm run check:mcd-4 && npm run check:mcd-5 && npm run check:mcd-6 && npm run check:mcd-7 && npm run check:mcd-8",
+      "check:mcd-8": "node scripts/check-mcd-8-kap-w26-successor.mjs",
+      "check:mcd-8-kap-w23-historical": "node scripts/check-mcd-8-kap-w23-successor.mjs",
+      "check:kap-handoff": "node scripts/check-kap-reality-handoff.mjs ALL",
+      "check:kap-w26": "node scripts/check-kap-reality-handoff.mjs W26",
+      "check:kap-w29": "node scripts/check-kap-reality-handoff.mjs W29"
+    }
+  },
+  "authorityBoundary": {
+    "mpaSoleDispatchAuthorityPreserved": true,
+    "mcd8CanonicalProjectionAuthorityPreserved": true,
+    "kapMayCreateCanonicalCase": false,
+    "kapMayCreateRealityModel": false,
+    "laterPackageScriptsGrantMcdOrKapAuthority": false
+  }
+}

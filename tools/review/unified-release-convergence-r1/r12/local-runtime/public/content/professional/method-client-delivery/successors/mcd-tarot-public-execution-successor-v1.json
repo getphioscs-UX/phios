@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-MCD-TAROT-PUBLIC-EXECUTION-SUCCESSOR-v1.0.0",
+  "work": "TPA-M-M-W55-M-W56",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "SOURCE_READY_DYNAMIC_SERVER_AUTHORITY",
+  "methodCode": "TAROT",
+  "route": "/readings/symbolic/?method=TAROT",
+  "executeApi": "/api/symbolic-method-execute",
+  "contextApi": "/api/symbolic-method-context?method=TAROT",
+  "statusApi": "/api/tarot-production-status",
+  "viewModel": "functions/symbolic-method-public-ux/tarot-product-view-model-v2.js",
+  "guest": {
+    "executionAllowedWhenServerAuthorityActive": true,
+    "hiddenPersistence": false,
+    "localStorageFallback": false,
+    "sessionStorageFallback": false
+  },
+  "account": {
+    "saveRequiresVerifiedServerIdentity": true,
+    "saveRequiresRetentionPolicy": true,
+    "saveRequiresRuntimeDb": true
+  },
+  "authority": {
+    "runAllowedFromServerOnly": true,
+    "clientMayGrantAuthority": false,
+    "catalogMayGrantAuthority": false
+  }
+}

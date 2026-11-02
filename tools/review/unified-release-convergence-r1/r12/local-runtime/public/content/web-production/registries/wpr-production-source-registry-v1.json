@@ -1,0 +1,222 @@
+{
+  "registryCode": "PHI-OS-WPR-W5-PRODUCTION-SOURCE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W5",
+  "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+  "status": "canonical_wpr_f_w22_w23_professional_report_sources_active",
+  "sourceClasses": [
+    "CANONICAL",
+    "PUBLISHED",
+    "PRODUCTION",
+    "SESSION",
+    "CUSTOMER_PRIVATE",
+    "PROFESSIONAL_PRIVATE"
+  ],
+  "entries": [
+    {
+      "sourceCode": "BOOK_REGISTRY",
+      "sourceClass": "CANONICAL",
+      "reference": "content/registry/books.json",
+      "allowedSurfaces": [
+        "HOME",
+        "LIBRARY",
+        "BOOK"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "PART_REGISTRY",
+      "sourceClass": "CANONICAL",
+      "reference": "content/registry/parts.json",
+      "allowedSurfaces": [
+        "LIBRARY",
+        "BOOK"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "PUBLISHED_KNOWLEDGE",
+      "sourceClass": "PUBLISHED",
+      "reference": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "allowedSurfaces": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "PUBLIC_ASSET_REGISTRY",
+      "sourceClass": "CANONICAL",
+      "reference": "content/registry/public-assets.json",
+      "allowedSurfaces": [
+        "HOME",
+        "LIBRARY",
+        "BOOK",
+        "FIGURE",
+        "DIAGRAM"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "PUBLISHED_ASSET_REGISTRY",
+      "sourceClass": "PUBLISHED",
+      "reference": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+      "allowedSurfaces": [
+        "FIGURE",
+        "DIAGRAM"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "CPR_REGISTRY",
+      "sourceClass": "PRODUCTION",
+      "reference": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+      "allowedSurfaces": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE",
+        "FIGURE",
+        "DIAGRAM",
+        "BOOK",
+        "ACADEMY_DISCOVERY",
+        "CUSTOMER_REPORT",
+        "PROFESSIONAL_WORKSPACE",
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "ALR",
+      "sourceClass": "PRODUCTION",
+      "reference": "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "ACADEMY_DISCOVERY",
+        "ACADEMY_LEARNING"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "RMO",
+      "sourceClass": "PRODUCTION",
+      "reference": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "allowedSurfaces": [
+        "CUSTOMER_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "RDG",
+      "sourceClass": "PRODUCTION",
+      "reference": "content/governance/reality-data-governance/freeze/rdg-w16-w20-access-privacy-rights-freeze-v1.json",
+      "allowedSurfaces": [
+        "ACADEMY_LEARNING",
+        "REALITY_JOURNEY",
+        "REALITY_ENTRY",
+        "PERSONAL_RUNTIME",
+        "CUSTOMER_WORKSPACE",
+        "CUSTOMER_REPORT",
+        "PROFESSIONAL_WORKSPACE",
+        "LEGAL",
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL"
+      ],
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "JR",
+      "sourceClass": "CANONICAL",
+      "reference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "FROZEN_ARCHITECTURE_VALIDATION_ONLY",
+      "readOnlyProjectionOnly": true
+    },
+    {
+      "sourceCode": "M3C_BROWSER_LOCAL",
+      "sourceClass": "SESSION",
+      "reference": "content/registry/m3c-journey-dashboard.json",
+      "allowedSurfaces": [
+        "REALITY_JOURNEY_LOCAL"
+      ],
+      "sourceAuthorityPreserved": true,
+      "canonicalJourneyAuthority": false,
+      "compatibilityMappingRequired": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json"
+    },
+    {
+      "sourceCode": "MPA",
+      "sourceClass": "CANONICAL",
+      "reference": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "authorityState": "ACTIVE_GOVERNED_SUCCESSOR_NO_GLOBAL_PRODUCTION_EXECUTION",
+      "eligibleSurfaceConsumers": [
+        "PERSONAL_RUNTIME_SETUP",
+        "PERSONAL_RUNTIME"
+      ],
+      "readOnlyProjectionOnly": true,
+      "productionEligibilityMayBeInferredByWpr": false,
+      "executionAuthorityMayBeInferredByWpr": false,
+      "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "PR",
+      "sourceClass": "CANONICAL",
+      "reference": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "PROFESSIONAL",
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE",
+        "PROFESSIONAL_REPORT_VIEWER",
+        "CUSTOMER_REPORT"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "FROZEN_HUMAN_AUTHORITY_GATED",
+      "readOnlyProjectionOnly": true,
+      "professionalJudgmentAuthorityMayBeInferredByWpr": false
+    },
+    {
+      "sourceCode": "RR",
+      "sourceClass": "CANONICAL",
+      "reference": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "CUSTOMER_REPORT",
+        "PROFESSIONAL_REPORT_VIEWER",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "FROZEN_ASSEMBLY_READY_UPSTREAM_GATED",
+      "readOnlyProjectionOnly": true,
+      "reportAssemblyAuthorityMayBeInferredByWpr": false
+    },
+    {
+      "sourceCode": "FINANCIAL_RUNTIME",
+      "sourceClass": "PRODUCTION",
+      "reference": "content/registry/m4a-financial-reality-navigation.json",
+      "allowedSurfaces": [
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "GOVERNED_M4A_COMPATIBILITY",
+      "readOnlyProjectionOnly": true,
+      "calculationAuthorityMayBeInferredByWpr": false,
+      "recommendationAuthorityMayBeInferredByWpr": false
+    }
+  ],
+  "forbiddenDirectSourceStates": [
+    "DRAFT",
+    "CANDIDATE",
+    "REVIEW_ONLY",
+    "FIXTURE_AS_PRODUCTION"
+  ],
+  "rules": {
+    "sourceRegistrationDoesNotPromoteSourceState": true,
+    "publishedOnlyMustRemainPublishedOnly": true,
+    "privateSourceRequiresAccessResolution": true,
+    "wprCannotRepairSourceAuthority": true
+  }
+}

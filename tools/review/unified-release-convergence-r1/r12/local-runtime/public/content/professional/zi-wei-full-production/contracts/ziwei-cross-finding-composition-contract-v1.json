@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W14",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "purpose": "Assemble W12 findings into small typed composition units while retaining W13 evidence lineage. Palace core and network context intentionally remain separate units with one shared semantic key so W16 can assign one render owner.",
+  "inputSchemas": [
+    "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+    "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+  "unitSchema": "PHI-OS-ZIWEI-COMPOSITION-UNIT-v1.0.0",
+  "compositionTypes": [
+    "FOUNDATION_SYNTHESIS",
+    "PALACE_CORE_STRUCTURE",
+    "PALACE_NETWORK_CONTEXT",
+    "QUALIFIED_PATTERN_SET",
+    "DA_XIAN_CURRENT_STRUCTURE",
+    "LIU_NIAN_CURRENT_STRUCTURE",
+    "TEMPORAL_CROSS_LAYER_STRUCTURE"
+  ],
+  "rules": {
+    "allFindingsCoveredExactlyOnce": true,
+    "palaceCoreAndNetworkShareSemanticKey": true,
+    "differentTemporalContextsRemainSeparate": true,
+    "compositionMayNotCreateNewFinding": true,
+    "compositionMayNotResolveContradiction": true,
+    "compositionMayNotCreateCustomerNarrative": true,
+    "goodBadScoreForbidden": true,
+    "eventPredictionForbidden": true
+  },
+  "runtimeRef": "functions/zi-wei-full-production/ziwei-cross-finding-composition-runtime.js",
+  "registryRef": "content/professional/zi-wei-full-production/registries/ziwei-cross-finding-composition-rule-registry-v1.json",
+  "customerCutoverAllowed": false
+}

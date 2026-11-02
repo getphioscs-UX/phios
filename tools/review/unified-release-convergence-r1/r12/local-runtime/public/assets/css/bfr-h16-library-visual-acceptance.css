@@ -1,0 +1,61 @@
+/* BFR-H16 current Library visual-consumption successor.
+   Uses existing PDS/Knowledge layout and the canonical public asset resolver;
+   it creates no new token, breakpoint, asset, or visual authority. */
+.bfr-library-hero-visual {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgb(17 20 26 / 12%);
+  border-radius: 1.25rem;
+  background: rgb(255 255 255 / 44%);
+  box-shadow: 0 24px 70px rgb(17 20 26 / 10%);
+}
+
+.bfr-library-hero-visual[hidden] {
+  display: none;
+}
+
+.bfr-library-hero-visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.bfr-library-card-visual {
+  margin: calc(clamp(1.3rem, 3vw, 2rem) * -1) calc(clamp(1.3rem, 3vw, 2rem) * -1) 1.1rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(17 20 26 / 10%);
+  border-radius: 1rem 1rem 0 0;
+  background: rgb(17 20 26 / 4%);
+}
+
+.bfr-library-card-visual img {
+  display: block;
+  width: 100%;
+  height: clamp(10rem, 20vw, 14rem);
+  object-fit: contain;
+  padding: 0.7rem;
+}
+
+.bfr-library-card-visual[data-bfr-library-visual-kind="KNOWLEDGE_FIGURE"] img {
+  object-fit: cover;
+  padding: 0;
+}
+
+@media (max-width: 760px) {
+  .bfr-library-hero-visual {
+    order: -1;
+  }
+
+  .bfr-library-card-visual img {
+    height: 11rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bfr-library-hero-visual,
+  .bfr-library-card-visual {
+    scroll-behavior: auto;
+  }
+}

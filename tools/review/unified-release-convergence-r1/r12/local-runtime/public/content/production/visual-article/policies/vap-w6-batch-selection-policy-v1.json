@@ -1,0 +1,33 @@
+{
+  "policyCode": "PHI-OS-VAP-W6-BATCH-SELECTION-POLICY-v1",
+  "policyVersion": "1.0.0",
+  "status": "active",
+  "authority": "DECISION_SUPPORT_ONLY",
+  "maximumBatchSize": 24,
+  "selectionMode": "PREFERRED_SIGNAL_COHORT_WITHOUT_GENERAL_BACKLOG_AUTOFILL",
+  "preferredPortfolioStatesInOrder": [
+    "EXPLICIT_ARTICLE_INTENT",
+    "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL"
+  ],
+  "excludedPortfolioStates": [
+    "EXISTING_PUBLISHED_ARTICLE",
+    "EXPLICIT_NON_ARTICLE_WAVE_OUTPUT"
+  ],
+  "generalBacklogState": "ARTICLE_DECISION_REQUIRED",
+  "generalBacklogAutoFill": false,
+  "ordering": [
+    "preferredPortfolioStateOrder",
+    "canonicalPortfolioOrder"
+  ],
+  "defaultLocale": "zh-Hans",
+  "selectionDoesNot": [
+    "assign_article_role",
+    "approve_production",
+    "freeze_production_plan",
+    "freeze_production_wave",
+    "create_candidate",
+    "invoke_provider",
+    "publish"
+  ],
+  "humanDecisionPrompt": "For each selected node, decide whether the governed production role should be ARTICLE, another KPP role, or DEFERRED before C2/C3 execution formation."
+}

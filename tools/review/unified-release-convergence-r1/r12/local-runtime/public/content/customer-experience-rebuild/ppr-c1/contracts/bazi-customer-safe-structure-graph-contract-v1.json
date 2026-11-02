@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-PPR-C1-BAZI-CUSTOMER-SAFE-STRUCTURE-GRAPH-CONTRACT-v1.0.0",
+  "work": "PPR-C1-W10",
+  "baselineCommit": "b6fce24a1a4262e69aa01417e82267524f72fae6",
+  "status": "ENGINEERING_COMPLETE",
+  "purpose": "Project the existing BAZI-FP-W10 evidence lineage into a customer-safe whole-chart structure graph without exposing internal finding, evidence, authority, unknown or edge identifiers.",
+  "inputAuthority": {
+    "readingIrSchema": "PHI-OS-BAZI-FULL-READING-IR-v1.0.0",
+    "upstreamGraphOwner": "BAZI-FP-W10",
+    "requiredLineage": ["readingIR.source.graphDigest", "readingIR.sections.evidence.graphDigest", "readingIR.renderOwners[].findingRefs", "readingIR.renderOwners[].evidenceRefs", "readingIR.renderOwners[].authorityRefs", "readingIR.renderOwners[].unknownRefs", "readingIR.renderOwners[].counterEvidenceRefs"],
+    "note": "PPR-C1-W10 does not reopen or recalculate the raw W10 graph. W14 already retains the graph digest and governed trace references needed for this customer projection."
+  },
+  "outputSchema": "PHI-OS-PPR-C1-BAZI-CUSTOMER-SAFE-STRUCTURE-GRAPH-v1.0.0",
+  "customerNodes": ["CHART", "FOUNDATION", "RELATIONSHIPS", "PATTERN", "SCHOOL_ZIPING", "SCHOOL_TIYONG", "SCHOOL_TIAOHOU", "DA_YUN", "LIU_NIAN", "OPEN_BOUNDARIES"],
+  "customerEdgeTypes": ["READING_SEQUENCE", "SCHOOL_QUALIFIED_VIEW", "TEMPORAL_LAYER", "BOUNDS"],
+  "traceProjection": {
+    "preserveCounts": ["findingCount", "evidenceCount", "authorityCount", "unknownCount", "counterEvidenceCount"],
+    "preserveResolutionState": true,
+    "rawIdsExposed": false,
+    "rawGraphTopologyCopied": false
+  },
+  "rules": {
+    "graphTopologyMayCreateMeaning": false,
+    "readingSequenceMayImplyCausality": false,
+    "graphMayImplyProbability": false,
+    "schoolViewsMayMerge": false,
+    "unknownMayBeSuppressed": false,
+    "counterEvidenceMayBeSuppressed": false,
+    "eventPredictionMayBeCreated": false,
+    "goodBadScoreMayBeCreated": false,
+    "methodRuntimeMayBeRecalculated": false,
+    "upstreamEvidenceGraphMayBeRecalculated": false
+  },
+  "specialistImplementation": {
+    "projection": "functions/personal-professional-reading/bazi-customer-safe-graph-projection.js",
+    "adapter": "functions/personal-professional-reading/bazi-method-native-reading-adapter.js",
+    "surfaceProjection": "functions/personal-professional-reading/bazi-professional-surface-projection.js",
+    "renderer": "assets/customer-ui/js/surfaces/bazi-professional-reading.js",
+    "css": "assets/customer-ui/surfaces/bazi-professional-reading.css",
+    "checker": "scripts/check-ppr-c1-w10.mjs"
+  }
+}

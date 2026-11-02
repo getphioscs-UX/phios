@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W12-DAR-CROSS-CONSUMPTION-CONTRACT-v1.0.0",
+  "work": "FDR-W12",
+  "status": "ACTIVE_FAIL_CLOSED_UNTIL_DAR_BINDING_EXISTS",
+  "producer": "FDR",
+  "consumer": "DAR",
+  "baselineDarPresence": "NOT_PRESENT_IN_812d7c8_BASELINE",
+  "fdrOwnedEstateFacts": [
+    "willExists",
+    "trustExists",
+    "nominationExists",
+    "beneficiaryKnown",
+    "executorKnown",
+    "assetJurisdiction",
+    "ownership"
+  ],
+  "fdrDoesNotOwn": [
+    "whoReceivesWhat",
+    "distributionShare",
+    "distributionInstruction",
+    "legalClause",
+    "willValidity",
+    "trustValidity",
+    "jurisdictionInference"
+  ],
+  "consumptionRules": {
+    "fdrAssetFactMayBeReferencedByDar": true,
+    "darInstructionMayMutateFdrAssetFact": false,
+    "darMayInventMissingFdrFact": false,
+    "darMayReplaceUnknownWithAssumption": false,
+    "darUseRequiresW18ConsentScope": "WILL_ASSEMBLY",
+    "futureDarBindingMustBeExplicitAndVersioned": true,
+    "allReferencedFdrFactsUseFactEnvelope": true
+  },
+  "lineage": {
+    "consumerMustStoreFdrRealityId": true,
+    "consumerMustStoreFdrVersion": true,
+    "consumerMustStoreFdrDigest": true,
+    "consumerInstructionDigestIsSeparate": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

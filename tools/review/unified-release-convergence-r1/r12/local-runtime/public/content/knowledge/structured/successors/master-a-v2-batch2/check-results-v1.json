@@ -1,0 +1,160 @@
+{
+  "status": "PASS",
+  "sourceRegistryShasPreserved": true,
+  "batch1AcceptedOutputShasPreserved": true,
+  "bookVIIAuthorityPreserved": true,
+  "bookVIIIRegisteredAndPublicTitlePreserved": true,
+  "referenceAuditRecords": 348,
+  "existingAtlasRetrievalCases": [
+    {
+      "case": "BOOK_V",
+      "primarySource": "CA-T00-01",
+      "chain": [
+        {
+          "stage": "ATLAS_ENTITY",
+          "status": "MATCHED",
+          "count": 1
+        },
+        {
+          "stage": "ATLAS_EVIDENCE",
+          "status": "NO_LINKED_EVIDENCE_RECORD",
+          "count": 0
+        },
+        {
+          "stage": "PART_12",
+          "status": "AUTHORIZED_FALLBACK"
+        },
+        {
+          "stage": "BROADER_KNOWLEDGE",
+          "status": "AUTHORIZED_FALLBACK"
+        }
+      ],
+      "currentOwnerUsed": true
+    },
+    {
+      "case": "BOOK_VI_CASE",
+      "primarySource": "RC-04",
+      "chain": [
+        {
+          "stage": "ATLAS_ENTITY",
+          "status": "MATCHED",
+          "count": 1
+        },
+        {
+          "stage": "RECONFIGURATION_CASE",
+          "status": "MATCHED",
+          "count": 1
+        },
+        {
+          "stage": "RECONFIGURATION_WINDOW",
+          "status": "MATCHED",
+          "count": 3
+        },
+        {
+          "stage": "WORLD_RECONFIGURATION_SNAPSHOT",
+          "status": "MATCHED",
+          "count": 1
+        },
+        {
+          "stage": "CONTEMPORARY_RUNTIME_DOSSIER",
+          "status": "NO_EXPLICIT_ENTITY_SELECTED",
+          "count": 0
+        },
+        {
+          "stage": "LIVED_REALITY_LAYER",
+          "status": "NO_EXPLICIT_ENTITY_SELECTED",
+          "count": 0
+        },
+        {
+          "stage": "RUNTIME_POSITION",
+          "status": "NO_EXPLICIT_ENTITY_SELECTED",
+          "count": 0
+        },
+        {
+          "stage": "BOOK_VI_CANONICAL_SECTION",
+          "status": "MATCHED",
+          "count": 2
+        },
+        {
+          "stage": "PART_13",
+          "status": "AUTHORIZED_FALLBACK"
+        },
+        {
+          "stage": "BROADER_KNOWLEDGE",
+          "status": "AUTHORIZED_FALLBACK"
+        }
+      ],
+      "currentOwnerUsed": true
+    },
+    {
+      "case": "BOOK_VI_DOSSIER",
+      "primarySource": "DOSSIER-CN",
+      "chain": [
+        {
+          "stage": "ATLAS_ENTITY",
+          "status": "MATCHED",
+          "count": 1
+        },
+        {
+          "stage": "RECONFIGURATION_CASE",
+          "status": "MATCHED",
+          "count": 8
+        },
+        {
+          "stage": "RECONFIGURATION_WINDOW",
+          "status": "NO_EXPLICIT_ENTITY_SELECTED",
+          "count": 0
+        },
+        {
+          "stage": "WORLD_RECONFIGURATION_SNAPSHOT",
+          "status": "NO_EXPLICIT_ENTITY_SELECTED",
+          "count": 0
+        },
+        {
+          "stage": "CONTEMPORARY_RUNTIME_DOSSIER",
+          "status": "MATCHED",
+          "count": 1
+        },
+        {
+          "stage": "LIVED_REALITY_LAYER",
+          "status": "MATCHED",
+          "count": 8
+        },
+        {
+          "stage": "RUNTIME_POSITION",
+          "status": "NO_EXPLICIT_ENTITY_SELECTED",
+          "count": 0
+        },
+        {
+          "stage": "BOOK_VI_CANONICAL_SECTION",
+          "status": "MATCHED",
+          "count": 8
+        },
+        {
+          "stage": "PART_13",
+          "status": "AUTHORIZED_FALLBACK"
+        },
+        {
+          "stage": "BROADER_KNOWLEDGE",
+          "status": "AUTHORIZED_FALLBACK"
+        }
+      ],
+      "currentOwnerUsed": true
+    }
+  ],
+  "dossierHistoryPreserved": true,
+  "noCurrentDataInvented": true,
+  "noAutomaticEpistemicAssignment": true,
+  "providerRequests": 0,
+  "legacyAskChecker": {
+    "status": "FAIL_STALE_CHAIN_EXPECTATION",
+    "path": "scripts/check-book6-reconfiguration-atlas-ask.mjs",
+    "reason": "Expected chain omits existing RUNTIME_POSITION stage; additive current regression asserts all ten stages."
+  },
+  "existingCheckers": {
+    "bookVFullRegistry": "PASS",
+    "bookVIDataClosure": "PASS",
+    "bookVISchemaVersion": "PASS"
+  },
+  "laterBatchExecuted": false
+}

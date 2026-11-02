@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-APS-8-PRODUCTION-FREEZE-v1.0.0",
+  "work": "APS-8",
+  "status": "FROZEN",
+  "freezeCode": "APS-ARTICLE-PRODUCTION-SIMPLIFICATION-v1.0.0",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "operatorSurface": {
+    "commands": [
+      "npm run article:batch -- --book BOOK-1 --count 30",
+      "npm run article:publish -- --batch BATCH-001"
+    ],
+    "commandCount": 2
+  },
+  "frozenPjaPublicationW1Sha256": "7e62f8b2a61524eb735d332103d5970ebf17130f0f26857782e5bc39b77bbe30",
+  "freezeBoundary": {
+    "apsContractsAndOperatorOrchestrationFrozen": true,
+    "pendingHumanDecisionsFrozenAsAuthority": false,
+    "futurePublicationResultsFrozen": false,
+    "underlyingAuthorityImplementationsReownedByAps": false,
+    "futureSuccessorMustBeAdditiveAndAuthorityPreserving": true
+  },
+  "digests": {
+    "content/production/article-simplification/contracts/aps-6-human-decision-bridge-contract-v1.json": "ab3afd5d9dd440f0ff50432f40d80c7965c1d519a155e5da99dab2acbdf072ab",
+    "content/production/article-simplification/contracts/aps-7-one-command-publication-contract-v1.json": "9664d081d118166017d47aed19268354d8c462869b9718d199939f67db1dbf56",
+    "content/production/article-simplification/contracts/aps-8-production-acceptance-freeze-contract-v1.json": "ec50de48d7dff0e6e86bd30cf9d05c4f08bcc4095b1d43844b1d4f3531a02a4a",
+    "content/production/article-simplification/acceptance/aps-8-production-acceptance-v1.json": "6871d05535ec6dd00ab6d35258c1197bf275202556f095672719a51f5869e80f",
+    "scripts/article-batch.mjs": "4691238f23363277f74fe286a4a018d884fafc598d2d26373842c2146a727ef4",
+    "scripts/article-publish.mjs": "cfbcb1c61fe6a21be1d1c7768a3d9f0a51da0c3c9af2518f64c5b3b0f9f43921",
+    "scripts/lib/article-simplification/human-decision-bridge-v1.mjs": "249742185a860f1f132610cd656b3fb6ab02ec29135a1a06f26a2a0c9917af38",
+    "scripts/lib/article-simplification/pja-publication-successor-v1.mjs": "b2270c32580c4be29c9c8e1451ad1c06a2c99e166b75f91c645b0b1caf1cd79a",
+    "scripts/lib/article-simplification/published-authority-successor-v1.mjs": "b20ac7a7bb589c22cb2f6b6419c52c7c04039fd5d07f2c5b708c5621a693179b",
+    "scripts/lib/article-simplification/publication-orchestrator-v1.mjs": "df27900542321fb96d13fc5f93f5f5cc23283cf78e704b141e3f1821f7ccb262",
+    "scripts/check-aps-6-human-decision-bridge.mjs": "524b83dee034167b452259c636777ad9639255bec21b69595b5c87e72f59b9e3",
+    "scripts/check-aps-7-one-command-publication.mjs": "7c3e1a4bc339167d394d15e91f84c63c535219c64a63fb540240b3acdb858543",
+    "scripts/check-aps-8-production-acceptance-freeze.mjs": "86d9ee9b29b48ebac3dd2888a2e364733cf302e95dcda6dd03df5510ed312a44",
+    "scripts/check-aps-1-current-gate-audit.mjs": "ddb4aedd2fb3401b0b44d79febd0040272c2ce0c164b6238788726eeec8e2622",
+    "scripts/check-aps-3-batch-orchestrator.mjs": "3eb37811249aa0f24112a14787c7298f28a11b2167e76893c60691815ddbd9e7",
+    "scripts/check-aps-2-single-readiness.mjs": "0c4c27eed4118ea27b5fe1f6d83f5a470f01307b0f97b4741bd085f67e6b7e6d",
+    "scripts/check-aps-4-candidate-orchestration.mjs": "973d7e21bc2c7f5404634c436363bbfc2b84b98a84667cd95c1a5860a0f972ea",
+    "scripts/check-aps-5-review-batch-assembly.mjs": "715e21287e2437d3a1af373f8245def6bf6011dc9197c12444b9ef40feb6b5b3",
+    "scripts/check-vap-l10n-r1-r5.mjs": "9fc94495f1e0b2f7e938c85d04042fd798120e461a879f553064b434914a25b3"
+  },
+  "successorPolicy": {
+    "frozenPjaImplementationMayBeMutated": false,
+    "frozenBriefSuccessorAdapterRequiredForHistoricalCandidates": true,
+    "publishedAuthorityGrowthMustBeAdditiveAndPublicationBacked": true,
+    "visualAssetRequiresCar": true,
+    "noVisualAssetMayRecordCarNotRequired": true,
+    "localeAuthorityInheritanceAllowed": false
+  }
+}

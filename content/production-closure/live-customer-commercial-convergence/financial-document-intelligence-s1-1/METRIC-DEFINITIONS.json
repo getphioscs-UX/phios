@@ -1,0 +1,52 @@
+{
+  "documentationVersion": "S1.1-DISCLOSURE-ONLY",
+  "owner": "functions/professional/financial/business-intake-candidate-r3.js",
+  "metricId": "BFT-R3:operatingHeadroom",
+  "calculationVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+  "formula": "closingCash - restrictedCash - committedCash - minimumOperatingReserve",
+  "deductsOtherObligations": false,
+  "registeredOtherObligationsIsNotConsumedByThisMetric": true,
+  "sourceOtherObligations": [
+    0,
+    0
+  ],
+  "meaning": {
+    "zh": "在指定受限现金、独立现金承诺及额外经营储备条件下的资金余量；并非银行负余额或可提取资金。",
+    "en": "Cash remaining against the specified restrictions, distinct commitments and additional operating reserve; not a negative bank balance or withdrawable cash."
+  },
+  "deductionRules": [
+    {
+      "field": "restrictedCash",
+      "definition": "Unavailable cash; no same amount may also be counted as committed cash."
+    },
+    {
+      "field": "committedCash",
+      "definition": "Separate commitments not already funded/countable under restricted cash; excludes extra operating reserve."
+    },
+    {
+      "field": "minimumOperatingReserve",
+      "definition": "Additional reserve target beyond restricted/committed amounts; not a second count of either."
+    },
+    {
+      "field": "otherObligations",
+      "definition": "Not deducted by native metric. Nonzero/overlapping/unclassified obligations require separate review; do not relabel result as cash after all obligations."
+    }
+  ],
+  "overlapDeclaration": {
+    "scope": "SYNTHETIC_FIXTURE_ONLY_NOT_REAL_ACCOUNTING_CERTIFICATION",
+    "groups": {
+      "restrictedCash": [
+        "SYNTHETIC-RESTRICTED-FUND"
+      ],
+      "committedCash": [
+        "SYNTHETIC-COMMITMENTS-EXCLUDING-RESTRICTED"
+      ],
+      "minimumOperatingReserve": [
+        "SYNTHETIC-ADDITIONAL-RESERVE-TARGET"
+      ]
+    },
+    "claim": "Non-overlap is an explicit demonstration assumption, not inferred from unknown real sources."
+  },
+  "ownerAccessibleCash": "UNKNOWN",
+  "formalAdmission": false
+}

@@ -1,0 +1,46 @@
+{
+  "contractCode": "PHI-OS-VAP-W5-PJA-PRODUCTION-BRIEF-EXPORT-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W5",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "status": "active",
+  "implementationBaselineCommit": "cdcb11be3e2db494fa1c40c7814604e2de31f34e",
+  "purpose": "Activate the already frozen PJA Canonical Article Production Brief exporter for VAP-B without reimplementing it, while requiring VAP-W4 Article eligibility and preserving VAP-W3 execution-mode boundaries.",
+  "existingRuntime": {
+    "npmScript": "knowledge:export-brief",
+    "exporter": "scripts/export-knowledge-production-brief.mjs",
+    "defaultCommand": "npm run knowledge:export-brief -- <NODE_CODE>",
+    "localeAndReportCommand": "npm run knowledge:export-brief -- <NODE_CODE> --locale zh-Hans --json-report",
+    "defaultOutputDirectory": "dist/knowledge-production-briefs",
+    "runtimeMustNotBeReimplemented": true
+  },
+  "requiredBriefContents": [
+    "Identity",
+    "Canonical Thesis",
+    "Boundary",
+    "Editorial Rules",
+    "Article Structure",
+    "Claims",
+    "Sources",
+    "Review Governance",
+    "Output Package"
+  ],
+  "eligibilityBoundary": {
+    "vapW4EligibilityRequired": true,
+    "pjaPrimaryDispatchRequiredForPjaExport": true,
+    "standardPjaArticleDraftExecutionModeRequired": true,
+    "vapW3AdapterRequirementMayNotBeBypassed": true,
+    "existingPublishedArticleReconciliationMayNotBeTurnedIntoNewArticleCandidate": true,
+    "carDispatchedMultiAssetMayNotBeReroutedToPja": true
+  },
+  "forbiddenOperations": [
+    "rewrite_existing_pja_exporter",
+    "bypass_vap_w4_eligibility",
+    "bypass_vap_w3_adapter_requirement",
+    "create_candidate_by_acceptance",
+    "invoke_provider",
+    "make_network_generation_call",
+    "publish"
+  ],
+  "outputPattern": "dist/knowledge-production-briefs/KN-XXX-production-brief.md"
+}

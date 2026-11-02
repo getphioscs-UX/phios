@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-fragment-eligibility-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nodeCode",
+    "articleStatus",
+    "publicKnowledgeValueExists",
+    "knowledgeCoverageSufficient",
+    "boundaryStable",
+    "fragmentCanStandAlone",
+    "localeSourceAvailable",
+    "status"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "articleStatus": {
+      "enum": [
+        "article_not_required",
+        "article_deferred"
+      ]
+    },
+    "publicKnowledgeValueExists": {
+      "type": "boolean"
+    },
+    "knowledgeCoverageSufficient": {
+      "type": "boolean"
+    },
+    "boundaryStable": {
+      "type": "boolean"
+    },
+    "fragmentCanStandAlone": {
+      "type": "boolean"
+    },
+    "localeSourceAvailable": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "fragment_eligible",
+        "fragment_not_required",
+        "fragment_deferred",
+        "fragment_blocked"
+      ]
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KNOWLEDGE-GROUNDING-BUNDLE-v1.0.0",
+  "title": "KnowledgeGroundingBundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "objectType",
+    "bundleId",
+    "authorityClass",
+    "question",
+    "normalization",
+    "retrieval",
+    "nodeMatches",
+    "relationships",
+    "sources",
+    "unknowns",
+    "excludedMaterial",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KNOWLEDGE-GROUNDING-BUNDLE-v1.0.0"
+    },
+    "objectType": {
+      "const": "KnowledgeGroundingBundle"
+    },
+    "bundleId": {
+      "type": "string",
+      "pattern": "^KGB-v1-[a-f0-9]{8}$"
+    },
+    "authorityClass": {
+      "const": "GROUNDED_NON_AUTHORITATIVE_INPUT"
+    },
+    "question": {
+      "type": "object"
+    },
+    "normalization": {
+      "type": "object"
+    },
+    "retrieval": {
+      "type": "object"
+    },
+    "nodeMatches": {
+      "type": "object"
+    },
+    "relationships": {
+      "type": "object"
+    },
+    "sources": {
+      "type": "array"
+    },
+    "unknowns": {
+      "type": "array"
+    },
+    "excludedMaterial": {
+      "type": "array"
+    },
+    "governance": {
+      "type": "object",
+      "required": [
+        "answerComposed",
+        "aiUsed",
+        "canonicalAuthorityCreated",
+        "publicationCreated",
+        "realityReadingCreated",
+        "persistentCaseCreated",
+        "rawFullBookExposed",
+        "unpublishedTargetContentInjected"
+      ],
+      "properties": {
+        "answerComposed": {
+          "const": false
+        },
+        "aiUsed": {
+          "const": false
+        },
+        "canonicalAuthorityCreated": {
+          "const": false
+        },
+        "publicationCreated": {
+          "const": false
+        },
+        "realityReadingCreated": {
+          "const": false
+        },
+        "persistentCaseCreated": {
+          "const": false
+        },
+        "rawFullBookExposed": {
+          "const": false
+        },
+        "unpublishedTargetContentInjected": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "repairCode": "PHI-OS-VAP-W1-KN-PREFACE-001-ZH-SUMMARY-INTEGRITY-REPAIR-v1",
+  "repairVersion": "1.0.0",
+  "work": "VAP-W1",
+  "status": "APPLIED_PROJECTION_REPAIR",
+  "baselineCommit": "04224bc214bc77b35c43a3b865b53e73148d8a7a",
+  "recordedAt": "2026-08-10T21:36:00+08:00",
+  "contractReference": "content/production/visual-article/contracts/vap-w1-published-knowledge-integrity-repair-v1.json",
+  "target": {
+    "nodeCode": "KN-PREFACE-001",
+    "locale": "zh-Hans",
+    "field": "article.summary",
+    "publicationReference": "content/knowledge/production/publications/zh-Hans/KN-PREFACE-001/publication.v1.json",
+    "publishedAuthorityReference": "content/knowledge/public/authority/articles/zh-Hans/KN-PREFACE-001.json",
+    "publishedAuthorityRegistryReference": "content/knowledge/public/authority/published-knowledge-authority.json",
+    "retrievalReference": "content/knowledge/public/retrieval/nodes.json"
+  },
+  "finding": {
+    "code": "PUBLISHED_SUMMARY_CORRUPTED_SHA256_FILE_LIST",
+    "sourceFindingCode": "ZH_SUMMARY_ARTIFACT_CONTAMINATION",
+    "pattern": "^[a-f0-9]{64}\\s{2,}\\S+",
+    "originalSummarySha256": "sha256:c284d57d943ff61968194cadf2ee753ca57577f7991f0e74830ecc60fee8eefe",
+    "originalSummaryLength": 530,
+    "artifactConfirmed": true
+  },
+  "replacement": {
+    "mode": "EXACT_EXTRACT_FROM_EXISTING_HUMAN_APPROVED_PUBLICATION_BODY",
+    "summary": "PHI OS 将人工智能理解为文明能力长期组织与持续运行的结果，这是一种解释人工智能形成机制的理论框架，而不是对所有现实发展已经完成事实验证的最终结论。它尝试说明知识表达、物质基础、组织制度与反馈机制如何共同支撑人工智能的发展，同时强调理论解释应与已经获得外部证据直接证实的事实保持明确区分，不应因为引用现实案例或已有研究，就把理论本身包装为已经完成全部事实审核的结论。",
+    "summarySha256": "sha256:a2ed91b3314c3a6b115c7cc21d83d458602e24261faa5c9c801f4ccdea80dfea",
+    "approvedBodySha256": "sha256:511b8e661c6ccb8ea880929c624d969a06a55e7f9cd53fa0860ff0bac11a626f",
+    "exactSubstringVerified": true,
+    "newKnowledge": false,
+    "newClaim": false,
+    "semanticMutation": false
+  },
+  "historicalAuthority": {
+    "candidateReference": "content/knowledge/production/candidates/zh-Hans/KN-PREFACE-001/candidate.v1.json",
+    "reviewReference": "content/knowledge/production/reviews/zh-Hans/KN-PREFACE-001/review.v1.json",
+    "approvalReference": "content/knowledge/production/approvals/zh-Hans/KN-PREFACE-001/approval.v1.json",
+    "publicationReference": "content/knowledge/production/publications/zh-Hans/KN-PREFACE-001/publication.v1.json",
+    "candidateDigest": "2918ac2b910607c0e83dfb0a6e99fa52411eec9215cca6fc2c750aba7181aa7d",
+    "reviewDigest": "442880cdceade0dd2eef39aee4fabf214f850c8bc99706eda03c893c0d0b0e0f",
+    "approvalDigest": "8b941fcd7c2f4136f7cfc119002ef8cff0bb712783ebfeaf1e17397b6156b4df",
+    "publicationDigest": "9d444caba95e4dac31c2a351ff91ff73ea4adb908cb8a3be485039f076c2b349",
+    "immutableFileDigests": {
+      "content/knowledge/production/candidates/zh-Hans/KN-PREFACE-001/candidate.v1.json": "sha256:c7653988d666ab97481d97f8c9191254462a0fb2fbb4589f25c618c0a373b7e2",
+      "content/knowledge/production/reviews/zh-Hans/KN-PREFACE-001/review.v1.json": "sha256:5dc755b1afbc312faf71538dc7ce86fba5f52ad3a216a4237850d6869335bf7a",
+      "content/knowledge/production/approvals/zh-Hans/KN-PREFACE-001/approval.v1.json": "sha256:b52aaecadf376447f0cf5b703b208a5efb5e850d68097fc2b3835f8f93d2520c",
+      "content/knowledge/production/publications/zh-Hans/KN-PREFACE-001/publication.v1.json": "sha256:f8491e49511b6583519d8dea5d99ab44b447f322c039fe88ad1cc21194430e24",
+      "content/knowledge/production/registry/publication-registry.json": "sha256:7bf35c97b43bfae5d36892d6da39006cfbeeaba28a9055dc43566c6c5763919e"
+    },
+    "mutationAllowed": false
+  },
+  "historicalProjectionSnapshots": {
+    "step63FreezeReference": "content/knowledge/production/freeze/pja-published-knowledge-authority-w1-freeze-v1.json",
+    "step63AuthorityFileSha256": "sha256:0ad96cefb4083333bcd347c616a01e2cf398196006ccef60d99c958aa2cf660e",
+    "step63ZhArticleFileSha256": "sha256:05046b41affc2e3e0cc5dfeaa35aa3958e53677c93b5b06af6ce000e68960c9a",
+    "step63ZhAuthorityDigest": "a6941f3ac8a161e991ec774e78a641a1f8980a8e5a55b55001c9bba61de4f6fc",
+    "step64FreezeReference": "content/knowledge/production/freeze/knr-published-retrieval-w1-freeze-v1.json",
+    "step64AuthorityDigest": "d59245cff13164115d869535904eb81288652fa499239f993dcbed9dd66bd6a3",
+    "step64IndexDigest": "9ddcf3331d1f1788ea0f8539ce0f78a225e4f217719eb7e598af292806463f53",
+    "packageDFreezeReference": "content/knowledge/production/freeze/knr-package-d-quality-production-integration-v1.json",
+    "packageDQualityReportDigest": "d8f22874839cbc87914e141081c2f7e14be1c7d5bf480fcd82b55d920a7c8137",
+    "packageDIntegrationReportDigest": "1ebd70c6247cd44e6e0fd23af59ced9347df0cd89b4ed3329a2873b0d9b91b77"
+  },
+  "effects": {
+    "candidateMutated": false,
+    "reviewMutated": false,
+    "approvalMutated": false,
+    "publicationMutated": false,
+    "publicationDecisionChanged": false,
+    "republished": false,
+    "publishedAuthorityProjectionRebuilt": true,
+    "retrievalProjectionRebuilt": true,
+    "qualityProjectionRebuilt": true,
+    "wave1ProductionAuthorizationChanged": false
+  }
+}

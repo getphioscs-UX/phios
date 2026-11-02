@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/question-demand-cluster-v1.schema.json",
+  "title": "QuestionDemandCluster",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "clusterId",
+    "questionClusterCode",
+    "signalCount",
+    "matchedNodes",
+    "metrics",
+    "authority"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-QUESTION-DEMAND-CLUSTER-v1.0.0"
+    },
+    "clusterId": {
+      "type": "string",
+      "pattern": "^PCA-QCL-[A-F0-9]{8}$"
+    },
+    "questionClusterCode": {
+      "type": "string"
+    },
+    "signalCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "matchedNodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "authority": {
+      "type": "object",
+      "required": [
+        "isCanonicalKnowledge",
+        "createsCanonicalNode",
+        "changesThesis"
+      ],
+      "properties": {
+        "isCanonicalKnowledge": {
+          "const": false
+        },
+        "createsCanonicalNode": {
+          "const": false
+        },
+        "changesThesis": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,185 @@
+/* PART H.5 — additive Client Visual Consumption successor.
+   Asset identity and URL resolution stay with the existing governed registries/resolver. */
+
+.client-visual-masthead,
+.client-visual-signature {
+  width: min(var(--phi-container-shell, 1180px), calc(100% - 2 * clamp(1rem, 4vw, 3rem)));
+  margin-inline: auto;
+}
+
+.client-visual-masthead {
+  position: relative;
+  margin-block: clamp(1rem, 2.4vw, 2rem) clamp(1.25rem, 3vw, 3rem);
+  overflow: clip;
+  border: 1px solid var(--phi-border-subtle, rgba(17, 24, 39, 0.12));
+  border-radius: clamp(1.15rem, 2vw, 2rem);
+  background: var(--phi-surface-elevated, #fff);
+  box-shadow: 0 1.5rem 4.5rem rgba(15, 23, 42, 0.10);
+  isolation: isolate;
+}
+
+.client-visual-masthead__figure {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  min-height: 14rem;
+  max-height: min(58vh, 46rem);
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.06), rgba(17, 24, 39, 0.01));
+}
+
+.client-visual-masthead__figure::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 35%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(6, 10, 18, 0.18));
+}
+
+.client-visual-masthead__image,
+.client-visual-managed-hero-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.client-visual-icon-rail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.45rem, 1vw, 0.75rem);
+  padding: clamp(0.75rem, 1.8vw, 1.15rem);
+  background: color-mix(in srgb, var(--phi-surface-elevated, #fff) 94%, transparent);
+}
+
+.client-visual-masthead > .client-visual-icon-rail {
+  position: relative;
+  z-index: 2;
+  margin-top: -1px;
+  border-top: 1px solid var(--phi-border-subtle, rgba(17, 24, 39, 0.10));
+}
+
+.client-visual-icon-rail--embedded {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: clamp(0.65rem, 1.5vw, 1rem);
+  padding-inline: 0;
+  background: transparent;
+}
+
+.client-visual-icon-tile {
+  display: inline-grid;
+  place-items: center;
+  width: clamp(2.75rem, 5vw, 3.6rem);
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  border: 1px solid var(--phi-border-subtle, rgba(17, 24, 39, 0.10));
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--phi-surface-elevated, #fff) 92%, transparent);
+  box-shadow: 0 0.55rem 1.5rem rgba(15, 23, 42, 0.06);
+}
+
+.client-visual-icon-image {
+  display: block;
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+}
+
+.client-visual-signature {
+  margin-block: clamp(0.8rem, 2vw, 1.5rem);
+  border-block: 1px solid var(--phi-border-subtle, rgba(17, 24, 39, 0.08));
+}
+
+.client-brand-logo {
+  display: block;
+  width: auto;
+  object-fit: contain;
+}
+
+.client-brand-logo--footer {
+  height: 2rem;
+  max-width: 11.5rem;
+}
+
+.client-brand-logo--professional {
+  height: clamp(1.8rem, 2.5vw, 2.25rem);
+  max-width: min(12.5rem, 36vw);
+}
+
+/* V8 destination HTML stays byte-frozen. This additive layer upgrades composition
+   around the preserved semantic blocks instead of rewriting them. */
+body.client-visual-destination-upgraded .hpc2-destination-hero {
+  padding-top: clamp(1.5rem, 3vw, 3rem);
+  background: transparent;
+}
+
+body.client-visual-destination-upgraded .hpc2-destination-hero .public-container {
+  display: grid;
+  gap: clamp(0.85rem, 1.7vw, 1.35rem);
+}
+
+body.client-visual-destination-upgraded .hpc2-destination-section {
+  padding-block: clamp(3.25rem, 7vw, 6.75rem);
+}
+
+body.client-visual-destination-upgraded .hpc2-destination-card,
+body.client-visual-destination-upgraded .hpc2-comparison > article,
+body.client-visual-destination-upgraded .hpc2-authority-chain > article {
+  border-radius: clamp(1rem, 1.6vw, 1.4rem);
+  box-shadow: 0 1rem 3rem rgba(15, 23, 42, 0.07);
+}
+
+@media (max-width: 768px) {
+  .client-visual-masthead,
+  .client-visual-signature {
+    width: min(100% - 1.5rem, var(--phi-container-shell, 1180px));
+  }
+
+  .client-visual-masthead {
+    border-radius: 1rem;
+    margin-block: 0.75rem 1.5rem;
+  }
+
+  .client-visual-masthead__figure {
+    min-height: 11rem;
+    max-height: 45vh;
+  }
+
+  .client-visual-icon-rail {
+    gap: 0.4rem;
+    padding: 0.65rem;
+  }
+
+  .client-visual-icon-tile {
+    width: 2.7rem;
+    border-radius: 0.75rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .client-visual-masthead__figure {
+    aspect-ratio: 4 / 3;
+  }
+
+  .client-visual-icon-tile {
+    width: 2.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .client-visual-masthead,
+  .client-visual-icon-tile {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .client-visual-masthead,
+  .client-visual-icon-tile {
+    border-color: currentColor;
+  }
+}

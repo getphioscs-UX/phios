@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-PXR-CHECKER-PACKAGE-SCRIPT-SUCCESSOR-v5.0.0",
+  "work": "MPA-W14-PXR-PACKAGE-JSON-SCRIPT-SUCCESSOR",
+  "baselineCommit": "f968210",
+  "status": "AUTHORIZED_PACKAGE_JSON_SCRIPT_SUCCESSOR_PXR_PUBLIC_EXPERIENCE_DEPENDENCY_FREEZE_PRESERVED",
+  "objective": "Authorize only the PXR checker scripts and additive insertion of PXR between BFR-H15 and BFR-H16 while preserving package-lock, dependency, Method runtime and Professional eligibility authority.",
+  "predecessor": {
+    "path": "content/professional/method-production-activation/successors/mpa-w14-bfr-h-central-checker-package-script-successor-v4.json",
+    "sha256": "429db9a8402e929ce85e1700ff6d6ff5a176b6231849eedfb243151a9aecd7d9",
+    "packageJsonSha256": "c1411d9e3c7ed405ad570a978cd24d8d52187e1069aea3d9fa85e9904cd9c1ff",
+    "checkerSha256": "59940aa141bdd94c2a5cae72a75471b63d5a0b1259a6043a70abe7a97465cbe1",
+    "rewritten": false,
+    "postcheckBfrHCommand": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:bfr-h16"
+  },
+  "successor": {
+    "packageJsonSha256": "0a68d557362c1cd4a198705462bec58e3f0b511589964807adfae6dd24d9249c",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176",
+    "checkerPath": "scripts/check-mpa-w14-regression-runtime.mjs",
+    "checkerSha256": "de38b8d35a3a8d9a972b59b371ba854e66625475ca705529abdb88c905c4c467"
+  },
+  "authorizedPackageJsonChange": {
+    "scope": "SCRIPTS_ONLY_PXR_PUBLIC_EXPERIENCE_CHECKERS_AND_BFR_H_ADDITIVE_INSERTION",
+    "dependenciesChanged": false,
+    "devDependenciesChanged": false,
+    "dependenciesSha256": "fdb26beafb30c99afae2d8cd362236425a4be4a48d52263f27ef4aa083aca8dc",
+    "devDependenciesSha256": "b86c1a6248172fb90efe608000cb7ee507afa3f664e9e179d69c1aee7d643384",
+    "scripts": {
+      "check:pxr-p0": "node scripts/check-pxr-p0-public-layer-emergency-cleanup.mjs",
+      "check:pxr-p1": "node scripts/check-pxr-p1-unified-visual-consumption.mjs",
+      "check:pxr-p2": "node scripts/check-pxr-p2-core-surface-recomposition.mjs",
+      "check:pxr-p3": "node scripts/check-pxr-p3-public-experience-acceptance.mjs",
+      "check:pxr": "npm run check:pxr-p0 && npm run check:pxr-p1 && npm run check:pxr-p2 && npm run check:pxr-p3",
+      "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:pxr && npm run check:bfr-h16"
+    },
+    "frozenPredecessorScriptsUnchanged": [
+      "check:bfr-h",
+      "check:hpc2",
+      "check:cka",
+      "check:web-production-runtime",
+      "check:web-production-current",
+      "check:bfr-h15",
+      "check:bfr-h16"
+    ]
+  },
+  "boundaries": {
+    "historicalRegressionRegistryMutated": false,
+    "v4SuccessorMutated": false,
+    "packageLockChanged": false,
+    "dependencyChanged": false,
+    "methodProductionEligibilityChanged": false,
+    "professionalEligibilityChanged": false,
+    "secondMethodAuthorityCreated": false,
+    "pxrRuntimeBecameMethodAuthority": false,
+    "futurePackageScriptDriftRequiresVersionedSuccessor": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R3-W10C-AST-MFP-R-SMR-ADAPTER-SUCCESSOR-v1.0.0",
+  "workCode": "PPR-R3-W10C",
+  "status": "AUTHORIZED_AST_METHOD_OWNED_SMR_ADAPTER_SUCCESSOR",
+  "ownerProgram": "AST_FULL_PRODUCTION",
+  "ownerGap": "MFP-R-AST-001",
+  "historicalPprR3Audit": "content/professional/personal-reality/r3/audit/ppr-r3-w0-authority-reconciliation-v1.json",
+  "sourceProductionAdmission": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-production-admission-v1.json",
+  "sourceChangeCommit": "ed3b161636501627ec9ee14f9f62619b39706f93",
+  "currentMainWitness": "949d0aeb2728bbbd684d9ca8dabd704ecf15ab54",
+  "reason": "PPR-R3 W0 froze shared single-method-reading bytes at 9b0eae. MFP-R-AST-001 later made one admitted AST-owned production change: the Astrology adapter wraps the existing accepted-method envelope input with applyAstMfpRPlanetSignRecovery before adaptation. The historical W0 audit remains immutable; this successor governs only that exact AST adapter byte transition.",
+  "authorizedFile": {
+    "path": "functions/single-method-reading/astrology-production-adapter.js",
+    "predecessorSha256": "105de585c02e6d2bd21b644249e8670ef810a1b7111a7ecd2fb012046e57f58c",
+    "successorSha256": "aefdf265b92f658c6865e1c9ecfcb8352ae96d0ffd8c0a47c511472cbfcdcfb4",
+    "changeClass": "AST_MFP_R_PLANET_SIGN_RECOVERY_WRAPPER_ONLY",
+    "requiredTokens": [
+      "import {applyAstMfpRPlanetSignRecovery} from '../ast-full-production/ast-mfp-r-planet-sign-recovery.js';",
+      "adaptAcceptedMethodReadingEnvelope(applyAstMfpRPlanetSignRecovery(methodResult),{expectedMethodId:'AST'})"
+    ],
+    "expectedMethodId": "AST",
+    "futureDriftAuthorized": false
+  },
+  "boundaries": {
+    "historicalPprR3W0AuditRewritten": false,
+    "genericSmrCoreChangedByReconciliation": false,
+    "nonAstMethodBehaviorChanged": false,
+    "pprR3SpecialistRendererAuthorityChanged": false,
+    "sharedPprMeaningAuthorityCreated": false,
+    "sharedPprCalculationAuthorityCreated": false,
+    "sharedPprProjectionAuthorityCreated": false,
+    "crossMethodCompositionCreated": false,
+    "astProductionAdmissionRecreated": false
+  }
+}

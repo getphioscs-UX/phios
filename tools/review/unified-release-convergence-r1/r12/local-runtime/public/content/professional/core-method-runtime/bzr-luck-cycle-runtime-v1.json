@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-BZR-LUCK-CYCLE-RUNTIME-v1.0.0",
+  "stageCode": "BZR-W3",
+  "runtimeCode": "BZR_LUCK_CYCLE_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "6d9b932a7d4b02057c89658b763ab56061bd0179"
+  },
+  "requiredInputs": [
+    "BZR_FOUR_PILLARS_RESULT",
+    "BZR_SOLAR_CALENDAR_CONTEXT",
+    "TRADITIONAL_CALCULATION_SEX"
+  ],
+  "inputBoundary": {
+    "fourPillarsModeRequired": true,
+    "knownBirthTimeRequired": true,
+    "threePillarsLuckCycleAllowed": false,
+    "traditionalCalculationSexUseScope": "LUCK_CYCLE_DIRECTION_ONLY",
+    "identityInferenceAllowed": false,
+    "personalityClaimAllowed": false,
+    "relationshipRoleClaimAllowed": false,
+    "generalProfileClaimAllowed": false
+  },
+  "directionPolicy": {
+    "authority": "PHI_OS_BAZI_POLICY_V1",
+    "rule": "year_stem_polarity_plus_traditional_calculation_sex",
+    "forward": [
+      "YANG_MALE",
+      "YIN_FEMALE"
+    ],
+    "backward": [
+      "YIN_MALE",
+      "YANG_FEMALE"
+    ]
+  },
+  "startPolicy": {
+    "forwardReference": "NEXT_JIE",
+    "backwardReference": "PREVIOUS_JIE",
+    "threeDaysEqualYears": 1,
+    "oneDayEqualMonths": 4,
+    "twoHoursEqualDays": 10,
+    "rounding": "no_rounding_in_engine"
+  },
+  "sequencePolicy": {
+    "cycleDurationYears": 10,
+    "minimumCycleCount": 1,
+    "maximumCycleCount": 12,
+    "monthPillarSequenceAuthority": "PHI_OS_BAZI_LUCK_CYCLE"
+  },
+  "scope": {
+    "createsLuckDirection": true,
+    "createsLuckStart": true,
+    "createsLuckCycleSequence": true,
+    "createsTenGods": false,
+    "createsUsefulGod": false,
+    "createsPattern": false,
+    "createsProjection": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "commercialLicensePassed": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "BZR-W4"
+}

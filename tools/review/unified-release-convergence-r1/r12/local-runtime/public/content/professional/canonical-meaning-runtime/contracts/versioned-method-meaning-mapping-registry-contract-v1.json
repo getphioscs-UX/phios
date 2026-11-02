@@ -1,0 +1,67 @@
+{
+  "contractCode": "PHI-OS-VERSIONED-METHOD-MEANING-MAPPING-REGISTRY-CONTRACT-v1.0.0",
+  "work": "CM-W6B",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "dependsOn": [
+    "PHI-OS-METHOD-TO-MEANING-MAPPING-CONTRACT-v1.0.0",
+    "PHI-OS-MEANING-IDENTITY-CONTRACT-v1.0.0"
+  ],
+  "identity": {
+    "mappingId": "stable_across_versions",
+    "mappingCode": "stable_logical_code",
+    "mappingVersion": "specific_semantic_version",
+    "versionIdentity": "mappingCode@mappingVersion"
+  },
+  "digestModel": {
+    "algorithm": "sha256",
+    "canonicalization": "recursive_key_sort_utf8_json",
+    "predicateHashInputs": [
+      "sourceMethodCode",
+      "sourceProjectionSchemaVersion",
+      "projectionType",
+      "projectionPredicate"
+    ],
+    "targetMeaningHashInputs": [
+      "targetMeaningCodes"
+    ],
+    "mappingDigestInputs": [
+      "mappingId",
+      "mappingCode",
+      "mappingVersion",
+      "predicateHash",
+      "targetMeaningHash",
+      "mappingAuthority",
+      "mappingConfidence",
+      "boundary"
+    ]
+  },
+  "versionPolicy": {
+    "breakingPredicateOrTargetMeaningChange": "major",
+    "backwardCompatiblePredicateOrTargetExtension": "minor",
+    "nonSemanticMetadataMaintenance": "patch",
+    "versionMutationInPlaceAllowed": false
+  },
+  "compatibilityPolicy": {
+    "backwardCompatibleFalseRequiresMigration": true,
+    "compatibleFromVersionsMustReferenceSameMappingId": true,
+    "successorDoesNotInheritApproval": true,
+    "successorDoesNotInheritProductionAuthority": true
+  },
+  "deprecationPolicy": {
+    "hardDeleteAllowed": false,
+    "deprecatedRecordRemainsResolvable": true,
+    "successorMappingIdOptional": true,
+    "successorMustBeDifferentMappingId": true
+  },
+  "registryRules": {
+    "canonicalProjectionOnly": true,
+    "rawMethodObjectAllowed": false,
+    "interpretationTextAllowed": false,
+    "actualMethodMappingPopulationAllowedInW6B": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "productionAuthorityCreated": false
+  }
+}

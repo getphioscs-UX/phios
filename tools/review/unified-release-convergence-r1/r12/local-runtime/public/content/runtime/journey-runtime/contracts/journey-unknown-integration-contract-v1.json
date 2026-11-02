@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-RJX-UNKNOWN-INTEGRATION-CONTRACT-v1.0.0",
+  "work": "RJX-W10",
+  "status": "ACTIVE_UNKNOWN_PRESERVATION_CANDIDATE",
+  "baselineCommit": "fe24201c6634ddff32ef5b067f6bce4db14c3cf0",
+  "requiredFields": [
+    "unknownCode",
+    "scopeType",
+    "scopeId",
+    "question",
+    "whyItMatters",
+    "materiality",
+    "blocking",
+    "suggestedEvidenceType",
+    "resolutionStatus",
+    "resolvedByEvidenceRefs",
+    "resolvedAt"
+  ],
+  "rules": {
+    "missingMaterialBecomesUnknown": true,
+    "aiMayRewriteExistingUnknownQuestionCandidate": true,
+    "aiMayAnswerUnknown": false,
+    "aiMayInferMissingFact": false,
+    "aiMayLowerBlockingMateriality": false,
+    "aiMayPromoteUncertainToConfirmed": false,
+    "blockingUnknownAlwaysVisible": true,
+    "resolutionRequiresEvidenceRefs": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W22-JOURNEY-HANDOFF-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W22",
+  "targetRuntime": "JR",
+  "targetContract": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+  "allowedIntentCodes": [
+    "OBSERVE",
+    "ACT",
+    "REVIEW",
+    "CONTINUE"
+  ],
+  "handoffShape": [
+    "planCandidateReference",
+    "planCandidateDigest",
+    "actionReferences",
+    "unknownReferences",
+    "intentCodes",
+    "customerReference"
+  ],
+  "rules": {
+    "hfpMayCreateJourney": false,
+    "hfpMaySetJourneyStage": false,
+    "hfpMayMutateJourneyProgress": false,
+    "jrOwnsWorkflowState": true,
+    "handoffIsReferenceOnly": true
+  }
+}

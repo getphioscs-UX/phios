@@ -1,0 +1,194 @@
+{
+  "milestone": "PDS-W0",
+  "contractVersion": "1.0.0",
+  "schemaVersion": "phi-os.pds-baseline-boundary.v1",
+  "status": "baseline-and-boundary-frozen",
+  "frozenAt": "2026-07-29",
+  "purpose": "Freeze the implementation baseline and protected Runtime boundary before PHI OS Design System page migration begins.",
+  "authorityOrder": [
+    "PHI OS Design System PDS v1.1",
+    "PHI OS Developer Guide v1.0",
+    "current code baseline",
+    "page-local implementation"
+  ],
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "3311262b377fb1e936fe39cfdd0528e6f3ce3e2e",
+    "shortCommit": "3311262",
+    "tree": "6610d1c36fa1c477b1cc61868a5bc3e6993738ca",
+    "commitMessage": "PWS-W1A Revenue Extension",
+    "productionUrl": "https://phios-github.pages.dev",
+    "writeSource": "verified-zip-restored-from-git-objects",
+    "onlineRepositoryRole": "read-only-baseline-and-deployment-verification"
+  },
+  "changePolicy": {
+    "designSystemMayChange": [
+      "visual hierarchy",
+      "layout and responsive presentation",
+      "component presentation states",
+      "customer-facing labels through existing locale architecture",
+      "focus, keyboard and touch interaction",
+      "progressive disclosure",
+      "loading, empty, error and recovery presentation",
+      "public journey continuity"
+    ],
+    "designSystemMustNotChange": [
+      "Runtime principle",
+      "Runtime stage or lifecycle state",
+      "Runtime contract or schema",
+      "evidence classification or confidence rule",
+      "provider routing",
+      "API request or response contract",
+      "persistence, recovery, lineage or revision behavior",
+      "database schema or migration history",
+      "professional authority or consent boundary"
+    ],
+    "noRewriteRules": [
+      "Do not rebuild the website from another version.",
+      "Do not replace existing pages with newly designed pages.",
+      "Do not rename system identifiers to match public language.",
+      "Do not treat Runtime SDK guidance as permission to reopen frozen Runtime behavior.",
+      "Do not use Production as a writable code source."
+    ]
+  },
+  "protectedScopes": [
+    {
+      "id": "runtime-server",
+      "paths": ["functions/runtime"],
+      "policy": "immutable-during-pds"
+    },
+    {
+      "id": "runtime-api",
+      "paths": [
+        "functions/api/reconstruct-reality.js",
+        "functions/api/read-runtime.js",
+        "functions/api/navigate-runtime.js"
+      ],
+      "policy": "immutable-during-pds"
+    },
+    {
+      "id": "runtime-client",
+      "paths": ["assets/js/runtime"],
+      "policy": "immutable-during-pds"
+    },
+    {
+      "id": "runtime-data",
+      "paths": ["db/schema", "db/migrations"],
+      "policy": "immutable-during-pds"
+    },
+    {
+      "id": "runtime-freeze-records",
+      "paths": [
+        "content/registry/runtime-contracts.json",
+        "content/registry/runtime-modules.json",
+        "content/registry/runtime-v1-acceptance.json",
+        "content/registry/runtime-v1-freeze-audit.json",
+        "content/registry/runtime-freeze-audit.json",
+        "content/registry/runtime-freeze-closure.json",
+        "content/registry/provider-closure.json"
+      ],
+      "policy": "immutable-during-pds"
+    }
+  ],
+  "implementationZones": {
+    "allowed": [
+      "assets/css/design",
+      "assets/css/tokens.css",
+      "page HTML presentation",
+      "customer projection and render modules",
+      "existing locale dictionaries",
+      "docs/design-system",
+      "content/registry/pds-*",
+      "tests/fixtures/pds-*",
+      "scripts/check-pds-*"
+    ],
+    "conditionalReview": [
+      "assets/js/core",
+      "assets/js/modules other than customer projection and rendering",
+      "assets/js/shared.js",
+      "assets/js/i18n.js",
+      "package.json except additive PDS check scripts"
+    ],
+    "forbidden": [
+      "functions/runtime",
+      "protected Runtime API routes",
+      "assets/js/runtime",
+      "db/schema",
+      "db/migrations",
+      "frozen Runtime registry records"
+    ]
+  },
+  "acceptanceBaseline": {
+    "viewports": [360, 768, 1440],
+    "locales": ["en", "zh-Hans"],
+    "minimumTouchTargetPx": 44,
+    "keyboardOperationRequired": true,
+    "focusVisibilityRequired": true,
+    "horizontalPageScrollAllowed": false,
+    "productionConsoleErrorsAllowed": false,
+    "requiredCommands": [
+      "npm run check:pds-w0",
+      "npm run check:pds-w1",
+      "npm run check"
+    ]
+  },
+  "baselineValidation": {
+    "pdsW0": "passed",
+    "pdsW1": "passed",
+    "schemaReferences": "passed",
+    "i18n": "passed",
+    "pwsW1aRevenue": "passed",
+    "postcheck": "passed",
+    "fullRepositoryCheck": "blocked-by-pre-existing-baseline-inconsistencies",
+    "knownBlockers": [
+      {
+        "id": "runtime-migration-registry-count",
+        "expected": 4,
+        "actual": 3,
+        "evidence": "The baseline contains db/migrations/0004_book_commerce.sql and the migration check expects it, but content/registry/runtime-migrations.json registers only versions 1 through 3.",
+        "pdsW0Change": false,
+        "resolutionBoundary": "separate Runtime migration governance fix"
+      },
+      {
+        "id": "m3b-book-products-registry-missing",
+        "expected": "content/registry/book-products.json",
+        "actual": "missing-from-baseline-commit",
+        "evidence": "The M3B knowledge release check requires the file, but it is absent from the 3311262 Git tree.",
+        "pdsW0Change": false,
+        "resolutionBoundary": "separate M3B commerce registry fix"
+      },
+      {
+        "id": "m3b-book-access-payment",
+        "expected": 201,
+        "actual": 500,
+        "evidence": "The M3B book access payment check fails after the missing product registry condition.",
+        "pdsW0Change": false,
+        "resolutionBoundary": "retest after M3B commerce registry repair"
+      }
+    ],
+    "protectedScopeDiff": "zero",
+    "decision": "conditional-passed"
+  },
+  "onlineVerification": {
+    "repository": "https://github.com/getphioscs-UX/phios",
+    "production": "https://phios-github.pages.dev",
+    "repositoryUse": [
+      "confirm latest main commit",
+      "compare delivered changes",
+      "inspect deployment source"
+    ],
+    "productionUse": [
+      "visual acceptance",
+      "interaction acceptance",
+      "responsive acceptance",
+      "locale acceptance",
+      "console inspection"
+    ]
+  },
+  "relationshipToPdsW1": {
+    "pdsW1AlreadyExists": true,
+    "rule": "PDS-W0 adds lower-level baseline governance and does not replace, reorder or reopen PDS-W1.",
+    "pdsW1Registry": "content/registry/pds-w1-experience-contract.json"
+  }
+}

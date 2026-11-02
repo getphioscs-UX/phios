@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/core-method-runtime/iching-calculation-result-v1.schema.json",
+  "title": "PHI OS I Ching Calculation Output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "inputMode",
+    "lineOrder",
+    "lines",
+    "primary",
+    "changingLines",
+    "changeMask",
+    "relating",
+    "trace",
+    "deterministic",
+    "sourceNeutral",
+    "projectionCreated",
+    "interpretationCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ICHING-CALCULATION-OUTPUT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "ICHING_TRANSFORMATION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "I_CHING"
+    },
+    "pluginCode": {
+      "const": "ICH"
+    },
+    "inputMode": {
+      "enum": [
+        "MANUAL_LINES",
+        "COIN_CAST",
+        "SYSTEM_RANDOM"
+      ]
+    },
+    "lineOrder": {
+      "const": "BOTTOM_TO_TOP"
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "primary": {
+      "type": "object"
+    },
+    "changingLines": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 6
+      },
+      "uniqueItems": true
+    },
+    "changeMask": {
+      "type": "string",
+      "pattern": "^[01]{6}$"
+    },
+    "relating": {
+      "type": "object"
+    },
+    "trace": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "sourceNeutral": {
+      "const": true
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/rre/readout-lineage-v1.schema.json",
+  "type": "object",
+  "required": [
+    "lineageCode",
+    "conclusionFragments",
+    "missingInputsRemainExplicit",
+    "lineageDigest"
+  ],
+  "properties": {
+    "lineageCode": {
+      "type": "string",
+      "pattern": "^RRE-LINEAGE-[A-Z0-9-]+$"
+    },
+    "conclusionFragments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "fragmentCode",
+          "fragmentType",
+          "componentDigest",
+          "realityReferences",
+          "evidenceReferences",
+          "observationReferences",
+          "projectionReferences",
+          "meaningReferences",
+          "knowledgeReferences",
+          "priorReadoutReferences",
+          "componentSupportReferences",
+          "missingLineageDimensions"
+        ],
+        "properties": {
+          "fragmentCode": {
+            "type": "string"
+          },
+          "fragmentType": {
+            "type": "string"
+          },
+          "componentDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "realityReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidenceReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "observationReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "projectionReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "meaningReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "knowledgeReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "priorReadoutReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "componentSupportReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missingLineageDimensions": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "EVIDENCE",
+                "OBSERVATION",
+                "PROJECTION",
+                "MEANING",
+                "KNOWLEDGE",
+                "PRIOR_READOUT"
+              ]
+            },
+            "uniqueItems": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "missingInputsRemainExplicit": {
+      "const": true
+    },
+    "lineageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}

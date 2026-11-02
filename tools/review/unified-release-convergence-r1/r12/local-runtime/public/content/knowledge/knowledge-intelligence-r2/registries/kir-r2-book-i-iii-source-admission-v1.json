@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-BOOK-I-III-SOURCE-ADMISSION-v1.0.0",
+  "work": "KIR-R2-W1",
+  "status": "PRODUCTION_SOURCE_ADMITTED",
+  "baselineCommit": "429ec91ec8529b45d8c789aae48779344fe2e789",
+  "productionBooks": [
+    "BOOK-1",
+    "BOOK-2",
+    "BOOK-3"
+  ],
+  "excludedBooks": [
+    {
+      "bookCode": "BOOK-4",
+      "reason": "MANUSCRIPT_NOT_COMPLETED_FOR_KIR_R2_PHASE1"
+    },
+    {
+      "bookCode": "BOOK-5",
+      "reason": "NOT_PRODUCTION_ADMITTED_FOR_KIR_R2_PHASE1"
+    }
+  ],
+  "records": [
+    {
+      "sourceCode": "MKS-BOOK-1-V2-ZH-HANS",
+      "bookCode": "BOOK-1",
+      "locale": "zh-Hans",
+      "title": "世界如何形成",
+      "titleEn": "Reality Formation",
+      "partCodes": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "sourceAuthority": "COMPLETED_MANUSCRIPT",
+      "sourceSha256": "7f7ed51199302b83d5bb5e48224a5f5995123171645e820925508fb31d97174d",
+      "corpusSha256": "37c581f4ffcce1dc47501166b04954cbc7dd6a726dd8ba6e2bad773e59fcafe5",
+      "retrievalCorpusSha256": "2756bf5f18a42772d40d46cfccd141e26e07d2ca416c5a9448a36eeb037bba6a",
+      "recordCount": 275,
+      "r2ObjectKey": "books/book-1/materialized/v2/retrieval-corpus.json",
+      "sectionInventoryPath": "content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json",
+      "bookRoute": "/books/reality-formation/",
+      "transportIntegrity": "ACTUAL_BYTES_SHA256_REQUIRED"
+    },
+    {
+      "sourceCode": "MKS-BOOK-2-V1-ZH-HANS",
+      "bookCode": "BOOK-2",
+      "locale": "zh-Hans",
+      "title": "世界如何运行",
+      "titleEn": "Reality Runtime",
+      "partCodes": [
+        "P5",
+        "P6",
+        "P7"
+      ],
+      "sourceAuthority": "COMPLETED_MANUSCRIPT",
+      "sourceSha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+      "corpusSha256": "94a9c7d506078f1f975022d108058c19465eb883d523efc886648819d3392f63",
+      "retrievalCorpusSha256": "83ae5f5af63652b1f45faf82ede922069b69e5eb2703b1ba2a617170619d2c8e",
+      "recordCount": 173,
+      "r2ObjectKey": "books/book-2/materialized/v1/retrieval-corpus.json",
+      "sectionInventoryPath": "content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json",
+      "bookRoute": "/books/reality-runtime/",
+      "transportIntegrity": "ACTUAL_BYTES_SHA256_REQUIRED"
+    },
+    {
+      "sourceCode": "MKS-BOOK-3-V1-ZH-HANS",
+      "bookCode": "BOOK-3",
+      "locale": "zh-Hans",
+      "title": "世界如何维持",
+      "titleEn": "Reality Continuity",
+      "partCodes": [
+        "P8",
+        "P9"
+      ],
+      "sourceAuthority": "COMPLETED_MANUSCRIPT",
+      "sourceSha256": "75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b",
+      "recordCount": 106,
+      "r2ObjectKey": "books/book-3/materialized/v1/retrieval-corpus.json",
+      "sectionInventoryPath": "content/knowledge/manuscripts/extraction/book-3-full-section-inventory-v1.json",
+      "bookRoute": "/books/reality-continuity/",
+      "transportIntegrity": "ACTUAL_BYTES_SHA256_REQUIRED"
+    }
+  ],
+  "boundaries": {
+    "blueprintPresenceDoesNotEqualRetrievalAdmission": true,
+    "book4Book5RetrievalAllowed": false,
+    "completedManuscriptRequired": true,
+    "canonicalNodeMutationAllowed": false
+  }
+}

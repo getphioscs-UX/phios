@@ -1,0 +1,56 @@
+{
+  "contractCode": "PHI-OS-RG-W1-CHECKER-IDENTITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RG-W1",
+  "status": "active",
+  "baselineCommit": "c6ff0a9d0481cafeb57f6c3248b6377d78444859",
+  "fields": [
+    "checkerId",
+    "checkerVersion",
+    "runtimeCode",
+    "workCode",
+    "canonicalCommand",
+    "implementationFile",
+    "implementationDigest",
+    "checkerType",
+    "status"
+  ],
+  "checkerTypes": [
+    "atomic",
+    "aggregate"
+  ],
+  "statusValues": [
+    "canonical",
+    "legacy",
+    "deprecated",
+    "successor"
+  ],
+  "identityRules": {
+    "checkerIdStableAcrossCompatibleImplementationChanges": true,
+    "workCodeIsRuntimeWorkStableIdentity": true,
+    "implementationFileIsImplementationDetail": true,
+    "canonicalCommandIsStablePublicEntry": true,
+    "implementationDigestRequiredForActiveCanonicalChecker": true,
+    "historicalCheckerRenameForbidden": true
+  },
+  "uniquenessRules": {
+    "oneRuntimeWorkCodeMayHaveOnlyOneActiveCanonicalChecker": true,
+    "manyWorkCodesMayShareOneAggregateImplementation": true
+  },
+  "allowedOperations": [
+    "read",
+    "resolve",
+    "validate",
+    "execute",
+    "report"
+  ],
+  "forbiddenOperations": [
+    "rename_checker",
+    "rewrite_checker",
+    "update_runtime_freeze",
+    "repair_digest_automatically",
+    "promote_state",
+    "publish",
+    "modify_runtime"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-WORLD-SIGNAL-OBSERVATION-BRIDGE-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_FOUNDATION",
+  "work": "PHI-OS-WORLD-RECONFIGURATION-OBSERVATION-P1",
+  "signalAuthority": "content/runtime/reality-model-runtime/contracts/signal-runtime-contract-v1.json",
+  "signalTypeRegistry": "content/runtime/reality-model-runtime/registries/canonical-signal-type-registry-v1.json",
+  "rules": [
+    "Signal is not event, evidence, interpretation or inference.",
+    "Signal requires governed source lineage.",
+    "Observed signal may point to persistence, change, trend, threshold, anomaly or absence, but it cannot promote its own evidence authority.",
+    "Observation threshold requires persistence/context/relationship-change review; no single signal creates a threshold crossing.",
+    "Provider or AI output may supply trace/measurement input but cannot create signal authority."
+  ],
+  "thresholdReviewRequiredFields": [
+    "signalRefs",
+    "window",
+    "baseline",
+    "persistenceAssessment",
+    "noiseAssessment",
+    "relationshipChangeAssessment",
+    "counterEvidence",
+    "unknowns",
+    "humanDecision"
+  ]
+}

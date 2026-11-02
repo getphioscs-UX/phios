@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-ECR-MANDALA-W26-TECHNICAL-DISCLOSURE-ACCEPTANCE-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W26",
+  "baselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "TECHNICAL_DISCLOSURE_ACCEPTED",
+  "defaultState": "COLLAPSED",
+  "requiredFields": [
+    "Solar Anchor",
+    "Reference frame",
+    "Calculation engine",
+    "ECR calculation specification",
+    "Projection ID",
+    "Meaning bundle",
+    "Composition rule version",
+    "Composition rule refs",
+    "Meaning refs",
+    "Boundaries"
+  ],
+  "requiredAuthorityValues": {
+    "referenceFrame": "Geocentric Tropical Ecliptic",
+    "calculationEngine": "Astronomy Engine JS",
+    "calculationEngineVersion": "2.1.19",
+    "calculationSpec": "PHI-OS-ECR-CALCULATION-SPEC-v1.0.0"
+  },
+  "boundaries": {
+    "debugConsoleOnFirstScreen": false,
+    "technicalDisclosureCreatesMeaning": false,
+    "technicalDisclosureRecalculatesEcr": false
+  },
+  "acceptanceEvidence": {
+    "machineGate": "scripts/check-ecr-mandala-w26-technical-disclosure.mjs",
+    "machineGatePassed": true
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "PHI-OS-WPR-PF3-RUNTIME-ORPHAN-REGISTRY-v1.0.0",
+  "work": "WPR-PF3",
+  "baselineCommit": "cae0e6e56993bcf215e588fc7a3196ca33754eb5",
+  "status": "NO_SILENT_RUNTIME_ORPHAN",
+  "recordCount": 12,
+  "orphanCount": 0,
+  "records": [
+    {
+      "runtimeCode": "KNR_PUBLISHED_KNOWLEDGE",
+      "architectureState": "ACTIVE_AUTHORITY",
+      "productionState": "PUBLISHED_RECORDS_AVAILABLE",
+      "webProjection": "MIGRATION_REQUIRED",
+      "expectedSurface": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE"
+      ],
+      "actualConsumer": [
+        "index.html",
+        "library.html",
+        "articles/*.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "CAR_PUBLISHED_ASSET",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_ONLY",
+      "webProjection": "BLOCKED_UNTIL_PUBLICATIONS_EXIST",
+      "expectedSurface": [
+        "FIGURE",
+        "DIAGRAM"
+      ],
+      "actualConsumer": [],
+      "status": "BLOCKED_NOT_PRODUCTION_ACTIVE"
+    },
+    {
+      "runtimeCode": "CPR",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_ONLY",
+      "webProjection": "FOUNDATION_ONLY_UNTIL_PRODUCTION_RECORDS_EXIST",
+      "expectedSurface": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE",
+        "FIGURE",
+        "DIAGRAM",
+        "BOOK",
+        "ACADEMY_DISCOVERY",
+        "CUSTOMER_REPORT",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "index.html",
+        "library.html",
+        "articles/*.html",
+        "figure.html",
+        "books/index.html",
+        "academy.html",
+        "professional-workspace.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "ALR",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_PROJECTION_ONLY",
+      "webProjection": "DISCOVERY_ALLOWED_LIVE_DELIVERY_BLOCKED",
+      "expectedSurface": [
+        "ACADEMY_DISCOVERY",
+        "ACADEMY_LEARNING"
+      ],
+      "actualConsumer": [
+        "academy.html",
+        "academy-lesson.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "JR",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_ONLY_INTEGRATION_RUNTIME",
+      "webProjection": "READ_ONLY_LIMITED_PRODUCTION_ALLOWED_NO_CANONICAL_PERSISTENCE_CLAIM",
+      "expectedSurface": [
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "reality-journey.html",
+        "reality-dashboard.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "RMO",
+      "architectureState": "FROZEN",
+      "productionState": "NOT_ACTIVATED",
+      "webProjection": "BLOCKED_CANONICAL_REALITY_PRODUCTION",
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [],
+      "status": "BLOCKED_NOT_PRODUCTION_ACTIVE"
+    },
+    {
+      "runtimeCode": "RDG",
+      "architectureState": "FROZEN",
+      "productionState": "GOVERNANCE_AUTHORITY",
+      "webProjection": "BOUNDARY_CONSUMER",
+      "expectedSurface": [
+        "LEGAL",
+        "REALITY_ENTRY",
+        "CUSTOMER_WORKSPACE",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "privacy.html",
+        "reality-entry.html",
+        "reality-dashboard.html",
+        "professional-workspace.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "VAP",
+      "architectureState": "ACTIVE_PRODUCTION_ACTIVATION",
+      "productionState": "W4_W5_ACTIVE_NO_PROVIDER_OR_PUBLICATION_BY_ACCEPTANCE",
+      "webProjection": "NONE_BY_DESIGN",
+      "expectedSurface": [],
+      "actualConsumer": [],
+      "status": "NONE_BY_DESIGN"
+    },
+    {
+      "runtimeCode": "MPA",
+      "architectureState": "ACTIVE",
+      "productionState": "METHOD_SPECIFIC_READINESS_ONLY_GLOBAL_EXECUTION_BLOCKED",
+      "webProjection": "READ_ONLY_ELIGIBILITY_AND_INPUT_CONTRACT_PROJECTION",
+      "expectedSurface": [
+        "PERSONAL_RUNTIME_SETUP",
+        "PERSONAL_RUNTIME"
+      ],
+      "actualConsumer": [
+        "personal-runtime.html",
+        "professional/personal-runtime/index.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "PR",
+      "architectureState": "NOT_DECLARED",
+      "productionState": "FROZEN_HUMAN_AUTHORITY_GATED",
+      "webProjection": "READ_ONLY_AUTHORITY_AND_EXISTING_AUTHORIZED_PAYLOAD",
+      "expectedSurface": [
+        "PROFESSIONAL",
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE",
+        "PROFESSIONAL_REPORT_VIEWER"
+      ],
+      "actualConsumer": [
+        "services.html",
+        "professional/financial/index.html",
+        "professional-workspace.html",
+        "professional-reports.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "RR",
+      "architectureState": "NOT_DECLARED",
+      "productionState": "FROZEN_ASSEMBLY_READY_UPSTREAM_GATED",
+      "webProjection": "RELEASED_OR_AUTHORIZED_REPORT_REFERENCE_ONLY",
+      "expectedSurface": [
+        "PROFESSIONAL_REPORT_VIEWER",
+        "PROFESSIONAL_WORKSPACE",
+        "CUSTOMER_REPORT"
+      ],
+      "actualConsumer": [
+        "professional-reports.html",
+        "professional-workspace.html"
+      ],
+      "status": "CONSUMED"
+    },
+    {
+      "runtimeCode": "FINANCIAL_RUNTIME",
+      "architectureState": "NOT_DECLARED",
+      "productionState": "GOVERNED_M4A_COMPATIBILITY",
+      "webProjection": "PUBLIC_DISCOVERY_AND_AUTHORIZED_WORKSPACE_PROJECTION",
+      "expectedSurface": [
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "professional/financial/index.html",
+        "professional-workspace.html"
+      ],
+      "status": "CONSUMED"
+    }
+  ],
+  "rule": "Production-active runtime with expectedSurface defined must have actualConsumer unless webProjection is NONE_BY_DESIGN. Explicit non-activated/validation-only states remain blocked, not silently promoted."
+}

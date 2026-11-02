@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-SCHOOL-REGISTRY-v1.1.0",
+  "work": "BAZI-FP-W6",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "status": "SOURCE_ADMITTED_MULTI_SCHOOL_FOUNDATION_RULESETS_FROZEN",
+  "registryVersion": "1.1.0",
+  "schools": [
+    {
+      "schoolCode": "ZI_PING_MONTH_COMMAND_USE_v1",
+      "labelZh": "子平真诠月令用神层",
+      "authoritySourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
+      "meaningOfUsefulGod": "MONTH_COMMAND_PATTERN_USE_WITH_FOUR_PILLAR_CONDITIONS",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001",
+        "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003",
+        "BZR-CLM-ZPZQ-10-VARIATION-004",
+        "BZR-CLM-ZPZQ-14-CLIMATE-CROSSCHECK-006",
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007"
+      ],
+      "productionVerdictEnabled": false,
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "elementSelectionEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v1.json",
+      "decisionCoverage": {
+        "schoolQualifiedEvidenceEvaluation": "SUPPORTED",
+        "usefulGodElementSelection": "UNRESOLVED_REQUIRES_DETAILED_PATTERN_CONDITION_AND_SELECTION_CLAIMS",
+        "customerOutcomePrediction": "FORBIDDEN"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json"
+    },
+    {
+      "schoolCode": "DI_TIAN_SUI_TI_YONG_BALANCE_v1",
+      "labelZh": "滴天髓体用平衡层",
+      "authoritySourceId": "BZR-SRC-DI-TIAN-SUI",
+      "meaningOfUsefulGod": "MOST_STRUCTURALLY_NECESSARY_FACTOR_OR_FACTORS_WITH_PRIORITY",
+      "sourceClaimRefs": [
+        "BZR-CLM-DTS-TIYONG-MULTI-USE-008",
+        "BZR-CLM-DTS-YUELING-CONTEXT-010",
+        "BZR-CLM-DTS-STRENGTH-NON-SINGLE-FACTOR-011"
+      ],
+      "productionVerdictEnabled": false,
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "elementSelectionEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-ti-yong-ruleset-v1.json",
+      "decisionCoverage": {
+        "schoolQualifiedEvidenceEvaluation": "SUPPORTED",
+        "multipleCandidateRepresentation": "SUPPORTED",
+        "priorityPrinciple": "SUPPORTED",
+        "factorSelectionAndPriorityTable": "UNRESOLVED_REQUIRES_ADDITIONAL_SOURCE_CLAIMS",
+        "numericScore": "FORBIDDEN"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json"
+    },
+    {
+      "schoolCode": "DI_TIAN_SUI_CLIMATE_TIAOHOU_v1",
+      "labelZh": "滴天髓寒暖燥湿层",
+      "authoritySourceId": "BZR-SRC-DI-TIAN-SUI",
+      "meaningOfUsefulGod": "CLIMATE_ADJUSTMENT_LENS_SEPARATE_FROM_GENERIC_STRENGTH",
+      "sourceClaimRefs": [
+        "BZR-CLM-DTS-HANNUAN-ZAOSHI-009"
+      ],
+      "productionVerdictEnabled": false,
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "elementSelectionEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v1.json",
+      "decisionCoverage": {
+        "climateDimensionRepresentation": "SUPPORTED",
+        "seasonContext": "SUPPORTED",
+        "moistureVerdictFromSeasonAlone": "FORBIDDEN",
+        "tiaohouElementSelection": "UNRESOLVED_REQUIRES_ELEMENT_SPECIFIC_SOURCE_CLAIMS"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json"
+    }
+  ],
+  "crossSchoolRules": {
+    "sameTermMayHaveDifferentTechnicalMeaning": true,
+    "automaticMergeForbidden": true,
+    "majorityVoteForbidden": true,
+    "customerSurfaceMustNameSchoolWhenVerdictsDiffer": true,
+    "productionSelectionRequiresHumanAdmittedClaims": true,
+    "humanAdmittedClaimsPresent": true,
+    "productionElementSelectionStillRequiresRuleCoverage": true
+  },
+  "predecessorRef": "content/interpretation/bazi/registries/bazi-useful-god-school-registry-v1.json",
+  "currentBaselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e"
+}

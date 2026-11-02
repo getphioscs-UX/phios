@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-W17-CURRENT-REACHABILITY-RECERTIFICATION-v1.0.0",
+  "workCode": "AST-CX-R3-W17-RECERTIFICATION",
+  "integrationBaselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "CANONICAL_AST_TARGET_CONTEXT_REACHABILITY_RECERTIFIED",
+  "historicalFinding": "PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED",
+  "historicalFindingRewritten": false,
+  "successors": [
+    "PPR-R3-W10A",
+    "PPR-R4-AST-TARGET-CONTEXT-INPUT-SUCCESSOR",
+    "PPR-R3-W10B"
+  ],
+  "canonicalPath": [
+    "PPR-R4 AST method input extension",
+    "assets/customer-ui/js/surfaces/personal-reality.js",
+    "POST /api/customer-personal-reality",
+    "resolveAstTargetContextInput",
+    "buildPersonalRealityProductRoute",
+    "buildAstCustomerWorkspaceCandidate(targetContext)",
+    "executeAstTransitRequest",
+    "ASTT governed temporal reading"
+  ],
+  "expectedW24Proof": {
+    "apiCases": 240,
+    "timingAvailable": 240
+  },
+  "boundaries": {
+    "browserClockInference": false,
+    "serverClockInference": false,
+    "deviceTimezoneInference": false,
+    "browserTransitCalculation": false,
+    "sharedPprMeaningAuthorityCreated": false,
+    "sharedPprForecastAuthorityCreated": false,
+    "sharedPprCurrentRealityAuthorityCreated": false
+  }
+}

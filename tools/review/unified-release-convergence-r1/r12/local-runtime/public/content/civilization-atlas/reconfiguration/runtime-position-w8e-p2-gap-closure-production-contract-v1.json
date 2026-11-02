@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2-GAP-CLOSURE-PRODUCTION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P2-GAP-CLOSURE",
+  "sourcePlan": "content/civilization-atlas/reconfiguration/runtime-position-w8e-p2-gap-closure-v1.json",
+  "providerPlan": "content/civilization-atlas/reconfiguration/moomoo-first-data-request-plan-v1.json",
+  "capabilities": [
+    "CAPITAL_FLOW",
+    "VALUATION",
+    "FINANCIAL_STATEMENTS",
+    "REVENUE_BREAKDOWN"
+  ],
+  "rules": [
+    "Only quote/read endpoints are allowed.",
+    "CAPITAL_FLOW may use US ETFs; VALUATION must use supported stocks or indices, never ETFs.",
+    "Financial statement/revenue breakdown observations are subsystem evidence only.",
+    "All imported payloads remain provider snapshots until W8B claim extraction and W8C admission.",
+    "No gap target becomes EVIDENCE_READY from provider import alone."
+  ],
+  "boundaries": {
+    "tradingAllowed": false,
+    "accountAccessAllowed": false,
+    "autoClaimInterpretationAllowed": false,
+    "autoW8ePromotionAllowed": false
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-TIAOHOU-RULESET-v1.0.0",
+  "work": "BAZI-FP-W6",
+  "rulesetId": "BAZI-W6-DI-TIAN-SUI-CLIMATE-TIAOHOU-RULESET-v1",
+  "rulesetVersion": "1.0.0",
+  "status": "FROZEN_SOURCE_ADMITTED_FOUNDATION",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "schoolCode": "DI_TIAN_SUI_CLIMATE_TIAOHOU_v1",
+  "authority": {
+    "sourceId": "BZR-SRC-DI-TIAN-SUI",
+    "sourceStrategyRef": "content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.1.json",
+    "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json",
+    "admittedClaimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v1.1.json",
+    "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-001-human-review-result-v1.json",
+    "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-001-admission-v1.json",
+    "admittedClaimRefs": [
+      "BZR-CLM-DTS-HANNUAN-ZAOSHI-009"
+    ]
+  },
+  "meaningOfUsefulGod": "CLIMATE_ADJUSTMENT_LENS_SEPARATE_FROM_GENERIC_STRENGTH",
+  "dimensions": [
+    "THERMAL_COLD_WARM",
+    "MOISTURE_DRY_WET"
+  ],
+  "rules": [
+    {
+      "ruleId": "W6-TH-R01",
+      "sourceClaimRefs": [
+        "BZR-CLM-DTS-HANNUAN-ZAOSHI-009"
+      ],
+      "action": "PRESERVE_COLD_WARM_AND_DRY_WET_AS_SEPARATE_CLIMATE_DIMENSIONS; DO_NOT_COLLAPSE_TO_GENERIC_STRENGTH"
+    }
+  ],
+  "decisionCoverage": {
+    "climateDimensionRepresentation": "SUPPORTED",
+    "seasonContext": "SUPPORTED",
+    "moistureVerdictFromSeasonAlone": "FORBIDDEN",
+    "tiaohouElementSelection": "UNRESOLVED_REQUIRES_ELEMENT_SPECIFIC_SOURCE_CLAIMS"
+  },
+  "freezePolicy": {
+    "strengthAndTiaohouMustRemainSeparate": true,
+    "silentCrossSchoolMergeForbidden": true,
+    "unsupportedGapFillForbidden": true,
+    "ruleMutationRequiresNewRulesetVersion": true
+  }
+}

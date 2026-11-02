@@ -1,0 +1,93 @@
+{
+  "workId": "PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT",
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-01",
+  "baselineCommit": "611ddf2dd7e4bdced6358879a5bdb9656c0f0286",
+  "status": "READY_FOR_REVIEW",
+  "sources": [
+    {
+      "layer": "calculation",
+      "id": "calendar_and_placement",
+      "refs": [
+        "functions/zi-wei-runtime/zi-wei-calculation-ir-runtime.js",
+        "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json"
+      ],
+      "scope": "HUMAN_FROZEN natal policy; exact time, range, school and leap rules must remain explicit."
+    },
+    {
+      "layer": "calculation",
+      "id": "extension_and_brightness",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-source-admission-authority-v1.js"
+      ],
+      "scope": "29/29 admitted source claims supersede historical engineering pending flags for source use only."
+    },
+    {
+      "layer": "calculation",
+      "id": "timing",
+      "refs": [
+        "functions/zi-wei-dynamic/dynamic-runtime.js",
+        "content/professional/zi-wei-dynamic/authority/zi-wei-dynamic-policy-v2.json"
+      ],
+      "scope": "Separate dynamic authority; natal + Da Xian + Liu Nian, no monthly."
+    },
+    {
+      "layer": "semantic",
+      "id": "star_palace_context",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v2.js",
+        "functions/zi-wei-full-production/ziwei-professional-reading-r2-runtime-v2.js"
+      ],
+      "scope": "Current 28-star × 12-palace combinations and 252 professional cells; later eight-star semantic admission differs from placement source admission."
+    },
+    {
+      "layer": "semantic",
+      "id": "atomic_meanings",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-meaning-authority-v1.js",
+        "functions/zi-wei-full-production/ziwei-meaning-registry-runtime.js"
+      ],
+      "scope": "Historical W11 keeps eight standalone extension meanings blocked. Do not mutate or mistake this for current PRO-R2 coverage."
+    },
+    {
+      "layer": "semantic",
+      "id": "transformations_relationships_patterns",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-four-transformation-matrix-runtime.js",
+        "functions/zi-wei-full-production/ziwei-palace-relationship-engine.js",
+        "functions/zi-wei-full-production/ziwei-pattern-rule-authority-v1.js"
+      ],
+      "scope": "Source-bound transformations, topology and 11 admitted patterns; opposition is not automatically conflict, triad not automatically support."
+    },
+    {
+      "layer": "semantic",
+      "id": "timing_meaning",
+      "refs": [
+        "functions/zi-wei-dynamic/dynamic-meaning-runtime.js",
+        "functions/zi-wei-full-production/ziwei-professional-timing-navigation-runtime.js"
+      ],
+      "scope": "Structural temporal focus, alternatives and navigation; no event certainty."
+    },
+    {
+      "layer": "editorial",
+      "id": "customer_projection",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-customer-report-runtime.js",
+        "functions/zi-wei-full-production/ziwei-professional-reading-r2-runtime-v2.js",
+        "functions/personal-reading/ziwei-visual-report-projection.js"
+      ],
+      "scope": "Bilingual presentation consumes admitted data; prose/visual rendering never grants semantic authority."
+    },
+    {
+      "layer": "editorial",
+      "id": "current_publication",
+      "refs": [
+        "functions/zi-wei-full-production/ziwei-professional-reading-v2-publication-authority.js",
+        "functions/zi-wei-full-production/ziwei-current-publication-envelope-runtime.js"
+      ],
+      "scope": "Existing route CUSTOMER_PUBLISHED with historical 24/24 human gate; this is not MR-W11 or new commerce release acceptance."
+    }
+  ],
+  "sourceRule": "Calculation, semantic and editorial authorities are distinct. No external source or school was newly admitted in this audit.",
+  "knownConflict": "REN_HUA_KE_TARGET_CONFLICT: keep frozen ZUO_FU; do not silently merge TIAN_FU witness variant."
+}

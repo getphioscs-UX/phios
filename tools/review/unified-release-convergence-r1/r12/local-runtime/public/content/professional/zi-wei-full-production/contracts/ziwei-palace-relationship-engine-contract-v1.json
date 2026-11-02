@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-PALACE-RELATIONSHIP-ENGINE-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W6",
+  "status": "ENGINEERING_COMPLETE",
+  "runtime": "functions/zi-wei-full-production/ziwei-palace-relationship-engine.js",
+  "inputs": [
+    "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-ZIWEI-COMPLETE-STAR-PLACEMENT-v1.0.0",
+    "PHI-OS-ZIWEI-STAR-STATE-RESULT-v1.0.0",
+    "PHI-OS-ZIWEI-FOUR-TRANSFORMATION-MATRIX-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-ZIWEI-PALACE-RELATIONSHIP-ENGINE-v1.0.0",
+  "canonicalCounts": {
+    "palaces": 12,
+    "oppositePairs": 6,
+    "trineGroups": 4,
+    "sanFangSiZhengNetworks": 12,
+    "adjacencyPairs": 12,
+    "flankingNetworks": 12
+  },
+  "emptyPalacePolicy": {
+    "definition": "NO_FOURTEEN_MAIN_STAR_IN_TARGET_PALACE",
+    "borrowReference": "OPPOSITE_MAIN_STARS_REFERENCE_ONLY",
+    "copyStarPlacement": false,
+    "copyMeaning": false
+  },
+  "rules": {
+    "relationshipGeometryIsCalculation": true,
+    "flankPatternQualificationDeferredToW7W8": true,
+    "interpretationDeferredToW11W17": true,
+    "noGoodBadScore": true,
+    "noFortunePrediction": true
+  }
+}

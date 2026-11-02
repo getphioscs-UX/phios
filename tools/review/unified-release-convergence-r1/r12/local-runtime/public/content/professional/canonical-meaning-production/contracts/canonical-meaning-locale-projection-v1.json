@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-LOCALE-PROJECTION-CONTRACT-v1.0.0",
+  "work": "CMP-W7",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE",
+  "input": "CanonicalMeaningProductionBundle",
+  "output": "CanonicalMeaningLocaleProjection",
+  "registry": "content/professional/canonical-meaning-production/registries/canonical-meaning-locale-registry-v1.json",
+  "requiredFields": [
+    "schemaVersion",
+    "sourceBundleCode",
+    "sourceBundleDigest",
+    "locale",
+    "items",
+    "boundaries"
+  ],
+  "rules": {
+    "sameMeaningIdentityAcrossLocales": true,
+    "localeProjectionMayNotModifySourceBundle": true,
+    "localeProjectionMayNotCreateInterpretation": true,
+    "localeProjectionMayNotCreateProfessionalJudgment": true
+  }
+}

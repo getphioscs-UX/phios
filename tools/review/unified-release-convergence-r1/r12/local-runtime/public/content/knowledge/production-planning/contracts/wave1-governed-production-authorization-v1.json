@@ -1,0 +1,45 @@
+{
+  "contractCode": "PHI-OS-WAVE1-GOVERNED-PRODUCTION-AUTHORIZATION-v1",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "baselineCommit": "07d634195cd7b1d641fbaf5bbba60137b8ca274c",
+  "preservesFrozenValidationRegistries": true,
+  "frozenValidationRegistries": [
+    "content/knowledge/production-planning/registries/kpp-human-production-decision-registry-v1.json",
+    "content/knowledge/production-planning/registries/kpp-production-plan-freeze-registry-v1.json",
+    "content/knowledge/production-planning/registries/kpp-production-wave-registry-v2.json",
+    "content/knowledge/production-planning/registries/kpp-pja-handoff-registry-v1.json",
+    "content/knowledge/production-planning/registries/kpp-car-handoff-registry-v1.json"
+  ],
+  "productionInstanceRoot": "content/knowledge/production-planning/production/wave1",
+  "requiredSequence": [
+    "HUMAN_PRODUCTION_DECISION",
+    "C3_HUMAN_APPROVAL_RECONCILIATION",
+    "PRODUCTION_PLAN_FREEZE",
+    "PRODUCTION_WAVE_FREEZE",
+    "EXECUTION_AUTHORITY_RECONCILIATION",
+    "PJA_CAR_HANDOFF"
+  ],
+  "humanDecisionRules": {
+    "actorMustBeHuman": true,
+    "decisionMustBeApproveForProduction": true,
+    "mustBindC2Hash": true,
+    "mustBindEligibleC3Assessment": true
+  },
+  "dispatchBoundary": {
+    "briefGenerationAllowed": true,
+    "candidateCreationAllowed": false,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false
+  },
+  "checkerBoundary": {
+    "read": true,
+    "validate": true,
+    "compare": true,
+    "fail": true,
+    "report": true,
+    "mutate": false,
+    "approve": false,
+    "publish": false
+  }
+}

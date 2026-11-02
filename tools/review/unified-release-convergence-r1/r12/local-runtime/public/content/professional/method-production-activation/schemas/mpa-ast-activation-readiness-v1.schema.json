@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MPA AST Activation Readiness v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "work",
+    "methodCode",
+    "decision",
+    "technicalActivationEvidenceReady",
+    "methodSpecificReady",
+    "productionEligible",
+    "productionExecutionAllowed",
+    "professionalEligible",
+    "readyForW26"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-AST-ACTIVATION-DECISION-v1.0.0"
+    },
+    "work": {
+      "const": "MPA-W22"
+    },
+    "methodCode": {
+      "const": "ASTROLOGY"
+    },
+    "decision": {
+      "enum": [
+        "AST_TECHNICAL_ACTIVATION_BLOCKED",
+        "BLOCKED_PRODUCTION_POLICY_AUTHORITY_REQUIRED",
+        "READY_FOR_MPA_W26_ELIGIBILITY_DECISION"
+      ]
+    },
+    "technicalActivationEvidenceReady": {
+      "type": "boolean"
+    },
+    "methodSpecificReady": {
+      "type": "boolean"
+    },
+    "productionEligible": {
+      "const": false
+    },
+    "productionExecutionAllowed": {
+      "const": false
+    },
+    "professionalEligible": {
+      "const": false
+    },
+    "readyForW26": {
+      "type": "boolean"
+    }
+  }
+}

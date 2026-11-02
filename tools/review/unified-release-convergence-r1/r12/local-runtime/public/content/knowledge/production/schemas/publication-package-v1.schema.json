@@ -1,0 +1,76 @@
+{
+  "$id": "https://getphios.com/schemas/knowledge/publication-package-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval": {
+      "type": "object"
+    },
+    "article": {
+      "required": [
+        "articleCode",
+        "nodeCode",
+        "locale",
+        "title",
+        "summary",
+        "bodyMarkdown",
+        "slug",
+        "href",
+        "version"
+      ],
+      "type": "object"
+    },
+    "authority": {
+      "type": "object"
+    },
+    "candidate": {
+      "type": "object"
+    },
+    "decision": {
+      "const": "publish"
+    },
+    "governance": {
+      "type": "object"
+    },
+    "publicationCode": {
+      "type": "string"
+    },
+    "publicationDigest": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "publicationSchemaVersion": {
+      "const": "PHI-OS-PUBLICATION-PACKAGE-v1.0.0"
+    },
+    "publicationType": {
+      "const": "canonical_article_publication"
+    },
+    "publishedAt": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "publisher": {
+      "type": "object"
+    },
+    "review": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "publicationType",
+    "publicationSchemaVersion",
+    "publicationCode",
+    "candidate",
+    "review",
+    "approval",
+    "publisher",
+    "decision",
+    "article",
+    "authority",
+    "governance",
+    "publishedAt",
+    "publicationDigest"
+  ],
+  "title": "PHI OS Publication Package v1",
+  "type": "object"
+}

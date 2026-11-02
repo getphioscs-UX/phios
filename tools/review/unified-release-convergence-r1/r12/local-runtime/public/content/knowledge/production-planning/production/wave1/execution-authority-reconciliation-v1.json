@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-WAVE1-EXECUTION-AUTHORITY-RECONCILIATION-v1.0.0",
+  "reconciliationCode": "PHI-OS-WAVE1-EXECUTION-AUTHORITY-RECONCILIATION-v1",
+  "version": "1.0.0",
+  "status": "CLOSED",
+  "baselineCommit": "07d634195cd7b1d641fbaf5bbba60137b8ca274c",
+  "reconciledAt": "2026-08-10T19:46:00+08:00",
+  "inspectedAuthorities": {
+    "KPP": "FROZEN_VALIDATION_RUNTIME_READY_FOR_GOVERNED_PRODUCTION_DECISIONS",
+    "KPE": "NOT_PRESENT_IN_CURRENT_MAIN",
+    "ORC": "PLANNED_NOT_ACTIVE",
+    "PJA": "ARTICLE_FRAGMENT_PRODUCTION_AUTHORITY",
+    "CAR": "GOVERNED_ASSET_PRODUCTION_AUTHORITY"
+  },
+  "conclusion": "KPE_NOT_REQUIRED_KPP_WAVE1_SCOPED_DISPATCH_AUTHORIZATION",
+  "rationale": "KPP already owns production planning and its existing PJA/CAR handoff contracts require a frozen plan and frozen wave. ORC is planned but not active; creating KPE now would duplicate authority.",
+  "executionAuthority": {
+    "owner": "KPP_WAVE1_PRODUCTION_OVERLAY",
+    "scope": "GOVERNED_HANDOFF_AND_BRIEF_GENERATION_ONLY",
+    "dispatchAllowed": true,
+    "pjaBriefGenerationAllowed": true,
+    "carBriefGenerationAllowed": true,
+    "candidateMaterializationAllowed": false,
+    "providerInvocationAllowed": false,
+    "networkCallAllowed": false,
+    "publicationAllowed": false
+  },
+  "handoffRules": {
+    "ARTICLE": "PJA",
+    "FRAGMENT": "PJA",
+    "FIGURE": "CAR",
+    "MULTI_ASSET": "CAR"
+  },
+  "futureMigration": {
+    "whenOrcBecomesActive": "ORC_MAY_ASSUME_GENERIC_ORCHESTRATION_WITHOUT_CHANGING_KPP_DECISION_AUTHORITY",
+    "kpeCreationRequired": false
+  },
+  "reconciliationDigest": "sha256:147505ded5e6f4fe4fd8fa04ae226000127c8fbbbc728b688fbdc3f45a367d6b"
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-VAP-L10N-R1-R5-CONTRACT-v1.0.0",
+  "phase": "VAP-L10N_ENGLISH_VISUAL_ARTICLE_SUCCESSOR",
+  "baselineCommit": "09d6ee76315cf7a8d6ab7e373d86fff816866845",
+  "scope": {
+    "nodeCode": "KN-PREFACE-001",
+    "locale": "en",
+    "slug": "ai-formation-from-civilizational-capability",
+    "href": "/articles/ai-formation-from-civilizational-capability"
+  },
+  "works": [
+    {"work":"VAP-L10N-R1","name":"English Article Successor Authority","humanReviewRequired":true,"humanApprovalRequired":true,"humanPublicationDecisionRequired":true},
+    {"work":"VAP-L10N-R2","name":"Shared Physical Figure / EN CAR Projection","figureRegenerationAllowed":false,"binaryDuplicationAllowed":false},
+    {"work":"VAP-L10N-R3","name":"EN CPR Production Presentation","samePresentationIdentityRequired":true,"samePdsReferencesRequired":true},
+    {"work":"VAP-L10N-R4","name":"EN Visual Article Projection","sameCanonicalRouteRequired":true,"englishOnlyPublicTextRequired":true},
+    {"work":"VAP-L10N-R5","name":"Same-Route Locale Acceptance & Freeze","productionDeploymentClaimed":false,"productionBrowserAcceptanceClaimed":false}
+  ],
+  "authorityBoundaries": {
+    "predecessorEnglishAuthorityImmutable": true,
+    "zhHansFrozenVisualArticleLaneImmutable": true,
+    "carOwnsFigurePublication": true,
+    "cprOwnsPresentation": true,
+    "vapOwnsVisualArticleReleaseProjection": true,
+    "runtimeChoosesLocale": true
+  },
+  "activation": {
+    "prepareCommand": "npm run vap:l10n:r1-r5:prepare",
+    "preflightCommand": "npm run check:vap-l10n:r1-r5:preflight",
+    "applyCommand": "npm run vap:l10n:r1-r5:apply",
+    "strictCheckCommand": "npm run check:vap-l10n:r1-r5"
+  }
+}

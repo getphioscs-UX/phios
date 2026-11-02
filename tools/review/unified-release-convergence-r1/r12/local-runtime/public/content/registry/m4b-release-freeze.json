@@ -1,0 +1,52 @@
+{
+  "id": "phi-os.m4b-release-freeze",
+  "version": "1.0.0",
+  "milestone": "M4B-W10",
+  "baseline": "73ebf4e91ca1c00a5760cda9dd80ccb45728041a",
+  "release_scope": "External Reader Framework and Professional Workspace",
+  "freeze_state": "conditional_passed",
+  "development_acceptance": {
+    "external_reader_framework_integrated": "passed",
+    "human_design_registry_usable": "passed",
+    "other_registries_scaffolded": "passed",
+    "professional_workspace_connected": "passed",
+    "consent_and_privacy_connected": "passed",
+    "reports_connected": "passed",
+    "all_tests_passed": "passed"
+  },
+  "production_acceptance": {
+    "deployment_baseline": "73ebf4e91ca1c00a5760cda9dd80ccb45728041a",
+    "url": "https://phios-github.pages.dev",
+    "status": "conditional_passed",
+    "checks": {
+      "professional_home": "passed",
+      "human_design_service": "passed",
+      "external_readers": "passed",
+      "intake": "passed",
+      "consent": "passed",
+      "chart_upload_handoff": "passed",
+      "professional_workspace_shell": "passed",
+      "report_preview_shell": "passed",
+      "pdf_export_control": "passed",
+      "english": "passed",
+      "simplified_chinese": "passed",
+      "mobile": "passed",
+      "desktop": "passed",
+      "console": "pending_interactive_verification"
+    },
+    "remaining_acceptance": [
+      "Authorised Professional Workspace payload with real client data",
+      "Authorised report payload and generated PDF content",
+      "Interactive Production console verification"
+    ]
+  },
+  "boundaries": {
+    "runtime_reading_modified": false,
+    "runtime_evidence_modified": false,
+    "reading_contract_modified": false,
+    "navigation_contract_modified": false,
+    "runtime_memory_modified": false,
+    "customer_journey_modified": false
+  },
+  "allowed_results": ["passed", "conditional_passed", "failed"]
+}

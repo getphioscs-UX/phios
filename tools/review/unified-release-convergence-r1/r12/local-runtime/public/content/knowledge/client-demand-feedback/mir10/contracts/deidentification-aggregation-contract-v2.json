@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-MIR-10-DEIDENTIFICATION-AGGREGATION-CONTRACT-v2.0.0",
+  "work": "MIR-10C",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "forbiddenKeyClasses": [
+    "question",
+    "rawQuestion",
+    "query",
+    "rawQuery",
+    "prompt",
+    "answer",
+    "transcript",
+    "userId",
+    "accountId",
+    "email",
+    "phone",
+    "sessionId",
+    "caseId",
+    "birthData",
+    "ipAddress",
+    "name",
+    "address"
+  ],
+  "retention": {
+    "rawQuestion": false,
+    "rawSearchQuery": false,
+    "personalAnswer": false,
+    "caseNarrative": false,
+    "aggregateMetrics": true,
+    "canonicalNodeRefs": true
+  },
+  "aggregation": {
+    "minimumFrequency": 1,
+    "crossSurfaceAllowed": true,
+    "sameDemandKeyRequired": true,
+    "ratesWeightedByFrequency": true,
+    "matchedNodesUnionOnly": true,
+    "historicalSignalMutationAllowed": false
+  },
+  "publicKnowledgeCandidateMayContainPersonalCaseDetails": false
+}

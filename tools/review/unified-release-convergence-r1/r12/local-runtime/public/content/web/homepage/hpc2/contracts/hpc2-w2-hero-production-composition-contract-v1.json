@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W2-HERO-PRODUCTION-COMPOSITION-CONTRACT-v1.0.0",
+  "work": "HPC2-W2",
+  "baselineCommit": "efc6c556107008cea495c2231e98f179436bd088",
+  "status": "H01_HERO_PRODUCTION_COMPOSITION_ACTIVE_H02_H09_DEFERRED",
+  "predecessorAuthority": {
+    "sceneRegistry": "content/web/homepage/hpc2/homepage-scene-registry-v2.json",
+    "sceneRegistrySha256": "f63c4a997896c7c5f15b5bd55786b46ab2dbd4154f8224fd4cff4349612543fb",
+    "w1Freeze": "content/web/homepage/hpc2/freeze/hpc2-w1-narrative-scene-authority-freeze-v1.json",
+    "relationship": "ADDITIVE_H01_COMPOSITION_CONSUMES_W1_AUTHORITY_NO_SECOND_HOMEPAGE_RUNTIME"
+  },
+  "ownership": {
+    "owns": [
+      "H01_DOM_COMPOSITION",
+      "H01_RESPONSIVE_PRESENTATION",
+      "H01_EN_ZH_HANS_COPY_PROJECTION",
+      "H01_CTA_HIERARCHY_AND_EXISTING_ROUTE_BRIDGE",
+      "HERO_001_EXISTING_RESOLVER_CONSUMPTION"
+    ],
+    "doesNotOwn": [
+      "H02_H09_COMPOSITION",
+      "HOMEPAGE_RUNTIME_AUTHORITY",
+      "PUBLIC_ASSET_REGISTRY_AUTHORITY",
+      "PUBLIC_ASSET_RESOLVER_AUTHORITY",
+      "VISUAL_REGISTRY_AUTHORITY",
+      "REALITY_AUTHORITY",
+      "REALITY_ROUTE_ACTIVATION",
+      "CKA_OR_ASK_RUNTIME",
+      "V8_DESTINATION_ROUTE_ACTIVATION",
+      "HUMAN_VISUAL_ACCEPTANCE"
+    ]
+  },
+  "composition": {
+    "sceneCode": "H01",
+    "sceneTitle": "Hero",
+    "consumer": "index.html",
+    "runtime": "assets/js/pages/home-production.js",
+    "stylesheet": "assets/css/hpc2-pre-home-visuals.css",
+    "localeOwners": [
+      "assets/js/locales/en/public.js",
+      "assets/js/locales/zh-Hans/public.js"
+    ],
+    "layout": {
+      "mode": "FULL_BLEED",
+      "viewportHeightDesktopSvh": 94,
+      "viewportHeightCompactSvh": 92,
+      "allowedRangeSvh": [
+        90,
+        100
+      ],
+      "readabilityLayer": "HTML_CSS_GRADIENT_OVERLAY",
+      "copyOwnership": "HTML_PLUS_LOCALE_RUNTIME",
+      "ctaOwnership": "HTML_PLUS_LOCALE_RUNTIME"
+    }
+  },
+  "heroAsset": {
+    "assetCode": "HERO-001",
+    "publicAssetRegistry": "content/registry/public-assets.json",
+    "visualRegistry": "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+    "resolver": "assets/js/runtime/web-production/asset-resolver.js",
+    "objectKey": "images/hero/PHIOS-HERO-REALITY-NAVIGATION-v1.webp",
+    "format": "webp",
+    "width": 2560,
+    "height": 1440,
+    "aspectRatio": "16:9",
+    "requiredState": "REMOTE_VERIFIED",
+    "existingResolverReused": true,
+    "secondResolverCreated": false,
+    "visualPolicy": {
+      "embeddedText": "FORBIDDEN",
+      "logo": "FORBIDDEN",
+      "button": "FORBIDDEN",
+      "fakeUi": "FORBIDDEN",
+      "language": "LOCALE_NEUTRAL",
+      "htmlOwnsAllCopyAndCta": true
+    }
+  },
+  "copy": {
+    "en": {
+      "brand": "PHI OS",
+      "platform": "Reality Navigation Platform",
+      "line1": "Reality is already happening.",
+      "line2": "Navigate what comes next.",
+      "principles": "Understand · Choose · Continue"
+    },
+    "zh-Hans": {
+      "brand": "PHI OS",
+      "platform": "现实导航平台",
+      "line1": "现实已经在发生。",
+      "line2": "看清它，并导航下一步。",
+      "principles": "理解 · 选择 · 继续"
+    }
+  },
+  "ctaHierarchy": [
+    {
+      "actionCode": "START_WITH_MY_REALITY",
+      "hierarchy": "PRIMARY",
+      "en": "Start with my reality",
+      "zh-Hans": "从我的现实开始",
+      "destination": "/reality-entry",
+      "destinationState": "EXISTING_LEGACY_ROUTE_PRESERVED",
+      "successorIntent": "H05_FIRST_INTERACTION_AFTER_HPC2_W6",
+      "activatesRealityCandidateRoute": false
+    },
+    {
+      "actionCode": "EXPLORE_PHI_OS",
+      "hierarchy": "SECONDARY",
+      "en": "Explore PHI OS",
+      "zh-Hans": "探索 PHI OS",
+      "destination": "#wpr-platform-title",
+      "destinationState": "CURRENT_IN_PAGE_COMPATIBILITY_TARGET",
+      "successorIntent": "H04_PHIOS_RUNTIME_AFTER_HPC2_W5",
+      "activatesRoute": false
+    }
+  ],
+  "ctaBoundary": {
+    "primaryCount": 1,
+    "secondaryCount": 1,
+    "askPhiosPresent": false,
+    "askPhiosPrimary": false,
+    "realityJourneyForcedAsDefault": false,
+    "candidateRealityRouteActivated": false
+  },
+  "v8HeroMigrationBoundary": {
+    "sourceManifest": "content/web/homepage/hpc2/v8-content-preservation-manifest-v1.json",
+    "manifestRewritten": false,
+    "successorVerifiedPromotions": 0,
+    "deletionAllowedPromotions": 0,
+    "reservations": [
+      {
+        "blockCode": "V8-HERO-001",
+        "copy": "AI can answer. Reality still has to be navigated.",
+        "reservedDestination": "H03_CATEGORY_TRANSITION",
+        "implementationState": "PRESERVED_PENDING_HPC2_W4",
+        "removedFromCanonicalSource": false
+      },
+      {
+        "blockCode": "V8-HERO-002",
+        "copy": "What is actually happening in my reality—and what should I do next?",
+        "reservedDestinations": [
+          "/about/why-phios",
+          "REALITY_JOURNEY_ORIENTATION_PROMPT"
+        ],
+        "implementationState": "PRESERVED_PENDING_ROUTE_AND_ORIENTATION_SUCCESSORS",
+        "removedFromCanonicalSource": false
+      }
+    ]
+  },
+  "successorBoundary": {
+    "h02OneRealityImplemented": false,
+    "w3PublicExampleDataAdded": false,
+    "privateCaseDataAdded": false,
+    "aboutWhyPhiosRouteActivated": false,
+    "aboutRealityNavigationRouteActivated": false,
+    "realityCandidateRouteActivated": false,
+    "legacyHomepageSectionsDeleted": false,
+    "humanVisualAcceptanceClaimed": false,
+    "globalProductionAcceptanceClaimed": false
+  }
+}

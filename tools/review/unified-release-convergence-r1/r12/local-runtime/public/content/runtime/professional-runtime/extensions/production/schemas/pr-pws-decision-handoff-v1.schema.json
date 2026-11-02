@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-pws-decision-handoff-v1.schema.json",
+  "title": "PHI OS PR PWS Decision Handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "handoffReference",
+    "workspaceReference",
+    "assignmentReference",
+    "deliverableReference",
+    "decisionPackageReference",
+    "decisionPackageDigest",
+    "prState",
+    "pwsCurrentState",
+    "requestedOperation",
+    "requestedTargetState",
+    "idempotencyKey",
+    "handoffState",
+    "executionFlags",
+    "handoffDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_PWS_DECISION_HANDOFF"
+    },
+    "handoffReference": {
+      "type": "string"
+    },
+    "workspaceReference": {
+      "type": "string"
+    },
+    "assignmentReference": {
+      "type": "string"
+    },
+    "deliverableReference": {
+      "type": "string"
+    },
+    "decisionPackageReference": {
+      "type": "string"
+    },
+    "decisionPackageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "prState": {
+      "enum": [
+        "DRAFT",
+        "REVIEWED",
+        "APPROVED",
+        "SIGNED",
+        "RELEASED"
+      ]
+    },
+    "pwsCurrentState": {
+      "enum": [
+        "draft",
+        "review_required",
+        "approved",
+        "signed",
+        "released"
+      ]
+    },
+    "requestedOperation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "requestedTargetState": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "idempotencyKey": {
+      "type": "string"
+    },
+    "handoffState": {
+      "type": "string"
+    },
+    "executionFlags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "workspaceMutatedByPr",
+        "deliverableMutatedByPr",
+        "pwsOperationExecutedByPr",
+        "pwsPersistencePerformedByPr",
+        "pwsDeliverableCreatedByPr"
+      ],
+      "properties": {
+        "workspaceMutatedByPr": {
+          "const": false
+        },
+        "deliverableMutatedByPr": {
+          "const": false
+        },
+        "pwsOperationExecutedByPr": {
+          "const": false
+        },
+        "pwsPersistencePerformedByPr": {
+          "const": false
+        },
+        "pwsDeliverableCreatedByPr": {
+          "const": false
+        }
+      }
+    },
+    "handoffDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "PHI-OS-CX-P1-LEGACY-DELETE-PLAN-v2.0.0",
+  "work": "P1_PHYSICAL_LEGACY_DELETE",
+  "baselineCommit": "931bf68fd5fa8e8de2b05c72d80cdae55f205ecd",
+  "predecessor": "content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v1.json",
+  "status": "PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE",
+  "gates": {
+    "replacementAccepted": true,
+    "routeCutoverComplete": true,
+    "npmTargetedAcceptancePassed": true,
+    "productionBrowserAccepted": true,
+    "zeroActiveCanonicalConsumerRequired": true
+  },
+  "candidates": [
+    {
+      "path": "my-reality.html",
+      "surface": "MY_REALITY",
+      "legacyRoutes": [
+        "/my-reality",
+        "/my-reality.html"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    },
+    {
+      "path": "reality-dashboard.html",
+      "surface": "MY_REALITY",
+      "legacyRoutes": [
+        "/reality-dashboard",
+        "/reality-dashboard.html"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    },
+    {
+      "path": "personal-runtime.html",
+      "surface": "PERSONAL_REALITY",
+      "legacyRoutes": [
+        "/personal-runtime",
+        "/personal-runtime.html"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    },
+    {
+      "path": "professional/personal-runtime/index.html",
+      "surface": "PERSONAL_REALITY",
+      "legacyRoutes": [
+        "/professional/personal-runtime",
+        "/professional/personal-runtime/"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    },
+    {
+      "path": "financial-reality.html",
+      "surface": "FINANCIAL_REALITY",
+      "legacyRoutes": [
+        "/financial-reality",
+        "/financial-reality.html"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    },
+    {
+      "path": "ask.html",
+      "surface": "ASK",
+      "legacyRoutes": [
+        "/ask",
+        "/ask.html"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    },
+    {
+      "path": "knowledge-search.html",
+      "surface": "ASK",
+      "legacyRoutes": [
+        "/knowledge-search",
+        "/knowledge-search.html"
+      ],
+      "state": "PHYSICALLY_DELETED",
+      "publicPresentationExists": false,
+      "compatibilityPreservedByRedirect": true
+    }
+  ],
+  "protected": [
+    "functions/",
+    "runtime/",
+    "content/professional/",
+    "content/financial/",
+    "content/knowledge/",
+    "content/reality/",
+    "scripts/"
+  ],
+  "protectedClasses": [
+    "runtime functions",
+    "canonical registries",
+    "method calculation",
+    "knowledge authority",
+    "financial authority",
+    "reality authority",
+    "report authority",
+    "governance evidence"
+  ],
+  "physicalDeleteCount": 7,
+  "backendDeleteCount": 0,
+  "authorityDeleteCount": 0
+}

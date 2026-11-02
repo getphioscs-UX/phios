@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-RELATIONSHIP-PROFILE-EVIDENCE-CONTRACT-v1.0.0",
+  "work": "PRF-W9",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "runtimeSchema": "PHI-OS-RELATIONSHIP-PROFILE-EVIDENCE-IR-v1",
+  "runtimeOwner": "functions/profile/profile-context-runtime.js",
+  "relationshipIntentAuthority": "PHI-OS-RELATIONSHIP-INTENT-v1.0.0",
+  "ruleRegistry": "content/professional/profile/relationship/registries/relationship-profile-comparison-rule-registry-v1.json",
+  "lane": "SEPARATE_PROFILE_EVIDENCE_LANE",
+  "mustNotBecome": "REL-W4_METHOD_COMPOSITION",
+  "participantInputs": [
+    "ExternalProfile(A/B)",
+    "PHI Self-Assessment(A/B)",
+    "ReasoningTaskPerformance(A/B) optional",
+    "Big Five / IPIP(A/B) optional"
+  ],
+  "allowedOutputs": [
+    "SIMILAR_SELF_REPORTED_TENDENCY",
+    "DIFFERENT_SELF_REPORTED_TENDENCY",
+    "COMPLEMENTARY_PATTERN",
+    "POTENTIAL_FRICTION_TARGET",
+    "COMMUNICATION_OBSERVATION_TARGET",
+    "OPEN"
+  ],
+  "rules": {
+    "specificPersonRelationshipOnly": true,
+    "admittedComparisonRulesOnly": true,
+    "participantIdentityMustRemainDistinct": true,
+    "crossSourcePartnerComparisonAllowed": false,
+    "compatibilityPercentageAllowed": false,
+    "partnerHiddenStateInferenceAllowed": false,
+    "traitDifferenceMayPredictRelationshipFailure": false,
+    "stayLeaveDirectiveAllowed": false,
+    "objectiveRelationshipFactCreated": false,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w9-relationship-profile-lane"
+}

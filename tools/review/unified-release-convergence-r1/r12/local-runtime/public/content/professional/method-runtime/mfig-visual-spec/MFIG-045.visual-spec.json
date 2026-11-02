@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-045",
+  "title": "METHOD-UNCERTAINTY",
+  "scope": "CROSS_METHOD",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/interpretation/governance/interpretation-conflict-resolution-policy-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CONFLICTING_EVIDENCE",
+      "displayLabel": "CONFLICTING EVIDENCE",
+      "nodeType": "STATE",
+      "authorityClass": "UNCERTAINTY",
+      "semanticRole": "UNCERTAINTY",
+      "container": "METHOD_UNCERTAINTY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CONFLICT_RESOLUTION_POLICY",
+      "displayLabel": "CONFLICT RESOLUTION POLICY",
+      "nodeType": "GATE",
+      "authorityClass": "UNCERTAINTY",
+      "semanticRole": "UNCERTAINTY",
+      "container": "METHOD_UNCERTAINTY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "RESOLVED_OR_UNKNOWN",
+      "displayLabel": "RESOLVED OR UNKNOWN",
+      "nodeType": "STATE",
+      "authorityClass": "UNCERTAINTY",
+      "semanticRole": "UNCERTAINTY",
+      "container": "METHOD_UNCERTAINTY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "UNCERTAINTY_DISCLOSURE",
+      "displayLabel": "UNCERTAINTY DISCLOSURE",
+      "nodeType": "GATE",
+      "authorityClass": "UNCERTAINTY",
+      "semanticRole": "UNCERTAINTY",
+      "container": "METHOD_UNCERTAINTY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-045-E01",
+      "from": "CONFLICTING_EVIDENCE",
+      "to": "CONFLICT_RESOLUTION_POLICY",
+      "relation": "RESOLVES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-045-E02",
+      "from": "CONFLICT_RESOLUTION_POLICY",
+      "to": "RESOLVED_OR_UNKNOWN",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-045-E03",
+      "from": "RESOLVED_OR_UNKNOWN",
+      "to": "UNCERTAINTY_DISCLOSURE",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_UNCERTAINTY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "CONFLICTING_EVIDENCE",
+        "CONFLICT_RESOLUTION_POLICY",
+        "RESOLVED_OR_UNKNOWN",
+        "UNCERTAINTY_DISCLOSURE"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CONFLICTING_EVIDENCE",
+    "CONFLICT_RESOLUTION_POLICY",
+    "RESOLVED_OR_UNKNOWN",
+    "UNCERTAINTY_DISCLOSURE"
+  ],
+  "mustState": [
+    "Conflict resolution must not fabricate certainty",
+    "Unknown is a valid governed outcome"
+  ],
+  "statementSources": {
+    "Conflict resolution must not fabricate certainty": "SRC-002",
+    "Unknown is a valid governed outcome": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

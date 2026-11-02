@@ -1,0 +1,21 @@
+{
+  "registryCode": "PHI-OS-ALR-W33-ACADEMY-ACCESS-SCOPE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W33",
+  "status": "canonical",
+  "productionStatus": "academy_access_scope_semantics_only",
+  "accessScopes": [
+    {"accessScopeCode": "ACADEMY_FOUNDATION", "ordinal": 1, "academyLevelCode": "FOUNDATION", "definition": "Access scope for Foundation learning objects.", "boundary": "Not an enrollment, Credential, Professional Service or Professional entitlement."},
+    {"accessScopeCode": "ACADEMY_READER", "ordinal": 2, "academyLevelCode": "READER", "definition": "Access scope for Reader learning objects and lower Academy levels.", "boundary": "Does not grant Reading, evidence or truth authority."},
+    {"accessScopeCode": "ACADEMY_NAVIGATOR", "ordinal": 3, "academyLevelCode": "NAVIGATOR", "definition": "Access scope for Navigator learning objects and lower Academy levels.", "boundary": "Does not grant decision, assignment or Professional authority."},
+    {"accessScopeCode": "ACADEMY_PROFESSIONAL_FORMATION", "ordinal": 4, "academyLevelCode": "PROFESSIONAL", "definition": "Access scope for bounded Professional Formation learning objects and lower Academy levels.", "boundary": "Not a Professional Service entitlement and does not grant professional readiness, Credential, assignment, jurisdiction or responsibility."}
+  ],
+  "rules": {
+    "scopeOrderMatchesAcademyLevelOrder": true,
+    "higherAcademyAccessScopeMayCoverLowerAcademyLearningScope": true,
+    "scopeIsCanonicalEntitlementInstance": false,
+    "scopeMayActivateEntitlement": false,
+    "professionalFormationScopeIsProfessionalServiceEntitlement": false,
+    "registryStoresUserOrEntitlementData": false
+  }
+}

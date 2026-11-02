@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/public-knowledge-question.schema.json",
+  "title": "PHI OS Public Knowledge Question",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["questionId", "locale", "questionText", "submittedAt", "surface", "consent", "sessionMode"],
+  "properties": {
+    "questionId": { "type": "string", "pattern": "^KQ-[A-Z0-9-]{8,64}$" },
+    "locale": { "enum": ["zh-Hans", "en"] },
+    "questionText": { "type": "string", "minLength": 3, "maxLength": 500 },
+    "submittedAt": { "type": "string", "format": "date-time" },
+    "surface": { "enum": ["knowledge_home", "article", "atlas", "book", "direct"] },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["boundaryAcknowledged", "sensitiveDataWarningAcknowledged"],
+      "properties": {
+        "boundaryAcknowledged": { "const": true },
+        "sensitiveDataWarningAcknowledged": { "const": true }
+      }
+    },
+    "sessionMode": { "const": "ephemeral" }
+  }
+}

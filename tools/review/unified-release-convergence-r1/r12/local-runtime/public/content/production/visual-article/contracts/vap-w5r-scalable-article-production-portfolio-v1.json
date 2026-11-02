@@ -1,0 +1,52 @@
+{
+  "contractCode": "PHI-OS-VAP-W5R-SCALABLE-ARTICLE-PRODUCTION-PORTFOLIO-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W5R",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION_RECONCILIATION",
+  "status": "active",
+  "implementationBaselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+  "purpose": "Project the complete Canonical Knowledge inventory into one scalable Article-production planning portfolio by reusing the existing PJA W3R1 scalable portfolio runtime and layering KPP decision authority, W4R execution semantics, Blueprint planning signals, C3 readiness, and published-Article protection.",
+  "existingRuntimeReuse": {
+    "runtime": "PJA-W3R1 Scalable Knowledge Article Production Workflow",
+    "builder": "scripts/lib/knowledge-production/scalable-article-workflow.mjs#buildPortfolio",
+    "existingProjection": "content/knowledge/production/production-portfolio.json",
+    "mustNotCreateSecondCanonicalNodeRegistry": true,
+    "mustNotReimplementPjaScalablePortfolio": true
+  },
+  "planningAuthority": {
+    "canonicalNodeAuthority": "content/knowledge/registry/nodes.json",
+    "blueprintRegistry": "content/knowledge/blueprints/blueprint-registry.json",
+    "kppArticleEligibilityGate": "content/knowledge/production-planning/contracts/kpp-article-eligibility-gate-v1.json",
+    "kppProductionNeedPolicy": "content/knowledge/production-planning/policies/kpp-production-need-score-v2.json",
+    "frozenWave1Plan": "content/knowledge/production-planning/production/wave1/frozen-production-plan-v1.json",
+    "humanDecision": "content/knowledge/production-planning/production/wave1/human-production-decision-v1.json",
+    "w4rExecutionEligibility": "content/production/visual-article/eligibility/visual-article-execution-eligibility-v1.json"
+  },
+  "portfolioStates": [
+    "EXISTING_PUBLISHED_ARTICLE",
+    "EXPLICIT_ARTICLE_INTENT",
+    "EXPLICIT_NON_ARTICLE_WAVE_OUTPUT",
+    "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+    "ARTICLE_DECISION_REQUIRED"
+  ],
+  "signalRules": {
+    "canonicalPrimaryAssetTypeArticleIsPlanningSignalOnly": true,
+    "blueprintArticleRequiredNowIsPlanningSignalOnly": true,
+    "planningSignalMayNotAutoAssignArticleRole": true,
+    "planningSignalMayNotAutoApproveArticle": true,
+    "planningSignalMayNotBypassKppArticleEligibility": true,
+    "frozenHumanProductionDecisionOverridesOlderPlanningSignals": true,
+    "publishedArticleMustNotBeRegeneratedAsNewCandidateByPortfolio": true
+  },
+  "invariants": {
+    "canonicalNodeCountDoesNotEqualArticleCount": true,
+    "noDefaultArticle": true,
+    "humanProductionDecisionRequired": true,
+    "portfolioIsDerivedProjectionOnly": true,
+    "portfolioDoesNotCreateCandidate": true,
+    "portfolioDoesNotInvokeProvider": true,
+    "portfolioDoesNotPublish": true
+  },
+  "output": "content/production/visual-article/portfolio/scalable-article-production-portfolio-v1.json",
+  "nextWork": "VAP-W6_BATCH_ARTICLE_SELECTION_AND_PRODUCTION_BRIEF_EXPORT"
+}

@@ -1,0 +1,213 @@
+{
+  "state": "CONFIGURATION_CANDIDATE_ONLY",
+  "project": "phios-financial-document-s2",
+  "host": "phios-financial-document-s2.pages.dev",
+  "pagesConfig": "Separate Pages project using production/preview supported slots. Its production slot is not the live getphios.com project. No arbitrary env.staging assumption.",
+  "environmentMode": {
+    "PHIOS_ENVIRONMENT": "qa",
+    "runtimeMode": "ISOLATED_SYNTHETIC_CANDIDATE",
+    "hostAllowlist": [
+      "phios-financial-document-s2.pages.dev"
+    ],
+    "status": "NOT_IMPLEMENTED_OR_AUTHORIZED_FOR_CLOUD"
+  },
+  "resources": {
+    "d1": {
+      "binding": "RUNTIME_DB",
+      "candidateName": "phios-financial-document-s2",
+      "databaseId": null
+    },
+    "r2": {
+      "binding": "PRIVATE_REPORTS",
+      "candidateName": "phios-financial-document-s2-private",
+      "publicAccess": false,
+      "actualIdentity": null
+    }
+  },
+  "testIdentity": "Separate synthetic A/B/C only; no LGS or customer documents",
+  "testSubject": "Fictional synthetic SME only; no real verification bypass",
+  "testSecrets": [
+    "Separate OIDC test client/secret",
+    "Separate AUTH_SESSION_SECRET",
+    "Separate REPORT_CONTEXT_ENCRYPTION_KEY"
+  ],
+  "secretValuesStored": false,
+  "productionResourceDenylist": {
+    "project": "phios-github",
+    "productionD1": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-production",
+        "database_id": "073639fa-01e4-4868-af10-6ed032637dab",
+        "migrations_dir": "db/migrations"
+      }
+    ],
+    "productionR2": [
+      {
+        "binding": "MANUSCRIPTS",
+        "bucket_name": "phios-private-manuscripts"
+      },
+      {
+        "binding": "PRIVATE_REPORTS",
+        "bucket_name": "phios-private-reports"
+      }
+    ],
+    "previewD1": [
+      {
+        "binding": "RUNTIME_DB",
+        "database_name": "phios-runtime-sandbox",
+        "database_id": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+        "migrations_dir": "db/migrations"
+      }
+    ],
+    "previewR2": [
+      {
+        "binding": "BOOKS",
+        "bucket_name": "phios-private-books-sandbox"
+      },
+      {
+        "binding": "PRIVATE_REPORTS",
+        "bucket_name": "phios-private-reports-sandbox"
+      }
+    ],
+    "services": [
+      {
+        "binding": "METHOD_REPORT_RENDERER",
+        "service": "phios-method-report-renderer-production"
+      }
+    ]
+  },
+  "uploadLimits": {
+    "perFileBytes": 1000000,
+    "totalFiles": 10,
+    "totalCampaignBytes": 10000000,
+    "pdfPages": 30,
+    "extractTimeoutMs": 12000,
+    "xlsxExpandedBytes": 3000000,
+    "xlsxEntries": 150,
+    "xlsxMaxRows": 300,
+    "xlsxMaxColumns": 10,
+    "localEncryptedPayloadBytes": 64000,
+    "currentFontEmbeddedSourcePdfBytes": 132615
+  },
+  "parserBoundary": "Current subprocess Python extractor is local-only. Pages cannot be assumed to spawn Python. A separately reviewed bounded parsing execution path must exist before S2 cloud test admission; no generic parser platform developed here.",
+  "allowedWrites": [
+    "Synthetic encrypted document bytes",
+    "Source metadata and review versions through existing PWS",
+    "Version-bound reviewed snapshot metadata through existing Context Owner",
+    "Minimal test audit"
+  ],
+  "retention": {
+    "candidateHours": 24,
+    "approved": false,
+    "localExistingSevenDayPolicyUnchanged": true,
+    "legalRetentionClaim": false,
+    "cleanupOperator": null,
+    "required": "Explicit environment-specific cleanup and failed-deletion reconciliation approval"
+  },
+  "recovery": {
+    "crossD1R2Atomicity": "BLOCKED",
+    "orphanCleanup": "BLOCKED",
+    "lostKeyRecovery": "BLOCKED",
+    "formalMigration": "BLOCKED",
+    "supportedLocal": "Source-reference compact snapshot with exact source review/sha pins and reauthentication",
+    "fontEmbeddedSourcePdfUpload": "BLOCKED_CURRENT_OWNER_PAYLOAD_CAPACITY"
+  },
+  "rollback": "Disable ingress; stop writes; return to prior test build; reconcile/delete authorized objects and indexes with failed cleanup recorded",
+  "costEnvelope": {
+    "approvedCloudBudgetUsd": 0,
+    "expectedCloudCost": "UNVERIFIED_NO_RESOURCES_CREATED",
+    "stopIfNonzeroCostOrPaidPlanRequired": true,
+    "providerCalls": 0,
+    "payments": 0,
+    "noFreeTierGuarantee": true
+  },
+  "namedOperators": {
+    "testOwner": null,
+    "keyCustodian": null,
+    "cleanupOperator": null,
+    "recoveryApprover": null
+  },
+  "approvals": {
+    "environmentConfiguration": "NOT_GRANTED",
+    "resourceCreation": "NOT_GRANTED",
+    "cloudTestExecution": "NOT_GRANTED",
+    "productionRelease": "NOT_GRANTED"
+  },
+  "conditions": [
+    {
+      "name": "Approved Host",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "phios-financial-document-s2.pages.dev; candidate only, not created",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Explicit Environment Mode",
+      "status": "BLOCKED",
+      "evidence": "Existing runtime is loopback-only. Reviewed exact-host synthetic-only adapter is not implemented/admitted.",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Test Identity",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "Separate synthetic A/B/C identity client/issuer, no production credentials; test operator named before activation",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Authorized Subject",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "Fictional Subject only; local synthetic fixture passed, no real Business grant implied",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Data Storage",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "Separate candidate D1/R2 IDs absent; no preview or production reuse",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Encryption / Key Custody",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "Separate test key, named custodian/backup/rotation and loss-response approval missing",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Write Permissions",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "Exact synthetic document/source/review/snapshot allowlist; environment and test permissions separately approved",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Retention / Cleanup",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "evidence": "Proposed synthetic 24-hour maximum and after-campaign cleanup; requires named operator and signed deadline, not a legal retention rule",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Isolation from Production",
+      "status": "BLOCKED",
+      "evidence": "Actual bindings/credential identity and production denylist test not yet executed in cloud",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "Rollback",
+      "status": "CONFIGURATION_REQUIRED",
+      "evidence": "Disable ingress; stop writes; return to prior test build; reconcile/delete authorized objects and indexes with failed cleanup recorded",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "No Real Payment",
+      "status": "VERIFIED",
+      "evidence": "Local task only: zero Stripe/payment operations. Cloud guard requires separate verification",
+      "actualCloudConditionSatisfied": false
+    },
+    {
+      "name": "No Paid Provider Calls",
+      "status": "VERIFIED",
+      "evidence": "Local task only: zero paid calls. Cloud no-egress guard requires separate verification",
+      "actualCloudConditionSatisfied": false
+    }
+  ],
+  "allTwelveCloudConditionsSatisfied": false,
+  "storageBoundary": "1MB parser file limit is not an encrypted-storage guarantee. Payloads above 64KB are explicitly blocked before new writes. Reference-based metadata preserves original encrypted evidence; no full font-PDF upload success claimed."
+}

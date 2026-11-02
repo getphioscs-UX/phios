@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PERSISTENCE-CURRENT-SUCCESSOR-v2.0.0",
+  "phase": "TPA-HR",
+  "work": "PERSISTENCE_SUCCESSOR_RECONCILIATION",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "successorOf": {
+    "phaseH": "content/interpretation/tarot/reconciliation/tarot-persistence-current-successor-v1.json",
+    "phaseHCheckerReconciliation": "content/interpretation/tarot/reconciliation/tarot-persistence-checker-successor-v1.json",
+    "machineAcceptance": "content/production/symbolic-method/acceptance/tarot-machine-acceptance-v2.json"
+  },
+  "status": "CURRENT_PERSISTENCE_RECONCILED_WITH_SHARED_ICHING_TAROT_CONTEXT_MACHINE_ACCEPTANCE_COMPATIBLE_PRODUCT_STILL_CLOSED",
+  "historicalEvidence": {
+    "phaseHAcceptance": {
+      "path": "content/interpretation/tarot/acceptance/tarot-persistence-acceptance-v1.json",
+      "sha256": "9150157b1d1109ee970da594545fedac5daa2263e5270c7c802022f5be2562af",
+      "preserved": true
+    },
+    "phaseHSuccessor": {
+      "path": "content/interpretation/tarot/reconciliation/tarot-persistence-current-successor-v1.json",
+      "sha256": "aa2a2c696aeec19048fc5d26c3f7ae09cdf4ee3e71684d5d4f565c87bc6519ec",
+      "preserved": true
+    },
+    "phaseHCheckerSuccessor": {
+      "path": "content/interpretation/tarot/reconciliation/tarot-persistence-checker-successor-v1.json",
+      "sha256": "8ab69833a32058e1553ea6b97b807f1ffac8114d1b27b9fd3422af8cc23cb4d9",
+      "preserved": true
+    },
+    "machineAcceptanceV2": {
+      "path": "content/production/symbolic-method/acceptance/tarot-machine-acceptance-v2.json",
+      "sha256": "8b00a01a9d006477e295402a1881c3305ffe4e6b4902093f24868465179e5579",
+      "preserved": true,
+      "stalePersistenceObservationSuperseded": true
+    }
+  },
+  "currentBinding": {
+    "sharedContextApi": {
+      "path": "functions/api/symbolic-method-context.js",
+      "sha256": "049e23518dc7847594b05f131fe9e86d5dcd54a9626b67a18cd8880a74bc45ed",
+      "methods": [
+        "I_CHING",
+        "TAROT"
+      ],
+      "bothSourceReady": true,
+      "separateExecutionAuthority": true,
+      "runAllowedStillFalseForTarot": true
+    },
+    "identityRuntime": {
+      "path": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+      "sha256": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4"
+    },
+    "envelopeRuntime": {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-envelope-v1.js",
+      "sha256": "ae486a2330c8fddf8bc4bbd6c7d414c1eefe55289e5c5911c4939ba5af6d0fa2"
+    },
+    "d1Store": {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js",
+      "sha256": "f37a4229050c878dbbc95374f03b9405aa60fee4373eab048513a9481aaaa6f9"
+    },
+    "saveApi": {
+      "path": "functions/api/symbolic-method-save.js",
+      "sha256": "b4b61f820ed83ca6cb96d4eab7b573744c54f0611906b408d742486b5f7672a7"
+    },
+    "readingsApi": {
+      "path": "functions/api/symbolic-method-readings.js",
+      "sha256": "f73dc8df6fabd506ebc78300fc15e7295b0210f07837ce8fd84d96598f8f1a97"
+    }
+  },
+  "persistenceRuntime": {
+    "d1SourceBindingReady": true,
+    "verifiedServerIdentityRequired": true,
+    "clientIdentityCannotGrantAccess": true,
+    "crossAccountIsolationPreserved": true,
+    "guestPersistenceBlocked": true,
+    "browserFallbackBlocked": true,
+    "explicitRealityContextOptInRequired": true,
+    "saveListOpenUpdateReady": true
+  },
+  "continuity": {
+    "phaseHPresentOnCurrentTree": true,
+    "phaseIMachineAcceptanceComplete": true,
+    "phaseIAggregateMustConsumeCurrentPhaseH": true,
+    "machineAcceptanceV2HistoricalObservationMayNotReclosePersistence": true
+  },
+  "productionBoundary": {
+    "globalAccountAuthenticationProviderConnected": false,
+    "verifiedLiveAccountPersistenceClaimed": false,
+    "humanAcceptanceClaimed": false,
+    "liveBrowserAcceptanceClaimed": false,
+    "liveProductionShaAlignmentClaimed": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false
+  },
+  "nextGate": "PHASE_J_24_CASE_HUMAN_REVIEW",
+  "checkerLifecycle": {
+    "historicalChecker": {
+      "path": "scripts/check-tarot-persistence.mjs",
+      "alias": "check:tarot-persistence-historical",
+      "historicalSourceDigestExpected": true
+    },
+    "currentChecker": {
+      "path": "scripts/check-tarot-persistence-current.mjs",
+      "aliases": [
+        "check:tarot-persistence",
+        "check:tarot-persistence-current",
+        "check:tarot-persistence-reconciliation"
+      ]
+    },
+    "rule": "STANDARD_PERSISTENCE_ALIAS_RESOLVES_CURRENT_SUCCESSOR_HISTORICAL_CHECK_REMAINS_EXPLICIT"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-NARRATIVE-PROVIDER-REGISTRY-v1.0.0",
+  "work": "W54N1",
+  "baselineCommit": "8331a81358531a1a80c077ac65dc5e3bd588ae15",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "providers": [
+    {
+      "providerId": "openai",
+      "transportRef": "functions/personal-reading/narrative/narrative-provider.js",
+      "credentialEnv": "OPENAI_API_KEY",
+      "modelEnvPriority": [
+        "OPENAI_NARRATIVE_MODEL",
+        "OPENAI_MODEL"
+      ],
+      "serverSideOnly": true,
+      "meaningAuthority": false
+    }
+  ],
+  "rules": {
+    "providerOrModelNameCustomerAuthority": false,
+    "providerMayRecalculateFacts": false,
+    "providerSecretsClientVisible": false,
+    "secondRelationshipProviderCreated": false
+  }
+}

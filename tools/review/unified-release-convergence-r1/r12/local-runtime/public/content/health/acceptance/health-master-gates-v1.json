@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-HEALTH-MASTER-GATES-v1.0.0",
+  "work": "PART-E-HEALTH-MASTER-GATES",
+  "baselineCommit": "e10dcd3cfe0c51cf76e5ddd1b129fb5761a73673",
+  "historicalHealthK1Gate": "check:health-k1-historical",
+  "currentHealthK1Gate": "check:health-k1",
+  "reflectiveGate": "check:hrp",
+  "requiredGates": [
+    "check:health-concept-registry",
+    "check:health-source-authority",
+    "check:health-source-admission",
+    "check:health-knowledge-corpus",
+    "check:health-safety-corpus",
+    "check:health-lab-corpus",
+    "check:health-care-navigation",
+    "check:health-lived-experience",
+    "check:health-answer-ir",
+    "check:health-reflective-authority",
+    "check:health-reflective-source-registry",
+    "check:health-reflective-symbol-registry",
+    "check:health-reflective-firewall",
+    "check:health-reflective-perspective"
+  ],
+  "successorPolicy": {
+    "historicalStageGatePreserved": true,
+    "currentGateMayConsumeExplicitHrpSuccessor": true,
+    "reflectiveSourceMayNeverBecomeClinicalAuthority": true
+  },
+  "status": "HEALTH_MASTER_GATES_CURRENT"
+}

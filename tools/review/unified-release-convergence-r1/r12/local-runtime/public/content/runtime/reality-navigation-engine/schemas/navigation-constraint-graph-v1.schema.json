@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Navigation Constraint Graph v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "graphCode",
+    "graphVersion",
+    "objectType",
+    "dataType",
+    "currentPositionReference",
+    "targetReference",
+    "nodes",
+    "edgeCount",
+    "unknownConstraintReferences",
+    "authorityBoundary",
+    "realityConstraintCreated",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "graphDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-NAVIGATION-CONSTRAINT-GRAPH-v1.0.0"
+    },
+    "graphCode": {
+      "type": "string",
+      "pattern": "^RNE-CONSTRAINT-GRAPH-[A-Z0-9-]{4,120}$"
+    },
+    "graphVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "NAVIGATION_CONSTRAINT_GRAPH"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "currentPositionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "targetReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "nodeCode",
+          "authorityConstraintReference",
+          "navigationRole",
+          "appliesTo",
+          "blockingClass",
+          "dependsOnConstraintReferences"
+        ],
+        "properties": {
+          "nodeCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "authorityConstraintReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "navigationRole": {
+            "enum": [
+              "HARD_BOUNDARY",
+              "SOFT_LIMIT",
+              "DEPENDENCY",
+              "UNKNOWN_LIMIT",
+              "OBSERVATION_REQUIREMENT"
+            ]
+          },
+          "appliesTo": {
+            "enum": [
+              "CURRENT",
+              "TARGET",
+              "TRANSITION"
+            ]
+          },
+          "blockingClass": {
+            "enum": [
+              "BLOCKING",
+              "NON_BLOCKING",
+              "UNKNOWN"
+            ]
+          },
+          "dependsOnConstraintReferences": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            }
+          }
+        }
+      }
+    },
+    "edgeCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "unknownConstraintReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "constraintTruthAuthority",
+        "constraintNavigationRoleAuthority",
+        "professionalJudgmentAuthority"
+      ],
+      "properties": {
+        "constraintTruthAuthority": {
+          "const": "RMO"
+        },
+        "constraintNavigationRoleAuthority": {
+          "const": "RNE"
+        },
+        "professionalJudgmentAuthority": {
+          "const": "PR"
+        }
+      }
+    },
+    "realityConstraintCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "graphDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

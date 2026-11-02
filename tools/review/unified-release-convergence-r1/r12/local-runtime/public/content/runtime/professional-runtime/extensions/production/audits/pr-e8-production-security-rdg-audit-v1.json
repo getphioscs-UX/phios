@@ -1,0 +1,21 @@
+{
+  "auditCode": "PHI-OS-PR-E8-PRODUCTION-SECURITY-RDG-AUDIT-v1",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "scope": "PR-E8",
+  "decision": "ACCEPT_EXISTING_AUTHORITIES_ADD_OPERATION_SCOPED_ENFORCEMENT",
+  "observed": {
+    "rdgDataPermissionContract": "content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+    "rdgProfessionalIsolationContract": "content/governance/reality-data-governance/contracts/professional-data-isolation-v1.json",
+    "professionalAuthorisation": "functions/professional/access/professional-authorisation-decision.js",
+    "authorisedDataLoader": "functions/professional/access/authorised-professional-data-loader.js",
+    "prV2RdgSuccessor": "content/governance/reality-data-governance/extensions/pr-v2/registries/pr-v2-data-contract-successor-v1.json"
+  },
+  "conclusions": {
+    "newPermissionAuthorityRequired": false,
+    "newDataTypeRequired": false,
+    "prMaySelfGrantAccess": false,
+    "operationScopedEnforcementRequired": true,
+    "crossCaseAccessMustFailClosed": true,
+    "unreleasedProfessionalDataMustRemainNonCustomerVisible": true
+  }
+}

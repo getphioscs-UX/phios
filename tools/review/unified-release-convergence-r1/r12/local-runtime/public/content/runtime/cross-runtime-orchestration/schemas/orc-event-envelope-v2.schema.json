@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/orc-event-envelope-v2.schema.json",
+  "title": "PHI OS ORC v2 Event Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "eventCode",
+    "eventId",
+    "caseId",
+    "authorityRuntime",
+    "authorityReference",
+    "requestIdentity"
+  ],
+  "properties": {
+    "eventCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "eventId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorityRuntime": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorityReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requestIdentity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "externalSideEffect": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

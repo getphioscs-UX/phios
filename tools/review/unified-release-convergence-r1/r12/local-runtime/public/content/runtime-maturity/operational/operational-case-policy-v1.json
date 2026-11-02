@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S12-OPERATIONAL-CASE-POLICY-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S12",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE_POLICY_FRAMEWORK",
+  "requiredPolicyFields": [
+    "capabilityCode",
+    "minimumIndependentCases",
+    "minimumDistinctInputProfiles",
+    "minimumDistinctFailurePaths",
+    "minimumDistinctOperationalConditions",
+    "requiredSuccessRate"
+  ],
+  "rules": {
+    "fixedGlobalCaseCountForbidden": true,
+    "repeatedSameFixtureDoesNotCountAsIndependentCases": true,
+    "realGovernedIndependentCasesRequired": true,
+    "em3PrerequisiteRequired": true
+  }
+}

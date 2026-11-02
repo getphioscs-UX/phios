@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "ZWR-PRODUCTION-ADMISSION-1",
+  "ZIWEI_LOCAL_CALCULATION": "PASS",
+  "ZIWEI_LOCAL_SUBJECT_BINDING": "PASS",
+  "ZIWEI_LOCAL_ENTITLEMENT_NEGATIVE_TEST": "PASS",
+  "ZIWEI_LOCAL_IMMUTABLE_SNAPSHOT": "PASS",
+  "ZIWEI_LOCAL_RELEASED_MATERIAL": "PASS",
+  "ZIWEI_LOCAL_ACCOUNT_DELIVERY": "PASS_CONTROLLED_SERVICE_ONLY",
+  "ZIWEI_QA_ACCOUNT_DELIVERY": "NOT_PROVEN",
+  "ZIWEI_PRODUCTION_DELIVERY": "NOT_RUN",
+  "ZIWEI_PRODUCTION_ADMISSION": "NOT_GRANTED",
+  "ASTROLOGY_METHOD_REPORTS": "WAITING_FOR_ZIWEI_DELIVERY",
+  "localEvidence": "docs/reports/ziwei/production-admission/local-delivery-evidence.json",
+  "discovery": "docs/reports/ziwei/production-admission/discovery.json",
+  "generalGenerationCoverage": {
+    "tested": 6,
+    "executed": 2,
+    "failed": 4,
+    "failClosedTests": [
+      {
+        "subjectId": "CONTROLLED-ZWR-PROD-3",
+        "state": "DENIED_BEFORE_EDITORIAL_COMPOSITION"
+      },
+      {
+        "subjectId": "CONTROLLED-ZWR-PROD-4",
+        "state": "DENIED_BEFORE_EDITORIAL_COMPOSITION"
+      },
+      {
+        "subjectId": "CONTROLLED-ZWR-PROD-5",
+        "state": "DENIED_BEFORE_EDITORIAL_COMPOSITION"
+      },
+      {
+        "subjectId": "CONTROLLED-ZWR-PROD-6",
+        "state": "DENIED_BEFORE_EDITORIAL_COMPOSITION"
+      }
+    ],
+    "scope": "No inference of universal coverage from two accepted structures"
+  },
+  "blockers": [
+    {
+      "code": "R2_EDITORIAL_STRUCTURE_COVERAGE",
+      "evidence": "docs/reports/ziwei/production-admission/generation-coverage-audit.json",
+      "detail": "Frozen R2 composer assumes available palace stars; four additional controlled charts fail. A separately reviewed production successor is needed; frozen accepted reports are unchanged."
+    },
+    {
+      "code": "CANONICAL_ACCOUNT_PERSON_OWNER_NOT_BOUND",
+      "detail": "Current RDG person-use policy exists, but no deployed Zi Wei canonical person loader was found; local controlled fixture is supplied only through a server dependency."
+    },
+    {
+      "code": "QA_E2E_NOT_PROVEN",
+      "detail": "QA browser is guest; authenticated generation/release/library route integration and real purchase/entitlement evidence are still required."
+    }
+  ],
+  "productionReleaseGranted": false,
+  "editorialAcceptanceUnaffected": true
+}

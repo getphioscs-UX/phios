@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "PHI-OS-IMR-VERSION-MANAGEMENT-REGISTRY-v1.0.0",
+  "stageCode": "IMR-W5",
+  "registryCode": "IMR_VERSION_MANAGEMENT_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "active_governance_registry",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "aa3a09aaccb4f7f19f9cc571f4b3c9094504611a"
+  },
+  "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+  "runtimeAuthority": false,
+  "governedRegistries": [
+    "imr-method-registry-v1.json",
+    "imr-commercial-license-registry-v1.json",
+    "imr-algorithm-governance-registry-v1.json",
+    "imr-production-eligibility-registry-v1.json"
+  ],
+  "versionPolicy": {
+    "semanticVersionRequired": true,
+    "migrationRequiredForBreakingChange": true,
+    "compatibilityAssessmentRequired": true,
+    "deprecationBeforeRemovalRequired": true,
+    "inPlaceBreakingMutationAllowed": false,
+    "frozenV1RequiresVersionedSuccessor": true,
+    "deprecationCreatesProductionAuthority": false
+  },
+  "compatibilityContract": {
+    "runtimeBaseline": "MR Frozen v1",
+    "backwardCompatibleChanges": [
+      "documentation",
+      "non-breaking metadata",
+      "new proposal record"
+    ],
+    "breakingChanges": [
+      "required field removal",
+      "identity change",
+      "boundary relaxation",
+      "eligibility bypass",
+      "license bypass",
+      "algorithm validation bypass"
+    ]
+  },
+  "methods": [
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "currentVersion": "1.0.0",
+      "versionStatus": "current",
+      "migrationStatus": "not_required",
+      "compatibilityStatus": "compatible_with_mr_frozen_v1",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": null
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "currentVersion": "0.1.0",
+      "versionStatus": "current",
+      "migrationStatus": "not_required",
+      "compatibilityStatus": "compatible_with_mr_frozen_v1",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": null
+    },
+    {
+      "methodCode": "BAZI",
+      "currentVersion": "0.1.0",
+      "versionStatus": "current",
+      "migrationStatus": "not_required",
+      "compatibilityStatus": "compatible_with_mr_frozen_v1",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": null
+    },
+    {
+      "methodCode": "I_CHING",
+      "currentVersion": "0.1.0",
+      "versionStatus": "current",
+      "migrationStatus": "not_required",
+      "compatibilityStatus": "compatible_with_mr_frozen_v1",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": null
+    },
+    {
+      "methodCode": "TAROT",
+      "currentVersion": "0.1.0",
+      "versionStatus": "current",
+      "migrationStatus": "not_required",
+      "compatibilityStatus": "compatible_with_mr_frozen_v1",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": null
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "currentVersion": "0.1.0",
+      "versionStatus": "current",
+      "migrationStatus": "not_required",
+      "compatibilityStatus": "compatible_with_mr_frozen_v1",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": null
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "currentVersion": "0.0.0-proposal",
+      "versionStatus": "proposal",
+      "migrationStatus": "not_applicable",
+      "compatibilityStatus": "not_registered",
+      "deprecated": false,
+      "deprecatedAt": null,
+      "successorVersion": null,
+      "migrationPlan": "Requires versioned IMR registry extension before implementation."
+    }
+  ]
+}

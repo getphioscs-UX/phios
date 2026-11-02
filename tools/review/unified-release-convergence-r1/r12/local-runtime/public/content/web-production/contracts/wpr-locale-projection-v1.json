@@ -1,0 +1,48 @@
+{
+  "contractCode": "PHI-OS-WPR-W12-LOCALE-PROJECTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W12",
+  "phase": "WPR-C_COMPOSITION_INFRASTRUCTURE",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "active_explicit_locale_projection_contract",
+  "upstreamAuthorityReference": "content/professional/canonical-presentation-runtime/contracts/cpr-locale-presentation-runtime-v1.json",
+  "supportedLocales": [
+    "en",
+    "zh-Hans"
+  ],
+  "defaultUiLocale": "en",
+  "resolver": {
+    "implementation": "assets/js/runtime/web-production/locale-resolver.js",
+    "functions": [
+      "normalizeWebLocale",
+      "resolveLocaleProjection"
+    ]
+  },
+  "rules": {
+    "fallbackPolicy": "EXPLICIT_ONLY",
+    "mixedLocaleDefault": "FORBIDDEN",
+    "missingLocaleDoesNotAuthorizeTranslation": true,
+    "localeDoesNotChangeKnowledgeAuthority": true,
+    "wprMayNotInventTranslation": true,
+    "sourceLocaleAvailabilityMustBeRespected": true,
+    "uiShellFallbackMayBeExplicitlyAllowed": true,
+    "canonicalContentFallbackRequiresUpstreamAvailability": true
+  },
+  "states": [
+    "AVAILABLE",
+    "EXPLICIT_FALLBACK",
+    "MISSING_BLOCKED"
+  ],
+  "failureCodes": [
+    "WPR_LOCALE_UNSUPPORTED",
+    "WPR_LOCALE_MISSING",
+    "WPR_LOCALE_FALLBACK_NOT_ALLOWED",
+    "WPR_LOCALE_MIXED_FORBIDDEN"
+  ],
+  "nonActivation": {
+    "translationCreated": false,
+    "localeAvailabilityPromoted": false,
+    "pageRewrite": false,
+    "surfaceActivated": false
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas reversal and loss registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "status",
+    "families",
+    "lossTypes",
+    "caseProfiles"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-BOOK-V-CIV-ATLAS-LOSS-v1.0.0"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "FROZEN"
+      ]
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/family"
+      }
+    },
+    "lossTypes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/lossType"
+      }
+    },
+    "caseProfiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/caseProfile"
+      }
+    }
+  },
+  "$defs": {
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "familyId",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "familyId": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "title": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "description": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "lossType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lossTypeId",
+        "familyId",
+        "title",
+        "definition",
+        "positionShift",
+        "evidenceRequirements",
+        "exampleCaseIds",
+        "relatedCanonicalNodes"
+      ],
+      "properties": {
+        "lossTypeId": {
+          "type": "string",
+          "pattern": "^LOSS-[A-Z0-9-]+$"
+        },
+        "familyId": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "title": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "definition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "positionShift": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "evidenceRequirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exampleCaseIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^CA-T"
+          },
+          "uniqueItems": true
+        },
+        "relatedCanonicalNodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^KN-"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "caseProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "caseId",
+        "lossTypeId",
+        "status",
+        "strengthLabel",
+        "evidenceRefs",
+        "interpretation",
+        "unknown"
+      ],
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "pattern": "^CA-T"
+        },
+        "lossTypeId": {
+          "type": "string",
+          "pattern": "^LOSS-"
+        },
+        "status": {
+          "enum": [
+            "OBSERVED",
+            "RECONSTRUCTED",
+            "CONTESTED",
+            "PARTIAL",
+            "UNKNOWN"
+          ]
+        },
+        "strengthLabel": {
+          "enum": [
+            "NOT_APPLICABLE",
+            "LIMITED",
+            "MATERIAL",
+            "EXTENSIVE",
+            "UNKNOWN"
+          ]
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^EV-[A-Z0-9-]+$"
+          },
+          "uniqueItems": true
+        },
+        "interpretation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "unknown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "UNKNOWN",
+                "CONTESTED",
+                "PARTIAL",
+                "RECONSTRUCTED",
+                "OBSERVED"
+              ]
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "note": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "zh-Hans",
+                    "en"
+                  ],
+                  "properties": {
+                    "zh-Hans": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "en": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

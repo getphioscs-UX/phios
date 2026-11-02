@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-MIR-4-TO-MIR-5-SUCCESSOR-REVALIDATION-v1.0.0",
+  "work": "MIR-5_PREDECESSOR_REVALIDATION",
+  "baselineCommit": "203edecf98763e27897c35aae2768d1a69b674d2",
+  "status": "MIR4_AUTHORITY_ARTIFACTS_VALID_PACKAGE_WIRING_DRIFT_VERSIONED",
+  "historicalMir4Aggregate": "content/reconciliation/mir/mir-4-dynamic-renderer-client-surface-reconciliation-v1.json",
+  "historicalMir4AggregateSha256": "41dfa78068d04b9d780b2729150509deb69631244d42936a45a188ad0debed69",
+  "historicalExpectedPackageSha256": "b547b69522ef9204029c8678033bbc6ee15865dac6320724d195b92603482c0d",
+  "current203edecBaselinePackageSha256": "063530cb70f6e622622a77cad266cdaaa5b70931546441f3bf89946d14050a7a",
+  "baselineMir4AggregatePackageCheckPasses": false,
+  "reason": "Downstream main added package scripts after MIR-4; MIR-4 created authority artifacts remain byte-valid. Historical MIR-4 freeze evidence is preserved and not rewritten.",
+  "revalidation": {
+    "mir4CreatedArtifactsMustMatchHistoricalSha": true,
+    "runMir4RendererChecker": true,
+    "runMir4SurfaceChecker": true,
+    "runMcd6": true,
+    "runMcd7": true,
+    "runMir3NodeSuccessor": true,
+    "allowRendererCalculation": false,
+    "allowInterpretationInRenderer": false,
+    "allowReadingRuntimeInMir4": false
+  },
+  "historicalMir4BytesMutated": false
+}

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "PHI-OS-CIVILIZATION-VISUAL-PROMPT-CANON-v1.0.0",
+  "version": "1.0.0",
+  "status": "FROZEN",
+  "authority": {
+    "promptMayCreateHistoricalClaim": false,
+    "promptMayOverrideRegistry": false,
+    "imageTextIsCanonical": false
+  },
+  "globalRules": {
+    "containsText": false,
+    "humanReviewRequired": true,
+    "uploadBeforeAcceptance": false,
+    "structuredFallbackRequired": true
+  },
+  "templates": [
+    {
+      "templateId": "TIMELINE_ANCHOR_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的历史时期主视觉。主题是“{{subject}}”。画面需要强烈历史感与文明识别度，重点表现该时期最代表性的聚落、城市、制度、贸易、交通、宗教或技术场景。风格为 premium atlas、深色电影感、博物馆级质感、适合网页后续叠加 HTML/SVG 文字。不要标题，不要海报小字，不要现代穿帮。"
+    },
+    {
+      "templateId": "CASE_HERO_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的文明案例识别图。主题是“{{subject}}”。画面重点突出该案例最有辨识度、且与其时代和地区一致的城市、建筑、基础设施、公共空间、港口、道路、宗教空间或政治中心。历史事实以 Registry 为准。不要标题，不要表格，不要小字。"
+    },
+    {
+      "templateId": "CASE_SECONDARY_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的文明辅助视觉图。主题是“{{subject}}”的运行载体。聚焦一个与 Registry 时代和地区一致的制度、知识、网络、器物、文书、基础设施或技术对象。不得由图片反向创造历史事实。不要标题，不要海报小字。"
+    },
+    {
+      "templateId": "WORLD_SNAPSHOT_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的世界横切面时代背景图。主题是“{{subject}}”。画面表达全球文明分布与区域时代气氛，作为动态地图和 HTML/SVG 的视觉底层。不要用生成图决定疆域、贸易路线或统计事实，不要堆满标签或小字。"
+    },
+    {
+      "templateId": "COMPARISON_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的比较家族主视觉。主题是“{{subject}}”。表达该类文明运行模式，适合叠加比较维度与关系网络。不得产生文明排名、优劣或赢家暗示。不要标题，不要海报小字。"
+    },
+    {
+      "templateId": "TRAJECTORY_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的长时段轨迹视觉 motif。主题是“{{subject}}”。画面抽象而有历史感，作为曲线图或带状图下方的视觉底层。不要伪造统计曲线、数值或精确证据。"
+    },
+    {
+      "templateId": "TRANSITION_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的转型窗口场景图。主题是“{{subject}}”。通过视觉叙事表达 before → threshold → after，但结构事实与因果说明仍由 Registry / HTML/SVG 承载。不要直接写字。"
+    },
+    {
+      "templateId": "SCALE_SHIFT_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的尺度跃迁视觉图。主题是“{{subject}}”。清楚表达运行尺度转变，适合与 SVG 门槛图叠加。不要虚构定量尺度。"
+    },
+    {
+      "templateId": "LOSS_FAMILY_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的逆转与损失家族主视觉。主题是“{{subject}}”。画面深色、克制、历史感强，作为矩阵与说明文字的视觉承载。不得将损失视觉转化为文明排名或 collapse score。"
+    },
+    {
+      "templateId": "LOSS_TYPE_TEMPLATE",
+      "text": "生成一张高分辨率、简洁、无文字的损失类型图标或小场景 vignette。主题是“{{subject}}”。极简、清楚、象征性强、适合卡片、矩阵和图例。不得通过图像新增历史案例。"
+    },
+    {
+      "templateId": "INFRASTRUCTURE_TEMPLATE",
+      "text": "生成一张无文字、高分辨率、适合 PHI OS Civilization Atlas 的文明基础设施通用视觉图。主题是“{{subject}}”。表现该基础设施如何承载文明运行，可跨文明复用。不要嵌入历史断言或文字。"
+    },
+    {
+      "templateId": "MAP_BASE_TEMPLATE",
+      "text": "生成一张高分辨率、无文字、适合 PHI OS Civilization Atlas 的地图底层资产。主题是“{{subject}}”。只提供清晰、优雅、深色 atlas 风格的地理底层与海陆轮廓，不加入文明标签、政治断言、贸易路线或说明文字。"
+    },
+    {
+      "templateId": "HISTORICAL_FIGURE_TEMPLATE",
+      "text": "生成一张高分辨率、无文字、适合 PHI OS Civilization Atlas 的历史人物辅助视觉。主题是“{{subject}}”。历史感强、庄重、背景简洁；人物图像仅作编辑插图，不作为史料证据。不要标题，不要海报小字。"
+    },
+    {
+      "templateId": "FLAG_TEMPLATE",
+      "text": "生成一张高分辨率、清晰、标准比例的现代国旗辅助视觉。主题是“{{subject}} 国旗”。颜色和图案应准确、不要额外装饰或文字；仅用于现代案例的小型辅助标识。"
+    }
+  ]
+}

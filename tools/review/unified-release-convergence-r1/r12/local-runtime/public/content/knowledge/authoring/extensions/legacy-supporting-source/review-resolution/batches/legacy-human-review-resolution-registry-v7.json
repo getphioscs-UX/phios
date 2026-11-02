@@ -1,0 +1,186 @@
+{
+  "registryCode": "KAU-E1R-HUMAN-REVIEW-RESOLUTION-REGISTRY",
+  "registryVersion": "7.0.0",
+  "workCode": "KAU-E1R",
+  "status": "ALL_HUMAN_REVIEW_WAVES_RESOLVED_READY_FOR_KAU_E2",
+  "baselineCommit": "fee1b54fa7fa9d72d863244e12f26198839c10a9",
+  "sourceReviewQueue": "../review/legacy-unified-language-human-review-queue-v1.json",
+  "recommendationPolicy": "legacy-human-review-recommendation-policy-v1.json",
+  "batchCount": 6,
+  "reviewCount": 185,
+  "batches": [
+    {
+      "batchCode": "KAU-E1R-WAVE-A",
+      "title": "Structure / Foundation",
+      "legacyParts": [
+        1,
+        2
+      ],
+      "entryCount": 21,
+      "file": "batches/legacy-human-review-wave-a-v1.json",
+      "status": "HUMAN_REVIEW_RESOLVED",
+      "recommendationCounts": {
+        "DEFER": 17,
+        "PARTIAL_OVERLAP": 3,
+        "SUPPORTS": 1
+      }
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-B",
+      "title": "Conscious / Relational",
+      "legacyParts": [
+        3,
+        4
+      ],
+      "entryCount": 38,
+      "file": "batches/legacy-human-review-wave-b-v1.json",
+      "status": "HUMAN_REVIEW_RESOLVED",
+      "recommendationCounts": {
+        "TERMINOLOGY_PREDECESSOR": 1,
+        "DEFER": 32,
+        "PARTIAL_OVERLAP": 4,
+        "SUPPORTS": 1
+      }
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-C",
+      "title": "Temporal / Recovery",
+      "legacyParts": [
+        5,
+        6
+      ],
+      "entryCount": 40,
+      "file": "batches/legacy-human-review-wave-c-v1.json",
+      "status": "HUMAN_REVIEW_RESOLVED",
+      "recommendationCounts": {
+        "DEFER": 28,
+        "SUPPORTS": 5,
+        "TERMINOLOGY_PREDECESSOR": 2,
+        "PARTIAL_OVERLAP": 5
+      }
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-D",
+      "title": "Reading / Governance",
+      "legacyParts": [
+        7,
+        8
+      ],
+      "entryCount": 27,
+      "file": "batches/legacy-human-review-wave-d-v1.json",
+      "status": "HUMAN_REVIEW_RESOLVED",
+      "recommendationCounts": {
+        "DEFER": 19,
+        "SUPPORTS": 4,
+        "PARTIAL_OVERLAP": 4
+      }
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-E",
+      "title": "Time / Capability",
+      "legacyParts": [
+        9,
+        10
+      ],
+      "entryCount": 28,
+      "file": "batches/legacy-human-review-wave-e-v1.json",
+      "status": "HUMAN_REVIEW_RESOLVED",
+      "recommendationCounts": {
+        "DEFER": 25,
+        "PARTIAL_OVERLAP": 3
+      }
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-F",
+      "title": "Civilization / Settlement",
+      "legacyParts": [
+        11,
+        12
+      ],
+      "entryCount": 31,
+      "file": "batches/legacy-human-review-wave-f-v1.json",
+      "status": "HUMAN_REVIEW_RESOLVED",
+      "recommendationCounts": {
+        "DEFER": 24,
+        "TERMINOLOGY_PREDECESSOR": 1,
+        "PARTIAL_OVERLAP": 5,
+        "SUPPORTS": 1
+      }
+    }
+  ],
+  "progress": {
+    "pendingHumanDecision": 0,
+    "humanReviewed": 185,
+    "acceptedSupporting": 155,
+    "deferred": 30,
+    "rejected": 0,
+    "unresolved": 0
+  },
+  "nextState": "KAU_E2_EXTENSION_ACCEPTANCE_AND_FREEZE",
+  "invariants": {
+    "reviewCountMatchesE1Queue": true,
+    "noAcceptedRelationshipCreatedByRecommendation": true,
+    "noCanonicalMutation": true,
+    "humanAuthorityRequired": true
+  },
+  "predecessorRegistry": "legacy-human-review-resolution-registry-v6.json",
+  "predecessorMutated": false,
+  "resolvedBatches": [
+    {
+      "batchCode": "KAU-E1R-WAVE-A",
+      "decisionFile": "decisions/legacy-human-review-wave-a-decisions-v1.json",
+      "resolutionFile": "resolved/legacy-human-review-wave-a-resolution-v1.json",
+      "acceptanceFile": "../acceptance/kau-e1r-wave-a-human-review-resolution-acceptance-v1.json",
+      "humanReviewed": 21,
+      "acceptedSupporting": 17,
+      "deferred": 4
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-B",
+      "decisionFile": "decisions/legacy-human-review-wave-b-decisions-v1.json",
+      "resolutionFile": "resolved/legacy-human-review-wave-b-resolution-v1.json",
+      "acceptanceFile": "../acceptance/kau-e1r-wave-b-human-review-resolution-acceptance-v1.json",
+      "humanReviewed": 38,
+      "acceptedSupporting": 33,
+      "deferred": 5
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-C",
+      "decisionFile": "decisions/legacy-human-review-wave-c-decisions-v1.json",
+      "resolutionFile": "resolved/legacy-human-review-wave-c-resolution-v1.json",
+      "acceptanceFile": "../acceptance/kau-e1r-wave-c-human-review-resolution-acceptance-v1.json",
+      "humanReviewed": 40,
+      "acceptedSupporting": 31,
+      "deferred": 9
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-D",
+      "decisionFile": "decisions/legacy-human-review-wave-d-decisions-v1.json",
+      "resolutionFile": "resolved/legacy-human-review-wave-d-resolution-v1.json",
+      "acceptanceFile": "../acceptance/kau-e1r-wave-d-human-review-resolution-acceptance-v1.json",
+      "humanReviewed": 27,
+      "acceptedSupporting": 23,
+      "deferred": 4
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-E",
+      "decisionFile": "decisions/legacy-human-review-wave-e-decisions-v1.json",
+      "resolutionFile": "resolved/legacy-human-review-wave-e-resolution-v1.json",
+      "acceptanceFile": "../acceptance/kau-e1r-wave-e-human-review-resolution-acceptance-v1.json",
+      "humanReviewed": 28,
+      "acceptedSupporting": 23,
+      "deferred": 5,
+      "specialReconciliation": "KAU-E1-REVIEW-0140 SUPERSEDED_BY ALR-W11"
+    },
+    {
+      "batchCode": "KAU-E1R-WAVE-F",
+      "decisionFile": "decisions/legacy-human-review-wave-f-decisions-v1.json",
+      "resolutionFile": "resolved/legacy-human-review-wave-f-resolution-v1.json",
+      "acceptanceFile": "../acceptance/kau-e1r-wave-f-human-review-resolution-acceptance-v1.json",
+      "humanReviewed": 31,
+      "acceptedSupporting": 28,
+      "deferred": 3
+    }
+  ],
+  "kauE2Ready": true
+}

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-PCM-CURRENT-METHOD-CLASSIFICATION-v1.0.0",
+  "work": "PCM-W4",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "AUDITED_CURRENT_SUCCESSOR_CLASSIFICATION",
+  "historicalConflict": {
+    "artifact": "content/governance/current-system-baseline/current-runtime-inventory.json",
+    "historicalBaselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+    "historicalStates": {
+      "AST": "BLOCKED_GLOBAL_EXECUTION_GATE",
+      "BZR": "BLOCKED_GLOBAL_EXECUTION_GATE",
+      "NUM": "BLOCKED_GLOBAL_EXECUTION_GATE"
+    },
+    "resolution": "Do not mutate the frozen predecessor. Current versioned MPA/MCD successors supersede those method execution states for PCM classification."
+  },
+  "currentSuccessorEvidence": [
+    "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+    "content/professional/method-client-delivery/registries/mcd-2-canonical-runtime-adapter-registry-v1.json",
+    "content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json",
+    "content/professional/method-client-delivery/acceptance/mcd-4-execution-acceptance-v1.json",
+    "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+    "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+    "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+  ],
+  "classifications": [
+    {
+      "pluginCode": "HDR",
+      "classification": "BLOCKED",
+      "userStatus": "Blocked",
+      "reason": "Implemented/validated internally but MPA forbids Production dispatch and MCD exposes no Production result tab."
+    },
+    {
+      "pluginCode": "AST",
+      "classification": "LIMITED_SCOPED",
+      "userStatus": "Limited",
+      "reason": "MPA grants bound-scope CALCULATION/PROJECTION; current MCD adapter, canonical projection and Personal Runtime consumer are active."
+    },
+    {
+      "pluginCode": "BZR",
+      "classification": "LIMITED_SCOPED",
+      "userStatus": "Limited",
+      "reason": "MPA grants bound-scope CALCULATION/PROJECTION; current MCD governed adapter, canonical projection and Personal Runtime consumer are active."
+    },
+    {
+      "pluginCode": "NUM",
+      "classification": "LIMITED_SCOPED",
+      "userStatus": "Limited",
+      "reason": "MPA successor grants bound-scope CALCULATION/PROJECTION and MCD executes/returns canonical numeric projections through the Production endpoint."
+    },
+    {
+      "pluginCode": "ICH",
+      "classification": "REGISTERED_NOT_IMPLEMENTED",
+      "userStatus": "Coming later",
+      "reason": "Registered identity only; implementation and independent activation are absent."
+    },
+    {
+      "pluginCode": "TAR",
+      "classification": "REGISTERED_NOT_IMPLEMENTED",
+      "userStatus": "Coming later",
+      "reason": "Registered identity only; implementation and independent activation are absent."
+    }
+  ],
+  "finalMethodState": {
+    "HDR": "BLOCKED",
+    "AST": "LIMITED_SCOPED",
+    "BZR": "LIMITED_SCOPED",
+    "NUM": "LIMITED_SCOPED",
+    "I_CHING": "REGISTERED_NOT_IMPLEMENTED",
+    "TAROT": "REGISTERED_NOT_IMPLEMENTED"
+  }
+}

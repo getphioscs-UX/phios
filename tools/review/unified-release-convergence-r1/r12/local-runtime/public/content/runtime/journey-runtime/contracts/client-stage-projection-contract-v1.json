@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-RJX-CLIENT-STAGE-PROJECTION-CONTRACT-v1.0.0",
+  "phase": "RJX",
+  "work": "RJX-W2",
+  "status": "CANDIDATE_READ_ONLY_PROJECTION",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "sourceRuntimeStateAuthority": {
+    "path": "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+    "sha256": "c9e88d668f7ec9513fd42333bfff5019191b3f8254fda6ef90cb07b901b60333"
+  },
+  "invariants": {
+    "runtimeStateNotUrl": true,
+    "runtimeStateNotScreen": true,
+    "frontendOwnsRuntimeAuthority": false,
+    "projectionDeterministic": true,
+    "backendStateMutationAllowed": false
+  },
+  "backendStateCount": 8,
+  "clientStageCount": 3,
+  "clientStages": [
+    "Understand",
+    "Choose",
+    "Review"
+  ],
+  "sequenceReconciliation": {
+    "canonicalBackendOrder": [
+      "entry",
+      "orientation",
+      "reading",
+      "reconstruction",
+      "navigation",
+      "review",
+      "continuity",
+      "closed"
+    ],
+    "masterWorkDisplayOrder": [
+      "entry",
+      "orientation",
+      "reconstruction",
+      "reading",
+      "navigation",
+      "review",
+      "continuity",
+      "closed"
+    ],
+    "decision": "NO_FROZEN_ORDER_MUTATION"
+  },
+  "projectionFields": [
+    "runtimeState",
+    "clientStage",
+    "defaultVisibleSections"
+  ]
+}

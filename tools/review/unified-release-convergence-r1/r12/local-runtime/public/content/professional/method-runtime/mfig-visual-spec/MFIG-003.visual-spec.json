@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-003",
+  "title": "SHARED-CALCULATION-RUNTIME",
+  "scope": "SHARED",
+  "role": "CALCULATION",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/shared-calculation-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "INPUT_CONTRACT",
+      "displayLabel": "INPUT CONTRACT",
+      "nodeType": "CONTRACT",
+      "authorityClass": "DATA",
+      "semanticRole": "INPUT",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_CALCULATION_RUNTIME",
+      "displayLabel": "SHARED CALCULATION RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "CALCULATION",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CALCULATION_TRACE",
+      "displayLabel": "VERSIONED TRACE",
+      "nodeType": "STATE",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "TRACE",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CALCULATION_RESULT",
+      "displayLabel": "CALCULATION RESULT",
+      "nodeType": "RESULT",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "OUTPUT",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "INTERPRETATION_BOUNDARY",
+      "displayLabel": "INTERPRETATION — OUTSIDE",
+      "nodeType": "GATE",
+      "authorityClass": "INTERPRETATION",
+      "semanticRole": "OUTSIDE_BOUNDARY",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-003-E01",
+      "from": "INPUT_CONTRACT",
+      "to": "SHARED_CALCULATION_RUNTIME",
+      "relation": "PROVIDES_CANONICAL_INPUT",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-003-E02",
+      "from": "SHARED_CALCULATION_RUNTIME",
+      "to": "CALCULATION_TRACE",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-003-E03",
+      "from": "CALCULATION_TRACE",
+      "to": "CALCULATION_RESULT",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_CALCULATION_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "INPUT_CONTRACT",
+        "SHARED_CALCULATION_RUNTIME",
+        "CALCULATION_TRACE",
+        "CALCULATION_RESULT"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "INTERPRETATION_BOUNDARY"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "INPUT_CONTRACT",
+    "SHARED_CALCULATION_RUNTIME",
+    "CALCULATION_TRACE",
+    "CALCULATION_RESULT",
+    "INTERPRETATION_BOUNDARY"
+  ],
+  "mustState": [
+    "Calculation is deterministic",
+    "Calculation creates no Projection",
+    "Calculation creates no Interpretation",
+    "perMethodRuntimeAllowed=false"
+  ],
+  "statementSources": {
+    "Calculation is deterministic": "SRC-002",
+    "Calculation creates no Projection": "SRC-002",
+    "Calculation creates no Interpretation": "SRC-002",
+    "perMethodRuntimeAllowed=false": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

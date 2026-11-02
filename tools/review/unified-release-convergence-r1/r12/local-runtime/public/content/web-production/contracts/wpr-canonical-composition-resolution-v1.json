@@ -1,0 +1,64 @@
+{
+  "contractCode": "PHI-OS-WPR-W11-CANONICAL-COMPOSITION-RESOLUTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W11",
+  "phase": "WPR-C_COMPOSITION_INFRASTRUCTURE",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "active_fail_closed_composition_execution_contract",
+  "authority": {
+    "cprCompositionAuthority": "content/professional/canonical-presentation-runtime/contracts/cpr-canonical-composition-runtime-v1.json",
+    "cprProductionRegistry": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+    "wprAuthority": "WEB_COMPOSITION_EXECUTION_ONLY",
+    "wprMayCreateKnowledge": false,
+    "wprMaySelectMeaning": false,
+    "wprMaySelectRelatedNodes": false,
+    "wprMaySelectReadingPath": false,
+    "wprMayPromotePublication": false,
+    "wprMayCreateCprProductionRecord": false
+  },
+  "resolver": {
+    "implementation": "assets/js/runtime/web-production/composition-resolver.js",
+    "function": "resolveWebComposition",
+    "requiredInputs": [
+      "webCompositionRecord",
+      "surfaceRegistry",
+      "routeRegistry"
+    ],
+    "optionalInputs": [
+      "accessState"
+    ],
+    "productionCprRecordRequiredForLiveSurface": true,
+    "validationFixtureMayExerciseResolverWithoutProductionActivation": true
+  },
+  "slotRegistryReference": "content/web-production/registries/wpr-composition-slot-registry-v1.json",
+  "bindingContract": {
+    "webCompositionRecordMustReferenceCprComposition": true,
+    "slotBindingsMustBeExplicit": true,
+    "componentToSlotInferenceForbidden": true,
+    "slotOrderMustFollowDeclaredOrder": true,
+    "undeclaredSlotForbidden": true,
+    "duplicateSlotForbidden": true,
+    "routeMustResolveToSurface": true,
+    "audienceMustMatchSurface": true,
+    "localeMustMatchComposition": true
+  },
+  "failureCodes": [
+    "WPR_COMPOSITION_RECORD_INVALID",
+    "WPR_COMPOSITION_SLOT_UNDECLARED",
+    "WPR_COMPOSITION_SLOT_DUPLICATE",
+    "WPR_ROUTE_NOT_FOUND",
+    "WPR_ROUTE_SURFACE_MISMATCH",
+    "WPR_SURFACE_NOT_FOUND",
+    "WPR_AUDIENCE_MISMATCH",
+    "WPR_LOCALE_MISMATCH",
+    "WPR_CPR_REFERENCE_REQUIRED",
+    "WPR_CPR_PRODUCTION_RECORD_REQUIRED",
+    "WPR_ACCESS_BLOCKED"
+  ],
+  "nonActivation": {
+    "pageRewrite": false,
+    "cprProductionRecordCreated": false,
+    "surfaceActivated": false,
+    "publicationPromoted": false
+  }
+}

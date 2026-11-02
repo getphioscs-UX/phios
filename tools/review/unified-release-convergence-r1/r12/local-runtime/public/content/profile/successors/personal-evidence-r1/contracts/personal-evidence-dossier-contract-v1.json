@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-EVIDENCE-DOSSIER-CONTRACT-v1",
+  "requiredFields": [
+    "dossierId",
+    "participantRef",
+    "locale",
+    "asOfDate",
+    "sourceEvidenceRefs",
+    "visualProjectionRef",
+    "staticPages",
+    "sections",
+    "boundaryRefs",
+    "unknownRefs",
+    "reportReference",
+    "reportVersion",
+    "consentRefs",
+    "sourceReferences"
+  ],
+  "identity": {
+    "en": "Personal Evidence Dossier",
+    "zh-Hans": "个人证据档案"
+  },
+  "not": [
+    "METHOD_READING",
+    "PERSONALITY_TRUTH",
+    "CURRENT_REALITY",
+    "PROFESSIONAL_ADVICE"
+  ],
+  "physicalOrder": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "SEC-01_MASTER",
+    "SEC-01_DYNAMIC",
+    "SEC-02_MASTER",
+    "SEC-02_DYNAMIC",
+    "SEC-03_MASTER",
+    "SEC-03_DYNAMIC",
+    "SEC-04_MASTER",
+    "SEC-04_DYNAMIC",
+    "SEC-05_MASTER",
+    "SEC-05_DYNAMIC",
+    "SEC-06_MASTER",
+    "SEC-06_DYNAMIC",
+    "SEC-07_MASTER",
+    "SEC-07_DYNAMIC",
+    "SEC-08_MASTER",
+    "SEC-08_DYNAMIC",
+    "SEC-09_MASTER",
+    "SEC-09_DYNAMIC",
+    "SEC-10_MASTER",
+    "SEC-10_DYNAMIC"
+  ],
+  "dynamicBodyOnly": [
+    "customerEvidence",
+    "sourceData",
+    "PFIG",
+    "provenance",
+    "currentContext",
+    "unknown",
+    "boundary"
+  ],
+  "coverOverlayOnly": [
+    "customerName",
+    "dossierDate",
+    "subject"
+  ],
+  "rules": {
+    "fullStaticEditorial": true,
+    "fullStaticSectionOpener": true,
+    "repeatMasterEditorialCopy": false,
+    "sparseEvidenceExplicit": true,
+    "liveOpenaiRequired": false,
+    "reportAssemblyOwner": "RR",
+    "presentationOwner": "CPR",
+    "printShell": "PHI-OS-REPORT-PRINT-SHELL-V2",
+    "humanAcceptanceRequiredForProduction": true
+  }
+}

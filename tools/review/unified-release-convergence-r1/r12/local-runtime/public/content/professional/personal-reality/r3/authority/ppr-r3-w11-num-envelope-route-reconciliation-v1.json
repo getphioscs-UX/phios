@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R3-W11-NUM-ENVELOPE-ROUTE-RECONCILIATION-v1.0.0",
+  "workCode": "PPR-R3-W11",
+  "baselineCommit": "86854ae467ff7da836f45c424f3f6f0ce97b64ef",
+  "status": "FROZEN_ROUTE_RECONCILIATION_ACTIVE",
+  "title": "PPR-R3 | NUM customer-envelope route reconciliation",
+  "problem": {
+    "runtimeExpectedSourceSchema": "PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0",
+    "driftedSourceSchema": "PHI-OS-NUM-INTEGRATED-READING-IR-v1.0.0",
+    "cause": "The root product assembly did not forward the already-built public Numerology customer envelope into the NUM specialist adapter. The root PPR-R3 envelope core was also stale relative to the W10 frozen successor digest."
+  },
+  "repair": {
+    "productAssembly": "Restore the PPR-R3 W10-frozen assembly path and forward projectNumerologyEnvelopeForCustomer(numerologyEnvelope) to the NUM adapter.",
+    "productEnvelopeCore": "Restore the PPR-R3 W10-frozen specialistRenderer reference contract at the canonical root path.",
+    "newMeaningCreated": false,
+    "newCalculationCreated": false,
+    "numMethodSemanticsChanged": false,
+    "sharedHostRendererProtocolChanged": false
+  },
+  "expected": {
+    "numSourceProductSchema": "PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0",
+    "rawCanonicalProjectionExposed": false,
+    "rendererId": "PPR_R3_NUM_PRODUCT_V1",
+    "productAssemblySha256": "2664b4ff349b58b631896de25ef5b8cc336d22e49dba9c9d9b548074802b9df2",
+    "productEnvelopeCoreSha256": "e0ad2d3a44e9713fc87ca98f3dae5d7d819ae120e64dddf1f53c167162adbc2a"
+  },
+  "boundaries": {
+    "personalRealityHtmlModified": false,
+    "personalRealityClientModified": false,
+    "personalRealityCssModified": false,
+    "customerPersonalRealityApiModified": false,
+    "sharedSingleMethodReadingModified": false,
+    "specialistMeaningAuthorityModified": false
+  }
+}

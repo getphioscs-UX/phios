@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-QUESTION-GUIDANCE-REGISTRY-v1.0.0",
+  "methodCode": "TAROT",
+  "status": "CURRENT",
+  "routingPolicy": "DETERMINISTIC_EXPLAINABLE_CUSTOMER_GUIDANCE",
+  "rules": {
+    "maxQuestionChars": 360,
+    "maxPrimaryTopics": 2,
+    "customerMustConfirmFocus": true,
+    "automaticPredictionRouting": false,
+    "broadQuestionPolicy": "NARROW_BEFORE_DRAW",
+    "note": "Routing recommends a spread; the customer remains free to choose another governed spread."
+  },
+  "intents": [
+    {
+      "intentId": "QUICK_FOCUS",
+      "labelEn": "One thing I want to notice",
+      "labelZhHans": "我只想聚焦一件事",
+      "recommendedSpreadId": "ONE_CARD_FOCUS",
+      "exampleEn": "What deserves my attention most in this situation?",
+      "exampleZhHans": "在这件事里，现在最值得我注意什么？",
+      "promptEn": "Name one situation and one thing you want to notice.",
+      "promptZhHans": "写一件具体的事，以及你最想看清的一个焦点。"
+    },
+    {
+      "intentId": "UNDERSTAND_SITUATION",
+      "labelEn": "Understand a situation",
+      "labelZhHans": "理解一个局面",
+      "recommendedSpreadId": "THREE_CARD_SITUATION",
+      "exampleEn": "What do I need to understand about changing jobs now?",
+      "exampleZhHans": "关于现在换工作这件事，我最需要看清什么？",
+      "promptEn": "Focus on one situation rather than asking for your whole future.",
+      "promptZhHans": "聚焦一个正在发生的局面，不要把整个人生或所有未来放进同一个问题。"
+    },
+    {
+      "intentId": "COMPARE_TWO_PATHS",
+      "labelEn": "Compare two choices",
+      "labelZhHans": "比较两个选择",
+      "recommendedSpreadId": "TWO_PATH_CHOICE",
+      "exampleEn": "What should I compare between staying in my current role and accepting the new offer?",
+      "exampleZhHans": "留在现职与接受新工作之间，我最需要比较哪些差异？",
+      "promptEn": "State Path A and Path B clearly. Tarot will compare; it will not decide for you.",
+      "promptZhHans": "把 A 与 B 两条路径写清楚。塔罗负责比较，不替你决定。"
+    },
+    {
+      "intentId": "RELATIONSHIP",
+      "labelEn": "Understand a relationship",
+      "labelZhHans": "理解一段关系",
+      "recommendedSpreadId": "RELATIONSHIP_CROSS",
+      "exampleEn": "What should I understand about how this relationship is operating now?",
+      "exampleZhHans": "关于这段关系目前如何运作，我最需要看清什么？",
+      "promptEn": "Ask about the relationship structure or your position, not another person’s hidden thoughts.",
+      "promptZhHans": "问关系结构、互动或你的位置，不要求系统断定对方隐藏的真实内心。"
+    },
+    {
+      "intentId": "CAREER_PROJECT",
+      "labelEn": "Work, career or project",
+      "labelZhHans": "工作、事业或项目",
+      "recommendedSpreadId": "CAREER_X",
+      "exampleEn": "What conditions matter most if I pursue this project now?",
+      "exampleZhHans": "如果现在推进这个项目，哪些条件最值得我注意？",
+      "promptEn": "Choose one role, project, offer or business decision.",
+      "promptZhHans": "一次只聚焦一个职位、项目、offer 或事业决定。"
+    },
+    {
+      "intentId": "CAUSE_RESPONSE",
+      "labelEn": "Why is this stuck?",
+      "labelZhHans": "为什么一直卡住？",
+      "recommendedSpreadId": "CAUSE_AND_RESPONSE_7",
+      "exampleEn": "What is keeping this situation stuck, and what response deserves consideration?",
+      "exampleZhHans": "是什么让这件事一直卡住，而我可以考虑怎样回应？",
+      "promptEn": "Describe one repeating problem or blockage.",
+      "promptZhHans": "描述一个反复出现的问题或卡点。"
+    },
+    {
+      "intentId": "REALITY_NAVIGATION",
+      "labelEn": "Reality check a complex situation",
+      "labelZhHans": "把复杂局面带回现实检查",
+      "recommendedSpreadId": "REALITY_NAVIGATION_6",
+      "exampleEn": "What may I be misreading here, and what should I verify in Reality next?",
+      "exampleZhHans": "这件事里我可能误读了什么，接下来最需要回到现实验证什么？",
+      "promptEn": "Use this when facts, interpretation and uncertainty are mixed together.",
+      "promptZhHans": "当事实、自己的解释与不确定性混在一起时，使用这个牌阵。"
+    },
+    {
+      "intentId": "DEEP_PATTERN",
+      "labelEn": "Explore a deeper pattern",
+      "labelZhHans": "深入看一个长期模式",
+      "recommendedSpreadId": "CELTIC_CROSS_10",
+      "exampleEn": "What deeper pattern is shaping this situation, and what should I understand before I move?",
+      "exampleZhHans": "是什么更深层的模式在影响这个局面，而行动前我最需要理解什么？",
+      "promptEn": "Best for one important, layered situation—not several unrelated life areas at once.",
+      "promptZhHans": "适合一个重要而多层的局面，不适合一次把多个互不相关的人生领域全部塞进来。"
+    }
+  ]
+}

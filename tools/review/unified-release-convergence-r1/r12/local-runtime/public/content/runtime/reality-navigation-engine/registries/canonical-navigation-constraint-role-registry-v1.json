@@ -1,0 +1,32 @@
+{
+  "registryCode": "PHI-OS-RNE-CANONICAL-NAVIGATION-CONSTRAINT-ROLE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "containsUserData": false,
+  "roles": [
+    {
+      "role": "HARD_BOUNDARY",
+      "meaning": "A recorded constraint that bounds the transition space and may not be silently bypassed."
+    },
+    {
+      "role": "SOFT_LIMIT",
+      "meaning": "A recorded constraint that narrows options without becoming an absolute command."
+    },
+    {
+      "role": "DEPENDENCY",
+      "meaning": "A dependency that must remain visible when options are formed."
+    },
+    {
+      "role": "UNKNOWN_LIMIT",
+      "meaning": "An unresolved constraint dimension that limits confidence and must remain explicit."
+    },
+    {
+      "role": "OBSERVATION_REQUIREMENT",
+      "meaning": "A condition requiring further observation before stronger navigation claims."
+    }
+  ],
+  "rules": {
+    "roleDoesNotRewriteRmoConstraintType": true,
+    "roleDoesNotCreateProfessionalJudgment": true
+  }
+}

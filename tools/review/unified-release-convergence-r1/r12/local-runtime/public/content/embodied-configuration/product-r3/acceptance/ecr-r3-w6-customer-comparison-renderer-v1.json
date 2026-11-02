@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "PHI-OS-ECR-R3-W6-CUSTOMER-COMPARISON-RENDERER-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "d86589d0be33ace066b29f300959cfdc27ced6e6",
+  "status": "ENGINEERING_COMPLETE",
+  "scope": [
+    "ECR-R3-W6 Customer Comparison Renderer"
+  ],
+  "predecessors": {
+    "w5ComparisonIr": "content/embodied-configuration/product-r3/acceptance/ecr-r3-w5-ecr-human-design-comparison-ir-v1.json",
+    "w4ConfirmedHumanDesignTransport": "content/embodied-configuration/product-r3/acceptance/ecr-r3-w4-confirmed-human-design-context-transport-v1.json"
+  },
+  "rendererAuthority": {
+    "path": "assets/customer-ui/js/specialists/ecr/human-design-comparison-renderer.js",
+    "rendererVersion": "PHI-OS-ECR-R3-ECR-HD-CUSTOMER-COMPARISON-RENDERER-v1.0.0",
+    "inputAuthority": "view.ecrHumanDesignComparison / PHI-OS-ECR-R3-ECR-HD-COMPARISON-IR-v1.0.0",
+    "outputAuthority": "PRESENTATION_ONLY",
+    "canonicalSectionId": "ecr-hd-comparison",
+    "canonicalCustomerRoute": "/perspectives/personal/"
+  },
+  "customerComposition": {
+    "headerExplainsAuthorityDifference": true,
+    "sharedObservationDomainVisible": true,
+    "complementaryLensVisible": true,
+    "noDirectEquivalenceVisible": true,
+    "ecrSourceUnitsVisible": true,
+    "confirmedHumanDesignClaimsVisible": true,
+    "partialHumanDesignInputExplainedWithoutInference": true,
+    "observationQuestionVisible": true,
+    "comparisonBoundaryVisible": true,
+    "integratedIntoEcrSpecialistReadingBeforePhiCards": true,
+    "ecrNavigationEntryInstalled": true
+  },
+  "presentationOrder": [
+    "PHI OS reading",
+    "flowing / strained expression when available",
+    "ECR × confirmed Human Design comparison",
+    "PHI Cards deterministic visual summary",
+    "sources and calculation"
+  ],
+  "boundaries": {
+    "rendererCreatesMeaning": false,
+    "rendererCreatesComparisonRules": false,
+    "ecrRemainsPhiOsNative": true,
+    "humanDesignRemainsCustomerSuppliedExternalContext": true,
+    "phiosHumanDesignCalculationAuthorityCreated": false,
+    "humanDesignRecalculated": false,
+    "directFieldEquivalenceCreated": false,
+    "ecrCoordinateToHumanDesignFieldMappingCreated": false,
+    "humanDesignFieldToEcrCoordinateMappingCreated": false,
+    "methodAgreementClaimed": false,
+    "convergenceClaimed": false,
+    "compatibilityScoreCreated": false,
+    "methodVoteCreated": false,
+    "currentRealityEvidenceCreated": false,
+    "currentRealityConclusionCreated": false,
+    "automaticPersistence": false,
+    "runtimeMemoryWritten": false
+  },
+  "w5HistoricalBoundary": {
+    "w5ComparisonIrStillReportsCustomerRendererCreatedFalse": true,
+    "reason": "W5 records what W5 itself created. W6 consumes that immutable comparison IR downstream and does not rewrite the W5 historical artifact or IR boundary object."
+  },
+  "successorBoundary": {
+    "w7CurrentRealityBridgeCreated": false,
+    "reservedFor": "ECR-R3-W7 Reality Bridge"
+  },
+  "validation": {
+    "checker": "scripts/check-ecr-product-r3-w6.mjs",
+    "richConfirmedHumanDesignRegression": true,
+    "partialConfirmedHumanDesignRegression": true,
+    "presentationOnlyBoundaryRegression": true,
+    "canonicalPersonalSurfaceBindingRegression": true,
+    "navigationAndSectionOrderRegression": true,
+    "w5IrRegressionPreserved": true
+  }
+}

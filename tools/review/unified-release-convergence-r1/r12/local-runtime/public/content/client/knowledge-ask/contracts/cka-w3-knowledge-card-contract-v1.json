@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W3-KNOWLEDGE-CARD-CONTRACT-v1.0.0",
+  "phase": "CKA",
+  "work": "CKA-W3",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "status": "PRODUCTION_CLIENT_CARD_PROJECTION_ACTIVE",
+  "requiredPublicFields": [
+    "concept",
+    "part",
+    "volume",
+    "description"
+  ],
+  "extendedFields": [
+    "contentType",
+    "href"
+  ],
+  "contentTypes": [
+    "CONCEPT",
+    "ARTICLE",
+    "FIGURE",
+    "BOOK_SECTION",
+    "READING_PATH"
+  ],
+  "sourceRule": "GOVERNED_RELATED_KNOWLEDGE_OR_READING_PATH_ONLY",
+  "forbiddenPublicFields": [
+    "nodeCode",
+    "fragmentCode",
+    "sectionCode",
+    "sourceId",
+    "pipelineState",
+    "candidatePublicationState"
+  ],
+  "projection": "functions/_lib/client-knowledge-ask.js#projectCkaClientAnswer",
+  "governance": {
+    "createsCanonicalTitle": false,
+    "exposesRawFullSource": false,
+    "exposesInternalNodeCodes": false
+  }
+}
+

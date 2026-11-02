@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-READING-LAYOUT-CONTRACT-v1.0.0",
+  "work": "R2-W10",
+  "firstScreenMaxBlocks": 8,
+  "firstScreenMaxThemes": 3,
+  "coreThemeMaxCount": 5,
+  "bodyMaxCharactersPerParagraph": 540,
+  "bodyRecommendedCharactersPerParagraph": 320,
+  "maxConsecutiveTextBlocks": 3,
+  "technicalDefaultCollapsed": true,
+  "chartPlacement": "LEVEL_3_METHOD_DETAIL_AFTER_READING",
+  "evidenceDisclosurePolicy": "SUMMARY_LEVEL_2_FULL_LINEAGE_LEVEL_3",
+  "desktopContentWidth": 760,
+  "mobileStackPolicy": "SINGLE_COLUMN_NO_NESTED_SCROLL",
+  "printBreakPolicy": "SECTION_AWARE_AVOID_THEME_SPLIT",
+  "firstScreen": {
+    "allowed": [
+      "READING_TITLE",
+      "OPENING_SYNTHESIS",
+      "PRIORITY_THEME",
+      "SUPPORT",
+      "TENSION_OR_OPEN",
+      "EXPLORE_FULL_READING_CTA"
+    ],
+    "forbidden": [
+      "CHART_DUMP",
+      "BIRTH_DATA_TABLE",
+      "SOURCE_REFS",
+      "TECHNICAL_IDS",
+      "TEN_TECHNICAL_CARDS"
+    ]
+  },
+  "mobile": {
+    "noHorizontalOverflow": true,
+    "noNestedScroll": true,
+    "readableLineLengthRequired": true,
+    "minTapTargetCssPx": 44,
+    "technicalPanelsCollapsed": true,
+    "themeWallsForbidden": true
+  },
+  "print": {
+    "sectionAwareBreaks": true,
+    "widowOrphanProtection": true,
+    "technicalAppendixIncluded": true,
+    "clippedChartAllowed": false,
+    "uiOnlyControlsIncluded": false
+  },
+  "boundary": {
+    "webMobilePrintConsumeSameIA": true,
+    "layoutMayCreateMeaning": false,
+    "rendererMayExpandLimits": false
+  }
+}

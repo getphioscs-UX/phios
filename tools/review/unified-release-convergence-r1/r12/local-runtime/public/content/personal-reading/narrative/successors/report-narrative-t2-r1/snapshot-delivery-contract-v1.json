@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-RNT2-SNAPSHOT-DELIVERY-CONTRACT-v1.0.0",
+  "work": "RNT2-W16-W17",
+  "status": "SUCCESSOR_CANDIDATE",
+  "snapshotKinds": [
+    "EDITORIAL_ACCEPTANCE_ARTIFACT",
+    "CUSTOMER_DELIVERY_SNAPSHOT",
+    "RENDERED_ARTIFACT_SNAPSHOT"
+  ],
+  "deliveryStates": [
+    "FREE",
+    "LOCKED",
+    "ENTITLED",
+    "FULL_REPORT",
+    "EXPLORE_DETAILS"
+  ],
+  "invalidation": {
+    "calculationFactChanged": "SEMANTIC",
+    "claimIrChanged": "SEMANTIC",
+    "authorityChanged": "SEMANTIC",
+    "materialPromptChanged": "SEMANTIC",
+    "verifierContractChanged": "REVALIDATE",
+    "localeProseChanged": "LOCALE_SEMANTIC",
+    "cssOnlyChanged": "RENDER_ONLY",
+    "coverCoordinatesChanged": "RENDER_ONLY",
+    "coverFontChanged": "RENDER_ONLY",
+    "paginationOnlyChanged": "RENDER_ONLY"
+  },
+  "rules": {
+    "fullReportRequiresEntitlement": true,
+    "reopenDoesNotRegenerate": true,
+    "exploreDoesNotMutateSnapshot": true,
+    "rawPiiForbiddenInSnapshotId": true,
+    "ownerAcceptedDoesNotEqualProduction": true,
+    "qaDoesNotEqualProduction": true,
+    "shadowDoesNotEqualProduction": true,
+    "canaryDoesNotEqualProduction": true
+  }
+}

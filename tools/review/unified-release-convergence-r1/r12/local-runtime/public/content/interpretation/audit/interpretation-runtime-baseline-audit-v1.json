@@ -1,0 +1,742 @@
+{
+  "schemaVersion": "PHI-OS-MIR-1-IR-W0-INTERPRETATION-RUNTIME-BASELINE-AUDIT-v1.0.0",
+  "work": [
+    "MIR-1",
+    "IR-W0"
+  ],
+  "status": "FROZEN_BASELINE_RECONCILED",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "recordedAt": "2026-08-17",
+  "purpose": "Audit existing Method / Projection / Interpretation / Meaning / Figure / Reading authority before any Canonical Interpretation Kernel is instantiated.",
+  "runtimeAuthorities": [
+    {
+      "code": "SHARED_DATA_AUTHORITY",
+      "domain": "INPUT",
+      "state": "EXISTING_FROZEN",
+      "owner": "SHARED_DATA_AUTHORITY",
+      "owns": [
+        "canonical governed input records",
+        "input provenance"
+      ],
+      "doesNotOwn": [
+        "method calculation",
+        "projection",
+        "interpretation",
+        "meaning",
+        "reading",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/method-runtime/shared-data-authority-v1.json",
+          "sha256": "a9acf53273a43088e4a191060e00250d8d8773c71ac653ee23a18f006a5b107c"
+        }
+      ]
+    },
+    {
+      "code": "METHOD_RUNTIME",
+      "domain": "METHOD_ALGORITHM_GOVERNANCE",
+      "state": "EXISTING_FROZEN",
+      "owner": "METHOD_RUNTIME / IMR governance",
+      "owns": [
+        "method identity",
+        "plugin binding",
+        "algorithm eligibility/governance"
+      ],
+      "doesNotOwn": [
+        "client interpretation",
+        "canonical meaning",
+        "reading",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+          "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76"
+        },
+        {
+          "path": "content/professional/method-runtime/method-runtime-freeze-v1.json",
+          "sha256": "8004a17aeb8936303221c9b3b37e190856bcb81067496322d72283472b6f4a83"
+        }
+      ]
+    },
+    {
+      "code": "SHARED_CALCULATION_RUNTIME",
+      "domain": "METHOD_CALCULATION",
+      "state": "EXISTING_FROZEN",
+      "owner": "SHARED_CALCULATION_RUNTIME",
+      "owns": [
+        "deterministic calculation facts",
+        "calculation lineage/digests"
+      ],
+      "doesNotOwn": [
+        "projection",
+        "interpretation",
+        "meaning",
+        "professional conclusion",
+        "reality fact"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+          "sha256": "63564d6d3c725f29c8b575913596fa7284af0e2fe6befba94cf68fe1befadec7"
+        },
+        {
+          "path": "content/professional/method-runtime/method-runtime-freeze-v1.json",
+          "sha256": "8004a17aeb8936303221c9b3b37e190856bcb81067496322d72283472b6f4a83"
+        }
+      ]
+    },
+    {
+      "code": "SHARED_PROJECTION_RUNTIME",
+      "domain": "METHOD_PROJECTION",
+      "state": "EXISTING_FROZEN",
+      "owner": "SHARED_PROJECTION_RUNTIME",
+      "owns": [
+        "canonical projection identity",
+        "projection lineage",
+        "projection confidence"
+      ],
+      "doesNotOwn": [
+        "calculation mutation",
+        "interpretation",
+        "knowledge",
+        "reality conclusion",
+        "professional conclusion"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+          "sha256": "8ffa3bf46930025cbf8ec3352223e7cdc5cc420b9f40016aa9e3edde6e981f13"
+        },
+        {
+          "path": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+          "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76"
+        }
+      ]
+    },
+    {
+      "code": "SHARED_INTERPRETATION_RUNTIME",
+      "domain": "INTERPRETATION_COMPOSITION_CANDIDATE",
+      "state": "EXISTING_FROZEN",
+      "owner": "SHARED_INTERPRETATION_RUNTIME",
+      "owns": [
+        "AI/provider-assisted Interpretation Candidate composition",
+        "candidate wording/summary within governed inputs"
+      ],
+      "doesNotOwn": [
+        "deterministic derivation authority",
+        "canonical meaning authority",
+        "calculation",
+        "projection",
+        "final conclusion",
+        "professional report",
+        "reality decision"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+          "sha256": "620302fcad136c603a3d65d1eda6b2e781ffcdf2254939d5fed67fcf9e3832b4"
+        },
+        {
+          "path": "functions/method-runtime/shared-interpretation-runtime.js",
+          "sha256": "89b1b0fa71674524fc4dc8c4c22f492b1b210bca02539eca16d55b0f0f396455"
+        },
+        {
+          "path": "content/professional/method-production-activation/contracts/mpa-interpretation-boundary-v1.json",
+          "sha256": "ff4bb43803593a4126e53fba3c8024063874664df568b69e876e170ca8b85a16"
+        }
+      ]
+    },
+    {
+      "code": "CANONICAL_INTERPRETATION_DERIVATION",
+      "domain": "INTERPRETATION_DERIVATION",
+      "state": "RESERVED_SINGLETON_UNINSTANTIATED",
+      "owner": "FUTURE_CANONICAL_INTERPRETATION_KERNEL",
+      "owns": [
+        "future governed structural/relational/configuration derivation under IR lifecycle"
+      ],
+      "doesNotOwn": [
+        "AI composition authority",
+        "canonical meaning vocabulary",
+        "calculation",
+        "projection",
+        "reading",
+        "navigation",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+          "sha256": "620302fcad136c603a3d65d1eda6b2e781ffcdf2254939d5fed67fcf9e3832b4"
+        },
+        {
+          "path": "content/professional/canonical-meaning-runtime/audits/cmr-authority-boundary-v1.json",
+          "sha256": "29e63eea38837ac1b3cebba4caa5a48e14e8f093d4af55c6b3ccfa953a5a4db1"
+        },
+        {
+          "path": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json",
+          "sha256": "4be26255aca8272dcf469de8ae60a037db95eb41478834981b17d614349e2570"
+        },
+        {
+          "path": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json",
+          "sha256": "a5ed4b8440a03c27418a5301890f134c1f7b37ba2be2a24e9cf7f2c949b8b26c"
+        }
+      ]
+    },
+    {
+      "code": "CANONICAL_MEANING_RUNTIME",
+      "domain": "MEANING",
+      "state": "EXISTING_FROZEN",
+      "owner": "CANONICAL_MEANING_RUNTIME",
+      "owns": [
+        "canonical meaning codes",
+        "meaning families",
+        "meaning dimensions",
+        "method-to-meaning mappings",
+        "canonical meaning bundles"
+      ],
+      "doesNotOwn": [
+        "method projection",
+        "knowledge prose",
+        "interpretation derivation",
+        "professional conclusion"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/canonical-meaning-runtime/audits/cmr-authority-boundary-v1.json",
+          "sha256": "29e63eea38837ac1b3cebba4caa5a48e14e8f093d4af55c6b3ccfa953a5a4db1"
+        },
+        {
+          "path": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+          "sha256": "27349bccaf07cad0324ed701d4c16dd6e6ba1522ce2bc7cbc079fea94040f5eb"
+        },
+        {
+          "path": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+          "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76"
+        }
+      ]
+    },
+    {
+      "code": "KNOWLEDGE_RUNTIME",
+      "domain": "KNOWLEDGE",
+      "state": "EXISTING_CANONICAL",
+      "owner": "KNOWLEDGE_RUNTIME",
+      "owns": [
+        "canonical knowledge nodes",
+        "semantic profiles",
+        "published fragments",
+        "canonical assemblies"
+      ],
+      "doesNotOwn": [
+        "method calculation",
+        "projection",
+        "case reality truth",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+          "sha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13"
+        },
+        {
+          "path": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+          "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76"
+        }
+      ]
+    },
+    {
+      "code": "KNOWLEDGE_RETRIEVAL",
+      "domain": "KNOWLEDGE_ACCESS",
+      "state": "EXISTING_GOVERNED",
+      "owner": "KSAR / Knowledge Source Access",
+      "owns": [
+        "question-scoped governed source retrieval",
+        "source attribution/excerpt boundaries"
+      ],
+      "doesNotOwn": [
+        "canonical-node mutation",
+        "article publication",
+        "interpretation derivation",
+        "reality reading"
+      ],
+      "evidence": [
+        {
+          "path": "content/knowledge/source-access/contracts/knowledge-source-access-boundary-v1.json",
+          "sha256": "25deb64016002e62f0f9a2ab42b1122fbc9abe09e248a55c288380917544f9d9"
+        }
+      ]
+    },
+    {
+      "code": "CAR_FIGURE_ASSET",
+      "domain": "CANONICAL_ASSET_FIGURE",
+      "state": "EXISTING_FROZEN",
+      "owner": "CANONICAL_ASSET_RUNTIME + PUBLIC_ASSET_REGISTRY_METADATA",
+      "owns": [
+        "asset contracts",
+        "asset briefs",
+        "asset candidates",
+        "asset lineage",
+        "public asset metadata"
+      ],
+      "doesNotOwn": [
+        "canonical meaning",
+        "knowledge claims",
+        "interpretation derivation",
+        "publication approval by itself",
+        "MFIG identity authority (deferred to MIR-2)"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/canonical-asset-runtime/audits/car-authority-boundary-v1.json",
+          "sha256": "d42dca01a97f8fe272ba90eb34b9916dbdaa96cca656c273a47d9e8f7f9ef0d2"
+        }
+      ]
+    },
+    {
+      "code": "MCD",
+      "domain": "METHOD_CLIENT_DELIVERY",
+      "state": "EXISTING_FROZEN_BASELINE",
+      "owner": "MCD",
+      "owns": [
+        "governed client delivery of already-authorized method execution/projection",
+        "renderer/presentation delivery contracts"
+      ],
+      "doesNotOwn": [
+        "method truth",
+        "production authority",
+        "interpretation authority",
+        "canonical meaning",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/professional/method-client-delivery/contracts/mcd-0-method-client-delivery-authority-boundary-v1.json",
+          "sha256": "ecf11e4d3c9bce7ea913d0912a2c73d74ed0a46357a3d0be4184bfc3e3e43ebf"
+        },
+        {
+          "path": "content/professional/method-client-delivery/contracts/mcd-8-production-acceptance-contract-v1.json",
+          "sha256": "ec58cbf7a25a3996dafc53d6c58ae47433da13b5187eb2302877524e62f95b0a"
+        }
+      ]
+    },
+    {
+      "code": "ICR",
+      "domain": "INPUT_CASE",
+      "state": "EXISTING_FROZEN",
+      "owner": "ICR",
+      "owns": [
+        "case initialization/versioned case input authority"
+      ],
+      "doesNotOwn": [
+        "interpretation derivation",
+        "meaning",
+        "reading",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json",
+          "sha256": "1aa8a7b20450070c86322733acac45508bc67a4eb9ba75a6b3ccf4d6608bdf22"
+        },
+        {
+          "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+          "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+        }
+      ]
+    },
+    {
+      "code": "RMO",
+      "domain": "REALITY_MODEL_STATE",
+      "state": "EXISTING_FROZEN",
+      "owner": "RMO",
+      "owns": [
+        "reality model/state/version/diff and governed state classifications"
+      ],
+      "doesNotOwn": [
+        "canonical interpretation creation",
+        "professional judgment",
+        "meaning vocabulary"
+      ],
+      "evidence": [
+        {
+          "path": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json",
+          "sha256": "4be26255aca8272dcf469de8ae60a037db95eb41478834981b17d614349e2570"
+        },
+        {
+          "path": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+          "sha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81"
+        },
+        {
+          "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+          "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+        }
+      ]
+    },
+    {
+      "code": "RDG",
+      "domain": "REALITY_DATA_GOVERNANCE",
+      "state": "EXISTING_FROZEN",
+      "owner": "RDG",
+      "owns": [
+        "data contract/purpose/consent/persistence/retention/sensitivity governance"
+      ],
+      "doesNotOwn": [
+        "knowledge truth",
+        "meaning truth",
+        "professional judgment",
+        "runtime business state",
+        "publication"
+      ],
+      "evidence": [
+        {
+          "path": "content/governance/reality-data-governance/audits/rdg-data-authority-boundary-v1.json",
+          "sha256": "91bc679d3b0f9146771c28b5fcc120fcbf6e0b90aacd5e3e51ead5b3898f13fa"
+        },
+        {
+          "path": "content/governance/reality-data-governance/freeze/reality-data-governance-freeze-v1.json",
+          "sha256": "79e5433ae73ff11ea6ead081f85f6b4a7e6573d3850756c52749c184eaf6d9a4"
+        }
+      ]
+    },
+    {
+      "code": "KAP",
+      "domain": "QUESTION_SCOPED_ANSWER_AND_GUIDED_COMPOSITION",
+      "state": "EXISTING_GOVERNED",
+      "owner": "KAP",
+      "owns": [
+        "question-scoped grounded answer projection",
+        "guided recomposition/contextual explanation within accepted inputs"
+      ],
+      "doesNotOwn": [
+        "canonical knowledge creation",
+        "canonical interpretation derivation",
+        "reality reading authority",
+        "method result creation",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/knowledge/answer-projection/contracts/kap-w1-authority-boundary-v1.json",
+          "sha256": "11f3f06ae114374501d0582f749d0c4003048f85b67ef1049d5b9a4e1c6b77ef"
+        },
+        {
+          "path": "content/knowledge/answer-projection/contracts/kap-w14-ai-authority-boundary-v1.json",
+          "sha256": "48c88c43adc1ad3263b364fbf6da6b16143ecac753f2bfd7ff345a2619475735"
+        },
+        {
+          "path": "content/knowledge/answer-projection/contracts/kap-w21-guided-recomposition-contract-v1.json",
+          "sha256": "dc148bd467320691224688a0a46ba867181e8432e1911866217ceab39421fb9d"
+        }
+      ]
+    },
+    {
+      "code": "RJX_JOURNEY",
+      "domain": "JOURNEY_ORCHESTRATION",
+      "state": "EXISTING_FROZEN_UPSTREAM_PRESERVED",
+      "owner": "JOURNEY_RUNTIME / RJX reconciliation",
+      "owns": [
+        "journey workflow state/orchestration and handoffs"
+      ],
+      "doesNotOwn": [
+        "method calculation",
+        "canonical meaning",
+        "interpretation derivation",
+        "reading derivation",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+          "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+        },
+        {
+          "path": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+          "sha256": "0f63eb01bd9af5a0ec7b8d912a2cabcd3ef25e67c515a84bbc0a99bc4dc2b47c"
+        }
+      ]
+    },
+    {
+      "code": "RRE",
+      "domain": "REALITY_READING",
+      "state": "EXISTING_FROZEN_BOUNDED_READING",
+      "owner": "RRE",
+      "owns": [
+        "bounded evidence/case-scoped descriptive Reality Readout / Reading"
+      ],
+      "doesNotOwn": [
+        "canonical interpretation kernel",
+        "diagnosis",
+        "legal/financial truth",
+        "identity truth",
+        "professional judgment",
+        "navigation command"
+      ],
+      "evidence": [
+        {
+          "path": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json",
+          "sha256": "a5ed4b8440a03c27418a5301890f134c1f7b37ba2be2a24e9cf7f2c949b8b26c"
+        },
+        {
+          "path": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+          "sha256": "4d7c7f4f1d233c5ad149a8fc300cc842a9dfc045a5afc2f9f9247f165a79a92b"
+        },
+        {
+          "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+          "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+        }
+      ]
+    },
+    {
+      "code": "RNE",
+      "domain": "NAVIGATION",
+      "state": "EXISTING_FROZEN",
+      "owner": "RNE",
+      "owns": [
+        "reality navigation authority under its frozen contract"
+      ],
+      "doesNotOwn": [
+        "interpretation derivation",
+        "canonical meaning",
+        "method calculation",
+        "professional judgment"
+      ],
+      "evidence": [
+        {
+          "path": "content/runtime/reality-navigation-engine/freeze/rne-v1-freeze-v1.json",
+          "sha256": "89003a9ae8b8965a981e7dd0dbbc4754289c6cb1a44d4c620cb2236fe7dbef15"
+        },
+        {
+          "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+          "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+        }
+      ]
+    },
+    {
+      "code": "PROFESSIONAL_RUNTIME",
+      "domain": "PROFESSIONAL_JUDGMENT",
+      "state": "EXISTING_FROZEN",
+      "owner": "PR v2 / SHARED_PROFESSIONAL_RUNTIME",
+      "owns": [
+        "professional observation/judgment/recommendation/approval/liability under human attribution"
+      ],
+      "doesNotOwn": [
+        "raw method calculation",
+        "canonical interpretation derivation",
+        "canonical meaning vocabulary"
+      ],
+      "evidence": [
+        {
+          "path": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+          "sha256": "b280fe736bcaa9802463c1941b9d1b3448f0848b7eb19dce9ff2dd7b645b6f7d"
+        },
+        {
+          "path": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+          "sha256": "4563bf9cdd98cb178a8e93809616477c8a31050b3d6c95d2012016bd4c6ad805"
+        },
+        {
+          "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+          "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+        }
+      ]
+    }
+  ],
+  "sharedInterpretationRuntimeFinding": {
+    "runtimeCode": "SHARED_INTERPRETATION_RUNTIME",
+    "frozenClassification": "INTERPRETATION_COMPOSITION_CANDIDATE_RUNTIME",
+    "inputOrder": [
+      "Projection",
+      "Knowledge Lookup",
+      "Journey Runtime",
+      "AI"
+    ],
+    "output": "Interpretation Candidate",
+    "authority": "candidate_only",
+    "actualAuthority": {
+      "derivationAuthority": false,
+      "meaningAuthority": false,
+      "compositionAuthority": true,
+      "aiInterpretationCandidateAuthority": true,
+      "canonicalInterpretationAuthority": false,
+      "professionalJudgmentAuthority": false
+    },
+    "preservation": "BYTE_PRESERVE_EXISTING_FROZEN_RUNTIME; DO_NOT RENAME OR REPURPOSE IN MIR-1"
+  },
+  "canonicalInterpretationDerivationFinding": {
+    "status": "RESERVED_SINGLETON_UNINSTANTIATED",
+    "runtimeCreatedByMir1": false,
+    "singleAuthoritySlotOnly": true,
+    "duplicateRuntimeAllowed": false,
+    "futureInstantiationGate": "MIR-5/MIR-6 governed successor work after source/operator/edge governance exists",
+    "mustRemainDistinctFrom": [
+      "SHARED_INTERPRETATION_RUNTIME composition",
+      "CANONICAL_MEANING_RUNTIME",
+      "KNOWLEDGE_RUNTIME",
+      "RMO interpretation/inference boundary state",
+      "RRE Reading runtime",
+      "KAP answer/guided composition",
+      "MCD renderer/surface"
+    ]
+  },
+  "auditConclusions": {
+    "duplicateInterpretationRuntimeExists": false,
+    "duplicateMeaningRuntimeExists": false,
+    "methodAuthorityMigrationDetected": false,
+    "rendererCalculationAuthorityDetected": false,
+    "rendererInterpretationAuthorityDetected": false,
+    "canonicalDerivationAuthorityCurrentlyInstantiated": false,
+    "safeToReserveSingleCanonicalInterpretationKernel": true,
+    "figureIdentityAuthorityDeferredToMir2WithoutCreatingDuplicate": true
+  },
+  "sourceEvidence": {
+    "runtimeAuthorityRegistry": {
+      "path": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+      "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76"
+    },
+    "methodFreeze": {
+      "path": "content/professional/method-runtime/method-runtime-freeze-v1.json",
+      "sha256": "8004a17aeb8936303221c9b3b37e190856bcb81067496322d72283472b6f4a83"
+    },
+    "sharedData": {
+      "path": "content/professional/method-runtime/shared-data-authority-v1.json",
+      "sha256": "a9acf53273a43088e4a191060e00250d8d8773c71ac653ee23a18f006a5b107c"
+    },
+    "sharedCalculation": {
+      "path": "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+      "sha256": "63564d6d3c725f29c8b575913596fa7284af0e2fe6befba94cf68fe1befadec7"
+    },
+    "sharedProjection": {
+      "path": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "sha256": "8ffa3bf46930025cbf8ec3352223e7cdc5cc420b9f40016aa9e3edde6e981f13"
+    },
+    "sharedInterpretation": {
+      "path": "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+      "sha256": "620302fcad136c603a3d65d1eda6b2e781ffcdf2254939d5fed67fcf9e3832b4"
+    },
+    "sharedInterpretationRuntime": {
+      "path": "functions/method-runtime/shared-interpretation-runtime.js",
+      "sha256": "89b1b0fa71674524fc4dc8c4c22f492b1b210bca02539eca16d55b0f0f396455"
+    },
+    "cmrBoundary": {
+      "path": "content/professional/canonical-meaning-runtime/audits/cmr-authority-boundary-v1.json",
+      "sha256": "29e63eea38837ac1b3cebba4caa5a48e14e8f093d4af55c6b3ccfa953a5a4db1"
+    },
+    "cmrFreeze": {
+      "path": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+      "sha256": "27349bccaf07cad0324ed701d4c16dd6e6ba1522ce2bc7cbc079fea94040f5eb"
+    },
+    "knowledgeAuthority": {
+      "path": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+      "sha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13"
+    },
+    "knowledgeAccessBoundary": {
+      "path": "content/knowledge/source-access/contracts/knowledge-source-access-boundary-v1.json",
+      "sha256": "25deb64016002e62f0f9a2ab42b1122fbc9abe09e248a55c288380917544f9d9"
+    },
+    "carBoundary": {
+      "path": "content/professional/canonical-asset-runtime/audits/car-authority-boundary-v1.json",
+      "sha256": "d42dca01a97f8fe272ba90eb34b9916dbdaa96cca656c273a47d9e8f7f9ef0d2"
+    },
+    "mcd0Boundary": {
+      "path": "content/professional/method-client-delivery/contracts/mcd-0-method-client-delivery-authority-boundary-v1.json",
+      "sha256": "ecf11e4d3c9bce7ea913d0912a2c73d74ed0a46357a3d0be4184bfc3e3e43ebf"
+    },
+    "mcd6RendererBoundary": {
+      "path": "content/professional/method-client-delivery/contracts/mcd-6-visualization-authority-contract-v1.json",
+      "sha256": "9091400c3b758bb136941b6647401715a510f2d060247a82f1af74efec193c5e"
+    },
+    "mcd7SurfaceBoundary": {
+      "path": "content/professional/method-client-delivery/contracts/mcd-7-personal-runtime-result-surface-contract-v1.json",
+      "sha256": "a0ce585e45ffe799c258ac7acc388d594866099cdefa0092c5b3a9f3b7bd5610"
+    },
+    "mcd8AcceptanceContract": {
+      "path": "content/professional/method-client-delivery/contracts/mcd-8-production-acceptance-contract-v1.json",
+      "sha256": "ec58cbf7a25a3996dafc53d6c58ae47433da13b5187eb2302877524e62f95b0a"
+    },
+    "mpaInterpretationBoundary": {
+      "path": "content/professional/method-production-activation/contracts/mpa-interpretation-boundary-v1.json",
+      "sha256": "ff4bb43803593a4126e53fba3c8024063874664df568b69e876e170ca8b85a16"
+    },
+    "icrFreeze": {
+      "path": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json",
+      "sha256": "1aa8a7b20450070c86322733acac45508bc67a4eb9ba75a6b3ccf4d6608bdf22"
+    },
+    "rmoBoundary": {
+      "path": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json",
+      "sha256": "4be26255aca8272dcf469de8ae60a037db95eb41478834981b17d614349e2570"
+    },
+    "rmoFreeze": {
+      "path": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "sha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81"
+    },
+    "rdgBoundary": {
+      "path": "content/governance/reality-data-governance/audits/rdg-data-authority-boundary-v1.json",
+      "sha256": "91bc679d3b0f9146771c28b5fcc120fcbf6e0b90aacd5e3e51ead5b3898f13fa"
+    },
+    "rdgFreeze": {
+      "path": "content/governance/reality-data-governance/freeze/reality-data-governance-freeze-v1.json",
+      "sha256": "79e5433ae73ff11ea6ead081f85f6b4a7e6573d3850756c52749c184eaf6d9a4"
+    },
+    "rreBoundary": {
+      "path": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json",
+      "sha256": "a5ed4b8440a03c27418a5301890f134c1f7b37ba2be2a24e9cf7f2c949b8b26c"
+    },
+    "rreFreeze": {
+      "path": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+      "sha256": "4d7c7f4f1d233c5ad149a8fc300cc842a9dfc045a5afc2f9f9247f165a79a92b"
+    },
+    "kapBoundary": {
+      "path": "content/knowledge/answer-projection/contracts/kap-w1-authority-boundary-v1.json",
+      "sha256": "11f3f06ae114374501d0582f749d0c4003048f85b67ef1049d5b9a4e1c6b77ef"
+    },
+    "kapAiBoundary": {
+      "path": "content/knowledge/answer-projection/contracts/kap-w14-ai-authority-boundary-v1.json",
+      "sha256": "48c88c43adc1ad3263b364fbf6da6b16143ecac753f2bfd7ff345a2619475735"
+    },
+    "kapGuidedRecomposition": {
+      "path": "content/knowledge/answer-projection/contracts/kap-w21-guided-recomposition-contract-v1.json",
+      "sha256": "dc148bd467320691224688a0a46ba867181e8432e1911866217ceab39421fb9d"
+    },
+    "rjxAuthority": {
+      "path": "content/runtime/journey-runtime/audits/rjx-w1-runtime-authority-reconciliation-v1.json",
+      "sha256": "f5d7dc1f82a36e2940a5068c1b366dde712d3b2cc4eef051985bf0a449d0bdf8"
+    },
+    "journeyFreeze": {
+      "path": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "sha256": "0f63eb01bd9af5a0ec7b8d912a2cabcd3ef25e67c515a84bbc0a99bc4dc2b47c"
+    },
+    "navigationFreeze": {
+      "path": "content/runtime/reality-navigation-engine/freeze/rne-v1-freeze-v1.json",
+      "sha256": "89003a9ae8b8965a981e7dd0dbbc4754289c6cb1a44d4c620cb2236fe7dbef15"
+    },
+    "professionalBoundary": {
+      "path": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+      "sha256": "b280fe736bcaa9802463c1941b9d1b3448f0848b7eb19dce9ff2dd7b645b6f7d"
+    },
+    "professionalFreeze": {
+      "path": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "sha256": "4563bf9cdd98cb178a8e93809616477c8a31050b3d6c95d2012016bd4c6ad805"
+    }
+  },
+  "preExistingBaselineAdvisories": [
+    {
+      "code": "CMR_W15_PROTECTED_KNOWLEDGE_REGISTRY_DIGEST_DRIFT",
+      "scope": "PRE_EXISTING_BASELINE_NOT_CREATED_BY_MIR_1",
+      "checker": "npm run check:cm-w15",
+      "untouchedProfessionalZipReproduces": true,
+      "protectedPath": "content/knowledge/registry/nodes.json",
+      "currentSha256": "ac9f1eab7cf2534d0853dc656d1a6265d56d8afbdc879f3aff592ce5437c6ade",
+      "cmrW15ExpectedSha256": "61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+      "mir1Action": "DO_NOT_MUTATE_CMR_FROZEN_EVIDENCE; preserve CMR authority and require a versioned successor reconciliation if the CMR full-freeze lineage is re-baselined later.",
+      "blocksMir1AuthorityExit": false
+    },
+    {
+      "code": "MR_W7_ARCHIVE_GIT_HISTORY_UNAVAILABLE",
+      "scope": "ARCHIVE_EXECUTION_ENVIRONMENT",
+      "checker": "npm run check:mr-w7",
+      "reason": "The supplied zip has no .git object database, so the historical MR-W7 baseline commit cannot be resolved by that checker.",
+      "mir1Action": "Do not weaken or edit MR-W7. MIR-1 byte-hashes the frozen Method Runtime predecessors and separately verifies MR-W3/MR-W4/MR-W5 behavior.",
+      "blocksMir1AuthorityExit": false
+    }
+  ]
+}

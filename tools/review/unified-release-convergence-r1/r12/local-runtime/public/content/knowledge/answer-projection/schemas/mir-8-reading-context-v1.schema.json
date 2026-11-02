@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/reading/mir-8-reading-context-v1.schema.json",
+  "title": "MIR-8 Minimal Reading Context",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "currentConcern": {"type": "string", "maxLength": 800},
+    "relevantTiming": {"type": "string", "maxLength": 400},
+    "relationshipContext": {"type": "string", "maxLength": 800},
+    "decisionContext": {"type": "string", "maxLength": 800},
+    "currentCondition": {"type": "string", "maxLength": 800},
+    "complexitySignals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "persistent": {"type": "boolean"},
+        "multiFactor": {"type": "boolean"},
+        "caseSpecific": {"type": "boolean"},
+        "realityDependent": {"type": "boolean"}
+      }
+    }
+  }
+}

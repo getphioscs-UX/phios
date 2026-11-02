@@ -1,0 +1,33 @@
+{
+  "acceptanceCode": "KAU-E1-LEGACY-RECONCILIATION-ACCEPTANCE",
+  "acceptanceVersion": "1.0.0",
+  "workCode": "KAU-E1",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "baselineCommit": "fb0be62d25669e4e6c81f9b6e459afd2ca0c6633",
+  "sourceCount": 2,
+  "sectionInventoryCount": 207,
+  "legacySectionCount": 185,
+  "terminologyCount": 33,
+  "candidateMatchCount": 185,
+  "humanReviewCount": 185,
+  "canonicalNodeCount": 716,
+  "canonicalNodeRegistryDigestBefore": "sha256:61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+  "canonicalNodeRegistryDigestAfter": "sha256:61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431",
+  "checks": {
+    "e0RegistrationRequired": true,
+    "twoRegisteredSourcesRequired": true,
+    "sectionInventoryCreated": true,
+    "terminologyInventoryCreated": true,
+    "existingNodeCandidateMatchingCreated": true,
+    "crossBookCandidateReconciliationCreated": true,
+    "humanReviewQueueCreated": true,
+    "acceptedCanonicalRelationshipsCreated": false,
+    "canonicalRegistryMutated": false,
+    "newCanonicalNodesCreated": false,
+    "meaningAuthorityMutated": false,
+    "productionReadinessPromoted": false,
+    "rawLegacyToKPPForbidden": true
+  },
+  "nextState": "HUMAN_REVIEW_THEN_KAU_E2_EXTENSION_ACCEPTANCE_AND_FREEZE",
+  "note": "KAU-E1 creates inventories, deterministic candidate matches, reconciliation candidates and a human review queue only. It does not accept canonical relationships."
+}

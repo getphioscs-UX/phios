@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-LIMITED-PRODUCTION-LIVE-EVIDENCE-v1.0.0",
+  "work": "ICH-PROD-W31-LIVE-LIMITED-PRODUCTION-EVIDENCE-ADMISSION",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "ADMITTED_LIVE_LIMITED_PRODUCTION_V2_EXACT_SHA",
+  "evidenceSource": {
+    "mode": "OPERATOR_EXECUTED_LIVE_CHECKER_OUTPUT",
+    "checker": "scripts/check-iching-limited-production-live-v2.mjs",
+    "checkerSha256": "b2ffababa2d86541d76a897d0bbe11918acbe3755966833c57c115ddd79c2463",
+    "reportedResult": "PASS",
+    "reportedOutput": "I Ching LIVE LIMITED_PRODUCTION v2 passed for 025588253432e411b130a61bf4b38fe540cfcf54. Access identity + production D1 probe + beta session + current context + stable depth execution are live; save remains explicit-consent fail-closed.",
+    "rawAccessCookieStored": false,
+    "rawAccountIdentityStored": false,
+    "sessionSecretStored": false,
+    "operatorTimestampFabricated": false
+  },
+  "deployment": {
+    "baseUrl": "https://phios-github.pages.dev",
+    "commitSha": "025588253432e411b130a61bf4b38fe540cfcf54",
+    "sessionEndpoint": "/api/iching-limited-session-v2",
+    "stableExecutionEndpoint": "/api/symbolic-method-execute",
+    "runtimeStatusEndpoint": "/api/iching-runtime-status",
+    "sessionEndpointVersion": "2.0.0"
+  },
+  "admittedLiveGates": {
+    "cloudflareAccessIdentityVerified": true,
+    "productionD1WriteReadCleanupVerified": true,
+    "signedBetaSessionCreated": true,
+    "deployedCurrentShaAligned": true,
+    "limitedProductionRuntimeStatusVerified": true,
+    "stableDepthExecutionVerified": true,
+    "depthRuntimeVersion": "2.0.0",
+    "humanApprovedDepthCoverage": "448/448",
+    "retentionRemainsExplicitConsentOnly": true,
+    "guestAuthorityNotPromoted": true
+  },
+  "authorityBindings": {
+    "limitedProductionFreezeV2": {
+      "path": "content/production/symbolic-method/freeze/iching-limited-production-implementation-freeze-v2.json",
+      "sha256": "c7ca32f02f57848f8c6f73938b913d8e86a702bec3ffc041565c73ba8057c4d5"
+    },
+    "persistenceCurrentV4": {
+      "path": "content/interpretation/iching/reconciliation/iching-persistence-current-successor-v4.json",
+      "sha256": "c70cf79f5eb6fe98d9066d7c17b5edcc625a351d767bcda54ecc56c94e7ec229"
+    },
+    "currentMasterV6": {
+      "path": "scripts/check-iching-current-v6.mjs",
+      "sha256": "74cb48123f42dedc9c5762397c97e18e38b455b726281c8481d1667f2dc271ae"
+    }
+  },
+  "scope": {
+    "authorityState": "LIMITED_PRODUCTION",
+    "fullProduction": false,
+    "globalPublicExecutionClaimed": false,
+    "jurisdictionScopeExpanded": false,
+    "humanReviewReopened": false,
+    "depthAdmissionReopened": false
+  },
+  "nextAction": "RUN_ICH_PROD_W32_LIVE_OBSERVATION_CAMPAIGN_AGAINST_THE_SAME_EXACT_DEPLOYMENT_SHA"
+}

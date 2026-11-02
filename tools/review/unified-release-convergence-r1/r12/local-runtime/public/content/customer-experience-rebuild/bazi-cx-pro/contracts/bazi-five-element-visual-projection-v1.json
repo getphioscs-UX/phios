@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-FIVE-ELEMENT-VISUAL-PROJECTION-CONTRACT-v1.0.0",
+  "work": "BAZI-CX-PRO-W2",
+  "status": "ENGINEERING_COMPLETE",
+  "projectionSchema": "PHI-OS-BAZI-CX-PRO-FIVE-ELEMENT-VISUAL-PROJECTION-v1.0.0",
+  "elements": ["WOOD", "FIRE", "EARTH", "METAL", "WATER"],
+  "rawRatio": {
+    "sources": ["visibleStems", "visibleBranches", "hiddenStemsUnweighted"],
+    "aggregation": "EQUAL_COUNT_FIRST_LAYER",
+    "display": "PERCENT_OF_COMBINED_RAW_INVENTORY",
+    "isStrengthScore": false
+  },
+  "correctedTendency": {
+    "mode": "QUALITATIVE_MONTH_COMMAND_RELATION_ONLY",
+    "relations": [
+      "SAME_AS_MONTH_COMMAND",
+      "GENERATED_BY_MONTH_COMMAND",
+      "GENERATES_MONTH_COMMAND",
+      "CONTROLLED_BY_MONTH_COMMAND",
+      "CONTROLS_MONTH_COMMAND"
+    ],
+    "numericWeightedStrengthAvailable": false,
+    "finalStrongWeakVerdict": false
+  },
+  "dayMasterFunctionalGroups": ["PEER", "RESOURCE", "OUTPUT", "WEALTH", "OFFICER"],
+  "tenGodPreview": {
+    "source": "visiblePlusHiddenUnweighted",
+    "purpose": "VISUAL_PREVIEW_ONLY",
+    "fullCompositionDeferredTo": "BAZI-CX-PRO-W3"
+  },
+  "prohibitedFabrication": {
+    "hiddenStemWeightsInvented": false,
+    "fakeWeightedPercentCreated": false,
+    "goodBadScoreCreated": false,
+    "fortunePredictionCreated": false
+  }
+}

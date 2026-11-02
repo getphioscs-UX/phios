@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-DAR-W19-WILL-PROFESSIONAL-LEGAL-ESCALATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W19",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_FAIL_CLOSED_ESCALATION",
+  "runtime": "functions/legal/will/escalation-gate.js",
+  "signals": [
+    "UNSUPPORTED_JURISDICTION",
+    "CROSS_BORDER_ESTATE",
+    "COMPLEX_TRUST",
+    "SPECIAL_NEEDS_BENEFICIARY",
+    "COMPANY_SUCCESSION",
+    "CONFLICTING_OWNERSHIP",
+    "LARGE_DIGITAL_ASSET_ARRANGEMENT",
+    "CUSTOM_CLAUSE",
+    "NON_STANDARD_FAMILY_STRUCTURE"
+  ],
+  "result": {
+    "onAnySignal": "AUTOMATIC_ASSEMBLY_BLOCKED",
+    "requiredNextState": "LEGAL_REVIEW_REQUIRED"
+  },
+  "rules": {
+    "signalsMustBeExplicitOrRegistryDerived": true,
+    "familyStructureMustNotBeGuessed": true,
+    "jurisdictionMustNotBeInferred": true,
+    "automaticBestEffortAssemblyForbidden": true
+  }
+}

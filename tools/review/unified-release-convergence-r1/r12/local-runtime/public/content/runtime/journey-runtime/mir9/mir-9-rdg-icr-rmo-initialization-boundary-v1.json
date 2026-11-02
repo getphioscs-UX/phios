@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-MIR-9-RDG-ICR-RMO-INITIALIZATION-BOUNDARY-v1.0.0",
+  "work": "MIR-9F",
+  "status": "ACTIVE_REFERENCE_ONLY_HANDOFF",
+  "chain": [
+    "Consented Reading→Reality Handoff",
+    "RDG-governed verified inputs",
+    "ICR Canonical Case",
+    "ICR Reality Initialization Request",
+    "RMO acceptance",
+    "Reality v1"
+  ],
+  "authorities": {
+    "consentAndPersistence": "RDG",
+    "verifiedInputAndCase": "ICR",
+    "realityIdentityAndVersion": "RMO"
+  },
+  "requiredPreservedLayers": [
+    "evidence",
+    "unknown",
+    "state",
+    "relationship",
+    "constraint",
+    "interpretation",
+    "action",
+    "outcome"
+  ],
+  "rules": {
+    "mir9MayVerifyInput": false,
+    "mir9MayCreateCanonicalCase": false,
+    "mir9MayCreateRealityIdentity": false,
+    "mir9MayPersistCase": false,
+    "icrMayCreateRealityV1": false,
+    "rmoAcceptanceRequired": true,
+    "rdgGovernanceRequired": true
+  }
+}

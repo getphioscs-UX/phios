@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-RLR-HDR-INTERNAL-RELATIONAL-CONTRACT-v1.0.0",
+  "work": "RLR-W2",
+  "status": "FROZEN_V1",
+  "outputSchema": "PHI-OS-INTERNAL-OPERATING-RELATIONAL-PROJECTION-v1.0.0",
+  "visibility": "INTERNAL_ONLY",
+  "publicVocabulary": "PHI_OS_ONLY",
+  "sourceReadings": {
+    "personA": "PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0",
+    "personB": "PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0"
+  },
+  "allowedAccessClasses": [
+    "GOVERNED_INTERNAL_PROFESSIONAL",
+    "GOVERNED_INTERNAL_QA"
+  ],
+  "requires": {
+    "bothPersonsInternalOperatingRelationalConsent": true,
+    "publicRequestFalse": true
+  },
+  "projectionDimensions": [
+    "SHARED_STABLE_STRUCTURE",
+    "SHARED_VARIABLE_STRUCTURE",
+    "A_STABLE_TO_B_VARIABLE",
+    "B_STABLE_TO_A_VARIABLE",
+    "INTEGRATION_CONTEXT"
+  ],
+  "rules": {
+    "combinedBodyGraphCalculationAllowed": false,
+    "traditionalConnectionMechanicMeaningCreated": false,
+    "conditioningDiagnosisAllowed": false,
+    "publicResultAllowed": false,
+    "compatibilityScoreAllowed": false,
+    "relationshipVerdictAllowed": false
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-CX-P1-LEGACY-DELETE-PLAN-v1.0.0",
+  "work": "PRIORITY_LEGACY_DELETE_P1",
+  "status": "BLOCKED_UNTIL_P1_PRODUCTION_BROWSER_ACCEPTANCE",
+  "mandatoryRule": "REPLACEMENT_ACCEPTED + ZERO_ACTIVE_CONSUMER + ROUTE_CUTOVER + NPM_CHECKS + BROWSER_SMOKE = PHYSICAL_DELETE",
+  "candidates": [
+    {
+      "path": "my-reality.html",
+      "surface": "MY_REALITY",
+      "deleteAfter": "P1_BROWSER_ACCEPTED"
+    },
+    {
+      "path": "reality-dashboard.html",
+      "surface": "MY_REALITY",
+      "deleteAfter": "P1_BROWSER_ACCEPTED"
+    },
+    {
+      "path": "personal-runtime.html",
+      "surface": "PERSONAL_REALITY",
+      "deleteAfter": "P1_BROWSER_ACCEPTED"
+    },
+    {
+      "path": "financial-reality.html",
+      "surface": "FINANCIAL_REALITY",
+      "deleteAfter": "P1_BROWSER_ACCEPTED"
+    },
+    {
+      "path": "knowledge-search.html",
+      "surface": "ASK_LEGACY_ALIAS",
+      "deleteAfter": "P1_BROWSER_ACCEPTED_AND_ZERO_NON_ROUTE_CONSUMER"
+    }
+  ],
+  "protected": [
+    "functions/",
+    "runtime/",
+    "content/professional/",
+    "content/financial/",
+    "content/knowledge/",
+    "content/reality/",
+    "scripts/"
+  ],
+  "mandatoryPhysicalDeleteAfterAcceptance": true,
+  "protectedClasses": [
+    "runtime functions",
+    "canonical registries",
+    "method calculation",
+    "knowledge authority",
+    "financial authority",
+    "reality authority",
+    "report authority",
+    "governance tests",
+    "migration evidence"
+  ]
+}

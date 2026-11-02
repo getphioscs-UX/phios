@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W0-CURRENT-AUTHORITY-AUDIT-v1.0.0",
+  "work": "BAZI-FP-W0",
+  "baselineCommit": "14b6735b1ffb804c160b0b5306646994ee1ab1dd",
+  "status": "COMPLETE",
+  "currentRuntime": {
+    "natalCalculation": {
+      "state": "AVAILABLE_BOUND_SCOPE",
+      "evidence": [
+        "functions/core-method-runtime/bzr-solar-calendar-runtime.js",
+        "functions/core-method-runtime/bzr-four-pillars-runtime.js"
+      ]
+    },
+    "luckCycleCalculation": {
+      "state": "AVAILABLE_BOUND_SCOPE",
+      "evidence": [
+        "functions/core-method-runtime/bzr-luck-cycle-runtime.js"
+      ]
+    },
+    "canonicalProjection": {
+      "state": "AVAILABLE_V1",
+      "surface": [
+        "STEM",
+        "BRANCH",
+        "PILLAR",
+        "LUCK_CYCLE"
+      ],
+      "evidence": [
+        "content/professional/bzr-production/registries/bzr-projection-coverage-v1.json"
+      ]
+    },
+    "canonicalMeaning": {
+      "state": "AVAILABLE_BUT_SHALLOW",
+      "activeMappingCount": 27,
+      "coverage": {
+        "STEM": 10,
+        "BRANCH": 12,
+        "PILLAR": 4,
+        "LUCK_CYCLE_SEQUENCE": 1
+      },
+      "evidence": [
+        "content/professional/bzr-production/registries/bzr-meaning-production-coverage-v1.json"
+      ]
+    },
+    "temporal": {
+      "state": "AVAILABLE_V2_BOUND_SCOPE",
+      "included": [
+        "NATAL",
+        "CURRENT_LUCK_CYCLE",
+        "ANNUAL_LI_CHUN_CONTEXT"
+      ],
+      "deferred": [
+        "MONTHLY",
+        "DAILY",
+        "HOURLY",
+        "TEN_GODS",
+        "USEFUL_GOD",
+        "PATTERN_CLASSIFICATION"
+      ],
+      "evidence": [
+        "content/professional/bzr-temporal/contracts/bzr-temporal-scope-v1.json"
+      ]
+    },
+    "customerComposition": {
+      "state": "STRUCTURALLY_CONNECTED_CONTENT_DEPTH_INSUFFICIENT",
+      "evidence": [
+        "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+        "functions/single-method-reading/bazi-single-method-composer.js"
+      ]
+    }
+  },
+  "confirmedCapabilities": [
+    "CANONICAL_BIRTH_INPUT",
+    "IANA_TIMEZONE_LINEAGE",
+    "TRUE_SOLAR_TIME",
+    "EXACT_LI_CHUN_YEAR_BOUNDARY",
+    "EXACT_TWELVE_JIE_MONTH_BOUNDARY",
+    "THREE_OR_FOUR_PILLARS",
+    "NO_SYNTHETIC_HOUR",
+    "DETERMINISTIC_LUCK_CYCLE_SEQUENCE",
+    "CURRENT_LUCK_CYCLE_CONTEXT",
+    "ANNUAL_LI_CHUN_CONTEXT"
+  ],
+  "missingOrInsufficientForFullReading": [
+    {
+      "capability": "CUSTOMER_READABLE_CHART_IDENTITY",
+      "gap": "raw pinyin codes can surface; no unified Chinese stem/branch/element/polarity/hidden-stem chart IR"
+    },
+    {
+      "capability": "HIDDEN_STEMS_AND_ROOTS",
+      "gap": "not present in current Canonical Method Projection"
+    },
+    {
+      "capability": "STRENGTH_SEASONAL_ANALYSIS",
+      "gap": "no source-bound evidence model or governed strong/weak conclusion"
+    },
+    {
+      "capability": "STEM_BRANCH_RELATIONS",
+      "gap": "合冲刑害破/三合/三会 are not calculated in current customer projection"
+    },
+    {
+      "capability": "TEN_GODS",
+      "gap": "explicitly excluded from current BZR production scope"
+    },
+    {
+      "capability": "PATTERN_CLASSIFICATION",
+      "gap": "explicitly deferred"
+    },
+    {
+      "capability": "USEFUL_GOD_TIAOHOU",
+      "gap": "explicitly deferred and school authority absent"
+    },
+    {
+      "capability": "NATAL_DA_YUN_LIU_NIAN_INTERACTION",
+      "gap": "temporal structure exists but interpretation interaction model is absent"
+    },
+    {
+      "capability": "CHART_LEVEL_COMPOSITION",
+      "gap": "current composer creates one near-identical unit per pillar rather than chart-level findings"
+    },
+    {
+      "capability": "SEMANTIC_DEDUPLICATION",
+      "gap": "current per-pillar units repeat the same boundary and generic meaning language"
+    },
+    {
+      "capability": "BAZI_SPECIFIC_UX",
+      "gap": "generic method layout exposes technical structure before prioritized BaZi reading"
+    }
+  ],
+  "rootCause": {
+    "currentCompositionRule": "CX-COMP-BZR-PILLAR-DAY-SEASON-v1",
+    "currentUnitShape": "ONE_UNIT_PER_YEAR_MONTH_DAY_HOUR_PILLAR",
+    "failureMode": "VARIABLE_SUBSTITUTION_OVER_SHALLOW_ATOMIC_MEANING",
+    "decision": "DO_NOT_PATCH_MORE_PILLAR_PARAGRAPHS; BUILD_CHART_LEVEL_STRUCTURAL_FINDINGS_THEN_COMPOSE"
+  },
+  "successorDecision": {
+    "scopeCode": "BAZI_FULL_PRODUCTION_V2",
+    "predecessorsMutated": false,
+    "canonicalProjectionReused": true,
+    "secondProjectionAuthorityCreated": false,
+    "newLayer": "SOURCE_GOVERNED_BAZI_STRUCTURAL_ANALYSIS_IR",
+    "customerPublicationRemainsBlockedUntil": "W18_HUMAN_REVIEW_AND_W19_GATE"
+  }
+}

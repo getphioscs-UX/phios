@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-STAR-COMBINATION-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W7",
+  "status": "ENGINEERING_COMPLETE",
+  "runtime": "functions/zi-wei-full-production/ziwei-star-combination-runtime.js",
+  "inputSchemas": [
+    "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-ZIWEI-COMPLETE-STAR-PLACEMENT-v1.0.0",
+    "PHI-OS-ZIWEI-STAR-STATE-RESULT-v1.0.0",
+    "PHI-OS-ZIWEI-FOUR-TRANSFORMATION-MATRIX-v1.0.0",
+    "PHI-OS-ZIWEI-PALACE-RELATIONSHIP-ENGINE-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-ZIWEI-STAR-COMBINATION-RUNTIME-v1.0.0",
+  "requiredOutput": [
+    "palaceCombinations",
+    "samePalacePairs",
+    "networkPairs",
+    "networks",
+    "transformationBindings",
+    "combinationDigest"
+  ],
+  "invariants": [
+    "28_UNIQUE_STAR_BASELINE",
+    "NO_STAR_REPLACEMENT_OR_COPY",
+    "NO_EMPTY_PALACE_BORROWED_PLACEMENT",
+    "NO_TRADITIONAL_PATTERN_QUALIFICATION",
+    "NO_INTERPRETATION_OR_GOOD_BAD_SCORE"
+  ]
+}

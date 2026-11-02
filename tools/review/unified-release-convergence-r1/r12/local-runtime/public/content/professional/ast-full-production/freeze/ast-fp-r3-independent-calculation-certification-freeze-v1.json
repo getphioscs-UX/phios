@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-INDEPENDENT-CALCULATION-CERTIFICATION-FREEZE-v1.0.0",
+  "workCode": "AST-FP-R3",
+  "certificationBaselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "FROZEN_INDEPENDENT_EPHEMERIS_CERTIFIED",
+  "certification": {
+    "command": "npm run check:ast-fp-r3",
+    "requiredResult": "PASS",
+    "observedResult": "PASS",
+    "evidenceOrigin": "USER_ATTESTED_DIRECT_COMMAND_PASS",
+    "attestedAt": "2026-08-29T08:57:00.000Z",
+    "localConsoleLogCapturedInThisBuild": false,
+    "reason": "The user explicitly reported a real direct PASS on the dependency-complete latest-main workspace. The aligned ZIP used for packaging does not include node_modules, so this artifact does not fabricate a second local execution log."
+  },
+  "evidenceRefs": {
+    "certificationAcceptanceRef": "content/professional/ast-full-production/acceptance/ast-fp-r3-independent-calculation-certification-v1.json",
+    "authorityRef": "content/professional/ast-full-production/authority/ast-fp-r3-independent-reference-authority-v1.json",
+    "contractRef": "content/professional/ast-full-production/contracts/ast-fp-r3-independent-calculation-certification-contract-v1.json",
+    "referenceFixtureRef": "content/professional/ast-full-production/fixtures/ast-fp-r3-independent-reference-v1.json",
+    "runtimeChecker": "scripts/check-ast-fp-r3-independent-calculation.mjs"
+  },
+  "campaignSnapshot": {
+    "cases": 10,
+    "existingR2Cases": 8,
+    "newEdgeCases": 2,
+    "core10ReferenceRows": 100,
+    "trueNodeReferenceRows": 20,
+    "houseSystems": [
+      "PLACIDUS_V1",
+      "WHOLE_SIGN_V1"
+    ],
+    "naturalMajorAspectCounts": {
+      "CONJUNCTION": 33,
+      "SEXTILE": 30,
+      "SQUARE": 24,
+      "TRINE": 24,
+      "OPPOSITION": 17
+    },
+    "robustMajorAspectCounts": {
+      "CONJUNCTION": 32,
+      "SEXTILE": 29,
+      "SQUARE": 23,
+      "TRINE": 24,
+      "OPPOSITION": 17
+    },
+    "syntheticOrbBoundaryChecksRequired": 10
+  },
+  "shadowValidationSnapshot": {
+    "status": "PASS",
+    "scope": "UTC + PHI_OS_ANGLE_HOUSE_FORMULAS_VS_STATIC_SWISS_REFERENCE; DOES_NOT_SUBSTITUTE_DIRECT_ASTRONOMY_ENGINE_RUNTIME_GATE",
+    "maxAngleErrorDegrees": 0.035726894,
+    "maxPlacidusCuspErrorDegrees": 0.035726894,
+    "stableHousePlacementReferenceRows": 227,
+    "boundarySensitiveHousePlacementRowsSkippedByContract": 1,
+    "polarCase": "ASTR3-10",
+    "preFixPolarAscendantErrorDegrees": 179.995275265,
+    "postFixPolarAscendantErrorDegrees": 0.004724735,
+    "quarterHourOffsetCase": "ASTR3-09"
+  },
+  "defectClosureSnapshot": {
+    "code": "AST_R3_EASTERN_ASCENDANT_BRANCH",
+    "productionFile": "functions/ast-production/ast-structural-calculation-runtime.js",
+    "state": "IMPLEMENTED",
+    "existingR2FixtureBranchChoiceUnchanged": true,
+    "newPolarWholeSignBranchCorrected": true,
+    "placidusPolarFailClosedPreserved": true
+  },
+  "scope": {
+    "independentEphemerisAccuracyCertificationEstablished": true,
+    "grantsCustomerMeaningAdmission": false,
+    "grantsFinalReportHumanAcceptance": false,
+    "grantsCustomerCutoverByItself": false,
+    "grantsDeploymentFreezeByItself": false
+  }
+}

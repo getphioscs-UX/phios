@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v3.0.0",
+  "work": "PRF-CUSTOMER-FULL-PRODUCTION-CUTOVER",
+  "baselineCommit": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+  "predecessor": "content/profile/ux/profile-progressive-ux-contract-v2.json",
+  "customerFlow": ["OPTIONAL_DEEPEN_MY_PROFILE","CHOOSE_PROFILE_MODE","ANSWER_OR_IMPORT","SOURCE_AWARE_RESULT","OPTIONAL_CURRENT_REALITY_COMPARISON"],
+  "personalReading": {"profileRequiredBeforeReading":false,"skipAllowed":true,"skipDestination":"/perspectives/personal/","profileFailureMayBlockSupportedSymbolicProduct":false,"profileFailureMayBlockCurrentRealityProduct":false},
+  "modes": [
+    {"mode":"QUICK_PROFILE","sourceClass":"CUSTOMER_SELF_REPORT","optional":true},
+    {"mode":"FULL_SELF_ASSESSMENT","sourceClass":"CUSTOMER_SELF_REPORT","optional":true},
+    {"mode":"REASONING_TASKS","sourceClass":"MEASURED_TASK_PERFORMANCE","optional":true},
+    {"mode":"IMPORT_EXTERNAL_RESULT","sourceClass":"EXTERNAL_PROFILE_RESULT","optional":true},
+    {"mode":"BIG_FIVE","sourceClass":"STANDARDIZED_SELF_REPORT","provider":"IPIP","optional":true,"submodes":["IPIP_BIG_FIVE_50","IPIP_NEO_120"]},
+    {"mode":"FINANCIAL_CAPABILITY","sourceClass":"MIXED_MEASURED_AND_STANDARDIZED_SELF_REPORT","provider":"PHI_OS_ADAPTED_OECD_INFE_2026","optional":true},
+    {"mode":"CAREER_INTERESTS","sourceClass":"STANDARDIZED_SELF_REPORT","provider":"O_NET_WEB_SERVICES_V2","optional":true,"submodes":["MINI_30","SHORT_60"],"providerQuestionTextVerbatim":true,"serverSideCredentialOnly":true}
+  ],
+  "resultUx": {"sourceClassLegendRequired":true,"assessmentDateVisible":true,"oldResultWarningRequired":true,"provenanceVisibleOnDemand":true,"currentRealityComparisonOptional":true,"academicRawScoreVisualRequired":true,"careerExplorationLanguageRequired":true},
+  "boundaries": {"quotientLabelsAllowed":false,"diagnosticLanguageAllowed":false,"universalMasterScoreAllowed":false,"symbolicScientificValidationTransferAllowed":false,"compatibilityPercentageAllowed":false,"partnerMindReadingAllowed":false,"automaticPersistenceAllowed":false,"jobFitGuaranteeAllowed":false,"employmentDecisionAuthority":false,"officialOecdScoreClaimAllowed":false,"financialAdviceAuthority":false},
+  "publication": {"route":"/perspectives/profile/","customerPublicationAllowed":true,"surfaceCutoverExecuted":true,"indexing":"INDEX_FOLLOW"},
+  "gate": "check:profile:customer-full-production"
+}

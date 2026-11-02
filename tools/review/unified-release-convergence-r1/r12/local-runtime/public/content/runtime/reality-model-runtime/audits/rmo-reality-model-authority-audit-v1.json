@@ -1,0 +1,124 @@
+{
+  "auditCode": "PHI-OS-RMO-W0-REALITY-MODEL-AUTHORITY-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "RMO-W0",
+  "status": "reconciled",
+  "baselineCommit": "0732b3dfef7c15d3571d980887f1423b68eee6a2",
+  "scope": "RMO-W0-W4 Reality Foundation",
+  "digestMode": "UTF8_NO_BOM_LF",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json",
+      "sha256": "1aa8a7b20450070c86322733acac45508bc67a4eb9ba75a6b3ccf4d6608bdf22",
+      "classification": "FROZEN_ICR_AUTHORITY",
+      "finding": "ICR owns Canonical Input, Verified Input, Canonical Case and the RMO initialization request; it does not create Reality v1."
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/contracts/canonical-reality-initialization-handoff-v1.json",
+      "sha256": "f35aa1e16fe35418b39453206978538cdf1f794d58d83a199813aa8862752d89",
+      "classification": "ICR_RMO_HANDOFF_AUTHORITY",
+      "finding": "RMO must accept the immutable ICR request and referenced Case before creating Reality v1."
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/schemas/reality-initialization-request-v1.schema.json",
+      "sha256": "3db100bba94df41947c4153ecfb06420992c553ed77402c0e91c0e5492edf364",
+      "classification": "ICR_RMO_HANDOFF_SCHEMA",
+      "finding": "The handoff carries references and digests, not an input or Reality payload."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "classification": "MASTER_WORK_AUTHORITY",
+      "finding": "RMO-W0 through RMO-W15 are the planned successors to frozen ICR-W0 through ICR-W9."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-runtime-plane-registry-v1.json",
+      "sha256": "f6837142a46c1f9f0e965c3f1a38038fd7a6e13ea6d47e2d48e470576a83eae8",
+      "classification": "RUNTIME_PLANE_AUTHORITY",
+      "finding": "RMO is a Runtime-plane authority while RDG remains Governance-plane authority."
+    },
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-runtime-dependency-registry-v1.json",
+      "sha256": "f69a1954d0f9191cfabeb69a1e175df87670b3fd65ffe83f5ff51ee2250da2e6",
+      "classification": "RUNTIME_DEPENDENCY_AUTHORITY",
+      "finding": "No canonical RMO dependency entry exists at baseline; this foundation defines a local ICR-to-RMO acceptance without mutating the shared dependency registry."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+      "sha256": "04d307980a6e0f232b2c068f8ba6015027c4b13cc88951121f79850b8f8db996",
+      "classification": "RDG_CROSS_RUNTIME_DATA_CONTRACT",
+      "finding": "RMO alone produces RUNTIME_STATE_RECORD and consumes REALITY_INPUT_RECORD, REALITY_EVIDENCE_RECORD and GOVERNANCE_RECORD."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/canonical-data-object-contract-v1.json",
+      "sha256": "b2daf0d13a3761d9f8ec294cada1c33da1512f75eef4aa53a46d961dfad064b9",
+      "classification": "RDG_DATA_ENVELOPE_AUTHORITY",
+      "finding": "RMO may model Runtime state but does not acquire governance authority from the data envelope."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-nature-registry-v1.json",
+      "sha256": "4251781634baafbb4963f4901def5adca0110ca72b63649a74d468cf60a18490",
+      "classification": "RDG_DATA_NATURE_AUTHORITY",
+      "finding": "RMO references controlled data natures and does not redefine Observed, Derived, Inferred or Interpreted semantics."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/registries/canonical-data-certainty-registry-v1.json",
+      "sha256": "0854cd9860e58eec2b98c7c9c64c4a70d7e8558c7020cb807176f43a0711f07c",
+      "classification": "RDG_CERTAINTY_AUTHORITY",
+      "finding": "Certainty remains distinct from data nature and Unknown remains representable."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json",
+      "sha256": "c61bef5b68141f7135b7d44c232b7260dc438c5f35f9d028673dbfcaeba920da",
+      "classification": "RDG_EVIDENCE_ELIGIBILITY_AUTHORITY",
+      "finding": "Entity, Event or Signal creation cannot promote a record to Evidence."
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/sensitive-inference-firewall-v1.json",
+      "sha256": "2faf5f39063b6728c4892c47fd57d35f470943916d44f6852a5bd7e29add8de8",
+      "classification": "RDG_INFERENCE_FIREWALL",
+      "finding": "RMO-W0-W4 does not activate sensitive inference or interpretation."
+    },
+    {
+      "reference": "content/professional/cross-runtime-authority/runtime-authority-registry-v1.json",
+      "sha256": "446f4c93fa156af704daf9fa6946d284c8b020685bc8c6eefb85dc8631c42f76",
+      "classification": "FROZEN_CROSS_RUNTIME_AUTHORITY",
+      "finding": "Existing Shared Data and Method authority boundaries remain unchanged."
+    },
+    {
+      "reference": "functions/runtime/registry/contract-registry.js",
+      "sha256": "fa3b2169a763c12314261a31a472efc08d9ac782358c0cf01d389c009cb0ee49",
+      "classification": "EXISTING_OPERATIONAL_RUNTIME_CONTRACTS",
+      "finding": "The existing Journey Runtime contract registry remains operational authority and is not rewritten as the Canonical Reality Model."
+    },
+    {
+      "reference": "functions/runtime/timeline/event-types.js",
+      "sha256": "f9cd0776f4c7fbf837895a091d9ab4b66f0b954baa1f322580a48dbd4ea2ad04",
+      "classification": "EXISTING_OPERATIONAL_TIMELINE",
+      "finding": "Operational Runtime events are distinct from RMO Reality Events and remain byte-unmodified."
+    },
+    {
+      "reference": "functions/runtime/formation/book-1-runtime-model.js",
+      "sha256": "1c3feac7a6c6a5ee818ab03abb0046e84e26dec04508dbaa47efa3e6924ecb45",
+      "classification": "EXISTING_PRESENTATIONAL_REALITY_MODEL",
+      "finding": "Book I Runtime formation remains an existing projection model, not the new RMO canonical state authority."
+    }
+  ],
+  "authorityDecision": {
+    "canonicalRealityOwner": "RMO",
+    "realityOutputDataType": "RUNTIME_STATE_RECORD",
+    "canonicalCaseOwner": "ICR",
+    "dataGovernanceOwner": "RDG",
+    "operationalJourneyOwner": "EXISTING_RUNTIME",
+    "entityEventSignalOwner": "RMO",
+    "realityEventIsOperationalTimelineEvent": false,
+    "signalIsEvidence": false,
+    "signalIsInterpretationOrInference": false,
+    "rmoMayReadCustomerDatabaseDirectly": false,
+    "rmoMayPromoteEvidence": false,
+    "providerOrAiMayCreateRealityAuthority": false,
+    "sharedGovernanceRegistriesMutated": false,
+    "existingOperationalRuntimeMutated": false
+  },
+  "existingRuntimeOrUserDataMutated": false
+}

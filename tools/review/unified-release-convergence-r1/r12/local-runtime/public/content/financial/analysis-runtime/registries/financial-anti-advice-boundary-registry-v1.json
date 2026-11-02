@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W20-ANTI-ADVICE-BOUNDARY-v1.0.0",
+  "phase": "FAR",
+  "work": "FAR-W20",
+  "status": "ACTIVE_BLOCKLIST",
+  "blockedPatterns": [
+    "\\brecommend\\b",
+    "\\bshould\\s+buy\\b",
+    "\\bmust\\s+invest\\b",
+    "\\bchoose\\s+(an?\\s+)?provider\\b",
+    "\\bestablish\\s+(an?\\s+)?trust\\b",
+    "\\btransfer\\s+property\\b",
+    "\\bpurchase\\s+insurance\\b"
+  ],
+  "scanTargets": [
+    "FAR_FINDING_SUMMARY",
+    "FAR_FINDING_LIMITATIONS",
+    "FAR_RUNTIME_USER_VISIBLE_TEXT"
+  ],
+  "fixtureException": "anti-advice-block.json",
+  "rules": {
+    "blockedTextMayBeEmittedByFar": false,
+    "fixtureMayContainBlockedCandidateOnlyForNegativeTest": true
+  }
+}

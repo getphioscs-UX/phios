@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R2-HUMAN-ADMITTED-CANDIDATE-CONTRACT-v1.0.0",
+  "workCode": "AST-FP-R2",
+  "sourceMainCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "predecessorContractRef": "content/professional/ast-full-production/contracts/ast-fp-engineering-contract-v1.json",
+  "reviewCasesRef": "content/professional/ast-full-production/review/ast-fp-review-cases-v1.json",
+  "humanReviewResultsRef": "content/professional/ast-full-production/review/ast-fp-review-results-v1.json",
+  "candidateAdmissionRef": "content/professional/ast-full-production/admission/ast-fp-r2-candidate-human-admission-v1.json",
+  "admittedCompositionVersion": "AST-FP-COMPOSITION-CANDIDATE-v1.0.0",
+  "eligibility": {
+    "methodId": "AST",
+    "candidateSchemaVersion": "PHI-OS-METHOD-INTERPRETATION-CANDIDATE-v2.0.0",
+    "exactCaseMembershipRequired": true,
+    "exactProjectionDigestRequired": true,
+    "exactSemanticDigestRequired": true,
+    "exactInterpretationDigestRequired": true,
+    "exactLocaleRequired": true,
+    "humanDecisionRequired": "HUMAN_ACCEPTED"
+  },
+  "effects": {
+    "engineeringCandidateHumanAccepted": true,
+    "candidateMayBeUsedAsEvidenceForNextEngineeringPhase": true,
+    "genericLiveCandidateAdmission": false,
+    "customerPublicationAllowed": false,
+    "productionAllowed": false,
+    "defaultCustomerCutover": false
+  },
+  "invalidation": [
+    "PROJECTION_DIGEST_CHANGED",
+    "SEMANTIC_DIGEST_CHANGED",
+    "INTERPRETATION_DIGEST_CHANGED",
+    "COMPOSITION_VERSION_CHANGED",
+    "LOCALE_CHANGED",
+    "HOUSE_SYSTEM_CHANGED"
+  ],
+  "boundaries": {
+    "sourceUseBasisUnchanged": true,
+    "newAtomicMeaningCreated": false,
+    "higherOrderMeaningCreated": false,
+    "oldSmrHumanEvidenceReused": false,
+    "rendererMeaningAuthorityCreated": false
+  }
+}

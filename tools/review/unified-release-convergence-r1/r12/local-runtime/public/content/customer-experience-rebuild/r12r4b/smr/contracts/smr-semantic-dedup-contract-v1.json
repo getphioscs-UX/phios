@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-SEMANTIC-DEDUP-CONTRACT-v1.0.0",
+  "work": "R2-W5",
+  "levels": ["EVIDENCE", "CLAIM", "NARRATIVE"],
+  "decisions": ["PRIMARY_EXPLANATION", "SECONDARY_REFERENCE", "CONTEXT_DERIVATIVE", "SUPPRESSED_DUPLICATE"],
+  "rules": {
+    "evidenceLineageMayBeDeleted": false,
+    "exactDuplicateMustNotReceiveSecondFullExplanation": true,
+    "semanticDuplicateMustNotReceiveSecondFullExplanation": true,
+    "contextDerivativeRequiresNewInformation": true,
+    "tensionOrConditionMayRemainAsContextDerivative": true,
+    "crossSectionFullExplanationMax": 1,
+    "rendererMayBypassDedup": false,
+    "dedupMustBeDeterministic": true
+  },
+  "thresholds": {
+    "claimTokenJaccard": 0.72,
+    "claimEvidenceJaccard": 0.25,
+    "sameDimensionEvidenceJaccard": 0.5,
+    "narrativeTokenJaccard": 0.8
+  }
+}

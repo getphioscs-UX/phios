@@ -1,0 +1,169 @@
+{
+  "registryCode": "PHI-OS-ALR-W20-PRACTICE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W20",
+  "objectType": "PRACTICE",
+  "status": "canonical",
+  "productionStatus": "unscored_practice_content_semantics",
+  "contractReference": "content/academy/academy-learning-runtime/contracts/practice-registry-contract-v1.json",
+  "practices": [
+    {
+      "practiceCode": "ALR-LO-PRACTICE-EVIDENCE-DISTINCTION",
+      "practiceVersion": "1.0.0",
+      "knowledgeLearningBindingCode": "ALR-KLB-EVIDENCE-DISTINCTION",
+      "lessonCode": "ALR-LO-LESSON-EVIDENCE-DISTINCTION",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-SEPARATE-EVIDENCE-CLASSES", "ALR-LO-OBJECTIVE-PRESERVE-SOURCE-LINEAGE"],
+      "title": "Build an evidence-classification map",
+      "practiceMode": "UNSCORED_STRUCTURED_PRACTICE",
+      "taskSequence": [
+        "Extract each statement from the supplied synthetic learning scenario.",
+        "Classify each statement as observation, report, inference or unknown.",
+        "Attach the relevant source and uncertainty boundary.",
+        "Review the map for any inference that was promoted into fact."
+      ],
+      "learnerArtifactContract": {
+        "artifactType": "EVIDENCE_CLASSIFICATION_MAP",
+        "requiredElements": ["STATEMENT", "EVIDENCE_CLASS", "SOURCE_BOUNDARY", "UNCERTAINTY_NOTE"]
+      },
+      "selfCheckPrompts": [
+        "Can every observation be traced to a directly available signal?",
+        "Are reports still attributed and are inferences still labelled?",
+        "Which unknowns remain unresolved?"
+      ],
+      "scenarioBoundary": "Use only the synthetic Example and Case Study bound to this Lesson; the artifact is not Reality Evidence.",
+      "dataState": "DEFINITION_ONLY_NO_LEARNER_RESPONSE",
+      "assessmentState": "NOT_ASSESSMENT",
+      "status": "APPROVED",
+      "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED",
+      "authorityReference": "ALR"
+    },
+    {
+      "practiceCode": "ALR-LO-PRACTICE-BOUNDED-READING",
+      "practiceVersion": "1.0.0",
+      "knowledgeLearningBindingCode": "ALR-KLB-BOUNDED-READING",
+      "lessonCode": "ALR-LO-LESSON-BOUNDED-READING",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-BOUND-READING-CLAIMS", "ALR-LO-OBJECTIVE-PRESERVE-READING-LIMITS"],
+      "title": "Form a bounded Reading",
+      "practiceMode": "UNSCORED_STRUCTURED_PRACTICE",
+      "taskSequence": [
+        "State the time and evidence boundary of the synthetic scenario.",
+        "Form claims proportionate to the available observations and reports.",
+        "List plausible alternative explanations and missing information.",
+        "Write a boundary statement describing what the Reading cannot determine."
+      ],
+      "learnerArtifactContract": {
+        "artifactType": "BOUNDED_READING_FRAME",
+        "requiredElements": ["TIME_BOUNDARY", "EVIDENCE_BOUND_CLAIMS", "ALTERNATIVES", "UNKNOWNS", "LIMIT_STATEMENT"]
+      },
+      "selfCheckPrompts": [
+        "Does any claim exceed the evidence available in the scenario?",
+        "Are competing interpretations and unknowns visible?",
+        "Does the Reading avoid diagnosis and professional judgment?"
+      ],
+      "scenarioBoundary": "The practice forms a learning artifact from synthetic content and cannot diagnose or determine a real situation.",
+      "dataState": "DEFINITION_ONLY_NO_LEARNER_RESPONSE",
+      "assessmentState": "NOT_ASSESSMENT",
+      "status": "APPROVED",
+      "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED",
+      "authorityReference": "ALR"
+    },
+    {
+      "practiceCode": "ALR-LO-PRACTICE-CONSTRAINT-AWARE-NAVIGATION",
+      "practiceVersion": "1.0.0",
+      "knowledgeLearningBindingCode": "ALR-KLB-CONSTRAINT-AWARE-NAVIGATION",
+      "lessonCode": "ALR-LO-LESSON-CONSTRAINT-AWARE-NAVIGATION",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-MAP-OPTIONS-CONSTRAINTS", "ALR-LO-OBJECTIVE-BOUND-NAVIGATION-AUTHORITY"],
+      "title": "Map options without selecting an action",
+      "practiceMode": "UNSCORED_STRUCTURED_PRACTICE",
+      "taskSequence": [
+        "State the synthetic current position, goal and time boundary.",
+        "Map each available option together with material constraints.",
+        "Identify the authority required to choose or act on each option.",
+        "Define a review condition without selecting an option."
+      ],
+      "learnerArtifactContract": {
+        "artifactType": "OPTION_CONSTRAINT_AUTHORITY_MAP",
+        "requiredElements": ["CURRENT_POSITION", "OPTIONS", "CONSTRAINTS", "AUTHORITY_OWNER", "REVIEW_CONDITION"]
+      },
+      "selfCheckPrompts": [
+        "Was the current position stated before direction was considered?",
+        "Are constraints paired with the options they affect?",
+        "Has choice remained with the authorized decision-maker?"
+      ],
+      "scenarioBoundary": "Navigation practice maps synthetic possibilities only; it neither recommends nor executes a real-world action.",
+      "dataState": "DEFINITION_ONLY_NO_LEARNER_RESPONSE",
+      "assessmentState": "NOT_ASSESSMENT",
+      "status": "APPROVED",
+      "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED",
+      "authorityReference": "ALR"
+    },
+    {
+      "practiceCode": "ALR-LO-PRACTICE-REVIEW-CONTINUITY",
+      "practiceVersion": "1.0.0",
+      "knowledgeLearningBindingCode": "ALR-KLB-REVIEW-CONTINUITY",
+      "lessonCode": "ALR-LO-LESSON-REVIEW-CONTINUITY",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-LINK-ACTION-OUTCOME", "ALR-LO-OBJECTIVE-PRESERVE-CONTINUATION-LINEAGE"],
+      "title": "Form a traceable continuation state",
+      "practiceMode": "UNSCORED_STRUCTURED_PRACTICE",
+      "taskSequence": [
+        "Identify the synthetic action and the outcomes observed after it.",
+        "Separate outcome observations from causal interpretations.",
+        "Preserve unresolved uncertainty and prior decision lineage.",
+        "Form a bounded next review state without rewriting the earlier record."
+      ],
+      "learnerArtifactContract": {
+        "artifactType": "REVIEW_CONTINUATION_FRAME",
+        "requiredElements": ["ACTION_REFERENCE", "OUTCOME_OBSERVATIONS", "UNRESOLVED_UNCERTAINTY", "LINEAGE", "NEXT_REVIEW_STATE"]
+      },
+      "selfCheckPrompts": [
+        "Are action and outcome linked without claiming unproven causality?",
+        "Does the continuation preserve mixed results and unresolved uncertainty?",
+        "Was prior lineage retained rather than replaced?"
+      ],
+      "scenarioBoundary": "The practice models continuity in a synthetic scenario and does not create Runtime Memory or a real continuation decision.",
+      "dataState": "DEFINITION_ONLY_NO_LEARNER_RESPONSE",
+      "assessmentState": "NOT_ASSESSMENT",
+      "status": "APPROVED",
+      "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED",
+      "authorityReference": "ALR"
+    },
+    {
+      "practiceCode": "ALR-LO-PRACTICE-BOUNDED-PROFESSIONAL-FORMATION",
+      "practiceVersion": "1.0.0",
+      "knowledgeLearningBindingCode": "ALR-KLB-BOUNDED-PROFESSIONAL-FORMATION",
+      "lessonCode": "ALR-LO-LESSON-BOUNDED-PROFESSIONAL-FORMATION",
+      "learningObjectiveCodes": ["ALR-LO-OBJECTIVE-APPLY-PROFESSIONAL-BOUNDARIES", "ALR-LO-OBJECTIVE-SEPARATE-CREDENTIAL-ENTITLEMENT"],
+      "title": "Separate learning formation from professional authority",
+      "practiceMode": "UNSCORED_STRUCTURED_PRACTICE",
+      "taskSequence": [
+        "Identify the learning, capability, credential, entitlement and assignment states in the synthetic scenario.",
+        "Name the distinct authority responsible for resolving each state.",
+        "Mark every unresolved jurisdiction, verification and responsibility gate.",
+        "Write a boundary statement that prevents learning completion from becoming professional permission."
+      ],
+      "learnerArtifactContract": {
+        "artifactType": "PROFESSIONAL_AUTHORITY_BOUNDARY_MAP",
+        "requiredElements": ["LEARNING_STATE", "CAPABILITY_STATE", "CREDENTIAL_STATE", "ENTITLEMENT_STATE", "ASSIGNMENT_STATE", "AUTHORITY_OWNER"]
+      },
+      "selfCheckPrompts": [
+        "Are learning completion and Capability State still distinct?",
+        "Are Credential, Entitlement and accepted assignment independently governed?",
+        "Does the artifact avoid granting professional authority?"
+      ],
+      "scenarioBoundary": "The practice is educational only and cannot verify, grant or recommend Credential, Entitlement, assignment or Professional authority.",
+      "dataState": "DEFINITION_ONLY_NO_LEARNER_RESPONSE",
+      "assessmentState": "NOT_ASSESSMENT",
+      "status": "APPROVED",
+      "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED",
+      "authorityReference": "ALR"
+    }
+  ],
+  "rules": {
+    "onePracticePerCanonicalLesson": true,
+    "allPracticesUnscored": true,
+    "allPracticeScenariosBoundToSyntheticLearningContent": true,
+    "learnerAttemptsOrResponsesStored": false,
+    "assessmentOrCapabilityEvidenceCreated": false,
+    "learnerDeliveryActivated": false
+  }
+}

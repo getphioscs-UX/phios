@@ -1,0 +1,31 @@
+{
+  "graphCode": "RNE-CONSTRAINT-GRAPH-VALIDATION-0001",
+  "nodes": [
+    {
+      "nodeCode": "RNE-CNODE-DEPENDENCY-0001",
+      "authorityConstraintReference": "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001",
+      "navigationRole": "DEPENDENCY",
+      "appliesTo": "TRANSITION",
+      "blockingClass": "UNKNOWN",
+      "dependsOnConstraintReferences": []
+    },
+    {
+      "nodeCode": "RNE-CNODE-SOFT-0002",
+      "authorityConstraintReference": "RMO-CONSTRAINT-SOFT-VALIDATION-0002",
+      "navigationRole": "SOFT_LIMIT",
+      "appliesTo": "TRANSITION",
+      "blockingClass": "NON_BLOCKING",
+      "dependsOnConstraintReferences": [
+        "RMO-CONSTRAINT-DEPENDENCY-VALIDATION-0001"
+      ]
+    },
+    {
+      "nodeCode": "RNE-CNODE-UNKNOWN-0003",
+      "authorityConstraintReference": "RMO-CONSTRAINT-UNKNOWN-VALIDATION-0003",
+      "navigationRole": "UNKNOWN_LIMIT",
+      "appliesTo": "TARGET",
+      "blockingClass": "UNKNOWN",
+      "dependsOnConstraintReferences": []
+    }
+  ]
+}

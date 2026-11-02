@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "PHI-OS-MPA-MCD-1-PRODUCTION-AUTHORITY-SUCCESSOR-v1.0.0",
+  "successorCode": "MPA-MCD-1-PRODUCTION-AUTHORITY-SUCCESSOR-001",
+  "work": "MCD-1",
+  "baselineCommit": "29dc486571862b530c374e61d883e594dad1d27d",
+  "authorityOwner": "MPA",
+  "status": "ELIGIBILITY_SUCCESSOR_AST_BZR_NUM_ALLOWED_HDR_BLOCKED_ADAPTER_BINDING_PENDING",
+  "predecessor": "content/professional/method-production-activation/freeze/mpa-production-activation-freeze-v1.json",
+  "predecessorMutated": false,
+  "frozenPredecessorDigests": {
+    "mpaW30Freeze": {
+      "path": "content/professional/method-production-activation/freeze/mpa-production-activation-freeze-v1.json",
+      "sha256": "f12ded2642f6bd9c1d9931b218c40cce141ecaa9e2e7da7103b197179bf369ac"
+    },
+    "mpaW26Eligibility": {
+      "path": "content/professional/method-production-activation/registries/mpa-production-eligibility-decision-registry-v1.json",
+      "sha256": "6c120de6ee4f6b07115f3e9c508b530f873f8cb90dfdedd0b7ce0ebad0ae54f1"
+    },
+    "mpaW27Execution": {
+      "path": "content/professional/method-production-activation/registries/mpa-production-execution-gate-registry-v1.json",
+      "sha256": "a5bc99ab4e0bd4d7bfae2890ee71c1a00920b2439625a0db7ee638a2f4a349d9"
+    },
+    "methodRegistryV2": {
+      "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0"
+    },
+    "imrLicenseV1": {
+      "path": "content/professional/method-governance/imr-commercial-license-registry-v1.json",
+      "sha256": "9afa261817dbfef0ad7faa4fc2e242fad7f25319c36cf8bdc9f6b0d87b1e1a61"
+    },
+    "astFreezeV1": {
+      "path": "content/professional/core-method-runtime/ast-production-freeze-v1.json",
+      "sha256": "34eb0804d5f943017919dcdd9df1053332cf78857d846b5b1e25920191e95826"
+    },
+    "bzrRuntimeManifestV1": {
+      "path": "content/professional/core-method-runtime/bzr-runtime-manifest-v1.json",
+      "sha256": "83df7bff063d1f72b7fc6202a90935dceea3504e4c738c015a33b2a37be22b48"
+    },
+    "numFreezeV1": {
+      "path": "content/professional/core-method-runtime/num-production-freeze-v1.json",
+      "sha256": "324906b84df5f559717863c770ddaefb795611c7ab1da14a1e11a7d5da4816a9"
+    },
+    "hdrFreezeV1": {
+      "path": "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+      "sha256": "edc383857ae02ecd5c050291aa2b1ef3f47ae0ca8296c65f9e1ba29a9b9e5296"
+    }
+  },
+  "globalRules": {
+    "onlyMpaDecisionControlsDispatchAllowed": true,
+    "mcdCannotGrant": true,
+    "apiCannotGrant": true,
+    "adapterCannotGrant": true,
+    "frontendCannotGrant": true,
+    "rendererCannotGrant": true,
+    "accountPlanCannotGrant": true,
+    "productionDispatchActiveBeforeMcd2": false,
+    "physicalAdapterBindingRequiredBeforeInvocation": true
+  },
+  "methods": [
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "methodVersion": "0.1.0",
+      "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+      "productionEligible": true,
+      "eligibleCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "dispatchableCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "dispatchAllowed": true,
+      "productionDispatchActive": false,
+      "activationRequiresAdapterBindingAt": "MCD-2",
+      "interpretationEligible": false,
+      "professionalEligible": false,
+      "publicUnrestrictedEligible": false,
+      "authorityEvidence": "content/professional/method-governance/successors/ast-production-policy-successor-v1.json",
+      "scopeLimit": "CORE_10_PLANET_PROJECTION_NO_HOUSES_NO_ASPECTS_NO_NODES"
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "methodVersion": "0.1.0",
+      "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+      "productionEligible": true,
+      "eligibleCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "dispatchableCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "dispatchAllowed": true,
+      "productionDispatchActive": false,
+      "activationRequiresAdapterBindingAt": "MCD-2",
+      "interpretationEligible": false,
+      "professionalEligible": false,
+      "publicUnrestrictedEligible": false,
+      "authorityEvidence": "content/professional/method-governance/successors/bzr-commercial-license-successor-v1.json"
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "methodVersion": "0.1.0-candidate",
+      "state": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+      "productionEligible": true,
+      "eligibleCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "dispatchableCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "dispatchAllowed": true,
+      "productionDispatchActive": false,
+      "activationRequiresAdapterBindingAt": "MCD-2",
+      "interpretationEligible": false,
+      "professionalEligible": false,
+      "publicUnrestrictedEligible": false,
+      "authorityEvidence": "content/professional/method-governance/successors/num-commercial-scope-successor-v1.json"
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "methodVersion": "1.0.0",
+      "state": "BLOCKED",
+      "productionEligible": false,
+      "eligibleCapabilities": [],
+      "dispatchableCapabilities": [],
+      "dispatchAllowed": false,
+      "productionDispatchActive": false,
+      "activationRequiresAdapterBindingAt": null,
+      "interpretationEligible": false,
+      "professionalEligible": false,
+      "publicUnrestrictedEligible": false,
+      "authorityEvidence": "content/professional/method-client-delivery/resolutions/mcd-1-hdr-restricted-method-resolution-v1.json",
+      "executionMode": "validation_only",
+      "blockingReasons": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED"
+      ]
+    }
+  ],
+  "activationSemantics": {
+    "dispatchAllowedMeans": "MPA authority gate permits the listed method/capability once canonical MCD adapter/runtime binding exists and all request-level gates pass.",
+    "productionDispatchActiveMeans": "A physical Production request can currently reach an authorized Core Runtime through MCD.",
+    "mcd1Result": "dispatchAllowed may be true for AST/BZR/NUM while productionDispatchActive remains false until MCD-2.",
+    "hdrAlwaysFailClosed": true
+  },
+  "nextWork": "MCD-2",
+  "sourceAttachmentBaseline": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "latestMainCompatibility": {
+    "commit": "29dc486571862b530c374e61d883e594dad1d27d",
+    "precedingCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+    "reconciliation": "SAFE_NON_OVERLAPPING_VAP_L10N_DELTA_PACKAGE_SCRIPTS_MERGED"
+  }
+}

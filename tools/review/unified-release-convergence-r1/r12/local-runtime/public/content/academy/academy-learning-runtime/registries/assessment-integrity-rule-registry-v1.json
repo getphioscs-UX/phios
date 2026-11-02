@@ -1,0 +1,34 @@
+{
+  "registryCode": "PHI-OS-ALR-W26-ASSESSMENT-INTEGRITY-RULE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W26",
+  "status": "canonical",
+  "productionStatus": "deterministic_fail_closed_integrity_rules",
+  "contractReference": "content/academy/academy-learning-runtime/contracts/assessment-integrity-contract-v1.json",
+  "ruleSets": [
+    {
+      "ruleSetCode": "ALR-ASMT-INTEGRITY-BASE-v1",
+      "ruleSetVersion": "1.0.0",
+      "rules": [
+        {"ruleCode": "REGISTERED_ASSESSMENT_REQUIRED", "sequence": 1, "failureDecision": "DENY_UNKNOWN_ASSESSMENT"},
+        {"ruleCode": "ASSESSMENT_VERSION_MATCH_REQUIRED", "sequence": 2, "failureDecision": "DENY_VERSION_MISMATCH"},
+        {"ruleCode": "ASSESSMENT_TYPE_MATCH_REQUIRED", "sequence": 3, "failureDecision": "DENY_TYPE_MISMATCH"},
+        {"ruleCode": "SCENARIO_VERSION_MATCH_REQUIRED", "sequence": 4, "failureDecision": "DENY_SCENARIO_VERSION_MISMATCH"},
+        {"ruleCode": "EXACT_CRITERION_COVERAGE_REQUIRED", "sequence": 5, "failureDecision": "DENY_CRITERION_COVERAGE"},
+        {"ruleCode": "CONTROLLED_FINDING_SHAPE_REQUIRED", "sequence": 6, "failureDecision": "DENY_FINDING_SHAPE"},
+        {"ruleCode": "FORBIDDEN_INPUT_FIELDS_DENIED", "sequence": 7, "failureDecision": "DENY_FORBIDDEN_INPUT_FIELD"},
+        {"ruleCode": "ACTIVE_DEFINITION_REQUIRED", "sequence": 8, "failureDecision": "DENY_INACTIVE_DEFINITION"}
+      ],
+      "successDecision": "INTEGRITY_VALID",
+      "status": "ACTIVE",
+      "authorityReference": "ALR"
+    }
+  ],
+  "rules": {
+    "oneCanonicalBaseRuleSet": true,
+    "rulesExecuteInContiguousOrder": true,
+    "failureDecisionMustBeControlled": true,
+    "integrityValidationPersistsData": false,
+    "unknownRuleSetOrRuleFailsClosed": true
+  }
+}

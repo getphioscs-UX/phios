@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W7-CENTER-THREE-STATE-STRUCTURAL-POLICY-v1.0.0",
+  "work": "HD-PRO-R3-W7",
+  "baselineCommit": "8c44a0e023a15a2e6f786306a83bd792b90bdb65",
+  "status": "R3_SHADOW_STRUCTURAL_SUCCESSOR_POLICY_NO_R2_MUTATION",
+  "purpose": "Preserve DEFINED vs UNDEFINED vs completely OPEN semantics without converting R2 openCenters into a false three-state classification.",
+  "states": {
+    "DEFINED": {
+      "definition": "Center state explicitly confirmed as defined in external chart intake.",
+      "gateRequirement": "No independent W7 gate rule; definition remains confirmed external structure.",
+      "channelConflict": "A confirmed complete channel can support but must not be used by W7 to silently recalculate the external chart."
+    },
+    "UNDEFINED": {
+      "definition": "Center explicitly confirmed as non-defined while one or more gate activations in that center are confirmed.",
+      "gateRequirement": "AT_LEAST_ONE_CONFIRMED_GATE_IN_CENTER",
+      "channelConflict": "A confirmed complete channel defining the center conflicts with UNDEFINED and requires reconfirmation."
+    },
+    "OPEN": {
+      "definition": "Center explicitly confirmed as non-defined with no confirmed gate activation in that center.",
+      "gateRequirement": "ZERO_CONFIRMED_GATES_IN_CENTER",
+      "channelConflict": "Any confirmed gate or complete defining channel conflicts with OPEN and requires reconfirmation."
+    }
+  },
+  "legacyR2": {
+    "fields": [
+      "definedCenters",
+      "openCenters"
+    ],
+    "openCentersSemantic": "NON_DEFINED_LEGACY_AMBIGUOUS",
+    "mayMapOpenCentersDirectlyToOPEN": false,
+    "r2ProductionAuthorityChanged": false,
+    "r2CustomerPublishedPreserved": true
+  },
+  "r3SuccessorRule": {
+    "birthDataRecalculationAllowed": false,
+    "confirmedExternalStructureRequired": true,
+    "gateActivationMayBeUsedForStateValidationOnly": true,
+    "missingGateDataMeans": "STATE_UNRESOLVED_NOT_OPEN",
+    "conflictMeans": "RETURN_TO_CHART_CONFIRMATION"
+  },
+  "precedence": {
+    "completeChannelMeaning": "PRIMARY_WHEN_CONFIRMED",
+    "gateMeaning": "SUPPORTING_DETAIL_OR_PRIMARY_WHEN_NO_COMPLETE_CHANNEL_AND_W9_ADMITTED",
+    "genericCenterStateMeaning": "CONTEXTUAL_BACKGROUND"
+  },
+  "publication": {
+    "customerRendererCutoverAllowed": false,
+    "requiresCompositionEngine": true,
+    "requiresR3MachineVerification": true,
+    "requiresR3HumanAcceptance": true
+  }
+}

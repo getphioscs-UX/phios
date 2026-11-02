@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-NUM-CX-CHART-SPEC-v1.0.0",
+  "work": "NUM-CX-W6",
+  "status": "PRIMARY_CUSTOMER_CHART_SYSTEM",
+  "charts": [
+    {"chartId":"CORE_NUMBER_MAP","source":"chartModel.coreNumberMap","renderer":"SVG_NODE_MAP","meaningCreated":false,"required":true},
+    {"chartId":"WHOLE_CHART_PATTERN","source":"chartModel.wholeChartPattern","renderer":"HTML_MATRIX_AND_METERS","meaningCreated":false,"required":false},
+    {"chartId":"NAME_LAYER_MAP","source":"chartModel.nameLayerMap","renderer":"ROLE_CARD_GRID","meaningCreated":false,"required":false},
+    {"chartId":"SECONDARY_CHART","source":"chartModel.secondaryChartMap","renderer":"PROGRESSIVE_MINI_CHARTS","meaningCreated":false,"required":false},
+    {"chartId":"LONG_CYCLE_TIMELINE","source":"chartModel.cycleTimeline","renderer":"TIMELINE_LANES","meaningCreated":false,"required":true},
+    {"chartId":"CURRENT_TIMING","source":"chartModel.timingBand","renderer":"SEPARATED_TIMING_LANES","meaningCreated":false,"required":false},
+    {"chartId":"ENERGY_PATTERN_MAP","source":"chartModel.energyPatternMap","renderer":"PATTERN_CHIPS","meaningCreated":false,"required":false},
+    {"chartId":"RELATIONSHIP_OVERLAY","source":"chartModel.relationshipOverlay","renderer":"STRUCTURAL_COMPARE","meaningCreated":false,"required":false}
+  ],
+  "accessibility": {
+    "svgHasTitleAndDescription": true,
+    "visualHasEquivalentTextSummary": true,
+    "criticalMeaningNotTooltipOnly": true,
+    "keyboardOnlyAccessSupported": true
+  },
+  "responsive": {
+    "desktop": 1200,
+    "tablet": 768,
+    "mobile": 390,
+    "timelineBecomesStackedOnMobile": true,
+    "relationshipBecomesStackedOnMobile": true
+  }
+}

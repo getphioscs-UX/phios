@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-article-eligibility-v1",
+  "type": "object",
+  "required": [
+    "nodeCode",
+    "status",
+    "knowledgeCoverageSufficient",
+    "standaloneReadingValueSufficient",
+    "independentQuestionClear",
+    "boundaryStable",
+    "narrativeDuplicationAcceptable",
+    "entryValueExists",
+    "localeSourceAvailable"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "article_eligible",
+        "article_not_required",
+        "article_deferred",
+        "article_blocked"
+      ]
+    },
+    "knowledgeCoverageSufficient": {
+      "type": "boolean"
+    },
+    "standaloneReadingValueSufficient": {
+      "type": "boolean"
+    },
+    "independentQuestionClear": {
+      "type": "boolean"
+    },
+    "boundaryStable": {
+      "type": "boolean"
+    },
+    "narrativeDuplicationAcceptable": {
+      "type": "boolean"
+    },
+    "entryValueExists": {
+      "type": "boolean"
+    },
+    "localeSourceAvailable": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

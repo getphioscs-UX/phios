@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.canonical-journey.v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "journeyId",
+    "customerReference",
+    "stage",
+    "context",
+    "session",
+    "progress",
+    "realityReference",
+    "readoutReferences",
+    "consentReferences",
+    "dataPurpose"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "phi-os.canonical-journey.v2"
+    },
+    "journeyId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "customerReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "enum": [
+        "entry",
+        "orientation",
+        "reading",
+        "reconstruction",
+        "navigation",
+        "review",
+        "continuity",
+        "closed"
+      ]
+    },
+    "realityReference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "readoutReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "consentReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "dataPurpose": {
+      "enum": [
+        "SERVICE_DELIVERY",
+        "RUNTIME_CONTINUITY",
+        "RUNTIME_RECOVERY"
+      ]
+    },
+    "context": {
+      "$ref": "journey-context-v2.schema.json"
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "sessionId",
+        "persistenceClass"
+      ],
+      "properties": {
+        "sessionId": {
+          "type": "string"
+        },
+        "persistenceClass": {
+          "enum": [
+            "EPHEMERAL",
+            "SESSION",
+            "RECOVERY",
+            "RUNTIME"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "progress": {
+      "type": "object",
+      "required": [
+        "completedStages"
+      ],
+      "properties": {
+        "completedStages": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "entry",
+              "orientation",
+              "reading",
+              "reconstruction",
+              "navigation",
+              "review",
+              "continuity",
+              "closed"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-NARRATIVE-CLAIM-VERIFICATION-v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "sourceBriefDigest",
+    "draftDigest",
+    "verifierVersion",
+    "claims",
+    "summary",
+    "governance",
+    "verificationDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-NARRATIVE-CLAIM-VERIFICATION-v1.0.0"
+    },
+    "sourceBriefDigest": {
+      "type": "string"
+    },
+    "draftDigest": {
+      "type": "string"
+    },
+    "verifierVersion": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array"
+    },
+    "summary": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    },
+    "verificationDigest": {
+      "type": "string"
+    }
+  }
+}

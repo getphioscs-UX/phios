@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-STRUCTURE-PROJECTOR-SUBTYPE-v1.0.0",
+  "work": "MIR-3",
+  "status": "ACTIVE",
+  "onlyWhenType": "PROJECTOR",
+  "rules": [
+    {
+      "subtype": "MENTAL_PROJECTOR",
+      "when": "0 < definedCenters and definedCenters subset of {HEAD,AJNA,THROAT}"
+    },
+    {
+      "subtype": "ENERGY_PROJECTOR",
+      "when": "not Mental and definedMotorCount >= 1 and no Motor→Throat path"
+    },
+    {
+      "subtype": "CLASSIC_PROJECTOR",
+      "when": "otherwise"
+    }
+  ],
+  "totalAndNonOverlapping": true
+}

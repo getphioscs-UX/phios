@@ -1,0 +1,201 @@
+{
+  "registryCode": "PHI-OS-CANONICAL-RUNTIME-PLANE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "CMW-W1",
+  "status": "canonical",
+  "planes": [
+    {
+      "planeCode": "GOVERNANCE",
+      "title": "Governs contracts, validation, data or design authority",
+      "authorityScope": "Governs contracts, validation, data or design authority",
+      "status": "active"
+    },
+    {
+      "planeCode": "AUTHORITY",
+      "title": "Owns canonical truth/decision authority",
+      "authorityScope": "Owns canonical truth/decision authority",
+      "status": "active"
+    },
+    {
+      "planeCode": "RUNTIME",
+      "title": "Executes bounded operational semantics",
+      "authorityScope": "Executes bounded operational semantics",
+      "status": "active"
+    },
+    {
+      "planeCode": "PRESENTATION",
+      "title": "Projects canonical presentation without changing authority",
+      "authorityScope": "Projects canonical presentation without changing authority",
+      "status": "active"
+    },
+    {
+      "planeCode": "SURFACE",
+      "title": "User- or machine-facing delivery surface",
+      "authorityScope": "User- or machine-facing delivery surface",
+      "status": "active"
+    }
+  ],
+  "assignments": [
+    {
+      "code": "CMW",
+      "plane": "GOVERNANCE"
+    },
+    {
+      "code": "RG",
+      "plane": "GOVERNANCE"
+    },
+    {
+      "code": "RDG",
+      "plane": "GOVERNANCE"
+    },
+    {
+      "code": "PDS",
+      "plane": "GOVERNANCE"
+    },
+    {
+      "code": "KNOWLEDGE_AUTHORITY",
+      "plane": "AUTHORITY"
+    },
+    {
+      "code": "MEANING_AUTHORITY",
+      "plane": "AUTHORITY"
+    },
+    {
+      "code": "PUBLICATION_AUTHORITY",
+      "plane": "AUTHORITY"
+    },
+    {
+      "code": "PROFESSIONAL_AUTHORITY",
+      "plane": "AUTHORITY"
+    },
+    {
+      "code": "PERMISSION_AUTHORITY",
+      "plane": "AUTHORITY"
+    },
+    {
+      "code": "KAU",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "KPP",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "PJA",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "KI",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "CAR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "ICR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "RMO",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "RRE",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "ALR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "JR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "PR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "RR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "ORC",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "LRM",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "RCL",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "RME",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "RNE",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "AIR",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "CIV",
+      "plane": "RUNTIME"
+    },
+    {
+      "code": "CPR",
+      "plane": "PRESENTATION"
+    },
+    {
+      "code": "WEBSITE",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "ACADEMY",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "CUSTOMER_WORKSPACE",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "PROFESSIONAL_WORKSPACE",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "BOOK",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "PDF",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "APP",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "API",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "EMAIL",
+      "plane": "SURFACE"
+    },
+    {
+      "code": "SOCIAL",
+      "plane": "SURFACE"
+    }
+  ],
+  "rules": {
+    "surfaceIsNotAuthority": true,
+    "presentationIsNotAuthority": true,
+    "governanceMayNotSilentlyMutateRuntimeAuthority": true
+  }
+}

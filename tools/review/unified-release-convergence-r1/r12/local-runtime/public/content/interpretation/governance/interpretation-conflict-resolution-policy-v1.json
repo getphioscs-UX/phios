@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-MIR-1-INTERPRETATION-CONFLICT-RESOLUTION-POLICY-v1.0.0",
+  "work": [
+    "MIR-1",
+    "IR-W2"
+  ],
+  "status": "FROZEN",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "recordedAt": "2026-08-17",
+  "principles": [
+    "OBJECT_DOMAIN_AUTHORITY_WINS_FOR_ITS_OWN_OBJECT",
+    "FROZEN_BASELINE_IS_BYTE_PRESERVED_UNTIL_EXPLICIT_VERSIONED_SUCCESSOR",
+    "CURRENT_CANONICAL_SOURCE_BEATS_HISTORICAL_SOURCE_WITHIN_THE_SAME_SOURCE_DOMAIN",
+    "CANONICAL_PROJECTION_BYTES_ARE_READ_ONLY_TO_INTERPRETATION",
+    "CASE_EVIDENCE_MAY_CONDITION_INTERPRETATION_BUT_MAY_NOT_BECOME_CANONICAL_STRUCTURE_BY_ITSELF",
+    "HYPOTHESIS_NEVER_AUTO_PROMOTES_TO_FACT_OR_CANONICAL_RULE",
+    "AI_COMPOSITION_IS_LAST_AND_NON_AUTHORITATIVE",
+    "UNKNOWN_IS_PRESERVED_WHEN_AUTHORIZED_DERIVATION_IS_MISSING"
+  ],
+  "cases": [
+    {
+      "conflict": "Interpretation vs calculation",
+      "winner": "SHARED_CALCULATION_RUNTIME",
+      "action": "Interpretation records conflict/unknown; never rewrites calculation."
+    },
+    {
+      "conflict": "Interpretation vs projection",
+      "winner": "SHARED_PROJECTION_RUNTIME",
+      "action": "Projection remains immutable; interpretation may only reference accepted projection."
+    },
+    {
+      "conflict": "Interpretation wording vs canonical meaning identity/mapping",
+      "winner": "CANONICAL_MEANING_RUNTIME",
+      "action": "Use CMR vocabulary/mapping; do not mint a second meaning code."
+    },
+    {
+      "conflict": "Old figure vs current canonical manuscript",
+      "winner": "CURRENT_CANONICAL_MANUSCRIPT",
+      "action": "Mark historical figure as historical/superseded candidate for MIR-2 reconciliation; never elevate it over current manuscript."
+    },
+    {
+      "conflict": "AI composition vs canonical structure/evidence",
+      "winner": "CANONICAL_STRUCTURE_OR_EVIDENCE",
+      "action": "Reject/omit unsupported AI claim; preserve unknown."
+    },
+    {
+      "conflict": "Reading vs interpretation derivation",
+      "winner": "SEPARATE_OBJECT_DOMAINS",
+      "action": "IR derives canonical interpretation result; RRE/Reading consumes governed inputs for bounded reading and may not become the kernel."
+    },
+    {
+      "conflict": "Professional judgment vs interpretation",
+      "winner": "PROFESSIONAL_RUNTIME",
+      "action": "IR may explain uncertainty but may not issue professional judgment/recommendation/approval."
+    }
+  ],
+  "successorPolicy": {
+    "silentMutationAllowed": false,
+    "required": "VERSIONED_SUCCESSOR_OR_DOWNSTREAM_RECONCILIATION",
+    "hashOnlyRepairOfFrozenEvidenceAllowed": false
+  }
+}

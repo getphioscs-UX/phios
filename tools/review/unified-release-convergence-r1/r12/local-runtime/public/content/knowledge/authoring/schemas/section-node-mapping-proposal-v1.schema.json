@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/section-node-mapping-proposal-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mappingCode",
+    "sectionCode",
+    "nodeCodes",
+    "supportingQuestionCodes",
+    "mappingMode",
+    "mappingRole",
+    "status",
+    "authorityMode"
+  ],
+  "properties": {
+    "mappingCode": {
+      "type": "string"
+    },
+    "sectionCode": {
+      "type": "string"
+    },
+    "nodeCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supportingQuestionCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mappingMode": {
+      "enum": [
+        "one_to_one",
+        "one_to_many",
+        "many_to_one",
+        "supporting_question_only",
+        "no_canonical_knowledge"
+      ]
+    },
+    "mappingRole": {
+      "enum": [
+        "primary",
+        "supporting",
+        "continuity",
+        "distinction",
+        "example",
+        "boundary",
+        "none"
+      ]
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "human_review_required",
+        "accepted",
+        "rejected",
+        "deferred"
+      ]
+    },
+    "authorityMode": {
+      "const": "proposal_only"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "observationCode": "PHI-OS-WPR-W28-PRODUCTION-OBSERVATION-v1",
+  "observationVersion": "1.0.0",
+  "work": "WPR-W28",
+  "observedAgainstRepositoryBaseline": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "repository": {
+    "expectedMainCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+    "attachmentAlignedToExpectedMain": true
+  },
+  "deployment": {
+    "lastVerifiedProductionCommit": "dc3be86824ff7f8e5c99afe6c5058378204e1138",
+    "lastVerifiedEvidence": "content/production/visual-article/deployment/vap-w2-cloudflare-production-sha-verification-v1.json",
+    "currentRepositoryBaselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+    "exactCommitMatch": false,
+    "state": "DEPLOYMENT_SHA_REVALIDATION_REQUIRED",
+    "currentDeploymentClaimAllowed": false
+  },
+  "webProduction": {
+    "productionRecordCount": 38,
+    "productionStates": [
+      "LIMITED_PRODUCTION"
+    ],
+    "routeEntryCount": 27,
+    "surfaceEntryCount": 26
+  },
+  "upstream": {
+    "cprProductionRecordCount": 0,
+    "carPublicationCount": 0,
+    "state": "UPSTREAM_PRODUCTION_AUTHORITIES_REMAIN_GATED"
+  },
+  "externalGates": [
+    {
+      "code": "DEPLOYMENT_SHA_REVALIDATION_REQUIRED",
+      "open": true
+    },
+    {
+      "code": "PHIOS_PUBLIC_ASSET_BASE_URL_UPSTREAM_VERIFICATION",
+      "open": true
+    },
+    {
+      "code": "CUSTOM_DOMAIN_GETPHIOS_COM_DEPLOYMENT_VERIFICATION",
+      "open": true
+    },
+    {
+      "code": "PDS_PRODUCTION_BROWSER_MATRIX_360_768_1440_EN_ZH_HANS",
+      "open": true
+    }
+  ],
+  "knownDrift": [
+    {
+      "code": "WPR-W28-PACKAGE-CHECKER-ALIAS-DRIFT",
+      "state": "RESOLVED_IN_WPR_W28",
+      "detail": "021007b removed check:wpr-w0 and compacted check:vap-b/check:wpr-w1 onto one physical line."
+    },
+    {
+      "code": "WPR-W27-HISTORICAL-RAW-BREAKPOINT-DRIFT",
+      "state": "RECORDED_REVALIDATION_REQUIRED"
+    },
+    {
+      "code": "WPR-W17-FIGURE-OWNERSHIP-DRIFT",
+      "state": "RECORDED_UPSTREAM_RECONCILIATION_REQUIRED"
+    }
+  ],
+  "privacy": {
+    "containsPii": false,
+    "containsCustomerPayload": false,
+    "containsCredentials": false
+  },
+  "status": "OBSERVED_LIMITED_PRODUCTION_EXTERNAL_GATES_OPEN"
+}

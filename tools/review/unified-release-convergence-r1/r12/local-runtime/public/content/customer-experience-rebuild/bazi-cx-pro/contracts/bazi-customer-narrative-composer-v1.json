@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-CUSTOMER-NARRATIVE-COMPOSER-CONTRACT-v1.0.0",
+  "workId": "BAZI-CX-PRO-W10",
+  "title": "Customer Narrative Composer",
+  "status": "ADMITTED",
+  "objective": "Convert the W7 whole-chart priorities, W8 professional topics and W9 professional timeline into a continuous customer-readable BaZi narrative without recalculating the chart, flattening contradictions or repeating one-symbol definitions across sections.",
+  "sourceInputs": [
+    "professionalModules.fiveElements",
+    "professionalModules.wholeChartPriority",
+    "professionalModules.professionalTopics",
+    "professionalModules.professionalTimeline"
+  ],
+  "surfaceOutput": {
+    "moduleSchemaVersion": "PHI-OS-BAZI-CX-PRO-CUSTOMER-NARRATIVE-v1.0.0",
+    "requiredFields": [
+      "opening",
+      "priorityChapters",
+      "topicNarratives",
+      "timingNarrative",
+      "dedup",
+      "boundaries"
+    ],
+    "priorityChapterRange": [3, 5],
+    "requiredTopicCount": 7,
+    "requiredPerPriorityChapterFields": [
+      "priorityRef",
+      "themeType",
+      "themeKey",
+      "title",
+      "thesis",
+      "development",
+      "condition",
+      "sourceRefs"
+    ],
+    "requiredPerTopicNarrativeFields": [
+      "topicCode",
+      "headline",
+      "lead",
+      "development",
+      "condition",
+      "priorityRefs"
+    ]
+  },
+  "compositionRules": [
+    "The opening synthesis must compress the chart into the first three priority themes rather than repeat a generic BaZi introduction.",
+    "Each priority chapter must add a different layer of meaning: relationship interface, pattern path, functional group, carrying structure or explicit timing activation.",
+    "Professional topic narratives may reuse source facts but must not repeat an identical narrative paragraph across life domains.",
+    "A selected timing window may extend the natal narrative but must not overwrite natal priorities or convert convergence into event certainty.",
+    "Customer-visible copy must not expose IR, work-package numbers, authority/admission vocabulary, semantic-owner vocabulary or production-state terminology.",
+    "Renderer code may select language and layout but may not invent new narrative meaning."
+  ],
+  "dedupRules": {
+    "exactVisibleDuplicateAllowed": 0,
+    "onePriorityChapterPerPriorityRef": true,
+    "oneTopicNarrativePerTopicCode": true,
+    "genericEndingPerTopicAllowed": false,
+    "repeatedMethodDisclaimerAllowed": false
+  },
+  "boundaries": {
+    "sourceFactsRecalculated": false,
+    "newChartFactCreated": false,
+    "priorityOrderPreserved": true,
+    "topicCompositionPreserved": true,
+    "timingDoesNotOverwriteNatal": true,
+    "fortunePredictionCreated": false,
+    "eventPredictionCreated": false,
+    "goodBadScoreCreated": false,
+    "identityLabelCreated": false
+  }
+}

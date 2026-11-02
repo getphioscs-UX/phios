@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-AST-PROFESSIONAL-INTEGRATION-v1.0.0",
+  "stageCode": "AST-W6",
+  "runtimeCode": "AST_PROFESSIONAL_INTEGRATION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "integration_established_release_blocked_by_current_governance",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "698713aa1b41db97c8c6c6c48e6e596fc94bfed6"
+  },
+  "input": {
+    "runtimeCode": "SHARED_INTERPRETATION_RUNTIME",
+    "schemaVersion": "PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0",
+    "candidateStatus": "candidate",
+    "allowedProjectionTypes": [
+      "PLANET",
+      "HOUSE",
+      "ASPECT"
+    ]
+  },
+  "methodEligibilityGate": {
+    "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+    "allRequired": true,
+    "requiredFields": [
+      "productionReady",
+      "professionalReady",
+      "validationPassed",
+      "regressionPassed",
+      "commercialLicensePassed",
+      "sharedRuntimeImplemented",
+      "professionalBoundaryPassed",
+      "professionalWorkflowPassed"
+    ],
+    "currentAstrologyReleaseAllowed": false
+  },
+  "professionalEligibilityGate": {
+    "decisionContract": "phi-os.professional-eligibility-decision.v1",
+    "requiredCapabilityCode": "ASTROLOGY_PROFESSIONAL_REVIEW",
+    "activeAssignmentRequired": true,
+    "activeConsentRequired": true,
+    "boundaryAcknowledgementRequired": true,
+    "workspaceAccessRequired": true
+  },
+  "professionalAuthority": {
+    "runtimeCode": "SHARED_PROFESSIONAL_RUNTIME",
+    "parallelRuntimeAllowed": false,
+    "requiredSequence": [
+      "PROFESSIONAL_REVIEW",
+      "BOUNDARY_VALIDATION",
+      "DELIVERABLE_ASSEMBLY",
+      "PROFESSIONAL_SIGNATURE",
+      "RELEASE"
+    ]
+  },
+  "boundaries": {
+    "methodEligibilityCreatesReleaseAuthority": false,
+    "professionalEligibilityCreatesReleaseAuthority": false,
+    "interpretationCandidateMutationAllowed": false,
+    "directReleaseAllowed": false,
+    "productionEligibilityChanged": false
+  },
+  "currentGovernanceResult": {
+    "commercialLicensePassed": true,
+    "sharedRuntimeImplemented": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "releaseStatus": "blocked"
+  },
+  "nextStage": "AST-W7"
+}

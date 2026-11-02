@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W4-STATEMENT-TYPE-REGISTRY-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W4",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_CANONICAL_STATEMENT_TYPES",
+  "statementTypes": [
+    {
+      "code": "FINANCIAL_FACT",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": false
+    },
+    {
+      "code": "CALCULATED_RESULT",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": false
+    },
+    {
+      "code": "ANALYTICAL_FINDING",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": false
+    },
+    {
+      "code": "SCENARIO_RESULT",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": false
+    },
+    {
+      "code": "PROFESSIONAL_RECOMMENDATION",
+      "professionalAuthorshipRequired": true,
+      "hfpMayAuthor": false
+    },
+    {
+      "code": "PROFESSIONAL_WARNING",
+      "professionalAuthorshipRequired": true,
+      "hfpMayAuthor": false
+    },
+    {
+      "code": "ACTION",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": false,
+      "professionalAuthorshipRule": "REQUIRED_ONLY_WHEN_ACTION_IS_PROFESSIONAL_SOURCE"
+    },
+    {
+      "code": "UNKNOWN",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": true
+    },
+    {
+      "code": "BOUNDARY",
+      "professionalAuthorshipRequired": false,
+      "hfpMayAuthor": true
+    }
+  ],
+  "rules": {
+    "recommendationRequiresPfr": true,
+    "warningRequiresPfr": true,
+    "professionalActionRequiresPfr": true,
+    "calculatedResultRequiresFcr": true,
+    "analyticalFindingRequiresFar": true,
+    "financialFactRequiresFdrOrDar": true
+  }
+}

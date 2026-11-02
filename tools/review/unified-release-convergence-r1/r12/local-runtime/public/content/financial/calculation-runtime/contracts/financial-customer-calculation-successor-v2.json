@@ -1,0 +1,21 @@
+{
+ "contractCode":"CUSTOMER_NET_DEBT_V2",
+ "version":"1.1.0",
+ "owner":"FCR",
+ "changeClass":"OPT_IN_CONTRACT_SUCCESSOR",
+ "legacyDefaultPreserved":true,
+ "legacyFrozenSourceSha256":"6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+ "successorModule":"functions/financial/calculation-runtime/financial-calculation-customer-v2.js",
+ "inheritance":"Frozen v1 runtime validates and calculates unchanged engines; successor replaces only cash flow, debt ratio, liquidity horizon, education separation and protection-scope results",
+ "consumers":["account-financial-summary","financial-factual-report"],
+ "netIncome":"NET streams unchanged; GROSS streams require an explicit tax assumption; unspecified basis remains unknown",
+ "debtService":"Explicit expense-liability links deduplicate; unmatched liability repayments are included; ambiguous or conflicting links return unknown",
+ "education":"Each open education goal has independent result/trace; a multi-goal household summary remains unknown rather than selecting the first goal or double-allocating funding",
+ "protection":"Policy declarations remain separate; a household coverage gap stays unknown until insured-person, risk-event and needs-model authority are bound",
+ "tracePolicy":"Existing input/assumption references retained; snapshot and calculation digests independently recomputed",
+ "units":{"debtServiceRatio":"0_TO_1_RATIO","liquidityMonths":"MONTHS","taxEffectiveRate":"0_TO_1_RATIO","loanAnnualRatePercent":"0_TO_100_PERCENT","rentalUseRatio":"0_TO_1_RATIO"},
+ "toolRounding":"INTEGER_MINOR_UNITS_HALF_UP_PER_PERIOD",
+ "toolCurrencies":["MYR","SGD","USD","GBP","EUR"],
+ "otherCurrencyMinorUnits":"NOT_SUPPORTED_BY_CURRENT_TWO_DECIMAL_TOOLS",
+ "productionAccepted":false
+}

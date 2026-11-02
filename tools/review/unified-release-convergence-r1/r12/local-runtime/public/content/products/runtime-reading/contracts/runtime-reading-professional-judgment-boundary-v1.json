@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W21-PROFESSIONAL-JUDGMENT-BOUNDARY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W21",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_PR_ATTRIBUTION_BOUNDARY",
+  "professionalAuthority": "content/runtime/professional-runtime/contracts/professional-judgment-contract-v2.json",
+  "productModes": {
+    "RRP-SELF": {
+      "professionalJudgmentAllowed": false,
+      "professionalJudgmentSourceRequired": null
+    },
+    "RRP-PRO": {
+      "professionalJudgmentAllowed": true,
+      "professionalJudgmentSourceRequired": "PR_PROFESSIONAL_JUDGMENT_RECORD",
+      "explicitHumanAttributionRequired": true,
+      "separateLabellingRequired": true
+    }
+  },
+  "rules": {
+    "systemMayCreateProfessionalJudgment": false,
+    "systemMayImpersonateProfessional": false,
+    "providerOrAiMayBeProfessionalAttributionAuthority": false,
+    "unsignedProfessionalTextMayBeAdmitted": false,
+    "professionalJudgmentMayBeMergedIntoSystemInterpretation": false,
+    "professionalJudgmentMayOverrideUnknownSilently": false,
+    "rrpOwnsProfessionalApproval": false
+  }
+}

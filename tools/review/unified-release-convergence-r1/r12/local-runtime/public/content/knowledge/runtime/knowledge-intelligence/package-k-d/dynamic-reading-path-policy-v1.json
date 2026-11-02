@@ -1,0 +1,104 @@
+{
+  "defaultPurpose": "overview",
+  "intentRules": {
+    "continuity": {
+      "en": [
+        "next",
+        "continue",
+        "continuity",
+        "what follows"
+      ],
+      "zh-Hans": [
+        "接下来",
+        "下一步",
+        "继续",
+        "之后"
+      ]
+    },
+    "deep_reading": {
+      "en": [
+        "deep",
+        "comprehensive",
+        "detailed"
+      ],
+      "zh-Hans": [
+        "深入",
+        "完整理解",
+        "详细"
+      ]
+    },
+    "mechanism": {
+      "en": [
+        "mechanism",
+        "how does",
+        "how is",
+        "formation"
+      ],
+      "zh-Hans": [
+        "机制",
+        "如何形成",
+        "为什么形成",
+        "运作"
+      ]
+    },
+    "theme": {
+      "en": [
+        "theme",
+        "domain",
+        "system",
+        "overall"
+      ],
+      "zh-Hans": [
+        "主题",
+        "领域",
+        "整体",
+        "系统"
+      ]
+    }
+  },
+  "localeIsolation": true,
+  "maximumSteps": 8,
+  "policyCode": "PHI-OS-DYNAMIC-READING-PATH-POLICY-v1.0.0",
+  "publishedBlocksOnly": true,
+  "purposeOrder": {
+    "continuity": [
+      "continuity",
+      "overview"
+    ],
+    "deep_reading": [
+      "overview",
+      "mechanism",
+      "theme",
+      "continuity"
+    ],
+    "mechanism": [
+      "mechanism",
+      "overview",
+      "continuity"
+    ],
+    "overview": [
+      "overview",
+      "theme",
+      "continuity"
+    ],
+    "theme": [
+      "theme",
+      "overview",
+      "continuity"
+    ]
+  },
+  "supportedLocales": [
+    "zh-Hans",
+    "en"
+  ],
+  "supportedPurposes": [
+    "auto",
+    "overview",
+    "mechanism",
+    "theme",
+    "continuity",
+    "deep_reading"
+  ],
+  "unpublishedTargetsBlocked": true,
+  "version": "1.0.0"
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-PDS-W0-PXR-ASSET-RESOLVER-SUCCESSOR-v2.0.0",
+  "work": "PDS-W0-PXR-ASSET-RESOLVER-CURRENT-SUCCESSOR",
+  "baselineCommit": "f968210",
+  "status": "ACTIVE_ADDITIVE_PXR_GROUP_MEMBER_SUCCESSOR_PDS_W0_HISTORY_PRESERVED",
+  "purpose": "Allow the current PDS-W0 protected-path checker to consume the already-governed PXR additive group-member extension of the single public asset resolver without rewriting the historical PDS/HPC2 predecessor or creating a second resolver.",
+  "predecessor": {
+    "path": "assets/js/runtime/web-production/asset-resolver.js",
+    "sha256": "6a44f5d3371f3dde0f0b51e95d97c74c1640d3767cb870a3fa5b7df75b8b64f0",
+    "gitBlobSha": "ec25872c12fe0ebaff9e26d46e64264635d2b03a",
+    "authority": "content/web-production/reconciliation/pds-w0-hpc2-pre-asset-resolver-successor-v1.json",
+    "rewritten": false
+  },
+  "pxrAuthority": {
+    "path": "content/web-production/pxr/successors/pxr-asset-resolver-group-member-successor-v1.json",
+    "sha256": "48d2e9c890c22dfced088175655f0fff05370f0264e1cdd885d331372b5b2bc3",
+    "rewritten": false
+  },
+  "current": {
+    "path": "assets/js/runtime/web-production/asset-resolver.js",
+    "sha256": "9c8b37b74f53bd8a54b9a730957627b1f96d9eeee8069d9b607c9112f2dcd23f",
+    "gitBlobSha": "a54589abb77e2d21202fbfdebf590072a4354102",
+    "singleResolverIdentityPreserved": true,
+    "groupMemberOnlyExtension": true,
+    "addedExports": [
+      "resolvePublicAssetGroupMember",
+      "resolvePublicAssetGroupMemberForWeb"
+    ]
+  },
+  "authorityBoundary": {
+    "pdsBaselineReopened": false,
+    "historicalPdsSuccessorRewritten": false,
+    "historicalHpc2FreezeRewritten": false,
+    "secondResolverCreated": false,
+    "registryAuthorityChanged": false,
+    "verificationAuthorityChanged": false,
+    "publicBaseAuthorityChanged": false,
+    "methodAuthorityChanged": false,
+    "knowledgeAuthorityChanged": false,
+    "globalProductionAcceptanceGranted": false
+  },
+  "successorPolicy": {
+    "failClosed": true,
+    "exactGitBlobRequired": true,
+    "exactSha256Required": true,
+    "futureResolverDriftRequiresVersionedSuccessor": true
+  }
+}

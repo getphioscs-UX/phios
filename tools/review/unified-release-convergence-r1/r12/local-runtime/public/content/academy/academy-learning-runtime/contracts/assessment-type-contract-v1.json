@@ -1,0 +1,24 @@
+{
+  "contractCode": "PHI-OS-ALR-W25-ASSESSMENT-TYPE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W25",
+  "status": "active",
+  "productionStatus": "controlled_assessment_type_semantics",
+  "authorityReference": "ALR",
+  "identityPrefix": "ALR-ASMT-TYPE-",
+  "requiredAssessmentTypeFields": ["assessmentTypeCode", "assessmentTypeVersion", "title", "capabilityKind", "evaluationMode", "responseShape", "supportedActionVerbs", "requiredIntegrityDimensions", "status", "authorityReference"],
+  "evaluationModes": ["GOVERNED_CRITERION_FINDING_MATRIX"],
+  "responseShapes": ["STRUCTURED_CRITERION_FINDINGS_ONLY"],
+  "requiredIntegrityDimensions": ["EVIDENCE_PRESENT", "UNKNOWNS_PRESERVED", "CONSTRAINTS_CORRECT", "INTERPRETATION_BOUNDED", "BOUNDARY_PRESERVED", "SUPPORT_LEVEL"],
+  "statusValues": ["DRAFT", "REVIEW_REQUIRED", "ACTIVE", "SUSPENDED", "RETIRED"],
+  "forbiddenAssessmentTypeFields": ["learnerReference", "subjectReference", "response", "answerKey", "score", "capabilityState", "credentialState", "entitlementState", "providerPrompt", "providerResponse", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "assessmentTypesAreControlledSemanticFamilies": true,
+    "typeMustMapToOneRegisteredCapabilityKind": true,
+    "typeMustUseControlledObjectiveActionVerbs": true,
+    "typeMayDefineResponseShapeButNotStoreResponse": true,
+    "typeMayDefineEvaluationModeButNotProviderScoring": true,
+    "unknownCapabilityKindActionVerbOrDimensionFailsClosed": true,
+    "validationMutatesRegistry": false
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "article": {
+    "bodyMarkdown": "# 为什么导航需要方向、位置与坐标\n\n导航并不是“知道一个目标，然后向前走”这么简单。真正的导航必须同时回答三个问题：现在在哪里、变化正在朝向哪里，以及这些变化可以在什么共同参照中被比较。位置、方向与坐标因此不是三个彼此独立的概念，而是让行动能够持续校正的共同结构。\n\n## 没有位置，就没有真正的起点\n\n任何导航都从当前位置开始。这里的“位置”并不只指地图上的地点，而是一个状态相对于参照条件所处的关系。一个系统可以知道自己正在变化，却仍然不知道这种变化发生在什么位置；也可以知道某个目标存在，却无法判断自己与目标之间的差异。\n\n因此，位置的作用不是给现实贴上一个静态标签，而是建立“当前状态相对于什么”的描述。只有当当前状态能够被辨认，后续的移动、偏离与接近才有可能被比较。\n\n## 方向说明变化朝向哪里\n\n知道位置仍不足以导航。两个系统可能处在相似的位置，却朝着完全不同的方向变化。方向描述的不是当前位置本身，而是变化的取向：如果当前运动继续，它正在使状态接近什么、远离什么，或者转向什么。\n\n位置与方向因此必须分开。位置回答“现在在哪里”，方向回答“正在往哪里变化”。缺少前者，系统没有起点；缺少后者，系统无法判断变化是否与目标一致。\n\n## 坐标让差异可以被重复比较\n\n如果每一次观察都使用不同的参照方式，即使位置和方向都被描述，也很难形成连续导航。坐标的作用就在这里出现：它把位置与方向放入一个可以重复比较的参考结构。\n\nPHI OS 所说的坐标，并不等同于 GPS、地理经纬度或任何单一技术系统。坐标更一般地指向一种稳定的关系结构：哪些维度被保留、状态如何被标记、不同时间点怎样可以互相比较。只有在这种共同参照中，系统才知道某次变化究竟意味着接近、偏离、停滞还是转换。\n\n## 导航是一连串比较与修正\n\n导航不是一次性选定路线之后机械执行。现实会变化，条件会变化，系统自身也会变化，因此导航必须不断更新当前位置，重新比较目标方向，并根据坐标中的差异修正下一步行动。\n\n这使导航形成一个持续循环：读取位置，比较差异，确认方向，产生行动，再读取新的位置。每一次更新都可能改变下一次判断。真正的导航能力因此不在于“从不偏离”，而在于偏离之后仍然能够重新定位。\n\n## 坐标不能消除不确定性\n\n拥有坐标，并不意味着拥有全部现实。任何坐标都只能保留某些维度，并以某种分辨率描述状态。没有被纳入坐标的差异仍然可能影响结果，已经进入坐标的信息也可能不够精细。\n\n因此，坐标让导航成为可能，却不会自动保证正确决策，更不会产生唯一正确路径。它提供的是可比较性与可修正性，而不是对未来的确定控制。\n\n## 从可导航进入导航精度\n\n当位置、方向与坐标同时建立，现实中的变化才开始具有可导航性：系统不仅知道事情正在发生，还能够辨认自己处于什么关系位置、变化朝向哪里，以及下一次比较应以什么为参照。\n\n但新的问题也随之出现。即使拥有坐标，如果坐标过于粗糙，系统仍可能看不见关键差异。于是，导航接下来必须面对另一个基础条件：结构与坐标的分辨率，将如何限制我们能够看见和修正的现实。",
+    "sectionHeadings": [
+      "没有位置，就没有真正的起点",
+      "方向说明变化朝向哪里",
+      "坐标让差异可以被重复比较",
+      "导航是一连串比较与修正",
+      "坐标不能消除不确定性",
+      "从可导航进入导航精度"
+    ],
+    "summary": "导航并不是“知道一个目标，然后向前走”这么简单。真正的导航必须同时回答三个问题：现在在哪里、变化正在朝向哪里，以及这些变化可以在什么共同参照中被比较。位置、方向与坐标因此不是三个彼此独立的概念，而是让行动能够持续校正的共同结构。",
+    "terminologyTermsUsed": [
+      "TERM-002",
+      "TERM-009",
+      "TERM-010",
+      "TERM-011",
+      "TERM-039"
+    ],
+    "title": "为什么导航需要方向、位置与坐标"
+  },
+  "authority": {
+    "approval": "not_approved",
+    "candidateContent": "candidate_only",
+    "canonicalMeaning": "TL",
+    "humanReview": "not_reviewed",
+    "publication": "not_published"
+  },
+  "candidateCode": "CANDIDATE-KN-B1-P1-006-ZH-HANS-V1",
+  "candidateDigest": "35657a32be574b888b82e615213ade9af4345e5c82d19186f119a010be0e47ce",
+  "candidateSchemaVersion": "PHI-OS-ZH-HANS-CANONICAL-CANDIDATE-v1.0.0",
+  "candidateState": "ready_for_human_review",
+  "candidateType": "canonical_article_candidate",
+  "governance": {
+    "approvalRecorded": false,
+    "canonicalMeaningMutationAllowed": false,
+    "localeStatePromotionAllowed": false,
+    "publicationRecorded": false,
+    "registryMutationAllowed": false,
+    "reviewRecorded": false
+  },
+  "locale": "zh-Hans",
+  "nodeCode": "KN-B1-P1-006",
+  "provenance": {
+    "independentLocaleAuthoring": true,
+    "producer": "VAP-W7S openai_chatgpt_session / GPT-5.6 Sol; VAP-W8 integrity + C2 bridge validation; source=sha256:997a13b6d78de9b95017db7401eae299ad54405f41d182babb0d2a982af1723b",
+    "productionMode": "brief_bound_candidate_authoring"
+  },
+  "sourceBrief": {
+    "briefCode": "BRIEF-KN-B1-P1-006-ZH-HANS-V1",
+    "briefDigest": "00b14ad45cb10812505ad4e01cc8e9c2de6eb6dbc84ad80b2807a6ac9b5853cb",
+    "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+    "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+  }
+}

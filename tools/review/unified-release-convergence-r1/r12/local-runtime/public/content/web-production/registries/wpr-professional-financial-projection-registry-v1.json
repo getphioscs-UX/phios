@@ -1,0 +1,40 @@
+{
+  "registryCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-PROJECTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W22",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "status": "canonical_limited_production_projection",
+  "entries": [
+    {
+      "projectionCode": "PROFESSIONAL_DISCOVERY",
+      "surfaceCode": "PROFESSIONAL",
+      "routeCode": "PROFESSIONAL",
+      "authorityReferences": [
+        "PR"
+      ],
+      "projectionState": "LIMITED_PRODUCTION",
+      "privateDataAllowed": false,
+      "professionalJudgmentCreationAllowed": false
+    },
+    {
+      "projectionCode": "FINANCIAL_DISCOVERY",
+      "surfaceCode": "FINANCIAL",
+      "routeCode": "FINANCIAL",
+      "authorityReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "projectionState": "LIMITED_PRODUCTION",
+      "privateDataAllowed": false,
+      "financialCalculationExecutionAllowed": false,
+      "financialRecommendationCreationAllowed": false,
+      "regulatedAdviceCreationAllowed": false
+    }
+  ],
+  "rules": {
+    "publicDiscoveryDoesNotGrantProfessionalPermission": true,
+    "financialPublicPageDoesNotExecuteCalculations": true,
+    "riskIsNotRecommendation": true,
+    "projectionIsNotProfessionalJudgment": true
+  }
+}

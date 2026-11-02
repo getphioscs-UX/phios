@@ -1,0 +1,32 @@
+{
+  "contractCode": "PHI-OS-RNE-W1-CURRENT-POSITION-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W1",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/current-position-v1.schema.json",
+  "reads": [
+    "RMO_REALITY_REFERENCE",
+    "RRE_READOUT_VALIDATION_VIEW_REFERENCE",
+    "RMO_CONSTRAINT_REFERENCES",
+    "RMO_UNKNOWN_REFERENCES",
+    "RDG_GOVERNANCE_REFERENCES"
+  ],
+  "rules": {
+    "realityReferenceRequired": true,
+    "readoutReferenceRequired": true,
+    "readoutReferenceMode": "VALIDATION_VIEW_REFERENCE_ONLY",
+    "constraintReferencesRequired": true,
+    "rawRealityPayloadAccepted": false,
+    "rawReadoutPayloadAccepted": false,
+    "realityTruthChanged": false,
+    "readoutMeaningChanged": false,
+    "constraintAuthorityChanged": false,
+    "targetCreated": false,
+    "recommendationCreated": false,
+    "navigationCommandCreated": false,
+    "professionalJudgmentCreated": false,
+    "persistentStoreActivated": false
+  }
+}

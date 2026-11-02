@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/method-runtime/method-plugin-contract-v1.schema.json",
+  "title": "PHI OS Method Plugin Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "pluginCode",
+    "pluginVersion",
+    "runtimeVersion",
+    "projectionVersion",
+    "status",
+    "licenseStatus",
+    "imrStatus",
+    "methodDefinitionVersion",
+    "dataAuthority",
+    "dependencies",
+    "authority",
+    "calculationPolicy",
+    "projectionPolicy",
+    "interpretationPolicy",
+    "professionalPolicy",
+    "capabilities"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-METHOD-PLUGIN-CONTRACT-v1.0.0"
+    },
+    "pluginCode": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9-]{2,31}$"
+    },
+    "pluginName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pluginVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "projectionVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "experimental",
+        "internal",
+        "pilot",
+        "production",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "licenseStatus": {
+      "enum": [
+        "approved",
+        "not_required",
+        "restricted",
+        "prohibited",
+        "expired"
+      ]
+    },
+    "imrStatus": {
+      "enum": [
+        "approved",
+        "production_eligible"
+      ]
+    },
+    "methodDefinitionVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "dataAuthority": {
+      "const": "SHARED_DATA_AUTHORITY"
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "journeyRuntime",
+        "knowledgeRuntime",
+        "professionalWorkspace",
+        "methodPlugins",
+        "externalCalculationEngines"
+      ],
+      "properties": {
+        "journeyRuntime": {
+          "const": false
+        },
+        "knowledgeRuntime": {
+          "const": false
+        },
+        "professionalWorkspace": {
+          "const": false
+        },
+        "methodPlugins": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9-]{2,31}$"
+          }
+        },
+        "externalCalculationEngines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "engineCode",
+              "engineVersion",
+              "verificationStatus",
+              "licenseStatus"
+            ],
+            "properties": {
+              "engineCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "engineVersion": {
+                "type": "string",
+                "minLength": 1
+              },
+              "verificationStatus": {
+                "const": "verified"
+              },
+              "licenseStatus": {
+                "enum": [
+                  "approved",
+                  "not_required"
+                ]
+              }
+            }
+          }
+        },
+        "optionalInputs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PUBLISHED_KNOWLEDGE",
+              "JOURNEY_RUNTIME"
+            ]
+          }
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodDefinition",
+        "data",
+        "calculation",
+        "projection",
+        "interpretation",
+        "professionalReview",
+        "release"
+      ],
+      "properties": {
+        "methodDefinition": {
+          "const": "IMR_APPROVED_METHOD_DEFINITION"
+        },
+        "data": {
+          "const": "SHARED_DATA_AUTHORITY"
+        },
+        "calculation": {
+          "const": "SHARED_CALCULATION_RUNTIME"
+        },
+        "projection": {
+          "const": "SHARED_PROJECTION_RUNTIME"
+        },
+        "interpretation": {
+          "const": "SHARED_INTERPRETATION_RUNTIME"
+        },
+        "professionalReview": {
+          "const": "SHARED_PROFESSIONAL_RUNTIME"
+        },
+        "release": {
+          "const": "AUTHORIZED_HUMAN_VIA_PROFESSIONAL_RUNTIME"
+        }
+      }
+    },
+    "calculationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engineType",
+        "providerParticipation",
+        "aiAllowed",
+        "workersAiAllowed",
+        "promptAllowed",
+        "interpretationAllowed",
+        "repeatability"
+      ],
+      "properties": {
+        "engineType": {
+          "enum": [
+            "deterministic_engine",
+            "verified_external_engine"
+          ]
+        },
+        "providerParticipation": {
+          "const": false
+        },
+        "aiAllowed": {
+          "const": false
+        },
+        "workersAiAllowed": {
+          "const": false
+        },
+        "promptAllowed": {
+          "const": false
+        },
+        "interpretationAllowed": {
+          "const": false
+        },
+        "repeatability": {
+          "const": "100_percent"
+        }
+      }
+    },
+    "projectionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output",
+        "containsInterpretation",
+        "professionalAuthority"
+      ],
+      "properties": {
+        "output": {
+          "const": "PROJECTION_JSON"
+        },
+        "containsInterpretation": {
+          "const": false
+        },
+        "professionalAuthority": {
+          "const": false
+        }
+      }
+    },
+    "interpretationPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output",
+        "professionalConclusion",
+        "directReleaseAllowed"
+      ],
+      "properties": {
+        "output": {
+          "const": "INTERPRETATION_CANDIDATE"
+        },
+        "professionalConclusion": {
+          "const": false
+        },
+        "directReleaseAllowed": {
+          "const": false
+        }
+      }
+    },
+    "professionalPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independentReview",
+        "authorizedHumanRequired",
+        "releaseAuthority"
+      ],
+      "properties": {
+        "independentReview": {
+          "const": true
+        },
+        "authorizedHumanRequired": {
+          "const": true
+        },
+        "releaseAuthority": {
+          "const": "SHARED_PROFESSIONAL_RUNTIME"
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "Definition",
+          "Data",
+          "Calculation",
+          "Projection",
+          "Interpretation",
+          "Professional"
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "production"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "licenseStatus": {
+            "enum": [
+              "approved",
+              "not_required"
+            ]
+          },
+          "imrStatus": {
+            "const": "production_eligible"
+          }
+        }
+      }
+    }
+  ]
+}
+

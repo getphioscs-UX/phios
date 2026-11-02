@@ -1,0 +1,108 @@
+{
+  "work": "KAP-BOOK-VII-PRODUCTION-ADMISSION-R1",
+  "status": "KAP_BOOK_VII_PRODUCTION_ADMITTED",
+  "predecessor": {
+    "path": "content/knowledge/answer-projection/reconciliation/kap-book-vii-production-admission-successor-v1.json",
+    "sha256": "49d3eb9502c5444feb65cf8cf8429abbd7445d0c874697784a3cd0035e1f22fd"
+  },
+  "release": {
+    "path": "content/knowledge/public/successors/book-vii-production-live-cutover-r1/published-projection.json",
+    "sha256": "97604f9ab50901eb8e6ab2c8eedde9eded09d7aeaee5cdabdb496498d2c393cf"
+  },
+  "changes": [
+    {
+      "path": "functions/_lib/book-vii-published-admission.js",
+      "predecessorSha256": "aed3b3deba61563b9b05701f04096064f82e2f058fe06f70224565f1e8a0232d",
+      "successorSha256": "3811113fd867626909ef42cbaa66db17d371c3979b80f44737190be768fbea98"
+    },
+    {
+      "path": "functions/_lib/knowledge-epistemic-reading.js",
+      "predecessorSha256": "56dbfb15f990d4ad0b28269c75c0f067bacf39fef543db2974a2090741ad62f2",
+      "successorSha256": "5d1bd14e27100320a74498b4aac95d909a7c9bbfa2ea81c5cbb72dba7837002e"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "dbd43420d768f0ae05da864423235b2834dd9b1b7a1115d730a868e588cd0898",
+      "successorSha256": "a2d7c3066e358da75b7cd01d87054a4e5c47b68d641974dc9fab498dfa486800"
+    },
+    {
+      "path": "functions/_lib/public-knowledge-api.js",
+      "predecessorSha256": "6d6b71b32404503eb6c11723f1ddd394846700b0ddb6b34686d5c8176d77beca",
+      "successorSha256": "04ebb5484c4f82a3965c1a0da80ea69a231fc35b129c177e0e906be1833fe462"
+    },
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "f58952616f6d8ffa3fe00e85b8add7be57c6286fe2dddffef52f6d674298b307",
+      "successorSha256": "d64f32acdae9b088a4e59492395fe23df4abd91294e99eef4212bf58e2dfa4a6"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "60d04d38230dc009e33a72a4ff830256770d2116499c4b6137b0f84e64909f57",
+      "successorSha256": "56d30179d92b633a38d4d22ce0ef231ded931cbd55be822efbeba6952297d4af"
+    },
+    {
+      "path": "scripts/build-kh-w4i-public-knowledge-projection.mjs",
+      "predecessorSha256": "f6928ed72ff4d3efb3776e75365fe641a1f4ebc9cdb0c0106c42cb16c01351ce",
+      "successorSha256": "af16d98b8b6e6f616009af2deaa8d5f6c918d185a844f6027fd1a7328cbef60b"
+    },
+    {
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "predecessorSha256": "65f10f0c9ea637dcc52b3d8a49aceb0fcb5d41cc9f6676d8fc0fc4f84edef27b",
+      "successorSha256": "62772b4f566afd2f3b755c03dbbc65aa6ac956c7826d6dac4c8fa13421311013"
+    },
+    {
+      "path": "scripts/lib/knowledge-runtime/knr-package-b-v1.mjs",
+      "predecessorSha256": "9bf3a00b5d1b8055d2c07b6e04b0f93c813d8241c28a314e764059647c47e4e8",
+      "successorSha256": "12fbba1210bec9a0b7ec8d946554df9cb8f9cc860643cdbb99ca74e9d7d474a7"
+    }
+  ],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false
+  },
+  "noAutomaticCommit": true,
+  "noAutomaticPush": true,
+  "liveCloudDeploymentPerformed": false,
+  "validation": [
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/api-handler-acceptance-v1.json",
+      "sha256": "720ae86df48aa4b61e424764e15c5bc07779ba18a08f0a9d5ed50deb6ce3548e"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/live-http-acceptance-v1.json",
+      "sha256": "64a0f0601e96bffa220f24921aa0b604c40af5b9692a5a4997007977dfef5211"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/browser-acceptance-v1.json",
+      "sha256": "b9249f3416dd40ad2841c67307e833f31330faac7bc548428ed52e9db238a761"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/full-regression-v1.json",
+      "sha256": "1cde8404ac12f3566323181aad7e214e719cb9ead499c325c551e959ac6367bb"
+    },
+    {
+      "path": "content/knowledge/book-vii/production-admission/live-cutover/pages-build-final-v1.json",
+      "sha256": "0822b00633adaae00402969ed3c2c18d3c81d9db07c7e741617d9f92fd7426f2"
+    }
+  ],
+  "executionScope": "CURRENT_MAIN_REPOSITORY_AND_LOCAL_LIVE_EXISTING_PAGES_WORKER",
+  "knownGaps": [
+    {
+      "scope": "CLOUD_DEPLOYMENT",
+      "status": "NOT_PERFORMED",
+      "detail": "Admission verified against the real local Pages Worker and current client. Public internet deployment and remote endpoint verification remain separate."
+    },
+    {
+      "scope": "CROSS_BOOK_BASELINE",
+      "status": "NO_COVERAGE",
+      "detail": "Roman civilization continuity and Japan 1945 queries remain unanswered by the existing published baseline; Book VII does not hijack them."
+    },
+    {
+      "scope": "LOCALE",
+      "status": "ZH_HANS_ONLY",
+      "detail": "English identity/prose admission has not been authorized or created."
+    }
+  ]
+}

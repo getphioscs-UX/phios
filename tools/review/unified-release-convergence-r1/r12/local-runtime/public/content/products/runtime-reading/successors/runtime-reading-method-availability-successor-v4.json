@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "PHI-OS-RRP-METHOD-AVAILABILITY-SUCCESSOR-v4.0.0",
+  "work": "ASTA-W18/W24",
+  "baselineCommit": "ec0f8d4b9ba37599affda909a47d1e41a1033037",
+  "status": "CURRENT_SUCCESSOR_NUM_BZR_AST_AVAILABLE",
+  "predecessor": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v3.json",
+  "predecessorMutated": false,
+  "methods": [
+    {
+      "methodCode": "NUM",
+      "canonicalMethodCode": "NUMEROLOGY",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0-candidate",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_NUM",
+        "NUMA_PRODUCTION_ACCEPTED"
+      ]
+    },
+    {
+      "methodCode": "BZR",
+      "canonicalMethodCode": "BAZI",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_BZR",
+        "BZRA_PRODUCTION_ACCEPTED"
+      ],
+      "executionCompletenessIndependent": true
+    },
+    {
+      "methodCode": "AST",
+      "canonicalMethodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "ASTA_V2_PROJECTION_ACTIVE",
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_AST",
+        "ASTA_PRODUCTION_ACCEPTED"
+      ],
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0",
+      "executionCompletenessIndependent": true
+    },
+    {
+      "methodCode": "HDR",
+      "canonicalMethodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "calculation": "UNAVAILABLE",
+      "projection": "UNAVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "UNAVAILABLE",
+      "selfServiceAllowed": false,
+      "reasonCodes": [
+        "MPA_DISPATCH_BLOCKED"
+      ]
+    }
+  ],
+  "rules": {
+    "capabilityAvailabilityIndependentFromExecutionCompleteness": true,
+    "optionalCycleTargetDateMayYieldPartialExecutionWithoutGlobalDowngrade": true,
+    "professionalJudgmentNotRequiredForSelfServiceAvailability": true
+  }
+}

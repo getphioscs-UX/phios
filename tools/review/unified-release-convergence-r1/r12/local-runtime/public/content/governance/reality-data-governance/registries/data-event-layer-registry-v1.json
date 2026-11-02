@@ -1,0 +1,53 @@
+{
+  "registryCode": "PHI-OS-RDG-W21-DATA-EVENT-LAYER-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RDG-W21",
+  "status": "canonical",
+  "layers": [
+    {
+      "layerCode": "UI_TELEMETRY",
+      "authorityReference": "surface-local interaction instrumentation",
+      "examples": ["button_clicked", "panel_expanded", "viewport_changed"],
+      "canonicalRuntimeState": false,
+      "realityEvidence": false
+    },
+    {
+      "layerCode": "PRODUCT_ANALYTICS",
+      "authorityReference": "content/governance/reality-data-governance/contracts/product-analytics-boundary-v1.json",
+      "examples": ["knowledge_open_count", "reading_path_completion_rate"],
+      "canonicalRuntimeState": false,
+      "realityEvidence": false
+    },
+    {
+      "layerCode": "RUNTIME_EVENT",
+      "authorityReference": "docs/pws/contracts/pws-canonical-events-v1.json",
+      "examples": ["journey.activated", "consent.withdrawn"],
+      "canonicalRuntimeState": false,
+      "realityEvidence": false
+    },
+    {
+      "layerCode": "CANONICAL_RUNTIME_STATE",
+      "authorityReference": "docs/pws/contracts/pws-canonical-states-v1.json",
+      "examples": ["journey state", "entitlement state"],
+      "canonicalRuntimeState": true,
+      "realityEvidence": false
+    },
+    {
+      "layerCode": "REALITY_EVIDENCE",
+      "authorityReference": "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json",
+      "examples": ["eligible governed evidence reference"],
+      "canonicalRuntimeState": false,
+      "realityEvidence": true
+    }
+  ],
+  "rules": {
+    "layersAreMutuallyDistinct": true,
+    "uiTelemetryIsCanonicalRuntimeEvent": false,
+    "uiTelemetryIsRealityEvidence": false,
+    "productAnalyticsIsKnowledgeAuthority": false,
+    "productAnalyticsMayChangeCanonicalRuntimeState": false,
+    "runtimeEventMayExecuteOperation": false,
+    "runtimeEventMayPromoteEvidence": false,
+    "successfulGovernedOperationRequiredForCanonicalRuntimeEvent": true
+  }
+}

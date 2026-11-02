@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-CUSTOMER-FULL-PRODUCTION-CUTOVER-v1.0.0",
+  "work": "PRF-CUSTOMER-FULL-PRODUCTION-CUTOVER",
+  "baselineCommit": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+  "status": "CUSTOMER_FULL_PRODUCTION_CUTOVER_EXECUTED",
+  "inherits": [
+    "content/profile/acceptance/profile-prf-w12-production-admission-v1.json",
+    "content/profile/freeze/profile-production-freeze-index-v1.json",
+    "content/profile/academic/onet/freeze/onet-live-provider-production-freeze-v1.json"
+  ],
+  "surface": "/perspectives/profile/",
+  "indexing": "INDEX_FOLLOW",
+  "perspectivesNavigationVisible": true,
+  "modesVisible": 7,
+  "academicLanesVisible": 4,
+  "customerPublicationAllowed": true,
+  "boundaries": {
+    "profileRequiredForPersonalReading": false,
+    "universalMasterScore": false,
+    "iqOrPercentile": false,
+    "diagnosis": false,
+    "financialAdvice": false,
+    "jobFitGuarantee": false,
+    "symbolicScientificValidationTransfer": false,
+    "automaticPersistence": false
+  },
+  "onet": {
+    "providerAdmission": "LIVE_PROVIDER_ADMITTED_USER_SMOKE",
+    "serverSecretRequired": "ONET_WEB_SERVICES_API_KEY",
+    "failClosedWithoutSecret": true
+  }
+}

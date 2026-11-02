@@ -1,0 +1,73 @@
+{
+  "registryCode": "PHI-OS-CAR-SURFACE-PROJECTION-TYPE-REGISTRY-v1",
+  "version": "1.0.0",
+  "work": "CAR-W15",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "surfaceTypes": [
+    {
+      "surface": "WEBSITE",
+      "requiredSlots": [
+        "heroOrLead",
+        "primaryContent"
+      ],
+      "optionalSlots": [
+        "figureOrDiagram",
+        "knowledgeBlocks",
+        "relatedNodes",
+        "readingPath"
+      ]
+    },
+    {
+      "surface": "BOOK",
+      "requiredSlots": [
+        "primaryContent"
+      ],
+      "optionalSlots": [
+        "selectedFigure",
+        "caption",
+        "sourceNote"
+      ]
+    },
+    {
+      "surface": "ACADEMY",
+      "requiredSlots": [
+        "lesson"
+      ],
+      "optionalSlots": [
+        "slides",
+        "quiz",
+        "assignment"
+      ]
+    },
+    {
+      "surface": "SOCIAL",
+      "requiredSlots": [
+        "primaryContent"
+      ],
+      "optionalSlots": [
+        "thumbnail",
+        "shortScript",
+        "caption",
+        "continueReadingLink"
+      ]
+    },
+    {
+      "surface": "API",
+      "requiredSlots": [
+        "metadata"
+      ],
+      "optionalSlots": [
+        "mediaReferences",
+        "knowledgeReferences",
+        "accessibilityData"
+      ]
+    }
+  ],
+  "invariants": {
+    "crossSurfacePublicationInherited": false,
+    "publishedOnly": true,
+    "candidateReadable": false,
+    "surfaceProjectionIsPublication": false
+  }
+}

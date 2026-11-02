@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-RULESET-v1.0.0",
+  "work": "BAZI-FP-W6",
+  "rulesetId": "BAZI-W6-ZI-PING-MONTH-COMMAND-USE-RULESET-v1",
+  "rulesetVersion": "1.0.0",
+  "status": "FROZEN_SOURCE_ADMITTED_FOUNDATION",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "schoolCode": "ZI_PING_MONTH_COMMAND_USE_v1",
+  "authority": {
+    "sourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
+    "sourceStrategyRef": "content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.1.json",
+    "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json",
+    "admittedClaimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v1.1.json",
+    "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-001-human-review-result-v1.json",
+    "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-001-admission-v1.json",
+    "admittedClaimRefs": [
+      "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001",
+      "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003",
+      "BZR-CLM-ZPZQ-10-VARIATION-004",
+      "BZR-CLM-ZPZQ-14-CLIMATE-CROSSCHECK-006",
+      "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007"
+    ]
+  },
+  "meaningOfUsefulGod": "MONTH_COMMAND_PATTERN_USE_WITH_FOUR_PILLAR_CONDITIONS",
+  "evaluationOrder": [
+    "MONTH_COMMAND_PATTERN_CONTEXT",
+    "FOUR_PILLAR_CONDITIONS",
+    "VARIATION_STAGE",
+    "CLIMATE_CROSSCHECK",
+    "PEER_MONTH_COMMAND_SPECIAL_HANDLING"
+  ],
+  "rules": [
+    {
+      "ruleId": "W6-ZP-R01",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001"
+      ],
+      "action": "START_FROM_MONTH_COMMAND_PATTERN_CONTEXT"
+    },
+    {
+      "ruleId": "W6-ZP-R02",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003"
+      ],
+      "action": "REQUIRE_FOUR_PILLAR_SUPPORT_DAMAGE_RESCUE_CONDITIONS"
+    },
+    {
+      "ruleId": "W6-ZP-R03",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-10-VARIATION-004"
+      ],
+      "action": "APPLY_VISIBLE_AND_COMBINATION_VARIATION_BEFORE_SELECTION"
+    },
+    {
+      "ruleId": "W6-ZP-R04",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-14-CLIMATE-CROSSCHECK-006"
+      ],
+      "action": "CROSSCHECK_CLIMATE_WITHOUT_REPLACING_MONTH_COMMAND_MODEL"
+    },
+    {
+      "ruleId": "W6-ZP-R05",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007"
+      ],
+      "action": "USE_SPECIAL_JIANLU_YUEJIE_PATH_FOR_PEER_MONTH_COMMAND"
+    }
+  ],
+  "decisionCoverage": {
+    "schoolQualifiedEvidenceEvaluation": "SUPPORTED",
+    "usefulGodElementSelection": "UNRESOLVED_REQUIRES_DETAILED_PATTERN_CONDITION_AND_SELECTION_CLAIMS",
+    "customerOutcomePrediction": "FORBIDDEN"
+  },
+  "freezePolicy": {
+    "silentCrossSchoolMergeForbidden": true,
+    "unsupportedGapFillForbidden": true,
+    "ruleMutationRequiresNewRulesetVersion": true
+  }
+}

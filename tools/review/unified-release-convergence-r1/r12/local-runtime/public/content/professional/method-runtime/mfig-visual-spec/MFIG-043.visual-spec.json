@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-043",
+  "title": "CROSS-METHOD-DIVERGENCE",
+  "scope": "CROSS_METHOD",
+  "role": "CROSS_METHOD",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-client-delivery/schemas/mcd-6-cross-method-composition-v1.schema.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "SOURCE_PROJECTIONS",
+      "displayLabel": "SOURCE PROJECTIONS",
+      "nodeType": "RESULT",
+      "authorityClass": "COMPOSITION",
+      "semanticRole": "DIVERGENCE",
+      "container": "CROSS_METHOD_COMPOSITION",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "DIVERGENCE_CLASSIFICATION",
+      "displayLabel": "DIVERGENCE CLASSIFICATION",
+      "nodeType": "STATE",
+      "authorityClass": "COMPOSITION",
+      "semanticRole": "DIVERGENCE",
+      "container": "CROSS_METHOD_COMPOSITION",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "DIVERGENCE_SIGNAL",
+      "displayLabel": "DIVERGENCE SIGNAL",
+      "nodeType": "SIGNAL",
+      "authorityClass": "COMPOSITION",
+      "semanticRole": "DIVERGENCE",
+      "container": "CROSS_METHOD_COMPOSITION",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "EVIDENCE_REFS",
+      "displayLabel": "EVIDENCE REFS",
+      "nodeType": "RESULT",
+      "authorityClass": "EVIDENCE",
+      "semanticRole": "DIVERGENCE",
+      "container": "CROSS_METHOD_COMPOSITION",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-043-E01",
+      "from": "SOURCE_PROJECTIONS",
+      "to": "DIVERGENCE_CLASSIFICATION",
+      "relation": "CLASSIFIES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-043-E02",
+      "from": "DIVERGENCE_CLASSIFICATION",
+      "to": "DIVERGENCE_SIGNAL",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-043-E03",
+      "from": "DIVERGENCE_SIGNAL",
+      "to": "EVIDENCE_REFS",
+      "relation": "BINDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "CROSS_METHOD_COMPOSITION",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "SOURCE_PROJECTIONS",
+        "DIVERGENCE_CLASSIFICATION",
+        "DIVERGENCE_SIGNAL",
+        "EVIDENCE_REFS"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "SOURCE_PROJECTIONS",
+    "DIVERGENCE_CLASSIFICATION",
+    "DIVERGENCE_SIGNAL",
+    "EVIDENCE_REFS"
+  ],
+  "mustState": [
+    "DIVERGENCE is a governed composition classification",
+    "Classification must reference source projections and evidence",
+    "Renderer must not compute classification"
+  ],
+  "statementSources": {
+    "DIVERGENCE is a governed composition classification": "SRC-002",
+    "Classification must reference source projections and evidence": "SRC-002",
+    "Renderer must not compute classification": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

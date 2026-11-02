@@ -1,0 +1,55 @@
+{
+  "auditCode": "PHI-OS-RR-W0-REPORT-AUTHORITY-AUDIT-v2",
+  "auditVersion": "2.0.0",
+  "runtimeCode": "RR",
+  "work": "RR-W0",
+  "status": "RECONCILED_UPGRADED_RUNTIME",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "migration": {
+    "legacyWorkCode": "RR-W0-W10",
+    "canonicalWorkCode": "RR-W0-W12",
+    "migrationStatus": "UPGRADED",
+    "reason": "Report assembly preserved; rendering moved to CPR."
+  },
+  "authorityStatements": [
+    "Report ≠ Knowledge",
+    "Report ≠ Meaning",
+    "Report ≠ Professional Judgment",
+    "Report ≠ Journey",
+    "Report ≠ Readout",
+    "Report ≠ Metric",
+    "RR = REPORT_ASSEMBLY authority"
+  ],
+  "legacyCompatibility": {
+    "professionalReportAdaptersPreserved": true,
+    "financialReportAdaptersPreserved": true,
+    "legacyTemplateRegistryPreserved": true,
+    "legacyAdaptersAreNotCanonicalRrV2Authority": true
+  },
+  "upstreamAuthorities": {
+    "reality": "RMO",
+    "evidence": "RRE evidence authority",
+    "readout": "RRE_READOUT",
+    "methodProjection": "MR family",
+    "meaning": "CMR",
+    "professionalJudgment": "PR",
+    "navigation": "JR",
+    "knowledge": "Knowledge Authority",
+    "metric": "upstream governed source only"
+  },
+  "downstreamAuthorities": {
+    "presentation": "CPR",
+    "longitudinalTimeline": "LRM"
+  },
+  "forbidden": [
+    "create new judgment",
+    "create new readout",
+    "create new metric",
+    "professional approval write",
+    "knowledge write",
+    "meaning write",
+    "navigation decision write",
+    "presentation rendering",
+    "direct LRM persistence"
+  ]
+}

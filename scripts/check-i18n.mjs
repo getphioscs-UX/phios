@@ -5,7 +5,9 @@ import en from '../assets/js/locales/en.js';
 import zhHans from '../assets/js/locales/zh-Hans.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ignoredDirectories = new Set(['.git', 'node_modules', '.pages-output', '.wrangler', 'artifacts']);
+// Nested checkouts and temporary browser profiles are not this checkout's
+// application sources. Each worktree validates its own sources independently.
+const ignoredDirectories = new Set(['.git', 'node_modules', '.pages-output', '.wrangler', 'artifacts', '.worktrees', '.tmp']);
 
 function flatten(value, prefix = '', output = new Set()) {
   for (const [key, child] of Object.entries(value || {})) {

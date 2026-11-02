@@ -1,0 +1,33 @@
+{
+  "registryCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-PROJECTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W20",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "canonical_wpr_w20_projection_registry",
+  "entries": [
+    {
+      "projectionCode": "JR_V2_CANONICAL_OVERVIEW",
+      "routeCode": "REALITY_JOURNEY",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "audience": "PUBLIC",
+      "sourceMode": "FROZEN_JR_AUTHORITY_ONLY",
+      "privateStateAllowed": false,
+      "canonicalAuthorityClaim": "JR_STAGE_AND_BOUNDARY_ONLY"
+    },
+    {
+      "projectionCode": "JR_V2_LOCAL_CUSTOMER_COMPATIBILITY",
+      "routeCode": "CUSTOMER_WORKSPACE",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "audience": "CUSTOMER",
+      "sourceMode": "LEGACY_M3C_BROWSER_LOCAL_STATE_MAPPED_THROUGH_JR_COMPATIBILITY",
+      "privateStateAllowed": "BROWSER_LOCAL_ONLY",
+      "canonicalAuthorityClaim": "NO_CANONICAL_JOURNEY_PERSISTENCE"
+    }
+  ],
+  "rules": {
+    "sameJourneyAuthority": true,
+    "secondJourneyRuntimeCreated": false,
+    "legacyProjectionIsNotCanonicalAuthority": true,
+    "missingMappingFailsClosed": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-MPA-MEANING-KNOWLEDGE-INTEGRATION-v1.0.0",
+  "work": "MPA-W19",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "validation_reference_only",
+  "flow": [
+    "PROJECTION_FREEZE",
+    "CMR_METHOD_TO_MEANING_MAPPING",
+    "CANONICAL_MEANING_CODE_REFERENCE",
+    "CMR_MEANING_KNOWLEDGE_MAP",
+    "KNOWLEDGE_NODE_REFERENCES",
+    "PUBLISHED_KNOWLEDGE_QUERY_AUTHORITY"
+  ],
+  "authority": {
+    "meaning": "CANONICAL_MEANING_RUNTIME",
+    "knowledge": "KNOWLEDGE_NODE_REGISTRY / PUBLISHED_KNOWLEDGE_AUTHORITY",
+    "mpaRole": "REFERENCE_ORCHESTRATION_ONLY"
+  },
+  "currentCompatibility": {
+    "methodToMeaningContract": "content/professional/canonical-meaning-runtime/contracts/method-to-meaning-mapping-contract-v1.json",
+    "meaningKnowledgeQueryContract": "content/professional/canonical-meaning-runtime/contracts/meaning-knowledge-query-contract-v1.json",
+    "meaningKnowledgeMap": "content/professional/canonical-meaning-runtime/registries/canonical-meaning-knowledge-map-v1.2.json",
+    "numMeaningMapping": "content/professional/canonical-meaning-runtime/registries/num-meaning-mapping-registry-v1.json",
+    "cmrProductionStatus": "validation_only",
+    "liveProductionIntegrationActivated": false
+  },
+  "rules": {
+    "projectionMayReferenceMeaning": true,
+    "projectionMayRequestPublishedKnowledgeCoverage": true,
+    "mpaMayCreateMeaningCode": false,
+    "mpaMayRewriteMeaning": false,
+    "mpaMayRewriteKnowledgeNode": false,
+    "mpaMayStoreArticleBody": false,
+    "mpaMayStorePublishedFragmentText": false,
+    "unpublishedKnowledgeExposureAllowed": false,
+    "meaningReferenceCreatesInterpretation": false,
+    "knowledgeReferenceCreatesRealityFact": false,
+    "knowledgeReferenceCreatesProfessionalConclusion": false
+  },
+  "knownBoundary": {
+    "numLifePathMappingsAvailable": true,
+    "numOtherRolesRemainUnresolved": true,
+    "cmrValidationOnlyMustRemainVisible": true
+  },
+  "productionEligibilityChanged": false,
+  "nextWork": "MPA-W20"
+}

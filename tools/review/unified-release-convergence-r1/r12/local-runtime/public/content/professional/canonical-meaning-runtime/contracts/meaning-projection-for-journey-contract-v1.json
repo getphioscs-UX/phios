@@ -1,0 +1,94 @@
+{
+  "contractCode": "PHI-OS-CM-W14-MEANING-PROJECTION-FOR-JOURNEY-v1",
+  "contractVersion": "1.0.0",
+  "work": "CM-W14",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "baselineCommit": "d116732ef27fd3cc0cbbf29b7b1aa3fb4b3682d3",
+  "purpose": "Expose a read-only, privacy- and authority-bounded Journey Context Projection derived from a Canonical Meaning Bundle.",
+  "inputAuthority": {
+    "runtime": "PHI_OS_CANONICAL_MEANING_RUNTIME",
+    "schemaVersion": "PHI-OS-CANONICAL-MEANING-BUNDLE-v1.0.0",
+    "readOnly": true
+  },
+  "output": {
+    "runtimeCode": "JOURNEY_MEANING_PROJECTION_RUNTIME",
+    "schemaVersion": "PHI-OS-JOURNEY-MEANING-CONTEXT-v1.0.0",
+    "journeyContextFields": [
+      "meaningCode",
+      "meaningFamily",
+      "selectedDimensions",
+      "knowledgeCoverage",
+      "limitations",
+      "sourceLineage"
+    ]
+  },
+  "allowedExposure": [
+    "meaningCode",
+    "meaningFamily",
+    "selectedDimensions",
+    "knowledgeCoverage",
+    "limitations",
+    "sourceLineage"
+  ],
+  "forbiddenExposure": [
+    "restricted algorithm details",
+    "calculation identifiers",
+    "calculation runtime internals",
+    "mapping registry internals",
+    "knowledge node lists",
+    "unpublished knowledge",
+    "article body",
+    "published fragment text",
+    "internal Professional Notes",
+    "license-restricted Source Data",
+    "Provider output",
+    "Prompt",
+    "Interpretation",
+    "Professional Conclusion",
+    "Reality Decision"
+  ],
+  "knowledgeBoundary": {
+    "cmW13MeaningToKnowledgeBridgePresent": false,
+    "knowledgeQueryAllowed": false,
+    "knowledgeCoverageSource": "Canonical Meaning Bundle inherited summary only",
+    "publishedKnowledgeBodyExposureAllowed": false,
+    "unpublishedKnowledgeExposureAllowed": false,
+    "futureCMW13IntegrationRequiresVersionedSuccessor": true
+  },
+  "lineageBoundary": {
+    "exposed": [
+      "methodCode",
+      "projectionType",
+      "projectionCode",
+      "projectionVersion",
+      "projectionDigest"
+    ],
+    "forbidden": [
+      "calculationId",
+      "calculationRuntimeCode",
+      "calculationRuntimeVersion",
+      "algorithmCode",
+      "algorithmVersion",
+      "inputDigest",
+      "outputDigest",
+      "mappingCode",
+      "mappingDigest"
+    ]
+  },
+  "invariants": {
+    "readOnly": true,
+    "deterministic": true,
+    "registryAuthorityMutationAllowed": false,
+    "meaningBundleMutationAllowed": false,
+    "journeyMayAcquireMeaningAuthority": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "knowledgeQueryAllowed": false,
+    "interpretationAllowed": false,
+    "professionalConclusionAllowed": false,
+    "realityDecisionAllowed": false
+  },
+  "nextStage": "CM-W15"
+}

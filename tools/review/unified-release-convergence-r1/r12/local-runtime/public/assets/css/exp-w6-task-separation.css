@@ -1,0 +1,37 @@
+/* EXP-W6 customer task separation. Runtime controls and contracts remain unchanged. */
+.exp-w6-supporting-status,
+.exp-w6-supporting-context,
+.exp-w6-review-handoff,
+.exp-w6-technical-history {
+  border: 1px solid var(--color-border, #d8d5cc);
+  border-radius: var(--radius-md, 12px);
+  background: var(--color-surface, #fff);
+}
+
+.exp-w6-supporting-status > summary,
+.exp-w6-supporting-context > summary,
+.exp-w6-review-handoff > summary,
+.exp-w6-technical-history > summary {
+  min-height: 44px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.exp-w6-details-body,
+.exp-w6-review-handoff > p,
+.exp-w6-review-handoff > .review-actions,
+.exp-w6-technical-history > :not(summary) { padding-inline: 1rem; }
+
+.exp-w6-compatible-control { display: none !important; }
+.exp-w6-direction-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.exp-w6-memory-overview dd { overflow-wrap: anywhere; }
+.exp-w6-review-handoff { margin-block-start: 1rem; }
+
+@media (max-width: 48rem) {
+  .exp-w6-direction-grid { grid-template-columns: 1fr; }
+  .exp-w6-supporting-status,
+  .exp-w6-supporting-context,
+  .exp-w6-review-handoff,
+  .exp-w6-technical-history { max-width: 100%; overflow-wrap: anywhere; }
+}

@@ -1,0 +1,564 @@
+{
+  "id": "FINANCIAL_R3_2_PRIVATE_XLSX_SCHEMA_CROSSWALK_CANDIDATE",
+  "status": "ANONYMIZED_STRUCTURE_ONLY_NOT_PRODUCTION_APPROVED",
+  "input": {
+    "type": "PRIVATE_WORKBOOK",
+    "sheetCount": 34,
+    "formulaCountApprox": 5018,
+    "cachedFormulaErrors": {
+      "DIV_ZERO": 8
+    },
+    "chartXmlCount": 12,
+    "personalValuesStored": false
+  },
+  "preservation": {
+    "existingR31PaidCore": 20,
+    "existingR3PaidCore": 16,
+    "existingFreeCore": 8,
+    "defaultPageCountChanged": false,
+    "commercialTerms": {
+      "currency": "MYR",
+      "paidPriceMinor": 6900,
+      "includedFollowups": 4,
+      "maximumPurchaseProviderCostUSD": 5
+    },
+    "providerCallsAllowed": false
+  },
+  "sourceWorksheets": [
+    {
+      "index": 1,
+      "sheetName": "Calculation  sheet",
+      "semanticClass": "LEGACY_CALCULATION_REFERENCE",
+      "anonymizedFields": "legacy calculations and comparison assumptions",
+      "integrateIntoCorePages": [
+        "P20"
+      ],
+      "candidateDeepDivePages": [],
+      "disposition": "DO_NOT_PORT_FORMULAS",
+      "boundary": "Review dependencies and rewrite canonical models; do not use cached answers"
+    },
+    {
+      "index": 2,
+      "sheetName": "Static Info",
+      "semanticClass": "PRIVATE_PROFILE_FIELDS",
+      "anonymizedFields": "persons, dates, financial assumption inputs",
+      "integrateIntoCorePages": [
+        "P03",
+        "P20"
+      ],
+      "candidateDeepDivePages": [],
+      "disposition": "SCHEMA_ONLY",
+      "boundary": "Do not copy identifiers or contact information"
+    },
+    {
+      "index": 3,
+      "sheetName": "Front",
+      "semanticClass": "LEGACY_VISUAL",
+      "anonymizedFields": "former cover and section graphic",
+      "integrateIntoCorePages": [],
+      "candidateDeepDivePages": [],
+      "disposition": "DESIGN_REJECTED",
+      "boundary": "Use mandatory R2 cover instead"
+    },
+    {
+      "index": 4,
+      "sheetName": "Cover Letter",
+      "semanticClass": "PROFESSIONAL_TEMPLATE",
+      "anonymizedFields": "personalized professional cover letter",
+      "integrateIntoCorePages": [],
+      "candidateDeepDivePages": [],
+      "disposition": "DO_NOT_REUSE",
+      "boundary": "Do not impersonate an advisor or claim completed client meeting"
+    },
+    {
+      "index": 5,
+      "sheetName": "Declaration",
+      "semanticClass": "DECLARATION_HISTORIC",
+      "anonymizedFields": "past client and provider declaration workflows",
+      "integrateIntoCorePages": [],
+      "candidateDeepDivePages": [],
+      "disposition": "NEEDS_SEPARATE_CONSENT_OWNER",
+      "boundary": "No historic signature/checkbox can grant active platform consent"
+    },
+    {
+      "index": 6,
+      "sheetName": "Content",
+      "semanticClass": "LEGACY_INDEX",
+      "anonymizedFields": "section inventory and legacy navigation",
+      "integrateIntoCorePages": [
+        "P20"
+      ],
+      "candidateDeepDivePages": [],
+      "disposition": "COVERAGE_AUDIT_ONLY",
+      "boundary": "Not proof of sections implemented"
+    },
+    {
+      "index": 7,
+      "sheetName": "Clients' Facts",
+      "semanticClass": "HOUSEHOLD",
+      "anonymizedFields": "household profile and time-based personal planning inputs",
+      "integrateIntoCorePages": [
+        "P03",
+        "P10",
+        "P19"
+      ],
+      "candidateDeepDivePages": [
+        "P23",
+        "P26",
+        "P27"
+      ],
+      "disposition": "MAP_TO_FDR_WITH_CONSENT",
+      "boundary": "Person and subject rights are separate"
+    },
+    {
+      "index": 8,
+      "sheetName": "Objectives",
+      "semanticClass": "GOALS",
+      "anonymizedFields": "goal importance, priority, time horizon, owner, qualitative constraints",
+      "integrateIntoCorePages": [
+        "P10",
+        "P15",
+        "P16"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P23",
+        "P27"
+      ],
+      "disposition": "REUSE_AND_EXTEND",
+      "boundary": "Do not promote personal goal to advisor recommendation"
+    },
+    {
+      "index": 9,
+      "sheetName": "Bank detail",
+      "semanticClass": "DEPOSITS",
+      "anonymizedFields": "bank/deposit type, value, maturity, ownership, access restrictions",
+      "integrateIntoCorePages": [
+        "P07",
+        "P08",
+        "P09"
+      ],
+      "candidateDeepDivePages": [
+        "P22",
+        "P24"
+      ],
+      "disposition": "REUSE_R3_1_APPENDIX",
+      "boundary": "Sensitive account identifiers masked"
+    },
+    {
+      "index": 10,
+      "sheetName": "Property",
+      "semanticClass": "PROPERTY_FACTS",
+      "anonymizedFields": "property legal ownership, acquisition, value and tenure",
+      "integrateIntoCorePages": [
+        "P07",
+        "P08",
+        "P11"
+      ],
+      "candidateDeepDivePages": [
+        "P22",
+        "P24",
+        "P26"
+      ],
+      "disposition": "REUSE_R3_1_APPENDIX",
+      "boundary": "Do not copy addresses; distinguish ownership share and loan"
+    },
+    {
+      "index": 11,
+      "sheetName": "Insurance ",
+      "semanticClass": "POLICY_FACTS",
+      "anonymizedFields": "policy holder, insured, event, coverage term, premium, nomination",
+      "integrateIntoCorePages": [
+        "P13",
+        "P14"
+      ],
+      "candidateDeepDivePages": [
+        "P25",
+        "P26"
+      ],
+      "disposition": "MAP_PER_PERSON_EVENT",
+      "boundary": "Nominee not automatically Will beneficiary"
+    },
+    {
+      "index": 12,
+      "sheetName": "Unit Trust",
+      "semanticClass": "INVESTMENT_FACTS",
+      "anonymizedFields": "fund costs, current value, holdings, and nominal profit/loss",
+      "integrateIntoCorePages": [
+        "P08",
+        "P09"
+      ],
+      "candidateDeepDivePages": [
+        "P22",
+        "P24"
+      ],
+      "disposition": "RECALCULATE_WITH_ZERO_GUARD",
+      "boundary": "Eight cached #DIV/0! errors across workbook, all in this sheet"
+    },
+    {
+      "index": 13,
+      "sheetName": "Share",
+      "semanticClass": "INVESTMENT_FACTS",
+      "anonymizedFields": "shares, vehicles, precious metals, other assets, cost/current value",
+      "integrateIntoCorePages": [
+        "P07",
+        "P08"
+      ],
+      "candidateDeepDivePages": [
+        "P22",
+        "P24"
+      ],
+      "disposition": "MAP_ASSETS",
+      "boundary": "Asset valuations need date and entitlement"
+    },
+    {
+      "index": 14,
+      "sheetName": "Liabilities",
+      "semanticClass": "DEBT_FACTS",
+      "anonymizedFields": "borrower, original loan, outstanding, rate, monthly payments",
+      "integrateIntoCorePages": [
+        "P07",
+        "P11",
+        "P12"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22",
+        "P27"
+      ],
+      "disposition": "REUSE_LOAN_OWNER",
+      "boundary": "Never double count repayment"
+    },
+    {
+      "index": 15,
+      "sheetName": "Risk Profile Questionnaire",
+      "semanticClass": "RISK_PROFILE_QUESTIONNAIRE",
+      "anonymizedFields": "declared tolerance, horizon, experience, product knowledge",
+      "integrateIntoCorePages": [
+        "P14"
+      ],
+      "candidateDeepDivePages": [
+        "P25"
+      ],
+      "disposition": "FACTS_ONLY_REQUIRES_REVIEW",
+      "boundary": "Does not independently establish appropriateness or licensed recommendation"
+    },
+    {
+      "index": 16,
+      "sheetName": "Income VS Expenditure",
+      "semanticClass": "FAMILY_CASH_FLOW",
+      "anonymizedFields": "source/category/member gross-net income and regular payments",
+      "integrateIntoCorePages": [
+        "P04",
+        "P05",
+        "P12"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22",
+        "P24",
+        "P27"
+      ],
+      "disposition": "REUSE_FCR",
+      "boundary": "Validate units, payroll deductions and intra-household transfers"
+    },
+    {
+      "index": 17,
+      "sheetName": "Total Net Worth",
+      "semanticClass": "BALANCE_SHEET",
+      "anonymizedFields": "asset/liability buckets and liquidity components",
+      "integrateIntoCorePages": [
+        "P02",
+        "P07",
+        "P09",
+        "P11"
+      ],
+      "candidateDeepDivePages": [
+        "P22",
+        "P24"
+      ],
+      "disposition": "REUSE_FCR",
+      "boundary": "Do not aggregate unproven jointly-held share"
+    },
+    {
+      "index": 18,
+      "sheetName": "Cash Flow",
+      "semanticClass": "CASH_FLOW_RATIOS",
+      "anonymizedFields": "income expense distribution and ratios",
+      "integrateIntoCorePages": [
+        "P04",
+        "P05",
+        "P14"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22"
+      ],
+      "disposition": "REUSE_FCR",
+      "boundary": "Historical thresholds not automatic accepted criteria"
+    },
+    {
+      "index": 19,
+      "sheetName": "Cash Flow Mgmt",
+      "semanticClass": "USER_SCENARIO_FORMAT",
+      "anonymizedFields": "before and after spending adjustment and consequences",
+      "integrateIntoCorePages": [
+        "P06",
+        "P15",
+        "P16"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22",
+        "P24",
+        "P27"
+      ],
+      "disposition": "OPT_IN_SCENARIOS_ONLY",
+      "boundary": "Only a saved user-authored scenario can change the baseline"
+    },
+    {
+      "index": 20,
+      "sheetName": "Monthly Amortization",
+      "semanticClass": "LOAN_AMORTIZATION_REFERENCE",
+      "anonymizedFields": "monthly loan amortization table",
+      "integrateIntoCorePages": [
+        "P11",
+        "P12"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22",
+        "P27"
+      ],
+      "disposition": "USE_EXISTING_LOAN_CALCULATOR",
+      "boundary": "No independent legacy amortization engine"
+    },
+    {
+      "index": 21,
+      "sheetName": "Tax Plan",
+      "semanticClass": "HISTORICAL_TAX",
+      "anonymizedFields": "income items, relief evidence and historical tax-year calculations",
+      "integrateIntoCorePages": [
+        "P18"
+      ],
+      "candidateDeepDivePages": [
+        "P26"
+      ],
+      "disposition": "EVIDENCE_ONLY",
+      "boundary": "Current tax conclusion requires reviewed country/year/residency rules"
+    },
+    {
+      "index": 22,
+      "sheetName": "Edu Plan 1",
+      "semanticClass": "EDUCATION_COST_PATH",
+      "anonymizedFields": "stages, destinations, start dates, tuition, living costs, inflation assumptions",
+      "integrateIntoCorePages": [
+        "P10"
+      ],
+      "candidateDeepDivePages": [
+        "P23"
+      ],
+      "disposition": "NEW_CONDITIONAL_MODEL",
+      "boundary": "Do not default to historic school, country or number of children"
+    },
+    {
+      "index": 23,
+      "sheetName": "Edu Plan 2",
+      "semanticClass": "EDUCATION_FUNDING_PATH",
+      "anonymizedFields": "funding portfolio, return hypotheses and annual education expense trajectory",
+      "integrateIntoCorePages": [
+        "P10"
+      ],
+      "candidateDeepDivePages": [
+        "P24"
+      ],
+      "disposition": "NEW_CONDITIONAL_MODEL",
+      "boundary": "Hardcoded rates and bases must become sourced assumptions"
+    },
+    {
+      "index": 24,
+      "sheetName": "Investment (Property)",
+      "semanticClass": "INVESTMENT_PROPERTY_SCENARIO",
+      "anonymizedFields": "rental estimates, purchase price, debt, property scenario",
+      "integrateIntoCorePages": [
+        "P08",
+        "P11",
+        "P12"
+      ],
+      "candidateDeepDivePages": [
+        "P22",
+        "P24",
+        "P27"
+      ],
+      "disposition": "DECLARED_SCENARIOS_ONLY",
+      "boundary": "No automatic property purchase or rent projections"
+    },
+    {
+      "index": 25,
+      "sheetName": "Investment (Others)",
+      "semanticClass": "ALTERNATIVE_INVESTMENTS",
+      "anonymizedFields": "investment allocations and alternative portfolio targets",
+      "integrateIntoCorePages": [
+        "P08",
+        "P14"
+      ],
+      "candidateDeepDivePages": [
+        "P22"
+      ],
+      "disposition": "EVIDENCE_OR_DECLARED_GOAL",
+      "boundary": "Investment recommendation requires separate professional authority"
+    },
+    {
+      "index": 26,
+      "sheetName": "Stock Analysis Table",
+      "semanticClass": "STOCK_HISTORY",
+      "anonymizedFields": "recorded market values, gain/loss calculations, volatile date formulas",
+      "integrateIntoCorePages": [
+        "P08"
+      ],
+      "candidateDeepDivePages": [
+        "P22"
+      ],
+      "disposition": "ASOF_DATE_REQUIRED",
+      "boundary": "TODAY() cannot mutate historic report"
+    },
+    {
+      "index": 27,
+      "sheetName": "Retire Plan 1",
+      "semanticClass": "RETIREMENT_NEEDS",
+      "anonymizedFields": "retirement expense/income requirement and capital estimates",
+      "integrateIntoCorePages": [
+        "P10",
+        "P15",
+        "P20"
+      ],
+      "candidateDeepDivePages": [
+        "P21"
+      ],
+      "disposition": "NEW_CONDITIONAL_MODEL",
+      "boundary": "Some output cells are hardcoded; historical assumptions not defaults"
+    },
+    {
+      "index": 28,
+      "sheetName": "Retire Plan 2",
+      "semanticClass": "RETIREMENT_FUNDING",
+      "anonymizedFields": "pre-retirement saving/pension accumulation and withdrawal schedule",
+      "integrateIntoCorePages": [
+        "P09",
+        "P10",
+        "P20"
+      ],
+      "candidateDeepDivePages": [
+        "P22"
+      ],
+      "disposition": "NEW_CONDITIONAL_MODEL",
+      "boundary": "Historic salary/contribution/return rates must not be universal"
+    },
+    {
+      "index": 29,
+      "sheetName": "Risk Insurance",
+      "semanticClass": "EVENT_PROTECTION_NEEDS",
+      "anonymizedFields": "debt cancellation, survivor income, disability and hospitalization event analysis",
+      "integrateIntoCorePages": [
+        "P13",
+        "P14"
+      ],
+      "candidateDeepDivePages": [
+        "P25"
+      ],
+      "disposition": "REWRITE_MODEL_AND_AUDIT_SIGNS",
+      "boundary": "Status labels not live calculations; sign inconsistencies"
+    },
+    {
+      "index": 30,
+      "sheetName": "Estate Planning",
+      "semanticClass": "ESTATE_PREPARATION",
+      "anonymizedFields": "role checks, nomination, documents, change triggers, after-death checklist",
+      "integrateIntoCorePages": [
+        "P19"
+      ],
+      "candidateDeepDivePages": [
+        "P26"
+      ],
+      "disposition": "LEGAL_SCOPE_GATE",
+      "boundary": "No direct portability of signing law or deadline instructions"
+    },
+    {
+      "index": 31,
+      "sheetName": "Executive Summary",
+      "semanticClass": "ASSUMPTION_LEDGER",
+      "anonymizedFields": "macro assumptions, model scope, duration, regulatory conditions",
+      "integrateIntoCorePages": [
+        "P03",
+        "P20"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22",
+        "P23",
+        "P24"
+      ],
+      "disposition": "CONVERT_TO_VERSIONED_LEDGER",
+      "boundary": "Predictions remain scenarios; no implicit unchanged-law promises"
+    },
+    {
+      "index": 32,
+      "sheetName": "Findings & Recommendations",
+      "semanticClass": "OBSERVATION_STRUCTURING",
+      "anonymizedFields": "issue finding, evidence, alternatives and downside discussion",
+      "integrateIntoCorePages": [
+        "P03",
+        "P15",
+        "P16",
+        "P17"
+      ],
+      "candidateDeepDivePages": [
+        "P21",
+        "P22",
+        "P23",
+        "P24",
+        "P25",
+        "P27"
+      ],
+      "disposition": "FORMAT_ONLY",
+      "boundary": "Do not reuse specific sales, property, allocation or lending advice"
+    },
+    {
+      "index": 33,
+      "sheetName": "Timeline of Action",
+      "semanticClass": "DECLARED_EVENT_CALENDAR",
+      "anonymizedFields": "year, person, milestones, repeat cadence, goals and obligations",
+      "integrateIntoCorePages": [
+        "P16",
+        "P17"
+      ],
+      "candidateDeepDivePages": [
+        "P27"
+      ],
+      "disposition": "USER_APPROVED_EVENTS_ONLY",
+      "boundary": "Historic advisor plan is not user approval or achieved action"
+    },
+    {
+      "index": 34,
+      "sheetName": "Holistic Checklist",
+      "semanticClass": "READINESS_VS_PRO_REVIEW",
+      "anonymizedFields": "scope, factual completeness, assumptions, suitability and professional review checklist",
+      "integrateIntoCorePages": [
+        "P03",
+        "P17",
+        "P20"
+      ],
+      "candidateDeepDivePages": [
+        "P26"
+      ],
+      "disposition": "TWO_SEPARATE_WORKFLOWS",
+      "boundary": "Historical checkmarks do not prove current facts or licensed review"
+    }
+  ],
+  "derivedAnalysis": {
+    "oldReportDefaultConclusionsAllowed": false,
+    "currentTaxRuleAssumedFromHistory": false,
+    "currentLegalValidityInferred": false,
+    "thirdPartyConsentInferred": false
+  }
+}

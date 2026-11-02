@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-BFA-COMPLETE-PUBLICATION-PACKAGE-CONTRACT-v1.0.0",
+  "work": "BFA-W1",
+  "status": "ACTIVE_CONTRACT",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "packageType": "BFA_COMPLETE_PUBLICATION_PACKAGE",
+  "packageCodePattern": "^BFA-PACKAGE-KN-[A-Z0-9-]+-v[0-9]+$",
+  "purpose": "Make TL final approval apply to the complete bilingual publication package rather than an article-only fragment.",
+  "requiredComponents": [
+    "canonicalAuthority",
+    "pjaBrief",
+    "locales.zh-Hans",
+    "locales.en",
+    "localeIdentity",
+    "sameRouteIdentity",
+    "figure",
+    "automaticEvidence",
+    "presentationPreview",
+    "publicationReadiness",
+    "finalPackageDigest"
+  ],
+  "componentOwnership": {
+    "canonicalAuthority": "Canonical Knowledge Authority",
+    "pjaBrief": "PJA",
+    "locales": "PJA Candidate / locale-authoring successor",
+    "localeIdentity": "KNR-L10N / ABL locale identity authority",
+    "sameRouteIdentity": "same-route locale runtime",
+    "figure": "Figure Requirement + CAR result when required",
+    "automaticEvidence": "BFA evidence projection only",
+    "presentationPreview": "CPR projection",
+    "publicationReadiness": "BFA readiness aggregation",
+    "finalPackageDigest": "BFA deterministic package binding"
+  },
+  "digestContract": {
+    "algorithm": "sha256",
+    "serialization": "recursive lexicographic object-key ordering; array order preserved; UTF-8 JSON",
+    "digestField": "finalPackageDigest",
+    "excludedOperationalFields": [
+      "finalPackageDigest",
+      "assembledAt",
+      "reviewState",
+      "decisionState"
+    ],
+    "requiredChangeTriggers": [
+      "title",
+      "summary",
+      "body",
+      "candidateDigest",
+      "figure",
+      "figure alt",
+      "locale identity",
+      "same-route identity",
+      "automatic evidence",
+      "presentation preview",
+      "publication readiness"
+    ]
+  },
+  "approvalBinding": {
+    "authorityType": "BILINGUAL_FINAL_PUBLICATION_APPROVAL",
+    "mustBindExactFinalPackageDigest": true,
+    "digestMismatchState": "STALE_REVIEW_REQUIRED",
+    "priorApprovalMayBeReusedAfterDigestChange": false
+  },
+  "governance": {
+    "packageMayCreateCanonicalMeaning": false,
+    "packageMayCreateArticleCandidate": false,
+    "packageMayCreateFigureCandidate": false,
+    "packageMayApproveCarAsset": false,
+    "packageMayCreateCprPresentationAuthority": false,
+    "packageMayPublish": false,
+    "packageIsReviewAggregationNotAuthorityCollapse": true
+  },
+  "schemaPath": "content/production/bilingual-final-approval/schemas/bfa-complete-publication-package-v1.schema.json",
+  "runtimeLibrary": "scripts/lib/bilingual-final-approval/bfa-package-v1.mjs"
+}

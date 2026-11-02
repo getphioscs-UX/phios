@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-PAID-ASK-EXISTING-REAL-EVIDENCE-CALIBRATION-v1.0.0",
+  "baselineCommit": "90d4a7ce304a3a2fe5a0f6547ff911565144faee",
+  "status": "REAL_PROVIDER_AND_RELEVANCE_CALIBRATION_AVAILABLE_NOT_PAID_COHORT_EVIDENCE",
+  "sources": [
+    {
+      "key": "live",
+      "path": "review/KIR-R2-W16R2-100-CASE-LIVE-RESULTS.json",
+      "sha256": "794d8020e5748523631d1e56c02f91c7e81ef38c665b3abaf9ce4d63807899b6"
+    },
+    {
+      "key": "bakeoff",
+      "path": "content/knowledge/knowledge-intelligence-r2/benchmarks/kir-r2-w16r2-24-case-provider-bakeoff-summary-v1.json",
+      "sha256": "4b1781184f236b78e0e3ad8145ba8c65c87a5974a80de4c7327d78d7a2c04542"
+    },
+    {
+      "key": "human",
+      "path": "content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2-w16r-final-human-acceptance-v1.json",
+      "sha256": "d819e2a48fb92dc4288d1885076743a1eb6f249c6eaae4310dc5e460983c502e"
+    }
+  ],
+  "liveCompositionCalibration": {
+    "evidenceClass": "REAL_PROVIDER_CALIBRATION",
+    "requestCount": 100,
+    "providerDistribution": {
+      "OPENAI_LUNA": 55,
+      "DEEPSEEK_V4_FLASH": 45
+    },
+    "inputTokens": 83537,
+    "cachedInputTokens": 0,
+    "outputTokens": 24115,
+    "averageLatencyMs": 3544.5244000000002,
+    "guardPassed": 100
+  },
+  "observedProviderCostCalibration": {
+    "evidenceClass": "REAL_PROVIDER_CALIBRATION",
+    "requestCount": 96,
+    "comparedQuestionCount": 24,
+    "totalCostUsdObserved": 0.06258485,
+    "providers": {
+      "DEEPSEEK_V4_FLASH": {
+        "humanAcceptanceRate": 1,
+        "totalCostUsdObserved": 0.0185658,
+        "avgLatencyMsObserved": 3382
+      },
+      "OPENAI_LUNA": {
+        "humanAcceptanceRate": 0.875,
+        "totalCostUsdObserved": 0.0123912,
+        "avgLatencyMsObserved": 4454
+      },
+      "MISTRAL_SMALL_4": {
+        "humanAcceptanceRate": 0.8333333333,
+        "totalCostUsdObserved": 0.01025535,
+        "avgLatencyMsObserved": 3243
+      },
+      "GEMINI_35_FLASH_LITE": {
+        "humanAcceptanceRate": 0.7916666667,
+        "totalCostUsdObserved": 0.0213725,
+        "avgLatencyMsObserved": 4406
+      }
+    }
+  },
+  "relevanceCalibration": {
+    "evidenceClass": "REAL_PROVIDER_CALIBRATION",
+    "effectiveAccepted": 100,
+    "effectiveTotal": 100,
+    "criticalFailures": 0
+  },
+  "paidPilotBoundary": {
+    "paidCohortParticipantsObserved": 0,
+    "commerceTransactionsObserved": 0,
+    "creditDebitsObserved": 0,
+    "upgradeConversionsObserved": 0,
+    "actualPaidAskMarginObserved": false,
+    "maySatisfyPaidAskAcceptance": false
+  }
+}

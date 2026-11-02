@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W6-PROFILE-CUSTOMER-OUTPUT-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W6",
+  "baselineCommit": "b0bc35d27f1379ec24f11200874b1f32b2135ad8",
+  "status": "READY_EXISTING_TRUTH_ONLY_DOWNSTREAM_VISUAL_BLOCKED",
+  "truthOwner": "EXISTING_PROFILE_PPR_AUTHORITY",
+  "projectionOwner": "PVP_R1",
+  "allowedProjectionFields": [
+    {
+      "projection": "SOURCE_LEGEND",
+      "truthPath": "view.sourceLegend",
+      "requiredBoundary": "source class remains visible"
+    },
+    {
+      "projection": "PROFILE_SIGNAL_CARD",
+      "truthPath": "view.signalCards[]",
+      "requiredBoundary": "source/provider/date/precision/provenance remain attached"
+    },
+    {
+      "projection": "SELF_ASSESSMENT_DOMAIN_MAP",
+      "truthPath": "view.selfAssessmentRadar.axes[]",
+      "requiredBoundary": "self-report lane only; six axes are not universal Profile dimensions"
+    },
+    {
+      "projection": "BIG_FIVE_SCORE_MAP",
+      "truthPath": "profileSummary.scores",
+      "requiredBoundary": "instrument-scoped; not normed, percentile, diagnosis or objective trait truth"
+    },
+    {
+      "projection": "RIASEC_INTEREST_MAP",
+      "truthPath": "view.careerInterest.axes[] / careerExploration.interests",
+      "requiredBoundary": "interest exploration only; not ability or job-fit guarantee"
+    },
+    {
+      "projection": "REASONING_PERFORMANCE_SUMMARY",
+      "truthPath": "reasoningView",
+      "requiredBoundary": "not IQ or percentile"
+    },
+    {
+      "projection": "FINANCIAL_CAPABILITY_SECTION_MAP",
+      "truthPath": "financialSummary.sections",
+      "requiredBoundary": "source lanes separate; not official OECD score or financial advice"
+    },
+    {
+      "projection": "EXTERNAL_PROVIDER_RESULT",
+      "truthPath": "view.signalCards[] where sourceClass=EXTERNAL_PROFILE_RESULT",
+      "requiredBoundary": "provider semantics remain external and customer-confirmed"
+    },
+    {
+      "projection": "CURRENT_REALITY_CORRELATION",
+      "truthPath": "view.currentReality",
+      "requiredBoundary": "explicit customer comparison only; does not prove/disprove Profile model"
+    },
+    {
+      "projection": "CROSS_SOURCE_PERSPECTIVE",
+      "truthPath": "view.crossSource",
+      "requiredBoundary": "no master score, no source equivalence, no scientific-validation transfer"
+    },
+    {
+      "projection": "RELATIONSHIP_PROFILE_EVIDENCE",
+      "truthPath": "view.relationshipProfile",
+      "requiredBoundary": "no compatibility percentage or hidden-state inference"
+    },
+    {
+      "projection": "CONTRADICTION_STATE",
+      "truthPath": "cross-source SOURCE_CONTRADICTION / Current Reality CURRENTLY_NOT_RESONANT",
+      "requiredBoundary": "state/provenance must remain explicit"
+    }
+  ],
+  "prohibitedProjectionClaims": [
+    "universal Profile dimensions derived by PVP",
+    "top scores relabeled as strengths without Profile/PPR authority",
+    "low scores relabeled as costs, weaknesses or tensions without Profile/PPR authority",
+    "generic decision style inferred from isolated facets",
+    "generic relationship style inferred from comparison evidence",
+    "career interests relabeled as work style",
+    "self-report stress/environment facets promoted to objective pattern or fit",
+    "cross-source semantic equivalence",
+    "PVP-created mapping from current groups to CONVERGES/CONTEXT_DEPENDENT/DIVERGES/UNKNOWN",
+    "universal master score or compatibility score"
+  ],
+  "genericFieldsNotYetProjectionAdmitted": [
+    "PROFILE_OVERVIEW",
+    "CORE_DIMENSIONS_UNIVERSAL",
+    "STRENGTH_PATTERNS",
+    "COST_TENSION_PATTERNS",
+    "DECISION_STYLE",
+    "RELATIONSHIP_STYLE",
+    "WORK_STYLE",
+    "STRESS_PATTERN",
+    "ENVIRONMENT_FIT",
+    "CONTEXT_VARIATION",
+    "GENERIC_REALITY_QUESTIONS"
+  ],
+  "productionGate": {
+    "profileDynamicVisualProductionAllowed": false,
+    "w7ProjectionIrAllowedNow": false,
+    "ownerSuccessorRequired": "PROFILE_PPR"
+  }
+}

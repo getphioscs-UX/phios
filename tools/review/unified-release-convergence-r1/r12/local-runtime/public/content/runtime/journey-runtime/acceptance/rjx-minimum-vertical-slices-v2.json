@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "PHI-OS-RJX-MINIMUM-VERTICAL-SLICES-v2.0.0",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "EVIDENCE_BOUND_VALIDATION_READY_PRODUCTION_EXECUTION_NOT_CLAIMED",
+  "predecessor": {
+    "path": "content/runtime/journey-runtime/acceptance/rjx-minimum-vertical-slices-v1.json",
+    "sha256": "224670dfd367356bcebe797ad231437c3604845dc746aa6fdf8549a340184bbe",
+    "rewritten": false
+  },
+  "authorityBoundary": {
+    "createsRuntimeAuthority": false,
+    "activatesRuleBindings": false,
+    "createsProfessionalJudgment": false,
+    "createsProviderAuthority": false,
+    "productionExecutionClaimed": false
+  },
+  "slices": [
+    {
+      "id": "SIMPLE_PERSONAL_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/rjx-slice-simple-personal-job-change.valid.json",
+      "mode": "SIMPLE_REALITY_CASE",
+      "proofs": [
+        "minimal_required_input_only",
+        "known_unknown_preserved",
+        "reading_no_single_decision",
+        "bounded_navigation_options",
+        "action_record_after_client_choice",
+        "expected_signal_compared_to_outcome",
+        "reality_vnext_preserves_predecessor"
+      ]
+    },
+    {
+      "id": "COMPLEX_FAMILY_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/rjx-slice-complex-family.valid.json",
+      "mode": "COMPLEX_REALITY_CASE",
+      "proofs": [
+        "multi_person_source_separation",
+        "relationship_event_provenance",
+        "scoped_unknown",
+        "book2_relational_candidate_scope",
+        "book3_maintenance_candidate_scope",
+        "no_ai_invented_relationship"
+      ]
+    },
+    {
+      "id": "ORGANIZATION_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/rjx-slice-organization.valid.json",
+      "mode": "COMPLEX_REALITY_CASE",
+      "proofs": [
+        "book4_context_requires_system_scale_evidence",
+        "system_constraint_not_personal_identity",
+        "multiple_objectives_preserved",
+        "professional_business_judgment_boundary_preserved"
+      ]
+    },
+    {
+      "id": "METHOD_ASSISTED_CASE",
+      "fixture": "content/runtime/journey-runtime/fixtures/rjx-slice-method-assisted.valid.json",
+      "mode": "METHOD_ASSISTED_REALITY_CASE",
+      "proofs": [
+        "method_result_not_observed",
+        "consent_required_for_case_handoff",
+        "recalculation_successor_and_diff",
+        "case_reading_not_silently_changed",
+        "hdr_validation_only_blocked"
+      ]
+    },
+    {
+      "id": "NO_PROVIDER_PRODUCTION",
+      "fixture": "content/runtime/journey-runtime/fixtures/rjx-slice-no-provider.valid.json",
+      "mode": "RULE_ONLY_NO_PROVIDER_VALIDATION",
+      "proofs": [
+        "entry_to_reality_next_complete_without_model",
+        "initial_reading_rule_only",
+        "no_automatic_openai_escalation",
+        "provider_failure_does_not_block_base_journey"
+      ]
+    }
+  ],
+  "requiredCommands": [
+    "npm run check:rjx-minimum-slices",
+    "npm run check:rjx"
+  ]
+}

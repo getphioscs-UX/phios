@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-APS-1-CURRENT-GATE-AUDIT-CONTRACT-v1.0.0",
+  "work": "APS-1",
+  "status": "ACTIVE_AUDIT_ONLY",
+  "title": "Current Gate Audit",
+  "purpose": "Inventory the real governed Article production and publication gates present at baseline commit 6932c8865c1a7d76ddaa2d402dc005dc370db788 before APS introduces any simplification, so later steps can collapse orchestration without bypassing Human, Canonical Knowledge, Publication, CAR, CPR, PDS or release authority.",
+  "baseline": {
+    "commit": "6932c8865c1a7d76ddaa2d402dc005dc370db788",
+    "message": "standardize article look",
+    "batchCode": "VAP-ARTICLE-BATCH-001",
+    "bookCode": "BOOK-1",
+    "locale": "zh-Hans"
+  },
+  "auditBoundary": {
+    "mayMutateCanonicalKnowledge": false,
+    "mayMutateC2OrC3": false,
+    "mayCreateHumanDecision": false,
+    "mayCreatePublicationAuthority": false,
+    "mayCreateCarAuthority": false,
+    "mayCreateCprAuthority": false,
+    "mayReleaseArticle": false,
+    "mayAddArticleBatchCommand": false,
+    "mayAddArticlePublishCommand": false,
+    "auditOnly": true
+  },
+  "requiredAuditQuestions": [
+    "Which gates currently exist from Canonical Node readiness through public visual release?",
+    "Which gates are upstream authority prerequisites and should be reused rather than re-asked during batch production?",
+    "Which steps are deterministic orchestration and therefore candidates for automation?",
+    "Which Human decisions remain irreducible authority boundaries?",
+    "Which visual gates are conditional on Figure or other CAR-managed assets?",
+    "What is the exact live state of VAP-ARTICLE-BATCH-001 at the baseline commit?"
+  ],
+  "classificationVocabulary": [
+    "PRESERVE_AUTHORITY",
+    "REUSE_UPSTREAM_AUTHORITY",
+    "AUTOMATE_ORCHESTRATION",
+    "COLLAPSE_DUPLICATE_HUMAN_INTERACTION",
+    "CONDITIONAL_VISUAL_GATE",
+    "POST_RELEASE_ACCEPTANCE"
+  ],
+  "nextWork": "APS-2_SINGLE_READINESS_CONTRACT"
+}

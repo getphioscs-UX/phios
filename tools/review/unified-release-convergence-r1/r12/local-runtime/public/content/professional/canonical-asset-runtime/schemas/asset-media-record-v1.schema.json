@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/asset-media-record-v1.schema.json",
+  "title": "PHI OS Asset Media Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mediaCode",
+    "assetCode",
+    "assetType",
+    "candidateCode",
+    "candidateDigest",
+    "mediaType",
+    "storageAuthority",
+    "contentType",
+    "locale",
+    "accessibilityText",
+    "accessibilityStatus",
+    "rightsStatus",
+    "sourceDigest",
+    "mediaDigest",
+    "fixtureOnly"
+  ],
+  "properties": {
+    "mediaCode": {
+      "type": "string",
+      "pattern": "^CAR-MEDIA-[A-Z0-9-]+$"
+    },
+    "assetCode": {
+      "type": "string"
+    },
+    "assetType": {
+      "type": "string"
+    },
+    "candidateCode": {
+      "type": "string"
+    },
+    "candidateDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "mediaType": {
+      "enum": [
+        "IMAGE",
+        "FIGURE",
+        "DIAGRAM",
+        "VIDEO",
+        "AUDIO",
+        "ANIMATION",
+        "PRESENTATION",
+        "ACADEMY_PACKAGE"
+      ]
+    },
+    "storageAuthority": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contentType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "width": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "height": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "duration": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "locale": {
+      "type": "string"
+    },
+    "accessibilityText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accessibilityStatus": {
+      "enum": [
+        "pending",
+        "passed",
+        "failed"
+      ]
+    },
+    "rightsStatus": {
+      "enum": [
+        "pending",
+        "cleared",
+        "owned",
+        "licensed",
+        "blocked"
+      ]
+    },
+    "sourceDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "mediaDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "fixtureOnly": {
+      "type": "boolean"
+    }
+  }
+}

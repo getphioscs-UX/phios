@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-TPA-PHASE-I-MACHINE-ACCEPTANCE-SUCCESSOR-v1.0.0",
+  "phase": "TPA-I",
+  "work": "TPA-W35-W38",
+  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
+  "status": "TAROT_MACHINE_ACCEPTED_PRODUCT_ACTIVATION_STILL_FAIL_CLOSED",
+  "successorOf": "content/production/symbolic-method/acceptance/tarot-machine-acceptance-v1.json",
+  "machineAcceptance": {
+    "complete": true,
+    "canonicalCardsCovered": 78,
+    "oneCardManualReadings": 78,
+    "threeCardManualReadings": 26,
+    "systemRandomModesCovered": 2,
+    "replayCases": 10,
+    "sensitiveCases": 8
+  },
+  "artifacts": {
+    "campaign35": {
+      "path": "content/production/symbolic-method/machine/tarot-78-card-machine-campaign-v1.json",
+      "sha256": "4a75eca6e8e106a9b4aea311764778504bc1297f9b0a1e37a382550bdea1ff0f"
+    },
+    "campaign36": {
+      "path": "content/production/symbolic-method/machine/tarot-replay-machine-campaign-v1.json",
+      "sha256": "0224f1f7786c6be2dab6f0dd0852a264117dee062055a7e93d90b9e5c0e4cbc8"
+    },
+    "campaign37": {
+      "path": "content/production/symbolic-method/machine/tarot-sensitive-domain-machine-campaign-v1.json",
+      "sha256": "b94f04d6ed6105c5078e13c8112f206463332328273bad561c1b12a533336bb6"
+    },
+    "accept35": {
+      "path": "content/production/symbolic-method/acceptance/tarot-78-card-machine-acceptance-v1.json",
+      "sha256": "26b347d60665afe3386ae33ee7e8e9be146d97e525142c9c256e6cccb25deedd"
+    },
+    "accept36": {
+      "path": "content/production/symbolic-method/acceptance/tarot-replay-machine-acceptance-v1.json",
+      "sha256": "25ab266bf2958e18dab9fab26df628fab72cfb52b7b0feccc090d1a461155b6b"
+    },
+    "accept37": {
+      "path": "content/production/symbolic-method/acceptance/tarot-sensitive-domain-machine-acceptance-v1.json",
+      "sha256": "9e41ae348e5f6920cce9fbe4dc6d7a710e29d194a090fd1d0d5622b67e4ffc06"
+    },
+    "aggregateAcceptance": {
+      "path": "content/production/symbolic-method/acceptance/tarot-machine-acceptance-v2.json",
+      "sha256": "8b00a01a9d006477e295402a1881c3305ffe4e6b4902093f24868465179e5579"
+    },
+    "guard": {
+      "path": "functions/symbolic-method-public-ux/symbolic-sensitive-domain-guard.js",
+      "sha256": "20522a325f6b1a78576a1ef7342f9ed9280569fead5ab0c99411f19ee9fb2b50"
+    },
+    "checker": {
+      "path": "scripts/check-tarot-machine-campaign.mjs",
+      "sha256": "f7079ba8117972d5e9c7919ca7a3b31228f4792db6f22250ca897ea4fb768572"
+    }
+  },
+  "predecessorContinuity": {
+    "phaseGProductSurfaceRequired": true,
+    "phaseHExpectedBeforeActivation": true,
+    "phaseHAcceptancePresentInCurrentBaseline": false,
+    "phaseHRestorationOrReconciliationRequiredBeforeProductionPromotion": true
+  },
+  "productionBoundary": {
+    "humanValidated": false,
+    "liveBrowserVerified": false,
+    "liveProductionShaVerified": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false
+  },
+  "nextGate": "PHASE_J_TPA_W39_W42_24_CASE_HUMAN_ACCEPTANCE"
+}

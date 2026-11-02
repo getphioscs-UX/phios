@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-RUNTIME-LINEAGE-CONTRACT-v1.0.0",
+  "phaseCode": "PHASE-0",
+  "stepCode": "STEP-0.3",
+  "contractCode": "CROSS_RUNTIME_LINEAGE_CONTRACT",
+  "contractVersion": "1.0.0",
+  "status": "frozen",
+  "digestAlgorithm": "sha256",
+  "canonicalSerialization": "stable_json_utf8_lf_v1",
+  "chain": [
+    {
+      "order": 1,
+      "digestField": "inputDigest",
+      "objectCodeField": "caseCode",
+      "authorityCode": "INPUT_AUTHORITY"
+    },
+    {
+      "order": 2,
+      "digestField": "calculationDigest",
+      "objectCodeField": "calculationId",
+      "authorityCode": "METHOD_AUTHORITY"
+    },
+    {
+      "order": 3,
+      "digestField": "projectionDigest",
+      "objectCodeField": "projectionCode",
+      "authorityCode": "PROJECTION_AUTHORITY"
+    },
+    {
+      "order": 4,
+      "digestField": "meaningDigest",
+      "objectCodeField": "meaningCode",
+      "authorityCode": "MEANING_AUTHORITY"
+    },
+    {
+      "order": 5,
+      "digestField": "knowledgeReferenceDigest",
+      "objectCodeField": "nodeCode",
+      "authorityCode": "KNOWLEDGE_AUTHORITY"
+    },
+    {
+      "order": 6,
+      "digestField": "assetBriefDigest",
+      "objectCodeField": "briefCode",
+      "authorityCode": "ASSET_AUTHORITY"
+    },
+    {
+      "order": 7,
+      "digestField": "assetDigest",
+      "objectCodeField": "assetCode",
+      "authorityCode": "ASSET_AUTHORITY"
+    },
+    {
+      "order": 8,
+      "digestField": "journeyDigest",
+      "objectCodeField": "journeyCode",
+      "authorityCode": "JOURNEY_AUTHORITY"
+    },
+    {
+      "order": 9,
+      "digestField": "professionalDecisionDigest",
+      "objectCodeField": "professionalDecisionCode",
+      "authorityCode": "PROFESSIONAL_AUTHORITY"
+    },
+    {
+      "order": 10,
+      "digestField": "reportDigest",
+      "objectCodeField": "reportCode",
+      "authorityCode": "REPORT_AUTHORITY"
+    }
+  ],
+  "lineageRecordRequiredFields": [
+    "sourceAuthorityCode",
+    "sourceObjectCode",
+    "sourceVersion",
+    "sourceDigest",
+    "targetAuthorityCode",
+    "targetObjectCode",
+    "targetVersion",
+    "targetDigest",
+    "relationshipCode",
+    "createdAt"
+  ],
+  "rules": {
+    "digestMustRepresentCanonicalObject": true,
+    "downstreamDigestMayReplaceUpstreamDigest": false,
+    "upstreamObjectMutationAllowed": false,
+    "missingIntermediateLineageAllowed": false,
+    "providerOutputMayReplaceCanonicalDigest": false,
+    "publicationStateMayRewriteReportDigest": false,
+    "lineageMustFailClosed": true
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-CALCULATION-PROJECTION-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "PERSONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-024-E01",
+      "from": "FIG-024-N01",
+      "relation": "NORMALIZED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-024-SRC-01",
+      "to": "FIG-024-N02"
+    },
+    {
+      "edgeId": "FIG-024-E02",
+      "from": "FIG-024-N02",
+      "relation": "PROJECTS_TO",
+      "required": true,
+      "sourceBindingId": "FIG-024-SRC-02",
+      "to": "FIG-024-N03"
+    },
+    {
+      "edgeId": "FIG-024-E03",
+      "from": "FIG-024-N03",
+      "relation": "DELIVERED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-024-SRC-02",
+      "to": "FIG-024-N04"
+    }
+  ],
+  "figureId": "FIG-024",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-024-N01",
+    "FIG-024-N02",
+    "FIG-024-N03",
+    "FIG-024-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Calculation Output",
+      "nodeId": "FIG-024-N01",
+      "required": true,
+      "semanticKey": "CALCULATION_OUTPUT",
+      "sourceBindingId": "FIG-024-SRC-01"
+    },
+    {
+      "displayLabel": "Normalization",
+      "nodeId": "FIG-024-N02",
+      "required": true,
+      "semanticKey": "NORMALIZATION",
+      "sourceBindingId": "FIG-024-SRC-01"
+    },
+    {
+      "displayLabel": "Canonical Projection",
+      "nodeId": "FIG-024-N03",
+      "required": true,
+      "semanticKey": "CANONICAL_PROJECTION",
+      "sourceBindingId": "FIG-024-SRC-01"
+    },
+    {
+      "displayLabel": "Consumer Contract",
+      "nodeId": "FIG-024-N04",
+      "required": true,
+      "semanticKey": "CONSUMER_CONTRACT",
+      "sourceBindingId": "FIG-024-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "CALCULATION-PROJECTION",
+  "title": "Calculation → Projection"
+}

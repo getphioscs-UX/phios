@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-RUNTIME-CAPABILITY-READINESS-v1.0.0",
+  "work": "MIR-3",
+  "status": "ACTIVE_CAPABILITY_GATED",
+  "coreCapabilities": [
+    "ASTRONOMY_READY",
+    "DESIGN_MOMENT_READY",
+    "GATE_LINE_READY",
+    "SCU_CHANNEL_READY",
+    "CENTER_GRAPH_READY",
+    "TYPE_READY",
+    "AUTHORITY_READY",
+    "DEFINITION_READY",
+    "PROFILE_READY",
+    "INCARNATION_CONFIGURATION_READY"
+  ],
+  "advancedCapabilities": [
+    "VARIABLE_ADVANCED_READY",
+    "TRANSIT_OVERLAY_READY",
+    "RELATIONSHIP_OVERLAY_READY"
+  ],
+  "eligibilityRule": "all required core capability true AND canonical input valid AND consent valid AND privacy valid",
+  "sourceTrademarkFlagsAreCoreCalculationGates": false,
+  "legacyGlobalHdrBlockedFlagAllowedAsPersonalRuntimeGate": false,
+  "currentRepositoryReadiness": {
+    "ASTRONOMY_READY": false,
+    "reason": "Existing deterministic 88° solar-arc solver is implemented and regression-checked when a governed astronomy adapter is supplied.",
+    "DESIGN_MOMENT_READY": true,
+    "GATE_LINE_READY": true,
+    "SCU_CHANNEL_READY": true,
+    "CENTER_GRAPH_READY": true,
+    "TYPE_READY": true,
+    "AUTHORITY_READY": true,
+    "DEFINITION_READY": true,
+    "PROFILE_READY": true,
+    "INCARNATION_CONFIGURATION_READY": true,
+    "VARIABLE_ADVANCED_READY": false,
+    "TRANSIT_OVERLAY_READY": false,
+    "RELATIONSHIP_OVERLAY_READY": false
+  },
+  "capabilityGatedExecutionAllowed": true,
+  "currentFullCoreProductionReady": false,
+  "blockedBySourceOrTrademark": false
+}

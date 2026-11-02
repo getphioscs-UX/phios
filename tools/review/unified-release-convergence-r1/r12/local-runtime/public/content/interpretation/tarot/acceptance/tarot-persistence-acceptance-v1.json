@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-TPA-PHASE-H-PERSISTENCE-ACCEPTANCE-v1.0.0",
+  "phase": "TPA-H",
+  "work": "TPA-W31-W34",
+  "baselineCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "status": "ACCEPTED_SOURCE_PERSISTENCE_D1_READY_GLOBAL_ACCOUNT_PROVIDER_PENDING_PRODUCT_STILL_CLOSED",
+  "accepted": {
+    "existingRuntimeD1SchemaReused": true,
+    "newMigrationAdded": false,
+    "verifiedServerIdentityRequired": true,
+    "clientSuppliedIdentityBlocked": true,
+    "explicitRetentionRequired": true,
+    "d1SaveImplemented": true,
+    "userScopedReadImplemented": true,
+    "userScopedUpdateImplemented": true,
+    "crossAccountReadBlocked": true,
+    "guestPersistenceBlocked": true,
+    "localStorageFallbackBlocked": true,
+    "sessionStorageFallbackBlocked": true,
+    "realityContextExplicitOptInPreserved": true,
+    "rawPrivateContextPersistenceBlocked": true,
+    "saveListOpenNotesReviewStateImplemented": true,
+    "persistenceCreatesRealityTruth": false,
+    "canonicalRawReadingIrClaimed": false,
+    "publicIrProjectionPersisted": true,
+    "globalAccountIdentityProviderConnected": false,
+    "verifiedLiveAccountPersistenceClaimed": false,
+    "publicExecutionStillClosed": true
+  },
+  "artifacts": {
+    "accountPersistenceContract": {
+      "path": "content/public-ux/symbolic-method/contracts/tarot-account-persistence-contract-v1.json",
+      "sha256": "29604b1d8cff4fadb78b3fb323bd750b909b2246ca442cf95faca65aff84d2de"
+    },
+    "guestPersistenceContract": {
+      "path": "content/public-ux/symbolic-method/contracts/tarot-guest-persistence-contract-v1.json",
+      "sha256": "be22f6f09b504997df4335ec85663bda87e94a5a80d72eb21d4ac601ddcb38c9"
+    },
+    "realityContextConsentContract": {
+      "path": "content/public-ux/symbolic-method/contracts/tarot-reality-context-consent-contract-v1.json",
+      "sha256": "e70acfc5a678bbf099c612e34caa1f6af0d96d6573ddd142b359ff84c17140ba"
+    },
+    "saveContinueContract": {
+      "path": "content/public-ux/symbolic-method/contracts/tarot-save-continue-contract-v1.json",
+      "sha256": "7e07562ccf0e6846fd0ec488e250a14abf025fed446e985030e07af51a925003"
+    },
+    "identityRuntime": {
+      "path": "functions/symbolic-method-persistence/symbolic-account-identity-v1.js",
+      "sha256": "18456c9dc5878e7a6eb2c5f727b9065c0cec0a8192e91ba978f6975dbf6de2b4"
+    },
+    "envelopeRuntime": {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-envelope-v1.js",
+      "sha256": "ae486a2330c8fddf8bc4bbd6c7d414c1eefe55289e5c5911c4939ba5af6d0fa2"
+    },
+    "d1Store": {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v1.js",
+      "sha256": "f37a4229050c878dbbc95374f03b9405aa60fee4373eab048513a9481aaaa6f9"
+    },
+    "saveApi": {
+      "path": "functions/api/symbolic-method-save.js",
+      "sha256": "b4b61f820ed83ca6cb96d4eab7b573744c54f0611906b408d742486b5f7672a7"
+    },
+    "readingsApi": {
+      "path": "functions/api/symbolic-method-readings.js",
+      "sha256": "f73dc8df6fabd506ebc78300fc15e7295b0210f07837ce8fd84d96598f8f1a97"
+    },
+    "contextApi": {
+      "path": "functions/api/symbolic-method-context.js",
+      "sha256": "ac5f4c320d38797fe78f0f086ca46694a1979e1c645aea71f0d3c21edda59a81"
+    },
+    "successor": {
+      "path": "content/interpretation/tarot/reconciliation/tarot-persistence-current-successor-v1.json",
+      "sha256": "aa2a2c696aeec19048fc5d26c3f7ae09cdf4ee3e71684d5d4f565c87bc6519ec"
+    },
+    "checker": {
+      "path": "scripts/check-tarot-persistence.mjs",
+      "sha256": "47851f27cfe27580a13391b34b02a0b75a4727638d1c4fcacdefad8c9f69c832"
+    }
+  },
+  "productionBoundary": {
+    "publicRunAllowedChanged": false,
+    "productionCapabilityPromoted": false,
+    "humanAcceptanceClaimed": false,
+    "liveBrowserAcceptanceClaimed": false,
+    "liveProductionShaAlignmentClaimed": false,
+    "globalAccountAuthenticationProviderConnected": false
+  },
+  "blocker": "GLOBAL_ACCOUNT_AUTHENTICATION_PROVIDER_NOT_CONNECTED_IN_CURRENT_ACCOUNT_RELEASE",
+  "nextPhase": "PHASE_I_MACHINE_ACCEPTANCE_TPA_W35_W38"
+}

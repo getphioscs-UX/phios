@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W3-CLAIM-IR-CONTRACT-v1.0.0",
+  "work": "HD-PRO-R3-W3",
+  "status": "ACTIVE_R3_SHADOW",
+  "claimLifecycle": [
+    "SOURCE_PENDING",
+    "SOURCE_ADMITTED",
+    "SEMANTIC_ADMITTED",
+    "COMPOSITION_SUPPORTED",
+    "MACHINE_VERIFIED",
+    "HUMAN_ACCEPTED",
+    "CUSTOMER_PUBLISHED"
+  ],
+  "legalSideStates": [
+    "SCHOOL_VARIANT",
+    "NOT_APPLICABLE"
+  ],
+  "rules": [
+    "Every claim must reference at least one admitted source unit.",
+    "Atomic source text is not customer interpretation.",
+    "Customer meaning remains null until value-specific editorial/semantic admission in W4-W11.",
+    "Composition requires an admitted compositionRuleId and may not be string concatenation.",
+    "Unknown or source-pending values remain unknown; AI may not fill them as fact.",
+    "Sensitive source material marked BOUNDARY_REWRITE_REQUIRED must be rewritten and reviewed before semantic admission.",
+    "R2 24/24 human acceptance does not admit any R3 claim."
+  ],
+  "owners": {
+    "semanticRegistry": "knowledge/external-readers/human-design/registry/entries.json",
+    "sourceUnitRegistry": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2A-user-authored-source-units-v1.json",
+    "claimCandidateRegistry": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/claims/hd-pro-r3-semantic-claim-candidates-v1.json"
+  }
+}

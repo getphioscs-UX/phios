@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "PHI-OS-AST-R2-W20-ROLLBACK-PLAN-v1.0.0",
+  "workCode": "R2-W20",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "status": "FROZEN_ROLLBACK_PROCEDURE",
+  "methodScope": "AST",
+  "triggerExamples": ["live API regression", "customer surface regression", "digest mismatch", "post-deploy layout failure"],
+  "actions": [
+    "Set R2-W19 AST method-scoped production flag to false and redeploy.",
+    "Keep BZR/NUM/ZWR/ECR production admission unchanged.",
+    "The canonical personal route remains /perspectives/personal/; do not restore /personal-runtime as customer authority.",
+    "Re-enable the pre-cutover AST presentation path while the R2 workspace remains fail-closed.",
+    "Record the failed deployed commit and smoke evidence before any subsequent re-admission."
+  ],
+  "otherMethodsRolledBack": false,
+  "legacyPersonalRuntimeBecomesCanonical": false
+}

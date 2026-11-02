@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "patternRuntimeCode",
+    "patterns",
+    "observedPatternCount",
+    "candidatePatternCount",
+    "insufficientEvidenceCount",
+    "interpretationCreated",
+    "diagnosisCreated",
+    "recommendationCreated",
+    "patternRuntimeDigest"
+  ],
+  "properties": {
+    "patternRuntimeCode": {
+      "type": "string"
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "patternCode",
+          "patternType",
+          "evidenceState",
+          "descriptorCode",
+          "observableReferences",
+          "supportReferences"
+        ],
+        "properties": {
+          "patternCode": {
+            "type": "string"
+          },
+          "patternType": {
+            "enum": [
+              "RECURRENT",
+              "TEMPORAL",
+              "RELATIONSHIP",
+              "LOAD",
+              "RECOVERY"
+            ]
+          },
+          "evidenceState": {
+            "enum": [
+              "OBSERVED_PATTERN",
+              "CANDIDATE_PATTERN",
+              "INSUFFICIENT_EVIDENCE"
+            ]
+          },
+          "descriptorCode": {
+            "type": "string"
+          },
+          "observableReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportReferences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "observedPatternCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "candidatePatternCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "insufficientEvidenceCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "diagnosisCreated": {
+      "const": false
+    },
+    "recommendationCreated": {
+      "const": false
+    },
+    "patternRuntimeDigest": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    }
+  }
+}

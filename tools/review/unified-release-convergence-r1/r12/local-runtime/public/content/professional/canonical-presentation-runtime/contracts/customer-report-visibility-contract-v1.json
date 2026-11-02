@@ -1,0 +1,69 @@
+{
+  "contractCode": "PHI-OS-CUSTOMER-REPORT-VISIBILITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W5/W6",
+  "status": "CURRENT_CUSTOMER_SAFE_FIELD_POLICY",
+  "customerVisibleSectionIds": [
+    "chart_overview",
+    "type",
+    "strategy",
+    "authority",
+    "profile",
+    "definition",
+    "centers",
+    "channels",
+    "key_gates",
+    "variables_phs",
+    "environment",
+    "cognition",
+    "motivation",
+    "general_operating_conditions",
+    "limitations"
+  ],
+  "alwaysVisibleSectionIds": [
+    "limitations"
+  ],
+  "forbiddenFields": [
+    "loginAssertion",
+    "sessionId",
+    "professionalAccess",
+    "authorization",
+    "authorizationDecision",
+    "internalCapabilityEvaluation",
+    "internalReportReference",
+    "rawScopes",
+    "internalRegistryPath",
+    "debugLineage",
+    "checkerState",
+    "governanceImplementation"
+  ],
+  "authorityVisualSemantics": {
+    "calculated": {
+      "label": {
+        "en": "Calculated by PHI OS",
+        "zh-Hans": "系统计算"
+      },
+      "class": "CALCULATED_STRUCTURE"
+    },
+    "professional_interpretation": {
+      "label": {
+        "en": "Professional interpretation",
+        "zh-Hans": "专业人员解读"
+      },
+      "class": "PROFESSIONAL_INTERPRETATION"
+    },
+    "professionally_verified": {
+      "label": {
+        "en": "Professional verification",
+        "zh-Hans": "专业人员核验"
+      },
+      "class": "PROFESSIONAL_BOUNDARY"
+    }
+  },
+  "rules": {
+    "clientVisibleMustBeTrue": true,
+    "technicalImplementationFieldsNeverProjected": true,
+    "limitationsCannotBeRemovedForCompactSurface": true
+  }
+}

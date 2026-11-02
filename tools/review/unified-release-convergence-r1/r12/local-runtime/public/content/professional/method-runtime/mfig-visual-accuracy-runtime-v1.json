@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-MFIG-VISUAL-ACCURACY-RUNTIME-v1.0.0",
+  "work": "MFIG-W0-W50",
+  "baselineCommit": "07f525b2047498364fea5a4ae0f9a51c37a47dd1",
+  "status": "PRODUCTION_TOOLING_ACTIVE_MACHINE_ONLY",
+  "runtimeId": "MFIG_VISUAL_ACCURACY_RUNTIME",
+  "authorityClass": "PRODUCTION_TOOLING",
+  "authorityBoundary": {
+    "owns": [
+      "visual specification validation",
+      "source provenance validation",
+      "deterministic diagram compilation",
+      "deterministic SVG production",
+      "geometry validation",
+      "staleness detection",
+      "machine acceptance records",
+      "CAR handoff candidate preparation"
+    ],
+    "doesNotOwn": [
+      "Method truth",
+      "Calculation authority",
+      "Projection authority",
+      "Interpretation authority",
+      "Meaning authority",
+      "Reading authority",
+      "Navigation authority",
+      "Professional judgment",
+      "CAR approval",
+      "CAR publication"
+    ],
+    "ownsMethodTruth": false,
+    "ownsCalculation": false,
+    "ownsProjection": false,
+    "ownsInterpretation": false,
+    "ownsMeaning": false,
+    "ownsReading": false,
+    "ownsNavigation": false,
+    "ownsProfessionalJudgment": false,
+    "ownsCAR": false,
+    "ownsPublication": false
+  },
+  "productionPolicy": {
+    "requiresHumanReview": false,
+    "requiresHumanVisualApproval": false,
+    "requiresAIVisualJudgment": false,
+    "generativeProductionRenderingAllowed": false,
+    "deterministicGeometryRequired": true,
+    "repositoryPinnedStylingOnly": true,
+    "failClosed": true
+  },
+  "canonicalIdentityAuthority": "content/professional/method-runtime/canonical-mfig-authority-registry-v1.json",
+  "calculationBindingAuthority": "content/professional/method-runtime/mfig-calculation-runtime-binding-registry-v1.json",
+  "projectionBindingAuthority": "content/professional/method-runtime/mfig-projection-runtime-binding-registry-v1.json",
+  "carBindingAuthority": "content/professional/canonical-asset-runtime/registries/mfig-car-binding-registry-v1.json",
+  "machineAcceptanceGate": [
+    "G0_CANONICAL_IDENTITY",
+    "G1_AUTHORITY_SOURCE_RESOLUTION",
+    "G2_VISUAL_SPEC_VALIDATION",
+    "G3_SEMANTIC_VALIDATION",
+    "G4_AUTHORITY_EDGE_VALIDATION",
+    "G5_DETERMINISTIC_SVG_GENERATION",
+    "G6_SVG_GEOMETRY_VALIDATION",
+    "G7_DETERMINISM_DIGEST_STALENESS",
+    "G8_CAR_BINDING_ELIGIBILITY",
+    "G9_EXISTING_PUBLICATION_RUNTIME"
+  ],
+  "invariants": [
+    "Repository decides truth",
+    "Visual Spec cannot create authority",
+    "No source = no node / no edge / no claim",
+    "Renderer cannot infer semantics",
+    "Renderer cannot calculate Method truth",
+    "Styling cannot alter semantics",
+    "AI cannot generate canonical labels/nodes/arrows/authority boundaries",
+    "MACHINE_ACCEPTED != CAR_BOUND",
+    "CAR_BOUND != PUBLISHED"
+  ]
+}

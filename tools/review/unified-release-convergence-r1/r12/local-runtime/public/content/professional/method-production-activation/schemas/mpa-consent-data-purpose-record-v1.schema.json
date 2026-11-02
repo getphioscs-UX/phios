@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa/mpa-consent-data-purpose-record-v1.schema.json",
+  "title": "PHI OS MPA Consent and Data Purpose Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "consentRecordId",
+    "subjectReference",
+    "methodCode",
+    "purposeCode",
+    "consentClass",
+    "retentionClass",
+    "visibilityScope",
+    "professionalAccess",
+    "professionalReference",
+    "grantedAt",
+    "expiresAt",
+    "consentValid",
+    "withdrawal"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-CONSENT-DATA-PURPOSE-RECORD-v1.0.0"
+    },
+    "consentRecordId": {
+      "type": "string",
+      "minLength": 3
+    },
+    "subjectReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "methodCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purposeCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "consentClass": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retentionClass": {
+      "type": "string",
+      "minLength": 1
+    },
+    "visibilityScope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "professionalAccess": {
+      "type": "boolean"
+    },
+    "professionalReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "grantedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expiresAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "consentValid": {
+      "type": "boolean"
+    },
+    "withdrawal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported",
+        "status",
+        "withdrawnAt"
+      ],
+      "properties": {
+        "supported": {
+          "const": true
+        },
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "WITHDRAWN"
+          ]
+        },
+        "withdrawnAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

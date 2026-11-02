@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W19-PRODUCTION-GATE-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W19",
+  "sourceMainCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "status": "FROZEN_PRODUCTION_GATE_CONTRACT",
+  "requiredGates": [
+    "BZR_R1_SOURCE_ADMISSION_ACTIVE",
+    "W5_W6_V2_RULESETS_FROZEN",
+    "W17_MACHINE_96_OF_96_PASS",
+    "W18_HUMAN_24_OF_24_ACCEPT",
+    "W14_W16_RUNTIME_VERSION_FROZEN",
+    "FAIL_CLOSED_PUBLICATION_AUTHORIZATION"
+  ],
+  "publicationContract": {
+    "readingIrSchema": "PHI-OS-BAZI-FULL-READING-IR-v1.0.0",
+    "readingIrRuntimeVersion": "1.0.0",
+    "reportSchema": "PHI-OS-BAZI-CUSTOMER-REPORT-v1.0.0",
+    "reportRuntimeVersion": "1.0.0",
+    "api": "/api/bazi-full-reading",
+    "defaultCustomerSurface": "personal-runtime.html#bazi",
+    "publicationEnvelopeRequired": true
+  },
+  "failClosedWhen": [
+    "GATE_NOT_FULL_PRODUCTION",
+    "READING_IR_SCHEMA_DRIFT",
+    "READING_IR_RUNTIME_DRIFT",
+    "REPORT_SCHEMA_DRIFT",
+    "REPORT_RUNTIME_DRIFT",
+    "REPORT_BOUNDARY_DRIFT"
+  ],
+  "immutableBoundaries": [
+    "NO_FORTUNE_OR_EVENT_CERTAINTY",
+    "NO_GOOD_BAD_SCORE",
+    "NO_SILENT_SCHOOL_MERGE",
+    "NO_HIDDEN_UNKNOWN",
+    "NO_INVENTED_PRIMARY_PATTERN",
+    "NO_INVENTED_STRONG_WEAK",
+    "NO_INVENTED_USEFUL_GOD",
+    "ONE_PRIMARY_EXPLANATION_PER_SEMANTIC_CLUSTER"
+  ]
+}

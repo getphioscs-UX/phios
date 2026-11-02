@@ -1,0 +1,53 @@
+{
+  "registryCode": "MPA-PRODUCTION-EXECUTION-GATE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "MPA-W27",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "ACTIVE_GATE_ZERO_CURRENT_PRODUCTION_DISPATCH",
+  "eligibilityRegistry": "content/professional/method-production-activation/registries/mpa-production-eligibility-decision-registry-v1.json",
+  "canonicalEndpoint": "functions/api/method-execute.js",
+  "canonicalWprClient": "assets/js/web-production/method-execution-client.js",
+  "runtimeGate": "functions/method-production-activation/production-eligibility-runtime.js",
+  "executionGate": "functions/method-production-activation/method-execution-gate-runtime.js",
+  "productionEntrypoints": [
+    {
+      "route": "/api/method-execute",
+      "capabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "mustGateBeforeDispatch": true
+    }
+  ],
+  "currentState": {
+    "eligibleCapabilities": [],
+    "conditionallyEligibleCapabilities": [
+      {
+        "methodCode": "NUMEROLOGY",
+        "methodVersion": "0.1.0-candidate",
+        "capability": "CALCULATION"
+      },
+      {
+        "methodCode": "NUMEROLOGY",
+        "methodVersion": "0.1.0-candidate",
+        "capability": "PROJECTION"
+      },
+      {
+        "methodCode": "BAZI",
+        "methodVersion": "0.1.0",
+        "capability": "CALCULATION"
+      },
+      {
+        "methodCode": "BAZI",
+        "methodVersion": "0.1.0",
+        "capability": "PROJECTION"
+      }
+    ],
+    "productionDispatchActive": false
+  },
+  "bypassAudit": {
+    "frontendCoreMethodRuntimeImportsAllowed": false,
+    "apiDirectCoreMethodRuntimeImportsOutsideCanonicalEndpointAllowed": false,
+    "legacyProductionMethodEndpointsAllowed": false
+  }
+}

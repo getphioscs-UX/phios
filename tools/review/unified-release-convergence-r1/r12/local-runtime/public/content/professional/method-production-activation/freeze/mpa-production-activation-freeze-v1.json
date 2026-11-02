@@ -1,0 +1,164 @@
+{
+  "freezeCode": "PHI-OS-MPA-PRODUCTION-ACTIVATION-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "status": "MPA-v1.0.0-FROZEN",
+  "work": "MPA-W30",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "scope": "MPA-W0-W30",
+  "governanceClosure": {
+    "governanceClosed": true,
+    "allMethodsActivated": false,
+    "blockedMethodsAllowedAtFreeze": true,
+    "freezeMeansAllMethodsOpen": false,
+    "freezeMeansGovernedEligibilityAndExecutionBoundariesClosed": true
+  },
+  "eligibilityAtFreeze": {
+    "eligibleCount": 0,
+    "conditionallyEligibleCount": 6,
+    "blockedCount": 36,
+    "productionExecutionAllowed": false
+  },
+  "executionAtFreeze": {
+    "eligibleProductionExecutionCount": 0,
+    "productionDispatchActive": false,
+    "conditionallyEligibleExecutionCandidates": [
+      {
+        "methodCode": "NUMEROLOGY",
+        "methodVersion": "0.1.0-candidate",
+        "capability": "CALCULATION"
+      },
+      {
+        "methodCode": "NUMEROLOGY",
+        "methodVersion": "0.1.0-candidate",
+        "capability": "PROJECTION"
+      },
+      {
+        "methodCode": "BAZI",
+        "methodVersion": "0.1.0",
+        "capability": "CALCULATION"
+      },
+      {
+        "methodCode": "BAZI",
+        "methodVersion": "0.1.0",
+        "capability": "PROJECTION"
+      }
+    ],
+    "canonicalEndpoint": "/api/method-execute"
+  },
+  "methodStates": {
+    "NUMEROLOGY": {
+      "DATA": "CONDITIONALLY_ELIGIBLE",
+      "CALCULATION": "CONDITIONALLY_ELIGIBLE",
+      "PROJECTION": "CONDITIONALLY_ELIGIBLE",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    },
+    "ASTROLOGY": {
+      "DATA": "BLOCKED",
+      "CALCULATION": "BLOCKED",
+      "PROJECTION": "BLOCKED",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    },
+    "BAZI": {
+      "DATA": "CONDITIONALLY_ELIGIBLE",
+      "CALCULATION": "CONDITIONALLY_ELIGIBLE",
+      "PROJECTION": "CONDITIONALLY_ELIGIBLE",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    },
+    "HUMAN_DESIGN": {
+      "DATA": "BLOCKED",
+      "CALCULATION": "BLOCKED",
+      "PROJECTION": "BLOCKED",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    },
+    "I_CHING": {
+      "DATA": "BLOCKED",
+      "CALCULATION": "BLOCKED",
+      "PROJECTION": "BLOCKED",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    },
+    "TAROT": {
+      "DATA": "BLOCKED",
+      "CALCULATION": "BLOCKED",
+      "PROJECTION": "BLOCKED",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    },
+    "PSYCHOLOGY": {
+      "DATA": "BLOCKED",
+      "CALCULATION": "BLOCKED",
+      "PROJECTION": "BLOCKED",
+      "INTERPRETATION": "BLOCKED",
+      "PROFESSIONAL": "BLOCKED",
+      "PUBLIC": "BLOCKED"
+    }
+  },
+  "downstreamAtFreeze": {
+    "canonicalFlow": [
+      "METHOD_PROJECTION",
+      "RMO",
+      "RRE",
+      "JR_PR_RNE",
+      "CPR",
+      "WPR"
+    ],
+    "integrationReference": "content/professional/method-production-activation/contracts/mpa-downstream-integration-v1.json",
+    "mpaCreatesCustomerReadout": false,
+    "mpaCreatesRealityFact": false,
+    "mpaCreatesProfessionalJudgment": false,
+    "currentProductionProjectionHandoffCount": 0
+  },
+  "openMethodGates": {
+    "NUMEROLOGY": [
+      "CANONICAL_COMMERCIAL_LICENSE_SUCCESSOR_REQUIRED"
+    ],
+    "BAZI": [
+      "IMR_COMMERCIAL_LICENSE_UNCONDITIONAL_PASS_OR_VERSIONED_SUCCESSOR_REQUIRED"
+    ],
+    "ASTROLOGY": [
+      "PRODUCTION_POLICIES_NOT_APPROVED",
+      "METHOD_SPECIFIC_READY_FOR_W26_FALSE"
+    ],
+    "HUMAN_DESIGN": [
+      "RESTRICTED_LICENSE_OR_RIGHTS_UNRESOLVED",
+      "AUTHORIZED_MAPPING_AUTHORITY_UNRESOLVED"
+    ],
+    "I_CHING": [
+      "FUTURE_METHOD_HOLDING_ONLY"
+    ],
+    "TAROT": [
+      "FUTURE_METHOD_HOLDING_ONLY"
+    ],
+    "PSYCHOLOGY": [
+      "FUTURE_METHOD_HOLDING_ONLY"
+    ]
+  },
+  "preservationManifestReference": "content/professional/method-production-activation/freeze/mpa-w0-w29-content-preservation-manifest-v1.json",
+  "preservationManifestDigest": "030761529e8106c786e009a992f29d1475b860497d46268626ec2eaf3f67ae02",
+  "frozenArtifactCount": 167,
+  "fullAcceptanceReference": "content/professional/method-production-activation/acceptance/mpa-w29-full-acceptance-v1.json",
+  "centralGovernance": {
+    "postcheckIntegrated": true,
+    "postcheckNeutralAlias": "npm run method-production-activation:check",
+    "historicalPreW30MpaCheckerGuardsRewritten": false,
+    "webProductionRuntimeRemainsFinalPostcheckTail": true
+  },
+  "successorRules": {
+    "eligibilityChangeRequiresVersionedSuccessor": true,
+    "executionActivationRequiresEligibleDecisionSuccessor": true,
+    "blockedMethodMayRemainBlockedIndefinitely": true,
+    "futureMethodHoldingDoesNotAutoPromote": true,
+    "authorityExpansionRequiresVersionedSuccessor": true,
+    "frozenArtifactMutationRequiresReconciliationOrSuccessor": true
+  }
+}

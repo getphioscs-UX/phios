@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-APS-8-PRODUCTION-ACCEPTANCE-v1.0.0",
+  "work": "APS-8",
+  "status": "ACCEPTED_PRODUCTION_CAPABILITY",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "acceptedAt": "2026-08-16T00:00:00.000Z",
+  "operatorSurface": {
+    "batch": "npm run article:batch -- --book BOOK-1 --count 30",
+    "publish": "npm run article:publish -- --batch BATCH-001",
+    "operatorCommandCount": 2
+  },
+  "baselineReality": {
+    "batchCode": "BATCH-001",
+    "humanPublicationDecisionCountAtAcceptance": 0,
+    "publicationRunPresentAtAcceptance": false,
+    "publicationInferredFromApproval": false,
+    "acceptancePublishesCurrentBatch": false
+  },
+  "acceptedProofs": [
+    "APS_6_EXPLICIT_TL_DECISION_BRIDGE",
+    "PUBLISH_DEFER_DO_NOT_PUBLISH_INDEPENDENT_FIXTURE",
+    "VAP_W11_AUTHORITY_REUSED",
+    "PJA_PUBLICATION_W1_BYTES_UNCHANGED",
+    "PJA_FROZEN_BRIEF_SUCCESSOR_ADAPTER",
+    "ADDITIVE_PUBLISHED_KNOWLEDGE_AUTHORITY_SUCCESSOR",
+    "ARTICLE_ONLY_NO_VISUAL_CAR_NOT_REQUIRED",
+    "VISUAL_ASSET_REQUIRES_CAR_FAIL_CLOSED",
+    "CPR_ARTICLE_PRESENTATION",
+    "VISUAL_ARTICLE_PUBLIC_PROJECTION",
+    "SAME_ROUTE_LOCALE_RELEASE",
+    "SECOND_PUBLISH_RUN_IDEMPOTENT",
+    "VAP_L10N_R5_FROZEN_REFERENCE_PRESERVED"
+  ],
+  "authorityBoundary": {
+    "apsOwnsOrchestrationOnly": true,
+    "apsCreatesBulkHumanAuthority": false,
+    "humanApprovalEqualsPublication": false,
+    "humanPublicationDecisionEqualsPublicationRecord": false,
+    "candidateMutationAllowed": false,
+    "reviewMutationAllowed": false,
+    "approvalMutationAllowed": false,
+    "localeAuthorityInheritanceAllowed": false,
+    "carAuthorityFabricationAllowed": false,
+    "frozenPjaImplementationMutationAllowed": false
+  },
+  "currentBatchNextAction": "TL_COMPLETES_PER_NODE_PUBLICATION_DECISIONS_THEN_RUNS_ARTICLE_PUBLISH"
+}

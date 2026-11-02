@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P4-HUMAN-REVIEW-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE_SUBSYSTEM_HUMAN_REVIEW",
+  "work": "PHI-OS-48-RUNTIME-POSITION-BACKBONE-R1-W8E-P4",
+  "predecessor": "content/civilization-atlas/reconfiguration/runtime-position-w8e-p3-derived-mechanisms-v1.json",
+  "purpose": "Human-review subsystem semantic candidates produced by W8E-P3 without promoting dossier-global semantics or runtime positions.",
+  "allowedDecisions": [
+    "ACCEPT",
+    "REJECT"
+  ],
+  "rules": [
+    "Only W8E-P3 subsystemCandidates with state HUMAN_REVIEW_READY may enter review.",
+    "ACCEPT confirms only the bounded subsystem grammar/domain candidate.",
+    "ACCEPT does not promote DOSSIER-US global G16/P3.",
+    "ACCEPT does not create RP-xx, transition, threshold or projection.",
+    "REJECT leaves the subsystem candidate unadmitted and preserves evidence lineage.",
+    "Human decision must name the candidateId and reviewer role."
+  ],
+  "boundaries": {
+    "dossierGlobalPromotionAllowed": false,
+    "runtimePositionCandidateAllowed": false,
+    "sourceEvidenceMutationAllowed": false,
+    "providerAuthorityMutationAllowed": false
+  }
+}

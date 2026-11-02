@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-RLR-FIXTURE-CORPUS-v1.0.0",
+  "work": "RLR-W0-W6",
+  "fixtures": [
+    {
+      "id": "RLR-FX-001",
+      "purpose": "PUBLIC_AST_ZWR_BZR_RELATIONAL_STRUCTURE",
+      "expectedRouteState": "RELATIONAL_RUNTIME_ROUTABLE",
+      "expectedHdrIncluded": false,
+      "expectedVerdictCreated": false
+    },
+    {
+      "id": "RLR-FX-002",
+      "purpose": "INTERNAL_WITH_HDR_RELATIONAL_STRUCTURE",
+      "expectedRouteState": "RELATIONAL_RUNTIME_ROUTABLE_INTERNAL",
+      "expectedHdrIncluded": true,
+      "expectedPublicResult": false
+    },
+    {
+      "id": "RLR-FX-003",
+      "mutation": "ONE_PERSON_CONSENT_MISSING",
+      "expectedFailure": "RLR_PERSON_B_ACTIVE_RELATIONAL_CONSENT_REQUIRED"
+    },
+    {
+      "id": "RLR-FX-004",
+      "mutation": "PUBLIC_HDR_INPUT",
+      "expectedFailure": "RLR_HDR_RELATIONAL_INTERNAL_ACCESS_REQUIRED"
+    },
+    {
+      "id": "RLR-FX-005",
+      "mutation": "BZR_TARGET_DATE_MISMATCH",
+      "expectedFailure": "RLR_BZR_RELATIONAL_TARGET_DATE_MISMATCH"
+    },
+    {
+      "id": "RLR-FX-006",
+      "mutation": "SAME_SUBJECT_REF",
+      "expectedFailure": "RLR_DISTINCT_SUBJECTS_REQUIRED"
+    },
+    {
+      "id": "RLR-FX-007",
+      "assertion": "DETERMINISTIC_READING_ID"
+    },
+    {
+      "id": "RLR-FX-008",
+      "assertion": "NO_COMPATIBILITY_SCORE_SOULMATE_GOOD_BAD_MARRIAGE_OR_METHOD_VOTING"
+    }
+  ]
+}

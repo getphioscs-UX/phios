@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-CPR-APS-ARTICLE-PRESENTATION-SUCCESSOR-v1.0.0",
+  "presentationCode": "PRESENTATION-ARTICLE-KN-B1-P5-016-EN-APS-v1",
+  "presentationVersion": "1.0.0",
+  "work": "APS-7_CPR_SUCCESSOR_ORCHESTRATION",
+  "status": "active_production_instance",
+  "surface": "WEBSITE",
+  "presentationType": "ARTICLE_PAGE",
+  "renderState": "ready_for_render",
+  "locale": "en",
+  "audience": "CUSTOMER",
+  "inputs": {
+    "publishedArticle": {
+      "authorityRecordCode": "PKA-KN-B1-P5-016-EN",
+      "authorityDigest": "0c561a284a7e8612cc9477f629ab2b77f5ea6bc5529a3fba6aca8fd605a45b6f",
+      "publicationCode": "PUBLICATION-BFA-KN-B1-P5-016-EN-721ff2d93353",
+      "publicationDigest": "415cf0daf41679c4a6abc7d5befb34f2a00e04ab63dc3c9ed605efb44812ab49",
+      "articleCode": "KA-B1-P5-016-EN-ARTICLE",
+      "nodeCode": "KN-B1-P5-016",
+      "href": "/articles/self-fragmentation-observation-and-reintegration",
+      "version": "1.0.0"
+    },
+    "car": {
+      "required": false,
+      "state": "NOT_REQUIRED_NO_VISUAL_ASSET",
+      "publishedAssetReferences": []
+    }
+  },
+  "composition": [
+    {
+      "ordinal": 1,
+      "componentCode": "ARTICLE_HEADER",
+      "sourceReferences": [
+        "PKA-KN-B1-P5-016-EN"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 2,
+      "componentCode": "ARTICLE_BODY",
+      "sourceReferences": [
+        "KA-B1-P5-016-EN-ARTICLE"
+      ],
+      "bodyInsertions": [],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 3,
+      "componentCode": "SECONDARY_PROVENANCE",
+      "sourceReferences": [
+        "KN-B1-P5-016"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 4,
+      "componentCode": "FOOTER",
+      "sourceReferences": [
+        "PDS_PUBLIC_SHELL"
+      ],
+      "visibility": "VISIBLE"
+    }
+  ],
+  "pdsReferences": {
+    "authority": "PDS",
+    "contracts": [
+      "content/registry/pds-w2-design-token-contract.json",
+      "content/registry/pds-w3-core-component-shell-contract.json",
+      "content/registry/pds-w7-reading-experience.json",
+      "content/registry/pds-w9-knowledge-professional.json"
+    ],
+    "styleReferences": [
+      "assets/css/tokens.css",
+      "assets/css/design/foundation.css",
+      "assets/css/design/typography.css",
+      "assets/css/public-experience.css",
+      "assets/css/knowledge-release.css",
+      "assets/css/article-renderer.css",
+      "assets/css/pds-w9-knowledge-professional.css",
+      "assets/css/wpr-public-production.css"
+    ]
+  },
+  "governance": {
+    "cprDecidesKnowledge": false,
+    "cprDecidesPublication": false,
+    "apsCreatesCarAuthority": false,
+    "carBypassAllowedWhenVisualAssetRequired": false,
+    "articleOnlyNoAssetPathAllowed": true
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-027",
+  "title": "BZR-SOLAR-CALENDAR",
+  "scope": "BZR",
+  "role": "CALCULATION",
+  "methodRefs": [
+    "BZR"
+  ],
+  "runtimeRefs": [
+    "content/professional/core-method-runtime/bzr-solar-calendar-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "SHARED_DATA_AUTHORITY",
+      "displayLabel": "SHARED DATA AUTHORITY",
+      "nodeType": "AUTHORITY",
+      "authorityClass": "DATA",
+      "semanticRole": "INPUT",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "BZR_SOLAR_CALENDAR",
+      "displayLabel": "BZR SOLAR CALENDAR",
+      "nodeType": "PROCESS",
+      "authorityClass": "SHARED_CALCULATION_RUNTIME",
+      "semanticRole": "METHOD_CALCULATION_STAGE",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CALCULATION_RESULT",
+      "displayLabel": "CALCULATION RESULT",
+      "nodeType": "RESULT",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "OUTPUT",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-027-E01",
+      "from": "SHARED_DATA_AUTHORITY",
+      "to": "BZR_SOLAR_CALENDAR",
+      "relation": "PROVIDES_CANONICAL_INPUT",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-027-E02",
+      "from": "BZR_SOLAR_CALENDAR",
+      "to": "CALCULATION_RESULT",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_CALCULATION_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "BZR_SOLAR_CALENDAR",
+        "CALCULATION_RESULT"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "SHARED_DATA_AUTHORITY",
+    "BZR_SOLAR_CALENDAR",
+    "CALCULATION_RESULT"
+  ],
+  "mustState": [
+    "calculationAuthority=SHARED_CALCULATION_RUNTIME",
+    "Calculation != Projection",
+    "Calculation != Interpretation",
+    "perMethodRuntimeAllowed=false"
+  ],
+  "statementSources": {
+    "calculationAuthority=SHARED_CALCULATION_RUNTIME": "SRC-002",
+    "Calculation != Projection": "SRC-002",
+    "Calculation != Interpretation": "SRC-002",
+    "perMethodRuntimeAllowed=false": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-CX-R9-R2-CURRENT-MAIN-RECONCILIATION-v1.0.0",
+  "baselineCommit": "d99a06631c9981d7c0864e5caa0e8b874185e0da",
+  "predecessor": {
+    "route": "/ask",
+    "surface": "ask.html",
+    "status": "PRESERVED_UNTIL_P1_ROUTE_CUTOVER"
+  },
+  "successor": {
+    "route": "/knowledge/ask/",
+    "surface": "knowledge/ask/index.html",
+    "status": "REPLACEMENT_CANDIDATE"
+  },
+  "preservedAuthorities": [
+    "CKA",
+    "KAP",
+    "ASK2",
+    "CURRENT_FACTS_GATEWAY",
+    "R20_KNOWLEDGE_PROJECTION",
+    "CURRENT_REALITY",
+    "PERSONAL_READING",
+    "RELATIONSHIP",
+    "PROFILE",
+    "PROFESSIONAL",
+    "ENTITLEMENT"
+  ],
+  "newAuthorityCreated": false,
+  "routeCutoverPerformed": false,
+  "legacyPhysicalDeletePerformed": false,
+  "currentCheckerReconciliation": {
+    "domain": "CKA",
+    "historicalChecker": "scripts/check-cka-current.mjs",
+    "historicalCheckerPreserved": true,
+    "currentChecker": "scripts/check-cka-current-v2.mjs",
+    "packageCurrentAlias": "check:cka-current",
+    "repair": "CURRENT_ALIAS_USES_EXISTING_V2_SUCCESSOR_AND_NO_LONGER_EXECUTES_UNRELATED_WHOLE_SITE_PX2_PREDECESSOR_GATE",
+    "authorityMutation": false
+  }
+}

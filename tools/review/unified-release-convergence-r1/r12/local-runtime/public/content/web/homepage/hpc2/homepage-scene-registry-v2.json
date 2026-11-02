@@ -1,0 +1,438 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W1-HOMEPAGE-SCENE-REGISTRY-v2.0.0",
+  "work": "HPC2-W1",
+  "baselineCommit": "57bf9ec086f16ad37f47db6ea93aae55987765f9",
+  "status": "FINAL_SINGLE_NARRATIVE_AND_H01_H09_AUTHORITY_FROZEN_COMPOSITION_PENDING",
+  "surface": "HOMEPAGE",
+  "authority": {
+    "owns": [
+      "FINAL_SINGLE_HOMEPAGE_NARRATIVE_SPINE",
+      "FINAL_H01_H09_SCENE_IDENTITIES_AND_ORDER",
+      "CAPABILITY_TO_SCENE_ASSIGNMENT",
+      "SCENE_AUDIENCE_DENSITY_VISUAL_AND_CTA_REQUIREMENTS"
+    ],
+    "doesNotOwn": [
+      "HOMEPAGE_DOM_IMPLEMENTATION",
+      "HOMEPAGE_RUNTIME",
+      "FINAL_SCENE_COPY",
+      "LOCALE_COPY",
+      "PUBLIC_ASSET_REGISTRY",
+      "PUBLIC_ASSET_RESOLVER",
+      "VISUAL_REGISTRY_AUTHORITY",
+      "CKA_OR_ASK_RUNTIME",
+      "KNOWLEDGE_AUTHORITY",
+      "READING_AUTHORITY",
+      "METHOD_AUTHORITY",
+      "REALITY_AUTHORITY",
+      "PROFESSIONAL_JUDGMENT_AUTHORITY",
+      "V8_DESTINATION_MIGRATION",
+      "ROUTE_ACTIVATION",
+      "HUMAN_ACCEPTANCE"
+    ],
+    "predecessorComposition": "content/web-production/composition/public/homepage-composition-v1.1.json",
+    "predecessorState": "HISTORICAL_7_SECTION_COMPOSITION_PRESERVED_CURRENT_CONSUMER_UNTIL_W2_W10",
+    "successorRelationship": "ADDITIVE_HPC2_NARRATIVE_AND_SCENE_AUTHORITY_NOT_SECOND_HOMEPAGE_RUNTIME",
+    "actualConsumerRemains": ["index.html", "assets/js/pages/home-production.js"]
+  },
+  "narrativeSpine": {
+    "singleStoryRequired": true,
+    "canonicalBeats": [
+      "REALITY",
+      "SIGNALS",
+      "FRAGMENTATION",
+      "PHI_OS",
+      "UNDERSTAND",
+      "CHOOSE",
+      "ACT",
+      "OUTCOME",
+      "REVIEW",
+      "CONTINUE"
+    ],
+    "primaryBeatProjection": [
+      {"beat":"REALITY","sceneCode":"H01"},
+      {"beat":"SIGNALS","sceneCode":"H02"},
+      {"beat":"FRAGMENTATION","sceneCode":"H03"},
+      {"beat":"PHI_OS","sceneCode":"H04"},
+      {"beat":"UNDERSTAND","sceneCode":"H05"},
+      {"beat":"CHOOSE","sceneCode":"H06"},
+      {"beat":"ACT","sceneCode":"H08"},
+      {"beat":"OUTCOME","sceneCode":"H09"},
+      {"beat":"REVIEW","sceneCode":"H09"},
+      {"beat":"CONTINUE","sceneCode":"H09"}
+    ],
+    "supportBridge": {
+      "sceneCode": "H07",
+      "role": "GROUNDED_KNOWLEDGE_SUPPORTS_UNDERSTAND_AND_CHOOSE_BEFORE_BOUNDED_ACTION",
+      "supportsBeats": ["UNDERSTAND", "CHOOSE"]
+    },
+    "storyMayNotBranchIntoParallelHomepageNarratives": true
+  },
+  "sceneOrder": ["H01", "H02", "H03", "H04", "H05", "H06", "H07", "H08", "H09"],
+  "scenePolicy": {
+    "sceneCount": 9,
+    "additionalSceneAllowed": false,
+    "additionalSceneRequiresVersionedHomepageArchitectureSuccessor": true,
+    "forbiddenSceneCodePattern": "^H[1-9][0-9]+$",
+    "h10AndAboveForbidden": true,
+    "sceneAuthorityDoesNotEqualDomImplementation": true,
+    "ctaDestinationDoesNotEqualRouteActivation": true,
+    "visualAssetAssignmentDoesNotCreateAssetAuthority": true,
+    "v8NarrativeLineageDoesNotEqualSuccessorVerification": true
+  },
+  "scenes": [
+    {
+      "sceneCode": "H01",
+      "sceneTitle": "Hero",
+      "purpose": "Establish PHI OS as the Reality Navigation Platform and open from a changing reality rather than a generic chat interface.",
+      "primaryNarrativeBeats": ["REALITY"],
+      "supportingNarrativeBeats": [],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"REALITY_NAVIGATION_PLATFORM","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W2"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#REALITY_NAVIGATION_PLATFORM",
+        "content/web-production/bfr-homepage-recomposition-requirement-v1.json",
+        "content/web-production/composition/public/homepage-composition-v1.1.json",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H01"
+      ],
+      "runtimeSources": [],
+      "runtimePolicy": "NONE_BY_DESIGN_NO_RUNTIME_OR_FULL_ASK_UI_IN_HERO",
+      "visualAssets": [
+        {"assetCode":"HERO-001","role":"PRIMARY_FULL_BLEED_HERO","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W2"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"START_WITH_MY_REALITY","hierarchy":"PRIMARY","destination":"#h05-first-interaction","destinationType":"IN_PAGE_SCENE_TARGET","activationState":"PENDING_HPC2_W2_W6"},
+        {"actionCode":"EXPLORE_PHI_OS","hierarchy":"SECONDARY","destination":"#h04-phios-runtime","destinationType":"IN_PAGE_SCENE_TARGET","activationState":"PENDING_HPC2_W2_W5"}
+      ],
+      "audience": ["PUBLIC"],
+      "density": "LOW",
+      "ckaRole": "NO_FULL_ASK_UI_AND_NO_ASK_PRIMARY",
+      "v8NarrativeLineage": [],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W2"
+    },
+    {
+      "sceneCode": "H02",
+      "sceneTitle": "One Reality",
+      "purpose": "Make one current Reality observable through public signals and governed state distinctions before explaining the platform architecture.",
+      "primaryNarrativeBeats": ["SIGNALS"],
+      "supportingNarrativeBeats": ["REALITY"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"REALITY_RECONSTRUCTION","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_RUNTIME_EXISTS_SCENE_CONSUMER_PENDING_HPC2_W3"},
+        {"capabilityCode":"FIGURES_VISUAL_KNOWLEDGE","coverageRole":"VISUAL","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_RESOLVER_REQUIRED"}
+      ],
+      "authoritySources": [
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-04",
+        "content/web/homepage/hpc2/v8-content-preservation-manifest-v1.json#V8-REALITY-001",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H02"
+      ],
+      "runtimeSources": [
+        "content/runtime/reality-model-runtime/contracts/canonical-reality-object-v1.json",
+        "content/runtime/reality-model-runtime/contracts/signal-runtime-contract-v1.json",
+        "content/runtime/reality-model-runtime/contracts/unknown-runtime-contract-v1.json"
+      ],
+      "visualAssets": [
+        {"assetCode":"FIG-054","role":"CURRENT_REALITY_MAP","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W3"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"UNDERSTAND_REALITY_DEFINITION","hierarchy":"CONTEXTUAL","destination":"/about/reality-navigation","destinationType":"PLANNED_V8_SUCCESSOR_ROUTE","activationState":"INACTIVE_PENDING_HPC2_W11"}
+      ],
+      "audience": ["PUBLIC"],
+      "density": "MEDIUM",
+      "ckaRole": "PUBLIC_EXAMPLE_QUESTIONS_ALLOWED_NO_PRIVATE_CONTEXT",
+      "v8NarrativeLineage": ["V8-REALITY-001", "V8-REALITY-002", "V8-REALITY-003", "V8-REALITY-004"],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W3"
+    },
+    {
+      "sceneCode": "H03",
+      "sceneTitle": "Many Lenses / Fragmentation",
+      "purpose": "Show why disconnected knowledge, AI, methods, experience and professional evidence can each reveal something without becoming the whole Reality.",
+      "primaryNarrativeBeats": ["FRAGMENTATION"],
+      "supportingNarrativeBeats": ["SIGNALS"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"REALITY_NAVIGATION_PLATFORM","coverageRole":"CATEGORY_TRANSITION","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_RECOMPOSITION_PENDING_HPC2_W4"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/v8-content-preservation-manifest-v1.json#V8-HERO-001",
+        "content/web/homepage/hpc2/v8-content-destination-map-v1.json",
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-03",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H03"
+      ],
+      "runtimeSources": [],
+      "runtimePolicy": "NONE_BY_DESIGN_CATEGORY_EXPLANATION_NOT_RUNTIME_EXECUTION",
+      "visualAssets": [
+        {"assetCode":"FIG-055","role":"MANY_LENSES_FRAGMENTATION","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W4"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"WHY_PHIOS","hierarchy":"CONTEXTUAL","destination":"/about/why-phios","destinationType":"PLANNED_V8_SUCCESSOR_ROUTE","activationState":"INACTIVE_PENDING_HPC2_W11"},
+        {"actionCode":"HUMAN_APPROACHES_TO_READING_REALITY","hierarchy":"CONTEXTUAL","destination":"/research/human-reading-systems","destinationType":"PLANNED_V8_SUCCESSOR_ROUTE","activationState":"INACTIVE_PENDING_HPC2_W11"}
+      ],
+      "audience": ["PUBLIC"],
+      "density": "MEDIUM",
+      "ckaRole": "EXPLAIN_WHY_ASK_IS_NOT_ANOTHER_DISCONNECTED_ANSWER_NO_CHAT_UI",
+      "v8NarrativeLineage": ["V8-HERO-001", "V8-POS-001", "V8-MARKET-001", "V8-MARKET-005", "V8-CATEGORY-001"],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W4"
+    },
+    {
+      "sceneCode": "H04",
+      "sceneTitle": "PHI OS Runtime",
+      "purpose": "Explain the governed PHI OS runtime from reconstruction through reading, navigation, action, outcome and review without creating calculation, interpretation or Reality authority.",
+      "primaryNarrativeBeats": ["PHI_OS"],
+      "supportingNarrativeBeats": ["UNDERSTAND", "ACT", "OUTCOME", "REVIEW"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"REALITY_RECONSTRUCTION","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_RUNTIME_CONSUMPTION_PENDING_HPC2_W5"},
+        {"capabilityCode":"READING_NAVIGATION","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_PARTIAL_CONSUMER_RECOMPOSITION_PENDING_HPC2_W5"},
+        {"capabilityCode":"ASK_PHIOS","coverageRole":"ENTRY","requirementState":"POSITION_RESERVED_HOMEPAGE_CONSUMER_STILL_MISSING_PENDING_CKA"},
+        {"capabilityCode":"FIGURES_VISUAL_KNOWLEDGE","coverageRole":"VISUAL","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_RESOLVER_REQUIRED"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#READING_NAVIGATION",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#ASK_PHIOS",
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-05",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H04"
+      ],
+      "runtimeSources": [
+        "content/runtime/reality-model-runtime/contracts/canonical-reality-object-v1.json",
+        "content/runtime/reality-readout-engine/contracts/canonical-runtime-readout-contract-v1.json",
+        "content/runtime/reality-navigation-engine/contracts/rne-authority-boundary-v1.json",
+        "content/knowledge/answer-projection/contracts/kap-w11-deterministic-answer-first-contract-v1.json"
+      ],
+      "visualAssets": [
+        {"assetCode":"FIG-056","role":"PHIOS_RUNTIME_CYCLE","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W5"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"ASK_PHIOS","hierarchy":"CONTEXTUAL_ENTRY","destination":"/knowledge-search","destinationType":"DECLARED_ASK_SURFACE","activationState":"HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA"}
+      ],
+      "audience": ["PUBLIC", "CUSTOMER"],
+      "density": "MEDIUM",
+      "ckaRole": "FIRST_FORMAL_CONTEXTUAL_ASK_ENTRY_AFTER_RUNTIME_EXPLANATION",
+      "v8NarrativeLineage": ["V8-VALUE-001", "V8-VALUE-002", "V8-VALUE-003", "V8-SYSTEM-001"],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W5"
+    },
+    {
+      "sceneCode": "H05",
+      "sceneTitle": "First Interaction",
+      "purpose": "Offer a minimal governed first interaction that separates question, situation and personal-runtime entry without forcing Reality Journey or method execution.",
+      "primaryNarrativeBeats": ["UNDERSTAND"],
+      "supportingNarrativeBeats": ["CHOOSE"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"ASK_PHIOS","coverageRole":"ENTRY","requirementState":"POSITION_RESERVED_HOMEPAGE_CONSUMER_STILL_MISSING_PENDING_CKA"},
+        {"capabilityCode":"PERSONAL_REALITY","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W6"}
+      ],
+      "authoritySources": [
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-05",
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-06",
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-08",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#PERSONAL_REALITY",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H05"
+      ],
+      "runtimeSources": [
+        "content/professional/method-client-delivery/contracts/canonical-birth-input-contract-v1.json",
+        "content/professional/method-client-delivery/contracts/mcd-0-method-client-delivery-authority-boundary-v1.json",
+        "content/knowledge/answer-projection/contracts/kap-w11-deterministic-answer-first-contract-v1.json"
+      ],
+      "visualAssets": [],
+      "visualMode": "REAL_HTML_UI_NO_FAKE_UI_IMAGE",
+      "ctaDestinations": [
+        {"actionCode":"TELL_PHIOS_WHAT_IS_HAPPENING","hierarchy":"PRIMARY_INTERACTION","destination":"#h05-situation-entry","destinationType":"IN_SCENE_FUNCTIONAL_UI","activationState":"PENDING_HPC2_W6"},
+        {"actionCode":"EXPLORE_MY_PERSONAL_REALITY","hierarchy":"SECONDARY","destination":"/personal-runtime","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W6"},
+        {"actionCode":"FINANCIAL_REALITY_HANDOFF","hierarchy":"CONTEXTUAL","destination":"/professional/financial","destinationType":"EXISTING_STATIC_ROUTE","activationState":"UNCHANGED_BY_HPC2_W1"},
+        {"actionCode":"I_JUST_HAVE_A_QUESTION","hierarchy":"TERTIARY","destination":"/knowledge-search","destinationType":"DECLARED_ASK_SURFACE","activationState":"HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA"}
+      ],
+      "audience": ["PUBLIC", "GUEST", "CUSTOMER"],
+      "density": "LOW",
+      "ckaRole": "ASK_SITUATION_PERSONAL_RUNTIME_SPLIT_NO_FORCED_JOURNEY",
+      "v8NarrativeLineage": ["V8-JOURNEY-001"],
+      "implementationState": "AUTHORITY_FROZEN_FUNCTIONAL_HTML_UI_PENDING_HPC2_W6"
+    },
+    {
+      "sceneCode": "H06",
+      "sceneTitle": "Reality Surfaces",
+      "purpose": "Present four client-facing anchors—Personal Reality, Financial Reality, Reality Journey, and Knowledge & Learning—without turning every backend surface into a Homepage card.",
+      "primaryNarrativeBeats": ["CHOOSE"],
+      "supportingNarrativeBeats": ["UNDERSTAND"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"PERSONAL_REALITY","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W7"},
+        {"capabilityCode":"FINANCIAL_REALITY","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W7"},
+        {"capabilityCode":"REALITY_JOURNEY","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_COMPLEX_CASE_BOUNDARY_REQUIRED_HPC2_W7"},
+        {"capabilityCode":"PUBLISHED_KNOWLEDGE","coverageRole":"SUPPORT","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_PARTIAL_CONSUMER_RECOMPOSITION_PENDING_HPC2_W7"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#PERSONAL_REALITY",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#FINANCIAL_REALITY",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#REALITY_JOURNEY",
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-04",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H06"
+      ],
+      "runtimeSources": [
+        "content/professional/method-client-delivery/contracts/mcd-7-personal-runtime-result-surface-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/reality-journey-role-contract-v1.json",
+        "content/knowledge/public/authority/published-knowledge-authority.json"
+      ],
+      "visualAssets": [
+        {"assetCode":"FIG-002","role":"REALITY_JOURNEY","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W7"},
+        {"assetCode":"FIG-003","role":"PERSONAL_REALITY","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W7"},
+        {"assetCode":"FIG-004","role":"FINANCIAL_REALITY","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W7"},
+        {"assetCode":"FIG-005","role":"KNOWLEDGE_AND_LEARNING","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W7"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"PERSONAL_REALITY","hierarchy":"SURFACE","destination":"/personal-runtime","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W7"},
+        {"actionCode":"FINANCIAL_REALITY","hierarchy":"SURFACE","destination":"/professional/financial","destinationType":"EXISTING_STATIC_ROUTE","activationState":"UNCHANGED_BY_HPC2_W1"},
+        {"actionCode":"REALITY_JOURNEY","hierarchy":"SURFACE_CONTEXTUAL_COMPLEX_ONLY","destination":"/reality-journey","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W7"},
+        {"actionCode":"KNOWLEDGE_AND_LEARNING","hierarchy":"SURFACE","destination":"/library","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W7"},
+        {"actionCode":"EXPLORE_VISUAL_KNOWLEDGE","hierarchy":"CONTEXTUAL","destination":"/figures","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W7"}
+      ],
+      "audience": ["PUBLIC", "CUSTOMER"],
+      "density": "MEDIUM",
+      "ckaRole": "ASK_IS_CROSS_SURFACE_INTERACTION_NOT_A_FIFTH_GIANT_CARD",
+      "v8NarrativeLineage": [],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W7"
+    },
+    {
+      "sceneCode": "H07",
+      "sceneTitle": "Five-Volume Knowledge",
+      "purpose": "Ground Reality Navigation in the ordered five-volume knowledge architecture and expose published knowledge, figures, contextual Ask, and Academy actions without replacing their authorities.",
+      "primaryNarrativeBeats": [],
+      "supportingNarrativeBeats": ["UNDERSTAND", "CHOOSE"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"FIVE_VOLUME_KNOWLEDGE_SYSTEM","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W8"},
+        {"capabilityCode":"PUBLISHED_KNOWLEDGE","coverageRole":"SUPPORT","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_PARTIAL_CONSUMER_RECOMPOSITION_PENDING_HPC2_W8"},
+        {"capabilityCode":"ASK_PHIOS","coverageRole":"ENTRY","requirementState":"POSITION_RESERVED_HOMEPAGE_CONSUMER_STILL_MISSING_PENDING_CKA"},
+        {"capabilityCode":"FIGURES_VISUAL_KNOWLEDGE","coverageRole":"VISUAL","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_RESOLVER_REQUIRED"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#FIVE_VOLUME_KNOWLEDGE_SYSTEM",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#PUBLISHED_KNOWLEDGE",
+        "content/web-production/bfr-library-book-knowledge-recomposition-v1.json",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H07"
+      ],
+      "runtimeSources": [
+        "content/knowledge/public/authority/published-knowledge-authority.json",
+        "content/knowledge/public/retrieval/published-retrieval-index.json",
+        "content/knowledge/answer-projection/contracts/kap-w11-deterministic-answer-first-contract-v1.json"
+      ],
+      "visualAssets": [
+        {"assetCode":"BOOK-1-HARDCOVER","role":"VOLUME_I","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W8"},
+        {"assetCode":"BOOK-2-HARDCOVER","role":"VOLUME_II","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W8"},
+        {"assetCode":"BOOK-3-HARDCOVER","role":"VOLUME_III","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W8"},
+        {"assetCode":"BOOK-4-HARDCOVER","role":"VOLUME_IV","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W8"},
+        {"assetCode":"BOOK-5-HARDCOVER","role":"VOLUME_V","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W8"},
+        {"assetCode":"FIG-001","role":"FIVE_VOLUME_ARCHITECTURE","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W8"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"READ_PUBLISHED_KNOWLEDGE","hierarchy":"KNOWLEDGE_ACTION","destination":"/library","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W8"},
+        {"actionCode":"SEE_FIGURES_AND_DIAGRAMS","hierarchy":"KNOWLEDGE_ACTION","destination":"/figures","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W8"},
+        {"actionCode":"ASK_PHIOS","hierarchy":"KNOWLEDGE_ACTION_CONTEXTUAL","destination":"/knowledge-search","destinationType":"DECLARED_ASK_SURFACE","activationState":"HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA"},
+        {"actionCode":"LEARN_IN_ACADEMY","hierarchy":"KNOWLEDGE_ACTION","destination":"/academy","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W8"}
+      ],
+      "audience": ["PUBLIC", "LEARNER"],
+      "density": "MEDIUM",
+      "ckaRole": "CONTEXTUAL_ASK_OVER_BOOK_ARTICLE_OR_FIGURE_NO_FAKE_ENTRY_BEFORE_CKA",
+      "v8NarrativeLineage": ["V8-ECO-001"],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W8"
+    },
+    {
+      "sceneCode": "H08",
+      "sceneTitle": "Academy / Services / Professional",
+      "purpose": "Separate capability-building from bounded support and show the escalation chain from PHI OS navigation to human review to qualified external authority without a price menu.",
+      "primaryNarrativeBeats": ["ACT"],
+      "supportingNarrativeBeats": ["CHOOSE"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"ACADEMY","coverageRole":"SECONDARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W9"},
+        {"capabilityCode":"SERVICES","coverageRole":"SECONDARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W9"},
+        {"capabilityCode":"PROFESSIONAL","coverageRole":"SECONDARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_EXISTING_CONSUMER_RECOMPOSITION_PENDING_HPC2_W9"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#ACADEMY",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#SERVICES",
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#PROFESSIONAL",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H08"
+      ],
+      "runtimeSources": [
+        "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json",
+        "content/runtime/reality-navigation-engine/contracts/professional-boundary-contract-v1.json",
+        "content/professional/professional-runtime/extensions/production/contracts/pr-production-authority-boundary-v1.json"
+      ],
+      "visualAssets": [
+        {"assetCode":"FIG-006","role":"PROFESSIONAL_AUTHORITY","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W9"},
+        {"assetCode":"ICON-014","role":"ACADEMY","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W9"},
+        {"assetCode":"ICON-015","role":"PROFESSIONAL","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W9"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"BUILD_CAPABILITY","hierarchy":"PRIMARY_CHANNEL","destination":"/academy","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W9"},
+        {"actionCode":"GET_SUPPORT","hierarchy":"PRIMARY_CHANNEL","destination":"/services","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W9"},
+        {"actionCode":"PROFESSIONAL_AUTHORITY","hierarchy":"CONTEXTUAL","destination":"/professional","destinationType":"PLANNED_ROOT_ROUTE","activationState":"INACTIVE_PENDING_HPC2_W9_W11"},
+        {"actionCode":"PROFESSIONAL_BOUNDARIES","hierarchy":"CONTEXTUAL","destination":"/professional/boundaries","destinationType":"PLANNED_V8_SUCCESSOR_ROUTE","activationState":"INACTIVE_PENDING_HPC2_W11"}
+      ],
+      "audience": ["PUBLIC", "LEARNER", "CLIENT", "PROFESSIONAL"],
+      "density": "MEDIUM",
+      "ckaRole": "ESCALATE_ONLY_WHEN_ANSWER_OR_AUTHORITY_REQUIRES_NO_FORCED_PROFESSIONAL",
+      "v8NarrativeLineage": ["V8-PRO-001", "V8-PRO-002", "V8-PRO-003", "V8-PRO-004", "V8-PRO-005", "V8-PRO-006", "V8-EXT-001", "V8-EXT-002", "V8-EXT-003", "V8-BOUNDARY-001"],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W9"
+    },
+    {
+      "sceneCode": "H09",
+      "sceneTitle": "Continuity",
+      "purpose": "End with the Action → Outcome → Review → Continue loop so the Homepage does not terminate at an answer, price menu, or forced Reality Journey.",
+      "primaryNarrativeBeats": ["OUTCOME", "REVIEW", "CONTINUE"],
+      "supportingNarrativeBeats": ["ACT"],
+      "capabilitiesConsumed": [
+        {"capabilityCode":"CONTINUITY","coverageRole":"PRIMARY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_PARTIAL_CONSUMER_RECOMPOSITION_PENDING_HPC2_W10"},
+        {"capabilityCode":"REALITY_JOURNEY","coverageRole":"PRIMARY_CONTEXTUAL_COMPLEX_ONLY","requirementState":"NARRATIVE_AUTHORITY_ASSIGNED_NO_FORCED_JOURNEY"},
+        {"capabilityCode":"ASK_PHIOS","coverageRole":"ENTRY","requirementState":"POSITION_RESERVED_HOMEPAGE_CONSUMER_STILL_MISSING_PENDING_CKA"}
+      ],
+      "authoritySources": [
+        "content/web/homepage/hpc2/homepage-capability-intake-v1.json#CONTINUITY",
+        "content/web-production/contracts/client-surface-global-invariants-v1.json#INV-06",
+        "content/web-production/composition/public/homepage-composition-v1.1.json#CONTINUITY",
+        "content/web/homepage/hpc2-pre/homepage-visual-slot-coverage-audit-v1.json#H09"
+      ],
+      "runtimeSources": [
+        "content/runtime/reality-model-runtime/contracts/outcome-runtime-contract-v1.json",
+        "content/runtime/reality-model-runtime/contracts/reality-diff-contract-v1.json",
+        "content/runtime/reality-navigation-engine/contracts/outcome-feedback-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/reality-review-next-contract-v1.json"
+      ],
+      "visualAssets": [
+        {"assetCode":"FIG-057","role":"CONTINUITY_LOOP","mode":"CANONICAL_R2_ASSET","availabilityState":"HPC2_PRE_READY","sceneConsumerState":"PENDING_HPC2_W10"}
+      ],
+      "ctaDestinations": [
+        {"actionCode":"START_WITH_MY_REALITY","hierarchy":"PRIMARY","destination":"#h05-first-interaction","destinationType":"IN_PAGE_SCENE_TARGET","activationState":"PENDING_HPC2_W10"},
+        {"actionCode":"ASK_PHIOS","hierarchy":"SECONDARY","destination":"/knowledge-search","destinationType":"DECLARED_ASK_SURFACE","activationState":"HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA"},
+        {"actionCode":"EXPLORE_REALITY_JOURNEY","hierarchy":"TERTIARY_CONTEXTUAL_COMPLEX_ONLY","destination":"/reality-journey","destinationType":"EXISTING_PUBLIC_ROUTE_DECLARATION","activationState":"REVALIDATION_REQUIRED_HPC2_W10"}
+      ],
+      "audience": ["PUBLIC", "CUSTOMER"],
+      "density": "LOW",
+      "ckaRole": "FOLLOW_UP_OR_ASK_AGAIN_JOURNEY_ONLY_WHEN_COMPLEXITY_REQUIRES",
+      "v8NarrativeLineage": ["V8-JOURNEY-002"],
+      "implementationState": "AUTHORITY_FROZEN_DOM_COPY_AND_LOCALE_PENDING_HPC2_W10"
+    }
+  ],
+  "v8ProjectionBoundary": {
+    "narrativeLineageOnlyNotMigration": true,
+    "successorVerifiedChangedByHpc2W1": false,
+    "deletionAllowedChangedByHpc2W1": false,
+    "fullResearchAndLongFormRemainNoneByDesignOnHomepage": true,
+    "notProjectedIntoScenes": [
+      "V8-HERO-002",
+      "V8-MARKET-002", "V8-MARKET-003", "V8-MARKET-004",
+      "V8-RESEARCH-001", "V8-RESEARCH-002", "V8-RESEARCH-003", "V8-RESEARCH-004", "V8-RESEARCH-005", "V8-RESEARCH-006",
+      "V8-FOUNDER-001", "V8-FOUNDER-002", "V8-FOUNDER-003"
+    ],
+    "founderProjection": "OPTIONAL_FOOTER_ABOUT_TEASER_OUTSIDE_SCENE_REGISTRY_PENDING_LATER_COMPOSITION",
+    "researchProjection": "NONE_BY_DESIGN_FULL_SUCCESSOR_PAGES_ONLY"
+  },
+  "implementationBoundary": {
+    "finalNarrativeAuthorityEstablished": true,
+    "finalNineSceneAuthorityEstablished": true,
+    "finalNineSceneDomImplemented": false,
+    "currentSevenSectionHomepageReplaced": false,
+    "homepageRuntimeCreated": false,
+    "homepageConsumerModified": false,
+    "routeActivated": false,
+    "realityRouteActivated": false,
+    "ckaAuthorityCreated": false,
+    "v8MigrationAccepted": false,
+    "humanAcceptanceClaimed": false
+  }
+}

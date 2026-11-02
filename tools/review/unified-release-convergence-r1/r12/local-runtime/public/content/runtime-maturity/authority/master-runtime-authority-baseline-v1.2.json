@@ -1,0 +1,1206 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S18-CURRENT-AUTHORITY-SUCCESSOR-v1.2.0",
+  "phase": "MRM-S",
+  "work": "MRM-S18",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "CURRENT_AUTHORITY_BASELINE_WITH_HFP_PFR_TRACKED_NO_SECOND_PRODUCTION_AUTHORITY",
+  "principles": {
+    "maturityDoesNotReplaceRuntimeAuthority": true,
+    "historicalFreezeMutationForbidden": true,
+    "currentAuthorityMustRemainDomainOwned": true,
+    "maturityRegistryOwnsOnlyMaturityAndEvidenceEvaluation": true,
+    "passFailAloneCannotEstablishMaturity": true
+  },
+  "requiredAuditSet": [
+    "CMW",
+    "PDS",
+    "CPR",
+    "WPR",
+    "MPA",
+    "MCD",
+    "CMR",
+    "RMO",
+    "RRE",
+    "RNE",
+    "RDG",
+    "JR",
+    "KNR",
+    "KAP",
+    "CKA",
+    "ALR",
+    "PR",
+    "RR",
+    "AST",
+    "BZR",
+    "NUM",
+    "HDR",
+    "FINANCIAL",
+    "COMMERCE",
+    "ACCOUNT",
+    "EXTERNAL_READER"
+  ],
+  "reconciliationExtensions": [
+    "CAR",
+    "CMP",
+    "DAR",
+    "FAR",
+    "FCR",
+    "FDR",
+    "HFP",
+    "ICR",
+    "KAU",
+    "KI",
+    "KPP",
+    "ORC",
+    "PFR",
+    "PJA",
+    "RG",
+    "RRP"
+  ],
+  "reservedFutureRuntimeCodes": [
+    "LRM",
+    "RCL",
+    "VAL",
+    "RME",
+    "AIR",
+    "CIV"
+  ],
+  "excludedNonRuntimePrograms": [
+    "PILOT"
+  ],
+  "registeredFutureMethodEntries": [
+    {
+      "methodCode": "I_CHING",
+      "pluginCode": "ICH",
+      "methodVersion": "0.1.0",
+      "state": "REGISTERED",
+      "productionEligible": false,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "methodCode": "TAROT",
+      "pluginCode": "TAR",
+      "methodVersion": "0.1.0",
+      "state": "REGISTERED",
+      "productionEligible": false,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "pluginCode": "PSY",
+      "methodVersion": "0.1.0",
+      "state": "REGISTERED",
+      "productionEligible": false,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    }
+  ],
+  "runtimes": [
+    {
+      "runtimeCode": "CMW",
+      "runtimeName": "Canonical Master Work",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+        "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_GOVERNANCE_AUTHORITY",
+      "checkerAuthority": {
+        "path": "scripts/check-cmw-w0-w6-master-work-governance.mjs",
+        "sha256": "74961094f9d10d7a10c6488aeed6a9d9467ac93ec54b3dae04afcc79acc2a34b"
+      },
+      "freezeAuthority": {
+        "path": "content/governance/canonical-master-work/freeze/cmw-w0-w7-canonical-master-work-freeze-v1.json",
+        "sha256": "0266c48896bc58b35378ecc4cc04363feda93226ad0b3b4efdd82292375488da"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "PDS",
+      "runtimeName": "PHI OS Design System",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/registry/pds-w1-experience-contract.json",
+        "sha256": "76a3da891c172e7bf36372134086e33c03867012bc02f2079ee1d197f8fd7aa3"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FULL_SITE_ACCEPTANCE_GOVERNED_NOT_EVIDENCE_VALIDATED",
+      "checkerAuthority": {
+        "path": "scripts/check-pds-w10-full-site-acceptance.mjs",
+        "sha256": "e08783d2ef208775758c103dec4923c0d20cae3963ece89c8969107b00945a18"
+      },
+      "freezeAuthority": null,
+      "supportingAuthorities": [
+        {
+          "path": "content/registry/pds-w10-full-site-acceptance.json",
+          "sha256": "c0e452604366314517d81748996b0b297b3e3cb80347a119cfe422606bf43fbe"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "CPR",
+      "runtimeName": "Canonical Presentation Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/canonical-presentation-runtime/contracts/canonical-presentation-contract-v1.json",
+        "sha256": "3a5021ba3932b47b8a61eeaffc749cf75b57c8787a67dd0e50b03cefa9cedf93"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_PRESENTATION_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-cpr-w30-full-freeze.mjs",
+        "sha256": "f1feba39420027dfe3f5be437e9f121d88dac9b1d22564ab605a304ee7bf0fab"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+        "sha256": "03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "WPR",
+      "runtimeName": "Web Production Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/web-production/contracts/wpr-authority-boundary-v1.json",
+        "sha256": "daa1d9834ec9465bdd2861e7b63ab4543f03fa7f949c0d0463c891be5e4fca0e"
+      },
+      "currentVersion": "VERSION_NOT_EXPLICIT",
+      "productionStatus": "FROZEN_WEB_PRODUCTION_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-wpr-w30-freeze.mjs",
+        "sha256": "792f88825dc580f8379820d2686f7109a837aac798160a5522b3fd10db17f372"
+      },
+      "freezeAuthority": {
+        "path": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+        "sha256": "405efc8d15e0c604ca9797267ff405e4fa38591f5b9b2f76a0a230720f980c66"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/web-production/contracts/wpr-full-production-acceptance-v1.json",
+          "sha256": "99f5476170187102797a1bbd1dd97214921023d5975eba00b2e45a2c43a4950f"
+        },
+        {
+          "path": "content/web-production/contracts/wpr-drift-observability-deployment-v1.json",
+          "sha256": "205cda2c3693ff1941f61072421b9a8e9123d599699d92b79d272ac9b27b5887"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "MPA",
+      "runtimeName": "Method Production Activation",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/method-production-activation/current/mpa-current-check-consolidation-v1.json",
+        "sha256": "4e02343f58cb1db8d8b08b0fe8e06eef2bfb59bc7956f65593c9c578c80c4674"
+      },
+      "currentVersion": "PHI-OS-MPA-CURRENT-CHECK-CONSOLIDATION-v1.0.0",
+      "productionStatus": "ACTIVE_METHOD_SCOPED_ELIGIBILITY_ZERO_CURRENT_METHOD_DISPATCH",
+      "checkerAuthority": {
+        "path": "scripts/check-mpa-current.mjs",
+        "sha256": "6ec0afdf43b61b118bfdf324c8759438df73b1db4c0622ff1211d2db0ce941a1"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/method-production-activation/freeze/mpa-production-activation-freeze-v1.json",
+        "sha256": "f12ded2642f6bd9c1d9931b218c40cce141ecaa9e2e7da7103b197179bf369ac"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "MCD",
+      "runtimeName": "Method Client Delivery",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/method-client-delivery/contracts/mcd-0-method-client-delivery-authority-boundary-v1.json",
+        "sha256": "ecf11e4d3c9bce7ea913d0912a2c73d74ed0a46357a3d0be4184bfc3e3e43ebf"
+      },
+      "currentVersion": "PHI-OS-MCD-0-AUTHORITY-BOUNDARY-v1.0.0",
+      "productionStatus": "LIMITED_METHOD_GATED_CLIENT_DELIVERY",
+      "checkerAuthority": {
+        "path": "scripts/check-mcd-8-production-acceptance-freeze.mjs",
+        "sha256": "226f249db37c7a32b3760857d4906489a1601d4b363ba044b2f4c3ed500c7e46"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+        "sha256": "b914bc09e24e3b4d61ffbc410285ddbcf27cea88813c547017f091ad665f2070"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "CMR",
+      "runtimeName": "Canonical Meaning Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+        "sha256": "a88c8dd422e222fee7efd4ee4ce9f3cc4b9e780f4b7fbc11ac0c4d0250c55936"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_MEANING_AUTHORITY_NOT_REAL_WORLD_VALIDATION",
+      "checkerAuthority": {
+        "path": "scripts/check-cmr-w15-acceptance-freeze.mjs",
+        "sha256": "c3f7cbf25d196b3662ca8f4c21982c03212757298e625852e2f304feb9fa3c38"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json",
+        "sha256": "27349bccaf07cad0324ed701d4c16dd6e6ba1522ce2bc7cbc079fea94040f5eb"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RMO",
+      "runtimeName": "Reality Model Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/reality-model-runtime/contracts/canonical-reality-object-v1.json",
+        "sha256": "27c5b2276a065865deb39aa6a8808cfbe3c82e61914c7aee259da9837f66bcf3"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_RUNTIME_AUTHORITY",
+      "checkerAuthority": {
+        "path": "scripts/check-rmo-w13-w15-reality-versioning-diff-freeze.mjs",
+        "sha256": "beee5bcc4601ac71a24955d88713e740e57621b1625c3c152c28774c46e9c73c"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+        "sha256": "10dd5d3f29963a3be601491d316701d6f631a0bb7064aa1136f0b743bfa1fd81"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RRE",
+      "runtimeName": "Reality Readout Engine",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json",
+        "sha256": "a5ed4b8440a03c27418a5301890f134c1f7b37ba2be2a24e9cf7f2c949b8b26c"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_READOUT_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-rre-w11-w16-canonical-readout-freeze.mjs",
+        "sha256": "e91adf432a0d29c639c83dceef476b35457616a0d69c6662ea561f5caf84a88b"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+        "sha256": "4d7c7f4f1d233c5ad149a8fc300cc842a9dfc045a5afc2f9f9247f165a79a92b"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RNE",
+      "runtimeName": "Reality Navigation Engine",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/reality-navigation-engine/contracts/rne-authority-boundary-v1.json",
+        "sha256": "a66f4c030bc4799a93d6a25f60a140985ea2f0934e6eaa4ccf173e95ab19edc6"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_NAVIGATION_RUNTIME_NOT_EFFECTIVENESS_VALIDATED",
+      "checkerAuthority": {
+        "path": "scripts/check-rne-w10-w14-integration-feedback-freeze.mjs",
+        "sha256": "2caf9385cf55b8bb5bbd143ebd3a208817acd120edf481817e06731d2a3aa000"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/reality-navigation-engine/freeze/rne-v1-freeze-v1.json",
+        "sha256": "89003a9ae8b8965a981e7dd0dbbc4754289c6cb1a44d4c620cb2236fe7dbef15"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RDG",
+      "runtimeName": "Reality Data Governance",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/governance/reality-data-governance/audits/rdg-data-authority-boundary-v1.json",
+        "sha256": "91bc679d3b0f9146771c28b5fcc120fcbf6e0b90aacd5e3e51ead5b3898f13fa"
+      },
+      "currentVersion": "VERSION_NOT_EXPLICIT",
+      "productionStatus": "FROZEN_DATA_GOVERNANCE",
+      "checkerAuthority": {
+        "path": "scripts/check-rdg-w26-w30-governance-acceptance-freeze.mjs",
+        "sha256": "c9c6e09b6c12fd69e3ee3bd1c7574ebfff0af5a14ff57d62423fbd304eb9c6cd"
+      },
+      "freezeAuthority": {
+        "path": "content/governance/reality-data-governance/freeze/reality-data-governance-freeze-v1.json",
+        "sha256": "79e5433ae73ff11ea6ead081f85f6b4a7e6573d3850756c52749c184eaf6d9a4"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "JR",
+      "runtimeName": "Journey Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+        "sha256": "5f6859209bbfe4a49d3d533f63b703e0d0199989c462c8ac9a11f9bcd910c044"
+      },
+      "currentVersion": "2.0.0",
+      "productionStatus": "FROZEN_JOURNEY_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-jr-w0-w14-canonical-journey-runtime.mjs",
+        "sha256": "8a2dc1c50ac756d9c48ffc108c636afdef6cb45ad3320041238d28fc8827a0c4"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "sha256": "0f63eb01bd9af5a0ec7b8d912a2cabcd3ef25e67c515a84bbc0a99bc4dc2b47c"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "KNR",
+      "runtimeName": "Knowledge Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+        "sha256": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13"
+      },
+      "currentVersion": "VERSION_NOT_EXPLICIT",
+      "productionStatus": "FROZEN_KNOWLEDGE_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-knowledge-runtime.mjs",
+        "sha256": "afa0bbaff3233eb68f7e6b7aa5aca86c54274ece5c13942e6c17bb27295dd71e"
+      },
+      "freezeAuthority": {
+        "path": "content/knowledge/completion/knowledge-runtime-production-freeze-v1.json",
+        "sha256": "4043ca4ce408cc3152f195e578dd125ab3332050c0bba329929bf37f5200f560"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "KAP",
+      "runtimeName": "Knowledge Answer Projection",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/knowledge/answer-projection/contracts/kap-w1-authority-boundary-v1.json",
+        "sha256": "11f3f06ae114374501d0582f749d0c4003048f85b67ef1049d5b9a4e1c6b77ef"
+      },
+      "currentVersion": "PHI-OS-KAP-W1-AUTHORITY-BOUNDARY-v1.0.0",
+      "productionStatus": "FROZEN_GROUNDED_ANSWER_BACKEND",
+      "checkerAuthority": {
+        "path": "scripts/check-kap-w30-w45-phase18-governance.mjs",
+        "sha256": "d0ec6cf18abc739d294a11d33b72cd567fc9a505ecc240d4a33bd208dabe5459"
+      },
+      "freezeAuthority": {
+        "path": "content/knowledge/answer-projection/freeze/kap-w30-w45-phase18-backend-freeze-v1.json",
+        "sha256": "9ac5063e6bfc1205304969d58257573d3b833f8aca67c1894344ca9a4c1b0ced"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "CKA",
+      "runtimeName": "Client Knowledge Ask",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json",
+        "sha256": "e5b36d37d2a71937a50cbb065f29ac21a7d6a980e43a041ae221c55d783e3f35"
+      },
+      "currentVersion": "PHI-OS-CKA-W18-W33-CLIENT-CONSUMPTION-CONTRACT-v1.0.0",
+      "productionStatus": "FROZEN_CLIENT_ASK_CONSUMPTION",
+      "checkerAuthority": {
+        "path": "scripts/check-cka-w18-w33.mjs",
+        "sha256": "2e55996c6b0f6684af067d4e64d5978429ead5e785b606e2a459ae8cc96b3f82"
+      },
+      "freezeAuthority": {
+        "path": "content/client/knowledge-ask/freeze/cka-w18-w33-client-consumption-freeze-v1.json",
+        "sha256": "99fa508274cb59aba027ac69fa8c591619d508363c455ce8b2b2b262715bb0aa"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/client/knowledge-ask/contracts/cka-w0-ask-entry-contract-v1.json",
+          "sha256": "435f30db777be862cefa308115dfe3f380ebc0057179bf2d5135cc4575b5132b"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "ALR",
+      "runtimeName": "Academy Learning Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json",
+        "sha256": "d47989ba38dd8df058387d4444e9e5752950bdbef5eaa3ec368aaf817c59b13d"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_LEARNING_RUNTIME_PARTIAL_CLIENT_CONSUMPTION",
+      "checkerAuthority": {
+        "path": "scripts/check-alr-w42-w46-governance-production-freeze.mjs",
+        "sha256": "8d7dda1bdeea30f4d3e29460a178e9cb68a66c1a963e5364b379e8b8753d9d53"
+      },
+      "freezeAuthority": {
+        "path": "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+        "sha256": "4e18c2d7104d3d4369a74cea673ca280c028664d2995f03fae356a97b8ad669e"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "PR",
+      "runtimeName": "Professional Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+        "sha256": "b280fe736bcaa9802463c1941b9d1b3448f0848b7eb19dce9ff2dd7b645b6f7d"
+      },
+      "currentVersion": "2.0.0",
+      "productionStatus": "FROZEN_HUMAN_GATED_PROFESSIONAL_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-pr-w0-w13-professional-runtime-v2.mjs",
+        "sha256": "186ac6bf75ccd6b3c08dfec87923c829fc92ca871f14bf474d96282f7473e167"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+        "sha256": "4563bf9cdd98cb178a8e93809616477c8a31050b3d6c95d2012016bd4c6ad805"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RR",
+      "runtimeName": "Customer Report Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/customer-report-runtime/contracts/canonical-report-object-contract-v2.json",
+        "sha256": "e0c74d0cfa2b86a88aa17c17615b32f10876d23c576b385445fcd4c7643c908b"
+      },
+      "currentVersion": "2.0.0",
+      "productionStatus": "FROZEN_REPORT_ASSEMBLY_UPSTREAM_GATED",
+      "checkerAuthority": {
+        "path": "scripts/check-rr-w0-w12-customer-report-runtime-v2.mjs",
+        "sha256": "aaa89b9526e98053c55ef18c0e6b24f0fdc5144f25b996633494aa44b64be74b"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+        "sha256": "1ffd7087e750104baf2d1be72117afb659145617d8a96c45d598cc227c36ef5e"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "AST",
+      "runtimeName": "Astrology",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+        "selector": "methods[pluginCode=AST]"
+      },
+      "currentVersion": "0.1.0",
+      "productionStatus": "METHOD_STATE_ACTIVATION_CANDIDATE_PRODUCTION_ELIGIBLE_FALSE",
+      "checkerAuthority": {
+        "path": "scripts/check-mpa-w22-ast-activation-current.mjs",
+        "sha256": "ed58cf685174f4998c2c0c48ff1733f9f590fb089fd3938b733007cf0f83c07b"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/method-production-activation/registries/mpa-ast-regression-freeze-v1.json",
+        "sha256": "9652fed85666f2cd1e5585bf690bd857abe3425ac568f5f20cb8ea381504beb6"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/professional/method-production-activation/current/mpa-current-check-consolidation-v1.json",
+          "sha256": "4e02343f58cb1db8d8b08b0fe8e06eef2bfb59bc7956f65593c9c578c80c4674"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true,
+      "methodState": "ACTIVATION_CANDIDATE",
+      "productionEligible": false,
+      "blockingReasons": [
+        "REFERENCE_VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "PRODUCTION_POLICIES_NOT_APPROVED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "runtimeCode": "BZR",
+      "runtimeName": "BaZi",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+        "selector": "methods[pluginCode=BZR]"
+      },
+      "currentVersion": "0.1.0",
+      "productionStatus": "METHOD_STATE_ACTIVATION_CANDIDATE_PRODUCTION_ELIGIBLE_FALSE",
+      "checkerAuthority": {
+        "path": "scripts/check-mpa-w23-bzr-activation-current.mjs",
+        "sha256": "83b627d010b756ac4465d95575b38c6a09212aad3869bf0de8b3bf91ccf5163d"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/method-production-activation/registries/mpa-bzr-regression-freeze-v1.json",
+        "sha256": "2f1145d9a9b0ffd7bb684b6960d9957543769dfc34a18074938774f6c8ff908e"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/professional/method-production-activation/current/mpa-current-check-consolidation-v1.json",
+          "sha256": "4e02343f58cb1db8d8b08b0fe8e06eef2bfb59bc7956f65593c9c578c80c4674"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true,
+      "methodState": "ACTIVATION_CANDIDATE",
+      "productionEligible": false,
+      "blockingReasons": [
+        "LICENSE_REVIEW_INCOMPLETE",
+        "VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "runtimeCode": "NUM",
+      "runtimeName": "Numerology",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+        "selector": "methods[pluginCode=NUM]"
+      },
+      "currentVersion": "0.1.0-candidate",
+      "productionStatus": "METHOD_STATE_ACTIVATION_CANDIDATE_PRODUCTION_ELIGIBLE_FALSE",
+      "checkerAuthority": {
+        "path": "scripts/check-mpa-w21-num-activation-current.mjs",
+        "sha256": "f0cde80c832dac24bcde3ba153468132ce25fe296716f3a1304c84acbd280b92"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/method-production-activation/registries/mpa-num-regression-freeze-v1.json",
+        "sha256": "b70df7ac62ea6ef86182d0550d5303e18b93ffaada913e7a346a51805c90cc69"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/professional/method-production-activation/current/mpa-current-check-consolidation-v1.json",
+          "sha256": "4e02343f58cb1db8d8b08b0fe8e06eef2bfb59bc7956f65593c9c578c80c4674"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true,
+      "methodState": "ACTIVATION_CANDIDATE",
+      "productionEligible": false,
+      "blockingReasons": [
+        "VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "COMMERCIAL_LICENSE_NOT_PASSED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "runtimeCode": "HDR",
+      "runtimeName": "Human Design",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0",
+        "selector": "methods[pluginCode=HDR]"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "METHOD_STATE_BLOCKED_PRODUCTION_ELIGIBLE_FALSE",
+      "checkerAuthority": {
+        "path": "scripts/check-mpa-w24-hdr-boundary-current.mjs",
+        "sha256": "f775a7711ed20f910cd4fc50accf5c5f1eaf0b42cbf856ae0bdab1811fd1dcbf"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/method-production-activation/registries/mpa-hdr-boundary-regression-freeze-v1.json",
+        "sha256": "c82614a929131fe0fef3ffa5461fecb89fb9ce636b3efa49fe279327eeaf6bde"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/professional/method-production-activation/current/mpa-current-check-consolidation-v1.json",
+          "sha256": "4e02343f58cb1db8d8b08b0fe8e06eef2bfb59bc7956f65593c9c578c80c4674"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true,
+      "methodState": "BLOCKED",
+      "productionEligible": false,
+      "blockingReasons": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+        "PROFESSIONAL_BOUNDARY_REQUIRES_RENEWED_ACTIVATION"
+      ]
+    },
+    {
+      "runtimeCode": "FINANCIAL",
+      "runtimeName": "Financial Reality Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/registry/financial-authority-boundary.json",
+        "sha256": "e8708450a169dc41f7cb26a1e83378a6ad06587f7b39d02fd90808e5bd73beb4"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "GOVERNED_LIMITED_FINANCIAL_DISCOVERY",
+      "checkerAuthority": {
+        "path": "scripts/check-m4a-financial-reality-navigation.mjs",
+        "sha256": "511dd66a84a3d2b80ab019f8ed7c1e459a833ae4601a46ae1fddf84efddecd6a"
+      },
+      "freezeAuthority": null,
+      "supportingAuthorities": [
+        {
+          "path": "content/registry/m4a-w2c-financial-intake-calculation.json",
+          "sha256": "057bc4bb713c68418b7b6d0bcda8a72b82bd22278fbb94adf9c872159048736f"
+        },
+        {
+          "path": "content/registry/m4a-w4-financial-reports.json",
+          "sha256": "6bc04ebc35a5d0931818111b588b50656339132af1d6e1a50e4626294d6a55ee"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "COMMERCE",
+      "runtimeName": "Commerce Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/registry/book-commerce-schema.json",
+        "sha256": "ac4e4b30d7b4fdfd681c0eeae607b4eb03a7152a6b0a749aa7c9fe434696d821"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "IMPLEMENTED_COMMERCE_BOUNDARY_NOT_MRM_VALIDATED",
+      "checkerAuthority": {
+        "path": "scripts/check-m3b-book-access-payment.mjs",
+        "sha256": "5b7c62d33906f43369a41ad905dbe7372432e6841c2bf8766a0ec41ea9e18089"
+      },
+      "freezeAuthority": null,
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "ACCOUNT",
+      "runtimeName": "Account Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/registry/m4c-account-payment-membership.json",
+        "sha256": "1c769b379e8340214887dc8e91edbadba42f0c22fdc395abd53b3cc66827882a"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "IMPLEMENTED_ACCOUNT_CONTINUITY",
+      "checkerAuthority": {
+        "path": "scripts/check-m4c-account-payment-membership.mjs",
+        "sha256": "ccf1059271fc01e6b0d28e14662a13161493e92c94a653f172580adf32f00c0f"
+      },
+      "freezeAuthority": null,
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "EXTERNAL_READER",
+      "runtimeName": "External Reader Runtime",
+      "auditGroup": "REQUIRED_AUDIT_SET",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/registry/m4b-external-reader-framework.json",
+        "sha256": "837a715d8bb348fd9fd660205d6ce697b4c59065bdf3e5268d432afb5a659df2"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "INFRASTRUCTURE_ONLY_EXTERNAL_READER_BOUNDARY",
+      "checkerAuthority": {
+        "path": "scripts/check-m4b-external-reader-framework.mjs",
+        "sha256": "56b58a0c8b8157aa991013492c055848aafe7acac3f360ed22a7844850605ce4"
+      },
+      "freezeAuthority": null,
+      "supportingAuthorities": [
+        {
+          "path": "content/registry/m4b-external-reader-data-privacy.json",
+          "sha256": "b8c222bd18a48842701867c51696be926cc1ab88ce0db1f224a6082ac614851e"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RG",
+      "runtimeName": "Runtime Checker Governance",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/governance/runtime-checker-governance/manifests/runtime-checker-manifest-v2.json",
+        "sha256": "f4c52358b6d6b1b5322bba98d30d584900fb1aac1b0743f738bafca320ae17bf"
+      },
+      "currentVersion": "VERSION_NOT_EXPLICIT",
+      "productionStatus": "FROZEN_CHECKER_GOVERNANCE",
+      "checkerAuthority": {
+        "path": "scripts/check-rg-w9-w15-checker-governance.mjs",
+        "sha256": "d57307683d684ad558e801e9b1ee690be5114c35ded57a88d32fafd9458c519b"
+      },
+      "freezeAuthority": {
+        "path": "content/governance/runtime-checker-governance/freeze/rg-w9-w15-runtime-checker-governance-freeze-v1.json",
+        "sha256": "7967dbe5d51f59c16b37ef4c5aad922fdc9787af53ef1262dfa3911ff83d342b"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "ICR",
+      "runtimeName": "Input Case Runtime",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/input-case-runtime/contracts/canonical-case-runtime-v1.json",
+        "sha256": "83b677cbce3cb6a431e5a5021efa3eaece5919988e1657ab5032478f191c9667"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_INPUT_CASE_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-icr-w5-w9-canonical-case-runtime.mjs",
+        "sha256": "afa9d6d5c44d028d6354a51fd559aad34183730299e3759c65f8ade97f3325d8"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json",
+        "sha256": "1aa8a7b20450070c86322733acac45508bc67a4eb9ba75a6b3ccf4d6608bdf22"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "ORC",
+      "runtimeName": "Cross Runtime Orchestration",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/runtime/cross-runtime-orchestration/contracts/orc-authority-boundary-v2.json",
+        "sha256": "0f788a29294fba1710f5914f3e6b421f22efd70c7610c7f854af69c2f7d54ee2"
+      },
+      "currentVersion": "2.0.0",
+      "productionStatus": "FROZEN_ORCHESTRATION_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-orc-v2-w0-w12.mjs",
+        "sha256": "ae8c903969a368c2fb34b712cf93dbbdc92ff98670ca7d0c424da6a644d65ed7"
+      },
+      "freezeAuthority": {
+        "path": "content/runtime/cross-runtime-orchestration/freeze/orc-v2-freeze-v1.json",
+        "sha256": "f418d930fdf9b38eb2cbce1163f7b2db83c68091396b40a0bc4827071f31d773"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "CAR",
+      "runtimeName": "Canonical Asset Runtime",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/canonical-asset-runtime/contracts/canonical-asset-contract-v1.json",
+        "sha256": "f2de620f429ad9d9b0d019d580ad5a3fe4f2c33bc792257b31a258e9c934c366"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_ASSET_RUNTIME",
+      "checkerAuthority": {
+        "path": "scripts/check-car-w18-full-acceptance-freeze.mjs",
+        "sha256": "354920e9be50cb7694395c20534aaa77f3dcab63be86bab6061902c6e0bdae50"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/canonical-asset-runtime/freeze/car-w18-freeze-v1.json",
+        "sha256": "8ea26f9b89dbd0b52a334a5e3155b8beef92702bca05c746b5b48dd521763020"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "KAU",
+      "runtimeName": "Knowledge Authoring Runtime",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/knowledge/authoring/contracts/kau-w1-authoring-source-contract-v1.json",
+        "sha256": "51d188608bd76ea81f42c8d9b47e873b6193186085de6cb092e294dc98c3e662"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_AUTHORING_GOVERNANCE",
+      "checkerAuthority": {
+        "path": "scripts/check-kau-w9-w14-authoring-governance-readiness.mjs",
+        "sha256": "9690487a2ebaf24d46467e7f23f9e54f0a543112f220ac912c95251a5c6af5eb"
+      },
+      "freezeAuthority": {
+        "path": "content/knowledge/authoring/freeze/kau-full-freeze-v1.json",
+        "sha256": "a2cb4057b668e206a05c709cb8280c07c850fef30e8b1fbb0c6d9c932cbf026a"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "KPP",
+      "runtimeName": "Knowledge Production Planning",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/knowledge/production-planning/contracts/kpp-w0-w12-production-planning-foundation-v1.json",
+        "sha256": "c5cbce009e685b2c85ce1ddeacd95d0e5856c24a0582718f68254c60652a1e87"
+      },
+      "currentVersion": "VERSION_NOT_EXPLICIT",
+      "productionStatus": "FROZEN_PRODUCTION_PLANNING",
+      "checkerAuthority": {
+        "path": "scripts/check-kpp-w23-w27-w29-v2-full-freeze.mjs",
+        "sha256": "2ba3568237b93a23529bbd3b45b8ce0315798205efa4a28c758fd328a4737a21"
+      },
+      "freezeAuthority": {
+        "path": "content/knowledge/production-planning/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json",
+        "sha256": "85217f79ff21a8db4f292c6abdfa3a100d0ad62a103ef2c2c388cff37d15aa7c"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "PJA",
+      "runtimeName": "Published/Production Article Runtime",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/knowledge/production/freeze/pja-published-knowledge-authority-w1-freeze-v1.json",
+        "sha256": "277c9d4d7033979b1624068186638db06fdb92beddd489b5d6e4cce33f436313"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_HUMAN_REVIEWED_ARTICLE_PUBLICATION_AUTHORITY",
+      "checkerAuthority": {
+        "path": "scripts/check-pja-publication-w1-runtime.mjs",
+        "sha256": "c2788bd5e620cbf99d7aa01279113008c7c35dfca689a95be79e402b80713d78"
+      },
+      "freezeAuthority": {
+        "path": "content/knowledge/production/freeze/pja-publication-w1-freeze-v1.json",
+        "sha256": "2fe75eae06530a19cb02597f842229af8a3408a6a17bc624a4c79ad65ea7fe73"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "KI",
+      "runtimeName": "Knowledge Intelligence Runtime",
+      "auditGroup": "RECONCILIATION_EXTENSION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/knowledge/contracts/knowledge-intelligence-package-k-a-v1.json",
+        "sha256": "ebb776f09ef4a174c238ae95d4c7c4c57e290b0aac23a72936bb9416fb5fb58b"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_KNOWLEDGE_INTELLIGENCE",
+      "checkerAuthority": {
+        "path": "scripts/check-knowledge-intelligence-phase-k-full-acceptance.mjs",
+        "sha256": "415841ac157dad4bb0ee6c3e93658e125bfb321e5521cfe281c5c7ff3845674a"
+      },
+      "freezeAuthority": {
+        "path": "content/knowledge/production/freeze/knowledge-intelligence-phase-k-v1.json",
+        "sha256": "bb1699ec2bd4701fd50950bdc7d54ff22062f65d51fb47697e5a4bf56d4f2f03"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/knowledge/contracts/knowledge-intelligence-package-k-b-v1.json",
+          "sha256": "fa34a50f7c5c6e8ef0221c24522e32f6d35a8bbfdf71ddabcf53f8273d36b6b6"
+        },
+        {
+          "path": "content/knowledge/contracts/knowledge-intelligence-package-k-c-v1.json",
+          "sha256": "463f417e6c0dced94711488aa8417573147f17780e50045f858e7254de334416"
+        },
+        {
+          "path": "content/knowledge/contracts/knowledge-intelligence-package-k-d-v1.json",
+          "sha256": "0e7e390b3364ffcdcc85aecff2ce4f169dcf5e86ba5647484493e275e55fd58d"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "DAR",
+      "runtimeName": "Document Assembly Runtime",
+      "auditGroup": "S8_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/document-assembly/authority/dar-authority-baseline-v1.json",
+        "sha256": "c47251da49030df134452e8a7ec7baf7fb7ab7c3a569b6d3c7b9943d075d9872"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "DAR_RUNTIME_COMPLETE_FAIL_CLOSED_NO_WILL_PRODUCTION_JURISDICTION_YET",
+      "checkerAuthority": {
+        "path": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
+        "sha256": "2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea"
+      },
+      "freezeAuthority": {
+        "path": "content/document-assembly/freeze/dar-production-freeze-v1.json",
+        "sha256": "e6f8c0d856d6f855bb74b695cd91e84417788743c928e10ea2d308ee6ecfce9a"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/document-assembly/acceptance/dar-production-acceptance-v1.json",
+          "sha256": "105351d65f3d06cedb76259e8bf790003ee7815156d7f167ed343ce88c5368e1"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "RRP",
+      "runtimeName": "Runtime Reading Product Engine",
+      "auditGroup": "S8_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/products/runtime-reading/authority/runtime-reading-authority-baseline-v1.json",
+        "sha256": "e249974d8631c5b041174237db15ec13074bea0bb6f65ce97e9668abb2648bb6"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_CANONICAL_RRP_REPORT_CANDIDATE_PRODUCT_BOUNDARY",
+      "checkerAuthority": {
+        "path": "scripts/check-rrp-w28-rr-handoff-freeze.mjs",
+        "sha256": "a00858af4ca0cecdf6ee49c5e564dcc8ebfd0567d1fc7bc9c89834705b3fbf95"
+      },
+      "freezeAuthority": {
+        "path": "content/products/runtime-reading/freeze/runtime-reading-product-freeze-v1.json",
+        "sha256": "9ca6732c1e3d134651eff5661aa0f7875675e6a3fa071ec42726099a401a460a"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/products/runtime-reading/acceptance/runtime-reading-product-acceptance-v1.json",
+          "sha256": "01d0424869f429c1fff2972f7818435219f01a0a5e04beebc52979ab02da2ac6"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "FDR",
+      "runtimeName": "Financial Data Runtime",
+      "auditGroup": "S8_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/financial/data-runtime/authority/financial-data-authority-baseline-v1.json",
+        "sha256": "16748999480db6c52df3e9e9f7a061eaa6d55bae36da2463a8b6d1c8abd5fa08"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_CANONICAL_FINANCIAL_REALITY_V1",
+      "checkerAuthority": {
+        "path": "scripts/check-fdr-authority.mjs",
+        "sha256": "ab55875ff328e3ddf6286fe3ec82c9e88c44463e4619919dc5064625bea74cae"
+      },
+      "freezeAuthority": {
+        "path": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+        "sha256": "921a5cbc4ff0102d4d26bd37d71a5fafcabca82bd608e6bc985660bb000ac1b1"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/financial/data-runtime/acceptance/fdr-w0-w24-acceptance-v1.json",
+          "sha256": "1858aed4dd81a1fad54828f40bc2ea6a2fca43d40c73722cd836def095a43000"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "FCR",
+      "runtimeName": "Financial Calculation Runtime",
+      "auditGroup": "S8_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/financial/calculation-runtime/authority/financial-calculation-authority-baseline-v1.json",
+        "sha256": "dc9ac8bfa4d18538ac0bb86b92b4e9b41d02049eac5acca50b984fa9794e28a2"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_DETERMINISTIC_FINANCIAL_CALCULATION_V1",
+      "checkerAuthority": {
+        "path": "scripts/check-fcr-determinism.mjs",
+        "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d"
+      },
+      "freezeAuthority": {
+        "path": "content/financial/calculation-runtime/authority/fcr-w0-w22-freeze-manifest-v1.json",
+        "sha256": "d0ba76e6442f54b71603e264bf2e54bf990421bf58b27b124f386d81478cb3b9"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/financial/calculation-runtime/acceptance/fcr-w0-w22-acceptance-v1.json",
+          "sha256": "d356a9a36d89616c5f0cd8e83cb0fb7c98b5c3cbef7b9a2ddbda9d1de7cb3f1e"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "FAR",
+      "runtimeName": "Financial Analysis Runtime",
+      "auditGroup": "S8_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/financial/analysis-runtime/authority/financial-analysis-authority-baseline-v1.json",
+        "sha256": "0fd6d5d3e436c285f9833f0b3c3b50c46176383764f603a2b94811e9eeab516f"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_STRUCTURAL_FINANCIAL_FINDINGS_V1_NO_ADVICE",
+      "checkerAuthority": {
+        "path": "scripts/check-far-runtime.mjs",
+        "sha256": "3de7f8dc99872244425aaed57a975e32dd4bda09ee9056c505d6600c6d1f42a5"
+      },
+      "freezeAuthority": {
+        "path": "content/financial/analysis-runtime/authority/far-w0-w22-freeze-manifest-v1.json",
+        "sha256": "1f24e4034575b1d61fde4078cd882a3a8a2fd17ada4862f2756cc0e96f0e0e44"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/financial/analysis-runtime/acceptance/far-w0-w22-acceptance-v1.json",
+          "sha256": "7d8c42e0bba36ee693f3ddba9bbc2d450367bc01f372a82d6d6d01072b5db538"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "CMP",
+      "runtimeName": "Canonical Meaning Production",
+      "auditGroup": "S8_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/professional/canonical-meaning-production/authority/canonical-meaning-production-authority-baseline-v1.json",
+        "sha256": "59b820726131e98e94019ea02dcb24fe5dc24f0d507678605b0490ebcbce5439"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "PRODUCTION_RUNTIME_ACCEPTED_METHOD_SCOPED_NUM_ONLY",
+      "checkerAuthority": {
+        "path": "scripts/check-cmp-w7-w12.mjs",
+        "sha256": "99f5740486a6fea89e6908b443a6688ba9a4d89353a0d1091e2126d6edc0eaa3"
+      },
+      "freezeAuthority": {
+        "path": "content/professional/canonical-meaning-production/freeze/canonical-meaning-production-freeze-v1.json",
+        "sha256": "569b1fa4d34ce8105679b67025703ddd448eaf65b2f642d8dd83aa5bd1083bb8"
+      },
+      "supportingAuthorities": [
+        {
+          "path": "content/professional/canonical-meaning-production/acceptance/cmp-w7-w12-acceptance-v1.json",
+          "sha256": "24de821cbbb8824cdd5adabd029d81a315f2a01c48490ad2d091e2e722ce687a"
+        },
+        {
+          "path": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+          "sha256": "e74012230f075fe750950ee9e20938b2bd32abff3bd2bfd8bcade9a21584867c"
+        }
+      ],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "HFP",
+      "runtimeName": "Holistic Financial Planning Product",
+      "auditGroup": "S18_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/financial/holistic-planning-product/authority/holistic-financial-planning-authority-baseline-v1.json",
+        "sha256": "fde45998834916a58dea6c21f4001f8ac0fe758abe8f63eb1cf4e7381afddda0"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_CANONICAL_FINANCIAL_PLAN_CANDIDATE_COMPOSITION_V1",
+      "checkerAuthority": {
+        "path": "scripts/check-hfp-authority.mjs",
+        "sha256": "c30b5d4334d87454ca1f60200ec5a35a81266083a0ddef5768282766625e7970"
+      },
+      "freezeAuthority": {
+        "path": "content/financial/holistic-planning-product/freeze/hfp-w0-w28-freeze-manifest-v1.json",
+        "sha256": "8a3fecd4228edb842d9650ca69095537e767365b309e89b9b50b2f5dc5321b0a"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    },
+    {
+      "runtimeCode": "PFR",
+      "runtimeName": "Professional Financial Review",
+      "auditGroup": "S18_CURRENT_STATE_RECONCILIATION",
+      "trackingState": "CURRENT_TRACKED_RUNTIME",
+      "currentAuthority": {
+        "path": "content/financial/professional-review/authority/financial-professional-authority-successor-v1.json",
+        "sha256": "039e2e5bf4e0cf48a550a42d657cecec7aa4e7be344e476990f09af8ea173eaf"
+      },
+      "currentVersion": "1.0.0",
+      "productionStatus": "FROZEN_PROFESSIONAL_FINANCIAL_REVIEW_SPECIALIZATION_UNDER_PR",
+      "checkerAuthority": {
+        "path": "scripts/check-pfr-authority.mjs",
+        "sha256": "94bcb452697632d14581c63d36f0170ef239ed5d850d2d302b6be919fc552afa"
+      },
+      "freezeAuthority": {
+        "path": "content/financial/professional-review/freeze/pfr-w0-w24-freeze-manifest-v1.json",
+        "sha256": "2de17fe91ee42f1639c0699465f76cb59b5457dc2194360e5eb65e45d773b5f8"
+      },
+      "supportingAuthorities": [],
+      "duplicateAuthorityDetected": false,
+      "historicalFreezePreserved": true
+    }
+  ],
+  "exitGate": {
+    "duplicateRuntimeAuthorityCount": 0,
+    "secondMaturityAuthorityCount": 0,
+    "historicalFreezeMutationCount": 0
+  },
+  "supersedes": {
+    "path": "content/runtime-maturity/authority/master-runtime-authority-baseline-v1.1.json",
+    "sha256": "ee81c0ed992f1c1773dbb2cf48694ea57ece5e491cbace17da64bd4162ce31dc"
+  },
+  "runtimeCount": 42
+}

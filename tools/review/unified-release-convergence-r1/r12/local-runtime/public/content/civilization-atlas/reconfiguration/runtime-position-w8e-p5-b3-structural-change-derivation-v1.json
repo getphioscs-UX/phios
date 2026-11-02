@@ -1,0 +1,857 @@
+{
+  "version": "1.0.0",
+  "work": "R1-W8E-P5-B3",
+  "status": "STRUCTURAL_CHANGE_DERIVATION_COMPLETE_GOVERNED_ADMISSION_PENDING",
+  "predecessor": {
+    "file": "runtime-position-w8e-p5-b2-comparable-period-extraction-v1.json",
+    "sha256": "413982b98652db6b05933c6e091f571bc75519edce03b6fa2f19cc7ced71c7a8"
+  },
+  "rule": {
+    "mixScreenPp": 10,
+    "authority": "PROVISIONAL_ANALYTICAL_SCREEN",
+    "purpose": "Triage revenue-composition movement for review, not establish materiality or G14.",
+    "concentrationMetric": "Sum of squared revenue shares, fraction scale; partition dependent."
+  },
+  "records": [
+    {
+      "issuer": "AAPL",
+      "scope": "SUBSYSTEM",
+      "knowledgeState": "HISTORICAL",
+      "observationWindow": "FY2023–FY2025",
+      "selectedBasisSourceId": "W8E-P5-B1-AAPL-FY2025",
+      "metric": "SEGMENT_REVENUE_OR_NET_SALES",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-AAPL-FY2023",
+          "sha256": "dacdd136f6d264e14e9516dd448fee5df40cf9e1d3ae3da046accd9d613adfa2",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-AAPL-FY2024",
+          "sha256": "4ceb7bfa64aabb53ceb3b186d6166de13d3ab32c6cdd2bb2b295371c781df35f",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-AAPL-FY2025",
+          "sha256": "6fdaba10369fdd8cf9e2b1439937d058ea421f096c3652dc77afb9afb3458396",
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+        }
+      ],
+      "officialEvent": null,
+      "asFiledComparabilityBreaks": 0,
+      "reportingBasisBridge": [
+        {
+          "fiscalYear": 2023,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 383285,
+          "revisedRevenueTotal": 383285,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        },
+        {
+          "fiscalYear": 2024,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 391035,
+          "revisedRevenueTotal": 391035,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        }
+      ],
+      "metrics": {
+        "segmentChanges": [
+          {
+            "name": "Americas",
+            "firstRevenue": 162560,
+            "lastRevenue": 178353,
+            "revenueGrowthPercent": 9.715182,
+            "sharesPercent": [
+              42.412304,
+              42.718682,
+              42.856731
+            ],
+            "netShareChangePp": 0.444427,
+            "adjacentShareChangesPp": [
+              0.306378,
+              0.138048
+            ]
+          },
+          {
+            "name": "Europe",
+            "firstRevenue": 94294,
+            "lastRevenue": 111032,
+            "revenueGrowthPercent": 17.750864,
+            "sharesPercent": [
+              24.601537,
+              25.91277,
+              26.680059
+            ],
+            "netShareChangePp": 2.078522,
+            "adjacentShareChangesPp": [
+              1.311233,
+              0.767289
+            ]
+          },
+          {
+            "name": "Greater China",
+            "firstRevenue": 72559,
+            "lastRevenue": 64377,
+            "revenueGrowthPercent": -11.276341,
+            "sharesPercent": [
+              18.930822,
+              17.121741,
+              15.469253
+            ],
+            "netShareChangePp": -3.461568,
+            "adjacentShareChangesPp": [
+              -1.809081,
+              -1.652488
+            ]
+          },
+          {
+            "name": "Japan",
+            "firstRevenue": 24257,
+            "lastRevenue": 28703,
+            "revenueGrowthPercent": 18.32873,
+            "sharesPercent": [
+              6.328711,
+              6.406588,
+              6.89709
+            ],
+            "netShareChangePp": 0.568379,
+            "adjacentShareChangesPp": [
+              0.077877,
+              0.490503
+            ]
+          },
+          {
+            "name": "Rest of Asia Pacific",
+            "firstRevenue": 29615,
+            "lastRevenue": 33696,
+            "revenueGrowthPercent": 13.780179,
+            "sharesPercent": [
+              7.726626,
+              7.840219,
+              8.096866
+            ],
+            "netShareChangePp": 0.37024,
+            "adjacentShareChangesPp": [
+              0.113593,
+              0.256647
+            ]
+          }
+        ],
+        "maxAbsShareChangePp": 3.461568,
+        "hhiFractionScale": [
+          0.286217,
+          0.289202,
+          0.290095
+        ],
+        "hhiChange": 0.003878,
+        "topSegmentByYear": [
+          {
+            "year": 2023,
+            "name": "Americas",
+            "sharePercent": 42.412304
+          },
+          {
+            "year": 2024,
+            "name": "Americas",
+            "sharePercent": 42.718682
+          },
+          {
+            "year": 2025,
+            "name": "Americas",
+            "sharePercent": 42.856731
+          }
+        ],
+        "mixScreenPp": 10,
+        "screenAuthority": "PROVISIONAL_ANALYTICAL_SCREEN_NOT_CANONICAL_G14",
+        "thresholdSensitivity": [
+          {
+            "thresholdPp": 5,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 10,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 15,
+            "screenCrossed": false
+          }
+        ]
+      },
+      "candidate": null,
+      "disposition": "REVENUE_MOVEMENT_OBSERVATION_ONLY",
+      "limitations": [
+        "Raw primary-file acquisition and B2 extraction are not CWA/RRE admission.",
+        "No G14/P2 assignment.",
+        "No dossier-global representativeness.",
+        "No runtime position.",
+        "No inference of present 2026 conditions from this historical cohort.",
+        "Non-screened movement does not establish absence of structural change."
+      ]
+    },
+    {
+      "issuer": "MSFT",
+      "scope": "SUBSYSTEM",
+      "knowledgeState": "HISTORICAL",
+      "observationWindow": "FY2023–FY2025",
+      "selectedBasisSourceId": "W8E-P5-B1-MSFT-FY2025",
+      "metric": "SEGMENT_REVENUE_OR_NET_SALES",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-MSFT-FY2023",
+          "sha256": "8516a20601bba95932ba4401af662314e98524ade32a868d756f4f520f2e7147",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-MSFT-FY2024",
+          "sha256": "78030528fe04de8076e61fafb7e7f86e1f06512b87f3739bee45a21e0c315766",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-MSFT-FY2025",
+          "sha256": "89ad7e9d9a76aee545ea49e8128db1bff56de2e8f7a23cdf118427a52a0854cd",
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm"
+        }
+      ],
+      "officialEvent": {
+        "type": "SEGMENT_RECLASSIFICATION",
+        "sourceId": "W8E-P5-B1-MSFT-FY2025",
+        "sourceSha256": "89ad7e9d9a76aee545ea49e8128db1bff56de2e8f7a23cdf118427a52a0854cd",
+        "url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+        "verified": true,
+        "admissionState": "NOT_ADMITTED",
+        "locators": [
+          {
+            "searchAnchor": "In August 2024, we announced changes to the composition of our segments.",
+            "normalizedTextOffset": 48757
+          },
+          {
+            "searchAnchor": "bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment.",
+            "normalizedTextOffset": 48919
+          },
+          {
+            "searchAnchor": "Prior period segment information has been recast",
+            "normalizedTextOffset": 182144
+          }
+        ],
+        "summary": "Microsoft reports an August 2024 change to segment composition, bringing Microsoft 365 commercial components together in Productivity and Business Processes. FY2025 internal reporting reflects the changed composition, with prior segment information recast. This establishes a reported organizational/reporting-composition event, not a revenue increase caused by reclassification."
+      },
+      "asFiledComparabilityBreaks": 2,
+      "reportingBasisBridge": [
+        {
+          "fiscalYear": 2023,
+          "state": "COMPARABILITY_BREAK_AS_FILED_VS_LATEST_BASIS",
+          "originalRevenueTotal": 211915,
+          "revisedRevenueTotal": 211915,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        },
+        {
+          "fiscalYear": 2024,
+          "state": "COMPARABILITY_BREAK_AS_FILED_VS_LATEST_BASIS",
+          "originalRevenueTotal": 245122,
+          "revisedRevenueTotal": 245122,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        }
+      ],
+      "metrics": {
+        "segmentChanges": [
+          {
+            "name": "Productivity and Business Processes",
+            "firstRevenue": 94151,
+            "lastRevenue": 120810,
+            "revenueGrowthPercent": 28.315153,
+            "sharesPercent": [
+              44.428662,
+              43.5783,
+              42.882396
+            ],
+            "netShareChangePp": -1.546267,
+            "adjacentShareChangesPp": [
+              -0.850363,
+              -0.695904
+            ]
+          },
+          {
+            "name": "Intelligent Cloud",
+            "firstRevenue": 72944,
+            "lastRevenue": 106265,
+            "revenueGrowthPercent": 45.680248,
+            "sharesPercent": [
+              34.421348,
+              35.681824,
+              37.719541
+            ],
+            "netShareChangePp": 3.298193,
+            "adjacentShareChangesPp": [
+              1.260476,
+              2.037717
+            ]
+          },
+          {
+            "name": "More Personal Computing",
+            "firstRevenue": 44820,
+            "lastRevenue": 54649,
+            "revenueGrowthPercent": 21.929942,
+            "sharesPercent": [
+              21.149989,
+              20.739876,
+              19.398063
+            ],
+            "netShareChangePp": -1.751926,
+            "adjacentShareChangesPp": [
+              -0.410113,
+              -1.341813
+            ]
+          }
+        ],
+        "maxAbsShareChangePp": 3.298193,
+        "hhiFractionScale": [
+          0.360606,
+          0.36024,
+          0.363795
+        ],
+        "hhiChange": 0.003189,
+        "topSegmentByYear": [
+          {
+            "year": 2023,
+            "name": "Productivity and Business Processes",
+            "sharePercent": 44.428662
+          },
+          {
+            "year": 2024,
+            "name": "Productivity and Business Processes",
+            "sharePercent": 43.5783
+          },
+          {
+            "year": 2025,
+            "name": "Productivity and Business Processes",
+            "sharePercent": 42.882396
+          }
+        ],
+        "mixScreenPp": 10,
+        "screenAuthority": "PROVISIONAL_ANALYTICAL_SCREEN_NOT_CANONICAL_G14",
+        "thresholdSensitivity": [
+          {
+            "thresholdPp": 5,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 10,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 15,
+            "screenCrossed": false
+          }
+        ]
+      },
+      "candidate": {
+        "candidateId": "US-W8E-P5-B3-MSFT-STRUCTURAL-CHANGE",
+        "types": [
+          "SEGMENT_RECLASSIFICATION"
+        ],
+        "state": "STRUCTURAL_CHANGE_CANDIDATE_REQUIRES_ADMISSION_AND_REVIEW",
+        "reasoning": [
+          "Microsoft reports an August 2024 change to segment composition, bringing Microsoft 365 commercial components together in Productivity and Business Processes. FY2025 internal reporting reflects the changed composition, with prior segment information recast. This establishes a reported organizational/reporting-composition event, not a revenue increase caused by reclassification."
+        ]
+      },
+      "disposition": "STRUCTURAL_CHANGE_CANDIDATE",
+      "limitations": [
+        "Raw primary-file acquisition and B2 extraction are not CWA/RRE admission.",
+        "No G14/P2 assignment.",
+        "No dossier-global representativeness.",
+        "No runtime position.",
+        "No inference of present 2026 conditions from this historical cohort.",
+        "Non-screened movement does not establish absence of structural change."
+      ]
+    },
+    {
+      "issuer": "AMZN",
+      "scope": "SUBSYSTEM",
+      "knowledgeState": "HISTORICAL",
+      "observationWindow": "FY2023–FY2025",
+      "selectedBasisSourceId": "W8E-P5-B1-AMZN-FY2025",
+      "metric": "SEGMENT_REVENUE_OR_NET_SALES",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-AMZN-FY2023",
+          "sha256": "1d6035099fc81c57c7f4a4df2e9e3dab785f9827e4ff10ebc452e66ef80ef4cd",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872424000008/amzn-20231231.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-AMZN-FY2024",
+          "sha256": "42f701a4dc0cc9d2598790f1a4f897cc29575a80f2ff06e6f5e3b6dd58a6b519",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872425000004/amzn-20241231.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-AMZN-FY2025",
+          "sha256": "204a449f87db0ac4676c6dbaa6a3ff42fe8302468bd15b5867db3148f2a5f30c",
+          "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+        }
+      ],
+      "officialEvent": null,
+      "asFiledComparabilityBreaks": 0,
+      "reportingBasisBridge": [
+        {
+          "fiscalYear": 2023,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 574785,
+          "revisedRevenueTotal": 574785,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        },
+        {
+          "fiscalYear": 2024,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 637959,
+          "revisedRevenueTotal": 637959,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        }
+      ],
+      "metrics": {
+        "segmentChanges": [
+          {
+            "name": "North America",
+            "firstRevenue": 352828,
+            "lastRevenue": 426305,
+            "revenueGrowthPercent": 20.825161,
+            "sharesPercent": [
+              61.384344,
+              60.74011,
+              59.463067
+            ],
+            "netShareChangePp": -1.921276,
+            "adjacentShareChangesPp": [
+              -0.644233,
+              -1.277043
+            ]
+          },
+          {
+            "name": "International",
+            "firstRevenue": 131200,
+            "lastRevenue": 161894,
+            "revenueGrowthPercent": 23.394817,
+            "sharesPercent": [
+              22.825926,
+              22.400499,
+              22.581752
+            ],
+            "netShareChangePp": -0.244174,
+            "adjacentShareChangesPp": [
+              -0.425427,
+              0.181253
+            ]
+          },
+          {
+            "name": "AWS",
+            "firstRevenue": 90757,
+            "lastRevenue": 128725,
+            "revenueGrowthPercent": 41.83479,
+            "sharesPercent": [
+              15.78973,
+              16.859391,
+              17.955181
+            ],
+            "netShareChangePp": 2.165451,
+            "adjacentShareChangesPp": [
+              1.069661,
+              1.09579
+            ]
+          }
+        ],
+        "maxAbsShareChangePp": 2.165451,
+        "hhiFractionScale": [
+          0.453838,
+          0.447538,
+          0.436818
+        ],
+        "hhiChange": -0.01702,
+        "topSegmentByYear": [
+          {
+            "year": 2023,
+            "name": "North America",
+            "sharePercent": 61.384344
+          },
+          {
+            "year": 2024,
+            "name": "North America",
+            "sharePercent": 60.74011
+          },
+          {
+            "year": 2025,
+            "name": "North America",
+            "sharePercent": 59.463067
+          }
+        ],
+        "mixScreenPp": 10,
+        "screenAuthority": "PROVISIONAL_ANALYTICAL_SCREEN_NOT_CANONICAL_G14",
+        "thresholdSensitivity": [
+          {
+            "thresholdPp": 5,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 10,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 15,
+            "screenCrossed": false
+          }
+        ]
+      },
+      "candidate": null,
+      "disposition": "REVENUE_MOVEMENT_OBSERVATION_ONLY",
+      "limitations": [
+        "Raw primary-file acquisition and B2 extraction are not CWA/RRE admission.",
+        "No G14/P2 assignment.",
+        "No dossier-global representativeness.",
+        "No runtime position.",
+        "No inference of present 2026 conditions from this historical cohort.",
+        "Non-screened movement does not establish absence of structural change."
+      ]
+    },
+    {
+      "issuer": "NVDA",
+      "scope": "SUBSYSTEM",
+      "knowledgeState": "HISTORICAL",
+      "observationWindow": "FY2023–FY2025",
+      "selectedBasisSourceId": "W8E-P5-B1-NVDA-FY2025",
+      "metric": "SEGMENT_REVENUE_OR_NET_SALES",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-NVDA-FY2023",
+          "sha256": "241cb72e75d11d4bca670eba0642c36353a189e6c570cb716d19a5269f240b71",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000017/nvda-20230129.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-NVDA-FY2024",
+          "sha256": "fc26122b619646282369be10ef1b675e17e910f12895674cbe3353c6a304fde7",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-NVDA-FY2025",
+          "sha256": "427e28d187bf3be253dea05277695a7b935fd6b36a9fd8c3340ef734ca2adc22",
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
+        }
+      ],
+      "officialEvent": null,
+      "asFiledComparabilityBreaks": 0,
+      "reportingBasisBridge": [
+        {
+          "fiscalYear": 2023,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 26974,
+          "revisedRevenueTotal": 26974,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        },
+        {
+          "fiscalYear": 2024,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 60922,
+          "revisedRevenueTotal": 60922,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        }
+      ],
+      "metrics": {
+        "segmentChanges": [
+          {
+            "name": "Compute & Networking",
+            "firstRevenue": 15068,
+            "lastRevenue": 116193,
+            "revenueGrowthPercent": 671.124237,
+            "sharesPercent": [
+              55.8612,
+              77.812613,
+              89.038828
+            ],
+            "netShareChangePp": 33.177629,
+            "adjacentShareChangesPp": [
+              21.951413,
+              11.226216
+            ]
+          },
+          {
+            "name": "Graphics",
+            "firstRevenue": 11906,
+            "lastRevenue": 14304,
+            "revenueGrowthPercent": 20.141105,
+            "sharesPercent": [
+              44.1388,
+              22.187387,
+              10.961172
+            ],
+            "netShareChangePp": -33.177629,
+            "adjacentShareChangesPp": [
+              -21.951413,
+              -11.226216
+            ]
+          }
+        ],
+        "maxAbsShareChangePp": 33.177629,
+        "hhiFractionScale": [
+          0.506871,
+          0.654708,
+          0.804806
+        ],
+        "hhiChange": 0.297935,
+        "topSegmentByYear": [
+          {
+            "year": 2023,
+            "name": "Compute & Networking",
+            "sharePercent": 55.8612
+          },
+          {
+            "year": 2024,
+            "name": "Compute & Networking",
+            "sharePercent": 77.812613
+          },
+          {
+            "year": 2025,
+            "name": "Compute & Networking",
+            "sharePercent": 89.038828
+          }
+        ],
+        "mixScreenPp": 10,
+        "screenAuthority": "PROVISIONAL_ANALYTICAL_SCREEN_NOT_CANONICAL_G14",
+        "thresholdSensitivity": [
+          {
+            "thresholdPp": 5,
+            "screenCrossed": true
+          },
+          {
+            "thresholdPp": 10,
+            "screenCrossed": true
+          },
+          {
+            "thresholdPp": 15,
+            "screenCrossed": true
+          }
+        ]
+      },
+      "candidate": {
+        "candidateId": "US-W8E-P5-B3-NVDA-STRUCTURAL-CHANGE",
+        "types": [
+          "BUSINESS_MIX_MIGRATION",
+          "CARRIER_CONCENTRATION_SHIFT"
+        ],
+        "state": "STRUCTURAL_CHANGE_CANDIDATE_REQUIRES_ADMISSION_AND_REVIEW",
+        "reasoning": [
+          "Comparable-basis segment revenue share crosses the provisional analytical screen. Differential revenue growth can cause this movement; capacity or causal carrier migration is not established.",
+          "Revenue concentration increases within the disclosed reportable-segment partition. This is a revenue proxy only, not a claim about capacity or national carrier structure."
+        ]
+      },
+      "disposition": "STRUCTURAL_CHANGE_CANDIDATE",
+      "limitations": [
+        "Raw primary-file acquisition and B2 extraction are not CWA/RRE admission.",
+        "No G14/P2 assignment.",
+        "No dossier-global representativeness.",
+        "No runtime position.",
+        "No inference of present 2026 conditions from this historical cohort.",
+        "Non-screened movement does not establish absence of structural change."
+      ]
+    },
+    {
+      "issuer": "JPM",
+      "scope": "SUBSYSTEM",
+      "knowledgeState": "HISTORICAL",
+      "observationWindow": "FY2023–FY2025",
+      "selectedBasisSourceId": "W8E-P5-B1-JPM-FY2025",
+      "metric": "TOTAL_NET_REVENUE_MANAGED_FTE",
+      "denominator": "SUM_OF_REPORTABLE_SEGMENTS_EXCLUDES_CORPORATE",
+      "sourceRefs": [
+        {
+          "sourceId": "W8E-P5-B1-JPM-FY2023",
+          "sha256": "b82a3f479ff6576d01dc97a558aaf641632c9132e23b936da954311b3f168aee",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961724000225/jpm-20231231.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-JPM-FY2024",
+          "sha256": "64969ed3dd3682bb1c006ffe4317a29a1584eb24c4c4de661c5cbe4c565ec6a0",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm"
+        },
+        {
+          "sourceId": "W8E-P5-B1-JPM-FY2025",
+          "sha256": "c2988ee57180367c69cb58fb65ae42b4b3fa764f2a5aabe04a2a984621bd3c92",
+          "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm"
+        }
+      ],
+      "officialEvent": {
+        "type": "ISSUER_STRUCTURE_SHIFT",
+        "sourceId": "W8E-P5-B1-JPM-FY2024",
+        "sourceSha256": "64969ed3dd3682bb1c006ffe4317a29a1584eb24c4c4de661c5cbe4c565ec6a0",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961725000270/jpm-20241231.htm",
+        "verified": true,
+        "admissionState": "NOT_ADMITTED",
+        "locators": [
+          {
+            "searchAnchor": "Effective in the second quarter of 2024",
+            "normalizedTextOffset": 241127
+          },
+          {
+            "searchAnchor": "combining the former Corporate & Investment Bank and Commercial Banking business segments",
+            "normalizedTextOffset": 241230
+          },
+          {
+            "searchAnchor": "Prior-period amounts have been revised to conform",
+            "normalizedTextOffset": 515089
+          }
+        ],
+        "summary": "JPM reports combining Corporate & Investment Bank and Commercial Banking into one Commercial & Investment Bank reportable segment from Q2 2024. Use revised historical data for revenue comparisons; the change in partition must remain separately visible."
+      },
+      "asFiledComparabilityBreaks": 1,
+      "reportingBasisBridge": [
+        {
+          "fiscalYear": 2023,
+          "state": "COMPARABILITY_BREAK_AS_FILED_VS_LATEST_BASIS",
+          "originalRevenueTotal": 154328,
+          "revisedRevenueTotal": 154328,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        },
+        {
+          "fiscalYear": 2024,
+          "state": "MATCHING_REVENUE_AND_SEGMENT_LABELS",
+          "originalRevenueTotal": 163199,
+          "revisedRevenueTotal": 163199,
+          "aggregateRevenueDifference": 0,
+          "interpretation": "A reclassification difference is not economic revenue growth."
+        }
+      ],
+      "metrics": {
+        "segmentChanges": [
+          {
+            "name": "Consumer & Community Banking",
+            "firstRevenue": 70148,
+            "lastRevenue": 76029,
+            "revenueGrowthPercent": 8.383703,
+            "sharesPercent": [
+              45.453839,
+              43.815832,
+              42.579919
+            ],
+            "netShareChangePp": -2.87392,
+            "adjacentShareChangesPp": [
+              -1.638006,
+              -1.235913
+            ]
+          },
+          {
+            "name": "Commercial & Investment Bank",
+            "firstRevenue": 64353,
+            "lastRevenue": 78454,
+            "revenueGrowthPercent": 21.911954,
+            "sharesPercent": [
+              41.698849,
+              42.962273,
+              43.938036
+            ],
+            "netShareChangePp": 2.239187,
+            "adjacentShareChangesPp": [
+              1.263424,
+              0.975763
+            ]
+          },
+          {
+            "name": "Asset & Wealth Management",
+            "firstRevenue": 19827,
+            "lastRevenue": 24073,
+            "revenueGrowthPercent": 21.415242,
+            "sharesPercent": [
+              12.847312,
+              13.221895,
+              13.482045
+            ],
+            "netShareChangePp": 0.634733,
+            "adjacentShareChangesPp": [
+              0.374583,
+              0.26015
+            ]
+          }
+        ],
+        "maxAbsShareChangePp": 2.87392,
+        "hhiFractionScale": [
+          0.39699,
+          0.39404,
+          0.392537
+        ],
+        "hhiChange": -0.004453,
+        "topSegmentByYear": [
+          {
+            "year": 2023,
+            "name": "Consumer & Community Banking",
+            "sharePercent": 45.453839
+          },
+          {
+            "year": 2024,
+            "name": "Consumer & Community Banking",
+            "sharePercent": 43.815832
+          },
+          {
+            "year": 2025,
+            "name": "Commercial & Investment Bank",
+            "sharePercent": 43.938036
+          }
+        ],
+        "mixScreenPp": 10,
+        "screenAuthority": "PROVISIONAL_ANALYTICAL_SCREEN_NOT_CANONICAL_G14",
+        "thresholdSensitivity": [
+          {
+            "thresholdPp": 5,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 10,
+            "screenCrossed": false
+          },
+          {
+            "thresholdPp": 15,
+            "screenCrossed": false
+          }
+        ]
+      },
+      "candidate": {
+        "candidateId": "US-W8E-P5-B3-JPM-STRUCTURAL-CHANGE",
+        "types": [
+          "ISSUER_STRUCTURE_SHIFT"
+        ],
+        "state": "STRUCTURAL_CHANGE_CANDIDATE_REQUIRES_ADMISSION_AND_REVIEW",
+        "reasoning": [
+          "JPM reports combining Corporate & Investment Bank and Commercial Banking into one Commercial & Investment Bank reportable segment from Q2 2024. Use revised historical data for revenue comparisons; the change in partition must remain separately visible."
+        ]
+      },
+      "disposition": "STRUCTURAL_CHANGE_CANDIDATE",
+      "limitations": [
+        "Raw primary-file acquisition and B2 extraction are not CWA/RRE admission.",
+        "No G14/P2 assignment.",
+        "No dossier-global representativeness.",
+        "No runtime position.",
+        "No inference of present 2026 conditions from this historical cohort.",
+        "Non-screened movement does not establish absence of structural change."
+      ]
+    }
+  ],
+  "completed": {
+    "issuerReadouts": 5,
+    "structuralChangeCandidates": 3,
+    "officialReportingStructureEvents": 2,
+    "revenueMixScreenCandidates": 1,
+    "observationsOnly": 2,
+    "g14Candidates": 0,
+    "dossierGlobalPromotions": 0,
+    "runtimePositionCandidates": 0
+  },
+  "next": "Carry bounded source/claims through W8A/W8B/W8C/W8D. B4 assess cross-issuer scope and representativeness; keep G14 fail-closed until admission and human review."
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-REPORT-NARRATIVE-RUNTIME-TIER-CONTRACT-v1.0.0",
+  "work": "RNT2-W6",
+  "status": "SUCCESSOR_CANDIDATE",
+  "tiers": {
+    "T1_FACT_PROJECTION": {
+      "meaningAuthority": false,
+      "providerRequired": false,
+      "owns": [
+        "calculation",
+        "facts",
+        "method relationships",
+        "timing",
+        "rank",
+        "structural state"
+      ]
+    },
+    "T2_GOVERNED_NATURAL_COMPOSITION": {
+      "meaningAuthority": false,
+      "providerRequired": true,
+      "owns": [
+        "paragraph architecture",
+        "natural explanation",
+        "transitions",
+        "licensed expansion",
+        "customer-readable wording",
+        "navigation wording"
+      ],
+      "requires": [
+        "sectionNarrativeBrief",
+        "semanticVerifier"
+      ]
+    },
+    "T3_DEEP_SYNTHESIS": {
+      "meaningAuthority": false,
+      "providerRequired": true,
+      "owns": [
+        "high-complexity licensed synthesis"
+      ],
+      "defaultForSingleMethod": false
+    },
+    "DETERMINISTIC_FALLBACK": {
+      "meaningAuthority": false,
+      "providerRequired": false,
+      "owns": [
+        "source-bound canonical humanization"
+      ],
+      "mayMasqueradeAsT2": false
+    }
+  },
+  "rules": {
+    "providerDoesNotCreateMethodTruth": true,
+    "t2RequiresVerifier": true,
+    "t2WithoutVerifierIsFallback": true,
+    "fallbackMustRecordReason": true,
+    "crossMayUseT3AfterProductionAdmittedInputsOnly": true
+  }
+}

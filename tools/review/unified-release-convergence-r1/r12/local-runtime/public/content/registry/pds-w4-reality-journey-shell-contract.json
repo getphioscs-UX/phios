@@ -1,0 +1,65 @@
+{
+  "milestone": "PDS-W4",
+  "contractVersion": "1.0.0",
+  "schemaVersion": "phi-os.pds-reality-journey-shell-contract.v1",
+  "status": "reality-journey-shell-aligned",
+  "frozenAt": "2026-07-29",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "660e1eaae958f1fe6df8a1741027a391cbc72be7",
+    "production": "https://phios-github.pages.dev"
+  },
+  "publicStageOrder": ["enter", "describe", "discover", "understand", "choose", "continue"],
+  "surfaceMap": {
+    "enter": ["reality-journey.html"],
+    "describe": ["reality-entry.html"],
+    "discover": ["reality-reconstruction.html"],
+    "understand": ["reality-reading.html"],
+    "choose": ["reality-navigation.html"],
+    "continue": ["reality-review.html", "my-reality.html"]
+  },
+  "sharedImplementation": {
+    "script": "assets/js/journey-shell.js",
+    "stylesheet": "assets/css/design/journey-shell.css",
+    "localeModules": ["assets/js/locales/en/shared.js", "assets/js/locales/zh-Hans/shared.js"]
+  },
+  "experienceContract": {
+    "topStagePrompt": true,
+    "journeyProgress": true,
+    "customerStatusLanguage": true,
+    "primaryActionLocator": true,
+    "backModifyPauseResumeContinuity": true,
+    "loadingEmptyErrorBlockedStates": true,
+    "nextStageHandoff": true,
+    "mobileActionContinuity": true
+  },
+  "customerBoundary": {
+    "customerViewDefault": true,
+    "forbiddenShellOutputs": [
+      "internal-state-code",
+      "data-key",
+      "source-path",
+      "schema-version",
+      "provider-name",
+      "raw-statement",
+      "normalized-statement",
+      "runtime-id"
+    ],
+    "technicalPanelsRemainRestricted": true,
+    "unknownIsNotFailure": true
+  },
+  "behaviorBoundary": {
+    "duplicatesRuntimeAction": false,
+    "writesRuntimeState": false,
+    "changesApi": false,
+    "changesStorageKey": false,
+    "changesPersistence": false,
+    "changesLineage": false
+  },
+  "responsiveViewportsPx": [360, 768, 1440],
+  "downstream": {
+    "nextMilestone": "PDS-W5",
+    "nextSurface": "Reality Entry"
+  }
+}

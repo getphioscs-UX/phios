@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-MCD-8-KAP-W26-REALITY-HANDOFF-SUCCESSOR-v1.0.0",
+  "status": "ACTIVE_AUTHORITY_PRESERVING_REALITY_HANDOFF_PACKAGE_SUCCESSOR",
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "predecessorFreeze": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+  "predecessorComplexitySuccessor": {
+    "path": "content/professional/method-client-delivery/successors/mcd-8-kap-w23-complexity-gate-successor-v1.json",
+    "sha256": "67a6dbe123bf382064f2ac198187d8cf6dd57b586c40ee1535cf5e874142d66c"
+  },
+  "packageLineage": {
+    "baselineCommitPackageSha256": "f78c73dd089c2b4ceaf33d25a0d2315cb5ae52e7d26a4d9132cadcdee1bbf129",
+    "kapW26RealityHandoffSuccessorSha256": "80409950184362be8a89545368c1f17c9efd7fb130ce83fef51f3dd79d55d335",
+    "baselineIncludesPostW23ApsChanges": true
+  },
+  "authorizedPackageChanges": [
+    "REGISTER_KAP_W26_ESCALATION_REASON_CHECKER",
+    "REGISTER_KAP_W27_EXPLICIT_CONSENT_CHECKER",
+    "REGISTER_KAP_W28_QUESTION_TO_CASE_HANDOFF_CHECKER",
+    "REGISTER_KAP_W29_KNOWLEDGE_METHOD_HANDOFF_CHECKER",
+    "EXTEND_CHECK_KAP_WITH_REALITY_HANDOFF",
+    "ROUTE_MCD8_PACKAGE_FREEZE_TO_KAP_W26_SUCCESSOR_AWARE_CHECKER",
+    "PRESERVE_KAP_W23_SUCCESSOR_CHECKER_AS_HISTORICAL"
+  ],
+  "authorityBoundary": {
+    "mpaSoleDispatchAuthorityPreserved": true,
+    "mcd8CanonicalProjectionAuthorityPreserved": true,
+    "realityHandoffMayExecuteMethod": false,
+    "realityHandoffMayRecalculateMethod": false,
+    "realityHandoffMayGrantDispatch": false,
+    "restrictedProjectionConsumption": false,
+    "kapMayCreateCanonicalCase": false,
+    "kapMayCreateRealityModel": false,
+    "kapMayOverrideRdg": false,
+    "knowledgeAndMethodProvenanceSeparated": true
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W4-MANY-LENSES-CATEGORY-TRANSITION-FREEZE-v1.0.0",
+  "work": "HPC2-W4",
+  "baselineCommit": "51d6a5ea141af8d2ecf24ded830387045d8026b0",
+  "status": "HPC2_W4_H03_REPOSITORY_COMPOSITION_FROZEN_ADDITIVE_SUCCESSOR_REQUIRED",
+  "immutableArtifacts": [
+    {
+      "path": "content/web/homepage/hpc2/contracts/hpc2-w4-many-lenses-category-transition-contract-v1.json",
+      "sha256": "a3d92e162e088f7e9ecad5b51ce8b888ba33ed4593bd956bd51a17e7ac163b36"
+    },
+    {
+      "path": "content/web/homepage/hpc2/evidence/hpc2-w4-many-lenses-category-transition-audit-v1.json",
+      "sha256": "fcc5cb13094cc1745f038cba0cf1450c5d17c25e1f324f862c8f7c3fed5b0aef"
+    },
+    {
+      "path": "content/web/homepage/hpc2/acceptance/hpc2-w4-many-lenses-category-transition-acceptance-v1.json",
+      "sha256": "f4263c014ca4cfb19d33ec7e04f3191bf235727ef540f4c319619906fd277dfe"
+    }
+  ],
+  "mutableConsumersExcludedFromWholeFileDigestFreeze": [
+    "index.html",
+    "assets/css/hpc2-pre-home-visuals.css",
+    "assets/js/pages/home-production.js",
+    "assets/js/locales/en/public.js",
+    "assets/js/locales/zh-Hans/public.js",
+    "package.json",
+    "scripts/check-hpc2-pre-current.mjs",
+    "scripts/check-hpc2-w2-current.mjs"
+  ],
+  "structuralFreeze": {
+    "h01Selector": "[data-hpc2-scene=H01]",
+    "h01MarkupSha256": "085c820319df3d0c54df2651207b8fc2a4040913ea396ba3088d7292a5461c6a",
+    "h02Selector": "[data-hpc2-scene=H02]",
+    "h02MarkupSha256": "b19a6965cbbb1952a2bbc15a34061da316cd7b9f31e6b35a6736a5ff43737630",
+    "h03Selector": "[data-hpc2-scene=H03]",
+    "h03FigureSelector": "[data-hpc2-figure=FIG-055]",
+    "h03LensSelector": "[data-hpc2-lens]",
+    "h03CategoryStageSelector": "[data-hpc2-category-stage]",
+    "requiredResolverFunction": "resolveCanonicalVisual",
+    "requiredLocaleNamespace": "discover.manyLenses",
+    "h01MayBeChangedOnlyByVersionedSuccessor": true,
+    "h02MayBeChangedOnlyByVersionedSuccessor": true,
+    "h03MayBeChangedOnlyByVersionedSuccessor": true,
+    "laterSceneCompositionMayExtendSharedConsumerFiles": true
+  },
+  "frozenPolicies": {
+    "sceneCode": "H03",
+    "figureAssetCode": "FIG-055",
+    "lensCodes": ["KNOWLEDGE", "AI", "METHOD", "EXPERIENCE", "PROFESSIONAL_EVIDENCE"],
+    "categoryStageCodes": ["FIND", "EXPLAIN", "NAVIGATE"],
+    "lensCount": 5,
+    "categoryStageCount": 3,
+    "runtimeExecutionForbidden": true,
+    "formOrInputCollectionForbidden": true,
+    "askUiInH03Forbidden": true,
+    "fakeUiForbidden": true,
+    "directR2UrlBypassForbidden": true,
+    "secondAssetResolverForbidden": true,
+    "secondHomepageRuntimeForbidden": true,
+    "newKnowledgeReadingMethodOrProfessionalAuthorityForbidden": true,
+    "plannedRouteHrefForbiddenUntilIndependentActivation": true
+  },
+  "preservedBoundaries": {
+    "w0V8EvidenceRewritten": false,
+    "w1SceneAuthorityRewritten": false,
+    "w2OrW3ImmutableEvidenceRewritten": false,
+    "h01Changed": false,
+    "h02Changed": false,
+    "h04H09Implemented": false,
+    "legacyHomepageSectionsDeleted": false,
+    "realityCandidateRouteActivated": false,
+    "aboutWhyPhiOsRouteActivated": false,
+    "humanReadingSystemsRouteActivated": false,
+    "runtimeExecutionActivated": false,
+    "askAuthorityCreated": false,
+    "humanVisualAcceptanceCreated": false,
+    "browserAcceptanceCreated": false,
+    "globalProductionAcceptanceCreated": false
+  },
+  "successorRules": {
+    "nextWork": "HPC2-W5_PHI_OS_RUNTIME_COMPOSITION",
+    "w5MustRemainAdditive": true,
+    "w5MayNotRewriteH01H03WithoutVersionedSuccessor": true,
+    "w5MustConsumeExistingRuntimeAuthoritiesWithoutDuplication": true,
+    "futureAskConsumerMustWaitForItsOwningGate": true,
+    "futureRouteActivationRemainsIndependent": true,
+    "futureHumanAndBrowserAcceptanceMustUseRealEvidence": true
+  }
+}

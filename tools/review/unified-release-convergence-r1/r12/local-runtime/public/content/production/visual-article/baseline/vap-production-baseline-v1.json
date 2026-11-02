@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "PHI-OS-VAP-W0-PRODUCTION-BASELINE-v1.0.0",
+  "baselineCode": "PHI-OS-VAP-W0-PRODUCTION-BASELINE-v1",
+  "baselineVersion": "1.0.1",
+  "work": "VAP-W0",
+  "status": "FROZEN_WITH_KNOWN_REPAIR_GATES",
+  "baselineCommit": "c215d30b4b3639321fbb8f02aae5d5c8d2fd84fc",
+  "baselineTimestamp": "2026-08-10T21:13:00+08:00",
+  "repository": {
+    "branch": "main",
+    "originMainVerified": true,
+    "originMainVerification": "GITHUB_CONNECTOR_LATEST_COMMIT",
+    "repositoryClean": true,
+    "repositoryCleanEvidence": "USER_CONFIRMED_ARCHIVE_ALIGNED_TO_MAIN; local archive has no .git metadata for independent git-status replay",
+    "repositoryCleanIndependentlyReplayed": false,
+    "fullCheckPassed": true,
+    "fullCheckEvidence": "USER_CONFIRMED_FULL_NPM_CHECK_PASSED_ON_BASELINE_MAIN",
+    "sandboxReplay": {
+      "attempted": true,
+      "passed": false,
+      "classification": "ARCHIVE_ENVIRONMENT_LIMITATION",
+      "reason": "Uploaded archive contains no .git metadata; existing PDS precheck requires historical git commit objects.",
+      "logicFailureObserved": false
+    },
+    "sourceDigestSemantics": "Git committed blob bytes are authoritative; archive fallback normalizes CRLF/CR to LF for text authority files."
+  },
+  "systemStatus": {
+    "pja": {
+      "stage": "PJA-W2F-C3",
+      "systemStatus": "frozen",
+      "assessed": 78,
+      "c2Frozen": 5,
+      "c2Blocked": 73,
+      "productionReady": 5,
+      "productionBlocked": 73,
+      "wave1ProductionReady": 4,
+      "exportGenerated": false,
+      "publishedByC3": false,
+      "sourceReference": "content/knowledge/editorial/c3/production-readiness-summary.json"
+    },
+    "kpp": {
+      "runtimeStatus": "frozen",
+      "runtimeProductionStatus": "validation_only",
+      "runtimeProductionActivated": false,
+      "runtimeNextState": "KPP_V2_RUNTIME_FROZEN_READY_FOR_GOVERNED_PRODUCTION_DECISIONS",
+      "wave1Status": "AUTHORIZED_FOR_GOVERNED_PRODUCTION_BRIEF_GENERATION",
+      "wave1SelectedItemCount": 4,
+      "wave1HumanApprovedCount": 4,
+      "wave1ProductionReadyCount": 4,
+      "productionPlanFrozen": true,
+      "productionWaveFrozen": true,
+      "dispatchAllowed": true,
+      "briefGenerationAllowed": true,
+      "candidateCreationAllowed": false,
+      "providerInvocationAllowed": false,
+      "publicationAllowed": false,
+      "requiredNextAuthority": "PJA_AND_CAR_GOVERNED_PRODUCTION_BRIEF_GENERATION",
+      "freezeReference": "content/knowledge/production-planning/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json",
+      "activationReference": "content/knowledge/production-planning/activation/wave1-production-authorized-v1.json"
+    },
+    "car": {
+      "runtimeStatus": "frozen",
+      "productionStatus": "validation_only",
+      "productionActivationAllowed": false,
+      "productionCandidateCount": 0,
+      "publishedAssetCount": 0,
+      "wave1BriefHandoffAuthorized": true,
+      "productionBriefCreated": false,
+      "freezeReference": "content/professional/canonical-asset-runtime/freeze/car-w18-freeze-v1.json",
+      "candidateRegistryReference": "content/professional/canonical-asset-runtime/registries/asset-candidate-registry-v1.json",
+      "publishedAssetRegistryReference": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json"
+    },
+    "cpr": {
+      "runtimeStatus": "frozen",
+      "productionStatus": "contract_frozen",
+      "productionRecordCount": 0,
+      "productionActivationStarted": false,
+      "freezeReference": "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+      "registryReference": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json"
+    },
+    "pds": {
+      "status": "implementation-complete-production-revalidation-required",
+      "presentationOnly": true,
+      "viewports": [
+        360,
+        768,
+        1440
+      ],
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "productionRevalidationRequired": true,
+      "sourceReference": "content/registry/pds-w10-full-site-acceptance.json"
+    },
+    "publishedKnowledge": {
+      "authorityStatus": "active_public_authority",
+      "authorityRecordCount": 2,
+      "canonicalNodeCount": 1,
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "integrityStatus": "REPAIR_REQUIRED",
+      "integrityFindings": [
+        {
+          "code": "PUBLISHED_SUMMARY_CORRUPTED_SHA256_FILE_LIST",
+          "nodeCode": "KN-PREFACE-001",
+          "locale": "zh-Hans",
+          "field": "article.summary",
+          "severity": "P0_FOR_VISUAL_ARTICLE_BASELINE",
+          "repairOwner": "VAP-W1",
+          "publicationWithdrawn": false
+        }
+      ],
+      "sourceReference": "content/knowledge/public/authority/published-knowledge-authority.json"
+    },
+    "cloudflare": {
+      "productionUrl": "https://phios-github.pages.dev/",
+      "deploymentStatus": "DEPLOYMENT_COMMIT_ALIGNMENT_UNVERIFIED",
+      "publicReachability": "NOT_INDEPENDENTLY_VERIFIED_THIS_RUN",
+      "authenticatedDeploymentMetadataAvailable": false,
+      "knownRepositoryEvidence": "PDS-W10 records prior production evidence at the production URL, but not alignment to the VAP-W0 baseline commit.",
+      "blockingForVapW1": false,
+      "verificationOwner": "VAP-W2"
+    }
+  },
+  "baselineFindings": [
+    {
+      "code": "VAP-W0-PUBLISHED-KNOWLEDGE-INTEGRITY-GAP",
+      "severity": "P0",
+      "state": "OPEN",
+      "description": "KN-PREFACE-001 zh-Hans published summary contains SHA256/file-list contamination.",
+      "nextWork": "VAP-W1"
+    },
+    {
+      "code": "VAP-W0-CLOUDFLARE-DEPLOYMENT-SHA-UNVERIFIED",
+      "severity": "P1",
+      "state": "OPEN",
+      "description": "Public deployment commit cannot be authenticated from the current connector/tool surface.",
+      "nextWork": "VAP-W2"
+    },
+    {
+      "code": "VAP-W0-WAVE1-CHECK-AGGREGATE-COVERAGE-GAP",
+      "severity": "P1",
+      "state": "OPEN",
+      "description": "package.json check:wave1-production predates the Human Production Authorization checks; VAP-W0 independently snapshots the authorized state without mutating the frozen Wave 1 authority.",
+      "nextWork": "VAP-W3_OR_CHECKER_INTEGRATION"
+    }
+  ],
+  "productionBoundary": {
+    "governedProductionBriefGenerationAllowed": true,
+    "pjaBriefGenerationAllowed": true,
+    "carBriefGenerationAllowed": true,
+    "candidateCreationAllowed": false,
+    "providerInvocationAllowed": false,
+    "assetCreationAllowed": false,
+    "cprProductionRecordCreationAllowedAtW0": false,
+    "publicationAllowed": false,
+    "baselineCheckerMayMutate": false
+  },
+  "sourceDigests": {
+    "content/knowledge/editorial/c3/production-readiness-summary.json": "sha256:e0d94b61e252bc06a15dc3368007c72653f8a3305811fbe8fd2a2c2058505454",
+    "content/knowledge/production-planning/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json": "sha256:85217f79ff21a8db4f292c6abdfa3a100d0ad62a103ef2c2c388cff37d15aa7c",
+    "content/knowledge/production-planning/activation/wave1-production-authorized-v1.json": "sha256:242d9a1ed1fa932608d3edb374291df24fcdf05fb0fab1020d3b4ce9d0292a6f",
+    "content/professional/canonical-asset-runtime/freeze/car-w18-freeze-v1.json": "sha256:8ea26f9b89dbd0b52a334a5e3155b8beef92702bca05c746b5b48dd521763020",
+    "content/professional/canonical-asset-runtime/registries/asset-candidate-registry-v1.json": "sha256:c20c30f8d29feb39720d78c452a4cc9df960f51e86a9406281123f22ec671b92",
+    "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json": "sha256:d457099835fe4f967fb77fd8861ffee3858a76878118597400029eb53aa48c6e",
+    "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json": "sha256:03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60",
+    "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json": "sha256:568cda919515f825b229698046c24998783b2c9a96ca644d4ca5031b5879bdfe",
+    "content/registry/pds-w10-full-site-acceptance.json": "sha256:536bbfaa871df7145cba6cc1af5a9ae98e280805bbe77310471db238f34601c9",
+    "content/knowledge/public/authority/published-knowledge-authority.json": "sha256:0ad96cefb4083333bcd347c616a01e2cf398196006ccef60d99c958aa2cf660e"
+  },
+  "nextWork": "VAP-W1_PUBLISHED_KNOWLEDGE_INTEGRITY_REPAIR",
+  "baselineDigest": "sha256:ecc860c411b77ae784f6fd14b29ada8fc9b02ddaece1dae3306b0995c48206cf",
+  "sourceDigestMode": "GIT_CANONICAL_TEXT_LF"
+}

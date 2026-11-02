@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W1-FINANCIAL-REALITY-OBJECT-CONTRACT-v1.0.0",
+  "work": "FDR-W1",
+  "status": "ACTIVE_CANONICAL_FACT_OBJECT",
+  "objectType": "CANONICAL_FINANCIAL_REALITY",
+  "authorityOwner": "FDR",
+  "requiredTopLevelFields": [
+    "financialRealityId",
+    "householdReference",
+    "customerReferences",
+    "asOfDate",
+    "currencyContext",
+    "people",
+    "entities",
+    "assets",
+    "liabilities",
+    "incomeStreams",
+    "expenses",
+    "policies",
+    "goals",
+    "estateFacts",
+    "documents",
+    "disclosureSummary",
+    "evidenceSummary",
+    "version",
+    "digest"
+  ],
+  "fieldContracts": {
+    "financialRealityId": "immutable FDR object identity",
+    "householdReference": "reference only; Account/Household identity is not re-owned",
+    "customerReferences": "one or more Account/customer references; never authentication authority",
+    "asOfDate": "ISO date for factual snapshot basis",
+    "currencyContext": {
+      "required": [
+        "baseCurrency"
+      ],
+      "optional": [
+        "displayCurrency",
+        "fxReferenceDate",
+        "fxSourceReference"
+      ],
+      "rule": "FDR stores currency context; FX calculation is external"
+    },
+    "people": "financial-person-contract-v1.json[]",
+    "entities": "financial-entity-contract-v1.json[]",
+    "assets": "financial-asset-contract-v1.json[]",
+    "liabilities": "financial-liability-contract-v1.json[]",
+    "incomeStreams": "financial-income-stream-contract-v1.json[]",
+    "expenses": "financial-expense-contract-v1.json[]",
+    "policies": "financial-policy-contract-v1.json[]",
+    "goals": "financial-goal-contract-v1.json[]",
+    "estateFacts": "facts only under fdr-dar boundary",
+    "documents": "financial-document-evidence-contract-v1.json[]",
+    "disclosureSummary": "derived metadata only; no financial analysis",
+    "evidenceSummary": "evidence coverage metadata only",
+    "version": "monotonic object contract version reference",
+    "digest": "deterministic content digest excluding digest field"
+  },
+  "invariants": {
+    "factsOnly": true,
+    "calculationsAllowed": false,
+    "analysisAllowed": false,
+    "recommendationsAllowed": false,
+    "professionalJudgmentAllowed": false,
+    "estateDistributionInstructionAllowed": false,
+    "legalClauseAllowed": false,
+    "partialDisclosureAllowed": true,
+    "unknownPreserved": true,
+    "declinedPreserved": true,
+    "missingConvertedToZero": false,
+    "accountAuthorityCreated": false,
+    "realityModelAuthorityCreated": false,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

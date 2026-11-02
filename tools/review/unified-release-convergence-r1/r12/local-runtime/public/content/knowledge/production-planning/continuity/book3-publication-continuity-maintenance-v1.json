@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-BOOK3-PUBLICATION-CONTINUITY-MAINTENANCE-v1.0.0",
+  "stage": "BOOK3-PUBLICATION-CONTINUITY-MAINTENANCE",
+  "status": "ACTIVE_POST_FREEZE_MAINTENANCE_POLICY",
+  "baselineCommit": "0b130813c6b599b48b1d76fe326c44691990b4b5",
+  "freezePath": "content/knowledge/production-planning/freeze/book3-final-publication-freeze-v1.json",
+  "maintenancePolicy": {
+    "allowed": [
+      "broken-link repair that preserves article identity",
+      "presentation-only accessibility or SEO correction through successor evidence",
+      "source/citation correction with provenance successor",
+      "visual replacement after governed visual review",
+      "new locale addition through locale-specific editorial/publication successor"
+    ],
+    "requiresSuccessor": [
+      "body editorial change",
+      "summary/title semantic change",
+      "visual meaning change",
+      "publication withdrawal or replacement",
+      "canonical node mapping change"
+    ],
+    "forbiddenWithoutCanonicalSuccessor": [
+      "repurposing Final Canonical Node identity",
+      "merging or splitting frozen Article identity",
+      "silently changing source-section bindings"
+    ]
+  },
+  "continuityChecks": {
+    "verify96PublicPayloads": true,
+    "verify48PlansPerLocale": true,
+    "verifyRequiredVisuals": true,
+    "verifyReleaseManifest": true,
+    "verifySameArticleRuntime": true
+  },
+  "nextMaintenanceMode": "SUCCESSOR_ONLY_NO_PARALLEL_RUNTIME"
+}

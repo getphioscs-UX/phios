@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "PHI-OS-ECR-CUSTOMER-MANDALA-AUTHORITY-AUDIT-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W0",
+  "baselineCommit": "1189c0519f1c5e9376965324b6010c00c212a3a1",
+  "workspaceSource": "library:ask.zip",
+  "status": "RECONCILED_ONE_AUTHORITY_PER_LAYER",
+  "baselineVerification": {
+    "criticalAuthorityFilesComparedToGitHub": 11,
+    "allCriticalAuthorityGitBlobsMatchBaseline": true,
+    "gitMetadataRequiredInWorkspace": false
+  },
+  "authorities": [
+    {
+      "path": "content/embodied-configuration/ecr-calculation-spec-v1.json",
+      "role": "CALCULATION_SPEC",
+      "sha256": "98ce791c9a0f459b6b16d3a31f73bca70f20834ab381ae7ea5d94188ebf7db44",
+      "gitBlobSha": "85b04980794717603eb79a92b100ae4d0a2278e4",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json",
+      "role": "BOOK_ALIGNED_G_Q_R_D",
+      "sha256": "dc2c3ffa1a19ff1390725946f8a1417f0237646057fb1b40c058267497481c34",
+      "gitBlobSha": "bf26b8a6a58674957f9964ac31074d36fecb299a",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "content/embodied-configuration/ecr-cosmological-context-registry-v1.json",
+      "role": "CC12",
+      "sha256": "0f44e01d3006ea4646dd0f4169084f4c5f7e3575cf99af77f539b0345c75bf4a",
+      "gitBlobSha": "86a5ea89bb3ba8cbcf0e16a2c6ea0cdaa9c19748",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "content/embodied-configuration/ecr-motion-registry-v1.json",
+      "role": "M8",
+      "sha256": "df555a540b151f43c3ac9d18030b23dac9962949250197f03b925ea5660328c9",
+      "gitBlobSha": "2875509fccdd44e43692f0662e09438e9d797c15",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "content/embodied-configuration/ecr-environment-first-configuration-v1.json",
+      "role": "H64",
+      "sha256": "fc5b00b5f3f8c56b983feaaf9a173bfcb6a1c75f14b9710bf8b11408b1ccfda6",
+      "gitBlobSha": "5cde74cb0291cd25000a9a443e0621cadb9132d1",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "content/embodied-configuration/ecr-activation-registry-v1.json",
+      "role": "A8",
+      "sha256": "09b8d471008f2cc9f854fc5bb0db47dcf89a98dc38b1a2a9aa1d817462e58b59",
+      "gitBlobSha": "9a4bdbc0203b3010f8916fa2be3a621c3055f28e",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "functions/embodied-configuration/ecr-calculation-runtime.js",
+      "role": "DETERMINISTIC_CALCULATION_RUNTIME",
+      "sha256": "b8e959bc474e157d34be1d1264fc3c24ab73571e0f853f117c380f505cc145b4",
+      "gitBlobSha": "137af790842567d19d7a7f0a7a32d0ee5ae90bb4",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "functions/embodied-configuration/ecr-calculation-spec-runtime.js",
+      "role": "CALCULATION_SPEC_RUNTIME",
+      "sha256": "44f8befbd939e52a449154bdb6b7b938b26e8fb0c6a6706cb70d92986fce4a1a",
+      "gitBlobSha": "4ed81801698ca946cbfd32fa8474f2c8a030b890",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "functions/embodied-configuration/ecr-ontology-registry.js",
+      "role": "CANONICAL_ONTOLOGY_ENTRY",
+      "sha256": "87dda502f1ef5dc3a4c767ad809dba1b836440d0b0cc631e90a574ed13e81796",
+      "gitBlobSha": "3bf1aa61e0c6cea464ea06c6a991e238a058992e",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "functions/embodied-configuration/ecr-canonical-projection-runtime.js",
+      "role": "CANONICAL_ECR_PROJECTION",
+      "sha256": "cb0bd72a1cc65eff1c6013615d50bbd7f2b0bda029944c03cea4c16321ea22fd",
+      "gitBlobSha": "3730304ae51f605f9df83b3e58ee40bb2d5d81fe",
+      "matchesBaselineGitBlob": true
+    },
+    {
+      "path": "functions/runtime-reading/ecr-reading-ir.js",
+      "role": "CUSTOMER_READING_IR_INPUT",
+      "sha256": "9676be30d565593cea3c6b642d23b5dc3a335d6d7fbf33c844e3ab2e8a14059d",
+      "gitBlobSha": "3d93ce8d8ecd9edcdccb078c6c06b1e3dce80e5f",
+      "matchesBaselineGitBlob": true
+    }
+  ],
+  "calculationFreeze": {
+    "CC12": {
+      "count": 12,
+      "sectorDegrees": 30,
+      "rule": "EQUAL_SECTOR"
+    },
+    "G16": {
+      "count": 16,
+      "sectorDegrees": 22.5,
+      "rule": "EQUAL_SECTOR"
+    },
+    "Q16": {
+      "count": 16,
+      "rule": "GRAMMAR_ORDINAL_PAIR",
+      "mapping": "Gn -> Qn"
+    },
+    "R9": {
+      "count": 9,
+      "rule": "QUESTION_CAPABILITY_MATRIX_V1"
+    },
+    "D12": {
+      "count": 12,
+      "sectorDegrees": 30,
+      "rule": "SOLAR_ANCHOR_DRIVER_SECTOR_DISTANCE_V1"
+    },
+    "M8": {
+      "count": 8,
+      "sectorDegrees": 45,
+      "rule": "EQUAL_SECTOR"
+    },
+    "H64": {
+      "count": 64,
+      "sectorDegrees": 5.625,
+      "rule": "EQUAL_SECTOR_ENVIRONMENT_FIRST"
+    },
+    "A8": {
+      "count": 8,
+      "subsegmentDegrees": 0.703125,
+      "rule": "POSITION_WITHIN_H64_SEGMENT"
+    }
+  },
+  "currentBookCapabilityOrder": [
+    [
+      "R1",
+      "Direction",
+      "方向能力"
+    ],
+    [
+      "R2",
+      "Understanding",
+      "理解能力"
+    ],
+    [
+      "R3",
+      "Expression",
+      "表达能力"
+    ],
+    [
+      "R4",
+      "Position",
+      "位置能力"
+    ],
+    [
+      "R5",
+      "Resources",
+      "资源能力"
+    ],
+    [
+      "R6",
+      "Execution",
+      "执行能力"
+    ],
+    [
+      "R7",
+      "Relational",
+      "关系能力"
+    ],
+    [
+      "R8",
+      "Survival",
+      "生存能力"
+    ],
+    [
+      "R9",
+      "Drive",
+      "驱动能力"
+    ]
+  ],
+  "legacyMandalaReconciliation": {
+    "referenceRole": "VISUAL_TOPOLOGY_AND_FOUNDER_REFERENCE_ONLY",
+    "semanticAuthority": "CURRENT_MACHINE_READABLE_ECR_AUTHORITIES_WIN",
+    "oldLabelOrOrdinalDriftMayBeCopiedIntoRuntime": false
+  },
+  "prohibitions": [
+    "COPY_LEGACY_MANDALA_TEXT_AS_RUNTIME_AUTHORITY",
+    "CREATE_DUPLICATE_G_Q_R_D_M_A_REGISTRY",
+    "RECALCULATE_ECR_IN_RENDERER",
+    "DERIVE_CC_G_M_H_A_FROM_LONGITUDE_IN_RENDERER",
+    "IMPORT_ASTROLOGY_SIGN_PERSONALITY_MEANING_INTO_CC",
+    "IMPORT_ICHING_FORTUNE_MEANING_INTO_H64"
+  ],
+  "gate": {
+    "oneCalculationAuthority": true,
+    "oneOntologyAuthority": true,
+    "oneCustomerVisualProjectionPath": "functions/embodied-configuration/ecr-customer-mandala-projection.js",
+    "duplicatedEcrSemanticsAllowed": false
+  },
+  "protectedSuccessors": {
+    "perspectives/personal/index.html": {
+      "predecessorAuthority": "content/professional/personal-reality/r3/audit/ppr-r3-w0-authority-reconciliation-v1.json",
+      "predecessorSha256": "81a46efab60d5337fc4802ac5ffff26dab3fdf7ec388de5298de2c38e60c3d3c",
+      "successorSha256": "3d9a2270e06a151ec5cbe53f37e07d2ec87057ef221aab013e4cb6f59471ff79",
+      "changeClass": "ECR_BRAND_ASSET_CORRECTION_ONLY",
+      "requiredReplacement": "LOGO-001",
+      "forbiddenLiteral": "Φ"
+    },
+    "functions/personal-reality-product/product-assembly.js": {
+      "predecessorAuthority": "content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json#successorFiles",
+      "predecessorSha256": "2664b4ff349b58b631896de25ef5b8cc336d22e49dba9c9d9b548074802b9df2",
+      "successorSha256": "39f8707fd9b0d5a2bff0ad6255a07fb19f0206207ff1e353e2c8e9c945b3f252",
+      "changeClass": "ECR_MANDALA_PROJECTION_WIRING_ONLY",
+      "requiredImport": "buildEcrCustomerMandalaProjection",
+      "forbiddenAuthorityCreation": true
+    },
+    "assets/customer-ui/js/surfaces/personal-reality.js": {
+      "predecessorAuthority": "content/professional/personal-reality/r3/audit/ppr-r3-w0-authority-reconciliation-v1.json",
+      "predecessorSha256": "286e58401cf84885f805b330d33377dd7b10313c6e520233fc67e066436b9f51",
+      "successorSha256": "88e730714d505692e09382f31de1b30dbf43c53a6ea7bc81c694dc5ffc69bfb0",
+      "changeClass": "BASELINE_RETIRED_RENDERER_DANGLING_IMPORT_REMOVAL_ONLY",
+      "removedImport": "./single-method-reading.js",
+      "requiredCanonicalRouteCall": "renderProductRoute"
+    }
+  },
+  "baselineRetiredFiles": {
+    "assets/customer-ui/js/surfaces/single-method-reading.js": {
+      "baselineCommit": "1189c0519f1c5e9376965324b6010c00c212a3a1",
+      "state": "ABSENT_ON_BASELINE",
+      "baselineFactOnly": true,
+      "createsRetirementAuthority": false,
+      "replacementWitnesses": [
+        "assets/customer-ui/js/personal-products/personal-product-renderers.js",
+        "assets/customer-ui/js/personal-products/specialist-renderer-host.js",
+        "assets/customer-ui/js/personal-products/specialist-renderer-registry.js"
+      ],
+      "canonicalSurfaceWitness": "assets/customer-ui/js/surfaces/personal-reality.js"
+    }
+  }
+}

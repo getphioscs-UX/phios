@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-HRX-TIMELINE-v1.0.0",
+  "eventTypes": [
+    "SYMPTOM",
+    "OBSERVATION",
+    "MEASUREMENT",
+    "DOCUMENT",
+    "CLINICIAN_EVENT",
+    "MEDICATION_EVENT",
+    "LIFESTYLE_CONTEXT",
+    "UNKNOWN"
+  ],
+  "requiredEventFields": [
+    "eventId",
+    "eventType",
+    "observedAt",
+    "sourceClass",
+    "summary",
+    "provenance"
+  ],
+  "rules": [
+    "TIMELINE_ORDER_DOES_NOT_ESTABLISH_CAUSALITY",
+    "MISSING_DATES_REMAIN_EXPLICIT",
+    "SOURCE_CLASS_PRESERVED",
+    "SAME_INPUT_PRODUCES_SAME_TIMELINE"
+  ]
+}

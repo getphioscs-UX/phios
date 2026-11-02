@@ -1,0 +1,310 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-002",
+  "title": "SHARED-DATA-AUTHORITY",
+  "scope": "SHARED",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/shared-data-authority-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "SOURCE_FACTS",
+      "displayLabel": "SOURCE FACTS",
+      "nodeType": "INPUT",
+      "authorityClass": "DATA",
+      "semanticRole": "SOURCE_FACTS",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "BIRTH_RECORD",
+      "displayLabel": "BIRTH RECORD",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "COORDINATE",
+      "displayLabel": "COORDINATE",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "TIMEZONE",
+      "displayLabel": "TIMEZONE",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "DST",
+      "displayLabel": "DST",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "TRUE_SOLAR_TIME",
+      "displayLabel": "TRUE SOLAR TIME",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "ASTRONOMY",
+      "displayLabel": "ASTRONOMY",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CALENDAR",
+      "displayLabel": "CALENDAR",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SOLAR_TERMS",
+      "displayLabel": "SOLAR TERMS",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "REFERENCE_TABLES",
+      "displayLabel": "REFERENCE TABLES",
+      "nodeType": "STATE",
+      "authorityClass": "DATA",
+      "semanticRole": "DATA_DOMAIN",
+      "container": "SHARED_DATA_AUTHORITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "METHOD_PLUGIN_CONSUMERS",
+      "displayLabel": "METHOD PLUGIN CONSUMERS",
+      "nodeType": "METHOD",
+      "authorityClass": "CONSUMER",
+      "semanticRole": "CONSUMER",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-002-E01",
+      "from": "SOURCE_FACTS",
+      "to": "BIRTH_RECORD",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E02",
+      "from": "BIRTH_RECORD",
+      "to": "COORDINATE",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E03",
+      "from": "COORDINATE",
+      "to": "TIMEZONE",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E04",
+      "from": "TIMEZONE",
+      "to": "DST",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E05",
+      "from": "DST",
+      "to": "TRUE_SOLAR_TIME",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E06",
+      "from": "TRUE_SOLAR_TIME",
+      "to": "ASTRONOMY",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E07",
+      "from": "ASTRONOMY",
+      "to": "CALENDAR",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E08",
+      "from": "CALENDAR",
+      "to": "SOLAR_TERMS",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E09",
+      "from": "SOLAR_TERMS",
+      "to": "REFERENCE_TABLES",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": false,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-002-E10",
+      "from": "REFERENCE_TABLES",
+      "to": "METHOD_PLUGIN_CONSUMERS",
+      "relation": "PROVIDES_CANONICAL_INPUT",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_DATA_AUTHORITY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "SOURCE_FACTS",
+        "BIRTH_RECORD",
+        "COORDINATE",
+        "TIMEZONE",
+        "DST",
+        "TRUE_SOLAR_TIME",
+        "ASTRONOMY",
+        "CALENDAR",
+        "SOLAR_TERMS",
+        "REFERENCE_TABLES"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "SOURCE_FACTS",
+    "BIRTH_RECORD",
+    "COORDINATE",
+    "TIMEZONE",
+    "DST",
+    "TRUE_SOLAR_TIME",
+    "ASTRONOMY",
+    "CALENDAR",
+    "SOLAR_TERMS",
+    "REFERENCE_TABLES",
+    "METHOD_PLUGIN_CONSUMERS"
+  ],
+  "mustState": [
+    "Data Authority is singleton",
+    "methodOverrideAllowed=false",
+    "aiAuthorityAllowed=false"
+  ],
+  "statementSources": {
+    "Data Authority is singleton": "SRC-002",
+    "methodOverrideAllowed=false": "SRC-002",
+    "aiAuthorityAllowed=false": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

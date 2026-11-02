@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-BFA-AUTHORITY-BOUNDARY-v1.0.0",
+  "work": "BFA-W0",
+  "status": "ACTIVE_SUCCESSOR_BASELINE_FROZEN",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "purpose": "Simplify bilingual final-review choreography without collapsing Canonical Knowledge, PJA, CAR, CPR, Published Knowledge or Publication Runtime authority.",
+  "coreInvariant": "SIMPLIFICATION_DOES_NOT_EQUAL_AUTHORITY_COLLAPSE",
+  "authoritySeparation": [
+    "CANONICAL_KNOWLEDGE_AUTHORITY",
+    "PJA",
+    "CAR",
+    "CPR",
+    "BFA",
+    "PUBLICATION_RUNTIME"
+  ],
+  "bfaOwns": [
+    "FINAL_PUBLICATION_PACKAGE_REVIEW",
+    "FINAL_HUMAN_PUBLICATION_APPROVAL"
+  ],
+  "bfaDoesNotOwn": [
+    "CANONICAL_MEANING",
+    "ARTICLE_GENERATION_AUTHORITY",
+    "FIGURE_GENERATION_AUTHORITY",
+    "CAR_APPROVAL_AUTHORITY",
+    "CPR_PRESENTATION_AUTHORITY",
+    "PUBLICATION_IMPLEMENTATION_AUTHORITY",
+    "PJA_PUBLICATION_AUTHORITY",
+    "PUBLISHED_KNOWLEDGE_AUTHORITY"
+  ],
+  "humanAuthority": {
+    "authorityType": "BILINGUAL_FINAL_PUBLICATION_APPROVAL",
+    "reviewerCode": "TL",
+    "oneExplicitFinalDecisionRequired": true,
+    "automaticEvidenceMayCreateHumanApproval": false,
+    "automaticPassMayCreateHumanApproval": false,
+    "finalApprovalEqualsPublicationExecution": false,
+    "finalApprovalMustBindExactFinalPackageDigest": true
+  },
+  "successorScope": {
+    "historicalBatchModel": "BATCH-001",
+    "historicalModelRemainsValid": true,
+    "successorAppliesFrom": "BATCH-002",
+    "successorHumanModel": "ONE_TL_FINAL_APPROVAL",
+    "downstreamConsequenceModel": "MULTIPLE_GOVERNED_TRANSITIONS",
+    "fakeHumanDecisionSynthesisAllowed": false,
+    "authorityBridgeImplementationWork": "BFA-W16"
+  },
+  "forbiddenSyntheticHumanStates": [
+    "REVIEW_ACCEPTED_INFERRED_FROM_AUTOMATIC_PASS",
+    "APPROVAL_APPROVED_INFERRED_FROM_AUTOMATIC_PASS",
+    "PUBLICATION_PUBLISH_INFERRED_FROM_AUTOMATIC_PASS"
+  ],
+  "baselineObservation": {
+    "code": "PRE_EXISTING_CPR_FREEZE_DRIFT_NOT_OWNED_BY_BFA",
+    "checker": "npm run check:cpr",
+    "path": "content/registry/public-assets.json",
+    "frozenExpectedDigest": "49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0",
+    "observedDigestAtProvidedBaseline": "60d58ca76e0f979033b8f27cf7a64b43357e3eb8ebdb5670f0987aa185d81fee",
+    "bfaMayRepairOrRebaseThisDrift": false,
+    "meaning": "BFA records this upstream observation but does not absorb or repair CPR authority."
+  },
+  "exitGate": {
+    "noDuplicatePublicationAuthority": true,
+    "noDuplicateCarAuthority": true,
+    "noDuplicatePjaAuthority": true,
+    "oneExplicitTlFinalApprovalRemainsHumanAuthority": true,
+    "historicalApsAblAuthorityRemainsReproducible": true
+  }
+}

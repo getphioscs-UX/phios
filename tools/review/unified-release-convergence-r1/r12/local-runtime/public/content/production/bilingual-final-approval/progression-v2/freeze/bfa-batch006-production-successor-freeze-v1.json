@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-BFA-BATCH006-PRODUCTION-SUCCESSOR-FREEZE-v1.0.0",
+  "freezeCode": "BFA-BATCH006-PRODUCTION-SUCCESSOR-FREEZE-v1",
+  "status": "FROZEN_ADDITIVE_BFA_BATCH006_PRODUCTION_SUCCESSOR",
+  "baselineCommit": "c84cb1975a7050b45fb616c1862211056c4c0723",
+  "predecessorFreeze": "content/production/bilingual-final-approval/progression-v2/freeze/bfa-public-composition-meta-purity-successor-freeze-v1.json",
+  "scope": [
+    "Recognize KAU-R5 approved new-node admission as upstream source authority for AUTO-C2 without creating a second Human C2/C3 authority.",
+    "Advance the lifecycle-aware progression checker from fully published BATCH-005 to current BATCH-006 readiness.",
+    "Reconcile the pre-existing Article Composition publication-successor digest drift already present in the c84cb19 baseline without rebasing historical freezes.",
+    "Freeze the BATCH-006 production regression checker as an additive capability."
+  ],
+  "authorityBoundary": {
+    "historicalFreezeRebased": false,
+    "canonicalMeaningAuthorityCreated": false,
+    "humanC2AuthorityCreated": false,
+    "humanC3AuthorityCreated": false,
+    "tlFinalApprovalCreated": false,
+    "publicationAuthorityCreated": false,
+    "kauR5HumanAcceptedAuthorityReused": true,
+    "baselinePublicationSuccessorBytesChangedByBatch006": false
+  },
+  "reconciledPredecessorFiles": {
+    "scripts/lib/bilingual-final-approval/bfa-publication-successor-v1.mjs": {
+      "predecessorSha256": "b87dc5471d43a5e34b06514a51cc9bdf4018edee4805889b7ddfbebac4ee5171",
+      "successorSha256": "345b8deb5db481bcedfc5832b825e94d60e32767cdee24d24fb4f760a510c7b2",
+      "reason": "The c84cb19 baseline already contains the composition-coverage-aware publication successor at this digest, while the Article Composition freeze still records its earlier predecessor. This successor records the existing transition without rewriting either file or historical freeze."
+    },
+    "scripts/lib/bilingual-final-approval/bfa-auto-c2c3-v2.mjs": {
+      "predecessorSha256": "d8f09d142d3516e27072354a7d4e81fc594573df21cd24721f43016802b77141",
+      "successorSha256": "eb566f70f0ad11247934114fa39b9cc3632fc2d28edf37296a12bfd7a56aeaf2",
+      "reason": "KAU-R5 new canonical-node admissions for KN-B2-P7-058 and KN-B2-P7-059 are accepted only when the exact approved binding and R4/R5 Human-acceptance successor evidence are present; generic mapping-authority acceptance is not widened."
+    },
+    "scripts/check-bfa-progression-v2.mjs": {
+      "predecessorSha256": "afd97817c285215d93ea141406e98c4c82e981091b07c84f3abb9cdd234e876f",
+      "successorSha256": "e95cd982f050e084ab7418d3a0296a2117c16c7dc573e5e366ab33855f6876aa",
+      "reason": "Progression acceptance becomes lifecycle-aware for published BATCH-003/004/005 and current BATCH-006, preserving all-or-none composition publication and verifying the BATCH-006 55/55 readiness cursor."
+    },
+    "scripts/check-bfa-w28-w39-production-acceptance-freeze.mjs": {
+      "predecessorSha256": "460d0e51fecef0495833bd32e2dbbb42a0de9955e503d5f00832ed087c64c1b6",
+      "successorSha256": "4aa501bd00ecf5203bcd6f0e3ea859c94e2e3557a6c53ecf3ce9bb7df18b1131",
+      "reason": "W39 recognizes this additive digest-bound successor after the existing meta-purity successor rather than rebasing any predecessor freeze."
+    },
+    "scripts/repair-bfa-batch5-public-meta-intro.mjs": {
+      "predecessorSha256": "11aab55f764dba95ad6ba8721289266311510a255bc289b5dc3b6fc0fc8f58a4",
+      "successorSha256": "32a502fabf9bf6fb8904a8f1822094954d8050989288c2ce3de0e9dbca25e587",
+      "reason": "The c84cb19 baseline contains the later BATCH-005 editorial-revision-aware meta-intro repair implementation. Record that already-present additive successor without rebasing the earlier meta-purity freeze."
+    },
+    "scripts/check-bfa-batch5-public-meta-intro-repair.mjs": {
+      "predecessorSha256": "8a51d11c371816cae8e96d1c6a8167f8d3accefad97437adea6859ef8348e802",
+      "successorSha256": "61b2d837a160f3cc0dd744c70ecacfbe1cfc375c37ef2b483737b3b4b847cfba",
+      "reason": "The c84cb19 baseline contains the later editorial-revision-aware BATCH-005 meta-intro checker. Record the already-present checker successor without altering historical approval evidence."
+    }
+  },
+  "files": {
+    "scripts/check-bfa-batch6-composition-production.mjs": "22c999de1d9c4f4d485d9dd6481c677c29a3e5c484a80aebd0f027cb571842eb"
+  },
+  "batch006Acceptance": {
+    "batchCode": "BATCH-006",
+    "bookCode": "BOOK-2",
+    "partCode": "P7",
+    "articleUnitCount": 11,
+    "canonicalNodeCoverageCount": 55,
+    "localeCandidateCount": 22,
+    "automaticC2FrozenCount": 55,
+    "deterministicC3ReadyCount": 55,
+    "exceptionCount": 0,
+    "expectedLifecycleBeforeTlApproval": "READY_FOR_FINAL_APPROVAL"
+  }
+}

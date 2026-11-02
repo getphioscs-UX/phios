@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-R1-ACCEPTANCE-v1.0.0",
+  "work": "CX-R12R4B-R1-W11R-W15R",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "R4B_R1_ACCEPTED_BY_EXECUTABLE_CHECKS",
+  "completed": [
+    "W11R_EXTERNAL_PROFILE_AUTHORITY_FREEZE",
+    "W12R_HUMAN_DESIGN_UPLOAD_INTAKE",
+    "W13R_EXTERNAL_PROFILE_EXTRACTION_IR",
+    "W14R_HUMAN_DESIGN_PROFILE_TEXT_PARSER",
+    "W15R_SIX_FIELD_MINIMAL_MANUAL_INTAKE"
+  ],
+  "claims": {
+    "xpfAuthorityActive": true,
+    "hdrShadowValidationOnlyPreserved": true,
+    "humanDesignCustomerCalculationPromoted": false,
+    "newHumanDesignMeaningAuthorityCreated": false,
+    "supportedUploadTypes": ["png", "jpg", "jpeg", "webp", "pdf"],
+    "fileContentPersisted": false,
+    "pastedExplicitLabelsProduceExtractionCandidates": true,
+    "machineExtractedValuesRequireFutureCustomerConfirmation": true,
+    "manualInputLimitedToSixAdvancedFields": true,
+    "manualCoreProfileRequired": false,
+    "binaryDocumentExtractionClaimed": false,
+    "customerReportCompositionClaimed": false
+  },
+  "manualAdvancedFields": [
+    "cognition",
+    "determination",
+    "environment",
+    "perspective",
+    "motivation",
+    "trajectory"
+  ],
+  "checkerRef": "scripts/check-cx-r12r4b-r1-external-profile-intake.mjs",
+  "nextSequentialWork": "CX-R12R4B-R2-W16R_UPLOAD_DERIVED_CORE_PROFILE"
+}

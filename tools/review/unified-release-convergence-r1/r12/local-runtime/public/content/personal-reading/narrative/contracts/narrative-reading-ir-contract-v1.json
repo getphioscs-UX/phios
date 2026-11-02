@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-NARRATIVE-READING-IR-CONTRACT-v1.0.0",
+  "work": "W54N4",
+  "baselineCommit": "8331a81358531a1a80c077ac65dc5e3bd588ae15",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "outputSchema": "PHI-OS-NARRATIVE-READING-IR-v1.0.0",
+  "narrativeTypes": [
+    "PERSONAL",
+    "RELATIONSHIP"
+  ],
+  "singleSemanticIrAcrossSurfaces": [
+    "WEB",
+    "PRINT",
+    "PDF"
+  ],
+  "rules": {
+    "finalVerificationPassRequired": true,
+    "activeEntitlementRequired": true,
+    "onePaidProductOneSemanticIr": true,
+    "printPdfMayRegenerateNarrative": false
+  },
+  "gate": "check:ppr-narrative:w54n4-narrative-ir",
+  "relationshipExtension": {
+    "authority": "PAID_RELATIONSHIP_NARRATIVE_V1",
+    "whenNarrativeType": "RELATIONSHIP",
+    "requiredFields": [
+      "relationshipProductAuthorityId",
+      "relationshipProductVersion",
+      "relationshipIntentId",
+      "participantARef",
+      "participantBRef",
+      "participantASourceDigest",
+      "participantBSourceDigest",
+      "relationshipBriefDigest",
+      "relationshipGenerationIdentityDigest"
+    ],
+    "participantBMayBeNullOnlyForSelfRelationshipPattern": true,
+    "relationshipBriefDigestMustEqualNarrativeBriefDigest": true,
+    "secondNarrativeIrCreated": false
+  }
+}

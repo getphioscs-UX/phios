@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-MPA-AST-ACTIVATION-DECISION-v1.0.0",
+  "work": "MPA-W22",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "methodVersion": "0.1.0",
+  "decision": "BLOCKED_PRODUCTION_POLICY_AUTHORITY_REQUIRED",
+  "technicalActivationEvidenceReady": true,
+  "methodSpecificReady": false,
+  "technicalGates": {
+    "ephemerisVersion": true,
+    "ephemerisDigest": true,
+    "trustedJplReference": true,
+    "toleranceFreeze": true,
+    "historicalTimezoneAuthority": true
+  },
+  "failedTechnicalGates": [],
+  "productionPolicyAuthorityApproved": false,
+  "remainingMethodSpecificBlockers": [
+    "PRODUCTION_POLICIES_NOT_APPROVED"
+  ],
+  "readyForW26": false,
+  "globalEligibilityGate": "MPA-W26_NOT_YET_REACHABLE_AST_POLICY_BLOCKED",
+  "productionEligible": false,
+  "productionEligibilityDecisionCreated": false,
+  "productionExecutionAllowed": false,
+  "productionExecutionGate": "MPA-W27_REQUIRED",
+  "professionalEligible": false,
+  "professionalReleaseAllowed": false,
+  "publicEligible": false,
+  "evidenceReferences": [
+    "content/professional/method-production-activation/registries/mpa-ast-ephemeris-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-timezone-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-trusted-reference-evidence-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-ast-tolerance-freeze-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-production-policy-blocker-v1.json"
+  ],
+  "frozenMrOrImrRewritten": false,
+  "legacyAstFreezeRewritten": false
+}

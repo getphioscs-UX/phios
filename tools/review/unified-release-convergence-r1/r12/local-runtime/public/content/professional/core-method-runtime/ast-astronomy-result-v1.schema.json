@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/ast/ast-astronomy-result-v1.schema.json",
+  "title": "PHI OS AST Astronomy Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "executionMode",
+    "utcIso",
+    "julianDay",
+    "julianDayScale",
+    "timeScale",
+    "deltaTSeconds",
+    "referenceFrame",
+    "observerMode",
+    "observer",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "planetRuntimeCreated",
+    "houseRuntimeCreated",
+    "aspectRuntimeCreated",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-AST-ASTRONOMY-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "AST_ASTRONOMY_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "ASTROLOGY"
+    },
+    "pluginCode": {
+      "const": "AST"
+    },
+    "calculationType": {
+      "const": "ASTRONOMY_CONTEXT"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "utcIso": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "julianDay": {
+      "type": "number",
+      "minimum": 0
+    },
+    "julianDayScale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timeScale": {
+      "enum": [
+        "UTC",
+        "UT1",
+        "TT",
+        "TDB"
+      ]
+    },
+    "deltaTSeconds": {
+      "type": "number"
+    },
+    "referenceFrame": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observerMode": {
+      "enum": [
+        "GEOCENTRIC",
+        "TOPOCENTRIC"
+      ]
+    },
+    "observer": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "latitude",
+            "longitude",
+            "elevationMeters",
+            "datum"
+          ],
+          "properties": {
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            },
+            "elevationMeters": {
+              "type": "number"
+            },
+            "datum": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "planetRuntimeCreated": {
+      "const": false
+    },
+    "houseRuntimeCreated": {
+      "const": false
+    },
+    "aspectRuntimeCreated": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

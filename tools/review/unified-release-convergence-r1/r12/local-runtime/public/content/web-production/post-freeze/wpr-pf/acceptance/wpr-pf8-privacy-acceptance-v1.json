@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-WPR-PF8-PRIVACY-ACCEPTANCE-v1.0.0",
+  "work": "WPR-PF8",
+  "baselineCommit": "cae0e6e56993bcf215e588fc7a3196ca33754eb5",
+  "status": "PRIVACY_ACCEPTED_REPOSITORY_POLICY_SCOPE",
+  "accepted": true,
+  "audienceLayers": [
+    "PUBLIC",
+    "CUSTOMER",
+    "PROFESSIONAL"
+  ],
+  "gates": {
+    "cacheIsolation": true,
+    "hydrationIsolation": true,
+    "storageIsolation": true,
+    "responseHeaders": true,
+    "privateNoindex": true,
+    "dataPurposeBounded": true,
+    "consentPreserved": true,
+    "professionalAuthorizationRequired": true
+  },
+  "privateHeaderRoutes": [
+    "/reality-dashboard*",
+    "/reality-entry*",
+    "/academy-lesson*",
+    "/personal-runtime*",
+    "/professional-workspace*",
+    "/professional-reports*",
+    "/account*",
+    "/checkout*"
+  ],
+  "evidence": [
+    "_headers",
+    "content/web-production/registries/wpr-surface-registry-v1.json",
+    "content/web-production/contracts/wpr-privacy-security-production-v1.json",
+    "content/governance/reality-data-governance/freeze/rdg-w16-w20-access-privacy-rights-freeze-v1.json",
+    "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json"
+  ]
+}

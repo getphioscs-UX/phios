@@ -1,0 +1,1470 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/article-v2.schema.json",
+  "title": "PHI OS Knowledge Article v2",
+  "description": "Strict, legacy-compatible structural contract for the single Article JSON content authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract",
+    "assetCode",
+    "nodeCode",
+    "locale",
+    "contentRole",
+    "version",
+    "contentStatus",
+    "reviewStatus",
+    "publicationStatus",
+    "publishedAt",
+    "publicationOrder",
+    "slug",
+    "title",
+    "displayQuestion",
+    "shortAnswer",
+    "summary",
+    "seo",
+    "keyConcepts",
+    "sections",
+    "knowledgeBoundary",
+    "sourceReferences",
+    "connections",
+    "masterMediaPost"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://getphios.com/schemas/knowledge/article-v2.schema.json"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-KNOWLEDGE-ARTICLE-v2.0.0"
+    },
+    "contract": {
+      "$ref": "#/$defs/shortPlainText"
+    },
+    "assetCode": {
+      "type": "string",
+      "pattern": "^KA-[A-Z0-9-]+$",
+      "maxLength": 96
+    },
+    "nodeCode": {
+      "$ref": "#/$defs/nodeCode"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "contentRole": {
+      "type": "string",
+      "enum": [
+        "canonical",
+        "localized"
+      ]
+    },
+    "localizationSourceLocale": {
+      "type": "string",
+      "const": "zh-Hans"
+    },
+    "localizationSourceVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "terminologyReviewStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "changes_required",
+        "approved"
+      ]
+    },
+    "semanticParityStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "changes_required",
+        "approved"
+      ]
+    },
+    "version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "contentStatus": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "canonical_draft_created",
+        "content_editing",
+        "changes_required",
+        "content_reviewed"
+      ]
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": [
+        "not_reviewed",
+        "changes_required",
+        "conditionally_approved",
+        "approved"
+      ]
+    },
+    "publicationStatus": {
+      "type": "string",
+      "enum": [
+        "not_published",
+        "published"
+      ]
+    },
+    "publishedAt": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}(?:T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z)?$"
+        }
+      ]
+    },
+    "publicationOrder": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "title": {
+      "$ref": "#/$defs/titleText"
+    },
+    "displayQuestion": {
+      "$ref": "#/$defs/titleText"
+    },
+    "canonicalQuestion": {
+      "$ref": "#/$defs/titleText"
+    },
+    "searchTitle": {
+      "$ref": "#/$defs/titleText"
+    },
+    "subtitle": {
+      "$ref": "#/$defs/titleText"
+    },
+    "readerTransformation": {
+      "$ref": "#/$defs/bodyText"
+    },
+    "shortAnswer": {
+      "$ref": "#/$defs/bodyText"
+    },
+    "summary": {
+      "$ref": "#/$defs/bodyText"
+    },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 120
+    },
+    "seo": {
+      "$ref": "#/$defs/seo"
+    },
+    "taxonomy": {
+      "$ref": "#/$defs/taxonomy"
+    },
+    "hero": {
+      "$ref": "#/$defs/hero"
+    },
+    "keyConcepts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "uniqueItems": true
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "knowledgeBoundary": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true
+    },
+    "sourceReferences": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/publicReference"
+      }
+    },
+    "connections": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/legacyConnections"
+        },
+        {
+          "$ref": "#/$defs/structuredConnections"
+        }
+      ]
+    },
+    "masterMediaPost": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/masterMediaPost"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "contentRole": {
+            "const": "canonical"
+          }
+        },
+        "required": [
+          "contentRole"
+        ]
+      },
+      "then": {
+        "properties": {
+          "locale": {
+            "const": "zh-Hans"
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "localizationSourceLocale"
+              ]
+            },
+            {
+              "required": [
+                "localizationSourceVersion"
+              ]
+            },
+            {
+              "required": [
+                "terminologyReviewStatus"
+              ]
+            },
+            {
+              "required": [
+                "semanticParityStatus"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "contentRole": {
+            "const": "localized"
+          }
+        },
+        "required": [
+          "contentRole"
+        ]
+      },
+      "then": {
+        "properties": {
+          "locale": {
+            "const": "en"
+          }
+        },
+        "required": [
+          "localizationSourceLocale",
+          "localizationSourceVersion",
+          "terminologyReviewStatus",
+          "semanticParityStatus"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "publicationStatus": {
+            "const": "published"
+          }
+        },
+        "required": [
+          "publicationStatus"
+        ]
+      },
+      "then": {
+        "properties": {
+          "contentStatus": {
+            "const": "content_reviewed"
+          },
+          "reviewStatus": {
+            "const": "approved"
+          },
+          "publishedAt": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}(?:T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z)?$"
+          },
+          "publicationOrder": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ],
+  "oneOf": [
+    {
+      "title": "Legacy PJA-W1 article",
+      "not": {
+        "required": [
+          "schemaVersion"
+        ]
+      },
+      "properties": {
+        "keyConcepts": {
+          "$ref": "#/$defs/legacyTextArray"
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/legacySection"
+          }
+        },
+        "knowledgeBoundary": {
+          "$ref": "#/$defs/legacyTextArray"
+        },
+        "connections": {
+          "$ref": "#/$defs/legacyConnections"
+        },
+        "masterMediaPost": {
+          "$ref": "#/$defs/masterMediaPost"
+        }
+      }
+    },
+    {
+      "title": "Structured Article v2",
+      "required": [
+        "schemaVersion",
+        "canonicalQuestion",
+        "searchTitle",
+        "readerTransformation",
+        "readingTimeMinutes",
+        "taxonomy",
+        "hero"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "PHI-OS-KNOWLEDGE-ARTICLE-v2.0.0"
+        },
+        "seo": {
+          "$ref": "#/$defs/structuredSeo"
+        },
+        "keyConcepts": {
+          "$ref": "#/$defs/structuredKeyConceptArray"
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/structuredSection"
+          }
+        },
+        "knowledgeBoundary": {
+          "$ref": "#/$defs/structuredBoundaryArray"
+        },
+        "connections": {
+          "$ref": "#/$defs/structuredConnections"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "maxLength": 24
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)+$",
+      "maxLength": 64
+    },
+    "plainText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^<>]+$"
+    },
+    "shortPlainText": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/plainText"
+        },
+        {
+          "maxLength": 160
+        }
+      ]
+    },
+    "titleText": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/plainText"
+        },
+        {
+          "maxLength": 240
+        },
+        {
+          "pattern": "^(?!\\s*#{1,6}\\s).+$"
+        }
+      ]
+    },
+    "bodyText": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/plainText"
+        },
+        {
+          "maxLength": 4000
+        },
+        {
+          "pattern": "^(?![\\s\\S]*(?:https?://|data:|javascript:))(?!\\s*#{1,6}\\s)(?![\\s\\S]*!\\[[^\\]]*\\]\\()[\\s\\S]+$"
+        }
+      ]
+    },
+    "paragraphText": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/bodyText"
+        },
+        {
+          "maxLength": 1200
+        }
+      ]
+    },
+    "legacyTextArray": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/bodyText"
+      }
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "description": {
+          "$ref": "#/$defs/bodyText"
+        },
+        "canonicalPath": {
+          "type": "string",
+          "pattern": "^/[a-z0-9]+(?:[/-][a-z0-9]+)*$",
+          "maxLength": 180
+        }
+      }
+    },
+    "structuredSeo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description",
+        "canonicalPath"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "description": {
+          "$ref": "#/$defs/bodyText"
+        },
+        "canonicalPath": {
+          "type": "string",
+          "pattern": "^/articles/[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "maxLength": 180
+        }
+      }
+    },
+    "taxonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "themeCode",
+        "nodeType",
+        "knowledgeLevel",
+        "tags"
+      ],
+      "properties": {
+        "themeCode": {
+          "type": "string",
+          "pattern": "^TH-[A-Z0-9-]+$",
+          "maxLength": 64
+        },
+        "nodeType": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "maxLength": 64
+        },
+        "knowledgeLevel": {
+          "type": "string",
+          "enum": [
+            "introductory",
+            "intermediate",
+            "advanced"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/shortPlainText"
+          }
+        }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eyebrow",
+        "lead",
+        "assetCode"
+      ],
+      "properties": {
+        "eyebrow": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "lead": {
+          "$ref": "#/$defs/bodyText"
+        },
+        "assetCode": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^(?:KA|KFIG)-[A-Z0-9-]+$",
+              "maxLength": 96
+            }
+          ]
+        }
+      }
+    },
+    "publicReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceCode",
+        "label",
+        "href"
+      ],
+      "properties": {
+        "sourceCode": {
+          "type": "string",
+          "pattern": "^SRC-[A-Z0-9-]+$",
+          "maxLength": 96
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "href": {
+          "type": "string",
+          "pattern": "^/(?!/)[a-z0-9]+(?:[/?#&=._-][a-zA-Z0-9]+)*$",
+          "maxLength": 240
+        }
+      }
+    },
+    "connectionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "href"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$",
+          "maxLength": 96
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "href": {
+          "type": "string",
+          "pattern": "^/(?!/)[a-z0-9]+(?:[/?#&=._-][a-zA-Z0-9]+)*$",
+          "maxLength": 240
+        }
+      }
+    },
+    "nodeCodeArray": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/nodeCode"
+      }
+    },
+    "connectionReferenceArray": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/connectionReference"
+      }
+    },
+    "legacyConnections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relatedArticles",
+        "relatedBooks",
+        "relatedTopics",
+        "relatedAtlasEntries",
+        "relatedFigures",
+        "relatedServices",
+        "journeyEntryTopics"
+      ],
+      "properties": {
+        "relatedArticles": {
+          "$ref": "#/$defs/nodeCodeArray"
+        },
+        "relatedBooks": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "relatedTopics": {
+          "$ref": "#/$defs/legacyOptionalTextArray"
+        },
+        "relatedAtlasEntries": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "relatedFigures": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "relatedServices": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "journeyEntryTopics": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        }
+      }
+    },
+    "structuredConnections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previousNode",
+        "nextNode",
+        "relatedNodes",
+        "relatedArticles",
+        "relatedBooks",
+        "relatedTopics",
+        "relatedAtlasEntries",
+        "relatedFigures",
+        "relatedServices",
+        "journeyEntryTopics"
+      ],
+      "properties": {
+        "previousNode": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/nodeCode"
+            }
+          ]
+        },
+        "nextNode": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/nodeCode"
+            }
+          ]
+        },
+        "relatedNodes": {
+          "$ref": "#/$defs/nodeCodeArray"
+        },
+        "relatedArticles": {
+          "$ref": "#/$defs/nodeCodeArray"
+        },
+        "relatedBooks": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "relatedTopics": {
+          "$ref": "#/$defs/legacyOptionalTextArray"
+        },
+        "relatedAtlasEntries": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "relatedFigures": {
+          "$ref": "#/$defs/connectionReferenceArray"
+        },
+        "relatedServices": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "journeyEntryTopics": {
+          "type": "array",
+          "maxItems": 0
+        }
+      }
+    },
+    "legacyOptionalTextArray": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/shortPlainText"
+      }
+    },
+    "masterMediaPost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assetCode",
+        "title",
+        "body"
+      ],
+      "properties": {
+        "assetCode": {
+          "type": "string",
+          "pattern": "^KA-[A-Z0-9-]+$",
+          "maxLength": 96
+        },
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "body": {
+          "$ref": "#/$defs/bodyText"
+        }
+      }
+    },
+    "legacySection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "paragraphs"
+      ],
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/titleText"
+        },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/paragraphText"
+          }
+        }
+      }
+    },
+    "structuredSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sectionCode",
+        "heading",
+        "purpose",
+        "blocks"
+      ],
+      "properties": {
+        "sectionCode": {
+          "type": "string",
+          "pattern": "^S\\d{2}$"
+        },
+        "heading": {
+          "$ref": "#/$defs/titleText"
+        },
+        "purpose": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "minLength": 3,
+          "maxLength": 64
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "anchor": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "maxLength": 80
+        },
+        "editorialNoteCode": {
+          "type": "string",
+          "pattern": "^EDN-[A-Z0-9-]+$",
+          "maxLength": 96
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 24,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/articleBlock"
+          }
+        }
+      }
+    },
+    "blockCode": {
+      "type": "string",
+      "pattern": "^S\\d{2}-B\\d{2}$"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "editorial_only"
+      ]
+    },
+    "sourceClaimCodes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^CLM-KN-[A-Z0-9-]+-\\d{3}$",
+        "maxLength": 96
+      }
+    },
+    "articleBlock": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/paragraphBlock"
+        },
+        {
+          "$ref": "#/$defs/leadBlock"
+        },
+        {
+          "$ref": "#/$defs/questionBlock"
+        },
+        {
+          "$ref": "#/$defs/insightBlock"
+        },
+        {
+          "$ref": "#/$defs/mechanismBlock"
+        },
+        {
+          "$ref": "#/$defs/timelineBlock"
+        },
+        {
+          "$ref": "#/$defs/comparisonBlock"
+        },
+        {
+          "$ref": "#/$defs/figureBlock"
+        },
+        {
+          "$ref": "#/$defs/transitionBlock"
+        },
+        {
+          "$ref": "#/$defs/nextNodeBlock"
+        }
+      ]
+    },
+    "paragraphBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "text"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "paragraph"
+        },
+        "text": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "leadBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "text"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "lead"
+        },
+        "text": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "questionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "text"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "question"
+        },
+        "text": {
+          "$ref": "#/$defs/titleText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "insightBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "text"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "insight"
+        },
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "text": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "mechanismStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/titleText"
+        },
+        "description": {
+          "$ref": "#/$defs/paragraphText"
+        }
+      }
+    },
+    "mechanismBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "title",
+        "steps"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "mechanism"
+        },
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "intro": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/mechanismStep"
+          }
+        },
+        "conclusion": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "vertical",
+            "horizontal"
+          ]
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "timelineItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/titleText"
+        },
+        "description": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "dateLabel": {
+          "$ref": "#/$defs/shortPlainText"
+        }
+      }
+    },
+    "timelineBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "items",
+        "timelineMode"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "timeline"
+        },
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/timelineItem"
+          }
+        },
+        "timelineMode": {
+          "type": "string",
+          "enum": [
+            "conceptual",
+            "chronological"
+          ]
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "timelineMode": {
+                "const": "chronological"
+              }
+            },
+            "required": [
+              "timelineMode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "items": {
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "dateLabel"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "comparisonColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "items"
+      ],
+      "properties": {
+        "heading": {
+          "$ref": "#/$defs/titleText"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/shortPlainText"
+          }
+        }
+      }
+    },
+    "comparisonBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "columns"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "comparison"
+        },
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/comparisonColumn"
+          }
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "figureBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "assetCode",
+        "altText",
+        "displayMode"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "figure"
+        },
+        "assetCode": {
+          "type": "string",
+          "pattern": "^(?:KA|KFIG)-[A-Z0-9-]+$",
+          "maxLength": 96
+        },
+        "caption": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "altText": {
+          "$ref": "#/$defs/titleText"
+        },
+        "displayMode": {
+          "type": "string",
+          "enum": [
+            "inline",
+            "wide",
+            "full"
+          ]
+        },
+        "creditLabel": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "transitionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "text"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "transition"
+        },
+        "text": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "nextNodeBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockCode",
+        "type",
+        "nodeCode",
+        "label",
+        "title",
+        "description"
+      ],
+      "properties": {
+        "blockCode": {
+          "$ref": "#/$defs/blockCode"
+        },
+        "type": {
+          "const": "next_node"
+        },
+        "nodeCode": {
+          "$ref": "#/$defs/nodeCode"
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "title": {
+          "$ref": "#/$defs/titleText"
+        },
+        "description": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "ariaLabel": {
+          "$ref": "#/$defs/titleText"
+        },
+        "sourceClaimCodes": {
+          "$ref": "#/$defs/sourceClaimCodes"
+        }
+      }
+    },
+    "structuredKeyConcept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conceptCode",
+        "label",
+        "definition",
+        "termReference"
+      ],
+      "properties": {
+        "conceptCode": {
+          "type": "string",
+          "pattern": "^KC-[A-Z0-9-]+$",
+          "maxLength": 96
+        },
+        "label": {
+          "$ref": "#/$defs/shortPlainText"
+        },
+        "definition": {
+          "$ref": "#/$defs/paragraphText"
+        },
+        "termReference": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string",
+              "pattern": "^TERM-[A-Z0-9-]+$",
+              "maxLength": 96
+            }
+          ]
+        }
+      }
+    },
+    "structuredKeyConceptArray": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/structuredKeyConcept"
+      }
+    },
+    "structuredBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "scope_limit",
+            "non_claim",
+            "interpretive_limit",
+            "application_limit",
+            "safety_limit",
+            "next_node_boundary"
+          ]
+        },
+        "text": {
+          "$ref": "#/$defs/paragraphText"
+        }
+      }
+    },
+    "structuredBoundaryArray": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/structuredBoundary"
+      }
+    }
+  }
+}

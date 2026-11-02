@@ -1,0 +1,39 @@
+{
+  "policyCode": "KRA-W1-PROVIDER-ROUTING-POLICY-v1.0.0",
+  "version": "1.0.0",
+  "localCoverageSufficientOutcomes": ["direct_match", "multi_node_match"],
+  "providerEligibleOutcomes": ["partial_coverage", "no_coverage"],
+  "supportedLocales": ["zh-Hans", "en"],
+  "translationFallback": {
+    "enabled": false,
+    "sourceOutcomes": ["partial_coverage", "no_coverage"],
+    "operation": "unmatched_query_translation_fallback",
+    "maxInputCharacters": 512,
+    "cacheRequired": true,
+    "budgetRequired": true,
+    "deterministicRematchRequired": true,
+    "articleTranslationAllowed": false,
+    "fragmentTranslationAllowed": false,
+    "finalAnswerTranslationAllowed": false
+  },
+  "workersAi": {
+    "enabled": false,
+    "allowedOperations": ["intent_classification", "semantic_similarity", "candidate_reranking", "ambiguity_resolution"],
+    "budgetRequired": true,
+    "coverageRecheckRequired": true,
+    "mayBypassCoverage": false,
+    "mayCreatePublishedContent": false
+  },
+  "openAiPublicKnr": {
+    "enabled": false,
+    "budgetUnits": 0,
+    "paidFallbackAllowed": false
+  },
+  "exhaustion": {
+    "continueDeterministicRetrieval": true,
+    "continuePublishedProjection": true,
+    "pauseTranslationFallback": true,
+    "pauseWorkersAi": true,
+    "paidFallbackAllowed": false
+  }
+}

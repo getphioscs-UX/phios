@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-047",
+  "title": "METHOD-TO-READING-PROJECTION",
+  "scope": "CROSS_METHOD",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-client-delivery/schemas/mcd-6-cross-method-composition-v1.schema.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_METHOD_PROJECTIONS",
+      "displayLabel": "CANONICAL METHOD PROJECTIONS",
+      "nodeType": "RESULT",
+      "authorityClass": "COMPOSITION",
+      "semanticRole": "READING_PROJECTION",
+      "container": "CROSS_METHOD_COMPOSITION",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CROSS_METHOD_COMPOSITION",
+      "displayLabel": "CROSS METHOD COMPOSITION",
+      "nodeType": "RESULT",
+      "authorityClass": "COMPOSITION",
+      "semanticRole": "READING_PROJECTION",
+      "container": "CROSS_METHOD_COMPOSITION",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "READING_PROJECTION_BOUNDARY",
+      "displayLabel": "READING PROJECTION BOUNDARY",
+      "nodeType": "GATE",
+      "authorityClass": "COMPOSITION",
+      "semanticRole": "READING_PROJECTION",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-047-E01",
+      "from": "CANONICAL_METHOD_PROJECTIONS",
+      "to": "CROSS_METHOD_COMPOSITION",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-047-E02",
+      "from": "CROSS_METHOD_COMPOSITION",
+      "to": "READING_PROJECTION_BOUNDARY",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "CROSS_METHOD_COMPOSITION",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "CANONICAL_METHOD_PROJECTIONS",
+        "CROSS_METHOD_COMPOSITION"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "READING_PROJECTION_BOUNDARY"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_METHOD_PROJECTIONS",
+    "CROSS_METHOD_COMPOSITION",
+    "READING_PROJECTION_BOUNDARY"
+  ],
+  "mustState": [
+    "Method-to-reading projection does not own Reading Runtime",
+    "Composition != Reading authority"
+  ],
+  "statementSources": {
+    "Method-to-reading projection does not own Reading Runtime": "SRC-002",
+    "Composition != Reading authority": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

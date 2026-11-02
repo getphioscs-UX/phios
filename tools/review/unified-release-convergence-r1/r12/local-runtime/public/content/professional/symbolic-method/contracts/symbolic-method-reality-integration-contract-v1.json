@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-SYMBOLIC-METHOD-REALITY-INTEGRATION-CONTRACT-v1.0.0",
+  "phase": "SYM",
+  "work": "SYM-W6",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "FROZEN_LAYER_ORDER",
+  "requiredLayerOrder": [
+    "METHOD_PROJECTION",
+    "INTERPRETIVE_LENS",
+    "REALITY_CHECK",
+    "EVIDENCE",
+    "USER_CHOICE"
+  ],
+  "layers": [
+    {
+      "layer": "METHOD_PROJECTION",
+      "authority": "SHARED_PROJECTION_RUNTIME",
+      "mayBecomeRealityTruth": false
+    },
+    {
+      "layer": "INTERPRETIVE_LENS",
+      "authority": "EXISTING_INTERPRETATION_AUTHORITY",
+      "mayBecomeRealityTruth": false
+    },
+    {
+      "layer": "REALITY_CHECK",
+      "authority": "EXISTING_RMO_RRE_BOUNDARY",
+      "mustCompareWithObservableReality": true,
+      "maySilentlyResolveUnknown": false
+    },
+    {
+      "layer": "EVIDENCE",
+      "authority": "GOVERNED_EVIDENCE_AND_SELECTION_EVIDENCE",
+      "mustRemainVisible": true
+    },
+    {
+      "layer": "USER_CHOICE",
+      "authority": "USER",
+      "systemMaySilentlyChoose": false
+    }
+  ],
+  "realityAuthorityEvidence": {
+    "rmoBoundaryPath": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json",
+    "rmoBoundarySha256": "4be26255aca8272dcf469de8ae60a037db95eb41478834981b17d614349e2570",
+    "rreBoundaryPath": "content/runtime/reality-readout-engine/contracts/rre-authority-boundary-v1.json",
+    "rreBoundarySha256": "a5ed4b8440a03c27418a5301890f134c1f7b37ba2be2a24e9cf7f2c949b8b26c",
+    "journeyContractPath": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json",
+    "journeyContractSha256": "5f6859209bbfe4a49d3d533f63b703e0d0199989c462c8ac9a11f9bcd910c044"
+  },
+  "rules": {
+    "methodProjectionEqualsReality": false,
+    "interpretiveLensEqualsObservedEvidence": false,
+    "unknownMustRemainVisible": true,
+    "contradictoryEvidenceMayBeHidden": false,
+    "userRetainsDecisionAuthority": true,
+    "automaticLifeDecisionForbidden": true
+  }
+}

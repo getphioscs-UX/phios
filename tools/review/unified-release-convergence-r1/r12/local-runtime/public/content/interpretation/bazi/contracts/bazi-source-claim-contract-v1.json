@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/bazi/bazi-source-claim-v1.schema.json",
+  "title": "PHI OS BaZi Source Claim v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "claimId",
+    "sourceId",
+    "witnessId",
+    "topic",
+    "locator",
+    "claimType",
+    "sourceBoundParaphrase",
+    "schoolLayer",
+    "reviewState",
+    "runtimeUseAllowed"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-BAZI-SOURCE-CLAIM-v1.0.0"
+    },
+    "claimId": {
+      "type": "string",
+      "minLength": 8
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^BZR-SRC-"
+    },
+    "witnessId": {
+      "type": "string",
+      "pattern": "^BZR-WIT-"
+    },
+    "topic": {
+      "type": "string"
+    },
+    "locator": {
+      "type": "object",
+      "required": [
+        "sectionOrChapter"
+      ],
+      "properties": {
+        "volume": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "sectionOrChapter": {
+          "type": "string"
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "witnessUrl": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "claimType": {
+      "enum": [
+        "STRUCTURAL_MAPPING",
+        "CALCULATION_RULE",
+        "INTERPRETIVE_RULE",
+        "SCHOOL_SPECIFIC_RULE",
+        "COVERAGE_NOTE"
+      ]
+    },
+    "sourceBoundParaphrase": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schoolLayer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewState": {
+      "enum": [
+        "EXTRACTED_PENDING_HUMAN_REVIEW",
+        "HUMAN_ADMITTED",
+        "REJECTED",
+        "SUPERSEDED"
+      ]
+    },
+    "runtimeUseAllowed": {
+      "type": "boolean"
+    },
+    "reviewEvidenceRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

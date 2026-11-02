@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-runtime/ast-meaning-mapping-registry-v1.schema.json",
+  "title": "PHI OS AST Meaning Mapping Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "work",
+    "productionStatus",
+    "sourceMethodCode",
+    "sourceProjectionSchemaVersion",
+    "mappingCount",
+    "mappings",
+    "blockers"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-AST-MEANING-MAPPING-REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.0.0"
+    },
+    "work": {
+      "const": "CM-W8"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "sourceMethodCode": {
+      "const": "ASTROLOGY"
+    },
+    "sourceProjectionSchemaVersion": {
+      "const": "PHI-OS-CANONICAL-PROJECTION-v1.0.0"
+    },
+    "mappingCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "mappings": {
+      "type": "array"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}

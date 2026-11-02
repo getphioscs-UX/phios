@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-BZRA-W2-INPUT-COMPLETENESS-CONTRACT-v1.0.0",
+  "work": "BZRA-W2",
+  "status": "ACTIVE",
+  "capabilityAvailabilityIndependentFromExecutionCompleteness": true,
+  "states": {
+    "FULL": {
+      "requires": [
+        "birthDate",
+        "known birthTime",
+        "timezone.utcOffsetAtBirth",
+        "birthPlace.latitude",
+        "birthPlace.longitude"
+      ],
+      "permits": [
+        "FOUR_PILLARS",
+        "LUCK_CYCLE_IF_TRADITIONAL_CALCULATION_SEX_PRESENT"
+      ]
+    },
+    "PARTIAL": {
+      "examples": [
+        "unknown birthTime -> three pillars only",
+        "missing traditionalCalculationSex -> luck cycle deferred"
+      ],
+      "capabilityDowngradeAllowed": false
+    },
+    "INSUFFICIENT": {
+      "examples": [
+        "missing birthDate",
+        "missing explicit UTC offset for required boundary classification",
+        "known time without coordinates for true-solar context"
+      ],
+      "result": "INPUT_REQUIRED_OR_FAILED_CLOSED",
+      "capabilityDowngradeAllowed": false
+    }
+  },
+  "fabricatedDefaultsForbidden": [
+    "12:00 birth time",
+    "current timezone",
+    "default coordinates",
+    "identity-inferred traditional calculation sex"
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-code-registry-v1.schema.json",
+  "title": "PHI OS Canonical Meaning Code Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "productionStatus",
+    "authority",
+    "namespaces",
+    "meaningCodes"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-CANONICAL-MEANING-CODE-REGISTRY"
+    },
+    "registryVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "productionStatus": {
+      "enum": [
+        "validation_only"
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaningCodeAuthority",
+        "meaningIdentityAuthority",
+        "familyAuthority",
+        "knowledgeAuthority",
+        "methodMappingAuthority"
+      ],
+      "properties": {
+        "meaningCodeAuthority": {
+          "const": "canonical_meaning_code_registry"
+        },
+        "meaningIdentityAuthority": {
+          "const": "meaning_identity_runtime"
+        },
+        "familyAuthority": {
+          "const": "canonical_meaning_family_registry"
+        },
+        "knowledgeAuthority": {
+          "const": "external_read_only"
+        },
+        "methodMappingAuthority": {
+          "const": "not_created"
+        }
+      }
+    },
+    "namespaces": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "namespaceCode",
+          "familyCode",
+          "codePattern",
+          "reservedCapacity",
+          "populationStatus"
+        ],
+        "properties": {
+          "namespaceCode": {
+            "type": "string",
+            "pattern": "^CM-[A-Z0-9-]+$"
+          },
+          "familyCode": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          },
+          "codePattern": {
+            "type": "string",
+            "minLength": 6
+          },
+          "reservedCapacity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "populationStatus": {
+            "enum": [
+              "reserved",
+              "partially_populated",
+              "populated"
+            ]
+          }
+        }
+      }
+    },
+    "meaningCodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "meaningId",
+          "meaningCode",
+          "meaningVersion",
+          "meaningFamily",
+          "definition",
+          "boundary",
+          "knowledgeAuthority",
+          "status"
+        ],
+        "properties": {
+          "meaningId": {
+            "type": "string",
+            "pattern": "^CMID-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+          },
+          "meaningCode": {
+            "type": "string",
+            "pattern": "^CM-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+          },
+          "meaningVersion": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          "meaningFamily": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 20
+          },
+          "boundary": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 5
+            }
+          },
+          "knowledgeAuthority": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "primaryNodeCodes",
+              "supportingNodeCodes",
+              "authorityStatus"
+            ],
+            "properties": {
+              "primaryNodeCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3
+                }
+              },
+              "supportingNodeCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 3
+                }
+              },
+              "authorityStatus": {
+                "enum": [
+                  "unmapped",
+                  "mapped_validation_only"
+                ]
+              }
+            }
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "validation_only",
+              "deprecated"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "policyCode": "PHI-OS-CAR-QUALITY-DRIFT-POLICY-v1",
+  "version": "1.0.0",
+  "work": "CAR-W16",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "checks": [
+    "meaningDrift",
+    "knowledgeDrift",
+    "fragmentDigestDrift",
+    "localeDrift",
+    "visualAccuracy",
+    "accessibility",
+    "brandCompliance",
+    "rightsStatus",
+    "unsupportedClaim",
+    "crossAssetContamination"
+  ],
+  "failClosedOn": [
+    "meaningDrift",
+    "knowledgeDrift",
+    "fragmentDigestDrift",
+    "localeDrift",
+    "accessibility",
+    "rightsStatus",
+    "unsupportedClaim",
+    "crossAssetContamination"
+  ],
+  "lineageRequired": [
+    "meaningReference",
+    "knowledgeNode",
+    "publishedFragmentDigest",
+    "assetBrief",
+    "candidate",
+    "review",
+    "approval",
+    "publication"
+  ],
+  "invariants": {
+    "articleToVideoDriftAllowed": false,
+    "videoToSocialDriftAllowed": false,
+    "figureMayAddMechanism": false,
+    "promptMayReferenceUnpublishedKnowledge": false,
+    "qualityEvaluationMayRepairContent": false
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Navigation Validation Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "validationRequestCode",
+    "validationRequestVersion",
+    "objectType",
+    "dataType",
+    "validatorRuntime",
+    "validationScope",
+    "jrHandoffReference",
+    "professionalGateReference",
+    "feedbackReference",
+    "requestedChecks",
+    "governanceReferences",
+    "validationStatus",
+    "expectedResultDataType",
+    "authorityBoundary",
+    "rneSelfValidationPerformed",
+    "effectivenessDetermined",
+    "causalityClaimed",
+    "successDeclared",
+    "productionExecutionActivated",
+    "validationRequestDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "typedRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest",
+        "dataType",
+        "authorityRuntime"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dataType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityRuntime": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-NAVIGATION-VALIDATION-REQUEST-v1.0.0"
+    },
+    "validationRequestCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validationRequestVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "NAVIGATION_EFFECTIVENESS_VALIDATION_REQUEST"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "validatorRuntime": {
+      "const": "VAL"
+    },
+    "validationScope": {
+      "const": "NAVIGATION_EFFECTIVENESS"
+    },
+    "jrHandoffReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "professionalGateReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "feedbackReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "requestedChecks": {
+      "$ref": "#/$defs/strarr"
+    },
+    "governanceReferences": {
+      "$ref": "#/$defs/strarr"
+    },
+    "validationStatus": {
+      "const": "PENDING_VAL_EXECUTION"
+    },
+    "expectedResultDataType": {
+      "const": "SYSTEM_OPERATION_RECORD"
+    },
+    "authorityBoundary": {
+      "type": "object"
+    },
+    "rneSelfValidationPerformed": {
+      "const": false
+    },
+    "effectivenessDetermined": {
+      "const": false
+    },
+    "causalityClaimed": {
+      "const": false
+    },
+    "successDeclared": {
+      "const": false
+    },
+    "productionExecutionActivated": {
+      "const": false
+    },
+    "validationRequestDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

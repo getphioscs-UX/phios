@@ -1,0 +1,96 @@
+{
+  "defaultMode": "focused",
+  "forbidden": [
+    "invent_text",
+    "change_fragment_order",
+    "cross_locale_fragment_mix",
+    "include_unpublished_fragment"
+  ],
+  "intentRules": {
+    "continuity": {
+      "en": [
+        "what next",
+        "next question",
+        "continue",
+        "continuity"
+      ],
+      "zh-Hans": [
+        "接下来",
+        "下一个问题",
+        "继续",
+        "持续"
+      ]
+    },
+    "focused": {
+      "en": [
+        "how",
+        "why",
+        "mechanism",
+        "boundary",
+        "responsibility"
+      ],
+      "zh-Hans": [
+        "如何",
+        "为什么",
+        "机制",
+        "边界",
+        "责任"
+      ]
+    },
+    "full_article": {
+      "en": [
+        "full article",
+        "read the article",
+        "complete article"
+      ],
+      "zh-Hans": [
+        "全文",
+        "完整文章",
+        "阅读文章"
+      ]
+    },
+    "overview": {
+      "en": [
+        "overview",
+        "summary",
+        "in brief",
+        "what is"
+      ],
+      "zh-Hans": [
+        "概览",
+        "摘要",
+        "简要",
+        "是什么"
+      ]
+    }
+  },
+  "maximumFragments": 6,
+  "minimumFragments": 1,
+  "modes": [
+    "overview",
+    "focused",
+    "full_article",
+    "continuity"
+  ],
+  "policyCode": "KNR-ADAPTIVE-PROJECTION-POLICY-v1",
+  "selection": {
+    "continuity": {
+      "includeHeading": true,
+      "trailingParagraphs": 2
+    },
+    "focused": {
+      "bestMatchingParagraphs": 3,
+      "includeHeading": true,
+      "neighborRadius": 1
+    },
+    "full_article": {
+      "includeAll": true
+    },
+    "overview": {
+      "includeHeading": true,
+      "leadingParagraphs": 2,
+      "trailingParagraphs": 1
+    }
+  },
+  "version": "1.0.0"
+}

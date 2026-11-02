@@ -1,0 +1,42 @@
+{
+  "registryCode": "PHI-OS-RRE-W8-DRIFT-READING-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RRE-W8",
+  "status": "canonical_validation_only",
+  "containsUserData": false,
+  "driftStates": [
+    "READABLE",
+    "NO_PREVIOUS_REALITY"
+  ],
+  "directions": [
+    "INCREASE",
+    "DECREASE",
+    "MIXED",
+    "NO_CHANGE",
+    "UNKNOWN"
+  ],
+  "magnitudeClasses": [
+    "NONE",
+    "SINGLE_DOMAIN",
+    "MULTI_DOMAIN",
+    "UNKNOWN"
+  ],
+  "persistenceClasses": [
+    "SINGLE_INTERVAL",
+    "REPEATED_INTERVALS",
+    "UNKNOWN"
+  ],
+  "uncertaintyClasses": [
+    "BOUNDED",
+    "ELEVATED",
+    "CONFLICTING",
+    "UNKNOWN"
+  ],
+  "rules": {
+    "rmoDiffRequiredWhenPreviousRealityExists": true,
+    "rreMayRecomputeStructuralDiff": false,
+    "magnitudeRepresentsStructuralDomainCoverageOnly": true,
+    "magnitudeIsMetricScore": false,
+    "causalityClaimed": false
+  }
+}

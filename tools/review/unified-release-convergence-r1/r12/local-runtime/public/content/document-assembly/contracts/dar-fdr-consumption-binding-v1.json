@@ -1,0 +1,23 @@
+{
+  "contractCode": "PHI-OS-DAR-W15-FDR-CONSUMPTION-BINDING-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W15",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_EXPLICIT_VERSIONED_BINDING",
+  "upstreamContract": "content/financial/data-runtime/contracts/fdr-dar-cross-consumption-contract-v1.json",
+  "consumer": "DAR",
+  "consentScope": "WILL_ASSEMBLY",
+  "consumedAuthority": "FDR_FACT_REFERENCE_ONLY",
+  "requiredLineage": [
+    "fdrRealityId",
+    "fdrVersion",
+    "fdrDigest"
+  ],
+  "rules": {
+    "darMayMutateFdrFact": false,
+    "darMayDuplicateFdrFactAuthority": false,
+    "darMayReplaceUnknownWithAssumption": false,
+    "darDistributionInstructionDigestSeparate": true,
+    "rawFdrFactsNeedNotBeCopiedIntoAssemblyIr": true
+  }
+}

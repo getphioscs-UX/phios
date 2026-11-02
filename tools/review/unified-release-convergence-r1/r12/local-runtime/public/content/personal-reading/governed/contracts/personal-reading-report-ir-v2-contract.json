@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-READING-REPORT-IR-v2-CONTRACT-v1.0.0",
+  "work": "W51",
+  "baselineCommit": "22904e2f6db4c980ea86083b963c722c69f2fe7e",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "outputSchema": "PHI-OS-PERSONAL-READING-REPORT-IR-v2.0.0",
+  "authority": "FREE_GOVERNED_PERSONAL_READING",
+  "surfaces": [
+    "WEB",
+    "PRINT",
+    "PDF"
+  ],
+  "singleSemanticIrAcrossSurfaces": true,
+  "coreFields": [
+    "reportId",
+    "generatedAt",
+    "locale",
+    "inputSummary",
+    "executiveReading",
+    "methodReadingRefs",
+    "profileSignalRefs",
+    "profileSummary",
+    "crossPerspective",
+    "crossSourcePerspective",
+    "currentReality",
+    "sections",
+    "openQuestions",
+    "sourceIndex",
+    "technicalAppendix",
+    "governance",
+    "lineage",
+    "semanticDigest"
+  ],
+  "rules": {
+    "webPrintPdfMeaningMayDiverge": false,
+    "freeReportMayBecomePaidNarrative": false,
+    "profileOptional": true
+  },
+  "gate": "check:ppr-r2:w51-report-ir"
+}

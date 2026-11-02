@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W13-DISCLOSURE-STATE-REGISTRY-v1.0.0",
+  "work": "FDR-W13",
+  "status": "ACTIVE",
+  "states": [
+    "KNOWN_EXACT",
+    "KNOWN_APPROXIMATE",
+    "RANGE_ONLY",
+    "SELF_REPORTED",
+    "DOCUMENT_VERIFIED",
+    "NOT_YET_PROVIDED",
+    "DECLINED_TO_PROVIDE",
+    "UNKNOWN",
+    "NOT_APPLICABLE"
+  ],
+  "semantics": {
+    "KNOWN_EXACT": "exact factual value is provided; evidence state is independent",
+    "KNOWN_APPROXIMATE": "approximate factual value is provided",
+    "RANGE_ONLY": "bounded range is provided without exact amount",
+    "SELF_REPORTED": "fact is explicitly reported by a data subject/source",
+    "DOCUMENT_VERIFIED": "fact has documentary verification",
+    "NOT_YET_PROVIDED": "requested/expected but not yet provided",
+    "DECLINED_TO_PROVIDE": "data subject explicitly declined",
+    "UNKNOWN": "fact is currently unknown",
+    "NOT_APPLICABLE": "field/domain is not applicable"
+  },
+  "rules": {
+    "statesAreNotNumericValues": true,
+    "declinedIsNotZero": true,
+    "unknownIsNotZero": true,
+    "notProvidedIsNotZero": true,
+    "notApplicableExcludedFromCompletenessDenominator": true,
+    "selfReportedAndDocumentVerifiedMayCoexistThroughEvidenceMetadata": true
+  }
+}

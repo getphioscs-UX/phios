@@ -1,0 +1,51 @@
+/* Shared semantic composition; images preserve their complete structural field. */
+.vr2-page{--vr2-ink:#123b48;--vr2-gold:#b98a48;--vr2-paper:#f5f1e7;overflow-wrap:break-word}
+.vr2-page.pm-shell{--pm-bg:#f5f1e7;--pm-ink:#123b48;--pm-muted:#335762;--pm-panel:#eee7d7;background:var(--pm-bg);color:var(--pm-ink)}
+.vr2-page.pm-shell a{color:#164d61}.vr2-page.pm-shell .pm-section p{color:#335762}.vr2-page.pm-shell .pm-hero .pm-kicker{color:#805418!important}
+.vr2-page main{min-width:0}.vr2-page img{max-width:100%}
+.vr2-page main{background-image:var(--vr2-texture);background-size:1200px auto}
+.vr2-page .figure-editorial img{background:#f5f1e7}
+.vr2-page .vr2-hero-surface>.vr2-story[data-vr2-role="HERO"]{max-width:1280px;margin-block:24px}
+body.vr2-page .cx-personal-hero-visual{position:relative;overflow:visible;transform:none;background:transparent}
+body.vr2-page .cx-personal-hero-visual img{height:auto;min-height:0;object-fit:contain;filter:none}
+body.vr2-page .cx-personal-hero--r5::before{display:none}
+.vr2-page[data-vr2-density="WORKSPACE"] .vr2-hero{min-height:280px}.vr2-page[data-vr2-density="WORKSPACE"] .vr2-hero img{max-height:360px;object-fit:contain}
+@media(max-width:768px){body.vr2-page .cx-personal-hero .cx-p1-hero__grid{display:flex;flex-direction:column;gap:24px}body.vr2-page .cx-personal-hero-visual{order:-1;width:100%;margin:0}body.vr2-page .cx-personal-hero-visual img{width:100%;height:auto;min-height:0}}
+.vr2-story{width:min(1280px,calc(100% - 48px));margin:clamp(40px,6vw,96px) auto;color:var(--vr2-ink)}
+.vr2-story h2{font-size:clamp(1.7rem,3.4vw,3rem);line-height:1.22;max-width:28ch}
+.vr2-story>p{max-width:70ch;line-height:1.75}.vr2-kicker{letter-spacing:.12em;font-weight:700;color:var(--vr2-gold)}
+.figure-editorial{margin:32px auto;width:100%;max-width:1280px;min-width:0}.figure-editorial a{display:block}.figure-editorial img{display:block;width:100%;height:auto;object-fit:contain}.figure-editorial figcaption{line-height:1.6;padding-block:16px;max-width:80ch}
+.vr2-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);align-items:center;gap:clamp(24px,4vw,64px);min-height:560px}.vr2-hero figure{margin:0}.vr2-hero img{width:100%;height:auto;object-fit:contain}.vr2-hero h1{font-size:clamp(2.3rem,4.6vw,4.7rem);line-height:1.08}
+.visual-entry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}.visual-entry-card{display:block;text-decoration:none;color:inherit;border-bottom:1px solid #cfbe9e;padding-bottom:20px}.visual-entry-card img{width:100%;height:auto;aspect-ratio:1.6;object-fit:contain}.visual-entry-card h3{font-size:1.3rem}
+.vr2-editorial-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}.vr2-editorial-panels img{width:100%;height:auto}.vr2-editorial-panels article{min-width:0}
+.flagship-feature{padding:clamp(24px,5vw,64px);background:var(--vr2-paper);border-top:4px solid var(--vr2-gold);width:min(1280px,calc(100% - 32px));margin:48px auto}.flagship-feature h2{font-size:clamp(2rem,4vw,3.7rem)}.flagship-feature [data-pm-example]{width:100%;overflow:auto}.flagship-feature .pm-example-scroll{max-width:100%}
+.vr2-lenses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-block:24px}.vr2-lenses details{border-bottom:1px solid #c7b898;padding:16px}.vr2-lenses summary{cursor:pointer;font-weight:600;min-height:44px}.vr2-lenses p{line-height:1.7}
+.method-lens-card{display:inline-flex;align-items:center;gap:12px;padding:16px;min-height:48px}.method-lens-card img{width:40px;height:40px;object-fit:contain}
+.book-identity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}.book-identity-card{display:block;color:inherit;text-decoration:none}.book-identity-card img{width:100%;height:auto;object-fit:contain}.book-identity-card span{display:block;padding-block:12px}
+.vr2-lightbox{width:min(96vw,1700px);max-width:96vw;max-height:96vh;overflow:auto;padding:16px;background:#f5f1e7;border:0}.vr2-lightbox::backdrop{background:#092630df}.vr2-lightbox img{display:block;width:100%;height:auto}.vr2-lightbox button{position:sticky;top:0;padding:12px 24px;min-height:44px;z-index:1}
+.vr2-page a:focus-visible,.vr2-page button:focus-visible,.vr2-page summary:focus-visible{outline:3px solid #137b76;outline-offset:4px}
+.vr2-skeleton{display:grid;gap:16px;min-height:160px;padding:24px;background:#eee9df}.vr2-skeleton span{display:block;height:24px;background:#d7dcd8;border-radius:4px}.vr2-skeleton span:last-child{width:65%}
+.vr2-page .r5-context-guide{max-width:1280px}.vr2-page .pis-landing-hero__image{object-position:center}.vr2-page .pm-product-thumb{max-height:none;height:auto;width:100%}
+@media(max-width:768px){.vr2-story{width:calc(100% - 32px);margin-block:36px}.vr2-hero{display:flex;flex-direction:column;min-height:0}.vr2-hero>figure{order:-1}.visual-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.vr2-editorial-panels{grid-template-columns:minmax(0,1fr)}.book-identity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vr2-lenses{grid-template-columns:minmax(0,1fr)}.figure-editorial{margin-block:24px}.flagship-feature{padding:20px}.vr2-page .cx-home-hero__grid{grid-template-columns:minmax(0,1fr)}.vr2-page .cx-home-hero__visual{order:-1;min-height:0}.vr2-page .pm-hero{grid-template-columns:minmax(0,1fr)}.vr2-page .pm-grid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.vr2-page *{scroll-behavior:auto;animation:none!important;transition:none!important}}
+/* A composed page has one semantic hero; the legacy automatic masthead is redundant. */
+body.vr2-page:has(main [data-vr2-role="HERO"])>.client-visual-masthead{display:none}
+body.vr2-page .vr2-hero-surface{background:transparent;background-image:none;padding-block:32px}
+body.vr2-page .vr2-hero-surface::before,body.vr2-page .vr2-hero-surface::after{display:none}
+body.vr2-page .vr2-hero-surface [data-vr2-role="HERO"] img{width:100%;height:auto;min-height:0;object-fit:contain}
+@media(max-width:768px){body.vr2-page .vr2-hero-surface .cx-p1-hero__grid{display:flex;flex-direction:column}body.vr2-page .vr2-hero-surface [data-vr2-role="HERO"]{order:-1}}
+body.vr2-page .cx-personal-hero{background:transparent;background-image:none}
+body.vr2-page .cx-personal-hero-visual{height:auto;min-height:0;aspect-ratio:auto;padding:0;border:0;box-shadow:none;background:none}
+body.vr2-page .cx-personal-hero-visual::before,body.vr2-page .cx-personal-hero-visual::after{display:none}
+/* Texture supports reading without competing with diagrams or body copy. */
+.vr2-page main{background-image:linear-gradient(rgba(245,241,231,.94),rgba(245,241,231,.94)),var(--vr2-texture);background-size:auto,1200px auto}
+.vr2-page .vr2-hero-surface .cx-knowledge-hero__visual{min-height:0}
+/* Marketing heroes retain the approved dark palette; reading/forms stay ivory. */
+body.vr2-page .vr2-hero-surface,body.vr2-page .cx-home-hero{background:#0c2935;color:#f5f1e7}
+body.vr2-page .vr2-hero-surface :is(h1,h2,p,a),body.vr2-page .cx-home-hero :is(h1,h2,p,label){color:#f5f1e7}
+body.vr2-page .vr2-hero-surface .vr2-kicker,body.vr2-page .cx-home-hero .cx-eyebrow{color:#e3bd78}
+body.vr2-page .vr2-hero-surface [data-vr2-role="HERO"] img{background:transparent}
+body.vr2-page .cx-home-hero input{background:#fbf8f0;color:#123b48}
+body.vr2-page .cx-home-hero .cx-home-ask :is(label,p,small){color:#123b48}
+body.vr2-page img[data-vr2-bound="failed"],body.vr2-page img[data-vr2-bound="resolution-failed"]{display:none}
+body.vr2-page [data-vr2-failure-state]{width:min(100%,320px);max-height:200px;object-fit:contain}

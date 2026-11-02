@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "PHI-OS-MCD-7-PERSONAL-RUNTIME-CURRENT-SUCCESSOR-RECONCILIATION-v3.0.0",
+  "work": "MCD-7-CURRENT-PRESENTATION-FINGERPRINT-DECOUPLING",
+  "status": "ACTIVE_CURRENT_CONTRACT_GUARDED_PRESENTATION_DECOUPLED",
+  "predecessor": {
+    "path": "content/professional/method-client-delivery/reconciliation/mcd-7-personal-runtime-result-surface-current-successor-v2.json",
+    "sha256": "c3ccd8ba6119ee51110e3bb5c0163e0c2548cd6c53309a0a62c22c746c8bd2ec",
+    "mutated": false,
+    "role": "HISTORICAL_PRESENTATION_DIGEST_SUCCESSOR"
+  },
+  "historicalFreeze": {
+    "path": "content/professional/method-client-delivery/freeze/mcd-7-personal-runtime-result-surface-freeze-v1.json",
+    "sha256": "ba4e0428abd03d2d05dad98cdcee2799f493c6fab66ed39d3291d4ea985378e5",
+    "mutated": false
+  },
+  "currentPolicy": {
+    "wholeHtmlFingerprintRequired": false,
+    "wholeCssFingerprintRequired": false,
+    "presentationMayEvolve": true,
+    "runtimeJsExactFingerprintRequired": true,
+    "localeAuthorityExactFingerprintRequired": true,
+    "contractRegistryAcceptanceExactFingerprintRequired": true,
+    "wprRuntimeBoundaryExactFingerprintRequired": true,
+    "reason": "Personal Runtime HTML/CSS are presentation surfaces. MCD-7 current authority is the result-surface contract, required runtime hooks, canonical projection execution path and restricted-result boundary, not the byte identity of the whole page."
+  },
+  "exactAuthorityArtifacts": [
+    {
+      "path": "content/professional/method-client-delivery/contracts/mcd-7-personal-runtime-result-surface-contract-v1.json",
+      "sha256": "a0ce585e45ffe799c258ac7acc388d594866099cdefa0092c5b3a9f3b7bd5610"
+    },
+    {
+      "path": "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+      "sha256": "b3ab48af637c24359329f937a99487a83aabaa83d133e3733dace3efe821ab8a"
+    },
+    {
+      "path": "content/professional/method-client-delivery/acceptance/mcd-7-personal-runtime-result-surface-acceptance-v1.json",
+      "sha256": "aa44ec91381f95fe7d931f8915921e161cf0c5cb99c13d279a1ab3df26ef8f3b"
+    },
+    {
+      "path": "content/web-production/successors/wpr-w21-mcd7-personal-runtime-result-surface-successor-v1.json",
+      "sha256": "96110ac9f6e4246ef4e0c4c07f505d4b0db7bb4ef0601e77599c3a96737953d8"
+    },
+    {
+      "path": "assets/js/method-client-delivery/personal-runtime-surface-runtime.js",
+      "sha256": "679613a3bee8ffa83f77fe19b3014d38aa4d87beed9bcedb108661a5f7e09174"
+    },
+    {
+      "path": "assets/js/pages/personal-runtime.js",
+      "sha256": "fbec293d2b1ac0f0f92400ecd7a0ba3e01863e22903578c23fec76d9022667b9"
+    },
+    {
+      "path": "assets/js/locales/en/personal-runtime.js",
+      "sha256": "2df7af0ffd2355a141e16085949a36534986c35a0a66ca82e25d0a60461e6914"
+    },
+    {
+      "path": "assets/js/locales/zh-Hans/personal-runtime.js",
+      "sha256": "0d4f8f6099c740a0989ff024679edaee2d7be6685aa20bc846a71a53ee9ff3e2"
+    }
+  ],
+  "semanticSurfaceContract": {
+    "path": "personal-runtime.html",
+    "requiredAttributes": [
+      "data-page=personal-runtime",
+      "data-wpr-production-surface=MCD7_PERSONAL_RUNTIME_RESULTS"
+    ],
+    "requiredFlowSteps": [
+      "input",
+      "eligibility",
+      "processing",
+      "results"
+    ],
+    "requiredIds": [
+      "personalRuntimeInput",
+      "executionConsent",
+      "checkPersonalRuntimeInput",
+      "processPersonalRuntime",
+      "clearPersonalRuntimeInput"
+    ],
+    "requiredHooks": [
+      "data-mcd7-method-selection",
+      "data-personal-runtime-readiness",
+      "data-mcd7-eligibility",
+      "data-mcd7-processing",
+      "data-mcd7-results",
+      "data-mcd7-tabs",
+      "data-mcd7-overview",
+      "data-mcd7-reading-sources"
+    ],
+    "requiredTabs": [
+      "overview",
+      "astrology",
+      "bazi",
+      "numeric",
+      "reading"
+    ],
+    "requiredResultHooks": [
+      "astrology",
+      "bazi",
+      "numeric"
+    ],
+    "requiredI18nMarkers": [
+      "personalRuntime.personalRuntimeProjection",
+      "personalRuntime.currentlyUnavailable",
+      "personalRuntime.readingCopy"
+    ],
+    "forbiddenPublicResultTerms": [
+      "Human Design",
+      "人类图",
+      "HUMAN_DESIGN",
+      ">HDR<"
+    ],
+    "productionTabAllowed": false,
+    "presentationClassesAndVisualAssetsMayChange": true
+  },
+  "authorityBoundary": {
+    "historicalFreezeMutated": false,
+    "v1SuccessorMutated": false,
+    "v2SuccessorMutated": false,
+    "mpaDispatchAuthorityChanged": false,
+    "mcd5ProjectionAuthorityChanged": false,
+    "mcd6RendererAuthorityChanged": false,
+    "mcd7ResultContractChanged": false,
+    "interpretationAuthorityCreated": false,
+    "hdrProductionResultTabCreated": false,
+    "persistenceAuthorityCreated": false,
+    "methodExecutionConsentChanged": false,
+    "presentationFingerprintTreatedAsRuntimeAuthority": false
+  }
+}

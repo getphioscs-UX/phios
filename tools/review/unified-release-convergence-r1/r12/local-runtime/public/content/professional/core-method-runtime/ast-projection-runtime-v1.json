@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "PHI-OS-AST-PROJECTION-RUNTIME-v1.0.0",
+  "stageCode": "AST-W5",
+  "runtimeCode": "AST_PROJECTION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "32d5ccf364e11c1df0ab05b6b8230f0caf9b0d05"
+  },
+  "inputs": [
+    {
+      "projectionType": "PLANET",
+      "algorithmCode": "AST_PLANET_EPHEMERIS",
+      "outputRuntimeCode": "AST_PLANET_RUNTIME"
+    },
+    {
+      "projectionType": "HOUSE",
+      "algorithmCode": "AST_HOUSE_STRUCTURE",
+      "outputRuntimeCode": "AST_HOUSE_RUNTIME"
+    },
+    {
+      "projectionType": "ASPECT",
+      "algorithmCode": "AST_GOVERNED_ASPECT_DETECTION",
+      "outputRuntimeCode": "AST_ASPECT_RUNTIME"
+    }
+  ],
+  "projectionAuthority": {
+    "runtimeCode": "SHARED_PROJECTION_RUNTIME",
+    "canonicalSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "localProjectionSchemaAllowed": false,
+    "localProjectionIdentityAllowed": false,
+    "syntheticCombinedCalculationAllowed": false,
+    "perProjectionCalculationLineageRequired": true
+  },
+  "projectionTypes": [
+    "PLANET",
+    "HOUSE",
+    "ASPECT"
+  ],
+  "crossResultAlignment": {
+    "utcIsoRequired": true,
+    "timeScaleRequired": true,
+    "referenceFrameRequired": true,
+    "observerModeRequired": true,
+    "houseMustReferencePlanetOutputDigest": true,
+    "aspectMustReferencePlanetOutputDigest": true
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "boundaries": {
+    "createsProjection": true,
+    "createsInterpretation": false,
+    "createsKnowledge": false,
+    "createsRealityConclusion": false,
+    "createsProfessionalConclusion": false,
+    "changesProductionEligibility": false
+  },
+  "governance": {
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "AST-W6"
+}

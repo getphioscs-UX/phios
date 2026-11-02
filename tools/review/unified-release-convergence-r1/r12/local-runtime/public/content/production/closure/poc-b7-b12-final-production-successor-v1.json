@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-POC-B7-B12-FINAL-PRODUCTION-SUCCESSOR-v1.0.0",
+  "baselineCommit": "10295c965663e36f397e93c4ed3149a053426614",
+  "canonicalOrigin": "https://getphios.com",
+  "productionRuntime": "CLOUDFLARE_PAGES",
+  "status": "PENDING_MACHINE_ACCEPTANCE",
+  "evidence": {
+    "pocB4": {
+      "wwwRule": "poc-b4-www-to-canonical",
+      "list": "getphios_www_canonical",
+      "state": "ACTIVE",
+      "target": "https://getphios.com"
+    },
+    "pocB5": {
+      "commit": "10295c965663e36f397e93c4ed3149a053426614",
+      "robots": "https://getphios.com/robots.txt",
+      "sitemap": "https://getphios.com/sitemap.xml",
+      "canonicalHostname": "getphios.com"
+    },
+    "pocB6": {
+      "pagesDevRule": "poc-b6-pagesdev-to-canonical",
+      "list": "getphios_pagesdev_canonical",
+      "state": "ACTIVE",
+      "source": "https://phios-github.pages.dev",
+      "target": "https://getphios.com"
+    }
+  },
+  "acceptance": {
+    "B7_LEGACY_HOSTNAME_CLOSURE": "READY_FOR_MACHINE_VERIFICATION",
+    "B8_SECURITY_HEADERS_PRODUCTION": "READY_FOR_MACHINE_VERIFICATION",
+    "B9_SEARCH_CANONICAL_ACCEPTANCE": "READY_FOR_MACHINE_VERIFICATION",
+    "B10_PRODUCTION_ROUTE_ACCEPTANCE": "READY_FOR_MACHINE_VERIFICATION",
+    "B11_PRODUCTION_EVIDENCE_FREEZE": "READY_AFTER_MACHINE_PASS",
+    "B12_FINAL_PRODUCTION_SUCCESSOR_ACCEPTANCE": "READY_AFTER_MACHINE_PASS"
+  },
+  "finalFreezeOnPass": {
+    "GETPHIOS_PRODUCTION_SUCCESSOR": "ACCEPTED",
+    "CANONICAL_ORIGIN": "https://getphios.com",
+    "WWW": "RETIRED_TO_301_SUCCESSOR",
+    "PAGES_DEV": "RETIRED_TO_301_SUCCESSOR",
+    "WIX": "DOMAIN_HISTORY_ONLY",
+    "PUBLIC_SEARCH_AUTHORITY": "getphios.com",
+    "PRODUCTION_RUNTIME": "CLOUDFLARE_PAGES"
+  }
+}

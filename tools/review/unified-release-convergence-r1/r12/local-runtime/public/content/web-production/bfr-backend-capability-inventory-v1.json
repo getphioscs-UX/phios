@@ -1,0 +1,1734 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H0-BACKEND-CAPABILITY-INVENTORY-v1.0.0",
+  "work": "BFR-H0",
+  "baselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "status": "BFR_H0_INVENTORY_COMPLETE_RECONCILIATION_ONLY",
+  "authorityBoundary": {
+    "owns": "INVENTORY_AND_CONSUMPTION_RECONCILIATION_ONLY",
+    "newBackendAuthorityCreated": false,
+    "productionEligibilityChanged": false
+  },
+  "minimumScanScope": [
+    "BOOKS",
+    "KNOWLEDGE",
+    "VISUAL",
+    "REALITY",
+    "METHOD",
+    "ACADEMY",
+    "SERVICES",
+    "PROFESSIONAL"
+  ],
+  "consumerStateEnum": [
+    "ACTIVE",
+    "PARTIAL",
+    "MISSING",
+    "NONE_BY_DESIGN",
+    "DEPRECATED"
+  ],
+  "recordCount": 56,
+  "records": [
+    {
+      "capabilityCode": "BOOK_REGISTRY",
+      "category": "BOOKS",
+      "runtimeCode": "BOOK_REGISTRY",
+      "authoritySource": "content/registry/books.json",
+      "productionState": "ACTIVE_FIVE_VOLUME_REGISTRY",
+      "dataSource": "content/registry/books.json",
+      "endpoint": "/content/registry/books.json",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "BOOK_COVERS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "actualConsumer": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": [
+        "Homepage five-volume consumer is deferred to HPC2."
+      ]
+    },
+    {
+      "capabilityCode": "PART_REGISTRY",
+      "category": "BOOKS",
+      "runtimeCode": "PART_REGISTRY",
+      "authoritySource": "content/registry/parts.json",
+      "productionState": "ACTIVE_15_PART_REGISTRY",
+      "dataSource": "content/registry/parts.json",
+      "endpoint": "/content/registry/parts.json",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "LIBRARY",
+        "INDIVIDUAL_BOOK"
+      ],
+      "actualConsumer": [
+        "LIBRARY",
+        "INDIVIDUAL_BOOK"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "FIVE_VOLUME_OWNERSHIP",
+      "category": "BOOKS",
+      "runtimeCode": "BOOK_W1",
+      "authoritySource": "content/registry/books.json",
+      "productionState": "FROZEN_FIVE_VOLUME_15_PART",
+      "dataSource": "content/registry/books.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "BOOK_COVERS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "actualConsumer": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "MISSING_CONSUMER",
+      "notes": [
+        "Homepage consumer missing at BFR baseline."
+      ]
+    },
+    {
+      "capabilityCode": "BOOK_ROUTES",
+      "category": "BOOKS",
+      "runtimeCode": "WPR_ROUTE",
+      "authoritySource": "content/web-production/registries/wpr-route-registry-v1.json",
+      "productionState": "ACTIVE_FIVE_VOLUME_ROUTES",
+      "dataSource": "content/web-production/registries/wpr-route-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "actualConsumer": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PUBLICATION_OWNERSHIP",
+      "category": "BOOKS",
+      "runtimeCode": "BOOK_W1D",
+      "authoritySource": "content/knowledge/migrations/node-publication-ownership-v2.json",
+      "productionState": "ACTIVE_SUCCESSOR_OWNERSHIP",
+      "dataSource": "content/web-production/registries/wpr-five-volume-publication-context-registry-v1.json",
+      "endpoint": "/content/web-production/registries/wpr-five-volume-publication-context-registry-v1.json",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ARTICLE",
+        "FIGURE",
+        "LIBRARY"
+      ],
+      "actualConsumer": [
+        "ARTICLE",
+        "FIGURE",
+        "LIBRARY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "CANONICAL_KNOWLEDGE",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KNR",
+      "authoritySource": "content/knowledge/registry/nodes.json",
+      "productionState": "ACTIVE_CANONICAL_AUTHORITY",
+      "dataSource": "content/knowledge/registry/nodes.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "INTERNAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "NONE_BY_DESIGN"
+      ],
+      "actualConsumer": [
+        "NONE_BY_DESIGN"
+      ],
+      "consumerState": "NONE_BY_DESIGN",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PUBLISHED_KNOWLEDGE",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KNR_PUBLISHED_KNOWLEDGE",
+      "authoritySource": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "productionState": "PUBLISHED_14_RECORDS",
+      "dataSource": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "endpoint": "/api/public-knowledge",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [
+        "ARTICLE_VISUALS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "ARTICLE",
+        "ASK_PHIOS"
+      ],
+      "actualConsumer": [
+        "LIBRARY",
+        "ARTICLE",
+        "ASK_PHIOS"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "MISSING_CONSUMER",
+      "notes": [
+        "Homepage consumption is not yet explicit."
+      ]
+    },
+    {
+      "capabilityCode": "REVIEWED_MANUSCRIPT_CORPUS",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KSAR",
+      "authoritySource": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+      "productionState": "ACTIVE_REVIEWED_CORPUS_REMOTE_R2_VERIFICATION_PENDING",
+      "dataSource": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+      "endpoint": "/api/knowledge-access",
+      "localeAvailability": [
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "INTERNAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ASK_PHIOS"
+      ],
+      "actualConsumer": [
+        "ASK_PHIOS"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": [
+        "Remote R2 verification remains an upstream operational gate."
+      ]
+    },
+    {
+      "capabilityCode": "KNOWLEDGE_RETRIEVAL",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KNR",
+      "authoritySource": "content/knowledge/public/retrieval/published-retrieval-index.json",
+      "productionState": "ACTIVE_PUBLIC_RETRIEVAL_INDEX",
+      "dataSource": "content/knowledge/public/retrieval/published-retrieval-index.json",
+      "endpoint": "/api/public-knowledge",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "KNOWLEDGE_SEARCH",
+        "ASK_PHIOS"
+      ],
+      "actualConsumer": [
+        "KNOWLEDGE_SEARCH",
+        "ASK_PHIOS"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "GROUNDED_ANSWER",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KAP",
+      "authoritySource": "content/knowledge/answer-projection/freeze/kap-w11-w17-answer-composition-freeze-v1.json",
+      "productionState": "ACTIVE_GROUNDED_ANSWER_SUCCESSOR",
+      "dataSource": "functions/api/ask-phios.js",
+      "endpoint": "/api/ask-phios",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ASK_PHIOS"
+      ],
+      "actualConsumer": [
+        "ASK_PHIOS"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "READING_PATHS",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KNR_READING_PATHS",
+      "authoritySource": "content/knowledge/public/public-reading-paths.json",
+      "productionState": "ACTIVE_LIMITED_PUBLIC_PATHS",
+      "dataSource": "content/knowledge/public/public-reading-paths.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "LIBRARY",
+        "ASK_PHIOS",
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "LIBRARY",
+        "ACADEMY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": [
+        "Ask related/reading-path presentation remains CKA work."
+      ]
+    },
+    {
+      "capabilityCode": "COLLECTIONS",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KNR_COLLECTIONS",
+      "authoritySource": "content/knowledge/registry/collections.json",
+      "productionState": "ACTIVE_STRUCTURED_COLLECTIONS",
+      "dataSource": "content/knowledge/registry/collections.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "LIBRARY"
+      ],
+      "actualConsumer": [
+        "LIBRARY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "RELATED_KNOWLEDGE",
+      "category": "KNOWLEDGE",
+      "runtimeCode": "KAP_RELATED",
+      "authoritySource": "content/knowledge/public/retrieval/relationships.json",
+      "productionState": "ACTIVE_RELATED_KNOWLEDGE_AUTHORITY",
+      "dataSource": "content/knowledge/public/retrieval/relationships.json",
+      "endpoint": "/api/ask-phios",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ASK_PHIOS",
+        "ARTICLE",
+        "BOOK",
+        "FIGURE"
+      ],
+      "actualConsumer": [
+        "ASK_PHIOS"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": [
+        "Contextual Article/Book/Figure Ask is deferred to CKA/HPC2."
+      ]
+    },
+    {
+      "capabilityCode": "FIGURES",
+      "category": "VISUAL",
+      "runtimeCode": "FIGURE_REGISTRY",
+      "authoritySource": "content/registry/figures.json",
+      "productionState": "ACTIVE_16_FIGURE_REGISTRY",
+      "dataSource": "content/registry/figures.json",
+      "endpoint": "/content/registry/figures.json",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "FIGURES"
+      ],
+      "expectedSurface": [
+        "FIGURE",
+        "ARTICLE",
+        "LIBRARY",
+        "HOMEPAGE"
+      ],
+      "actualConsumer": [
+        "FIGURE",
+        "LIBRARY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "Article/Homepage governed visual consumption is incomplete."
+      ]
+    },
+    {
+      "capabilityCode": "DIAGRAMS",
+      "category": "VISUAL",
+      "runtimeCode": "PUBLIC_ASSET_REGISTRY",
+      "authoritySource": "content/registry/public-assets.json",
+      "productionState": "REGISTERED_VISUAL_CAPABILITY_R2_VERIFICATION_PENDING",
+      "dataSource": "content/registry/public-assets.json",
+      "endpoint": "/api/public-asset-config",
+      "localeAvailability": [
+        "locale-neutral",
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "DIAGRAMS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "BOOK",
+        "ARTICLE",
+        "ACADEMY"
+      ],
+      "actualConsumer": [],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "BFR-H11 records concrete R2 resolution/consumer gaps."
+      ]
+    },
+    {
+      "capabilityCode": "ILLUSTRATIONS",
+      "category": "VISUAL",
+      "runtimeCode": "PUBLIC_ASSET_REGISTRY",
+      "authoritySource": "content/registry/public-assets.json",
+      "productionState": "REGISTERED_VISUAL_CAPABILITY_R2_VERIFICATION_PENDING",
+      "dataSource": "content/registry/public-assets.json",
+      "endpoint": "/api/public-asset-config",
+      "localeAvailability": [
+        "locale-neutral",
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "ILLUSTRATIONS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "BOOK",
+        "ARTICLE",
+        "ACADEMY"
+      ],
+      "actualConsumer": [],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "BFR-H11 records concrete R2 resolution/consumer gaps."
+      ]
+    },
+    {
+      "capabilityCode": "ICONS",
+      "category": "VISUAL",
+      "runtimeCode": "PUBLIC_ASSET_REGISTRY",
+      "authoritySource": "content/registry/public-assets.json",
+      "productionState": "REGISTERED_VISUAL_CAPABILITY_R2_VERIFICATION_PENDING",
+      "dataSource": "content/registry/public-assets.json",
+      "endpoint": "/api/public-asset-config",
+      "localeAvailability": [
+        "locale-neutral",
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "ICONS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "BOOK",
+        "ACADEMY",
+        "SERVICES"
+      ],
+      "actualConsumer": [],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "BFR-H11 records concrete R2 resolution/consumer gaps."
+      ]
+    },
+    {
+      "capabilityCode": "THESIS_VISUALS",
+      "category": "VISUAL",
+      "runtimeCode": "PUBLIC_ASSET_REGISTRY",
+      "authoritySource": "content/registry/public-assets.json",
+      "productionState": "REGISTERED_VISUAL_CAPABILITY_R2_VERIFICATION_PENDING",
+      "dataSource": "content/registry/public-assets.json",
+      "endpoint": "/api/public-asset-config",
+      "localeAvailability": [
+        "locale-neutral",
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "THESIS_VISUALS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "BOOK",
+        "ARTICLE",
+        "ACADEMY"
+      ],
+      "actualConsumer": [],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "BFR-H11 records concrete R2 resolution/consumer gaps."
+      ]
+    },
+    {
+      "capabilityCode": "KNOWLEDGE_VISUALS",
+      "category": "VISUAL",
+      "runtimeCode": "PUBLIC_ASSET_REGISTRY",
+      "authoritySource": "content/registry/public-assets.json",
+      "productionState": "REGISTERED_VISUAL_CAPABILITY_R2_VERIFICATION_PENDING",
+      "dataSource": "content/registry/public-assets.json",
+      "endpoint": "/api/public-asset-config",
+      "localeAvailability": [
+        "locale-neutral",
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "KNOWLEDGE_VISUALS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "BOOK",
+        "ARTICLE",
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "LIBRARY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "BFR-H11 records concrete R2 resolution/consumer gaps."
+      ]
+    },
+    {
+      "capabilityCode": "PREVIEW_ASSETS",
+      "category": "VISUAL",
+      "runtimeCode": "PUBLIC_ASSET_REGISTRY",
+      "authoritySource": "content/registry/public-assets.json",
+      "productionState": "REGISTERED_VISUAL_CAPABILITY_R2_VERIFICATION_PENDING",
+      "dataSource": "content/registry/public-assets.json",
+      "endpoint": "/api/public-asset-config",
+      "localeAvailability": [
+        "locale-neutral",
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [
+        "PREVIEW_ASSETS"
+      ],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "LIBRARY",
+        "BOOK",
+        "ARTICLE",
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "LIBRARY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "notes": [
+        "BFR-H11 records concrete R2 resolution/consumer gaps."
+      ]
+    },
+    {
+      "capabilityCode": "PERSONAL_RUNTIME",
+      "category": "REALITY",
+      "runtimeCode": "MCD",
+      "authoritySource": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+      "productionState": "LIMITED_PRODUCTION_METHOD_GATED",
+      "dataSource": "content/professional/method-client-delivery/contracts/mcd-7-personal-runtime-result-surface-contract-v1.json",
+      "endpoint": "/api/method-execute",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PERSONAL_REALITY"
+      ],
+      "actualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": [
+        "Execution remains consent/MPA gated."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_RUNTIME",
+      "category": "REALITY",
+      "runtimeCode": "RMO",
+      "authoritySource": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "productionState": "FROZEN_RUNTIME_AUTHORITY",
+      "dataSource": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE",
+        "REALITY_DASHBOARD"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "REALITY_JOURNEY",
+      "category": "REALITY",
+      "runtimeCode": "JR",
+      "authoritySource": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "productionState": "FROZEN_ARCHITECTURE_LIMITED_READ_ONLY_PROJECTION",
+      "dataSource": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "endpoint": "/api/reality-handoff",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "REALITY_JOURNEY",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "READING_RUNTIME",
+      "category": "REALITY",
+      "runtimeCode": "RRE",
+      "authoritySource": "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json",
+      "productionState": "FROZEN_READING_RUNTIME",
+      "dataSource": "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json",
+      "endpoint": "/api/read-runtime",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "REALITY_JOURNEY",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "NAVIGATION_RUNTIME",
+      "category": "REALITY",
+      "runtimeCode": "RNE",
+      "authoritySource": "content/runtime/reality-navigation-engine/freeze/rne-w5-w9-navigation-decision-support-freeze-v1.json",
+      "productionState": "FROZEN_NAVIGATION_RUNTIME",
+      "dataSource": "content/runtime/reality-navigation-engine/freeze/rne-w5-w9-navigation-decision-support-freeze-v1.json",
+      "endpoint": "/api/navigate-runtime",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "REALITY_JOURNEY",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "FINANCIAL_REALITY",
+      "category": "REALITY",
+      "runtimeCode": "FINANCIAL_RUNTIME",
+      "authoritySource": "content/registry/m4a-financial-reality-navigation.json",
+      "productionState": "GOVERNED_LIMITED_PUBLIC_DISCOVERY",
+      "dataSource": "content/registry/m4a-financial-reality-navigation.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "FINANCIAL_REALITY",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "HOMEPAGE",
+        "FINANCIAL_REALITY",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": [
+        "Public discovery is active; calculation/recommendation authority remains downstream-gated."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_VERSION",
+      "category": "REALITY",
+      "runtimeCode": "RMO_VERSIONING",
+      "authoritySource": "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json",
+      "productionState": "FROZEN_RUNTIME_STATE",
+      "dataSource": "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE",
+        "REALITY_DASHBOARD"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "MISSING_SURFACE",
+      "notes": []
+    },
+    {
+      "capabilityCode": "REALITY_DIFF",
+      "category": "REALITY",
+      "runtimeCode": "RMO_DIFF",
+      "authoritySource": "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json",
+      "productionState": "FROZEN_RUNTIME_STATE",
+      "dataSource": "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE",
+        "REALITY_DASHBOARD"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "MISSING_SURFACE",
+      "notes": []
+    },
+    {
+      "capabilityCode": "CONTINUITY",
+      "category": "REALITY",
+      "runtimeCode": "LRM_CONTINUITY",
+      "authoritySource": "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json",
+      "productionState": "FROZEN_CONTINUITY_HANDOFF",
+      "dataSource": "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE",
+        "REALITY_DASHBOARD"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "CUSTOMER_WORKSPACE",
+      "category": "REALITY",
+      "runtimeCode": "CUSTOMER_WORKSPACE",
+      "authoritySource": "content/web-production/registries/wpr-surface-registry-v1.json",
+      "productionState": "ROUTE_PRESENT_CANONICAL_WORKSPACE_NOT_YET_SEPARATE",
+      "dataSource": "content/web-production/registries/wpr-route-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "MISSING_SURFACE",
+      "notes": [
+        "Current route resolves to browser-local Reality Journey compatibility, not a distinct canonical customer workspace."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_DASHBOARD",
+      "category": "REALITY",
+      "runtimeCode": "JR_BROWSER_LOCAL",
+      "authoritySource": "content/registry/m3c-journey-dashboard.json",
+      "productionState": "LIMITED_BROWSER_LOCAL_COMPATIBILITY",
+      "dataSource": "content/registry/m3c-journey-dashboard.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "REALITY_DASHBOARD"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "METHOD_RUNTIME",
+      "category": "METHOD",
+      "runtimeCode": "METHOD_RUNTIME",
+      "authoritySource": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "productionState": "GOVERNED_METHOD_AUTHORITY",
+      "dataSource": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "endpoint": "/api/method-execute",
+      "localeAvailability": [
+        "locale-neutral"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PERSONAL_REALITY"
+      ],
+      "actualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "CALCULATION_RUNTIME",
+      "category": "METHOD",
+      "runtimeCode": "SHARED_CALCULATION_RUNTIME",
+      "authoritySource": "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+      "productionState": "GOVERNED_INTERNAL_CALCULATION",
+      "dataSource": "content/professional/method-runtime/shared-calculation-runtime-v1.json",
+      "endpoint": "/api/method-execute",
+      "localeAvailability": [
+        "locale-neutral"
+      ],
+      "audience": [
+        "INTERNAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "NONE_BY_DESIGN"
+      ],
+      "actualConsumer": [
+        "NONE_BY_DESIGN"
+      ],
+      "consumerState": "NONE_BY_DESIGN",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PROJECTION_RUNTIME",
+      "category": "METHOD",
+      "runtimeCode": "SHARED_PROJECTION_RUNTIME",
+      "authoritySource": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "productionState": "GOVERNED_INTERNAL_PROJECTION",
+      "dataSource": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "endpoint": "/api/method-execute",
+      "localeAvailability": [
+        "locale-neutral"
+      ],
+      "audience": [
+        "INTERNAL",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PERSONAL_REALITY"
+      ],
+      "actualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "MPA_ELIGIBILITY",
+      "category": "METHOD",
+      "runtimeCode": "MPA",
+      "authoritySource": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "productionState": "ACTIVE_GOVERNED_ELIGIBILITY",
+      "dataSource": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "endpoint": "/api/method-execute",
+      "localeAvailability": [
+        "locale-neutral"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PERSONAL_REALITY"
+      ],
+      "actualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "METHOD_CLIENT_DELIVERY",
+      "category": "METHOD",
+      "runtimeCode": "MCD",
+      "authoritySource": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+      "productionState": "ACTIVE_LIMITED_CLIENT_DELIVERY",
+      "dataSource": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+      "endpoint": "/api/method-execute",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PERSONAL_REALITY"
+      ],
+      "actualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "ACADEMY",
+      "category": "ACADEMY",
+      "runtimeCode": "ALR",
+      "authoritySource": "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+      "productionState": "FROZEN_VALIDATION_PROJECTION_DISCOVERY_ALLOWED",
+      "dataSource": "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "HOMEPAGE",
+        "ACADEMY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "LEARNING_RUNTIME",
+      "category": "ACADEMY",
+      "runtimeCode": "ALR",
+      "authoritySource": "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+      "productionState": "FROZEN_LEARNING_RUNTIME",
+      "dataSource": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "ACADEMY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PROGRESS",
+      "category": "ACADEMY",
+      "runtimeCode": "ALR_PROGRESS",
+      "authoritySource": "content/academy/academy-learning-runtime/registries/learning-progress-state-registry-v1.json",
+      "productionState": "FROZEN_PROGRESS_STATE",
+      "dataSource": "content/academy/academy-learning-runtime/registries/learning-progress-state-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "ACADEMY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "ASSESSMENT",
+      "category": "ACADEMY",
+      "runtimeCode": "ALR_ASSESSMENT",
+      "authoritySource": "content/academy/academy-learning-runtime/registries/assessment-registry-v1.json",
+      "productionState": "FROZEN_ASSESSMENT_RUNTIME",
+      "dataSource": "content/academy/academy-learning-runtime/registries/assessment-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "ACADEMY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "ACADEMY_READING_PATHS",
+      "category": "ACADEMY",
+      "runtimeCode": "ALR_READING_PATH",
+      "authoritySource": "content/academy/academy-learning-runtime/registries/learning-path-registry-v1.json",
+      "productionState": "FROZEN_FIVE_LEARNING_PATHS",
+      "dataSource": "content/academy/academy-learning-runtime/registries/learning-path-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "ACADEMY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "FIVE_VOLUME_LEARNING_ARCHITECTURE",
+      "category": "ACADEMY",
+      "runtimeCode": "ALR_ARCHITECTURE",
+      "authoritySource": "content/academy/academy-learning-runtime/freeze/alr-w10-w14-learning-architecture-freeze-v1.json",
+      "productionState": "FROZEN_FIVE_VOLUME_LEARNING_ARCHITECTURE",
+      "dataSource": "content/academy/academy-learning-runtime/freeze/alr-w10-w14-learning-architecture-freeze-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "visualAssets": [
+        "BOOK_COVERS"
+      ],
+      "expectedSurface": [
+        "ACADEMY"
+      ],
+      "actualConsumer": [
+        "ACADEMY"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "SERVICES",
+      "category": "SERVICES",
+      "runtimeCode": "SERVICES",
+      "authoritySource": "content/knowledge/registry/services.json",
+      "productionState": "PUBLIC_STATIC_SERVICE_PROJECTION_REGISTRY_EMPTY",
+      "dataSource": "content/knowledge/registry/services.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "SERVICES"
+      ],
+      "actualConsumer": [
+        "HOMEPAGE",
+        "SERVICES"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "STALE_PROJECTION",
+      "notes": [
+        "Services page exists but canonical service registry currently contains zero service records."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_READOUT",
+      "category": "SERVICES",
+      "runtimeCode": "RRE",
+      "authoritySource": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+      "productionState": "FROZEN_READOUT_RUNTIME",
+      "dataSource": "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json",
+      "endpoint": "/api/read-runtime",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "SERVICES",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "SERVICES",
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "SERVICE_NAVIGATION",
+      "category": "SERVICES",
+      "runtimeCode": "RNE",
+      "authoritySource": "content/runtime/reality-navigation-engine/freeze/rne-w5-w9-navigation-decision-support-freeze-v1.json",
+      "productionState": "FROZEN_NAVIGATION_RUNTIME",
+      "dataSource": "content/runtime/reality-navigation-engine/freeze/rne-w5-w9-navigation-decision-support-freeze-v1.json",
+      "endpoint": "/api/navigate-runtime",
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "SERVICES",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "SERVICES",
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "SERVICE_FINANCIAL_REALITY",
+      "category": "SERVICES",
+      "runtimeCode": "FINANCIAL_RUNTIME",
+      "authoritySource": "content/registry/m4a-financial-reality-navigation.json",
+      "productionState": "GOVERNED_LIMITED_DISCOVERY",
+      "dataSource": "content/registry/m4a-financial-reality-navigation.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "SERVICES",
+        "FINANCIAL_REALITY"
+      ],
+      "actualConsumer": [
+        "SERVICES",
+        "FINANCIAL_REALITY"
+      ],
+      "consumerState": "ACTIVE",
+      "gapClassification": "NO_GAP",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_SERVICES",
+      "category": "SERVICES",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "productionState": "FROZEN_HUMAN_AUTHORITY_GATED",
+      "dataSource": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PUBLIC",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "HOMEPAGE",
+        "SERVICES",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "HOMEPAGE",
+        "SERVICES",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "SERVICE_CUSTOMER_WORKSPACE",
+      "category": "SERVICES",
+      "runtimeCode": "CUSTOMER_WORKSPACE",
+      "authoritySource": "content/web-production/registries/wpr-surface-registry-v1.json",
+      "productionState": "WORKSPACE_ROUTE_PARTIAL",
+      "dataSource": "content/web-production/registries/wpr-route-registry-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "CUSTOMER_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "MISSING_SURFACE",
+      "notes": []
+    },
+    {
+      "capabilityCode": "REPORTS",
+      "category": "SERVICES",
+      "runtimeCode": "RR",
+      "authoritySource": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "productionState": "FROZEN_ASSEMBLY_READY_UPSTREAM_GATED",
+      "dataSource": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "REPORT",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "REPORT",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_WORKSPACE",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "productionState": "LIMITED_PRODUCTION_AUTHORIZED_SHELL",
+      "dataSource": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_EVIDENCE",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/contracts/professional-evidence-package-contract-v2.json",
+      "productionState": "FROZEN_PROFESSIONAL_AUTHORITY",
+      "dataSource": "content/runtime/professional-runtime/contracts/professional-evidence-package-contract-v2.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_JUDGMENT_BOUNDARY",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/contracts/professional-judgment-contract-v2.json",
+      "productionState": "FROZEN_PROFESSIONAL_AUTHORITY",
+      "dataSource": "content/runtime/professional-runtime/contracts/professional-judgment-contract-v2.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "APPROVAL",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/contracts/professional-approval-lifecycle-contract-v2.json",
+      "productionState": "FROZEN_PROFESSIONAL_AUTHORITY",
+      "dataSource": "content/runtime/professional-runtime/contracts/professional-approval-lifecycle-contract-v2.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "ACTION",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/registries/professional-lifecycle-state-registry-v2.json",
+      "productionState": "FROZEN_PROFESSIONAL_AUTHORITY",
+      "dataSource": "content/runtime/professional-runtime/registries/professional-lifecycle-state-registry-v2.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "OUTCOME",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/registries/professional-outcome-kind-registry-v2.json",
+      "productionState": "FROZEN_PROFESSIONAL_AUTHORITY",
+      "dataSource": "content/runtime/professional-runtime/registries/professional-outcome-kind-registry-v2.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    },
+    {
+      "capabilityCode": "EXTERNAL_AUTHORITY",
+      "category": "PROFESSIONAL",
+      "runtimeCode": "PR",
+      "authoritySource": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+      "productionState": "FROZEN_PROFESSIONAL_AUTHORITY",
+      "dataSource": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+      "endpoint": null,
+      "localeAvailability": [
+        "en",
+        "zh-Hans"
+      ],
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "visualAssets": [],
+      "expectedSurface": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "actualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "consumerState": "PARTIAL",
+      "gapClassification": "PARTIAL_CONSUMPTION",
+      "notes": []
+    }
+  ],
+  "sourceSnapshot": [
+    {
+      "path": "content/registry/books.json",
+      "sha256": "5b0ade2a3b3bf36e13691f1b99205bd94f33790daa0306a58422a7bbe8fe4830"
+    },
+    {
+      "path": "content/registry/parts.json",
+      "sha256": "603752f0bfaea72488efedcf27deb77fca21c23f49fdae3330a8d777ffe1dde5"
+    },
+    {
+      "path": "content/knowledge/registry/nodes.json",
+      "sha256": "ac9f1eab7cf2534d0853dc656d1a6265d56d8afbdc879f3aff592ce5437c6ade"
+    },
+    {
+      "path": "content/knowledge/migrations/node-publication-ownership-v2.json",
+      "sha256": "2c7cbdf901a2c0c21760fa1ad9a554fff944252e636570214febba4ca576d1b0"
+    },
+    {
+      "path": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "sha256": "5510dba24306d38b72cf8bd7e6d37c7bcdd30dfe0eb0e917d184d8faba912c4b"
+    },
+    {
+      "path": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+      "sha256": "87ad2425427f3583b890b2b8b785d4f52caa8969e3b986c7fa0b4c9c9027cefa"
+    },
+    {
+      "path": "content/knowledge/public/retrieval/published-retrieval-index.json",
+      "sha256": "b49f504e3a120ee2c15e49681662d6f05ac102d79c93208195b13237454dbd05"
+    },
+    {
+      "path": "content/registry/figures.json",
+      "sha256": "2c664dc993f3b10243850dc765ef6e185aa3f14e59b92631ea66b1f2484ee023"
+    },
+    {
+      "path": "content/registry/public-assets.json",
+      "sha256": "60d58ca76e0f979033b8f27cf7a64b43357e3eb8ebdb5670f0987aa185d81fee"
+    },
+    {
+      "path": "content/web-production/registries/wpr-surface-registry-v1.json",
+      "sha256": "84399fb47db1b5ca9c61c546cf0b3234629f09f00636c28c6a87a15f98dd61c5"
+    },
+    {
+      "path": "content/web-production/registries/wpr-route-registry-v1.json",
+      "sha256": "79cb71a17868ca127ec9e6151cd453a5d29cf541cc6366c9aa72b0c5e7ea9d74"
+    },
+    {
+      "path": "content/web-production/registries/wpr-production-source-registry-v1.json",
+      "sha256": "e601ec7447efd0ca3d0589a36e80f29ed7d0b4f4b2814bfa7c9bed6f37f855aa"
+    },
+    {
+      "path": "content/web-production/registries/wpr-runtime-consumption-registry-v1.json",
+      "sha256": "ca26ba8f698ed944c07cdaffa0e76ac8009df03720dc97e780c0a2804f9a2f1b"
+    },
+    {
+      "path": "content/web-production/contracts/wpr-pds-responsive-accessibility-integration-v1.json",
+      "sha256": "ba37ac2a2514ddd11d40a14d62c4d6d05af04c30b8997536ba54ec938705219f"
+    },
+    {
+      "path": "content/professional/canonical-presentation-runtime/freeze/cpr-w7-w30-full-freeze-v1.json",
+      "sha256": "03cb9b8c1a1d599705544dbd6d39c80f494e629f8d9502c55e5acbaad6ef0a60"
+    },
+    {
+      "path": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+      "sha256": "405efc8d15e0c604ca9797267ff405e4fa38591f5b9b2f76a0a230720f980c66"
+    },
+    {
+      "path": "content/web-production/contracts/client-surface-global-invariants-v1.json",
+      "sha256": "b68acd6801ca47192cf1f7e03ae17b5e46a67afcc5e666b8077c4ebc12453056"
+    }
+  ],
+  "exitGate": {
+    "everyKnownProductionCapabilityInventoried": true,
+    "invisibleCapabilitiesOmitted": false,
+    "authoritySourceRecorded": true,
+    "expectedSurfaceRecorded": true,
+    "consumerStateRecorded": true
+  }
+}

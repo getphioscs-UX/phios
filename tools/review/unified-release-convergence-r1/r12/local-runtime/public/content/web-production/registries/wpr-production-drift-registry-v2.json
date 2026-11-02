@@ -1,0 +1,114 @@
+{
+  "registryCode": "PHI-OS-WPR-PF-PRODUCTION-DRIFT-REGISTRY-v2",
+  "registryVersion": "2.0.0",
+  "phase": "WPR-PF",
+  "work": "WPR-PF0",
+  "title": "Production Drift Registry Successor",
+  "baselineCommit": "65fe9cb7f039ca8672c3af20d44879baf8ed267b",
+  "status": "ACTIVE_POST_FREEZE_SUCCESSOR",
+  "predecessor": {
+    "wprFreeze": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+    "wprFreezeRewritten": false,
+    "wprW28Contract": "content/web-production/contracts/wpr-drift-observability-deployment-v1.json",
+    "wprW28ObservabilityRegistry": "content/web-production/registries/wpr-observability-registry-v1.json",
+    "wprW28Observation": "content/web-production/observability/wpr-production-observation-v1.json",
+    "predecessorAuthorityRewritten": false
+  },
+  "authorityBoundary": {
+    "ownsDriftTypeVocabularyOnly": true,
+    "ownsDetectorEvidence": false,
+    "ownsFailureDecision": false,
+    "ownsCanonicalSource": false,
+    "ownsBookAuthority": false,
+    "ownsAssetAuthority": false,
+    "ownsCprAuthority": false,
+    "ownsLocaleAuthority": false,
+    "ownsRuntimeAuthority": false,
+    "ownsDeploymentAuthority": false,
+    "ownsPublicVocabularyAuthority": false,
+    "ownsPrivacyAuthority": false,
+    "ownsVisualAuthority": false,
+    "mayMutateWprV1Freeze": false,
+    "mayGrantProduction": false,
+    "mayDeploy": false,
+    "mayPublish": false,
+    "mayCreateKnowledge": false,
+    "mayCreateMeaning": false,
+    "mayGrantMethodAuthority": false,
+    "mayCreateProfessionalJudgment": false
+  },
+  "driftTypes": [
+    {
+      "code": "SOURCE_DRIFT",
+      "definition": "A production surface or consumer resolves from a stale, unauthorized, candidate, or otherwise non-canonical source instead of the governed production source.",
+      "primaryDetectionWork": "WPR-PF4"
+    },
+    {
+      "code": "ROUTE_DRIFT",
+      "definition": "A production route diverges from its governed resolution, canonical source, locale, audience, cache, or redirect contract.",
+      "primaryDetectionWork": "WPR-PF5"
+    },
+    {
+      "code": "BOOK_DRIFT",
+      "definition": "A public or production projection diverges from the canonical five-book, fifteen-part, volume, or publication-ownership architecture.",
+      "primaryDetectionWork": "WPR-PF1"
+    },
+    {
+      "code": "ASSET_DRIFT",
+      "definition": "A governed asset is unresolved, missing, unconsumed, deprecated-but-consumed, or bypassed by an unauthorized hard-coded asset path.",
+      "primaryDetectionWork": "WPR-PF2",
+      "acceptanceWork": "WPR-PF6"
+    },
+    {
+      "code": "CPR_DRIFT",
+      "definition": "A rendered composition diverges from governed CPR composition lineage, slot ownership, or WPR projection boundaries.",
+      "primaryDetectionWork": "WPR-PF7"
+    },
+    {
+      "code": "LOCALE_DRIFT",
+      "definition": "A production projection diverges from its governed locale identity, route-locale relationship, or locale-specific production source.",
+      "primaryDetectionWork": "WPR-PF5",
+      "acceptanceWork": "WPR-PF7"
+    },
+    {
+      "code": "RUNTIME_ORPHAN",
+      "definition": "A production runtime declares an expected web surface or consumer but has no actual governed consumer, unless webProjection is explicitly NONE_BY_DESIGN.",
+      "primaryDetectionWork": "WPR-PF3",
+      "acceptanceWork": "WPR-PF10"
+    },
+    {
+      "code": "DEPLOYMENT_DRIFT",
+      "definition": "Repository production state and live deployment evidence are stale, missing, or not aligned to the accepted deployment candidate.",
+      "primaryDetectionWork": "WPR-PF12",
+      "liveClosurePhase": "POC-A"
+    },
+    {
+      "code": "VOCABULARY_DRIFT",
+      "definition": "A public surface leaks restricted internal vocabulary, stale method naming, old volume wording, incorrect book-volume naming, or internal codes.",
+      "primaryDetectionWork": "WPR-PF9"
+    },
+    {
+      "code": "VISUAL_DRIFT",
+      "definition": "A production surface falls below its governed visual coverage expectation or diverges from the accepted visual production projection.",
+      "primaryDetectionWork": "WPR-PF11"
+    },
+    {
+      "code": "PRIVACY_DRIFT",
+      "definition": "PUBLIC, CUSTOMER, or PROFESSIONAL isolation diverges across cache, hydration, storage, response headers, indexing, data purpose, consent, or professional authorization.",
+      "primaryDetectionWork": "WPR-PF8"
+    }
+  ],
+  "rules": {
+    "driftCodeMustComeFromThisRegistry": true,
+    "unknownDriftCodeFailsClosed": true,
+    "duplicateDriftCodeForbidden": true,
+    "detectorOwnsEvidence": true,
+    "detectorOwnsContextualFailureDecision": true,
+    "recordedDriftDoesNotMutateCanonicalAuthority": true,
+    "absenceOfDriftEvidenceDoesNotGrantProduction": true,
+    "deploymentDriftClassificationDoesNotEqualDeploymentAcceptance": true,
+    "runtimeNoneByDesignMayBeNonOrphan": true,
+    "canonicalNodeIdentityPrefixMustNotBeUsedToInferPublicBookOwnership": true,
+    "wprV1FrozenAuthorityRemainsHistoricalAuthority": true
+  }
+}

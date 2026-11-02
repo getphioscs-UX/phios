@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W19-FINANCIAL-REALITY-SNAPSHOT-CONTRACT-v1.0.0",
+  "work": "FDR-W19",
+  "baselineCommit": "1fcbb42",
+  "status": "ACTIVE_APPEND_ONLY_HISTORY",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "snapshotId",
+    "financialRealityId",
+    "sequence",
+    "timepoint",
+    "asOfDate",
+    "financialRealityVersion",
+    "snapshotPayload",
+    "previousSnapshotDigest",
+    "changeEventReferences",
+    "createdAt",
+    "creationReason",
+    "consentReference",
+    "digest"
+  ],
+  "timepointContract": {
+    "examples": [
+      "t0",
+      "t1",
+      "t2"
+    ],
+    "pattern": "^t[0-9]+$",
+    "sequenceStartsAt": 0,
+    "sequenceMustIncreaseByOne": true
+  },
+  "snapshotPayloadContract": "financial-reality-object-contract-v1.json",
+  "digestContract": {
+    "algorithm": "SHA-256",
+    "canonicalization": "UTF-8 JSON with recursively sorted object keys and no insignificant whitespace; digest field excluded",
+    "binds": [
+      "snapshot metadata",
+      "snapshotPayload",
+      "previousSnapshotDigest",
+      "changeEventReferences"
+    ]
+  },
+  "rules": {
+    "appendOnly": true,
+    "historicalSnapshotImmutable": true,
+    "silentHistoryMutationAllowed": false,
+    "snapshotOverwriteAllowed": false,
+    "snapshotDeleteToHideHistoryAllowed": false,
+    "newFactStateCreatesNewSnapshot": true,
+    "priorSnapshotDigestMustMatchPredecessor": true,
+    "sequenceGapAllowed": false,
+    "snapshotPayloadMayContainCalculation": false,
+    "snapshotPayloadMayContainRecommendation": false,
+    "consentScopeMustBeValidAtCreation": true
+  }
+}

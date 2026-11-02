@@ -1,6 +1,6 @@
 import {PublicAssetResolutionError,isAssetVerificationRenderable,resolvePublicAsset} from '../../assets/js/runtime/web-production/asset-resolver.js';
 import {reportVisualArchitecture,fixedReportAssetLanguage} from './report-visual-architecture.js';
-import visualManifest from '../../content/reports/shared/report-visual-assets-r2.json' with {type:'json'};
+import visualManifest from '../../content/reports/shared/report-visual-assets-r2.json';
 
 // R6.11 pure presentation boundary. The server caller checks the existing
 // purchase owner first and supplies its language plus existing registry rows.

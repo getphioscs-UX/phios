@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-WPR-PF1-BOOK-DRIFT-AUDIT-v1.0.0",
+  "work": "WPR-PF1",
+  "baselineCommit": "cae0e6e56993bcf215e588fc7a3196ca33754eb5",
+  "status": "NO_BOOK_DRIFT",
+  "canonicalBookCount": 5,
+  "websiteBookProjectionCount": 5,
+  "bookVolumeTitleMap": {
+    "BOOK-1": {
+      "volume": 1,
+      "title": "Reality Formation"
+    },
+    "BOOK-2": {
+      "volume": 2,
+      "title": "Reality Runtime"
+    },
+    "BOOK-3": {
+      "volume": 3,
+      "title": "Reality Continuity"
+    },
+    "BOOK-4": {
+      "volume": 4,
+      "title": "Reality Civilization"
+    },
+    "BOOK-5": {
+      "volume": 5,
+      "title": "Reality Navigation"
+    }
+  },
+  "publicationOwnership": {
+    "P1": "BOOK-1",
+    "P2": "BOOK-1",
+    "P3": "BOOK-1",
+    "P4": "BOOK-1",
+    "P5": "BOOK-2",
+    "P6": "BOOK-2",
+    "P7": "BOOK-2",
+    "P8": "BOOK-3",
+    "P9": "BOOK-3",
+    "P10": "BOOK-4",
+    "P11": "BOOK-4",
+    "P12": "BOOK-4",
+    "P13": "BOOK-5",
+    "P14": "BOOK-5",
+    "P15": "BOOK-5"
+  },
+  "preservedCanonicalNodeIdentityExamples": [
+    {
+      "nodeCode": "KN-B2-P8-001",
+      "publicationBookCode": "BOOK-3",
+      "prefixInferenceUsed": false
+    },
+    {
+      "nodeCode": "KN-B3-P10-001",
+      "publicationBookCode": "BOOK-4",
+      "prefixInferenceUsed": false
+    },
+    {
+      "nodeCode": "KN-B4-P13-001",
+      "publicationBookCode": "BOOK-5",
+      "prefixInferenceUsed": false
+    }
+  ],
+  "failConditions": [
+    "CANONICAL_BOOK_COUNT_NOT_5",
+    "WEBSITE_BOOK_PROJECTION_COUNT_NOT_5",
+    "BOOK_VOLUME_TITLE_MISMATCH",
+    "PART_PUBLICATION_OWNER_MISMATCH",
+    "PUBLIC_BOOK_INFERRED_FROM_KN_B_PREFIX"
+  ],
+  "identityPreservationIsNotDrift": true,
+  "evidence": [
+    "content/registry/books.json",
+    "content/registry/parts.json",
+    "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+    "content/web-production/registries/wpr-five-volume-publication-context-registry-v1.json",
+    "assets/js/pages/books.js",
+    "assets/js/web-production/public-surface-data.js"
+  ]
+}

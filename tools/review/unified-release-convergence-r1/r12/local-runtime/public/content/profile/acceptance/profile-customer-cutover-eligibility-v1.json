@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-CUSTOMER-CUTOVER-ELIGIBILITY-v1.0.0",
+  "work": "PRF-W12-CUSTOMER-CUTOVER-ELIGIBILITY",
+  "campaignBaselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
+  "admissionCommitContext": "dcd325143f119d5817f2abf03f79f9a8ba5b789c",
+  "status": "ELIGIBLE_NOT_EXECUTED",
+  "productionAdmissionRef": "content/profile/acceptance/profile-prf-w12-production-admission-v1.json",
+  "productionAdmissionSha256": "51c10e0e997eba91a0212a120271853d9dc3bc42d19350b4af56606379e9bbbd",
+  "freezeIndexRef": "content/profile/freeze/profile-production-freeze-index-v1.json",
+  "freezeIndexSha256": "683f82c5b99e5fe8aca413b8f845ce12a01517c62ae0ef81ab77ed3c07893c17",
+  "requirements": {
+    "progressiveUxMachineVerified": true,
+    "machineCampaign24Of24": true,
+    "humanAcceptance24Of24": true,
+    "allEightProductionFreezesActive": true,
+    "profileOptionalBeforePersonalReading": true
+  },
+  "effects": {
+    "customerProfileExecutionAllowed": true,
+    "customerPublicationAuthorityAvailable": true,
+    "profileRouteCutoverEligible": true,
+    "primaryPerspectivesNavigationCutoverEligible": true,
+    "cutoverExecuted": false,
+    "primaryNavigationChangedByThisWork": false,
+    "pprW47ProfileIntegrationEligibleWhenGlobalSequenceReachesW47": true,
+    "pprW47MayStartNow": false
+  },
+  "academicBridgeDeployment": {
+    "P1_IPIP_BIG_FIVE": "AVAILABLE_CAPABILITY",
+    "P2_PHI_REASONING": "AVAILABLE_CAPABILITY_NON_IQ",
+    "P3_ONET_RIASEC": "AVAILABLE_WHEN_CONFIGURED",
+    "P4_FINANCIAL_CAPABILITY": "AVAILABLE_CAPABILITY",
+    "p3ConfigurationDoesNotBlockCoreProfileCutover": true
+  },
+  "next": "Profile lane is closed and customer-cutover eligible. Continue global Master Work through REL-W5 then REL-W6; when the sequence reaches W47, Profile may be consumed without reopening PRF-W12. O*NET RIASEC remains configuration-gated until external approval/API key deployment is present.",
+  "sequenceDependency": {
+    "nextGlobalGate": "REL_W5_RELATIONSHIP_CURRENT_REALITY",
+    "then": "REL_W6_CROSS_EVIDENCE_RELATIONSHIP_SYNTHESIS",
+    "w47IntegrationOnlyAfterRelW6": true
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-P1-BROWSER-R1-BLOCKER-REPAIR-AUDIT-v1.0.0",
+  "work": "P1-BROWSER-R1",
+  "baseline": "19981b2_PLUS_P1_ROUTE_CUTOVER_DELTA",
+  "findings": [
+    {
+      "id": "R1-01",
+      "finding": "LOGO-003 rendered as a dark plate in the light CX header during production browser review.",
+      "repair": "Select already-canonical LOGO-009 for the light header; preserve LOGO-003 as historical canonical asset evidence."
+    },
+    {
+      "id": "R1-02",
+      "finding": "Native Ask drawer GET submit was observed as non-responsive in production browser review.",
+      "repair": "Install an explicit submit navigation handler and keep the open-link query synchronized."
+    },
+    {
+      "id": "R1-03",
+      "finding": "A spouse/temper question was classified as CKA and lexical retrieval matched generic 为什么/what terms to a PHI OS article.",
+      "repair": "Route spouse/partner language to relationship/current-context handling and reject KAP source sets that share no informative question term.",
+      "machineRegression": "POST /api/customer-contextual-ask with the reported spouse question now returns NEEDS_CONTEXT, no irrelevant Why-PHI-OS source projection, and no partner mind-reading."
+    },
+    {
+      "id": "R1-04",
+      "finding": "Zi Wei W16 reconciliation v2 still named the pre-CX-R12 Personal Reality JS digest.",
+      "repair": "Add v3 reconciliation reading the current PPR shared-owner registry without mutating Zi Wei or the historical freeze."
+    }
+  ],
+  "browserRecheckRequired": true,
+  "kapRuntimeSuccessor": "content/knowledge/answer-projection/reconciliation/kap-p1-question-source-relevance-successor-v1.json"
+}

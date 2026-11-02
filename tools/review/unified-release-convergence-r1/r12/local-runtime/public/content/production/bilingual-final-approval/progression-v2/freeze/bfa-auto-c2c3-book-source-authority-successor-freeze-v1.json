@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-BFA-AUTO-C2C3-BOOK-SOURCE-AUTHORITY-SUCCESSOR-FREEZE-v1.0.0",
+  "work": "BFA-AUTO-C2C3-BOOK-SOURCE-AUTHORITY-SUCCESSOR-FREEZE",
+  "status": "FROZEN_ADDITIVE_BFA_AUTO_C2C3_BOOK_SOURCE_AUTHORITY_SUCCESSOR",
+  "baselineCommit": "07f525b2047498364fea5a4ae0f9a51c37a47dd1",
+  "predecessorFreeze": "content/production/bilingual-final-approval/progression-v2/freeze/bfa-auto-c2c3-successor-freeze-v1.json",
+  "files": {
+    "scripts/check-bfa-w28-w39-production-acceptance-freeze.mjs": "6e7715b5445bfe9276d7707460ae7752db818a03a26ab28511196d5267d21b78",
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/contracts/book-scoped-source-authority-successor-v1.json": "4fa4b0795d7d6b950951ec4541a07e6e17f1f49d4613c8474763e62ec3c0627d"
+  },
+  "reconciledPredecessorFiles": {
+    "scripts/lib/bilingual-final-approval/bfa-auto-c2c3-v2.mjs": {
+      "predecessorSha256": "6c00e2d87bedd45b40841e58595a58e0af3cd13998b206291e89c2ba3c390815",
+      "successorSha256": "d8f09d142d3516e27072354a7d4e81fc594573df21cd24721f43016802b77141",
+      "reason": "Cross-book AUTO-C2/C3 must resolve book-scoped reviewed manuscript inventories and versioned KAU Human Accepted source authority; BOOK-2 uses KAU-R4 and includes two explicitly Human Accepted COMPOSITE_SOURCE_COVERAGE nodes."
+    },
+    "scripts/check-bfa-auto-c2c3.mjs": {
+      "predecessorSha256": "30ecf2921048b86e9dba3adff477fac3d32af53f477a99194171df269f29d497",
+      "successorSha256": "097f0771f78af28e8ba26c751e8ebe6619b182b742b334a981685333144ae8d9",
+      "reason": "Cross-book AUTO-C2/C3 must resolve book-scoped reviewed manuscript inventories and versioned KAU Human Accepted source authority; BOOK-2 uses KAU-R4 and includes two explicitly Human Accepted COMPOSITE_SOURCE_COVERAGE nodes."
+    },
+    "scripts/check-bfa-progression-v2.mjs": {
+      "predecessorSha256": "7b0799fe8125a51b0f44bee5b94c8717c872ad65eb129e9f830aa46ef77caa4c",
+      "successorSha256": "afd97817c285215d93ea141406e98c4c82e981091b07c84f3abb9cdd234e876f",
+      "reason": "Cross-book AUTO-C2/C3 must resolve book-scoped reviewed manuscript inventories and versioned KAU Human Accepted source authority; BOOK-2 uses KAU-R4 and includes two explicitly Human Accepted COMPOSITE_SOURCE_COVERAGE nodes."
+    }
+  },
+  "invariants": [
+    "BOOK_SCOPED_MANUSCRIPT_INVENTORY",
+    "VERSIONED_KAU_HUMAN_ACCEPTED_AUTHORITY",
+    "HUMAN_ACCEPTED_COMPOSITE_SOURCE_COVERAGE_IS_REUSED_NOT_SYNTHESIZED",
+    "MISSING_SOURCE_AUTHORITY_FAILS_CLOSED",
+    "ROUTINE_C2_C3_HUMAN_REVIEW_REMAINS_DISABLED",
+    "BFA_FINAL_PUBLICATION_APPROVAL_REMAINS_TL_HUMAN_AUTHORITY"
+  ]
+}

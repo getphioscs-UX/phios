@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-REL-W5-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "REL-W5",
+  "baselineCommit": "cbf21d3660142f1fe585c0c6cbf933b65c318f15",
+  "status": "MACHINE_VERIFIED_SIX_METHOD_CURRENT",
+  "campaign": {
+    "required": 24,
+    "passed": 24,
+    "scopeCoverage": {
+      "ME": 6,
+      "OTHER_AS_OBSERVED": 6,
+      "US": 6,
+      "CONTEXT": 6
+    },
+    "comparisonStateCoverage": {
+      "CURRENTLY_RESONANT": 6,
+      "PARTIALLY_RESONANT": 6,
+      "CURRENTLY_NOT_RESONANT": 6,
+      "OPEN": 6
+    },
+    "observationTypeCoverage": {
+      "OBSERVABLE": 12,
+      "CUSTOMER_INTERPRETATION": 12
+    },
+    "sensitiveExplicitConsentCases": 6
+  },
+  "inputAuthority": {
+    "AST": "HUMAN_ADMITTED_REL_W5_ELIGIBLE",
+    "BZR": "HUMAN_ADMITTED_REL_W5_ELIGIBLE",
+    "ZWR": "HUMAN_ADMITTED_REL_W5_ELIGIBLE",
+    "NUM": "HUMAN_ADMITTED_REL_W5_ELIGIBLE",
+    "ECR": "HUMAN_ADMITTED_REL_W5_ELIGIBLE",
+    "HD": "HUMAN_ADMITTED_REL_W5_ELIGIBLE"
+  },
+  "boundaries": {
+    "relationshipCurrentRealityCustomerControlled": true,
+    "otherAsObservedBecomesPartnerInnerStateFact": false,
+    "customerInterpretationBecomesObjectiveFact": false,
+    "customerResonanceProvesMethod": false,
+    "customerNonResonanceDisprovesMethod": false,
+    "automaticSemanticMatching": false,
+    "automaticPersistence": false,
+    "compatibilityScoreCreated": false,
+    "crossMethodMeaningCreated": false,
+    "customerPublicationAllowed": false,
+    "allSixMethodsAuthorityEligible": true,
+    "unavailableMethodMayContributeZeroClaims": true
+  },
+  "gate": "check:relationship:w5-current-reality",
+  "next": "REL-W6 Cross-Evidence Relationship Synthesis using six-method admitted claims, PRF-W12 production-admitted Profile evidence when present, and REL-W5 Current Reality."
+}

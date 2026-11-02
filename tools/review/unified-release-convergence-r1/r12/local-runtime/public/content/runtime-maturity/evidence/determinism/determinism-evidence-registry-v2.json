@@ -1,0 +1,2029 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S8-DETERMINISM-EVIDENCE-REGISTRY-v2.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S8",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "GLOBAL_MRM_S8_EM1_DETERMINISM_CAMPAIGN_ACTIVE_AND_ACCEPTED",
+  "evaluationRule": "same canonical input + same runtime version + same dependency/policy version = same canonical output",
+  "evidenceObjectCount": 37,
+  "evidenceObjects": [
+    {
+      "evidenceId": "MRM-RRP-W27-DET-REPORT-COMPOSITION-v1",
+      "runtimeCode": "RRP",
+      "capabilityCode": "RRP-REPORT-COMPOSITION",
+      "evidenceClass": "DETERMINISM",
+      "source": "RRP_W26_GOLDEN_CANDIDATE_DETERMINISM",
+      "environment": "REPOSITORY_BASELINE_f010b292e2c778c744913f1789148c53db89926f",
+      "version": "1.0.0",
+      "createdAt": "2026-08-22",
+      "producer": "RRP-W27_MRM_S_SYNC",
+      "reviewStatus": "MACHINE_VERIFIED",
+      "result": "PASS",
+      "artifactDigest": "f7f340f172bf325b53b747013ccdbbeb168a0097c73acb5d76a5b2e5844017f8",
+      "scope": [
+        "RRP-REPORT-COMPOSITION"
+      ],
+      "limitations": [
+        "FIXTURE_OR_DETERMINISM_EVIDENCE_ONLY",
+        "NOT_PILOT_EVIDENCE"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "content/products/runtime-reading/fixtures/cases/F01/expected-candidate.json",
+          "sha256": "f7f340f172bf325b53b747013ccdbbeb168a0097c73acb5d76a5b2e5844017f8"
+        }
+      ],
+      "fixtureId": "F01"
+    },
+    {
+      "evidenceId": "MRM-RRP-W27-DET-RR-HANDOFF-v1",
+      "runtimeCode": "RRP",
+      "capabilityCode": "RRP-RR-HANDOFF",
+      "evidenceClass": "DETERMINISM",
+      "source": "RRP_W28_SUBMISSION_DETERMINISM",
+      "environment": "REPOSITORY_BASELINE_f010b292e2c778c744913f1789148c53db89926f",
+      "version": "1.0.0",
+      "createdAt": "2026-08-22",
+      "producer": "RRP-W27_MRM_S_SYNC",
+      "reviewStatus": "MACHINE_VERIFIED",
+      "result": "PASS",
+      "artifactDigest": "f530aebfd3b6f8bb72b666fcd76ce5621025abb8641fde2e2fe3cc0f0105ccaa",
+      "scope": [
+        "RRP-RR-HANDOFF"
+      ],
+      "limitations": [
+        "FIXTURE_OR_DETERMINISM_EVIDENCE_ONLY",
+        "NOT_PILOT_EVIDENCE"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "content/products/runtime-reading/fixtures/cases/F11/expected-candidate.json",
+          "sha256": "f530aebfd3b6f8bb72b666fcd76ce5621025abb8641fde2e2fe3cc0f0105ccaa"
+        }
+      ],
+      "fixtureId": "F11"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-AST-CALC-PLANET-v1",
+      "runtimeCode": "AST",
+      "capabilityCode": "AST-CALC-PLANET",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "f0cb97d98cd4a55f34a0a3d78bb940dcdb0d2c6dfcda611ce4d1cb16693410fb",
+      "scope": [
+        "AST-CALC-PLANET"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/ast-planet-runtime.js",
+          "sha256": "ccae563a9a8e56a2dbedfd5e4cfa7b22139d6f2d9b033b2407e7b6e8984a9d26",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-ast-w2-planet-runtime.mjs",
+          "sha256": "3b263aae8ecdd42f8ea25e56f9e06f89f702b081581def06eaff74dc1e42be1d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-AST-CALC-HOUSE-v1",
+      "runtimeCode": "AST",
+      "capabilityCode": "AST-CALC-HOUSE",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "9f1b13dfffcae2914cc6bbdf76d46ec8e5a1bac95278d6bd1240fe519f8aa8fa",
+      "scope": [
+        "AST-CALC-HOUSE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/ast-house-runtime.js",
+          "sha256": "b606bf844e4ddb0c121dceec1bce64fdaba738d9b2c97ed4c6ffe0d146a0d97b",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-ast-w3-house-runtime.mjs",
+          "sha256": "2604a85e606fa3ff3c820f0ddedc78ee543e07d337d18a541101b034392b5376",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-AST-CALC-ASPECT-v1",
+      "runtimeCode": "AST",
+      "capabilityCode": "AST-CALC-ASPECT",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "02a98d293586923e7f80816ebb67885f47584674a10167d8fa698a4bfbb19eee",
+      "scope": [
+        "AST-CALC-ASPECT"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/ast-aspect-runtime.js",
+          "sha256": "1499593085089b28a6e373cac18b40955434c70ebe7016127290c9e0ebcd7d06",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-ast-w4b-aspect-runtime.mjs",
+          "sha256": "e87e662616aa366ab61ad0b0c6e34ac976015670bd3726413b1599d0a293f66c",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-BZR-SOLAR-CALENDAR-v1",
+      "runtimeCode": "BZR",
+      "capabilityCode": "BZR-SOLAR-CALENDAR",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "962286bc2ac07c7e669a598302b2457c5af4b90c159c9b8d25844db734fc72a6",
+      "scope": [
+        "BZR-SOLAR-CALENDAR"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/bzr-solar-calendar-runtime.js",
+          "sha256": "1a3bd6058e6e9ff2c8a8ce28744607e263a926a17a3d039ab88d81ec88fe5264",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-bzr-w1-solar-calendar-runtime.mjs",
+          "sha256": "0e56bd8cbb9f3371a2bfdb733ecf0144f4a15d7dcdefecf63d282d035c41ce01",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-BZR-FOUR-PILLARS-v1",
+      "runtimeCode": "BZR",
+      "capabilityCode": "BZR-FOUR-PILLARS",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "0220529b158e6ff9418bb3c6ced6e552883fa260d9aae1536fbbbcaa00facddf",
+      "scope": [
+        "BZR-FOUR-PILLARS"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/bzr-four-pillars-runtime.js",
+          "sha256": "70eeaf70469bfb4b6df2bb100ccef15312fe01aac0d4561455bbbd355f839a05",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-bzr-w2-four-pillars-runtime.mjs",
+          "sha256": "4be0c184c1e698ec3c6ddaa4d68267b687f9fdef4f4ea98d7d12070c03b1963b",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-BZR-LUCK-CYCLE-v1",
+      "runtimeCode": "BZR",
+      "capabilityCode": "BZR-LUCK-CYCLE",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "bc33fc24ec97e0c3246ae972cf3b74c5431413d86090c5749eaa41ac9d328f34",
+      "scope": [
+        "BZR-LUCK-CYCLE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/bzr-luck-cycle-runtime.js",
+          "sha256": "bb00b015513683e63d0ccce15188aec154de9b85c89c5f0e484c00def0a24aa8",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-bzr-w3-luck-cycle-runtime.mjs",
+          "sha256": "85e53e493e86a4e3cc3e4bc6c09f9c423be65eb7c3502a2f5a4c89220e45cf54",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-NUM-BIRTH-NUMBER-v1",
+      "runtimeCode": "NUM",
+      "capabilityCode": "NUM-BIRTH-NUMBER",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0-candidate",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "1c314ba42e50f0a3955a00e9b1005dd32d2893205b5dd281165465882e387e53",
+      "scope": [
+        "NUM-BIRTH-NUMBER"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/num-birth-number-runtime.js",
+          "sha256": "e7de5630c7b2e6faef419ba697da22a7bf979de135eb236713ea0fe4aec3e70d",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-num-w1-birth-number-runtime.mjs",
+          "sha256": "cd07cdad6e3542b95637afa7a85cd40616eda059e4db1f44e3ac11f2d93a8179",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-NUM-CYCLE-v1",
+      "runtimeCode": "NUM",
+      "capabilityCode": "NUM-CYCLE",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "0.1.0-candidate",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "3101cab32f033ae1d479e28bb36f4295d0ee98fed11342cb2e187df7bbbb0d4b",
+      "scope": [
+        "NUM-CYCLE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/num-cycle-runtime.js",
+          "sha256": "9b1155a7b79b75c0d1ce89f78ca89a44208e283439fdea79b63cac6856a4de2c",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-num-w3-cycle-runtime.mjs",
+          "sha256": "5eeee817285bcd92e4351aaf24b601bd867659a2c44e80a91b217b53f6fedf8d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-HDR-DESIGN-MOMENT-v1",
+      "runtimeCode": "HDR",
+      "capabilityCode": "HDR-DESIGN-MOMENT",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "7dce718464863c29cf7efb9baa7a00e95c80f54e95dced26268562b9585e1a44",
+      "scope": [
+        "HDR-DESIGN-MOMENT"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/hdr-design-moment-runtime.js",
+          "sha256": "2d684ac53e2847d34094605f4dddb765566fb82e346643be9b8a46f3ef074e32",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-hdr-w2-design-moment-solver.mjs",
+          "sha256": "175711cffa2c9280c7a77f7a99085bf592e5f5bc290d936e1f9e32287199c61b",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-HDR-BODYGRAPH-v1",
+      "runtimeCode": "HDR",
+      "capabilityCode": "HDR-BODYGRAPH",
+      "evidenceClass": "DETERMINISM",
+      "source": "LEGACY_METHOD_RUNTIME_REPEATABILITY_ADMITTED_BY_MRM_S8",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "fdfeb83d900f910ac585fcccd564a5d19bf4b797588e829d4d9c41aa1609f777",
+      "scope": [
+        "HDR-BODYGRAPH"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/core-method-runtime/hdr-bodygraph-runtime.js",
+          "sha256": "3a0ece9f05e76d3fca9ac7cdea2ae7c913136c385981ce82afb06fd95f527473",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-hdr-w4-bodygraph-runtime.mjs",
+          "sha256": "145fbfa366a873893d53596bb6c53d015c2081b54377726c70f3539a4672c5a9",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/method-production-activation/registries/mpa-method-dependency-registry-v2.json",
+          "sha256": "84f3a450e6762f7d49f0aaba2dfaf0437154546523fd153fc7de4fbb9483155c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-NUM-PROJECTION-v1",
+      "runtimeCode": "NUM",
+      "capabilityCode": "NUM-PROJECTION",
+      "evidenceClass": "DETERMINISM",
+      "source": "NUM_PRODUCTION_PROJECTION_REPEATABILITY",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "c70404ec9e27a118ab56a76a51cefc8f5c7e241a643111b24b5dffb1cfbe44d2",
+      "scope": [
+        "NUM-PROJECTION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/method-client-delivery/canonical-projection-runtime-current.js",
+          "sha256": "4819d859750da671353397493834efc70171d7112a5d35f2bc8d5fb075ace662",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-num-production.mjs",
+          "sha256": "f6c38633d4af3a2b8d95764a73ffd2ad80e2781a1766d0cb79dac5e0830b677f",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/num-production/acceptance/num-production-determinism-acceptance-v1.json",
+          "sha256": "90d490ae7ed8ec113a5868517a687e9a2fa73922205dc0760e36735456311448",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+          "sha256": "a200b3f4ec2032ab27a74b7d7f325ac282b82bf31f45242842821ecaaaf55184",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-CURRENCY-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-CURRENCY",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-CURRENCY"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-NET-WORTH-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-NET-WORTH",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-NET-WORTH"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-LIQUIDITY-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-LIQUIDITY",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-LIQUIDITY"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-CASH-FLOW-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-CASH-FLOW",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-CASH-FLOW"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-DEBT-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-DEBT",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-DEBT"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-CONTINGENT-EXPOSURE-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-CONTINGENT-EXPOSURE",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-CONTINGENT-EXPOSURE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-EMERGENCY-RESERVE-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-EMERGENCY-RESERVE",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-EMERGENCY-RESERVE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-PROTECTION-NEED-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-PROTECTION-NEED",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-PROTECTION-NEED"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-EDUCATION-FUNDING-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-EDUCATION-FUNDING",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-EDUCATION-FUNDING"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-RETIREMENT-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-RETIREMENT",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-RETIREMENT"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-INVESTMENT-PROJECTION-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-INVESTMENT-PROJECTION",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-INVESTMENT-PROJECTION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-ESTATE-LIQUIDITY-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-ESTATE-LIQUIDITY",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-ESTATE-LIQUIDITY"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-BUSINESS-WEALTH-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-BUSINESS-WEALTH",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-BUSINESS-WEALTH"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-ALLOCATION-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-ALLOCATION",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-ALLOCATION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-SCENARIO-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-SCENARIO",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-SCENARIO"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-FCR-TRACE-v1",
+      "runtimeCode": "FCR",
+      "capabilityCode": "FCR-TRACE",
+      "evidenceClass": "DETERMINISM",
+      "source": "FCR_AGGREGATE_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "ecaeac16ed258b1f2ba70cea3e1e574026a985a3a901a8129aa4c0718f6454fd",
+      "scope": [
+        "FCR-TRACE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+          "sha256": "6e60d2b626fb99b316f66be4e5b5914f15eca0c9d1b7b4afa73cf331659b15e2",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-fcr-determinism.mjs",
+          "sha256": "a485cb773fcc29d88aa20b98010682fabdd1804abf056631f19c67ce23cdba9d",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-calculation-engine-registry-v1.json",
+          "sha256": "4ce9e6a3800276de914537e6759c3f4b860cb917a16b37c36c9adde292b2ffb5",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/registries/financial-assumption-registry-v1.json",
+          "sha256": "ff2ba1b79bbf4d59c1f10d1595fa603a741a740f2f8b50307d80f43bced90c6b",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/financial/calculation-runtime/fixtures/fcr-fixture-registry-v1.json",
+          "sha256": "49bf3e814fb61d9c7c4bbb6747c24ebc55b4a9d9d81b9bf98520c27755b3c221",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-DAR-CLAUSE-RESOLUTION-v1",
+      "runtimeCode": "DAR",
+      "capabilityCode": "DAR-CLAUSE-RESOLUTION",
+      "evidenceClass": "DETERMINISM",
+      "source": "DAR_IN_MEMORY_NON_LEGAL_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "aa3b0872403e5d82830a957069641fe1397e58a9a2484f112ac60ab460af8898",
+      "scope": [
+        "DAR-CLAUSE-RESOLUTION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/document-assembly/clause-resolver.js",
+          "sha256": "ebe40f72172a0e88fd74dff00dd2bfe05088a2abae9baaefab5a0cca0eefb272",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
+          "sha256": "2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/deterministic-clause-resolver-contract-v1.json",
+          "sha256": "57f3dedea527323ce0e42616aea52a134665b24eb6f365dc1c8e09d0d666c3fb",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/document-assembly-ir-contract-v1.json",
+          "sha256": "d2b9a6b1fbe90e409abb84a090a4e8ae63b9bc58b015429050d5d3d4bc5e8947",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-DAR-DOCUMENT-ASSEMBLY-v1",
+      "runtimeCode": "DAR",
+      "capabilityCode": "DAR-DOCUMENT-ASSEMBLY",
+      "evidenceClass": "DETERMINISM",
+      "source": "DAR_IN_MEMORY_NON_LEGAL_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "27185b0a2699a92eb08f33f92a2735ce7306a19d3eed553fbda73ee8cb35640d",
+      "scope": [
+        "DAR-DOCUMENT-ASSEMBLY"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/document-assembly/document-assembler.js",
+          "sha256": "5f857df1f049057531a2476d75d958ed56060072c904851c18e48130053f56c0",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
+          "sha256": "2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/deterministic-clause-resolver-contract-v1.json",
+          "sha256": "57f3dedea527323ce0e42616aea52a134665b24eb6f365dc1c8e09d0d666c3fb",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/document-assembly-ir-contract-v1.json",
+          "sha256": "d2b9a6b1fbe90e409abb84a090a4e8ae63b9bc58b015429050d5d3d4bc5e8947",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-DAR-DOCUMENT-VALIDATION-v1",
+      "runtimeCode": "DAR",
+      "capabilityCode": "DAR-DOCUMENT-VALIDATION",
+      "evidenceClass": "DETERMINISM",
+      "source": "DAR_IN_MEMORY_NON_LEGAL_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "1e889739efc8e3181c31e2803b1cf5aacb3363bde04f55d8ad0b2ba8d4b68126",
+      "scope": [
+        "DAR-DOCUMENT-VALIDATION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/document-assembly/document-validator.js",
+          "sha256": "941bf2ca487f34c522c557a3d03f1c7b72137888f80e0dbde1415067122c8a12",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
+          "sha256": "2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/deterministic-clause-resolver-contract-v1.json",
+          "sha256": "57f3dedea527323ce0e42616aea52a134665b24eb6f365dc1c8e09d0d666c3fb",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/document-assembly-ir-contract-v1.json",
+          "sha256": "d2b9a6b1fbe90e409abb84a090a4e8ae63b9bc58b015429050d5d3d4bc5e8947",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-DAR-RENDERING-v1",
+      "runtimeCode": "DAR",
+      "capabilityCode": "DAR-RENDERING",
+      "evidenceClass": "DETERMINISM",
+      "source": "DAR_IN_MEMORY_NON_LEGAL_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "8decac250bda61ad91c97c3eb8524e6c8e00c691b2f6b7c2672800187a8e868d",
+      "scope": [
+        "DAR-RENDERING"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/document-assembly/renderers/dar-pdf-renderer.js",
+          "sha256": "8aa32704a758213ded1efa7046c86f0623d4daf25348070d0da1a389292e103d",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
+          "sha256": "2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/deterministic-clause-resolver-contract-v1.json",
+          "sha256": "57f3dedea527323ce0e42616aea52a134665b24eb6f365dc1c8e09d0d666c3fb",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/document-assembly-ir-contract-v1.json",
+          "sha256": "d2b9a6b1fbe90e409abb84a090a4e8ae63b9bc58b015429050d5d3d4bc5e8947",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-DAR-VERSIONING-v1",
+      "runtimeCode": "DAR",
+      "capabilityCode": "DAR-VERSIONING",
+      "evidenceClass": "DETERMINISM",
+      "source": "DAR_IN_MEMORY_NON_LEGAL_REPEATABILITY_CAMPAIGN",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "b14175d6796eeaca0a76bd0aa97d52f309a6edc7a0755e0b14a99016f44fe8c4",
+      "scope": [
+        "DAR-VERSIONING"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/document-assembly/document-version.js",
+          "sha256": "43273fecdc4a17446aeddd7e12cff23f44af4a8df49a7b34aa86f9e2621a2311",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
+          "sha256": "2e0100df00551af64ad2e39a43a9b0df43c481b523a007c38762526026defdea",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/deterministic-clause-resolver-contract-v1.json",
+          "sha256": "57f3dedea527323ce0e42616aea52a134665b24eb6f365dc1c8e09d0d666c3fb",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        },
+        {
+          "path": "content/document-assembly/contracts/document-assembly-ir-contract-v1.json",
+          "sha256": "d2b9a6b1fbe90e409abb84a090a4e8ae63b9bc58b015429050d5d3d4bc5e8947",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-CMP-MEANING-RESOLUTION-v1",
+      "runtimeCode": "CMP",
+      "capabilityCode": "CMP-MEANING-RESOLUTION",
+      "evidenceClass": "DETERMINISM",
+      "source": "CMP_NUM_SCOPED_CANONICAL_MEANING_REPEATABILITY",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "2d466229e2bfa10317d3422c51a1b21cc31d00ddf780a1494402275ef0ef244c",
+      "scope": [
+        "CMP-MEANING-RESOLUTION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/canonical-meaning-production/meaning-resolver-production.js",
+          "sha256": "cc93e37864da0df8d4c6b9f6799710e9a30482a1962a1248ae50be270adda1da",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-cmp-w7-w12.mjs",
+          "sha256": "99f5740486a6fea89e6908b443a6688ba9a4d89353a0d1091e2126d6edc0eaa3",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+          "sha256": "e74012230f075fe750950ee9e20938b2bd32abff3bd2bfd8bcade9a21584867c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-CMP-BUNDLE-v1",
+      "runtimeCode": "CMP",
+      "capabilityCode": "CMP-BUNDLE",
+      "evidenceClass": "DETERMINISM",
+      "source": "CMP_NUM_SCOPED_CANONICAL_MEANING_REPEATABILITY",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "a8caf7c84e06f754845f3e9767974968afbd42ec41e77835ae51a7b2569d9c52",
+      "scope": [
+        "CMP-BUNDLE"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/canonical-meaning-production/meaning-bundle-builder-production.js",
+          "sha256": "b30146ae024d5d26d8b26903824cc1879168a8d7abf3d8f345d13efc46fe277b",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-cmp-w0-w6.mjs",
+          "sha256": "a673392aa0bc2ce7ac7415dbad879a6cc0a0953d3d5e0b108b1f39919e4eddf0",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+          "sha256": "e74012230f075fe750950ee9e20938b2bd32abff3bd2bfd8bcade9a21584867c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    },
+    {
+      "evidenceId": "MRM-S8-DET-CMP-LOCALE-PROJECTION-v1",
+      "runtimeCode": "CMP",
+      "capabilityCode": "CMP-LOCALE-PROJECTION",
+      "evidenceClass": "DETERMINISM",
+      "source": "CMP_NUM_SCOPED_CANONICAL_MEANING_REPEATABILITY",
+      "environment": "REPOSITORY_BASELINE_b536eb5a6f69a50d7549426a09b7f123bde35c74",
+      "version": "1.0.0",
+      "createdAt": "2026-08-23",
+      "producer": "MRM-S8_EM1_DETERMINISM_CAMPAIGN",
+      "reviewStatus": "MACHINE_VERIFIED_REPEATABILITY",
+      "result": "PASS",
+      "artifactDigest": "651a5797fcf3a771b490c47e052828877a5946e43d1fe4f87ac20cc5ff4b48d8",
+      "scope": [
+        "CMP-LOCALE-PROJECTION"
+      ],
+      "limitations": [
+        "DETERMINISM_ONLY",
+        "DOES_NOT_ESTABLISH_REAL_WORLD_VALIDITY",
+        "DOES_NOT_ESTABLISH_PILOT_EM3",
+        "DOES_NOT_CHANGE_DOMAIN_PRODUCTION_AUTHORITY"
+      ],
+      "evidenceState": "CURRENT",
+      "artifactReferences": [
+        {
+          "path": "functions/canonical-meaning-production/locale-projector.js",
+          "sha256": "20a97006b5b573bef55457dc183f2e789313be1bd973d59dc3ba762daa9073da",
+          "roles": [
+            "DETERMINISTIC_IMPLEMENTATION"
+          ]
+        },
+        {
+          "path": "scripts/check-cmp-w7-w12.mjs",
+          "sha256": "99f5740486a6fea89e6908b443a6688ba9a4d89353a0d1091e2126d6edc0eaa3",
+          "roles": [
+            "EXECUTABLE_REPEATABILITY_CHECKER"
+          ]
+        },
+        {
+          "path": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+          "sha256": "e74012230f075fe750950ee9e20938b2bd32abff3bd2bfd8bcade9a21584867c",
+          "roles": [
+            "VERSION_OR_DEPENDENCY_BINDING"
+          ]
+        }
+      ],
+      "determinismRule": "same canonical input + same runtime/dependency/policy version -> same canonical output"
+    }
+  ],
+  "rules": {
+    "globalMRMS8Complete": true,
+    "passAloneDoesNotPromote": true,
+    "versionBindingRequired": true,
+    "architectureEvidencePrerequisiteRequired": true,
+    "contiguousPromotionOnly": true,
+    "fixtureEvidenceDoesNotAutoPromoteToEM2BeforeMRMS9": true,
+    "productionAuthorityUnchanged": true,
+    "pilotEvidenceCreated": false
+  },
+  "supersedes": {
+    "path": "content/runtime-maturity/evidence/determinism/determinism-evidence-registry-v1.json",
+    "sha256": "717f5df822474899238823e93baa8b2b29b6185a5ad977a057681033eecddcbc"
+  }
+}

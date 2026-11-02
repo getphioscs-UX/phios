@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-PRODUCTION-CONTRACT-v1.0.0",
+  "work": "CMP-W1",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "PRODUCTION_FOUNDATION_CONTRACT_ACTIVE_USER_ACTIVATION_DEFERRED",
+  "inputAuthority": {
+    "contract": "CANONICAL_METHOD_PROJECTION",
+    "schemaVersion": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+    "readOnly": true
+  },
+  "outputAuthority": {
+    "record": "CANONICAL_MEANING_PRODUCTION_ITEM",
+    "bundle": "PHI-OS-CANONICAL-MEANING-PRODUCTION-BUNDLE-v1.0.0"
+  },
+  "requiredLineage": [
+    "projectionId",
+    "publicMethodCode",
+    "mappingCode",
+    "mappingVersion",
+    "meaningId",
+    "meaningCode",
+    "meaningVersion",
+    "sourceFields",
+    "knowledgeAuthority"
+  ],
+  "meaningDefinition": {
+    "is": [
+      "PHI OS governed semantic representation",
+      "versioned meaning identity",
+      "bounded semantic bridge from CanonicalMethodProjection to Runtime Reading"
+    ],
+    "isNot": [
+      "Method calculation",
+      "Method original interpretation",
+      "fortune prediction",
+      "Reality fact",
+      "Professional judgment",
+      "Reality decision"
+    ]
+  },
+  "allowedSemanticTypes": [
+    "STRUCTURAL_MEANING",
+    "DIRECTIONAL_MEANING",
+    "RELATIONAL_MEANING",
+    "DOMAIN_MEANING",
+    "CYCLE_MEANING"
+  ],
+  "prohibitedClaims": [
+    "PREDICTION_CERTAINTY",
+    "PROFESSIONAL_DIAGNOSIS",
+    "FINANCIAL_ADVICE",
+    "MEDICAL_ADVICE",
+    "LEGAL_ADVICE",
+    "UNBOUNDED_FATE_CLAIM"
+  ],
+  "runtimeRules": {
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "recalculationAllowed": false,
+    "projectionMutationAllowed": false,
+    "productionModeRequiresExplicitActivationSuccessor": true
+  }
+}

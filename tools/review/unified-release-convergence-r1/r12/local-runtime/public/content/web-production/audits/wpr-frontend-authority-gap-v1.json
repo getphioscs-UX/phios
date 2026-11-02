@@ -1,0 +1,46 @@
+{
+  "auditCode": "PHI-OS-WPR-W0-FRONTEND-AUTHORITY-GAP-v1",
+  "auditVersion": "1.0.0",
+  "work": "WPR-W0",
+  "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+  "status": "open_findings",
+  "findings": [
+    {
+      "code": "WPR-GAP-ROUTE-001",
+      "severity": "P0",
+      "finding": "No canonical WPR route registry existed before WPR-A.",
+      "resolutionOwner": "WPR-W4"
+    },
+    {
+      "code": "WPR-GAP-SOURCE-001",
+      "severity": "P0",
+      "finding": "Frontend consumption is not governed by a single canonical production-source registry.",
+      "resolutionOwner": "WPR-W5"
+    },
+    {
+      "code": "WPR-GAP-CONSUMER-001",
+      "severity": "P0",
+      "finding": "No cross-runtime web-consumer registry proves which production runtime is intentionally projected or intentionally has no web surface.",
+      "resolutionOwner": "WPR-W6"
+    },
+    {
+      "code": "WPR-GAP-CPR-001",
+      "severity": "P0",
+      "finding": "CPR is frozen but validation-only and its canonical production record registry is empty; website production composition must not be inferred from freeze.",
+      "resolutionOwner": "FUTURE_WPR_COMPOSITION"
+    },
+    {
+      "code": "WPR-GAP-BOOK-001",
+      "severity": "P1",
+      "finding": "Legacy frontend book/page naming must be reconciled later against the four-volume canonical Book Registry.",
+      "resolutionOwner": "WPR-W15_W18"
+    },
+    {
+      "code": "WPR-GAP-METHOD-001",
+      "severity": "P1",
+      "finding": "Public method availability must later resolve through MPA eligibility and public vocabulary, not runtime existence.",
+      "resolutionOwner": "MPA_AND_WPR-W21"
+    }
+  ],
+  "wprW0RepairsApplied": false
+}

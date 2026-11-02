@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R4-AST-TARGET-CONTEXT-INPUT-EXTENSION-CONTRACT-v1.0.0",
+  "work": "PPR-R4-AST-TARGET-CONTEXT-INPUT-EXTENSION",
+  "integrationBaselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "ACTIVE_METHOD_INPUT_SUCCESSOR_CONTRACT",
+  "predecessorAuthority": "content/professional/personal-reality/r4/authority/ppr-r4-method-input-successor-freeze-v1.json",
+  "methodOwner": "AST",
+  "extensionId": "PPR_R4_AST_INPUT_EXTENSION_V1",
+  "module": "/assets/customer-ui/js/specialists/ast/input-extension.js",
+  "stylesheet": "/assets/customer-ui/surfaces/astrology-input-extension.css",
+  "visibleFields": [
+    "astCxTargetDate",
+    "astCxTargetTime",
+    "astCxTargetTimezone",
+    "astCxTargetUtcOffset"
+  ],
+  "serializedField": "astTargetContext",
+  "targetPolicy": "ZERO_OR_FOUR_VISIBLE_TARGET_FIELDS",
+  "rules": {
+    "natalOnlyWhenAllBlank": true,
+    "partialTargetRejected": true,
+    "timeNormalizedToSeconds": true,
+    "ianaTimezoneValidated": true,
+    "utcOffsetValidated": true,
+    "browserClockInference": false,
+    "serverClockInference": false,
+    "deviceTimezoneInference": false,
+    "rendererRunsTransitCalculation": false,
+    "genericHostCreatesAstMeaning": false,
+    "genericHostRunsAstCalculation": false
+  }
+}

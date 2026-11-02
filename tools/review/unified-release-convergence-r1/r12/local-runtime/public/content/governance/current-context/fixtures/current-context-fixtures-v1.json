@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "PHI-OS-CCR-FIXTURE-CORPUS-v1.0.0",
+  "work": "CCR-W0-W3",
+  "fixtures": [
+    {"id":"CCR-FX-001","question":"现在事业什么动力正在被激活？","expectedTaxonomy":"CURRENT","expectedPrimary":"AST.CURRENT_DYNAMIC","expectedSupporting":["ZWR.DYNAMIC_DOMAIN"],"expectedSnapshotState":"COMPLETE"},
+    {"id":"CCR-FX-002","question":"今年事业环境如何？","expectedTaxonomy":"TIME","expectedPrimary":"BZR.TEMPORAL","expectedSupporting":["ZWR.DYNAMIC_DOMAIN"],"expectedSnapshotState":"COMPLETE"},
+    {"id":"CCR-FX-003","question":"今年是什么节奏？","expectedTaxonomy":"RHYTHM","expectedPrimary":"NUM","expectedSupporting":["BZR.TEMPORAL"],"expectedSnapshotState":"COMPLETE"},
+    {"id":"CCR-FX-004","question":"我应该接受这个工作吗？","publicRequest":false,"internalAccessClass":"GOVERNED_INTERNAL_PROFESSIONAL","expectedPrimary":"HDR.OPERATING_READING","realityEvidenceRequired":true,"expectedSnapshotState":"COMPLETE"},
+    {"id":"CCR-FX-005","question":"现行法律是什么？","expectedRouteState":"REALITY_EVIDENCE_ONLY","realityEvidenceRequired":true,"expectedSnapshotState":"COMPLETE"},
+    {"id":"CCR-FX-006","question":"我应该接受这个工作吗？","publicRequest":true,"expectedRouteState":"BLOCKED_CAPABILITY","expectedCcrFailure":"CCR_ROUTE_PLAN_NOT_COMPOSABLE"},
+    {"id":"CCR-FX-007","question":"现在事业什么动力正在被激活？","expectedCcrFailure":"CCR_CONTEXT_TARGET_MISMATCH","mutation":"SOURCE_TARGET_DATE_MISMATCH"},
+    {"id":"CCR-FX-008","question":"现在事业什么动力正在被激活？","expectedCcrFailure":"CCR_UNROUTED_LENS_INPUT","mutation":"INJECT_NUM"}
+  ]
+}

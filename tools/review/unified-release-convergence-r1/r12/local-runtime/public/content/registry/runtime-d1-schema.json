@@ -1,0 +1,73 @@
+{
+  "schema_id": "phi-os.runtime-d1-schema.v1",
+  "version": "1.0.0",
+  "status": "frozen_for_migration",
+  "authority": "db/schema/runtime-schema-v1.sql",
+  "binding": "RUNTIME_DB",
+  "migration_target": "db/migrations/0002_initial_runtime.sql",
+  "previous_migration": "db/migrations/0001_platform_foundation.sql",
+  "tables": [
+    {
+      "name": "runtime_users",
+      "primary_key": "user_id",
+      "json_fields": [],
+      "foreign_keys": []
+    },
+    {
+      "name": "runtimes",
+      "primary_key": "runtime_id",
+      "json_fields": ["state"],
+      "foreign_keys": ["user_id -> runtime_users.user_id"]
+    },
+    {
+      "name": "runtime_events",
+      "primary_key": "event_id",
+      "json_fields": ["payload"],
+      "foreign_keys": ["runtime_id -> runtimes.runtime_id"]
+    },
+    {
+      "name": "runtime_snapshots",
+      "primary_key": "snapshot_id",
+      "json_fields": ["state"],
+      "foreign_keys": ["runtime_id -> runtimes.runtime_id"]
+    },
+    {
+      "name": "runtime_revisions",
+      "primary_key": "revision_id",
+      "json_fields": ["changes"],
+      "foreign_keys": [
+        "runtime_id -> runtimes.runtime_id",
+        "parent_revision_id -> runtime_revisions.revision_id"
+      ]
+    },
+    {
+      "name": "runtime_lineages",
+      "primary_key": "lineage_id",
+      "json_fields": ["metadata"],
+      "foreign_keys": [
+        "parent_runtime_id -> runtimes.runtime_id",
+        "child_runtime_id -> runtimes.runtime_id"
+      ]
+    },
+    {
+      "name": "runtime_artifacts",
+      "primary_key": "artifact_id",
+      "json_fields": ["payload"],
+      "foreign_keys": ["runtime_id -> runtimes.runtime_id"]
+    }
+  ],
+  "required_query_fields": [
+    "runtime_id",
+    "user_id",
+    "created_at",
+    "event_type",
+    "current_stage"
+  ],
+  "rules": {
+    "json_must_be_valid": true,
+    "runtime_children_delete_with_runtime": true,
+    "lineage_never_deletes_related_runtime": true,
+    "old_migrations_are_immutable": true,
+    "placeholder_database_id_forbidden": true
+  }
+}

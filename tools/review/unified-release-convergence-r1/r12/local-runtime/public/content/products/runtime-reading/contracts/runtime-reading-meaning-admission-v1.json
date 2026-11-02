@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W9-MEANING-ADMISSION-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W9",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_FAIL_CLOSED_MEANING_ADMISSION",
+  "meaningAuthority": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+  "requiredFlow": [
+    "CANONICAL_METHOD_PROJECTION",
+    "APPROVED_MEANING_RUNTIME",
+    "ADMISSIBLE_MEANING_REFERENCE",
+    "RRP_COMPOSITION"
+  ],
+  "meaningStatusValues": [
+    "AVAILABLE",
+    "VALIDATION_ONLY_NOT_ADMISSIBLE",
+    "UNAVAILABLE"
+  ],
+  "currentAuthorityState": {
+    "cmrProductionStatus": "validation_only",
+    "automaticMethodMeaningAdmission": "UNAVAILABLE",
+    "affectedCurrentMethods": [
+      "AST",
+      "BZR",
+      "NUM",
+      "HDR"
+    ]
+  },
+  "admissionRequirements": [
+    "MEANING_IDENTITY_RESOLVES",
+    "MEANING_VERSION_RESOLVES",
+    "PROJECTION_LINEAGE_RESOLVES",
+    "MEANING_STATUS_IS_PRODUCTION_ADMISSIBLE",
+    "BOUNDARIES_PRESERVED"
+  ],
+  "rules": {
+    "llmMayCreateMissingMeaning": false,
+    "providerMayCreateMissingMeaning": false,
+    "projectionMayBeTreatedAsMeaning": false,
+    "validationOnlyMeaningMayEnterAutomaticCustomerReading": false,
+    "missingMeaningMustBecomeUnknownOrLimitation": true,
+    "calculatedStructureMayRemainReportableWithoutMeaning": true
+  }
+}

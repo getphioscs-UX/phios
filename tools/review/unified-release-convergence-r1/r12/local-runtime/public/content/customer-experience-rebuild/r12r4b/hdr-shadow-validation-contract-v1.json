@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-HDR-SHADOW-VALIDATION-CONTRACT-v1.0.0",
+  "work": "CX-R12R4B-R2-W20R-W21R",
+  "baselineCommit": "6afe4a602659155b8419bdfc0345313376dbe28e",
+  "status": "INTERNAL_VALIDATION_ACTIVE_CUSTOMER_AUTHORITY_UNCHANGED",
+  "methodId": "HDR",
+  "authorityClass": "INTERNAL_VALIDATION_ONLY",
+  "requires": {
+    "confirmedExternalProfile": true,
+    "exactBirthDate": true,
+    "exactBirthTime": true,
+    "governedBirthPlace": true,
+    "explicitShadowValidationConsent": true
+  },
+  "comparisonScope": ["type", "authority", "profile", "definition", "channels", "definedCenters", "openCenters"],
+  "states": ["REFERENCE_MATCH", "PROFILE_DISCREPANCY", "NOT_RUN_INPUT_INCOMPLETE", "NOT_RUN_LOCATION_UNAVAILABLE", "NOT_RUN_INPUT_INVALID", "NOT_RUN_RUNTIME_UNAVAILABLE"],
+  "rules": {
+    "customerProfileOverwriteForbidden": true,
+    "hdrCustomerProjectionForbidden": true,
+    "hdrCustomerInterpretationForbidden": true,
+    "hdrMeaningCreationForbidden": true,
+    "discrepancyIsNotCalculationFact": true,
+    "confirmedCustomerUploadRemainsExternalProfileAuthority": true,
+    "persistence": "NONE"
+  }
+}

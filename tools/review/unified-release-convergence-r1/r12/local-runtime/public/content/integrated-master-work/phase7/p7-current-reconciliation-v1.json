@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "PHI-OS-INTEGRATED-PHASE7-PROFILE-CURRENT-RECONCILIATION-v1.0.0",
+  "work": "PHASE7-PROFILE-W6-W9",
+  "baselineCommit": "1f81638d214bd946778e4ac721a0f7b265eac116",
+  "status": "CURRENT_PROFILE_SUCCESSOR_RECONCILED_W6_W9_VERIFIED",
+  "phase6Prerequisite": {
+    "freeze": "content/customer-experience-rebuild/cx-r31/freeze/cx-r31-phase6-freeze-v1.json",
+    "requiredStatus": "CX_R31_PHASE6_ACCEPTED"
+  },
+  "masterRule": "VERIFY_CURRENT_WHEN_PROFILE_PPR_OWNER_SUCCESSOR_ALREADY_EXISTS",
+  "truthOwner": "PROFILE_PPR",
+  "projectionOwner": "PVP_R1",
+  "currentAuthority": {
+    "profileCurrent": "content/profile/current/profile-current-v3.json",
+    "visualOutputAuthority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json",
+    "pfigAdmission": "content/product-visual-platform-r1/profile/pfig-authority-admission-v1.json"
+  },
+  "historicalSuccessorsConsumed": {
+    "w6PredecessorAcceptance": "content/product-visual-platform-r1/acceptance/pvp-r1-vis-w6-profile-output-contract-v1.json",
+    "w7Acceptance": "content/product-visual-platform-r1/acceptance/pvp-r1-vis-w7-profile-projection-ir-v1.json",
+    "w8Acceptance": "content/product-visual-platform-r1/acceptance/pvp-r1-vis-w8-profile-visual-mvp-v1.json",
+    "w9Acceptance": "content/product-visual-platform-r1/acceptance/pvp-r1-vis-w9-profile-free-paid-v1.json"
+  },
+  "supersessionNotes": [
+    "W6 predecessor SHA snapshot is historical and is not used as current-main authority after later admitted Profile API successors.",
+    "W8 predecessor direct mountProfileVisualMvp surface assertion is superseded by the current mountProfileFreePaid wrapper, which consumes the same governed MVP renderer through W9 depth projection.",
+    "Historical acceptance records are preserved; Phase 7 adds current-main successor evidence instead of rewriting predecessor facts."
+  ],
+  "workSteps": {
+    "PVP-R1-VIS-W6": {
+      "status": "CURRENT_AUTHORITY_VERIFIED",
+      "result": "PROFILE_PPR_OWNER_CURRENT_9_PFIG_AUTHORITY_ALLOWED"
+    },
+    "PVP-R1-VIS-W7": {
+      "status": "CURRENT_IR_VERIFIED",
+      "result": "9_OF_9_PFIG_IR_AUTHORITY_SAFE"
+    },
+    "PVP-R1-VIS-W8": {
+      "status": "CURRENT_MVP_VERIFIED",
+      "result": "4_OF_4_MVP_RENDERERS_CONSUMED_THROUGH_W9_WRAPPER"
+    },
+    "PVP-R1-VIS-W9": {
+      "status": "CURRENT_DEPTH_VERIFIED",
+      "result": "FREE_SNAPSHOT_ACTIVE_DEEP_AND_REALITY_PROFILE_DEFINED_COMMERCE_FAIL_CLOSED"
+    }
+  },
+  "authoritySnapshot": [
+    {
+      "path": "content/profile/current/profile-current-v3.json",
+      "sha256": "2cc506c5ab897a4b6c31b62e3a98742f3d8489fa3bd5cf93b3f825ed1b83526b"
+    },
+    {
+      "path": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json",
+      "sha256": "38e58493391c27c71c0a5c02f0a0864736ad6143940d89d6ed1038771d547bd7"
+    },
+    {
+      "path": "content/product-visual-platform-r1/profile/pfig-authority-admission-v1.json",
+      "sha256": "a36a301c857cb32c09d420192e997d68d9302ed99a8f7579b823c47ba80036b1"
+    },
+    {
+      "path": "content/product-visual-platform-r1/profile/ir/profile-customer-visual-projection-v1.json",
+      "sha256": "5e66b9acb0af30a0844605f68183b71274e84788aa7a306add95d5b52ac45f63"
+    },
+    {
+      "path": "content/product-visual-platform-r1/profile/mvp/pvp-r1-vis-w8-profile-visual-mvp-v1.json",
+      "sha256": "efb8f8374481291bcb1cc58c9ea152d45b6e223e69b6daa42ff6f27346119adc"
+    },
+    {
+      "path": "content/product-visual-platform-r1/profile/access/profile-free-paid-depth-contract-v1.json",
+      "sha256": "cac1680a691b422d7fd4cb03131e936ca2b5ca6967e119dd77ae616a0e9285f2"
+    },
+    {
+      "path": "functions/api/profile-progressive.js",
+      "sha256": "6c9b1b9c57b8cf6fade30ca57b8ccfd83b6f43a497ce9e633f93f8377250d01a"
+    },
+    {
+      "path": "functions/profile/profile-customer-visual-projection.js",
+      "sha256": "9db22a1d5a94c836fbb13d828ead5a2b28ec18004f3c6c69437b9249a1c4f77c"
+    },
+    {
+      "path": "functions/profile/profile-visual-depth-projection.js",
+      "sha256": "aef80e49668bdf663e09ef25ef574970e921b5bfbbd1fa83009d572b8aeb38da"
+    },
+    {
+      "path": "assets/customer-ui/js/visuals/profile-visual-mvp.js",
+      "sha256": "c525ed8973ec3b56e5df25742de65ec0698c75a3c0cb8a0688128ffd6dc44eb1"
+    },
+    {
+      "path": "assets/customer-ui/js/visuals/profile-free-paid.js",
+      "sha256": "6f590ccef427e4bf8d74c24ed1ea8383db46262d8958b71da2c744c1981d31f7"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "sha256": "2bd1b97f8580dced17d0b854bfd60241ef9634775d2292579fa92a9e9410dfc0"
+    },
+    {
+      "path": "perspectives/profile/index.html",
+      "sha256": "699db996e116cb9502852395df0bec922ceac72104de161683ab48342bcfe023"
+    }
+  ],
+  "boundaries": {
+    "newProfileTruthCreated": false,
+    "universalMasterScoreCreated": false,
+    "crossInstrumentNormalizationCreated": false,
+    "genericStrengthFromHighScoreCreated": false,
+    "compatibilityScoreCreated": false,
+    "clientPaidSelfUpgradeAllowed": false,
+    "productionPriceCreatedByPvp": false,
+    "phase8WorkExecutedByThisReconciliation": false
+  },
+  "phase7ExitComplete": true,
+  "phase8Authorized": true,
+  "nextWorkStep": "PHASE8_ECR_W10_W16_VERIFY_CURRENT_AND_CONTINUE"
+}

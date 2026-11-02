@@ -1,0 +1,35 @@
+{
+  "status": "WITHHELD_INTERACTION_CANDIDATES",
+  "owner": {
+    "path": "functions/api/ask-phios.js",
+    "sha256": "114dcc0fcf88ca8e3f741caac43a95e84e391eb071316edc7f6a057f98a4e760"
+  },
+  "interactions": [
+    {
+      "interactionCode": "CONTINUE_OBSERVING",
+      "label": "继续观察这个问题",
+      "role": "EXISTING_ASK_MODE",
+      "contract": {
+        "path": "content/knowledge/structured/successors/master-a-v2-batch3/observation-interaction-contract-v1.json",
+        "sha256": "345ce7ff38b63d244361bf90c65e8d927ec6a7b5bc2c9f3e10829a67b12a689c"
+      },
+      "actionExecution": false,
+      "publicUI": false
+    },
+    {
+      "interactionCode": "EXPLORE_NEXT_OPTIONS",
+      "label": "查看有哪些可行路径",
+      "role": "EXISTING_ASK_OR_REALITY_INTERACTION",
+      "contract": {
+        "path": "content/knowledge/structured/successors/master-a-v2-batch4/possibility-space-contract-v1.json",
+        "sha256": "390c8707407b564099193021e49d8fbdd10da9ac43ea3a6fe7891c1301e75850"
+      },
+      "boundary": "OPTION_EXPLORATION != RECOMMENDATION",
+      "actionExecution": false,
+      "publicUI": false
+    }
+  ],
+  "standaloneObservationLab": false,
+  "standaloneNavigationLab": false,
+  "newRoute": false
+}

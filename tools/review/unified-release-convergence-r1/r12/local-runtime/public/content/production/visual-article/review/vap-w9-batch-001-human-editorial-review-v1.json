@@ -1,0 +1,617 @@
+{
+  "batchCode": "VAP-ARTICLE-BATCH-001",
+  "bulkEnvelopeIsNotBulkReviewDecision": true,
+  "candidatePromotionIsApproval": false,
+  "candidatePromotionIsPublication": false,
+  "candidatePromotionMeaning": "accepted_human_review_handoff_to_pja_approval_eligibility",
+  "candidateRegistryMutationAllowedByW9": false,
+  "entries": [
+    {
+      "aiEditorialRecommendation": {
+        "authority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+        "recommendation": "ACCEPT_RECOMMENDED_PENDING_HUMAN_CONFIRMATION",
+        "reviewFocus": [
+          "确认“结构分辨率 ≠ 导航本身”的语义边界保持清楚。"
+        ],
+        "summary": "正文清楚区分位置、方向与坐标，明确坐标不等同 GPS，也明确导航不保证唯一正确路径；结尾自然进入分辨率问题。"
+      },
+      "automatedValidation": {
+        "externalFactIndicators": [],
+        "factualTruthValidated": false,
+        "mustEstablishCoverage": [
+          {
+            "coverage": 0.65,
+            "statement": "导航同时依赖当前位置、变化方向与共同坐标参照。"
+          },
+          {
+            "coverage": 0.808,
+            "statement": "坐标不是附加标签，而是让位置与方向可以重复比较的关系结构。"
+          },
+          {
+            "coverage": 0.65,
+            "statement": "导航是持续比较与修正，而不是一次性的目标选择。"
+          }
+        ],
+        "requiredDistinctionCoverage": [
+          {
+            "coverage": 1,
+            "statement": "位置 ≠ 方向"
+          },
+          {
+            "coverage": 0.444,
+            "statement": "坐标 ≠ 地理坐标的单一形式"
+          },
+          {
+            "coverage": 0.4,
+            "statement": "导航 ≠ 预测未来"
+          },
+          {
+            "coverage": 0.625,
+            "statement": "结构分辨率 ≠ 导航本身"
+          }
+        ],
+        "semanticHumanReviewStillRequired": true,
+        "sourceTruthValidated": false,
+        "thesisCoverage": 0.625
+      },
+      "candidate": {
+        "bodyCharacters": 1283,
+        "candidateCode": "CANDIDATE-KN-B1-P1-006-ZH-HANS-V1",
+        "candidateDigest": "35657a32be574b888b82e615213ade9af4345e5c82d19186f119a010be0e47ce",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P1-006/candidate.v1.json",
+        "sectionHeadings": [
+          "没有位置，就没有真正的起点",
+          "方向说明变化朝向哪里",
+          "坐标让差异可以被重复比较",
+          "导航是一连串比较与修正",
+          "坐标不能消除不确定性",
+          "从可导航进入导航精度"
+        ],
+        "summary": "导航并不是“知道一个目标，然后向前走”这么简单。真正的导航必须同时回答三个问题：现在在哪里、变化正在朝向哪里，以及这些变化可以在什么共同参照中被比较。位置、方向与坐标因此不是三个彼此独立的概念，而是让行动能够持续校正的共同结构。",
+        "title": "为什么导航需要方向、位置与坐标"
+      },
+      "controllingC2": {
+        "continuity": {
+          "fromPreviousNode": "承接 KN-B1-P1-005 对现实持续演化的说明，把“变化”转化为“可被定位与引导的变化”。",
+          "toNextNode": "进入 KN-B1-P1-007，说明坐标与结构的分辨率如何进一步限制导航精度。"
+        },
+        "mustNotClaim": [
+          "不得把 PHI OS 的坐标概念等同于 GPS、物理空间或任何单一技术坐标系统。",
+          "不得声称只要拥有坐标就能保证正确决策或确定未来。",
+          "不得从一般导航机制直接推断个人状态或给出专业建议。"
+        ],
+        "proposalContentHash": "sha256:db96ef69fbe652e7a6e6cfa9dda35d80961ba6abbba62c542fb7af3763e5d115",
+        "requiredDistinctions": [
+          "位置 ≠ 方向",
+          "坐标 ≠ 地理坐标的单一形式",
+          "导航 ≠ 预测未来",
+          "结构分辨率 ≠ 导航本身"
+        ]
+      },
+      "humanDecisionState": "pending_human",
+      "humanReviewDimensions": [
+        "canonical_meaning",
+        "boundary",
+        "structure",
+        "terminology",
+        "evidence",
+        "continuity",
+        "language"
+      ],
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P1-006",
+      "promotionState": "not_promoted_pending_human_review",
+      "reviewIndex": 1
+    },
+    {
+      "aiEditorialRecommendation": {
+        "authority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+        "recommendation": "ACCEPT_RECOMMENDED_PENDING_HUMAN_CONFIRMATION",
+        "reviewFocus": [
+          "W8 对英文 distinction 标签的字面覆盖为 0；Human Review 应按中文语义确认，而不是要求正文出现英文标签。"
+        ],
+        "summary": "正文明确建立 Reality 与 World Projection 的差异，并直接说明 Projection ≠ Illusion、Selection ≠ Fabrication；没有把 PHI OS 投影等同于外部理论。"
+      },
+      "automatedValidation": {
+        "externalFactIndicators": [],
+        "factualTruthValidated": false,
+        "mustEstablishCoverage": [
+          {
+            "coverage": 0.688,
+            "statement": "有限载体不能同时呈现现实的全部差异。"
+          },
+          {
+            "coverage": 0.706,
+            "statement": "投影通过选择、压缩与映射形成可访问世界。"
+          },
+          {
+            "coverage": 0.5,
+            "statement": "投影保留可行动关系，但不等于现实本体。"
+          }
+        ],
+        "requiredDistinctionCoverage": [
+          {
+            "coverage": 0,
+            "statement": "Reality ≠ World Projection"
+          },
+          {
+            "coverage": 0,
+            "statement": "Projection ≠ Illusion"
+          },
+          {
+            "coverage": 0,
+            "statement": "Selection ≠ Fabrication"
+          },
+          {
+            "coverage": 0,
+            "statement": "Interface ≠ Total Reality"
+          }
+        ],
+        "semanticHumanReviewStillRequired": true,
+        "sourceTruthValidated": false,
+        "thesisCoverage": 0.661
+      },
+      "candidate": {
+        "bodyCharacters": 1245,
+        "candidateCode": "CANDIDATE-KN-B1-P2-001-ZH-HANS-V1",
+        "candidateDigest": "20c6861a59b2049b3d0b49aa5b91829f55ae0aab3b343e08a59ef320a07b2f0e",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-001/candidate.v1.json",
+        "sectionHeadings": [
+          "世界不是现实的完整复制",
+          "有限载体必须选择",
+          "压缩让现实变得可处理",
+          "投影不等于幻觉",
+          "可访问世界让经验与行动成为可能",
+          "从投影进入经验表面"
+        ],
+        "summary": "现实可以包含远多于任何单一系统能够同时承载的差异。一个有限的载体，无论它以什么方式感知、记录或行动，都不可能在同一时刻把现实的全部状态完整纳入自身。于是，在“现实存在”与“一个系统能够经验到世界”之间，必然出现一个中间过程：投影。",
+        "title": "为什么现实必须经过投影才能成为世界"
+      },
+      "controllingC2": {
+        "continuity": {
+          "fromPreviousNode": "承接 KN-B1-P1-012 对可观察接口的说明，进一步解释接口为何必然形成选择性的投影。",
+          "toNextNode": "进入 KN-B1-P2-002，说明投影如何在表面形成可经验的界面。"
+        },
+        "mustNotClaim": [
+          "不得把投影描述为现实不存在或世界纯属虚构。",
+          "不得声称所有观察者的投影完全相同或完全任意。",
+          "不得把 PHI OS Projection 直接等同于某一哲学、心理学或物理学理论。"
+        ],
+        "proposalContentHash": "sha256:896c4329bb24733e87344f28d2adb255610d61e9213689cb9f5dc4a1b0826131",
+        "requiredDistinctions": [
+          "Reality ≠ World Projection",
+          "Projection ≠ Illusion",
+          "Selection ≠ Fabrication",
+          "Interface ≠ Total Reality"
+        ]
+      },
+      "humanDecisionState": "pending_human",
+      "humanReviewDimensions": [
+        "canonical_meaning",
+        "boundary",
+        "structure",
+        "terminology",
+        "evidence",
+        "continuity",
+        "language"
+      ],
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P2-001",
+      "promotionState": "not_promoted_pending_human_review",
+      "reviewIndex": 2
+    },
+    {
+      "aiEditorialRecommendation": {
+        "authority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+        "recommendation": "ACCEPT_RECOMMENDED_PENDING_HUMAN_CONFIRMATION",
+        "reviewFocus": [
+          "Human Review 确认“更新 ≠ 完整替换”与“失真 ≠ 道德失败”已以中文语义充分表达。"
+        ],
+        "summary": "正文分别解释偏向、失真、稳定与更新，明确 Bias 不自动等于 Error、Stability 不等于 Accuracy、Update 不保证更优，并避免个人心理推断。"
+      },
+      "automatedValidation": {
+        "externalFactIndicators": [],
+        "factualTruthValidated": false,
+        "mustEstablishCoverage": [
+          {
+            "coverage": 0.75,
+            "statement": "偏向首先来自有限选择，不必然等于错误。"
+          },
+          {
+            "coverage": 0.588,
+            "statement": "失真是投影与可用信号或结果之间的失配。"
+          },
+          {
+            "coverage": 0.643,
+            "statement": "稳定来自重复权重、反馈与持续条件。"
+          },
+          {
+            "coverage": 0.294,
+            "statement": "更新需要新信号、误差或约束改变推动重组。"
+          }
+        ],
+        "requiredDistinctionCoverage": [
+          {
+            "coverage": 0,
+            "statement": "Bias ≠ Error"
+          },
+          {
+            "coverage": 0,
+            "statement": "Stability ≠ Accuracy"
+          },
+          {
+            "coverage": 0,
+            "statement": "Update ≠ Complete Replacement"
+          },
+          {
+            "coverage": 0,
+            "statement": "Distortion ≠ Moral Failure"
+          }
+        ],
+        "semanticHumanReviewStillRequired": true,
+        "sourceTruthValidated": false,
+        "thesisCoverage": 0.609
+      },
+      "candidate": {
+        "bodyCharacters": 1256,
+        "candidateCode": "CANDIDATE-KN-B1-P2-009-ZH-HANS-V1",
+        "candidateDigest": "b62a5ddeb779d61bb6ef87fc5bebcab5a3175fe07eeab667070b6f8dfe4ec9c1",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-009/candidate.v1.json",
+        "sectionHeadings": [
+          "偏向首先来自选择",
+          "失真来自投影与现实之间的失配",
+          "稳定来自重复与反馈",
+          "更新从误差与新条件中发生",
+          "四种现象构成动态平衡",
+          "从单一投影进入共同现实"
+        ],
+        "summary": "投影一旦形成，就不会只是静止地“显示现实”。因为投影必须持续选择信息、维持结构并回应变化，它会自然出现四种彼此关联的现象：偏向、失真、稳定与更新。它们并不是四个独立问题，而是有限投影能够持续运行的不同结果。",
+        "title": "为什么投影会产生偏向、失真、稳定与更新"
+      },
+      "controllingC2": {
+        "continuity": {
+          "fromPreviousNode": "承接 KN-B1-P2-008 对位置、感知、行为、角色与方向塑造现实版本的说明。",
+          "toNextNode": "进入 KN-B1-P2-010，讨论多个不同投影如何在差异中形成协调。"
+        },
+        "mustNotClaim": [
+          "不得把所有偏向都描述为心理缺陷或认知错误。",
+          "不得把稳定投影当成客观真理。",
+          "不得声称更新一定更准确或更优。",
+          "不得从一般投影机制推断个人心理状态。"
+        ],
+        "proposalContentHash": "sha256:02cc48e3be61ced9e3eef7c69b84239dac3d7e6d4855735926e1e386c1dfc533",
+        "requiredDistinctions": [
+          "Bias ≠ Error",
+          "Stability ≠ Accuracy",
+          "Update ≠ Complete Replacement",
+          "Distortion ≠ Moral Failure"
+        ]
+      },
+      "humanDecisionState": "pending_human",
+      "humanReviewDimensions": [
+        "canonical_meaning",
+        "boundary",
+        "structure",
+        "terminology",
+        "evidence",
+        "continuity",
+        "language"
+      ],
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P2-009",
+      "promotionState": "not_promoted_pending_human_review",
+      "reviewIndex": 3
+    },
+    {
+      "aiEditorialRecommendation": {
+        "authority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+        "recommendation": "ACCEPT_RECOMMENDED_PENDING_HUMAN_CONFIRMATION",
+        "reviewFocus": [
+          "Human Review 确认 Operational Boundary 与 Reality Boundary 的区分足够明确。"
+        ],
+        "summary": "正文把问题定义为开放现实的结构化压缩，明确有限问题不等于简单问题，也反复保留盲区与未覆盖现实，没有把分类写成唯一自然结构。"
+      },
+      "automatedValidation": {
+        "externalFactIndicators": [],
+        "factualTruthValidated": false,
+        "mustEstablishCoverage": [
+          {
+            "coverage": 0.684,
+            "statement": "问题是对开放现实的结构化压缩，而不是现实本身。"
+          },
+          {
+            "coverage": 0.682,
+            "statement": "压缩通过边界、变量、时间窗口、资源与目标限制处理范围。"
+          },
+          {
+            "coverage": 0.765,
+            "statement": "任何有限问题都会保留盲区与未覆盖现实。"
+          }
+        ],
+        "requiredDistinctionCoverage": [
+          {
+            "coverage": 0.071,
+            "statement": "Question ≠ Reality"
+          },
+          {
+            "coverage": 0.043,
+            "statement": "Compression ≠ Complete Explanation"
+          },
+          {
+            "coverage": 0.107,
+            "statement": "Operational Boundary ≠ Ontological Boundary"
+          },
+          {
+            "coverage": 0.059,
+            "statement": "Finite Problem ≠ Simple Problem"
+          }
+        ],
+        "semanticHumanReviewStillRequired": true,
+        "sourceTruthValidated": false,
+        "thesisCoverage": 0.485
+      },
+      "candidate": {
+        "bodyCharacters": 1230,
+        "candidateCode": "CANDIDATE-KN-B1-P3-005-ZH-HANS-V1",
+        "candidateDigest": "d114c1b5c95ec79431a7549843d20aa139cef6ac54d061e1b1590668f7cc80ce",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P3-005/candidate.v1.json",
+        "sectionHeadings": [
+          "问题不是现实本身",
+          "边界把开放复杂性变成处理范围",
+          "变量、时间、资源与目标共同压缩现实",
+          "有限问题并不等于简单问题",
+          "每一个问题都会留下未覆盖现实",
+          "从问题压缩进入问题架构"
+        ],
+        "summary": "现实本身并不会自动以一个清楚的问题出现。任何时刻都可能同时存在大量差异、关系、历史、约束与未来可能性。如果一个有限系统试图同时处理这一切，它很快就会失去明确的输入、判断边界与行动范围。于是，运行必须先做一件事：把开放现实压缩成有限问题。",
+        "title": "无限现实如何压缩为有限问题"
+      },
+      "controllingC2": {
+        "continuity": {
+          "fromPreviousNode": "承接 KN-B1-P3-004 对现实语法如何组织形成、激活、内化与重组的说明。",
+          "toNextNode": "进入 KN-B1-P3-006，说明一组基础问题如何进一步组织现实辨认、建立、共存与延续。"
+        },
+        "mustNotClaim": [
+          "不得声称现实能够被有限问题完全穷尽。",
+          "不得把问题分类当作自然界唯一结构。",
+          "不得在本节点提前宣称十六个问题是唯一可能分类。"
+        ],
+        "proposalContentHash": "sha256:dc9ddbc6e571f04d46c820e611a956b55354d42c7f9d2a095fa80c11dd9dc672",
+        "requiredDistinctions": [
+          "Question ≠ Reality",
+          "Compression ≠ Complete Explanation",
+          "Operational Boundary ≠ Ontological Boundary",
+          "Finite Problem ≠ Simple Problem"
+        ]
+      },
+      "humanDecisionState": "pending_human",
+      "humanReviewDimensions": [
+        "canonical_meaning",
+        "boundary",
+        "structure",
+        "terminology",
+        "evidence",
+        "continuity",
+        "language"
+      ],
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P3-005",
+      "promotionState": "not_promoted_pending_human_review",
+      "reviewIndex": 4
+    },
+    {
+      "aiEditorialRecommendation": {
+        "authority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+        "recommendation": "ACCEPT_RECOMMENDED_PENDING_HUMAN_CONFIRMATION",
+        "reviewFocus": [
+          "Human Review 确认“关键关系与约束被维持”没有被读成固定结构必须永久保留。"
+        ],
+        "summary": "正文以分布式网络解释状态、反馈、重组与连续性，明确反馈不保证稳定、重组不要求归零、连续性不等于不变。"
+      },
+      "automatedValidation": {
+        "externalFactIndicators": [],
+        "factualTruthValidated": false,
+        "mustEstablishCoverage": [
+          {
+            "coverage": 0.667,
+            "statement": "当前状态由多个节点与关系共同形成。"
+          },
+          {
+            "coverage": 0.421,
+            "statement": "反馈把运行结果重新带回网络并改变后续状态。"
+          },
+          {
+            "coverage": 0.476,
+            "statement": "重组可以改变连接、权重或边界而不必摧毁全部结构。"
+          },
+          {
+            "coverage": 0.474,
+            "statement": "连续性来自变化中仍被维持的关键关系与约束。"
+          }
+        ],
+        "requiredDistinctionCoverage": [
+          {
+            "coverage": 0,
+            "statement": "State ≠ Single Cause"
+          },
+          {
+            "coverage": 0.059,
+            "statement": "Feedback ≠ Simple Loop"
+          },
+          {
+            "coverage": 0.045,
+            "statement": "Reorganization ≠ Total Reset"
+          },
+          {
+            "coverage": 0.118,
+            "statement": "Continuity ≠ No Change"
+          }
+        ],
+        "semanticHumanReviewStillRequired": true,
+        "sourceTruthValidated": false,
+        "thesisCoverage": 0.701
+      },
+      "candidate": {
+        "bodyCharacters": 1246,
+        "candidateCode": "CANDIDATE-KN-B1-P3-015-ZH-HANS-V1",
+        "candidateDigest": "f51a45851064f290d3de50564e6554587c03b01380fbeeb91bb80c97a0ff1f32",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P3-015/candidate.v1.json",
+        "sectionHeadings": [
+          "状态来自网络，而不是单一原因",
+          "输出会重新成为输入",
+          "重组让网络在条件变化后继续运行",
+          "连续性不等于保持不变",
+          "反馈不保证自动稳定",
+          "从网络运行进入生命载体"
+        ],
+        "summary": "一个运行中的系统，很少由单一节点独立决定当前状态。更常见的情况是：多个节点、关系、权重、约束与时间条件同时参与，形成一个暂时稳定却持续变化的网络状态。要理解 Runtime 如何延续，就必须同时理解状态、反馈、重组与连续性。",
+        "title": "运行网络如何形成状态、反馈、重组与连续性"
+      },
+      "controllingC2": {
+        "continuity": {
+          "fromPreviousNode": "承接 KN-B1-P3-014 对激活窗口、权重、场与时间如何放大或结束运动的说明。",
+          "toNextNode": "进入 KN-B1-P4-001，解释持续 Runtime 为什么需要进一步压缩并承载为生命组织。"
+        },
+        "mustNotClaim": [
+          "不得把网络状态归因于单一中央控制器。",
+          "不得把反馈写成必然稳定或必然自我修复。",
+          "不得声称连续性要求结构完全不变。"
+        ],
+        "proposalContentHash": "sha256:a1d0fb294291fb7e30226d6f0f7f71dc7d9e4cb8351f8cb263a4cda16cb62e90",
+        "requiredDistinctions": [
+          "State ≠ Single Cause",
+          "Feedback ≠ Simple Loop",
+          "Reorganization ≠ Total Reset",
+          "Continuity ≠ No Change"
+        ]
+      },
+      "humanDecisionState": "pending_human",
+      "humanReviewDimensions": [
+        "canonical_meaning",
+        "boundary",
+        "structure",
+        "terminology",
+        "evidence",
+        "continuity",
+        "language"
+      ],
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P3-015",
+      "promotionState": "not_promoted_pending_human_review",
+      "reviewIndex": 5
+    },
+    {
+      "aiEditorialRecommendation": {
+        "authority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+        "recommendation": "ACCEPT_RECOMMENDED_PENDING_HUMAN_CONFIRMATION",
+        "reviewFocus": [
+          "Human Review 特别确认一般 Runtime 模型没有被写成具体生理机制或医疗建议。"
+        ],
+        "summary": "正文完整建立成本、恢复与内部连接的动态稳定关系，并明确 Runtime Cost 不是道德评价；医学诊断与个人健康建议边界被显式保留。"
+      },
+      "automatedValidation": {
+        "externalFactIndicators": [],
+        "factualTruthValidated": false,
+        "mustEstablishCoverage": [
+          {
+            "coverage": 0.533,
+            "statement": "身体持续运行会产生资源与调节成本。"
+          },
+          {
+            "coverage": 0.5,
+            "statement": "恢复用于重建可用容量与调节余量。"
+          },
+          {
+            "coverage": 0.8,
+            "statement": "内部连接使局部状态能够被更大范围的载体协调。"
+          },
+          {
+            "coverage": 0.538,
+            "statement": "稳定是动态维持结果，不是无变化。"
+          }
+        ],
+        "requiredDistinctionCoverage": [
+          {
+            "coverage": 0.063,
+            "statement": "Stability ≠ Inactivity"
+          },
+          {
+            "coverage": 0.115,
+            "statement": "Recovery ≠ Guaranteed Restoration"
+          },
+          {
+            "coverage": 0.435,
+            "statement": "Runtime Cost ≠ Moral Weakness"
+          },
+          {
+            "coverage": 0.069,
+            "statement": "Carrier mechanism ≠ Medical diagnosis"
+          }
+        ],
+        "semanticHumanReviewStillRequired": true,
+        "sourceTruthValidated": false,
+        "thesisCoverage": 0.616
+      },
+      "candidate": {
+        "bodyCharacters": 1405,
+        "candidateCode": "CANDIDATE-KN-B1-P4-006-ZH-HANS-V1",
+        "candidateDigest": "7f25fa5596051b7bc0ba869395d25b4a2b006e74ef462b17efd62610e83ad010",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P4-006/candidate.v1.json",
+        "sectionHeadings": [
+          "持续运行必然产生成本",
+          "稳定不是把成本降到零",
+          "恢复重新建立可用容量",
+          "内部连接让局部状态能够被协调",
+          "成本、恢复与连接共同形成动态稳定",
+          "这不是医学诊断模型",
+          "从内部稳定进入环境输入"
+        ],
+        "summary": "身体稳定并不是一种没有变化、没有消耗的静止状态。一个持续运行的生命载体必须不断感知、调节、行动、维护并回应环境，而这些过程都会占用有限资源。稳定因此不是“什么都没有发生”，而是运行成本、恢复能力与内部连接持续协调后形成的动态结果。",
+        "title": "运行成本、恢复与内部连接如何维持身体稳定"
+      },
+      "controllingC2": {
+        "continuity": {
+          "fromPreviousNode": "承接 KN-B1-P4-005 对载体能力、约束、完整性与适应如何共同塑造运行的说明。",
+          "toNextNode": "进入 KN-B1-P4-007，讨论感官、环境与摄取条件如何改变载体接收的现实输入。"
+        },
+        "mustNotClaim": [
+          "不得诊断疾病、疲劳原因、营养状态或心理状态。",
+          "不得给出睡眠、饮食、运动、治疗或医疗建议。",
+          "不得把一般 Runtime Cost 模型声称为具体生理机制的完整解释。"
+        ],
+        "proposalContentHash": "sha256:23591767c2a47dfbc551a4f22cf83d73d55371e2f2d28850ebfce2f1965ffc57",
+        "requiredDistinctions": [
+          "Stability ≠ Inactivity",
+          "Recovery ≠ Guaranteed Restoration",
+          "Runtime Cost ≠ Moral Weakness",
+          "Carrier mechanism ≠ Medical diagnosis"
+        ]
+      },
+      "humanDecisionState": "pending_human",
+      "humanReviewDimensions": [
+        "canonical_meaning",
+        "boundary",
+        "structure",
+        "terminology",
+        "evidence",
+        "continuity",
+        "language"
+      ],
+      "locale": "zh-Hans",
+      "nodeCode": "KN-B1-P4-006",
+      "promotionState": "not_promoted_pending_human_review",
+      "reviewIndex": 6
+    }
+  ],
+  "humanAuthorityRequired": true,
+  "locale": "zh-Hans",
+  "oneIndependentDecisionPerNode": true,
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "proposalAuthority": "AI_EDITORIAL_RECOMMENDATION_ONLY_NOT_HUMAN_REVIEW",
+  "reviewQueueCode": "PHI-OS-VAP-W9-BATCH-001-HUMAN-EDITORIAL-REVIEW-v1",
+  "reviewQueueDigest": "sha256:b451fa7382d60cca9db2353d8b1a09eb9ba8f469776b5704792e8a809fe7a07e",
+  "reviewRuntime": "PJA-HUMAN-REVIEW-W1",
+  "schemaVersion": "PHI-OS-VAP-W9-BATCH-HUMAN-EDITORIAL-REVIEW-v1.0.0",
+  "status": "AWAITING_EXPLICIT_HUMAN_EDITORIAL_DECISIONS",
+  "work": "VAP-W9"
+}

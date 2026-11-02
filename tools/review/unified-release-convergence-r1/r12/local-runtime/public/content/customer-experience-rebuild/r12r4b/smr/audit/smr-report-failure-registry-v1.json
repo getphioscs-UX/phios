@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-REPORT-FAILURE-REGISTRY-v1.0.0",
+  "work": "CX-R12R4B-SMR-R2-W0",
+  "taxonomy": [
+    {
+      "failureId": "F01",
+      "code": "EXACT_DUPLICATE",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "Exact normalized paragraph text repeats within a report."
+    },
+    {
+      "failureId": "F02",
+      "code": "SEMANTIC_DUPLICATE",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "The same accepted interpretation unit is paraphrased repeatedly inside one report."
+    },
+    {
+      "failureId": "F03",
+      "code": "CROSS_SECTION_RESTATEMENT",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "The same accepted interpretation unit is fully restated across multiple sections."
+    },
+    {
+      "failureId": "F04",
+      "code": "GENERIC_FILLER",
+      "state": "NOT_OBSERVED_BY_CURRENT_MACHINE_RULES",
+      "affectedCaseCount": 0,
+      "evidence": "Legacy quality checks do not identify generic filler; this does not establish paid-value quality."
+    },
+    {
+      "failureId": "F05",
+      "code": "LOW_INFORMATION_GAIN",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "Available sections reuse existing units without a section-level new-information eligibility gate."
+    },
+    {
+      "failureId": "F06",
+      "code": "TECHNICAL_OVERLOAD",
+      "state": "UNVERIFIED",
+      "affectedCaseCount": null,
+      "evidence": "No frozen technical-to-customer content ratio exists in legacy SMR."
+    },
+    {
+      "failureId": "F07",
+      "code": "WEAK_PRIORITY",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "Priority does not materially suppress repeated lower-information paragraphs."
+    },
+    {
+      "failureId": "F08",
+      "code": "QUESTION_NOT_ANSWERED",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "Different intent variants within the same method/locale produce the same paragraph sequence."
+    },
+    {
+      "failureId": "F09",
+      "code": "METHOD_GLOSSARY",
+      "state": "UNVERIFIED",
+      "affectedCaseCount": null,
+      "evidence": "Method-specific glossary dominance is not measured by the legacy gate."
+    },
+    {
+      "failureId": "F10",
+      "code": "UNTRACEABLE_CLAIM",
+      "state": "NOT_OBSERVED",
+      "affectedCaseCount": 0,
+      "evidence": "Legacy paragraphs are lineage-bound; traceability itself is not the current failure."
+    },
+    {
+      "failureId": "F11",
+      "code": "LAYOUT_DENSITY",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "Legacy reports exceed the R2 audit density threshold of 24 body paragraphs without information-gain gating."
+    },
+    {
+      "failureId": "F12",
+      "code": "MOBILE_FAILURE",
+      "state": "UNVERIFIED",
+      "affectedCaseCount": null,
+      "evidence": "Legacy review CSS has a breakpoint but no mobile reading-layout contract or wall-of-text gate."
+    },
+    {
+      "failureId": "F13",
+      "code": "PRINT_FAILURE",
+      "state": "UNVERIFIED",
+      "affectedCaseCount": null,
+      "evidence": "Legacy review CSS has print rules but no widow/orphan, clipped-chart, or UI-control contract."
+    },
+    {
+      "failureId": "F14",
+      "code": "FALSE_DEPTH",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "Length is materially inflated by repeated explanation rather than new claims or relations."
+    },
+    {
+      "failureId": "F15",
+      "code": "TEMPLATE_SUBSTITUTION",
+      "state": "OBSERVED",
+      "affectedCaseCount": 48,
+      "evidence": "The legacy campaign varies locale/intent over one underlying authority per method, so it is not structural-diversity evidence."
+    }
+  ],
+  "summary": {
+    "observed": [
+      "F01",
+      "F02",
+      "F03",
+      "F05",
+      "F07",
+      "F08",
+      "F11",
+      "F14",
+      "F15"
+    ],
+    "unverified": [
+      "F06",
+      "F09",
+      "F12",
+      "F13"
+    ],
+    "notObserved": [
+      "F04",
+      "F10"
+    ]
+  },
+  "governance": {
+    "auditEvidenceDoesNotCreateMeaning": true,
+    "unverifiedDoesNotMeanPass": true
+  }
+}

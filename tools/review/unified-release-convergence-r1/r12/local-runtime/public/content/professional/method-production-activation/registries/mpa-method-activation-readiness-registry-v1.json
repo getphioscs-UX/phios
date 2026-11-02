@@ -1,0 +1,52 @@
+{
+  "registryCode": "MPA-METHOD-ACTIVATION-READINESS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_METHOD_SPECIFIC_READINESS_NO_GLOBAL_ELIGIBILITY",
+  "baselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "entries": [
+    {
+      "work": "MPA-W21",
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "methodVersion": "0.1.0-candidate",
+      "decision": "READY_FOR_MPA_W26_ELIGIBILITY_DECISION",
+      "methodSpecificReady": true,
+      "gates": {
+        "registrationSuccessor": "PASS_METHOD_REGISTRY_V2",
+        "canonicalInput": "PASS_MPA_W6",
+        "consentPurpose": "PASS_MPA_W7",
+        "calculationAuthorityResolver": "PASS_W21_EXACT_AUTHORITY_BINDING",
+        "determinism": "PASS_SHARED_CALCULATION_AND_NUM_CHECKERS",
+        "fixtureCorpus": "PASS_W21_VERSIONED_SUCCESSOR",
+        "validationHarness": "PASS_NUM_W0_W6_AND_MPA_BOUNDARIES",
+        "regression": "PASS_W21_FROZEN_FINGERPRINTS",
+        "crossImplementationComparison": "PASS_EXACT",
+        "projectionFreeze": "PASS_MPA_W17",
+        "interpretationBoundary": "PASS_MPA_W18",
+        "meaningKnowledgeBoundary": "PASS_REFERENCE_ONLY_NOT_CALCULATION_AUTHORITY",
+        "professionalSeparation": "PASS_PROFESSIONAL_REMAINS_SEPARATE"
+      },
+      "historicalBlockerReconciliation": {
+        "VALIDATION_NOT_PASSED": "RESOLVED_FOR_METHOD_SPECIFIC_READINESS_BY_W21_EVIDENCE",
+        "REGRESSION_NOT_PASSED": "RESOLVED_FOR_METHOD_SPECIFIC_READINESS_BY_W21_REGRESSION_FREEZE",
+        "COMMERCIAL_LICENSE_NOT_PASSED": "CURRENT_SCOPE_USES_ONLY_GOVERNED_INTERNAL_CALCULATION_AUTHORITIES_NO_EXTERNAL_DATASET_LICENSE_PASS_CLAIM",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED": "REMAINS_GLOBAL_BLOCKER_UNTIL_MPA_W27"
+      },
+      "globalGates": {
+        "MPA-W26": "REQUIRED",
+        "MPA-W27": "REQUIRED"
+      },
+      "productionEligible": false,
+      "productionExecutionAllowed": false,
+      "professionalEligible": false,
+      "professionalReleaseAllowed": false,
+      "publicEligible": false
+    }
+  ],
+  "rules": {
+    "w21MaySetProductionEligible": false,
+    "w21MayOpenExecutionGate": false,
+    "w21MaySetProfessionalEligible": false,
+    "futureMethodActivationsAppendVersionedEvidence": true
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "schemaVersion": "PHI-OS-ECR-PHI-CARD-MAPPING-MATRIX-v1.0.0",
+  "work": "ECR-PC-R1-S3",
+  "status": "FROZEN_DETERMINISTIC_PRESENTATION_MAPPING",
+  "inputAuthority": {
+    "requiredMethod": "ECR",
+    "requiredPublicationClass": "CUSTOMER_PUBLISHABLE",
+    "acceptedInterpretationRequired": true,
+    "rawProjectionAloneInsufficient": true
+  },
+  "groupMappings": {
+    "CORE": {
+      "sourceFamilies": [
+        "ECR_GRAMMAR",
+        "ECR_QUESTION"
+      ],
+      "codeToCard": {
+        "G1": "ECR-PC-C01",
+        "G2": "ECR-PC-C03",
+        "G3": "ECR-PC-C04",
+        "G4": "ECR-PC-C04",
+        "G5": "ECR-PC-C01",
+        "G6": "ECR-PC-C03",
+        "G7": "ECR-PC-C05",
+        "G8": "ECR-PC-C07",
+        "G9": "ECR-PC-C05",
+        "G10": "ECR-PC-C08",
+        "G11": "ECR-PC-C07",
+        "G12": "ECR-PC-C02",
+        "G13": "ECR-PC-C03",
+        "G14": "ECR-PC-C06",
+        "G15": "ECR-PC-C05",
+        "G16": "ECR-PC-C04",
+        "Q1": "ECR-PC-C07",
+        "Q2": "ECR-PC-C02",
+        "Q3": "ECR-PC-C07",
+        "Q4": "ECR-PC-C06",
+        "Q5": "ECR-PC-C08",
+        "Q6": "ECR-PC-C03",
+        "Q7": "ECR-PC-C04",
+        "Q8": "ECR-PC-C08",
+        "Q9": "ECR-PC-C04",
+        "Q10": "ECR-PC-C04",
+        "Q11": "ECR-PC-C02",
+        "Q12": "ECR-PC-C03",
+        "Q13": "ECR-PC-C06",
+        "Q14": "ECR-PC-C03",
+        "Q15": "ECR-PC-C01",
+        "Q16": "ECR-PC-C04"
+      },
+      "score": {
+        "grammar": 2,
+        "question": 2
+      },
+      "tieBreak": "CARD_ID_ASC"
+    },
+    "DRIVER": {
+      "sourceFamilies": [
+        "ECR_DRIVER_PRIORITY"
+      ],
+      "codeToCard": {
+        "D1": "ECR-PC-D03",
+        "D2": "ECR-PC-D08",
+        "D3": "ECR-PC-D01",
+        "D4": "ECR-PC-D08",
+        "D5": "ECR-PC-D03",
+        "D6": "ECR-PC-D06",
+        "D7": "ECR-PC-D07",
+        "D8": "ECR-PC-D06",
+        "D9": "ECR-PC-D05",
+        "D10": "ECR-PC-D04",
+        "D11": "ECR-PC-D02",
+        "D12": "ECR-PC-D07"
+      },
+      "weightRule": "Use normalized driver baseline weights when available; otherwise rank contribution = 1/rank. Baseline affinity is never labeled current priority.",
+      "tieBreak": "CARD_ID_ASC"
+    },
+    "GIFT": {
+      "sourceFamilies": [
+        "ECR_CAPABILITIES"
+      ],
+      "codeToCard": {
+        "R1": "ECR-PC-G01",
+        "R2": "ECR-PC-G02",
+        "R3": "ECR-PC-G04",
+        "R4": "ECR-PC-G01",
+        "R5": "ECR-PC-G05",
+        "R6": "ECR-PC-G06",
+        "R7": "ECR-PC-G03",
+        "R8": "ECR-PC-G07",
+        "R9": "ECR-PC-G08"
+      },
+      "weightRule": "PRIMARY=2; SUPPORTING=1; no claim that capability is always available in lived reality.",
+      "tieBreak": "CARD_ID_ASC"
+    },
+    "FIELD": {
+      "sourceFamilies": [
+        "ECR_MOTION",
+        "ECR_CONFIGURATION"
+      ],
+      "motionCodeToCard": {
+        "M1": "ECR-PC-F01",
+        "M2": "ECR-PC-F08",
+        "M3": "ECR-PC-F05",
+        "M4": "ECR-PC-F07",
+        "M5": "ECR-PC-F02",
+        "M6": "ECR-PC-F02",
+        "M7": "ECR-PC-F06",
+        "M8": "ECR-PC-F04"
+      },
+      "configurationCodeToCard": {
+        "ECR-H01": "ECR-PC-F01",
+        "ECR-H02": "ECR-PC-F01",
+        "ECR-H03": "ECR-PC-F01",
+        "ECR-H04": "ECR-PC-F01",
+        "ECR-H05": "ECR-PC-F01",
+        "ECR-H06": "ECR-PC-F01",
+        "ECR-H07": "ECR-PC-F01",
+        "ECR-H08": "ECR-PC-F01",
+        "ECR-H09": "ECR-PC-F08",
+        "ECR-H10": "ECR-PC-F08",
+        "ECR-H11": "ECR-PC-F08",
+        "ECR-H12": "ECR-PC-F08",
+        "ECR-H13": "ECR-PC-F08",
+        "ECR-H14": "ECR-PC-F08",
+        "ECR-H15": "ECR-PC-F08",
+        "ECR-H16": "ECR-PC-F08",
+        "ECR-H17": "ECR-PC-F05",
+        "ECR-H18": "ECR-PC-F05",
+        "ECR-H19": "ECR-PC-F05",
+        "ECR-H20": "ECR-PC-F05",
+        "ECR-H21": "ECR-PC-F05",
+        "ECR-H22": "ECR-PC-F05",
+        "ECR-H23": "ECR-PC-F05",
+        "ECR-H24": "ECR-PC-F05",
+        "ECR-H25": "ECR-PC-F07",
+        "ECR-H26": "ECR-PC-F07",
+        "ECR-H27": "ECR-PC-F07",
+        "ECR-H28": "ECR-PC-F07",
+        "ECR-H29": "ECR-PC-F07",
+        "ECR-H30": "ECR-PC-F07",
+        "ECR-H31": "ECR-PC-F07",
+        "ECR-H32": "ECR-PC-F07",
+        "ECR-H33": "ECR-PC-F02",
+        "ECR-H34": "ECR-PC-F02",
+        "ECR-H35": "ECR-PC-F02",
+        "ECR-H36": "ECR-PC-F02",
+        "ECR-H37": "ECR-PC-F02",
+        "ECR-H38": "ECR-PC-F02",
+        "ECR-H39": "ECR-PC-F02",
+        "ECR-H40": "ECR-PC-F02",
+        "ECR-H41": "ECR-PC-F02",
+        "ECR-H42": "ECR-PC-F02",
+        "ECR-H43": "ECR-PC-F02",
+        "ECR-H44": "ECR-PC-F02",
+        "ECR-H45": "ECR-PC-F02",
+        "ECR-H46": "ECR-PC-F02",
+        "ECR-H47": "ECR-PC-F02",
+        "ECR-H48": "ECR-PC-F02",
+        "ECR-H49": "ECR-PC-F06",
+        "ECR-H50": "ECR-PC-F06",
+        "ECR-H51": "ECR-PC-F06",
+        "ECR-H52": "ECR-PC-F06",
+        "ECR-H53": "ECR-PC-F06",
+        "ECR-H54": "ECR-PC-F06",
+        "ECR-H55": "ECR-PC-F06",
+        "ECR-H56": "ECR-PC-F06",
+        "ECR-H57": "ECR-PC-F04",
+        "ECR-H58": "ECR-PC-F04",
+        "ECR-H59": "ECR-PC-F04",
+        "ECR-H60": "ECR-PC-F04",
+        "ECR-H61": "ECR-PC-F04",
+        "ECR-H62": "ECR-PC-F04",
+        "ECR-H63": "ECR-PC-F04",
+        "ECR-H64": "ECR-PC-F04"
+      },
+      "weightRule": "motion=2; environment-priority configuration=1",
+      "tieBreak": "CARD_ID_ASC"
+    },
+    "PHASE": {
+      "sourceFamilies": [
+        "ECR_ACTIVATION"
+      ],
+      "codeToCard": {
+        "A1": "ECR-PC-P01",
+        "A2": "ECR-PC-P02",
+        "A3": "ECR-PC-P03",
+        "A4": "ECR-PC-P04",
+        "A5": "ECR-PC-P05",
+        "A6": "ECR-PC-P06",
+        "A7": "ECR-PC-P07",
+        "A8": "ECR-PC-P08"
+      },
+      "weightRule": "exact activation stage match only",
+      "tieBreak": "CARD_ID_ASC"
+    },
+    "TENSION": {
+      "sourceFamilies": [
+        "accepted ECR interpretation friction conditions",
+        "driver-weight structure",
+        "activation stage"
+      ],
+      "selectionMode": "CONDITIONAL_PRESENTATION_RISK_ONLY",
+      "rules": [
+        {
+          "ruleId": "ECR-PC-TENSION-OVERLOAD",
+          "cardId": "ECR-PC-T01",
+          "when": {
+            "anyCode": [
+              "A6"
+            ]
+          },
+          "weight": 5
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-PULL",
+          "cardId": "ECR-PC-T02",
+          "when": {
+            "driverTopTwoGapLTE": 0.015
+          },
+          "weight": 3
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-STALL",
+          "cardId": "ECR-PC-T03",
+          "when": {
+            "anyCode": [
+              "G2",
+              "M6"
+            ],
+            "andActivationAny": [
+              "A1",
+              "A2"
+            ]
+          },
+          "weight": 3
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-DISPERSION",
+          "cardId": "ECR-PC-T04",
+          "when": {
+            "driverTopFourRangeLTE": 0.08
+          },
+          "weight": 2
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-COMPRESSION",
+          "cardId": "ECR-PC-T05",
+          "when": {
+            "anyCode": [
+              "G2",
+              "M1"
+            ]
+          },
+          "weight": 2
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-LOOP",
+          "cardId": "ECR-PC-T06",
+          "when": {
+            "anyCode": [
+              "G12",
+              "G16"
+            ]
+          },
+          "weight": 2
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-CLOSURE",
+          "cardId": "ECR-PC-T07",
+          "when": {
+            "anyCode": [
+              "A8",
+              "D9",
+              "M6"
+            ]
+          },
+          "weight": 4
+        },
+        {
+          "ruleId": "ECR-PC-TENSION-DRAIN",
+          "cardId": "ECR-PC-T08",
+          "when": {
+            "anyCode": [
+              "A7"
+            ]
+          },
+          "weight": 5
+        }
+      ],
+      "withholdIfNoRuleMatches": true,
+      "customerBoundary": "A selected TENSION card is a structural risk-to-observe, not a fact about current Reality."
+    }
+  },
+  "selectionOutput": {
+    "groups": [
+      "CORE",
+      "DRIVER",
+      "GIFT",
+      "TENSION",
+      "FIELD",
+      "PHASE"
+    ],
+    "maxPrimaryCards": 6,
+    "tensionOptional": true,
+    "observeCardRuntimeGeneratedLater": true
+  },
+  "boundaries": {
+    "randomSelection": false,
+    "rendererMayOverrideSelection": false,
+    "mappingCreatesNewMeaning": false,
+    "currentRealityInferred": false,
+    "fortunePredictionCreated": false,
+    "internalCodesShownOnDefaultCard": false
+  }
+}

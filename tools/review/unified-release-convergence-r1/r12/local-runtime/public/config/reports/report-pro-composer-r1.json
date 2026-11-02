@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "PHI-OS-REPORT-PRO-COMPOSER-R1-REGISTRY-v1.0.0",
+  "status": "ACTIVE_SHARED_PRODUCTION_POLICY",
+  "composerId": "REPORT-PRO-COMPOSER-R1",
+  "objective": "Make human-accepted reference quality, method-owned authority and independent semantic verification mandatory for paid report prose across all symbolic/report methods.",
+  "execution": {
+    "productionTier": "T3_DEEP_COMPOSITION",
+    "providerRoutingOwner": "functions/_lib/pai-r1-economics.js",
+    "providerAdapterOwner": "functions/personal-reading/narrative/narrative-provider.js",
+    "defaultDeepModelClass": "DEEP",
+    "deterministicProseFallbackAllowed": false,
+    "cachedAcceptedSnapshotPreferred": true
+  },
+  "requiredChain": [
+    "METHOD_CALCULATION",
+    "METHOD_AUTHORITY_PACK",
+    "SECTION_OWNERSHIP_CONTRACT",
+    "HUMAN_ACCEPTED_EDITORIAL_REFERENCE",
+    "T3_DEEP_COMPOSITION",
+    "INDEPENDENT_SEMANTIC_VERIFIER",
+    "REFERENCE_QUALITY_GATE",
+    "CROSS_SECTION_DUPLICATION_GATE",
+    "BILINGUAL_PARITY_WHEN_BILINGUAL",
+    "IMMUTABLE_CUSTOMER_DELIVERY_SNAPSHOT"
+  ],
+  "methods": [
+    {
+      "methodId": "BZR",
+      "name": "BaZi",
+      "referenceState": "ACTIVE",
+      "referenceRef": "docs/reports/BAZI-EDITORIAL-REFERENCE-R2.md",
+      "authorityRequirement": "PHI-OS-BAZI-FULL-READING-R2-v1.0.0",
+      "authorityOwner": "functions/api/bazi-full-reading-r2.js"
+    },
+    {
+      "methodId": "ZWR",
+      "name": "Zi Wei",
+      "referenceState": "ACTIVE",
+      "referenceRef": "docs/reports/ziwei/professional-synthesis-r5",
+      "authorityRequirement": "METHOD_OWNED_ZIWEI_PROFESSIONAL_SYNTHESIS_AUTHORITY"
+    },
+    {
+      "methodId": "AST",
+      "name": "Astrology",
+      "referenceState": "REQUIRED",
+      "referenceRef": null,
+      "authorityRequirement": "METHOD_OWNED_AUTHORITY_PACK_REQUIRED"
+    },
+    {
+      "methodId": "NUM",
+      "name": "Numerology",
+      "referenceState": "REQUIRED",
+      "referenceRef": null,
+      "authorityRequirement": "METHOD_OWNED_AUTHORITY_PACK_REQUIRED"
+    },
+    {
+      "methodId": "PROFILE",
+      "name": "Profile",
+      "referenceState": "REQUIRED",
+      "referenceRef": null,
+      "authorityRequirement": "METHOD_OWNED_AUTHORITY_PACK_REQUIRED"
+    },
+    {
+      "methodId": "ECR",
+      "name": "Embodied Configuration",
+      "referenceState": "REQUIRED",
+      "referenceRef": null,
+      "authorityRequirement": "METHOD_OWNED_AUTHORITY_PACK_REQUIRED"
+    },
+    {
+      "methodId": "HD",
+      "name": "Human Design",
+      "referenceState": "REQUIRED",
+      "referenceRef": null,
+      "authorityRequirement": "METHOD_OWNED_AUTHORITY_PACK_REQUIRED"
+    },
+    {
+      "methodId": "CROSS",
+      "name": "Incarnation Cross",
+      "referenceState": "REQUIRED",
+      "referenceRef": null,
+      "authorityRequirement": "METHOD_OWNED_AUTHORITY_PACK_REQUIRED"
+    }
+  ],
+  "invariants": {
+    "methodOwnsFacts": true,
+    "llmMayRecalculateMethodFacts": false,
+    "llmMayInventBiography": false,
+    "sectionScopeMustBeExplicit": true,
+    "acceptedReferenceControlsEditorialQualityNotSubjectSemantics": true,
+    "noProfessionalNoteByDefault": true,
+    "crossSectionDuplicationMustPass": true,
+    "productionMayNotMasqueradeDeterministicFallbackAsReferenceQuality": true,
+    "missingReferenceDisposition": "CONTROLLED_NOT_READY"
+  }
+}

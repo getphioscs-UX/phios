@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-WORLD-OBSERVATION-KNOWLEDGE-STATE-MAP-v1.0.0",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "work": "PHI-OS-WORLD-RECONFIGURATION-OBSERVATION-P1",
+  "sourceContract": "content/civilization-atlas/reconfiguration/knowledge-state-contract-v1.json",
+  "mappings": [
+    {
+      "state": "CANONICAL_HISTORY",
+      "observationAuthority": "ADMITTED_HISTORICAL",
+      "bookViiBoundary": "Past event/claim is admitted historical knowledge; currentness is not implied."
+    },
+    {
+      "state": "HISTORICAL_RECONSTRUCTION",
+      "observationAuthority": "RECONSTRUCTED",
+      "bookViiBoundary": "Evidence-bounded reconstruction; uncertainty remains visible."
+    },
+    {
+      "state": "STRUCTURAL_KNOWLEDGE",
+      "observationAuthority": "STRUCTURAL",
+      "bookViiBoundary": "Durable relation/model; not a live observation."
+    },
+    {
+      "state": "OBSERVED_SIGNAL",
+      "observationAuthority": "SIGNAL",
+      "bookViiBoundary": "Directional/threshold-relevant observation with lineage; not CURRENT_DATA by itself."
+    },
+    {
+      "state": "CURRENT_DATA",
+      "observationAuthority": "CURRENT_EVIDENCE",
+      "bookViiBoundary": "Dated, fresh, source-admitted current observation."
+    },
+    {
+      "state": "DERIVED_RUNTIME_READOUT",
+      "observationAuthority": "DERIVED",
+      "bookViiBoundary": "Evidence-derived reading; not observed fact."
+    },
+    {
+      "state": "CONDITIONAL_PROJECTION",
+      "observationAuthority": "PROJECTED",
+      "bookViiBoundary": "Conditional future possibility; never prediction."
+    },
+    {
+      "state": "UNKNOWN",
+      "observationAuthority": "UNKNOWN",
+      "bookViiBoundary": "Unresolved state remains explicit."
+    }
+  ],
+  "conflictRule": "Until a global CONTESTED knowledge state is introduced, unresolved source conflict remains UNKNOWN with explicit conflict metadata; it must not be collapsed into a confident value."
+}

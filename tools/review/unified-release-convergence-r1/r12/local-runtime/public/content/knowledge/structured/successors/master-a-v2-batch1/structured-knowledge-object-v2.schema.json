@@ -1,0 +1,312 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MASTER A batch 1 candidate envelope successor of existing Structured Knowledge owner",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectId",
+    "bookCode",
+    "partCode",
+    "nodeCode",
+    "objectType",
+    "title",
+    "definition",
+    "sourceRefs",
+    "relationships",
+    "dataClass",
+    "evidenceState",
+    "unknownState",
+    "asOfDate",
+    "sourceFreshness",
+    "lastReviewedAt",
+    "version",
+    "supersedes",
+    "supersededBy",
+    "projectionState",
+    "runtimeEligibility",
+    "runtimeHandoffType",
+    "operationalAdmissionState",
+    "status",
+    "authorityOwner",
+    "authorityBoundary",
+    "claimAuthorityClass",
+    "observationTimeClass",
+    "knowledgeState"
+  ],
+  "properties": {
+    "objectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bookCode": {
+      "enum": [
+        "BOOK-5",
+        "BOOK-6",
+        "BOOK-7",
+        "BOOK-8"
+      ]
+    },
+    "partCode": {
+      "enum": [
+        "PART-12",
+        "PART-13",
+        "PART-14",
+        "PART-15"
+      ]
+    },
+    "nodeCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objectType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceRefs": {
+      "$ref": "../../schema/structured-knowledge-common-v1.schema.json#/properties/sourceRefs"
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataClass": {
+      "enum": [
+        "CANONICAL_PUBLICATION",
+        "CANONICAL_HISTORY",
+        "HISTORICAL_RECONSTRUCTION",
+        "STRUCTURED_KNOWLEDGE",
+        "CURRENT_DATA",
+        "DERIVED_RUNTIME_READOUT",
+        "CONDITIONAL_PROJECTION",
+        "UNKNOWN"
+      ]
+    },
+    "evidenceState": {
+      "enum": [
+        "OBSERVED",
+        "REPORTED",
+        "MEASURED",
+        "DOCUMENTED",
+        "DERIVED",
+        "INTERPRETED",
+        "RECONSTRUCTED",
+        "CONCEPTUAL",
+        "PARTIAL",
+        "CONTESTED",
+        "UNKNOWN",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE",
+        "OUTSIDE_AUTHORITY",
+        "CURRENT_DATA_REQUIRED"
+      ]
+    },
+    "unknownState": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "asOfDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "sourceFreshness": {
+      "type": "object",
+      "required": [
+        "state",
+        "asOfDate"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "CURRENT",
+            "STALE",
+            "UNKNOWN",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "asOfDate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lastReviewedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supersedes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supersededBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "projectionState": {
+      "enum": [
+        "CANDIDATE",
+        "WITHHELD"
+      ]
+    },
+    "runtimeEligibility": {
+      "enum": [
+        "NONE",
+        "REFERENCE_ONLY",
+        "OBSERVATION_FRAME",
+        "NAVIGATION_FRAME",
+        "VALIDATION_CANDIDATE",
+        "OPERATIONAL_CANDIDATE"
+      ]
+    },
+    "runtimeHandoffType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operationalAdmissionState": {
+      "const": "NOT_ADMITTED"
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "IN_REVIEW"
+      ]
+    },
+    "authorityOwner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authorityBoundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claimAuthorityClass": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-authorityRef": {
+        "path": "content/knowledge/answer-projection/contracts/kap-book-vii-claim-authority-matching-contract-v1.json",
+        "sha256": "025d06a5a25c7431048172b8014223571ac5aa853ea2fdee4ccd7940cf6f64ad"
+      },
+      "description": "Value is resolved and checked against existing KAP owner; this schema grants no evaluation authority."
+    },
+    "observationTimeClass": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-authorityRef": {
+        "path": "content/knowledge/answer-projection/contracts/kap-book-vii-observation-time-contract-v1.json",
+        "sha256": "ba1fca7eef66f1e89d13328e05b6d6000291f1040aa33091749e14987095bd64"
+      },
+      "description": "Value is resolved and checked against existing KAP owner; this schema grants no evaluation authority."
+    },
+    "knowledgeState": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "x-authorityRef": {
+        "path": "content/knowledge/answer-projection/contracts/kap-book-vii-knowledge-state-contract-v1.json",
+        "sha256": "75089062567041f2e2c637a2fb99a596fb60284c560ce6757f05cdd232d7d0b6"
+      },
+      "description": "Value is resolved and checked against existing KAP owner; this schema grants no evaluation authority."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "bookCode": {
+            "const": "BOOK-5"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "partCode": {
+            "const": "PART-12"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bookCode": {
+            "const": "BOOK-6"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "partCode": {
+            "const": "PART-13"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bookCode": {
+            "const": "BOOK-7"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "partCode": {
+            "const": "PART-14"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "bookCode": {
+            "const": "BOOK-8"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "partCode": {
+            "const": "PART-15"
+          }
+        }
+      }
+    }
+  ]
+}
+

@@ -1,0 +1,155 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-PHIOS-RUNTIME-CYCLE-v1.svg",
+  "diagramRole": "LOOP",
+  "domain": "GLOBAL",
+  "edges": [
+    {
+      "edgeId": "FIG-056-E01",
+      "from": "FIG-056-N01",
+      "relation": "INITIALIZES",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-01",
+      "to": "FIG-056-N02"
+    },
+    {
+      "edgeId": "FIG-056-E02",
+      "from": "FIG-056-N02",
+      "relation": "READ_BY",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-02",
+      "to": "FIG-056-N03"
+    },
+    {
+      "edgeId": "FIG-056-E03",
+      "from": "FIG-056-N03",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-03",
+      "to": "FIG-056-N04"
+    },
+    {
+      "edgeId": "FIG-056-E04",
+      "from": "FIG-056-N04",
+      "relation": "GUIDES",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-04",
+      "to": "FIG-056-N05"
+    },
+    {
+      "edgeId": "FIG-056-E05",
+      "from": "FIG-056-N05",
+      "relation": "PRODUCES",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-05",
+      "to": "FIG-056-N06"
+    },
+    {
+      "edgeId": "FIG-056-E06",
+      "from": "FIG-056-N06",
+      "relation": "REVIEWED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-06",
+      "to": "FIG-056-N07"
+    },
+    {
+      "edgeId": "FIG-056-E07",
+      "from": "FIG-056-N07",
+      "relation": "CONTINUES",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-06",
+      "to": "FIG-056-N08"
+    },
+    {
+      "edgeId": "FIG-056-E08",
+      "from": "FIG-056-N08",
+      "relation": "NEXT_REALITY_VERSION",
+      "required": true,
+      "sourceBindingId": "FIG-056-SRC-06",
+      "to": "FIG-056-N02"
+    }
+  ],
+  "figureId": "FIG-056",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-056-N01",
+    "FIG-056-N02",
+    "FIG-056-N03",
+    "FIG-056-N04",
+    "FIG-056-N05",
+    "FIG-056-N06",
+    "FIG-056-N07",
+    "FIG-056-N08"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Input",
+      "nodeId": "FIG-056-N01",
+      "required": true,
+      "semanticKey": "INPUT",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Reality Model",
+      "nodeId": "FIG-056-N02",
+      "required": true,
+      "semanticKey": "REALITY_MODEL",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Reading",
+      "nodeId": "FIG-056-N03",
+      "required": true,
+      "semanticKey": "READING",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Navigation",
+      "nodeId": "FIG-056-N04",
+      "required": true,
+      "semanticKey": "NAVIGATION",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Action",
+      "nodeId": "FIG-056-N05",
+      "required": true,
+      "semanticKey": "ACTION",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Outcome",
+      "nodeId": "FIG-056-N06",
+      "required": true,
+      "semanticKey": "OUTCOME",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Review",
+      "nodeId": "FIG-056-N07",
+      "required": true,
+      "semanticKey": "REVIEW",
+      "sourceBindingId": "FIG-056-SRC-01"
+    },
+    {
+      "displayLabel": "Continuity",
+      "nodeId": "FIG-056-N08",
+      "required": true,
+      "semanticKey": "CONTINUITY",
+      "sourceBindingId": "FIG-056-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "PHIOS-RUNTIME-CYCLE",
+  "title": "PHI OS Runtime Cycle"
+}

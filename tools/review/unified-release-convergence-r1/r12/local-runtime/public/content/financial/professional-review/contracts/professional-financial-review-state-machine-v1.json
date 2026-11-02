@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-PFR-W3-STATE-MACHINE-v1.0.0",
+  "work": "PFR-W3",
+  "states": [
+    "OPEN",
+    "IN_REVIEW",
+    "NEEDS_MORE_INFORMATION",
+    "RECOMMENDATION_DRAFTED",
+    "CUSTOMER_DISCUSSION",
+    "APPROVED",
+    "SIGNED",
+    "SUPERSEDED"
+  ],
+  "transitions": {
+    "OPEN": [
+      "IN_REVIEW"
+    ],
+    "IN_REVIEW": [
+      "NEEDS_MORE_INFORMATION",
+      "RECOMMENDATION_DRAFTED"
+    ],
+    "NEEDS_MORE_INFORMATION": [
+      "IN_REVIEW"
+    ],
+    "RECOMMENDATION_DRAFTED": [
+      "CUSTOMER_DISCUSSION"
+    ],
+    "CUSTOMER_DISCUSSION": [
+      "APPROVED"
+    ],
+    "APPROVED": [
+      "SIGNED"
+    ],
+    "SIGNED": [
+      "SUPERSEDED"
+    ],
+    "SUPERSEDED": []
+  },
+  "rules": {
+    "stateSkippingForbidden": true,
+    "humanProfessionalActorRequired": true,
+    "signedBeforeContribution": true
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "contractCode": "PHI-OS-ALR-W19-FIGURE-LEARNING-PROJECTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W19",
+  "objectType": "FIGURE_LEARNING_PROJECTION",
+  "status": "active",
+  "productionStatus": "eligibility_runtime_active_no_eligible_asset",
+  "authorityReference": "ALR",
+  "typeAuthorityReference": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json",
+  "publishedAssetAuthority": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+  "identityPrefix": "ALR-LO-FIGURE-PROJECTION-",
+  "eligiblePublishedAssetTypes": ["FIGURE", "DIAGRAM"],
+  "requiredProjectionFields": [
+    "figureLearningProjectionCode",
+    "figureLearningProjectionVersion",
+    "publishedAssetCode",
+    "lessonCode",
+    "learningObjectiveCodes",
+    "learningFocus",
+    "observationPrompt",
+    "misreadingBoundary",
+    "status",
+    "deliveryActivationState",
+    "authorityReference"
+  ],
+  "statusValues": ["DRAFT", "REVIEW_REQUIRED", "APPROVED", "SUSPENDED", "RETIRED"],
+  "deliveryActivationStates": ["CONTENT_STRUCTURE_READY_DELIVERY_BLOCKED", "SUSPENDED", "RETIRED"],
+  "eligibilityDecisionCodes": [
+    "ALLOW_PUBLISHED_FIGURE_REFERENCE",
+    "DENY_ASSET_NOT_PUBLISHED",
+    "DENY_ASSET_TYPE",
+    "DENY_UNKNOWN_LESSON_OR_OBJECTIVE",
+    "DENY_ASSET_PAYLOAD_OR_PRESENTATION_OWNERSHIP"
+  ],
+  "forbiddenProjectionFields": [
+    "candidateAssetCode",
+    "fixtureReference",
+    "assetPayload",
+    "imagePayload",
+    "sourceFile",
+    "layout",
+    "theme",
+    "pdsTokens",
+    "responsiveRules",
+    "presentationPayload",
+    "learnerReference",
+    "caseReference",
+    "learnerResponse",
+    "assessmentResult",
+    "capabilityState",
+    "credentialState",
+    "entitlementState",
+    "professionalJudgment"
+  ],
+  "rules": {
+    "carPublishedAssetRequired": true,
+    "candidateFixtureOrUnpublishedAssetFailsClosed": true,
+    "alrMayReferenceButNotCreateApproveOrPublishAsset": true,
+    "figureLearningProjectionMayDefineLearningFocus": true,
+    "figureLearningProjectionMayOwnLayoutOrPresentation": false,
+    "emptyRegistryValidWhenNoPublishedCarFigureOrDiagramExists": true,
+    "registryStoresAssetPayload": false,
+    "learnerDeliveryRuntimeActive": false,
+    "unknownPublishedAssetLessonOrObjectiveFailsClosed": true
+  },
+  "activation": {
+    "eligibilityValidatorActive": true,
+    "canonicalProjectionInstancesActive": false,
+    "reason": "CAR_PUBLISHED_ASSET_REGISTRY_EMPTY",
+    "academyPresentationRuntimeActive": false
+  }
+}

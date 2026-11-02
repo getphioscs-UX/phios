@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "PHI-OS-PRODUCTION-CAPABILITY-REGISTRY-v9.0.0",
+  "registryCode": "PRODUCTION_CAPABILITY_REGISTRY_V2",
+  "registryVersion": "9.0.0",
+  "work": "NUM-CX-W18",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "CURRENT_NUM_PRIMARY_CUSTOMER_ROUTE_FULL_PRODUCTION_AUTHORITY",
+  "predecessor": "content/governance/production-capability-matrix/registries/production-capability-registry-v8.json",
+  "predecessorMutated": false,
+  "statusContract": "content/governance/full-method-availability/contracts/production-capability-status-contract-v2.json",
+  "capabilities": [
+    {
+      "capabilityId": "PCM-METHOD-HDR",
+      "methodRuntime": {
+        "methodCode": "HUMAN_DESIGN",
+        "pluginCode": "HDR",
+        "runtimeId": "HDR",
+        "methodVersion": "1.0.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "BLOCKED"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": null,
+      "userExecutable": false,
+      "persistent": false,
+      "productionAccepted": false,
+      "blockedReason": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+        "PRODUCTION_INVOCATION_FORBIDDEN"
+      ],
+      "classification": "BLOCKED",
+      "statusProjection": "Blocked",
+      "scope": "VALIDATION_ONLY_NO_CLIENT_DISPATCH",
+      "statusSurfaceRoute": "/personal-runtime",
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-2-canonical-runtime-adapter-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+      ],
+      "predecessorCapabilityState": {
+        "classification": "BLOCKED",
+        "statusProjection": "Blocked",
+        "methodVersion": "1.0.0"
+      },
+      "meaningReady": false,
+      "readingReady": false,
+      "deploymentVerified": false,
+      "capabilityAvailability": "BLOCKED"
+    },
+    {
+      "capabilityId": "PCM-METHOD-AST",
+      "methodRuntime": {
+        "methodCode": "ASTROLOGY",
+        "pluginCode": "AST",
+        "runtimeId": "AST",
+        "methodVersion": "0.1.0",
+        "capabilityVersion": "1.0.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+        "meaning": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v3.json",
+        "reading": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v4.json",
+        "clientDeliverySuccessor": "content/professional/method-client-delivery/successors/mcd-ast-structural-client-binding-successor-v3.json"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/personal-runtime",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "AVAILABLE",
+      "statusProjection": "Available",
+      "scope": "AST_STRUCTURAL_RUNTIME_V1",
+      "limitations": [],
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "content/professional/ast-production/acceptance/ast-production-acceptance-v1.json",
+        "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v3.json",
+        "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v4.json",
+        "content/professional/method-client-delivery/successors/mcd-ast-structural-client-binding-successor-v3.json"
+      ],
+      "predecessorCapabilityState": {
+        "classification": "LIMITED_SCOPED",
+        "statusProjection": "Limited",
+        "methodVersion": "0.1.0"
+      },
+      "meaningReady": true,
+      "readingReady": true,
+      "deploymentVerified": false,
+      "capabilityAvailability": "AVAILABLE",
+      "deploymentState": "PENDING_EXTERNAL_DEPLOYMENT_VERIFICATION",
+      "knownExecutionLimitations": [
+        "UNKNOWN_BIRTH_TIME_REMAINS_INPUT_REQUIRED_NO_FABRICATED_INSTANT",
+        "APPROXIMATE_BIRTH_TIME_WITHHOLDS_HOUSES_AND_ANGLES",
+        "MISSING_COORDINATES_WITHHOLDS_HOUSES_AND_ANGLES",
+        "APPLYING_SEPARATING_CLASSIFICATION_DEFERRED",
+        "NODE_AND_ANGLE_ASPECTS_DEFERRED"
+      ],
+      "frontendMeaningConsumer": {
+        "route": "/personal-runtime",
+        "projectionApi": "/api/ast-structural-execute",
+        "meaningApi": "/api/method-meaning",
+        "script": "assets/js/pages/ast-production-meaning.js",
+        "hook": "data-ast-production-meaning"
+      },
+      "fmaFinalFreeze": "content/governance/full-method-availability/freeze/full-method-availability-freeze-v1.json",
+      "sharedConsumerContract": "content/governance/full-method-availability/contracts/shared-production-consumer-contract-v1.json"
+    },
+    {
+      "capabilityId": "PCM-METHOD-BZR",
+      "methodRuntime": {
+        "methodCode": "BAZI",
+        "pluginCode": "BZR",
+        "runtimeId": "BZR",
+        "methodVersion": "0.1.0",
+        "capabilityVersion": "1.0.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+        "meaning": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v2.json",
+        "reading": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v3.json"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/personal-runtime",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "AVAILABLE",
+      "statusProjection": "Available",
+      "scope": "BAZI_STRUCTURAL_RUNTIME_V1",
+      "limitations": [],
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "content/professional/bzr-production/acceptance/bzr-production-acceptance-v1.json",
+        "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v2.json",
+        "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v3.json"
+      ],
+      "predecessorCapabilityState": {
+        "classification": "LIMITED_SCOPED",
+        "statusProjection": "Limited",
+        "methodVersion": "0.1.0"
+      },
+      "meaningReady": true,
+      "readingReady": true,
+      "deploymentVerified": false,
+      "capabilityAvailability": "AVAILABLE",
+      "deploymentState": "PENDING_EXTERNAL_DEPLOYMENT_VERIFICATION",
+      "knownExecutionLimitations": [
+        "UNKNOWN_BIRTH_TIME_DEGRADES_TO_THREE_PILLARS_WITHOUT_CAPABILITY_DOWNGRADE",
+        "LUCK_CYCLE_REQUIRES_KNOWN_BIRTH_TIME_AND_EXPLICIT_TRADITIONAL_CALCULATION_SEX",
+        "EXACT_SOLAR_CONTEXT_REQUIRES_EXPLICIT_OFFSET_AND_COORDINATES_WHEN_TIME_KNOWN",
+        "LUCK_CYCLE_DIRECTION_MEANING_DEFERRED_UNTIL_CANONICAL_PROJECTION_EXPOSES_DIRECTION"
+      ],
+      "frontendMeaningConsumer": {
+        "route": "/personal-runtime",
+        "api": "/api/method-meaning",
+        "script": "assets/js/pages/bzr-production-meaning.js",
+        "hook": "data-bzr-production-meaning"
+      },
+      "fmaFinalFreeze": "content/governance/full-method-availability/freeze/full-method-availability-freeze-v1.json",
+      "sharedConsumerContract": "content/governance/full-method-availability/contracts/shared-production-consumer-contract-v1.json"
+    },
+    {
+      "capabilityId": "PCM-METHOD-NUM",
+      "methodRuntime": {
+        "methodCode": "NUMEROLOGY",
+        "pluginCode": "NUM",
+        "runtimeId": "NUM",
+        "methodVersion": "1.0.0",
+        "executionAuthorityMethodVersion": "0.1.0-candidate"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE",
+        "meaning": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+        "reading": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v2.json",
+        "customerSurface": "content/professional/num-production/customer/authority/num-cx-primary-surface-authority-successor-v2.json",
+        "customerCutover": "content/professional/num-production/customer/cutover/num-cx-w18-primary-route-cutover-v1.json"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/perspectives/personal/",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "AVAILABLE",
+      "statusProjection": "Available",
+      "scope": "NUMERIC_RUNTIME_V1",
+      "limitations": [],
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-4-execution-acceptance-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "content/professional/num-production/acceptance/num-production-acceptance-v1.json",
+        "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json",
+        "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v2.json",
+        "content/professional/num-production/customer/acceptance/num-cx-w17-human-acceptance-v1.json",
+        "content/professional/num-production/customer/cutover/num-cx-w18-primary-route-cutover-v1.json",
+        "content/professional/num-production/customer/authority/num-cx-primary-surface-authority-successor-v2.json"
+      ],
+      "predecessorCapabilityState": {
+        "classification": "LIMITED_SCOPED",
+        "statusProjection": "Limited",
+        "methodVersion": "0.1.0-candidate"
+      },
+      "meaningReady": true,
+      "readingReady": true,
+      "deploymentVerified": false,
+      "capabilityAvailability": "AVAILABLE",
+      "knownExecutionLimitations": [
+        "TARGET_DATE_REQUIRED_ONLY_FOR_CYCLE_COMPONENT",
+        "TIMEZONE_CONTEXT_REQUIRED_ONLY_WHEN_CYCLE_REQUESTED",
+        "CHALLENGE_CYCLE_ZERO_HAS_EXPLICIT_NO_CANONICAL_MEANING"
+      ],
+      "frontendMeaningConsumer": {
+        "route": "/perspectives/personal/",
+        "api": "/api/customer-personal-reality",
+        "script": "assets/customer-ui/js/surfaces/personal-reality.js",
+        "renderer": "assets/customer-ui/js/numerology/reading-renderer.js",
+        "chartModel": "functions/customer-projection/numerology-customer-reading-envelope-v1.js"
+      },
+      "deploymentState": "PENDING_EXTERNAL_DEPLOYMENT_VERIFICATION",
+      "fmaFinalFreeze": "content/governance/full-method-availability/freeze/full-method-availability-freeze-v1.json",
+      "sharedConsumerContract": "content/governance/full-method-availability/contracts/shared-production-consumer-contract-v1.json",
+      "primaryCustomerRoute": "/perspectives/personal/",
+      "secondaryDiagnosticRoute": "/personal-runtime"
+    },
+    {
+      "capabilityId": "PCM-METHOD-ICH",
+      "methodRuntime": {
+        "methodCode": "I_CHING",
+        "pluginCode": "ICH",
+        "runtimeId": "ICH",
+        "methodVersion": "0.1.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": null,
+        "clientDelivery": null,
+        "currentDecision": "REGISTERED_NOT_IMPLEMENTED"
+      },
+      "implemented": false,
+      "validated": false,
+      "projected": false,
+      "frontendRoute": null,
+      "userExecutable": false,
+      "persistent": false,
+      "productionAccepted": false,
+      "blockedReason": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ],
+      "classification": "REGISTERED_NOT_IMPLEMENTED",
+      "statusProjection": "Coming later",
+      "scope": "REGISTRY_HOLDING_ONLY",
+      "evidence": [
+        "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "content/professional/method-production-activation/registries/mpa-future-method-holding-registry-v1.json"
+      ],
+      "predecessorCapabilityState": {
+        "classification": "REGISTERED_NOT_IMPLEMENTED",
+        "statusProjection": "Coming later",
+        "methodVersion": "0.1.0"
+      },
+      "meaningReady": false,
+      "readingReady": false,
+      "deploymentVerified": false,
+      "capabilityAvailability": "COMING_LATER"
+    },
+    {
+      "capabilityId": "PCM-METHOD-TAR",
+      "methodRuntime": {
+        "methodCode": "TAROT",
+        "pluginCode": "TAR",
+        "runtimeId": "TAR",
+        "methodVersion": "1.0.0",
+        "capabilityVersion": "1.0.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v5.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-tarot-full-production-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/successors/mcd-tarot-public-execution-successor-v1.json",
+        "currentDecision": "FULL_PRODUCTION_RELEASE_AUTHORITY_REQUIRED"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/perspectives/tarot/",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "AVAILABLE",
+      "statusProjection": "Available",
+      "scope": "TAROT_SYMBOLIC_REFLECTIVE_RUNTIME_V1",
+      "evidence": [
+        "content/interpretation/tarot/freeze/tarot-product-interpretation-freeze-v1.json",
+        "content/production/symbolic-method/freeze/tarot-human-acceptance-freeze-v3.json",
+        "content/production/symbolic-method/freeze/tarot-live-browser-acceptance-freeze-v1.json",
+        "content/professional/method-production-activation/successors/mpa-tarot-limited-production-successor-v1.json",
+        "content/professional/method-client-delivery/successors/mcd-tarot-public-execution-successor-v1.json"
+      ],
+      "predecessorCapabilityState": {
+        "classification": "REGISTERED_NOT_IMPLEMENTED",
+        "statusProjection": "Coming later",
+        "methodVersion": "0.1.0"
+      },
+      "meaningReady": true,
+      "readingReady": true,
+      "deploymentVerified": true,
+      "capabilityAvailability": "AVAILABLE",
+      "limitations": [
+        "GUEST_READING_IS_NOT_PERSISTED",
+        "NO_PREDICTION_DIAGNOSIS_HIDDEN_STATE_OR_DECISION_AUTHORITY"
+      ],
+      "deploymentState": "DYNAMIC_EXACT_SHA_SERVER_AUTHORITY",
+      "executionAuthority": {
+        "provider": "RUNTIME_DB_D1",
+        "runtime": "functions/tarot-product-runtime/tarot-production-authority-v3.js",
+        "authorityScope": "RELEASE",
+        "timeExpiryAllowed": false,
+        "ordinaryDeploymentRequiresRepromotion": false,
+        "staticRegistryMayGrantRunAllowed": false,
+        "clientMayGrantRunAllowed": false
+      }
+    },
+    {
+      "capabilityId": "PCM-METHOD-ZWR",
+      "methodRuntime": {
+        "methodCode": "ZI_WEI_DOU_SHU",
+        "pluginCode": "ZWR",
+        "runtimeId": "ZI_WEI_RUNTIME",
+        "methodVersion": "1.0.0",
+        "executionAuthorityMethodVersion": "0.1.0-candidate",
+        "capabilityVersion": "1.0.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v3.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-zwr-production-activation-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/successors/mcd-zwr-production-adapter-successor-v1.json",
+        "meaning": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v4.json",
+        "reading": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v5.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/personal-runtime",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "AVAILABLE",
+      "statusProjection": "Available",
+      "scope": "ZI_WEI_NATAL_STRUCTURAL_RUNTIME_V1",
+      "limitations": [],
+      "meaningReady": true,
+      "readingReady": true,
+      "deploymentVerified": false,
+      "deploymentState": "PENDING_EXTERNAL_DEPLOYMENT_VERIFICATION",
+      "capabilityAvailability": "AVAILABLE",
+      "knownExecutionLimitations": [
+        "EXACT_BIRTH_TIME_REQUIRED",
+        "GREGORIAN_RANGE_1901_2100",
+        "NATAL_ONLY_V1_DYNAMIC_PERIODS_DEFERRED",
+        "AUXILIARY_STAR_SCOPE_LIMITED_TO_SIX_SUPPORT_STARS_V1",
+        "FOUR_TRANSFORMATIONS_LIMITED_TO_NATAL_SOUTHERN_TABLE_V1"
+      ],
+      "frontendMeaningConsumer": {
+        "route": "/personal-runtime",
+        "projectionApi": "/api/zi-wei-execute",
+        "meaningApi": "/api/method-meaning",
+        "script": "assets/js/pages/zwr-production-meaning.js",
+        "hook": "data-zwr-production-meaning"
+      },
+      "evidence": [
+        "content/zi-wei-runtime/acceptance/zwr-w7-w13-calculation-validation-projection-acceptance-v1.json",
+        "content/zi-wei-runtime/acceptance/zi-wei-production-acceptance-v1.json",
+        "content/professional/method-production-activation/successors/mpa-zwr-production-activation-successor-v1.json",
+        "content/professional/method-client-delivery/successors/mcd-zwr-production-adapter-successor-v1.json",
+        "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v4.json",
+        "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v5.json"
+      ]
+    }
+  ],
+  "rules": {
+    "capabilityAvailabilityIndependentFromExecutionCompleteness": true,
+    "availableRequiresMethodProductionAvailabilityContract": true,
+    "historicalCandidateVersionMayRemainExecutionCompatibilityIdentity": true,
+    "frontendMayNotInferAvailability": true
+  }
+}

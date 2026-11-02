@@ -1,0 +1,50 @@
+{
+  "contractCode": "PHI-OS-VAP-W22-CPR-PRODUCTION-ACTIVATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W22",
+  "phase": "VAP-E_CPR_PDS_PRODUCTION_PRESENTATION",
+  "baselineCommit": "807efc359a0d1477bc697044f55970fc5e6e8500",
+  "status": "active_production_contract",
+  "purpose": "Activate the first governed CPR Production Instance without mutating the frozen canonical presentation registry.",
+  "canonicalRegistryBoundary": {
+    "path": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+    "baselineDigest": "568cda919515f825b229698046c24998783b2c9a96ca644d4ca5031b5879bdfe",
+    "productionRecordsMustRemainEmpty": true,
+    "frozenRegistryMutationAllowed": false
+  },
+  "productionRegistry": "content/production/cpr/registries/cpr-production-instance-registry-v1.json",
+  "firstProductionInstance": "PRESENTATION-ARTICLE-KN-PREFACE-001-ZH-HANS-v1",
+  "requiredInputs": [
+    "PUBLISHED_ARTICLE",
+    "PUBLISHED_FIGURE",
+    "KNOWLEDGE_RELATIONSHIPS",
+    "READING_CONTINUITY",
+    "LOCALE",
+    "AUDIENCE"
+  ],
+  "decisionBoundary": {
+    "cprDecides": [
+      "COMPOSITION",
+      "PLACEMENT",
+      "INFORMATION_DENSITY",
+      "SURFACE",
+      "RESPONSIVE_PROJECTION"
+    ],
+    "cprDoesNotDecide": [
+      "KNOWLEDGE",
+      "MEANING",
+      "ASSET_APPROVAL"
+    ]
+  },
+  "failClosedRules": {
+    "unpublishedArticle": "BLOCK",
+    "unpublishedFigure": "BLOCK",
+    "figureLocaleMismatch": "BLOCK",
+    "missingKnowledgeRelationshipProjection": "BLOCK",
+    "missingReadingContinuityProjection": "BLOCK",
+    "missingAlt": "BLOCK",
+    "missingCaption": "BLOCK",
+    "nonPdsVisualOwnership": "BLOCK",
+    "frozenCanonicalRegistryMutation": "BLOCK"
+  }
+}

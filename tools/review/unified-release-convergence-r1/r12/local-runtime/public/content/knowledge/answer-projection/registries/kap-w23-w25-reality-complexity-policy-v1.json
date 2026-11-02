@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W23-W25-REALITY-COMPLEXITY-POLICY-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W23",
+    "KAP-W24",
+    "KAP-W25"
+  ],
+  "baselineCommit": "a6e6297fe5d353c56b859d0f80608e847eba9376",
+  "status": "ACTIVE_DETERMINISTIC_COMPLEXITY_GATE",
+  "sequence": [
+    "W23_COMPLEXITY_SIGNALS",
+    "W25_COMPLEXITY_SCORE_ROUTING_AID",
+    "W24_REALITY_MODEL_REQUIREMENT_TEST"
+  ],
+  "note": "W25 is computed before W24 only so W24 can expose score context; W25 never decides the route.",
+  "predecessor": {
+    "guidedReadingFreeze": "content/knowledge/answer-projection/freeze/kap-w18-w22-guided-reading-freeze-v1.json",
+    "mutated": false
+  },
+  "production": {
+    "endpoint": "/api/reality-complexity",
+    "aiRequired": false,
+    "persistentStorage": false,
+    "automaticRealityJourney": false
+  },
+  "routing": {
+    "requirementNo": [
+      "ASK_PHIOS",
+      "GUIDED_READING"
+    ],
+    "requirementYes": [
+      "REALITY_JOURNEY_CANDIDATE"
+    ],
+    "explicitEscalationConsentAlwaysRequired": true
+  }
+}

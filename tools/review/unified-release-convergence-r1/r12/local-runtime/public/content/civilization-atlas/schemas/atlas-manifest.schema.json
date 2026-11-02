@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "bookId",
+    "partId",
+    "canonicalRoute",
+    "status",
+    "baselineCommit",
+    "layers",
+    "authority",
+    "authorityRefs",
+    "registryRefs",
+    "boundaries"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0.0"
+    },
+    "bookId": {
+      "const": "book-5"
+    },
+    "partId": {
+      "const": "part-12"
+    },
+    "canonicalRoute": {
+      "const": "/books/reality-differentiation/"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "PRODUCTION_ADMITTED"
+      ]
+    },
+    "baselineCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "layers": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "timeline"
+        },
+        {
+          "const": "cases"
+        },
+        {
+          "const": "comparison"
+        },
+        {
+          "const": "world"
+        },
+        {
+          "const": "trajectories"
+        },
+        {
+          "const": "transitions"
+        },
+        {
+          "const": "loss"
+        }
+      ],
+      "minItems": 7,
+      "maxItems": 7
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalTheory",
+        "historicalCases",
+        "evidence",
+        "projection",
+        "unknown"
+      ],
+      "properties": {
+        "canonicalTheory": {
+          "const": "existing-part-12-authority"
+        },
+        "historicalCases": {
+          "const": "case-registry"
+        },
+        "evidence": {
+          "const": "evidence-authority"
+        },
+        "projection": {
+          "const": "explicit-projection-only"
+        },
+        "unknown": {
+          "const": "explicit-unknown-state"
+        }
+      }
+    },
+    "authorityRefs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "registryRefs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^content/civilization-atlas/"
+      },
+      "required": [
+        "layers",
+        "timeline",
+        "cases",
+        "comparison",
+        "world",
+        "trajectories",
+        "transitions",
+        "loss",
+        "evidence"
+      ]
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      },
+      "required": [
+        "newKnowledgeMaster",
+        "newArticleRuntime",
+        "newContextResolver",
+        "newAskRuntime",
+        "newFigureResolver",
+        "newBookRuntime",
+        "posterAsSourceOfTruth",
+        "ocrWritesRegistry",
+        "conceptualAsStatisticalFact",
+        "civilizationRankingScore",
+        "collapseScore",
+        "superiorityScore",
+        "publicUiActivated"
+      ]
+    }
+  }
+}

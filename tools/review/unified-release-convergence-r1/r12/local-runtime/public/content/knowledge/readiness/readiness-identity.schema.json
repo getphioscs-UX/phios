@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/readiness-identity.schema.json",
+  "title": "PHI OS Universal Readiness Identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "recordType", "nodeCode", "locale",
+    "readinessStatus", "productionStatus", "review", "blocking", "missing",
+    "thesis", "boundary", "claims", "sources", "questions", "figures",
+    "export", "audit"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "PHI-OS-READINESS-IDENTITY-v1.0.0" },
+    "recordType": { "const": "canonical_readiness_skeleton" },
+    "nodeCode": { "type": "string", "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+    "locale": { "const": "zh-Hans" },
+    "readinessStatus": { "$ref": "#/$defs/readinessStatus" },
+    "productionStatus": { "enum": ["not_production_ready", "production_ready", "published"] },
+    "review": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "humanFrozen"],
+      "properties": {
+        "status": { "enum": ["not_started", "editorial_review_required", "reviewed"] },
+        "humanFrozen": { "type": "boolean" }
+      }
+    },
+    "blocking": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "$ref": "#/$defs/blockingFinding" }
+    },
+    "missing": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "thesis": { "$ref": "#/$defs/layerStatus" },
+    "boundary": { "$ref": "#/$defs/layerStatus" },
+    "claims": { "$ref": "#/$defs/layerStatus" },
+    "sources": { "$ref": "#/$defs/layerStatus" },
+    "questions": { "$ref": "#/$defs/layerStatus" },
+    "figures": { "$ref": "#/$defs/layerStatus" },
+    "export": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status"], "properties": { "status": { "const": "blocked" } }
+    },
+    "audit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ownerStage", "registryVersion", "blueprintContract", "recordVersion"],
+      "properties": {
+        "ownerStage": { "const": "PJA-W2F-C1" },
+        "registryVersion": { "type": "string", "minLength": 1 },
+        "blueprintContract": { "type": "string", "minLength": 1 },
+        "recordVersion": { "const": "1.0.0" }
+      }
+    }
+  },
+  "$defs": {
+    "readinessStatus": {
+      "enum": ["skeleton", "canonical_thesis_ready", "boundary_ready", "editorial_ready", "production_ready", "published"]
+    },
+    "layerStatus": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status"], "properties": { "status": { "const": "not_ready" } }
+    },
+    "blockingFinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["code", "message", "ownerStage", "active"],
+      "properties": {
+        "code": { "enum": [
+          "CANONICAL_THESIS_NOT_READY", "BOUNDARY_NOT_READY", "CLAIMS_NOT_READY",
+          "SOURCE_PLAN_NOT_READY", "QUESTION_PLAN_NOT_READY", "FIGURE_PLAN_NOT_READY",
+          "EDITORIAL_REVIEW_REQUIRED", "HUMAN_FREEZE_REQUIRED"
+        ] },
+        "message": { "type": "string", "minLength": 1 },
+        "ownerStage": { "enum": ["PJA-W2F-C2", "PJA-W2F-C3"] },
+        "active": { "const": true }
+      }
+    }
+  }
+}

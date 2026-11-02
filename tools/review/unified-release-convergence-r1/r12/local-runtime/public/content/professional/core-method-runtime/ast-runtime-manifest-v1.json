@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "PHI-OS-AST-RUNTIME-MANIFEST-v1.0.0",
+  "stageCode": "AST-W0",
+  "runtimeCode": "ASTROLOGY_RUNTIME",
+  "runtimeVersion": "0.1.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "foundation_audited_runtime_not_activated",
+  "dependencies": {
+    "sharedRuntime": [
+      "SHARED_DATA_AUTHORITY",
+      "SHARED_CALCULATION_RUNTIME",
+      "SHARED_PROJECTION_RUNTIME",
+      "SHARED_INTERPRETATION_RUNTIME",
+      "SHARED_PROFESSIONAL_RUNTIME"
+    ],
+    "candidateEngine": {
+      "dependencyCode": "ASTRONOMY_ENGINE_JS",
+      "license": "MIT",
+      "commercialUseAllowed": true,
+      "noticeRequired": true,
+      "runtimeRole": "candidate_ephemeris_engine"
+    },
+    "validationReference": {
+      "dependencyCode": "NASA_JPL_HORIZONS",
+      "runtimeRole": "validation_only",
+      "productionDependency": false,
+      "customerPayloadAllowed": false
+    }
+  },
+  "policyDefaults": {
+    "zodiacType": null,
+    "houseSystem": null,
+    "planetSet": null,
+    "nodeType": null,
+    "aspectSet": null,
+    "aspectOrbs": null,
+    "retrogradePolicy": null,
+    "precisionPolicy": null,
+    "tolerancePolicy": null,
+    "fabricatedDefaultsAllowed": false
+  },
+  "activation": {
+    "pluginRegistered": true,
+    "pluginActivated": false,
+    "sharedRuntimeImplemented": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionEligible": false,
+    "professionalReady": false
+  },
+  "pipeline": [
+    {
+      "stageCode": "AST-W0",
+      "status": "completed"
+    },
+    {
+      "stageCode": "AST-W1",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "AST-W2",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "AST-W3",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "AST-W4",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "AST-W5",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "AST-W6",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "AST-W7",
+      "status": "not_eligible"
+    }
+  ],
+  "nextStage": "AST-W1"
+}

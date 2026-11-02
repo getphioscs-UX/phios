@@ -1,0 +1,32 @@
+{
+  "work": "HPC2-PRE-1",
+  "schemaVersion": "1.0.0",
+  "executionBaselineCommit": "f78aec2bc74b772494ba6f2831c010da31f83fb4",
+  "resolved": [
+    {
+      "drift": "HERO_PREDECESSOR_MASTER_PNG",
+      "resolution": "All 23 canonical Hero records now declare WebP canonical master 2560x1440."
+    },
+    {
+      "drift": "FIGURE_PREDECESSOR_SVG_OR_RASTER_POLICY",
+      "resolution": "All 57 canonical Figure records now bind SVG canonical masters from canonical-client-figure-registry-v2."
+    },
+    {
+      "drift": "FIGURE_V1_1_R2_WEBP_OBJECT_KEYS",
+      "resolution": "FIG-001..053 object keys corrected to .svg canonical members; FIG-054..057 added as .svg."
+    }
+  ],
+  "remaining": [
+    {
+      "drift": "REMOTE_MIME_ETAG_SIZE_NOT_OBSERVED",
+      "blocking": true,
+      "resolutionCommand": "npm run hpc2-pre:r2-verify"
+    },
+    {
+      "drift": "HERO_AND_ICON_LOCAL_BINARY_NOT_IN_REPOSITORY",
+      "blocking": false,
+      "note": "R2 is canonical delivery location; remote verification owns MIME/object truth."
+    }
+  ],
+  "status": "FORMAT_CONTRACT_DRIFT_RESOLVED_REMOTE_EVIDENCE_PENDING"
+}

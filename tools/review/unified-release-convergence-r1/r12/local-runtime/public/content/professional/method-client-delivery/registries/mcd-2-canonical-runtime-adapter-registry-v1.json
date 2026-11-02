@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "PHI-OS-MCD-2-CANONICAL-RUNTIME-ADAPTER-REGISTRY-v1.0.0",
+  "work": "MCD-2",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "status": "ACTIVE_CANONICAL_BINDINGS_MPA_GATED_CUSTOMER_EXECUTION_DEFERRED",
+  "canonicalEndpoint": "/api/method-execute",
+  "runtimeRegistryModule": "functions/method-client-delivery/adapter-registry-runtime.js",
+  "mpaSuccessorRuntime": "functions/method-production-activation/mcd1-production-authority-successor-runtime.js",
+  "entries": [
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "methodVersion": "0.1.0",
+      "registrationStatus": "REGISTERED_PRODUCTION_AUTHORIZED_BINDING",
+      "mpaDispatchAllowed": true,
+      "productionAdapterBindingActive": true,
+      "customerCalculationActive": false,
+      "customerCalculationDeferredTo": "MCD-4",
+      "canonicalInputRequiredBeforeCalculation": "MCD-3",
+      "capabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false,
+      "adapterModule": "functions/method-client-delivery/adapters/ast-adapter.js",
+      "coreBindings": [
+        {
+          "runtimeCode": "AST_ASTRONOMY_RUNTIME",
+          "module": "functions/core-method-runtime/ast-astronomy-runtime.js",
+          "factory": "createAstAstronomyRuntime"
+        },
+        {
+          "runtimeCode": "AST_PLANET_RUNTIME",
+          "module": "functions/core-method-runtime/ast-planet-runtime.js",
+          "factory": "createAstPlanetRuntime"
+        }
+      ],
+      "scopeLimit": "CORE_10_PLANET_PROJECTION_NO_HOUSES_NO_ASPECTS_NO_NODES"
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "methodVersion": "0.1.0",
+      "registrationStatus": "REGISTERED_PRODUCTION_AUTHORIZED_BINDING",
+      "mpaDispatchAllowed": true,
+      "productionAdapterBindingActive": true,
+      "customerCalculationActive": false,
+      "customerCalculationDeferredTo": "MCD-4",
+      "canonicalInputRequiredBeforeCalculation": "MCD-3",
+      "capabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false,
+      "adapterModule": "functions/method-client-delivery/adapters/bzr-adapter.js",
+      "coreBindings": [
+        {
+          "runtimeCode": "BZR_SOLAR_CALENDAR_RUNTIME",
+          "module": "functions/core-method-runtime/bzr-solar-calendar-runtime.js",
+          "factory": "createBzrSolarCalendarRuntime"
+        },
+        {
+          "runtimeCode": "BZR_FOUR_PILLARS_RUNTIME",
+          "module": "functions/core-method-runtime/bzr-four-pillars-runtime.js",
+          "factory": "createBzrFourPillarsRuntime"
+        },
+        {
+          "runtimeCode": "BZR_LUCK_CYCLE_RUNTIME",
+          "module": "functions/core-method-runtime/bzr-luck-cycle-runtime.js",
+          "factory": "createBzrLuckCycleRuntime"
+        },
+        {
+          "runtimeCode": "BZR_PROJECTION_NORMALIZATION_RUNTIME",
+          "module": "functions/core-method-runtime/bzr-projection-normalization-runtime.js",
+          "factory": "createBzrProjectionNormalizationRuntime"
+        },
+        {
+          "runtimeCode": "BZR_PROJECTION_RUNTIME",
+          "module": "functions/core-method-runtime/bzr-projection-runtime.js",
+          "factory": "createBzrProjectionRuntime"
+        }
+      ]
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "methodVersion": "0.1.0-candidate",
+      "registrationStatus": "REGISTERED_PRODUCTION_AUTHORIZED_BINDING",
+      "mpaDispatchAllowed": true,
+      "productionAdapterBindingActive": true,
+      "customerCalculationActive": false,
+      "customerCalculationDeferredTo": "MCD-4",
+      "canonicalInputRequiredBeforeCalculation": "MCD-3",
+      "capabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false,
+      "adapterModule": "functions/method-client-delivery/adapters/num-adapter.js",
+      "coreBindings": [
+        {
+          "runtimeCode": "NUM_BIRTH_NUMBER_RUNTIME",
+          "module": "functions/core-method-runtime/num-birth-number-runtime.js",
+          "factory": "createNumBirthNumberRuntime"
+        },
+        {
+          "runtimeCode": "NUM_NUMBER_STRUCTURE_RUNTIME",
+          "module": "functions/core-method-runtime/num-number-structure-runtime.js",
+          "factory": "createNumNumberStructureRuntime"
+        },
+        {
+          "runtimeCode": "NUM_CYCLE_RUNTIME",
+          "module": "functions/core-method-runtime/num-cycle-runtime.js",
+          "factory": "createNumCycleRuntime"
+        },
+        {
+          "runtimeCode": "NUM_PROJECTION_RUNTIME",
+          "module": "functions/core-method-runtime/num-projection-runtime.js",
+          "factory": "createNumProjectionRuntime"
+        }
+      ]
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "methodVersion": "1.0.0",
+      "registrationStatus": "REGISTERED_VALIDATION_ONLY",
+      "mpaDispatchAllowed": false,
+      "productionAdapterBindingActive": false,
+      "customerCalculationActive": false,
+      "customerCalculationDeferredTo": null,
+      "canonicalInputRequiredBeforeCalculation": null,
+      "capabilities": [],
+      "validationCapabilities": [
+        "CALCULATION",
+        "PROJECTION"
+      ],
+      "interpretationIncluded": false,
+      "professionalIncluded": false,
+      "publicSurfaceIncluded": false,
+      "adapterModule": "functions/method-client-delivery/adapters/hdr-adapter.js",
+      "coreBindings": [
+        {
+          "runtimeCode": "HDR_ASTRONOMY_RUNTIME",
+          "module": "functions/core-method-runtime/hdr-astronomy-runtime.js",
+          "factory": "createHdrAstronomyRuntime"
+        },
+        {
+          "runtimeCode": "HDR_DESIGN_MOMENT_RUNTIME",
+          "module": "functions/core-method-runtime/hdr-design-moment-runtime.js",
+          "factory": "createHdrDesignMomentRuntime"
+        },
+        {
+          "runtimeCode": "HDR_GATE_RUNTIME",
+          "module": "functions/core-method-runtime/hdr-gate-runtime.js",
+          "factory": "createHdrGateRuntime"
+        },
+        {
+          "runtimeCode": "HDR_BODYGRAPH_RUNTIME",
+          "module": "functions/core-method-runtime/hdr-bodygraph-runtime.js",
+          "factory": "createHdrBodyGraphRuntime"
+        },
+        {
+          "runtimeCode": "HDR_PROJECTION_RUNTIME",
+          "module": "functions/core-method-runtime/hdr-projection-runtime.js",
+          "factory": "createHdrProjectionRuntime"
+        }
+      ],
+      "productionInvocation": "FORBIDDEN",
+      "executionMode": "validation_only"
+    }
+  ],
+  "globalRules": {
+    "registryDoesNotGrantAuthority": true,
+    "onlyMpaSuccessorCanAuthorizeProductionBinding": true,
+    "adapterBindingDoesNotEqualCustomerCalculationActivation": true,
+    "mcd3CanonicalInputRequiredNext": true,
+    "mcd4ExecutionRequiredBeforeCustomerCalculation": true,
+    "hdrProductionInvocationFailClosed": true
+  }
+}

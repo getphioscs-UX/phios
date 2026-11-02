@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "work": "B14-SKS-W50-W52",
+  "rule": "STRUCTURED_KNOWLEDGE_IS_NOT_CURRENT_REALITY_FACT",
+  "candidateRoles": ["interpretationCandidate", "observationPrompt", "comparisonFrame", "recoveryOptionFrame", "navigationFrame"],
+  "requirements": {"serverResolvedSource": true, "sourceTextRequired": true, "userConfirmationRequired": true, "observationRemainsUserReported": true},
+  "prohibitions": {"automaticDiagnosis": true, "automaticFactPromotion": true, "automaticProfessionalAdvice": true, "automaticMethodExecution": true},
+  "routes": [
+    {"bookCode": "BOOK-1", "href": "/reality/", "role": "OBSERVATION_REVIEW"},
+    {"bookCode": "BOOK-2", "href": "/perspectives/relationship/", "role": "RELATIONSHIP_READING_FRAME"},
+    {"bookCode": "BOOK-3", "href": "/reality/", "role": "CURRENT_REALITY_REVIEW"},
+    {"bookCode": "BOOK-4", "href": "/professional/", "role": "PROFESSIONAL_CONTEXT_ENTRY"}
+  ],
+  "routeSelectionCreatesEvidence": false,
+  "humanAcceptanceComplete": false,
+  "productionAcceptanceComplete": false
+}

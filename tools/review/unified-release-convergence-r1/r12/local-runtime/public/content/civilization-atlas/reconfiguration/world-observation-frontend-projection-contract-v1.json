@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-WORLD-OBSERVATION-FRONTEND-PROJECTION-CONTRACT-v1.0.0",
+  "version": "1.0.0",
+  "status": "P1_CONTRACT_READY__P2_PROJECTION_NOT_BUILT",
+  "work": "PHI-OS-WORLD-RECONFIGURATION-OBSERVATION-P1",
+  "consumers": [
+    {
+      "surface": "RECONFIGURATION_ATLAS",
+      "requiredProjection": [
+        "knowledgeState",
+        "observationSummary",
+        "evidenceSummary",
+        "uncertainty",
+        "sourceMix",
+        "lastObservedAt",
+        "runtimeReadoutBoundary"
+      ]
+    },
+    {
+      "surface": "CURRENT_DOSSIERS",
+      "requiredProjection": [
+        "fieldState",
+        "observedValueOrUnknown",
+        "asOf",
+        "evidenceRefs",
+        "freshness",
+        "derivedReadout",
+        "unknowns"
+      ]
+    },
+    {
+      "surface": "SIGNALS",
+      "requiredProjection": [
+        "signalType",
+        "direction",
+        "window",
+        "baseline",
+        "persistence",
+        "noise",
+        "thresholdState",
+        "evidenceRefs",
+        "unknowns"
+      ]
+    },
+    {
+      "surface": "WORLD_SNAPSHOTS",
+      "requiredProjection": [
+        "timeSlice",
+        "knowledgeState",
+        "observedVsReconstructed",
+        "sourceRefs",
+        "uncertainty"
+      ]
+    }
+  ],
+  "prohibitedBrowserInputs": [
+    "content/civilization-atlas/reconfiguration/market-provider-intake-v1.json",
+    "content/civilization-atlas/reconfiguration/market-provider-snapshots-v1.json",
+    "content/civilization-atlas/reconfiguration/p5-b1-filings/raw/**"
+  ],
+  "reason": "Raw/high-volume evidence stores are backend evidence inputs. Browser surfaces require bounded, lightweight projection IR with explicit observation authority.",
+  "p2OutputTarget": "content/civilization-atlas/reconfiguration/world-observation-projection-v1.json"
+}

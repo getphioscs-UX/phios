@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-PART-H5-CLIENT-VISUAL-CONSUMPTION-FREEZE-v1.0.0",
+  "work": "PART-H.5",
+  "baselineCommit": "4e018485935ab090f1bd72eb9636b28686b42693",
+  "status": "PART_H5_REPOSITORY_SUCCESSOR_FROZEN_EXTERNAL_LIVE_EVIDENCE_MUTABLE",
+  "immutableArtifacts": [
+    {
+      "path": "content/web-production/client-visual-consumption/contracts/part-h5-client-visual-consumption-contract-v1.json",
+      "sha256": "8e08380b8b622973e7d38410d7453f360f88b5ccb85fe3567c96b0c437191881"
+    },
+    {
+      "path": "content/web-production/registries/client-visual-consumer-map-v1.json",
+      "sha256": "82e4f4a73daf891cced7592ada597a874ba9665585627675c072b15cada85b1a"
+    },
+    {
+      "path": "content/web-production/client-visual-consumption/reconciliation/part-h5-client-visual-consumption-reconciliation-v1.json",
+      "sha256": "b8cab878571e4aed7ff0b4ce3da5078c62f8e55a8b30c36a2b1d4199ea5aa3eb"
+    },
+    {
+      "path": "content/web-production/client-visual-consumption/acceptance/part-h5-client-visual-consumption-acceptance-v1.json",
+      "sha256": "178dce8376f8271f467746c01b8b4088f5651cdfbf7a094cb4999938c6d262f3"
+    },
+    {
+      "path": "assets/js/client-visual-consumption.js",
+      "sha256": "ee81210a7cc697b6f889b520e5bb9d27db21088be391632628706811ff447366"
+    },
+    {
+      "path": "assets/css/client-visual-consumption.css",
+      "sha256": "b55a92e9f9e76978b5ca361da2f2162f1c5a67c95f5875b5f4be410f2fd9a698"
+    },
+    {
+      "path": "scripts/check-client-visual-consumption-current.mjs",
+      "sha256": "16b0ab567fbda5603927306c1eae4419d5662b7e829731d6d2528dad98ce9bf8"
+    },
+    {
+      "path": "scripts/check-client-visual-consumption-live.mjs",
+      "sha256": "dcc4c88804d2cbfc4aeb25470dd3cdfe802ea2190fa73f48c05b9a5c1e170ded"
+    },
+    {
+      "path": "scripts/client-visual/verify-branding-r2.mjs",
+      "sha256": "904828489aa0f29e6c13c92b54cea124c7accec41984b449d008d7594d760a0a"
+    }
+  ],
+  "bootstrapBinding": {
+    "path": "assets/js/i18n.js",
+    "requiredMarker": "import('./client-visual-consumption.js')",
+    "fullFileFrozen": false,
+    "reason": "i18n remains a shared current bootstrap and may receive unrelated locale/runtime successors."
+  },
+  "preservedAuthorities": {
+    "publicAssetRegistryFrozen": false,
+    "publicAssetRegistryReason": "R2 verification evidence is intentionally live-mutable.",
+    "clientVisualAssetRegistryRewritten": false,
+    "logoRegistryRewrittenByRepositoryH5": false,
+    "hpc2W11DestinationHtmlRewritten": false,
+    "wprFreezeReopened": false,
+    "hpc2FreezeReopened": false,
+    "ckaFreezeReopened": false
+  },
+  "mutableLiveEvidence": {
+    "publicAssetsMayAdvanceByVerifiedR2EvidenceOnly": true,
+    "logoRegistryMayAdvanceByVerifiedR2EvidenceOnly": true,
+    "brandingEvidenceMayAdvanceAfterExternalR2Check": true,
+    "pocA10EvidenceMayAdvanceAfterDeployment": true,
+    "customDomainNotRequiredForH5": true
+  },
+  "successorRules": {
+    "futureConsumerChangesRequireAdditiveSuccessor": true,
+    "futureHeroOrIconRemovalRequiresExplicitConsumerReconciliation": true,
+    "liveBrandingAcceptanceCannotBeSynthesizedFromRepositoryState": true,
+    "partIFinalAcceptanceNotCreatedByThisFreeze": true
+  },
+  "globalProductionAccepted": false,
+  "next": "PART_I_AFTER_H5_REPOSITORY_GATE_PLUS_POC_A10_LIVE_REVALIDATION"
+}

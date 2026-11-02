@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-KAP-MAINTENANCE-SUCCESSOR-v2.0.0",
+  "work": "KAP-M10-ATLAS-SELECTION-ISOLATION",
+  "status": "MAINTENANCE_RECONCILIATION",
+  "baselineCommit": "f0f5c93717d6f10b2f8ea9b6ad3f5495e674e306",
+  "changes": [
+    {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "predecessorSha256": "d64f32acdae9b088a4e59492395fe23df4abd91294e99eef4212bf58e2dfa4a6",
+      "successorSha256": "68e3d86be6eb09656b37f83faef4c3aa1c3c198eb569cfea63ce31a399832ccd",
+      "changeClass": "EXPLICIT_ATLAS_SELECTION_EXCLUDES_UNRELATED_CANONICAL_AND_MANUSCRIPT_SOURCES"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "ab0196ba7a2b4b9e3e9c0acf705ea7554eb6e0d86f28e29b783bbef47aeea4d1",
+      "successorSha256": "bcd78f56f07a2b61ed88fb97895f0ba873405f87272629466ae9f6a07cc36c1d",
+      "changeClass": "REGISTER_ATLAS_SELECTION_MAINTENANCE_SUCCESSOR"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-composition.js",
+      "predecessorSha256": "a2d7c3066e358da75b7cd01d87054a4e5c47b68d641974dc9fab498dfa486800",
+      "successorSha256": "d42e53c230fccadb4d9c1d03bf3acdd54ce9e45f38b62fd3c66660c098c2f410",
+      "changeClass": "PRESERVE_ACCEPTED_UNKNOWN_AND_EXTERNAL_DOSSIER_SOURCE_CLASSES"
+    },
+    {
+      "path": "scripts/build-cloudflare-pages.mjs",
+      "predecessorSha256": "bf94c4ef3aeb47f7047b90174021bed4485f2661aaf8c4dd3f2ea21602d22fc3",
+      "successorSha256": "3af85a3f2f9038f64c307a834efc3067610fd8eeb2dae707a8dc95ff7dd38ab5",
+      "changeClass": "SHARED_OUTPUT_LOCK_BUILD_STAGE_RECEIPTS_AND_ATLAS_BRIDGE_PUBLICATION"
+    }
+  ],
+  "evidence": [
+    "scripts/check-w31-actual-contextual-ask.mjs",
+    "content/production-closure/live-customer-commercial-convergence/W31-ACTUAL-CONTEXTUAL-ASK-QA.json",
+    "scripts/check-pages-output-concurrency.mjs"
+  ],
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false
+  },
+  "productionAdmission": false
+}

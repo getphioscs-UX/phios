@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-RJX-COMPLEX-CASE-FIXTURE-v1.0.0",
+  "work": "RJX-W7",
+  "fixtureCode": "enterprise-multi-objective-case",
+  "mode": "COMPLEX_REALITY_CASE",
+  "scope": "ENTERPRISE",
+  "status": "CANDIDATE_VALIDATION_FIXTURE",
+  "entities": [
+    {
+      "id": "E1",
+      "source": "fixture_input"
+    },
+    {
+      "id": "E2",
+      "source": "fixture_input"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "REL1",
+      "from": "E1",
+      "to": "E2",
+      "source": "fixture_input",
+      "inventedByAI": false
+    }
+  ],
+  "events": [
+    {
+      "id": "EV1",
+      "version": 1,
+      "source": "fixture_input"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "C1",
+      "scope": "ENTERPRISE"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "O1"
+    },
+    {
+      "id": "O2"
+    }
+  ],
+  "perspectives": [
+    {
+      "id": "P1",
+      "sourceEntityId": "E1"
+    },
+    {
+      "id": "P2",
+      "sourceEntityId": "E2"
+    }
+  ],
+  "unknown": [
+    {
+      "id": "U1",
+      "scopeType": "RELATIONSHIP",
+      "scopeId": "REL1"
+    }
+  ]
+}

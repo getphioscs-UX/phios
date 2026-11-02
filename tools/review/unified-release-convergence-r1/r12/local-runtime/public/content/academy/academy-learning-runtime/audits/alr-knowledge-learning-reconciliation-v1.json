@@ -1,0 +1,138 @@
+{
+  "auditCode": "PHI-OS-ALR-W15-W19-KNOWLEDGE-LEARNING-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "ALR-W15-W19",
+  "status": "reconciled",
+  "baselineCommit": "f3fcc4b9887f75737d8fd07b4539031a4540ca54",
+  "canonicalPhase": "ALR-D｜Knowledge → Learning",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "classification": "MASTER_WORK_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json",
+      "sha256": "d47989ba38dd8df058387d4444e9e5752950bdbef5eaa3ec368aaf817c59b13d",
+      "classification": "ALR_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json",
+      "sha256": "2b67e5366f78299fbd0c84eb7a27657283eee0760472d1caae92bee9a370e3dd",
+      "classification": "LEARNING_OBJECT_TYPE_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/contracts/learning-architecture-contract-v1.json",
+      "sha256": "b59881f3d35c59d66b446fc813b633be609817a4dc46b11a34fd63c471fe70f0",
+      "classification": "ALR_W10_W14_ARCHITECTURE"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/lesson-registry-v1.json",
+      "sha256": "cbc932d689c003764678997a3b9358bf9aebd81958bf23793cf46a43a6e2581d",
+      "classification": "LESSON_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-objective-registry-v1.json",
+      "sha256": "67366a07bd5f77ce2319c5d9fcbf5226902e211b54ac4813b793b7564b883bb9",
+      "classification": "LEARNING_OBJECTIVE_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/freeze/alr-w10-w14-learning-architecture-freeze-v1.json",
+      "sha256": "b70e5fb13d400ddb3ada916b9853c941abb799401bad2b0ed49449eb5526d1de",
+      "classification": "ALR_W10_W14_FREEZE"
+    },
+    {
+      "reference": "content/knowledge/contracts/published-knowledge-authority-v1.json",
+      "sha256": "bab0789e8029f7aae0d7e1eb66f851f537f7a20d38b3f9a0e10e9beab9929f1f",
+      "classification": "PUBLISHED_KNOWLEDGE_AUTHORITY"
+    },
+    {
+      "reference": "content/knowledge/public/published-nodes.json",
+      "sha256": "6fb9cd411ce21954ea6679433e8ad68c4c2d9a173aa078b35396d77b2749b4da",
+      "classification": "PUBLISHED_NODE_PROJECTION"
+    },
+    {
+      "reference": "content/knowledge/public/published-articles.json",
+      "sha256": "c4082593f7eacc49c854d0faaa4def6c7e3fd469fd62be672cd6c97de48a244a",
+      "classification": "PUBLISHED_ARTICLE_PROJECTION"
+    },
+    {
+      "reference": "content/knowledge/production-planning/policies/kpp-academy-production-need-v1.json",
+      "sha256": "a6110e14c274b45fc1826d16d998702d7d4cfe3c5c88555afd440334dfd299c1",
+      "classification": "KPP_ACADEMY_NEED"
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/contracts/car-slides-academy-contract-v1.json",
+      "sha256": "c064604c64ef6ea835fe2df29f9f720fca932b834e49ff09ee117fd81f0be6ea",
+      "classification": "CAR_TEACHING_ASSET_BOUNDARY"
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/contracts/car-alr-cpr-authority-reconciliation-v1.json",
+      "sha256": "3f8ce8787728a2cec005289223a201c18421626ff9a6dbcb6748cab06497f662",
+      "classification": "CAR_ALR_CPR_AUTHORITY_BOUNDARY"
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+      "sha256": "d457099835fe4f967fb77fd8861ffee3858a76878118597400029eb53aa48c6e",
+      "classification": "CAR_PUBLISHED_ASSET_AUTHORITY"
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+      "sha256": "015fd9cc8265ccc3bc7c61254b6c70b2ca680c40979f4c35b6a0f77b2b92aac2",
+      "classification": "RDG_LEARNING_DATA_BOUNDARY"
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json",
+      "sha256": "1aa8a7b20450070c86322733acac45508bc67a4eb9ba75a6b3ccf4d6608bdf22",
+      "classification": "ICR_CASE_BOUNDARY"
+    }
+  ],
+  "baselineFindings": {
+    "publishedNodeProjectionRecordCount": 6,
+    "publishedArticleProjectionRecordCount": 6,
+    "uniquePublishedNodeCount": 3,
+    "publishedLocales": ["en", "zh-Hans"],
+    "canonicalLessonCount": 5,
+    "canonicalLearningObjectiveCount": 10,
+    "carPublishedAssetCount": 0,
+    "w10W14LessonIntegrationArraysRemainEmpty": true,
+    "knowledgeProjectionRuntimePresent": false,
+    "teachingExplanationRuntimePresent": false,
+    "exampleRuntimePresent": false,
+    "caseStudyRuntimePresent": false,
+    "figureLearningProjectionRuntimePresent": false
+  },
+  "implementationDecision": {
+    "knowledgeProjectionCount": 5,
+    "teachingExplanationCount": 5,
+    "exampleCount": 5,
+    "caseStudyCount": 5,
+    "figureLearningProjectionCount": 0,
+    "lessonBindingOverlayRequired": true,
+    "publishedKnowledgeMayBeReferenced": true,
+    "publishedKnowledgeMayBeMutatedOrCopiedAsAuthority": false,
+    "teachingObjectsMayAddUngroundedKnowledgeClaims": false,
+    "syntheticExamplesOrCaseStudiesMayBecomeRealityEvidence": false,
+    "candidateOrFixtureAssetMayBecomeFigureLearningProjection": false,
+    "emptyFigureProjectionRegistryRequiredUntilPublishedCarAssetExists": true,
+    "learnerDeliveryMayBeActivated": false
+  },
+  "baselineRepair": {
+    "classification": "REPOSITORY_LOGIC_RECONCILIATION",
+    "issue": "ICR-W5-W9 preservation manifest retained the pre-ALR-integration digest of the ICR-W0-W4 checker.",
+    "changedFiles": [
+      "content/runtime/input-case-runtime/freeze/icr-w0-w4-byte-preservation-manifest-v1.json",
+      "scripts/check-icr-w5-w9-canonical-case-runtime.mjs"
+    ],
+    "runtimeSemanticsMutated": false,
+    "crossPlatformTextHashingApplied": true
+  },
+  "preservation": {
+    "w0W14FrozenArtifactsMutated": false,
+    "publishedKnowledgeMutated": false,
+    "carOrCprAuthorityMutated": false,
+    "rdgLearningDataAuthorityMutated": false,
+    "icrCaseSemanticsMutated": false,
+    "existingRuntimeOrUserDataMutated": false
+  }
+}

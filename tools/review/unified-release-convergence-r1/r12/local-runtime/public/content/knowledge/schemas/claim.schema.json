@@ -1,0 +1,531 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/claim.schema.json",
+  "title": "PHI OS Knowledge Claim",
+  "description": "A governance-only, auditable assertion. It never supplies public article body content or publication authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "claimCode",
+    "claimSetVersion",
+    "nodeCode",
+    "locale",
+    "statement",
+    "claimType",
+    "scope",
+    "supportRequirement",
+    "sourceSupport",
+    "canonicalSourceCodes",
+    "contrarySourceCodes",
+    "conflictAssessment",
+    "supportAssessment",
+    "editorialAssessment",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KNOWLEDGE-CLAIM-v1.0.0"
+    },
+    "claimCode": {
+      "type": "string",
+      "pattern": "^CLM-KN-[A-Z0-9]+(?:-[A-Z0-9]+)*-\\d{3}$",
+      "maxLength": 96
+    },
+    "claimSetVersion": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "nodeCode": {
+      "$ref": "#/$defs/nodeCode"
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "claimType": {
+      "type": "string",
+      "enum": [
+        "externally_verifiable",
+        "phi_os_interpretation",
+        "editorial_inference",
+        "mixed",
+        "canonical_transition",
+        "boundary_statement"
+      ]
+    },
+    "scope": {
+      "$ref": "#/$defs/claimScope"
+    },
+    "supportRequirement": {
+      "$ref": "#/$defs/supportRequirement"
+    },
+    "sourceSupport": {
+      "type": "array",
+      "maxItems": 24,
+      "items": {
+        "$ref": "#/$defs/sourceSupport"
+      }
+    },
+    "canonicalSourceCodes": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceCode"
+      }
+    },
+    "contrarySourceCodes": {
+      "type": "array",
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceCode"
+      }
+    },
+    "conflictAssessment": {
+      "$ref": "#/$defs/conflictAssessment"
+    },
+    "supportAssessment": {
+      "$ref": "#/$defs/claimAssessment"
+    },
+    "editorialAssessment": {
+      "$ref": "#/$defs/editorialAssessment"
+    },
+    "mixedAssessment": {
+      "$ref": "#/$defs/mixedAssessment"
+    },
+    "status": {
+      "$ref": "#/$defs/claimStatus"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "claimType": {
+            "const": "mixed"
+          }
+        },
+        "required": [
+          "claimType"
+        ]
+      },
+      "then": {
+        "required": [
+          "mixedAssessment"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "mixedAssessment"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claimType": {
+            "const": "phi_os_interpretation"
+          }
+        },
+        "required": [
+          "claimType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "canonicalSourceCodes": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$",
+      "maxLength": 80
+    },
+    "sourceCode": {
+      "type": "string",
+      "pattern": "^SRC-[A-Z0-9]+(?:-[A-Z0-9]+)*$",
+      "maxLength": 96
+    },
+    "reviewStatus": {
+      "type": "string",
+      "enum": [
+        "not_applicable",
+        "not_reviewed",
+        "in_review",
+        "changes_required",
+        "conditionally_approved",
+        "approved",
+        "rejected"
+      ]
+    },
+    "reviewerType": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "human",
+        "ai_assistant",
+        "automated_validator",
+        "system",
+        null
+      ]
+    },
+    "reviewedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$"
+    },
+    "reviewedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "claimScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "articleSectionCode",
+        "articleBlockCode",
+        "usage",
+        "materiality"
+      ],
+      "properties": {
+        "articleSectionCode": {
+          "type": "string",
+          "pattern": "^S\\d{2}$"
+        },
+        "articleBlockCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^S\\d{2}-B\\d{2}$"
+        },
+        "usage": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "paraphrased",
+            "contextual",
+            "illustrative",
+            "transitional"
+          ]
+        },
+        "materiality": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        }
+      }
+    },
+    "supportRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceRequired",
+        "minimumIndependentSources",
+        "primarySourcePreferred",
+        "qualificationRequired"
+      ],
+      "properties": {
+        "sourceRequired": {
+          "type": "boolean"
+        },
+        "minimumIndependentSources": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 12
+        },
+        "primarySourcePreferred": {
+          "type": "boolean"
+        },
+        "qualificationRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sourceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pageRange",
+        "section"
+      ],
+      "properties": {
+        "pageRange": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        }
+      }
+    },
+    "sourceSupport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceCode",
+        "supportType",
+        "supportScope",
+        "supportLevel",
+        "locator",
+        "reviewStatus"
+      ],
+      "properties": {
+        "sourceCode": {
+          "$ref": "#/$defs/sourceCode"
+        },
+        "supportType": {
+          "type": "string",
+          "enum": [
+            "direct",
+            "partial",
+            "contextual",
+            "contradictory",
+            "not_supportive"
+          ]
+        },
+        "supportScope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "supportLevel": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "moderate",
+            "weak",
+            "none",
+            "not_assessed"
+          ]
+        },
+        "locator": {
+          "$ref": "#/$defs/sourceLocator"
+        },
+        "reviewStatus": {
+          "$ref": "#/$defs/reviewStatus"
+        }
+      }
+    },
+    "conflictAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "conflictType",
+        "resolution",
+        "reviewerType",
+        "reviewedBy",
+        "reviewedAt"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_applicable",
+            "not_assessed",
+            "in_review",
+            "changes_required",
+            "resolved",
+            "accepted_unresolved"
+          ]
+        },
+        "conflictType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "methodological_difference",
+            "scope_difference",
+            "definition_difference",
+            "date_difference",
+            "interpretive_difference",
+            "direct_contradiction",
+            null
+          ]
+        },
+        "resolution": {
+          "type": "string",
+          "maxLength": 1200
+        },
+        "reviewerType": {
+          "$ref": "#/$defs/reviewerType"
+        },
+        "reviewedBy": {
+          "$ref": "#/$defs/reviewedBy"
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/reviewedAt"
+        }
+      }
+    },
+    "claimAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "supportLevel",
+        "notes",
+        "reviewerType",
+        "reviewedBy",
+        "reviewedAt"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/reviewStatus"
+        },
+        "supportLevel": {
+          "type": "string",
+          "enum": [
+            "strong",
+            "moderate",
+            "weak",
+            "none",
+            "not_assessed"
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1600
+        },
+        "reviewerType": {
+          "$ref": "#/$defs/reviewerType"
+        },
+        "reviewedBy": {
+          "$ref": "#/$defs/reviewedBy"
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/reviewedAt"
+        }
+      }
+    },
+    "editorialAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "wordingRisk",
+        "qualification",
+        "notes",
+        "reviewerType",
+        "reviewedBy",
+        "reviewedAt"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/reviewStatus"
+        },
+        "wordingRisk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "qualification": {
+          "type": "string",
+          "maxLength": 1200
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1600
+        },
+        "reviewerType": {
+          "$ref": "#/$defs/reviewerType"
+        },
+        "reviewedBy": {
+          "$ref": "#/$defs/reviewedBy"
+        },
+        "reviewedAt": {
+          "$ref": "#/$defs/reviewedAt"
+        }
+      }
+    },
+    "mixedAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factualPortion",
+        "interpretivePortion"
+      ],
+      "properties": {
+        "factualPortion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        },
+        "interpretivePortion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        }
+      }
+    },
+    "claimStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claimStatus",
+        "reviewStatus"
+      ],
+      "properties": {
+        "claimStatus": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "mapped",
+            "ready_for_review",
+            "changes_required",
+            "approved",
+            "rejected",
+            "deprecated"
+          ]
+        },
+        "reviewStatus": {
+          "$ref": "#/$defs/reviewStatus"
+        }
+      }
+    }
+  }
+}

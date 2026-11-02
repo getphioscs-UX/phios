@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rjx/mir-9-reading-reality-handoff-v1.schema.json",
+  "title": "PHI OS MIR-9 Reading to Reality Handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "handoffId",
+    "sourceInterpretationResultId",
+    "sourceReadingOutcome",
+    "complexityGate",
+    "consent",
+    "entryEligibility",
+    "backendState",
+    "clientStage",
+    "understandProjection",
+    "icrHandoff",
+    "rmoHandoff",
+    "rdgHandoff",
+    "workspace",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MIR-9-READING-REALITY-HANDOFF-v1.0.0"
+    },
+    "handoffId": {
+      "type": "string",
+      "pattern": "^RJX-HANDOFF-[A-F0-9]{8}$"
+    },
+    "sourceInterpretationResultId": {
+      "type": "string"
+    },
+    "sourceReadingOutcome": {
+      "const": "REALITY_MODEL_REQUIRED"
+    },
+    "complexityGate": {
+      "type": "object"
+    },
+    "consent": {
+      "type": "object"
+    },
+    "entryEligibility": {
+      "type": "object"
+    },
+    "backendState": {
+      "const": "entry"
+    },
+    "clientStage": {
+      "const": "Understand"
+    },
+    "understandProjection": {
+      "type": "object"
+    },
+    "icrHandoff": {
+      "type": "object"
+    },
+    "rmoHandoff": {
+      "type": "object"
+    },
+    "rdgHandoff": {
+      "type": "object"
+    },
+    "workspace": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

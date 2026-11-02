@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RRE Drift Reading v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "driftReadingCode",
+    "realityReference",
+    "previousRealityReference",
+    "driftState",
+    "rmoDiffReference",
+    "direction",
+    "magnitudeClass",
+    "domains",
+    "persistence",
+    "uncertainty",
+    "structuralDiffConsumed",
+    "recomputedRealityDiff",
+    "causalityClaimed",
+    "metricCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "driftReadingDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RRE-DRIFT-READING-v1.0.0"
+    },
+    "driftReadingCode": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "previousRealityReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "code",
+            "version",
+            "digest"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "driftState": {
+      "enum": [
+        "READABLE",
+        "NO_PREVIOUS_REALITY"
+      ]
+    },
+    "rmoDiffReference": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "code",
+            "version",
+            "digest"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 240
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "direction": {
+      "enum": [
+        "INCREASE",
+        "DECREASE",
+        "MIXED",
+        "NO_CHANGE",
+        "UNKNOWN"
+      ]
+    },
+    "magnitudeClass": {
+      "enum": [
+        "NONE",
+        "SINGLE_DOMAIN",
+        "MULTI_DOMAIN",
+        "UNKNOWN"
+      ]
+    },
+    "domains": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    },
+    "persistence": {
+      "enum": [
+        "SINGLE_INTERVAL",
+        "REPEATED_INTERVALS",
+        "UNKNOWN"
+      ]
+    },
+    "uncertainty": {
+      "enum": [
+        "BOUNDED",
+        "ELEVATED",
+        "CONFLICTING",
+        "UNKNOWN"
+      ]
+    },
+    "structuralDiffConsumed": {
+      "type": "boolean"
+    },
+    "recomputedRealityDiff": {
+      "const": false
+    },
+    "causalityClaimed": {
+      "const": false
+    },
+    "metricCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "driftReadingDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+/* R2 binds admitted artwork below the existing text-safe gradient. */
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"]{background:#faf7ef}
+.pub-report[data-method="ZWR"] .pub-family[data-hero-placement="hero-bottom"] .pub-decoration img[data-decorative-layer="2"]{height:74%;bottom:0}
+.pub-report[data-method="ZWR"] .pub-family[data-hero-placement="hero-left"] .pub-decoration img[data-decorative-layer="2"]{width:112%;left:-12%;height:100%}
+.pub-report[data-method="ZWR"] .pub-family[data-hero-placement="hero-right"] .pub-decoration img[data-decorative-layer="2"]{width:112%;right:-12%;height:100%}
+.pub-report[data-method="ZWR"][lang="zh-Hans"] .pub-composed-content{font-size:18px;line-height:1.75}
+.pub-report[data-method="ZWR"][lang="zh-Hans"] .pub-composed-page[data-text-fit="COMPACT"] .pub-composed-content{font-size:17px;line-height:1.6}
+.pub-report[data-method="ZWR"][lang="zh-Hans"] .pub-composed-page[data-text-fit="REFLOW"] .pub-composed-content{font-size:16px;line-height:1.5}
+.pub-report[data-method="ZWR"] .pub-composed-content .pub-visual{background:rgba(255,253,247,.76)}
+.pub-report[data-method="ZWR"] .pub-master-insights{background:rgba(255,253,247,.9)}
+
+
+/* Zi Wei section-master visual correction: authored section artwork is the
+   primary opener background; body/motif layers remain for reading pages. */
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-decoration img[data-decorative-layer="0"],
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-decoration img[data-decorative-layer="1"]{display:none!important}
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-decoration img[data-decorative-layer="2"]{
+ inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+ object-fit:cover!important;opacity:1!important
+}
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-decoration:after{
+ background:linear-gradient(90deg,rgba(252,250,245,.86) 0%,rgba(252,250,245,.72) 34%,rgba(252,250,245,.18) 58%,rgba(252,250,245,0) 76%)!important
+}
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"][data-hero-placement="hero-left"] .pub-decoration:after{
+ background:linear-gradient(270deg,rgba(252,250,245,.86) 0%,rgba(252,250,245,.72) 34%,rgba(252,250,245,.18) 58%,rgba(252,250,245,0) 76%)!important
+}
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"]{background:#faf7ef}
+.pub-report[data-method="ZWR"] .pub-family[data-page-family="SECTION_OPENER_PAGE"] .pub-master-insights{background:rgba(252,250,245,.84);backdrop-filter:none}

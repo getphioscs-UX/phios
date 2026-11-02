@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-HDR-RUNTIME-BOUNDARY-v1.0.0",
+  "stageCode": "HDR-W0",
+  "runtimeCode": "HUMAN_DESIGN_RUNTIME",
+  "runtimeVersion": "0.0.0-foundation",
+  "pluginCode": "HDR",
+  "status": "not_activated",
+  "pipeline": [
+    {
+      "stage": "HDR-W1",
+      "name": "Astronomy Runtime",
+      "input": "normalized_birth_moment",
+      "output": "planetary_longitudes",
+      "status": "not_implemented"
+    },
+    {
+      "stage": "HDR-W2",
+      "name": "Design Moment Solver",
+      "input": "birth_sun_longitude",
+      "output": "design_moment_88_degree_solar_arc",
+      "status": "not_implemented"
+    },
+    {
+      "stage": "HDR-W3",
+      "name": "Gate Runtime",
+      "input": "planetary_longitudes",
+      "output": "gate_line_projection_inputs",
+      "status": "blocked_pending_source_and_rights"
+    },
+    {
+      "stage": "HDR-W4",
+      "name": "BodyGraph Runtime",
+      "input": "gate_line_projection_inputs",
+      "output": "channels_centers_authority_profile",
+      "status": "blocked_pending_source_and_rights"
+    },
+    {
+      "stage": "HDR-W5",
+      "name": "Projection Runtime",
+      "input": "validated_structural_result",
+      "output": "canonical_projection_json",
+      "status": "not_implemented"
+    },
+    {
+      "stage": "HDR-W6",
+      "name": "Professional Integration",
+      "input": "interpretation_candidate",
+      "output": "professional_release",
+      "status": "not_implemented"
+    },
+    {
+      "stage": "HDR-W7",
+      "name": "Production Freeze",
+      "input": "accepted_runtime_and_governance",
+      "output": "HDR_FROZEN_v1",
+      "status": "not_eligible"
+    }
+  ],
+  "separationRules": {
+    "astronomyDoesNotInterpret": true,
+    "calculationDoesNotProject": true,
+    "projectionDoesNotInterpret": true,
+    "interpretationDoesNotRelease": true,
+    "professionalReleaseUsesSharedRuntime": true
+  },
+  "prohibitedAtFoundation": [
+    "CALCULATE_CHART",
+    "CREATE_PROJECTION",
+    "CREATE_INTERPRETATION",
+    "CREATE_PROFESSIONAL_CONCLUSION",
+    "RELEASE_REPORT",
+    "PUBLISH_SERVICE",
+    "ACTIVATE_PLUGIN"
+  ]
+}

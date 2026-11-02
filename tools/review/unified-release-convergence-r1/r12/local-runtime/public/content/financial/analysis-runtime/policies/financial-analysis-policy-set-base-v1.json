@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "PHI-OS-FAR-ANALYSIS-POLICY-SET-v1.0.0",
+  "policySetId": "FAR-POLICY-BASE-v1",
+  "version": "1.0.0",
+  "effectiveDate": "2026-01-01",
+  "sourceLabel": "PHI OS FAR v1 governed analysis thresholds",
+  "status": "ACTIVE",
+  "thresholds": [
+    {
+      "policyId": "FAR-P-LIQ-LOW",
+      "code": "LIQUIDITY_LOW_MONTHS",
+      "value": 6,
+      "unit": "MONTHS"
+    },
+    {
+      "policyId": "FAR-P-LIQ-STRONG",
+      "code": "LIQUIDITY_STRONG_MONTHS",
+      "value": 12,
+      "unit": "MONTHS"
+    },
+    {
+      "policyId": "FAR-P-DSR-HIGH",
+      "code": "DEBT_SERVICE_HIGH_RATIO",
+      "value": 0.35,
+      "unit": "RATIO"
+    },
+    {
+      "policyId": "FAR-P-LEV-HIGH",
+      "code": "LEVERAGE_HIGH_RATIO",
+      "value": 0.5,
+      "unit": "RATIO"
+    },
+    {
+      "policyId": "FAR-P-BIZ-CONC",
+      "code": "BUSINESS_CONCENTRATION_HIGH_RATIO",
+      "value": 0.5,
+      "unit": "RATIO"
+    },
+    {
+      "policyId": "FAR-P-PROP-CONC",
+      "code": "PROPERTY_CONCENTRATION_HIGH_PERCENT",
+      "value": 70,
+      "unit": "PERCENT"
+    },
+    {
+      "policyId": "FAR-P-LIQ-CONC",
+      "code": "LIQUIDITY_ALLOCATION_LOW_PERCENT",
+      "value": 10,
+      "unit": "PERCENT"
+    },
+    {
+      "policyId": "FAR-P-BIZ-DEP",
+      "code": "BUSINESS_DEPENDENCY_HIGH_RATIO",
+      "value": 0.5,
+      "unit": "RATIO"
+    },
+    {
+      "policyId": "FAR-P-GAP-TOL",
+      "code": "FUNDING_GAP_TOLERANCE",
+      "value": 0,
+      "unit": "BASE_CURRENCY"
+    },
+    {
+      "policyId": "FAR-P-SENS",
+      "code": "SCENARIO_SENSITIVITY_RELATIVE_CHANGE",
+      "value": 0.25,
+      "unit": "RATIO"
+    },
+    {
+      "policyId": "FAR-P-EVIDENCE",
+      "code": "MIN_EVIDENCE_CONFIDENCE",
+      "value": 0.5,
+      "unit": "SCORE"
+    }
+  ],
+  "rules": {
+    "versioned": true,
+    "effectiveDated": true,
+    "sourceLabelled": true,
+    "hiddenThresholdAllowed": false,
+    "recommendationDirectionEncoded": false
+  },
+  "digest": "6864c99fbd6b61fb647bc98758a8b50a7fec84f39cdb520a5bb9fc5c3b1a1b2c"
+}

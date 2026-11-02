@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W5-W6-V2-ACCEPTANCE-v1.0.0",
+  "work": "BAZI-FP-W5-W6",
+  "status": "BATCH_002_SOURCE_ADMISSION_COMPLETE_V2_RULESETS_FROZEN",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "gates": {
+    "SOURCE_FIDELITY_HUMAN_REVIEW_COMPLETE": true,
+    "HUMAN_REVIEW_DECISIONS_ALL_ADMIT": true,
+    "BATCH_002_ADMITTED_CLAIM_COUNT": 20,
+    "BATCH_002_RUNTIME_USE_ALLOWED_COUNT": 20,
+    "W5_V2_RULESET_FROZEN": true,
+    "W5_DEFEAT_RESCUE_COUNTER_EVIDENCE_RULES_PRESENT": true,
+    "W5_JIANLU_YUEJIE_SPECIAL_PATH_PRESENT": true,
+    "W5_PRIMARY_PATTERN_AUTO_ASSIGNMENT_ENABLED": false,
+    "W6_ZI_PING_V2_RULESET_FROZEN": true,
+    "W6_TI_YONG_V2_RULESET_FROZEN": true,
+    "W6_TIAOHOU_V2_RULESET_FROZEN": true,
+    "W6_CONDITIONAL_CANDIDATE_SELECTION_AUTHORIZED": true,
+    "W6_UNIVERSAL_ELEMENT_AUTO_SELECTION_ENABLED": false,
+    "SILENT_CROSS_SCHOOL_MERGE_ENABLED": false,
+    "OVERALL_PRODUCTION_GATE_OPEN": false
+  },
+  "freezeRef": "content/professional/bzr-full-production/freeze/bazi-fp-w5-w6-v2-source-admission-ruleset-freeze-v1.json",
+  "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+  "next": "BAZI-FP-W8 then W9; do not treat source admission as customer prediction authorization."
+}

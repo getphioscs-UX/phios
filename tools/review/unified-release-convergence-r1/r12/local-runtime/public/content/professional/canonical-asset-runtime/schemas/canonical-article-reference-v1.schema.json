@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-article-reference-v1.schema.json",
+  "title": "PHI OS Canonical Article Reference v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assetReferenceCode","assetType","authorityMode","nodeCode","locale","articleCode","articleVersion","publishedAuthorityReference","articleRendererReference","lineage","referenceState"],
+  "properties": {
+    "assetReferenceCode": {"type":"string","pattern":"^CAR-ARTICLE-REF-[A-Z0-9-]+$"},
+    "assetType": {"const":"ARTICLE"},
+    "authorityMode": {"const":"reference_only"},
+    "nodeCode": {"type":"string","pattern":"^KN-[A-Z0-9-]+$"},
+    "locale": {"enum":["en","zh-Hans"]},
+    "articleCode": {"type":"string","minLength":1},
+    "articleVersion": {"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "publishedAuthorityReference": {
+      "type":"object","additionalProperties":false,
+      "required":["authorityRecordCode","authorityDigest","authorityPath"],
+      "properties": {
+        "authorityRecordCode":{"type":"string","minLength":1},
+        "authorityDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "authorityPath":{"type":"string","pattern":"^content/knowledge/public/authority/articles/"}
+      }
+    },
+    "articleRendererReference": {
+      "type":"object","additionalProperties":false,
+      "required":["rendererAuthority","rendererPath"],
+      "properties": {
+        "rendererAuthority":{"const":"Existing Article Renderer"},
+        "rendererPath":{"const":"assets/js/knowledge/article-renderer.js"}
+      }
+    },
+    "lineage": {
+      "type":"object","additionalProperties":false,
+      "required":["candidateCode","candidateDigest","reviewCode","reviewDigest","approvalCode","approvalDigest","publicationCode","publicationDigest"],
+      "properties": {
+        "candidateCode":{"type":"string","minLength":1},"candidateDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "reviewCode":{"type":"string","minLength":1},"reviewDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "approvalCode":{"type":"string","minLength":1},"approvalDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+        "publicationCode":{"type":"string","minLength":1},"publicationDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"}
+      }
+    },
+    "referenceState": {"const":"active"}
+  },
+  "allOf": [
+    {"not":{"required":["bodyMarkdown"]}},
+    {"not":{"required":["title"]}},
+    {"not":{"required":["summary"]}},
+    {"not":{"required":["reviewState"]}},
+    {"not":{"required":["approvalState"]}},
+    {"not":{"required":["publicationState"]}}
+  ]
+}

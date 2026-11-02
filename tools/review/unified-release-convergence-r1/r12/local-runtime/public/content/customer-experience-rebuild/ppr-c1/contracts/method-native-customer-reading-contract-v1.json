@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-NATIVE-CUSTOMER-READING-CONTRACT-v1.0.0",
+  "work": "PPR-C1-W2",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "status": "FROZEN_PRODUCT_ENVELOPE_CONTRACT",
+  "envelopeSchema": "PHI-OS-METHOD-NATIVE-CUSTOMER-READING-v1.0.0",
+  "requiredFields": [
+    "methodId",
+    "productVersion",
+    "summary",
+    "structuralModel",
+    "readingSections",
+    "temporalContext",
+    "openVerdicts",
+    "evidence",
+    "publicationDecision"
+  ],
+  "methodEligibility": {
+    "BZR": {
+      "allowed": true,
+      "authority": "BAZI-FP-v1.0.0",
+      "state": "CUSTOMER_PUBLISHABLE"
+    },
+    "NUM": {
+      "allowed": true,
+      "authority": "NUM-D8 Full Production",
+      "state": "CUSTOMER_PUBLISHABLE_NOT_WIRED_IN_W2"
+    },
+    "ZWR": {
+      "allowed": false,
+      "authority": "ZIWEI-FP-W23",
+      "state": "HUMAN_REVIEW_PENDING"
+    },
+    "AST": {
+      "allowed": false,
+      "authority": "AST-R5/R2-W9-W12",
+      "state": "FINAL_RELEASE_GATES_PENDING"
+    }
+  },
+  "boundaries": {
+    "createsSecondInterpretationRuntime": false,
+    "recalculatesMethod": false,
+    "normalizesMethodMeaningAcrossSchools": false,
+    "rendererCreatesMeaning": false,
+    "productPublicationDecisionMustBePreserved": true,
+    "methodNativeSectionsRemainMethodOwned": true
+  }
+}

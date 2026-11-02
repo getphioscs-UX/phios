@@ -1,0 +1,276 @@
+{
+  "id": "phi-os.professional-service-catalog",
+  "version": "1.0.0",
+  "milestone": "M4A-W1",
+  "status": "definition-frozen-implementation-pending",
+  "productPosition": {
+    "en": "PHI OS separates evidence, interpretation, calculation, professional assessment, recommendation, client decision and implementation result.",
+    "zh-Hans": "PHI OS 将证据、解释、计算、专业评估、建议、客户决定与执行结果分别记录。"
+  },
+  "serviceGroups": [
+    "runtime",
+    "human_design",
+    "financial",
+    "integrated"
+  ],
+  "services": [
+    {
+      "serviceId": "automated_runtime_reading",
+      "group": "runtime",
+      "name": {
+        "en": "Automated Runtime Reading",
+        "zh-Hans": "自动 Runtime Reading"
+      },
+      "deliveryProfileId": "automated_runtime_reading",
+      "completionProfileId": "immediate",
+      "pricingProfileId": "entry_level",
+      "professionalReviewRequired": false,
+      "regulatedScopeGate": false,
+      "activationStatus": "existing-bounded-runtime"
+    },
+    {
+      "serviceId": "professional_runtime_reading",
+      "group": "runtime",
+      "name": {
+        "en": "Professional Runtime Reading",
+        "zh-Hans": "专业 Runtime Reading"
+      },
+      "deliveryProfileId": "professional_runtime_reading",
+      "completionProfileId": "three_to_five_business_days",
+      "pricingProfileId": "professional_core",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "reading_consultation",
+      "group": "runtime",
+      "name": {
+        "en": "Reading + Consultation",
+        "zh-Hans": "Reading 与咨询"
+      },
+      "deliveryProfileId": "professional_consultation",
+      "completionProfileId": "scheduled_after_report",
+      "pricingProfileId": "consultation",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "navigation_follow_up",
+      "group": "runtime",
+      "name": {
+        "en": "Navigation Follow-up",
+        "zh-Hans": "Navigation 跟进"
+      },
+      "deliveryProfileId": "navigation_follow_up",
+      "completionProfileId": "scheduled_cycle",
+      "pricingProfileId": "follow_up",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "long_term_runtime_review",
+      "group": "runtime",
+      "name": {
+        "en": "Long-term Runtime Review",
+        "zh-Hans": "长期 Runtime Review"
+      },
+      "deliveryProfileId": "long_term_runtime_review",
+      "completionProfileId": "monthly_or_quarterly",
+      "pricingProfileId": "annual_or_periodic_review",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "human_design_foundation_report",
+      "group": "human_design",
+      "name": {
+        "en": "Human Design Foundation Report",
+        "zh-Hans": "人类图基础报告"
+      },
+      "deliveryProfileId": "human_design_foundation",
+      "completionProfileId": "three_to_five_business_days",
+      "pricingProfileId": "human_design_standalone",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "human_design_runtime_interpretation",
+      "group": "human_design",
+      "name": {
+        "en": "Human Design Runtime Interpretation",
+        "zh-Hans": "人类图运行解读"
+      },
+      "deliveryProfileId": "human_design_runtime_interpretation",
+      "completionProfileId": "five_to_seven_business_days",
+      "pricingProfileId": "human_design_premium",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "reality_specific_human_design_interpretation",
+      "group": "human_design",
+      "name": {
+        "en": "Reality-Specific Human Design Interpretation",
+        "zh-Hans": "现实专项人类图解读"
+      },
+      "deliveryProfileId": "reality_specific_human_design",
+      "completionProfileId": "five_to_ten_business_days",
+      "pricingProfileId": "human_design_premium",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "runtime_human_design_consultation",
+      "group": "human_design",
+      "name": {
+        "en": "Runtime Reading + Human Design Consultation",
+        "zh-Hans": "Runtime Reading 与人类图咨询"
+      },
+      "deliveryProfileId": "professional_consultation",
+      "completionProfileId": "scheduled_after_report",
+      "pricingProfileId": "integrated_premium",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "financial_reality_snapshot",
+      "group": "financial",
+      "name": {
+        "en": "Financial Reality Snapshot",
+        "zh-Hans": "财务现实快照"
+      },
+      "deliveryProfileId": "financial_reality_snapshot",
+      "completionProfileId": "one_to_three_business_days",
+      "pricingProfileId": "financial_individual_or_joint",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "financial_stamina_analysis",
+      "group": "financial",
+      "name": {
+        "en": "Financial Stamina Analysis",
+        "zh-Hans": "财务承受力分析"
+      },
+      "deliveryProfileId": "financial_stamina_analysis",
+      "completionProfileId": "five_to_ten_business_days",
+      "pricingProfileId": "financial_individual_or_joint",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "financial_reality_consultation",
+      "group": "financial",
+      "name": {
+        "en": "Financial Reality Consultation",
+        "zh-Hans": "财务现实咨询"
+      },
+      "deliveryProfileId": "financial_reality_consultation",
+      "completionProfileId": "scheduled_after_report",
+      "pricingProfileId": "consultation",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "financial_navigation_plan",
+      "group": "financial",
+      "name": {
+        "en": "Financial Navigation Plan",
+        "zh-Hans": "财务导航计划"
+      },
+      "deliveryProfileId": "financial_navigation_plan",
+      "completionProfileId": "three_to_five_after_consultation",
+      "pricingProfileId": "financial_plan",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "financial_implementation_review",
+      "group": "financial",
+      "name": {
+        "en": "Financial Implementation Review",
+        "zh-Hans": "财务执行审阅"
+      },
+      "deliveryProfileId": "financial_implementation_review",
+      "completionProfileId": "scheduled_cycle",
+      "pricingProfileId": "follow_up",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "long_term_financial_runtime_review",
+      "group": "financial",
+      "name": {
+        "en": "Long-term Financial Runtime Review",
+        "zh-Hans": "长期财务 Runtime Review"
+      },
+      "deliveryProfileId": "long_term_financial_review",
+      "completionProfileId": "five_to_ten_after_complete_update",
+      "pricingProfileId": "annual_or_periodic_review",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "joint_household_financial_review",
+      "group": "financial",
+      "name": {
+        "en": "Joint Household Financial Review",
+        "zh-Hans": "联合家庭财务审阅"
+      },
+      "deliveryProfileId": "financial_stamina_analysis",
+      "completionProfileId": "seven_to_fourteen_business_days",
+      "pricingProfileId": "financial_individual_or_joint",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "integrated_runtime_financial_review",
+      "group": "integrated",
+      "name": {
+        "en": "Integrated Runtime + Financial Review",
+        "zh-Hans": "Runtime 与财务综合审阅"
+      },
+      "deliveryProfileId": "integrated_professional_review",
+      "completionProfileId": "complex_scope_confirmed_after_intake",
+      "pricingProfileId": "integrated_premium",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    },
+    {
+      "serviceId": "integrated_professional_review",
+      "group": "integrated",
+      "name": {
+        "en": "Integrated Professional Review",
+        "zh-Hans": "综合专业审阅"
+      },
+      "deliveryProfileId": "integrated_professional_review",
+      "completionProfileId": "complex_scope_confirmed_after_intake",
+      "pricingProfileId": "integrated_premium",
+      "professionalReviewRequired": true,
+      "regulatedScopeGate": true,
+      "activationStatus": "definition-only"
+    }
+  ],
+  "relationshipModel": {
+    "runtimeReading": "Reads how the current Reality is operating.",
+    "humanDesign": "Offers an optional interpretive perspective and never becomes Runtime Evidence.",
+    "financialNavigation": "Reconstructs and measures financial conditions using dated, traceable information.",
+    "integratedReview": "Keeps every evidence and interpretation source separately labelled."
+  }
+}

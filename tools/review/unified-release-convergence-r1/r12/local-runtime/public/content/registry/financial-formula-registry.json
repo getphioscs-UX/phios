@@ -1,0 +1,79 @@
+{
+  "id": "phi-os.financial-formula-registry",
+  "version": "1.0.0",
+  "milestone": "M4A-W8",
+  "status": "central-authority",
+  "authority": "functions/professional/financial/financial-formula-registry.js",
+  "rules": {
+    "pageLocalFormulaAllowed": false,
+    "zeroDenominatorReturnsInfinity": false,
+    "inputEvidenceRequired": true,
+    "inputDateRequired": true,
+    "assumptionsRecorded": true,
+    "calculationReviewRequired": true,
+    "professionalOverrideAudited": true,
+    "calculationCreatesRecommendation": false
+  },
+  "formulas": [
+    {
+      "id": "liquidity_ratio",
+      "version": "1.0.0",
+      "expression": "liquid_assets / monthly_expenses",
+      "unit": "months"
+    },
+    {
+      "id": "debt_to_income_ratio",
+      "version": "1.0.0",
+      "expression": "monthly_debt_repayments / monthly_gross_income * 100",
+      "unit": "percent"
+    },
+    {
+      "id": "current_ratio",
+      "version": "1.0.0",
+      "expression": "liquid_assets / current_liabilities",
+      "unit": "ratio"
+    },
+    {
+      "id": "leverage_ratio",
+      "version": "1.0.0",
+      "expression": "total_liabilities / total_assets * 100",
+      "unit": "percent"
+    },
+    {
+      "id": "savings_ratio",
+      "version": "1.0.0",
+      "expression": "monthly_surplus / monthly_net_income * 100",
+      "unit": "percent"
+    },
+    {
+      "id": "net_worth",
+      "version": "1.0.0",
+      "expression": "total_assets - total_liabilities",
+      "unit": "currency"
+    },
+    {
+      "id": "cash_flow_surplus",
+      "version": "1.0.0",
+      "expression": "total_income - total_expenses",
+      "unit": "currency"
+    },
+    {
+      "id": "retirement_gap",
+      "version": "1.0.0",
+      "expression": "max(0, required_retirement_fund - existing_retirement_assets)",
+      "unit": "currency"
+    },
+    {
+      "id": "education_gap",
+      "version": "1.0.0",
+      "expression": "max(0, projected_education_cost - existing_education_fund)",
+      "unit": "currency"
+    },
+    {
+      "id": "insurance_gap",
+      "version": "1.0.0",
+      "expression": "max(0, required_coverage - existing_coverage)",
+      "unit": "currency"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-BZR-TEMPORAL-LUCK-BOUNDARY-AUTHORITY-v1.0.0",
+  "work": "BZT-W2",
+  "status": "FROZEN",
+  "sourceAuthority": "PHI-OS-BZRA-W4-LUCK-CYCLE-POLICY-FREEZE-v1.0.0",
+  "directionAuthorityReused": true,
+  "startAgeAuthorityReused": true,
+  "sequenceAuthorityReused": true,
+  "currentCycleBoundaryPolicy": {
+    "code": "BZT_CIVIL_DATE_LUCK_BOUNDARY_V1",
+    "rule": "first luck-cycle civil boundary = birth civil date + governed startAge years/months/days; subsequent boundaries add 10 calendar years",
+    "invalidDayPolicy": "CLAMP_TO_LAST_VALID_DAY_OF_TARGET_MONTH",
+    "precision": "CIVIL_DATE",
+    "transitionDatePolicy": "DO_NOT_SELECT_ONE_SIDE; return TRANSITION_DAY candidates",
+    "fabricatedInstantAllowed": false
+  },
+  "rules": {
+    "recalculateLuckDirection": false,
+    "inferTraditionalCalculationSex": false,
+    "roundStartAge": false,
+    "claimExactTransitionInstant": false
+  }
+}

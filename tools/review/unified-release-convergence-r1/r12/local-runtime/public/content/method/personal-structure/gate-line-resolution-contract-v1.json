@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-STRUCTURE-GATE-LINE-RESOLUTION-CONTRACT-v1.0.0",
+  "work": "MIR-3",
+  "status": "ACTIVE",
+  "mappingVersion": "PHI-OS-GATE-WHEEL-v1.0.0",
+  "formula": {
+    "gateWheelAngle": "normalize360(eclipticLongitude - 302.0)",
+    "gateIndex": "floor(gateWheelAngle / 5.625)",
+    "gate": "GATE_SEQUENCE[gateIndex]",
+    "positionWithinGateDeg": "gateWheelAngle - gateIndex*5.625",
+    "lineIndexZeroBased": "floor(positionWithinGateDeg / 0.9375)",
+    "line": "lineIndexZeroBased + 1"
+  },
+  "floatingPointToleranceRequired": true,
+  "intervalConvention": "[start,end)",
+  "normalize360ToZero": true,
+  "gate41LineBoundariesDeg": [
+    [
+      302.0,
+      302.9375
+    ],
+    [
+      302.9375,
+      303.875
+    ],
+    [
+      303.875,
+      304.8125
+    ],
+    [
+      304.8125,
+      305.75
+    ],
+    [
+      305.75,
+      306.6875
+    ],
+    [
+      306.6875,
+      307.625
+    ]
+  ]
+}

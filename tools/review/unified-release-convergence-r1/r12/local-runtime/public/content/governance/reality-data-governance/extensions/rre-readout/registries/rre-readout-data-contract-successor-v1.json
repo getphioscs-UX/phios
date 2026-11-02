@@ -1,0 +1,113 @@
+{
+  "registryCode": "PHI-OS-RDG-RRE-READOUT-DATA-CONTRACT-SUCCESSOR-v1",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_EXTENSION",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "extends": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+  "preservedLegacyAuthority": {
+    "runtimeCode": "RRE",
+    "subauthorityCode": "RRE_EVIDENCE",
+    "producedDataTypes": [
+      "REALITY_EVIDENCE_RECORD"
+    ],
+    "consumedDataTypes": [
+      "REALITY_INPUT_RECORD",
+      "GOVERNANCE_RECORD"
+    ],
+    "evidencePromotion": "ALLOW_GOVERNED",
+    "mutated": false
+  },
+  "addedDataTypes": [
+    {
+      "dataType": "REALITY_READOUT_RECORD",
+      "dataDomain": "REALITY_READOUT"
+    }
+  ],
+  "successorEntries": [
+    {
+      "runtimeCode": "RRE",
+      "subauthorityCode": "RRE_READOUT",
+      "plane": "RUNTIME",
+      "activationState": "ACTIVE_GOVERNED",
+      "producedDataTypes": [
+        "REALITY_READOUT_RECORD"
+      ],
+      "consumedDataTypes": [
+        "REALITY_INPUT_RECORD",
+        "RUNTIME_STATE_RECORD",
+        "REALITY_EVIDENCE_RECORD",
+        "METHOD_PROJECTION_RECORD",
+        "MEANING_PROJECTION_RECORD",
+        "GOVERNANCE_RECORD"
+      ],
+      "readAuthority": {
+        "mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+        "dataTypes": [
+          "REALITY_INPUT_RECORD",
+          "RUNTIME_STATE_RECORD",
+          "REALITY_EVIDENCE_RECORD",
+          "METHOD_PROJECTION_RECORD",
+          "MEANING_PROJECTION_RECORD",
+          "GOVERNANCE_RECORD"
+        ]
+      },
+      "writeAuthority": {
+        "mode": "ALLOW_LIST",
+        "dataTypes": [
+          "REALITY_READOUT_RECORD"
+        ]
+      },
+      "allowedPurposes": [
+        "SERVICE_DELIVERY",
+        "PROFESSIONAL_SERVICE"
+      ],
+      "allowedPersistenceClasses": [
+        "EPHEMERAL",
+        "SESSION",
+        "SERVICE_SCOPED",
+        "PROFESSIONAL_SCOPED"
+      ],
+      "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {
+        "evidencePromotion": "DENY_READOUT_SUBAUTHORITY",
+        "professionalDataWrite": "DENY",
+        "analyticsWrite": "DENY"
+      }
+    }
+  ],
+  "rules": {
+    "baseRegistryMutated": false,
+    "secondEvidenceAuthorityCreated": false,
+    "readoutMayMasqueradeAsEvidence": false,
+    "readoutMayMasqueradeAsRuntimeState": false,
+    "persistenceStillRequiresRdgEligibilityGate": true,
+    "storageLocationDoesNotGrantAuthority": true,
+    "professionalJudgmentAuthorityGranted": false,
+    "navigationDecisionAuthorityGranted": false,
+    "consumerReadExtensionDoesNotGrantWriteAuthority": true
+  },
+  "consumerReadExtensions": [
+    {
+      "runtimeCode": "CPR",
+      "dataType": "REALITY_READOUT_RECORD",
+      "readAuthorityMode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+      "allowedPurposes": [
+        "SERVICE_DELIVERY",
+        "PROFESSIONAL_SERVICE"
+      ],
+      "writeAuthorityExpanded": false,
+      "reason": "RRE-W14 canonical readout handoff to CPR presentation selection"
+    },
+    {
+      "runtimeCode": "RR",
+      "dataType": "REALITY_READOUT_RECORD",
+      "readAuthorityMode": "PURPOSE_PERMISSION_VISIBILITY_BOUND",
+      "allowedPurposes": [
+        "SERVICE_DELIVERY",
+        "PROFESSIONAL_SERVICE"
+      ],
+      "writeAuthorityExpanded": false,
+      "reason": "Customer report path may consume canonical readout before RR produces governed REPORT_RECORD"
+    }
+  ]
+}

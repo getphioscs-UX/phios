@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.method-editorial-response.r1.local",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["zhHans", "en", "claimUsage", "illustrations"],
+  "properties": {
+    "headline": {"type": "string"},
+    "zhHans": {"$ref": "#/$defs/language"},
+    "en": {"$ref": "#/$defs/language"},
+    "claimUsage": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["paragraphId", "claimId", "scope"], "properties": {"paragraphId": {"type": "string"}, "claimId": {"type": "string"}, "scope": {"type": "string"}}}},
+    "illustrations": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["paragraphId", "status"], "properties": {"paragraphId": {"type": "string"}, "status": {"const": "HYPOTHETICAL"}}}},
+    "uncertaintyNotes": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {"language": {"type": "object", "additionalProperties": false, "required": ["paragraphs", "question"], "properties": {"paragraphs": {"type": "array", "minItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["id", "text"], "properties": {"id": {"type": "string", "minLength": 1}, "text": {"type": "string", "minLength": 1}}}}, "question": {"type": "string", "minLength": 1}}}}
+}

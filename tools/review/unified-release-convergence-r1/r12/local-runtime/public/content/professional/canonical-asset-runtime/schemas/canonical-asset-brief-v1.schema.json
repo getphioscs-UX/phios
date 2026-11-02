@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-asset-brief-v1.schema.json",
+  "title": "PHI OS Canonical Asset Brief v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["briefCode","briefVersion","assetType","nodeCode","meaningReferences","knowledgeReferences","sourceFragmentDigests","locale","audience","purpose","mustEstablish","mustInclude","mustNotInclude","factualBoundary","visualOrNarrativeContract","brandConstraints","accessibilityRequirements","outputContract","authorityValidation","briefDigest"],
+  "properties": {
+    "briefCode": {"type":"string","pattern":"^CAB-[A-Z0-9-]+$"},
+    "briefVersion": {"type":"string","pattern":"^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "assetType": {"type":"string"},
+    "nodeCode": {"type":"string","pattern":"^KN-[A-Z0-9-]+$"},
+    "meaningReferences": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^CM-[A-Z0-9-]+$"}},
+    "knowledgeReferences": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^KN-[A-Z0-9-]+$"}},
+    "sourceFragmentDigests": {"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","pattern":"^[a-f0-9]{64}$"}},
+    "locale": {"type":"string","minLength":2},
+    "audience": {"type":"string","minLength":1},
+    "purpose": {"type":"string","minLength":1},
+    "mustEstablish": {"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "mustInclude": {"type":"array","items":{"type":"string","minLength":1}},
+    "mustNotInclude": {"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "factualBoundary": {"type":"object","additionalProperties":false,"required":["publishedOnly","newClaimsAllowed","professionalConclusionAllowed"],"properties":{"publishedOnly":{"const":true},"newClaimsAllowed":{"const":false},"professionalConclusionAllowed":{"const":false}}},
+    "visualOrNarrativeContract": {"type":"object","minProperties":1},
+    "brandConstraints": {"type":"object","additionalProperties":false,"required":["authority","pdsReferences","mustNotInferRuntimeState"],"properties":{"authority":{"const":"PDS"},"pdsReferences":{"type":"array","minItems":1,"items":{"type":"string"}},"mustNotInferRuntimeState":{"const":true}}},
+    "accessibilityRequirements": {"type":"array","minItems":1,"items":{"type":"string","minLength":1}},
+    "outputContract": {"type":"object","additionalProperties":false,"required":["candidateOnly","publicationAllowed","assetIsBrief"],"properties":{"candidateOnly":{"const":true},"publicationAllowed":{"const":false},"assetIsBrief":{"const":false}}},
+    "authorityValidation": {"type":"object","additionalProperties":false,"required":["meaningAuthorityValid","knowledgeReferencesValid","publishedCoverageSufficient","localeSupported","assetTypeRegistered"],"properties":{"meaningAuthorityValid":{"const":true},"knowledgeReferencesValid":{"const":true},"publishedCoverageSufficient":{"const":true},"localeSupported":{"const":true},"assetTypeRegistered":{"const":true}}},
+    "briefDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

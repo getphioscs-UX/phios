@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-PRODUCTION-ACTIVATION-READINESS-v4.0.0",
+  "work": "ICH-PROD-W31-LIVE-LIMITED-PRODUCTION-READINESS-SUCCESSOR",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "LIMITED_PRODUCTION_ACTIVE_EXACT_SHA_OBSERVATION_AND_FINAL_ACCEPTANCE_PENDING",
+  "successorOf": "content/production/symbolic-method/reconciliation/iching-production-activation-readiness-v3.json",
+  "historicalPredecessorMutated": false,
+  "liveEvidence": "content/production/symbolic-method/deployment/iching-limited-production-live-evidence-v1.json",
+  "contentReadiness": {
+    "baseHumanAcceptance": "24/24",
+    "humanApprovedDepthCoverage": "448/448",
+    "humanApprovedDepthHexagramCoverage": "64/64",
+    "humanApprovedDepthLineCoverage": "384/384",
+    "bilingualDepthRuntimeCases": "896/896",
+    "humanInterpretiveReviewComplete": true,
+    "humanReviewReopened": false,
+    "depthAdmissionReopened": false
+  },
+  "limitedProductionExternalGates": {
+    "cloudflareAccessBetaIdentityVerified": true,
+    "productionD1WriteReadCleanupVerified": true,
+    "liveBrowserAccepted": true,
+    "liveProductionShaAligned": true,
+    "deploymentJurisdictionRightsReviewPresent": true,
+    "stableRouteDepthExecutionVerified": true
+  },
+  "currentAuthority": {
+    "state": "LIMITED_PRODUCTION",
+    "limitedProductionAllowed": true,
+    "governedBetaRunAllowed": true,
+    "globalPublicRunAllowed": false,
+    "fullProductionAllowed": false,
+    "productionCapabilityPromoted": false,
+    "clientMayGrantAuthority": false,
+    "staticRegistryMayGrantAuthority": false
+  },
+  "runtimeAuthority": {
+    "productRuntime": "functions/iching-product-runtime/iching-product-runtime-v2.js",
+    "depthRuntime": "functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js",
+    "sessionEndpoint": "functions/api/iching-limited-session-v2.js",
+    "stableExecutionEndpoint": "/api/symbolic-method-execute",
+    "limitedExecutionTarget": "functions/api/symbolic-method-execute-v4.js",
+    "deploymentSha": "025588253432e411b130a61bf4b38fe540cfcf54"
+  },
+  "fullProductionGates": {
+    "w32ObservationAccepted": false,
+    "w33FinalProductionAcceptance": false,
+    "globalPublicExecutionApproved": false,
+    "fullProductionFreezeCreated": false
+  },
+  "nextRequiredActions": [
+    "MATERIALIZE_W32_EXACT_SHA_LIMITED_PRODUCTION_OBSERVATION",
+    "ADMIT_W32_OBSERVATION_ACCEPTANCE",
+    "RUN_W33_FINAL_LIMITED_PRODUCTION_ACCEPTANCE_BEFORE_FULL_PRODUCTION",
+    "DO_NOT_REOPEN_24_448_OR_896_ACCEPTANCE_WITHOUT_CONTENT_DIGEST_CHANGE"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "contractCode": "PHI-OS-MEANING-IDENTITY-v1.0.0",
+  "work": "CM-W1.5",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "authority": {
+    "identityAuthority": "canonical_meaning_identity_registry",
+    "meaningDefinitionAuthority": "canonical_meaning_contract",
+    "knowledgeAuthority": "external_read_only",
+    "mappingAuthority": "external_read_only",
+    "providerAuthority": "forbidden",
+    "professionalConclusionAuthority": "forbidden"
+  },
+  "identityRules": {
+    "meaningIdStableAcrossVersions": true,
+    "meaningCodeStableWithinIdentity": true,
+    "meaningVersionRequired": true,
+    "meaningIdentityVersionIndependentFromMeaningVersion": true,
+    "deleteDeprecatedIdentityAllowed": false,
+    "successorMayReplaceIdentitySilently": false
+  },
+  "hashRules": {
+    "algorithm": "sha256",
+    "canonicalization": "recursive_key_sort_utf8_lf_json",
+    "semanticHashScope": ["meaningFamily", "meaningDimensions", "boundaries"],
+    "knowledgeHashScope": ["knowledgeReferences"],
+    "mappingHashScope": ["sourceProjection", "mappingLineage"],
+    "meaningCanonicalDigestScope": ["meaningIdentityVersion", "meaningId", "meaningCode", "meaningVersion", "semanticHash", "knowledgeHash", "mappingHash"]
+  },
+  "versionRules": {
+    "major": ["breaking semantic definition change", "meaning boundary change that invalidates prior interpretation"],
+    "minor": ["knowledge reference change", "mapping change that preserves semantic definition", "backward-compatible semantic extension"],
+    "patch": ["non-semantic metadata correction", "timestamp or descriptive maintenance with all component hashes unchanged"]
+  },
+  "compatibilityRules": {
+    "breakingSemanticChangeBackwardCompatible": false,
+    "knowledgeOnlyChangeMayBeBackwardCompatible": true,
+    "mappingOnlyChangeMayBeBackwardCompatible": true,
+    "incompatibleChangeRequiresMigration": true,
+    "successorRequiredForIdentityReplacement": true
+  },
+  "deprecationRules": {
+    "hardDeleteAllowed": false,
+    "deprecatedIdentityRemainsResolvable": true,
+    "successorMustUseDifferentMeaningId": true,
+    "successorDoesNotInheritApprovalOrProductionState": true
+  },
+  "invariants": {
+    "deterministic": true,
+    "registryLed": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "meaningFamilyRegistryCreated": false,
+    "meaningCodeRegistryCreated": false,
+    "methodMappingCreated": false,
+    "productionAuthorityCreated": false
+  }
+}

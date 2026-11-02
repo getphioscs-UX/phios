@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "stageCode": "IMR-W0",
+  "findings": [
+    {
+      "findingCode": "ASTRONOMY_ENGINE_MIT_CANDIDATE",
+      "subject": "ASTRONOMY_ENGINE_JS",
+      "findingType": "commercial_use_allowed",
+      "productionBlocking": false,
+      "validationBlocking": true,
+      "resolution": "Retain copyright and MIT license notice; validate accuracy before production."
+    },
+    {
+      "findingCode": "SWISS_EPHEMERIS_DEFERRED",
+      "subject": "SWISS_EPHEMERIS",
+      "findingType": "commercial_license_required_or_agpl_decision",
+      "productionBlocking": true,
+      "resolution": "Use only as a future fallback after explicit license decision."
+    },
+    {
+      "findingCode": "HUMAN_DESIGN_SEPARATE_AUDIT_REQUIRED",
+      "subject": "HUMAN_DESIGN",
+      "findingType": "written_rights_and_data_audit_required",
+      "productionBlocking": true,
+      "resolution": "Preserve external calculation and existing professional method; continue only through HDR-W0."
+    },
+    {
+      "findingCode": "GENE_KEYS_NOT_PLANNED",
+      "subject": "GENE_KEYS",
+      "findingType": "scope_excluded",
+      "productionBlocking": true,
+      "resolution": "Do not activate, calculate, ingest official content, or create AI use."
+    },
+    {
+      "findingCode": "ZI_WEI_DEFERRED_OUT_OF_SCOPE",
+      "subject": "ZI_WEI_DOU_SHU",
+      "findingType": "scope_deferred",
+      "productionBlocking": true,
+      "resolution": "No implementation or service activation in the IMR track."
+    }
+  ],
+  "allowedStatuses": [
+    "not_assessed",
+    "research_only",
+    "internal_testing_allowed",
+    "commercial_use_allowed",
+    "commercial_license_required",
+    "written_permission_required",
+    "restricted",
+    "prohibited",
+    "license_conflict"
+  ]
+}

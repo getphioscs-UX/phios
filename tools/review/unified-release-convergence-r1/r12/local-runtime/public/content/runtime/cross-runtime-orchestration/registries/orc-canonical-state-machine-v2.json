@@ -1,0 +1,234 @@
+{
+  "registryCode": "PHI-OS-ORC-W1-CANONICAL-STATE-MACHINE-v2",
+  "registryVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W1",
+  "status": "canonical",
+  "states": [
+    {
+      "ordinal": 0,
+      "stateCode": "CASE_OPENED",
+      "label": "Case Opened",
+      "domainAuthority": "ICR"
+    },
+    {
+      "ordinal": 1,
+      "stateCode": "CONSENT_VALID",
+      "label": "Consent Valid",
+      "domainAuthority": "CONSENT"
+    },
+    {
+      "ordinal": 2,
+      "stateCode": "INPUT_VERIFIED",
+      "label": "Input Verified",
+      "domainAuthority": "ICR"
+    },
+    {
+      "ordinal": 3,
+      "stateCode": "REALITY_INITIALIZED",
+      "label": "Reality Initialized",
+      "domainAuthority": "RMO"
+    },
+    {
+      "ordinal": 4,
+      "stateCode": "METHOD_CALCULATED",
+      "label": "Method Calculated",
+      "domainAuthority": "METHOD_RUNTIME"
+    },
+    {
+      "ordinal": 5,
+      "stateCode": "PROJECTION_FROZEN",
+      "label": "Projection Frozen",
+      "domainAuthority": "MPA"
+    },
+    {
+      "ordinal": 6,
+      "stateCode": "MEANING_RESOLVED",
+      "label": "Meaning Resolved",
+      "domainAuthority": "CMR"
+    },
+    {
+      "ordinal": 7,
+      "stateCode": "KNOWLEDGE_COVERAGE_CHECKED",
+      "label": "Knowledge Coverage Checked",
+      "domainAuthority": "KI"
+    },
+    {
+      "ordinal": 8,
+      "stateCode": "READOUT_GENERATED",
+      "label": "Readout Generated",
+      "domainAuthority": "RRE"
+    },
+    {
+      "ordinal": 9,
+      "stateCode": "JOURNEY_ACTIVATED",
+      "label": "Journey Activated",
+      "domainAuthority": "JR"
+    },
+    {
+      "ordinal": 10,
+      "stateCode": "PROFESSIONAL_HANDOFF",
+      "label": "Professional Handoff",
+      "domainAuthority": "JR"
+    },
+    {
+      "ordinal": 11,
+      "stateCode": "PROFESSIONAL_DECISION",
+      "label": "Professional Decision",
+      "domainAuthority": "PR"
+    },
+    {
+      "ordinal": 12,
+      "stateCode": "REPORT_ASSEMBLED",
+      "label": "Report Assembled",
+      "domainAuthority": "RR"
+    },
+    {
+      "ordinal": 13,
+      "stateCode": "REPORT_APPROVED",
+      "label": "Report Approved",
+      "domainAuthority": "RR"
+    },
+    {
+      "ordinal": 14,
+      "stateCode": "REPORT_RELEASED",
+      "label": "Report Released",
+      "domainAuthority": "RR"
+    },
+    {
+      "ordinal": 15,
+      "stateCode": "ACTION_RECORDED",
+      "label": "Action Recorded",
+      "domainAuthority": "RMO"
+    },
+    {
+      "ordinal": 16,
+      "stateCode": "OUTCOME_OBSERVED",
+      "label": "Outcome Observed",
+      "domainAuthority": "RMO"
+    },
+    {
+      "ordinal": 17,
+      "stateCode": "REVIEW",
+      "label": "Review",
+      "domainAuthority": "JR"
+    },
+    {
+      "ordinal": 18,
+      "stateCode": "CONTINUITY",
+      "label": "Continuity",
+      "domainAuthority": "RCL"
+    }
+  ],
+  "serviceProfiles": [
+    {
+      "profileCode": "SELF_GUIDED_READOUT",
+      "governedStatePath": [
+        "CASE_OPENED",
+        "CONSENT_VALID",
+        "INPUT_VERIFIED",
+        "REALITY_INITIALIZED",
+        "READOUT_GENERATED",
+        "JOURNEY_ACTIVATED",
+        "REVIEW",
+        "CONTINUITY"
+      ],
+      "requiresAllCanonicalStates": false
+    },
+    {
+      "profileCode": "METHOD_READOUT",
+      "governedStatePath": [
+        "CASE_OPENED",
+        "CONSENT_VALID",
+        "INPUT_VERIFIED",
+        "REALITY_INITIALIZED",
+        "METHOD_CALCULATED",
+        "PROJECTION_FROZEN",
+        "MEANING_RESOLVED",
+        "KNOWLEDGE_COVERAGE_CHECKED",
+        "READOUT_GENERATED",
+        "JOURNEY_ACTIVATED",
+        "REVIEW",
+        "CONTINUITY"
+      ],
+      "requiresAllCanonicalStates": false
+    },
+    {
+      "profileCode": "PROFESSIONAL_REPORT",
+      "governedStatePath": [
+        "CASE_OPENED",
+        "CONSENT_VALID",
+        "INPUT_VERIFIED",
+        "REALITY_INITIALIZED",
+        "METHOD_CALCULATED",
+        "PROJECTION_FROZEN",
+        "MEANING_RESOLVED",
+        "KNOWLEDGE_COVERAGE_CHECKED",
+        "READOUT_GENERATED",
+        "JOURNEY_ACTIVATED",
+        "PROFESSIONAL_HANDOFF",
+        "PROFESSIONAL_DECISION",
+        "REPORT_ASSEMBLED",
+        "REPORT_APPROVED",
+        "REPORT_RELEASED",
+        "REVIEW",
+        "CONTINUITY"
+      ],
+      "requiresAllCanonicalStates": false
+    },
+    {
+      "profileCode": "NAVIGATION_CONTINUITY",
+      "governedStatePath": [
+        "CASE_OPENED",
+        "CONSENT_VALID",
+        "INPUT_VERIFIED",
+        "REALITY_INITIALIZED",
+        "READOUT_GENERATED",
+        "JOURNEY_ACTIVATED",
+        "ACTION_RECORDED",
+        "OUTCOME_OBSERVED",
+        "REVIEW",
+        "CONTINUITY"
+      ],
+      "requiresAllCanonicalStates": false
+    },
+    {
+      "profileCode": "FULL_PILOT",
+      "governedStatePath": [
+        "CASE_OPENED",
+        "CONSENT_VALID",
+        "INPUT_VERIFIED",
+        "REALITY_INITIALIZED",
+        "METHOD_CALCULATED",
+        "PROJECTION_FROZEN",
+        "MEANING_RESOLVED",
+        "KNOWLEDGE_COVERAGE_CHECKED",
+        "READOUT_GENERATED",
+        "JOURNEY_ACTIVATED",
+        "PROFESSIONAL_HANDOFF",
+        "PROFESSIONAL_DECISION",
+        "REPORT_ASSEMBLED",
+        "REPORT_APPROVED",
+        "REPORT_RELEASED",
+        "ACTION_RECORDED",
+        "OUTCOME_OBSERVED",
+        "REVIEW",
+        "CONTINUITY"
+      ],
+      "requiresAllCanonicalStates": true
+    }
+  ],
+  "transitionRules": {
+    "stateOrderImmutable": true,
+    "statesMayBeSkippedOnlyWhenAbsentFromGovernedServiceProfile": true,
+    "adHocSkipForbidden": true,
+    "backwardTransitionForbiddenOutsideRecovery": true,
+    "recoveryUsesLastCommittedCanonicalState": true,
+    "terminalState": "CONTINUITY"
+  },
+  "rules": {
+    "notEveryServiceUsesEveryState": true,
+    "optionalPathMustBeGoverned": true,
+    "statePresenceDoesNotGrantDomainAuthority": true
+  }
+}

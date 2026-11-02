@@ -1,0 +1,87 @@
+/* Shared public hero composition. Text remains in normal flow at every zoom. */
+:is(.cx-home-hero, .cx-hero, .cx-explore-hero, .cx-explore-subhero,
+    .cx-knowledge-hero, .cx-knowledge-subhero, .cx-p1-hero, .knowledge-hero) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  min-height: calc(100svh - var(--cx-size-header, 5rem));
+  border-radius: 0;
+  padding-block: clamp(3rem, 7vw, 7rem);
+}
+:is(.cx-home-hero__grid, .cx-hero__grid, .cx-explore-hero__grid,
+    .cx-explore-subhero__grid, .cx-knowledge-hero__grid, .cx-knowledge-subhero__grid) {
+  width: 100%;
+  max-width: none;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+:is(.cx-home-hero__grid, .cx-hero__grid, .cx-explore-hero__grid,
+    .cx-explore-subhero__grid, .cx-knowledge-hero__grid, .cx-knowledge-subhero__grid) > :not(figure) {
+  width: min(100% - 2 * var(--cx-gutter, 1.5rem), 88rem);
+  margin-inline: auto;
+  min-width: 0;
+}
+.cx-home-hero__title { max-width: 24ch; font-size: clamp(2.6rem, 5.8vw, 6.8rem); }
+:is(.cx-home-hero__visual, .cx-explore-hero__visual, .cx-explore-subhero__visual,
+    .cx-knowledge-hero__visual, .cx-knowledge-subhero__visual) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  height: clamp(24rem, 65svh, 60rem);
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+}
+:is(.cx-home-hero__visual, .cx-explore-hero__visual, .cx-explore-subhero__visual,
+    .cx-knowledge-hero__visual, .cx-knowledge-subhero__visual) img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+.wpr-book-hero .knowledge-shell {
+  width: min(100% - 2 * clamp(1.25rem, 4vw, 5rem), 100rem);
+  max-width: none;
+}
+.wpr-book-hero .wpr-book-cover img { width: 100%; max-height: 75svh; object-fit: contain; }
+/* The homepage opens directly on the artwork, across the entire viewport. */
+.cx-home-hero { position: relative; isolation: isolate; }
+.cx-home-hero__visual {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  height: 100%;
+}
+.cx-home-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(247,245,239,.98), rgba(247,245,239,.9) 44%, rgba(247,245,239,.25));
+}
+.cx-home-hero__grid > .cx-home-hero__copy {
+  width: min(100% - 2 * var(--cx-gutter, 1.5rem), 88rem);
+}
+.cx-home-hero__copy > * { max-width: 48rem; }
+.cx-home-hero__title { font-size: clamp(2.6rem, 4.8vw, 5.5rem); }
+:is(.cx-home-hero__visual, .cx-explore-hero__visual, .cx-explore-subhero__visual,
+    .cx-knowledge-hero__visual, .cx-knowledge-subhero__visual) img[hidden] { display: none; }
+@media (max-width: 48rem) {
+  :is(.cx-home-hero__visual, .cx-explore-hero__visual, .cx-explore-subhero__visual,
+      .cx-knowledge-hero__visual, .cx-knowledge-subhero__visual) {
+    height: clamp(18rem, 50svh, 32rem);
+  }
+  .cx-home-hero__visual { height: 100%; }
+  .cx-home-hero::after { background: rgba(247,245,239,.9); }
+}
+@media print {
+  :is(.cx-home-hero, .cx-hero, .cx-explore-hero, .cx-explore-subhero,
+      .cx-knowledge-hero, .cx-knowledge-subhero, .cx-p1-hero, .knowledge-hero) {
+    min-height: 0;
+    padding-block: 1rem;
+  }
+}

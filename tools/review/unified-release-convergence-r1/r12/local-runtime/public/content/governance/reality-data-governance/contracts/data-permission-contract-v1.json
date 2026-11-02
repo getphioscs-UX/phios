@@ -1,0 +1,9 @@
+{
+  "contractCode": "PHI-OS-RDG-W17-DATA-PERMISSION-v1",
+  "work": "RDG-W17",
+  "status": "active",
+  "requiredInputs": ["actorReference", "subjectReference", "purposeCode", "purposeAllowed", "visibilityDecision", "sensitivityClass"],
+  "conditionalInputs": ["consentValid", "professionalAssignmentValid", "professionalAuthority", "legalBasisReference"],
+  "outputs": ["ALLOW", "DENY", "REQUIRE_CONSENT", "REQUIRE_PROFESSIONAL_ASSIGNMENT", "UNRESOLVED"],
+  "rules": {"uiMayDeterminePermission": false, "aiMayGrantPermission": false, "providerMayGrantPermission": false, "visibilityAloneDoesNotGrantPermission": true, "missingGovernanceFailsClosed": true}
+}

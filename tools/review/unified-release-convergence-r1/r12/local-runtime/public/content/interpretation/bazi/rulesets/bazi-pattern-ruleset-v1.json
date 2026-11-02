@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-PATTERN-RULESET-v1.0.0",
+  "work": "BAZI-FP-W5",
+  "rulesetId": "BAZI-W5-ZI-PING-MONTH-COMMAND-RULESET-v1",
+  "rulesetVersion": "1.0.0",
+  "status": "FROZEN_SOURCE_ADMITTED_FOUNDATION",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "schoolCode": "ZI_PING_MONTH_COMMAND_PATTERN_v1",
+  "authority": {
+    "sourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
+    "sourceStrategyRef": "content/interpretation/bazi/authority/bzr-r1-source-strategy-v1.1.json",
+    "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json",
+    "admittedClaimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v1.1.json",
+    "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-001-human-review-result-v1.json",
+    "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-001-admission-v1.json",
+    "admittedClaimRefs": [
+      "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001",
+      "BZR-CLM-ZPZQ-08-SHUN-NI-002",
+      "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003",
+      "BZR-CLM-ZPZQ-10-VARIATION-004",
+      "BZR-CLM-ZPZQ-12-NO-AUTO-RANK-005",
+      "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007"
+    ]
+  },
+  "familyByTenGod": {
+    "ZHENG_GUAN": "ZHENG_GUAN",
+    "QI_SHA": "QI_SHA",
+    "ZHENG_CAI": "CAI",
+    "PIAN_CAI": "CAI",
+    "ZHENG_YIN": "YIN",
+    "PIAN_YIN": "YIN",
+    "SHI_SHEN": "SHI_SHEN",
+    "SHANG_GUAN": "SHANG_GUAN",
+    "BI_JIAN": "PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE",
+    "JIE_CAI": "PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE"
+  },
+  "treatmentClassByPatternFamily": {
+    "ZHENG_GUAN": "SHUN_USE",
+    "CAI": "SHUN_USE",
+    "YIN": "SHUN_USE",
+    "SHI_SHEN": "SHUN_USE",
+    "QI_SHA": "NI_USE",
+    "SHANG_GUAN": "NI_USE",
+    "PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE": "SPECIAL_JIANLU_YUEJIE_REVIEW"
+  },
+  "evaluationOrder": [
+    "MONTH_COMMAND_STARTING_CONTEXT",
+    "HIDDEN_STEM_CANDIDATE_FAMILIES",
+    "VISIBLE_STEM_AND_BRANCH_RELATION_VARIATION",
+    "FOUR_PILLAR_SUPPORT_DAMAGE_RESCUE_CONDITIONS",
+    "PEER_MONTH_COMMAND_SPECIAL_HANDLING",
+    "NO_AUTOMATIC_QUALITY_RANK"
+  ],
+  "rules": [
+    {
+      "ruleId": "W5-R01",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001"
+      ],
+      "action": "USE_MONTH_COMMAND_AS_STARTING_CONTEXT_NOT_AUTOMATIC_PATTERN_VERDICT"
+    },
+    {
+      "ruleId": "W5-R02",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-08-SHUN-NI-002"
+      ],
+      "action": "EXPOSE_SHUN_NI_OR_SPECIAL_TREATMENT_CLASS_WITHOUT_GOOD_BAD_PERSON_LABEL"
+    },
+    {
+      "ruleId": "W5-R03",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003"
+      ],
+      "action": "REQUIRE_FOUR_PILLAR_SUPPORT_DAMAGE_RESCUE_CONDITIONS_BEFORE_PRIMARY_PATTERN_FORMATION_VERDICT",
+      "coverage": "PRINCIPLE_ADMITTED_DETAILED_CONDITION_TABLE_NOT_IN_BATCH_001"
+    },
+    {
+      "ruleId": "W5-R04",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-10-VARIATION-004"
+      ],
+      "action": "REQUIRE_VISIBLE_STEM_AND_BRANCH_COMBINATION_VARIATION_STAGE; DO_NOT_ASSUME_TRANSFORMATION"
+    },
+    {
+      "ruleId": "W5-R05",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-12-NO-AUTO-RANK-005"
+      ],
+      "action": "FORBID_AUTOMATIC_QUALITY_SCORE_FROM_PATTERN_NAME"
+    },
+    {
+      "ruleId": "W5-R06",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007"
+      ],
+      "action": "ROUTE_PEER_MONTH_COMMAND_TO_DEDICATED_JIANLU_YUEJIE_REVIEW"
+    }
+  ],
+  "decisionCoverage": {
+    "candidateFamilyClassification": "SUPPORTED",
+    "treatmentClass": "SUPPORTED",
+    "variationEvidenceEvaluation": "SUPPORTED",
+    "primaryPatternFormation": "UNRESOLVED_REQUIRES_ADDITIONAL_DETAILED_CONDITION_CLAIMS",
+    "qualityRanking": "FORBIDDEN",
+    "lifeOutcomePrediction": "FORBIDDEN"
+  },
+  "freezePolicy": {
+    "silentSchoolBlendForbidden": true,
+    "unsupportedGapFillForbidden": true,
+    "ruleMutationRequiresNewRulesetVersion": true
+  }
+}

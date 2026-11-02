@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-B6-FR1-W1-W2-CUSTOMER-READER-v1.0.0",
+  "status": "IMPLEMENTED_READY_FOR_HUMAN_REVIEW",
+  "recordedAt": "2026-09-29",
+  "baseline": {
+    "cases": 60,
+    "windows": 24,
+    "snapshots": 12,
+    "dossiers": 12,
+    "livedRealityDimensions": 14,
+    "relationships": 85,
+    "coreVisuals": "23/23 PRESENT"
+  },
+  "customerIA": {
+    "primaryEntries": [
+      "cases",
+      "windows",
+      "snapshots",
+      "dossiers",
+      "lived"
+    ],
+    "toolEntries": [
+      "search",
+      "compare",
+      "dossiercompare"
+    ],
+    "removedPrimaryEntries": [
+      "overview",
+      "timeline",
+      "visuals"
+    ],
+    "legacyRouteMigration": {
+      "overview": "cases",
+      "timeline": "windows",
+      "visuals": "snapshots"
+    }
+  },
+  "caseReader": {
+    "chain": [
+      "PRIOR_CONFIGURATION",
+      "TRIGGER_PRESSURE",
+      "STRUCTURAL_CHANGE",
+      "SUCCESSOR_CONFIGURATION",
+      "OBSERVED_CONSEQUENCES"
+    ],
+    "evidenceUnknownProgressiveDisclosure": true,
+    "rawCaseIdForegrounded": false,
+    "rawDataStateForegrounded": false,
+    "comparePreserved": true,
+    "askPreserved": true
+  },
+  "boundaries": {
+    "granularCausalWeightingStillUnknownWhereNotAdmitted": true,
+    "noSyntheticRanking": true,
+    "visualLibraryNotCustomerEntry": true
+  },
+  "humanReview": "PENDING_OWNER_DECISION"
+}

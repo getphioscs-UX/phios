@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-COMPOSITION-RULE-REGISTRY-v2.0.0",
+  "registryId": "CX-R12R3B-COMPOSITION-RULES-v2.0.0",
+  "status": "HUMAN_REVIEWED_CUSTOMER_PUBLISHABLE_INTERPRETATION_AUTHORITY",
+  "rules": [
+    {
+      "ruleRef": "CX-COMP-AST-PLANET-SIGN-HOUSE-v1",
+      "methodId": "AST",
+      "requires": [
+        "POSITION",
+        "ACTUAL_HOUSE_SYSTEM"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-AST-ASPECT-v1",
+      "methodId": "AST",
+      "requires": [
+        "TWO_POSITIONS",
+        "ADMITTED_ASPECT"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-AST-PLACEMENT-v1",
+      "methodId": "AST",
+      "requires": [
+        "POSITION",
+        "RECORDED_PLACEMENT"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-NUM-ROLE-NUMBER-PATH-v1",
+      "methodId": "NUM",
+      "requires": [
+        "CALCULATION_ROLE",
+        "RAW_OR_COMPOUND_VALUE",
+        "REDUCTION_PATH"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-NUM-CYCLE-v1",
+      "methodId": "NUM",
+      "requires": [
+        "AUTHORISED_CYCLE"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-BZR-PILLAR-DAY-SEASON-v1",
+      "methodId": "BZR",
+      "requires": [
+        "PILLAR_ROLE",
+        "DAY_REFERENCE",
+        "MONTH_CONTEXT"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-ZWR-PALACE-NETWORK-v1",
+      "methodId": "ZWR",
+      "requires": [
+        "PALACE_DOMAIN",
+        "PALACE_NETWORK"
+      ]
+    },
+    {
+      "ruleRef": "CX-COMP-ZWR-FOUR-TRANSFORMATION-v1",
+      "methodId": "ZWR",
+      "requires": [
+        "RECORDED_NATAL_TRANSFORMATION"
+      ]
+    }
+  ],
+  "rulesCreateAtomicMeaning": false,
+  "rulesMayPublishWithoutProjectionRefs": false,
+  "rulesMayPublishWithoutAdmittedMeaningRefs": false,
+  "humanReviewed": true,
+  "customerPublishable": true,
+  "workCoverage": [
+    18
+  ],
+  "successorOf": "content/customer-experience-rebuild/registries/cx-r12r3b-composition-rule-registry-v1.json",
+  "baselineCommit": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "humanReviewEvidenceRef": "content/customer-experience-rebuild/review/cx-r12r3b-human-review-results-v1.json"
+}

@@ -1,0 +1,107 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-OUTCOME-REVIEW-v1.svg",
+  "diagramRole": "LOOP",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-050-E01",
+      "from": "FIG-050-N01",
+      "relation": "PRODUCES",
+      "required": true,
+      "sourceBindingId": "FIG-050-SRC-01",
+      "to": "FIG-050-N02"
+    },
+    {
+      "edgeId": "FIG-050-E02",
+      "from": "FIG-050-N02",
+      "relation": "GROUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-050-SRC-02",
+      "to": "FIG-050-N03"
+    },
+    {
+      "edgeId": "FIG-050-E03",
+      "from": "FIG-050-N03",
+      "relation": "MAY_REQUIRE",
+      "required": true,
+      "sourceBindingId": "FIG-050-SRC-02",
+      "to": "FIG-050-N04"
+    },
+    {
+      "edgeId": "FIG-050-E04",
+      "from": "FIG-050-N04",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-050-SRC-02",
+      "to": "FIG-050-N05"
+    },
+    {
+      "edgeId": "FIG-050-E05",
+      "from": "FIG-050-N05",
+      "relation": "NEXT_CYCLE",
+      "required": true,
+      "sourceBindingId": "FIG-050-SRC-02",
+      "to": "FIG-050-N01"
+    }
+  ],
+  "figureId": "FIG-050",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-050-N01",
+    "FIG-050-N02",
+    "FIG-050-N03",
+    "FIG-050-N04",
+    "FIG-050-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Outcome",
+      "nodeId": "FIG-050-N01",
+      "required": true,
+      "semanticKey": "OUTCOME",
+      "sourceBindingId": "FIG-050-SRC-01"
+    },
+    {
+      "displayLabel": "Evidence",
+      "nodeId": "FIG-050-N02",
+      "required": true,
+      "semanticKey": "EVIDENCE",
+      "sourceBindingId": "FIG-050-SRC-01"
+    },
+    {
+      "displayLabel": "Review",
+      "nodeId": "FIG-050-N03",
+      "required": true,
+      "semanticKey": "REVIEW",
+      "sourceBindingId": "FIG-050-SRC-01"
+    },
+    {
+      "displayLabel": "Revision",
+      "nodeId": "FIG-050-N04",
+      "required": true,
+      "semanticKey": "REVISION",
+      "sourceBindingId": "FIG-050-SRC-01"
+    },
+    {
+      "displayLabel": "Next Decision",
+      "nodeId": "FIG-050-N05",
+      "required": true,
+      "semanticKey": "NEXT_DECISION",
+      "sourceBindingId": "FIG-050-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "OUTCOME-REVIEW",
+  "title": "Outcome Review"
+}

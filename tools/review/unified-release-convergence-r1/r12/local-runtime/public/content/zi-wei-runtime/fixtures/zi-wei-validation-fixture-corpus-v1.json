@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-VALIDATION-FIXTURE-CORPUS-v1.0.0",
+  "work": "ZWR-W11",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "VALIDATION_CORPUS_FROZEN",
+  "fixtureCount": 10,
+  "calendarFixtures": [
+    {
+      "fixtureId": "ZWR-FX-CAL-001",
+      "input": {
+        "birthDate": "2023-01-22",
+        "birthTime": "05:00:00",
+        "timeAccuracy": "EXACT",
+        "timezone": {
+          "iana": "Asia/Hong_Kong",
+          "utcOffsetAtBirth": "+08:00",
+          "source": "FIXTURE"
+        }
+      },
+      "expected": {
+        "effectiveCivilDate": "2023-01-22",
+        "lunarYear": 2023,
+        "lunarMonth": 1,
+        "lunarDay": 1,
+        "isLeap": false,
+        "effectiveMonthForRules": 1,
+        "hourBranch": "MAO",
+        "yearStem": "GUI",
+        "yearBranch": "MAO"
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-CAL-002",
+      "input": {
+        "birthDate": "2023-03-22",
+        "birthTime": "05:00:00",
+        "timeAccuracy": "EXACT",
+        "timezone": {
+          "iana": "Asia/Hong_Kong",
+          "utcOffsetAtBirth": "+08:00",
+          "source": "FIXTURE"
+        }
+      },
+      "expected": {
+        "lunarYear": 2023,
+        "lunarMonth": 2,
+        "lunarDay": 1,
+        "isLeap": true,
+        "effectiveMonthForRules": 2
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-CAL-003",
+      "input": {
+        "birthDate": "2023-04-06",
+        "birthTime": "05:00:00",
+        "timeAccuracy": "EXACT",
+        "timezone": {
+          "iana": "Asia/Hong_Kong",
+          "utcOffsetAtBirth": "+08:00",
+          "source": "FIXTURE"
+        }
+      },
+      "expected": {
+        "lunarYear": 2023,
+        "lunarMonth": 2,
+        "lunarDay": 16,
+        "isLeap": true,
+        "effectiveMonthForRules": 3
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-CAL-004",
+      "input": {
+        "birthDate": "2000-02-05",
+        "birthTime": "11:00:00",
+        "timeAccuracy": "EXACT",
+        "timezone": {
+          "iana": "Asia/Hong_Kong",
+          "utcOffsetAtBirth": "+08:00",
+          "source": "FIXTURE"
+        }
+      },
+      "expected": {
+        "lunarYear": 2000,
+        "lunarMonth": 1,
+        "lunarDay": 1,
+        "isLeap": false,
+        "yearStem": "GENG",
+        "yearBranch": "CHEN"
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-CAL-005",
+      "input": {
+        "birthDate": "2023-01-21",
+        "birthTime": "23:00:00",
+        "timeAccuracy": "EXACT",
+        "timezone": {
+          "iana": "Asia/Hong_Kong",
+          "utcOffsetAtBirth": "+08:00",
+          "source": "FIXTURE"
+        }
+      },
+      "expected": {
+        "dayShift": 1,
+        "effectiveCivilDate": "2023-01-22",
+        "lunarYear": 2023,
+        "lunarMonth": 1,
+        "lunarDay": 1,
+        "hourBranch": "ZI"
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-CAL-006",
+      "input": {
+        "birthDate": "2023-01-21",
+        "birthTime": "22:59:59",
+        "timeAccuracy": "EXACT",
+        "timezone": {
+          "iana": "Asia/Hong_Kong",
+          "utcOffsetAtBirth": "+08:00",
+          "source": "FIXTURE"
+        }
+      },
+      "expected": {
+        "dayShift": 0,
+        "effectiveCivilDate": "2023-01-21",
+        "lunarYear": 2022,
+        "lunarMonth": 12,
+        "lunarDay": 30,
+        "hourBranch": "HAI"
+      }
+    }
+  ],
+  "formulaFixtures": [
+    {
+      "fixtureId": "ZWR-FX-BUREAU-001",
+      "kind": "FIVE_ELEMENT_BUREAU",
+      "input": {
+        "stem": "BING",
+        "branch": "ZI"
+      },
+      "expected": {
+        "element": "WATER",
+        "bureau": 2
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-BUREAU-002",
+      "kind": "FIVE_ELEMENT_BUREAU",
+      "input": {
+        "stem": "XIN",
+        "branch": "WEI"
+      },
+      "expected": {
+        "element": "EARTH",
+        "bureau": 5
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-BUREAU-003",
+      "kind": "FIVE_ELEMENT_BUREAU",
+      "input": {
+        "stem": "GENG",
+        "branch": "SHEN"
+      },
+      "expected": {
+        "element": "WOOD",
+        "bureau": 3
+      }
+    },
+    {
+      "fixtureId": "ZWR-FX-ZIWEI-001",
+      "kind": "ZI_WEI_START",
+      "cases": [
+        {
+          "lunarDay": 27,
+          "bureau": 3,
+          "expectedBranch": "XU"
+        },
+        {
+          "lunarDay": 13,
+          "bureau": 6,
+          "expectedBranch": "HAI"
+        },
+        {
+          "lunarDay": 6,
+          "bureau": 5,
+          "expectedBranch": "WEI"
+        }
+      ]
+    }
+  ]
+}

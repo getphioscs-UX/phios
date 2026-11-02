@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.signal-envelope.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileSignalId",
+    "participantRef",
+    "sourceClass",
+    "sourceRef",
+    "domainId",
+    "value",
+    "valueType",
+    "confidence",
+    "assessmentDate",
+    "customerConfirmed",
+    "precisionBoundary",
+    "provenance",
+    "governance",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-PROFILE-SIGNAL-ENVELOPE-v1"
+    },
+    "profileSignalId": {
+      "type": "string",
+      "pattern": "^PRF-SIG-[A-F0-9]{24}$"
+    },
+    "participantRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceClass": {
+      "enum": [
+        "MEASURED_TASK_PERFORMANCE",
+        "STANDARDIZED_SELF_REPORT",
+        "CUSTOMER_SELF_REPORT",
+        "EXTERNAL_PROFILE_RESULT",
+        "SYMBOLIC_INTERPRETATION",
+        "CURRENT_REALITY_OBSERVATION",
+        "PROFESSIONAL_EVIDENCE"
+      ]
+    },
+    "sourceRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "providerFamily": {
+      "enum": [
+        "MBTI_OFFICIAL",
+        "16P_NERIS",
+        "IPIP_BIG_FIVE",
+        "OTHER_BIG_FIVE",
+        "OTHER_EXTERNAL_PROFILE"
+      ]
+    },
+    "domainId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "facetId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {},
+    "valueType": {
+      "enum": [
+        "NUMBER",
+        "TEXT",
+        "LABEL",
+        "OBJECT",
+        "BOOLEAN"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "SELF_REPORTED",
+        "CUSTOMER_CONFIRMED",
+        "TASK_OBSERVED",
+        "EXTERNAL_RESULT_CONFIRMED",
+        "APPROXIMATE",
+        "UNKNOWN"
+      ]
+    },
+    "assessmentDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validityWindow": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "customerConfirmed": {
+      "type": "boolean"
+    },
+    "precisionBoundary": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "governance": {
+      "type": "object"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

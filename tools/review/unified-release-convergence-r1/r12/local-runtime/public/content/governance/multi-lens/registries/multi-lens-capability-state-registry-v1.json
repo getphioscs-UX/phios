@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "PHI-OS-MULTI-LENS-CAPABILITY-STATE-REGISTRY-v1.0.0",
+  "work": "ML-W3",
+  "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+  "status": "CURRENT_MULTI_LENS_STATE_V1",
+  "publicProductionAuthority": "content/governance/production-capability-matrix/registries/production-capability-registry-v6.json",
+  "executionCompletenessModel": "PER_EXECUTION_ONLY",
+  "records": [
+    {
+      "pluginCode": "AST",
+      "lensCode": "FUNCTION",
+      "methodCode": "ASTROLOGY",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "AST_STRUCTURAL_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "AST_TRANSIT_RUNTIME_V2"
+    },
+    {
+      "pluginCode": "BZR",
+      "lensCode": "TIME",
+      "methodCode": "BAZI",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "BAZI_STRUCTURAL_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "BZR_TEMPORAL_RUNTIME_V2"
+    },
+    {
+      "pluginCode": "ZWR",
+      "lensCode": "DOMAIN",
+      "methodCode": "ZI_WEI_DOU_SHU",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "ZI_WEI_NATAL_STRUCTURAL_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "ZI_WEI_DYNAMIC_DOMAIN_RUNTIME_V2"
+    },
+    {
+      "pluginCode": "HDR",
+      "lensCode": "OPERATION",
+      "methodCode": "HUMAN_DESIGN",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "RESTRICTED_INTERNAL",
+      "publicExecutionAllowed": false,
+      "internalAccessClass": "GOVERNED_INTERNAL_VALIDATION",
+      "currentScope": "HDR_W0_W6_IMPLEMENTED_FROZEN_VALIDATION_ONLY",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "HDR2_INTERNAL_OPERATING_LENS",
+      "pcmPublicProductionState": "BLOCKED",
+      "publicTrademarkUseAllowed": false,
+      "publicSelfServiceAllowed": false,
+      "manualProfessionalExtensions": {
+        "PHS": "MANUAL_INPUT_ONLY",
+        "DREAM_RAVE": "MANUAL_INPUT_ONLY"
+      },
+      "automaticProfessionalExtensionCalculationAllowed": false
+    },
+    {
+      "pluginCode": "NUM",
+      "lensCode": "RHYTHM",
+      "methodCode": "NUMEROLOGY",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "NUMERIC_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "NONE_REQUIRED_FOR_ROLE_FREEZE"
+    }
+  ],
+  "rules": {
+    "publicStateDerivedFromCurrentPcmForPublicMethods": true,
+    "hdrInternalStateIsAdditiveSuccessorVisibilityOnly": true,
+    "hdrHistoricalPublicBlockPreserved": true,
+    "noFutureDynamicRuntimeActivated": true,
+    "noPublicSurfaceChangedByMaster1": true
+  }
+}

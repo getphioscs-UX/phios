@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "PHI-OS-MIR-3-MFIG-CALCULATION-RUNTIME-BINDING-v1.0.0",
+  "work": "MIR-3",
+  "baselineCommit": "6eb067c8944d641d7fa40393ed00c15802d7208d",
+  "status": "ACTIVE_RECONCILED",
+  "identityAuthority": "content/professional/method-runtime/canonical-mfig-authority-registry-v1.json",
+  "calculationAuthority": "functions/method-runtime/shared-calculation-runtime.js",
+  "secondCalculationAuthorityCreated": false,
+  "bindings": [
+    {
+      "mfigId": "MFIG-002",
+      "role": "INPUT_AUTHORITY",
+      "runtimeRefs": [
+        "functions/method-client-delivery/canonical-birth-input-runtime.js",
+        "functions/method-production-activation/canonical-method-input-runtime.js"
+      ],
+      "authority": "SHARED_DATA_AUTHORITY",
+      "successor": "NO_NEW_INPUT_AUTHORITY"
+    },
+    {
+      "mfigId": "MFIG-003",
+      "role": "CALCULATION_AUTHORITY",
+      "runtimeRefs": [
+        "functions/method-runtime/shared-calculation-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "successor": "SOLE_CALCULATION_AUTHORITY"
+    },
+    {
+      "mfigId": "MFIG-012",
+      "role": "HISTORICAL_HDR_ASTRONOMY_VALIDATION",
+      "runtimeRefs": [
+        "functions/core-method-runtime/hdr-astronomy-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "currentClientAuthority": false
+    },
+    {
+      "mfigId": "MFIG-013",
+      "role": "DESIGN_MOMENT_SOLVER",
+      "runtimeRefs": [
+        "functions/core-method-runtime/hdr-design-moment-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "reusedByPersonalStructure": true
+    },
+    {
+      "mfigId": "MFIG-014",
+      "role": "GATE_CALCULATION_SUCCESSOR",
+      "runtimeRefs": [
+        "functions/method-runtime/personal-structure/gate-wheel.js",
+        "functions/method-runtime/personal-structure/gate-line.js",
+        "functions/method-runtime/personal-structure/activation-builder.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "historicalRuntimeRef": "functions/core-method-runtime/hdr-gate-runtime.js"
+    },
+    {
+      "mfigId": "MFIG-015",
+      "role": "STRUCTURAL_GRAPH_SUCCESSOR",
+      "runtimeRefs": [
+        "functions/method-runtime/personal-structure/scu-resolver.js",
+        "functions/method-runtime/personal-structure/center-graph.js",
+        "functions/method-runtime/personal-structure/type-resolver.js",
+        "functions/method-runtime/personal-structure/authority-resolver.js",
+        "functions/method-runtime/personal-structure/definition-resolver.js",
+        "functions/method-runtime/personal-structure/profile-resolver.js",
+        "functions/method-runtime/personal-structure/incarnation-resolver.js",
+        "functions/method-runtime/personal-structure/personal-structure-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "historicalRuntimeRef": "functions/core-method-runtime/hdr-bodygraph-runtime.js"
+    },
+    {
+      "mfigId": "MFIG-019",
+      "role": "AST_ASTRONOMY",
+      "runtimeRefs": [
+        "functions/core-method-runtime/ast-astronomy-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-020",
+      "role": "AST_PLANET",
+      "runtimeRefs": [
+        "functions/core-method-runtime/ast-planet-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-021",
+      "role": "AST_HOUSE",
+      "runtimeRefs": [
+        "functions/core-method-runtime/ast-house-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "productionScope": "DEFERRED_BY_AST_POLICY"
+    },
+    {
+      "mfigId": "MFIG-023",
+      "role": "AST_ASPECT",
+      "runtimeRefs": [
+        "functions/core-method-runtime/ast-aspect-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME",
+      "productionScope": "DEFERRED_BY_AST_POLICY"
+    },
+    {
+      "mfigId": "MFIG-027",
+      "role": "BZR_SOLAR_CALENDAR",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-solar-calendar-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-028",
+      "role": "BZR_TRUE_SOLAR_TIME",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-solar-calendar-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-029",
+      "role": "BZR_FOUR_PILLARS",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-four-pillars-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-030",
+      "role": "BZR_SEXAGENARY_CALENDAR",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-four-pillars-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-031",
+      "role": "BZR_LUCK_CYCLE",
+      "runtimeRefs": [
+        "functions/core-method-runtime/bzr-luck-cycle-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-036",
+      "role": "NUM_BIRTH_NUMBER",
+      "runtimeRefs": [
+        "functions/core-method-runtime/num-birth-number-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-037",
+      "role": "NUM_STRUCTURE",
+      "runtimeRefs": [
+        "functions/core-method-runtime/num-number-structure-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    },
+    {
+      "mfigId": "MFIG-038",
+      "role": "NUM_CYCLE",
+      "runtimeRefs": [
+        "functions/core-method-runtime/num-cycle-runtime.js"
+      ],
+      "authority": "SHARED_CALCULATION_RUNTIME"
+    }
+  ]
+}

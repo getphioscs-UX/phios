@@ -1,0 +1,724 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/canonical-production-readiness.schema.json",
+  "title": "PHI OS Universal Canonical Production Readiness",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "readinessSchemaVersion",
+    "nodeCode",
+    "locale",
+    "canonicalIdentity",
+    "hierarchy",
+    "canonicalThesis",
+    "articleBoundary",
+    "supportingQuestionBoundary",
+    "sequenceBoundary",
+    "claimBoundary",
+    "sourceBoundary",
+    "figureBoundary",
+    "publicContentBoundary",
+    "localizationReadiness",
+    "productionReadiness",
+    "versionBinding",
+    "review"
+  ],
+  "properties": {
+    "readinessSchemaVersion": {
+      "const": "PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 24
+    },
+    "canonicalIdentity": {
+      "$ref": "#/$defs/canonicalIdentity"
+    },
+    "hierarchy": {
+      "$ref": "#/$defs/hierarchy"
+    },
+    "canonicalThesis": {
+      "$ref": "#/$defs/canonicalThesis"
+    },
+    "articleBoundary": {
+      "$ref": "#/$defs/articleBoundary"
+    },
+    "supportingQuestionBoundary": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "$ref": "#/$defs/supportingQuestion"
+      }
+    },
+    "sequenceBoundary": {
+      "$ref": "#/$defs/sequenceBoundary"
+    },
+    "claimBoundary": {
+      "$ref": "#/$defs/claimBoundary"
+    },
+    "sourceBoundary": {
+      "$ref": "#/$defs/sourceBoundary"
+    },
+    "figureBoundary": {
+      "$ref": "#/$defs/figureBoundary"
+    },
+    "publicContentBoundary": {
+      "$ref": "#/$defs/publicContentBoundary"
+    },
+    "localizationReadiness": {
+      "$ref": "#/$defs/localizationReadiness"
+    },
+    "productionReadiness": {
+      "$ref": "#/$defs/productionReadiness"
+    },
+    "versionBinding": {
+      "$ref": "#/$defs/versionBinding"
+    },
+    "review": {
+      "$ref": "#/$defs/review"
+    }
+  },
+  "$defs": {
+    "nullableText": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "textList": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1600
+      }
+    },
+    "codeList": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      }
+    },
+    "canonicalIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "nodeCode",
+        "canonicalQuestionKey",
+        "slug",
+        "localizedTitle",
+        "localizedQuestion",
+        "registryStatus",
+        "blueprintStatus"
+      ],
+      "properties": {
+        "nodeCode": {
+          "type": "string"
+        },
+        "canonicalQuestionKey": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "localizedTitle": {
+          "type": "string"
+        },
+        "localizedQuestion": {
+          "type": "string"
+        },
+        "registryStatus": {
+          "type": "string"
+        },
+        "blueprintStatus": {
+          "type": "string"
+        }
+      }
+    },
+    "hierarchy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bookCode",
+        "bookTitle",
+        "partCode",
+        "partTitle",
+        "domainCode",
+        "themeCode",
+        "nodeCode",
+        "nodeType"
+      ],
+      "properties": {
+        "bookCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bookTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "partCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "partTitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "domainCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "themeCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nodeCode": {
+          "type": "string"
+        },
+        "nodeType": {
+          "type": "string"
+        }
+      }
+    },
+    "canonicalThesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "thesisVersion",
+        "statement",
+        "mechanism",
+        "necessity",
+        "systemRole",
+        "continuity"
+      ],
+      "properties": {
+        "thesisVersion": {
+          "type": "string"
+        },
+        "statement": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "mechanism": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "necessity": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "systemRole": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "continuity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fromPreviousNode",
+            "toNextNode"
+          ],
+          "properties": {
+            "fromPreviousNode": {
+              "$ref": "#/$defs/nullableText"
+            },
+            "toNextNode": {
+              "$ref": "#/$defs/nullableText"
+            }
+          }
+        }
+      }
+    },
+    "articleBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "boundaryVersion",
+        "mustEstablish",
+        "mustNotClaim",
+        "includedScope",
+        "excludedScope",
+        "assumptions",
+        "unresolvedQuestions"
+      ],
+      "properties": {
+        "boundaryVersion": {
+          "type": "string"
+        },
+        "mustEstablish": {
+          "$ref": "#/$defs/textList"
+        },
+        "mustNotClaim": {
+          "$ref": "#/$defs/textList"
+        },
+        "includedScope": {
+          "$ref": "#/$defs/textList"
+        },
+        "excludedScope": {
+          "$ref": "#/$defs/textList"
+        },
+        "assumptions": {
+          "$ref": "#/$defs/textList"
+        },
+        "unresolvedQuestions": {
+          "$ref": "#/$defs/textList"
+        },
+        "requiredDistinctions": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    },
+    "supportingQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "questionCode",
+        "questionText",
+        "primaryNodeCode",
+        "relatedNodeCodes",
+        "relationshipType",
+        "coverageRole",
+        "articleTreatment",
+        "searchAliasEligibility",
+        "supportingContentEligibility"
+      ],
+      "properties": {
+        "questionCode": {
+          "type": "string"
+        },
+        "questionText": {
+          "type": "string"
+        },
+        "primaryNodeCode": {
+          "type": "string"
+        },
+        "relatedNodeCodes": {
+          "$ref": "#/$defs/codeList"
+        },
+        "relationshipType": {
+          "type": "string"
+        },
+        "coverageRole": {
+          "type": "string"
+        },
+        "articleTreatment": {
+          "enum": [
+            "integrate",
+            "briefly_address",
+            "defer",
+            "faq_candidate",
+            "supporting_article_candidate",
+            "video_candidate",
+            "exclude"
+          ]
+        },
+        "searchAliasEligibility": {
+          "type": "boolean"
+        },
+        "supportingContentEligibility": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sequenceBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previousNode",
+        "nextNode",
+        "previousNodeContribution",
+        "currentNodeTransformation",
+        "nextNodePreparation",
+        "partContribution",
+        "bookContribution",
+        "systemContribution"
+      ],
+      "properties": {
+        "previousNode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nextNode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "previousNodeContribution": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "currentNodeTransformation": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "nextNodePreparation": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "partContribution": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "bookContribution": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "systemContribution": {
+          "$ref": "#/$defs/nullableText"
+        }
+      }
+    },
+    "claimBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requiredClaimFamilies",
+        "allowedClaimTypes",
+        "sourceRequiredClaims",
+        "internalCanonicalClaims",
+        "interpretiveClaims",
+        "analogyOnlyStatements",
+        "prohibitedClaims",
+        "qualificationRequirements"
+      ],
+      "properties": {
+        "requiredClaimFamilies": {
+          "$ref": "#/$defs/textList"
+        },
+        "allowedClaimTypes": {
+          "$ref": "#/$defs/codeList"
+        },
+        "sourceRequiredClaims": {
+          "$ref": "#/$defs/textList"
+        },
+        "internalCanonicalClaims": {
+          "$ref": "#/$defs/textList"
+        },
+        "interpretiveClaims": {
+          "$ref": "#/$defs/textList"
+        },
+        "analogyOnlyStatements": {
+          "$ref": "#/$defs/textList"
+        },
+        "prohibitedClaims": {
+          "$ref": "#/$defs/textList"
+        },
+        "qualificationRequirements": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    },
+    "sourceBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourcePlanVersion",
+        "sourceRequirement",
+        "internalCanonicalSources",
+        "externalSourceDomains",
+        "preferredSourceTypes",
+        "prohibitedSourceTypes",
+        "knownSources",
+        "researchNeeded",
+        "verificationNeeded",
+        "citationSensitivity"
+      ],
+      "properties": {
+        "sourcePlanVersion": {
+          "type": "string"
+        },
+        "sourceRequirement": {
+          "$ref": "#/$defs/textList"
+        },
+        "internalCanonicalSources": {
+          "$ref": "#/$defs/codeList"
+        },
+        "externalSourceDomains": {
+          "$ref": "#/$defs/textList"
+        },
+        "preferredSourceTypes": {
+          "$ref": "#/$defs/codeList"
+        },
+        "prohibitedSourceTypes": {
+          "$ref": "#/$defs/codeList"
+        },
+        "knownSources": {
+          "$ref": "#/$defs/codeList"
+        },
+        "researchNeeded": {
+          "$ref": "#/$defs/textList"
+        },
+        "verificationNeeded": {
+          "$ref": "#/$defs/textList"
+        },
+        "citationSensitivity": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "figureBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "figureRequirement",
+        "requiredFigures",
+        "optionalFigures",
+        "visualMechanism",
+        "prohibitedVisualClaims",
+        "accessibilityRequirements",
+        "assetSourceBoundary"
+      ],
+      "properties": {
+        "figureRequirement": {
+          "enum": [
+            "not_assessed",
+            "none",
+            "optional",
+            "required"
+          ]
+        },
+        "requiredFigures": {
+          "$ref": "#/$defs/codeList"
+        },
+        "optionalFigures": {
+          "$ref": "#/$defs/codeList"
+        },
+        "visualMechanism": {
+          "$ref": "#/$defs/nullableText"
+        },
+        "prohibitedVisualClaims": {
+          "$ref": "#/$defs/textList"
+        },
+        "accessibilityRequirements": {
+          "$ref": "#/$defs/textList"
+        },
+        "assetSourceBoundary": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    },
+    "publicContentBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publicKnowledgeBoundary",
+        "paidBookBoundary",
+        "runtimeJourneyBoundary",
+        "professionalServiceBoundary",
+        "enterpriseBoundary",
+        "developerBoundary"
+      ],
+      "properties": {
+        "publicKnowledgeBoundary": {
+          "$ref": "#/$defs/textList"
+        },
+        "paidBookBoundary": {
+          "$ref": "#/$defs/textList"
+        },
+        "runtimeJourneyBoundary": {
+          "$ref": "#/$defs/textList"
+        },
+        "professionalServiceBoundary": {
+          "$ref": "#/$defs/textList"
+        },
+        "enterpriseBoundary": {
+          "$ref": "#/$defs/textList"
+        },
+        "developerBoundary": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    },
+    "localizationReadiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "localizedTitle",
+        "localizedQuestion",
+        "canonicalThesis",
+        "articleBoundary",
+        "supportingQuestions",
+        "searchAliases",
+        "terminologyReview",
+        "languageStatus"
+      ],
+      "properties": {
+        "localizedTitle": {
+          "type": "string"
+        },
+        "localizedQuestion": {
+          "type": "string"
+        },
+        "canonicalThesis": {
+          "enum": [
+            "not_ready",
+            "ready_for_editorial_review",
+            "production_ready"
+          ]
+        },
+        "articleBoundary": {
+          "enum": [
+            "not_ready",
+            "ready_for_editorial_review",
+            "production_ready"
+          ]
+        },
+        "supportingQuestions": {
+          "enum": [
+            "not_ready",
+            "ready_for_editorial_review",
+            "production_ready"
+          ]
+        },
+        "searchAliases": {
+          "enum": [
+            "not_ready",
+            "ready_for_editorial_review",
+            "production_ready"
+          ]
+        },
+        "terminologyReview": {
+          "enum": [
+            "not_ready",
+            "pending",
+            "approved"
+          ]
+        },
+        "languageStatus": {
+          "enum": [
+            "not_ready",
+            "ready_for_editorial_review",
+            "production_ready"
+          ]
+        }
+      }
+    },
+    "productionReadiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "readinessVersion",
+        "status",
+        "missingFields",
+        "blockingReasons"
+      ],
+      "properties": {
+        "readinessVersion": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "not_assessed",
+            "identity_ready",
+            "thesis_draft",
+            "boundary_draft",
+            "ready_for_editorial_review",
+            "changes_required",
+            "production_ready",
+            "production_blocked",
+            "retired"
+          ]
+        },
+        "missingFields": {
+          "$ref": "#/$defs/codeList"
+        },
+        "blockingReasons": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    },
+    "versionBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registryVersion",
+        "blueprintVersion",
+        "editorialContractVersion",
+        "articleSchemaVersion",
+        "claimGovernanceVersion",
+        "exporterVersion"
+      ],
+      "properties": {
+        "registryVersion": {
+          "type": "string"
+        },
+        "blueprintVersion": {
+          "type": "string"
+        },
+        "editorialContractVersion": {
+          "type": "string"
+        },
+        "articleSchemaVersion": {
+          "type": "string"
+        },
+        "claimGovernanceVersion": {
+          "type": "string"
+        },
+        "exporterVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "humanFrozen",
+        "reviewedBy",
+        "reviewedAt",
+        "blockingFindings"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not_reviewed",
+            "ready_for_editorial_review",
+            "changes_required",
+            "approved"
+          ]
+        },
+        "humanFrozen": {
+          "type": "boolean"
+        },
+        "reviewedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reviewedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "blockingFindings": {
+          "$ref": "#/$defs/textList"
+        }
+      }
+    }
+  }
+}

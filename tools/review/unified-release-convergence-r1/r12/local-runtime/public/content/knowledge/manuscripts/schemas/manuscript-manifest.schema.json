@@ -1,0 +1,288 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/manuscript-manifest.schema.json",
+  "title": "PHI OS Private Manuscript Manifest",
+  "description": "Internal metadata contract for a private manuscript authority. The manifest contains no manuscript body, public URL, signed URL or credential.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "bookCode",
+    "title",
+    "locale",
+    "manuscriptVersion",
+    "authorityStatus",
+    "r2Bucket",
+    "objects",
+    "parts",
+    "contentHashes",
+    "uploadedBy",
+    "uploadedAt",
+    "verifiedAt",
+    "publicAccess",
+    "retrievalEligibility",
+    "verificationStatus"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "bookCode": {
+      "type": "string",
+      "pattern": "^BOOK-[A-Z0-9]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "manuscriptVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "authorityStatus": {
+      "enum": [
+        "registered",
+        "verified",
+        "superseded",
+        "revoked"
+      ]
+    },
+    "r2Bucket": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63,
+      "pattern": "^(?=.*(?:^|-)private(?:-|$))[a-z0-9][a-z0-9.-]*[a-z0-9]$"
+    },
+    "objects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/manuscriptObject"
+      }
+    },
+    "parts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/manuscriptPart"
+      }
+    },
+    "contentHashes": {
+      "$ref": "#/$defs/contentHashes"
+    },
+    "uploadedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "uploadedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verifiedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "publicAccess": {
+      "const": "disabled"
+    },
+    "retrievalEligibility": {
+      "enum": [
+        "internal_only",
+        "blocked"
+      ]
+    },
+    "verificationStatus": {
+      "$ref": "#/$defs/verificationStatus"
+    }
+  },
+  "$defs": {
+    "verificationStatus": {
+      "enum": [
+        "metadata_pending",
+        "metadata_verified",
+        "content_verified",
+        "failed",
+        "stale"
+      ]
+    },
+    "privateObjectKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*(?:https?://|r2\\.dev|X-Amz-))[A-Za-z0-9][A-Za-z0-9._/-]*$"
+    },
+    "manuscriptObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objectRole",
+        "objectKey",
+        "contentType",
+        "sizeBytes",
+        "sha256",
+        "etag",
+        "versionId",
+        "authoritative",
+        "uploadedAt",
+        "verificationStatus"
+      ],
+      "properties": {
+        "objectRole": {
+          "enum": [
+            "source_pdf",
+            "normalized_markdown",
+            "part_extraction",
+            "supporting_asset"
+          ]
+        },
+        "objectKey": {
+          "$ref": "#/$defs/privateObjectKey"
+        },
+        "contentType": {
+          "enum": [
+            "application/pdf",
+            "text/markdown",
+            "text/plain",
+            "application/json"
+          ]
+        },
+        "sizeBytes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "etag": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "versionId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "authoritative": {
+          "type": "boolean"
+        },
+        "uploadedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "verificationStatus": {
+          "$ref": "#/$defs/verificationStatus"
+        }
+      }
+    },
+    "manuscriptPart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "partCode",
+        "title",
+        "sequence",
+        "sourceObjectKey",
+        "normalizedObjectKey",
+        "normalizationStatus",
+        "humanVerified"
+      ],
+      "properties": {
+        "partCode": {
+          "type": "string",
+          "pattern": "^P[0-9]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sourceObjectKey": {
+          "$ref": "#/$defs/privateObjectKey"
+        },
+        "normalizedObjectKey": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/privateObjectKey"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalizationStatus": {
+          "enum": [
+            "not_materialized",
+            "candidate",
+            "human_review_required",
+            "human_verified",
+            "stale"
+          ]
+        },
+        "humanVerified": {
+          "type": "boolean"
+        }
+      }
+    },
+    "contentHashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceObjectSha256",
+        "normalizedParts"
+      ],
+      "properties": {
+        "sourceObjectSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "normalizedParts": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^P[0-9]+$"
+          },
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  }
+}

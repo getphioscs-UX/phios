@@ -1,0 +1,24 @@
+{
+  "contractCode": "PHI-OS-RMO-W3-EVENT-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W3",
+  "status": "foundation_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "componentType": "REALITY_EVENT",
+  "schemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-event-v1.schema.json",
+  "typeRegistryReference": "content/runtime/reality-model-runtime/registries/canonical-event-type-registry-v1.json",
+  "operationalTimelineReference": "functions/runtime/timeline/event-types.js",
+  "rules": {
+    "realityEventIsOperationalTimelineEvent": false,
+    "eventRequiresRealityAndEntityBinding": true,
+    "eventRequiresSourceLineage": true,
+    "eventCreationPromotesEvidence": false,
+    "eventCreationCreatesInterpretation": false,
+    "eventRecordImmutable": true,
+    "eventDigestMustBeDeterministic": true,
+    "existingOperationalTimelineMutated": false,
+    "providerOrAiMayCreateEventAuthority": false,
+    "persistentStoreActivated": false
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "verifiedInputCode": "ICR-VERIFIED-BIRTH-VALIDATION-0001",
+  "verifiedInputVersion": "1.0.0",
+  "verificationCode": "ICR-VERIFY-BIRTH-VALIDATION-0001",
+  "verifierClass": "DOCUMENT_REVIEW",
+  "verifierReference": "REVIEWER-VALIDATION-0001",
+  "verifiedAt": "2026-08-10T06:10:00.000Z",
+  "fieldDecisions": [
+    {"fieldPath": "birthData.localDate", "state": "VERIFIED", "evidenceReferences": ["EVIDENCE-BIRTH-CERTIFICATE-VALIDATION-0001"]},
+    {"fieldPath": "birthData.localTime", "state": "VERIFIED", "evidenceReferences": ["EVIDENCE-BIRTH-CERTIFICATE-VALIDATION-0001"]},
+    {"fieldPath": "birthData.precision", "state": "VERIFIED", "evidenceReferences": ["EVIDENCE-BIRTH-CERTIFICATE-VALIDATION-0001"]},
+    {"fieldPath": "birthData.calendarCode", "state": "VERIFIED", "evidenceReferences": ["EVIDENCE-CALENDAR-POLICY-VALIDATION-0001"]},
+    {"fieldPath": "birthData.placeName", "state": "VERIFIED", "evidenceReferences": ["EVIDENCE-BIRTH-CERTIFICATE-VALIDATION-0001"]},
+    {"fieldPath": "birthData.sourceTimezoneText", "state": "VERIFIED", "evidenceReferences": ["EVIDENCE-TIMEZONE-REVIEW-VALIDATION-0001"]}
+  ],
+  "authorityBindings": [
+    {
+      "bindingCode": "ICR-BIND-BIRTH-VALIDATION-0001",
+      "authority": "SHARED_DATA_AUTHORITY",
+      "recordType": "BIRTH_RECORD",
+      "recordId": "SDA-BIRTH-VALIDATION-0001",
+      "recordVersion": "1.0.0",
+      "recordDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    {
+      "bindingCode": "ICR-BIND-COORDINATE-VALIDATION-0001",
+      "authority": "SHARED_DATA_AUTHORITY",
+      "recordType": "COORDINATE",
+      "recordId": "SDA-COORDINATE-VALIDATION-0001",
+      "recordVersion": "1.0.0",
+      "recordDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    {
+      "bindingCode": "ICR-BIND-TIMEZONE-VALIDATION-0001",
+      "authority": "SHARED_DATA_AUTHORITY",
+      "recordType": "TIMEZONE",
+      "recordId": "SDA-TIMEZONE-VALIDATION-0001",
+      "recordVersion": "1.0.0",
+      "recordDigest": "3333333333333333333333333333333333333333333333333333333333333333"
+    }
+  ]
+}

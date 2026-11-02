@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "PHI-OS-CPR-CUSTOMER-PRODUCTION-ACCEPTANCE-v1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W12",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "MACHINE_ACCEPTED_12_SCENARIOS_CUSTOMER_PRESENTATION_SLICE_GLOBAL_CURRENT_GATE_PENDING",
+  "scenarios": [
+    {
+      "id": "SIGNED_FINAL_EXPLICIT_RELEASE_CORRECT_CUSTOMER",
+      "expected": "PASS"
+    },
+    {
+      "id": "FINAL_BUT_UNRELEASED",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "UNSIGNED_REPORT",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "WRONG_CUSTOMER",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "REVOKED_CONSENT",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "SUPERSEDED_REPORT",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "CLIENT_VISIBLE_FALSE_SECTION",
+      "expected": "HIDDEN"
+    },
+    {
+      "id": "RAW_PROFESSIONAL_AUTHORIZATION_EXPOSED",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "DIRECT_HDR_MCD_DISPATCH",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "AI_FILLED_HDR_MANUAL_FIELD",
+      "expected": "BLOCK"
+    },
+    {
+      "id": "ZH_HANS_LOCALE",
+      "expected": "PASS"
+    },
+    {
+      "id": "WORKSPACE_PDF_SAME_SOURCE_DIGEST",
+      "expected": "PASS"
+    }
+  ],
+  "rules": {
+    "twelveScenariosRequired": true,
+    "productionPresentationDoesNotActivateHdr": true,
+    "frozenCprV1RemainsUnmodified": true
+  },
+  "machineResult": {
+    "scenarioCount": 12,
+    "passedExpectedPass": 3,
+    "blockedExpectedBlock": 8,
+    "hiddenExpectedHidden": 1,
+    "unexpectedResultCount": 0
+  },
+  "productionBoundary": {
+    "customerPresentationActive": true,
+    "hdrProductionActivated": false,
+    "publicSelfServiceEligible": false,
+    "cloudflareDeploymentClaimed": false,
+    "customerPresentationSliceActive": true,
+    "globalRepositoryCurrentGateGreen": false
+  },
+  "repositoryGate": {
+    "checkCurrent": "BLOCKED_BY_PREEXISTING_UPSTREAM_MIR_GUIDED_READING_PRESENTATION_FINGERPRINT_DRIFT",
+    "causedByCprCust": false,
+    "blockedArtifact": "guided-reading.html",
+    "observedCurrentSha256": "488a473142d057eea64994f43abe862ede6755019098d89bd5dabe4e672945f1",
+    "historicalPinnedSha256": "67a79e86541468b99e9ab89b9df3b7fb2c50538254265207fed7a49d74ca751d",
+    "historicalDigestRewritePerformed": false,
+    "globalProductionAcceptanceClaimed": false
+  }
+}

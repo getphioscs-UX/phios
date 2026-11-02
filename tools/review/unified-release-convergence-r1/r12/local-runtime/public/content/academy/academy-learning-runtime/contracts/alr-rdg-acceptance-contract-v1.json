@@ -1,0 +1,40 @@
+{
+  "contractCode": "PHI-OS-ALR-W43-RDG-ACCEPTANCE-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W43",
+  "status": "active",
+  "semanticAuthority": "ALR",
+  "dataGovernanceAuthority": "RDG",
+  "acceptanceDecision": "ACCEPTED_CONTRACT_VALIDATION_ONLY",
+  "rdgActivationState": "RESERVED_NOT_IMPLEMENTED",
+  "allowedPurposes": [
+    "LEARNING_DELIVERY",
+    "CAPABILITY_TRACKING"
+  ],
+  "allowedPersistenceClasses": [
+    "EPHEMERAL",
+    "SESSION",
+    "SERVICE_SCOPED"
+  ],
+  "producedDataTypes": [
+    "LEARNING_RECORD",
+    "CAPABILITY_EVIDENCE_RECORD"
+  ],
+  "consumedDataTypes": [
+    "LEARNING_RECORD",
+    "CAPABILITY_EVIDENCE_RECORD",
+    "GOVERNANCE_RECORD"
+  ],
+  "rules": {
+    "acceptanceActivatesLiveLearningData": false,
+    "acceptanceAuthorizesPersistence": false,
+    "assessmentScoreIsCapability": false,
+    "lessonCompletionIsCapability": false,
+    "learningRecordMaySetCapabilityState": false,
+    "rdgMayInterpretAlrSemantics": false,
+    "permissionMustBeResolvedBeforePersistence": true,
+    "realityEvidencePromotionAllowed": false,
+    "professionalDataWriteAllowed": false,
+    "analyticsWriteAllowed": false
+  }
+}

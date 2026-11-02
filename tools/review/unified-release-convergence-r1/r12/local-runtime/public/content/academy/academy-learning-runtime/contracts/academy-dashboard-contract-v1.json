@@ -1,0 +1,44 @@
+{
+  "contractCode": "PHI-OS-ALR-W37-ACADEMY-DASHBOARD-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W37",
+  "status": "active",
+  "productionStatus": "validation_projection_only",
+  "viewCode": "ALR-ACADEMY-DASHBOARD",
+  "route": "/academy",
+  "mission": "Expose the governed Academy structure and the availability of progress without inventing learner state.",
+  "sectionOrder": [
+    "ORIENTATION",
+    "PROGRAM_SUMMARY",
+    "LEARNING_PATHS",
+    "PROGRESS_STATUS",
+    "CONTINUITY_BOUNDARY",
+    "ACCESS_BOUNDARY"
+  ],
+  "progressProjectionStates": [
+    "NOT_PROVIDED",
+    "GOVERNED_REFERENCES_PROVIDED"
+  ],
+  "requiredInputFields": [
+    "viewCode",
+    "projectionVersion",
+    "locale",
+    "progressProjectionState",
+    "progressReferences",
+    "generatedAt",
+    "providerUsed",
+    "aiUsed"
+  ],
+  "rules": {
+    "programPathModuleLessonCountsAreStructural": true,
+    "progressMustComeFromGovernedAlrProgressReferences": true,
+    "missingProgressDisplaysNotProvided": true,
+    "missingProgressMayBeInferredAsNotStarted": false,
+    "unknownOrDisputedMayBeStyledAsFailure": false,
+    "dashboardMayAutoSelectNextLesson": false,
+    "dashboardMayEnrollUnlockCompleteOrRecommend": false,
+    "dashboardMayWriteProgressOrContinuity": false,
+    "dashboardMayStoreLearnerData": false,
+    "onePrimaryActionPerView": true
+  }
+}

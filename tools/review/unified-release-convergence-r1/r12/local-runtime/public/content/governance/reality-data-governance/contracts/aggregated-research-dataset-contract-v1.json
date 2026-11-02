@@ -1,0 +1,71 @@
+{
+  "contractCode": "PHI-OS-RDG-W25-AGGREGATED-RESEARCH-DATASET-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W25",
+  "status": "active_contract_collection_disabled",
+  "requiredDatasetFields": [
+    "datasetCode",
+    "researchPurposeReference",
+    "purposeCode",
+    "sourceContractReferences",
+    "aggregationSpecReference",
+    "governedMinimumCohortSize",
+    "cohortSize",
+    "anonymizationProofReference",
+    "consentOrLegalBasisReferences",
+    "retentionClass",
+    "createdAt"
+  ],
+  "eligibilityOutputs": [
+    "COLLECTION_DISABLED",
+    "REQUIRE_RDG_APPROVAL",
+    "DENY_PURPOSE",
+    "DENY_GOVERNANCE",
+    "DENY_REIDENTIFICATION_RISK",
+    "UNRESOLVED_MINIMUM_COHORT",
+    "DENY_MINIMUM_COHORT",
+    "REQUIRE_RESEARCH_CONSENT_AND_LAWFUL_BASIS",
+    "UNRESOLVED",
+    "ELIGIBLE_FOR_GOVERNED_MATERIALIZATION"
+  ],
+  "forbiddenDatasetFields": [
+    "subjectReference",
+    "accountReference",
+    "professionalReference",
+    "directIdentifiers",
+    "rowLevelData",
+    "rawRealityInput",
+    "professionalNotes",
+    "reidentificationKey"
+  ],
+  "minimumCohortPolicy": {
+    "mode": "DATASET_SPECIFIC_GOVERNED_THRESHOLD",
+    "globalUngovernedDefaultAllowed": false,
+    "thresholdMustExceedOne": true,
+    "datasetMustMeetOrExceedThreshold": true
+  },
+  "activation": {
+    "default": "DISABLED",
+    "requires": [
+      "explicitRdgApproval",
+      "rdgApprovalReference",
+      "purposeBoundResearchPlan",
+      "sourceEligibility",
+      "anonymizationVerification",
+      "minimumCohortVerification",
+      "retentionDecision",
+      "withdrawalAndDeletionImpactReview"
+    ]
+  },
+  "rules": {
+    "anonymizedRequired": true,
+    "aggregatedRequired": true,
+    "purposeLimitedRequired": true,
+    "reidentificationForbidden": true,
+    "individualDatasetPublicationForbidden": true,
+    "privateOrProfessionalSourceRequiresResearchConsentAndLawfulBasis": true,
+    "researchConsentDoesNotGrantPublication": true,
+    "collectionOrMaterializationActivatedByThisContract": false,
+    "providerMayApproveResearchUse": false
+  }
+}

@@ -1,0 +1,3871 @@
+{
+  "$comment": "Proposed publication/presentation contract only. NOT an overwrite of the canonical V2 contract, NOT Human ACCEPT or legal/regulatory admission.",
+  "schemaVersion": "PHIOS_FINANCIAL_PUBLICATION_R3_1_CANDIDATE_V1",
+  "status": "LOCAL_VALIDATED_CANDIDATE_PENDING_HUMAN_REVIEW",
+  "userDecisionScope": "Latest R3.1 Master: Paid20 opt-in local candidate, preserve Paid16/Free8 and historical orders; RM69 bilingual four questions, USD5 whole-order cap, provider0. No Free6 generated or activated.",
+  "supersedesWhenAccepted": [
+    "FINANCE_PUBLICATION_R3_PAID16_FOR_NEW_REPORTS_ONLY"
+  ],
+  "preservedLegacy": {
+    "sourceContractPath": "content/financial/reports/publication-v2-contract.json",
+    "sourceBlobShaObserved": "cf9fe818398f4ab32abb85b1407138d89f671342",
+    "readOnlyHistoricalArtifacts": true,
+    "historicalOrders": "KEEP_STORED_PRICE_AND_ENTITLEMENT",
+    "newReportIdentityMustInclude": "publicationVersion",
+    "currentR3Paid": 16,
+    "currentR3Free": 8,
+    "currentContractReadOnly": true
+  },
+  "identity": {
+    "candidateId": "FINANCE_PUBLICATION_R3_1_CANDIDATE",
+    "productId": "COM-REPORT-FINANCIAL-FULL",
+    "productName": {
+      "zh-Hans": "个人与家庭财务准备报告",
+      "en": "Personal & Household Financial Preparation Report"
+    },
+    "sectionRegistry": "content/financial/holistic-planning-product/registries/holistic-financial-plan-section-registry-v1.json",
+    "relationshipToHFPRegistry": "CONTENT_AUTHORITIES_ONLY; HFP sections do not own layout"
+  },
+  "tiers": {
+    "FREE": {
+      "name": {
+        "zh-Hans": "免费财务概览",
+        "en": "Free Financial Snapshot"
+      },
+      "price": {
+        "currency": "MYR",
+        "amountMinor": 0
+      },
+      "outputLocales": [
+        "zh-Hans",
+        "en"
+      ],
+      "pages": 8,
+      "providerCalls": 0,
+      "renderer": "DETERMINISTIC_ONLY",
+      "sources": "EXACT_SAVED_VERSION_OR_EXPLICIT_UNSAVED_PREVIEW",
+      "allowed": [
+        "CALCULATIONS",
+        "GROUNDED_CHARTS",
+        "SAVED_VERSION",
+        "SOURCE_STATUS",
+        "FREE_PREVIEW"
+      ],
+      "mustNot": [
+        "OPENAI_CALL",
+        "SIMULATED_PAID_NARRATIVE",
+        "PAID_ENTITLEMENT_IMPLIED"
+      ]
+    },
+    "PAID_FULL": {
+      "name": {
+        "zh-Hans": "财务完整报告 · AI 深化解读",
+        "en": "Financial Full Report · AI-Enhanced Interpretation"
+      },
+      "price": {
+        "currency": "MYR",
+        "amountMinor": 6900
+      },
+      "outputLocales": [
+        "zh-Hans",
+        "en"
+      ],
+      "languageMode": "BILINGUAL_SEMANTIC_PARITY_TWO_RENDERED_OUTPUTS",
+      "corePages": 20,
+      "appendices": "CONDITIONAL_ADDITIVE_NOT_COUNTED_IN_CORE",
+      "includedFollowupQuestions": 4,
+      "entireOrderProviderCostCapUSD": 5,
+      "costScope": "BOTH_LANGUAGES_PLUS_FOUR_FOLLOWUPS_PLUS_RECOVERY",
+      "generation": "DETERMINISTIC_NUMBERS_AND_VISUALS_PLUS_SOURCE_BOUND_AI_LANGUAGE",
+      "openAiDispatch": "NOT_ADMITTED_NO_PROVIDER_CALLS_UNTIL_EXPLICIT_AUTHORIZATION",
+      "existingHistoricalOrders": "NO_RETROACTIVE_PRICE_OR_ENTITLEMENT_CHANGE",
+      "regenerationFromUpdatedSource": "NEW_PURCHASE_UNLESS_OWNER_LATER_APPROVES_OTHER_ENTITLEMENT"
+    }
+  },
+  "visualAssets": {
+    "delivery": "RESOLVE_FROM_APPROVED_R2_ASSET_OWNER_NOT_HARDCODE_PUBLIC_URL",
+    "r2Namespace": "phios-public-assets",
+    "cover": {
+      "objectKey": "images/reports/financial/editorial/bilingual/RPT-FINANCIAL-P01-COVER-v1.webp",
+      "mandatoryFor": "PAID_FULL_P01",
+      "renderMode": "FULL_BLEED_A4_PORTRAIT",
+      "noReplacementWithoutUserApproval": true,
+      "containsSharedBilingualArt": true,
+      "freeTierCaveat": "CHECK_BAKED_IN_PAID_WORDING_BEFORE_FREE_USE",
+      "sha256": "fac87c668c178d2221026fb28ca6852620af4a1057c4aa5804e540db9ec777d4",
+      "width": 1055,
+      "height": 1491,
+      "localPath": "/assets/reports/financial/r3/RPT-FINANCIAL-P01-COVER-v1.webp"
+    },
+    "body": {
+      "objectKey": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "mandatoryFor": "ALL_INTERIOR_PAGES_IN_BOTH_TIERS",
+      "renderMode": "PRINT_BACKGROUND_COVER_A4_WITH_CONTENT_SAFE_AREA",
+      "containsNoLiveChartsOrText": true,
+      "layoutIndependence": "BACKGROUND_IS_PAGE_GENERIC_CHARTS_AND_LAYOUT_OVERLAID_DYNAMICALLY",
+      "sha256": "cc04a2f25f58eb9628ef63cca2e20703aaff6493b773f5c098ca5227f7d712a1",
+      "width": 1055,
+      "height": 1491,
+      "localPath": "/assets/reports/financial/r3/VIS-REPORT-FINANCIAL-BODY.webp"
+    },
+    "assetVerification": "APPROVED_R2_BYTES_REUSED_WITH_PINNED_HASHES; LOCAL_DECODE_AND_ACTUAL_PDF_PIXEL_CHECKED; REMOTE_R2_NOT_REQUERIED",
+    "doNotUseAsBakedCharts": [
+      "PHIOS Financial Report System Poster(1).png",
+      "Luxurious Financial Report Overview(1).png"
+    ]
+  },
+  "print": {
+    "size": "A4",
+    "orientation": "portrait",
+    "physicalMm": {
+      "width": 210,
+      "height": 297
+    },
+    "bleedMode": "COVER_FULL_BLEED_INTERIOR_EDGES_ONLY",
+    "safeInsetsMm": {
+      "top": 22,
+      "right": 16,
+      "bottom": 25,
+      "left": 16
+    },
+    "dynamicFooter": "ALIGNED_TO_BODY_ART_AFTER_RENDER_PROOF",
+    "pageOverflow": "FAIL_DO_NOT_SHRINK_UNKNOWN_OR_OVERWRITE_NEXT_PAGE",
+    "maxPageNumberCore": 20,
+    "fonts": "USE_REPO_APPROVED_CJK_AND_LATIN_PRINT_FONTS_NO_EXTERNAL_FONT_DISTRIBUTION",
+    "numericFormatting": "LOCALE_NUMBER_FORMAT_AND_EXPLICIT_CURRENCY_UNIT_PERIOD"
+  },
+  "presentation": {
+    "palette": {
+      "paper": "#F8F3E9",
+      "ink": "#152E4C",
+      "secondaryInk": "#3B5264",
+      "gold": "#B8842C",
+      "goldRule": "#D4B475",
+      "teal": "#14766F",
+      "deepTeal": "#075058",
+      "blue": "#2A6799",
+      "income": "#1C517E",
+      "outflow": "#16817A",
+      "net": "#B8832A",
+      "assets": "#24766F",
+      "liability": "#8A5B42",
+      "warning": "#9F3B46",
+      "unknown": "#687780",
+      "neutral": "#87939D",
+      "estimated": "#957631",
+      "card": "#FBF8F1",
+      "border": "#D9C7A5"
+    },
+    "semanticChartColors": {
+      "INCOME": "income",
+      "EXPENSES": "outflow",
+      "NET_CASH": "net",
+      "ASSETS": "assets",
+      "DEBTS": "liability",
+      "SHORTFALL": "warning",
+      "UNKNOWN": "unknown",
+      "ESTIMATE": "estimated"
+    },
+    "globalVisualRule": "A4 2D editorial; shared marble/ivory R2 body, navy headlines, gold rules, teal chart accents, no 3D.",
+    "layoutPresets": {
+      "FULL_BLEED_COVER": {
+        "title": "cover-background-only",
+        "slots": [
+          "approvedCoverArt",
+          "dynamicMetadataSafeArea"
+        ],
+        "chartFootprint": "NONE",
+        "interiorBackground": false
+      },
+      "KPI_OVERVIEW": {
+        "slots": [
+          "heading",
+          "kpiRow",
+          "primaryChart",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "4 metric cards above 62:38 chart/text",
+        "mainChartTargetHeightMm": 88
+      },
+      "ROLE_MAP": {
+        "slots": [
+          "heading",
+          "roleMap",
+          "responsibilityList",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "65:35 role graphic / responsibility facts",
+        "mainChartTargetHeightMm": 134
+      },
+      "SPLIT_BAR": {
+        "slots": [
+          "heading",
+          "primaryChart",
+          "supportingCategory",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "62:38 two column, large comparison chart",
+        "mainChartTargetHeightMm": 125
+      },
+      "WATERFALL_PAGE": {
+        "slots": [
+          "heading",
+          "cashFlowWaterfall",
+          "comparisonStrip",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "full-width primary chart plus right reading margin",
+        "mainChartTargetHeightMm": 126
+      },
+      "HISTORY_COMPARE": {
+        "slots": [
+          "heading",
+          "timeChart",
+          "scenarioCompare",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "one large chart, comparison beneath",
+        "mainChartTargetHeightMm": 126
+      },
+      "BALANCE_SHEET": {
+        "slots": [
+          "heading",
+          "netWorthBridge",
+          "assetsLiabilitiesTable",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "48:52 bridge/table",
+        "mainChartTargetHeightMm": 132
+      },
+      "DONUT_ALLOCATION": {
+        "slots": [
+          "heading",
+          "donut",
+          "legendWithAmounts",
+          "ownershipFacts",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "54:46 ring/legend",
+        "mainChartTargetHeightMm": 125
+      },
+      "RESERVE_COVERAGE": {
+        "slots": [
+          "heading",
+          "coverageIndicator",
+          "liquidityBars",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "one large coverage block with component columns",
+        "mainChartTargetHeightMm": 115
+      },
+      "GOAL_FUNDING": {
+        "slots": [
+          "heading",
+          "fundingBars",
+          "goalTimeline",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "full-width progress rows, slim date rail",
+        "mainChartTargetHeightMm": 143
+      },
+      "LIABILITIES": {
+        "slots": [
+          "heading",
+          "debtStack",
+          "loanSummaryTable",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "50:50 bar/table",
+        "mainChartTargetHeightMm": 118
+      },
+      "SHOCK_CAPACITY": {
+        "slots": [
+          "heading",
+          "baselineScenarioChart",
+          "assumptionCards",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "65:35 bar/assumptions",
+        "mainChartTargetHeightMm": 120
+      },
+      "PROTECTION_RECORDS": {
+        "slots": [
+          "heading",
+          "roleMatrix",
+          "policyList",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "full-width insured-event/role matrix",
+        "mainChartTargetHeightMm": 143
+      },
+      "RISK_READINESS": {
+        "slots": [
+          "heading",
+          "riskEvidenceMatrix",
+          "dataBoundIndicators",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "55:45 matrix/indicators",
+        "mainChartTargetHeightMm": 127
+      },
+      "PRIORITY_CARDS": {
+        "slots": [
+          "heading",
+          "priorityCards",
+          "reasons",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "2x2 icon-led priority cards",
+        "mainChartTargetHeightMm": 151
+      },
+      "ROADMAP": {
+        "slots": [
+          "heading",
+          "milestoneTimeline",
+          "dependencyList",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "three temporal rails, full-width",
+        "mainChartTargetHeightMm": 156
+      },
+      "CHECKLIST": {
+        "slots": [
+          "heading",
+          "statusGrid",
+          "nextReview",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "full width checklist/table with source status",
+        "mainChartTargetHeightMm": 150
+      },
+      "TAX_PREPARATION": {
+        "slots": [
+          "heading",
+          "documentMatrix",
+          "assessmentYear",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "60:40 document status and year",
+        "mainChartTargetHeightMm": 151
+      },
+      "ESTATE_PREPARATION": {
+        "slots": [
+          "heading",
+          "roleMap",
+          "documentsAndWishes",
+          "interpretation",
+          "footnote"
+        ],
+        "grid": "two separate columns facts and wishes",
+        "mainChartTargetHeightMm": 134
+      },
+      "SOURCES_METHOD": {
+        "slots": [
+          "heading",
+          "sourceLedger",
+          "methodNotes",
+          "unknownLegend",
+          "footnote"
+        ],
+        "grid": "single reading column with lined records",
+        "mainChartTargetHeightMm": 90
+      }
+    },
+    "chartTypeDefinitions": {
+      "KPI_GRID_4": "Four headline metric cards with unit, period and precision labels; no pseudo trend arrows without history.",
+      "HOUSEHOLD_ROLE_NETWORK": "Non-suggestive people and responsibility nodes; no inferred nominee/beneficiary or amounts.",
+      "GROUPED_BARS": "Bars only if at least two comparable, known series/items with shared currency and period.",
+      "EXPENSE_STACK": "Non-overlapping spending-category portions and an explicit unclassified remainder; never invent split.",
+      "CASH_WATERFALL": "Known income/expense/debt bridge, no double deduction; if unknown show component rails only.",
+      "HISTORY_LINE": "True recorded period observations only, with source dates and no implied extrapolation.",
+      "CURRENT_VS_SCENARIO": "Only explicitly saved assumption-driven system results; annotate baseline vs scenario.",
+      "NET_WORTH_BRIDGE": "Assets minus liabilities using same valuation basis; signed result and owner share explicit.",
+      "DONUT_ALLOCATION": "Known additive category ratios only, each with legend, amount and 100% reconciliation.",
+      "HORIZONTAL_RESERVE_BARS": "Separate available amounts from restricted or unknown liquidity classifications.",
+      "COVERAGE_MONTHS": "Coverage months only with valid numerator / expense denominator basis, not assumed essentials.",
+      "FUNDING_PROGRESS": "Goal target and uniquely allocated funds supported by explicit declaration; avoid invented %.",
+      "DEBT_STACK_AND_TABLE": "Debt by type and amount, matched to valuations/dates. Payment commitments separate.",
+      "SENSITIVITY_COMPARISON": "Scenario stress outcome with known assumptions, never a synthetic shock by default.",
+      "POLICY_ROLE_MATRIX": "Owner, insured person, premium, term, covered event, nomination documented separately.",
+      "EVIDENCE_RISK_MATRIX": "Known, estimated, unknown source readiness; not a risk adequacy rating.",
+      "RADAR_INDICATORS": "Only admitted dimensionally comparable, defined, normalized indicator scores, never default.",
+      "PRIORITY_EVIDENCE_CARDS": "Prioritize missing-data review and customer-selected goals only; not regulated recommendations.",
+      "MILESTONE_ROADMAP": "Timeline anchored to explicitly declared milestone dates and user choices.",
+      "REVIEW_CHECKLIST": "Status and source/action receipts, cannot assert a task was completed without saved evidence.",
+      "DOCUMENT_STATUS_MATRIX": "Supported document status by jurisdiction/year, with exact rule approval boundary.",
+      "ESTATE_READINESS_MAP": "Roles, documents and wishes; legal validity and nominee effects not inferred.",
+      "SOURCE_PROVENANCE": "Evidence/digest/units/rule versions without private IDs in shared previews."
+    },
+    "iconSystem": "SINGLE_LUCIDE_LIKE_FLAT_STROKE_SYSTEM_NO_PHOTOREALISTIC_ICONS",
+    "legibility": {
+      "minBodyPt": 10.5,
+      "minChartLabelPt": 9,
+      "numericCardMinPt": 16,
+      "contrast": "WCAG_AA_WHERE_APPLICABLE",
+      "noLabelsEmbeddedInRaster": true
+    },
+    "chapterVisualRhythm": "HEADER_TITLE > SINGLE_SUBJECT_DIAGRAM > SUPPORTING_FACTS > SOURCE_BOUND_INTERPRETATION > EVIDENCE_FOOTNOTE",
+    "negativeState": "SIGNED_VALUE_PLUS_TEXT_NOT_COLOR_ALONE",
+    "sourceWatermark": "SYNTHETIC_DATA_OVERPRINT_ONLY_FOR_QA"
+  },
+  "dataBindingRegistry": {
+    "metrics.netWorth": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.grossAssets": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.totalLiabilities": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.monthlyIncome": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.monthlyExpenses": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.cashFlowSurplus": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.liquidityMonths": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "metrics.debtServiceRatio": {
+      "authority": "FCR",
+      "bindingStatus": "EXISTING_METRIC",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.household": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.incomeStreams": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.expenses": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.assets": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.liabilities": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.goals": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.policies": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.guarantees": {
+      "authority": "FDR",
+      "bindingStatus": "EXISTING_SOURCE_NEEDS_PRESENTATION_ADAPTER",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.taxDocuments": {
+      "authority": "ACCOUNT",
+      "bindingStatus": "NOT_YET_PROVEN_DIRECT_REPORT_BINDING",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.estatePreparation": {
+      "authority": "ACCOUNT_DAR",
+      "bindingStatus": "EXPLICIT_CONSENT_AND_VERSION_REQUIRED",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "records.userActionItems": {
+      "authority": "ACCOUNT",
+      "bindingStatus": "REQUIRES_ACTION_OWNER_MAPPING",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "history.verifiedSnapshots": {
+      "authority": "ACCOUNT",
+      "bindingStatus": "REQUIRES_EXACT_VERSION_HISTORY_SERIES",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "scenarios.userSaved": {
+      "authority": "FINANCIAL_TOOLS",
+      "bindingStatus": "EXPLICIT_SAVED_SCENARIO_ONLY",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "results.loan": {
+      "authority": "FINANCIAL_TOOLS",
+      "bindingStatus": "EXISTING_CALCULATION_OPTIONAL",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "results.rentalPortfolio": {
+      "authority": "FINANCIAL_TOOLS",
+      "bindingStatus": "EXISTING_CALCULATION_OPTIONAL",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.incomeExpenseSeries": {
+      "authority": "FCR_FDR",
+      "bindingStatus": "REQUIRES_PERIOD_NORMALIZATION",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.expenseCategories": {
+      "authority": "FDR_FCR",
+      "bindingStatus": "REQUIRES_CATEGORY_AND_NO_DOUBLE_COUNT",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.cashFlowBridge": {
+      "authority": "FCR_FDR",
+      "bindingStatus": "REQUIRES_NO_DOUBLE_COUNT",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.assetClassAllocation": {
+      "authority": "FDR_FCR",
+      "bindingStatus": "REQUIRES_OWNERSHIP_AND_VALUATION_ALIGNMENT",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.accessibleReserves": {
+      "authority": "FDR_FCR",
+      "bindingStatus": "REQUIRES_ASSET_LIQUIDITY_CLASSIFICATION",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.goalAllocations": {
+      "authority": "FDR_FCR",
+      "bindingStatus": "REQUIRES_EXPLICIT_FUND_ASSIGNMENT",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.debtByType": {
+      "authority": "FDR_FCR",
+      "bindingStatus": "REQUIRES_VALUE_DATE_ALIGNMENT",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.shockScenarios": {
+      "authority": "FCR",
+      "bindingStatus": "REQUIRES_CUSTOMER_DEFINED_ASSUMPTIONS",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.policyRolesAndEvents": {
+      "authority": "FDR",
+      "bindingStatus": "REQUIRES_PERSON_EVENT_SCOPE_VALIDATION",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.riskIndicators": {
+      "authority": "FCR_FAR",
+      "bindingStatus": "REQUIRES_APPROVED_COMPARABLE_INDICATOR_DEFINITIONS",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.evidencePriorities": {
+      "authority": "FAR",
+      "bindingStatus": "MISSING_EVIDENCE_REVIEW_ONLY",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.customerRoadmap": {
+      "authority": "ACCOUNT",
+      "bindingStatus": "REQUIRES_CUSTOMER_SELECTED_MILESTONES",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.followupChecklist": {
+      "authority": "ACCOUNT_FAR",
+      "bindingStatus": "SCOPE_LIMITED_REVIEW_TASKS",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.taxEvidenceStatus": {
+      "authority": "FDR",
+      "bindingStatus": "CHECKLIST_ONLY_UNTIL_APPROVED_RULES",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "derived.estateReadiness": {
+      "authority": "ACCOUNT_DAR",
+      "bindingStatus": "FACT_WISH_SEPARATION_REQUIRED",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    },
+    "report.sourceManifest": {
+      "authority": "ACCOUNT",
+      "bindingStatus": "EXISTING_VERSION_DIGEST_AND_LINEAGE",
+      "isProductionApiPath": false,
+      "note": "R3 presentation binding. Codex must reconcile with exact owner fields; do not invent missing backend fields."
+    }
+  },
+  "globalChartRules": {
+    "EXACT_SOURCE_SNAPSHOT": "All charts, text, inputs share the exact saved draft version and content/evidence digests.",
+    "KNOWN_NIL_IS_NOT_UNKNOWN": "UNKNOWN, NOT_PROVIDED, NOT_APPLICABLE, EXACT_ZERO, APPROXIMATE and RANGE are separate states; never manufacture a zero or midpoint.",
+    "HISTORY_REQUIRED": "Never invent historical observations, compare-to-last-year % or growth trend from one snapshot; fallback is a current-state visual plus explicit missing periods.",
+    "ALLOCATION_REQUIRED": "Pie/donut is allowed only for known additive non-overlapping category amounts, with correct base, period, ownership and currency.",
+    "RATIO_GUARD": "No risk meters, ratios or percentage rings with zero/unknown denominator; percentages display numerator/denominator and time basis.",
+    "SHOCK_CONSENT": "Do not invent rate rises or job-loss scenarios. Use only user-saved explicit assumptions and deterministic calculated outcomes.",
+    "INSURED_EVENT_SCOPE": "Missing policies or insured persons never prove an insurance/protection gap. State documented cover only; adequacy requires additional rule/authority.",
+    "NO_UNLICENSED_ADVICE": "Financial-preparation report cannot invent investments, insurance sales, automatic asset allocation, precise tax deductions, testamentary effect or professional suitability claims.",
+    "UNVERIFIED_TAX": "Tax pages show document readiness and rule/version facts, not tax payable/deduction or loss treatment without an admitted jurisdiction, year and law packet.",
+    "ESTATE_DISTINCTION": "Household relations, nominees, beneficiaries, wishes, legal owners, and Will signing/validity are separate. Missing consent blocks private details.",
+    "CONTRADICTORY_ASSET": "A mandatory art asset with baked-in paid wording cannot be used to imply FREE is paid. Free may use approved artwork as a nonmisleading crop/cover only if legible and accurate; otherwise free cover awaits owner-approved variant.",
+    "BILINGUAL_COVER_EXCEPTION": "The owner-provided shared bilingual cover is an intentional artwork exception to locale-pure customer UI; renderer-generated English text never contains Chinese and vice versa.",
+    "NO_STATIC_DATA_IN_BACKGROUND": "Body background is decorative only. All diagrams and labels are separately rendered from data; never paste sample chart pixels into live pages.",
+    "NEGATIVE_AND_ZERO_AXIS": "Show zero baseline, negatives below baseline or as signed diverging bars. Do not paint positive green for negative amounts.",
+    "SAME_MONEY_ONCE": "Loan payments and associated interest, rental totals and selected property leaf, transfers and assigned goal balances may not be double counted."
+  },
+  "paidCorePageCount": 20,
+  "paidCorePages": [
+    {
+      "page": 1,
+      "pageId": "FPR3-P01",
+      "key": "cover",
+      "pillar": "FRONT_MATTER",
+      "topic": {
+        "zh-Hans": "财务完整报告",
+        "en": "Financial Full Report"
+      },
+      "readerQuestion": {
+        "zh-Hans": "这份报告属于哪份资料？",
+        "en": "Which saved information is this report based on?"
+      },
+      "layoutPreset": "FULL_BLEED_COVER",
+      "primaryDataBindings": [
+        "report.sourceManifest"
+      ],
+      "diagrams": [
+        {
+          "key": "cover-art",
+          "type": "SOURCE_ART",
+          "role": "primary",
+          "sourceBindings": [],
+          "eligibilityRules": [
+            "BILINGUAL_COVER_EXCEPTION"
+          ],
+          "whenUnavailable": "DISPLAY_APPROVED_ART_WITH_NO_CHARTS",
+          "diagramDataAuthority": "APPROVED_R2_STATIC_COVER_ART",
+          "visualIsDynamic": false,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "book-open"
+      ],
+      "contentBlocks": [
+        "APPROVED_COVER",
+        "SAFE_CUSTOMER_METADATA"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "根据客户确认的财务资料生成。",
+        "en": "Prepared from the customer’s confirmed financial information."
+      },
+      "paidAiSlot": null,
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 1,
+      "visualAssetRef": "cover",
+      "primaryDiagramKey": "report_scope",
+      "supportingDiagramKeys": [
+        "version",
+        "date"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "report.sourceManifest"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        4
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_PERSONAL_FULL_ID"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 2,
+      "pageId": "FPR3-P02",
+      "key": "overview",
+      "pillar": "FRONT_MATTER",
+      "topic": {
+        "zh-Hans": "目前的财务全景",
+        "en": "Financial Snapshot"
+      },
+      "readerQuestion": {
+        "zh-Hans": "我现在的钱和责任处在什么状态？",
+        "en": "How do my finances and commitments stand today?"
+      },
+      "layoutPreset": "EDITORIAL_OVERVIEW",
+      "primaryDataBindings": [
+        "metrics.netWorth",
+        "metrics.cashFlowSurplus",
+        "metrics.liquidityMonths"
+      ],
+      "diagrams": [
+        {
+          "key": "overview-kpis",
+          "type": "KPI_GRID_4",
+          "role": "primary",
+          "sourceBindings": [
+            "metrics.monthlyIncome",
+            "metrics.monthlyExpenses",
+            "metrics.cashFlowSurplus",
+            "metrics.netWorth"
+          ],
+          "eligibilityRules": [
+            "EXACT_SOURCE_SNAPSHOT",
+            "RATIO_GUARD"
+          ],
+          "whenUnavailable": "INDICATE_NOT_PROVIDED_IN_AFFECTED_CARDS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "overview-bridge",
+          "type": "NET_WORTH_BRIDGE",
+          "role": "secondary",
+          "sourceBindings": [
+            "metrics.grossAssets",
+            "metrics.totalLiabilities",
+            "metrics.netWorth"
+          ],
+          "eligibilityRules": [
+            "EXACT_SOURCE_SNAPSHOT"
+          ],
+          "whenUnavailable": "SHOW_KNOWN_COMPONENTS_ONLY",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "layout-dashboard",
+        "chart-pie"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "先看收支、净资产与储备覆盖，再辨认哪些数值来自申报、估算或尚待核对的事实。",
+        "en": "Start with cash flow, net worth and reserve coverage, then distinguish declared, estimated and unresolved figures."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P02-INTERPRETATION",
+        "role": "SYNTHESIZE_FACTS_NO_RISK_LABEL",
+        "requiredSourceBinding": "FPR3-P02-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 115,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 2,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "income_expense_net",
+      "supportingDiagramKeys": [
+        "asset_liability_bridge",
+        "declared_vs_actual_if_authorized"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "metrics.netWorth",
+        "metrics.cashFlowSurplus",
+        "metrics.liquidityMonths"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P02-INTERPRETATION",
+          "role": "SYNTHESIZE_FACTS_NO_RISK_LABEL",
+          "requiredSourceBinding": "FPR3-P02-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 115,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        1,
+        2,
+        14
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_AUTO_ALLOCATION_RATIO"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 3,
+      "pageId": "FPR3-P03",
+      "key": "household",
+      "pillar": "FRONT_MATTER",
+      "topic": {
+        "zh-Hans": "家庭与经济责任",
+        "en": "Household Responsibilities"
+      },
+      "readerQuestion": {
+        "zh-Hans": "目前由谁承担哪些经济责任？",
+        "en": "Who supports which ongoing responsibilities?"
+      },
+      "layoutPreset": "HOUSEHOLD_AND_RESPONSIBILITY",
+      "primaryDataBindings": [
+        "records.household",
+        "records.liabilities"
+      ],
+      "diagrams": [
+        {
+          "key": "household-roles",
+          "type": "HOUSEHOLD_ROLE_NETWORK",
+          "role": "primary",
+          "sourceBindings": [
+            "records.household"
+          ],
+          "eligibilityRules": [
+            "ESTATE_DISTINCTION"
+          ],
+          "whenUnavailable": "SHOW_DECLARED_PEOPLE_AND_MISSING_ROLE_LINKS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "users",
+        "heart-handshake"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "家庭关系与经济责任相互关联，却不等同于共同持有权或遗产受益安排。",
+        "en": "Household relationships and financial responsibilities matter together but do not establish joint ownership or inheritance rights."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P03-INTERPRETATION",
+        "role": "MAP_DECLARED_ROLES_NOT_LEGAL_STATUS",
+        "requiredSourceBinding": "FPR3-P03-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 3,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "person_responsibility_graph",
+      "supportingDiagramKeys": [
+        "payer_category_matrix"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.household",
+        "records.liabilities"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P03-INTERPRETATION",
+          "role": "MAP_DECLARED_ROLES_NOT_LEGAL_STATUS",
+          "requiredSourceBinding": "FPR3-P03-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-CASHFLOW"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        3,
+        13
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_UNCONSENTED_ADULT"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 4,
+      "pageId": "FPR3-P04",
+      "key": "income-spending",
+      "pillar": "FINANCIAL_ANALYSIS",
+      "topic": {
+        "zh-Hans": "每月收入与支出",
+        "en": "Income & Spending"
+      },
+      "readerQuestion": {
+        "zh-Hans": "目前收入能够覆盖哪些支出？",
+        "en": "How do recorded income and spending compare?"
+      },
+      "layoutPreset": "INCOME_SPENDING_GROUPED",
+      "primaryDataBindings": [
+        "metrics.monthlyIncome",
+        "metrics.monthlyExpenses",
+        "records.incomeStreams",
+        "records.expenses"
+      ],
+      "diagrams": [
+        {
+          "key": "income-vs-expense",
+          "type": "GROUPED_BARS",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.incomeExpenseSeries",
+            "metrics.monthlyIncome",
+            "metrics.monthlyExpenses"
+          ],
+          "eligibilityRules": [
+            "EXACT_SOURCE_SNAPSHOT",
+            "NEGATIVE_AND_ZERO_AXIS"
+          ],
+          "whenUnavailable": "SHOW_CURRENT_PERIOD_TWO_BARS_IF_HISTORY_MISSING",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "expense-composition",
+          "type": "EXPENSE_STACK",
+          "role": "secondary",
+          "sourceBindings": [
+            "derived.expenseCategories"
+          ],
+          "eligibilityRules": [
+            "ALLOCATION_REQUIRED"
+          ],
+          "whenUnavailable": "DISPLAY_UNCLASSIFIED_TOTAL_AND_CATEGORY_GAPS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "wallet",
+        "chart-column"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "收入与支出必须使用一致的期间与币种；到手收入及偿债项目不能被重复扣减。",
+        "en": "Income and spending must use comparable periods and currencies; take-home income and loan repayments must not be deducted twice."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P04-INTERPRETATION",
+        "role": "EXPLAIN_COMPONENTS_AND_PERIOD",
+        "requiredSourceBinding": "FPR3-P04-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 4,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "gross_to_net_if_supported",
+      "supportingDiagramKeys": [
+        "income_by_person_and_type"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "metrics.monthlyIncome",
+        "metrics.monthlyExpenses",
+        "records.incomeStreams",
+        "records.expenses"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P04-INTERPRETATION",
+          "role": "EXPLAIN_COMPONENTS_AND_PERIOD",
+          "requiredSourceBinding": "FPR3-P04-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-CASHFLOW"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        13
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_DOUBLE_PAYROLL_DEDUCTION"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 5,
+      "pageId": "FPR3-P05",
+      "key": "cashflow-bridge",
+      "pillar": "FINANCIAL_ANALYSIS",
+      "topic": {
+        "zh-Hans": "现金流的结构",
+        "en": "Cash Flow Structure"
+      },
+      "readerQuestion": {
+        "zh-Hans": "现金如何从收入转为实际结余？",
+        "en": "How do recorded cash movements lead to the current surplus or shortfall?"
+      },
+      "layoutPreset": "CASHFLOW_WATERFALL",
+      "primaryDataBindings": [
+        "metrics.cashFlowSurplus",
+        "derived.cashFlowBridge"
+      ],
+      "diagrams": [
+        {
+          "key": "cash-bridge",
+          "type": "CASH_WATERFALL",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.cashFlowBridge",
+            "metrics.cashFlowSurplus"
+          ],
+          "eligibilityRules": [
+            "SAME_MONEY_ONCE",
+            "NEGATIVE_AND_ZERO_AXIS"
+          ],
+          "whenUnavailable": "SHOW_A_PARTIAL_COMPONENT_LEDGER_AND_UNKNOWN_TOTAL",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "arrow-down-up",
+        "coins"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "现金流连接日常生活与长期计划。每笔费用、贷款偿还与实际付款时间都需要各有其位。",
+        "en": "Cash flow links daily commitments to future plans. Expense categories, repayments and payment timing must each be represented once."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P05-INTERPRETATION",
+        "role": "EXPLAIN_CASH_BRIDGE_NOT_ADVICE",
+        "requiredSourceBinding": "FPR3-P05-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 5,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "net_income_to_cash_remain",
+      "supportingDiagramKeys": [
+        "expenses_by_category_and_payer"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "metrics.cashFlowSurplus",
+        "derived.cashFlowBridge"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P05-INTERPRETATION",
+          "role": "EXPLAIN_CASH_BRIDGE_NOT_ADVICE",
+          "requiredSourceBinding": "FPR3-P05-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-LOANS",
+        "FIN-A-CASHFLOW",
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        1,
+        12,
+        13,
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_LOAN_DOUBLE_COUNT"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 6,
+      "pageId": "FPR3-P06",
+      "key": "change-scenarios",
+      "pillar": "FINANCIAL_ANALYSIS",
+      "topic": {
+        "zh-Hans": "时间变化与调整情景",
+        "en": "Changes & Declared Scenarios"
+      },
+      "readerQuestion": {
+        "zh-Hans": "已有事实显示怎样的变化？我选择的假设会怎样改变结果？",
+        "en": "What changed in verified records, and how do my saved assumptions affect comparisons?"
+      },
+      "layoutPreset": "ACTUAL_VS_DECLARED_SCENARIO",
+      "primaryDataBindings": [
+        "history.verifiedSnapshots",
+        "scenarios.userSaved"
+      ],
+      "diagrams": [
+        {
+          "key": "verified-trend",
+          "type": "HISTORY_LINE",
+          "role": "primary",
+          "sourceBindings": [
+            "history.verifiedSnapshots"
+          ],
+          "eligibilityRules": [
+            "HISTORY_REQUIRED"
+          ],
+          "whenUnavailable": "CURRENT_SNAPSHOT_AND_MISSING_HISTORY_PERIODS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "scenario-comparison",
+          "type": "CURRENT_VS_SCENARIO",
+          "role": "secondary",
+          "sourceBindings": [
+            "scenarios.userSaved"
+          ],
+          "eligibilityRules": [
+            "SHOCK_CONSENT"
+          ],
+          "whenUnavailable": "EXPLAIN_HOW_TO_SAVE_COMPARISON",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "chart-line",
+        "sliders-horizontal"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "历史趋势只来自真实记录；未来情景只来自明确保存的假设，两者不能混在一张时间线中。",
+        "en": "Historical trends require observed records; forward-looking scenarios require saved assumptions. Their statuses must remain distinct."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P06-INTERPRETATION",
+        "role": "EXPLAIN_RECORDED_CHANGES_AND_ASSUMPTIONS",
+        "requiredSourceBinding": "FPR3-P06-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 6,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "asof_timeline_or_before_after",
+      "supportingDiagramKeys": [
+        "fact_change_ledger"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "history.verifiedSnapshots",
+        "scenarios.userSaved"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P06-INTERPRETATION",
+          "role": "EXPLAIN_RECORDED_CHANGES_AND_ASSUMPTIONS",
+          "requiredSourceBinding": "FPR3-P06-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_SYNTHETIC_HISTORY"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 7,
+      "pageId": "FPR3-P07",
+      "key": "balance-sheet",
+      "pillar": "RESOURCE_PLANNING",
+      "topic": {
+        "zh-Hans": "资产负债与净资产",
+        "en": "Assets, Liabilities & Net Worth"
+      },
+      "readerQuestion": {
+        "zh-Hans": "有哪些资产与负债，真正属于我的份额是多少？",
+        "en": "What assets and liabilities are recorded, and what share is mine?"
+      },
+      "layoutPreset": "NET_WORTH_BRIDGE",
+      "primaryDataBindings": [
+        "metrics.grossAssets",
+        "metrics.totalLiabilities",
+        "metrics.netWorth",
+        "records.assets",
+        "records.liabilities"
+      ],
+      "diagrams": [
+        {
+          "key": "balance-bridge",
+          "type": "NET_WORTH_BRIDGE",
+          "role": "primary",
+          "sourceBindings": [
+            "metrics.grossAssets",
+            "metrics.totalLiabilities",
+            "metrics.netWorth"
+          ],
+          "eligibilityRules": [
+            "EXACT_SOURCE_SNAPSHOT"
+          ],
+          "whenUnavailable": "SHOW_KNOWN_ASSET_AND_LIABILITY_ROWS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "balance-breakdown",
+          "type": "DEBT_STACK_AND_TABLE",
+          "role": "secondary",
+          "sourceBindings": [
+            "records.liabilities"
+          ],
+          "eligibilityRules": [
+            "KNOWN_NIL_IS_NOT_UNKNOWN"
+          ],
+          "whenUnavailable": "SHOW_RECORDS_WITH_UNKNOWN_OWNERSHIP",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "scale",
+        "building-2"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "资产与负债是不同的记录。估值日期、持有份额和未偿本金共同决定净资产的计算基础。",
+        "en": "Assets and debts are separate records. Valuation dates, ownership shares and outstanding principal determine the net-worth basis."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P07-INTERPRETATION",
+        "role": "EXPLAIN_OWNERSHIP_AND_BASIS",
+        "requiredSourceBinding": "FPR3-P07-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 7,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "total_assets_minus_liabilities",
+      "supportingDiagramKeys": [
+        "owner_share_and_short_long_debt"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "metrics.grossAssets",
+        "metrics.totalLiabilities",
+        "metrics.netWorth",
+        "records.assets",
+        "records.liabilities"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P07-INTERPRETATION",
+          "role": "EXPLAIN_OWNERSHIP_AND_BASIS",
+          "requiredSourceBinding": "FPR3-P07-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-BANK",
+        "FIN-A-INVESTMENTS",
+        "FIN-A-PROPERTY",
+        "FIN-A-LOANS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        6,
+        7,
+        8,
+        11,
+        12,
+        14
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_FULL_ASSET_ASSUMPTION"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 8,
+      "pageId": "FPR3-P08",
+      "key": "allocation",
+      "pillar": "RESOURCE_PLANNING",
+      "topic": {
+        "zh-Hans": "资产配置与现有投资",
+        "en": "Asset Allocation & Holdings"
+      },
+      "readerQuestion": {
+        "zh-Hans": "资产集中在哪些类别？",
+        "en": "Where are my recorded assets concentrated?"
+      },
+      "layoutPreset": "DONUT_AND_COST_VALUE",
+      "primaryDataBindings": [
+        "records.assets",
+        "derived.assetClassAllocation"
+      ],
+      "diagrams": [
+        {
+          "key": "asset-donut",
+          "type": "DONUT_ALLOCATION",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.assetClassAllocation"
+          ],
+          "eligibilityRules": [
+            "ALLOCATION_REQUIRED"
+          ],
+          "whenUnavailable": "SHOW_CLASSIFIED_ASSET_ITEMS_WITHOUT_A_PERCENT_CHART",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "chart-pie",
+        "layers-3"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "资产类别反映现有持有状况，不代表建议的投资比例。未分类和权属不明的资产必须明确显示。",
+        "en": "Asset categories describe recorded holdings, not recommended portfolio weights. Unclassified or disputed ownership remains visible."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P08-INTERPRETATION",
+        "role": "DESCRIBE_ALLOCATION_NOT_RECOMMEND",
+        "requiredSourceBinding": "FPR3-P08-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 8,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "exclusive_asset_allocation",
+      "supportingDiagramKeys": [
+        "cost_vs_market_value_if_supported"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.assets",
+        "derived.assetClassAllocation"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P08-INTERPRETATION",
+          "role": "DESCRIBE_ALLOCATION_NOT_RECOMMEND",
+          "requiredSourceBinding": "FPR3-P08-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-BANK",
+        "FIN-A-INVESTMENTS",
+        "FIN-A-PROPERTY"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        6,
+        7,
+        8,
+        11
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_UNREALIZED_TO_TOTAL_RETURN"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 9,
+      "pageId": "FPR3-P09",
+      "key": "reserve",
+      "pillar": "RESOURCE_PLANNING",
+      "topic": {
+        "zh-Hans": "储备、到期与流动性",
+        "en": "Reserves, Maturity & Liquidity"
+      },
+      "readerQuestion": {
+        "zh-Hans": "目前有哪些资金可以真正用于应付生活变化？",
+        "en": "Which resources are actually accessible if circumstances change?"
+      },
+      "layoutPreset": "RESERVE_AND_MATURITY",
+      "primaryDataBindings": [
+        "derived.accessibleReserves",
+        "metrics.liquidityMonths",
+        "metrics.monthlyExpenses"
+      ],
+      "diagrams": [
+        {
+          "key": "reserve-components",
+          "type": "HORIZONTAL_RESERVE_BARS",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.accessibleReserves"
+          ],
+          "eligibilityRules": [
+            "KNOWN_NIL_IS_NOT_UNKNOWN"
+          ],
+          "whenUnavailable": "SHOW_LIQUIDITY_CLASSIFICATION_TO_CONFIRM",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "coverage-months",
+          "type": "COVERAGE_MONTHS",
+          "role": "secondary",
+          "sourceBindings": [
+            "metrics.liquidityMonths",
+            "metrics.monthlyExpenses"
+          ],
+          "eligibilityRules": [
+            "RATIO_GUARD"
+          ],
+          "whenUnavailable": "DO_NOT_SHOW_MONTHS_IF_DENOMINATOR_UNAVAILABLE",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "wallet",
+        "droplets"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "流动资产、限制用途资金和一般资产价值并非同一种可用现金。覆盖月数必须标明支出计算基础。",
+        "en": "Accessible cash, restricted funds and general asset values are not interchangeable. Any months-of-coverage figure must identify its spending basis."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P09-INTERPRETATION",
+        "role": "EXPLAIN_LIQUIDITY_LIMITS",
+        "requiredSourceBinding": "FPR3-P09-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 9,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "two_coverage_denominators",
+      "supportingDiagramKeys": [
+        "deposit_maturity_access"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "derived.accessibleReserves",
+        "metrics.liquidityMonths",
+        "metrics.monthlyExpenses"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P09-INTERPRETATION",
+          "role": "EXPLAIN_LIQUIDITY_LIMITS",
+          "requiredSourceBinding": "FPR3-P09-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-BANK",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        6,
+        14
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_RESTRICTED_CASH_AUTOMATIC"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 10,
+      "pageId": "FPR3-P10",
+      "key": "goals",
+      "pillar": "RESOURCE_PLANNING",
+      "topic": {
+        "zh-Hans": "目标优先级与资金进度",
+        "en": "Goal Priorities & Funding"
+      },
+      "readerQuestion": {
+        "zh-Hans": "现有资源与已声明目标之间有多大距离？",
+        "en": "How do assigned resources relate to declared goals and dates?"
+      },
+      "layoutPreset": "GOAL_PRIORITY_AND_FUNDING",
+      "primaryDataBindings": [
+        "records.goals",
+        "derived.goalAllocations"
+      ],
+      "diagrams": [
+        {
+          "key": "goal-funding",
+          "type": "FUNDING_PROGRESS",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.goalAllocations",
+            "records.goals"
+          ],
+          "eligibilityRules": [
+            "RATIO_GUARD",
+            "SAME_MONEY_ONCE"
+          ],
+          "whenUnavailable": "SHOW_GOAL_LIST_WITH_TARGETS_BUT_NO_PROGRESS_PERCENT",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "target",
+        "graduation-cap"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "只有明确分配给目标的资金才能用于资金进度计算；同一份储备不能被多次认领。",
+        "en": "Only funds explicitly assigned to a goal count toward its progress. The same resources cannot be allocated repeatedly."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P10-INTERPRETATION",
+        "role": "EXPLAIN_CUSTOMER_SELECTED_GOALS",
+        "requiredSourceBinding": "FPR3-P10-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 10,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "importance_vs_time_matrix",
+      "supportingDiagramKeys": [
+        "assigned_funds_progress"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.goals",
+        "derived.goalAllocations"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P10-INTERPRETATION",
+          "role": "EXPLAIN_CUSTOMER_SELECTED_GOALS",
+          "requiredSourceBinding": "FPR3-P10-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-GOALS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        5
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "OVERFUNDED_EXPLICIT",
+        "DUPLICATE_ALLOCATION_FLAG"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 11,
+      "pageId": "FPR3-P11",
+      "key": "debt",
+      "pillar": "RISK_ASSESSMENT",
+      "topic": {
+        "zh-Hans": "债务、借款人与偿还",
+        "en": "Loans & Debt Commitments"
+      },
+      "readerQuestion": {
+        "zh-Hans": "每笔债务的余额与付款责任是什么？",
+        "en": "What balances and payment obligations have been declared?"
+      },
+      "layoutPreset": "LIABILITIES_AND_LOAN_FACTS",
+      "primaryDataBindings": [
+        "records.liabilities",
+        "metrics.totalLiabilities",
+        "metrics.debtServiceRatio"
+      ],
+      "diagrams": [
+        {
+          "key": "debt-composition",
+          "type": "DEBT_STACK_AND_TABLE",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.debtByType",
+            "metrics.totalLiabilities"
+          ],
+          "eligibilityRules": [
+            "EXACT_SOURCE_SNAPSHOT"
+          ],
+          "whenUnavailable": "SHOW_KNOWN_DEBT_ITEMS_NO_UNSUPPORTED_PERCENT",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "debt-service",
+          "type": "GROUPED_BARS",
+          "role": "secondary",
+          "sourceBindings": [
+            "records.liabilities",
+            "metrics.debtServiceRatio"
+          ],
+          "eligibilityRules": [
+            "RATIO_GUARD"
+          ],
+          "whenUnavailable": "SHOW_PAYMENT_UNKNOWN_SEPARATELY",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "landmark",
+        "credit-card"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "贷款余额不是每月开销，月供也不是可以从现金流中再次扣除的独立负债金额。",
+        "en": "Loan principal is not monthly spending, and repayments already included in cash flow cannot be deducted again."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P11-INTERPRETATION",
+        "role": "EXPLAIN_CURRENT_OBLIGATIONS",
+        "requiredSourceBinding": "FPR3-P11-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 11,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "debt_by_type",
+      "supportingDiagramKeys": [
+        "borrower_rate_payment_matrix"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.liabilities",
+        "metrics.totalLiabilities",
+        "metrics.debtServiceRatio"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P11-INTERPRETATION",
+          "role": "EXPLAIN_CURRENT_OBLIGATIONS",
+          "requiredSourceBinding": "FPR3-P11-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-PROPERTY",
+        "FIN-A-LOANS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        8,
+        12,
+        14
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_FUTURE_LOAN_WITHOUT_TERM"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 12,
+      "pageId": "FPR3-P12",
+      "key": "shock",
+      "pillar": "RISK_ASSESSMENT",
+      "topic": {
+        "zh-Hans": "收入冲击与应变能力",
+        "en": "Income Shock & Resilience"
+      },
+      "readerQuestion": {
+        "zh-Hans": "如果已选条件发生变化，现有现金能承受多少？",
+        "en": "How does the cash position change under explicitly selected conditions?"
+      },
+      "layoutPreset": "SHOCK_CAPACITY",
+      "primaryDataBindings": [
+        "metrics.cashFlowSurplus",
+        "derived.shockScenarios",
+        "scenarios.userSaved"
+      ],
+      "diagrams": [
+        {
+          "key": "shock-compare",
+          "type": "SENSITIVITY_COMPARISON",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.shockScenarios"
+          ],
+          "eligibilityRules": [
+            "SHOCK_CONSENT"
+          ],
+          "whenUnavailable": "SHOW_CURRENT_CASH_POSITION_AND_REQUEST_USER_SCENARIO",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "shield-alert",
+        "activity"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "没有保存收入下降、额外开销等情景时，报告不应替客户假设事件会发生。",
+        "en": "Without saved assumptions about lower income or additional costs, the report cannot assume a shock has occurred or will occur."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P12-INTERPRETATION",
+        "role": "EXPLAIN_SELECTED_SENSITIVITY_ONLY",
+        "requiredSourceBinding": "FPR3-P12-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 12,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "saved_scenario_comparison_or_evidence_map",
+      "supportingDiagramKeys": [
+        "current_cash_coverage"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "metrics.cashFlowSurplus",
+        "derived.shockScenarios",
+        "scenarios.userSaved"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P12-INTERPRETATION",
+          "role": "EXPLAIN_SELECTED_SENSITIVITY_ONLY",
+          "requiredSourceBinding": "FPR3-P12-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-LOANS",
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        12,
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_UNDECLARED_SHOCK",
+        "UNKNOWN_GOAL_NOT_ZERO"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 13,
+      "pageId": "FPR3-P13",
+      "key": "protection",
+      "pillar": "RISK_ASSESSMENT",
+      "topic": {
+        "zh-Hans": "已有保障及保单角色",
+        "en": "Existing Protection & Policy Roles"
+      },
+      "readerQuestion": {
+        "zh-Hans": "已登记的保障覆盖谁、哪些事件和期限？",
+        "en": "Who and what events are covered in the available records?"
+      },
+      "layoutPreset": "POLICY_EVENT_MATRIX",
+      "primaryDataBindings": [
+        "records.policies",
+        "derived.policyRolesAndEvents"
+      ],
+      "diagrams": [
+        {
+          "key": "policy-role-grid",
+          "type": "POLICY_ROLE_MATRIX",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.policyRolesAndEvents"
+          ],
+          "eligibilityRules": [
+            "INSURED_EVENT_SCOPE",
+            "ESTATE_DISTINCTION"
+          ],
+          "whenUnavailable": "SHOW_UNVERIFIED_ROLES_AND_DOCUMENT_REQUIREMENTS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "shield-check",
+        "user-check"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "缺少保单记录，不能自动推论保障充足或不足。受保人、持有人、受益人和保费承担者必须分开。",
+        "en": "An absent policy record cannot establish adequacy or a gap. Insured persons, owners, beneficiaries and premium payers have distinct roles."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P13-INTERPRETATION",
+        "role": "DESCRIBE_DOCUMENTED_PROTECTION_NOT_GAP_ADVICE",
+        "requiredSourceBinding": "FPR3-P13-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 13,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "person_by_insured_event",
+      "supportingDiagramKeys": [
+        "premium_due_and_nominee_status"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.policies",
+        "derived.policyRolesAndEvents"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P13-INTERPRETATION",
+          "role": "DESCRIBE_DOCUMENTED_PROTECTION_NOT_GAP_ADVICE",
+          "requiredSourceBinding": "FPR3-P13-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-POLICIES"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        9,
+        10
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_POLICY_SUM_AS_FAMILY_COVER"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 14,
+      "pageId": "FPR3-P14",
+      "key": "risk-readiness",
+      "pillar": "RISK_ASSESSMENT",
+      "topic": {
+        "zh-Hans": "风险事实与财务比率",
+        "en": "Risk Evidence & Financial Ratios"
+      },
+      "readerQuestion": {
+        "zh-Hans": "哪些已知压力和资料缺口需要进一步核对？",
+        "en": "Which known pressures and missing facts require follow-up?"
+      },
+      "layoutPreset": "RATIO_EVIDENCE_PROFILE",
+      "primaryDataBindings": [
+        "derived.riskIndicators",
+        "metrics.cashFlowSurplus",
+        "metrics.liquidityMonths",
+        "metrics.debtServiceRatio"
+      ],
+      "diagrams": [
+        {
+          "key": "risk-evidence",
+          "type": "EVIDENCE_RISK_MATRIX",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.evidencePriorities",
+            "derived.riskIndicators"
+          ],
+          "eligibilityRules": [
+            "NO_UNLICENSED_ADVICE",
+            "KNOWN_NIL_IS_NOT_UNKNOWN"
+          ],
+          "whenUnavailable": "USE_EVIDENCE_READINESS_MATRIX_NO_RISK_SCORE",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        },
+        {
+          "key": "risk-radar-conditional",
+          "type": "RADAR_INDICATORS",
+          "role": "secondary",
+          "sourceBindings": [
+            "derived.riskIndicators"
+          ],
+          "eligibilityRules": [
+            "RATIO_GUARD"
+          ],
+          "whenUnavailable": "RENDER_ONLY_AFTER_INDICATOR_DEFINITIONS_ARE_APPROVED",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "shield",
+        "clipboard-check"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "这里首先表达可核实的指标与尚未确认的事实，不以漂亮的雷达图替代有依据的判断。",
+        "en": "This page distinguishes defined indicators from unresolved evidence; an attractive radar graphic must not stand in for supported conclusions."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P14-INTERPRETATION",
+        "role": "REPORT_MEASURABLE_CONDITIONS_NO_SUITABILITY",
+        "requiredSourceBinding": "FPR3-P14-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 14,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "validated_ratio_by_formula",
+      "supportingDiagramKeys": [
+        "evidence_status_compass"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "derived.riskIndicators",
+        "metrics.cashFlowSurplus",
+        "metrics.liquidityMonths",
+        "metrics.debtServiceRatio"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P14-INTERPRETATION",
+          "role": "REPORT_MEASURABLE_CONDITIONS_NO_SUITABILITY",
+          "requiredSourceBinding": "FPR3-P14-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-POLICIES",
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        9,
+        10,
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_LEGACY_THRESHOLD_RISK_RATING"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 15,
+      "pageId": "FPR3-P15",
+      "key": "priorities",
+      "pillar": "STRATEGIC_NEXT_STEPS",
+      "topic": {
+        "zh-Hans": "目标、约束与优先核对事项",
+        "en": "Goals, Constraints & Review Priorities"
+      },
+      "readerQuestion": {
+        "zh-Hans": "当前哪些已知事实最值得先确认？",
+        "en": "Which known information gaps matter most to the current picture?"
+      },
+      "layoutPreset": "PRIORITY_AND_EVIDENCE",
+      "primaryDataBindings": [
+        "derived.evidencePriorities",
+        "records.goals"
+      ],
+      "diagrams": [
+        {
+          "key": "priority-cards",
+          "type": "PRIORITY_EVIDENCE_CARDS",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.evidencePriorities",
+            "records.goals"
+          ],
+          "eligibilityRules": [
+            "NO_UNLICENSED_ADVICE"
+          ],
+          "whenUnavailable": "SHOW_REVIEW_ORDER_AS_UNRANKED_CARDS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "list-ordered",
+        "circle-help"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "这里记录资料完整性、已申报的时间压力和用户的目标优先次序，而不自动替客户决定投资或保险产品。",
+        "en": "These priorities reflect information readiness, stated deadlines and customer-declared goals; they are not automatic product recommendations."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P15-INTERPRETATION",
+        "role": "DISCUSS_EVIDENCE_BEFORE_DECISIONS",
+        "requiredSourceBinding": "FPR3-P15-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 15,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "declared_priority_cards",
+      "supportingDiagramKeys": [
+        "cause_source_and_missing_graph"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "derived.evidencePriorities",
+        "records.goals"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P15-INTERPRETATION",
+          "role": "DISCUSS_EVIDENCE_BEFORE_DECISIONS",
+          "requiredSourceBinding": "FPR3-P15-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-GOALS",
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        5,
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_PRODUCT_RECOMMENDATION"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 16,
+      "pageId": "FPR3-P16",
+      "key": "roadmap",
+      "pillar": "STRATEGIC_NEXT_STEPS",
+      "topic": {
+        "zh-Hans": "根据已声明日期的分阶段路线",
+        "en": "Staged Review Roadmap"
+      },
+      "readerQuestion": {
+        "zh-Hans": "目标何时发生，哪些准备工作需要相互衔接？",
+        "en": "When are declared milestones due and what preparation connects them?"
+      },
+      "layoutPreset": "DEPENDENCY_ROADMAP",
+      "primaryDataBindings": [
+        "derived.customerRoadmap",
+        "records.goals"
+      ],
+      "diagrams": [
+        {
+          "key": "roadmap",
+          "type": "MILESTONE_ROADMAP",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.customerRoadmap",
+            "records.goals"
+          ],
+          "eligibilityRules": [
+            "NO_UNLICENSED_ADVICE"
+          ],
+          "whenUnavailable": "SHOW_DECLARED_GOALS_UNPLACED_WHEN_DATES_UNKNOWN",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "route",
+        "calendar-check"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "行动时间轴从客户确定的事项和日期开始，不根据模板自动捏造一年、三年或五年的目标。",
+        "en": "The roadmap begins with the customer’s own milestones and dates, not default one-, three- or five-year targets invented by the template."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P16-INTERPRETATION",
+        "role": "ORGANIZE_DECLARED_MILESTONES",
+        "requiredSourceBinding": "FPR3-P16-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 16,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "fact_to_goal_to_review_arrows",
+      "supportingDiagramKeys": [
+        "real_milestones_if_declared"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "derived.customerRoadmap",
+        "records.goals"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P16-INTERPRETATION",
+          "role": "ORGANIZE_DECLARED_MILESTONES",
+          "requiredSourceBinding": "FPR3-P16-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-GOALS",
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        5,
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_INVENTED_DATES"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 17,
+      "pageId": "FPR3-P17",
+      "key": "checklist",
+      "pillar": "STRATEGIC_NEXT_STEPS",
+      "topic": {
+        "zh-Hans": "财务准备与执行追踪",
+        "en": "Preparation & Action Tracking"
+      },
+      "readerQuestion": {
+        "zh-Hans": "已经完成哪些准备，还有哪些项目待跟进？",
+        "en": "Which preparations are confirmed complete and which remain open?"
+      },
+      "layoutPreset": "PREPARATION_TRACKING",
+      "primaryDataBindings": [
+        "derived.followupChecklist",
+        "records.userActionItems"
+      ],
+      "diagrams": [
+        {
+          "key": "followup-list",
+          "type": "REVIEW_CHECKLIST",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.followupChecklist",
+            "records.userActionItems"
+          ],
+          "eligibilityRules": [
+            "NO_UNLICENSED_ADVICE"
+          ],
+          "whenUnavailable": "SHOW_MISSING_ITEMS_UNCHECKED_BY_DEFAULT",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "list-checks",
+        "clipboard-list"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "完成状态应来自真实保存的确认或凭证；未填写和待审项目不应自动出现已完成的勾选。",
+        "en": "Completion markers require saved confirmations or evidence. Missing or pending items must not appear checked by default."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P17-INTERPRETATION",
+        "role": "CHECKLIST_AND_DISCUSSION_PREPARATION",
+        "requiredSourceBinding": "FPR3-P17-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 17,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "review_status_swimlanes",
+      "supportingDiagramKeys": [
+        "evidence_and_owner_index"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "derived.followupChecklist",
+        "records.userActionItems"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P17-INTERPRETATION",
+          "role": "CHECKLIST_AND_DISCUSSION_PREPARATION",
+          "requiredSourceBinding": "FPR3-P17-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-SCENARIOS",
+        "FIN-A-RATIOS"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        15
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_IMPLIED_COMPLETION"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 18,
+      "pageId": "FPR3-P18",
+      "key": "tax",
+      "pillar": "SUPPORT_RECORDS",
+      "topic": {
+        "zh-Hans": "年度税务资料准备",
+        "en": "Annual Tax Records & Preparation"
+      },
+      "readerQuestion": {
+        "zh-Hans": "相关课税年度的文件和规则准备到哪里？",
+        "en": "Which annual records and rule sources are available?"
+      },
+      "layoutPreset": "TAX_RECORD_COVERAGE",
+      "primaryDataBindings": [
+        "records.taxDocuments",
+        "derived.taxEvidenceStatus"
+      ],
+      "diagrams": [
+        {
+          "key": "tax-status",
+          "type": "DOCUMENT_STATUS_MATRIX",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.taxEvidenceStatus"
+          ],
+          "eligibilityRules": [
+            "UNVERIFIED_TAX"
+          ],
+          "whenUnavailable": "SHOW_YEAR_AND_JURISDICTION_CONFIRMATION_REQUIRED",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "folder-search",
+        "calendar-days"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "这一页是报税准备的资料清单，而不是税额或扣除资格的自动结论。",
+        "en": "This is an evidence checklist for tax preparation, not a computation of tax payable or deduction eligibility."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P18-INTERPRETATION",
+        "role": "DOCUMENT_COMPLETENESS_NO_TAX_CALC",
+        "requiredSourceBinding": "FPR3-P18-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 18,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "year_and_evidence_matrix",
+      "supportingDiagramKeys": [
+        "rule_status_provenance"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.taxDocuments",
+        "derived.taxEvidenceStatus"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P18-INTERPRETATION",
+          "role": "DOCUMENT_COMPLETENESS_NO_TAX_CALC",
+          "requiredSourceBinding": "FPR3-P18-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [
+        "FIN-A-TAX"
+      ],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        16
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "UNAPPROVED_YA_BLOCKS_TAX_CALC"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 19,
+      "pageId": "FPR3-P19",
+      "key": "estate",
+      "pillar": "SUPPORT_RECORDS",
+      "topic": {
+        "zh-Hans": "遗产与家庭文件准备",
+        "en": "Estate & Household Document Readiness"
+      },
+      "readerQuestion": {
+        "zh-Hans": "重要文件、角色与分配意愿分别准备好了吗？",
+        "en": "Are key documents, roles and wishes recorded separately?"
+      },
+      "layoutPreset": "ESTATE_READINESS",
+      "primaryDataBindings": [
+        "records.estatePreparation",
+        "records.household",
+        "records.assets"
+      ],
+      "diagrams": [
+        {
+          "key": "estate-map",
+          "type": "ESTATE_READINESS_MAP",
+          "role": "primary",
+          "sourceBindings": [
+            "derived.estateReadiness",
+            "records.estatePreparation"
+          ],
+          "eligibilityRules": [
+            "ESTATE_DISTINCTION"
+          ],
+          "whenUnavailable": "SHOW_DOCUMENT_STATUS_ONLY_NO_LEGAL_CONCLUSION",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "files",
+        "users-round"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "MAIN_DIAGRAM",
+        "SECONDARY_SUPPORT",
+        "SOURCED_INTERPRETATION",
+        "EVIDENCE_AND_SCOPE_FOOTNOTE"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "财务资产记录不会自动成为可处分遗产，受养人与受益人也不是同一身份。遗嘱效力须依适用法律独立处理。",
+        "en": "Financial asset entries do not automatically establish estate property, nor do dependants automatically become beneficiaries. Will validity has a separate legal basis."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P19-INTERPRETATION",
+        "role": "PREPARATION_STATUS_ONLY",
+        "requiredSourceBinding": "FPR3-P19-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 155,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 19,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "asset_role_nomination_will_wishes",
+      "supportingDiagramKeys": [
+        "document_status"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "records.estatePreparation",
+        "records.household",
+        "records.assets"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P19-INTERPRETATION",
+          "role": "PREPARATION_STATUS_ONLY",
+          "requiredSourceBinding": "FPR3-P19-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 155,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        3
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "NO_LEGAL_WILL_WITHOUT_APPROVED_TEMPLATE"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    },
+    {
+      "page": 20,
+      "pageId": "FPR3-P20",
+      "key": "sources",
+      "pillar": "BACK_MATTER",
+      "topic": {
+        "zh-Hans": "方法、来源与延续",
+        "en": "Sources, Calculations & Continuity"
+      },
+      "readerQuestion": {
+        "zh-Hans": "这份报告怎样得出，以及有哪些边界？",
+        "en": "Where do these figures come from and what remains uncertain?"
+      },
+      "layoutPreset": "METHODS_AND_PROVENANCE",
+      "primaryDataBindings": [
+        "report.sourceManifest"
+      ],
+      "diagrams": [
+        {
+          "key": "provenance",
+          "type": "SOURCE_PROVENANCE",
+          "role": "primary",
+          "sourceBindings": [
+            "report.sourceManifest"
+          ],
+          "eligibilityRules": [
+            "EXACT_SOURCE_SNAPSHOT",
+            "KNOWN_NIL_IS_NOT_UNKNOWN"
+          ],
+          "whenUnavailable": "DISPLAY_AVAILABLE_SOURCE_DIGEST_AND_UNRESOLVED_FLAGS",
+          "diagramDataAuthority": "DETERMINISTIC_ONLY",
+          "visualIsDynamic": true,
+          "mustShowUnitsAndAsOf": true
+        }
+      ],
+      "iconFamily": [
+        "notebook-text",
+        "file-check-2"
+      ],
+      "contentBlocks": [
+        "PAGE_HEADING",
+        "SOURCE_LEDGER",
+        "CONSTRAINTS_AND_ASSUMPTIONS",
+        "STATUS_KEY"
+      ],
+      "fixedIntroduction": {
+        "zh-Hans": "每个结论都能追溯到保存版本、计算口径和资料状态。报告属于资料准备与解释，不代替个人专业建议。",
+        "en": "Every conclusion should resolve to its saved source, calculation basis and information state. This report supports preparation and explanation, not personal professional advice."
+      },
+      "paidAiSlot": {
+        "slotId": "FPR3-P20-INTERPRETATION",
+        "role": "SOURCES_AND_SCOPE_ONLY",
+        "requiredSourceBinding": "FPR3-P20-SOURCE_BUNDLE",
+        "maxWordsPerLanguage": 115,
+        "mustRemainFactuallyBound": true,
+        "bilingualSemanticParity": true
+      },
+      "diagramMissingStatePolicy": "NO_DATA_GRAPHICS_MASQUERADING_AS_FACTS",
+      "noAutoPageDeletion": true,
+      "ordinal": 20,
+      "visualAssetRef": "body",
+      "primaryDiagramKey": "fact_to_calculation_to_chart_flow",
+      "supportingDiagramKeys": [
+        "certainty_and_scope_matrix"
+      ],
+      "sourceOwnerRegistryRefs": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "dataBindings": [
+        "report.sourceManifest"
+      ],
+      "chartEligibility": [
+        "SAME_SAVED_VERSION",
+        "SAME_CURRENCY_PERIOD_OWNED_SCOPE",
+        "KNOWN_IS_NOT_ZERO"
+      ],
+      "chartMissingFallback": "EVIDENCE_DIAGRAM",
+      "narrativeSlots": [
+        {
+          "slotId": "FPR3-P20-INTERPRETATION",
+          "role": "SOURCES_AND_SCOPE_ONLY",
+          "requiredSourceBinding": "FPR3-P20-SOURCE_BUNDLE",
+          "maxWordsPerLanguage": 115,
+          "mustRemainFactuallyBound": true,
+          "bilingualSemanticParity": true
+        }
+      ],
+      "sourceNoteMode": "SHORT_REFERENCE",
+      "conditionalAppendixKeys": [],
+      "themeColorTokens": [
+        "titleNavy",
+        "graphTeal",
+        "brandGold"
+      ],
+      "printSafeZone": {
+        "leftMM": 16,
+        "rightMM": 16,
+        "topPercent": 16.2,
+        "bottomPercent": 18.5
+      },
+      "freePaidAvailability": "PAID_CANDIDATE",
+      "regressionIds": [
+        "CH01",
+        "CH02",
+        "CH04",
+        "CH05",
+        "CH06"
+      ],
+      "legacyFactfinderPageRefs": [
+        2,
+        3,
+        4
+      ],
+      "caseSensitiveSourceVersion": true,
+      "retentionPolicy": "IMMUTABLE_STORED_HTML",
+      "disclosureBoundary": [
+        "TECHNICAL_HASH_IN_DETAIL"
+      ],
+      "privacyGate": "CURRENT_REPORT_GRANT_AND_SUBJECT_ADMISSION"
+    }
+  ],
+  "free": {
+    "corePageCount": 8,
+    "sourcePublicationVersion": "FINANCE_PUBLICATION_R3",
+    "pages": [
+      {
+        "page": 1,
+        "id": "cover",
+        "theme": "overview",
+        "title": {
+          "zh-Hans": "封面与阅读范围",
+          "en": "Cover and scope"
+        },
+        "chartTypes": [
+          "cover-art"
+        ],
+        "contentBlocks": [
+          "identity",
+          "scope",
+          "saved-version"
+        ],
+        "dataDependencies": [
+          "source"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 2,
+        "id": "overview",
+        "theme": "overview",
+        "title": {
+          "zh-Hans": "报告总览",
+          "en": "Report overview"
+        },
+        "chartTypes": [
+          "kpi-cards",
+          "donut",
+          "comparison-bars"
+        ],
+        "contentBlocks": [
+          "four-kpis",
+          "snapshot",
+          "four-pillars"
+        ],
+        "dataDependencies": [
+          "CASH_FLOW",
+          "NET_WORTH"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 3,
+        "id": "executive",
+        "theme": "overview",
+        "title": {
+          "zh-Hans": "重点摘要",
+          "en": "Executive summary"
+        },
+        "chartTypes": [
+          "numbered-findings",
+          "snapshot-cards"
+        ],
+        "contentBlocks": [
+          "findings",
+          "supporting-snapshot",
+          "interpretation"
+        ],
+        "dataDependencies": [
+          "CASH_FLOW",
+          "NET_WORTH",
+          "LIQUIDITY"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 4,
+        "id": "income",
+        "theme": "analysis",
+        "title": {
+          "zh-Hans": "财务分析概览",
+          "en": "Financial analysis overview"
+        },
+        "chartTypes": [
+          "grouped-bars",
+          "annualized-cashflow"
+        ],
+        "contentBlocks": [
+          "monthly-comparison",
+          "annualized-basis",
+          "interpretation"
+        ],
+        "dataDependencies": [
+          "CASH_FLOW"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 5,
+        "id": "allocation",
+        "theme": "resources",
+        "title": {
+          "zh-Hans": "资源规划概览",
+          "en": "Resource planning overview"
+        },
+        "chartTypes": [
+          "allocation-donut",
+          "category-bars"
+        ],
+        "contentBlocks": [
+          "asset-categories",
+          "asset-total",
+          "interpretation"
+        ],
+        "dataDependencies": [
+          "NET_WORTH",
+          "assets"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 6,
+        "id": "protection",
+        "theme": "risk",
+        "title": {
+          "zh-Hans": "风险评估概览",
+          "en": "Risk assessment overview"
+        },
+        "chartTypes": [
+          "evidence-radar",
+          "coverage-gap-state"
+        ],
+        "contentBlocks": [
+          "risk-dimensions",
+          "policy-records",
+          "gap-boundaries",
+          "interpretation"
+        ],
+        "dataDependencies": [
+          "PROTECTION_NEED",
+          "DEBT",
+          "LIQUIDITY",
+          "assets"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 7,
+        "id": "priorities",
+        "theme": "strategy",
+        "title": {
+          "zh-Hans": "行动路径概览",
+          "en": "Strategic next steps overview"
+        },
+        "chartTypes": [
+          "icon-cards",
+          "numbered-priorities"
+        ],
+        "contentBlocks": [
+          "priorities",
+          "why-now",
+          "interpretation"
+        ],
+        "dataDependencies": [
+          "CASH_FLOW",
+          "unknowns",
+          "goals"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      },
+      {
+        "page": 8,
+        "id": "notes",
+        "theme": "notes",
+        "title": {
+          "zh-Hans": "资料、方法与边界",
+          "en": "Data, methods and boundaries"
+        },
+        "chartTypes": [
+          "completeness-strip",
+          "source-index"
+        ],
+        "contentBlocks": [
+          "completeness",
+          "annualization",
+          "assumptions",
+          "followups",
+          "sources"
+        ],
+        "dataDependencies": [
+          "source",
+          "calculationDigest",
+          "assumptions"
+        ],
+        "visibility": [
+          "FREE"
+        ],
+        "deepeningSlots": [],
+        "condensed": true
+      }
+    ],
+    "providerAllowed": false,
+    "optionalSixPageCandidateGenerated": false,
+    "mayReduceWithoutHumanAcceptance": false
+  },
+  "conditionalAppendixRules": [
+    {
+      "key": "LOAN_AMORTIZATION",
+      "addWhen": "EXPLICITLY_INCLUDED_CALCULATED_LOAN_SCENARIO",
+      "diagram": "REPAYMENT_BALANCE_LINE_AND_SCHEDULE",
+      "notes": "No implied bank daily accrual; no double counted repayment."
+    },
+    {
+      "key": "RENTAL_DETAILS",
+      "addWhen": "EXPLICIT_SELECTED_PROPERTY_WITH_MATCHED_PERIOD_AND_CURRENCY",
+      "diagram": "OPERATING_CASH_DEBT_CAPEX_BRIDGE",
+      "notes": "Tax candidate and cash flow separate."
+    },
+    {
+      "key": "RENTAL_PORTFOLIO",
+      "addWhen": "MULTIPLE_SELECTED_PROPERTIES_HAVE_KNOWN_GROUPED_CALCULATION",
+      "diagram": "PORTFOLIO_GROUPED_CASHFLOW_AND_STATUS",
+      "notes": "Do not count selected single-property leaf twice."
+    },
+    {
+      "key": "PROVENANCE_EXTRA",
+      "addWhen": "MANDATORY_SOURCE_INDEX_OVERFLOWS_ON_LAST_CORE_PAGE",
+      "diagram": "EVIDENCE_LEDGER",
+      "notes": "Append without shrinking readable core text."
+    }
+  ],
+  "paidNarrativeContract": {
+    "providerAccess": "CLOSED_UNTIL_SEPARATE_AUTHORIZATION",
+    "modelSelection": "INHERIT_CURRENT_FINANCE_PRODUCT_ADMISSION_DO_NOT_ASSUME_PREVIOUS_MODEL_IS_PERMITTED",
+    "promptVersion": "FINANCE_R3_SOURCE_BOUND_EDITORIAL_CANDIDATE",
+    "inputContents": [
+      "EXACT_OWNER_AUTHORIZED_SOURCE_MANIFEST",
+      "FCR_TYPED_METRICS",
+      "VALIDATED_CHART_DATA",
+      "APPROVED_CUSTOMER_SCENARIOS",
+      "MISSINGNESS",
+      "SECTION_LIMITS"
+    ],
+    "outputPerPage": {
+      "fields": [
+        "pageId",
+        "insightText",
+        "evidenceRefs",
+        "uncertaintyFlags"
+      ],
+      "mustNotProduce": [
+        "AMOUNTS",
+        "CHART_SERIES",
+        "SOURCE_DIGESTS",
+        "LEGAL_CONCLUSIONS",
+        "TAX_DECISIONS",
+        "PROFESSIONAL_PRODUCT_RECOMMENDATIONS"
+      ]
+    },
+    "hardChecks": [
+      "SOURCE_REF_EXACT",
+      "LANGUAGE_PURE_EXCEPT_APPROVED_BILINGUAL_ART",
+      "NUMBER_CLAIMS_RECONCILE",
+      "NO_INVENTED_HISTORY",
+      "UNKNOWN_PRESERVED",
+      "REGULATED_ADVICE_SCOPE_REVIEW",
+      "CONTENT_LENGTH_FIT",
+      "COST_CEILING_INCLUDES_ALL_FOLLOWUPS"
+    ],
+    "paidSamplePreviewPolicy": "DETERMINISTIC_SOURCE_BOUND_SYNTHETIC_PLACEHOLDERS_NO_LIVE_PROVIDER",
+    "followupQuestionEntitlement": {
+      "included": 4,
+      "sharedOrderCapUSD": 5,
+      "accessPurpose": "FINANCE_REPORT_FOLLOWUP",
+      "mustReferToStoredReportVersion": true,
+      "noPersonalProfessionalAdviceWithout_AUTHORITY": true
+    }
+  },
+  "examplesForLocalReview": {
+    "scenarios": [
+      "COMPLETE",
+      "SHORTFALL",
+      "MISSING"
+    ],
+    "locales": [
+      "zh-Hans",
+      "en"
+    ],
+    "outputTiers": [
+      "FREE",
+      "PAID_FULL"
+    ],
+    "initialProviderCalls": 0,
+    "currentPreviewInputs": [
+      "complete-en.html",
+      "complete-zh-Hans.html",
+      "shortfall-en.html",
+      "shortfall-zh-Hans.html",
+      "missing-en.html",
+      "missing-zh-Hans.html",
+      "index(4).html"
+    ],
+    "doNotReclassifyAsProduction": true
+  },
+  "acceptance": {
+    "representativePages": [
+      2,
+      4,
+      8,
+      13,
+      14
+    ],
+    "mandatoryCoreStates": [
+      "COMPLETE",
+      "SHORTFALL",
+      "MISSING"
+    ],
+    "extraRenderedStates": [
+      "JOINT",
+      "SCENARIO",
+      "APPENDICES"
+    ],
+    "languages": [
+      "zh-Hans",
+      "en"
+    ],
+    "paidCorePages": 20,
+    "freeCorePages": 8,
+    "fullCandidateCount": 18,
+    "representativeCandidateCount": 6,
+    "actualCorePages": 288,
+    "actualAppendixPages": 30,
+    "humanAccepted": false,
+    "productionEnabled": false,
+    "evidenceRoot": "tools/review/financial-publication-r3-1"
+  },
+  "integration": {
+    "currentCanonicalContract": "content/financial/reports/publication-v2-contract.json",
+    "writeCandidateNotReplace": "content/financial/reports/financial-publication-r3-page-contract.candidate.json",
+    "preview": "professional/financial/report-preview/index.html",
+    "existingCustomerReportRuntime": "functions/financial/holistic-planning-product/factual-report-job.js",
+    "sourcePreservation": "DO_NOT_REWRITE_FCR_FDR_PFR_DAR_OR_HISTORICAL_FROZEN_RECEIPTS",
+    "adoptionInstruction": "READ CURRENT WORKTREE AND GOVERNANCE; WIRE R3 AS ADDITIVE OPT_IN_SUCCESSOR; ACCEPT AFTER HUMAN REVIEW; DO_NOT_COMMIT_PUSH_DEPLOY_OR_PAID_CALL",
+    "status": "PROPOSED_NOT_WRITTEN_TO_REPO"
+  },
+  "legacyV2PageMapping": {
+    "cover": [
+      "FPR3-P01"
+    ],
+    "summary": [
+      "FPR3-P02"
+    ],
+    "household": [
+      "FPR3-P03"
+    ],
+    "balance": [
+      "FPR3-P07",
+      "FPR3-P08"
+    ],
+    "cashflow": [
+      "FPR3-P04",
+      "FPR3-P05"
+    ],
+    "expenses": [
+      "FPR3-P04",
+      "FPR3-P05"
+    ],
+    "liquidity": [
+      "FPR3-P09",
+      "FPR3-P12"
+    ],
+    "debt": [
+      "FPR3-P11"
+    ],
+    "protection": [
+      "FPR3-P13",
+      "FPR3-P14"
+    ],
+    "goals": [
+      "FPR3-P10",
+      "FPR3-P16"
+    ],
+    "funding": [
+      "FPR3-P10"
+    ],
+    "scenarios": [
+      "FPR3-P06",
+      "FPR3-P12"
+    ],
+    "tax": [
+      "FPR3-P18"
+    ],
+    "estate": [
+      "FPR3-P19"
+    ],
+    "next": [
+      "FPR3-P15",
+      "FPR3-P16",
+      "FPR3-P17"
+    ],
+    "sources": [
+      "FPR3-P20"
+    ]
+  },
+  "legacyV2PageMappingNotes": "Mapped by meaning, not literal one-to-one; retain exact FDR/FCR source and report content lineage. Differences in R3 publication order do not rewrite V2 frozen artifacts.",
+  "production": {
+    "enabled": false,
+    "realProviderCallsAuthorized": false,
+    "realStripePriceBoundByThisCandidate": false,
+    "deploymentAuthorized": false,
+    "taxRulesApprovedByThisCandidate": false,
+    "legalWillApprovedByThisCandidate": false,
+    "humanAccepted": false
+  },
+  "appendixRegistry": [
+    {
+      "appendixId": "FIN-A-BANK",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-INVESTMENTS",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-PROPERTY",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-LOANS",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-POLICIES",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-CASHFLOW",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-GOALS",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-SCENARIOS",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-TAX",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-RATIOS",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-RENTAL",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    },
+    {
+      "appendixId": "FIN-A-SOURCES",
+      "requiresSelection": true,
+      "requiresFacts": true,
+      "requiresScope": true,
+      "maxRowsPerPage": 6
+    }
+  ],
+  "providerPolicy": {
+    "enabled": false,
+    "calls": 0,
+    "priceMYR": 69,
+    "bilingual": true,
+    "includedFollowups": 4,
+    "wholeOrderCapUSD": 5
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-MCD-4-EXECUTION-CONTRACT-v1.0.0",
+  "work": "MCD-4",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "status": "ACTIVE_MPA_FIRST_PARTIAL_EXECUTION_NO_CANONICAL_PROJECTION",
+  "sequence": ["REQUEST", "MPA_EVALUATION", "CANONICAL_INPUT_EVALUATION", "ADAPTER_BINDING_RESOLUTION", "PARTIAL_EXECUTION", "REASON_CODES"],
+  "requestSchema": "content/professional/method-client-delivery/schemas/mcd-method-execution-request-v1.schema.json",
+  "resultSchema": "content/professional/method-client-delivery/schemas/mcd-method-execution-result-v1.schema.json",
+  "reasonCodeRegistry": "content/professional/method-client-delivery/registries/mcd-4-reason-code-registry-v1.json",
+  "rules": {
+    "mpaEvaluationMustPrecedeInputEvaluation": true,
+    "mpaBlockedRequestMayNotReachCore": true,
+    "mcdMayNotGrantProductionAuthority": true,
+    "canonicalBirthInputRequiredForEligibleExecution": true,
+    "missingInputValuesMayNotBeGuessed": true,
+    "partialExecutionMustDiscloseDeferredStages": true,
+    "reasonCodesRequiredForPartialOrBlockedExecution": true,
+    "coreHistoricalValidationExecutionModePreserved": true,
+    "mpaProductionAuthorityMayAuthorizeMcdUseOfImmutableValidationModeCoreCalculation": true,
+    "coreResultIsInternalExecutionArtifactUntilMcd5": true,
+    "apiSuppressesRawCoreResultsUntilMcd5": true,
+    "canonicalProjectionCreated": false,
+    "interpretationCreated": false,
+    "professionalJudgmentCreated": false,
+    "aiUsed": false,
+    "providerUsed": false
+  },
+  "methodExecution": {
+    "AST": {"state": "PARTIAL_EXECUTION", "coreCalculationActive": false, "reason": "GOVERNED_ASTRONOMY_ENGINE_RUNTIME_ADAPTER_NOT_MATERIALIZED", "mpaAuthorityRequired": true},
+    "BZR": {"state": "PARTIAL_EXECUTION", "coreCalculationActive": false, "reason": "GOVERNED_SOLAR_TERM_RUNTIME_ADAPTER_NOT_MATERIALIZED", "unknownTimeDegradePreserved": true, "mpaAuthorityRequired": true},
+    "NUM": {"state": "PARTIAL_OR_BOUND_SCOPE_EXECUTION", "birthNumberActive": true, "numberStructureActive": true, "cycleActiveWhenTargetDateAndGovernedTimezoneContextPresent": true, "mpaAuthorityRequired": true},
+    "HDR": {"state": "FAIL_CLOSED", "mpaEvaluationFirst": true, "productionInvocationAllowed": false, "inputCompletenessMayNotOverrideBlock": true, "adapterBypassStillForbidden": true}
+  },
+  "nextWork": "MCD-5"
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/correspondence.v1.json",
+  "title": "PHI OS External Reader Correspondence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "correspondence_id",
+    "reader_type",
+    "interpretation_id",
+    "runtime_evidence_references",
+    "status",
+    "summary",
+    "client_confirmed",
+    "professional_id"
+  ],
+  "properties": {
+    "correspondence_id": {"type": "string", "minLength": 1},
+    "reader_type": {
+      "enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]
+    },
+    "interpretation_id": {"type": "string", "minLength": 1},
+    "runtime_evidence_id": {"type": ["string", "null"]},
+    "runtime_evidence_references": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "status": {
+      "enum": [
+        "possible",
+        "client_confirmed",
+        "professionally_supported",
+        "possible_correspondence",
+        "client_confirmed_correspondence",
+        "professionally_supported_correspondence",
+        "conflicting_evidence",
+        "no_confirmed_correspondence",
+        "insufficient_evidence"
+      ]
+    },
+    "summary": {"type": "string", "minLength": 1},
+    "supporting_evidence": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "conflicting_evidence": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "limitations": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "client_confirmation": {"type": "boolean"},
+    "professional_confirmation": {"type": "boolean"},
+    "client_confirmed": {"type": "boolean"},
+    "professional_id": {"type": "string", "minLength": 1},
+    "reader_became_reality_fact": {"const": false},
+    "runtime_evidence_required_for_support": {"const": true},
+    "runtime_evidence_written": {"const": false},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"}
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "contractCode": "PHI-OS-DAR-W14-WILL-DOWNLOAD-PRIVACY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W14",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_PRIVATE_DOWNLOAD_BOUNDARY",
+  "webPrivacyAuthority": "content/web-production/contracts/wpr-privacy-security-production-v1.json",
+  "commerceTokenReference": "content/registry/book-commerce-schema.json",
+  "requirements": {
+    "privateByDefault": true,
+    "authenticatedWhenStored": true,
+    "timeLimitedDownloadTokenRequiredWhenRemote": true,
+    "encryptedStorageRequired": true,
+    "cacheControl": "private, no-store",
+    "robots": "noindex, nofollow, noarchive",
+    "noPublicR2ObjectForWill": true,
+    "noAnalyticsPayloadLeakage": true,
+    "noUrlOrQueryPii": true,
+    "downloadAuditMayStoreMetadataNotDocumentPayload": true
+  },
+  "rules": {
+    "publicAssetDeliveryIsNotWillDeliveryAuthority": true,
+    "tokenDoesNotGrantLegalValidity": true,
+    "downloadDoesNotEqualExecution": true,
+    "rawWillPayloadMustNotEnterAnalytics": true
+  }
+}

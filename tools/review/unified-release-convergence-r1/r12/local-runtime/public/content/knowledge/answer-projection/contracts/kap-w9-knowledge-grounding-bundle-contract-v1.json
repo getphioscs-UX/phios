@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W9-KNOWLEDGE-GROUNDING-BUNDLE-CONTRACT-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W9",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "status": "ACTIVE_GROUNDING_BUNDLE_NO_ANSWER_COMPOSITION",
+  "objectType": "KnowledgeGroundingBundle",
+  "schemaPath": "content/knowledge/answer-projection/schemas/knowledge-grounding-bundle-v1.schema.json",
+  "requiredAuthorityBoundaries": {
+    "authorityClass": "GROUNDED_NON_AUTHORITATIVE_INPUT",
+    "answerComposed": false,
+    "aiUsed": false,
+    "canonicalAuthorityCreated": false,
+    "publicationCreated": false,
+    "realityReadingCreated": false,
+    "persistentCaseCreated": false
+  },
+  "requiredSections": [
+    "question",
+    "normalization",
+    "retrieval",
+    "nodeMatches",
+    "relationships",
+    "sources",
+    "unknowns",
+    "excludedMaterial",
+    "governance"
+  ],
+  "excludedMaterial": [
+    "RAW_FULL_BOOK",
+    "RAW_SECTION_BODY",
+    "UNPUBLISHED_RELATIONSHIP_TARGET_CONTENT",
+    "UPSTREAM_GROUNDED_ANSWER_TEXT",
+    "CLIENT_REALITY_EVIDENCE",
+    "METHOD_CALCULATION_RESULT",
+    "AI_GENERATED_KNOWLEDGE"
+  ],
+  "rules": {
+    "groundingSourcesMustComeFromKSAR": true,
+    "pendingCanonicalBindingMayRemainAsUnknown": true,
+    "unpublishedRelationshipTargetMayRemainAsUnknown": true,
+    "bundleMayBeConsumedByLaterAnswerComposition": true,
+    "bundleItselfIsNotAnswer": true
+  },
+  "nextStep": "KAP-W10_COVERAGE_EVALUATION"
+}

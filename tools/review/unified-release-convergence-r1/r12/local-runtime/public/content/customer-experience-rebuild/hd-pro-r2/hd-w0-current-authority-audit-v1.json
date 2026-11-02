@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R2-W0-AUTHORITY-AUDIT-v1.0.0",
+  "work": "HD-W0",
+  "baselineCommit": "3d66a5037a0c184ba2059c958a5f7e580696b786",
+  "baselineArtifact": "reality.zip",
+  "methodBoundary": {
+    "customerSuppliedMethodId": "XPF",
+    "profileFamily": "HUMAN_DESIGN",
+    "authorityClass": "CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT",
+    "hdrMethodId": "HDR",
+    "hdrExecutionMode": "INTERNAL_VALIDATION_ONLY",
+    "phiosHumanDesignCalculationAuthority": false,
+    "publicHdrExecutionAllowed": false,
+    "advancedVariableAutomaticCalculationAllowed": false
+  },
+  "currentDefect": {
+    "code": "HD-UPLOAD-SELECTED-NOT-SUBMITTED",
+    "observed": "A selected PDF/image only changed the browser file label; extraction ran only when the separate Personal Reality form was submitted.",
+    "successorRequirement": "Human Design intake must have its own explicit read -> extract -> correct -> confirm transition."
+  },
+  "decision": "Implement W0-W10 as a customer-supplied external chart successor without promoting HDR or restricted automatic calculation.",
+  "status": "AUDITED"
+}

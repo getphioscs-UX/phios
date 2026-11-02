@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-016",
+  "title": "HDR-PROJECTION",
+  "scope": "HDR",
+  "role": "PROJECTION",
+  "methodRefs": [
+    "HDR"
+  ],
+  "runtimeRefs": [
+    "content/professional/core-method-runtime/hdr-projection-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CALCULATION_RESULT",
+      "displayLabel": "CALCULATION RESULT",
+      "nodeType": "RESULT",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "INPUT",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "HDR_PROJECTION",
+      "displayLabel": "HDR PROJECTION",
+      "nodeType": "PROCESS",
+      "authorityClass": "SHARED_PROJECTION_RUNTIME",
+      "semanticRole": "METHOD_PROJECTION_STAGE",
+      "container": "SHARED_PROJECTION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CANONICAL_PROJECTION",
+      "displayLabel": "CANONICAL PROJECTION",
+      "nodeType": "RESULT",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "OUTPUT",
+      "container": "SHARED_PROJECTION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-016-E01",
+      "from": "CALCULATION_RESULT",
+      "to": "HDR_PROJECTION",
+      "relation": "PROJECTS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-016-E02",
+      "from": "HDR_PROJECTION",
+      "to": "CANONICAL_PROJECTION",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_PROJECTION_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "HDR_PROJECTION",
+        "CANONICAL_PROJECTION"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CALCULATION_RESULT",
+    "HDR_PROJECTION",
+    "CANONICAL_PROJECTION"
+  ],
+  "mustState": [
+    "projectionAuthority=SHARED_PROJECTION_RUNTIME",
+    "Projection != Interpretation",
+    "Projection != Professional Judgment",
+    "HDR figure does not grant Production eligibility"
+  ],
+  "statementSources": {
+    "projectionAuthority=SHARED_PROJECTION_RUNTIME": "SRC-002",
+    "Projection != Interpretation": "SRC-002",
+    "Projection != Professional Judgment": "SRC-002",
+    "HDR figure does not grant Production eligibility": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

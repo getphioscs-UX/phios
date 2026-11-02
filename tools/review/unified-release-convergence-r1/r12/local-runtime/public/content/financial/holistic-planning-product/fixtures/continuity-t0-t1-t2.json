@@ -1,0 +1,31 @@
+{
+  "fixtureVersion": "HFP-FIXTURE-v1",
+  "scenario": "continuity-t0-t1-t2",
+  "synthetic": true,
+  "mode": "PLANNING",
+  "sourceFcrFixture": "zero-debt.json",
+  "includeFcr": true,
+  "includeFar": true,
+  "verificationState": "UNVERIFIED",
+  "continuity": {
+    "snapshotReferences": [
+      "SNAP:t0",
+      "SNAP:t1",
+      "SNAP:t2"
+    ],
+    "changeEventReferences": [
+      "CHANGE:t1",
+      "CHANGE:t2"
+    ],
+    "goalProgressReferences": [
+      "GOALPROG:t1",
+      "GOALPROG:t2"
+    ],
+    "actionProgressReferences": [
+      "ACTIONPROG:t1",
+      "ACTIONPROG:t2"
+    ],
+    "stalenessState": "CURRENT"
+  },
+  "expectContinuity": true
+}

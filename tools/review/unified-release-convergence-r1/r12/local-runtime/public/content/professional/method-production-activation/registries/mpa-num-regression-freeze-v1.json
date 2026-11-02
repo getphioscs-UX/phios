@@ -1,0 +1,65 @@
+{
+  "registryCode": "MPA-W21-NUM-REGRESSION-FREEZE-v1",
+  "registryVersion": "1.0.0",
+  "work": "MPA-W21",
+  "baselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "status": "PASS_METHOD_SPECIFIC_ACTIVATION_EVIDENCE",
+  "methodCode": "NUMEROLOGY",
+  "pluginCode": "NUM",
+  "requiredCheckerScripts": [],
+  "checkerAliases": [
+    "check:num-w0",
+    "check:num-w1",
+    "check:num-w2",
+    "check:num-w3",
+    "check:num-w4",
+    "check:num-w5",
+    "check:num-w6"
+  ],
+  "fingerprints": [
+    {
+      "path": "functions/core-method-runtime/num-birth-number-runtime.js",
+      "sha256": "e7de5630c7b2e6faef419ba697da22a7bf979de135eb236713ea0fe4aec3e70d"
+    },
+    {
+      "path": "functions/core-method-runtime/num-number-structure-runtime.js",
+      "sha256": "23cde80b9a2d2939ecac5cab6c782e4bbec4702f3a9e1d1e2ca178c4b76766b6"
+    },
+    {
+      "path": "functions/core-method-runtime/num-cycle-runtime.js",
+      "sha256": "9b1155a7b79b75c0d1ce89f78ca89a44208e283439fdea79b63cac6856a4de2c"
+    },
+    {
+      "path": "functions/core-method-runtime/num-projection-runtime.js",
+      "sha256": "7670fce9e12793026b94c67b22189ad2440358952e0404b0cf5105b1144f7b2d"
+    },
+    {
+      "path": "content/professional/core-method-runtime/num-birth-number-runtime-v1.json",
+      "sha256": "a1a148fbf0071f138953abfd47f5cdabe66fd67ae0a90460c5b82b83ebe547d9"
+    },
+    {
+      "path": "content/professional/core-method-runtime/num-cycle-policy-registry-v1.json",
+      "sha256": "2946439f63396a737fb0e9b3693abf31064223e878c7d1cfcade1f7ed67517a0"
+    },
+    {
+      "path": "content/professional/method-production-activation/fixtures/mpa-w21-num-activation-fixture-corpus-v1.1.json",
+      "sha256": "3d73ccce1f9753df47fca8ddc9881c05fcd3882a3cbbbef1bd76ca1149510eae"
+    }
+  ],
+  "triggerCoverage": [
+    "algorithm",
+    "dependency",
+    "registry",
+    "policy"
+  ],
+  "externalTriggerApplicability": {
+    "timezone_library": "NOT_APPLICABLE_BIRTH_DATE_NUMERIC_SCOPE",
+    "ephemeris": "NOT_APPLICABLE"
+  },
+  "rules": {
+    "anyFingerprintDriftRequiresRegression": true,
+    "allNumW0W6CheckersMustPass": true,
+    "professionalCheckerPassMeansBoundaryRemainsBlockedNotProfessionalActivation": true,
+    "productionEligibilityCreated": false
+  }
+}

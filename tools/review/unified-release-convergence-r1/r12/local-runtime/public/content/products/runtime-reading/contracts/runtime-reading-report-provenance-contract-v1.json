@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W24-REPORT-PROVENANCE-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W24.4",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_END_TO_END_STATEMENT_PROVENANCE",
+  "traceChain": [
+    "REPORT_STATEMENT",
+    "INTERPRETATION",
+    "MEANING",
+    "PROJECTION",
+    "CALCULATION_OR_REALITY_INPUT"
+  ],
+  "minimumSourceRecordFields": [
+    "sourceRuntime",
+    "sourceCapability",
+    "sourceVersion",
+    "sourceArtifact",
+    "sourceDigest",
+    "caseReference",
+    "evidenceMaturity"
+  ],
+  "rules": {
+    "everyStatementSourceResolvable": true,
+    "interpretationMustTraceToMeaning": true,
+    "meaningMustTraceToProjectionWhenMethodDerived": true,
+    "projectionMustTraceToCalculationOrGovernedRealityInput": true,
+    "sourceDigestRequired": true,
+    "caseReferenceRequired": true,
+    "evidenceMaturityIsReadFromMRMSNotSelfAssigned": true,
+    "missingLinkFailsClosed": true
+  }
+}

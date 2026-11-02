@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W25-PRODUCTION-CUTOVER-v1.0.0",
+  "work": "HD-PRO-R3-W25",
+  "baselineCommit": "896a01a24f904bee337cfa89a5aa5069cb143a58",
+  "status": "CUSTOMER_PUBLISHED",
+  "gates": {
+    "semanticCensusCurrent": true,
+    "sourceRegistryClean": true,
+    "atomicCorpusAdmitted": true,
+    "compositionRulesSupported": true,
+    "machine96Pass": true,
+    "benchmark12Pass": true,
+    "human24Accepted": true,
+    "customerRendererRegressionPass": true,
+    "realityCompositionPass": true
+  },
+  "lifecycle": [
+    "MACHINE_VERIFIED",
+    "HUMAN_ACCEPTED",
+    "PRODUCTION_ADMITTED",
+    "CUSTOMER_PUBLISHED"
+  ],
+  "cutover": {
+    "activeCustomerReadingVersion": "HD_PRO_R3",
+    "r2State": "CUSTOMER_PUBLISHED_FALLBACK",
+    "r3State": "CUSTOMER_PUBLISHED",
+    "r2FallbackAvailable": true
+  },
+  "boundaries": {
+    "phiosHumanDesignCalculationAuthorityCreated": false,
+    "hdrPublicExecutionAuthorityCreated": false,
+    "automaticVariableOrPHSCalculationCreated": false,
+    "dualChartRelationshipAuthorityCreated": false
+  }
+}

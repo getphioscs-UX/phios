@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-CX-R-BACKEND-CUSTOMER-PROJECTION-MAP-v4.0.0",
+  "work": "CX-R20-CURRENT-MAIN-RECONCILIATION",
+  "executionBaselineCommit": "3eed6a26db6767cdd270719f58636376fcb29e9a",
+  "predecessors": [
+    "content/customer-experience-rebuild/registries/backend-customer-projection-map-v2.json",
+    "content/customer-experience-rebuild/registries/backend-customer-projection-map-v3.json"
+  ],
+  "status": "R20_CURRENT_MAIN_PROJECTION_BOUNDARY_FROZEN",
+  "rules": {
+    "cxConsumesOnly": true,
+    "createsSecondAuthority": false,
+    "availabilityMustReadUpstreamAuthority": true,
+    "hardCodeAvailableForbidden": true,
+    "unknownMustRemainVisible": true,
+    "futureRuntimeMayNotBeSimulated": true
+  },
+  "mappings": [
+    {"projectionId":"ASK","backendAuthorities":["CKA","KAP","CURRENT_FACTS_GATEWAY"],"customerSurfaces":["ASK"],"adapterIds":["KNOWLEDGE_ANSWER"],"state":"ACTIVE"},
+    {"projectionId":"MY_REALITY_CORE","backendAuthorities":["ICR","RDG","RMO"],"customerSurfaces":["MY_REALITY"],"adapterIds":["REALITY"],"state":"ACTIVE"},
+    {"projectionId":"PERSPECTIVES","backendAuthorities":["MPA","METHOD_RUNTIME","CMR"],"customerSurfaces":["PERSPECTIVES","PERSONAL_REALITY"],"adapterIds":["METHODS"],"state":"ACTIVE"},
+    {"projectionId":"READING_UNDERSTANDING","backendAuthorities":["RRE"],"customerSurfaces":["MY_REALITY","PERSONAL_REALITY"],"adapterIds":["READOUT"],"state":"ACTIVE"},
+    {"projectionId":"PROGRESS_CONTINUITY","backendAuthorities":["JR"],"customerSurfaces":["MY_REALITY","ACCOUNT"],"adapterIds":["CONTINUITY"],"state":"ACTIVE"},
+    {"projectionId":"NAVIGATION","backendAuthorities":["RNE"],"customerSurfaces":["MY_REALITY"],"adapterIds":["NAVIGATION"],"state":"ACTIVE"},
+    {"projectionId":"FINANCIAL_REALITY","backendAuthorities":["FDR","FCR","FAR","HFP","PFR"],"customerSurfaces":["FINANCIAL_REALITY"],"adapterIds":["FINANCIAL"],"state":"ACTIVE"},
+    {"projectionId":"PROFESSIONAL_REVIEW","backendAuthorities":["PR","PFR"],"customerSurfaces":["PROFESSIONAL","FINANCIAL_REALITY"],"adapterIds":["PROFESSIONAL_REVIEW"],"state":"ACTIVE"},
+    {"projectionId":"REPORT","backendAuthorities":["RR"],"customerSurfaces":["MY_REALITY","REPORT","PROFESSIONAL"],"adapterIds":["REPORT"],"state":"ACTIVE"},
+    {"projectionId":"KNOWLEDGE","backendAuthorities":["KNOWLEDGE_RUNTIME","KI","PJA"],"customerSurfaces":["KNOWLEDGE","SEARCH"],"adapterIds":[],"state":"GOVERNED_KNOWLEDGE_PROJECTION_OUTSIDE_PRIORITY_ADAPTER_TRANCHE"},
+    {"projectionId":"PRESENTATION","backendAuthorities":["CPR"],"customerSurfaces":["CX_UI"],"adapterIds":[],"state":"PRESENTATION_INFRASTRUCTURE_NOT_RUNTIME_TRUTH_ADAPTER"},
+    {"projectionId":"WEB_DELIVERY","backendAuthorities":["WPR"],"customerSurfaces":["CX_UI"],"adapterIds":[],"state":"DELIVERY_INFRASTRUCTURE_NOT_RUNTIME_TRUTH_ADAPTER"},
+    {"projectionId":"HISTORY","backendAuthorities":["LRM"],"customerSurfaces":["MY_REALITY","ACCOUNT"],"adapterIds":[],"state":"FUTURE_GATED"},
+    {"projectionId":"CASE_LEARNING_RESEARCH","backendAuthorities":["RCL"],"customerSurfaces":["FUTURE"],"adapterIds":[],"state":"FUTURE_GATED"},
+    {"projectionId":"VALIDATION_DISCLOSURE","backendAuthorities":["VAL"],"customerSurfaces":["FUTURE"],"adapterIds":[],"state":"FUTURE_GATED"},
+    {"projectionId":"METRICS","backendAuthorities":["RME"],"customerSurfaces":["FUTURE"],"adapterIds":[],"state":"FUTURE_GATED"}
+  ],
+  "priorityCoverage": [
+    {"phase":"CX-R10","surface":"MY_REALITY","requiredAuthorities":["ICR","RDG","RMO","RRE","JR","RNE","RR"],"adapterIds":["REALITY","READOUT","CONTINUITY","NAVIGATION","REPORT"],"status":"BOUNDARY_READY_NOT_PRODUCT_ACCEPTED"},
+    {"phase":"CX-R12","surface":"PERSONAL_REALITY","requiredAuthorities":["MPA","METHOD_RUNTIME","CMR","RRE"],"adapterIds":["METHODS","READOUT"],"status":"BOUNDARY_READY_NOT_PRODUCT_ACCEPTED"},
+    {"phase":"CX-R13","surface":"FINANCIAL_REALITY","requiredAuthorities":["FDR","FCR","FAR","HFP","PFR"],"adapterIds":["FINANCIAL","PROFESSIONAL_REVIEW"],"status":"BOUNDARY_READY_NOT_PRODUCT_ACCEPTED"},
+    {"phase":"CX-R9-R2","surface":"ASK","requiredAuthorities":["CKA","KAP","CURRENT_FACTS_GATEWAY"],"adapterIds":["KNOWLEDGE_ANSWER"],"status":"BOUNDARY_READY_NOT_PRODUCT_ACCEPTED"}
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/bzr/bzr-four-pillars-result-v1.schema.json",
+  "title": "PHI OS BZR Four Pillars Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "calculationType",
+    "executionMode",
+    "calculationMode",
+    "birthTimeKnown",
+    "hourPillarStatus",
+    "sourceCalendarContextType",
+    "yearPillar",
+    "monthPillar",
+    "dayPillar",
+    "hourPillar",
+    "pillars",
+    "lineage",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "stemCreated",
+    "branchCreated",
+    "pillarCreated",
+    "luckCycleCreated",
+    "projectionNormalized",
+    "projectionCreated",
+    "interpretationCreated",
+    "knowledgeCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-BZR-FOUR-PILLARS-RESULT-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "BZR_FOUR_PILLARS_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "BAZI"
+    },
+    "pluginCode": {
+      "const": "BZR"
+    },
+    "calculationType": {
+      "const": "FOUR_PILLARS"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "calculationMode": {
+      "enum": [
+        "THREE_PILLARS",
+        "FOUR_PILLARS"
+      ]
+    },
+    "birthTimeKnown": {
+      "type": "boolean"
+    },
+    "hourPillarStatus": {
+      "enum": [
+        "UNRESOLVED",
+        "RESOLVED"
+      ]
+    },
+    "sourceCalendarContextType": {
+      "enum": [
+        "BZR_SOLAR_CALENDAR_CONTEXT",
+        "BZR_SOLAR_DATE_CONTEXT"
+      ]
+    },
+    "yearPillar": {
+      "type": "object"
+    },
+    "monthPillar": {
+      "type": "object"
+    },
+    "dayPillar": {
+      "type": "object"
+    },
+    "hourPillar": {
+      "anyOf": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pillars": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 4
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "stemCreated": {
+      "const": true
+    },
+    "branchCreated": {
+      "const": true
+    },
+    "pillarCreated": {
+      "const": true
+    },
+    "luckCycleCreated": {
+      "const": false
+    },
+    "projectionNormalized": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "knowledgeCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}

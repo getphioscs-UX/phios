@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-PATTERN-SCHOOL-REGISTRY-v1.2.0",
+  "work": "BAZI-FP-W5",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "status": "SOURCE_ADMITTED_DETAILED_V2_RULESET_FROZEN",
+  "registryVersion": "1.2.0",
+  "schools": [
+    {
+      "schoolCode": "ZI_PING_MONTH_COMMAND_PATTERN_v1",
+      "labelZh": "子平真诠月令格局层",
+      "authoritySourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
+      "sourceClaimRefs": [
+        "BZR-CLM-ZPZQ-08-MONTH-COMMAND-001",
+        "BZR-CLM-ZPZQ-08-SHUN-NI-002",
+        "BZR-CLM-ZPZQ-09-CONDITIONAL-FORMATION-003",
+        "BZR-CLM-ZPZQ-10-VARIATION-004",
+        "BZR-CLM-ZPZQ-12-NO-AUTO-RANK-005",
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-007",
+        "BZR-CLM-ZPZQ-09-ZHENGGUAN-FORMATION-013",
+        "BZR-CLM-ZPZQ-09-CAI-FORMATION-014",
+        "BZR-CLM-ZPZQ-09-YIN-FORMATION-015",
+        "BZR-CLM-ZPZQ-09-SHISHEN-FORMATION-016",
+        "BZR-CLM-ZPZQ-09-QISHA-FORMATION-017",
+        "BZR-CLM-ZPZQ-09-SHANGGUAN-FORMATION-018",
+        "BZR-CLM-ZPZQ-09-JIANLU-YUEJIE-FORMATION-019",
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020",
+        "BZR-CLM-ZPZQ-09-TABOO-WITHIN-FORMATION-021",
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022",
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-DETAIL-023"
+      ],
+      "sourceAdmissionRequired": true,
+      "productionVerdictEnabled": false,
+      "candidateFamilies": [
+        "ZHENG_GUAN",
+        "QI_SHA",
+        "CAI",
+        "YIN",
+        "SHI_SHEN",
+        "SHANG_GUAN",
+        "PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE"
+      ],
+      "boundaries": {
+        "monthBranchLookupAloneMayEstablishPattern": false,
+        "visibleStemAndCombinationVariationMustBeExposed": true,
+        "patternNameMayCreateQualityScore": false,
+        "patternNameMayCreateLifeOutcome": false,
+        "peerMonthCommandRequiresDedicatedJianLuYueJieRule": true
+      },
+      "sourceAdmissionComplete": true,
+      "ruleEvaluationEnabled": true,
+      "primaryPatternAssignmentEnabled": false,
+      "rulesetRef": "content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v2.json",
+      "decisionCoverage": {
+        "candidateFamilyClassification": "SUPPORTED",
+        "formationDefeatRescueCounterEvidence": "SUPPORTED_CONDITIONAL",
+        "jianluYuejieSpecialPath": "SUPPORTED",
+        "primaryPatternFormation": "PREREQUISITE_GATED_NO_AUTO_ASSIGNMENT",
+        "qualityRanking": "FORBIDDEN",
+        "lifeOutcomePrediction": "FORBIDDEN"
+      },
+      "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+      "detailedRuleCoverageEnabled": true
+    }
+  ],
+  "noSilentSchoolBlend": true,
+  "predecessorRef": "content/interpretation/bazi/registries/bazi-pattern-school-registry-v1.1.json",
+  "currentBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140"
+}

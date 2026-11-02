@@ -1,0 +1,36 @@
+{
+  "policyCode": "KAU-E1R-HUMAN-REVIEW-RECOMMENDATION-POLICY",
+  "policyVersion": "1.0.0",
+  "workCode": "KAU-E1R",
+  "status": "ACTIVE_ADVISORY_ONLY",
+  "authority": "DECISION_SUPPORT_ONLY",
+  "rules": [
+    {
+      "when": "riskFlags contains CURRENT_ALR_ARCHITECTURE_CONFLICT_REVIEW",
+      "recommend": "DEFER_WITH_HIGH_REVIEW_PRIORITY"
+    },
+    {
+      "when": "proposedReviewClass = REVIEW_SUPPORTING_RELATIONSHIP",
+      "recommend": "SUPPORTS"
+    },
+    {
+      "when": "proposedReviewClass = REVIEW_PARTIAL_OVERLAP and riskFlags contains LEGACY_TERMINOLOGY_EVOLUTION",
+      "recommend": "TERMINOLOGY_PREDECESSOR"
+    },
+    {
+      "when": "proposedReviewClass = REVIEW_PARTIAL_OVERLAP",
+      "recommend": "PARTIAL_OVERLAP"
+    },
+    {
+      "when": "otherwise",
+      "recommend": "DEFER"
+    }
+  ],
+  "invariants": {
+    "recommendationIsHumanDecision": false,
+    "recommendationMayCreateCanonicalRelationship": false,
+    "recommendationMayMutateCanonicalNode": false,
+    "recommendationMayPromoteProductionReadiness": false,
+    "humanDecisionRequiredForAcceptance": true
+  }
+}

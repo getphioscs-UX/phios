@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-runtime/versioned-method-meaning-mapping-registry-v1.schema.json",
+  "title": "PHI OS Versioned Method-to-Meaning Mapping Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "schemaVersion",
+    "productionStatus",
+    "mappingCount",
+    "mappings"
+  ],
+  "properties": {
+    "registryCode": { "const": "PHI-OS-VERSIONED-METHOD-MEANING-MAPPING-REGISTRY" },
+    "registryVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "schemaVersion": { "const": "PHI-OS-VERSIONED-METHOD-MEANING-MAPPING-REGISTRY-v1.0.0" },
+    "productionStatus": { "const": "validation_only" },
+    "mappingCount": { "type": "integer", "minimum": 0 },
+    "mappings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/mappingRecord" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "mappingRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mappingId",
+        "mappingCode",
+        "mappingVersion",
+        "sourceMethodCode",
+        "sourceProjectionSchemaVersion",
+        "projectionType",
+        "projectionPredicate",
+        "targetMeaningCodes",
+        "mappingAuthority",
+        "mappingConfidence",
+        "boundary",
+        "predicateHash",
+        "targetMeaningHash",
+        "mappingDigest",
+        "compatibility",
+        "lifecycle",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "mappingId": {
+          "type": "string",
+          "pattern": "^MAPID-[A-Z][A-Z0-9_]+(?:-[A-Z0-9_]+)+$"
+        },
+        "mappingCode": {
+          "type": "string",
+          "pattern": "^MAP-[A-Z][A-Z0-9_]+-[A-Z][A-Z0-9_]+-[A-Z0-9_]+$"
+        },
+        "mappingVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "sourceMethodCode": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "sourceProjectionSchemaVersion": {
+          "const": "PHI-OS-CANONICAL-PROJECTION-v1.0.0"
+        },
+        "projectionType": {
+          "enum": [
+            "GATE", "CHANNEL", "CENTER", "AUTHORITY", "PROFILE",
+            "PLANET", "HOUSE", "ASPECT", "STEM", "BRANCH",
+            "PILLAR", "LUCK_CYCLE", "HEXAGRAM", "CARD"
+          ]
+        },
+        "projectionPredicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["predicateVersion", "operator", "path", "value"],
+          "properties": {
+            "predicateVersion": { "const": "1.0.0" },
+            "operator": { "enum": ["equals", "in"] },
+            "path": {
+              "type": "string",
+              "pattern": "^projection(Value|Code)(\\.[A-Za-z][A-Za-z0-9_]*)*$"
+            },
+            "value": {}
+          }
+        },
+        "targetMeaningCodes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^CM-[A-Z0-9]+(?:-[A-Z0-9]+)+$"
+          }
+        },
+        "mappingAuthority": { "const": "PHIOS" },
+        "mappingConfidence": { "enum": ["proposed", "reviewed", "validated"] },
+        "boundary": { "const": "validation_only" },
+        "predicateHash": { "$ref": "#/$defs/sha256" },
+        "targetMeaningHash": { "$ref": "#/$defs/sha256" },
+        "mappingDigest": { "$ref": "#/$defs/sha256" },
+        "compatibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "backwardCompatible",
+            "migrationRequired",
+            "compatibleFromVersions"
+          ],
+          "properties": {
+            "backwardCompatible": { "type": "boolean" },
+            "migrationRequired": { "type": "boolean" },
+            "compatibleFromVersions": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+            }
+          }
+        },
+        "lifecycle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "deprecated",
+            "deprecatedAt",
+            "deprecatedReason",
+            "successorMappingId"
+          ],
+          "properties": {
+            "status": { "enum": ["draft", "validation_only", "deprecated"] },
+            "deprecated": { "type": "boolean" },
+            "deprecatedAt": { "type": ["string", "null"], "format": "date-time" },
+            "deprecatedReason": { "type": ["string", "null"] },
+            "successorMappingId": {
+              "type": ["string", "null"],
+              "pattern": "^MAPID-[A-Z][A-Z0-9_]+(?:-[A-Z0-9_]+)+$"
+            }
+          }
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

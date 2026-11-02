@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-POSITION-CONTRACT-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W5",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "REGISTRY_BOUND_NON_PREDICTIVE_POSITION_CONTRACT",
+  "positionIdentityFields": [
+    "spreadId",
+    "spreadVersion",
+    "positionId",
+    "order",
+    "label"
+  ],
+  "governedPositions": [
+    {
+      "spreadId": "ONE_CARD",
+      "spreadVersion": "1.0.0",
+      "positions": [
+        {
+          "positionId": "WHAT_DESERVES_ATTENTION",
+          "order": 1,
+          "label": "What deserves attention",
+          "temporalPredictionRole": false
+        }
+      ]
+    },
+    {
+      "spreadId": "THREE_CARD",
+      "spreadVersion": "1.0.0",
+      "positions": [
+        {
+          "positionId": "SITUATION",
+          "order": 1,
+          "label": "Situation",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "TENSION",
+          "order": 2,
+          "label": "Tension",
+          "temporalPredictionRole": false
+        },
+        {
+          "positionId": "CONSIDERATION",
+          "order": 3,
+          "label": "Consideration",
+          "temporalPredictionRole": false
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "positionAuthority": "TAROT_SPREAD_REGISTRY_V1",
+    "pastPresentFutureDefaultAllowed": false,
+    "temporalPredictionRoleAllowed": false,
+    "pagePromptMayRenamePosition": false,
+    "positionMayCreateOutcomeClaim": false
+  }
+}

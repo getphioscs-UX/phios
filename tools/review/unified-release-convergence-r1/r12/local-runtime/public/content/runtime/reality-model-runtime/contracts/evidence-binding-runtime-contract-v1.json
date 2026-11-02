@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-RMO-W8-EVIDENCE-BINDING-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W8",
+  "status": "boundary_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "componentType": "REALITY_EVIDENCE_BINDING",
+  "schemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-evidence-binding-v1.schema.json",
+  "roleRegistryReference": "content/runtime/reality-model-runtime/registries/canonical-evidence-binding-role-registry-v1.json",
+  "authorityBoundary": {
+    "rreOwns": ["REALITY_EVIDENCE_RECORD identity", "governed Evidence production"],
+    "rdgOwns": ["eligibility", "promotion", "data nature", "certainty", "purpose", "sensitivity"],
+    "rmoOwns": ["Reality-component Evidence reference binding", "binding role"]
+  },
+  "rules": {
+    "acceptedRreEvidenceRequired": true,
+    "eligibilityDecisionMustBeEligible": true,
+    "evidenceDigestAndSubjectBindingRequired": true,
+    "bindingTargetsKnownRealityComponents": true,
+    "contraryEvidenceMayRemainBound": true,
+    "bindingIsEvidence": false,
+    "bindingCreatesEvidence": false,
+    "bindingPromotesEvidence": false,
+    "bindingClaimsTruth": false,
+    "bindingStoresEvidencePayload": false,
+    "alrAssessmentCandidateMayBindDirectly": false,
+    "providerOrAiMayCreateBindingAuthority": false,
+    "persistentStoreActivated": false
+  }
+}

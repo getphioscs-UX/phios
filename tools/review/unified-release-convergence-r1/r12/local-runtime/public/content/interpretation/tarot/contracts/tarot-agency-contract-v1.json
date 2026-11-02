@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-AGENCY-CONTRACT-v1.0.0",
+  "phase": "TPA-F",
+  "work": "TPA-W24",
+  "baselineCommit": "a347b414094e23cc361c3c73120173f117eef537",
+  "status": "FROZEN_USER_DECISION_AUTHORITY",
+  "contractVersion": "1.0.0",
+  "methodCode": "TAROT",
+  "decisionAuthority": "USER",
+  "rules": {
+    "tarotMayInformReflection": true,
+    "tarotMayDecide": false,
+    "cardMayCompelAction": false,
+    "sourceMayCompelAction": false,
+    "systemMayCompelAction": false,
+    "professionalDirectiveAuthority": false,
+    "hiddenStateAuthority": false,
+    "futureOutcomeAuthority": false,
+    "diagnosticAuthority": false,
+    "userDecisionRemainsYours": true
+  },
+  "forbiddenDirectives": [
+    "QUIT_JOB",
+    "INVEST_FUNDS",
+    "DIVORCE_OR_SEPARATE",
+    "STOP_MEDICATION",
+    "STOP_TREATMENT",
+    "DECLARE_PREGNANCY",
+    "DECLARE_DEATH",
+    "DECLARE_INFIDELITY",
+    "DECLARE_HIDDEN_FEELINGS_AS_FACT"
+  ],
+  "handoffRule": "WHEN_PROFESSIONAL_OR_SAFETY_AUTHORITY_IS_REQUIRED_TAROT_MUST_NOT_REPLACE_IT"
+}

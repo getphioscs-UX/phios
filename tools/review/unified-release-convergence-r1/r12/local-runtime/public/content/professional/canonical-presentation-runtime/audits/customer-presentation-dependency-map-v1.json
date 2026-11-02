@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-CPR-CUSTOMER-PRESENTATION-DEPENDENCY-MAP-v1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W0",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "CURRENT_DEPENDENCY_MAP",
+  "chain": [
+    {
+      "order": 1,
+      "component": "HDR_REGISTERED_PROFESSIONAL_FINAL_REPORT",
+      "authority": "PROFESSIONAL_REPORT",
+      "path": "functions/professional/hdr-internal/hdr-registered-professional-final-report-runtime.js",
+      "condition": "FINAL_SIGNED"
+    },
+    {
+      "order": 2,
+      "component": "REPORT_RELEASE_ASSERTION",
+      "authority": "REPORT_RELEASE",
+      "path": "functions/canonical-presentation-runtime/report-release-runtime.js",
+      "condition": "EXPLICIT_ACTIVE_RELEASE"
+    },
+    {
+      "order": 3,
+      "component": "RELEASED_CUSTOMER_REPORT_GATE",
+      "authority": "DOWNSTREAM_ELIGIBILITY_PROJECTION",
+      "path": "functions/canonical-presentation-runtime/released-report-projection-runtime.js",
+      "condition": "REPORT_RELEASE_MATCH"
+    },
+    {
+      "order": 4,
+      "component": "CUSTOMER_AUTHORIZATION_ASSERTION",
+      "authority": "EXTERNAL_PERMISSION_RUNTIME",
+      "condition": "ALLOWED_CUSTOMER_MATCH"
+    },
+    {
+      "order": 5,
+      "component": "CPR_CUSTOMER_PROJECTION",
+      "authority": "PRESENTATION_AUTHORITY",
+      "path": "functions/canonical-presentation-runtime/customer-report-presentation-runtime.js",
+      "condition": "AUDIENCE_AFTER_AUTHORIZATION"
+    },
+    {
+      "order": 6,
+      "component": "PDS",
+      "authority": "VISUAL_SYSTEM",
+      "path": "content/registry/pds-w1-experience-contract.json",
+      "condition": "REFERENCE_ONLY"
+    },
+    {
+      "order": 7,
+      "component": "WORKSPACE_OR_PDF_RENDERER",
+      "authority": "LAYOUT_RENDERING_ONLY",
+      "condition": "SEMANTICS_IMMUTABLE"
+    }
+  ],
+  "invariants": {
+    "reportNotMutatedByRelease": true,
+    "releaseNotPresentationAuthority": true,
+    "audienceDoesNotGrantAccess": true,
+    "rendererDoesNotChangeMeaning": true
+  }
+}

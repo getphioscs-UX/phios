@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-APS-L10N-PUBLISHED-ARTICLE-FORMAT-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "work": "APS-L10N",
+  "status": "ACTIVE_SUCCESSOR_AWARE_CHECKER_RECONCILIATION",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "problem": "The standardized published-article-format checker still asserted that KN-PREFACE-001/en must never appear in the visual release manifest, even after completed VAP-L10N R1-R5 created explicit Human Review, Human Approval, Human Publication, English successor authority and frozen same-route release.",
+  "resolution": "Keep the pre-publication fail-closed assertion when no English release exists; when a governed English successor exists, require exact candidate binding, explicit TL Human Review/Approval/Publication, published successor authority and frozen VAP-L10N same-route evidence before accepting the manifest record.",
+  "preservedAuthority": {
+    "repairCandidateDoesNotAutoPublish": true,
+    "humanReviewRequired": true,
+    "humanApprovalRequired": true,
+    "humanPublicationRequired": true,
+    "englishSuccessorAuthorityRequired": true,
+    "vapL10nFreezeRequired": true,
+    "candidateEqualsAuthority": false,
+    "apsCreatesNoPublication": true
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-DA-XIAN-INTEGRATION-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W9",
+  "status": "ENGINEERING_COMPLETE",
+  "runtime": "functions/zi-wei-full-production/ziwei-da-xian-integration-runtime.js",
+  "outputSchema": "PHI-OS-ZIWEI-DA-XIAN-INTEGRATION-IR-v1.0.0",
+  "requiredInputs": [
+    "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0 with existing ZWD timeLayers",
+    "PHI-OS-ZIWEI-FOUR-TRANSFORMATION-MATRIX-v1.0.0",
+    "PHI-OS-ZIWEI-PALACE-RELATIONSHIP-ENGINE-v1.0.0",
+    "PHI-OS-ZIWEI-STAR-COMBINATION-RUNTIME-v1.0.0",
+    "PHI-OS-ZIWEI-PATTERN-RUNTIME-v1.0.0 admitted rules"
+  ],
+  "requiredOutput": [
+    "period",
+    "roleOverlays",
+    "currentLifeNetwork",
+    "transformationBindings",
+    "natalDaXianTransformationOverlaps",
+    "patternContext",
+    "daXianIntegrationDigest"
+  ],
+  "rules": {
+    "mustReuseExistingZwdPeriod": true,
+    "mustReuseW6GeometryByBranch": true,
+    "mustUseExactlyFourDaXianTransformationsWhenActive": true,
+    "mayRecalculateDirection": false,
+    "mayReselectPeriod": false,
+    "mayInferTemporalPatternOutcome": false,
+    "mayCreateCustomerMeaning": false
+  }
+}

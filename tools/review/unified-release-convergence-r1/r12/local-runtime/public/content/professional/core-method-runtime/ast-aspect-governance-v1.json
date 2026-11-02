@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "PHI-OS-AST-ASPECT-GOVERNANCE-v1.0.0",
+  "stageCode": "AST-W4A",
+  "governanceCode": "AST_ASPECT_GOVERNANCE",
+  "governanceVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "governance_frozen_runtime_not_started",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "b358ef364a23aab13495ef3e13333978e296ef49"
+  },
+  "authority": {
+    "authorityCode": "AST_ASPECT_GOVERNANCE",
+    "authorityType": "METHOD_GOVERNANCE_EXTENSION",
+    "runtimeAuthority": false,
+    "productionAuthority": false,
+    "interpretationAuthority": false
+  },
+  "aspectRegistry": [
+    {
+      "aspectCode": "CONJUNCTION",
+      "angleDegrees": 0,
+      "category": "major",
+      "symmetry": "unordered_pair",
+      "status": "registered"
+    },
+    {
+      "aspectCode": "SEXTILE",
+      "angleDegrees": 60,
+      "category": "major",
+      "symmetry": "unordered_pair",
+      "status": "registered"
+    },
+    {
+      "aspectCode": "SQUARE",
+      "angleDegrees": 90,
+      "category": "major",
+      "symmetry": "unordered_pair",
+      "status": "registered"
+    },
+    {
+      "aspectCode": "TRINE",
+      "angleDegrees": 120,
+      "category": "major",
+      "symmetry": "unordered_pair",
+      "status": "registered"
+    },
+    {
+      "aspectCode": "OPPOSITION",
+      "angleDegrees": 180,
+      "category": "major",
+      "symmetry": "unordered_pair",
+      "status": "registered"
+    }
+  ],
+  "aspectSets": [
+    {
+      "aspectSetCode": "MAJOR_ASPECTS_V1",
+      "aspectSetVersion": "1.0.0",
+      "status": "candidate_validation_only",
+      "aspectCodes": [
+        "CONJUNCTION",
+        "SEXTILE",
+        "SQUARE",
+        "TRINE",
+        "OPPOSITION"
+      ],
+      "productionApproved": false
+    }
+  ],
+  "orbPolicies": [
+    {
+      "orbPolicyCode": "EXACT_ONLY_VALIDATION_V1",
+      "orbPolicyVersion": "1.0.0",
+      "status": "approved_for_validation_only",
+      "defaultOrbDegrees": 0,
+      "perAspectOverrides": {},
+      "luminaryOverridesAllowed": false,
+      "bodySpecificOverridesAllowed": false,
+      "customOverridesAllowed": false,
+      "productionApproved": false
+    }
+  ],
+  "applyingPolicies": [
+    {
+      "applyingPolicyCode": "LONGITUDE_SPEED_DIRECTION_V1",
+      "applyingPolicyVersion": "1.0.0",
+      "status": "candidate_validation_only",
+      "requiresLongitudeSpeed": true,
+      "classificationValues": [
+        "APPLYING",
+        "SEPARATING",
+        "EXACT",
+        "UNDETERMINED"
+      ],
+      "unknownSpeedPolicy": "UNDETERMINED",
+      "productionApproved": false
+    }
+  ],
+  "priorityPolicies": [
+    {
+      "priorityPolicyCode": "MAJOR_ASPECT_PRIORITY_V1",
+      "priorityPolicyVersion": "1.0.0",
+      "status": "candidate_validation_only",
+      "orderedAspectCodes": [
+        "CONJUNCTION",
+        "OPPOSITION",
+        "TRINE",
+        "SQUARE",
+        "SEXTILE"
+      ],
+      "priorityUse": "deterministic_tie_break_only",
+      "productionApproved": false
+    }
+  ],
+  "normalizationPolicy": {
+    "normalizationPolicyCode": "SHORTEST_ANGULAR_SEPARATION_V1",
+    "normalizationPolicyVersion": "1.0.0",
+    "inputLongitudeRange": "[0,360)",
+    "outputSeparationRange": "[0,180]",
+    "formulaCode": "MIN_ABSOLUTE_MODULAR_SEPARATION",
+    "bodyPairOrdering": "LEXICOGRAPHIC_BODY_CODE",
+    "duplicatePairAllowed": false
+  },
+  "validationBoundary": {
+    "executionMode": "validation",
+    "exactOnly": true,
+    "maximumAuthorizedOrbDegrees": 0,
+    "minimumAuthorizedOrbDegrees": 0,
+    "oneResultPerBodyPair": true,
+    "ambiguousMatchPolicy": "FAIL_CLOSED",
+    "missingSpeedPolicy": "UNDETERMINED",
+    "unknownAspectCodePolicy": "FAIL_CLOSED",
+    "unknownPolicyCodePolicy": "FAIL_CLOSED",
+    "runtimeMayInventPolicy": false
+  },
+  "runtimeContract": {
+    "runtimeStage": "AST-W4B",
+    "registryReadRequired": true,
+    "hardCodedAspectAnglesAllowed": false,
+    "hardCodedOrbAllowed": false,
+    "hardCodedPriorityAllowed": false,
+    "localPolicyOverrideAllowed": false,
+    "sharedCalculationRuntimeRequired": true,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false
+  },
+  "boundaries": {
+    "aspectDetectionExecuted": false,
+    "aspectResultCreated": false,
+    "projectionCreated": false,
+    "interpretationCreated": false,
+    "professionalConclusionCreated": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "AST-W4B"
+}

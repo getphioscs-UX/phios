@@ -1,0 +1,2145 @@
+{
+  "registryCode": "PHI-OS-WPR-5V-W4-CANONICAL-WEB-PRODUCTION-SUCCESSOR-v1",
+  "registryVersion": "1.1.0",
+  "work": "WPR-5V-W4",
+  "baselineCommit": "1cbc50f7590759774944a577d3082c13ef59c40b",
+  "status": "POST_FREEZE_FIVE_VOLUME_SUCCESSOR_LIMITED_PRODUCTION",
+  "schemaReference": "content/web-production/schemas/canonical-web-production-v1.schema.json",
+  "productionRecords": [
+    {
+      "productionCode": "WPR-HOME-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "HOME",
+      "routeCode": "HOME",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json",
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/homepage-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "content/registry/public-assets.json"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-HOME-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-LIBRARY-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "LIBRARY",
+      "routeCode": "LIBRARY",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json",
+        "content/registry/figures.json",
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/library-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-LIBRARY-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-ARTICLE-INDEX-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "LIBRARY",
+      "routeCode": "ARTICLES",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "PJA",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/library-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-ARTICLE-INDEX-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-ARTICLE-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "ARTICLE",
+      "routeCode": "ARTICLE",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "PJA",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/article-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-ARTICLE-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-FIGURE-GALLERY-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "FIGURE",
+      "routeCode": "FIGURES",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/figures.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/figure-diagram-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-FIGURE-GALLERY-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-FIGURE-DETAIL-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "FIGURE",
+      "routeCode": "FIGURE",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/figures.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/figure-diagram-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-FIGURE-DETAIL-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOKS-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOKS",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "content/registry/public-assets.json"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOKS-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-1-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_FORMATION",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-1-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-1-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-2-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_RUNTIME",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-2-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-2-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-3-PUBLIC-en",
+      "productionVersion": "1.1.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_CONTINUITY",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-3-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-3-PUBLIC-v1.1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-4-PUBLIC-en",
+      "productionVersion": "1.1.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_CIVILIZATION",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-4-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-4-PUBLIC-v1.1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-ACADEMY-DISCOVERY-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "ACADEMY_DISCOVERY",
+      "routeCode": "ACADEMY",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/academy/academy-learning-runtime/"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "ALR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/academy-discovery-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-ACADEMY-DISCOVERY-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-HOME-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "HOME",
+      "routeCode": "HOME",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json",
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/homepage-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "content/registry/public-assets.json"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-HOME-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-LIBRARY-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "LIBRARY",
+      "routeCode": "LIBRARY",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json",
+        "content/registry/figures.json",
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/library-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-LIBRARY-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-ARTICLE-INDEX-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "LIBRARY",
+      "routeCode": "ARTICLES",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "PJA",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/library-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-ARTICLE-INDEX-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-ARTICLE-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "ARTICLE",
+      "routeCode": "ARTICLE",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/knowledge/public/published-articles.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "PJA",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/article-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-ARTICLE-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "EXISTING_PUBLISHED_RUNTIME_ACCEPTED",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-FIGURE-GALLERY-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "FIGURE",
+      "routeCode": "FIGURES",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/figures.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/figure-diagram-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-FIGURE-GALLERY-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-FIGURE-DETAIL-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "FIGURE",
+      "routeCode": "FIGURE",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/figures.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/figure-diagram-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-FIGURE-DETAIL-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOKS-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOKS",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "content/registry/public-assets.json"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOKS-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-1-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_FORMATION",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "KNR_PUBLIC"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-1-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-1-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-2-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_RUNTIME",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-2-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-2-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-3-PUBLIC-zh_Hans",
+      "productionVersion": "1.1.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_CONTINUITY",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-3-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-3-PUBLIC-v1.1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-4-PUBLIC-zh_Hans",
+      "productionVersion": "1.1.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_CIVILIZATION",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [
+        "BOOK-4-HARDCOVER"
+      ],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-4-PUBLIC-v1.1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-ACADEMY-DISCOVERY-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "ACADEMY_DISCOVERY",
+      "routeCode": "ACADEMY",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/academy/academy-learning-runtime/"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "ALR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/academy-discovery-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-ACADEMY-DISCOVERY-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-OVERVIEW-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "routeCode": "REALITY_JOURNEY",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-safety-boundary-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-recommendation-contract-v1.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_JOURNEY_ORIENTATION",
+        "JR_V2_AUTHORITY_PROJECTION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "JR_V2_READ_ONLY_AUTHORITY_PROJECTION",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY_CANONICAL_REGISTRY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-LOCAL-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "routeCode": "CUSTOMER_WORKSPACE",
+      "locale": "en",
+      "audience": "CUSTOMER",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-progress-contract-v1.json",
+        "content/registry/m3c-journey-dashboard.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "M3C_COMPATIBILITY",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "BROWSER_LOCAL_JOURNEY_STATUS",
+        "RECOVERY_COMPATIBILITY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "BROWSER_LOCAL_JOURNEY_COMPATIBILITY",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY",
+        "privateStateAllowed": "BROWSER_LOCAL_ONLY",
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "legacyCompatibilityReference": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-OVERVIEW-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "routeCode": "REALITY_JOURNEY",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-safety-boundary-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-recommendation-contract-v1.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_JOURNEY_ORIENTATION",
+        "JR_V2_AUTHORITY_PROJECTION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "JR_V2_READ_ONLY_AUTHORITY_PROJECTION",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY_CANONICAL_REGISTRY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-LOCAL-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "routeCode": "CUSTOMER_WORKSPACE",
+      "locale": "zh-Hans",
+      "audience": "CUSTOMER",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-progress-contract-v1.json",
+        "content/registry/m3c-journey-dashboard.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "M3C_COMPATIBILITY",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "BROWSER_LOCAL_JOURNEY_STATUS",
+        "RECOVERY_COMPATIBILITY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "BROWSER_LOCAL_JOURNEY_COMPATIBILITY",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY",
+        "privateStateAllowed": "BROWSER_LOCAL_ONLY",
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "legacyCompatibilityReference": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PERSONAL-RUNTIME-SETUP-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+      "routeCode": "PERSONAL_RUNTIME_SETUP",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
+        "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+        "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "content/web-production/registries/wpr-personal-runtime-projection-registry-v1.json",
+        "content/web-production/registries/wpr-public-vocabulary-registry-v2.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "MPA",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/personal-runtime-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PERSONAL_RUNTIME_INPUT_READINESS",
+        "METHOD_AVAILABILITY_ORIENTATION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "EPHEMERAL_INPUT_READINESS_NO_METHOD_EXECUTION",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true,
+        "methodExecutionAllowed": false
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_EPHEMERAL_INPUT_READINESS",
+        "privateStateAllowed": "DOM_MEMORY_ONLY",
+        "serverCustomerDataAllowed": false,
+        "localStorageAllowed": false,
+        "sessionStorageAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W21",
+        "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+        "mpaReadinessReference": "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PERSONAL-RUNTIME-SETUP-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+      "routeCode": "PERSONAL_RUNTIME_SETUP",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
+        "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+        "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "content/web-production/registries/wpr-personal-runtime-projection-registry-v1.json",
+        "content/web-production/registries/wpr-public-vocabulary-registry-v2.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "MPA",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/personal-runtime-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PERSONAL_RUNTIME_INPUT_READINESS",
+        "METHOD_AVAILABILITY_ORIENTATION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "EPHEMERAL_INPUT_READINESS_NO_METHOD_EXECUTION",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true,
+        "methodExecutionAllowed": false
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_EPHEMERAL_INPUT_READINESS",
+        "privateStateAllowed": "DOM_MEMORY_ONLY",
+        "serverCustomerDataAllowed": false,
+        "localStorageAllowed": false,
+        "sessionStorageAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W21",
+        "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+        "mpaReadinessReference": "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PROFESSIONAL-DISCOVERY-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PROFESSIONAL",
+      "routeCode": "PROFESSIONAL",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "PR"
+      ],
+      "runtimeReferences": [
+        "PR"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "professionalJudgmentCreationAllowed": false,
+        "professionalPermissionCreationAllowed": false
+      },
+      "hydrationPolicy": {
+        "privateDataAllowed": false,
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "mode": "PUBLIC_STATIC_METADATA",
+        "maxAgeSeconds": 300
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "followLinks": true
+      },
+      "lineage": {
+        "wprWork": "WPR-W22",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-FINANCIAL-DISCOVERY-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "FINANCIAL",
+      "routeCode": "FINANCIAL",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "financialCalculationExecutionAllowed": false,
+        "financialRecommendationCreationAllowed": false,
+        "regulatedAdviceCreationAllowed": false
+      },
+      "hydrationPolicy": {
+        "privateDataAllowed": false,
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "mode": "PUBLIC_STATIC_METADATA",
+        "maxAgeSeconds": 300
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "followLinks": true
+      },
+      "lineage": {
+        "wprWork": "WPR-W22",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PROFESSIONAL-WORKSPACE-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "routeCode": "PROFESSIONAL_WORKSPACE",
+      "locale": "en",
+      "audience": "PROFESSIONAL",
+      "sourceReferences": [
+        "PR",
+        "RDG",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PROFESSIONAL_AUTHORIZED",
+      "dataPurpose": [
+        "SERVICE_DELIVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "professionalJudgmentCreationAllowed": false,
+        "reportGenerationAllowed": false
+      },
+      "hydrationPolicy": {
+        "authorizedPayloadRequired": true,
+        "wprPrivatePayloadFetchAllowed": false,
+        "serverCustomerDataAllowed": false,
+        "externalAuthorizedPayloadOnly": true
+      },
+      "cachePolicy": {
+        "mode": "PRIVATE_NO_STORE",
+        "maxAgeSeconds": 0
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "followLinks": false
+      },
+      "lineage": {
+        "wprWork": "WPR-W23",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "AUTHORIZED_PRIVATE_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PROFESSIONAL-REPORT-VIEWER-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "routeCode": "PROFESSIONAL_REPORTS",
+      "locale": "en",
+      "audience": "PROFESSIONAL",
+      "sourceReferences": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "runtimeReferences": [
+        "RR",
+        "PR"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PROFESSIONAL_AUTHORIZED",
+      "dataPurpose": [
+        "SERVICE_DELIVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "reportGenerationAllowed": false,
+        "reportApprovalAllowed": false,
+        "professionalJudgmentCreationAllowed": false,
+        "printExistingProjectionAllowed": true
+      },
+      "hydrationPolicy": {
+        "authorizedPayloadRequired": true,
+        "wprPrivatePayloadFetchAllowed": false,
+        "serverCustomerDataAllowed": false,
+        "externalAuthorizedPayloadOnly": true
+      },
+      "cachePolicy": {
+        "mode": "PRIVATE_NO_STORE",
+        "maxAgeSeconds": 0
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "followLinks": false
+      },
+      "lineage": {
+        "wprWork": "WPR-W23",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "AUTHORIZED_PRIVATE_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PROFESSIONAL-DISCOVERY-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PROFESSIONAL",
+      "routeCode": "PROFESSIONAL",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "PR"
+      ],
+      "runtimeReferences": [
+        "PR"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "professionalJudgmentCreationAllowed": false,
+        "professionalPermissionCreationAllowed": false
+      },
+      "hydrationPolicy": {
+        "privateDataAllowed": false,
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "mode": "PUBLIC_STATIC_METADATA",
+        "maxAgeSeconds": 300
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "followLinks": true
+      },
+      "lineage": {
+        "wprWork": "WPR-W22",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-FINANCIAL-DISCOVERY-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "FINANCIAL",
+      "routeCode": "FINANCIAL",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "financialCalculationExecutionAllowed": false,
+        "financialRecommendationCreationAllowed": false,
+        "regulatedAdviceCreationAllowed": false
+      },
+      "hydrationPolicy": {
+        "privateDataAllowed": false,
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "mode": "PUBLIC_STATIC_METADATA",
+        "maxAgeSeconds": 300
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "followLinks": true
+      },
+      "lineage": {
+        "wprWork": "WPR-W22",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PROFESSIONAL-WORKSPACE-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "routeCode": "PROFESSIONAL_WORKSPACE",
+      "locale": "zh-Hans",
+      "audience": "PROFESSIONAL",
+      "sourceReferences": [
+        "PR",
+        "RDG",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeReferences": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PROFESSIONAL_AUTHORIZED",
+      "dataPurpose": [
+        "SERVICE_DELIVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "professionalJudgmentCreationAllowed": false,
+        "reportGenerationAllowed": false
+      },
+      "hydrationPolicy": {
+        "authorizedPayloadRequired": true,
+        "wprPrivatePayloadFetchAllowed": false,
+        "serverCustomerDataAllowed": false,
+        "externalAuthorizedPayloadOnly": true
+      },
+      "cachePolicy": {
+        "mode": "PRIVATE_NO_STORE",
+        "maxAgeSeconds": 0
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "followLinks": false
+      },
+      "lineage": {
+        "wprWork": "WPR-W23",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "AUTHORIZED_PRIVATE_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PROFESSIONAL-REPORT-VIEWER-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "routeCode": "PROFESSIONAL_REPORTS",
+      "locale": "zh-Hans",
+      "audience": "PROFESSIONAL",
+      "sourceReferences": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "runtimeReferences": [
+        "RR",
+        "PR"
+      ],
+      "presentationReferences": [],
+      "assetReferences": [],
+      "accessMode": "PROFESSIONAL_AUTHORIZED",
+      "dataPurpose": [
+        "SERVICE_DELIVERY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-COMPOSITION-v1",
+      "renderPolicy": {
+        "htmlIsProjectionOnly": true,
+        "reportGenerationAllowed": false,
+        "reportApprovalAllowed": false,
+        "professionalJudgmentCreationAllowed": false,
+        "printExistingProjectionAllowed": true
+      },
+      "hydrationPolicy": {
+        "authorizedPayloadRequired": true,
+        "wprPrivatePayloadFetchAllowed": false,
+        "serverCustomerDataAllowed": false,
+        "externalAuthorizedPayloadOnly": true
+      },
+      "cachePolicy": {
+        "mode": "PRIVATE_NO_STORE",
+        "maxAgeSeconds": 0
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "followLinks": false
+      },
+      "lineage": {
+        "wprWork": "WPR-W23",
+        "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "AUTHORIZED_PRIVATE_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-5-PUBLIC-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_NAVIGATION",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-5-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true,
+        "missingGovernedCoverFallsBackWithoutInventingAssetAuthority": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b",
+        "successorAddedBy": "WPR-5V-W4",
+        "book5CoverAssetState": "CURRENT_BOOK_REGISTRY_OBJECT_DECLARED_PUBLIC_ASSET_REGISTRY_RECORD_PENDING"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-BOOK-5-PUBLIC-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "BOOK",
+      "routeCode": "BOOK_REALITY_NAVIGATION",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "runtimeReferences": [
+        "WPR"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/public/book-composition-v1.1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_DISCOVERY",
+        "PUBLIC_KNOWLEDGE_PROJECTION"
+      ],
+      "compositionCode": "WPR-BOOK-5-PUBLIC-v1",
+      "renderPolicy": {
+        "mode": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true,
+        "missingGovernedCoverFallsBackWithoutInventingAssetAuthority": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-D",
+        "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL",
+        "fiveVolumeSuccessorBaseline": "1cbc50f7590759774944a577d3082c13ef59c40b",
+        "successorAddedBy": "WPR-5V-W4",
+        "book5CoverAssetState": "CURRENT_BOOK_REGISTRY_OBJECT_DECLARED_PUBLIC_ASSET_REGISTRY_RECORD_PENDING"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    }
+  ],
+  "rules": {
+    "registryPresenceDoesNotCreateSourceAuthority": true,
+    "recordDoesNotCreatePublicationAuthority": true,
+    "recordDoesNotCreateAccessAuthority": true,
+    "recordDoesNotCreateMethodEligibility": true,
+    "htmlIsProjectionOnly": true,
+    "productionRecordsMayBeEmptyDuringWprA": true,
+    "productionRecordsMustNotRemainEmptyAtFinalWprFreeze": true,
+    "wprDPublicRecordsDoNotCreateCprProductionRecords": true,
+    "frozenPredecessorRecordCount": 38,
+    "successorRecordCount": 40,
+    "wprV1RegistryMutated": false
+  }
+}

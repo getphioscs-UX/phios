@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/production/visual-article/vap-w10-human-approval-decisions-v1.schema.json",
+  "title": "PHI OS VAP-W10 Human Approval Decisions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "decisionEnvelopeCode", "work", "batchCode", "locale", "status", "approvalQueueDigest", "bulkApprovalAllowed", "oneIndependentDecisionPerNode", "entries"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VAP-W10-HUMAN-APPROVAL-DECISIONS-v1.0.0"},
+    "decisionEnvelopeCode": {"const": "PHI-OS-VAP-W10-BATCH-001-HUMAN-APPROVAL-DECISIONS-v1"},
+    "work": {"const": "VAP-W10"},
+    "batchCode": {"const": "VAP-ARTICLE-BATCH-001"},
+    "locale": {"const": "zh-Hans"},
+    "status": {"enum": ["PENDING_HUMAN_APPROVAL", "HUMAN_APPROVAL_DECISIONS_RECORDED"]},
+    "approvalQueueDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "bulkApprovalAllowed": {"const": false},
+    "oneIndependentDecisionPerNode": {"const": true},
+    "entries": {
+      "type": "array", "minItems": 6, "maxItems": 6,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["decisionCode", "nodeCode", "candidateCode", "candidateDigest", "reviewCode", "reviewDigest", "decisionState", "decision", "approverCode", "approverAuthority", "approvedAt", "summary", "conditions"],
+        "properties": {
+          "decisionCode": {"type": "string"}, "nodeCode": {"type": "string"}, "candidateCode": {"type": "string"}, "candidateDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "reviewCode": {"type": "string"}, "reviewDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "decisionState": {"enum": ["pending_human", "human_decided"]},
+          "decision": {"type": ["string", "null"], "enum": ["approve", "decline", "defer", null]},
+          "approverCode": {"type": ["string", "null"]}, "approverAuthority": {"type": ["string", "null"]},
+          "approvedAt": {"type": ["string", "null"]}, "summary": {"type": ["string", "null"]}, "conditions": {"type": "array"}
+        }
+      }
+    }
+  }
+}

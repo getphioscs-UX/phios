@@ -1,0 +1,187 @@
+BASELINE HEAD
+67254e3d039c842fca0cbd8edc392691ccd2166b
+
+CURRENT HEAD
+8888f647bd85f21a45397690fb3479de9b339c17
+
+WORKTREE BEFORE
+ M docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json
+?? docs/acceptance/bazi-paid-report/deep-manuscript-r2/owner-acceptance-r3-4/2026-10-08T01-45-53-624Z/
+
+
+WORKTREE AFTER
+ M SHARED-REPORT-E2E-VFR-R2-INSTALL.mjs
+ M assets/customer-ui/js/personal-products/personal-evidence-dossier.bundle.js
+ M assets/customer-ui/js/visuals/profile-visual-mvp.js
+ M config/reports/zero-cost-check-commands.json
+ M content/product-convergence-r1/audits/pc-r1-w0-current-main-reconciliation-v1.json
+ M content/product-convergence-r1/audits/regression/check-cpr.log
+ M content/product-convergence-r1/audits/regression/check-financial-runtime-product.log
+ M content/product-convergence-r1/audits/regression/check-pages-build.log
+ M content/product-convergence-r1/audits/regression/check-runtime-position-48.log
+ M content/product-convergence-r1/audits/regression/results.json
+ M content/profile/successors/personal-evidence-r1/w11r5/baseline.json
+ M docs/acceptance/bazi-paid-report/visual-first-r1/ZERO-COST-GUARD-EVIDENCE.json
+ M functions/account/ziwei-account-delivery.js
+ M functions/api/profile-progressive.js
+ M functions/api/shared-report-e2e-proof.js
+ M functions/professional/financial/financial-calculation-layer.js
+ M functions/profile/personal-evidence-handoffs.js
+ M functions/report-delivery/ziwei-vfr-r1-generation.js
+ M index.html
+ M package.json
+ M scripts/build-profile-personal-evidence-w11r3.mjs
+ M scripts/check-runtime-position-48-w6.mjs
+ M scripts/check-runtime-position-48-w8a-p2.mjs
+ M scripts/register-profile-personal-evidence-w11r5-checks.mjs
+ M scripts/run-pc-r1-regression.mjs
+ M tools/review/PROFILE-PERSONAL-EVIDENCE-R1-HUMAN-REVIEW.html
+ M tools/review/personal-evidence-r1/portable-evidence-manifest.json
+?? .gitattributes
+?? .phios-repair-backups/import-compat-20261008-103225/
+?? .phios-repair-backups/shared-e2e-v2/2026-10-08T02-27-03.610Z/
+?? .phios-repair-receipts/
+?? SHARED-REPORT-E2E-VFR-R2-INSTALL.mjs.backup-20261008-102703
+?? content/product-convergence-r1/audits/pc-r1-profile-demotion-first-batch-v1.json
+?? content/product-convergence-r1/audits/pc-r1-profile-demotion-machine-gate-v1.json
+?? content/product-convergence-r1/audits/profile-demotion-browser-results.json
+?? content/product-convergence-r1/audits/profile-method-registry-retirement-v1.json
+?? content/product-convergence-r1/contracts/
+?? content/product-convergence-r1/profile/
+?? content/product-convergence-r1/registries/
+?? content/profile/successors/personal-evidence-r1/w11r5/FINAL-REPORT.txt
+?? content/profile/successors/personal-evidence-r1/w11r5/completion.json
+?? functions/profile/profile-person-evidence-adapter.js
+?? scripts/build-pc-r1-profile-demotion.mjs
+?? scripts/check-pc-r1-profile-demotion.mjs
+?? scripts/check-pc-r1-review-browser.mjs
+?? scripts/close-pc-r1-first-batch.mjs
+?? scripts/finalize-profile-personal-evidence-w11r5.mjs
+?? scripts/lib/personal-evidence-w11r5-review.mjs
+?? scripts/run-financial-freeze-check-compat.mjs
+?? tools/review/PHI-OS-PC-R1-PROFILE-DEMOTION-HUMAN-REVIEW.html
+
+
+PDF BASELINE
+CASE-01 · 40 pages (accepted by attached instruction; original PDF not attached; original HTML also 40 pages)
+
+EXISTING WORK REUSED
+P01-P05
+SEC01-SEC10 Masters
+SEC01-SEC10 body
+bilingual publication
+
+ROOT CAUSE FOUND
+Publication IR omitted figure payloads; CPR never invoked PFIG renderer; W11R3 audit marked UNKNOWN/EMPTY suppressed.
+
+PFIG PATH BEFORE
+Projection payload → Dossier primary bindings → RR source references → IR prose-only → CPR narrative/table-only → HTML/print no PFIG
+
+PFIG PATH AFTER
+Projection payload → same Dossier primary bindings → same RR source lineage → IR source-bound visualBlocks → existing bilingual PFIG renderer → one figure per primary section → A4/mobile
+
+PFIG-001 STATUS
+READY · publication visible · full render = 1
+
+PFIG-002 STATUS
+READY · publication visible · full render = 1
+
+PFIG-003 STATUS
+UNKNOWN · publication visible · full render = 1
+
+PFIG-004 STATUS
+UNKNOWN · publication visible · full render = 1
+
+PFIG-005 STATUS
+UNKNOWN · publication visible · full render = 1
+
+PFIG-006 STATUS
+UNKNOWN · publication visible · full render = 1
+
+PFIG-007 STATUS
+UNKNOWN · publication visible · full render = 1
+
+PFIG-008 STATUS
+UNKNOWN · publication visible · full render = 1
+
+PFIG-009 STATUS
+UNKNOWN · publication visible · full render = 1
+
+CASE-01 BEFORE PAGE COUNT
+40
+
+CASE-01 AFTER PAGE COUNT
+49
+
+CASE-01 PFIG FULL RENDER COUNT
+9 total; each = 1
+
+CASE-01 DUPLICATES
+0
+
+BILINGUAL PUBLICATION RESULT
+PASS · one report per case
+
+11-CASE RESULT
+PASS · 11 bilingual reports
+
+MULTI-SOURCE RESULT
+PASS · CASE-08 self-report polygon and imported IPIP native value kept separate; no master polygon
+
+CURRENT REALITY RESULT
+PASS · CASE-09 linked comparison retained. PFIG-004 remains UNKNOWN without explicit contextual observations; separate synthetic explicit-observation regression permits 004/005/009 READY.
+
+UNKNOWN RESULT
+PASS · UNKNOWN and EMPTY stay visible; READY is not invented
+
+PRINT RESULT
+PASS · all 11 cases; 3 PDF samples
+
+MOBILE RESULT
+PASS · all 11 cases at 390px
+
+FILES MODIFIED
+Existing PFIG renderer, dossier/Publication IR adapters, CPR renderer, dossier CSS, client bundle, review builder/hub/generated bilingual reports, W6 checker, package aliases and zero-cost registry, Pages output boundary.
+
+FILES CREATED
+W11R5 checkers and preservation/browser/PDF evidence; 3 bilingual PDFs; PC-W0 reconciliation audit/checker; complete paths appear in WORKTREE AFTER.
+
+P01-P05 MODIFIED
+NO
+
+SECTION MASTERS MODIFIED
+NO
+
+REPORT BODY SEMANTIC DRIFT
+NO
+
+PROVIDER CALLS
+0
+
+OPENAI CALLS
+0
+
+CHECKS PASS
+check:profile:prd-w11r5; check:profile:pfig-authority; check:profile:personal-evidence-prd-w3-w5; check:profile:personal-evidence-prd-w6; check:profile:personal-evidence-prd-w7; check:profile:personal-evidence-prd-w8; check:rr-v2; check:relationship:w0-w8; check:rmo; check:runtime-position-48; check:financial-runtime-product; check:profile; check:cx-r12; check:cx-r31; check:backend-frontend-full-production; check:pages-build; check:ppr-current-shared-owner
+
+CHECKS FAIL
+check:cpr (BASELINE_EXTERNAL; outside first-batch required gates)
+
+BASELINE_EXTERNAL
+CPR public-assets historical digest mismatch remains recorded. Financial frozen source line endings restored; original frozen checkers preserved through read-only alias compatibility. Runtime Position 48 stale assertions reconciled with existing admitted evidence; both required gates now PASS.
+
+STILL_BLOCKING
+R5 owner review pending. PC-W11 requires explicit PC-R1 PROFILE DEMOTION ACCEPT; PC-W0–W10 is READY_FOR_HUMAN_REVIEW with all six final required gates PASS.
+
+NOT_RUN
+PC-W11–W99; PRD-W12; human ACCEPT; production freeze; production deploy
+
+HUMAN REVIEW URL
+http://127.0.0.1:8799/
+http://127.0.0.1:8802/pc-r1/
+
+W12
+BLOCKED
+
+COMMIT READY
+YES (scoped review candidate; shared worktree includes unrelated changes; no commit or deployment performed)

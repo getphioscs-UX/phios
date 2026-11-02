@@ -1,0 +1,9 @@
+import fs from 'node:fs';import path from 'node:path';import {execFileSync,spawnSync} from 'node:child_process';
+const wt='C:/phios/.worktrees/unified-release-convergence-r1',D='C:/phios/tools/review/unified-release-convergence-r1/r12',files=JSON.parse(fs.readFileSync('C:/phios/tools/review/unified-release-convergence-r1/r11/STATIC-PUBLICATION.json')).potentialTrackedPublicFiles;
+files.push('tools/review/free-ask-manuscript-r1/whole-chapter-batch-r1/CHAPTER-CURRENT-CLOSURE.json','docs/acceptance/world-recovery/visual-coverage-ledger.json','content/deployment/cloudflare/cloudflare-function-source-deployability-invariant-v1.json');
+const missing=[...new Set(files.filter(f=>!fs.existsSync(wt+'/'+f)))];
+const headers=execFileSync('git',['cat-file','--batch-check'],{cwd:wt,input:missing.map(f=>'HEAD:'+f+'\n').join(''),encoding:'utf8',maxBuffer:10_000_000}).trim().split('\n');
+const valid=missing.filter((f,i)=>!headers[i].endsWith(' missing'));
+const bytes=execFileSync('git',['cat-file','--batch'],{cwd:wt,input:valid.map(f=>'HEAD:'+f+'\n').join(''),maxBuffer:600_000_000});let pos=0;
+for(const f of valid){const e=bytes.indexOf(10,pos),header=bytes.subarray(pos,e).toString(),n=Number(header.split(' ')[2]);if(!Number.isSafeInteger(n))throw Error(header);const p=path.resolve(wt,f);if(!p.startsWith(wt+path.sep)&&!p.startsWith(wt.replaceAll('/',path.sep)+path.sep))throw Error('OUTSIDE_INTEGRATION');if(fs.existsSync(p))throw Error('CONCURRENT_FILE_CREATED '+f);fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,bytes.subarray(e+1,e+1+n));pos=e+2+n;}
+fs.writeFileSync(D+'/BUILD-INPUT-MATERIALIZATION.json',JSON.stringify({at:new Date().toISOString(),head:execFileSync('git',['rev-parse','HEAD'],{cwd:wt,encoding:'utf8'}).trim(),materialized:valid,overwritten:0,source:'Exact immutable HEAD blobs for sparse omitted public build inputs; no other worktree copied.'},null,2));console.log(JSON.stringify({materialized:valid.length,overwritten:0}));

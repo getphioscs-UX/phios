@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-COMPOSITION-EVIDENCE-CONTRACT-v1.0.0",
+  "phase": "TPA-F",
+  "work": "TPA-W26",
+  "baselineCommit": "a347b414094e23cc361c3c73120173f117eef537",
+  "status": "FROZEN_COMPOSITION_PROVENANCE_REQUIREMENTS",
+  "contractVersion": "1.0.0",
+  "methodCode": "TAROT",
+  "requiredFields": [
+    "readingIrVersion",
+    "corpusFreezeVersion",
+    "corpusFreezeSha256",
+    "cardRegistryVersion",
+    "sourceRegistryVersion",
+    "waiteSourceCorpusVersion",
+    "perspectiveRegistryVersion",
+    "reflectiveLensRegistryVersion",
+    "noSourceBlendingContractVersion",
+    "boundaryContractVersions",
+    "sourceIds",
+    "drawEvidenceId",
+    "provider",
+    "generatedAt"
+  ],
+  "rules": {
+    "drawEvidenceMustBeReplayable": true,
+    "authorityVersionsMustBeVisible": true,
+    "sourceIdsMustBeVisible": true,
+    "providerMetadataRequiredWhenApplicable": true,
+    "modelMayCalculate": false,
+    "modelMayMutateEvidence": false,
+    "sameEvidenceMustUseSameAllowedSemanticBoundaries": true,
+    "sameEvidenceMustUseSamePerspectiveAvailability": true,
+    "sameEvidenceMustRequireSameRccAndAgencyLayers": true,
+    "byteIdenticalProseRequired": false
+  },
+  "providerDefault": {
+    "used": false,
+    "providerId": null,
+    "modelId": null
+  }
+}

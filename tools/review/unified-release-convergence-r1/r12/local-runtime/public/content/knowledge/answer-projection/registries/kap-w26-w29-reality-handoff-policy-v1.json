@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W26-W29-REALITY-HANDOFF-POLICY-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W26",
+    "KAP-W27",
+    "KAP-W28",
+    "KAP-W29"
+  ],
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "ACTIVE_TWO_STAGE_REALITY_HANDOFF",
+  "sequence": [
+    "W24_REQUIREMENT_YES",
+    "W26_EXPLAIN_REASON",
+    "W27_EXPLICIT_CONSENT",
+    "W28_REALITY_ENTRY_SEED",
+    "W29_PROVENANCE_SEPARATED_CONTEXT_HANDOFF"
+  ],
+  "actions": {
+    "PREPARE": "EXPLANATION_ONLY_NO_SEED",
+    "HANDOFF": "CONSENT_REQUIRED_SEED_AND_CONTEXT_ENVELOPE"
+  },
+  "persistence": {
+    "kapWritesPersistentCase": false,
+    "kapWritesRealityModel": false,
+    "downstreamGovernanceRequired": true
+  },
+  "target": {
+    "surface": "REALITY_JOURNEY_ENTRY",
+    "canonicalCaseOwner": "ICR",
+    "realityModelOwner": "RMO",
+    "dataGovernanceOwner": "RDG"
+  }
+}

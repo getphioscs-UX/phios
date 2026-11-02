@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W4-ASSET-CONTRACT-v1.0.0",
+  "work": "FDR-W4",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "assetId",
+    "assetType",
+    "ownership",
+    "valueFact",
+    "jurisdiction",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "label",
+    "institutionOrCounterparty",
+    "maskedReference",
+    "acquisitionDate",
+    "maturityDate",
+    "liquidityNotes",
+    "encumbranceReferences",
+    "documentReferences"
+  ],
+  "valueFact": {
+    "allowedRepresentations": [
+      "EXACT_MINOR_UNITS",
+      "APPROXIMATE_MINOR_UNITS",
+      "RANGE_MINOR_UNITS",
+      "UNKNOWN"
+    ],
+    "requiredCurrencyWhenMonetary": true,
+    "valuationDateRequiredWhenKnown": true
+  },
+  "rules": {
+    "assetValueIsFactNotCalculation": true,
+    "ownershipUsesDedicatedContract": true,
+    "unknownValueAllowed": true,
+    "rangeValueAllowed": true,
+    "missingValueDoesNotBecomeZero": true,
+    "assetDoesNotImplyEstateDistribution": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

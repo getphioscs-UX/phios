@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-TRUSTED-REFERENCE-EVIDENCE-v1.0.0",
+  "work": "MPA-W22",
+  "status": "WITHIN_FROZEN_TOLERANCE_UPSTREAM_RELEASE_EVIDENCE",
+  "methodCode": "ASTROLOGY",
+  "comparisonMode": "ASTRONOMY_ENGINE_2_1_19_vs_NASA_JPL_HORIZONS_ARCHIVED_RELEASE_EVIDENCE",
+  "candidateEngine": {
+    "version": "2.1.19",
+    "releaseCommit": "61dc07020aaa6885d2c7f688a4d82beaf6edb9ef",
+    "sourceGitBlobSha1": "b16e54660ee65df2947079b383d90bac06ee82bf"
+  },
+  "trustedReference": {
+    "referenceCode": "NASA_JPL_HORIZONS",
+    "role": "TRUSTED_REFERENCE",
+    "archivedSnapshot": {
+      "path": "generate/horizons/airless_Jupiter.txt",
+      "gitBlobSha1": "2ee26b47f6e90e35e7131fb6af3da7ac68062d7c",
+      "target": "Jupiter (599)",
+      "center": "Earth (399)",
+      "sourceEphemeris": [
+        "jup341",
+        "DE431mx"
+      ],
+      "start": "1900-01-01T00:00:00Z",
+      "stop": "2100-01-01T00:00:00Z",
+      "stepMinutes": 14400,
+      "refraction": "AIRLESS"
+    },
+    "knownRow": {
+      "utc": "1900-01-01T00:00:00Z",
+      "j2000RaDegrees": 240.63084,
+      "j2000DecDegrees": -19.8803,
+      "apparentRaDegrees": 239.17752,
+      "apparentDecDegrees": -19.60066,
+      "azimuthDegrees": 275.3334,
+      "altitudeDegrees": -52.5522
+    }
+  },
+  "upstreamComparisonHarness": {
+    "path": "generate/jpl_horizons_check.js",
+    "gitBlobSha1": "05e66c569b9e65c5004487681a3bf5ba84fd8df2",
+    "runnerPath": "generate/jplcheck",
+    "runnerGitBlobSha1": "9c361b94457f59cd39fda288e41905221d1f639f",
+    "deltaTFunction": "DeltaT_JplHorizons",
+    "thresholdArcminutes": 0.878,
+    "dimensions": [
+      "metricEquatorial",
+      "apparentEquatorial",
+      "horizontal"
+    ],
+    "failsAboveTolerance": true
+  },
+  "evidenceClassification": {
+    "immutableUpstreamReleaseEvidenceAccepted": true,
+    "directPhiNumericReplayExecuted": false,
+    "exactMatchClaimed": false,
+    "whyNoExactMatch": "The governed comparison is tolerance-based and PHI does not claim a local replay that was not executed.",
+    "technicalTrustedReferenceGateSatisfied": true,
+    "productionRuntimeAdapterBindingRequiredAtW27": true
+  },
+  "historicalW15": {
+    "registryRewritten": false,
+    "previousState": "REFERENCE_PENDING",
+    "resolvedTechnicalBlockers": [
+      "NASA_JPL_HORIZONS_NOT_EXECUTED",
+      "TOLERANCE_NOT_DEFINED",
+      "EPHEMERIS_VERSION_DIGEST_UNRESOLVED"
+    ]
+  },
+  "effects": {
+    "productionEligibilityCreated": false,
+    "professionalEligibilityCreated": false
+  },
+  "evidenceDigest": "c26d6e8cd4c169a14fc8f20701351b581be2224a7fb705d0a22139d24a751054"
+}

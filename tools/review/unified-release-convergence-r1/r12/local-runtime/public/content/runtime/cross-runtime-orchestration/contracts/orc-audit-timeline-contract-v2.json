@@ -1,0 +1,25 @@
+{
+  "contractCode": "PHI-OS-ORC-W8-AUDIT-TIMELINE-CONTRACT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W8",
+  "status": "canonical",
+  "requiredFields": [
+    "transitionId",
+    "caseId",
+    "serviceProfile",
+    "fromState",
+    "toState",
+    "eventCode",
+    "authorityReference",
+    "operationDigest",
+    "committedAtOrdinal",
+    "replay"
+  ],
+  "payloadPolicy": "NO_DOMAIN_PAYLOAD",
+  "rules": {
+    "everyCommittedTransitionCreatesTimelineEntry": true,
+    "timelineAppendOnly": true,
+    "historicalEntryMutationForbidden": true
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-SEMANTIC-DEDUP-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W13",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "purpose": "Assign exactly one primary full-explanation owner to each BaZi semantic composition cluster, while preserving secondary lineage and context derivatives that add genuinely new information.",
+  "inputSchemas": [
+    "PHI-OS-BAZI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+    "PHI-OS-BAZI-CONTRADICTION-RESOLUTION-IR-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-BAZI-SEMANTIC-DEDUP-IR-v1.0.0",
+  "decisions": [
+    "PRIMARY_EXPLANATION",
+    "CONTEXT_DERIVATIVE",
+    "REFERENCE_ONLY"
+  ],
+  "rules": {
+    "semanticKeyIsTheDedupClusterAuthority": true,
+    "fullExplanationMaxPerSemanticCluster": 1,
+    "sameSchoolAndSameSemanticKeyMayDedup": true,
+    "differentSchoolCodesMustNeverDedupIntoOnePrimary": true,
+    "differentTemporalContextsMustNeverDedupIntoOnePrimary": true,
+    "contextDerivativeRequiresNewFindingEvidenceAuthorityUnknownOrCounterInformation": true,
+    "referenceOnlyStillPreservesLineage": true,
+    "dedupMayNotDeleteEvidence": true,
+    "dedupMayNotCreateMeaning": true,
+    "dedupMayNotResolveContradiction": true,
+    "dedupMayNotCreateCustomerNarrative": true
+  },
+  "runtimeRef": "functions/bzr-full-production/bazi-semantic-dedup-runtime.js",
+  "handoff": "BAZI-FP-W14 consumes W13 primary render owners and W12 resolution state to construct the BaZi Reading IR."
+}

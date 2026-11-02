@@ -1,0 +1,167 @@
+/* PDS-W8 — presentation only. Runtime choices, gates and lineage stay frozen. */
+.navigation-choice-boundary,
+.navigation-pause-resume,
+.review-pause-resume {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--phi-space-5);
+  align-items: center;
+  margin: var(--phi-space-5) 0;
+  padding: var(--phi-space-5);
+  border: 1px solid var(--phi-border-subtle);
+  border-inline-start: 4px solid var(--phi-action-platform);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-subtle);
+}
+
+.navigation-choice-boundary {
+  display: block;
+}
+
+.navigation-choice-boundary p,
+.navigation-pause-resume p,
+.review-pause-resume p {
+  margin: var(--phi-space-2) 0 0;
+  color: var(--phi-text-secondary);
+}
+
+.navigation-path-item {
+  display: grid;
+  align-content: start;
+}
+
+.navigation-path-item.is-selected {
+  border-color: var(--phi-action-platform);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--phi-action-platform) 10%, transparent);
+}
+
+.navigation-selected-mark {
+  margin-inline-start: var(--phi-space-2);
+}
+
+.navigation-evidence-log,
+.navigation-review-gate {
+  margin-top: var(--phi-space-5);
+  padding: var(--phi-space-5);
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-subtle);
+}
+
+.navigation-evidence-log summary {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--phi-space-4);
+  min-height: 44px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navigation-evidence-log > p,
+.navigation-review-gate p {
+  color: var(--phi-text-secondary);
+}
+
+.navigation-evidence-log ol {
+  display: grid;
+  gap: var(--phi-space-3);
+  padding-inline-start: 1.4rem;
+}
+
+.navigation-evidence-log li {
+  display: grid;
+  gap: var(--phi-space-1);
+}
+
+.navigation-evidence-log time,
+.navigation-evidence-log small {
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+}
+
+.navigation-review-gate {
+  border-inline-start: 4px solid var(--phi-state-warning);
+}
+
+.navigation-review-gate.is-ready {
+  border-inline-start-color: var(--phi-state-success);
+}
+
+.navigation-review-gate > span {
+  display: block;
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+}
+
+.navigation-review-gate > strong {
+  display: block;
+  margin-top: var(--phi-space-2);
+  color: var(--phi-text-primary);
+}
+
+.review-change-state {
+  display: grid;
+  gap: var(--phi-space-2);
+  margin-top: var(--phi-space-4);
+  padding-inline-start: var(--phi-space-4);
+  border-inline-start: 4px solid var(--phi-border-strong);
+}
+
+.review-change-state.is-changed { border-inline-start-color: var(--phi-state-success); }
+.review-change-state.is-unchanged { border-inline-start-color: var(--phi-action-platform); }
+.review-change-state.is-unknown { border-inline-start-color: var(--phi-state-warning); }
+
+.continuity-branch-explainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--phi-space-4);
+  margin: var(--phi-space-5) 0;
+}
+
+.continuity-branch-explainer article {
+  padding: var(--phi-space-4);
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-subtle);
+}
+
+.continuity-branch-explainer p,
+.continuity-resume-note {
+  color: var(--phi-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .navigation-pause-resume,
+  .review-pause-resume {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .continuity-branch-explainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 360px) {
+  .navigation-choice-boundary,
+  .navigation-pause-resume,
+  .review-pause-resume,
+  .navigation-evidence-log,
+  .navigation-review-gate {
+    padding: var(--phi-space-4);
+  }
+}
+
+@media (min-width: 1440px) {
+  .navigation-path {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigation-path-item,
+  .review-decision-grid button,
+  .continuity-choice {
+    transition: none;
+  }
+}

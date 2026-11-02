@@ -1,0 +1,38 @@
+{
+  "contractCode": "PHI-OS-CMR-MAPPING-FOUNDATION-ACCEPTANCE-v1.0.0",
+  "work": "CM-W6D",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "scope": ["CM-W6A", "CM-W6B", "CM-W6C"],
+  "authorityChain": [
+    "METHOD_RUNTIME",
+    "CANONICAL_PROJECTION",
+    "UNIVERSAL_MAPPING_CONTRACT",
+    "VERSIONED_MAPPING_REGISTRY",
+    "MAPPING_CHECKER_AND_COMPATIBILITY",
+    "CANONICAL_MEANING"
+  ],
+  "acceptanceRequirements": {
+    "canonicalProjectionIsSoleInput": true,
+    "stableMappingIdentityEstablished": true,
+    "versionedRegistryEstablished": true,
+    "deterministicDigestsEstablished": true,
+    "compatibilityAndDeprecationEstablished": true,
+    "checkerReadOnlyAndFailClosed": true,
+    "registryMutationAllowed": false,
+    "actualMethodMappingPopulationAllowed": false,
+    "productionAuthorityCreated": false
+  },
+  "forbiddenInputs": [
+    "RAW_METHOD_OBJECT",
+    "METHOD_CALCULATION_INTERNALS",
+    "TEMPORARY_RUNTIME_OBJECT",
+    "ORIGINAL_METHOD_INTERPRETATION_TEXT"
+  ],
+  "consumerRule": "HDR, AST, BZR, NUM and future Method mappings must consume this frozen foundation and may not create a parallel Mapping Contract or Registry.",
+  "successorPolicy": {
+    "inPlaceMutationAllowed": false,
+    "versionedSuccessorRequired": true,
+    "successorMustPreserveAuthoritySeparation": true
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "PHI-OS-RELATIONSHIP-PERSON-B-INPUT-CONTRACT-v1.0.0",
+  "work": "REL-W1",
+  "productObject": "PHI-OS-RELATIONSHIP-PERSON-B-INPUT-v1",
+  "sharedAcrossMethods": ["AST", "BZR", "ZWR", "NUM", "ECR"],
+  "humanDesign": {"sharedBirthInputMayBeStored": true, "customerReadingRequiresConfirmedExternalChartWhenNoPHIOSCalculationAuthority": true},
+  "birthTimePrecision": ["EXACT", "APPROXIMATE", "UNKNOWN"],
+  "unknownTimeRule": "UNKNOWN -> birthTime null; never fabricate noon/12:00 authority",
+  "timezoneRule": "UTC offset is derived from confirmed location/timezone lineage; customer manual UTC offset is not required",
+  "methodExtensions": {"NUM": ["birthName"], "HD": ["confirmedExternalChartRef"]},
+  "profileExtensions": ["externalProfileRefs", "selfAssessmentRef", "reasoningTaskRef"],
+  "thirdPartyBoundary": {"explicitRelationshipPurposeRequired": true, "minimalCollectionRequired": true, "hiddenPersistenceAllowed": false, "personBAccountCreationAllowed": false, "silentReuseAllowed": false},
+  "predecessorRefs": ["functions/method-client-delivery/canonical-birth-input-runtime.js", "content/governance/relational/contracts/two-person-input-consent-contract-v1.json"]
+}

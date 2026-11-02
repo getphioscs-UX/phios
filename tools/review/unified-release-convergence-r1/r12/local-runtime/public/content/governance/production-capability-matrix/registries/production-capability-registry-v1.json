@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "PHI-OS-PRODUCTION-CAPABILITY-REGISTRY-v1.0.0",
+  "registryCode": "PRODUCTION_CAPABILITY_REGISTRY_V1",
+  "work": "PCM-W0",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_CURRENT_USER_EXECUTABILITY_AUTHORITY",
+  "purpose": "Answer whether a governed backend Method capability is actually usable by a Production user now.",
+  "sourcePrecedence": [
+    "CURRENT_VERSIONED_SUCCESSOR",
+    "CURRENT_CLIENT_DELIVERY_ACCEPTANCE",
+    "CURRENT_FRONTEND_CONSUMER",
+    "FROZEN_PREDECESSOR_AS_LINEAGE_ONLY"
+  ],
+  "requiredFields": [
+    "capabilityId",
+    "methodRuntime",
+    "authority",
+    "implemented",
+    "validated",
+    "projected",
+    "frontendRoute",
+    "userExecutable",
+    "persistent",
+    "productionAccepted",
+    "blockedReason"
+  ],
+  "statusVocabulary": [
+    "Available",
+    "Limited",
+    "Preview",
+    "Blocked",
+    "Coming later"
+  ],
+  "capabilities": [
+    {
+      "capabilityId": "PCM-METHOD-HDR",
+      "methodRuntime": {
+        "methodCode": "HUMAN_DESIGN",
+        "pluginCode": "HDR",
+        "runtimeId": "HDR",
+        "methodVersion": "1.0.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "BLOCKED"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": null,
+      "userExecutable": false,
+      "persistent": false,
+      "productionAccepted": false,
+      "blockedReason": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+        "PRODUCTION_INVOCATION_FORBIDDEN"
+      ],
+      "classification": "BLOCKED",
+      "statusProjection": "Blocked",
+      "scope": "VALIDATION_ONLY_NO_CLIENT_DISPATCH",
+      "statusSurfaceRoute": "/personal-runtime",
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-2-canonical-runtime-adapter-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+      ]
+    },
+    {
+      "capabilityId": "PCM-METHOD-AST",
+      "methodRuntime": {
+        "methodCode": "ASTROLOGY",
+        "pluginCode": "AST",
+        "runtimeId": "AST",
+        "methodVersion": "0.1.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/personal-runtime",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "LIMITED_SCOPED",
+      "statusProjection": "Limited",
+      "scope": "CORE_10_PLANET_TROPICAL_PROJECTION",
+      "limitations": [
+        "HOUSES_NOT_INCLUDED",
+        "ASPECTS_NOT_INCLUDED",
+        "NODES_NOT_INCLUDED",
+        "INTERPRETATION_NOT_INCLUDED",
+        "PROFESSIONAL_JUDGMENT_NOT_INCLUDED"
+      ],
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+      ]
+    },
+    {
+      "capabilityId": "PCM-METHOD-BZR",
+      "methodRuntime": {
+        "methodCode": "BAZI",
+        "pluginCode": "BZR",
+        "runtimeId": "BZR",
+        "methodVersion": "0.1.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/personal-runtime",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "LIMITED_SCOPED",
+      "statusProjection": "Limited",
+      "scope": "FOUR_PILLARS_WITH_GOVERNED_SOLAR_CONTEXT_AND_CONDITIONAL_LUCK_CYCLE",
+      "limitations": [
+        "UNKNOWN_BIRTH_TIME_DEGRADES_WITHOUT_SYNTHETIC_HOUR",
+        "LUCK_CYCLE_REQUIRES_EXPLICIT_TRADITIONAL_CALCULATION_SEX",
+        "INTERPRETATION_NOT_INCLUDED",
+        "PROFESSIONAL_JUDGMENT_NOT_INCLUDED"
+      ],
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+      ]
+    },
+    {
+      "capabilityId": "PCM-METHOD-NUM",
+      "methodRuntime": {
+        "methodCode": "NUMEROLOGY",
+        "pluginCode": "NUM",
+        "runtimeId": "NUM",
+        "methodVersion": "0.1.0-candidate"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "clientDelivery": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+        "currentDecision": "PRODUCTION_AUTHORITY_GRANTED_FOR_BOUND_SCOPE"
+      },
+      "implemented": true,
+      "validated": true,
+      "projected": true,
+      "frontendRoute": "/personal-runtime",
+      "userExecutable": true,
+      "persistent": false,
+      "productionAccepted": true,
+      "blockedReason": [],
+      "classification": "LIMITED_SCOPED",
+      "statusProjection": "Limited",
+      "scope": "BIRTH_NUMBER_NUMBER_STRUCTURE_AND_EXPLICIT_DATE_CYCLE_PROJECTION",
+      "limitations": [
+        "CYCLE_REQUIRES_EXPLICIT_TARGET_DATE_AND_GOVERNED_TIMEZONE_CONTEXT",
+        "INTERPRETATION_NOT_INCLUDED",
+        "PROFESSIONAL_JUDGMENT_NOT_INCLUDED"
+      ],
+      "evidence": [
+        "content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-4-execution-acceptance-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+        "content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json",
+        "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json"
+      ]
+    },
+    {
+      "capabilityId": "PCM-METHOD-ICH",
+      "methodRuntime": {
+        "methodCode": "I_CHING",
+        "pluginCode": "ICH",
+        "runtimeId": "ICH",
+        "methodVersion": "0.1.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": null,
+        "clientDelivery": null,
+        "currentDecision": "REGISTERED_NOT_IMPLEMENTED"
+      },
+      "implemented": false,
+      "validated": false,
+      "projected": false,
+      "frontendRoute": null,
+      "userExecutable": false,
+      "persistent": false,
+      "productionAccepted": false,
+      "blockedReason": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ],
+      "classification": "REGISTERED_NOT_IMPLEMENTED",
+      "statusProjection": "Coming later",
+      "scope": "REGISTRY_HOLDING_ONLY",
+      "evidence": [
+        "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "content/professional/method-production-activation/registries/mpa-future-method-holding-registry-v1.json"
+      ]
+    },
+    {
+      "capabilityId": "PCM-METHOD-TAR",
+      "methodRuntime": {
+        "methodCode": "TAROT",
+        "pluginCode": "TAR",
+        "runtimeId": "TAR",
+        "methodVersion": "0.1.0"
+      },
+      "authority": {
+        "registration": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "productionDispatch": null,
+        "clientDelivery": null,
+        "currentDecision": "REGISTERED_NOT_IMPLEMENTED"
+      },
+      "implemented": false,
+      "validated": false,
+      "projected": false,
+      "frontendRoute": null,
+      "userExecutable": false,
+      "persistent": false,
+      "productionAccepted": false,
+      "blockedReason": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ],
+      "classification": "REGISTERED_NOT_IMPLEMENTED",
+      "statusProjection": "Coming later",
+      "scope": "REGISTRY_HOLDING_ONLY",
+      "evidence": [
+        "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "content/professional/method-production-activation/registries/mpa-future-method-holding-registry-v1.json"
+      ]
+    }
+  ],
+  "rules": {
+    "runtimeImplementedDoesNotImplyProductionReady": true,
+    "productionAcceptedRequiresProductionConsumer": true,
+    "frontendExecutableRequiresCanonicalRuntimeAuthority": true,
+    "statusMustNotOverstateAvailability": true,
+    "frozenPredecessorMayBeSupersededWithoutMutation": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-CHECKER-STATE-LIFECYCLE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_GOVERNANCE",
+  "baselineCommit": "203edecf98763e27897c35aae2768d1a69b674d2",
+  "purpose": "Separate immutable historical freeze evidence from current production-state validation so later governed successor state does not invalidate an earlier work-stage checker.",
+  "rules": {
+    "historicalFreezeIsImmutableSnapshot": true,
+    "currentProductionIsVersionedSuccessorState": true,
+    "upstreamCheckerMayForbidMutationByItsOwnStage": true,
+    "upstreamCheckerMayForbidLegitimateDownstreamStateExistence": false,
+    "currentAggregateCountMayBeHardCodedToHistoricalTotal": false,
+    "currentStateMustRebuildFromCurrentSourceOfTruth": true,
+    "historicalDigestMayRemainPinnedForReproducibility": true,
+    "currentPublicPageBytesMayBeOwnedByUnrelatedAuthority": false,
+    "publicSurfaceByteDriftAloneMayInvalidatePwsAuthorization": false
+  },
+  "applications": {
+    "PWS_ENTRY_W1": {
+      "historicalAuthority": "PWS authorization/data-loader boundary",
+      "currentValidation": "authorization behavior, denial-before-read, payload-free audit and canonical registry behavior",
+      "publicPageByteAuthority": "WPR/BFR/CPR/PDS"
+    },
+    "VAP_W8_W11": {
+      "historicalAuthority": "each stage may prove it did not create downstream authority",
+      "currentValidation": "later Publication may exist only with governed successor lineage"
+    },
+    "STEP63_PKA": {
+      "historicalAuthority": "two-record STEP63 freeze remains reproducible",
+      "currentValidation": "current PKA is rebuilt from current Publication Registry + Publication Packages with governed projection repair",
+      "fixedCurrentRecordCount": null
+    }
+  }
+}

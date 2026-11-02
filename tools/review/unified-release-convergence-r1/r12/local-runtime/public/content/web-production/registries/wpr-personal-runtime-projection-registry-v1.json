@@ -1,0 +1,165 @@
+{
+  "registryCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-PROJECTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W21",
+  "phase": "WPR-E_PERSONAL_RUNTIME_SURFACE",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "status": "limited_production_input_readiness_no_method_execution",
+  "sourceAuthorities": {
+    "methodRegistry": "content/professional/method-production-activation/registries/method-registry-v2.json",
+    "activationReadiness": "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+    "capabilityMatrix": "content/professional/method-production-activation/registries/mpa-method-capability-matrix-v1.json",
+    "birthInitialization": "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
+    "consentPurpose": "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+    "publicVocabulary": "content/web-production/registries/wpr-public-vocabulary-registry-v2.json",
+    "rdgSensitivity": "content/governance/reality-data-governance/registries/canonical-data-sensitivity-registry-v1.json"
+  },
+  "entries": [
+    {
+      "projectionCode": "PERSONAL_RUNTIME_NUM",
+      "vocabularyCode": "METHOD_NUMEROLOGY",
+      "inputProfile": "BIRTH_DATE",
+      "availabilityCode": "READY_FOR_ELIGIBILITY_DECISION",
+      "methodStateEvidence": "ACTIVATION_CANDIDATE",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "MPA-W26_PRODUCTION_ELIGIBILITY_DECISION_REQUIRED",
+        "MPA-W27_PRODUCTION_EXECUTION_GATE_REQUIRED"
+      ],
+      "methodSpecificReadinessDecision": "READY_FOR_MPA_W26_ELIGIBILITY_DECISION",
+      "methodSpecificReady": true,
+      "globalGates": {
+        "MPA-W26": "REQUIRED",
+        "MPA-W27": "REQUIRED"
+      }
+    },
+    {
+      "projectionCode": "PERSONAL_RUNTIME_AST",
+      "vocabularyCode": "METHOD_ASTROLOGY",
+      "inputProfile": "FULL_BIRTH_CONTEXT",
+      "availabilityCode": "ACTIVATION_CANDIDATE",
+      "methodStateEvidence": "ACTIVATION_CANDIDATE",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "REFERENCE_VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "PRODUCTION_POLICIES_NOT_APPROVED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "projectionCode": "PERSONAL_RUNTIME_BZR",
+      "vocabularyCode": "METHOD_BAZI",
+      "inputProfile": "FULL_BIRTH_CONTEXT",
+      "availabilityCode": "ACTIVATION_CANDIDATE",
+      "methodStateEvidence": "ACTIVATION_CANDIDATE",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "LICENSE_REVIEW_INCOMPLETE",
+        "VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "projectionCode": "PERSONAL_RUNTIME_HDR",
+      "vocabularyCode": "METHOD_HUMAN_DESIGN",
+      "inputProfile": "FULL_BIRTH_CONTEXT",
+      "availabilityCode": "BLOCKED",
+      "methodStateEvidence": "BLOCKED",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+        "PROFESSIONAL_BOUNDARY_REQUIRES_RENEWED_ACTIVATION"
+      ]
+    },
+    {
+      "projectionCode": "PERSONAL_RUNTIME_ICH",
+      "vocabularyCode": "METHOD_I_CHING",
+      "inputProfile": "NOT_BIRTH_INITIALIZED",
+      "availabilityCode": "REGISTERED_NOT_IMPLEMENTED",
+      "methodStateEvidence": "REGISTERED",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "projectionCode": "PERSONAL_RUNTIME_TAR",
+      "vocabularyCode": "METHOD_TAROT",
+      "inputProfile": "NOT_BIRTH_INITIALIZED",
+      "availabilityCode": "REGISTERED_NOT_IMPLEMENTED",
+      "methodStateEvidence": "REGISTERED",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "projectionCode": "PERSONAL_RUNTIME_PSY",
+      "vocabularyCode": "METHOD_PSYCHOLOGY",
+      "inputProfile": "NOT_BIRTH_INITIALIZED",
+      "availabilityCode": "REGISTERED_NOT_IMPLEMENTED",
+      "methodStateEvidence": "REGISTERED",
+      "productionEligibleEvidence": false,
+      "professionalEligibleEvidence": false,
+      "publicExecutionAllowed": false,
+      "professionalExecutionAllowed": false,
+      "visibleOnSetupSurface": true,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    }
+  ],
+  "rules": {
+    "runtimeExistenceCreatesExecutionAuthority": false,
+    "methodSpecificReadinessCreatesProductionEligibility": false,
+    "publicLabelCreatesPublicEligibility": false,
+    "noMethodExecutionBeforeMpaW26W27": true,
+    "birthInputOnThisSurfaceIsEphemeralBrowserOnly": true,
+    "birthInputMayNotBePersistedByWprW21": true,
+    "birthInputMayNotBeSubmittedToServerByWprW21": true,
+    "canonicalConsentRecordCreatedByWprW21": false,
+    "canonicalMethodInputCreatedByWprW21": false,
+    "professionalInterpretationCreatedByWprW21": false,
+    "restrictedInternalLabelMayNotRender": true,
+    "unknownBirthTimeMayNotDefaultToNoon": true,
+    "timezoneMayNotDefaultFromBrowser": true,
+    "coordinatesMayNotBeGeocodedOrFabricated": true
+  },
+  "nextGlobalGates": [
+    "MPA-W22_AST_ACTIVATION",
+    "MPA-W26_PRODUCTION_ELIGIBILITY_DECISION",
+    "MPA-W27_PRODUCTION_EXECUTION_GATE"
+  ]
+}

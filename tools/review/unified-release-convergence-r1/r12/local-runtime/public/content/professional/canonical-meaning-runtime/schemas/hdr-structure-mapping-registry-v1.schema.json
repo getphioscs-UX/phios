@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-runtime/hdr-structure-mapping-registry-v1.schema.json",
+  "title": "PHI OS HDR Structure Mapping Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "work",
+    "productionStatus",
+    "sourceMethodCode",
+    "sourceProjectionSchemaVersion",
+    "expectedCoverage",
+    "blockers",
+    "mappingCount",
+    "mappings"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-HDR-STRUCTURE-MAPPING-REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.0.0"
+    },
+    "work": {
+      "const": "CM-W7A"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "sourceMethodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "sourceProjectionSchemaVersion": {
+      "const": "PHI-OS-CANONICAL-PROJECTION-v1.0.0"
+    },
+    "expectedCoverage": {
+      "type": "object"
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "mappingCount": {
+      "const": 0
+    },
+    "mappings": {
+      "type": "array",
+      "maxItems": 0
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "workId": "PHI-OS-METHOD-REPORTS-PRODUCTION-ROLLOUT",
+  "schemaVersion": 1,
+  "auditedAt": "2026-10-01",
+  "baselineCommit": "611ddf2dd7e4bdced6358879a5bdb9656c0f0286",
+  "status": "READY_FOR_REVIEW",
+  "verificationMeaning": "VERIFIED means repository fixture/runtime checks for the stated scope, not independent astronomical certification or live deployment verification.",
+  "capabilities": [
+    {
+      "capability": "birth_datetime_normalization",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-calendar-conversion-runtime-v2.js"
+      ],
+      "scope": "Exact local birth time and governed timezone metadata required; 23:00 next-day rule; no implicit timezone or true-solar-time correction.",
+      "verification": "scripts/check-zwr-w7-w13-calculation-projection.mjs"
+    },
+    {
+      "capability": "lunar_solar_conversion",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-calendar-conversion-runtime-v2.js",
+        "functions/zi-wei-runtime/lunar-calendar-table-v1.js"
+      ],
+      "scope": "Gregorian-to-lunar supported for 1901–2100; leap-month day 16 split. Reverse lunar-input conversion is not established.",
+      "verification": "scripts/check-zwr-w7-w13-calculation-projection.mjs"
+    },
+    {
+      "capability": "life_palace",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-palace-construction-runtime-v2.js",
+        "functions/zi-wei-full-production/ziwei-chart-runtime.js"
+      ],
+      "scope": "Life palace derived from governed lunar month/hour.",
+      "verification": "scripts/check-ziwei-fp-w0-w4.mjs"
+    },
+    {
+      "capability": "body_palace",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-palace-construction-runtime-v2.js",
+        "functions/zi-wei-full-production/ziwei-chart-runtime.js"
+      ],
+      "scope": "Body palace preserved by canonical chart normalization.",
+      "verification": "scripts/check-ziwei-fp-w0-w4.mjs"
+    },
+    {
+      "capability": "twelve_palaces",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-full-production/ziwei-chart-runtime.js"
+      ],
+      "scope": "Twelve distinct palace codes and branch bindings required.",
+      "verification": "scripts/check-ziwei-fp-w0-w4.mjs"
+    },
+    {
+      "capability": "main_stars",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-main-star-runtime.js"
+      ],
+      "scope": "14 main stars in frozen natal calculation.",
+      "verification": "scripts/check-zwr-w7-w13-calculation-projection.mjs"
+    },
+    {
+      "capability": "support_stars",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-support-star-runtime.js",
+        "functions/zi-wei-full-production/ziwei-complete-star-placement-runtime.js"
+      ],
+      "scope": "Six natal support stars plus governed extension; not all traditional miscellaneous stars.",
+      "verification": "scripts/check-ziwei-fp-w0-w4.mjs"
+    },
+    {
+      "capability": "malefic_stars",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-full-production/ziwei-complete-star-placement-runtime.js",
+        "functions/zi-wei-full-production/ziwei-source-admission-authority-v1.js",
+        "functions/zi-wei-full-production/ziwei-professional-reading-r2-authority-v2.js"
+      ],
+      "scope": "Six malefics in eight-star extension; source admission 29/29 and later semantic admission 8/8 must not be conflated.",
+      "verification": "scripts/check-ziwei-pro-r2-w2-w12.mjs"
+    },
+    {
+      "capability": "four_transformations",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-four-transformations-runtime.js",
+        "functions/zi-wei-full-production/ziwei-four-transformation-matrix-runtime.js"
+      ],
+      "scope": "Four natal + four Da Xian + four Liu Nian; frozen Southern Ren table uses Zuo Fu for Hua Ke; palace-stem flying deferred.",
+      "verification": "scripts/check-ziwei-fp-w5-w6.mjs"
+    },
+    {
+      "capability": "palace_stems",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-runtime/zi-wei-palace-construction-runtime-v2.js"
+      ],
+      "scope": "Palace stems calculated; presence does not imply palace-stem flying transformations.",
+      "verification": "scripts/check-ziwei-fp-w0-w4.mjs"
+    },
+    {
+      "capability": "da_xian",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-dynamic/dynamic-runtime.js",
+        "functions/zi-wei-full-production/ziwei-da-xian-integration-runtime.js"
+      ],
+      "scope": "Governed calculation sex and explicit target required; lunar nominal age; current integration checks pass. Legacy full surface check fails missing personal-runtime.html.",
+      "verification": "scripts/check-ziwei-fp-w5-w6.mjs"
+    },
+    {
+      "capability": "liu_nian",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-dynamic/dynamic-runtime.js",
+        "functions/zi-wei-full-production/ziwei-professional-timing-navigation-runtime.js"
+      ],
+      "scope": "Explicit target year/timezone; six-year structural navigation replayed, not event prediction.",
+      "verification": "scripts/check-ziwei-pro-r2-w16-w17.mjs"
+    },
+    {
+      "capability": "liu_yue",
+      "status": "NOT_SUPPORTED",
+      "owners": [
+        "functions/zi-wei-dynamic/dynamic-runtime.js"
+      ],
+      "scope": "Monthly scope not activated; exclude from proposed report.",
+      "verification": "scripts/check-zwd-w0-w9-zi-wei-dynamic-domain-runtime.mjs"
+    },
+    {
+      "capability": "star_brightness",
+      "status": "PARTIAL",
+      "owners": [
+        "functions/zi-wei-full-production/ziwei-star-state-runtime.js",
+        "functions/zi-wei-full-production/ziwei-star-state-authority-v1.js"
+      ],
+      "scope": "Source-explicit states available for admitted cells; preserve UNSPECIFIED, never coerce to PING. No universal all-star/all-school coverage claimed.",
+      "verification": "scripts/check-ziwei-fp-w0-w4.mjs"
+    },
+    {
+      "capability": "palace_relationships",
+      "status": "VERIFIED",
+      "owners": [
+        "functions/zi-wei-full-production/ziwei-palace-relationship-engine.js"
+      ],
+      "scope": "12 networks, 6 opposite pairs, 4 trines, flank and empty-palace opposite reference; topology alone is not meaning.",
+      "verification": "scripts/check-ziwei-fp-w5-w6.mjs"
+    }
+  ],
+  "knownRegression": {
+    "command": "node scripts/check-zwd-w0-w9-zi-wei-dynamic-domain-runtime.mjs",
+    "exitCode": 1,
+    "reason": "ENOENT personal-runtime.html at legacy frontend assertion; earlier runtime assertions ran, but entire gate is not PASS."
+  }
+}

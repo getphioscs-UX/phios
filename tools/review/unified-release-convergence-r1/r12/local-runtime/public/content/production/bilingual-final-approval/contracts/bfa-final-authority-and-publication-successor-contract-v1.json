@@ -1,0 +1,50 @@
+{
+  "schemaVersion":"PHI-OS-BFA-FINAL-AUTHORITY-PUBLICATION-SUCCESSOR-CONTRACT-v1.0.0",
+  "work":["BFA-W15","BFA-W16","BFA-W17","BFA-W18","BFA-W19","BFA-W20","BFA-W22","BFA-W23","BFA-W24","BFA-W25","BFA-W26","BFA-W27"],
+  "status":"ACTIVE_SUCCESSOR_CONTRACT",
+  "baselineCommit":"a6395ad926ce1bcd318b596d6f6ce028f5b96ae9",
+  "singleHumanAuthority":{
+    "authorityType":"BILINGUAL_FINAL_PUBLICATION_APPROVAL",
+    "reviewerCode":"TL",
+    "decisions":["approve_for_publication","revise","defer","do_not_publish"],
+    "bindsExactFinalPackageDigest":true,
+    "threeHumanDecisionRecordsForbidden":true
+  },
+  "authorityBridge":{
+    "oneTlDecisionMayGovernMultipleTransitions":true,
+    "transitions":["SATISFIES_PJA_FINAL_EDITORIAL_GATE","SATISFIES_PUBLICATION_APPROVAL_GATE","AUTHORIZES_PUBLICATION_EXECUTION"],
+    "everyTransitionReferences":["sourceAuthorityType","sourceAuthorityDigest","finalPackageDigest","nodeCode"],
+    "transitionRecordsAreHumanEvidence":false
+  },
+  "batchApproval":{
+    "oneUiActionMayCreateManyPackageScopedApprovals":true,
+    "oneUndifferentiatedBatchAuthority":false,
+    "approveAllPassingRequires":["Automatic Evidence PASS","Figure READY or NOT_REQUIRED","No warning","No blocker","Package digest valid"]
+  },
+  "persistence":{
+    "pathPattern":"content/production/bilingual-final-approval/{batchCode}/approvals/BFA-APPROVAL-{nodeCode}-v1.json",
+    "browserStateIsAuthority":false
+  },
+  "revision":{
+    "candidateDigestChangeInvalidatesApproval":true,
+    "figureDigestChangeInvalidatesApproval":true,
+    "newFinalPackageDigestRequiresReReview":true,
+    "historicalCandidateMayBeOverwritten":false
+  },
+  "readiness":{
+    "preApprovalState":"READY_FOR_FINAL_APPROVAL",
+    "postApprovalState":"READY_FOR_PUBLICATION",
+    "requirements":["Canonical Authority ready","zh-Hans Candidate ready","en Candidate ready","Bilingual Meaning coverage pass","Locale identities ready","Figure NOT_REQUIRED or PUBLICATION_READY","CAR ready if applicable","CPR preview ready","Accessibility pass","No blockers"]
+  },
+  "publication":{
+    "command":"npm run article:publish -- --batch BATCH-002",
+    "executionOnlyAfterBfaApproval":true,
+    "sequence":["validate exact finalPackageDigest","BFA authority bridge","PJA Publication compatibility successor","Published Knowledge Authority","CAR published asset binding if applicable","CPR","locale release","same-route public projection","manifest"],
+    "figureRequiredButCarNotReady":"BLOCK",
+    "articleFirstFigureLaterForbidden":true,
+    "routeArchitecture":"SAME_CANONICAL_ROUTE_MULTI_LOCALE",
+    "localePrefixCreationAllowed":false,
+    "idempotent":true,
+    "failClosedBeforeSideEffects":true
+  }
+}

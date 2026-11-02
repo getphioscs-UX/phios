@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-ACADEMIC-BRIDGE-FULL-ACTIVATION-v1.0.0",
+  "work": "PRF-W10F",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "status": "FOUR_LANE_ACTIVATION_MACHINE_VERIFIED",
+  "statusModelRef": "content/profile/academic/contracts/academic-instrument-status-model-v1.json",
+  "instruments": [
+    {
+      "priority": "P1",
+      "instrumentFamily": "IPIP_BIG_FIVE",
+      "availabilityState": "AVAILABLE",
+      "normingState": "NOT_NORMED",
+      "scoringState": "FIRST_PARTY_SCORED",
+      "publicationState": "CANDIDATE_UNPUBLISHED",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "runtimeRef": "functions/profile/academic-bridge-runtime.js",
+      "artifactRefs": [
+        "content/profile/academic/ipip/ipip-big-five-50-v1.json",
+        "content/profile/academic/ipip/ipip-neo-120-v1.json"
+      ],
+      "deploymentRequirements": [],
+      "claimBoundary": "Raw keyed IPIP scale scores and means only until an exact norm authority is separately admitted."
+    },
+    {
+      "priority": "P2",
+      "instrumentFamily": "PHI_ORIGINAL_REASONING_TASK_PERFORMANCE",
+      "availabilityState": "AVAILABLE",
+      "normingState": "NOT_NORMED",
+      "scoringState": "RAW_PERFORMANCE_ONLY",
+      "publicationState": "CANDIDATE_UNPUBLISHED",
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "runtimeRef": "functions/profile/academic-bridge-runtime.js",
+      "artifactRefs": [
+        "content/profile/academic/reasoning/original-reasoning-task-bank-v1.json"
+      ],
+      "deploymentRequirements": [],
+      "claimBoundary": "Observed performance on this PHI OS task sample only; not IQ, percentile, diagnosis or intelligence rank."
+    },
+    {
+      "priority": "P3",
+      "instrumentFamily": "O_NET_INTEREST_PROFILER_RIASEC",
+      "availabilityState": "AVAILABLE_WHEN_CONFIGURED",
+      "normingState": "NOT_NORMED",
+      "scoringState": "EXTERNALLY_SCORED",
+      "publicationState": "CANDIDATE_UNPUBLISHED",
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "runtimeRef": "functions/profile/academic-bridge-runtime.js",
+      "artifactRefs": [
+        "content/profile/academic/onet/onet-interest-profiler-adapter-contract-v1.json",
+        "content/profile/academic/onet/onet-license-attribution-v1.json"
+      ],
+      "deploymentRequirements": [
+        "ONET_WEB_SERVICES_ACCOUNT_APPROVED",
+        "ONET_WEB_SERVICES_API_KEY",
+        "REGISTERED_PROJECT_URL"
+      ],
+      "claimBoundary": "RIASEC interest exploration and O*NET career matches only; no job-fit guarantee, destiny claim or employment decision authority."
+    },
+    {
+      "priority": "P4",
+      "instrumentFamily": "PHI_FINANCIAL_CAPABILITY_OECD_INFE_2026_ADAPTED",
+      "availabilityState": "AVAILABLE",
+      "normingState": "NOT_NORMED",
+      "scoringState": "ADAPTED_SCORED",
+      "publicationState": "CANDIDATE_UNPUBLISHED",
+      "sourceClass": "MULTI_SOURCE_CLASS_PRESERVED",
+      "runtimeRef": "functions/profile/academic-bridge-runtime.js",
+      "artifactRefs": [
+        "content/profile/academic/financial/oecd-infe-2026-license-admission-v1.json",
+        "content/profile/academic/financial/phi-financial-capability-instrument-v1.json"
+      ],
+      "deploymentRequirements": [],
+      "claimBoundary": "PHI OS adapted financial capability signals; not an official OECD score and not professional financial advice."
+    }
+  ],
+  "signalEnvelope": {
+    "schema": "PHI-OS-PROFILE-SIGNAL-ENVELOPE-v1",
+    "bundleSchema": "PHI-OS-ACADEMIC-PROFILE-SIGNAL-BUNDLE-v1",
+    "sourceClassesMustRemainVisible": true,
+    "crossLaneAveragingAllowed": false,
+    "universalMasterScoreAllowed": false
+  },
+  "governance": {
+    "historicalW10FoundationRegistryPreserved": true,
+    "customerPublishableBeforePrfW12": false,
+    "prfW11StillRequired": true,
+    "prfW12StillRequired": true,
+    "symbolicScientificValidationTransferAllowed": false,
+    "sourceClassFlatteningAllowed": false
+  },
+  "gate": "check:profile:w10f-signal-integration"
+}

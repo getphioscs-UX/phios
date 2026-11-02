@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "stageCode": "IMR-W0",
+  "sources": [
+    {
+      "sourceCode": "ASTRONOMY_ENGINE_JS",
+      "owner": "CosineKitty",
+      "sourceType": "astronomical_calculation_library",
+      "roles": [
+        "astrology_pilot_engine",
+        "solar_longitude_candidate",
+        "bazi_solar_term_candidate"
+      ],
+      "license": {
+        "name": "MIT",
+        "status": "commercial_use_allowed",
+        "fee": "none",
+        "attributionRequired": true
+      },
+      "runtimeUse": "pilot_only",
+      "productionStatus": "validation_required",
+      "customerPayloadAllowed": false
+    },
+    {
+      "sourceCode": "IANA_TZDB",
+      "owner": "IANA",
+      "sourceType": "time_zone_database",
+      "roles": [
+        "civil_time_resolution",
+        "historical_utc_offset",
+        "dst_resolution"
+      ],
+      "versionPolicy": "version_must_be_recorded",
+      "license": {
+        "status": "commercial_use_allowed"
+      },
+      "runtimeUse": "candidate",
+      "productionStatus": "validation_required",
+      "historicalLimitationsVisible": true
+    },
+    {
+      "sourceCode": "NASA_JPL_HORIZONS",
+      "owner": "NASA JPL",
+      "sourceType": "astronomical_validation_reference",
+      "roles": [
+        "planetary_position_validation",
+        "solar_position_validation",
+        "regression_reference"
+      ],
+      "license": {
+        "status": "commercial_use_allowed_with_source_review"
+      },
+      "runtimeUse": "validation_only",
+      "productionDependency": false,
+      "customerPayloadAllowed": false
+    },
+    {
+      "sourceCode": "HONG_KONG_OBSERVATORY_CALENDAR",
+      "owner": "Hong Kong Observatory",
+      "sourceType": "calendar_validation_reference",
+      "roles": [
+        "solar_term_fixture_reference",
+        "gregorian_lunar_calendar_reference"
+      ],
+      "license": {
+        "status": "reference_use_only"
+      },
+      "runtimeUse": "validation_only",
+      "productionDependency": false
+    },
+    {
+      "sourceCode": "SWISS_EPHEMERIS",
+      "owner": "Astrodienst",
+      "sourceType": "deferred_astrology_engine",
+      "roles": [
+        "commercial_fallback"
+      ],
+      "license": {
+        "status": "commercial_license_required_or_agpl_decision"
+      },
+      "runtimeUse": "deferred",
+      "productionStatus": "blocked"
+    },
+    {
+      "sourceCode": "EXTERNAL_BAZI_TOOLS",
+      "owner": "multiple",
+      "sourceType": "reference_implementation",
+      "roles": [
+        "cross_tool_comparison"
+      ],
+      "license": {
+        "status": "results_reference_only"
+      },
+      "runtimeUse": "validation_only",
+      "productionDependency": false,
+      "algorithmAuthority": false
+    }
+  ]
+}

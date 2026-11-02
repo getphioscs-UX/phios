@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W5-W6-VALIDATION-FIXTURE-v1.0.0",
+  "caseId": "ZIWEI-FP-W56-FIXTURE-001",
+  "purpose": "Deterministic structural validation only; not a customer reading or empirical validation of Zi Wei claims.",
+  "canonicalInput": {
+    "birthDate": "2023-01-22",
+    "birthTime": "05:00:00",
+    "timezone": {"iana": "Asia/Hong_Kong", "utcOffsetAtBirth": "+08:00"},
+    "timeAccuracy": "EXACT"
+  },
+  "dynamicInput": {
+    "targetDate": "2026-08-28",
+    "targetTime": "12:00:00",
+    "targetTimezone": {"iana": "Asia/Kuala_Lumpur", "utcOffsetAtTarget": "+08:00"},
+    "traditionalCalculationSex": "MALE"
+  },
+  "expected": {
+    "humanAdmittedSourceClaims": 29,
+    "transformationCounts": {"NATAL": 4, "DA_XIAN": 4, "LIU_NIAN": 4, "ALL": 12},
+    "palaceRelationshipCounts": {"palaces": 12, "oppositePairs": 6, "trineGroups": 4, "sanFangSiZhengNetworks": 12, "adjacencyPairs": 12, "flankingNetworks": 12},
+    "lifePalace": {"opposite": "TRAVEL", "triads": ["WEALTH", "CAREER"], "flanks": ["PARENTS", "SIBLINGS"]},
+    "emptyMainStarPalaceCount": 2,
+    "palaceStemFlyingIncluded": false,
+    "customerCutoverAllowed": false
+  }
+}

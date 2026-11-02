@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-SERVICE-CONTINUITY-CURRENT-SUCCESSOR-v3.0.0",
+  "work": "P1_PHYSICAL_LEGACY_DELETE_CURRENT_RECONCILIATION",
+  "baselineCommit": "931bf68fd5fa8e8de2b05c72d80cdae55f205ecd",
+  "status": "CURRENT_SERVICE_CONTINUITY_P1_PRESENTATION_SUCCESSOR",
+  "predecessor": {
+    "path": "content/web-production/px2/successors/service-continuity-current-successor-v2.json",
+    "sha256": "9a03e352e97f71f4348d0b10f8fecac587b03b0de7f33cce28dc827b398d07c4",
+    "mutated": false
+  },
+  "currentPresentation": {
+    "currentAcceptance": "node scripts/check-px2-cx-p1-successor.mjs",
+    "currentPublicSurfaces": [
+      "services.html",
+      "professional/financial/index.html"
+    ],
+    "p1RouteAuthority": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json",
+    "physicalDeleteAcceptance": "content/customer-experience-rebuild/acceptance/p1-physical-legacy-delete-acceptance-v1.json",
+    "reason": "P1 physical deletion retired unrelated legacy public presentations, so Service Continuity current validation consumes the active PX2/CX-P1 successor instead of the pre-P1 whole-site presentation checker."
+  },
+  "authority": {
+    "serviceAuthorityTransferredToPX2": false,
+    "financialRuntimeAuthorityTransferredToPX2": false,
+    "consentAuthorityTransferredToPX2": false,
+    "privacyAuthorityTransferredToPX2": false,
+    "historicalV2Rewritten": false,
+    "currentPresentationCheckerOnly": true
+  }
+}

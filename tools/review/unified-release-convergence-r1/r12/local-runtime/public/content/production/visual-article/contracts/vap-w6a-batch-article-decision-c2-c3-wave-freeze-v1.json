@@ -1,0 +1,66 @@
+{
+  "contractCode": "PHI-OS-VAP-W6A-BATCH-ARTICLE-DECISION-C2-C3-WAVE-FREEZE-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W6A",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "implementationBaselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "status": "ACTIVE_AWAITING_HUMAN_DECISIONS",
+  "purpose": "Convert the governed VAP Article review cohort into executable Article production only after explicit per-node Human Production and Human Editorial decisions, then reuse existing C2/C3 authorities, freeze an Article-only plan/wave, and expose brief-export eligibility without creating candidates or publication.",
+  "upstream": {
+    "batchSelection": "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json",
+    "w6Contract": "content/production/visual-article/contracts/vap-w6-batch-article-selection-production-brief-export-v1.json",
+    "c2Authority": "content/knowledge/editorial/c2/canonical-thesis-boundary-index.json",
+    "c3Authority": "content/knowledge/editorial/c3/universal-production-readiness-index.json"
+  },
+  "humanDecisionBoundary": {
+    "explicitPerNodeProductionDecisionRequired": true,
+    "explicitPerNodeC2FreezeDecisionRequired": true,
+    "explicitPerNodeManuscriptMappingVerificationRequired": true,
+    "bulkApprovalAllowed": false,
+    "batchEnvelopeMayContainIndependentNodeDecisions": true,
+    "systemMayInferApprovalFromContinueCommand": false,
+    "aiMayActAsHumanAuthority": false,
+    "exactProposalContentHashBindingRequired": true
+  },
+  "formationOrder": [
+    "HUMAN_ARTICLE_DECISION",
+    "HUMAN_C2_CONTENT_AND_MAPPING_APPROVAL",
+    "C2_FREEZE",
+    "C3_REBUILD",
+    "CANONICAL_PRODUCTION_READINESS_PROJECTION",
+    "PRODUCTION_PLAN_FREEZE",
+    "ARTICLE_WAVE_FREEZE",
+    "EXECUTION_ELIGIBILITY",
+    "W6_BRIEF_EXPORT"
+  ],
+  "c2Boundary": {
+    "existingC2RuntimeMustBeReused": true,
+    "canonicalThesisMayNotBeDerivedFromTitleWithoutHumanApproval": true,
+    "failureCodePreserved": "C2_THESIS_BOUNDARY_NOT_FROZEN"
+  },
+  "c3Boundary": {
+    "existingC3RuntimeMustBeReused": true,
+    "humanProductionApprovalRequired": true,
+    "sourceSufficiencyMustRemainFailClosed": true,
+    "figureDecisionMustRemainExplicitOrNotRequiredByC2": true
+  },
+  "productionBoundary": {
+    "productionRole": "ARTICLE",
+    "requiredOutputs": [
+      "ARTICLE"
+    ],
+    "dispatchTarget": "PJA",
+    "candidateCreationAllowed": false,
+    "providerInvocationAllowedByW6a": false,
+    "publicationAllowed": false,
+    "standardPjaBriefExporterReused": true
+  },
+  "outputs": {
+    "review": "content/production/visual-article/review/vap-w6a-batch-001-human-review-v1.json",
+    "humanDecisions": "content/production/visual-article/decisions/vap-w6a-batch-001-human-decisions-v1.json",
+    "executionEligibility": "content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json",
+    "activation": "content/production/visual-article/activation/vap-w6a-batch-article-decision-c2-c3-wave-freeze-v1.json",
+    "futureFrozenProductionRoot": "content/knowledge/production-planning/production/vap-article-batch-001"
+  },
+  "nextWorkAfterExecutableBriefs": "VAP-W7_GOVERNED_PROVIDER_GENERATION"
+}

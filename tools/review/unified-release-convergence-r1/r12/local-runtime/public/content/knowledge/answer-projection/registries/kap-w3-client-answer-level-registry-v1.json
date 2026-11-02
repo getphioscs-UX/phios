@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W3-CLIENT-ANSWER-LEVEL-REGISTRY-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W3",
+  "baselineCommit": "00b5d580c9dbc4fc460694095b7519afad4b0b61",
+  "status": "FOUNDATION_REGISTRY_FROZEN_ROUTING_NOT_ACTIVATED",
+  "levels": [
+    {
+      "level": 1,
+      "code": "ASK_PHIOS",
+      "role": "KNOWLEDGE_QUESTION",
+      "authorityInputs": [
+        "KNOWLEDGE"
+      ],
+      "createsPersistentCase": false,
+      "requiresRealityModel": false,
+      "implementationState": "FOUNDATION_REGISTERED_NOT_ACTIVATED_BY_KAP_W0_W3"
+    },
+    {
+      "level": 2,
+      "code": "GUIDED_READING",
+      "role": "QUESTION_PLUS_LIMITED_CLIENT_CONTEXT",
+      "authorityInputs": [
+        "KNOWLEDGE",
+        "CLIENT_PROVIDED_CONTEXT"
+      ],
+      "optionalFutureInputs": [
+        "AUTHORIZED_METHOD_PROJECTION"
+      ],
+      "createsPersistentCase": false,
+      "requiresRealityModel": false,
+      "implementationState": "ROUTING_CONTRACT_ONLY_FUTURE_PHASE"
+    },
+    {
+      "level": 3,
+      "code": "REALITY_JOURNEY",
+      "role": "PERSISTENT_COMPLEX_REALITY_MODEL",
+      "authorityInputs": [
+        "KNOWLEDGE",
+        "GOVERNED_REALITY_EVIDENCE"
+      ],
+      "optionalFutureInputs": [
+        "AUTHORIZED_METHOD_PROJECTION"
+      ],
+      "createsPersistentCase": true,
+      "requiresRealityModel": true,
+      "requiresExplicitEscalationConsent": true,
+      "implementationState": "REFERENCE_ONLY_EXISTING_JOURNEY_NOT_MUTATED"
+    }
+  ],
+  "orthogonalCapabilities": [
+    {
+      "code": "PERSONAL_RUNTIME",
+      "role": "DETERMINISTIC_METHOD_CALCULATION_AND_PROJECTION",
+      "isKnowledgeAnswerLevel": false,
+      "futureDeliveryAuthority": "MCD",
+      "kapFoundationActivates": false
+    }
+  ],
+  "routingInvariants": {
+    "simpleQuestionDoesNotRequireRealityJourney": true,
+    "guidedReadingDoesNotAutomaticallyCreateCase": true,
+    "realityJourneyRequiresRealityModel": true,
+    "personalRuntimeIsNotAnswerLevel": true,
+    "kapW3DoesNotImplementRouting": true,
+    "kapW3DoesNotActivateMcd": true
+  }
+}

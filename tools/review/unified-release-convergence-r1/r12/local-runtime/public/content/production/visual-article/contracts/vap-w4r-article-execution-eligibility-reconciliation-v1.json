@@ -1,0 +1,43 @@
+{
+  "contractCode": "PHI-OS-VAP-W4R-ARTICLE-EXECUTION-ELIGIBILITY-RECONCILIATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W4R",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION_RECONCILIATION",
+  "status": "active",
+  "implementationBaselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+  "purpose": "Correct VAP-W4 semantic overreach by separating governed production eligibility, Article intent, and new-Article execution eligibility without weakening C2/C3/Human/KPP authority gates or rewriting the frozen Wave 1 plan.",
+  "supersession": {
+    "historicalInput": "content/production/visual-article/eligibility/visual-article-production-eligibility-v1.json",
+    "historicalOutputRemainsImmutable": true,
+    "downstreamArticleExecutionDecisionMustUseW4R": true,
+    "w4ArticleEligibleFlagIsNotSufficientExecutionAuthority": true
+  },
+  "articleIntentRules": {
+    "articleRoleCreatesIntent": true,
+    "multiAssetCreatesIntentOnlyWhenRequiredOutputsContainArticle": true,
+    "fragmentDoesNotCreateArticleIntent": true,
+    "figureDoesNotCreateArticleIntent": true,
+    "multiAssetWithoutArticleOutputDoesNotCreateArticleIntent": true
+  },
+  "newArticleExecutionRequirements": [
+    "ARTICLE_INTENT_CONFIRMED",
+    "ALL_NON_ROLE_GOVERNANCE_GATES_PASSED",
+    "DISPATCH_TARGET_PJA",
+    "W3_EXECUTION_MODE_NEW_ARTICLE_PRODUCTION",
+    "STANDARD_PJA_ARTICLE_DRAFT_EXPORTER_ALLOWED",
+    "DIRECT_PJA_BRIEF_EXECUTION_READY"
+  ],
+  "preservedGovernance": {
+    "c2ThesisBoundaryFailureCode": "C2_THESIS_BOUNDARY_NOT_FROZEN",
+    "c2ThesisBoundaryGatePreserved": true,
+    "c3ProductionReadinessPreserved": true,
+    "humanProductionDecisionPreserved": true,
+    "frozenPlanAndWavePreserved": true,
+    "localeGatePreserved": true,
+    "candidateAuthorityUnchanged": true,
+    "providerAuthorityUnchanged": true,
+    "publicationAuthorityUnchanged": true
+  },
+  "output": "content/production/visual-article/eligibility/visual-article-execution-eligibility-v1.json",
+  "nextWork": "VAP-W5R_SCALABLE_ARTICLE_PRODUCTION_PORTFOLIO"
+}

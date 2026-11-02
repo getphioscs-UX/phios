@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-008",
+  "title": "DETERMINISTIC-CALCULATION-BOUNDARY",
+  "scope": "SHARED",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/shared-calculation-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_INPUT_DIGEST",
+      "displayLabel": "CANONICAL INPUT DIGEST",
+      "nodeType": "STATE",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "DETERMINISM",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "ALGORITHM_VERSION",
+      "displayLabel": "ALGORITHM VERSION",
+      "nodeType": "STATE",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "DETERMINISM",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "REFERENCE_VERSIONS",
+      "displayLabel": "REFERENCE VERSIONS",
+      "nodeType": "STATE",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "DETERMINISM",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "DETERMINISTIC_EXECUTION",
+      "displayLabel": "DETERMINISTIC EXECUTION",
+      "nodeType": "PROCESS",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "DETERMINISM",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "OUTPUT_DIGEST",
+      "displayLabel": "OUTPUT DIGEST",
+      "nodeType": "STATE",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "DETERMINISM",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-008-E01",
+      "from": "CANONICAL_INPUT_DIGEST",
+      "to": "ALGORITHM_VERSION",
+      "relation": "REQUIRES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-008-E02",
+      "from": "ALGORITHM_VERSION",
+      "to": "REFERENCE_VERSIONS",
+      "relation": "REQUIRES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-008-E03",
+      "from": "REFERENCE_VERSIONS",
+      "to": "DETERMINISTIC_EXECUTION",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-008-E04",
+      "from": "DETERMINISTIC_EXECUTION",
+      "to": "OUTPUT_DIGEST",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "DETERMINISTIC_CALCULATION_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "CANONICAL_INPUT_DIGEST",
+        "ALGORITHM_VERSION",
+        "REFERENCE_VERSIONS",
+        "DETERMINISTIC_EXECUTION",
+        "OUTPUT_DIGEST"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_INPUT_DIGEST",
+    "ALGORITHM_VERSION",
+    "REFERENCE_VERSIONS",
+    "DETERMINISTIC_EXECUTION",
+    "OUTPUT_DIGEST"
+  ],
+  "mustState": [
+    "repeatExecutionRequired=true",
+    "silentRepairAllowed=false",
+    "AI calculation forbidden"
+  ],
+  "statementSources": {
+    "repeatExecutionRequired=true": "SRC-002",
+    "silentRepairAllowed=false": "SRC-002",
+    "AI calculation forbidden": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

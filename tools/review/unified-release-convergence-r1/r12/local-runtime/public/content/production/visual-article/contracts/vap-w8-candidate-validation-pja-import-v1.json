@@ -1,0 +1,95 @@
+{
+  "authorityBoundary": {
+    "approvalAuthorityMutationAllowedByW8": false,
+    "candidateImportEqualsApproval": false,
+    "candidateImportEqualsHumanReview": false,
+    "candidateImportEqualsPublication": false,
+    "candidateImportEqualsPublicationReadiness": false,
+    "candidateRegistryMutationAllowedByW8": false,
+    "canonicalKnowledgeMutationAllowed": false,
+    "humanEditorialReviewRequired": true,
+    "pjaImportedCandidateAuthority": "candidate_only",
+    "providerCandidateAuthority": false,
+    "publicationAllowed": false,
+    "reviewAuthorityMutationAllowedByW8": false
+  },
+  "contractCode": "PHI-OS-VAP-W8-CANDIDATE-VALIDATION-PJA-IMPORT-v1",
+  "contractVersion": "1.0.0",
+  "implementationBaselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "nextWork": "VAP-W9_HUMAN_EDITORIAL_REVIEW_AND_CANDIDATE_PROMOTION",
+  "outputs": {
+    "activation": "content/production/visual-article/activation/vap-w8-candidate-validation-pja-import-v1.json",
+    "importManifest": "content/production/visual-article/import/vap-article-batch-001-pja-import-v1.json",
+    "pjaCandidatePattern": "content/knowledge/production/candidates/zh-Hans/<NODE_CODE>/candidate.v1.json",
+    "validation": "content/production/visual-article/validation/vap-article-batch-001-candidate-validation-v1.json"
+  },
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "pjaImportBridge": {
+    "existingPjaImporterMustBeReused": true,
+    "generationBriefMayBeFalselyRelabeledAsCanonicalBriefV2": false,
+    "generationInputContract": "PHI-OS-KNOWLEDGE-PRODUCTION-BRIEF-v1.1.0",
+    "pjaCandidateBindingContract": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+    "providerWasNotClaimedToHaveUsedCanonicalBriefV2": true,
+    "rebindAllowedOnlyAfterExactApprovedC2ThesisBoundaryEquivalence": true,
+    "secondPjaCandidateImporterForbidden": true
+  },
+  "postFreezeReconciliation": {
+    "historicalW5rContractAuthorityRewritten": false,
+    "purpose": "Prevent the scalable Article portfolio from continuing to report the six approved Batch 001 nodes as pending Article decisions after W6A freeze and execution formation.",
+    "w5rDerivedPortfolioMustConsumeW6aSuccessorAuthority": true
+  },
+  "purpose": "Validate the six non-authoritative Batch 001 provider Article candidates against their approved W6A/C2 authority, preserve generation lineage, and import only validation-passing zh-Hans candidates into the existing PJA Candidate layer for Human editorial review without approval or publication.",
+  "status": "active",
+  "upstream": {
+    "executionEligibility": "content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json",
+    "existingCanonicalBriefRuntime": "scripts/lib/knowledge-production/canonical-brief-v2.mjs",
+    "existingPjaCandidateRuntime": "scripts/lib/knowledge-production/zh-hans-candidate-v1.mjs",
+    "humanDecisions": "content/production/visual-article/decisions/vap-w6a-batch-001-human-decisions-v1.json",
+    "humanReviewProposals": "content/production/visual-article/review/vap-w6a-batch-001-human-review-v1.json",
+    "productionBriefDirectory": "dist/knowledge-production-briefs",
+    "providerSessionManifest": "dist/knowledge-production-candidates/VAP-ARTICLE-BATCH-001/session-generation-manifest.json"
+  },
+  "validationGate": {
+    "anyBlockingFindingPreventsImport": true,
+    "approvedC2ToPjaCanonicalBriefV2EquivalenceRequired": true,
+    "candidateDigestMustMatchSessionManifest": true,
+    "canonicalTitleBindingRequired": true,
+    "generationProposalHashMustMatchHumanDecision": true,
+    "generationRecordDigestMustMatchSessionManifest": true,
+    "humanArticleApprovalRequired": true,
+    "humanC2FreezeApprovalRequired": true,
+    "humanManuscriptMappingApprovalRequired": true,
+    "minimumArticleLengthRequired": true,
+    "minimumArticleStructureRequired": true,
+    "minimumCanonicalThesisCoverageRequired": true,
+    "minimumMustEstablishCoverageRequired": true,
+    "pjaCandidateSchemaValidationRequired": true,
+    "providerCandidateMustExist": true,
+    "providerGenerationRecordMustExist": true,
+    "publicMarkdownSafetyValidationRequired": true,
+    "w6aExecutionEligibilityRequired": true
+  },
+  "validationLimits": {
+    "automatedValidationMayEstablish": [
+      "lineage_integrity",
+      "candidate_digest_binding",
+      "public_body_safety",
+      "canonical_title_binding",
+      "minimum_thesis_and_must_establish_coverage",
+      "c2_to_pja_brief_equivalence",
+      "pja_candidate_schema_compatibility"
+    ],
+    "automatedValidationMayNotEstablish": [
+      "factual_truth",
+      "source_truth",
+      "complete_semantic_fidelity",
+      "human_editorial_approval",
+      "article_approval",
+      "publication_readiness",
+      "publication"
+    ],
+    "externalFactIndicatorsAreWarningsNotEvidenceValidation": true,
+    "requiredDistinctionsRemainHumanReviewDimension": true
+  },
+  "work": "VAP-W8"
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "ZWR-PRO-W6-REFERENCE-QUALITY-VERIFIER-CONTRACT-v1",
+  "work": "ZWR-PRO-W6",
+  "status": "IMPLEMENTED_MACHINE_GATE_PENDING_REFERENCE_CALIBRATION_FIXED",
+  "reference": "ZWR-PRO-GOLD-STANDARD-W0-v1",
+  "comparisonMode": "QUALITY_DIMENSIONS_NOT_LEXICAL_TEMPLATE",
+  "checks": [
+    "REFERENCE_DEPTH_BAND",
+    "PARAGRAPH_RHYTHM",
+    "PARAGRAPH_DEVELOPMENT",
+    "CUSTOMER_VOICE",
+    "TECHNICAL_GROUNDING",
+    "PALACE_VISIBILITY",
+    "STAR_VISIBILITY",
+    "TIMING_TRANSFORMATION_VISIBILITY",
+    "NO_GOVERNANCE_PROSE",
+    "NO_STAR_GLOSSARY",
+    "NO_REFERENCE_SENTENCE_COPY_FOR_OTHER_SUBJECT"
+  ],
+  "productionAdmissionGranted": false,
+  "paragraphDevelopment": {
+    "mode": "REFERENCE_DERIVED",
+    "rule": "Single-sentence substantial paragraphs are allowed only up to the count already present in the accepted reference for that section/locale, and must remain within the reference-derived minimum length band.",
+    "fragmentationIncreaseForbidden": true,
+    "sentencePerParagraphHardMinimum": false
+  },
+  "paragraphMinimum": {
+    "mode": "SECTION_AND_LOCALE_REFERENCE_DERIVED",
+    "hardFloor": {
+      "zhHansChars": 36,
+      "enWords": 24
+    },
+    "rule": "Candidate paragraph minimum is max(hard floor, 90% of the accepted reference section's shortest paragraph). Single-sentence paragraph floor is derived separately from the accepted reference's shortest single-sentence paragraph.",
+    "purpose": "Allow intentional short closing paragraphs present in the gold reference without permitting greater fragmentation in generated customer copy."
+  },
+  "customerVoice": {
+    "mode": "SECTION_REFERENCE_DERIVED",
+    "rule": "If the accepted reference section uses direct customer/chart-addressed language, the candidate must retain a comparable direct voice. If the accepted reference section instead uses a section-native professional subject such as Liu Nian, annual structure or a palace, direct second-person wording is not mandatory.",
+    "directForms": [
+      "you",
+      "your",
+      "this chart",
+      "the chart",
+      "你",
+      "你的",
+      "这张盘",
+      "命盘"
+    ],
+    "safeguards": [
+      "PROCESS_OR_GOVERNANCE_PROSE_REMAINS_FORBIDDEN",
+      "TECHNICAL_GROUNDING_STILL_REQUIRED",
+      "REFERENCE_DEPTH_AND_PARAGRAPH_RHYTHM_STILL_REQUIRED"
+    ]
+  }
+}

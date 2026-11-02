@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-SOURCE-CLASS-v1.0.0",
+  "work": "PRF-W0",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "FOUNDATION_CONTRACT",
+  "sourceClasses": [
+    "MEASURED_TASK_PERFORMANCE",
+    "STANDARDIZED_SELF_REPORT",
+    "CUSTOMER_SELF_REPORT",
+    "EXTERNAL_PROFILE_RESULT",
+    "SYMBOLIC_INTERPRETATION",
+    "CURRENT_REALITY_OBSERVATION",
+    "PROFESSIONAL_EVIDENCE"
+  ],
+  "requirements": {
+    "everyProfileSignalCarriesSourceClass": true,
+    "customerVisualLanguageMayBeShared": true,
+    "evidenceClassesMayBeFlattened": false,
+    "sourceProvenancePreserved": true
+  },
+  "forbiddenConversions": [
+    {
+      "from": "SYMBOLIC_INTERPRETATION + CUSTOMER_SELF_REPORT agreement",
+      "to": "METHOD_PROVEN_TRUE"
+    },
+    {
+      "from": "CUSTOMER_SELF_REPORT score",
+      "to": "OBJECTIVE_PERSONALITY_FACT"
+    },
+    {
+      "from": "MEASURED_TASK_PERFORMANCE mini-task",
+      "to": "IQ_OR_PERCENTILE_WITHOUT_NORMING"
+    },
+    {
+      "from": "EXTERNAL_PROFILE_RESULT four-letter label",
+      "to": "UNIVERSAL_PERSONALITY_TRUTH"
+    }
+  ],
+  "customerClaimBoundary": "Source class describes how a signal was obtained; it does not rank every source on one truth scale."
+}

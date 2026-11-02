@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-MIR-10-PCA-AUTHORITY-BOUNDARY-v2.0.0",
+  "work": "MIR-10A",
+  "baselineCommit": "5726f4a06a4aefe9695325306b27933e5e33501a",
+  "status": "ACTIVE_SUCCESSOR_NON_TRUTH_AUTHORITY",
+  "positioning": {
+    "PCA": "PRODUCTION_DEMAND_FEEDBACK_RUNTIME",
+    "knowledgeTruthRuntime": false,
+    "interpretationRuntime": false,
+    "methodRuntime": false,
+    "readingRuntime": false,
+    "publicationRuntime": false
+  },
+  "may": [
+    "receive de-identified aggregate demand",
+    "aggregate recurring demand",
+    "rank advisory production priority",
+    "handoff advisory evidence to KPP",
+    "form candidate-only PJA/CAR handoff after KPP authorization",
+    "compare published coverage against demand",
+    "mark demand resolved/remaining prospectively"
+  ],
+  "mayNot": [
+    "create Canonical Node",
+    "create Canonical Claim",
+    "create Canonical Meaning",
+    "rewrite Method algorithm",
+    "activate Interpretation rule",
+    "activate Figure authority",
+    "answer live client questions",
+    "create Human review evidence",
+    "publish Article",
+    "publish Asset",
+    "rewrite historical client truth"
+  ],
+  "predecessorPcaW0W8MutationAllowed": false,
+  "predecessorEvidence": {
+    "pcaFreeze": {
+      "path": "content/knowledge/client-demand-feedback/freeze/pca-w0-w8-client-demand-loop-freeze-v1.json",
+      "sha256": "5cc49cad5e5f919036f826d340420fe01bd568da3d3976bc085423c1dc21856d"
+    },
+    "pcaAcceptance": {
+      "path": "content/knowledge/client-demand-feedback/acceptance/pca-w0-w8-client-demand-loop-acceptance-v1.json",
+      "sha256": "9bc0b415ea1bb1b8a729cde79c44369d266b591e10a62bdd76a6b2638989bf15"
+    },
+    "kppFreeze": {
+      "path": "content/knowledge/production-planning/freeze/kpp-w29-knowledge-production-planning-v2-freeze.json",
+      "sha256": "85217f79ff21a8db4f292c6abdfa3a100d0ad62a103ef2c2c388cff37d15aa7c"
+    },
+    "kppPja": {
+      "path": "content/knowledge/production-planning/contracts/kpp-pja-handoff-contract-v2.json",
+      "sha256": "2876309cc4dd52119035975490caa14a02d9d5a998d4d12571e0f1f9ac09cb1a"
+    },
+    "kppCar": {
+      "path": "content/knowledge/production-planning/contracts/kpp-car-handoff-contract-v2.json",
+      "sha256": "1e0485e4b49a6a9de97c722e34fe78e6e4ff033a70d0f05360f006ce57ad47eb"
+    },
+    "kapPca": {
+      "path": "content/knowledge/answer-projection/reconciliation/kap-w41-pca-demand-gap-signal-handoff-v1.json",
+      "sha256": "2b84a195d1172f598c7441c3f81832c2317139f23d2acd825335485c6df68bac"
+    },
+    "publicationRegistry": {
+      "path": "content/knowledge/production/registry/publication-registry.json",
+      "sha256": "07aee83b75d850d24da245d79471bf6f9e129fe4914019cdca2d1f63d7917f31"
+    },
+    "compositionCoverage": {
+      "path": "content/knowledge/public/article-composition-coverage-registry-v1.json",
+      "sha256": "581caccc79b96939f96b8e7fca2184c448d0d808ec7d97b7b13c198039c77ec6"
+    },
+    "carPublished": {
+      "path": "content/production/car/registries/published-asset-production-registry-v1.json",
+      "sha256": "a359c807e5b53858757861446e9aaee65927dd5aad0eedfdeb066ae3d55f311d"
+    },
+    "mir9": {
+      "path": "content/reconciliation/mir/mir-9-reality-escalation-rjx-integration-v1.json",
+      "sha256": "9fa1568aa3cb3146c312fc53da1934a6ca025b0fb27dd357cbdc6940e23189bd"
+    }
+  }
+}

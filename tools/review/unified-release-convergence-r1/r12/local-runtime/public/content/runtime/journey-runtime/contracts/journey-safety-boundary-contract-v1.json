@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-JR-W8-SAFETY-BOUNDARY-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W8",
+  "status": "active_fail_closed",
+  "checks": [
+    "EMERGENCY_SIGNAL",
+    "REGULATED_ADVICE_REQUEST",
+    "MISSING_REQUIRED_CONSENT",
+    "PROFESSIONAL_ESCALATION",
+    "DATA_PURPOSE_VIOLATION"
+  ],
+  "states": [
+    "ALLOW",
+    "BLOCK",
+    "ESCALATE"
+  ],
+  "rules": {
+    "emergencySignalMustBeExplicitUpstreamSignal": true,
+    "jrDoesNotDiagnoseEmergency": true,
+    "regulatedAdviceDecisionNotMadeByJr": true,
+    "missingConsentBlocks": true,
+    "dataPurposeViolationBlocks": true,
+    "professionalEscalationCreatesResponsibility": false,
+    "professionalHandoffRequiresSeparateGate": true
+  }
+}

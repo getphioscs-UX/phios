@@ -1,0 +1,351 @@
+{
+  "id": "FINANCIAL_R3_2_CONDITIONAL_DEEP_DIVE_PAGE_CONTRACT_CANDIDATE",
+  "status": "CANDIDATE_NOT_ENTITLED_NOT_RELEASED",
+  "basePublication": "R3_1_PAID_CORE_20_CANDIDATE",
+  "pagesAddedToDefaultReport": 0,
+  "defaultPageCountChanged": false,
+  "pages": [
+    {
+      "pageId": "P21",
+      "ordinalIfIncluded": 21,
+      "pageIdentity": "R3_2_DEEP_DIVE_P21",
+      "topicKey": "RETIREMENT_EXPENSE_PATH",
+      "title": {
+        "zh-Hans": "退休生活需要多少",
+        "en": "Retirement Spending Requirement"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "RETIREMENT_EXPENSE_PATH",
+      "sourceModel": "RETIREMENT_NEEDS",
+      "requiredEvidence": [
+        "declared_retirement_age_or_date",
+        "retirement_spending_basis",
+        "cost_inflation_assumption",
+        "years_in_retirement",
+        "currency_and_asof"
+      ],
+      "allowedOutputMetrics": [
+        "retirement_first_year_spending",
+        "annual_expense_path",
+        "scenario_capital_requirement"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "NEEDS_INPUT_AND_SOURCED_ASSUMPTIONS",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D01",
+      "layoutTheme": "RETIREMENT_NOMINAL_REAL_PATH",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-RETIREMENT-YEARLY",
+        "FIN-A-ASSUMPTIONS"
+      ]
+    },
+    {
+      "pageId": "P22",
+      "ordinalIfIncluded": 22,
+      "pageIdentity": "R3_2_DEEP_DIVE_P22",
+      "topicKey": "RETIREMENT_FUNDING_PATH",
+      "title": {
+        "zh-Hans": "退休资金来自哪里",
+        "en": "Retirement Resources & Funding Path"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "STACKED_ACCUMULATION_AND_GAP",
+      "sourceModel": "RETIREMENT_FUNDING",
+      "requiredEvidence": [
+        "P21_compatible_need_scenario",
+        "validated_balances_by_subject",
+        "contributions_by_year",
+        "asset_access_rules",
+        "return_assumptions_and_fees"
+      ],
+      "allowedOutputMetrics": [
+        "annual_funding_path",
+        "sourced_gap_or_excess",
+        "unassigned_or_duplicate_assets"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "NEEDS_INPUT_AND_SOURCED_ASSUMPTIONS",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D02",
+      "layoutTheme": "RETIREMENT_FUNDING_COST_GAP",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-RETIREMENT-YEARLY",
+        "FIN-A-ASSUMPTIONS"
+      ]
+    },
+    {
+      "pageId": "P23",
+      "ordinalIfIncluded": 23,
+      "pageIdentity": "R3_2_DEEP_DIVE_P23",
+      "topicKey": "EDUCATION_COST_TIMELINE",
+      "title": {
+        "zh-Hans": "教育安排与未来成本",
+        "en": "Education Path & Cost Timeline"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "STAGE_TIMELINE_AND_COST_STACK",
+      "sourceModel": "EDUCATION_COST",
+      "requiredEvidence": [
+        "consented_dependants",
+        "education_stages",
+        "declared_start_years",
+        "fee_source_year",
+        "fees_living_costs",
+        "currency_and_assumptions"
+      ],
+      "allowedOutputMetrics": [
+        "annual_cost_by_person_and_stage",
+        "cost_assumptions"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "NEEDS_CHILD_STAGE_COST_EVIDENCE",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D03",
+      "layoutTheme": "EDUCATION_STACKED_STAGE_COST",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-EDUCATION-YEARLY",
+        "FIN-A-ASSUMPTIONS"
+      ]
+    },
+    {
+      "pageId": "P24",
+      "ordinalIfIncluded": 24,
+      "pageIdentity": "R3_2_DEEP_DIVE_P24",
+      "topicKey": "EDUCATION_FUNDING_GAPS",
+      "title": {
+        "zh-Hans": "教育资金还差多少",
+        "en": "Education Funding Sources & Gaps"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "FUNDING_GAP_AND_SOURCE_MAP",
+      "sourceModel": "EDUCATION_FUNDING",
+      "requiredEvidence": [
+        "P23_compatible_cost_scenario",
+        "explicit_fund_allocations",
+        "ownership_shares",
+        "funding_schedule",
+        "return_assumptions_if_projecting"
+      ],
+      "allowedOutputMetrics": [
+        "annual_education_funding_difference",
+        "unassigned_value",
+        "double_allocation_conflicts"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "NEEDS_GOAL_FUNDS_AND_VALIDATED_SCENARIO",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D04",
+      "layoutTheme": "EDUCATION_FUNDING_SOURCE_GAP",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-EDUCATION-YEARLY",
+        "FIN-A-ASSUMPTIONS"
+      ]
+    },
+    {
+      "pageId": "P25",
+      "ordinalIfIncluded": 25,
+      "pageIdentity": "R3_2_DEEP_DIVE_P25",
+      "topicKey": "PERSON_EVENT_PROTECTION",
+      "title": {
+        "zh-Hans": "分人分事件的保障准备",
+        "en": "Protection Needs by Person & Event"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "PERSON_EVENT_COVERAGE_GRID",
+      "sourceModel": "PROTECTION_EVENT",
+      "requiredEvidence": [
+        "consented_subjects",
+        "actual_policy_events",
+        "insured_person_reference",
+        "coverage_terms",
+        "need_model_if_gap_claimed"
+      ],
+      "allowedOutputMetrics": [
+        "event_matched_coverage_evidence",
+        "case_specific_gap_only_if_approved"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "NEEDS_VERIFIED_COVERAGE_TO_CALCULATE_GAP",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D05",
+      "layoutTheme": "PROTECTION_EVENT_EVIDENCE",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-COVERAGE-EVENTS"
+      ]
+    },
+    {
+      "pageId": "P26",
+      "ordinalIfIncluded": 26,
+      "pageIdentity": "R3_2_DEEP_DIVE_P26",
+      "topicKey": "ESTATE_CONTINUITY",
+      "title": {
+        "zh-Hans": "遗产与家庭文件的持续准备",
+        "en": "Estate Continuity & Review Triggers"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "DOCUMENT_ROLE_RELATION_MAP",
+      "sourceModel": "ESTATE_CONTINUITY",
+      "requiredEvidence": [
+        "declared_will_status",
+        "role_statements",
+        "nomination_review_status",
+        "document_location_reference",
+        "review_events",
+        "legal_scope_if_legal_claim"
+      ],
+      "allowedOutputMetrics": [
+        "document_preparation_status",
+        "review_triggers"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "LEGAL_SCOPE_CHECK_FOR_ACTIONS",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D06",
+      "layoutTheme": "ESTATE_DOCUMENT_ROLE_NETWORK",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-ESTATE-DOCUMENTS"
+      ]
+    },
+    {
+      "pageId": "P27",
+      "ordinalIfIncluded": 27,
+      "pageIdentity": "R3_2_DEEP_DIVE_P27",
+      "topicKey": "LIFE_COURSE_MILESTONES",
+      "title": {
+        "zh-Hans": "多年生活与财务事件",
+        "en": "Life-course Financial Milestones"
+      },
+      "status": "CONDITIONAL_OPT_IN_HUMAN_REVIEW_ONLY",
+      "oneTopicPerPage": true,
+      "primaryDiagram": "MULTI_LANE_YEARLY_MILESTONE_MAP",
+      "sourceModel": "LIFE_COURSE_EVENTS",
+      "requiredEvidence": [
+        "user_declared_events",
+        "event_dates_or_years",
+        "household_subject_authorizations",
+        "event_status",
+        "linked_goals_debts_or_assets"
+      ],
+      "allowedOutputMetrics": [
+        "yearly_declared_events",
+        "recurring_review_events",
+        "verified_status_distinctions"
+      ],
+      "fallback": "RENDER_INPUT_READINESS_IN_CORE_20_NOT_EMPTY_DEEP_DIVE_PAGE",
+      "blockedReasonCode": "NEEDS_DATED_USER_EVENTS",
+      "narrativePolicy": "EXPLAIN_FROZEN_SYSTEM_RESULTS_ONLY",
+      "chartRendering": "DYNAMIC_SVG_HTML_NOT_BACKGROUND",
+      "backgroundAsset": "images/reports/financial/editorial/bilingual/VIS-REPORT-FINANCIAL-BODY.webp",
+      "format": "A4_PORTRAIT_210x297mm",
+      "requiresCurrentOwnerConsent": true,
+      "providerCallsInCurrentWork": 0,
+      "deepDiveId": "D07",
+      "layoutTheme": "MULTI_LANE_DATED_MILESTONES",
+      "chartEligibility": "CURRENT_SOURCE_AND_SUBJECT_AUTHORIZATION_PLUS_EXPLICIT_MODEL_INPUTS",
+      "pageCountPolicy": "OMIT_IF_MEANINGFUL_EVIDENCE_NOT_AVAILABLE",
+      "ownershipPrivacyGate": "LOCAL_SYNTHETIC_ADMISSION_ONLY_REAL_SUBJECT_ADAPTER_BLOCKED",
+      "appendices": [
+        "FIN-A-READINESS"
+      ]
+    }
+  ],
+  "modelSourcesAreFDR_FCR_FAR": "MUST_CHECK_CANONICAL_RUNTIME",
+  "preventDuplicateFundingAndDoubleCounting": true,
+  "freeNoOpenAI": true,
+  "paidPriceMYR": 69,
+  "includedFollowups": 4,
+  "purchaseProviderCostCapUSD": 5,
+  "currentProviderBudgetUSD": 0,
+  "realProviderCallsAllowed": false,
+  "corePageEnhancementTargets": [
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08",
+    "P09",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P20"
+  ],
+  "humanApprovalNeededForCommercialInclusion": true,
+  "privacy": {
+    "privateLegacyXlsxIsEvidenceOnly": true,
+    "noSourcePersonalFieldsExported": true,
+    "subjectConsentGate": true,
+    "noRealClientDataInFixtures": true
+  },
+  "legacyPreservation": {
+    "paid16": true,
+    "free8": true,
+    "r31Paid20": true,
+    "historicalOrderEntitlements": true
+  },
+  "executionVersion": "FINANCE_R3_2_DEEP_DIVE_CANDIDATE",
+  "outputLanguage": "BILINGUAL_SINGLE_ARTIFACT",
+  "humanAccepted": false,
+  "productionAdmitted": false
+}

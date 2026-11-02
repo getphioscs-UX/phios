@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "PHI-OS-DOSSIER-EU-W8I-ACCEPTED-CURRENT-DOSSIER-v1.0.0",
+  "status": "ACCEPTED_CURRENT_DOSSIER",
+  "dossierId": "DOSSIER-EU",
+  "stage": "W8-I",
+  "acceptedAt": "2026-10-08",
+  "humanDecisionReference": "content/civilization-atlas/reconfiguration/dossier-eu-w8h-human-decisions-v1.json",
+  "readoutReference": {
+    "code": "RRE-READOUT-B6-EU-2026-1-CONTRACT",
+    "version": "2026.1-contract",
+    "digest": "6fe8d9d2b675f8b1548b1a0b43f8ce80f8fa41af1d968425de6fb0d6ee2040c2"
+  },
+  "admittedPositions": [
+    {
+      "candidateId": "EU-RP-22-EU-W8F-SEM-FINANCIAL-SETTLEMENT-CARRIER",
+      "runtimePositionId": "RP-22",
+      "scope": "SUBSYSTEM",
+      "subsystem": "FINANCIAL_SETTLEMENT_CARRIER",
+      "grammarId": "G6",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "EU-CARRIER-STRUCTURE-2026-001"
+      ]
+    },
+    {
+      "candidateId": "EU-RP-23-EU-W8F-SEM-INDUSTRIAL-SYSTEM-RUNTIME",
+      "runtimePositionId": "RP-23",
+      "scope": "SUBSYSTEM",
+      "subsystem": "INDUSTRIAL_SYSTEM_RUNTIME",
+      "grammarId": "G7",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "EU-INDUSTRY-2026-001",
+        "EU-INFRASTRUCTURE-2026-001",
+        "EU-TECHNOLOGY-2026-001"
+      ]
+    },
+    {
+      "candidateId": "EU-RP-18-EU-W8F-SEM-ENERGY-IMPORT-COST-CONSTRAINT",
+      "runtimePositionId": "RP-18",
+      "scope": "SUBSYSTEM",
+      "subsystem": "ENERGY_IMPORT_COST_RUNTIME",
+      "grammarId": "G2",
+      "realityDomainId": "P2",
+      "evidenceRefs": [
+        "EU-EXTERNAL-DEPENDENCY-2026-001",
+        "EU-PRESSURE-FIELD-2026-001"
+      ]
+    }
+  ],
+  "preservedReferenceOnly": [
+    {
+      "semanticBasisId": "EU-W8E-SEM-ENERGY-SUPPLY-RECONFIGURATION",
+      "state": "REFERENCE_ONLY",
+      "reason": "Current evidence shows changing energy-import composition but does not yet establish a direct P3 continuity/reconfiguration mechanism across the EU energy system."
+    },
+    {
+      "claimId": "EU-ENERGY-RECONFIGURATION-2026-001",
+      "state": "REFERENCE_ONLY",
+      "reason": "Supply-composition change is retained as context, not position admission."
+    }
+  ],
+  "preservedUnknowns": [
+    "The persistence of current 2026 industrial and producer-price conditions is not established.",
+    "TEN-T work plans identify progress and bottlenecks but do not establish uniform network completion.",
+    "Digital infrastructure maturity differs materially between basic 5G coverage and fibre/computing/semiconductor capacity.",
+    "No single whole-dossier EU runtime position is established."
+  ],
+  "preservedConflicts": [
+    "Mature institutional carriers coexist with weak industrial momentum, infrastructure bottlenecks, uneven digital depth and energy-cost vulnerability."
+  ],
+  "projectionBoundary": {
+    "subsystemPositionsDoNotImplySingleWholeDossierPosition": true,
+    "cnPositionReuse": false,
+    "seaPositionReuse": false,
+    "inPositionReuse": false,
+    "usPositionReuse": false,
+    "prediction": false,
+    "historicalPositionShortcut": false,
+    "memberStateHeterogeneityPreserved": true,
+    "eurosystemScopePreserved": true,
+    "energySupplyReconfigurationNotAdmitted": true
+  },
+  "providerCalls": 0
+}

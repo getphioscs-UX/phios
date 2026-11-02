@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-extraction-policy.schema.json",
+  "title": "PHI OS PKR Canonical Extraction Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "contract",
+    "version",
+    "status",
+    "effectiveFrom",
+    "unitOfRegistration",
+    "hierarchy",
+    "prohibitedMappings",
+    "admissionTests",
+    "classifications",
+    "nodeIdentity",
+    "languagePolicy",
+    "scaling",
+    "productionQueue",
+    "reviewGates",
+    "changeActions",
+    "runtimeImpact",
+    "publicPageImpact"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "contract": { "const": "PHI-OS-PKR-Canonical-Extraction-Scaling-v1.2.0" },
+    "version": { "const": "1.2.0" },
+    "status": { "enum": ["draft", "review", "frozen", "superseded"] },
+    "effectiveFrom": { "type": "string", "minLength": 1 },
+    "unitOfRegistration": { "const": "independent_reusable_mechanism" },
+    "hierarchy": {
+      "type": "array",
+      "minItems": 5,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "prohibitedMappings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "admissionTests": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "classifications": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "nodeIdentity": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "languagePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "knowledgeCore",
+        "canonicalArticleLanguage",
+        "localizedLanguages",
+        "englishMayIntroduceNewTheory"
+      ],
+      "properties": {
+        "knowledgeCore": { "const": "language_neutral" },
+        "canonicalArticleLanguage": { "const": "zh-Hans" },
+        "localizedLanguages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        },
+        "englishMayIntroduceNewTheory": { "const": false }
+      }
+    },
+    "scaling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "partThresholds",
+        "planningRanges",
+        "volumePlanning",
+        "threeVolumePlanning",
+        "densityReview"
+      ],
+      "properties": {
+        "partThresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["softReview", "mandatoryAudit", "hardFreeze"],
+          "properties": {
+            "softReview": { "type": "integer", "minimum": 1 },
+            "mandatoryAudit": { "type": "integer", "minimum": 1 },
+            "hardFreeze": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "planningRanges": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "maxPages",
+              "canonicalNodesMin",
+              "canonicalNodesMax",
+              "supportingQuestionsMin",
+              "supportingQuestionsMax"
+            ],
+            "properties": {
+              "minPages": { "type": "integer", "minimum": 1 },
+              "maxPages": { "type": "integer", "minimum": 1 },
+              "canonicalNodesMin": { "type": "integer", "minimum": 0 },
+              "canonicalNodesMax": { "type": "integer", "minimum": 0 },
+              "supportingQuestionsMin": { "type": "integer", "minimum": 0 },
+              "supportingQuestionsMax": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "volumePlanning": { "$ref": "#/$defs/range" },
+        "threeVolumePlanning": { "$ref": "#/$defs/range" },
+        "densityReview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "canonicalDensityReviewAbove",
+            "questionDensityReviewBelow",
+            "metricsAreAutomaticDeletionRules"
+          ],
+          "properties": {
+            "canonicalDensityReviewAbove": { "type": "number", "minimum": 0 },
+            "questionDensityReviewBelow": { "type": "number", "minimum": 0 },
+            "metricsAreAutomaticDeletionRules": { "const": false }
+          }
+        }
+      }
+    },
+    "productionQueue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tierCActiveMin",
+        "tierCActiveMax",
+        "tierBActiveMin",
+        "tierBActiveMax",
+        "tierAActiveMin",
+        "tierAActiveMax",
+        "totalActiveArticleMaximum",
+        "registryPresenceImpliesProduction"
+      ],
+      "properties": {
+        "tierCActiveMin": { "type": "integer", "minimum": 0 },
+        "tierCActiveMax": { "type": "integer", "minimum": 0 },
+        "tierBActiveMin": { "type": "integer", "minimum": 0 },
+        "tierBActiveMax": { "type": "integer", "minimum": 0 },
+        "tierAActiveMin": { "type": "integer", "minimum": 0 },
+        "tierAActiveMax": { "type": "integer", "minimum": 0 },
+        "totalActiveArticleMaximum": { "type": "integer", "minimum": 1 },
+        "registryPresenceImpliesProduction": { "const": false }
+      }
+    },
+    "reviewGates": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "changeActions": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "runtimeImpact": { "const": "none" },
+    "publicPageImpact": { "const": "none" }
+  },
+  "$defs": {
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalNodesMin",
+        "canonicalNodesMax",
+        "supportingQuestionsMin",
+        "supportingQuestionsMax"
+      ],
+      "properties": {
+        "canonicalNodesMin": { "type": "integer", "minimum": 0 },
+        "canonicalNodesMax": { "type": "integer", "minimum": 0 },
+        "supportingQuestionsMin": { "type": "integer", "minimum": 0 },
+        "supportingQuestionsMax": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

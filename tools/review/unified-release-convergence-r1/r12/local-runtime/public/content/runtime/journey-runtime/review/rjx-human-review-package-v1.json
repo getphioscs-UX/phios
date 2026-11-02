@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "PHI-OS-RJX-HUMAN-REVIEW-PACKAGE-v1.0.0",
+  "work": "RJX-W21",
+  "status": "READY_FOR_TL_REVIEW",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "recordedAt": "2026-08-21",
+  "reviewPackages": [
+    {
+      "package": "A",
+      "name": "Role and Route",
+      "decision": "PENDING",
+      "review": [
+        "Reality Journey role",
+        "request routing classes",
+        "/reality/ canonical route",
+        "old route compatibility decisions"
+      ],
+      "evidence": [
+        "content/runtime/journey-runtime/contracts/reality-journey-role-contract-v1.json",
+        "content/runtime/journey-runtime/registries/reality-request-route-registry-v1.json",
+        "content/runtime/journey-runtime/compatibility/rjx-route-compatibility-v1.json",
+        "reality-entry.html"
+      ],
+      "baselineRouteFact": {
+        "commit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+        "fact": "reality-entry.html removed on main",
+        "packageECompatibilityDisposition": "compatibility_shell_to_/reality/",
+        "fullPackageAcceptanceStillRequired": true
+      }
+    },
+    {
+      "package": "B",
+      "name": "Node-to-Rule",
+      "decision": "PENDING_BINDING_ACCEPTANCE",
+      "review": [
+        "931 Node eligibility dispositions",
+        "executable rule candidates",
+        "evidence question candidates",
+        "explanation fragment candidates",
+        "context-only / retrieval-only / defer"
+      ],
+      "eligibilityAlreadyAccepted": true,
+      "eligibilityAcceptedCount": 931,
+      "ruleBindingAcceptanceCount": 0,
+      "activeRuleCount": 0,
+      "warning": "Accepting Node eligibility does not accept or activate a rule binding.",
+      "evidence": [
+        "content/runtime/journey-runtime/registries/canonical-node-rule-eligibility-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-node-rule-binding-candidates-v1.json"
+      ]
+    },
+    {
+      "package": "C",
+      "name": "Method and Evidence",
+      "decision": "PENDING",
+      "review": [
+        "CALCULATED representation",
+        "DERIVED compatibility fallback",
+        "Method handoff consent",
+        "HDR blocked boundary",
+        "Method recalculation and diff"
+      ],
+      "evidence": [
+        "content/runtime/journey-runtime/contracts/method-case-provenance-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/method-result-case-handoff-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/hdr-reality-boundary-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/method-result-successor-contract-v1.json"
+      ]
+    },
+    {
+      "package": "D",
+      "name": "Provider Cost",
+      "decision": "PENDING",
+      "review": [
+        "OpenAI explicit opt-in",
+        "Workers AI budget behavior",
+        "fallback behavior",
+        "cost telemetry",
+        "client-facing deeper explanation action"
+      ],
+      "evidence": [
+        "content/runtime/journey-runtime/policies/rjx-provider-cost-policy-v1.json",
+        "content/runtime/journey-runtime/audits/rjx-provider-cost-reconciliation-v1.json"
+      ]
+    },
+    {
+      "package": "E",
+      "name": "UX Browser Review",
+      "decision": "PENDING_BROWSER_REVIEW",
+      "review": [
+        "Understand",
+        "Choose",
+        "Review",
+        "Simple Personal Case",
+        "Complex Reality Mode",
+        "mobile",
+        "zh-Hans",
+        "en",
+        "accessibility",
+        "no model fallback"
+      ],
+      "evidence": [
+        "reality/index.html",
+        "content/runtime/journey-runtime/phase19/rjx-phase19-w11-w18-technical-acceptance-v1.json"
+      ]
+    }
+  ],
+  "activationBoundary": {
+    "candidateOnly": true,
+    "productionActivation": false,
+    "freezeAllowed": false
+  },
+  "acceptanceRule": "Each binding requires explicit acceptance or an explicit batch scope; technical completion never synthesizes TL acceptance."
+}

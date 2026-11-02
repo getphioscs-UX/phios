@@ -1,0 +1,35 @@
+{
+  "allowedOperations": [
+    "read_candidate",
+    "read_review",
+    "read_approval",
+    "record_publication",
+    "write_publication_package",
+    "write_publication_registry_projection",
+    "report"
+  ],
+  "authority": "Independent Publication Authority",
+  "boundaries": {
+    "approvalDoesNotImplyPublication": true,
+    "localePublicationIsIndependent": true,
+    "publicationDoesNotImplyPublicRuntimeProjection": true
+  },
+  "contractCode": "PJA-PUBLICATION-W1-CONTRACT",
+  "contractVersion": "1.0.0",
+  "inputRequirements": {
+    "approvalDecision": "approve",
+    "candidate": "valid zh-Hans Candidate",
+    "reviewDecision": "accept"
+  },
+  "outputAuthority": "publication_record_only",
+  "prohibitedOperations": [
+    "rewrite_candidate",
+    "modify_review",
+    "modify_approval",
+    "modify_canonical_meaning",
+    "modify_knowledge_registry",
+    "inherit_other_locale_publication",
+    "write_public_runtime_projection",
+    "call_provider"
+  ]
+}

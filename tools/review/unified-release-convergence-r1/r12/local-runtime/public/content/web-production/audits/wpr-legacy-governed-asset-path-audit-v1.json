@@ -1,0 +1,38 @@
+{
+  "auditCode": "PHI-OS-WPR-W10-LEGACY-GOVERNED-ASSET-PATH-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "WPR-W10",
+  "baselineCommit": "39fb21c54768c2c247a73cf5f005cf25d73435fc",
+  "status": "migration_findings_recorded_no_page_rewrite",
+  "findings": [
+    {
+      "code": "BOOK_1_FIGURE_LOCAL_PATH",
+      "needle": "/assets/images/figures/book-1/web/",
+      "files": [
+        "assets/js/pages/atlas.js",
+        "assets/js/pages/book-one.js",
+        "assets/js/pages/figure-detail.js",
+        "assets/js/pages/figures.js"
+      ],
+      "occurrences": 18,
+      "classification": "GOVERNED_MIGRATION_REQUIRED",
+      "modifiedByWprW10": false
+    },
+    {
+      "code": "BOOK_1_COVER_LOCAL_PATH",
+      "needle": "/assets/images/books/book-1/product/",
+      "files": [
+        "book-one.html"
+      ],
+      "occurrences": 1,
+      "classification": "GOVERNED_MIGRATION_REQUIRED",
+      "modifiedByWprW10": false
+    }
+  ],
+  "rules": {
+    "auditDoesNotRequireLegacyPathsToRemainForever": true,
+    "futureWprSurfaceMigrationMayCloseFindings": true,
+    "staticUiAssetsMayRemainLocalWhenNotGovernedPublishedAssets": true,
+    "bookCoversFiguresDiagramsEditorialIllustrationsRequireGovernedResolutionWhenMigrated": true
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-CUSTOMER-VISUAL-PROJECTION-v1.0.0",
+  "work": "PVP-R1-VIS-W7",
+  "baselineCommit": "ac9ee0b759d94a4dac22dfa42faa4edfa600bcb3",
+  "status": "PROJECTION_IR_CONTRACT_READY_ALL_9_PFIG",
+  "truthOwner": "PROFILE_PPR",
+  "projectionOwner": "PVP_R1",
+  "ownerAuthority": "content/profile/customer-output/profile-ppr-visual-output-authority-v2.json",
+  "inputContract": "content/profile/customer-output/profile-customer-output-ir-schema-v1.json",
+  "optionalOwnerInputs": [
+    "content/profile/customer-output/profile-pattern-confirmation-contract-v1.json",
+    "content/profile/customer-output/profile-cross-source-visual-state-mapping-v1.json",
+    "content/profile/customer-output/profile-visual-synthesis-lens-registry-v1.json"
+  ],
+  "rootShape": {
+    "schemaVersion": "PHI-OS-PROFILE-CUSTOMER-VISUAL-PROJECTION-v1.0.0",
+    "participantRef": "opaque|string|null",
+    "asOfDate": "ISO date/time|null",
+    "figures": "ordered PFIG-001..PFIG-009 objects",
+    "governance": "projection-only boundary object"
+  },
+  "figureCommonShape": {
+    "pfig": "PFIG-00N",
+    "schemaVersion": "figure-specific IR schema",
+    "state": "READY | EMPTY | UNKNOWN",
+    "customerLabel": "localized label object",
+    "evidenceRefs": "array of governed source/signal/context references",
+    "data": "figure-specific projection payload",
+    "boundaries": "figure-specific non-authority assertions"
+  },
+  "stateRules": {
+    "READY": "at least one authority-valid evidence element is present",
+    "EMPTY": "the relevant admitted source section is present but contains no renderable evidence",
+    "UNKNOWN": "required evidence is absent, ambiguous, or cannot be mapped under owner rules"
+  },
+  "pfigOrder": [
+    "PFIG-001",
+    "PFIG-002",
+    "PFIG-003",
+    "PFIG-004",
+    "PFIG-005",
+    "PFIG-006",
+    "PFIG-007",
+    "PFIG-008",
+    "PFIG-009"
+  ],
+  "pfigContracts": {
+    "PFIG-001": "content/product-visual-platform-r1/profile/ir/pfig-001-profile-dimension-map-ir-v1.json",
+    "PFIG-002": "content/product-visual-platform-r1/profile/ir/pfig-002-profile-pattern-radar-ir-v1.json",
+    "PFIG-003": "content/product-visual-platform-r1/profile/ir/pfig-003-profile-strength-cost-map-ir-v1.json",
+    "PFIG-004": "content/product-visual-platform-r1/profile/ir/pfig-004-profile-context-variation-ir-v1.json",
+    "PFIG-005": "content/product-visual-platform-r1/profile/ir/pfig-005-profile-convergence-divergence-ir-v1.json",
+    "PFIG-006": "content/product-visual-platform-r1/profile/ir/pfig-006-profile-work-map-ir-v1.json",
+    "PFIG-007": "content/product-visual-platform-r1/profile/ir/pfig-007-profile-relationship-map-ir-v1.json",
+    "PFIG-008": "content/product-visual-platform-r1/profile/ir/pfig-008-profile-decision-map-ir-v1.json",
+    "PFIG-009": "content/product-visual-platform-r1/profile/ir/pfig-009-profile-reality-bridge-ir-v1.json"
+  },
+  "globalBoundaries": {
+    "pvpMayInventMeaning": false,
+    "pvpMayNormalizeAcrossInstruments": false,
+    "pvpMayCreateUniversalMasterScore": false,
+    "pvpMayFillMissingEvidence": false,
+    "sourceAndContextProvenanceRequired": true,
+    "unknownOrEmptyStateRequiredWhenInsufficient": true,
+    "renderingImplementedByThisWork": false
+  },
+  "nextGate": "PVP-R1-VIS-W8 Profile Visual MVP may implement renderers only from this IR."
+}

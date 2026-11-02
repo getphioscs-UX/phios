@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-PFR-W0-AUTHORITY-SUCCESSOR-v1.0.0",
+  "phase": "PFR",
+  "work": "PFR-W0",
+  "baselineCommit": "ec0f8d4b9ba37599affda909a47d1e41a1033037",
+  "status": "ACTIVE_FINANCIAL_SPECIALIZATION_UNDER_PR_AUTHORITY",
+  "canonicalStatement": "PFR is the financial-domain specialization through which an eligible human Professional exercises Professional Financial Judgment. It reuses PR v2 Professional authority and does not create a second generic Professional authority.",
+  "authorityRoot": {
+    "runtime": "PR",
+    "professionalAuthorityBoundary": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+    "judgmentAuthority": "content/runtime/professional-runtime/contracts/professional-judgment-contract-v2.json",
+    "recommendationAuthority": "content/runtime/professional-runtime/contracts/professional-recommendation-contract-v2.json",
+    "productionBoundary": "content/runtime/professional-runtime/extensions/production/contracts/pr-production-authority-boundary-v1.json"
+  },
+  "financialSpecializationOwns": [
+    "PROFESSIONAL_FINANCIAL_REVIEW_CASE",
+    "PROFESSIONAL_FINANCIAL_FACT_REVIEW",
+    "PROFESSIONAL_FINANCIAL_CALCULATION_REVIEW",
+    "PROFESSIONAL_FINANCIAL_FINDING_REVIEW",
+    "PROFESSIONAL_FINANCIAL_RECOMMENDATION",
+    "PROFESSIONAL_FINANCIAL_SUITABILITY_ASSESSMENT",
+    "PROFESSIONAL_FINANCIAL_REVIEW_CONTRIBUTION"
+  ],
+  "upstreamReadOnlyAuthorities": {
+    "FDR": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+    "FCR": "content/financial/calculation-runtime/authority/fcr-w0-w22-freeze-manifest-v1.json",
+    "FAR": "content/financial/analysis-runtime/authority/far-w0-w22-freeze-manifest-v1.json",
+    "HFP": "content/financial/holistic-planning-product/freeze/hfp-w0-w28-freeze-manifest-v1.json",
+    "CONSENT": "content/financial/data-runtime/contracts/financial-data-consent-contract-v1.json",
+    "PWS_ASSIGNMENT": "docs/pws/contracts/pws-canonical-object-registry-v1.json"
+  },
+  "downstreamReferenceOnlyAuthorities": {
+    "HFP": "content/financial/holistic-planning-product/contracts/hfp-pfr-contribution-reference-contract-v1.json",
+    "RR": "content/runtime/customer-report-runtime/contracts/report-candidate-contract-v2.json"
+  },
+  "compatibilityPredecessor": {
+    "path": "functions/professional/financial/financial-professional-authority.js",
+    "status": "COMPATIBILITY_PREDECESSOR_NOT_SECOND_AUTHORITY",
+    "autoPromoted": false
+  },
+  "rules": {
+    "pfrMayMutateFdr": false,
+    "pfrMayOverrideFcr": false,
+    "pfrMayRewriteFar": false,
+    "pfrMayFinalizeRr": false,
+    "pfrMayReleaseReport": false,
+    "pfrMayRenderPdf": false,
+    "aiMayAuthorProfessionalFinancialJudgment": false,
+    "humanProfessionalAttributionRequired": true,
+    "pwsCaseObjectCreated": false
+  }
+}

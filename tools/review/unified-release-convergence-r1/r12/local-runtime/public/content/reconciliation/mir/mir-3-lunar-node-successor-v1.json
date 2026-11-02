@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-MIR-3-LUNAR-NODE-SUCCESSOR-RECONCILIATION-v1.0.0",
+  "work": "MIR-3-NODE-SUCCESSOR",
+  "baselineCommit": "73ba874ecad0e452eb768a36af9f0c66241c906a",
+  "status": "SOURCE_SUCCESSOR_COMPLETE_ENGINE_PACKAGE_INTEGRATION_CHECKER_PINNED",
+  "objective": "Freeze canonical Lunar Node astronomy model, calculate Personality/Design North/South Nodes, reuse frozen 302-degree Gate mapper, and replace 4 node UNKNOWN records with governed CALCULATED records when the pinned engine is installed.",
+  "authority": {
+    "astronomy": "EXISTING_SHARED_AST_ASTRONOMY_AUTHORITY",
+    "calculation": "SHARED_CALCULATION_RUNTIME",
+    "gateLine": "EXISTING_PHI_OS_GATE_WHEEL_V1",
+    "nodePolicy": "PHI_OS_AST_TRUE_NODE_V1",
+    "nodeConvention": "TRUE_NODE.V1",
+    "secondEphemerisAuthorityCreated": false,
+    "secondGateMapperCreated": false
+  },
+  "modelFreeze": {
+    "northNode": "geocentric instantaneous/osculating ascending Lunar Node in true ecliptic of date (ECT)",
+    "southNode": "normalize360(NORTH_NODE + 180)",
+    "meanNodeFallbackAllowed": false,
+    "implicitNodeDefaultAllowed": false,
+    "engine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "npmIntegrity": "sha512-8yWKNf7UeNbH458h3sAJ6ZgAjE5jTXp/mNNRFoC20j2SHwZIjAQeEsBB2Q3uCFRaTCCJRv33K2XhkhZQMXoX6w=="
+  },
+  "mappingFreeze": {
+    "gateWheelEclipticOffsetDeg": 302.0,
+    "gateSpanDeg": 5.625,
+    "lineSpanDeg": 0.9375,
+    "interval": "[start,end)",
+    "mapperReused": true
+  },
+  "teresaReference": {
+    "role": "VALIDATION_ONLY_NOT_RUNTIME_AUTHORITY",
+    "personality": "N 320.761158209905 -> Gate 49.3; S 140.761158209905 -> Gate 4.3",
+    "design": "N 325.809142207977 -> Gate 30.2; S 145.809142207977 -> Gate 29.2",
+    "personalityNearestLineBoundaryArcsec": 40.169555659
+  },
+  "acceptance": {
+    "predecessorCheckCommand": "npm run check:mir-3",
+    "predecessorCheckPassed": true,
+    "successorCheckCommand": "npm run check:personal-structure:lunar-node-successor",
+    "successorCheckPassed": true,
+    "governedSuccessorResult": {
+      "expectedActivations": 26,
+      "calculatedActivations": 26,
+      "unknownActivations": 0
+    },
+    "realEngineIntegrationCommand": "npm run check:personal-structure:lunar-node-engine",
+    "realEngineIntegrationCheckerIncluded": true,
+    "realEngineIntegrationExecutedInThisBuildEnvironment": false,
+    "reasonNotExecutedHere": "Source-aligned Library ZIP contains no node_modules and this build environment cannot resolve the npm registry; package.json/package-lock.json pin astronomy-engine 2.1.19 for npm ci in the target repository."
+  },
+  "criticalFrozenPredecessorSha256": {
+    "content/reconciliation/mir/mir-3-method-calculation-projection-v1.json": "297d0ce6feec4ffcb9e1370f1854c3d74ee43fa45cc5f977ca51ea3a0d245d83",
+    "content/professional/method-governance/successors/ast-production-policy-successor-v1.json": "fc545f48aa730ad058a4ef15641515148aa7343d70b0acf0b4c17cbcf311dcb8",
+    "content/method/personal-structure/canonical-astronomy-binding-v1.json": "de9c1011078709821865e1837de9fac8ab8241f1b1adb0eac4118561824df683",
+    "content/method/personal-structure/gate-wheel-registry-v1.json": "09aa99e2a3c68826adcab9742f1cf3a11aa958545eba2e10cf10f1a867d9a948",
+    "functions/method-runtime/shared-calculation-runtime.js": "733ea3ebf93d53e090a3dec84da1021069bf55c432599980e6a32461aa65470e",
+    "functions/method-runtime/personal-structure/activation-builder.js": "252321cdd20bf87904edf8c35c98a751093b51234e93ed2d4ccffeb0389c70b8",
+    "functions/method-runtime/personal-structure/personal-structure-runtime.js": "05887f8d9c947508bf1b4a7dc7c5906f4e76df8b903855e7d702065e10e689be",
+    "scripts/check-personal-structure-runtime.mjs": "2b230bc457e1cf5b3b6bc5cb64205bdf8db3205569afd5f58f25e5e799dd8d7f"
+  },
+  "successorArtifactSha256": {
+    "content/professional/method-governance/successors/ast-production-policy-successor-v2.json": "cf87cbbb325ab71f2a7a9184da92326fb132089a60daaf104f7fc7280c1e3f6a",
+    "content/method/personal-structure/canonical-astronomy-binding-v2.json": "907025bb887f4e418c65bbd3586a7d010e7e4eb1b2134a35ff7554d1d3fa4073",
+    "content/method/personal-structure/lunar-node-calculation-contract-v1.json": "e1354faac44fa9cb16cf411dbccf162d98e60e3739faf05a6b9e937f93f586c5",
+    "content/method/personal-structure/fixtures/teresa-lunar-node-true-reference-v1.json": "2d79dc9939d63fa54c656a84f757f3b5f48bb381b406ab0841ec7d8708874186",
+    "functions/core-method-runtime/ast-lunar-node-adapter.js": "4e86af8587dd52211029ced5bd316a01569883d8318961a0b0b94d9dcf3940cd",
+    "functions/core-method-runtime/ast-lunar-node-runtime.js": "867675b54b9af6a3de814c5fa9bcfdb313681286b4051f95a2a4af9c1073bc01",
+    "functions/method-runtime/personal-structure/lunar-node-successor-runtime.js": "2e007ca379c1d268095feb7644e157108f85d368383e2550d06eeeadbf856559",
+    "scripts/check-personal-structure-lunar-node-successor.mjs": "c40a14bfed21bd84d2d4b7c0d69044be02f812c0351678d6c64719f890e68036",
+    "scripts/check-personal-structure-lunar-node-engine-integration.mjs": "26632d1ff0c655b95f1b81e796b775292aa12bd722873749a635866ba3ae2229",
+    "package.json": "95a3b3423aa718c1308bdc59956af08ed8b03faff2cba46a8c2037692aac8066",
+    "package-lock.json": "a4e12509421e1c61d6a8ebcdf6213e80096005ad73d5dc215a8711d7842cb1e5"
+  },
+  "exitGate": {
+    "trueNodeModelFrozen": true,
+    "meanNodeFallbackForbidden": true,
+    "personalityNorthSouthEstablished": true,
+    "designNorthSouthEstablished": true,
+    "existing302MapperReused": true,
+    "fourUnknownUpgradePathProven": true,
+    "oldNodeNonePolicyPreserved": true,
+    "nonNodeCalculationPreserved": true,
+    "interpretationAuthorityCreated": false,
+    "meaningAuthorityCreated": false,
+    "professionalJudgmentAuthorityCreated": false
+  }
+}

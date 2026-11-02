@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-MACHINE-ACCEPTANCE-v1.0.0",
+  "phase": "ICH",
+  "work": "ICH-W11",
+  "status": "MACHINE_ACCEPTANCE_CONTRACT_ACTIVE",
+  "requiredCommands": [
+    "check:iching-identity",
+    "check:iching-calculation",
+    "check:iching-transformation",
+    "check:iching-projection",
+    "check:iching-replay"
+  ],
+  "additionalCommands": [
+    "check:iching-edge-cases",
+    "check:iching-freeze",
+    "check:iching"
+  ],
+  "acceptance": {
+    "identity": "existing I_CHING / ICH / HEXAGRAM lineage only; 8 trigram and 64 hexagram structural identities unique",
+    "calculation": "three input modes normalize to canonical six-line model with calculation-only states",
+    "transformation": "primary + changing lines + relating hexagram + machine trace deterministic",
+    "projection": "existing Shared Projection Runtime emits HEXAGRAM projection through mapper binding",
+    "replay": "same persisted evidence reproduces identical result for 1000 runs",
+    "edgeCases": "invalid cardinality/value fail closed; no/one/multiple/all changing and all yin/yang covered"
+  },
+  "productionActivationGranted": false,
+  "interpretationActivationGranted": false
+}

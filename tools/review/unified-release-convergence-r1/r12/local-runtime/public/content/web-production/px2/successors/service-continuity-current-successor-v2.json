@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-SERVICE-CONTINUITY-CURRENT-SUCCESSOR-v2.0.0",
+  "work": "PROD-W6/PROD-W7-CURRENT-RECONCILIATION",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "CURRENT_SERVICE_CONTINUITY_PX2_PRESENTATION_SUCCESSOR",
+  "predecessor": {
+    "contract": "content/web-production/successors/service-continuity-batch3-presentation-successor-v1.json",
+    "contractSha256": "40aaaeaa0837f9c678dd9a899759c8032766edbcbe03c175fd8de4185ffe8aa7",
+    "checker": "scripts/check-service-continuity-batch3.mjs",
+    "checkerSha256": "9e1e129ac4ee2f610bc5fcd87dd20a812cc9b40dbd51bb6543198b88c4b9e5db",
+    "mutated": false
+  },
+  "currentPresentation": {
+    "px2Audit": "content/web-production/px2/audit/px2-w0-current-public-consumer-audit-v1.json",
+    "px2Acceptance": "node scripts/check-px2-w0-w13-public-experience-v2.mjs",
+    "currentPublicSurfaces": [
+      "services.html",
+      "professional/financial/index.html"
+    ],
+    "historicalContinuityMarkersRequiredOnPX2Surfaces": false,
+    "reason": "PX2 replaced legacy service-continuity presentation composition while preserving upstream service/runtime authority."
+  },
+  "authority": {
+    "preservePredecessorAuthorityHashesExceptPresentationShell": true,
+    "legacyPublicShellFingerprintIsPresentationOnly": true,
+    "serviceAuthorityTransferredToPX2": false,
+    "financialRuntimeAuthorityTransferredToPX2": false,
+    "consentAuthorityTransferredToPX2": false,
+    "privacyAuthorityTransferredToPX2": false
+  }
+}

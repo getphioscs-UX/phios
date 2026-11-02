@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-CX-OLD-SHELL-DECOMMISSION-PLAN-v1.0.0",
+  "work": "CX-R1A-W3",
+  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
+  "recordedAt": "2026-08-24T13:49:00Z",
+  "status": "DELETE_PRESENTATION_CLASSIFIED_WAITING_REPLACEMENT_ACCEPTANCE",
+  "rules": {
+    "oldShellFutureAuthority": false,
+    "physicalDeleteBeforeR5Acceptance": false,
+    "physicalDeleteAfterZeroConsumerMandatory": true
+  },
+  "entries": [
+    {
+      "path": "assets/js/public-shell-v2.js",
+      "role": "OLD_PUXR_GLOBAL_SHELL",
+      "exists": true,
+      "classification": "DELETE_PRESENTATION",
+      "deleteNow": false,
+      "requiredBeforeDelete": [
+        "CX_R5_ONE_GLOBAL_SHELL_ACCEPTED",
+        "ZERO_ACTIVE_CONSUMER",
+        "NPM_ACCEPTANCE_PASSES",
+        "BROWSER_SMOKE_PASSES"
+      ]
+    },
+    {
+      "path": "assets/js/public-shell.js",
+      "role": "OLD_PUBLIC_GLOBAL_SHELL",
+      "exists": true,
+      "classification": "DELETE_PRESENTATION",
+      "deleteNow": false,
+      "requiredBeforeDelete": [
+        "CX_R5_ONE_GLOBAL_SHELL_ACCEPTED",
+        "ZERO_ACTIVE_CONSUMER",
+        "NPM_ACCEPTANCE_PASSES",
+        "BROWSER_SMOKE_PASSES"
+      ]
+    },
+    {
+      "path": "assets/js/journey-shell.js",
+      "role": "OLD_JOURNEY_SHELL",
+      "exists": true,
+      "classification": "DELETE_PRESENTATION",
+      "deleteNow": false,
+      "requiredBeforeDelete": [
+        "CX_R5_ONE_GLOBAL_SHELL_ACCEPTED",
+        "ZERO_ACTIVE_CONSUMER",
+        "NPM_ACCEPTANCE_PASSES",
+        "BROWSER_SMOKE_PASSES"
+      ]
+    }
+  ]
+}

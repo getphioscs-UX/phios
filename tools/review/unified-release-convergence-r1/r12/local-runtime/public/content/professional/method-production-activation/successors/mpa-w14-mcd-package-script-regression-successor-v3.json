@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-MCD-PACKAGE-SCRIPT-REGRESSION-SUCCESSOR-v3.0.0",
+  "work": "MPA-W14-PACKAGE-JSON-SCRIPT-SUCCESSOR",
+  "baselineCommit": "a45d65851df55858fd9ea9c7f76a14d34ed915e6",
+  "status": "AUTHORIZED_PACKAGE_JSON_SCRIPT_SUCCESSOR_DEPENDENCY_FREEZE_PRESERVED",
+  "objective": "Reconcile the current package.json fingerprint after AST/BZR MCD current-successor checker aliases were added, while preserving all Method and visual-raster dependency versions, the package-lock fingerprint, and Method Production eligibility boundaries.",
+  "predecessor": {
+    "source": "content/professional/method-production-activation/successors/mpa-w14-visual-raster-dependency-regression-successor-v2.json",
+    "status": "AUTHORIZED_EXPLICIT_NON_METHOD_DEPENDENCY_FINGERPRINT_SUCCESSOR",
+    "packageJsonSha256": "83610766134dd5d4af1575411b407450d844b0151000a8bdb7560a335bf4d0f2",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176",
+    "checkerSha256": "10828045552e59e47e5df772b954ca4cfcf42e6c3115789f5cde086fdb95a1b6",
+    "rewritten": false
+  },
+  "successor": {
+    "packageJsonSha256": "79e3893d128fac1d8f35803deb3399638bd9d85da6a4318e8628acd1381e71ce",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176",
+    "checkerPath": "scripts/check-mpa-w14-regression-runtime.mjs",
+    "checkerSha256": "0b02cd196b9f224372e64be4ac7d8829e04edf23301eb27344a64920feefa1d3"
+  },
+  "authorizedPackageJsonChange": {
+    "scope": "SCRIPTS_ONLY",
+    "dependenciesChanged": false,
+    "devDependenciesChanged": false,
+    "dependenciesSha256": "fdb26beafb30c99afae2d8cd362236425a4be4a48d52263f27ef4aa083aca8dc",
+    "devDependenciesSha256": "b86c1a6248172fb90efe608000cb7ee507afa3f664e9e179d69c1aee7d643384",
+    "scripts": {
+      "check:mcd-2": "node scripts/check-mcd-2-ast-bzr-production-successor.mjs",
+      "check:mcd-4": "node scripts/check-mcd-4-ast-bzr-production-successor.mjs",
+      "check:mcd-5": "node scripts/check-mcd-5-canonical-method-projection.mjs && node scripts/check-mcd-5-ast-bzr-production-successor-freeze.mjs",
+      "check:mcd-ast-bzr-production": "node scripts/check-mcd-ast-bzr-production-successor.mjs"
+    }
+  },
+  "methodDependencyFreeze": {
+    "engine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "npmIntegrity": "sha512-8yWKNf7UeNbH458h3sAJ6ZgAjE5jTXp/mNNRFoC20j2SHwZIjAQeEsBB2Q3uCFRaTCCJRv33K2XhkhZQMXoX6w==",
+    "algorithmChanged": false,
+    "timezoneAuthorityChanged": false,
+    "ephemerisAuthorityChanged": false
+  },
+  "authorizedNonMethodDependency": {
+    "package": "sharp",
+    "purpose": "REPOSITORY_FIGURE_AND_MFIG_RASTER_BACKEND",
+    "packageJsonRange": "0.35.2",
+    "packageLockRange": "0.35.2",
+    "resolvedVersion": "0.35.2",
+    "methodRuntimeConsumerAllowed": false,
+    "allowedConsumers": [
+      {"path":"scripts/figure/figure-lib.mjs","sha256":"6d6acd0c8aad4ea94843c4b506e481f76762eb8e9a4cb90ad068f166485b90f7"},
+      {"path":"scripts/mfig/mfig-lib.mjs","sha256":"84eb6d3eb9ba84927b8f9f8d1148de5146f30b59f67e052d1726573e6aff6a95"},
+      {"path":"scripts/check-figure-raster-backend.mjs","sha256":"9ca24bf33ac1e1f4fe37a7e9ac47a5cb7f8f534b5cefb6dfbb795b6c5f30197b"},
+      {"path":"scripts/check-mfig-raster-backend.mjs","sha256":"b39771ee0f9ec611d89e7b7423a1c028bb366c0a23d87b46cb5c2eb00fa36284"}
+    ]
+  },
+  "boundaries": {
+    "historicalRegressionRegistryMutated": false,
+    "mir3SuccessorMutated": false,
+    "visualRasterSuccessorMutated": false,
+    "silentDependencyUpgradeAllowed": false,
+    "methodProductionEligibilityChanged": false,
+    "professionalEligibilityChanged": false,
+    "secondAstronomyAuthorityCreated": false,
+    "visualRasterDependencyMayBecomeMethodAuthority": false,
+    "futureDependencyDriftRequiresVersionedSuccessor": true
+  }
+}

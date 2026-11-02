@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-044",
+  "title": "METHOD-EVIDENCE-BOUNDARY",
+  "scope": "CROSS_METHOD",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/interpretation/governance/interpretation-source-authority-hierarchy-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "OBJECT_DOMAIN_AUTHORITY",
+      "displayLabel": "OBJECT DOMAIN AUTHORITY",
+      "nodeType": "AUTHORITY",
+      "authorityClass": "EVIDENCE",
+      "semanticRole": "EVIDENCE_BOUNDARY",
+      "container": "METHOD_EVIDENCE_BOUNDARY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SOURCE_AUTHORITY_HIERARCHY",
+      "displayLabel": "SOURCE AUTHORITY HIERARCHY",
+      "nodeType": "AUTHORITY",
+      "authorityClass": "EVIDENCE",
+      "semanticRole": "EVIDENCE_BOUNDARY",
+      "container": "METHOD_EVIDENCE_BOUNDARY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "EVIDENCE_REFS",
+      "displayLabel": "EVIDENCE REFS",
+      "nodeType": "GATE",
+      "authorityClass": "EVIDENCE",
+      "semanticRole": "EVIDENCE_BOUNDARY",
+      "container": "METHOD_EVIDENCE_BOUNDARY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "FIGURE_CLAIM_BOUNDARY",
+      "displayLabel": "FIGURE CLAIM BOUNDARY",
+      "nodeType": "GATE",
+      "authorityClass": "EVIDENCE",
+      "semanticRole": "EVIDENCE_BOUNDARY",
+      "container": "METHOD_EVIDENCE_BOUNDARY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-044-E01",
+      "from": "OBJECT_DOMAIN_AUTHORITY",
+      "to": "SOURCE_AUTHORITY_HIERARCHY",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-044-E02",
+      "from": "SOURCE_AUTHORITY_HIERARCHY",
+      "to": "EVIDENCE_REFS",
+      "relation": "BINDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-044-E03",
+      "from": "EVIDENCE_REFS",
+      "to": "FIGURE_CLAIM_BOUNDARY",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_EVIDENCE_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "OBJECT_DOMAIN_AUTHORITY",
+        "SOURCE_AUTHORITY_HIERARCHY",
+        "EVIDENCE_REFS",
+        "FIGURE_CLAIM_BOUNDARY"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "OBJECT_DOMAIN_AUTHORITY",
+    "SOURCE_AUTHORITY_HIERARCHY",
+    "EVIDENCE_REFS",
+    "FIGURE_CLAIM_BOUNDARY"
+  ],
+  "mustState": [
+    "Object-domain authority precedes source hierarchy",
+    "Unknown remains explicit",
+    "Figure dependency does not create causality"
+  ],
+  "statementSources": {
+    "Object-domain authority precedes source hierarchy": "SRC-002",
+    "Unknown remains explicit": "SRC-002",
+    "Figure dependency does not create causality": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

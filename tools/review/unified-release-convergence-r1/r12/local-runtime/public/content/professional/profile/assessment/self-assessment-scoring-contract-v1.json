@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-SELF-ASSESSMENT-SCORING-v1.0.0",
+  "work": "PRF-W4",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "FOUNDATION_CONTRACT",
+  "inputInstrument": "PHI-OS-SELF-ASSESSMENT-INSTRUMENT-v2",
+  "outputSchema": "PHI-OS-SELF-ASSESSMENT-RESULT-IR-v1",
+  "scoring": {
+    "itemRange": [
+      1,
+      5
+    ],
+    "reverseKeyFormula": "6 - response",
+    "domainRawScore": "mean(answered item values within domain)",
+    "facetRawScore": "mean(answered item values within facet)",
+    "normalizedSelfReportIndex": "((mean - 1) / 4) * 100",
+    "partialResponsesAllowed": true,
+    "responseCompletenessRequired": true
+  },
+  "customerLanguage": [
+    "Self-reported profile",
+    "Current self-view",
+    "Assessment index"
+  ],
+  "forbiddenCustomerLanguage": [
+    "IQ score",
+    "EQ score",
+    "clinical resilience score",
+    "objective health score",
+    "scientific percentile"
+  ],
+  "boundaries": {
+    "diagnosisCreated": false,
+    "objectivePersonalityFactCreated": false,
+    "normedPercentileCreated": false,
+    "professionalJudgmentCreated": false,
+    "sensitiveInputWithoutExplicitConsentAllowed": false
+  },
+  "inputConsent": {
+    "purpose": "PROFILE_SELF_REFLECTION",
+    "explicitConsentRequired": true,
+    "sensitiveItemConsentRequiredWhenAnswered": true,
+    "sensitiveDomains": [
+      "BODY_LIFESTYLE_STEWARDSHIP",
+      "FINANCIAL_CAPABILITY"
+    ],
+    "automaticPersistence": false
+  }
+}

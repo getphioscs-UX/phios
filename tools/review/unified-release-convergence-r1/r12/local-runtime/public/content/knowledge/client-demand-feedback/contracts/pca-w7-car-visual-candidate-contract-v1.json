@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-PCA-W7-CAR-VISUAL-CANDIDATE-CONTRACT-v1.0.0",
+  "phase": "PCA",
+  "step": "PCA-W7",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "status": "ACTIVE_CAR_VISUAL_CANDIDATE_ONLY",
+  "eligibleVisualNeeds": [
+    "FIGURE",
+    "DIAGRAM",
+    "FLOW",
+    "COMPARISON"
+  ],
+  "visualRoleMapping": {
+    "FIGURE": "FIGURE",
+    "DIAGRAM": "DIAGRAM",
+    "FLOW": "DIAGRAM",
+    "COMPARISON": "DIAGRAM"
+  },
+  "preconditions": [
+    "REUSABLE_VISUAL_NEED",
+    "GOVERNED_KPP_CAR_HANDOFF",
+    "KPP_ROLE_FIGURE_DIAGRAM_OR_MULTI_ASSET"
+  ],
+  "authority": {
+    "createsFinalAsset": false,
+    "approvesAsset": false,
+    "publishesAsset": false,
+    "carLifecycleRequired": true
+  },
+  "preservedEvidence": {
+    "kppCarHandoff": {
+      "path": "content/knowledge/production-planning/contracts/kpp-car-handoff-contract-v2.json",
+      "sha256": "1e0485e4b49a6a9de97c722e34fe78e6e4ff033a70d0f05360f006ce57ad47eb"
+    }
+  }
+}
