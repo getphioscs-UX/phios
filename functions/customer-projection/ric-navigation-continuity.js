@@ -7,12 +7,22 @@ const kinds=['FACT','PREFERENCE','CONSTRAINT','EVIDENCE','INTERPRETATION','DECIS
 const owner=(c,user)=>need(c?.owner_user_id===user,'CASE_NOT_FOUND');
 const id=()=>crypto.randomUUID();
 const event=(c,type,refs,reason,at)=>{c.history.push({id:id(),type,refs,reason,at});c.version++;c.updated_at=at;};
-export function createContinuityCase({userId,question,goal,topic='self',locale='en',at=new Date().toISOString()}){
- need(userId,'AUTH_REQUIRED');const caseId=id();
+export function createContinuityCase({userId,question,goal,topic='self',locale='en',at=new Date().toISOString(),caseId=id()}){
+ need(userId,'AUTH_REQUIRED');need(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(caseId),'CASE_ID_INVALID');
  return {schemaVersion:'RIC-CONTINUITY-LOCAL-v1',case_id:caseId,owner_user_id:userId,title:text(question,800),current_question:text(question,800),goal:text(goal,800),topic,language:locale==='zh-Hans'?'zh-Hans':'en',status:'Active',active_branch_id:'main',version:1,questionVersion:1,created_at:at,updated_at:at,store:newRealityCandidateStore({accountId:userId,entities:[{id:caseId,kind:'REALITY_CASE',accountId:userId}]}),records:[],checkpoints:[],history:[],branches:[{id:'main',parent:null,title:text(question,800)}],productionPersistence:false};
 }
 export function updateContinuityCase(previous,input,{userId,at=new Date().toISOString(),resolvedEvidence=null,validateEvidence=null}={}){
- owner(previous,userId);need(input.expectedVersion===previous.version,'VERSION_CONFLICT');const c=structuredClone(previous);const action=input.action;
+ owner(previous,userId);need(input.expectedVersion===previous.version,'VERSION_CONFLICT');
+ if(input.action==='review'){
+  need(input.consent===true,'REVIEW_CONSENT_REQUIRED');
+  const original=previous.records.find(r=>r.record_id===input.actionRecordId&&r.kind==='NEXT_ACTION'&&r.validity==='ACTIVE'&&r.confirmation_status==='USER_CONFIRMED');need(original,'CONFIRMED_ACTION_REQUIRED');
+  let next=updateContinuityCase(previous,{action:'record',expectedVersion:previous.version,kind:'FACT',content:text(input.content),consent:true},{userId,at,validateEvidence});
+  const review=next.records.at(-1);review.reviewOf={recordId:original.record_id,version:original.version};review.source_type='USER_REPORTED_ACTION_REVIEW';
+  next=updateContinuityCase(next,{action:'confirm',expectedVersion:next.version,recordId:review.record_id,consent:true,reason:'Explicitly confirmed action review'},{userId,at,validateEvidence});
+  for(const p of next.checkpoints)if(p.state==='CURRENT')p.state='REVIEW_REQUIRED';
+  event(next,'ACTION_REVIEW_RECORDED',[{actionId:original.record_id,actionVersion:original.version,reviewId:review.record_id}],'Actual user report; no Profile or historical result mutation',at);return next;
+ }
+ const c=structuredClone(previous);const action=input.action;
  if(action==='record'){
   need(kinds.includes(input.kind),'RECORD_KIND_INVALID');const content=text(input.content),rid=id();
   need(c.records.length<500,'RECORD_LIMIT');

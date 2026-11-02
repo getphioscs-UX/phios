@@ -54,3 +54,7 @@ export function evidenceValueRows(value,locale='en'){
   return Object.entries(value).filter(([key,v])=>terms[key]&&v!=null&&typeof v!=='object').map(([key,v])=>[evidenceLabel(key,locale),typeof v==='boolean'?(locale==='zh-Hans'?(v?'是':'否'):(v?'Yes':'No')):evidenceLabel(v,locale)]);
 }
 export const domainCta=(key,locale='en')=>({relationship:['Continue to Relationship Reality','继续到关系现实'],career:['Explore work context','探索工作情境'],financial:['Continue to Financial Reality','继续到财务现实']}[key]||['Continue','继续'])[locale==='zh-Hans'?1:0];
+
+// Existing Owner presentation-only source explanations; no scoring/authority change.
+const SOURCE_DESCRIPTION_COPY={MEASURED_TASK_PERFORMANCE:['What happened on this task sample.','这次任务样本中实际发生的表现。'],STANDARDIZED_SELF_REPORT:['Answers scored under an admitted questionnaire or external scoring method.','依据已准入问卷或外部评分方式整理的自陈结果。'],CUSTOMER_SELF_REPORT:['How you describe yourself in this assessment.','你在这次评估中如何描述自己。'],EXTERNAL_PROFILE_RESULT:['A result you supplied from another provider; its provider identity stays visible.','你从其他提供方带入的结果；提供方身份会一直保留。'],SYMBOLIC_INTERPRETATION:['An interpretive perspective, not a measured trait or scientific validation.','一种诠释视角，不等同于测量特质或科学验证。'],CURRENT_REALITY_OBSERVATION:['What you report is happening now.','你所报告的现在正在发生什么。'],PROFESSIONAL_EVIDENCE:['Evidence supplied under a separate professional scope.','在独立专业范围内提供的证据。']};
+export function evidenceSourceDescription(sourceClass,locale='en'){return SOURCE_DESCRIPTION_COPY[sourceClass]?.[locale==='zh-Hans'?1:0]||'';}

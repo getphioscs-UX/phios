@@ -1,7 +1,38 @@
 const form=document.querySelector('[data-health-reality-form]');
 const output=document.querySelector('[data-health-reality-output]');
 const status=document.querySelector('[data-health-route-status]');
-const esc=s=>String(s??'');
-function renderLocal(concern,observedAt){output.hidden=false;output.innerHTML='';const h=document.createElement('h2');h.textContent='Current health observation';const p=document.createElement('p');p.textContent=concern||'No observation entered.';const m=document.createElement('p');m.textContent=observedAt?`Observed: ${observedAt}`:'Date not provided — kept as unknown.';const b=document.createElement('p');b.textContent='This surface organizes observations and routing only. It does not diagnose, rule out disease, or prescribe treatment.';output.append(h,p,m,b);}
-function appendRouting(payload){const section=document.createElement('section');const h=document.createElement('h3');h.textContent='Health routing';const p=document.createElement('p');p.textContent=payload.route==='HRX_SAFETY_FIRST'?'This concern needs safety-first real-world care routing.':payload.route==='HRX_AUTHORITY_REQUIRED'?'Health facts require an admitted current health authority source before PHI OS can answer them.':payload.route==='HRX_GUIDED_CONTEXT'?'PHI OS can help organize the current health reality without diagnosing it.':payload.route==='HRX_GROUNDED_HEALTH'?'Approved current health authority is available for grounded explanation.':'This question stays with standard PHI OS knowledge.';section.append(h,p);for(const item of payload.guided?.prompts||[]){const q=document.createElement('p');q.textContent=`• ${esc(item.label)}`;section.append(q)}output.append(section)}
-if(form&&output){form.addEventListener('submit',async event=>{event.preventDefault();const fd=new FormData(form);const concern=esc(fd.get('concern')).trim();const observedAt=esc(fd.get('observedAt')).trim();const consent=fd.get('processingConsent')==='GRANTED';renderLocal(concern,observedAt);if(!consent){if(status)status.textContent='Guided health processing was not requested.';return}if(status)status.textContent='Organizing health context…';try{const response=await fetch('/api/ask-phios-health',{method:'POST',headers:{'content-type':'application/json'},cache:'no-store',credentials:'same-origin',body:JSON.stringify({question:concern,caseRef:'EPHEMERAL-HEALTH-CANDIDATE',consentState:'GRANTED'})});const payload=await response.json();if(!response.ok||!payload.ok)throw new Error(payload?.error?.code||'HEALTH_ROUTE_FAILED');appendRouting(payload);if(status)status.textContent='Health context organized. Nothing was saved by this candidate.'}catch(error){if(status)status.textContent=`Health routing unavailable: ${esc(error.message)}`}})}
+const zh=()=>document.documentElement.lang.startsWith('zh');
+const tr=(en,cn)=>zh()?cn:en;
+let observation=null,route=null,pending=0;
+const add=(parent,tag,en,cn)=>{const n=document.createElement(tag);n.textContent=tr(en,cn);parent.append(n);return n;};
+let statusCopy=null;
+function setStatus(en,zh){statusCopy=[en,zh];status.textContent=tr(en,zh);}
+function render(){
+ if(!observation){output.hidden=true;output.replaceChildren();return;}
+ output.hidden=false;output.replaceChildren();
+ add(output,'h2','This session’s observation','本次会话的观察');
+ const text=document.createElement('p');text.textContent=observation.concern;output.append(text);
+ add(output,'p',observation.date?'Observed: '+observation.date:'Observation date not provided.',observation.date?'观察日期：'+observation.date:'尚未提供观察日期。');
+ add(output,'p','This organizes an observation; it does not diagnose a condition, rule out disease or prescribe treatment. Nothing is saved to your account.','这里只整理观察，不诊断、不排除疾病、不开具治疗方案，也不保存到账户。');
+ if(route){
+  const section=document.createElement('section');add(section,'h3','What to consider next','下一步可关注的事项');
+  const map={HRX_SAFETY_FIRST:['This concern needs appropriate real-world medical care.','这项情况需要现实中的适当医疗照护。'],HRX_AUTHORITY_REQUIRED:['Current health facts need an approved, current health source. No factual conclusion was established here.','当前健康事实需要合适的最新来源；这里尚未确立事实结论。'],HRX_GUIDED_CONTEXT:['Use the question to organize what you know and what remains uncertain, without diagnosing it.','用问题区分已知与未知，不作诊断。'],HRX_GROUNDED_HEALTH:['A current health source is available for explanation. It is not an individual diagnosis.','当前有健康来源可供解释；这不等于个人诊断。']};
+  add(section,'p',...(map[route.route]||['This stays with general knowledge rather than an individual health assessment.','这里仅作一般知识整理，不是个人健康评估。']));
+  output.append(section);
+ }
+ const clear=add(output,'button','Clear this session’s observation','清除本次会话观察');clear.type='button';clear.addEventListener('click',()=>{pending++;observation=null;route=null;render();setStatus('Observation cleared. Nothing was saved.','观察已清除，没有保存资料。');});
+}
+if(form&&output){
+ form.addEventListener('submit',async event=>{
+  event.preventDefault();if(!form.reportValidity())return;const data=new FormData(form),id=++pending;
+  observation={concern:String(data.get('concern')||'').trim(),date:String(data.get('observedAt')||'').trim()};route=null;render();
+  if(data.get('processingConsent')!=='GRANTED'){setStatus('Organized on this page only. Health routing was not requested.','仅在本页整理；没有请求健康信息处理。');return;}
+  setStatus('Organizing the health question…','正在整理健康问题……');
+  try{
+   const response=await fetch('/api/ask-phios-health',{method:'POST',headers:{'content-type':'application/json'},cache:'no-store',credentials:'same-origin',body:JSON.stringify({question:observation.concern,caseRef:'EPHEMERAL-HEALTH-CANDIDATE',consentState:'GRANTED'})});
+   const body=await response.json();if(id!==pending)return;if(!response.ok||!body.ok)throw Error('HEALTH_ROUTE_FAILED');
+   route=body;render();setStatus('Health question organized. Nothing was saved.','健康问题已整理；没有保存资料。');
+  }catch{if(id!==pending)return;setStatus('Health routing is unavailable. Your observation remains on this page; you can retry or clear it.','目前无法处理健康问题。观察仍在本页，你可以重试或清除。');}
+ });
+ new MutationObserver(()=>{render();if(statusCopy)setStatus(...statusCopy);}).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+}

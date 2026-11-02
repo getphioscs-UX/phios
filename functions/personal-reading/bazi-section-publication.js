@@ -249,21 +249,7 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
  };
  const r11Repeated=topic=>(topic?.relevantTenGods||[]).filter(x=>x.repeatState==='REPEATED').sort((a,b)=>b.count-a.count);
  const r11TenGodDetail=code=>reading.professionalModules.tenGods?.items?.find(x=>x.tenGodCode===code)||null;
- const r11TenGodStructure=code=>{
-  const x=r11TenGodDetail(code);if(!x)return '';
-  const presence=x.repeatState==='REPEATED'
-   ?pick('repeats across the chart','在命盘中重复出现')
-   :pick('has a more limited presence','出现较有限');
-  const visibility=x.visibleCount>0&&x.hiddenCount>0
-   ?pick('appears through both visible and hidden layers','同时通过透干与藏干进入结构')
-   :x.visibleCount>0
-    ?pick('is expressed through the visible layer','主要通过透干进入结构')
-    :pick('is carried in the hidden layer','主要保留在藏干层');
-  return pick(
-   `${R11_TEN_GOD[code]||code} ${presence} and ${visibility}. The distinction matters because repetition and visibility describe different structural roles; neither should be converted into a score.`,
-   `${R11_TEN_GOD[code]||code}${presence}，并且${visibility}。这里要区分“是否重复”与“通过哪一层进入结构”；两者都不应被转换成评分。`
-  );
- };
+ const r11TenGodStructure=code=>describeBaziR11TenGod(r11TenGodDetail(code),locale);
  const r11Pattern=topic=>(topic?.patternCandidates||[]);
  const r11Relations=topic=>(topic?.relationshipInterfaces||[]);
  const r11Module=(key,code,paragraphs,{boundary='',observations=r11Prompts(code),extraRefs=[]}={})=>{
@@ -853,4 +839,23 @@ export async function projectBaziSectionPublication({reading,locale,temporalCont
   return {...safe,internalSections:internalSections.map(s=>({...s,diagnostics:{...s.diagnostics,sectionRuntimeTier:s.t3?'T2_FALLBACK':'DETERMINISTIC',fallbackReason:s.t3?'CROSS_SECTION_REPETITION':null}})),crossSection,t3Fallback:'CROSS_SECTION_REPETITION'};
  }
  return {pages,sections,internalSections,legacy,...(crossSection?{crossSection}:{})};
+}
+
+// Same R11 source owner, reused by the full-report publication adapter.
+export function describeBaziR11TenGod(x,locale){
+ if(!x)return '';const pick=(en,zh)=>locale==='en'?en:zh;
+ const R11_TEN_GOD={BI_JIAN:pick('Peer','比肩'),JIE_CAI:pick('Rob Wealth','劫财'),SHI_SHEN:pick('Eating God','食神'),SHANG_GUAN:pick('Hurting Officer','伤官'),PIAN_CAI:pick('Indirect Wealth','偏财'),ZHENG_CAI:pick('Direct Wealth','正财'),QI_SHA:pick('Seven Killings','七杀'),ZHENG_GUAN:pick('Direct Officer','正官'),PIAN_YIN:pick('Indirect Resource','偏印'),ZHENG_YIN:pick('Direct Resource','正印')};const code=x.tenGodCode;
+  const presence=x.repeatState==='REPEATED'
+   ?pick('repeats across the chart','在命盘中重复出现')
+   :pick('has a more limited presence','出现较有限');
+  const visibility=x.visibleCount>0&&x.hiddenCount>0
+   ?pick('appears through both visible and hidden layers','同时通过透干与藏干进入结构')
+   :x.visibleCount>0
+    ?pick('is expressed through the visible layer','主要通过透干进入结构')
+    :pick('is carried in the hidden layer','主要保留在藏干层');
+  return pick(
+   `${R11_TEN_GOD[code]||code} ${presence} and ${visibility}. The distinction matters because repetition and visibility describe different structural roles; neither should be converted into a score.`,
+   `${R11_TEN_GOD[code]||code}${presence}，并且${visibility}。这里要区分“是否重复”与“通过哪一层进入结构”；两者都不应被转换成评分。`
+  );
+
 }

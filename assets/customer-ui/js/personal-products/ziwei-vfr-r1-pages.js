@@ -1,3 +1,4 @@
+import {renderReportCoverOverlay} from '../../../../functions/canonical-presentation-runtime/report-cover-overlay.js';
 import {getZwrVfrVisualBinding} from '../../../../functions/canonical-presentation-runtime/ziwei-vfr-r1-visual-bindings.js';
 import {requireFixedReportManifest,renderFixedReportPage,FIXED_REPORT_PAGE_CSS,resolveReportBodyAsset} from '../../../../functions/canonical-presentation-runtime/report-editorial-resolver.js';
 
@@ -272,7 +273,7 @@ function closingPage(reportIr,binding,pageNumber){
  const en=(reportIr?.closingSummary?.en||[]).map(x=>firstSentence(x,'en'));
  return '<div class="zv-closing-art">'+(binding.hero?'<img src="'+esc(binding.hero)+'" alt="">':'')+(binding.motif?'<img class="zv-closing-motif" src="'+esc(binding.motif)+'" alt="">':'')+'</div><div class="zv-closing"><span>'+esc(pageNumber||'')+'</span><h1>读取边界</h1><h2>Reading Boundary</h2><p>命盘提供结构化观察，不替代现实证据、专业判断或你的实际选择。</p><p lang="en">The chart provides structured observation; it does not replace real-world evidence, professional judgment, or your own decisions.</p><div class="zv-closing-points">'+zh.slice(0,3).map((x,i)=>'<article><b>0'+(i+1)+'</b><p>'+esc(x)+'</p><small>'+esc(en[i]||'')+'</small></article>').join('')+'</div></div>';
 }
-export function renderZwrVfrReview({reportIr,diagramData,pagePlan,fixedVisualManifest=null,contentLanguage=reportIr.locale||'bilingual'}){
+export function renderZwrVfrReview({reportIr,diagramData,pagePlan,fixedVisualManifest=null,contentLanguage=reportIr.locale||'bilingual',subjectPresentation=null}){
  if(fixedVisualManifest)requireFixedReportManifest('ZWR',contentLanguage,fixedVisualManifest);
  const bodyR2=fixedVisualManifest?resolveReportBodyAsset({methodId:'ZWR',manifest:fixedVisualManifest}):null,nativeR2=fixedVisualManifest?.reports.ZWR.nativeBindings;let physicalPage=0;
  const sections=new Map((reportIr?.sections||[]).map(s=>[s.sectionId,s]));
@@ -284,7 +285,7 @@ export function renderZwrVfrReview({reportIr,diagramData,pagePlan,fixedVisualMan
    if(p.pageFamily==='SECTION_MASTER'&&nativeR2.bodyOnlySections.includes(p.sectionId))return '';
    if(p.pageFamily==='OVERVIEW'){physicalPage++;prefix=`<style>${FIXED_REPORT_PAGE_CSS}</style>${renderFixedReportPage({methodId:'ZWR',pageId:nativeR2.overviewMaster,contentLanguage,manifest:fixedVisualManifest})}`;}
    p={...p,pageNumber:++physicalPage};
-   if(sourcePage.pageNumber<=5||p.pageFamily==='SECTION_MASTER')return `<style>${FIXED_REPORT_PAGE_CSS}</style>${renderFixedReportPage({methodId:'ZWR',pageId:sourcePage.pageNumber<=5?'P0'+sourcePage.pageNumber:nativeR2.sectionMasters[p.sectionId],contentLanguage,manifest:fixedVisualManifest})}`;
+   if(sourcePage.pageNumber<=5||p.pageFamily==='SECTION_MASTER'){let fixed=renderFixedReportPage({methodId:'ZWR',pageId:sourcePage.pageNumber<=5?'P0'+sourcePage.pageNumber:nativeR2.sectionMasters[p.sectionId],contentLanguage,manifest:fixedVisualManifest});if(sourcePage.pageNumber===1&&subjectPresentation)fixed=fixed.replace('</section>',renderReportCoverOverlay({methodId:'ZWR',subject:subjectPresentation})+'</section>');return `<style>${FIXED_REPORT_PAGE_CSS}</style>${fixed}`;}
   }
   const s=sections.get(p.sectionId),ds=(p.diagramIds||[]).map(id=>diagrams.get(id)).filter(Boolean);
   const binding=fixedVisualManifest?{kind:p.pageFamily==='CLOSING'?'CLOSING':'BODY',hero:bodyR2.url,body:bodyR2.url,motif:null}:getZwrVfrVisualBinding({pageNumber:p.pageNumber,sectionId:p.sectionId,pageFamily:p.pageFamily});

@@ -1,0 +1,53 @@
+name: Final unified release R1 artifacts
+on:
+  push:
+    branches: [codex/final-unified-production-r1]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: npm run check:final-unified-release-r1 && npm run check:country-history-coverage-r1 && npm run check:cloudflare-function-import-compat
+      - name: Build exact Preview artifact without deployment
+        run: npm run build:pages
+        env:
+          CF_PAGES: '1'
+          CF_PAGES_BRANCH: codex/final-unified-production-r1
+          CF_PAGES_ENVIRONMENT: preview
+          CF_PAGES_COMMIT_SHA: ${{ github.sha }}
+          CF_PAGES_URL: https://ci-final.phios-github.pages.dev
+      - run: mkdir -p release-artifacts/preview && mv .pages-output release-artifacts/preview/site && node scripts/record-final-release-artifact.mjs preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-preview-${{ github.sha }}
+          path: release-artifacts/preview
+          include-hidden-files: true
+          retention-days: 7
+      - name: Build Production candidate artifact without deployment
+        run: npm run build:pages
+        env:
+          CF_PAGES: '1'
+          CF_PAGES_BRANCH: main
+          CF_PAGES_ENVIRONMENT: production
+          CF_PAGES_COMMIT_SHA: ${{ github.sha }}
+          CF_PAGES_URL: https://phios-github.pages.dev
+      - run: mkdir -p release-artifacts/production && mv .pages-output release-artifacts/production/site && node scripts/record-final-release-artifact.mjs production
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-production-${{ github.sha }}
+          path: release-artifacts/production
+          include-hidden-files: true
+          retention-days: 7
+      - run: git diff --exit-code

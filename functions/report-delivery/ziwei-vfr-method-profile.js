@@ -1,3 +1,5 @@
+import {ziweiPhysicalPageMap,ziweiR2VisualManifest,assertZiweiR2PublicationBinding} from './ziwei-r2-publication-binding.js';
+import {ZWR_R13_PRINT_CORRECTION,ZWR_R13_COVER_CSS} from '../../assets/customer-ui/js/personal-products/ziwei-vfr-r1-styles.js';
 import {renderZwrVfrReview,ZWR_VFR_RENDERER_VERSION} from '../../assets/customer-ui/js/personal-products/ziwei-vfr-r1-pages.js';
 import {ZWR_VFR_STYLES} from '../../assets/customer-ui/js/personal-products/ziwei-vfr-r1-styles.js';
 import {buildZwrVfrPagePlan,validateZwrVfrPagePlan,ZWR_VFR_PAGE_PLAN_VERSION} from '../personal-reading/visual-first/ziwei-vfr-page-plan.js';
@@ -22,7 +24,7 @@ export function resolveMethodRenderContract(candidate){
   if(ids.length!==15||new Set(ids).size!==15)fail('ZWR_VFR_DIAGRAM_REGISTRY_INVALID');
   const checked=validateZwrVfrPagePlan({diagramIds:ids,pages:c.vfrPagePlan,sections:c.visualReportIr.sections});
   if(!checked.accepted||JSON.stringify(c.vfrPagePlan)!==JSON.stringify(buildZwrVfrPagePlan({sections:c.visualReportIr.sections}))||JSON.stringify(c.vfrPublicationFit)!==JSON.stringify(checked.fitProfile))fail('ZWR_VFR_PAGE_PLAN_INVALID');
-  return {methodCode:'ZWR',compositionVersion:version,rendererId:'ZIWEI_VFR',requiresBoundMaterialIdentity:true,rendererVersion:ZWR_VFR_RENDERER_VERSION,publicationVersion:c.visualReportIr.schemaVersion,pagePlanVersion:ZWR_VFR_PAGE_PLAN_VERSION,expectedPageCount:c.vfrPagePlan.length,expectedPageRule:'vfrPagePlan.length',requiredDiagramIds:ids,verificationMode:'ZWR_VFR_PHYSICAL_PAGE_CONTRACT_V1',pageSelector:'main.report-root > .zv-page',styles:ZWR_VFR_STYLES,safeLimits:{maxRequestBytes:8000000},renderFunction:()=>renderZwrVfrReview({reportIr:c.visualReportIr,diagramData:c.vfrDiagramData,pagePlan:c.vfrPagePlan})};
+  return {methodCode:'ZWR',compositionVersion:version,rendererId:'ZIWEI_VFR',requiresBoundMaterialIdentity:true,rendererVersion:c.vfrR2PublicationBinding?'ZWR-R13-R2-RENDERER-1':ZWR_VFR_RENDERER_VERSION,publicationVersion:c.visualReportIr.schemaVersion,pagePlanVersion:ZWR_VFR_PAGE_PLAN_VERSION,expectedPageCount:c.vfrR2PublicationBinding?ziweiPhysicalPageMap(c.vfrPagePlan).length:c.vfrPagePlan.length,expectedPageRule:'VERSIONED_NATIVE_PHYSICAL_PLAN_LENGTH',requiredDiagramIds:ids,verificationMode:'ZWR_VFR_PHYSICAL_PAGE_CONTRACT_V1',pageSelector:c.vfrR2PublicationBinding?'main.report-root > .zv-page, main.report-root > .report-fixed-page':'main.report-root > .zv-page',styles:ZWR_VFR_STYLES+(c.vfrR2PublicationBinding?ZWR_R13_PRINT_CORRECTION+ZWR_R13_COVER_CSS:''),safeLimits:{maxRequestBytes:8000000},renderFunction:()=>renderZwrVfrReview({reportIr:c.visualReportIr,diagramData:c.vfrDiagramData,pagePlan:c.vfrPagePlan,...(c.vfrR2PublicationBinding?{fixedVisualManifest:ziweiR2VisualManifest,contentLanguage:'bilingual',subjectPresentation:c.subject}:{} )})};
  }
  const expectedPageCount=HISTORICAL_ZIWEI_PAGE_COUNTS[version];
  // Never fall back to legacy publication for a VFR payload with an old version.
@@ -48,6 +50,7 @@ export async function assertMethodGeneration(candidate){
  if((await createCustomerDeliverySnapshot(s)).semanticSnapshotId!==s.semanticSnapshotId)fail('METHOD_SEMANTIC_SNAPSHOT_TAMPERED');
  if(contract.rendererId==='ZIWEI_VFR'){
   const c=s.semanticContent;
+  if(c.vfrR2PublicationBinding)await assertZiweiR2PublicationBinding(candidate);
   if(c.vfrLineage?.profileVersion!==ZWR_VFR_METHOD_PROFILE.profileVersion||c.vfrLineage?.rendererContractVersion!==ZWR_VFR_METHOD_PROFILE.rendererContractVersion||c.vfrLineage?.pagePlanDigest!==await sha256Stable(c.vfrPagePlan)||JSON.stringify(await buildZwrVfrDiagramData({evidence:c.evidence}))!==JSON.stringify(c.vfrDiagramData))fail('METHOD_PUBLICATION_LINEAGE_MISMATCH');
   const {publicationIrDigest,...ir}=c.visualReportIr,{diagramDataDigest,...diagrams}=c.vfrDiagramData;
   if(await sha256Stable(ir)!==publicationIrDigest||await sha256Stable(diagrams)!==diagramDataDigest)fail('METHOD_PUBLICATION_DIGEST_MISMATCH');

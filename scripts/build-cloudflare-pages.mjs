@@ -1,4 +1,5 @@
 import {worldPreviewBuildPolicy,isolateWorldPreviewWorker} from './lib/world-preview-worker-isolation.mjs';
+import {finalReleaseBuildPolicy,isolateFinalReleaseWorker} from './lib/final-release-publication.mjs';
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
 import {internalPublicationFile} from './lib/publication-boundary.mjs';
 ﻿import fs from 'node:fs';
@@ -250,6 +251,15 @@ if (admittedBookVii) {
   if(fs.existsSync(path.join(root,currentDirectory)))for(const name of fs.readdirSync(path.join(root,currentDirectory)))if(name.endsWith('.json'))publicationFiles.add(currentDirectory+'/'+name);
 }
 
+
+// Bounded W4/W5/W9/W10 integration: public UI only; existing exclusions remain authoritative.
+for(const file of ["assets/customer-ui/js/surfaces/journey-method-visual-model-r1.js","assets/customer-ui/js/surfaces/journey-method-visual-r1.js","assets/customer-ui/surfaces/journey-method-visual-r1.css","assets/customer-ui/js/surfaces/profile-observation-panels-r1.js","assets/customer-ui/js/personal-products/profile-observation-prompts-r1.js"]){if(!fs.existsSync(path.join(root,file)))throw Error("VISUAL_INTEGRATION_INPUT_MISSING:"+file);publicationFiles.add(file);}
+const visualPointer=JSON.parse(fs.readFileSync(path.join(root,"content/web-production/registries/current-client-visual-registry.json"),"utf8"));
+if(!/^\/content\/web-production\/registries\/client-visual-asset-registry-v\d+(?:\.\d+)*\.json$/.test(visualPointer.currentRegistryPath))throw Error("VISUAL_REGISTRY_PATH_INVALID");
+publicationFiles.add(visualPointer.currentRegistryPath.slice(1));
+// Never promote legacy QA builds, review exports or private operational QA config
+// merely because those files remain tracked in the current main snapshot.
+for(const file of [...publicationFiles])if(/^(?:tmp\/|artifacts\/|config\/qa\/)/.test(file)||/^config\/reports\/(?:zero-cost-check-(?:commands|successors)|tarot-qa-provider)\.json$/.test(file))publicationFiles.delete(file);
 let copied = 0;
 let skipped = 0;
 
@@ -378,7 +388,8 @@ if (
 // Compact generated bindings and whitespace, preserving runtime names, syntax
 // and legal comments. Enforce unchanged budgets on the actual shipped bytes.
 const worldPreviewPolicy=worldPreviewBuildPolicy(process.env);
-const compiledWorker = isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
+const finalReleasePolicy=finalReleaseBuildPolicy(process.env);
+const compiledWorker = finalReleasePolicy.active?isolateFinalReleaseWorker(workerSource,finalReleasePolicy):isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
 console.log('World immutable build scope: '+JSON.stringify(worldPreviewPolicy));
 const compactWorker = transformSync(compiledWorker, pagesWorkerCompactionOptions).code;
 fs.writeFileSync(workerSource, compactWorker);

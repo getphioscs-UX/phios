@@ -70,6 +70,8 @@ export async function generateZiweiVfrR1Candidate(context,selection,deps={}){
    compositionVersion:ZIWEI_VFR_R1_GENERATION_VERSION,
    semanticContent:{
     ...Object.fromEntries(Object.entries(base.snapshot.semanticContent).filter(([key])=>key!=='report')),
+    vfrInputSnapshot:base.canonicalInputSnapshot,
+    vfrObservationContext:evidence.targetContext,
     vfrLineage:{profileVersion:profile.profileVersion,rendererContractVersion:profile.rendererContractVersion,birthSourceRef:base.birthSourceRef,canonicalInputDigest:base.canonicalInputDigest,calculationDigest:await sha256Stable(evidence),pagePlanDigest:await sha256Stable(pages),semanticCacheKey:semanticKey},
     visualReportIr:reportIr,
     vfrCompactAuthoringPackDigest:pack.authorityDigest,

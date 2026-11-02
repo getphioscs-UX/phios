@@ -54,14 +54,14 @@ export async function commerceOrder(env,id,customerId){
 }
 // Language is bound through the immutable purchase -> checkout order relation.
 // Bundle children each resolve the same purchased presentation, without a new store.
-export async function ownedReportPresentation(env,customerId,productId,clock=Date.now){
+export async function ownedReportPresentation(env,customerId,productId,clock=Date.now,{purchaseId=null}={}){
  const row=await dbFrom(env).prepare(`SELECT e.entitlement_id,e.entitlement_status,e.purchase_id,o.context_json
  FROM digital_entitlements e JOIN commerce_purchases p ON p.purchase_id=e.purchase_id
  JOIN commerce_checkout_attempts o ON o.checkout_attempt_id=p.checkout_attempt_id
  WHERE e.customer_id=?1 AND e.product_id=?2 AND e.entitlement_status='active'
  AND (e.expires_at IS NULL OR e.expires_at>?3) AND o.review_required=0
  AND o.customer_id=e.customer_id AND p.purchase_state='purchased'
- AND o.order_state IN ('FULFILLED','FULFILLMENT_PENDING') AND o.environment=?4 ORDER BY e.granted_at DESC LIMIT 1`).bind(customerId,productId,nowIso(clock),commerceEnvironment(env)).first();
+ AND o.order_state IN ('FULFILLED','FULFILLMENT_PENDING') AND o.environment=?4 AND (?5 IS NULL OR e.purchase_id=?5) ORDER BY e.granted_at DESC LIMIT 1`).bind(customerId,productId,nowIso(clock),commerceEnvironment(env),purchaseId).first();
  return row?{entitlement_id:row.entitlement_id,entitlement_status:row.entitlement_status,purchase_id:row.purchase_id,reportPresentation:orderReportPresentation(row)}:null;
 }
 export async function commerceCustomerBinding(env,customerId){

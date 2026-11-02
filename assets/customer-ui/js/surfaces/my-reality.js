@@ -1,9 +1,14 @@
+import '../account-session-signal.js';
+import './profile-account-bridge.js';
 import {installSubjectWorkspace} from './subject-workspace-r1.js';
 import {externalConditionsHtml} from './external-reality.js';
 import {installNavigationHandoff} from '../navigation-handoff.js';
 import {arr,esc,installTabs,locale,postJson,reRenderOnLocale,setStatus,tr,valueText} from './runtime-ui.js';
 import {renderRealityNavigationNetwork,renderNavigationFormationConcept} from '../reality-navigation-network.js';
 let currentView=null;
+let restoreWorkspaceTab=()=>{};
+let loadingCurrent=null;
+let currentLoadState="loading";
 const sessionObservations=[];
 const empty=message=>`<div class="cx-p1-empty">${esc(message)}</div>`;
 const textOf=item=>typeof item==='string'?item:item?.statement||item?.summary||item?.label||item?.title||item?.content||'';
@@ -157,20 +162,48 @@ function renderSide(view){
   if(c.available&&c.href){cta.href=c.href;cta.hidden=false;state.textContent=c.requiresExplicitConsent?tr('Explicit consent is required before persistent continuation.','持续保存前需要明确同意。'):''}else{cta.hidden=true;state.textContent=tr('No continuation route is currently established.','当前尚未建立持续路径。')}
 }
 
-function render(input){
+export function render(input){
   renderRealityNavigationNetwork(document.querySelector('[data-reality-network]'),input?.graphProjection,{locale:locale()});
   renderNavigationFormationConcept(document.querySelector('[data-network-formation]'),{locale:locale()});
-  const view=normalizeWorkspace(input);currentView=view;renderContextSummary(view);renderOverview(view);renderCurrent(view);renderPerspectives(view);renderReading(view);renderNavigation(view);renderActions(view);renderObservations();renderReview(view);renderHistory(view);renderReports(view);renderContinuity(view);renderSide(view);
+  const view=normalizeWorkspace(input);currentView=view;setWorkspaceLoadState('ready');restoreWorkspaceTab();renderContextSummary(view);renderOverview(view);renderCurrent(view);renderPerspectives(view);renderReading(view);renderNavigation(view);renderActions(view);renderObservations();renderReview(view);renderHistory(view);renderReports(view);renderContinuity(view);renderSide(view);
 }
-async function loadCurrent(){try{const response=await fetch(`/api/customer-my-reality?locale=${encodeURIComponent(locale())}${new URLSearchParams(location.search).get('externalContextRef')==='WORLD_PUBLIC_CONTEXT'?'&externalContextRef=WORLD_PUBLIC_CONTEXT':''}`,{cache:'no-store',credentials:'same-origin'});const payload=await response.json();if(response.ok&&payload?.ok)render(payload.workspace||payload.view)}catch{render({state:'EMPTY',overview:{},currentReality:{},perspectives:{items:[]}})}}
+function setWorkspaceLoadState(state){
+ currentLoadState=state;document.body.dataset.realityLoadState=state;
+ const loading=state==='loading',blocked=!currentView&&state!=='ready';
+ const status=document.querySelector('[data-reality-load-status]'),retry=document.querySelector('[data-reality-load-retry]');
+ if(status){status.textContent=loading?tr('Loading your current view…','正在读取当前视图……'):state==='error'?tr('Your view could not be loaded. Your information has not been cleared. Retry when you are ready.','当前视图读取失败，原有资料没有被清除。请重试。'):'';status.hidden=state==='ready';}
+ if(retry){retry.hidden=state!=='error';retry.disabled=loading;}
+ for(const e of document.querySelectorAll('[data-cx-tab],[data-reality-structure-tab]')){e.disabled=blocked;e.setAttribute('aria-busy',String(loading));}
+ document.querySelector('[data-cx-workspace]')?.setAttribute('aria-busy',String(loading));
+}
+async function loadCurrent(){
+ if(loadingCurrent)return loadingCurrent;
+ setWorkspaceLoadState('loading');
+ loadingCurrent=(async()=>{try{
+  const response=await fetch(`/api/customer-my-reality?locale=${encodeURIComponent(locale())}${new URLSearchParams(location.search).get('externalContextRef')==='WORLD_PUBLIC_CONTEXT'?'&externalContextRef=WORLD_PUBLIC_CONTEXT':''}`,{cache:'no-store',credentials:'same-origin'});
+  const payload=await response.json();if(!response.ok||!payload?.ok)throw Error('REALITY_LOAD_FAILED');
+  render(payload.workspace||payload.view);
+ }catch{setWorkspaceLoadState('error');}finally{loadingCurrent=null;}})();return loadingCurrent;
+}
 function boot(){
-  installTabs();const dialog=document.getElementById('cx-reality-intake');
+  installTabs();
+  let restoringTab=false;
+  const restoreTab=()=>{const url=new URL(location.href),hashId=url.hash.match(/^#reality-tab=([a-z]+)$/)?.[1],queryId=url.searchParams.get('view'),id=hashId||(['current','navigation','review'].includes(queryId)?queryId:'overview');const button=document.querySelector('[data-cx-tab="'+id+'"]');if(button&&button.getAttribute('aria-selected')!=='true'){restoringTab=true;try{button.click();}finally{restoringTab=false;}}};
+  for(const button of document.querySelectorAll('[data-cx-tab]')){button.addEventListener('click',()=>{if(restoringTab)return;const next=new URL(location.href);next.searchParams.delete('view');next.hash='reality-tab='+button.dataset.cxTab;if(next.href!==location.href)history.pushState(null,'',next);});}
+  restoreWorkspaceTab=restoreTab;setWorkspaceLoadState('loading');
+  document.querySelector('[data-reality-load-retry]')?.addEventListener('click',()=>void loadCurrent());
+  document.querySelector('[data-cx-start-reality]')?.removeAttribute('disabled');
+  window.addEventListener('hashchange',restoreTab);window.addEventListener('popstate',restoreTab);restoreTab();
+  const dialog=document.getElementById('cx-reality-intake');
   document.querySelector('[data-cx-start-reality]')?.addEventListener('click',()=>dialog?.showModal());
   document.querySelector('[data-cx-reality-form]')?.addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,status=form.querySelector('[data-cx-reality-form-status]');if(!form.elements.consent.checked)return;setStatus(status,tr('Building your temporary current view…','正在建立你的临时当前视图…'));const data=Object.fromEntries(new FormData(form).entries());try{const payload=await postJson('/api/customer-my-reality',{...data,locale:locale(),consent:true});render(payload.workspace||payload.view);setStatus(status,tr('Current view ready. Nothing was saved automatically.','当前视图已建立，没有任何内容被自动保存。'),'success');setTimeout(()=>dialog?.close(),450)}catch{setStatus(status,tr('This view could not be created right now.','目前无法建立这个视图。'),'error')}});
   document.querySelector('[data-cx-observe-form]')?.addEventListener('submit',event=>{event.preventDefault();const data=Object.fromEntries(new FormData(event.currentTarget).entries());const whatHappened=String(data.whatHappened||'').trim();if(!whatHappened)return;sessionObservations.push({whatHappened,newEvidence:String(data.newEvidence||'').trim(),change:String(data.change||'').trim()});event.currentTarget.reset();renderObservations()});
-  window.addEventListener('message',event=>{if(event.origin!==location.origin||event.data?.type!=='PHIOS_CX_REALITY_HANDOFF'||!event.data?.viewModel)return;render(event.data.viewModel)});
-  if(new URLSearchParams(location.search).get('handoff')==='1'&&window.opener){window.opener.postMessage({type:'PHIOS_CX_MY_REALITY_READY'},location.origin)}
-  loadCurrent();reRenderOnLocale(()=>{if(currentView)render(currentView)})
+  const handoffRequested=new URLSearchParams(location.search).get('handoff')==='1';
+  const nonce=location.hash.slice(1);let received=false;
+  window.addEventListener('phios:reality-handoff-request',()=>{if(received&&currentView)window.dispatchEvent(new CustomEvent('phios:reality-handoff-received',{detail:{workspace:currentView}}));});
+  const receive=event=>{if(received||!handoffRequested||!window.opener||event.source!==window.opener||event.origin!==location.origin||event.data?.type!=='PHIOS_CX_REALITY_HANDOFF'||event.data?.nonce!==nonce||!event.data?.viewModel)return;received=true;render(event.data.viewModel);window.opener.postMessage({type:'PHIOS_CX_MY_REALITY_RECEIVED',nonce},location.origin);window.removeEventListener('message',receive);window.dispatchEvent(new CustomEvent('phios:reality-handoff-received',{detail:{workspace:event.data.viewModel}}));history.replaceState(null,'',location.pathname+location.search);};
+  if(handoffRequested&&window.opener&&/^[0-9a-f-]{36}$/i.test(nonce)){window.addEventListener('message',receive);window.opener.postMessage({type:'PHIOS_CX_MY_REALITY_READY',nonce},location.origin);}
+  else loadCurrent();reRenderOnLocale(()=>{const loadState=currentLoadState;if(currentView)render(currentView);setWorkspaceLoadState(loadState)})
 }
 boot();
 
@@ -180,4 +213,7 @@ for(const button of document.querySelectorAll('[data-reality-structure-tab]'))bu
 
 document.addEventListener('click',event=>{const button=event.target.closest('[data-external-ignore]');if(!button||!currentView?.externalReality)return;const id=button.dataset.externalIgnore;const graph=currentView.graphProjection;const graphProjection=graph?{...graph,G1:{...graph.G1,nodes:graph.G1.nodes.filter(n=>!(n.type==='EXTERNAL_CURRENT'&&n.id.endsWith(':external:'+id)))}}:graph;currentView={...currentView,graphProjection,externalReality:{...currentView.externalReality,items:currentView.externalReality.items.filter(i=>i.eventId!==id)},currentReality:{...currentView.currentReality,evidence:arr(currentView.currentReality?.evidence).filter(i=>i.eventId!==id)}};render(currentView);});
 
+window.addEventListener('phios:account-logout',()=>{render({state:'EMPTY',overview:{},currentReality:{},perspectives:{items:[]}});location.reload();});
+
 void installSubjectWorkspace();
+

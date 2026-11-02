@@ -55,7 +55,7 @@ export function measureBaziPublication(root,options={}){
   if(failed)overflowPages.push(pageId);
  }
  const assetFailures=[...root.querySelectorAll('img')].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),diagrams=[...root.querySelectorAll('figure[data-diagram-id]')];
- const fail=pages.length!==48||diagrams.length!==15||new Set(diagrams.map(d=>d.dataset.diagramId)).size!==15||overflowPages.length||clippedSlots.length||hiddenTextSlots.length||fontMinimumViolations.length||assetFailures.length||missingLocales.length||diagramViolations.length||diagramLocaleViolations.length||root.querySelector('[data-missing-required]');
+ const fail=pages.length!==(options.expectedPageCount??48)||diagrams.length!==15||new Set(diagrams.map(d=>d.dataset.diagramId)).size!==15||overflowPages.length||clippedSlots.length||hiddenTextSlots.length||fontMinimumViolations.length||assetFailures.length||missingLocales.length||diagramViolations.length||diagramLocaleViolations.length||root.querySelector('[data-missing-required]');
  return {presentationMode:mode,layoutProfileVersion:profile.id,pageCount:pages.length,diagramCount:diagrams.length,overflowPages,clippedSlots,hiddenTextSlots,fontMinimumViolations,assetFailures,missingLocales,diagramLocaleViolations,diagramViolations,topology,slots,recomposePasses:[],fitStatus:fail?'FAIL':'PASS',providerCalls:0};
 }
 export function assertBaziFitRelease(ir,receipt){if(receipt.presentationMode!==ir.presentationMode||!['PASS','PASS_AFTER_RECOMPOSE'].includes(receipt.fitStatus))throw Error('PUBLICATION_OVERFLOW_UNRESOLVED');if(ir.customerPublishable!==true)throw Error('HUMAN_REVIEW_OR_COVERAGE_PENDING');return true;}

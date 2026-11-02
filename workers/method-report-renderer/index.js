@@ -1,3 +1,4 @@
+import {methodPdfMultipart} from '../../functions/report-delivery/method-pdf-transfer.js';
 import {assertMethodGeneration} from '../../functions/report-delivery/method-render-contract.js';
 import puppeteer from '@cloudflare/puppeteer';
 import {createCustomerDeliverySnapshot} from '../../functions/personal-reading/narrative/report-section-snapshot.js';
@@ -11,14 +12,16 @@ const hash=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA
 
 export default {
  async fetch(request,env){
+  if(env.PHIOS_ENVIRONMENT==='qa'&&request.method==='GET'&&new URL(request.url).pathname==='/health')return Response.json({ok:true,pdfTransferProtocol:'BZR-PDF-MULTIPART-1'},{headers:{'cache-control':'no-store'}});
   // No public endpoint. Only Pages' private service binding may invoke this worker.
-  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||new URL(request.url).pathname!=='/verify')return new Response(null,{status:404});
+  if(env.PHIOS_ENVIRONMENT!=='qa'||request.method!=='POST'||!['/verify','/pdf'].includes(new URL(request.url).pathname))return new Response(null,{status:404});
   let browser,stage='INPUT';const startedAt=Date.now(),timings={};
   try{
    const reader=request.body?.getReader();if(!reader)throw Error('BODY_REQUIRED');let size=0,raw='';const decoder=new TextDecoder();
    for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>8000000){await reader.cancel();throw Error('TOO_LARGE');}raw+=decoder.decode(value,{stream:true});}
    const parsed=JSON.parse(raw+decoder.decode()),{candidate,method,compositionVersion}=parsed;
-   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer);
+   if(method==='BZR')return await verifyBaziPublication(parsed.publication,env,puppeteer,{pdfResponse:new URL(request.url).pathname==='/pdf',expectedHtmlDigest:parsed.expectedHtmlDigest,includePdf:parsed.includePdf===true});
+   if(new URL(request.url).pathname==='/pdf')throw Error('METHOD_PDF_NOT_ADMITTED');
    const contract=await assertMethodGeneration(candidate),expectedPageCount=contract.expectedPageCount;
    if(method!==contract.methodCode||compositionVersion!==contract.compositionVersion||candidate?.scope!=='CONTROLLED_QA_ONLY'||candidate.snapshot?.locale!==candidate.locale||(await createCustomerDeliverySnapshot(candidate.snapshot)).semanticSnapshotId!==candidate.snapshot.semanticSnapshotId)throw Error('SNAPSHOT_INVALID');
    if(compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1')await assertZiweiContextSnapshot(candidate);
@@ -45,7 +48,7 @@ export default {
 
    stage='ASSET_LOAD';
    const assetStarted=Date.now();
-   await page.setContent(`<!doctype html><html lang="${candidate.locale}"><head><meta charset="utf-8"><title>PHI OS · Zi Wei</title><style>${contract.styles||css}${compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1'?CONTEXTUAL_REPORT_CSS:''}</style></head><body><main class="report-root">${body}</main></body></html>`,{waitUntil:'networkidle0',timeout:60000});
+   await page.setContent(`<!doctype html><html lang="${candidate.locale}"><head><meta charset="utf-8"><title>PHI OS · Zi Wei</title><style>${contract.styles||css}${compositionVersion==='ZIWEI-CONTEXTUAL-RCA-R1'?CONTEXTUAL_REPORT_CSS:''}</style></head><body>${candidate.schemaVersion==='ZWR-VFR-R1-ACCEPTED-RENDERER-FIXTURE-v1'?'<div style="position:fixed;top:1mm;left:0;right:0;text-align:center;z-index:100;font:7px sans-serif;color:#754d38">SYNTHETIC REVIEW ONLY - NOT CUSTOMER ISSUED</div>':''}<main class="report-root">${body}</main></body></html>`,{waitUntil:'networkidle0',timeout:60000});
    timings.assetLoadMs=Date.now()-assetStarted;
    if(contract.rendererId!=='ZIWEI_VFR')await page.addScriptTag({content:fitCode});
    await page.emulateMediaType('print');
@@ -61,7 +64,7 @@ export default {
     const imageDecodeMs=performance.now()-decodeStarted,fitStarted=performance.now();
     const fits=rendererId==='ZIWEI_VFR'?[]:methodReportFit.fitPublicationForPrint(document);
     const physicalPages=[...document.querySelectorAll(pageSelector)];
-    const pageNumbers=physicalPages.map(p=>Number(p.dataset.pageNumber));
+    const pageNumbers=physicalPages.map((p,i)=>Number(p.dataset.pageNumber||(p.classList.contains('report-fixed-page')?i+1:0)));
     const pageSequenceValid=physicalPages.length===expectedPageCount&&pageNumbers.every((n,i)=>n===i+1);
     const hiddenOrZeroGeometryCount=physicalPages.filter(p=>{
      const rect=p.getBoundingClientRect(),style=getComputedStyle(p);
@@ -104,7 +107,7 @@ export default {
    await page.evaluate(()=>document.querySelectorAll('script').forEach(s=>s.remove()));
    const html=await page.content();
 
-   return Response.json({
+   const output={
     html,
     verification:{
      schemaVersion:'METHOD_BROWSER_VERIFICATION_V1',
@@ -133,7 +136,13 @@ export default {
      errorCount:0,
      outputDigest:await hash(html)
     }
-   },{headers:{'Cache-Control':'no-store'}});
+   };
+   if(parsed.includePdf===true){
+    if(method!=='ZWR'||!candidate.snapshot.semanticContent.vfrR2PublicationBinding)throw Error('METHOD_PDF_NOT_ADMITTED');
+    const bytes=new Uint8Array(await page.pdf({preferCSSPageSize:true,printBackground:true,tagged:true,outline:true}));
+    return methodPdfMultipart(html,output.verification,bytes);
+   }
+   return Response.json(output,{headers:{'Cache-Control':'no-store'}});
   }catch(error){
    return Response.json({
     ok:false,

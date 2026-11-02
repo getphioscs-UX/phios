@@ -6,6 +6,8 @@
     "#cmp-production-api": "./functions/canonical-meaning-production/api-method-meaning-handler.js"
   },
   "scripts": {
+    "check:world-country-observation:p2": "node scripts/run-zero-cost-regression.mjs check:world-country-observation:p2",
+    "check:subject-country-spw-fin-r1": "node scripts/run-zero-cost-regression.mjs check:subject-country-spw-fin-r1",
     "check:bazi-s05-market": "node scripts/run-zero-cost-regression.mjs check:bazi-s05-market",
     "check:bazi-s04-v4": "node scripts/run-zero-cost-regression.mjs check:bazi-s04-v4",
     "dev": "wrangler pages dev .",
@@ -2997,7 +2999,9 @@
     "check:visual-function-preservation": "node scripts/run-zero-cost-regression.mjs check:visual-function-preservation",
     "check:global-visual-r2": "node scripts/run-zero-cost-regression.mjs check:global-visual-r2",
     "check:visual-r2-publication-boundary": "node scripts/run-zero-cost-regression.mjs check:visual-r2-publication-boundary",
-    "check:ask-architecture-r1": "node scripts/run-zero-cost-regression.mjs check:ask-architecture-r1"
+    "check:ask-architecture-r1": "node scripts/run-zero-cost-regression.mjs check:ask-architecture-r1",
+    "check:final-unified-release-r1": "node scripts/run-zero-cost-regression.mjs check:final-unified-release-r1",
+    "check:country-history-coverage-r1": "node scripts/run-zero-cost-regression.mjs check:country-history-coverage-r1"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "^1.1.1",
