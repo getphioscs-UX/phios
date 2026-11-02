@@ -14,6 +14,7 @@ import {createStripeTestSignature,verifyCommerceQaPrice} from '../functions/comm
 import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
 import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
 import {sha256Hex} from '../functions/commerce/commerce-crypto.js';
+import {fiveMethodReportCapability} from '../functions/report-delivery/paid-report-production-capabilities.js';
 
 const cases=[];async function test(name,fn){await fn();cases.push({name,status:'PASS',evidence:'local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end'});}
 const isolatedCheckoutFixture=process.argv.includes('--isolated-checkout-fixture');
@@ -225,6 +226,15 @@ await test('active single products fulfill after verified payment',async()=>{
       assert.equal(stripeCalls.length,beforeCalls);assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
       continue;
     }
+    const reportCapability=fiveMethodReportCapability(product.productId,env);
+    if(reportCapability){
+      assert.equal(reportCapability.setupAvailable,false,'offline fixture must not admit report sales');
+      assert.equal(response.status,409,product.productId);
+      assert.equal((await response.json()).error,reportCapability.blockedReason);
+      assert.equal(stripeCalls.length,beforeCalls+(product.qaPriceVerificationRequired?1:0),'report rejection permits only Price GET');
+      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'unadmitted report must not create an order');
+      continue;
+    }
     assert.equal(response.status,201,product.productId);
     const session=[...sessions.values()].at(-1);session.payment_status='paid';assert.equal((await send('checkout.session.completed',session)).status,200);
   }
@@ -265,7 +275,8 @@ await test('provider price mismatch is review-required without grants; portal ca
   assert.equal((await commerceApi(context({customer:'cus_other'}),'portal')).status,422);
 });
 await test('temporary DB failure returns 503; failed event retry succeeds without duplicate rights',async()=>{
-  assert.equal((await commerceApi(context({productId:'COM-REPORT-HD-FULL'}),'checkout')).status,201);
+  // Exercise settlement retry on an eligible fixture, without admitting HD sales.
+  assert.equal((await commerceApi(context({productId:'COM-REPORT-ECR-FULL'}),'checkout')).status,201);
   const session=[...sessions.values()].at(-1);session.payment_status='paid';let fail=true;
   env.RUNTIME_DB={...db,prepare(sql){if(fail&&sql.includes('INSERT OR IGNORE INTO commerce_purchases')){fail=false;throw new Error('fixture temporary database error');}return db.prepare(sql);}};
   try{assert.equal((await send('checkout.session.completed',session,'evt_retrydb')).status,503);assert.equal(sqlite.prepare("SELECT processing_status FROM commerce_webhook_events WHERE stripe_event_id='evt_retrydb'").get().processing_status,'failed');assert.equal((await send('checkout.session.completed',session,'evt_retrydb')).status,200);}finally{env.RUNTIME_DB=db;}
@@ -298,7 +309,7 @@ await test('bilingual bundle settlement persists one language across every child
   for(const child of selectedProducts){const owned=await ownedReportPresentation(env,identity.userId,child);assert.equal(owned.reportPresentation.reportLocale,'bilingual');}
   assert.equal(sqlite.prepare('SELECT amount_minor FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).amount_minor,total);
  }
- const r=await commerceApi(context({productId:'COM-REPORT-HD-FULL',reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');const result=await r.json();const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);session.line_items.data[1].price.unit_amount=1;session.payment_status='paid';
+ const r=await commerceApi(context({productId:'COM-REPORT-BUNDLE-2',selectedProducts:standardBundleProducts().slice(0,2),reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');assert.equal(r.status,201);const result=await r.json();const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);session.line_items.data[1].price.unit_amount=1;session.payment_status='paid';
  const invalid=await send('checkout.session.completed',session);assert.equal((await invalid.json()).eventStatus,'review_required');
  assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).n,0);
 });

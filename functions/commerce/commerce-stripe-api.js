@@ -95,6 +95,9 @@ export async function commerceApi(context,action){
     if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
+    // Identity, origin, input and canonical quote are validated above. Preserve
+    // the QA price-binding contract before report admission, with no writes.
+    if(commerceEnvironment(env)==='QA'&&product.qaPriceVerificationRequired)await verifyCommerceQaPrice(env,product,fetcher);
     const fullReportCapability=requireFiveMethodReportSetup(product.productId,env);
     if(fullReportCapability||env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;contextSnapshot.reportSubject=paidReportSubjectSnapshot(readiness);}
     if(commerceEnvironment(env)==='LIVE'&&(isLanguageReport(product)||product.category==='REPORT'))contextSnapshot.p9Canary=await requireP9Payment(context,{productId:product.productId,readinessId:contextSnapshot.reportIntentId,presentation:contextSnapshot.reportPresentation});
@@ -103,7 +106,6 @@ export async function commerceApi(context,action){
       if(product.billingType==='RECURRING'||!isLanguageReport(product))throw Object.assign(Error('Controlled report purchase only.'),{status:403,code:'controlled_product_denied'});
       contextSnapshot.controlledPurchase=controlled;
     }
-    if(commerceEnvironment(env)==='QA'&&product.qaPriceVerificationRequired)await verifyCommerceQaPrice(env,product,fetcher);
     const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
     // One persisted attempt across all products for this campaign/account.
     const key=await sha256Hex(contextSnapshot.p9Canary?`P9-CANARY/${contextSnapshot.p9Canary.releaseCandidateDigest}/${contextSnapshot.p9Canary.ownerOpaqueRef}`:controlled?`COM-STRIPE-R1/${commerceEnvironment(env)}/${controlled.reservationKey}`:`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);

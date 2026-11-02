@@ -24,3 +24,4 @@ jobs:
       - run: npm ci
       - run: node --import ./scripts/lib/report-zero-cost-preload.mjs scripts/check-unified-preview-scope-r12.mjs
       - run: npm run check:cloudflare-function-import-compat
+      - run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-commerce-qa-price-admission-order-r1.mjs
