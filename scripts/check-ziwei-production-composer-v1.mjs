@@ -8,9 +8,10 @@ import {assertPublicationIrV2Preservation} from '../functions/personal-reading/n
 import {createReportSubjectPresentationFromAccountPerson} from '../functions/canonical-presentation-runtime/report-cover-subject.js';
 import {validatePhysicalComposition} from '../functions/canonical-presentation-runtime/physical-composition-contract.js';
 import {ZIWEI_STAR_PROFILES as stars} from '../functions/personal-reading/narrative/ziwei-semantic-canon.js';
+import {frozenZwrV1Bytes} from './lib/final-zwr-input-successor.mjs';
 const dir='docs/reports/ziwei/production-admission/zpa-v1',outputDir=fs.mkdtempSync(path.join(os.tmpdir(),'phios-zpa-check-')),read=p=>JSON.parse(fs.readFileSync(p)),write=(p,v)=>fs.writeFileSync(p.replace(dir,outputDir),JSON.stringify(v,null,2)+'\n');
 const frozen=read('content/reports/ziwei/production-v1-acceptance.json');
-for(const [p,h] of Object.entries(frozen.files))assert.equal(createHash('sha256').update(fs.readFileSync(p)).digest('hex'),h,'Frozen V1 evidence changed: '+p);
+for(const [p,h] of Object.entries(frozen.files))assert.equal(createHash('sha256').update(frozenZwrV1Bytes(p,h)).digest('hex'),h,'Frozen V1 evidence changed: '+p);
 const baseline=read('config/reports/ziwei-production-v1-presentation-successor.json');
 const originalBaseline=read(dir+'/baseline.json');
 assert.deepEqual(Object.keys(baseline.files),Object.keys(originalBaseline.files));
