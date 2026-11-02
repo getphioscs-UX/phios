@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('C:/phios/tools/review/subject-country-spw-fin-r1/correction-browser.mjs');s=p.read_text(encoding='utf-8').replace("p.locator('[data-original-world-question]').innerText()","p.locator('[data-original-world-question]').textContent()");p.write_bytes(s.encode())
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');p=r/'scripts/check-world-country-refresh.py';s=p.read_text(encoding='utf-8').replace('import importlib.util,json,tempfile,subprocess,sys,hashlib','import importlib.util,json,tempfile,subprocess,sys,hashlib\nsys.dont_write_bytecode=True');p.write_bytes(s.encode());cache=r/'scripts/__pycache__/refresh-world-country-evidence.cpython-312.pyc';cache.unlink(missing_ok=True)

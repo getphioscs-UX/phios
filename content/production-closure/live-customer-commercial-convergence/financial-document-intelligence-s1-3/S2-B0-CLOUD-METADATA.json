@@ -1,0 +1,118 @@
+{
+  "at": "2026-11-02T03:47:13.160Z",
+  "mode": "AUTHENTICATED_READ_ONLY_METADATA",
+  "accountId": "0b9f36bdf56f38d7d09aebe388f15204",
+  "existingSession": true,
+  "loginPerformed": false,
+  "rows": [
+    {
+      "kind": "account",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204",
+      "status": "READ_SUCCESS",
+      "httpStatus": "2XX_EXACT_STATUS_NOT_EXPOSED_BY_WRANGLER",
+      "metadata": {
+        "id": "0b9f36bdf56f38d7d09aebe388f15204",
+        "type": "standard",
+        "settings": {
+          "enforce_twofactor": false
+        }
+      }
+    },
+    {
+      "kind": "subscriptions",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/subscriptions",
+      "status": "ACCESS_REQUIRED_OR_QUERY_FAILED",
+      "code": 10000,
+      "error": "A request to the Cloudflare API (/accounts/0b9f36bdf56f38d7d09aebe388f15204/subscriptions) failed."
+    },
+    {
+      "kind": "pages",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects",
+      "status": "ACCESS_REQUIRED_OR_QUERY_FAILED",
+      "code": 8000024,
+      "error": "A request to the Cloudflare API (/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects) failed."
+    },
+    {
+      "kind": "d1",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/d1/database",
+      "status": "READ_SUCCESS",
+      "httpStatus": "2XX_EXACT_STATUS_NOT_EXPOSED_BY_WRANGLER",
+      "metadata": [
+        {
+          "uuid": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+          "name": "phios-runtime-sandbox",
+          "version": "production",
+          "file_size": 1003520,
+          "num_tables": 0
+        },
+        {
+          "uuid": "073639fa-01e4-4868-af10-6ed032637dab",
+          "name": "phios-runtime-production",
+          "version": "production",
+          "file_size": 229376,
+          "num_tables": 0
+        }
+      ]
+    },
+    {
+      "kind": "r2",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/r2/buckets",
+      "status": "READ_SUCCESS",
+      "httpStatus": "2XX_EXACT_STATUS_NOT_EXPOSED_BY_WRANGLER",
+      "metadata": {
+        "buckets": [
+          {
+            "name": "phios-private-books-sandbox",
+            "creation_date": "2026-09-15T10:30:04.582Z"
+          },
+          {
+            "name": "phios-private-manuscripts",
+            "creation_date": "2026-08-03T01:27:14.065Z"
+          },
+          {
+            "name": "phios-private-reports",
+            "creation_date": "2026-09-21T07:37:55.928Z"
+          },
+          {
+            "name": "phios-private-reports-sandbox",
+            "creation_date": "2026-09-21T07:38:51.689Z"
+          },
+          {
+            "name": "phios-public-assets",
+            "creation_date": "2026-07-30T06:28:23.530Z"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "organization",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/access/organizations",
+      "status": "ACCESS_REQUIRED_OR_QUERY_FAILED",
+      "code": 10000,
+      "error": "A request to the Cloudflare API (/accounts/0b9f36bdf56f38d7d09aebe388f15204/access/organizations) failed."
+    },
+    {
+      "kind": "apps",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/access/apps",
+      "status": "READ_SUCCESS",
+      "httpStatus": "2XX_EXACT_STATUS_NOT_EXPOSED_BY_WRANGLER",
+      "metadata": []
+    },
+    {
+      "kind": "identityProviders",
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/access/identity_providers",
+      "status": "READ_SUCCESS",
+      "httpStatus": "2XX_EXACT_STATUS_NOT_EXPOSED_BY_WRANGLER",
+      "metadata": []
+    }
+  ],
+  "pagination": "First page per_page=100; inventory completeness requires count check; no candidate-name reservation proof",
+  "excluded": [
+    "D1 rows",
+    "R2 object lists/content",
+    "Secrets",
+    "billing payment methods",
+    "customer identity records"
+  ],
+  "writes": 0
+}

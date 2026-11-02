@@ -1,0 +1,4 @@
+from pathlib import Path
+r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');q=Path('C:/phios/tools/review/subject-country-spw-fin-r1');leaf=Path('content/production-closure/live-customer-commercial-convergence/subject-country-spw-fin-r1')
+for root in [r,Path('C:/phios')]:
+ out=root/leaf;(out/'CORRECTION-RETRY-BROWSER.json').write_bytes((q/'retry-question-browser/RESULT.json').read_bytes());p=out/'EXECUTION-RECORD.md';s=p.read_text(encoding='utf-8');s+='\nSource-failure recovery reuses submitQuestion with the displayed original question instead of reloading the page. Actual aborted request and recovered owner request both tested; original question preserved. Durable browser companion now has25 assertions/scenarios including this check. Production remains untouched.\n';p.write_bytes(s.encode())

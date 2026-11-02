@@ -1,0 +1,80 @@
+{
+  "commands": [
+    {
+      "command": "node tools/review/country-history-closure-r1/check-history.mjs",
+      "exitCode": 0,
+      "result": "30/30"
+    },
+    {
+      "command": "node scripts/build-country-history-source-projection.mjs --check (candidate cwd)",
+      "exitCode": 0
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/check-build.mjs",
+      "exitCode": 0,
+      "result": "4 targeted client/function compilations"
+    },
+    {
+      "command": "node scripts/check-world-question-outcome-r2.mjs --receipt=... (candidate cwd)",
+      "exitCode": 1,
+      "result": "49 pass; exactly 2 superseded no-source expectations; old test unchanged"
+    },
+    {
+      "command": "node --import C:/phios/scripts/lib/pages-json-import-preload.mjs ...",
+      "exitCode": 1,
+      "result": "ERR_UNSUPPORTED_ESM_URL_SCHEME, Windows absolute path corrected to file URL"
+    },
+    {
+      "command": "node --import file:///C:/phios/scripts/lib/pages-json-import-preload.mjs scripts/check-subject-country-spw-fin-r1.mjs (candidate cwd)",
+      "exitCode": 0,
+      "result": "60 assertions"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/browser.mjs (first sandbox)",
+      "exitCode": 1,
+      "result": "loopback isolation, preserved failure"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/browser.mjs (host)",
+      "exitCode": 1,
+      "result": "27/28, earlier mobile submit/refresh timeout preserved"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/interactions.mjs (original harness)",
+      "exitCode": 1,
+      "result": "test assumed same-tab navigation; existing owner opens new tab"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/interactions.mjs (corrected harness)",
+      "exitCode": 0,
+      "result": "4/4 full interaction groups, R2 image decoded and shown"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/final-preview.mjs",
+      "exitCode": 0,
+      "result": "12/12 actual overview/SGP/IDN API and page checks"
+    },
+    {
+      "command": "git diff --check (candidate cwd)",
+      "exitCode": 0,
+      "result": "scoped source line endings normalized"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/audit.mjs",
+      "exitCode": 0,
+      "result": "immutable before/after and no unrecognized old failure"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/close-review.mjs",
+      "exitCode": 0,
+      "result": "frozen sources and current candidate digests verified; Master append preserves all prior bytes"
+    },
+    {
+      "command": "node tools/review/country-history-closure-r1/query-campaign.mjs",
+      "exitCode": 0,
+      "result": "8/8 original required queries through actual input and intent API; no unknown ledger assertion"
+    }
+  ],
+  "noGlobalNpmCheck": true,
+  "noProductionCommands": true
+}

@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/phios/tools/review/subject-country-spw-fin-r1/browser-journeys-correction.mjs');s=p.read_text(encoding='utf-8');begin=s.index("await test('J03-");end=s.index("\nawait test(",begin);s=s[:s.index('try{')+4]+'\n'+s[begin:end]+'\n'+s[s.index('}finally{'):];s=s.replace("qa+'/browser'","qa+'/correction-history-recheck'");p.with_name('history-boundary-recheck.mjs').write_bytes(s.encode())

@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {createRequire} from 'node:module';
+const {build}=createRequire('C:/phios/package.json')('esbuild'),root='C:/phios/.worktrees/country-history-closure-r1',qa='C:/phios/tools/review/country-history-closure-r1';
+const results=[];
+for(const [name,entry,platform]of [['World','assets/js/pages/civilization-atlas/world-journey-shell-r3.js','browser'],['Country','assets/customer-ui/js/surfaces/profile-country-r1.js','browser'],['Knowledge','assets/customer-ui/js/surfaces/knowledge.js','browser'],['CountryAPI','functions/api/customer-subject-workspace.js','node']]){try{const b=await build({entryPoints:[root+'/'+entry],bundle:true,write:false,platform,format:'esm',target:'es2022',packages:platform==='node'?'external':undefined,external:['cloudflare:*','node:*']});results.push({name,status:'PASS',bytes:b.outputFiles[0].contents.length});}catch(e){results.push({name,status:'FAIL',error:e.message});}}
+fs.writeFileSync(qa+'/BUILD.json',JSON.stringify({at:new Date().toISOString(),scope:'TARGETED_CLIENT_AND_ACTUAL_FUNCTION_DEPENDENCY_COMPILE',results},null,2));console.log(results);if(results.some(r=>r.status==='FAIL'))process.exitCode=1;

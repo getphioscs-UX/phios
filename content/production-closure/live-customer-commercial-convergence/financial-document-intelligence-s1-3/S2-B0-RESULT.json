@@ -1,0 +1,254 @@
+{
+  "scope": "S2_B0_READ_ONLY_CLOUD_ACCOUNT_METADATA_VERIFICATION",
+  "at": "2026-11-02T03:49:26.298Z",
+  "accountId": "0b9f36bdf56f38d7d09aebe388f15204",
+  "authentication": {
+    "existingWranglerSession": true,
+    "whoamiSucceeded": true,
+    "loginPerformed": false,
+    "tokenOrSecretValuesPrinted": false,
+    "accountType": "standard",
+    "accountTypeIsNotPlan": true
+  },
+  "accountPlan": {
+    "status": "ACCESS_REQUIRED",
+    "subscriptionQueryCode": 10000,
+    "paidFreePlan": "UNVERIFIED",
+    "billingMode": "UNVERIFIED",
+    "remainingWorkersD1R2AccessAllowance": "UNVERIFIED",
+    "actualAdditionalCostUsd": "UNKNOWN"
+  },
+  "inventory": {
+    "pages": [
+      {
+        "id": "64a12fc7-7bd0-4d84-bb17-6741b6970e7b",
+        "name": "phios-github",
+        "subdomain": "phios-github.pages.dev",
+        "domains": [
+          "phios-github.pages.dev",
+          "getphios.com"
+        ],
+        "production_branch": "main"
+      }
+    ],
+    "d1": [
+      {
+        "uuid": "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+        "name": "phios-runtime-sandbox",
+        "version": "production",
+        "file_size": 1003520,
+        "num_tables": 0
+      },
+      {
+        "uuid": "073639fa-01e4-4868-af10-6ed032637dab",
+        "name": "phios-runtime-production",
+        "version": "production",
+        "file_size": 229376,
+        "num_tables": 0
+      }
+    ],
+    "r2": [
+      {
+        "name": "phios-private-books-sandbox",
+        "location": "APAC",
+        "storage_class": "Standard",
+        "jurisdiction": "default",
+        "creation_date": "2026-09-15T10:30:04.582Z"
+      },
+      {
+        "name": "phios-private-manuscripts",
+        "location": "APAC",
+        "storage_class": "Standard",
+        "jurisdiction": "default",
+        "creation_date": "2026-08-03T01:27:14.065Z"
+      },
+      {
+        "name": "phios-private-reports",
+        "location": "APAC",
+        "storage_class": "Standard",
+        "jurisdiction": "default",
+        "creation_date": "2026-09-21T07:37:55.928Z"
+      },
+      {
+        "name": "phios-private-reports-sandbox",
+        "location": "APAC",
+        "storage_class": "Standard",
+        "jurisdiction": "default",
+        "creation_date": "2026-09-21T07:38:51.689Z"
+      },
+      {
+        "name": "phios-public-assets",
+        "location": "APAC",
+        "storage_class": "Standard",
+        "jurisdiction": "default",
+        "creation_date": "2026-07-30T06:28:23.530Z"
+      }
+    ],
+    "existingResourcesNotForReuse": true,
+    "pagesInitialError": {
+      "code": 8000024,
+      "resolved": "Default pagination succeeded"
+    },
+    "candidatePages": {
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-financial-document-s2",
+      "status": "QUERY_FAILED",
+      "code": 8000007,
+      "error": "A request to the Cloudflare API (/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-financial-document-s2) failed.",
+      "notes": [
+        "Project not found. The specified project name does not match any of your existing projects. [code: 8000007]"
+      ]
+    },
+    "candidateR2": {
+      "endpoint": "/accounts/0b9f36bdf56f38d7d09aebe388f15204/r2/buckets/phios-financial-document-s2-private",
+      "status": "QUERY_FAILED",
+      "code": 10006,
+      "error": "A request to the Cloudflare API (/accounts/0b9f36bdf56f38d7d09aebe388f15204/r2/buckets/phios-financial-document-s2-private) failed.",
+      "notes": [
+        "The specified bucket does not exist. [code: 10006]"
+      ]
+    },
+    "candidateD1": {
+      "name": "phios-financial-document-s2",
+      "present": false,
+      "id": "NOT_CREATED"
+    },
+    "candidateHost": {
+      "name": "phios-financial-document-s2.pages.dev",
+      "status": "NOT_CONFIGURED",
+      "namespaceAvailability": "NOT_VERIFIED_NOT_RESERVED; account-level absence is not global registration proof"
+    },
+    "pagination": "Pages 1 result on default first page; D1 2 and R2 5 results. No supplied continuation observed; not a global namespace inventory."
+  },
+  "usage": {
+    "r2LatestAggregate": {
+      "objects": 1817,
+      "payloadBytes": 3114482983,
+      "metadataBytes": 58923
+    },
+    "samplesPath": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-3/S2-B0-R2-USAGE.json",
+    "sampleTimes": "2026-11-02T03:00:00Z to 03:10:00Z",
+    "d1ReportedFileSizes": [
+      {
+        "name": "phios-runtime-sandbox",
+        "bytes": 1003520
+      },
+      {
+        "name": "phios-runtime-production",
+        "bytes": 229376
+      }
+    ],
+    "limits": "D1 API num_tables=0 is reported metadata, not schema inspection. No D1 rows or schema queried.",
+    "remainingQuota": "UNKNOWN; aggregate storage samples do not establish monthly billing usage, operation counts or account allowance"
+  },
+  "access": {
+    "appsList": "READ_SUCCESS_EMPTY",
+    "identityProvidersList": "READ_SUCCESS_EMPTY",
+    "teamOrganization": "ACCESS_REQUIRED_CODE_10000",
+    "teamDomain": "UNVERIFIED",
+    "issuer": "NOT_VERIFIED",
+    "audience": "NOT_CONFIGURED_FOR_S2",
+    "jwks": "NOT_VERIFIED_NO_TEAM_DOMAIN",
+    "rotation": "Requires actual team public keys, pinned-key provenance/rotation responsibility and fresh validation before use",
+    "testIdentityPolicy": "No configured Access app or IdP found; independent synthetic A/B/C mapping and test sessions not configured",
+    "sessionExpiryRevocation": "Actual policy absent; S2-A1 local checks are not cloud evidence",
+    "nativeAccountPws": "Access never substitutes Subject/resource/purpose authorization; Profile artifact route not admitted and Business download BLOCKED"
+  },
+  "bindings": {
+    "pagesProjectId": "NOT_CREATED",
+    "d1Id": "NOT_CREATED",
+    "r2Bucket": "NOT_CREATED",
+    "independentSecrets": "NOT_CONFIGURED_NO_SECRET_VALUES_QUERIED",
+    "hostMode": "Local candidate only; actual deployment NOT_CREATED",
+    "productionDenylist": "Verified existing production Pages id 64a12fc7-7bd0-4d84-bb17-6741b6970e7b and current production/sandbox D1/R2 must stay forbidden; no current resource reused",
+    "stopControls": "S2-A1 local verified only; deployed controls NOT_VERIFIED"
+  },
+  "roles": {
+    "testOwner": "UNASSIGNED",
+    "keyCustodian": "UNASSIGNED",
+    "cleanupOperator": "UNASSIGNED",
+    "recoveryApprover": "UNASSIGNED",
+    "smallCampaignOption": "Owner may nominate one actual named operator as Test Owner + Cleanup Operator if appropriately authorized; separately name key custody and recovery approval. Codex does not appoint anyone."
+  },
+  "retention": {
+    "candidateHours": 24,
+    "approved": false,
+    "earlierCleanupAtCompletionOrAbort": true
+  },
+  "cost": {
+    "targetIncrementalUsd": 0,
+    "canConfirmTarget": false,
+    "resourceCreation": "BLOCKED",
+    "reason": "Billing subscription permission denied; actual plan, monthly operation allowances, Access seat entitlement and reliable charge stop absent. No paid plan activation or budget alert treated as cap."
+  },
+  "approval": {
+    "localS2A1": "OWNER_ACCEPTED_LOCAL_CANDIDATE_ONLY",
+    "A": "NOT_READY_MISSING_BILLING_ACCESS_REAL_ACCESS_CONFIG_AND_NAMED_OPERATORS",
+    "B": "NOT_AUTHORIZED_BLOCKED_UNTIL_A",
+    "C": "NOT_AUTHORIZED_REQUIRES_B_ACTUAL_IDS_AND_ISOLATION_ACCEPTANCE",
+    "D": "NOT_AUTHORIZED"
+  },
+  "firstBlocker": "A_ENVIRONMENT_INCOMPLETE: ACCESS_REQUIRED for actual plan/billing/allowance and Zero Trust team; USD0 feasibility cannot be established. Named operators and exact Access/test configuration also absent.",
+  "nextAuthorizedOperation": "Obtain existing-account read-only subscription/usage/Zero Trust organization metadata access or Owner-supplied redacted dashboard evidence; name Test Owner/Key Custodian/Cleanup Operator/Recovery Approver and decide actual test configuration. No creation/login/configuration is implied.",
+  "evidence": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-3/S2-B0-CLOUD-METADATA.json",
+      "sha256": "12de0de4da261f7a02dd16fa3d1e8aadfe45b1c7513020c9ca1de1d03ef6ac9a"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-3/S2-B0-INVENTORY-FOLLOWUP.json",
+      "sha256": "4dc4c1e26be20ec65359f9617a8012b81ceee2fb3f2585e586db4f1a4cd34557"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-3/S2-B0-R2-USAGE.json",
+      "sha256": "c83ed01275d340f85921ecd235f5c6462e4a8b6416d13969f5a927caa9a41c70"
+    }
+  ],
+  "sources": [
+    {
+      "path": "tools/review/financial-document-s2-b0/finalize.mjs",
+      "sha256": "e338724460f20f6931cb37acfef112bd6024efa9dca6ab39d4a694ad95390027"
+    },
+    {
+      "path": "tools/review/financial-document-s2-b0/followup.mjs",
+      "sha256": "e47d02aa934977e96ab4f965d2742c01ab731aceee5faf547c9f8fe9fea0f86d"
+    },
+    {
+      "path": "tools/review/financial-document-s2-b0/inventory.mjs",
+      "sha256": "2b81ee64c59beeb46fa275722002929b8ee5dde3d3b2737b8474939739a99d3c"
+    },
+    {
+      "path": "tools/review/financial-document-s2-b0/usage.mjs",
+      "sha256": "35813ba89828beef26774fa5b13b1c7c55e8448a9dcb101e19f84ac7bb1d606d"
+    }
+  ],
+  "git": {
+    "head": "17ac245528d3dbd90292aced5428e2ad7ff5a3e1",
+    "branch": "main",
+    "stagedFiles": "",
+    "parallelWorkPreserved": true,
+    "startHead": "1eb081ab99f1f96f1346c8b4bd7df707626ec57e",
+    "headAdvancedDuringReadOnlyTask": true,
+    "headAdvanceAttribution": "Observed concurrent repository change; no Git writes executed by this task. New HEAD is not deployment acceptance."
+  },
+  "preserved": {
+    "history": 132,
+    "owners": 8,
+    "a1SourcesAndTransitiveInputs": true,
+    "originalApprovalPackage": true
+  },
+  "execution": {
+    "cloudMetadataRead": true,
+    "graphql": "Fixed read-only aggregate query via POST, no mutation",
+    "customerContentRead": 0,
+    "secretValuesRead": 0,
+    "cloudResourceWrites": 0,
+    "resourcesCreated": 0,
+    "deploy": false,
+    "paidProviders": 0,
+    "stripe": false,
+    "fullNpmCheck": false,
+    "commit": false,
+    "push": false,
+    "merge": false
+  }
+}

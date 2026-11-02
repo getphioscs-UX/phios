@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('C:/phios/tools/review/subject-country-spw-fin-r1/correction-browser.mjs');s=p.read_text(encoding='utf-8').replace("assert.equal(await p.locator('[data-world-result-summary]').evaluate(n=>getComputedStyle(n).color),'rgb(20, 52, 71)');", "await p.waitForFunction(()=>getComputedStyle(document.querySelector('[data-world-result-summary]')).color==='rgb(20, 52, 71)');");p.write_bytes(s.encode())
