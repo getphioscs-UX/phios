@@ -44,7 +44,7 @@ function responseFor(bridge,responseCode,index=0,note=''){
   return {schemaVersion:ECR_HD_REALITY_BRIDGE_RESPONSE_VERSION,bridgeDigest:bridge.bridgeDigest,sourceComparisonDigest:bridge.sourceComparisonDigest,entries:[{promptId:prompt.promptId,dimensionId:prompt.dimensionId,responseCode,note}]};
 }
 async function handoff({bridge,response,locale='en',consent=true}={}){
-  const request=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sourceType:'PERSONAL_REALITY',locale,consent:{explicit:consent,accepted:consent},viewModel:{intent:'Reality bridge acceptance',reading:{methods:[]},ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response}})});
+  const request=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json',origin:'https://example.test'},body:JSON.stringify({sourceType:'PERSONAL_REALITY',locale,consent:{explicit:consent,accepted:consent},viewModel:{intent:'Reality bridge acceptance',reading:{methods:[]},ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response}})});
   const result=await handoffPost({request});
   return {response:result,payload:await result.json()};
 }

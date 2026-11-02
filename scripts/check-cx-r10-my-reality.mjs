@@ -90,7 +90,7 @@ const denied=await onRequestPost({request:new Request('https://phios.test/api/cu
 assert.equal(denied.status,403);assert.equal((await denied.json()).error,'REALITY_PROCESSING_CONSENT_REQUIRED');
 const allowed=await onRequestPost({request:new Request('https://phios.test/api/customer-my-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({whatIsHappening:'Context',consent:true,locale:'en'})})});
 const allowedBody=await allowed.json();assert.equal(allowed.status,200);assert.equal(allowedBody.workspace.observe.persisted,false);assert.equal(allowedBody.governance.canonicalRealityCreated,false);
-const handoffDenied=await onHandoffPost({request:new Request('https://phios.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sourceType:'ASK'})})});
+const handoffDenied=await onHandoffPost({request:new Request('https://phios.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json',origin:'https://phios.test'},body:JSON.stringify({sourceType:'ASK'})})});
 assert.equal(handoffDenied.status,403);assert.equal((await handoffDenied.json()).error,'MY_REALITY_HANDOFF_CONSENT_REQUIRED');
 
 assert.equal(retirement.status,'LEGACY_UI_AUTHORITY_RETIRED_FILE_PRESERVED_UNTIL_P1_BROWSER_ACCEPTANCE');

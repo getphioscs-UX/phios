@@ -82,10 +82,16 @@ assert(reported[0].includes('我观察到它会稳定重复'));
 assert(reported[1].includes('我目前的现实经验与这份读取不符合'));
 assert.equal(buildEcrHumanDesignRealityBridgeReportedContext({ecrHumanDesignRealityBridge:bridge},'zh-Hans').length,0,'No explicit response must create no reported context');
 
-const handoffRequest=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
+const handoffRequest=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json',origin:'https://example.test'},body:JSON.stringify({
   sourceType:'PERSONAL_REALITY',locale:'zh-Hans',consent:{explicit:true,accepted:true},viewModel:{intent:'现实核对',reading:{methods:[]},ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response}
 })});
 const handoffResponse=await handoffPost({request:handoffRequest});
+for(const origin of [null,'https://cross-origin.invalid']){
+ const headers=new Headers(handoffRequest.headers);if(origin===null)headers.delete('origin');else headers.set('origin',origin);
+ const denied=await handoffPost({request:new Request(handoffRequest.url,{method:'POST',headers,body:'{}'})});
+ assert.equal(denied.status,403,'Missing or foreign Origin must remain blocked');
+ assert.equal((await denied.json()).error,'AUTH_ORIGIN_REQUIRED');
+}
 assert.equal(handoffResponse.status,200);
 const handoffPayload=await handoffResponse.json();
 assert.equal(handoffPayload.ok,true);
@@ -98,7 +104,7 @@ assert.equal(handoffPayload.view.governance.canonicalRealityCreated,false);
 assert.equal(handoffPayload.governance.currentRealityEvidenceCreated,false);
 assert.equal(handoffPayload.governance.currentRealityConclusionCreated,false);
 
-const successorHandoffRequest=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
+const successorHandoffRequest=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json',origin:'https://example.test'},body:JSON.stringify({
   sourceType:'PERSONAL_REALITY',locale:'zh-Hans',consent:{explicit:true,accepted:true},viewModel:{
     schemaVersion:'PHI-OS-MY-REALITY-HANDOFF-SELECTION-v1.0.0',customerSelected:true,automaticPersistence:false,
     ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response
@@ -116,7 +122,7 @@ assert.equal(successorHandoffPayload.view.governance.persisted,false);
 assert.equal(successorHandoffPayload.governance.currentRealityEvidenceCreated,false);
 assert.equal(successorHandoffPayload.governance.currentRealityConclusionCreated,false);
 
-const noConsent=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sourceType:'PERSONAL_REALITY',locale:'zh-Hans',consent:{explicit:false,accepted:false},viewModel:{ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response}})});
+const noConsent=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json',origin:'https://example.test'},body:JSON.stringify({sourceType:'PERSONAL_REALITY',locale:'zh-Hans',consent:{explicit:false,accepted:false},viewModel:{ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response}})});
 const noConsentResponse=await handoffPost({request:noConsent});
 assert.equal(noConsentResponse.status,403,'W7 must preserve explicit handoff consent');
 
