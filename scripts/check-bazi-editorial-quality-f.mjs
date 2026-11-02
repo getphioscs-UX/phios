@@ -1,3 +1,4 @@
+import {baziT3ReadPath} from './lib/bazi-t3-check-output.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {withEditorialMeaningBrief,MEANING_CANON_VERSION,QUALITY_VERSION,STYLE_CONTRACTS,editorialQualityMetrics,validateEditorialQuality} from '../functions/personal-reading/narrative/bazi-editorial-quality.js';
@@ -5,7 +6,7 @@ import {checkBaziShadowStage} from '../functions/personal-reading/narrative/bazi
 import {canShowT3} from '../functions/personal-reading/narrative/bazi-t3-composition.js';
 import {T3_SECTIONS} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
-const packs=JSON.parse(fs.readFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json')).packs;
+const packs=JSON.parse(fs.readFileSync(baziT3ReadPath('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json'))).packs;
 for(const locale of ['en','zh-Hans']){
  const source=packs[`BASELINE_NOW:${locale}:S02_PERSONALITY`],before=JSON.stringify(source),pack=await withEditorialMeaningBrief(source);
  assert.equal(source.explanatoryAuthorityVersion,'BAZI_EXPLANATORY_AUTHORITY_V2');assert(source.licensedClaims.some(c=>c.relationType==='LIFE_DOMAIN_EXPLANATION'));assert(source.licensedClaims.some(c=>c.relationType==='OPERATING_CONDITION'));

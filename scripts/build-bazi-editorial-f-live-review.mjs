@@ -1,3 +1,4 @@
+import {baziT3ReadPath} from './lib/bazi-t3-check-output.mjs';
 import fs from 'node:fs';
 import {sha256Stable} from '../functions/interpretation-runtime/mir7-utils.js';
 import {withEditorialMeaningBrief,validateEditorialQuality} from '../functions/personal-reading/narrative/bazi-editorial-quality.js';
@@ -11,7 +12,7 @@ const briefs=JSON.parse(fs.readFileSync(`${root}/section-narrative-briefs.json`)
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fields={headline:'Heading / 标题',lead:'Opening / 开篇',interpretation:'Meaning / 意义',supportingConditions:'Supporting context / 支持背景',tensionConditions:'Tension / 张力',howThisMayShowUp:'Licensed reflection / 许可反思',closingInsight:'Closing / 收束',observationPrompt:'Observation / 观察',counterSignals:'Counterexample / 反例',realityCheck:'Reality check / 现实核对',boundaryNote:'Local scope / 局部范围',technicalNote:'Technical note / 技术说明'};
 const records=[];
-const packs=JSON.parse(fs.readFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json')).packs;
+const packs=JSON.parse(fs.readFileSync(baziT3ReadPath('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json'))).packs;
 for(const locale of ['en','zh-Hans']){
  const record=JSON.parse(fs.readFileSync(`${input}/${locale}.json`));
  const brief=briefs[`BASELINE_NOW:${locale}:${sectionKey}`];

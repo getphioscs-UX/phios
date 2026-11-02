@@ -1,9 +1,10 @@
+import {baziT3ReadPath} from './lib/bazi-t3-check-output.mjs';
 import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 import {composeBaziT3Section} from '../functions/personal-reading/narrative/bazi-t3-composition.js';
 import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-section-publication.js';
 import {buildBaZiNarrativeClaimIR} from '../functions/personal-reading/narrative/bazi-explanatory-authority.js';
 import {loadAcceptedBaziSnapshots} from './lib/bazi-accepted-snapshot-loader.mjs';
-const read=p=>JSON.parse(fs.readFileSync(p)),root='docs/acceptance/bazi-paid-report',source=read('docs/guided-report-successor-r2/bazi-source.json'),fixtures=read('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json'),acceptance=read('config/reports/bazi-editorial-quality-acceptance.json');
+const read=p=>JSON.parse(fs.readFileSync(p)),root='docs/acceptance/bazi-paid-report',source=read('docs/guided-report-successor-r2/bazi-source.json'),fixtures=read(baziT3ReadPath('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json')),acceptance=read('config/reports/bazi-editorial-quality-acceptance.json');
 const deployed=read('functions/personal-reading/narrative/bazi-t3-preview-baseline.generated.json');
 assert.deepEqual(deployed.profileIds,['BASELINE_NOW']);assert(Object.keys(deployed.packs).every(k=>k.startsWith('BASELINE_NOW:')));
 for(const [key,pack] of Object.entries(deployed.packs))assert.deepEqual(pack,fixtures.packs[key]);

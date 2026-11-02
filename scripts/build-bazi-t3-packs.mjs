@@ -5,7 +5,10 @@ import {projectBaziSectionPublication} from '../functions/personal-reading/bazi-
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {buildInputs,generateCampaignCases} from './lib/bazi-fp-w17-campaign.mjs';
 import {T3_SECTIONS,buildSectionEvidencePack} from '../functions/personal-reading/narrative/bazi-editorial-contract.js';
+import path from 'node:path';
+import {baziT3CheckPath,assertBaziT3DeployedBaselineUnchanged} from './lib/bazi-t3-check-output.mjs';
 async function writeGenerated(file, content) {
+ assertBaziT3DeployedBaselineUnchanged(file,content);file=baziT3CheckPath(file);fs.mkdirSync(path.dirname(file),{recursive:true});
  try { if(fs.readFileSync(file,'utf8')===content)return; } catch(error) { if(error.code!=='ENOENT')throw error; }
  const temporary=`${file}.${randomUUID()}.tmp`;
  try {

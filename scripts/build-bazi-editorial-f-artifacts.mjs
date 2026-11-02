@@ -1,6 +1,7 @@
+import {baziT3ReadPath} from './lib/bazi-t3-check-output.mjs';
 import fs from 'node:fs';
 import {withEditorialMeaningBrief,STYLE_CONTRACTS,MEANING_CANON_VERSION} from '../functions/personal-reading/narrative/bazi-editorial-quality.js';
-const source=JSON.parse(fs.readFileSync('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json'));
+const source=JSON.parse(fs.readFileSync(baziT3ReadPath('functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json')));
 const root='docs/guided-report-successor-r2/editorial-f';fs.mkdirSync(root,{recursive:true});
 const canon={version:MEANING_CANON_VERSION,meaningCreated:false,sections:{}},briefs={};
 for(const [key,value] of Object.entries(source.packs).filter(([key])=>key.startsWith('BASELINE_NOW:'))){

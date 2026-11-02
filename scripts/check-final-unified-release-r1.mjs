@@ -4,6 +4,8 @@ import {finalR6VisualSuccessor} from './lib/final-r6-visual-successor.mjs';
 import {createHash} from 'node:crypto';
 import {frozenZwrV1Bytes,validateZwrInputSuccessor,ZWR_INPUT_SUCCESSOR} from './lib/final-zwr-input-successor.mjs';
 import {validateFinalBaziRendererSuccessor} from './lib/final-bazi-renderer-successor.mjs';
+import path from 'node:path';
+import {BAZI_T3_QA_ENV,BAZI_T3_GENERATED_PATHS,baziT3CheckPath,baziT3ReadPath,assertBaziT3DeployedBaselineUnchanged} from './lib/bazi-t3-check-output.mjs';
 import {FINAL_RELEASE_BRANCH,FINAL_PREVIEW_FLAGS,finalReleaseBuildPolicy,finalInternalPath,wrapFinalReleaseWorker} from '../functions/_lib/final-release-scope.js';
 import {requireFiveMethodReportSetup} from '../functions/report-delivery/paid-report-production-capabilities.js';
 import {isolateFinalReleaseWorker} from './lib/final-release-publication.mjs';
@@ -12,6 +14,18 @@ import {STRIPE_PRODUCT_REGISTRY} from '../functions/pws/commercial/stripe-produc
 const sha='a'.repeat(40),preview=finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:FINAL_RELEASE_BRANCH,CF_PAGES_COMMIT_SHA:sha,CF_PAGES_URL:'https://review.phios-github.pages.dev'}),production=finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:'main',CF_PAGES_COMMIT_SHA:sha,CF_PAGES_ENVIRONMENT:'production'});let checks=0,calls=0,seen;
 for(const path of ['assets/customer-ui/js/surfaces/profile-country-r1.js','assets/js/pages/civilization-atlas/world-journey-shell-r3.js','assets/js/pages/civilization-atlas/world-question-outcome.js','assets/js/pages/civilization-atlas/world-history-coverage-r1.js']){execFileSync(process.execPath,['--check',path],{stdio:'pipe'});checks++;}
 const original={fetch:async(request,env)=>{calls++;seen=env;return new Response('original handler');}};
+const priorT3Output=process.env[BAZI_T3_QA_ENV],priorT3Require=process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT;
+try{
+ delete process.env[BAZI_T3_QA_ENV];assert.equal(baziT3CheckPath(BAZI_T3_GENERATED_PATHS[0]),BAZI_T3_GENERATED_PATHS[0]);checks++;
+ const output=path.resolve('.tmp/final-release-policy/t3-output-contract');process.env[BAZI_T3_QA_ENV]=output;delete process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT;
+ for(const p of BAZI_T3_GENERATED_PATHS){assert(baziT3CheckPath(p).startsWith(output+path.sep));assert.notEqual(baziT3CheckPath(p),p);checks++;}
+ process.env[BAZI_T3_QA_ENV]=path.resolve('functions');assert.throws(()=>baziT3CheckPath(BAZI_T3_GENERATED_PATHS[0]));checks++;process.env[BAZI_T3_QA_ENV]=output;
+ assert.throws(()=>baziT3CheckPath('config/private.json'));checks++;
+ const baseline=fs.readFileSync(BAZI_T3_GENERATED_PATHS[1],'utf8');assertBaziT3DeployedBaselineUnchanged(BAZI_T3_GENERATED_PATHS[1],baseline);checks++;
+ assert.throws(()=>assertBaziT3DeployedBaselineUnchanged(BAZI_T3_GENERATED_PATHS[1],baseline+' '));checks++;
+ assert.equal(fs.readFileSync(BAZI_T3_GENERATED_PATHS[1],'utf8'),baseline);checks++;
+ process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT='true';assert.throws(()=>baziT3ReadPath(BAZI_T3_GENERATED_PATHS[0]));checks++;
+}finally{if(priorT3Output===undefined)delete process.env[BAZI_T3_QA_ENV];else process.env[BAZI_T3_QA_ENV]=priorT3Output;if(priorT3Require===undefined)delete process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT;else process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT=priorT3Require;}
 const baziSuccessor=validateFinalBaziRendererSuccessor();assert.equal(baziSuccessor.entries.length,3);checks++;
 for(const key of ['historicalEvidenceRewritten','productionAdmissionGranted','currentRendererFitGranted','providerCallsAuthorized','humanAcceptanceGranted']){assert.throws(()=>validateFinalBaziRendererSuccessor({...baziSuccessor,[key]:true}));checks++;}
 for(const change of [r=>r.entries[0].historicalBytesBase64=Buffer.from('Unregistered historical renderer').toString('base64'),r=>r.entries[0].currentSha256='0'.repeat(64),r=>r.entries[0].ownerIntegratedRevision='0'.repeat(40)]){const r=structuredClone(baziSuccessor);change(r);assert.throws(()=>validateFinalBaziRendererSuccessor(r));checks++;}

@@ -10,6 +10,8 @@ const inherited=process.env.NODE_OPTIONS||'';
 let nodeOptions=inherited;
 for(const module of [preload,jsonPreload])if(!nodeOptions.includes(module))nodeOptions+=` --import=${module}`;
 const env={...process.env,REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true',NODE_OPTIONS:nodeOptions};
+if(key==='check'||(key==='check:bazi-t3'&&!env.PHIOS_BAZI_T3_QA_OUTPUT_DIR)){fs.mkdirSync('.tmp',{recursive:true});env.PHIOS_BAZI_T3_QA_OUTPUT_DIR=fs.mkdtempSync(path.resolve('.tmp/bazi-t3-check-'));}
+if(key==='check:bazi-t3')env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT='true';
 // Non-Node grandchildren cannot spend using inherited model credentials either.
 for(const key of Object.keys(env))if(/^(OPENAI|ANTHROPIC|DEEPSEEK|GEMINI|GOOGLE_AI|OPENROUTER).*(API_KEY|ACCESS_TOKEN|SECRET)$/.test(key))delete env[key];
 const extra=process.argv.slice(3);if(extra.some(a=>!/^[-A-Za-z0-9:_.=]+$/.test(a)))throw Error('ZERO_COST_ARGUMENT_INVALID');
