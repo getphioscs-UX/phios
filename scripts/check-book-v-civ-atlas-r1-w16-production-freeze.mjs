@@ -194,7 +194,25 @@ function marketDigest(p,prior){const c=market.changes.find(c=>c.path===p);if(!c)
 const previewBuild=json('content/civilization-atlas/maintenance/book-v-world-preview-build-successor-v17.json');
 assert.equal(previewBuild.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(previewBuild.humanDecision,'PENDING');assert.equal(previewBuild.predecessor,'content/civilization-atlas/maintenance/book-v-world-market-company-successor-v16.json');assert.equal(digest(previewBuild.predecessor),previewBuild.predecessorSha256);
 assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(previewBuild.changeClass));assert.equal(previewBuild.ownerPath,'scripts/build-cloudflare-pages.mjs');
-assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',previewBuild.previousGitRevision+':'+previewBuild.ownerPath])).digest('hex'),previewBuild.previousSha256);assert.equal(digest(previewBuild.ownerPath),previewBuild.successorSha256);
+assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',previewBuild.previousGitRevision+':'+previewBuild.ownerPath])).digest('hex'),previewBuild.previousSha256);
+// Preserve the historical v17 digest; separately bind the isolated Preview hook.
+const unifiedBuild=json('content/civilization-atlas/maintenance/book-v-world-unified-preview-build-successor-v20.json');
+assert.equal(unifiedBuild.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(unifiedBuild.humanDecision,'PENDING');
+assert.equal(unifiedBuild.predecessor,'content/civilization-atlas/maintenance/book-v-world-preview-build-successor-v17.json');assert.equal(unifiedBuild.predecessorSha256,digest(unifiedBuild.predecessor));
+assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(unifiedBuild.changeClass));assert.equal(unifiedBuild.ownerPath,previewBuild.ownerPath);assert.equal(unifiedBuild.previousSha256,previewBuild.successorSha256);
+assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',unifiedBuild.previousGitRevision+':'+unifiedBuild.ownerPath])).digest('hex'),unifiedBuild.previousSha256);
+assert.equal(digest(unifiedBuild.ownerPath),unifiedBuild.successorSha256);
+let predecessorBuild=read(unifiedBuild.ownerPath);
+for(const [after,before] of [
+ ["import {unifiedPreviewBuildPolicy,applyUnifiedPreviewPublication,isolateUnifiedPreviewWorker} from './lib/unified-preview-publication.mjs';\n",''],
+ ["const unifiedPreviewPolicy=unifiedPreviewBuildPolicy(process.env);\nconsole.log('Unified Preview publication: '+JSON.stringify(applyUnifiedPreviewPublication(output,unifiedPreviewPolicy)));\n",''],
+ ["const worldScopedWorker = isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);\n// The two branch allowlists are disjoint. Keep the existing World wrapper intact.\nconst compiledWorker = unifiedPreviewPolicy.active?isolateUnifiedPreviewWorker(workerSource,unifiedPreviewPolicy):worldScopedWorker;","const compiledWorker = isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);"]
+]){assert.equal(predecessorBuild.split(after).length,2,'exact Preview hook occurrence');predecessorBuild=predecessorBuild.replace(after,before);}
+assert.equal(crypto.createHash('sha256').update(predecessorBuild).digest('hex'),previewBuild.successorSha256,'Preview-only changes must reconstruct exact historical build bytes');
+assert.equal(unifiedBuild.branch,'codex/unified-release-preview-r12');
+assert.deepEqual(unifiedBuild.dependencies.map(d=>d.path),['scripts/lib/unified-preview-publication.mjs','functions/_lib/unified-preview-scope.js','scripts/check-unified-preview-scope-r12.mjs']);
+for(const d of unifiedBuild.dependencies)assert.equal(digest(d.path),d.sha256);
+for(const k of ['productionConfigurationChanged','historicalEvidenceChanged','productionAdmissionChanged'])assert.equal(unifiedBuild[k],false);
 for(const d of previewBuild.dependencies)assert.equal(preFilingDigest(d.path),d.sha256);for(const k of ['productionConfigurationChanged','sharedPreviewModeRequired','historicalEvidenceChanged','runtimeMiddlewareChanged'])assert.equal(previewBuild[k],false);
 const localReceiver=json('content/civilization-atlas/maintenance/book-v-world-local-evidence-receiver-successor-v14.json');
 assert.equal(localReceiver.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(localReceiver.humanDecision,'PENDING');
