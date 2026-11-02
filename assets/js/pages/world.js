@@ -41,5 +41,4 @@ let printDetails=[];window.addEventListener('beforeprint',()=>{printDetails=[...
 
 document.querySelector('main').addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const u=new URL(a.href,location.href);if(u.origin===location.origin&&u.pathname.startsWith('/world')){if(!u.searchParams.has('locale'))u.searchParams.set('locale',getLocale());a.href=u.pathname+u.search+u.hash;}});
 
-mountWorldObservations(document.querySelector('[data-world-observations]'));
-mountWorldCompany(document.querySelector('[data-world-company]'));
+if(!document.querySelector('[data-world-ux-r3]')){mountWorldObservations(document.querySelector('[data-world-observations]'));mountWorldCompany(document.querySelector('[data-world-company]'));}

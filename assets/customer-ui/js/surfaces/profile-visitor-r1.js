@@ -45,11 +45,11 @@ function localized(node,en,zh){
 }
 function create(tag,cls){const el=document.createElement(tag);if(cls)el.className=cls;return el;}
 const image=(id)=>{const im=document.createElement('img');im.src=iconBase+id+'-v1.svg';im.alt='';im.setAttribute('aria-hidden','true');im.loading='lazy';im.decoding='async';return im;};
-function createWheel({items=lenses,groupLabel=pair('Six ways to think about yourself','六个理解自己的角度'),centerLabel=null,onSelect=null}={}){
+function createWheel({items=lenses,groupLabel=pair('Six ways to think about yourself','六个理解自己的角度'),centerLabel=null,onSelect=null,initialSelected='identity'}={}){
  const host=create('div','prf-visitor-wheel-wrap');
  const wheel=create('div','prf-visitor-wheel');
  wheel.setAttribute('role','group');wheel.setAttribute('aria-label',groupLabel);
- let selected='identity';
+ let selected=items.some(x=>x.id===initialSelected)?initialSelected:'identity';
  const note=create('p','prf-visitor-wheel__hint');
  note.setAttribute('role','status');note.setAttribute('aria-live','polite');
  const controls=items.map(x=>{

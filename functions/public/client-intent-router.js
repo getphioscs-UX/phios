@@ -46,6 +46,7 @@ function classifyClientIntent(input={}){
   return {...result('PRODUCT_HELP',helpIds.length?helpIds:['PRODUCT_HELP']),task:'PRODUCT_HELP'};
  }
  if(/今天|最新|today|latest/i.test(q)&&/政策|policy/i.test(q))return result('NEEDS_INPUT',['WORLD'],zh?'涉及哪个地区、哪项政策和日期？请先选择当前来源；历史资料不能证明今天的影响。':'Which jurisdiction, policy and date? Select a current source first; historical material cannot establish today’s effect.');
+ const worldPresentation=topicRoute(q,locale,input.topicId);if(input.task!=='KNOWLEDGE_BASIC'&&worldPresentation?.worldPresentation)return {...base,...worldPresentation,boundaries:{...base.boundaries,...worldPresentation.boundaries}};
  const explanatory=/为什么|为何|为啥|怎么会|如何|怎样(?:形成|影响|理解)|原因是什么|形成原因|理解.*(?:原因|概念|含义)|解释|\b(?:why|how|explain|what\s+causes|what\s+makes|tell\s+me\s+about)\b/i.test(q);
  const topical=topicRoute(q,locale,input.topicId);if(!explanatory&&input.task!=='KNOWLEDGE_BASIC'&&topical&&topical.topicIds.length===1)return {...base,...topical};
  if(input.task==='KNOWLEDGE_BASIC'||explanatory)return {...result('KNOWLEDGE_LOOKUP',['KNOWLEDGE']),task:'KNOWLEDGE_BASIC',query:raw,retrievalQuery:q,generalExplanation:true};

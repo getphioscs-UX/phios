@@ -2,7 +2,19 @@
 // the server; no free question, account identity, or private context is forwarded.
 export const WORLD_BANK_INDICATORS=Object.freeze({
  'SP.POP.TOTL':{unit:'persons',priceBasis:null,title:{en:'Population, total','zh-Hans':'总人口'}},
- 'NY.GDP.MKTP.CD':{unit:'USD',priceBasis:'CURRENT_USD',title:{en:'GDP (current US$)','zh-Hans':'国内生产总值（现价美元）'}}
+ 'NY.GDP.MKTP.CD':{unit:'USD',priceBasis:'CURRENT_USD',title:{en:'GDP (current US$)','zh-Hans':'国内生产总值（现价美元）'}},
+ "NY.GDP.MKTP.KD.ZG":{"unit": "percent", "priceBasis": null, "title": {"en": "GDP growth (annual %)", "zh-Hans": "GDP实际增长率（年度%）"}, "domain": "MACROECONOMIC", "dimensions": ["growth", "potential"], "financialMetricId": "gdpGrowth"},
+ "FP.CPI.TOTL.ZG":{"unit": "percent", "priceBasis": null, "title": {"en": "Inflation, consumer prices (annual %)", "zh-Hans": "消费价格通胀率（年度%）"}, "domain": "MACROECONOMIC", "dimensions": ["environment"], "financialMetricId": "inflation"},
+ "SL.EMP.TOTL.SP.ZS":{"unit": "percent", "priceBasis": null, "title": {"en": "Employment to population, age15+ (modelled ILO)", "zh-Hans": "15岁以上就业人口比（ILO模型估计）"}, "domain": "MACROECONOMIC", "dimensions": ["expression"], "financialMetricId": "employment"},
+ "NE.TRD.GNFS.ZS":{"unit": "percent_GDP", "priceBasis": null, "title": {"en": "Trade (% GDP)", "zh-Hans": "货物及服务贸易占GDP比（%）"}, "domain": "MACROECONOMIC", "dimensions": ["relationships"], "financialMetricId": "trade"},
+ "SP.URB.TOTL.IN.ZS":{"unit": "percent", "priceBasis": null, "title": {"en": "Urban population (% total)", "zh-Hans": "城镇人口比（%）"}, "domain": "MACROECONOMIC", "dimensions": ["environment"], "financialMetricId": null},
+ "EG.ELC.ACCS.ZS":{"unit": "percent", "priceBasis": null, "title": {"en": "Access to electricity (% population)", "zh-Hans": "电力可及人口比（%）"}, "domain": "MACROECONOMIC", "dimensions": ["environment"], "financialMetricId": null},
+ "EG.FEC.RNEW.ZS":{"unit": "percent_final_energy", "priceBasis": null, "title": {"en": "Renewable energy (% final consumption)", "zh-Hans": "可再生能源占最终能源消耗比（%）"}, "domain": "MACROECONOMIC", "dimensions": ["environment", "potential"], "financialMetricId": null},
+ "IT.NET.USER.ZS":{"unit": "percent", "priceBasis": null, "title": {"en": "Internet use (% population)", "zh-Hans": "互联网使用人口比（%）"}, "domain": "MACROECONOMIC", "dimensions": ["environment"], "financialMetricId": null},
+ "GC.REV.XGRT.GD.ZS":{"unit": "percent_GDP", "priceBasis": null, "title": {"en": "Government revenue excluding grants (% GDP)", "zh-Hans": "政府收入（不含赠款）占GDP比（%）"}, "domain": "PUBLIC_FISCAL", "dimensions": ["expression"], "financialMetricId": "governmentRevenue"},
+ "GC.XPN.TOTL.GD.ZS":{"unit": "percent_GDP", "priceBasis": null, "title": {"en": "Government expense (% GDP)", "zh-Hans": "政府费用占GDP比（%）"}, "domain": "PUBLIC_FISCAL", "dimensions": ["expression"], "financialMetricId": "governmentExpenditure"},
+ "GC.DOD.TOTL.GD.ZS":{"unit": "percent_GDP", "priceBasis": null, "title": {"en": "Central government debt (% GDP)", "zh-Hans": "中央政府债务占GDP比（%）"}, "domain": "PUBLIC_FISCAL", "dimensions": ["potential"], "financialMetricId": "publicDebt"},
+ "GC.BAL.CASH.GD.ZS":{"unit": "percent_GDP", "priceBasis": null, "title": {"en": "Cash surplus/deficit (% GDP)", "zh-Hans": "财政现金盈余／赤字占GDP比（%）"}, "domain": "PUBLIC_FISCAL", "dimensions": ["growth"], "financialMetricId": "budgetBalance"}
 });
 export function observationRequest(input){const keys=Object.keys(input);if(keys.some(k=>!['country','indicator','year'].includes(k)))throw Error('PUBLIC_IDENTIFIERS_ONLY');const country=String(input.country||'').toUpperCase(),indicator=input.indicator,year=Number(input.year);if(!/^[A-Z]{2}$/.test(country)||!WORLD_BANK_INDICATORS[indicator]||!Number.isInteger(year)||year<1960||year>new Date().getUTCFullYear())throw Error('OBSERVATION_INPUT_INVALID');return {country,indicator,year};}
 export async function readWorldBankObservation(input,{fetcher=fetch,now=()=>new Date().toISOString()}={}){
