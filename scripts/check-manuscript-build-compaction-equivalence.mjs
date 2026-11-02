@@ -29,5 +29,8 @@ for(const c of cases){
   results.push({id:c.id,equivalent:true,state:responses[0].state,responseDigest:sha(JSON.stringify(responses[0]))});
 }
 assert.equal(calls,0);
-fs.writeFileSync(output+'MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE-current.json',JSON.stringify({at:new Date().toISOString(),tool:'esbuild',version,options:pagesWorkerCompactionOptions,beforeSha256:sha(before),afterSha256:sha(after),beforeBytes:Buffer.byteLength(before),afterBytes:Buffer.byteLength(after),scope:'Actual customer Ask consumer bundle; not every Worker route',results,providerCalls:calls},null,2)+'\n');
+// A replay must not rewrite the historical tracked review receipt.
+const receiptDirectory=process.env.PHIOS_COMPACTION_QA_OUTPUT||'.tmp/final-compaction-qa/';
+fs.mkdirSync(receiptDirectory,{recursive:true});
+fs.writeFileSync(receiptDirectory+'/MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE-current.json',JSON.stringify({at:new Date().toISOString(),tool:'esbuild',version,options:pagesWorkerCompactionOptions,beforeSha256:sha(before),afterSha256:sha(after),beforeBytes:Buffer.byteLength(before),afterBytes:Buffer.byteLength(after),scope:'Actual customer Ask consumer bundle; not every Worker route',results,providerCalls:calls},null,2)+'\n');
 console.log(`PASS esbuild deployment compaction equivalence: ${results.length} actual customer Ask paths; providerCalls=0.`);
