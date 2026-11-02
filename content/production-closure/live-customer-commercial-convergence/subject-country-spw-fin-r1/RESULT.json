@@ -1,0 +1,287 @@
+{
+  "work": "SPW-FIN-R1 / WORLD-OBSERVATION-COUNTRY-CONTINUITY-R1",
+  "at": "2026-10-31T05:49:47.088567+00:00",
+  "status": "PARTIAL",
+  "sourceBase": "9b86c2608ef98a8e475c91db8dad76f196a8741f",
+  "preservedR4Head": "9005a87671e8d448ee995e599977d0d312796eac",
+  "currentMain": "38eaebcf6d8d0628372eaa59a85da08a6a523fd5",
+  "candidateBranch": "codex/spw-fin-r1",
+  "unit": {
+    "status": "PASS",
+    "passed": 60
+  },
+  "privateOwnerRegression": {
+    "status": "PASS",
+    "passed": 21,
+    "failed": 0,
+    "mode": "UNCHANGED_ORIGINAL_ASSERTIONS_MEMORY_SQLITE_WITH_EXISTING_NODE22_ADAPTER",
+    "historicalHTTPTestsNotRepeated": true
+  },
+  "browser": {
+    "status": "PASS",
+    "passed": 20,
+    "failed": 0,
+    "localURL": "http://127.0.0.1:59537",
+    "viewports": [
+      360,
+      768,
+      1440
+    ],
+    "locales": [
+      "zh-Hans",
+      "en"
+    ]
+  },
+  "worldOriginal42": {
+    "status": "PASS",
+    "count": 42
+  },
+  "worldOriginal58": {
+    "status": "PASS",
+    "count": 58,
+    "receipt": "INTERACTION-CHECKS.json"
+  },
+  "homeOriginal14": {
+    "status": "PASS",
+    "count": 14
+  },
+  "questionOutcomes39": {
+    "status": "PARTIAL",
+    "originalTimedCampaign": {
+      "passed": 35,
+      "failed": 1
+    },
+    "privacyAndLocale": {
+      "passed": 3,
+      "failed": 0
+    },
+    "requestBarrierDiagnostic": "PASS; actual two owner responses, same final assertions",
+    "fullCoordinatedCampaign": "RUNNING"
+  },
+  "w16": {
+    "status": "PASS",
+    "oldManifestsUnchanged": true
+  },
+  "pagesBuild": {
+    "status": "NOT_RUN",
+    "scope": "FINAL_BUILD_RUNNING_2026_11_02",
+    "workerBytes": 13832089,
+    "staticFiles": 12229
+  },
+  "githubCI": {
+    "status": "NOT_RUN",
+    "reason": "Awaiting validated feature commit and normal successor PR CI."
+  },
+  "preview": {
+    "status": "NOT_RUN",
+    "reason": "Exact feature SHA not yet available; no Cloudflare config may be added without TL."
+  },
+  "countryCoverage": {
+    "MYS": {
+      "requestedSlots": 84,
+      "sourceReturnedRows": 78,
+      "known": 74,
+      "missingSlots": 10
+    },
+    "SGP": {
+      "requestedSlots": 84,
+      "sourceReturnedRows": 78,
+      "known": 74,
+      "missingSlots": 10
+    },
+    "IDN": {
+      "requestedSlots": 84,
+      "sourceReturnedRows": 78,
+      "known": 57,
+      "missingSlots": 27
+    }
+  },
+  "worldIdentities": {
+    "existingMappedGeographicIdentities": 176,
+    "identityOnlySupplement": 1,
+    "notAllSovereigntyClassified": true
+  },
+  "indicators": 14,
+  "requestedStatisticalSlots": 252,
+  "knownObservations": 205,
+  "missingSlots": 47,
+  "rawSourceRows": 234,
+  "rawNullRows": 29,
+  "sourceOmittedCashBalanceRows": 18,
+  "manualSnapshotSha256": "25e88c61784ecd51aaa94da18b6829fa706e4a16521b4133f518c871a5f5bace",
+  "humanGates": {
+    "WORLD_R4_HUMAN_ACCEPTANCE": "REVISE_PENDING_RECHECK",
+    "COUNTRY_PROFILE_HUMAN_ACCEPTANCE": "PENDING",
+    "SUBJECT_FRAMEWORK_HUMAN_ACCEPTANCE": "PENDING",
+    "FINANCIAL_SUBJECT_ADAPTER_ADMISSION": "PENDING",
+    "READING_NAVIGATION_HANDOFF_ADMISSION": "PENDING",
+    "PRODUCTION_RELEASE_AUTHORIZATION": "NOT_GRANTED"
+  },
+  "restrictions": {
+    "paidProviderCalls": 0,
+    "productionWrites": 0,
+    "StripeChanges": 0,
+    "CronEnabled": false,
+    "productionDeployment": false,
+    "automaticCaseCreation": false,
+    "formalPrivateSubjectAdmission": false
+  },
+  "inheritedDifferences": {
+    "ASK": {
+      "historical": 5,
+      "R4Behavior": 1,
+      "expectationsChanged": false
+    }
+  },
+  "blockers": [
+    "Six independent human/release decisions pending",
+    "Country fiscal currency amounts, debt service, exact fiscal-year and consolidated-government coverage not admitted",
+    "Formal private Subject/Reading/Navigation write admission remains closed",
+    "No matched Malaysia historical case; modern statistics are not historical answers",
+    "PR14 acceptance remains independent; no automatic main merge or Production release",
+    "Old worktree cleanup gated on approved Production acceptance",
+    "Automatic approval rejected feature commit; explicit scoped Git authorization needed",
+    "Candidate must reconcile updated main and preserve newest Master Owner sections before CI",
+    "Signed-in multi-subject Account HTTP/browser campaign not repeated"
+  ],
+  "resumedClientDate": "2026-11-02",
+  "remoteMain": "38eaebcf6d8d0628372eaa59a85da08a6a523fd5",
+  "localMain": "1eb081ab99f1f96f1346c8b4bd7df707626ec57e",
+  "gitIntegration": {
+    "status": "TL_EXPLICITLY_AUTHORIZED_PENDING_EXECUTION",
+    "action": "Stage and commit own paths on codex/spw-fin-r1",
+    "reason": "Automatic approval rejected because earlier no-commit/no-push restriction remains ambiguous. No retry or workaround. Explicit scoped authorization required.",
+    "featureCommitCreated": false,
+    "pushed": false,
+    "successorPRCreated": false,
+    "preexistingMergeCommit": "9b86c2608ef98a8e475c91db8dad76f196a8741f",
+    "stagedPaths": [],
+    "authorizationDate": "2026-11-02",
+    "priorAutomaticRejectionRetained": true
+  },
+  "productionMetadata": {
+    "at": "2026-11-02T02:47:38.428473+00:00",
+    "mode": "READ_ONLY_METADATA_GET",
+    "productionWrites": 0,
+    "project": "phios-github",
+    "productionBranch": "main",
+    "productionAutoDeploy": false,
+    "previewSetting": "custom",
+    "canonicalDeployment": {
+      "id": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+      "url": "https://eb30bd35.phios-github.pages.dev",
+      "environment": "production",
+      "commit": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+      "branch": "main",
+      "latestStage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-30T08:16:31.575631Z",
+        "status": "success"
+      }
+    }
+  },
+  "accountUIBoundary": "Signed-in multi-subject browser campaign NOT_RUN; original21 memory-SQLite permission assertions and anonymous API isolation PASS.",
+  "mainReconciliation": {
+    "status": "PARTIAL",
+    "latestMainObjectAvailable": true,
+    "overlapWithinTouchedOwners": [
+      "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html"
+    ],
+    "otherSourceOwnersInScopedComparisonChanged": false,
+    "mergeNotExecuted": true
+  },
+  "observationP2": {
+    "work": "PHIOS-WORLD-OBSERVATION-COUNTRY-CONTINUITY-R1",
+    "status": "BOUNDED_LOCAL_COUNTRY_P2_VALIDATED_HUMAN_PENDING",
+    "scope": "MYS_SGP_IDN_2019_2024_ONLY",
+    "envelopes": 42,
+    "comparisonSlots": 252,
+    "projectionBytes": 530712,
+    "validMacroTrends": 27,
+    "withheldTrends": 15,
+    "unit": {
+      "passed": 36,
+      "status": "PASS"
+    },
+    "browser": {
+      "passed": 12,
+      "failed": 0,
+      "status": "PASS"
+    },
+    "bindings": [
+      "PUBLIC_COUNTRY_API",
+      "COUNTRY_COMPARISON",
+      "COUNTRY_TREND_READING",
+      "EXISTING_WORLD_R42_COMPARISON",
+      "PUBLIC_RESEARCH_NAVIGATION"
+    ],
+    "notClaimed": [
+      "GLOBAL_CURRENT_WORLD",
+      "NEW_RRE_RUNTIME_POSITION",
+      "SIGNAL_THRESHOLD_CROSSING",
+      "CURRENT_MARKET_FACTS_FROM_MOOMOO",
+      "PRIVATE_MY_REALITY_WRITE",
+      "PRODUCTION_ADMISSION"
+    ],
+    "upstreamAudit": [
+      {
+        "owner": "BOOK_V",
+        "path": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+        "sha256": "6291f76099bfa3f0747c2c29ced4f491045d221e64730ae710031d7f821c3d1a",
+        "bytes": 890419,
+        "runtimeMutation": false,
+        "status": "ACTIVE",
+        "recordCount": 120
+      },
+      {
+        "owner": "BOOK_VI",
+        "path": "content/civilization-atlas/reconfiguration/contemporary-runtime-dossiers-v1.json",
+        "sha256": "f6ce6b12cacb12fd2a990b155b97cae77da4846fd8afc332a69155a61a6a84a7",
+        "bytes": 88233,
+        "runtimeMutation": false,
+        "status": "CONTRACT_READY_CURRENT_DATA_NOT_ADMITTED",
+        "recordCount": 12
+      },
+      {
+        "owner": "BOOK_VII",
+        "path": "content/civilization-atlas/reconfiguration/world-observation-envelope-contract-v1.json",
+        "sha256": "c72c1394de8d3fa9e7ab63b05a2be4b66afa0de2e5cc3e31ee8e4293f0553cab",
+        "bytes": 2172,
+        "runtimeMutation": false,
+        "status": "ACTIVE",
+        "recordCount": 0
+      },
+      {
+        "owner": "WORLD_EVIDENCE",
+        "path": "content/world/world-evidence-observations-v1.json",
+        "sha256": "7b1b2e4ee61305221aca3f8b2209a1a251d8da29657df8b67e1bdca4b268de28",
+        "bytes": 26276,
+        "runtimeMutation": false,
+        "status": null,
+        "recordCount": 22
+      },
+      {
+        "owner": "CWA",
+        "path": "functions/current-web-authority/current-web-authority-runtime.js",
+        "sha256": "7215dadcaf2630572d268cfb1411b6f6057f2441fcc5d1c4bf8455d4375ee580",
+        "bytes": 8599,
+        "runtimeMutation": false
+      },
+      {
+        "owner": "RRE",
+        "path": "content/civilization-atlas/reconfiguration/runtime-position-w8d-rre-readouts-v1.json",
+        "sha256": "91d8885b79d1837def3d82d636577fef1424cc7022886d9de93900991911047a",
+        "bytes": 5142,
+        "runtimeMutation": false,
+        "status": "RRE_CURRENT_EVIDENCE_CONSUMED",
+        "recordCount": 2
+      }
+    ],
+    "p1FoundationFilesUnchanged": true,
+    "providerCalls": 0,
+    "productionWrites": 0,
+    "humanDecision": "PENDING"
+  },
+  "localEngineeringStatus": "PASS_FOR_BOUNDED_SCOPE"
+}

@@ -9,6 +9,14 @@ const read=p=>(uiPredecessors.get(p)||fs.readFileSync(path.join(root,p))).toStri
 const json=p=>JSON.parse(read(p));
 const digest=p=>crypto.createHash('sha256').update(uiPredecessors.get(p)||fs.readFileSync(path.join(root,p))).digest('hex');
 
+// SPW-FIN-R1 is a separate human-pending successor. Do not rewrite the R4 acceptance or old hashes.
+const spw=json('content/civilization-atlas/maintenance/book-v-subject-country-successor-v23.json');
+assert.equal(spw.work,'SPW-FIN-R1');assert.equal(spw.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(spw.humanDecision,'PENDING');assert.equal(spw.predecessor,'content/civilization-atlas/maintenance/book-v-world-question-outcome-successor-v22.json');assert.equal(digest(spw.predecessor),spw.predecessorSha256);
+for(const c of spw.changes){const prior=worldGitObject('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(crypto.createHash('sha256').update(prior).digest('hex'),c.previousSha256);assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,c.path))).digest('hex'),c.successorSha256);uiPredecessors.set(c.path,prior);}
+for(const d of spw.dependencies)assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,d.path))).digest('hex'),d.sha256);
+for(const k of ['productionAdmissionChanged','canonicalTheoryChanged','historicalRecordsChanged','providerLiveEnabled','productionScheduleEnabled','privateSubjectAdmissionChanged','parallelKnowledgeAskNavigationSystem'])assert.equal(spw[k],false);
+function spwExpected(p,prior){const c=spw.changes.find(c=>c.path===p);if(!c)return prior;assert.equal(c.previousSha256,prior,'SPW predecessor drift: '+p);return c.successorSha256;}
+
 // Question-to-outcome successor validates only current bytes; historical assertion inputs stay unchanged.
 const outcome=json('content/civilization-atlas/maintenance/book-v-world-question-outcome-successor-v22.json');
 assert.equal(outcome.status,'ENGINEERING_REVISION_PENDING_RECHECK');assert.equal(outcome.humanDecision,'REVISE_PENDING_RECHECK');assert.equal(digest(outcome.predecessor),outcome.predecessorSha256);
@@ -17,7 +25,7 @@ for(const c of outcome.changes){assert.equal(c.previousGitRevision,'29d2a31ae482
 const correction=outcome.candidateCorrection;assert.equal(correction.status,'UNACCEPTED_CANDIDATE_CORRECTION');assert.equal(correction.priorCommit,'d0acf8e7e2b01232c77a699d672056612243ff58');assert.equal(crypto.createHash('sha256').update(worldGitObject('git',['show',correction.priorCommit+':content/civilization-atlas/maintenance/book-v-world-question-outcome-successor-v22.json'])).digest('hex'),correction.priorManifestSha256);
 for(const d of outcome.dependencies)assert.equal(digest(d.path),d.sha256,'Question outcome dependency drift: '+d.path);
 for(const k of ['canonicalTheoryChanged','historicalRecordsChanged','providerLiveEnabled','productionScheduleEnabled','productionAdmissionChanged','parallelKnowledgeAskNavigationSystem'])assert.equal(outcome[k],false);
-function currentExpected(p,previous){const c=outcome.changes.find(c=>c.path===p);if(!c)return previous;assert.equal(c.previousSha256,previous,'Question successor predecessor drift: '+p);return c.successorSha256;}
+function currentExpected(p,previous){const c=outcome.changes.find(c=>c.path===p);if(!c)return spwExpected(p,previous);assert.equal(c.previousSha256,previous,'Question successor predecessor drift: '+p);return spwExpected(p,c.successorSha256);}
 await import('./check-world-question-outcome-r2.mjs');
 // Validate current R4 bytes first, then run every historical assertion on its exact registered predecessor.
 const ui=json('content/civilization-atlas/maintenance/book-v-world-customer-journey-successor-v20.json');
