@@ -3,6 +3,7 @@ import {execFileSync} from 'node:child_process';
 import {finalR6VisualSuccessor} from './lib/final-r6-visual-successor.mjs';
 import {createHash} from 'node:crypto';
 import {frozenZwrV1Bytes,validateZwrInputSuccessor,ZWR_INPUT_SUCCESSOR} from './lib/final-zwr-input-successor.mjs';
+import {validateFinalBaziRendererSuccessor} from './lib/final-bazi-renderer-successor.mjs';
 import {FINAL_RELEASE_BRANCH,FINAL_PREVIEW_FLAGS,finalReleaseBuildPolicy,finalInternalPath,wrapFinalReleaseWorker} from '../functions/_lib/final-release-scope.js';
 import {requireFiveMethodReportSetup} from '../functions/report-delivery/paid-report-production-capabilities.js';
 import {isolateFinalReleaseWorker} from './lib/final-release-publication.mjs';
@@ -11,6 +12,9 @@ import {STRIPE_PRODUCT_REGISTRY} from '../functions/pws/commercial/stripe-produc
 const sha='a'.repeat(40),preview=finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:FINAL_RELEASE_BRANCH,CF_PAGES_COMMIT_SHA:sha,CF_PAGES_URL:'https://review.phios-github.pages.dev'}),production=finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:'main',CF_PAGES_COMMIT_SHA:sha,CF_PAGES_ENVIRONMENT:'production'});let checks=0,calls=0,seen;
 for(const path of ['assets/customer-ui/js/surfaces/profile-country-r1.js','assets/js/pages/civilization-atlas/world-journey-shell-r3.js','assets/js/pages/civilization-atlas/world-question-outcome.js','assets/js/pages/civilization-atlas/world-history-coverage-r1.js']){execFileSync(process.execPath,['--check',path],{stdio:'pipe'});checks++;}
 const original={fetch:async(request,env)=>{calls++;seen=env;return new Response('original handler');}};
+const baziSuccessor=validateFinalBaziRendererSuccessor();assert.equal(baziSuccessor.entries.length,3);checks++;
+for(const key of ['historicalEvidenceRewritten','productionAdmissionGranted','currentRendererFitGranted','providerCallsAuthorized','humanAcceptanceGranted']){assert.throws(()=>validateFinalBaziRendererSuccessor({...baziSuccessor,[key]:true}));checks++;}
+for(const change of [r=>r.entries[0].historicalBytesBase64=Buffer.from('Unregistered historical renderer').toString('base64'),r=>r.entries[0].currentSha256='0'.repeat(64),r=>r.entries[0].ownerIntegratedRevision='0'.repeat(40)]){const r=structuredClone(baziSuccessor);change(r);assert.throws(()=>validateFinalBaziRendererSuccessor(r));checks++;}
 const inputSuccessor=JSON.parse(fs.readFileSync(ZWR_INPUT_SUCCESSOR)),inputSource=fs.readFileSync(inputSuccessor.path),hash=b=>createHash('sha256').update(b).digest('hex');assert.equal(hash(frozenZwrV1Bytes(inputSuccessor.path,inputSuccessor.previousSha256)),inputSuccessor.previousSha256);checks++;
 for(const key of ['historicalFreezeRewritten','humanAcceptanceGranted','productionActivated','commercialAdmissionGranted','calculationOrAcceptedTextChanged']){assert.throws(()=>validateZwrInputSuccessor({...inputSuccessor,[key]:true},inputSource,inputSuccessor.previousSha256));checks++;}
 for(const change of [s=>s+' ',s=>s.replace('productionAdmissionGranted:false','productionAdmissionGranted:true'),s=>s+inputSuccessor.exactInsertion]){const source=Buffer.from(change(inputSource.toString('utf8')));assert.notEqual(hash(source),hash(inputSource));assert.throws(()=>validateZwrInputSuccessor({...inputSuccessor,currentSha256:hash(source)},source,inputSuccessor.previousSha256));checks++;}
