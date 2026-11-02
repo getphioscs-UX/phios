@@ -1,7 +1,14 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import {finalR6VisualSuccessor} from './final-r6-visual-successor.mjs';
 export function assertCurrentVisualSuccessor(pointer){
+ if(pointer.currentRegistryPath==='/content/web-production/registries/client-visual-asset-registry-v1.9.json'){
+  const successor=finalR6VisualSuccessor();
+  const predecessor=assertCurrentVisualSuccessor({...pointer,currentRegistryPath:'/content/web-production/registries/client-visual-asset-registry-v1.8.json'});
+  assert.deepEqual(successor.predecessor,predecessor);
+  return successor.current;
+ }
  const predecessor='content/web-production/registries/client-visual-asset-registry-v1.7.json';
  assert.equal(pointer.currentRegistryPath,'/content/web-production/registries/client-visual-asset-registry-v1.8.json');
  const current=JSON.parse(fs.readFileSync(pointer.currentRegistryPath.slice(1)));
