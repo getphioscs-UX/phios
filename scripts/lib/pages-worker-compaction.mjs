@@ -3,5 +3,7 @@
 export const pagesWorkerCompactionOptions = Object.freeze({
   loader: 'js', target: 'esnext', minifyWhitespace: true,
   minifyIdentifiers: true, keepNames: true, minifySyntax: false,
+  // Emit equivalent native Unicode instead of ASCII escape expansion.
+  charset: 'utf8',
   legalComments: 'inline'
 });
