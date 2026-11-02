@@ -1,0 +1,58 @@
+{
+  "status": "SOURCE_CLASSIFICATION_REQUIRED",
+  "originalSource": {
+    "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-staging-s1/synthetic-package.json",
+    "sha256": "202cd77e1fc9d2280f55413b394c519f1b0cf975f68c0957f5b864dbe4e6ac07"
+  },
+  "evidence": "Generator, immutable package and native BUSINESS_FIELDS provide loans values but no total/current/non-current definition. No numeric difference is treated as classification evidence.",
+  "periods": [
+    {
+      "period": "2025-Q1",
+      "currentLiabilities": 32000,
+      "loans": 50000,
+      "reportedTotalLiabilities": 72000,
+      "currency": "MYR",
+      "rawUnit": "MYR_MAJOR",
+      "classification": "SOURCE_CLASSIFICATION_REQUIRED",
+      "loanDefinition": null,
+      "currentLoanPortion": null,
+      "nonCurrentLoanPortion": null,
+      "derivedNonCurrentLiabilities": null,
+      "combinedCurrentLiabilitiesPlusLoans": null,
+      "blockedConclusions": [
+        "Loan classification/portion split",
+        "Total liabilities derived from loans + current liabilities",
+        "Loan overlap/double-count clearance",
+        "Leverage/debt-maturity conclusions requiring classified loans"
+      ],
+      "reportedBalanceEquationOnly": true,
+      "notProofOfComponentClassification": true
+    },
+    {
+      "period": "2025-Q2",
+      "currentLiabilities": 43000,
+      "loans": 56000,
+      "reportedTotalLiabilities": 87000,
+      "currency": "MYR",
+      "rawUnit": "MYR_MAJOR",
+      "classification": "SOURCE_CLASSIFICATION_REQUIRED",
+      "loanDefinition": null,
+      "currentLoanPortion": null,
+      "nonCurrentLoanPortion": null,
+      "derivedNonCurrentLiabilities": null,
+      "combinedCurrentLiabilitiesPlusLoans": null,
+      "blockedConclusions": [
+        "Loan classification/portion split",
+        "Total liabilities derived from loans + current liabilities",
+        "Loan overlap/double-count clearance",
+        "Leverage/debt-maturity conclusions requiring classified loans"
+      ],
+      "reportedBalanceEquationOnly": true,
+      "notProofOfComponentClassification": true
+    }
+  ],
+  "classificationFactsCreated": false,
+  "sourceValuesChanged": false,
+  "independentMetrics": "Native reported working capital/headroom values retained as historical source-based figures; no new debt composition inference.",
+  "exactSourceActionRequired": "Synthetic source preparer must explicitly define Loans, current portion within Current Liabilities, non-current portion and any other liability categories with source references. New source version + independent review required; do not mutate old version."
+}

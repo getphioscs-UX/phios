@@ -1,0 +1,1 @@
+import fs from 'node:fs';import {build} from 'esbuild';const out='.tmp/financial-document-s1-3/runner.mjs';await build({entryPoints:['tools/review/financial-document-s1-3/runtime-test.mjs'],bundle:true,format:'esm',platform:'node',packages:'external',outfile:out,logLevel:'warning'});await import(new URL('../../../'+out,import.meta.url));

@@ -4,7 +4,7 @@
   "status": "PARTIAL",
   "sourceBase": "9b86c2608ef98a8e475c91db8dad76f196a8741f",
   "preservedR4Head": "9005a87671e8d448ee995e599977d0d312796eac",
-  "currentMain": "d15ae4c8480cf46f81152fb8c87e623f1b8fb13c",
+  "currentMain": "38eaebcf6d8d0628372eaa59a85da08a6a523fd5",
   "candidateBranch": "codex/spw-fin-r1",
   "unit": {
     "status": "PASS",
@@ -19,9 +19,9 @@
   },
   "browser": {
     "status": "PASS",
-    "passed": 19,
+    "passed": 20,
     "failed": 0,
-    "localURL": "http://127.0.0.1:62066",
+    "localURL": "http://127.0.0.1:59537",
     "viewports": [
       360,
       768,
@@ -37,29 +37,44 @@
     "count": 42
   },
   "worldOriginal58": {
-    "status": "NOT_RUN"
+    "status": "PASS",
+    "count": 58,
+    "receipt": "INTERACTION-CHECKS.json"
   },
   "homeOriginal14": {
-    "status": "NOT_RUN"
+    "status": "PASS",
+    "count": 14
   },
   "questionOutcomes39": {
-    "status": "NOT_RUN"
+    "status": "PARTIAL",
+    "originalTimedCampaign": {
+      "passed": 35,
+      "failed": 1
+    },
+    "privacyAndLocale": {
+      "passed": 3,
+      "failed": 0
+    },
+    "requestBarrierDiagnostic": "PASS; actual two owner responses, same final assertions",
+    "fullCoordinatedCampaign": "RUNNING"
   },
   "w16": {
     "status": "PASS",
     "oldManifestsUnchanged": true
   },
   "pagesBuild": {
-    "status": "PASS",
-    "scope": "LOCAL_BUILD_ONCE_BEFORE_FINAL_SMALL_BOUNDARY_REFINEMENTS; FINAL_HEAD_CI_REQUIRED",
+    "status": "NOT_RUN",
+    "scope": "FINAL_BUILD_RUNNING_2026_11_02",
     "workerBytes": 13832089,
     "staticFiles": 12229
   },
   "githubCI": {
-    "status": "NOT_RUN"
+    "status": "BLOCKED",
+    "reason": "Feature commit/push not authorized after automatic approval rejection; no candidate SHA to test."
   },
   "preview": {
-    "status": "NOT_RUN"
+    "status": "BLOCKED",
+    "reason": "New candidate has not been pushed/deployed. Historical PR14 Preview is not new evidence."
   },
   "countryCoverage": {
     "MYS": {
@@ -124,6 +139,54 @@
     "Formal private Subject/Reading/Navigation write admission remains closed",
     "No matched Malaysia historical case; modern statistics are not historical answers",
     "PR14 acceptance remains independent; no automatic main merge or Production release",
-    "Old worktree cleanup gated on approved Production acceptance"
-  ]
+    "Old worktree cleanup gated on approved Production acceptance",
+    "Automatic approval rejected feature commit; explicit scoped Git authorization needed",
+    "Candidate must reconcile updated main and preserve newest Master Owner sections before CI",
+    "Signed-in multi-subject Account HTTP/browser campaign not repeated"
+  ],
+  "resumedClientDate": "2026-11-02",
+  "remoteMain": "38eaebcf6d8d0628372eaa59a85da08a6a523fd5",
+  "localMain": "1eb081ab99f1f96f1346c8b4bd7df707626ec57e",
+  "gitIntegration": {
+    "status": "BLOCKED_AUTO_REVIEW",
+    "action": "Stage and commit own paths on codex/spw-fin-r1",
+    "reason": "Automatic approval rejected because earlier no-commit/no-push restriction remains ambiguous. No retry or workaround. Explicit scoped authorization required.",
+    "featureCommitCreated": false,
+    "pushed": false,
+    "successorPRCreated": false,
+    "preexistingMergeCommit": "9b86c2608ef98a8e475c91db8dad76f196a8741f",
+    "stagedPaths": []
+  },
+  "productionMetadata": {
+    "at": "2026-11-02T02:47:38.428473+00:00",
+    "mode": "READ_ONLY_METADATA_GET",
+    "productionWrites": 0,
+    "project": "phios-github",
+    "productionBranch": "main",
+    "productionAutoDeploy": false,
+    "previewSetting": "custom",
+    "canonicalDeployment": {
+      "id": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+      "url": "https://eb30bd35.phios-github.pages.dev",
+      "environment": "production",
+      "commit": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+      "branch": "main",
+      "latestStage": {
+        "name": "deploy",
+        "started_on": null,
+        "ended_on": "2026-10-30T08:16:31.575631Z",
+        "status": "success"
+      }
+    }
+  },
+  "accountUIBoundary": "Signed-in multi-subject browser campaign NOT_RUN; original21 memory-SQLite permission assertions and anonymous API isolation PASS.",
+  "mainReconciliation": {
+    "status": "PARTIAL",
+    "latestMainObjectAvailable": true,
+    "overlapWithinTouchedOwners": [
+      "content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html"
+    ],
+    "otherSourceOwnersInScopedComparisonChanged": false,
+    "mergeNotExecuted": true
+  }
 }

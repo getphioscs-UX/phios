@@ -1,0 +1,15 @@
+// Observation adapters extend the existing R4.2 comparison owner; no score or new registry.
+export function compareWorldObservationValues(a,b){
+ const absent=!a||!b||![a?.value,b?.value].every(Number.isFinite);if(absent)return {state:'NOT_COMPARABLE',reasons:['MISSING_VALUE_NOT_ZERO'],difference:null};
+ const reasons=[];for(const k of ['indicatorId','unit','currency','priceBasis','frequency','definitionVersion','sourceVersion','scope'])if(a[k]===undefined||a[k]!==b[k])reasons.push('OBSERVATION_'+k.toUpperCase()+'_MISMATCH');
+ if(a.admission!=='ARCHIVAL_CWA_SOURCE_BOUND'||b.admission!=='ARCHIVAL_CWA_SOURCE_BOUND')reasons.push('SOURCE_ADMISSION_REQUIRED');
+ if(a.fiscalCoverageVerified===false||b.fiscalCoverageVerified===false)reasons.push('GOVERNMENT_COVERAGE_NOT_VERIFIED');
+ if(reasons.length)return {state:'NOT_COMPARABLE',reasons,difference:null};const comparison=compareWorldObjects(a,b);if(comparison.state!=='COMPARABLE')return {...comparison,difference:null};
+ return {...comparison,difference:a.value-b.value,differenceUnit:a.unit.startsWith('percent')?'percentage_points':a.unit,methodRef:'WORLD_R42_OBSERVATION_DELTA_V1',formula:'left - right',sourceRefs:[a.id,b.id],causality:false,ranking:false};
+}
+export function describeWorldObservationSeries(rows,{start,end}={}){
+ const reasons=[];if(!Number.isInteger(start)||!Number.isInteger(end)||end<=start||end-start>100)reasons.push('EXPLICIT_MULTI_POINT_WINDOW_REQUIRED');const points=[...rows].filter(r=>r.time?.start>=start&&r.time.start<=end).sort((a,b)=>a.time.start-b.time.start),first=points[0];
+ if(points.length<2||points.length!==end-start+1)reasons.push('MISSING_WINDOW_POINTS');for(let i=0;i<points.length;i++){const p=points[i];if(!Number.isFinite(p.value))reasons.push('MISSING_VALUE_NOT_ZERO');if(p.frequency!=='ANNUAL')reasons.push('ANNUAL_SOURCE_REQUIRED');if(p.admission!=='ARCHIVAL_CWA_SOURCE_BOUND')reasons.push('SOURCE_ADMISSION_REQUIRED');if(p.fiscalCoverageVerified===false)reasons.push('GOVERNMENT_COVERAGE_NOT_VERIFIED');if(i&&p.time.start!==points[i-1].time.start+1)reasons.push('MISSING_OR_DUPLICATE_PERIOD');for(const k of ['subjectId','indicatorId','unit','currency','priceBasis','frequency','definitionVersion','sourceVersion','scope'])if(p[k]===undefined||p[k]!==first[k])reasons.push('SERIES_'+k.toUpperCase()+'_MISMATCH');}
+ if(reasons.length)return {state:'INSUFFICIENT_SERIES',reasons:[...new Set(reasons)],points:[],change:null,noInterpolation:true,window:{start,end},nextAction:'CHECK_MATCHING_SOURCE_PERIODS'};
+ return {state:'TREND_OBSERVATION',scope:'DATED_OBSERVED_SEQUENCE_NOT_FORECAST',window:{start,end,samplingFrequency:'ANNUAL'},count:points.length,points:points.map(p=>({period:p.time.start,value:p.value,observationId:p.id})),first:first.value,last:points.at(-1).value,change:points.at(-1).value-first.value,unit:first.unit.startsWith('percent')?'percentage_points':first.unit,sourceRefs:points.map(p=>p.id),methodRef:'WORLD_R42_ANNUAL_OBSERVED_SEQUENCE_V1',noInterpolation:true,persistence:null,noise:null,thresholdState:'NOT_EVALUATED',forecast:false,causality:false};
+}

@@ -1,8 +1,8 @@
 {
-  "base": "http://127.0.0.1:62066",
-  "at": "2026-10-31T05:47:57.020Z",
+  "base": "http://127.0.0.1:59537",
+  "at": "2026-11-02T03:01:24.101Z",
   "status": "PASS",
-  "passed": 19,
+  "passed": 21,
   "failed": 0,
   "results": [
     {
@@ -164,6 +164,22 @@
         "country": "SGP",
         "dimension": "environment",
         "year": 2023
+      }
+    },
+    {
+      "name": "Personal-locale-switch-does-not-activate-Country-or-reuse-country-reading",
+      "status": "PASS",
+      "detail": {
+        "personalRemainsPersonal": true,
+        "noStaleCountryContext": true
+      }
+    },
+    {
+      "name": "clear-or-invalid-country-never-displays-first-country-as-fallback",
+      "status": "PASS",
+      "detail": {
+        "clearAndInvalidRemainUnselected": true,
+        "noDefaultCountry": true
       }
     },
     {

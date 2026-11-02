@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Complete original professional PDF streamed to existing private object Owner with encrypted metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "Duplicate save uses same artifact without rewriting original object",
+      "status": "PASS"
+    },
+    {
+      "name": "Repeated full downloads equal the unchanged report SHA256 and bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong authenticated account denied by existing owner",
+      "status": "PASS"
+    },
+    {
+      "name": "Different document and source version cannot reuse the grant",
+      "status": "PASS"
+    },
+    {
+      "name": "Source revocation denies a fresh request; restored authorization permits fresh grant",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing object is detected without reporting successful download",
+      "status": "PASS"
+    },
+    {
+      "name": "Same-length stored object hash tamper fails during actual streamed read",
+      "status": "PASS"
+    },
+    {
+      "name": "Partial artifact is repair-required; fixture restores exact original bytes only, then repeated read succeeds",
+      "status": "PASS"
+    },
+    {
+      "name": "Interrupted write fails and can retry the same immutable descriptor",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong upload digest is refused before an indexed artifact is complete",
+      "status": "PASS"
+    },
+    {
+      "name": "Metadata-index failure and cleanup failure expose a real orphan; existing lifecycle dry-run identifies it",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing retention cleanup failure is visible and retry succeeds on the same Profile-owned expired test scope",
+      "status": "PASS"
+    },
+    {
+      "name": "Production environment refuses this local owner and no external network was used",
+      "status": "PASS"
+    }
+  ],
+  "node": "v22.16.0",
+  "scope": "EXISTING_PROFILE_OWNER_MECHANISM_PROBE_ONLY_NOT_BUSINESS_ADMISSION",
+  "actualReport": {
+    "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-1/professional-draft.pdf",
+    "sha256": "98cd9281d3a9c3763b03ae924b9f43e3a3a0b9d7c1857d19af406d2ce21ff707",
+    "bytes": 366807,
+    "contentDeleted": false
+  },
+  "transport": "Disposable local filesystem R2-method adapter and actual native SQLite-backed D1 adapter",
+  "events": [
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-42c66a30fe11845b93f930d8d16a147fa0664ed4fea6c1c0e51a12012ec0a771/aa93f0ae-380c-4402-86c7-8babd11359fc.pdf"
+    },
+    {
+      "phase": "OBJECT_WRITTEN",
+      "key": "local-private-pdf-r23/LPDF3-42c66a30fe11845b93f930d8d16a147fa0664ed4fea6c1c0e51a12012ec0a771/aa93f0ae-380c-4402-86c7-8babd11359fc.pdf"
+    },
+    {
+      "nativeEvent": "PRIVATE_OBJECT_READY"
+    },
+    {
+      "nativeEvent": "GRANT_ISSUED"
+    },
+    {
+      "phase": "INDEXED_THEN_COMPLETE",
+      "nativeState": "LOCAL_PRIVATE_OBJECT_CANDIDATE_NOT_RELEASED"
+    },
+    {
+      "nativeEvent": "GRANT_ISSUED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_STARTED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_COMPLETE"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_STARTED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_COMPLETE"
+    },
+    {
+      "nativeEvent": "ACCESS_DENIED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_DENIED"
+    },
+    {
+      "nativeEvent": "ACCESS_DENIED"
+    },
+    {
+      "nativeEvent": "GRANT_ISSUED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_STARTED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_COMPLETE"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_STARTED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_INTERRUPTED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_STARTED"
+    },
+    {
+      "nativeEvent": "DOWNLOAD_COMPLETE"
+    },
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-93984dacd6bfb162b19f7d15a8e4387a588028cf2b255551a65d796a8a23c2c3/d8349ae2-6db3-470e-8ef7-4ec36f5231e1.pdf"
+    },
+    {
+      "phase": "TEST_OBJECT_DELETED",
+      "key": "local-private-pdf-r23/LPDF3-93984dacd6bfb162b19f7d15a8e4387a588028cf2b255551a65d796a8a23c2c3/d8349ae2-6db3-470e-8ef7-4ec36f5231e1.pdf"
+    },
+    {
+      "nativeEvent": "PREPARE_FAILED"
+    },
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-93984dacd6bfb162b19f7d15a8e4387a588028cf2b255551a65d796a8a23c2c3/bec377cd-c52e-4dde-8112-3e0be2c3a16a.pdf"
+    },
+    {
+      "phase": "OBJECT_WRITTEN",
+      "key": "local-private-pdf-r23/LPDF3-93984dacd6bfb162b19f7d15a8e4387a588028cf2b255551a65d796a8a23c2c3/bec377cd-c52e-4dde-8112-3e0be2c3a16a.pdf"
+    },
+    {
+      "nativeEvent": "PRIVATE_OBJECT_READY"
+    },
+    {
+      "nativeEvent": "GRANT_ISSUED"
+    },
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-f2fb6aec14c1c711dbaed09adddd28aa1dcaf82493200c080a366b338cb0a272/f08586be-451a-4841-87f2-e46674907eaa.pdf"
+    },
+    {
+      "phase": "TEST_OBJECT_DELETED",
+      "key": "local-private-pdf-r23/LPDF3-f2fb6aec14c1c711dbaed09adddd28aa1dcaf82493200c080a366b338cb0a272/f08586be-451a-4841-87f2-e46674907eaa.pdf"
+    },
+    {
+      "nativeEvent": "PREPARE_FAILED"
+    },
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-af6a53be10ccc9bf1be13b27c571c92b4dd40180a17da83598d78a8db05a8401/c939d581-1766-442f-9437-848c0959ae3c.pdf"
+    },
+    {
+      "phase": "OBJECT_WRITTEN",
+      "key": "local-private-pdf-r23/LPDF3-af6a53be10ccc9bf1be13b27c571c92b4dd40180a17da83598d78a8db05a8401/c939d581-1766-442f-9437-848c0959ae3c.pdf"
+    },
+    {
+      "nativeEvent": "PREPARE_FAILED"
+    },
+    {
+      "phase": "FAILED_RECOVERABLE_ORPHAN",
+      "cleanup": "DRY_RUN_IDENTIFIED_ONLY"
+    },
+    {
+      "phase": "TEST_CLOCK_SOURCE_RETENTION_VERIFIED",
+      "sourceArtifactId": "PEX-514ff6b712c52e1b0714b89c59d8c2cf8690843a518c5fb508faa01fc763c2f8-v1",
+      "simulatedClockOnly": true
+    },
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-eb24036c9fee11b1c2f2cee34dea8dea0a8ab88b919aa0ade852f32bc5503f8f/b430825c-9755-4d3e-8566-831444493ccf.pdf"
+    },
+    {
+      "phase": "OBJECT_WRITTEN",
+      "key": "local-private-pdf-r23/LPDF3-eb24036c9fee11b1c2f2cee34dea8dea0a8ab88b919aa0ade852f32bc5503f8f/b430825c-9755-4d3e-8566-831444493ccf.pdf"
+    },
+    {
+      "nativeEvent": "PRIVATE_OBJECT_READY"
+    },
+    {
+      "nativeEvent": "GRANT_ISSUED"
+    },
+    {
+      "phase": "TEST_OBJECT_DELETED",
+      "key": "local-private-pdf-r23/LPDF3-eb24036c9fee11b1c2f2cee34dea8dea0a8ab88b919aa0ade852f32bc5503f8f/b430825c-9755-4d3e-8566-831444493ccf.pdf"
+    },
+    {
+      "phase": "TEST_OBJECT_DELETED",
+      "key": "local-private-pdf-r23/LPDF3-93984dacd6bfb162b19f7d15a8e4387a588028cf2b255551a65d796a8a23c2c3/bec377cd-c52e-4dde-8112-3e0be2c3a16a.pdf"
+    },
+    {
+      "phase": "TEST_OBJECT_DELETED",
+      "key": "local-private-pdf-r23/LPDF3-42c66a30fe11845b93f930d8d16a147fa0664ed4fea6c1c0e51a12012ec0a771/aa93f0ae-380c-4402-86c7-8babd11359fc.pdf"
+    },
+    {
+      "phase": "LOCAL_EXPIRED_PROFILE_FIXTURE_CLEANUP_RETRIED",
+      "businessRetentionPolicyApproved": false
+    },
+    {
+      "phase": "PREPARED",
+      "key": "local-private-pdf-r23/LPDF3-42c66a30fe11845b93f930d8d16a147fa0664ed4fea6c1c0e51a12012ec0a771/8afae293-1176-4eba-9a11-47861812f9e6.pdf"
+    },
+    {
+      "phase": "OBJECT_WRITTEN",
+      "key": "local-private-pdf-r23/LPDF3-42c66a30fe11845b93f930d8d16a147fa0664ed4fea6c1c0e51a12012ec0a771/8afae293-1176-4eba-9a11-47861812f9e6.pdf"
+    },
+    {
+      "nativeEvent": "PRIVATE_OBJECT_READY"
+    },
+    {
+      "nativeEvent": "GRANT_ISSUED"
+    },
+    {
+      "nativeEvent": "ACCESS_DENIED"
+    }
+  ],
+  "profileEntitlementFixtureOnly": true,
+  "businessIntegration": "BLOCKED",
+  "businessSubjectBinding": "NOT_PROVEN_OWNER_HAS_NO_BUSINESS_SUBJECT_CONTRACT",
+  "partialRecovery": "Detected repair-required; exact-byte restoration was fixture-only, not an approved recovery endpoint",
+  "cleanup": "Existing Profile lifecycle with decrypted source expiry/digest + unchanged-source checks under simulated expiry clock; disposable synthetic Profile only, not Business policy approval",
+  "crossD1R2Atomicity": false,
+  "cloudQa": false,
+  "productionWrites": 0,
+  "providerCalls": 0,
+  "secretValuesRecordedInReceipt": false
+}

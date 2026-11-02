@@ -1,0 +1,238 @@
+{
+  "packageId": "BFT-FDI-S1.2-S2-APPROVAL-CANDIDATE",
+  "scope": "ONE_ISOLATED_SYNTHETIC_CLOUD_QA_CAMPAIGN_ONLY",
+  "project": "phios-financial-document-s2",
+  "host": "phios-financial-document-s2.pages.dev",
+  "pagesMode": "Separate Pages project using supported production/preview slots; never interpret live project preview as automatically isolated staging.",
+  "runtimeMode": "ISOLATED_SYNTHETIC_CANDIDATE",
+  "environment": "qa",
+  "accounts": [
+    "S2-TEST-A",
+    "S2-TEST-B"
+  ],
+  "subject": "S2-FICTIONAL-SME",
+  "resources": {
+    "d1": {
+      "binding": "RUNTIME_DB",
+      "name": "phios-financial-document-s2",
+      "id": null
+    },
+    "privateR2": {
+      "binding": "PRIVATE_REPORTS",
+      "bucket": "phios-financial-document-s2-private",
+      "id": null,
+      "publicAccess": false
+    }
+  },
+  "secrets": {
+    "valuesIncluded": false,
+    "source": "New test-only values, not production copies",
+    "names": [
+      "AUTH_SESSION_SECRET",
+      "REPORT_CONTEXT_ENCRYPTION_KEY",
+      "Private artifact metadata/grant secrets under admitted existing Owner contract"
+    ],
+    "custodian": null
+  },
+  "writes": "Synthetic source/version/review/context/private artifact + minimal audit only. No Stripe/order/product/entitlement changes.",
+  "productionDenial": {
+    "sourcePath": "wrangler.jsonc",
+    "sourceSha256": "468092ba45d6c21e8fa7f3442b5321ced85fd4e0a47fda014ed9932c9cdb8c59",
+    "denyEveryCurrentBindingIdentifier": [
+      "073639fa-01e4-4868-af10-6ed032637dab",
+      "phios-private-manuscripts",
+      "phios-private-reports",
+      "phios-method-report-renderer-production",
+      "phios-method-report-renderer-qa",
+      "c2c6e313-9bc8-4fd4-89b1-36f3d764dad8",
+      "phios-private-books-sandbox",
+      "phios-private-reports-sandbox"
+    ],
+    "actualNewBindingVerification": "Required after separately approved creation and before test execution"
+  },
+  "retentionCleanup": {
+    "candidateHours": 24,
+    "approved": false,
+    "operator": null,
+    "sourceAndBackupScope": "Explicit test-only object/index/key cleanup with failure receipts; no permanent default"
+  },
+  "failureRecovery": "Use existing owner states and verified source/metadata/sha references; Business admission/recovery contract remains blocked.",
+  "costBudget": {
+    "candidateMaximumIncrementalCloudUsd": 0,
+    "approved": false,
+    "expectedCloudCost": "UNVERIFIED",
+    "stopOnPaidPlanOrNonzeroCost": true,
+    "providerCalls": 0,
+    "payments": 0
+  },
+  "rollback": "Disable staging ingress, stop writes, restore reviewed test build; reconcile test indexes/objects and record cleanup failures",
+  "approvals": {
+    "technicalDirection": "OWNER_AGREED_SYNTHETIC_ONLY_DIRECTION",
+    "A_environmentConfiguration": "SPECIFIC_CANDIDATE_NOT_YET_APPROVED",
+    "B_cloudResourceCreation": "NOT_AUTHORIZED",
+    "C_cloudTestExecution": "NOT_AUTHORIZED",
+    "D_production": "STRICTLY_PROHIBITED"
+  },
+  "ownerResponse": {
+    "A": null,
+    "B": null,
+    "C": null,
+    "D": "NOT_AUTHORIZED",
+    "namedTestOperator": null,
+    "keyCustodian": null,
+    "cleanupOperator": null,
+    "authorizedCampaignWindow": null,
+    "acceptedCostCeilingUsd": null
+  },
+  "testPlan": [
+    {
+      "step": 1,
+      "action": "Upload only frozen synthetic PDF/CSV/XLSX; enforce format/size and untrusted-input handling.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 2,
+      "action": "Write full authorized artifacts into the independently identified private Staging R2; verify no public object route.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 3,
+      "action": "Write encrypted metadata/source/review refs to independently identified Staging D1; capture failure phases.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 4,
+      "action": "Verify immutable document SHA/version, source location and review pins; deny tampered/mixed Subject references.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 5,
+      "action": "Run existing Financial calculations and independent synthetic source review; keep unresolved Loans classification blocked.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 6,
+      "action": "Generate from the existing reviewed data/template and privately save complete professional PDF without content removal.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 7,
+      "action": "Log out, authenticate again and reopen exact source/review/artifact version; repeated download bytes must match.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 8,
+      "action": "Verify Account B cannot read A private artifact, and wrong Subject/purpose/resource grants are rejected.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 9,
+      "action": "Verify source grant revoke/expiry, duplicate save, interruption, partial/index failure and authorized retry; do not assert shared D1/R2 atomicity.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    },
+    {
+      "step": 10,
+      "action": "Read back actual resource IDs, enforce production denial, reconcile and verify cleanup; report failed deletion instead of success.",
+      "status": "NOT_RUN_CLOUD",
+      "requires": "Business artifact binding + runtime + environment readiness, then separate C authorization"
+    }
+  ],
+  "excluded": [
+    "Real IDs",
+    "Private SSM evidence",
+    "Real customer financial files",
+    "LGS real records",
+    "Stripe payments",
+    "Paid AI",
+    "Real Business grant issuance",
+    "Formal customer publication"
+  ],
+  "matrix": [
+    {
+      "condition": "Approved Host",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "detail": "Candidate phios-financial-document-s2.pages.dev; existence and ownership not checked",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Explicit Environment Mode",
+      "status": "BLOCKED",
+      "detail": "Existing code loopback-only. Exact-host synthetic-only mode/binding enforcement needs separately admitted adapter.",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Test Identity",
+      "status": "CONFIGURATION_REQUIRED",
+      "detail": "Two isolated test Accounts A/B; no production identity client or real business verification",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Authorized Subject",
+      "status": "CONFIGURATION_REQUIRED",
+      "detail": "One fictional Subject; A preparer, B narrowly scoped independent source reviewer. B must still be denied A generated private artifact. Distinct source-review versus artifact-read permissions require explicit binding.",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Data Storage",
+      "status": "CONFIGURATION_REQUIRED",
+      "detail": "Separate D1 and private R2 IDs absent; all current live/preview bindings denied",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Encryption / Key Custody",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "detail": "Separate test metadata and grant keys; actual custodian and recovery operator unassigned",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Write Permissions",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "detail": "Only synthetic upload/source/review/private-artifact/metadata/audit writes in named staging resources; no commerce orders or entitlements",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Retention / Cleanup",
+      "status": "OWNER_APPROVAL_REQUIRED",
+      "detail": "Candidate 24h test retention and verified end-of-campaign cleanup, with named operator and failure retry approval; not a legal retention term",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Isolation from Production",
+      "status": "BLOCKED",
+      "detail": "No actual cloud credential/binding denial proof yet",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "Rollback",
+      "status": "CONFIGURATION_REQUIRED",
+      "detail": "Disable staging ingress, stop writes, restore reviewed test build; reconcile test indexes/objects and record cleanup failures",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "No Real Payment",
+      "status": "VERIFIED_LOCAL_ONLY",
+      "detail": "Zero Stripe/payment operations; Cloud enforcement still needs proof",
+      "cloudSatisfied": false
+    },
+    {
+      "condition": "No Paid Provider Calls",
+      "status": "VERIFIED_LOCAL_ONLY",
+      "detail": "Local fixture network denied; no paid AI. Cloud deny-by-default still needs proof",
+      "cloudSatisfied": false
+    }
+  ],
+  "allTwelveCloudConditionsMet": false,
+  "actualResourcesCreated": false,
+  "deploy": false,
+  "documentation": "https://developers.cloudflare.com/pages/functions/wrangler-configuration/",
+  "firstAction": "Review the five minimum existing-owner contracts and source classification evidence; do not approve four accepted local contracts again. Resource creation/test execution remain separate decisions."
+}

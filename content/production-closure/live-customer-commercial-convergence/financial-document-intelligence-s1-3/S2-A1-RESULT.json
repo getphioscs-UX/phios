@@ -1,0 +1,489 @@
+{
+  "scope": "LOCAL_SECURITY_IMPLEMENTATION_AND_WORKERD_VERIFICATION_ONLY",
+  "head": "1eb081ab99f1f96f1346c8b4bd7df707626ec57e",
+  "sourceFiles": [
+    {
+      "path": "tools/review/financial-document-s2-a1/finalize.mjs",
+      "sha256": "137d8b9b43110b7890866ff5f070d8c7e85f7068bb423ff75c207585b437f6be"
+    },
+    {
+      "path": "tools/review/financial-document-s2-a1/run.mjs",
+      "sha256": "bb36dee6b285a671030e4425ff56d2e787a372bc06befc37a466e9bb1af428b9"
+    },
+    {
+      "path": "tools/review/financial-document-s2-a1/security.mjs",
+      "sha256": "585cd1ad4d8a73bae36c68dadef0b52eff56f1b08b6abf653d012563d3f6ef16"
+    },
+    {
+      "path": "tools/review/financial-document-s2-a1/test.mjs",
+      "sha256": "d86c19cfd82c0aebf26f60c2e06ca0b836219b105d223672b990707218a1f0bd"
+    },
+    {
+      "path": "tools/review/financial-document-s2-a1/worker.mjs",
+      "sha256": "2259916eba1d68eaed42fdda5534f521d132f7028962a4de871d10d0a58aeeae"
+    }
+  ],
+  "bundle": {
+    "head": "1eb081ab99f1f96f1346c8b4bd7df707626ec57e",
+    "inputs": [
+      {
+        "path": "tools/review/financial-document-s2-a1/security.mjs",
+        "sha256": "585cd1ad4d8a73bae36c68dadef0b52eff56f1b08b6abf653d012563d3f6ef16"
+      },
+      {
+        "path": "functions/financial/calculation-runtime/range-arithmetic.js",
+        "sha256": "f44a62ffd74b394844a419b4f120aa5cf0b039fed223924ef42e352e02b7dabe"
+      },
+      {
+        "path": "functions/customer-projection/projection-common.js",
+        "sha256": "368ffa2350f674388015733063a4f6097926e612231ae82d9786a4b946677aab"
+      },
+      {
+        "path": "functions/customer-projection/navigation-customer-projection.js",
+        "sha256": "3504f04b6a94b7b0278aa17659bbbd19f69aaf8e49b2a2db5b79b3877af173aa"
+      },
+      {
+        "path": "functions/profile/subject-context-r1.js",
+        "sha256": "8d87774baa6a67b4db5f13ec250cdaf44e282ca43e854329bd9dcd13ac8d55ea"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/buffer_utils.js",
+        "sha256": "73bcd92b89c5d51cb089bab31b8ab190bf7101616ae121c5aaa3f10ed34d5893"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/base64.js",
+        "sha256": "547a24150d1270d26f7afba4a046023744e71d31c84bc41ec6dbc033440a23b3"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/util/base64url.js",
+        "sha256": "3f327a63d612b8804a8e27dbd73736c8a52a3f59dff7a8ffcb83084f28d89869"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/util/errors.js",
+        "sha256": "e567c2321364b5a0d944416b2d926b5b0674775bbcd6690b17e0f1d249db5a25"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/iv.js",
+        "sha256": "0133913bbd657c14deef3196c2417b01b9872e5007c875d95b4b9b6793a24fa1"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/check_iv_length.js",
+        "sha256": "cc9474d291ba1204a7afe25ad2278b592d930be7df85df36d0766823eb77698f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/check_cek_length.js",
+        "sha256": "b9c85a6afb3117e9dedb54a6ccc3617c35231e707de4a388844b895631d022d7"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/crypto_key.js",
+        "sha256": "5e30cdf50fbdb0dd670cbb756602605be3a2368f3aeae6525cd9ee00f2fbbd15"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/invalid_key_input.js",
+        "sha256": "5c48d61e2a6f762397a95071f23265d1ba7be330af25feac1d8181e1f5e57658"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/is_key_like.js",
+        "sha256": "c1eff565bb0c36ce9e740965d68d49184f453e5b83ab4da79b5c72a55315b991"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/decrypt.js",
+        "sha256": "21e1b25838c62bc681b3e5937cb4fac0dc124c63de9cab64a4498bacb5702de3"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/is_disjoint.js",
+        "sha256": "9fc85b9f9b990ad88cd76206169380bc00f6cf3a6a613b0e770e40dc45274328"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/is_object.js",
+        "sha256": "d72d5568927cd64eb60a85c13b93a5b9fb3b8d1740d7a02fdfd294af8e15b482"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/aeskw.js",
+        "sha256": "f01d1f7befb989ab98374721e21e764dfaa04d0f9133113dd0ec6a04a62dc87f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/digest.js",
+        "sha256": "be2a17e2067550bde82d95254aee252a74d49506477c20d53a8b4480de2d81ea"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/ecdhes.js",
+        "sha256": "04f5bf8b514d4fdd9854a0bad949b87c2f3db5233ff45869d97d8ddece0d1c92"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/pbes2kw.js",
+        "sha256": "c1f41c60d640ed81e8a6de058acc668fab2971b00451401a1c181f45cb13bd39"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/check_key_length.js",
+        "sha256": "41c700b7a38c4ca7d4cc0b156be0a0648ffef4abb8ed657b371c8f63f7edf950"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/rsaes.js",
+        "sha256": "7a5f479d9272b115b84696927fdc4779a80ae4cdef008019f6763afaa5c8a1a8"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/cek.js",
+        "sha256": "e8375c7420c6227e1b44a368a135aa40df5d39ffe1c6bd1052b890bd543e1e1e"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/asn1.js",
+        "sha256": "9f69684cb6e2c7b59607b3f8cdeedd2fc9f4d6d7e98a1b096187f6c3f66d0547"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/jwk_to_key.js",
+        "sha256": "d9ef29f9d76a8fc49ea17fbd31996f48642f91b9108d61c9e526bb35359730f8"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/key/import.js",
+        "sha256": "b5de0a3fec53b8d4609710b810aae655c31706f2cc5ed4378bb068cbb86abf4f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/encrypt.js",
+        "sha256": "87322e8250567858a4d64618998a4346f97a5eb5812bcd9776f2acf6f03dffe0"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/aesgcmkw.js",
+        "sha256": "54c867fcb8466aedcea4fb204ce9c01f1809084b116a53aa5dbcf7c8286e5068"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/decrypt_key_management.js",
+        "sha256": "af8e9b47287764c196c7efa19bf1a5e48e97627bc4ff61ee8d87e745cc9c82dc"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/validate_crit.js",
+        "sha256": "f40554247a23aecb4e84a5cb266c5012de03802ef4b6c0eed4d3367e9d6431e4"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/validate_algorithms.js",
+        "sha256": "f18c6b28c02401507005d7b1a4392606f9ef55efe574a3f1ca7f32219969f308"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/is_jwk.js",
+        "sha256": "0b295284d72b9d60a98e96816e66a999b4a99cc5755cb2f76af30cff76951bb1"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/normalize_key.js",
+        "sha256": "ef12506e12f3e0cf5892a5327b4a02c67297b3b54ddda8b8ae12a5b72df0fb3a"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/check_key_type.js",
+        "sha256": "6bf205447c4bb96e30d2802575dc9e6accf2568b34a2ed922f2613dd4e3af7bf"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwe/flattened/decrypt.js",
+        "sha256": "fc05c7095e8bc8acbc1755aaee41178d4d9bc53cb440f6e4afd670a40235857f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwe/compact/decrypt.js",
+        "sha256": "5b9b92a4af569e143761511dbad7b41f23477dc58848f3c4bd8d9f1039ad3a17"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwe/general/decrypt.js",
+        "sha256": "698d06becb39f1c8fe874aed6f15839afb2fd580790446a37d20055179f31b6f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/private_symbols.js",
+        "sha256": "b99d79c797549a1ab957bb75abfc12cc95ec74b429ea63eeba14abf2fcd138f7"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/key_to_jwk.js",
+        "sha256": "548c82e5dd67e633118bb226d4656f809b3a87a0a3884da9abec989f85709809"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/key/export.js",
+        "sha256": "13d14d97ae494b9a6a40dcb73153c923f01e4c7f37e582abcdc4c81adcea0ad9"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/encrypt_key_management.js",
+        "sha256": "ce5a3880685615f2cc431fd9be5f511469a80424118ee7866af6ed75c3fc626f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwe/flattened/encrypt.js",
+        "sha256": "ce8971b01a0699cb93addffddfcdd53e450dd87068fc566875c1a32a41e5a955"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwe/general/encrypt.js",
+        "sha256": "ebc875ad230159fd6d1cc407b27ce4c1b19ba80c6c87fda72bdbd1636f75c200"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/subtle_dsa.js",
+        "sha256": "3adf77e9239139d7a99358f3fd78ac767419c5c57298ebaea105fcac1862cd5f"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/get_sign_verify_key.js",
+        "sha256": "22af0117cd6411487606190fed1401f823e4b009df867e8ba3f3d671c588a28e"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/verify.js",
+        "sha256": "cbc402a69fc6bf55ceb36b7162026d0bc1f48fdb4110b54b1acbddad283b6a15"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jws/flattened/verify.js",
+        "sha256": "e70412e654982644359da6712aca8aa462470328d6111c57e527b87fd846c064"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jws/compact/verify.js",
+        "sha256": "dfc153ab0ef9d96bc90f2d6a0cb65ed088e19aabcc45b952bb3d74b6aa00c711"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jws/general/verify.js",
+        "sha256": "f6cea1202c13d573a08b7c69163b920ba1eebb03415ae71d8cfa9588bfb0de30"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/epoch.js",
+        "sha256": "bb41597bb596d58398470ea6b54d55949d8e6535078d6f75cdf3a7c1019d636a"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/secs.js",
+        "sha256": "35a237e8dfce09138436bc855b4d324f7a2d3cabdfa026a982e1e87099c51502"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/jwt_claims_set.js",
+        "sha256": "5e43c11981a69e2df3fc319676c8383d110b344087207c827294528eb0a65699"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwt/verify.js",
+        "sha256": "b5e1af340cb1567a9c805ac1917c0ab1cb362bfecaea0d64d6edf809c0cbc634"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwt/decrypt.js",
+        "sha256": "0da3ffbc71dbd7b9dd4f48c229649862af6651f9fd782e92a9402e86d3e25422"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwe/compact/encrypt.js",
+        "sha256": "56dd4a4caed37f41cd51ef2c732b25388a19d7f34d835acf340f66600c4c2ef4"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/lib/sign.js",
+        "sha256": "60a3ee6002775fa385d56c18f0d85b8a9dc7250fd3fa4794a57c5eb917cb59cb"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jws/flattened/sign.js",
+        "sha256": "8db3c1ada098852ff60731fba2621d3642762976859fd32e095c336dd126e447"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jws/compact/sign.js",
+        "sha256": "1ea707188de5726c32a38af6cc97e2c269781fac5730405513de07798ffb8e0c"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jws/general/sign.js",
+        "sha256": "e8ac4001655eabb63ffbac6b497cfb9a0aaa1fa5979f571016f16d0278285ef9"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwt/sign.js",
+        "sha256": "5263958960b60aa39de13920e7e18d2284450659841e904bda475e0557afbbd3"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwt/encrypt.js",
+        "sha256": "0d587d000c29780526ae04e28d64d223d6f39ba2c2ec31a2689c1f43bc117751"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwk/thumbprint.js",
+        "sha256": "11bef43ab72ea51dbdba9ed27fe9e0aea990056d43b0f81a52b8851f995498d3"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwk/embedded.js",
+        "sha256": "f0f8af4e76bf81a61470c298f95bd51a0997a52bf4bd31df951905e7e44256b7"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwks/local.js",
+        "sha256": "7f7239bab7f506a4206ebb23ee739d7fc8e8636d8313ddde4ac322527274b448"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwks/remote.js",
+        "sha256": "28c022136bacd5fe7f3ef6c95c3814212bee6b6e29af87aea956c5f47a5ed2cf"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/jwt/unsecured.js",
+        "sha256": "3cbd8a28a3d8691e112e71c38e4d2dea3fa12ff3a99c923afadbe6710e2ce7dd"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/util/decode_protected_header.js",
+        "sha256": "015564ad4e0507f591087e05371153d0a633937701649c0154c8025709d579c0"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/util/decode_jwt.js",
+        "sha256": "02ae2ac765490e8b14268863564e925582734d33011e2a24f229e5cc6cb24310"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/key/generate_key_pair.js",
+        "sha256": "5f5aca7d3de8e04003df2338c929f45404944ee455818b6b653fa23a58719cb5"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/key/generate_secret.js",
+        "sha256": "171f3a2746f0f635de6be46d12b0d6329af643fadb726122e667ec8a8b937f84"
+      },
+      {
+        "path": "node_modules/jose/dist/webapi/index.js",
+        "sha256": "36168bc60c47cd0b545bde565568059c1bfc08b877bce128c32e1972aa4906fd"
+      },
+      {
+        "path": "functions/account/oidc-auth.js",
+        "sha256": "f465f1f01fe86ccac89691dba4d966a69f240d82a7773b4860e5f72b29fe310b"
+      },
+      {
+        "path": "functions/profile/subject-bft-authority-candidate-r3.js",
+        "sha256": "3e97a49b8090e4c12254d8b55abdc574e11879b941af336a86cf6bd519b03ae3"
+      },
+      {
+        "path": "functions/professional/financial/business-intake-candidate-r3.js",
+        "sha256": "1337aa189e64c6fca42428e4c9b13a31c585d9609d9a647e5295bf7e79771aa4"
+      },
+      {
+        "path": "tools/review/financial-document-s1-3/parsers.mjs",
+        "sha256": "9c163def2925e1cb6f6335a29234ea09c72ea501a57acecb18b29ad25221522f"
+      },
+      {
+        "path": "tools/review/financial-document-s2-a1/worker.mjs",
+        "sha256": "2259916eba1d68eaed42fdda5534f521d132f7028962a4de871d10d0a58aeeae"
+      }
+    ],
+    "bundleSha256": "d2c51d2937528a04dd3ff3ca2cd5bb5193212ae00c80feb39019755096c8f632",
+    "bundleBytes": 34395
+  },
+  "tests": {
+    "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-3/S2-A1-WORKERD-TESTS.json",
+    "sha256": "c93ae3ebd4fa22e778d89ca5564a9a760bbb30f3e59c0e61fbbe8490e863736d",
+    "passed": 22,
+    "actualWorkerd": true
+  },
+  "authentication": {
+    "status": "PASS_LOCAL_RSA_FIXTURE_ACCESS_JWT_VALIDATOR",
+    "validation": [
+      "RS256 signature",
+      "pinned public JWK kid",
+      "exact issuer and audience",
+      "exp iat nbf",
+      "mapped synthetic subject",
+      "session epoch"
+    ],
+    "trustedKeySource": "Named operator must securely fetch exact approved team /cdn-cgi/access/certs public keys, verify issuer/provenance and pin in isolated config; rotation requires new trusted pins. No token-controlled URL or key accepted.",
+    "actualAccessApp": "NOT_CONFIGURED",
+    "realAccounts": "NOT_CREATED",
+    "nativeAccountPws": "No Account/PWS grant is minted from Access identity. Pure parser/calculation only; artifact and Business owner routes remain denied."
+  },
+  "resourceChecks": {
+    "status": "PASS_LOCAL_MARKER_AND_CONFIG_NEGATIVE_TESTS",
+    "checks": [
+      "HTTPS exact host",
+      "mode/project/source SHA",
+      "fixed production/preview denylist",
+      "D1 and R2 campaign/project/nonce/resource identity markers",
+      "purpose/operation/synthetic Subject allowlist"
+    ],
+    "limitation": "Binding marker is corroborating application identity, not Cloudflare attestation. Actual provider IDs, permissions and no-production-binding proof remain mandatory; a copied marker must not be accepted as resource proof."
+  },
+  "controls": {
+    "defaults": "execution/upload/writes/download = 0 in local control schema",
+    "controlOwner": "Isolated operator-only D1 administrative control; no public control setter endpoint",
+    "executionStop": "Blocks new reads and calculations; requests already in flight are not retroactively cancelled",
+    "writeStop": "Blocks new extraction reservations; artifact writes always closed",
+    "sessionRevocation": "D1 sessionEpoch vs pinned identity version",
+    "download": "Always closed without native Owner route admission, even if flag enabled",
+    "faults": "Original S1.3 test harness not imported into candidate; unknown/debug/fault/grant/cleanup paths 404",
+    "quotas": {
+      "fileBytes": 1000000,
+      "maxRequests": 100,
+      "maxFiles": 10,
+      "maxCumulativeInputBytes": 10000000,
+      "maxWindowHours": 24,
+      "implementation": "Atomic conditional D1 UPDATE RETURNING; failed attempts consume reservations. Not a joint D1/R2 transaction or billing hard cap."
+    }
+  },
+  "cleanup": {
+    "owner": "UNASSIGNED",
+    "deadline": "Candidate no later than start+24h, earlier completion/abort cleanup; not approved",
+    "runbook": [
+      "Close ingress/execution/upload/writes/download in isolated control before reconciliation",
+      "Named operator inventories exact staging D1/R2 and records key/count/hash references without payloads",
+      "Use existing private artifact lifecycle owner only after its test-scope admission; no public cleanup API",
+      "Reconcile metadata/index/object refs and remove only campaign-owned synthetic objects/metadata; record failed deletion and retry",
+      "Read back absence and retain redacted cleanup audit; cannot mark COMPLETE with orphan or failed deletion",
+      "Key disposal and backup scope require custodian decision; never infer lost-key recovery"
+    ],
+    "automaticDeletion": "NOT_IMPLEMENTED_OR_AUTHORIZED; deadline denies runtime requests but does not delete stored objects",
+    "actualCloudCleanup": "NOT_RUN"
+  },
+  "cost": {
+    "officialPricingReviewed": true,
+    "actualAccountPlan": "UNVERIFIED_NO_CONNECTED_CLOUDFLARE_BILLING_INVENTORY_TOOL",
+    "accountQuota": "UNVERIFIED",
+    "newCostGoalUsd": 0,
+    "canGuaranteeZero": false,
+    "applicationLimitsNotBillingCap": true,
+    "stop": "Do not create resources/start test until actual plan, quota, Access seats and storage operations reviewed; stop on unknown/nonzero cost. Notifications not hard cap.",
+    "creation": "BLOCKED_PENDING_COST_DECISION"
+  },
+  "documents": [
+    {
+      "name": "Access JWT signature and claims",
+      "url": "https://developers.cloudflare.com/cloudflare-one/access-controls/applications/http-apps/authorization-cookie/application-token/"
+    },
+    {
+      "name": "Pages Functions pricing",
+      "url": "https://developers.cloudflare.com/pages/functions/pricing/"
+    },
+    {
+      "name": "D1 pricing",
+      "url": "https://developers.cloudflare.com/d1/platform/pricing/"
+    },
+    {
+      "name": "R2 pricing",
+      "url": "https://developers.cloudflare.com/r2/pricing/"
+    },
+    {
+      "name": "Workers pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/"
+    },
+    {
+      "name": "Access pricing",
+      "url": "https://www.cloudflare.com/plans/zero-trust-services/"
+    }
+  ],
+  "approval": {
+    "parentPath": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-2/S2-APPROVAL-PACKAGE.json",
+    "parentSha256": "bb8079728ae1ce9a1af1c352690de2aa5e6e5fbf19ec249b01d7253d937853a2",
+    "A": "NOT_READY_FOR_EXACT_CONFIGURATION_ACCEPTANCE",
+    "B": "NOT_AUTHORIZED",
+    "C": "NOT_AUTHORIZED",
+    "D": "NOT_AUTHORIZED"
+  },
+  "remaining": [
+    "Named Test Owner, Key Custodian, Cleanup and Recovery Operator",
+    "Actual Access team/audience/trusted public keys, independent test identities and native Account/PWS resource authorization",
+    "Exact staging Cloudflare IDs, public-access denial, provider-issued binding inventory and isolation proof",
+    "Actual account plan/quota and enforceable accepted cost decision; USD0 not guaranteed",
+    "Native Profile artifact test route integration and independent admission before any cloud storage/download test; Business remains blocked",
+    "Approved cleanup/retention/key disposal and test campaign window",
+    "Exact clean build snapshot/transitive lockfile manifest and independent A/B/C approvals"
+  ],
+  "preservation": {
+    "history": 132,
+    "owners": 8,
+    "priorSourceDigestsVerified": 12,
+    "parentUnchanged": true,
+    "originalFullPdfSha256": "98cd9281d3a9c3763b03ae924b9f43e3a3a0b9d7c1857d19af406d2ce21ff707",
+    "nativeRuntimeModified": false,
+    "oldEvidenceOverwritten": false,
+    "fullNpmCheck": "USER_REPORTED_PREVIOUS_PASS_NOT_RERUN"
+  },
+  "git": {
+    "branch": "main",
+    "head": "1eb081ab99f1f96f1346c8b4bd7df707626ec57e",
+    "staged": "",
+    "dirtyWorktreeNotDeploymentInput": true
+  },
+  "execution": {
+    "cloudResourcesCreated": 0,
+    "cloudSecretsConfigured": 0,
+    "cloudWrites": 0,
+    "providerCalls": 0,
+    "stripeChanges": 0,
+    "productionWrites": 0,
+    "commit": false,
+    "push": false,
+    "merge": false,
+    "deploy": false
+  }
+}

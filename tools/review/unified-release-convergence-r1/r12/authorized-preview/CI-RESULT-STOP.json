@@ -1,0 +1,76 @@
+{
+  "at": "2026-11-02T02:49:51.825Z",
+  "status": "STOPPED_CI_FAILED_NO_PREVIEW_DEPLOYMENT",
+  "candidate": "d305a6ada24e770082762d860758cc88402d537c",
+  "pr": "https://github.com/getphioscs-UX/phios/pull/15",
+  "runs": [
+    {
+      "id": 41379231430,
+      "name": "PTRC repository validation",
+      "event": "workflow_dispatch",
+      "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+      "conclusion": "failure",
+      "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379231430"
+    },
+    {
+      "id": 41379164813,
+      "name": "BaZi R8 Baseline Render Audit",
+      "event": "push",
+      "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+      "conclusion": "success",
+      "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379164813"
+    },
+    {
+      "id": 41379164877,
+      "name": "Unified Preview R1.2 scope safety",
+      "event": "push",
+      "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+      "conclusion": "success",
+      "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379164877"
+    }
+  ],
+  "failedStep": "Run npm run check",
+  "failingScript": "scripts/check-commerce-stripe-r1.mjs:148",
+  "product": "COM-REPORT-NUMEROLOGY-FULL",
+  "actualHttp": 409,
+  "expectedHttp": 503,
+  "logExcerpt": [
+    "2026-11-02T02:48:54.4513101Z     triggerUncaughtException(",
+    "2026-11-02T02:48:54.4513728Z     ^",
+    "2026-11-02T02:48:54.4514049Z ",
+    "2026-11-02T02:48:54.4514738Z AssertionError [ERR_ASSERTION]: COM-REPORT-NUMEROLOGY-FULL",
+    "2026-11-02T02:48:54.4515332Z ",
+    "2026-11-02T02:48:54.4515503Z 409 !== 503",
+    "2026-11-02T02:48:54.4515638Z ",
+    "2026-11-02T02:48:54.4515984Z     at file:///home/runner/work/phios/phios/scripts/check-commerce-stripe-r1.mjs:148:14",
+    "2026-11-02T02:48:54.4516722Z     at async test (file:///home/runner/work/phios/phios/scripts/check-commerce-stripe-r1.mjs:18:45)",
+    "2026-11-02T02:48:54.4517472Z     at async file:///home/runner/work/phios/phios/scripts/check-commerce-stripe-r1.mjs:143:1 {",
+    "2026-11-02T02:48:54.4517968Z   generatedMessage: false,",
+    "2026-11-02T02:48:54.4518237Z   code: 'ERR_ASSERTION',",
+    "2026-11-02T02:48:54.4518477Z   actual: 409,",
+    "2026-11-02T02:48:54.4518689Z   expected: 503,",
+    "2026-11-02T02:48:54.4518922Z   operator: 'strictEqual'",
+    "2026-11-02T02:48:54.4519162Z }",
+    "2026-11-02T02:48:54.4519268Z ",
+    "2026-11-02T02:48:54.4519356Z Node.js v22.16.0",
+    "2026-11-02T02:48:54.4699497Z ##[error]Process completed with exit code 1.",
+    "2026-11-02T02:48:54.4860641Z Post job cleanup.",
+    "2026-11-02T02:48:54.5796968Z [command]/usr/bin/git version",
+    "2026-11-02T02:48:54.5845229Z git version 2.56.0",
+    "2026-11-02T02:48:54.5887115Z Temporarily overriding HOME='/home/runner/work/_temp/8e42435a-d7fe-4369-bcbf-87c03c7724c8' before making global git config changes",
+    "2026-11-02T02:48:54.5888680Z Adding repository directory to the temporary git global config as a safe directory",
+    "2026-11-02T02:48:54.5893090Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/phios/phios"
+  ],
+  "node": "22.16.0",
+  "priorSteps": {
+    "npmCi": "PASS",
+    "ptrcMachine": "PASS",
+    "pagesBuild": "PASS"
+  },
+  "gitDiffCheck": "SKIPPED",
+  "previewDeploymentPerformed": false,
+  "ciBypassed": false,
+  "evidenceChangedToPass": false,
+  "candidateChanged": false,
+  "localFullCheckRun": false
+}

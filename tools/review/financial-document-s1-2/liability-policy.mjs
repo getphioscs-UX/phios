@@ -1,0 +1,2 @@
+// Review constraint only. No arithmetic owner, ledger or runtime replacement.
+export function requireLiabilityClassification({classification,currentPortion,nonCurrentPortion}={}){if(!['TOTAL_LOANS_INCLUDING_CURRENT_PORTION','NON_CURRENT_LOANS_ONLY'].includes(classification)||!Number.isSafeInteger(currentPortion)||currentPortion<0||!Number.isSafeInteger(nonCurrentPortion)||nonCurrentPortion<0)throw Error('SOURCE_CLASSIFICATION_REQUIRED');return{classification,currentPortion,nonCurrentPortion};}

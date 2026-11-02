@@ -1,0 +1,119 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Actual workerd csv extraction matches local native/Python values and source locations",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual workerd pdf extraction matches local native/Python values and source locations",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual workerd xlsx extraction matches local native/Python values and source locations",
+      "status": "PASS"
+    },
+    {
+      "name": "Font-embedded PDF structure explicitly blocked without extraction fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual workerd native Financial calculations retain pinned values",
+      "status": "PASS"
+    },
+    {
+      "name": "Native Business/PWS candidate checks pass but do not grant existing Owner download",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong account, Subject and report/source version are denied in workerd",
+      "status": "PASS"
+    },
+    {
+      "name": "Current native Business revoke and expiry are rechecked for each access candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing Profile mechanism saves full PDF through actual workerd FixedLengthStream/D1/R2",
+      "status": "PASS"
+    },
+    {
+      "name": "Repeated full native R2 downloads are byte-identical",
+      "status": "PASS"
+    },
+    {
+      "name": "Native duplicate/concurrent requests yield one immutable indexed artifact",
+      "status": "PASS"
+    },
+    {
+      "name": "Object write/index+cleanup failures are visible; orphan cleanup fails then retries",
+      "status": "PASS"
+    },
+    {
+      "name": "Partial upload/wrong hash rejected and retry uses original complete bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong Profile identity/version and revoked runtime deny downloads",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing native R2 object blocks reuse; exact test fixture restoration preserves bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "Malformed format and hostile spreadsheet/formula content do not execute",
+      "status": "PASS"
+    },
+    {
+      "name": "Local Workers serves inherited bilingual review copy only, not a new production customer route",
+      "status": "PASS"
+    }
+  ],
+  "formats": [
+    {
+      "format": "csv",
+      "status": "PASS_ACTUAL_LOCAL_WORKERD",
+      "file": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-staging-s1/documents/profit-loss.csv",
+      "sha256": "5805eae3c5a4b7770fda1c2dc51e4454621cf2ca1b01ae182abe98b2b6662030",
+      "rows": 12,
+      "elapsedMs": 11,
+      "scope": "Native controlled CSV"
+    },
+    {
+      "format": "pdf",
+      "status": "PASS_ACTUAL_LOCAL_WORKERD",
+      "file": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-staging-s1/documents/synthetic-statements.pdf",
+      "sha256": "2758d68b0abe23cc15b3b3640e4fae3b0493da228a0e939ace4f72819aa120cb",
+      "rows": 70,
+      "elapsedMs": 21,
+      "scope": "Controlled ReportLab ASCII85/Flate text template only"
+    },
+    {
+      "format": "xlsx",
+      "status": "PASS_ACTUAL_LOCAL_WORKERD",
+      "file": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-staging-s1/documents/synthetic-statements.xlsx",
+      "sha256": "59f622d69c36b1ba59206b469bcd39cf2696c5ecf87a01c7f57b73b0c1b7222b",
+      "rows": 70,
+      "elapsedMs": 12,
+      "scope": "Fixed Sources worksheet, literal cells only"
+    },
+    {
+      "format": "font-embedded-pdf",
+      "status": "CLOUD_PARSER_BLOCKED",
+      "fallback": false
+    }
+  ],
+  "runtime": "ACTUAL_LOCAL_WORKERD_MINIFLARE_D1_R2",
+  "node": "v22.16.0",
+  "outputPath": "C:\\phios\\.tmp\\financial-document-s1-3\\runtime-50bf9656-9780-4e1e-8b04-cba3484e5aa0",
+  "externalRequests": 0,
+  "fullPdfSha256": "98cd9281d3a9c3763b03ae924b9f43e3a3a0b9d7c1857d19af406d2ce21ff707",
+  "businessStorageAdmission": "BLOCKED_LOCAL_CANDIDATE_ONLY",
+  "profileCapabilityOnly": true,
+  "customerFlow": "BLOCKED_NO_BUSINESS_OWNER_ROUTE",
+  "cloudQa": false,
+  "crossD1R2Atomicity": false,
+  "productionWrites": 0,
+  "providerCalls": 0
+}

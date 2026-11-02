@@ -1,0 +1,5 @@
+from pathlib import Path
+p=Path('C:/phios/.worktrees/five-method-paid-report-production-r1/workers/method-report-renderer/index.js');s=p.read_text(encoding='utf8');s="import {methodPdfMultipart} from '../../functions/report-delivery/method-pdf-transfer.js';\n"+s;s=s.replace("const pageNumbers=physicalPages.map(p=>Number(p.dataset.pageNumber));","const pageNumbers=physicalPages.map((p,i)=>Number(p.dataset.pageNumber||(p.classList.contains('report-fixed-page')?i+1:0)));")
+s=s.replace("return Response.json({\n    html,","const output={\n    html,")
+s=s.replace("   },{headers:{'Cache-Control':'no-store'}});\n  }catch(error)","   };\n   if(parsed.includePdf===true){\n    if(method!=='ZWR'||!candidate.snapshot.semanticContent.vfrR2PublicationBinding)throw Error('METHOD_PDF_NOT_ADMITTED');\n    const bytes=new Uint8Array(await page.pdf({preferCSSPageSize:true,printBackground:true,tagged:true,outline:true}));\n    return methodPdfMultipart(html,output.verification,bytes);\n   }\n   return Response.json(output,{headers:{'Cache-Control':'no-store'}});\n  }catch(error)")
+p.write_text(s,encoding='utf8',newline='\r\n')

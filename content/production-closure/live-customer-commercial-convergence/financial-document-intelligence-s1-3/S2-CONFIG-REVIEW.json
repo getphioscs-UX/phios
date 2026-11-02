@@ -1,0 +1,111 @@
+{
+  "reviewType": "REVIEW_OF_EXISTING_PACKAGE_NOT_SECOND_CONFIGURATION",
+  "packageId": "BFT-FDI-S1.2-S2-APPROVAL-CANDIDATE",
+  "exactParentPath": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-2/S2-APPROVAL-PACKAGE.json",
+  "parentSha256": "bb8079728ae1ce9a1af1c352690de2aa5e6e5fbf19ec249b01d7253d937853a2",
+  "project": "phios-financial-document-s2",
+  "host": "phios-financial-document-s2.pages.dev",
+  "resourceNamesUnchanged": true,
+  "hostObservation": {
+    "cloudApiInventoryRead": false,
+    "status": "DNS_QUERY_FAILED",
+    "kind": "READ_ONLY_PUBLIC_DNS",
+    "error": "phios-financial-document-s2.pages.dev : DNS name does not exist.",
+    "projectNameAvailability": "UNVERIFIED_NOT_RESERVED",
+    "host": "phios-financial-document-s2.pages.dev"
+  },
+  "availability": "DNS_NXDOMAIN_OBSERVED_PROJECT_NAMESPACE_AVAILABILITY_UNVERIFIED_NOT_RESERVED",
+  "cloudAccountInventoryNotQueried": true,
+  "requestedConfigurationDelta": [
+    {
+      "field": "accounts",
+      "old": [
+        "S2-TEST-A",
+        "S2-TEST-B"
+      ],
+      "requested": [
+        "S2-TEST-A",
+        "S2-TEST-B",
+        "S2-TEST-C"
+      ],
+      "reason": "A preparer, B private artifact denial, C independent source reviewer; no real identity or new grants issued",
+      "approval": "REQUIRES_SPECIFIC_CONFIG_APPROVAL"
+    },
+    {
+      "field": "parserCapability",
+      "actual": "Controlled CSV / original ReportLab ASCII85+Flate template PDF / fixed literal Sources XLSX executed in local workerd",
+      "excluded": "Font-embedded PDF is CLOUD_PARSER_BLOCKED; no OCR or arbitrary layout support",
+      "approval": "LOCAL_TECHNICAL_EVIDENCE_NOT_CLOUD_AUTHORIZATION"
+    },
+    {
+      "field": "artifactConsumer",
+      "actual": "Native R6/PWS Business access candidate tested. Existing large Owner still requires Profile eligibility; authorized Business candidates receive no download grant",
+      "approval": "EXISTING_OWNER_BUSINESS_CONSUMER_ADMISSION_REQUIRED"
+    }
+  ],
+  "runtimeEvidence": {
+    "path": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-3/WORKERD-TESTS.json",
+    "sha256": "5bc68b893f62063b1b53101c1d435135beb4ddf2931cc00573bc2f314cb79bd9",
+    "checks": 17,
+    "cloudQa": false
+  },
+  "dependencies": {
+    "nodeOnlyOldExtractor": [
+      "Python subprocess",
+      "pdfplumber",
+      "openpyxl",
+      "local filesystem/temp files"
+    ],
+    "candidateParser": [
+      "node:zlib under nodejs_compat, executed in actual workerd",
+      "Web Crypto SHA256",
+      "TextDecoder / bounded ZIP+OpenXML reader",
+      "Bounded ReportLab text stream reader",
+      "Existing native CSV parser and Financial arithmetic"
+    ],
+    "newExternalLibrariesInstalled": false,
+    "wasmAdded": false
+  },
+  "limits": {
+    "fileBytes": 1000000,
+    "pdfPages": 30,
+    "pdfInflatedPageBytes": 500000,
+    "xlsxEntries": 150,
+    "xlsxTotalInflatedBytes": 3000000,
+    "xlsxEntryBytes": 1500000,
+    "xlsxRows": 300,
+    "xlsxColumns": 10,
+    "macroAndExternalLinkParts": "DENIED",
+    "formulaExecution": false
+  },
+  "resourceUseTruth": "Local measured parse timings and bundle size only; cloud CPU/peak-memory/concurrency acceptance NOT_RUN. Local workerd success is not deployed or live Cloudflare proof.",
+  "admissionDelta": [
+    {
+      "owner": "Existing Account/PWS + private artifact Owner",
+      "required": "An explicit non-Profile Business consumer admission, current authorization callback and metadata binding. Do not reuse or modify Profile paid rights."
+    },
+    {
+      "owner": "Existing Financial source/report reference owner",
+      "required": "Pin Account/Subject/purpose/resource/grant, source/review/report version, immutable artifact SHA and retention/revocation. Candidate remains local only."
+    },
+    {
+      "owner": "Existing private artifact/lifecycle Owner",
+      "required": "Business retention/cleanup/key custody and repair/retry authority; keep existing native states and no second history store."
+    }
+  ],
+  "liability": {
+    "status": "SOURCE_CLASSIFICATION_REQUIRED",
+    "exactPredecessor": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-s1-2/LIABILITY-CLASSIFICATION.json",
+    "sha256": "6c865895076045ef15f3933c67c4e742abbd8bc39670044fa81f4391d1a8a116",
+    "valuesOrDefinitionsChanged": false
+  },
+  "approvals": {
+    "technicalDirection": "AGREED_SYNTHETIC_ONLY",
+    "A_specificConfiguration": "NOT_GRANTED",
+    "B_cloudResourceCreation": "NOT_AUTHORIZED",
+    "C_cloudTestExecution": "NOT_AUTHORIZED",
+    "D_production": "NOT_AUTHORIZED"
+  },
+  "allTwelveCloudConditionsSatisfied": false,
+  "firstRemainingBlocker": "BUSINESS_PRIVATE_ARTIFACT_OWNER_CONSUMER_ADMISSION"
+}

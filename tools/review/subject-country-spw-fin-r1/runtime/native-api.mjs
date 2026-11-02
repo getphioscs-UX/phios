@@ -11,6 +11,150 @@ __export(customer_subject_workspace_exports, {
   onRequestGet: () => onRequestGet
 });
 
+// ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/current-web-authority/current-web-authority-runtime.js
+var CWA_EVIDENCE_SCHEMA = "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0";
+var PRECEDENCE = Object.freeze({ OFFICIAL_PRIMARY: 100, REGULATOR: 95, PUBLIC_HEALTH: 95, GOVERNMENT: 90, OFFICIAL_COMPANY: 85, ACADEMIC: 80, MARKET_DATA_PROVIDER: 78, REPUTABLE_NEWS: 70, SECONDARY_REFERENCE: 55, COMMUNITY: 25 });
+var DOMAIN_ALLOWED = Object.freeze({ HEALTH: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "REGULATOR", "PUBLIC_HEALTH", "GOVERNMENT", "ACADEMIC"]), FINANCIAL_MARKETS: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "REGULATOR", "GOVERNMENT", "MARKET_DATA_PROVIDER", "OFFICIAL_COMPANY", "REPUTABLE_NEWS"]), COMPANY_PRODUCT: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "OFFICIAL_COMPANY", "REGULATOR", "REPUTABLE_NEWS", "SECONDARY_REFERENCE"]), NEWS_CURRENT_EVENTS: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "GOVERNMENT", "REGULATOR", "REPUTABLE_NEWS"]), WEATHER: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "GOVERNMENT", "SECONDARY_REFERENCE"]), GENERAL_CURRENT: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "GOVERNMENT", "REGULATOR", "OFFICIAL_COMPANY", "ACADEMIC", "REPUTABLE_NEWS", "SECONDARY_REFERENCE"]) });
+var TTL = Object.freeze({ STOCK_OR_MARKET_PRICE: 900, WEATHER_CURRENT: 10800, BREAKING_NEWS: 86400, NEWS_DEVELOPMENT: 604800, PUBLIC_HEALTH_ALERT: 86400, GENERAL_CURRENT_FACT: 604800 });
+var CLAIM_ALLOWED = Object.freeze({ HEALTH: /* @__PURE__ */ new Set(["PUBLIC_HEALTH_ALERT", "MEDICAL_GUIDELINE", "GENERAL_CURRENT_FACT", "NEWS_DEVELOPMENT"]), FINANCIAL_MARKETS: /* @__PURE__ */ new Set(["STOCK_OR_MARKET_PRICE", "POLICY_OR_REGULATION", "BREAKING_NEWS", "NEWS_DEVELOPMENT", "GENERAL_CURRENT_FACT"]), COMPANY_PRODUCT: /* @__PURE__ */ new Set(["COMPANY_PRODUCT_SPEC", "POLICY_OR_REGULATION", "BREAKING_NEWS", "NEWS_DEVELOPMENT", "GENERAL_CURRENT_FACT"]), NEWS_CURRENT_EVENTS: /* @__PURE__ */ new Set(["BREAKING_NEWS", "NEWS_DEVELOPMENT", "GENERAL_CURRENT_FACT"]), WEATHER: /* @__PURE__ */ new Set(["WEATHER_CURRENT", "GENERAL_CURRENT_FACT"]), GENERAL_CURRENT: /* @__PURE__ */ new Set(["GENERAL_CURRENT_FACT", "BREAKING_NEWS", "NEWS_DEVELOPMENT", "POLICY_OR_REGULATION", "COMPANY_PRODUCT_SPEC"]) });
+function fail(code, status = 422) {
+  const e = new Error(code);
+  e.code = code;
+  e.status = status;
+  throw e;
+}
+function freeze(v) {
+  if (v && typeof v === "object" && !Object.isFrozen(v)) {
+    Object.freeze(v);
+    for (const x of Object.values(v)) freeze(x);
+  }
+  return v;
+}
+function iso(v, code) {
+  const d = new Date(v);
+  if (!v || Number.isNaN(d.valueOf())) fail(code, 400);
+  return d.toISOString();
+}
+function safeUrl(value) {
+  let u;
+  try {
+    u = new URL(value);
+  } catch {
+    fail("CWA_URL_INVALID", 400);
+  }
+  if (u.protocol !== "https:") fail("CWA_HTTPS_REQUIRED", 400);
+  u.hash = "";
+  return u.toString();
+}
+function discoverCurrentSourceCandidates({ query = "", domain = "GENERAL_CURRENT", currentnessRequirement = "CURRENTNESS_REQUIRED", results = [] } = {}) {
+  if (!String(query).trim()) fail("CWA_DISCOVERY_QUERY_REQUIRED", 400);
+  if (!DOMAIN_ALLOWED[domain]) fail("CWA_DOMAIN_UNKNOWN", 400);
+  if (currentnessRequirement === "CURRENTNESS_NONE") return freeze({ state: "CWA_NOT_CALLED", query: String(query).trim(), domain, currentnessRequirement, candidates: [] });
+  if (!Array.isArray(results)) fail("CWA_DISCOVERY_RESULTS_ARRAY_REQUIRED", 400);
+  return freeze({ state: "CANDIDATES_DISCOVERED_NOT_ADMITTED", query: String(query).trim(), domain, currentnessRequirement, candidates: results.map(normalizeCurrentSourceCandidate), boundaries: freeze({ searchResultIsFact: false, searchRankIsAuthority: false }) });
+}
+function normalizeCurrentSourceCandidate({ url, publisher, title, publishedAt = null, retrievedAt, authorityClassHint = null, sourceVersionHint = null } = {}) {
+  if (!publisher?.trim() || !title?.trim()) fail("CWA_SOURCE_METADATA_REQUIRED", 400);
+  return freeze({ url: safeUrl(url), publisher: publisher.trim(), title: title.trim(), publishedAt: publishedAt ? iso(publishedAt, "CWA_PUBLISHED_AT_INVALID") : null, retrievedAt: iso(retrievedAt, "CWA_RETRIEVED_AT_INVALID"), authorityClassHint: authorityClassHint || null, sourceVersionHint: sourceVersionHint || null, admissionState: "CANDIDATE_ONLY", isFact: false, isAuthority: false });
+}
+function evaluateCurrentness({ claimType, retrievedAt, now: now2 = (/* @__PURE__ */ new Date()).toISOString(), sourceVersionCurrent = null, superseded = false } = {}) {
+  const r = new Date(iso(retrievedAt, "CWA_RETRIEVED_AT_INVALID")), n = new Date(iso(now2, "CWA_NOW_INVALID"));
+  if (r > n) fail("CWA_RETRIEVAL_FROM_FUTURE", 400);
+  if (TTL[claimType] != null) {
+    const age = Math.floor((n - r) / 1e3);
+    return freeze({ freshnessState: age <= TTL[claimType] ? "FRESH" : "STALE", mode: "TTL", ageSeconds: age, ttlSeconds: TTL[claimType] });
+  }
+  if (claimType === "POLICY_OR_REGULATION") return freeze({ freshnessState: superseded ? "STALE" : "FRESH_UNTIL_SUPERSEDED", mode: "UNTIL_SUPERSEDED" });
+  if (claimType === "MEDICAL_GUIDELINE" || claimType === "COMPANY_PRODUCT_SPEC") return freeze({ freshnessState: sourceVersionCurrent === true ? "FRESH_VERSION_BOUND" : "VERSION_CHECK_REQUIRED", mode: claimType === "MEDICAL_GUIDELINE" ? "VERSION_BOUND" : "CURRENT_RELEASE" });
+  return freeze({ freshnessState: "NO_FRESHNESS_POLICY", mode: "REJECT" });
+}
+function admitCurrentSource({ candidate, domain, authorityClass: authorityClass2, claimType, now: now2, sourceVersionCurrent = null, superseded = false, sourceId, sourceVersionOrDigest } = {}) {
+  if (!candidate || candidate.admissionState !== "CANDIDATE_ONLY") fail("CWA_CANDIDATE_REQUIRED", 400);
+  const allowed = DOMAIN_ALLOWED[domain];
+  if (!allowed) fail("CWA_DOMAIN_UNKNOWN", 400);
+  if (!PRECEDENCE[authorityClass2]) fail("CWA_AUTHORITY_CLASS_UNKNOWN", 400);
+  if (!allowed.has(authorityClass2)) return freeze({ admissionState: "REJECTED", reason: "CWA_AUTHORITY_NOT_ALLOWED_FOR_DOMAIN", domain, authorityClass: authorityClass2 });
+  const claimAllowed = CLAIM_ALLOWED[domain];
+  if (!claimAllowed?.has(claimType)) return freeze({ admissionState: "REJECTED", reason: "CWA_CLAIM_TYPE_NOT_ALLOWED_FOR_DOMAIN", domain, authorityClass: authorityClass2, claimType });
+  const freshness = evaluateCurrentness({ claimType, retrievedAt: candidate.retrievedAt, now: now2, sourceVersionCurrent, superseded });
+  if (["STALE", "VERSION_CHECK_REQUIRED", "NO_FRESHNESS_POLICY"].includes(freshness.freshnessState)) return freeze({ admissionState: freshness.freshnessState === "STALE" ? "STALE" : "REJECTED", reason: "CWA_FRESHNESS_NOT_ADMITTED", domain, authorityClass: authorityClass2, freshness });
+  if (!sourceId?.trim() || !sourceVersionOrDigest?.trim()) fail("CWA_PROVENANCE_REQUIRED", 400);
+  return freeze({ admissionState: "ADMITTED", source: { sourceId: sourceId.trim(), sourceVersionOrDigest: sourceVersionOrDigest.trim(), ...candidate, authorityClass: authorityClass2, domain }, claimType, freshness, authorityPrecedence: PRECEDENCE[authorityClass2], sourceCountIsAuthority: false });
+}
+function createCurrentEvidence({ claimId, claimText, claimType, admission, publishedAt = null, supportLevel = "DIRECT", jurisdiction = null, conflicts = [] } = {}) {
+  if (admission?.admissionState !== "ADMITTED") fail("CWA_ADMITTED_SOURCE_REQUIRED", 409);
+  if (!claimId?.trim() || !claimText?.trim()) fail("CWA_CLAIM_REQUIRED", 400);
+  return freeze({ schemaVersion: CWA_EVIDENCE_SCHEMA, claimId: claimId.trim(), claimText: claimText.trim(), claimType, sourceId: admission.source.sourceId, sourceUrl: admission.source.url, authorityClass: admission.source.authorityClass, publisher: admission.source.publisher, title: admission.source.title, publishedAt: publishedAt || admission.source.publishedAt, retrievedAt: admission.source.retrievedAt, sourceVersion: admission.source.sourceVersionOrDigest, freshnessState: admission.freshness.freshnessState, supportLevel, jurisdiction, domain: admission.source.domain, conflicts: [...conflicts], boundaries: freeze({ searchRankUsedAsAuthority: false, sourceVotingUsed: false, lensMutationAllowed: false, proseGenerationAllowed: false }) });
+}
+
+// ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/assets/js/pages/civilization-atlas/world-r42-contract.js
+function compareWorldObjects(a, b) {
+  if (!a || !b) return { state: "COMPARABILITY_UNKNOWN", reasons: ["OBJECT_MISSING"] };
+  const reasons = [];
+  for (const [field, reason] of [["indicatorId", "INDICATOR_DEFINITIONS_DIFFER"], ["spatialLevel", "SPATIAL_SCOPES_DIFFER"], ["priceBasis", "PRICE_BASES_DIFFER"]]) if (a[field] && b[field] && a[field] !== b[field]) reasons.push(reason);
+  if (a.unit && b.unit && a.unit !== b.unit) reasons.push("INCOMPATIBLE_UNITS");
+  if (a.methodology && b.methodology && a.methodology !== b.methodology) reasons.push("INCOMPATIBLE_METHODS");
+  if (reasons.length) return { state: "NOT_COMPARABLE", reasons };
+  if (a.type !== b.type) return { state: "NOT_COMPARABLE", reasons: ["DIFFERENT_OBJECT_CLASSES"] };
+  if (a.id === b.id) return { state: "COMPARABILITY_UNKNOWN", reasons: ["SELECT_TWO_DISTINCT_OBJECTS"] };
+  if (!a.source || !b.source || !a.time || !b.time) return { state: "COMPARABILITY_UNKNOWN", reasons: ["SOURCE_OR_TIME_UNKNOWN"] };
+  if (a.unit && b.unit && (a.time.start !== b.time.start || a.time.end !== b.time.end)) return { state: "NOT_COMPARABLE", reasons: ["MEASUREMENT_PERIODS_DIFFER"] };
+  return { state: a.comparisonBasis && a.comparisonBasis === b.comparisonBasis ? "COMPARABLE" : "PARTIALLY_COMPARABLE", reasons: a.comparisonBasis === b.comparisonBasis && a.comparisonBasis ? [] : ["DESCRIPTIVE_SOURCE_ROWS_ONLY_NO_RANK_OR_CAUSAL_INFERENCE"] };
+}
+function compareWorldObservationValues(a, b) {
+  const absent = !a || !b || ![a?.value, b?.value].every(Number.isFinite);
+  if (absent) return { state: "NOT_COMPARABLE", reasons: ["MISSING_VALUE_NOT_ZERO"], difference: null };
+  const reasons = [];
+  for (const k of ["indicatorId", "unit", "currency", "priceBasis", "frequency", "definitionVersion", "sourceVersion", "scope"]) if (a[k] === void 0 || a[k] !== b[k]) reasons.push("OBSERVATION_" + k.toUpperCase() + "_MISMATCH");
+  if (a.admission !== "ARCHIVAL_CWA_SOURCE_BOUND" || b.admission !== "ARCHIVAL_CWA_SOURCE_BOUND") reasons.push("SOURCE_ADMISSION_REQUIRED");
+  if (a.fiscalCoverageVerified === false || b.fiscalCoverageVerified === false) reasons.push("GOVERNMENT_COVERAGE_NOT_VERIFIED");
+  if (reasons.length) return { state: "NOT_COMPARABLE", reasons, difference: null };
+  const comparison = compareWorldObjects(a, b);
+  if (comparison.state !== "COMPARABLE") return { ...comparison, difference: null };
+  return { ...comparison, difference: a.value - b.value, differenceUnit: a.unit.startsWith("percent") ? "percentage_points" : a.unit, methodRef: "WORLD_R42_OBSERVATION_DELTA_V1", formula: "left - right", sourceRefs: [a.id, b.id], causality: false, ranking: false };
+}
+function describeWorldObservationSeries(rows2, { start, end } = {}) {
+  const reasons = [];
+  if (!Number.isInteger(start) || !Number.isInteger(end) || end <= start || end - start > 100) reasons.push("EXPLICIT_MULTI_POINT_WINDOW_REQUIRED");
+  const points = [...rows2].filter((r) => r.time?.start >= start && r.time.start <= end).sort((a, b) => a.time.start - b.time.start), first = points[0];
+  if (points.length < 2 || points.length !== end - start + 1) reasons.push("MISSING_WINDOW_POINTS");
+  for (let i = 0; i < points.length; i++) {
+    const p = points[i];
+    if (!Number.isFinite(p.value)) reasons.push("MISSING_VALUE_NOT_ZERO");
+    if (p.frequency !== "ANNUAL") reasons.push("ANNUAL_SOURCE_REQUIRED");
+    if (p.admission !== "ARCHIVAL_CWA_SOURCE_BOUND") reasons.push("SOURCE_ADMISSION_REQUIRED");
+    if (p.fiscalCoverageVerified === false) reasons.push("GOVERNMENT_COVERAGE_NOT_VERIFIED");
+    if (i && p.time.start !== points[i - 1].time.start + 1) reasons.push("MISSING_OR_DUPLICATE_PERIOD");
+    for (const k of ["subjectId", "indicatorId", "unit", "currency", "priceBasis", "frequency", "definitionVersion", "sourceVersion", "scope"]) if (p[k] === void 0 || p[k] !== first[k]) reasons.push("SERIES_" + k.toUpperCase() + "_MISMATCH");
+  }
+  if (reasons.length) return { state: "INSUFFICIENT_SERIES", reasons: [...new Set(reasons)], points: [], change: null, noInterpolation: true, window: { start, end }, nextAction: "CHECK_MATCHING_SOURCE_PERIODS" };
+  return { state: "TREND_OBSERVATION", scope: "DATED_OBSERVED_SEQUENCE_NOT_FORECAST", window: { start, end, samplingFrequency: "ANNUAL" }, count: points.length, points: points.map((p) => ({ period: p.time.start, value: p.value, observationId: p.id })), first: first.value, last: points.at(-1).value, change: points.at(-1).value - first.value, unit: first.unit.startsWith("percent") ? "percentage_points" : first.unit, sourceRefs: points.map((p) => p.id), methodRef: "WORLD_R42_ANNUAL_OBSERVED_SEQUENCE_V1", noInterpolation: true, persistence: null, noise: null, thresholdState: "NOT_EVALUATED", forecast: false, causality: false };
+}
+
+// ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/_lib/world-observation-projection.js
+var OBSERVATION_P2_VERSION = "WORLD_OBSERVATION_COUNTRY_P2_V1";
+function countryObservationEnvelope(row) {
+  if (row?.access !== "PUBLIC" || row.privateDataUsed || row.subjectId !== "WORLD:COUNTRY:" + row.countryCode || !/^https:\/\/api\.worldbank\.org\//.test(row.sourceUrl || "")) throw Error("P2_PUBLIC_WORLD_SOURCE_SCOPE_REQUIRED");
+  const licensed = row.access === "PUBLIC" && row.licenseStatus === "INDICATOR_CC_BY_4_0_VERIFIED" && row.sourceDigest && row.metadataDigest;
+  let admission = null, evidence = null;
+  if (licensed) {
+    const candidate = normalizeCurrentSourceCandidate({ url: row.sourceUrl, publisher: row.sourcePublisher || "World Bank WDI", title: row.indicatorId, publishedAt: row.publicationDate, retrievedAt: row.retrievedAt });
+    admission = admitCurrentSource({ candidate, domain: "GENERAL_CURRENT", authorityClass: "OFFICIAL_PRIMARY", claimType: "GENERAL_CURRENT_FACT", sourceId: "WDI:" + row.indicatorId, sourceVersionOrDigest: row.sourceDigest, now: row.retrievedAt });
+    if (admission.admissionState === "ADMITTED" && Number.isFinite(row.value)) evidence = createCurrentEvidence({ claimId: "WDI-REPORTED:" + row.id, claimText: "Source reports " + row.countryCode + " " + row.indicatorId + " " + row.year + " = " + row.value + " " + row.unit, claimType: "GENERAL_CURRENT_FACT", admission, jurisdiction: row.countryCode });
+  }
+  const admitted = !!evidence;
+  return { observationId: row.id, subject: { subjectId: row.subjectId, type: "COUNTRY", countryCode: row.countryCode, spatialLevel: "COUNTRY" }, observationClass: "MEASUREMENT", knowledgeState: admitted ? "CANONICAL_HISTORY" : "UNKNOWN", observedAt: String(row.year), retrievedAt: row.retrievedAt, sourceRefs: [{ id: "WDI:" + row.indicatorId, url: row.sourceUrl, metadataUrl: row.metadataUrl, sourceVersion: row.sourceDigest, datasetUpdatedAt: row.sourceUpdatedAt, publicationDate: row.publicationDate, licenseStatus: row.licenseStatus }], lineage: { sourceClass: "OFFICIAL_DATASET", providerId: "WORLD_BANK", rawSnapshotRef: "content/world/world-country-public-evidence-r1.json#" + row.id, claimRefs: evidence ? [evidence.claimId] : [], evidenceRefs: evidence ? [evidence.claimId] : [], rreReadoutRef: null, transformationRefs: [OBSERVATION_P2_VERSION], archiveValidationReferenceTime: row.retrievedAt, validationMode: "PINNED_SOURCE_REFERENCE_TIME_REPLAY_NOT_A_HISTORICAL_ACTION_RECORD", archiveAdmissionState: admission?.admissionState || "NOT_ADMITTED", currentnessClaimed: false }, measurement: { objectDefinition: row.indicatorDefinition, indicatorId: row.indicatorId, value: admitted ? row.value : null, unit: row.unit, currency: row.currency, priceBasis: row.priceBasis, scale: "COUNTRY", baseline: null, window: { start: row.year, end: row.year, samplingFrequency: "ANNUAL" }, resolution: "SOURCE_REPORTED_STATISTICAL_YEAR_LABEL_ONLY", calibration: null, comparability: admitted && row.domain !== "PUBLIC_FISCAL" ? "PARTIALLY_COMPARABLE" : "UNKNOWN", error: { known: false, description: row.estimateBasis || "Source measurement error not supplied." }, missingness: { state: admitted ? "SOURCE_VALUE_AVAILABLE" : "MISSING_OR_UNADMITTED", description: admitted ? "Source-reported dated value; not a live observation." : "No substitute or zero is inserted." } }, uncertainty: { state: "PARTIAL_BOUND", description: row.coverage || "Country-specific reporting method and exact annual boundaries require source review.", unresolved: ["NO_CURRENT_WORLD_STATE_INFERENCE", "NO_CAUSALITY", "NO_POLICY_CONCLUSION", ...row.domain === "PUBLIC_FISCAL" ? ["GOVERNMENT_COVERAGE_NOT_VERIFIED"] : []] }, boundary: { publicOnly: true, personalFact: false, privateWrite: false, liveMarketFact: false, forecast: false, currentData: false, signalThresholdEvaluated: false }, admission: { state: admitted ? "ARCHIVAL_CWA_SOURCE_BOUND" : "NOT_ADMITTED", licenseVerified: !!licensed, archival: true }, projectionVersion: row.projectionVersion, dimensionIds: row.dimensionIds, title: row.title, sourceObservationRef: row.id };
+}
+function worldObservationObject(row) {
+  const e = countryObservationEnvelope(row);
+  return { id: row.id, subjectId: row.subjectId, type: "admitted-measurement", indicatorId: row.indicatorId, title: { en: row.countryCode + " \xB7 " + row.title.en + " \xB7 " + row.year, "zh-Hans": row.countryCode + " \xB7 " + row.title["zh-Hans"] + " \xB7 " + row.year }, unit: row.unit, value: e.measurement.value, currency: row.currency, priceBasis: row.priceBasis, frequency: row.frequency?.toUpperCase() || null, definitionVersion: row.metadataDigest, sourceVersion: row.sourceDigest, scope: row.domain, spatialLevel: "COUNTRY", methodology: row.metadataDigest, source: row.sourceUrl, time: { start: row.year, end: row.year }, comparisonBasis: [row.indicatorId, row.unit, row.priceBasis, row.metadataDigest, row.sourceDigest].join("|"), admission: e.admission.state, fiscalCoverageVerified: row.domain === "PUBLIC_FISCAL" ? false : null, version: row.projectionVersion, region: row.countryCode, state: Number.isFinite(row.value) ? "DATED_SOURCE_VALUE" : "MISSING_SOURCE_VALUE", href: "/perspectives/profile/?subjectType=COUNTRY&country=" + row.countryCode + "&dimension=" + (row.dimensionIds[0] || "identity") + "&year=" + row.year, observationEnvelopeRef: e.observationId };
+}
+function countryObservationProjection(country, { start = 2019, end = 2024 } = {}) {
+  const rows2 = country.rows.filter((r) => r.year >= start && r.year <= end), ids = [...new Set(rows2.map((r) => r.indicatorId))], latest2 = ids.map((id2) => rows2.filter((r) => r.indicatorId === id2).sort((a, b) => b.year - a.year)[0]).filter(Boolean);
+  return { schemaVersion: OBSERVATION_P2_VERSION, owner: "WORLD_EVIDENCE", sourceVersion: country.sourceVersion, subject: country.identity, scope: "THREE_COUNTRY_ARCHIVAL_SOURCE_PILOT_ONLY", envelopes: latest2.map(countryObservationEnvelope), comparisonObjects: latest2.map(worldObservationObject), trends: ids.map((id2) => ({ indicatorId: id2, title: rows2.find((r) => r.indicatorId === id2).title, ...describeWorldObservationSeries(rows2.filter((r) => r.indicatorId === id2).map(worldObservationObject), { start, end }) })), runtimeReadoutBoundary: { rreCurrentWorldDerivation: false, signalClassification: false, universalCountryScore: false, globalSnapshot: false }, providerCalls: 0, productionWrites: 0 };
+}
+var compareCountryObservationValues = (a, b) => compareWorldObservationValues(worldObservationObject(a), worldObservationObject(b));
+
 // ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/customer-projection/projection-common.js
 var CX_PROJECTION_VERSION = "PHI-OS-CX-CUSTOMER-PROJECTION-v1.0.0";
 var clean = (value) => String(value ?? "").normalize("NFKC").trim().replace(/\s+/g, " ");
@@ -25,7 +169,7 @@ function deepFreeze(value) {
   }
   return value;
 }
-function safeUrl(value) {
+function safeUrl2(value) {
   const v = clean(value);
   if (!v) return null;
   try {
@@ -50,7 +194,7 @@ var option = (item) => deepFreeze({
   id: clean(item?.id || item?.pathId || item?.code) || null,
   label: clean(item?.label || item?.title || item?.statement),
   description: clean(item?.description || item?.summary) || null,
-  href: safeUrl(item?.href),
+  href: safeUrl2(item?.href),
   state: clean(item?.state || item?.status) || null,
   evidence: clean(item?.evidenceState) || null,
   tradeOff: clean(item?.tradeOff || item?.tradeoff) || null,
@@ -314,15 +458,15 @@ function projectCountryEvidence(snapshot, code, { year = null } = {}) {
     const projectedRows = pilot ? periods.map((period) => sourceRows.find((x) => x.period === period) || { countryCode: code, period, value: null, qualityState: "MISSING", sourceReturnedObservation: false }) : sourceRows;
     for (const o of projectedRows) {
       const known = series.licenseStatus === "INDICATOR_CC_BY_4_0_VERIFIED" && o.qualityState === "OBSERVED" && Number.isFinite(o.value);
-      rows2.push({ id: series.indicatorId + ":" + code + ":" + o.period, subjectId: publicSubjectRef(code), countryCode: code, countryCodeAlpha2: identity.iso2, indicatorId: series.indicatorId, indicatorDefinition: series.metadata.Longdefinition || series.metadata.Shortdefinition || null, title: definition.title, domain: definition.domain || "MACROECONOMIC", dimensionIds: definition.dimensions || (series.indicatorId === "SP.POP.TOTL" ? ["identity", "growth"] : ["expression", "growth"]), financialMetricId: definition.financialMetricId || (series.indicatorId === "NY.GDP.MKTP.CD" ? "gdp" : null), unit: definition.unit, currency: definition.unit === "USD" ? "USD" : null, value: known ? o.value : null, periodStart: null, periodEnd: null, sourceReportedPeriod: String(o.period), periodBoundaryStatus: "YEAR_LABEL_ONLY_CALENDAR_OR_FISCAL_BOUNDARY_NOT_VERIFIED", year: o.period, frequency: series.metadata.Periodicity || null, sourcePublisher: series.metadata.Source || null, sourceDataset: "World Development Indicators", sourceUrl: series.dataUrl, metadataUrl: series.metadataUrl, retrievedAt: series.retrievedAt, publicationDate: null, sourceUpdatedAt: series.sourceUpdatedAt, sourceVersion: series.sourceUpdatedAt || null, sourceDigest: series.dataSha256, metadataDigest: series.metadataSha256, projectionVersion: snapshot.projectionDigest, methodology: series.metadata.Statisticalconceptandmethodology || null, coverage: series.metadata.Limitationsandexceptions || null, licenseStatus: series.licenseStatus, licenseUrl: series.metadata.License_URL || null, sourceReturnedObservation: o.sourceReturnedObservation !== false, qualityState: known ? "OBSERVED" : o.qualityState === "RIGHTS_PENDING" ? "RIGHTS_PENDING" : "MISSING", kind: "OBSERVED_FACT", factStatement: "Source reports this statistical value; not a claim of direct measurement.", estimateBasis: ["SP.POP.TOTL", "SL.EMP.TOTL.SP.ZS"].includes(series.indicatorId) ? "SOURCE_ESTIMATE_OR_MODEL" : null, access: "PUBLIC", privateDataUsed: false });
+      rows2.push({ id: series.indicatorId + ":" + code + ":" + o.period, subjectId: publicSubjectRef(code), countryCode: code, countryCodeAlpha2: identity.iso2, indicatorId: series.indicatorId, indicatorDefinition: series.metadata.Longdefinition || series.metadata.Shortdefinition || null, title: definition.title, domain: definition.domain || "MACROECONOMIC", dimensionIds: definition.dimensions || (series.indicatorId === "SP.POP.TOTL" ? ["identity", "growth"] : ["expression", "growth"]), financialMetricId: definition.financialMetricId || (series.indicatorId === "NY.GDP.MKTP.CD" ? "gdp" : null), unit: definition.unit, priceBasis: definition.priceBasis || null, currency: definition.unit === "USD" ? "USD" : null, value: known ? o.value : null, periodStart: null, periodEnd: null, sourceReportedPeriod: String(o.period), periodBoundaryStatus: "YEAR_LABEL_ONLY_CALENDAR_OR_FISCAL_BOUNDARY_NOT_VERIFIED", year: o.period, frequency: series.metadata.Periodicity || null, sourcePublisher: series.metadata.Source || null, sourceDataset: "World Development Indicators", sourceUrl: series.dataUrl, metadataUrl: series.metadataUrl, retrievedAt: series.retrievedAt, publicationDate: null, sourceUpdatedAt: series.sourceUpdatedAt, sourceVersion: series.sourceUpdatedAt || null, sourceDigest: series.dataSha256, metadataDigest: series.metadataSha256, projectionVersion: snapshot.projectionDigest, methodology: series.metadata.Statisticalconceptandmethodology || null, coverage: series.metadata.Limitationsandexceptions || null, licenseStatus: series.licenseStatus, licenseUrl: series.metadata.License_URL || null, sourceReturnedObservation: o.sourceReturnedObservation !== false, qualityState: known ? "OBSERVED" : o.qualityState === "RIGHTS_PENDING" ? "RIGHTS_PENDING" : "MISSING", kind: "OBSERVED_FACT", factStatement: "Source reports this statistical value; not a claim of direct measurement.", estimateBasis: ["SP.POP.TOTL", "SL.EMP.TOTL.SP.ZS"].includes(series.indicatorId) ? "SOURCE_ESTIMATE_OR_MODEL" : null, access: "PUBLIC", privateDataUsed: false });
     }
   }
-  return { identity: { subjectId: publicSubjectRef(code), subjectType: "COUNTRY", displayNames: { en: identity.name.en, "zh-Hans": identity.name.zh }, countryCodeAlpha3: code, countryCodeAlpha2: identity.iso2, identitySource: identity.source || "WORLD_GEO_R2", identityVersion: "WORLD_GEO_R2_WITH_VERIFIED_SGP_IDENTITY", ownershipClass: "SYSTEM_MAINTAINED", visibility: "PUBLIC", permissionScope: ["PUBLIC_READ", "PUBLIC_RESEARCH"], ownsSubject: false, geometryAvailability: identity.geometryAvailable === false ? "UNAVAILABLE" : "AVAILABLE", entityType: ["MYS", "SGP", "IDN"].includes(code) ? "COUNTRY" : "GEOGRAPHIC_ENTITY_CLASSIFICATION_UNVERIFIED", currentIdentitySource: identity.source || "/content/civilization-atlas/geography/world-selection-geometry-r2.json" }, rows: rows2, sourceVersion: snapshot.projectionDigest, asOf: snapshot.retrievedAt, pilotCoverage: snapshot.identitySource.countries.some((c) => c.id === code), requestedYear: year };
+  return { identity: { subjectId: publicSubjectRef(code), subjectType: "COUNTRY", canonicalSubjectRef: { owner: "WORLD", id: code, version: "WORLD_GEO_R2_WITH_VERIFIED_SGP_IDENTITY" }, identityPersisted: false, displayNames: { en: identity.name.en, "zh-Hans": identity.name.zh }, countryCodeAlpha3: code, countryCodeAlpha2: identity.iso2, identitySource: identity.source || "WORLD_GEO_R2", identityVersion: "WORLD_GEO_R2_WITH_VERIFIED_SGP_IDENTITY", ownershipClass: "SYSTEM_MAINTAINED", visibility: "PUBLIC", permissionScope: ["PUBLIC_READ", "PUBLIC_RESEARCH"], ownsSubject: false, geometryAvailability: identity.geometryAvailable === false ? "UNAVAILABLE" : "AVAILABLE", entityType: ["MYS", "SGP", "IDN"].includes(code) ? "COUNTRY" : "GEOGRAPHIC_ENTITY_CLASSIFICATION_UNVERIFIED", currentIdentitySource: identity.source || "/content/civilization-atlas/geography/world-selection-geometry-r2.json" }, rows: rows2, sourceVersion: snapshot.projectionDigest, asOf: snapshot.retrievedAt, pilotCoverage: snapshot.identitySource.countries.some((c) => c.id === code), requestedYear: year };
 }
 function compareCountryEvidence(left, right, { year = 2024 } = {}) {
   const by = (p, id2) => p.rows.find((x) => x.indicatorId === id2 && x.year === year && x.qualityState === "OBSERVED");
   return Object.entries(WORLD_BANK_INDICATORS).map(([id2, d]) => {
-    const a = by(left, id2), b = by(right, id2), compatible = a && b && ["indicatorId", "unit", "currency", "frequency", "sourceDataset", "projectionVersion", "year"].every((k) => a[k] === b[k]) && a.domain !== "PUBLIC_FISCAL";
+    const a = by(left, id2), b = by(right, id2), compatible = a && b && ["indicatorId", "unit", "priceBasis", "currency", "frequency", "sourceDataset", "projectionVersion", "year"].every((k) => a[k] === b[k]) && a.domain !== "PUBLIC_FISCAL";
     return { indicatorId: id2, title: d.title, year, unit: d.unit, left: a || null, right: b || null, state: compatible ? "COMPARABLE" : a?.domain === "PUBLIC_FISCAL" || b?.domain === "PUBLIC_FISCAL" ? "GOVERNMENT_COVERAGE_RECHECK_REQUIRED" : "MISSING_OR_INCOMPATIBLE", reason: compatible ? "Same reported definition, year, frequency, unit and snapshot. No ranking." : "Missing values or unconfirmed government reporting coverage; no substitute or score.", differenceCalculated: false };
   });
 }
@@ -389,6 +533,7 @@ function countryReadingContext(subject, dimension, observations, { locale = "en"
 // ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/professional/financial/country-public-financial-adapter-r1.js
 function countryFinancialProjection(subject, evidence) {
   if (subject.subjectType !== "COUNTRY" || subject.visibility !== "PUBLIC") throw Error("COUNTRY_PUBLIC_FINANCIAL_SCOPE_REQUIRED");
+  if (evidence.some((e) => e.subjectId !== subject.subjectId || e.access !== "PUBLIC" || e.privateDataUsed)) throw Error("COUNTRY_FINANCIAL_EVIDENCE_SCOPE_MISMATCH");
   const macro = evidence.filter((e) => e.domain === "MACROECONOMIC"), fiscal = evidence.filter((e) => e.domain === "PUBLIC_FISCAL");
   if (fiscal.some((e) => !FINANCIAL_SCOPE_METRICS.PUBLIC_FISCAL.includes(e.financialMetricId))) throw Error("PUBLIC_FISCAL_METRIC_SCOPE_MISMATCH");
   return { subjectId: subject.subjectId, subjectType: "COUNTRY", macroeconomic: { scope: "MACROECONOMIC", observations: macro }, publicFinance: { scope: "PUBLIC_FISCAL", observations: fiscal, governmentCoverage: "CENTRAL_OR_BUDGETARY_CENTRAL_RECHECK_REQUIRED", currencyAmountsAvailable: false, unavailableMetrics: ["debtService", "localCurrencyRevenue", "localCurrencyExpenditure", "verifiedConsolidatedGovernmentBoundary"], expenseIsCompleteExpenditure: false, reportedRatiosOnly: true, budgetBalance: null, budgetBalanceReason: "Revenue excludes grants; expense is not complete expenditure; no matched government boundary or cash-balance observation.", policyAdvice: false }, derivedMetrics: [], personalFormulaApplied: false, businessProfitApplied: false, GDPIsGovernmentRevenue: false, automaticProfessionalConclusion: false };
@@ -419,32 +564,32 @@ async function publicCountryProfile(context, { countryCode, locale = "en", year 
   if (compare) {
     if (compare === countryCode) throw Object.assign(Error("DIFFERENT_COUNTRY_REQUIRED"), { status: 400 });
     const other = projectCountryEvidence(snapshot, compare, { year: year || 2024 });
-    comparison = { left: p.identity, right: other.identity, year: year || 2024, rows: compareCountryEvidence(p, other, { year: year || 2024 }), ranking: null, sourceVersion: p.sourceVersion };
+    comparison = { left: p.identity, right: other.identity, year: year || 2024, rows: compareCountryEvidence(p, other, { year: year || 2024 }), observationRows: compareCountryEvidence(p, other, { year: year || 2024 }).map((row) => ({ indicatorId: row.indicatorId, ...row.left && row.right && row.state === "COMPARABLE" ? compareCountryObservationValues(row.left, row.right) : { state: "NOT_COMPARABLE", difference: null, reasons: [row.state] } })), ranking: null, sourceVersion: p.sourceVersion };
   }
-  return { schemaVersion: "COUNTRY_PROFILE_SOURCE_PROJECTION_R1", contractVersion: "SUBJECT-CONTEXT-R1", subject: p.identity, sourceVersion: p.sourceVersion, asOf: p.asOf, requestedYear: year, pilotCoverage: p.pilotCoverage, coverage: observations.filter((x) => x.value !== null).length ? "PROFILE_FACTS_PARTIAL" : "IDENTITY_AVAILABLE", dimensions, financial, comparison, navigation, history: { countryCode, requestedPeriod: null, coverage: "HISTORY_COVERAGE_PARTIAL", caseMappingAdmitted: false, modernBoundaryIsHistoricalBoundary: false, href: "/world/?worldJourney=history&locale=" + locale + "#v=2&mode=history&pane=cases&region=" + countryCode + "&applyYear=false" }, privacy: { accountRead: false, pwsRead: false, privateProfileRead: false, personalNationalityInferred: false, countryAdministrationGranted: false, persistence: false }, paidProviderCalls: 0, productionAdmissionGranted: false };
+  return { schemaVersion: "COUNTRY_PROFILE_SOURCE_PROJECTION_R1", contractVersion: "SUBJECT-CONTEXT-R1", subject: p.identity, sourceVersion: p.sourceVersion, asOf: p.asOf, requestedYear: year, pilotCoverage: p.pilotCoverage, coverage: observations.filter((x) => x.value !== null).length ? "PROFILE_FACTS_PARTIAL" : "IDENTITY_AVAILABLE", dimensions, financial, comparison, navigation, observationProjection: countryObservationProjection(projectCountryEvidence(snapshot, countryCode), { start: 2019, end: Math.min(year || 2024, 2024) }), history: { countryCode, requestedPeriod: null, coverage: "HISTORY_COVERAGE_PARTIAL", caseMappingAdmitted: false, modernBoundaryIsHistoricalBoundary: false, href: "/world/?worldJourney=history&locale=" + locale + "#v=2&mode=history&pane=cases&region=" + countryCode + "&applyYear=false" }, privacy: { accountRead: false, pwsRead: false, privateProfileRead: false, personalNationalityInferred: false, countryAdministrationGranted: false, persistence: false }, paidProviderCalls: 0, productionAdmissionGranted: false };
 }
 
 // ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/account/oidc-auth.js
 import { EncryptJWT, jwtDecrypt, jwtVerify, createLocalJWKSet } from "jose";
 var SESSION_COOKIE = "__Host-phios-session";
 var encoder = new TextEncoder();
-var fail = (code, status = 400) => Object.assign(new Error(code), { code, status });
+var fail2 = (code, status = 400) => Object.assign(new Error(code), { code, status });
 var now = () => Math.floor(Date.now() / 1e3);
 async function digest(value) {
   return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", encoder.encode(value))), (v) => v.toString(16).padStart(2, "0")).join("");
 }
 function config(context) {
   const env = context.env || {}, origin = new URL(context.request.url).origin;
-  if (env.AUTH_PROVIDER !== "auth0" || !env.AUTH_CLIENT_ID || !env.AUTH_CLIENT_SECRET || String(env.AUTH_SESSION_SECRET || "").length < 32 || !env.RUNTIME_DB?.prepare) throw fail("AUTH_CONFIGURATION_REQUIRED", 503);
+  if (env.AUTH_PROVIDER !== "auth0" || !env.AUTH_CLIENT_ID || !env.AUTH_CLIENT_SECRET || String(env.AUTH_SESSION_SECRET || "").length < 32 || !env.RUNTIME_DB?.prepare) throw fail2("AUTH_CONFIGURATION_REQUIRED", 503);
   let issuer;
   try {
     issuer = new URL(env.AUTH_ISSUER);
   } catch {
-    throw fail("AUTH_ISSUER_INVALID", 503);
+    throw fail2("AUTH_ISSUER_INVALID", 503);
   }
-  if (issuer.protocol !== "https:" || issuer.username || issuer.password || issuer.search || issuer.hash || issuer.pathname !== "/") throw fail("AUTH_ISSUER_INVALID", 503);
+  if (issuer.protocol !== "https:" || issuer.username || issuer.password || issuer.search || issuer.hash || issuer.pathname !== "/") throw fail2("AUTH_ISSUER_INVALID", 503);
   const callback = env.AUTH_CALLBACK_URL || `${origin}/api/auth/callback`;
-  if (new URL(callback).origin !== origin || new URL(callback).pathname !== "/api/auth/callback" || new URL(callback).search || new URL(callback).hash || !origin.startsWith("https://")) throw fail("AUTH_CALLBACK_INVALID", 503);
+  if (new URL(callback).origin !== origin || new URL(callback).pathname !== "/api/auth/callback" || new URL(callback).search || new URL(callback).hash || !origin.startsWith("https://")) throw fail2("AUTH_CALLBACK_INVALID", 503);
   return { issuer: issuer.href, origin, callback, clientId: env.AUTH_CLIENT_ID, clientSecret: env.AUTH_CLIENT_SECRET, secret: env.AUTH_SESSION_SECRET, db: env.RUNTIME_DB };
 }
 async function key(c, purpose) {
@@ -2540,82 +2685,6 @@ __export(current_facts_exports, {
   onRequestPost: () => onRequestPost2
 });
 
-// ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/current-web-authority/current-web-authority-runtime.js
-var CWA_EVIDENCE_SCHEMA = "PHI-OS-CURRENT-EVIDENCE-IR-v1.0.0";
-var PRECEDENCE = Object.freeze({ OFFICIAL_PRIMARY: 100, REGULATOR: 95, PUBLIC_HEALTH: 95, GOVERNMENT: 90, OFFICIAL_COMPANY: 85, ACADEMIC: 80, MARKET_DATA_PROVIDER: 78, REPUTABLE_NEWS: 70, SECONDARY_REFERENCE: 55, COMMUNITY: 25 });
-var DOMAIN_ALLOWED = Object.freeze({ HEALTH: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "REGULATOR", "PUBLIC_HEALTH", "GOVERNMENT", "ACADEMIC"]), FINANCIAL_MARKETS: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "REGULATOR", "GOVERNMENT", "MARKET_DATA_PROVIDER", "OFFICIAL_COMPANY", "REPUTABLE_NEWS"]), COMPANY_PRODUCT: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "OFFICIAL_COMPANY", "REGULATOR", "REPUTABLE_NEWS", "SECONDARY_REFERENCE"]), NEWS_CURRENT_EVENTS: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "GOVERNMENT", "REGULATOR", "REPUTABLE_NEWS"]), WEATHER: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "GOVERNMENT", "SECONDARY_REFERENCE"]), GENERAL_CURRENT: /* @__PURE__ */ new Set(["OFFICIAL_PRIMARY", "GOVERNMENT", "REGULATOR", "OFFICIAL_COMPANY", "ACADEMIC", "REPUTABLE_NEWS", "SECONDARY_REFERENCE"]) });
-var TTL = Object.freeze({ STOCK_OR_MARKET_PRICE: 900, WEATHER_CURRENT: 10800, BREAKING_NEWS: 86400, NEWS_DEVELOPMENT: 604800, PUBLIC_HEALTH_ALERT: 86400, GENERAL_CURRENT_FACT: 604800 });
-var CLAIM_ALLOWED = Object.freeze({ HEALTH: /* @__PURE__ */ new Set(["PUBLIC_HEALTH_ALERT", "MEDICAL_GUIDELINE", "GENERAL_CURRENT_FACT", "NEWS_DEVELOPMENT"]), FINANCIAL_MARKETS: /* @__PURE__ */ new Set(["STOCK_OR_MARKET_PRICE", "POLICY_OR_REGULATION", "BREAKING_NEWS", "NEWS_DEVELOPMENT", "GENERAL_CURRENT_FACT"]), COMPANY_PRODUCT: /* @__PURE__ */ new Set(["COMPANY_PRODUCT_SPEC", "POLICY_OR_REGULATION", "BREAKING_NEWS", "NEWS_DEVELOPMENT", "GENERAL_CURRENT_FACT"]), NEWS_CURRENT_EVENTS: /* @__PURE__ */ new Set(["BREAKING_NEWS", "NEWS_DEVELOPMENT", "GENERAL_CURRENT_FACT"]), WEATHER: /* @__PURE__ */ new Set(["WEATHER_CURRENT", "GENERAL_CURRENT_FACT"]), GENERAL_CURRENT: /* @__PURE__ */ new Set(["GENERAL_CURRENT_FACT", "BREAKING_NEWS", "NEWS_DEVELOPMENT", "POLICY_OR_REGULATION", "COMPANY_PRODUCT_SPEC"]) });
-function fail2(code, status = 422) {
-  const e = new Error(code);
-  e.code = code;
-  e.status = status;
-  throw e;
-}
-function freeze(v) {
-  if (v && typeof v === "object" && !Object.isFrozen(v)) {
-    Object.freeze(v);
-    for (const x of Object.values(v)) freeze(x);
-  }
-  return v;
-}
-function iso(v, code) {
-  const d = new Date(v);
-  if (!v || Number.isNaN(d.valueOf())) fail2(code, 400);
-  return d.toISOString();
-}
-function safeUrl2(value) {
-  let u;
-  try {
-    u = new URL(value);
-  } catch {
-    fail2("CWA_URL_INVALID", 400);
-  }
-  if (u.protocol !== "https:") fail2("CWA_HTTPS_REQUIRED", 400);
-  u.hash = "";
-  return u.toString();
-}
-function discoverCurrentSourceCandidates({ query = "", domain = "GENERAL_CURRENT", currentnessRequirement = "CURRENTNESS_REQUIRED", results = [] } = {}) {
-  if (!String(query).trim()) fail2("CWA_DISCOVERY_QUERY_REQUIRED", 400);
-  if (!DOMAIN_ALLOWED[domain]) fail2("CWA_DOMAIN_UNKNOWN", 400);
-  if (currentnessRequirement === "CURRENTNESS_NONE") return freeze({ state: "CWA_NOT_CALLED", query: String(query).trim(), domain, currentnessRequirement, candidates: [] });
-  if (!Array.isArray(results)) fail2("CWA_DISCOVERY_RESULTS_ARRAY_REQUIRED", 400);
-  return freeze({ state: "CANDIDATES_DISCOVERED_NOT_ADMITTED", query: String(query).trim(), domain, currentnessRequirement, candidates: results.map(normalizeCurrentSourceCandidate), boundaries: freeze({ searchResultIsFact: false, searchRankIsAuthority: false }) });
-}
-function normalizeCurrentSourceCandidate({ url, publisher, title, publishedAt = null, retrievedAt, authorityClassHint = null, sourceVersionHint = null } = {}) {
-  if (!publisher?.trim() || !title?.trim()) fail2("CWA_SOURCE_METADATA_REQUIRED", 400);
-  return freeze({ url: safeUrl2(url), publisher: publisher.trim(), title: title.trim(), publishedAt: publishedAt ? iso(publishedAt, "CWA_PUBLISHED_AT_INVALID") : null, retrievedAt: iso(retrievedAt, "CWA_RETRIEVED_AT_INVALID"), authorityClassHint: authorityClassHint || null, sourceVersionHint: sourceVersionHint || null, admissionState: "CANDIDATE_ONLY", isFact: false, isAuthority: false });
-}
-function evaluateCurrentness({ claimType, retrievedAt, now: now2 = (/* @__PURE__ */ new Date()).toISOString(), sourceVersionCurrent = null, superseded = false } = {}) {
-  const r = new Date(iso(retrievedAt, "CWA_RETRIEVED_AT_INVALID")), n = new Date(iso(now2, "CWA_NOW_INVALID"));
-  if (r > n) fail2("CWA_RETRIEVAL_FROM_FUTURE", 400);
-  if (TTL[claimType] != null) {
-    const age = Math.floor((n - r) / 1e3);
-    return freeze({ freshnessState: age <= TTL[claimType] ? "FRESH" : "STALE", mode: "TTL", ageSeconds: age, ttlSeconds: TTL[claimType] });
-  }
-  if (claimType === "POLICY_OR_REGULATION") return freeze({ freshnessState: superseded ? "STALE" : "FRESH_UNTIL_SUPERSEDED", mode: "UNTIL_SUPERSEDED" });
-  if (claimType === "MEDICAL_GUIDELINE" || claimType === "COMPANY_PRODUCT_SPEC") return freeze({ freshnessState: sourceVersionCurrent === true ? "FRESH_VERSION_BOUND" : "VERSION_CHECK_REQUIRED", mode: claimType === "MEDICAL_GUIDELINE" ? "VERSION_BOUND" : "CURRENT_RELEASE" });
-  return freeze({ freshnessState: "NO_FRESHNESS_POLICY", mode: "REJECT" });
-}
-function admitCurrentSource({ candidate, domain, authorityClass: authorityClass2, claimType, now: now2, sourceVersionCurrent = null, superseded = false, sourceId, sourceVersionOrDigest } = {}) {
-  if (!candidate || candidate.admissionState !== "CANDIDATE_ONLY") fail2("CWA_CANDIDATE_REQUIRED", 400);
-  const allowed = DOMAIN_ALLOWED[domain];
-  if (!allowed) fail2("CWA_DOMAIN_UNKNOWN", 400);
-  if (!PRECEDENCE[authorityClass2]) fail2("CWA_AUTHORITY_CLASS_UNKNOWN", 400);
-  if (!allowed.has(authorityClass2)) return freeze({ admissionState: "REJECTED", reason: "CWA_AUTHORITY_NOT_ALLOWED_FOR_DOMAIN", domain, authorityClass: authorityClass2 });
-  const claimAllowed = CLAIM_ALLOWED[domain];
-  if (!claimAllowed?.has(claimType)) return freeze({ admissionState: "REJECTED", reason: "CWA_CLAIM_TYPE_NOT_ALLOWED_FOR_DOMAIN", domain, authorityClass: authorityClass2, claimType });
-  const freshness = evaluateCurrentness({ claimType, retrievedAt: candidate.retrievedAt, now: now2, sourceVersionCurrent, superseded });
-  if (["STALE", "VERSION_CHECK_REQUIRED", "NO_FRESHNESS_POLICY"].includes(freshness.freshnessState)) return freeze({ admissionState: freshness.freshnessState === "STALE" ? "STALE" : "REJECTED", reason: "CWA_FRESHNESS_NOT_ADMITTED", domain, authorityClass: authorityClass2, freshness });
-  if (!sourceId?.trim() || !sourceVersionOrDigest?.trim()) fail2("CWA_PROVENANCE_REQUIRED", 400);
-  return freeze({ admissionState: "ADMITTED", source: { sourceId: sourceId.trim(), sourceVersionOrDigest: sourceVersionOrDigest.trim(), ...candidate, authorityClass: authorityClass2, domain }, claimType, freshness, authorityPrecedence: PRECEDENCE[authorityClass2], sourceCountIsAuthority: false });
-}
-function createCurrentEvidence({ claimId, claimText, claimType, admission, publishedAt = null, supportLevel = "DIRECT", jurisdiction = null, conflicts = [] } = {}) {
-  if (admission?.admissionState !== "ADMITTED") fail2("CWA_ADMITTED_SOURCE_REQUIRED", 409);
-  if (!claimId?.trim() || !claimText?.trim()) fail2("CWA_CLAIM_REQUIRED", 400);
-  return freeze({ schemaVersion: CWA_EVIDENCE_SCHEMA, claimId: claimId.trim(), claimText: claimText.trim(), claimType, sourceId: admission.source.sourceId, sourceUrl: admission.source.url, authorityClass: admission.source.authorityClass, publisher: admission.source.publisher, title: admission.source.title, publishedAt: publishedAt || admission.source.publishedAt, retrievedAt: admission.source.retrievedAt, sourceVersion: admission.source.sourceVersionOrDigest, freshnessState: admission.freshness.freshnessState, supportLevel, jurisdiction, domain: admission.source.domain, conflicts: [...conflicts], boundaries: freeze({ searchRankUsedAsAuthority: false, sourceVotingUsed: false, lensMutationAllowed: false, proseGenerationAllowed: false }) });
-}
-
 // ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/current-facts-gateway/current-facts-gateway.js
 var PUBLIC_FACT_SIGNAL = /(exchange rate|fx\b|currency rate|stock|share price|market price|interest rate|weather|temperature|forecast|breaking|latest news|current event|regulation|law|policy|current price|price today|汇率|外汇|股价|市场价格|利率|天气|气温|预报|最新新闻|时事|法规|监管|政策|今日价格|当前价格)/i;
 var DOMAIN_RULES = [["WEATHER", /(weather|temperature|forecast|天气|气温|预报)/i], ["FINANCIAL_MARKETS", /(exchange rate|fx\b|currency|stock|share price|market|interest rate|汇率|外汇|货币|股价|市场|利率)/i], ["NEWS_CURRENT_EVENTS", /(breaking|latest news|current event|新闻|时事|突发)/i], ["COMPANY_PRODUCT", /(current price|price today|product price|售价|产品价格|今日价格|当前价格)/i]];
@@ -2931,21 +3000,6 @@ function analyzeWorldCompany(packet, { now: now2 = (/* @__PURE__ */ new Date()).
     scenario.price.limitations.push("USER_DECLARED_ASSUMPTION_NOT_FORECAST");
   }
   return { symbol, name: packet.name || symbol, exchange: "MYX", securityCode: symbol.slice(4), industry: packet.industry || null, currency: unit || null, state: validFiling ? "PARTIAL_DATED_FILING" : "SOURCE_GAP", metrics: out, period: { start: f.periodStart || null, end: f.periodEnd || null, kind: f.periodKind || null, comparison: f.comparison || null, audited: f.audited === true }, source: { id: packet.sourceId || null, url: packet.sourceUrl || null, publishedAt: packet.publishedAt || null, checkedAt: packet.checkedAt || null, authority: packet.sourceAuthority || null, verifiedReport: packet.verifiedReport || null, latestFilingCheck: packet.latestFilingCheck || null }, freshness: { filing: latestChecked ? "LATEST_MANUALLY_VERIFIED_AS_OF_CHECK_NOT_AUTOMATIC_REFRESH" : "HISTORICAL_AS_FILED_NOT_VERIFIED_LATEST", quote: quoteState, computedAt: now2 }, scenarios, limits: [...packet.limits || [], "NO_QUARTERLY_ANNUALISATION", "NO_PRICE_TARGET_OR_INVESTMENT_RECOMMENDATION"], segmentContributions, reportedYearToDate: f.yearToDateSummary || null, interpretationMode: "RULE_BASED_EXPLANATION", providerCalls: 0, modelCalls: 0, personalFactsCreated: false };
-}
-
-// ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/assets/js/pages/civilization-atlas/world-r42-contract.js
-function compareWorldObjects(a, b) {
-  if (!a || !b) return { state: "COMPARABILITY_UNKNOWN", reasons: ["OBJECT_MISSING"] };
-  const reasons = [];
-  for (const [field, reason] of [["indicatorId", "INDICATOR_DEFINITIONS_DIFFER"], ["spatialLevel", "SPATIAL_SCOPES_DIFFER"], ["priceBasis", "PRICE_BASES_DIFFER"]]) if (a[field] && b[field] && a[field] !== b[field]) reasons.push(reason);
-  if (a.unit && b.unit && a.unit !== b.unit) reasons.push("INCOMPATIBLE_UNITS");
-  if (a.methodology && b.methodology && a.methodology !== b.methodology) reasons.push("INCOMPATIBLE_METHODS");
-  if (reasons.length) return { state: "NOT_COMPARABLE", reasons };
-  if (a.type !== b.type) return { state: "NOT_COMPARABLE", reasons: ["DIFFERENT_OBJECT_CLASSES"] };
-  if (a.id === b.id) return { state: "COMPARABILITY_UNKNOWN", reasons: ["SELECT_TWO_DISTINCT_OBJECTS"] };
-  if (!a.source || !b.source || !a.time || !b.time) return { state: "COMPARABILITY_UNKNOWN", reasons: ["SOURCE_OR_TIME_UNKNOWN"] };
-  if (a.unit && b.unit && (a.time.start !== b.time.start || a.time.end !== b.time.end)) return { state: "NOT_COMPARABLE", reasons: ["MEASUREMENT_PERIODS_DIFFER"] };
-  return { state: a.comparisonBasis && a.comparisonBasis === b.comparisonBasis ? "COMPARABLE" : "PARTIALLY_COMPARABLE", reasons: a.comparisonBasis === b.comparisonBasis && a.comparisonBasis ? [] : ["DESCRIPTIVE_SOURCE_ROWS_ONLY_NO_RANK_OR_CAUSAL_INFERENCE"] };
 }
 
 // ../Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios/functions/current-facts-gateway/world-company-projection.js

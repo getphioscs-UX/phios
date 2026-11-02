@@ -1,0 +1,5 @@
+from pathlib import Path
+import urllib.request,json,tomllib,datetime
+q=Path('C:/phios/tools/review/subject-country-spw-fin-r1');token=tomllib.loads(Path('C:/Users/Guest Account/AppData/Roaming/xdg.config/.wrangler/config/default.toml').read_text(encoding='utf-8'))['oauth_token'];url='https://api.cloudflare.com/client/v4/accounts/0b9f36bdf56f38d7d09aebe388f15204/pages/projects/phios-github/deployments?per_page=25';req=urllib.request.Request(url,headers={'Authorization':'Bearer '+token,'Cache-Control':'no-cache'})
+with urllib.request.urlopen(req,timeout=20)as response:data=json.load(response)['result']
+rows=[{'id':d['id'],'url':d['url'],'environment':d['environment'],'branch':d['deployment_trigger']['metadata'].get('branch'),'commit':d['deployment_trigger']['metadata'].get('commit_hash'),'stage':d['latest_stage']}for d in data if d['deployment_trigger']['metadata'].get('branch')=='codex/spw-fin-r1'];(q/'SUCCESSOR-PREVIEW-DISCOVERY.json').write_bytes((json.dumps({'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'rows':rows},indent=2)+'\n').encode());print(json.dumps(rows))

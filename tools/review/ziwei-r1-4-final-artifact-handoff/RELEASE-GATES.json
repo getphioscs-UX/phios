@@ -1,0 +1,47 @@
+{
+  "gates": [
+    {
+      "gate": "Reference Q87 Publication",
+      "status": "PASS_LOCAL_EXACT_BYTES / LOCAL_VISUAL_ACCEPT_CANDIDATE",
+      "evidence": "68 pages / 12 bookmarks / 9807509 bytes / 2dd6e0b3a4c6fba2a5ab7305afdb1cd2a1d4e9c72b56c63f8ca3677275d578b4. Owner signature pending."
+    },
+    {
+      "gate": "Personalized PDF Publication",
+      "status": "PASS_LOCAL_SAME_SYNTHETIC_SUBJECT_V2",
+      "evidence": "Existing Profile/cover fields, same approved source chart and body. 9838466 bytes / 7babe9af729f3f82704dfaaa7265f8019066d8c271fc3f27023ded0bd1950d72. Not an arbitrary customer's manuscript."
+    },
+    {
+      "gate": "Watermark Human Approval",
+      "status": "PENDING_OWNER",
+      "evidence": "PHIOS-REPORT-COMMERCIAL-WM-R14-CANDIDATE-R2; top-right / 8pt / 6mm baseline / 12mm inset. V1 retained, superseded by V2."
+    },
+    {
+      "gate": "Private Artifact Handoff",
+      "status": "PASS_LOCAL_TWO_DISTINCT_IMMUTABLE_VERSIONS",
+      "evidence": "Actual pinned Q87 and V2 bytes persisted through existing Artifact Store. Version/receipt/byte drift and concurrent drift denied. No formal production store write."
+    },
+    {
+      "gate": "Native Account Delivery",
+      "status": "PASS_LOCAL_NATIVE_LIST_DOWNLOAD_COLD_REOPEN",
+      "evidence": "Native list includes PDF links; both files downloaded/redownloaded byte-for-byte; separate cold process; 27 negative cases; zero renders. Seeded local rights/principal only; browser UI interaction NOT_RUN."
+    },
+    {
+      "gate": "Non-production Cloud QA",
+      "status": "NOT_RUN",
+      "evidence": "No actual Cloud private Worker/D1/R2/authenticated session campaign or Cloud write."
+    },
+    {
+      "gate": "Deployment / Live Customer / P8 Admission",
+      "status": "CLOSED / NOT_RUN / FALSE",
+      "evidence": "No commit, push, merge, deployment, real payment, Live customer issuance or P8 admission."
+    }
+  ],
+  "sourceManuscriptACCEPT": true,
+  "referenceVisualCandidate": "LOCAL_VISUAL_ACCEPT_CANDIDATE",
+  "ownerSigned": false,
+  "watermarkHumanApproval": "PENDING",
+  "commercialPublication": "BLOCKED",
+  "localFinalFileGap": "CLOSED_FOR_THE_TWO_EXACT_SYNTHETIC_FILES",
+  "productionArtifactStoreWrites": 0,
+  "physicalPrint": "NOT_RUN"
+}

@@ -1,0 +1,39 @@
+{
+  "state": "LOCAL_ADAPTER_CANDIDATE_ONLY",
+  "source": "tools/review/financial-document-s1-3/business-candidate.mjs",
+  "oldProfileEntitlementsChanged": false,
+  "existingR62AcceptedContractsPreserved": true,
+  "authorizationChain": [
+    "Native verified synthetic Account context",
+    "Existing R6 Subject authorization through native PWS relationship",
+    "Current independently reviewed Financial source version",
+    "Server-pinned report version/output SHA/reference",
+    "Existing large artifact Owner admission gate remains CLOSED"
+  ],
+  "actualResult": "CANDIDATE_CHECKED_DOWNLOAD_NOT_GRANTED",
+  "downloadAllowed": false,
+  "noPublicUrl": true,
+  "checks": [
+    "Wrong Account",
+    "Wrong Subject",
+    "Wrong source/report version",
+    "Wrong artifact SHA",
+    "Expired/revoked current native Subject grant"
+  ],
+  "requiredOwnerContractDelta": [
+    {
+      "owner": "Existing Account/PWS + private artifact Owner",
+      "required": "An explicit non-Profile Business consumer admission, current authorization callback and metadata binding. Do not reuse or modify Profile paid rights."
+    },
+    {
+      "owner": "Existing Financial source/report reference owner",
+      "required": "Pin Account/Subject/purpose/resource/grant, source/review/report version, immutable artifact SHA and retention/revocation. Candidate remains local only."
+    },
+    {
+      "owner": "Existing private artifact/lifecycle Owner",
+      "required": "Business retention/cleanup/key custody and repair/retry authority; keep existing native states and no second history store."
+    }
+  ],
+  "productionEntryOpened": false,
+  "syntheticNotRealIdentity": true
+}

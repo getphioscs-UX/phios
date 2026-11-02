@@ -1,0 +1,50 @@
+{
+  "status": "FAIL",
+  "checks": [
+    {
+      "name": "Actual workerd csv extraction matches local native/Python values and source locations",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual workerd pdf extraction matches local native/Python values and source locations",
+      "status": "PASS"
+    },
+    {
+      "name": "Actual workerd xlsx extraction matches local native/Python values and source locations",
+      "status": "FAIL",
+      "reason": "Error: RUNTIME_PARSER_xlsx:XLSX_CONTROLLED_SOURCES_SHEET_REQUIRED\n    at file:///C:/phios/.tmp/financial-document-s1-3/runner.mjs:12858:37\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async test (file:///C:/phios/.tmp/financial-document-s1-3/runner.mjs:12818:5)\n    at async file:///C:/phios/.tmp/financial-document-s1-3/runner.mjs:12855:5"
+    }
+  ],
+  "formats": [
+    {
+      "format": "csv",
+      "status": "PASS_ACTUAL_LOCAL_WORKERD",
+      "file": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-staging-s1/documents/profit-loss.csv",
+      "sha256": "5805eae3c5a4b7770fda1c2dc51e4454621cf2ca1b01ae182abe98b2b6662030",
+      "rows": 12,
+      "elapsedMs": 13,
+      "scope": "Native controlled CSV"
+    },
+    {
+      "format": "pdf",
+      "status": "PASS_ACTUAL_LOCAL_WORKERD",
+      "file": "content/production-closure/live-customer-commercial-convergence/financial-document-intelligence-staging-s1/documents/synthetic-statements.pdf",
+      "sha256": "2758d68b0abe23cc15b3b3640e4fae3b0493da228a0e939ace4f72819aa120cb",
+      "rows": 70,
+      "elapsedMs": 20,
+      "scope": "Controlled ReportLab ASCII85/Flate text template only"
+    }
+  ],
+  "runtime": "ACTUAL_LOCAL_WORKERD_MINIFLARE_D1_R2",
+  "node": "v22.16.0",
+  "outputPath": "C:\\phios\\.tmp\\financial-document-s1-3\\runtime-212e5ae1-7627-461c-8c60-fb84c5d73d58",
+  "externalRequests": 0,
+  "fullPdfSha256": "98cd9281d3a9c3763b03ae924b9f43e3a3a0b9d7c1857d19af406d2ce21ff707",
+  "businessStorageAdmission": "BLOCKED_LOCAL_CANDIDATE_ONLY",
+  "profileCapabilityOnly": true,
+  "customerFlow": "BLOCKED_NO_BUSINESS_OWNER_ROUTE",
+  "cloudQa": false,
+  "crossD1R2Atomicity": false,
+  "productionWrites": 0,
+  "providerCalls": 0
+}

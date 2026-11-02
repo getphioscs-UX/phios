@@ -1,0 +1,118 @@
+diff --git a/.github/workflows/unified-preview-r12.yml b/.github/workflows/unified-preview-r12.yml
+index a690cf3b..9831e618 100644
+--- a/.github/workflows/unified-preview-r12.yml
++++ b/.github/workflows/unified-preview-r12.yml
+@@ -24,3 +24,4 @@ jobs:
+       - run: npm ci
+       - run: node --import ./scripts/lib/report-zero-cost-preload.mjs scripts/check-unified-preview-scope-r12.mjs
+       - run: npm run check:cloudflare-function-import-compat
++      - run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-commerce-qa-price-admission-order-r1.mjs
+diff --git a/functions/commerce/commerce-stripe-api.js b/functions/commerce/commerce-stripe-api.js
+index 8cba7abb..6c0f96f7 100644
+--- a/functions/commerce/commerce-stripe-api.js
++++ b/functions/commerce/commerce-stripe-api.js
+@@ -95,6 +95,9 @@ export async function commerceApi(context,action){
+     if(body.subscriptionId!==undefined)throw Object.assign(Error('CONTINUITY_REFILL_KIND_REQUIRED'),{status:422});
+     if(isLanguageReport(product))contextSnapshot.reportPresentation=commerceReportQuote(product,body,selected);
+     else if(body.reportLanguageMode||body.reportLocale)throw Object.assign(new Error('Report language is not applicable.'),{status:422,code:'REPORT_PRESENTATION_NOT_APPLICABLE'});
++    // Identity, origin, input and canonical quote are validated above. Preserve
++    // the QA price-binding contract before report admission, with no writes.
++    if(commerceEnvironment(env)==='QA'&&product.qaPriceVerificationRequired)await verifyCommerceQaPrice(env,product,fetcher);
+     const fullReportCapability=requireFiveMethodReportSetup(product.productId,env);
+     if(fullReportCapability||env.PHIOS_SHARED_PAID_REPORT_ENABLED==='true'&&isLanguageReport(product)&&!product.productId.includes('BUNDLE')){const readiness=await requirePaidReportCheckout(context,{productId:product.productId,readinessId:body.context?.reportIntentId,presentation:contextSnapshot.reportPresentation});contextSnapshot.reportIntentId=readiness.readinessId;contextSnapshot.reportSubject=paidReportSubjectSnapshot(readiness);}
+     if(commerceEnvironment(env)==='LIVE'&&(isLanguageReport(product)||product.category==='REPORT'))contextSnapshot.p9Canary=await requireP9Payment(context,{productId:product.productId,readinessId:contextSnapshot.reportIntentId,presentation:contextSnapshot.reportPresentation});
+@@ -103,7 +106,6 @@ export async function commerceApi(context,action){
+       if(product.billingType==='RECURRING'||!isLanguageReport(product))throw Object.assign(Error('Controlled report purchase only.'),{status:403,code:'controlled_product_denied'});
+       contextSnapshot.controlledPurchase=controlled;
+     }
+-    if(commerceEnvironment(env)==='QA'&&product.qaPriceVerificationRequired)await verifyCommerceQaPrice(env,product,fetcher);
+     const requestHash=await sha256Hex(JSON.stringify({productId:product.productId,selected,context:contextSnapshot}));
+     // One persisted attempt across all products for this campaign/account.
+     const key=await sha256Hex(contextSnapshot.p9Canary?`P9-CANARY/${contextSnapshot.p9Canary.releaseCandidateDigest}/${contextSnapshot.p9Canary.ownerOpaqueRef}`:controlled?`COM-STRIPE-R1/${commerceEnvironment(env)}/${controlled.reservationKey}`:`COM-STRIPE-R1/${commerceEnvironment(env)}/${customerId}/${supplied}`);
+diff --git a/scripts/check-commerce-qa-price-admission-order-r1.mjs b/scripts/check-commerce-qa-price-admission-order-r1.mjs
+new file mode 100644
+index 00000000..e9348a73
+--- /dev/null
++++ b/scripts/check-commerce-qa-price-admission-order-r1.mjs
+@@ -0,0 +1,34 @@
++import assert from 'node:assert/strict';
++import {DatabaseSync} from 'node:sqlite';
++import {createSqliteD1Adapter,loadRuntimeMigrations} from './runtime-migration-loader.mjs';
++import {applyRuntimeMigrations} from '../functions/runtime/migrations/migration-runner.js';
++import {STRIPE_PRODUCT_REGISTRY} from '../functions/pws/commercial/stripe-product-registry.js';
++import {commerceApi} from '../functions/commerce/commerce-stripe-api.js';
++import {fiveMethodReportCapability} from '../functions/report-delivery/paid-report-production-capabilities.js';
++
++// Injected Price GET only; any customer/session request fails this test.
++const sql=new DatabaseSync(':memory:'),db=createSqliteD1Adapter(sql);
++await applyRuntimeMigrations({db,migrations:loadRuntimeMigrations(process.cwd()).migrations});
++const env={RUNTIME_DB:db,PHIOS_ENVIRONMENT:'local',STRIPE_ENVIRONMENT:'QA',STRIPE_SECRET_KEY:'sk_test_fixture_only',PHIOS_COMMERCE_QA_ENABLED:'true'};
++const identity={userId:'user_owner',providerId:'QA_TEST_FIXTURE',authenticated:true,verified:true};
++let cases=0;
++const counts=()=>Object.fromEntries(['commerce_checkout_attempts','commerce_customer_bindings','commerce_purchases','digital_entitlements'].map(t=>[t,sql.prepare(`SELECT COUNT(*) n FROM ${t}`).get().n]));
++async function check(productId,{patch={},flag='false',status=409,error,body={},data={symbolicAccountIdentity:identity},origin='https://phios.test',gets=1}={}){
++ const p=STRIPE_PRODUCT_REGISTRY.find(p=>p.productId===productId),before=counts();let reads=0;
++ const fetcher=async(url,options)=>{reads++;assert.equal(options.method,'GET');assert.equal(String(url),'https://api.stripe.com/v1/prices/'+p.qaPriceId);return Response.json({id:p.qaPriceId,product:p.qaProductId,unit_amount:p.amountMinor,currency:'myr',active:true,livemode:false,...patch});};
++ const response=await commerceApi({env:{...env,PHIOS_SHARED_PAID_REPORT_ENABLED:flag},data,fetch:fetcher,request:new Request('https://phios.test/api/commerce-checkout',{method:'POST',headers:{origin,'content-type':'application/json','idempotency-key':'admission-regression-0001'},body:JSON.stringify({productId,acceptDigitalPolicy:true,reportLanguageMode:'SINGLE',reportLocale:'en',...body})})},'checkout');
++ assert.equal(response.status,status,productId);const result=await response.json();if(error)assert.equal(result.error,error);
++ assert.equal(reads,gets,'only required readonly Price GETs');assert.deepEqual(counts(),before,'no order/customer/purchase/entitlement writes');cases++;
++}
++const num='COM-REPORT-NUMEROLOGY-FULL',bzr='COM-REPORT-BAZI-FULL';
++for(const patch of [{id:'price_wrong'},{product:'prod_wrong'},{unit_amount:1},{currency:'usd'},{active:false},{livemode:true},{recurring:{interval:'month'}}])await check(num,{patch,status:503,error:'stripe_qa_price_binding_mismatch'});
++await check(num,{flag:'true',error:'SHARED_ADAPTER_ABSENT'});
++await check(bzr,{error:'SHARED_REPORT_SETUP_DISABLED'});
++await check(bzr,{flag:'true',error:'PAID_REPORT_READINESS_REQUIRED'});
++await check(num,{data:{},status:401,gets:0});
++await check(num,{origin:'https://attacker.test',status:403,gets:0});
++await check(num,{body:{priceId:'tamper'},status:422,gets:0});
++await check(num,{body:{reportLocale:'invalid'},status:422,gets:0});
++await check(num,{body:{acceptDigitalPolicy:false},status:422,gets:0});
++for(const id of ['ASTROLOGY','BAZI','ZIWEI','NUMEROLOGY','HD']){const capability=fiveMethodReportCapability(`COM-REPORT-${id}-FULL`,env);assert(capability);assert.equal(capability.setupAvailable,false);assert.equal(capability.grantsEntitlement,false);cases++;}
++sql.close();console.log(`Commerce QA price / report admission: ${cases} focused cases PASS; injected GET only, zero mutations, no live network.`);
+diff --git a/scripts/check-commerce-stripe-r1.mjs b/scripts/check-commerce-stripe-r1.mjs
+index 6e92d523..a3103ad3 100644
+--- a/scripts/check-commerce-stripe-r1.mjs
++++ b/scripts/check-commerce-stripe-r1.mjs
+@@ -14,6 +14,7 @@ import {createStripeTestSignature,verifyCommerceQaPrice} from '../functions/comm
+ import {onRequestPost as webhook} from '../functions/api/stripe-webhook.js';
+ import {ownedReportPresentation,commerceAccountProjection,registerWebhookEvent,ensureBookProduct} from '../functions/commerce/book-commerce-store.js';
+ import {sha256Hex} from '../functions/commerce/commerce-crypto.js';
++import {fiveMethodReportCapability} from '../functions/report-delivery/paid-report-production-capabilities.js';
+ 
+ const cases=[];async function test(name,fn){await fn();cases.push({name,status:'PASS',evidence:'local SQLite D1 adapter / injected Stripe HTTP fixture; not provider end-to-end'});}
+ const isolatedCheckoutFixture=process.argv.includes('--isolated-checkout-fixture');
+@@ -225,6 +226,15 @@ await test('active single products fulfill after verified payment',async()=>{
+       assert.equal(stripeCalls.length,beforeCalls);assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders);
+       continue;
+     }
++    const reportCapability=fiveMethodReportCapability(product.productId,env);
++    if(reportCapability){
++      assert.equal(reportCapability.setupAvailable,false,'offline fixture must not admit report sales');
++      assert.equal(response.status,409,product.productId);
++      assert.equal((await response.json()).error,reportCapability.blockedReason);
++      assert.equal(stripeCalls.length,beforeCalls+(product.qaPriceVerificationRequired?1:0),'report rejection permits only Price GET');
++      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'unadmitted report must not create an order');
++      continue;
++    }
+     assert.equal(response.status,201,product.productId);
+     const session=[...sessions.values()].at(-1);session.payment_status='paid';assert.equal((await send('checkout.session.completed',session)).status,200);
+   }
+@@ -265,7 +275,8 @@ await test('provider price mismatch is review-required without grants; portal ca
+   assert.equal((await commerceApi(context({customer:'cus_other'}),'portal')).status,422);
+ });
+ await test('temporary DB failure returns 503; failed event retry succeeds without duplicate rights',async()=>{
+-  assert.equal((await commerceApi(context({productId:'COM-REPORT-HD-FULL'}),'checkout')).status,201);
++  // Exercise settlement retry on an eligible fixture, without admitting HD sales.
++  assert.equal((await commerceApi(context({productId:'COM-REPORT-ECR-FULL'}),'checkout')).status,201);
+   const session=[...sessions.values()].at(-1);session.payment_status='paid';let fail=true;
+   env.RUNTIME_DB={...db,prepare(sql){if(fail&&sql.includes('INSERT OR IGNORE INTO commerce_purchases')){fail=false;throw new Error('fixture temporary database error');}return db.prepare(sql);}};
+   try{assert.equal((await send('checkout.session.completed',session,'evt_retrydb')).status,503);assert.equal(sqlite.prepare("SELECT processing_status FROM commerce_webhook_events WHERE stripe_event_id='evt_retrydb'").get().processing_status,'failed');assert.equal((await send('checkout.session.completed',session,'evt_retrydb')).status,200);}finally{env.RUNTIME_DB=db;}
+@@ -298,7 +309,7 @@ await test('bilingual bundle settlement persists one language across every child
+   for(const child of selectedProducts){const owned=await ownedReportPresentation(env,identity.userId,child);assert.equal(owned.reportPresentation.reportLocale,'bilingual');}
+   assert.equal(sqlite.prepare('SELECT amount_minor FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).amount_minor,total);
+  }
+- const r=await commerceApi(context({productId:'COM-REPORT-HD-FULL',reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');const result=await r.json();const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);session.line_items.data[1].price.unit_amount=1;session.payment_status='paid';
++ const r=await commerceApi(context({productId:'COM-REPORT-BUNDLE-2',selectedProducts:standardBundleProducts().slice(0,2),reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}),'checkout');assert.equal(r.status,201);const result=await r.json();const session=[...sessions.values()].find(s=>s.metadata.order_id===result.orderId);session.line_items.data[1].price.unit_amount=1;session.payment_status='paid';
+  const invalid=await send('checkout.session.completed',session);assert.equal((await invalid.json()).eventStatus,'review_required');
+  assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_purchases WHERE checkout_attempt_id=?').get(result.orderId).n,0);
+ });

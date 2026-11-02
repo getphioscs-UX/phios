@@ -1,0 +1,79 @@
+{
+  "status": "FAIL",
+  "runtime": "ACTUAL_LOCAL_WORKERD_NATIVE_D1_R2",
+  "checks": [
+    {
+      "name": "Default execution closed even with signed identity",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing token and synthetic identity headers rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Forged signature rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong audience issuer expiry future nbf rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Signed trusted identity works; spoof headers cannot replace it",
+      "status": "PASS"
+    },
+    {
+      "name": "Unmapped and wrong Subject identities rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong Host scheme Mode and Project reject",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong D1 and R2 markers reject",
+      "status": "PASS"
+    },
+    {
+      "name": "Upload/write flags default closed",
+      "status": "PASS"
+    },
+    {
+      "name": "Upload enabled alone cannot override writes stop",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing CSV controlled PDF literal XLSX parsers execute unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Write stop rejects new uploads; request cannot reenable",
+      "status": "PASS"
+    },
+    {
+      "name": "Session revocation blocks signed token immediately",
+      "status": "PASS"
+    },
+    {
+      "name": "Download stop and native owner non-admission remain fail closed",
+      "status": "PASS"
+    },
+    {
+      "name": "No public fault debug grant cleanup or Business download routes",
+      "status": "PASS"
+    },
+    {
+      "name": "EXECUTION_FAILURE",
+      "status": "FAIL",
+      "error": "TypeError [ERR_IMPORT_ATTRIBUTE_MISSING]: Module \"file:///C:/phios/content/personal-reading/continuity/registries/continuity-subscription-product-registry-v2.json\" needs an import attribute of \"type: json\"\n    at validateAttributes (node:internal/modules/esm/assert:88:15)\n    at defaultLoadSync (node:internal/modules/esm/load:163:3)\n    at #loadAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:802:12)\n    at #loadSync (node:internal/modules/esm/loader:834:53)\n    at ModuleLoader.load (node:internal/modules/esm/loader:783:26)\n    at ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:494:31)\n    at #getOrCreateModuleJobAfterResolve (node:internal/modules/esm/loader:560:36)\n    at afterResolve (node:internal/modules/esm/loader:607:52)\n    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:613:12)\n    at ModuleJob.syncLink (node:internal/modules/esm/module_job:163:33)"
+    }
+  ],
+  "network": 0,
+  "cloudWrites": 0,
+  "realAccessIdentity": false,
+  "signatureFixture": "Locally generated RSA key; no real Access app or identity issued",
+  "productionWrites": 0,
+  "providerCalls": 0,
+  "artifact": "Cloud artifact route deliberately closed; native S1.3 artifact evidence preserved, not retested or admitted",
+  "tmp": ".tmp/financial-document-s2-a1-4fcb0871-7de8-4733-8b48-124cd59d6ae6"
+}

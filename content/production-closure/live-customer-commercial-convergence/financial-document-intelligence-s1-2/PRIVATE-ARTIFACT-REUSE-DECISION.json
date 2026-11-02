@@ -1,0 +1,91 @@
+{
+  "businessFullArtifact": "BLOCKED",
+  "mechanismProbe": "EXISTING_PROFILE_OWNER_ONLY",
+  "ownerInventory": [
+    {
+      "path": "functions/report-context/report-context-store.js",
+      "role": "Small encrypted metadata/snapshot owner; Base64 capacity restriction retained"
+    },
+    {
+      "path": "functions/account/local-large-private-pdf-artifact.js",
+      "role": "Streamed private full object + encrypted runtime_artifacts metadata + signed header download grant; calls existing Profile eligibility"
+    },
+    {
+      "path": "functions/account/local-private-pdf-lifecycle.js",
+      "role": "Existing Profile retention pending/retry and orphan grace handling; not a Business policy"
+    },
+    {
+      "path": "functions/document-assembly/download-runtime.js",
+      "role": "Account-bound signed grant; no automatic Business grant"
+    },
+    {
+      "path": "functions/report-delivery/customer-artifact-store.js",
+      "role": "Held commercial report store needs order/product/report/worker fence; not an unpurchased Business artifact owner"
+    }
+  ],
+  "nativeStates": {
+    "complete": "LOCAL_PRIVATE_OBJECT_CANDIDATE_NOT_RELEASED",
+    "cleanupPending": "RETENTION_DELETE_PENDING",
+    "errors": [
+      "LARGE_PDF_OBJECT_REPAIR_REQUIRED",
+      "PRIVATE_PDF_CLEANUP_RETRY_REQUIRED"
+    ]
+  },
+  "phaseMap": [
+    {
+      "phase": "Prepared",
+      "evidence": "Descriptor validated in invocation, not a durable cross-store transaction"
+    },
+    {
+      "phase": "Object Written",
+      "evidence": "R2-style put + head verified; may be orphaned if SQL indexing fails"
+    },
+    {
+      "phase": "Indexed",
+      "evidence": "Native INSERT OR IGNORE encrypted runtime_artifacts metadata"
+    },
+    {
+      "phase": "Complete",
+      "evidence": "Read-back native metadata state + object identity verified"
+    },
+    {
+      "phase": "Failed / Recoverable",
+      "evidence": "PREPARE_FAILED / repair-required / cleanup-pending audit and errors; no automatic Business recovery claimed"
+    }
+  ],
+  "minimalMissingContracts": [
+    {
+      "id": "BUSINESS-ARTIFACT-AUTHORITY",
+      "owner": "Account/PWS + existing private artifact Owner",
+      "detail": "Approved Business Subject/purpose/resource/grant-version/expiry/revocation callback. Current large artifact configuration calls dossierEligibility and has no Business Subject field. Do not fabricate Profile membership or a paid order."
+    },
+    {
+      "id": "BUSINESS-ARTIFACT-BINDING",
+      "owner": "Financial Source + existing artifact Owner",
+      "detail": "Bind exact Business Subject, immutable source document IDs/full SHA/version, independent review version, report/render digest and artifact SHA. Account-only or report-only binding is not enough."
+    },
+    {
+      "id": "BUSINESS-RETENTION-AND-REVOCATION",
+      "owner": "Named Continuity/Privacy/Storage reviewers",
+      "detail": "Actual Business retention expiry and deletion authority, lawful hold, key custody and revocation recheck responsibility; Profile policy is not automatically transferred."
+    },
+    {
+      "id": "BUSINESS-RECOVERY-AND-AUDIT",
+      "owner": "Existing Storage/PWS Owner",
+      "detail": "Approved existing-owner reconciliation for indexed-missing/partial objects and unindexed orphan objects, retry identity and durable audit. Native repair-required detection is not an implemented Business recovery endpoint."
+    },
+    {
+      "id": "S2-PARSER-RUNTIME",
+      "owner": "Existing Financial Intake deployment reviewer",
+      "detail": "Bounded PDF/CSV/XLSX extraction execution compatible with chosen cloud target; current Python subprocess is local-only."
+    }
+  ],
+  "wrongBusinessSubjectTest": "BLOCKED_NO_BUSINESS_BINDING_CONTRACT; wrong document test is not relabelled wrong Subject",
+  "fullArtifactEncryption": "Small metadata encrypted; full PDF retained in authorized private object transport. No public URL or second history store created.",
+  "recoveryTruth": "Partial-file fixture restoration used exact immutable bytes only to exercise read resumption; not a production or Business repair API.",
+  "newOwner": false,
+  "newRegistry": false,
+  "newHistoryStore": false,
+  "contextLimitRaised": false,
+  "oldPdfBytesChanged": false
+}

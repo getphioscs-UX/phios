@@ -1,15 +1,15 @@
 {
-  "at": "2026-10-31T05:45:25.897Z",
-  "status": "PREVIEW_READY",
-  "meaning": "Local source/artifact gate ready to request Preview-only authorization. Not deployed, not GitHub CI PASS, not remote503 fixed, not Human ACCEPT of excluded features.",
-  "candidateSha": "d305a6ada24e770082762d860758cc88402d537c",
-  "candidateTree": "a1053456ec3121de5cea4025a67972618649d6e6",
+  "at": "2026-11-02T03:34:49.402Z",
+  "status": "COMMERCE_CI_PASS_GIT_INTEGRATION_REVIEW_REQUIRED_PREVIEW_CLOSED",
+  "meaning": "PR15 Commerce contract repair; no Preview deployment authorized in this round.",
+  "candidateSha": "786dd7d69bbfb1600ceb49cde7f32a12b3c8934e",
+  "candidateTree": "2a98c72cd249c27d8f4b68f790306f81fe664d66",
   "baseMain": "d15ae4c8480cf46f81152fb8c87e623f1b8fb13c",
   "originalCandidate": "91ba31bf",
   "jsonCorrectionRetained": true,
   "branch": "codex/unified-release-preview-r12",
   "gate": {
-    "currentMainHandled": true,
+    "currentMainHandled": false,
     "report18Protected": true,
     "sharedOwnerDeltasExplicitlyExcluded": true,
     "assetPlanVerified": true,
@@ -19,14 +19,16 @@
     "commercialClosed": true,
     "sourceShaAndManifest": true,
     "trackedCandidateClean": true,
-    "otherWindowSourcesPreserved": true
+    "otherWindowSourcesPreserved": true,
+    "previewAuthorized": false,
+    "gitIntegrationRisk": "One build-bazi-r9-review.mjs comment conflict; pending separate reconciliation, no merge performed."
   },
   "sourceChangesFromMain": [
     {
       "path": ".github/workflows/unified-preview-r12.yml",
       "mode": "100644",
       "type": "blob",
-      "object": "a690cf3b2701d08932a2ebb29906cb2fbc61bbd3"
+      "object": "9831e6181eccda31b925f726efde7d8567eeecc3"
     },
     {
       "path": "assets/customer-ui/js/surfaces/account-persons.js",
@@ -35,10 +37,22 @@
       "object": "7d166d13fb396d52c606af427bcf68a8e67122df"
     },
     {
+      "path": "content/civilization-atlas/maintenance/book-v-world-unified-preview-build-successor-v20.json",
+      "mode": "100644",
+      "type": "blob",
+      "object": "56351b6ba8dca4998454ff7837843ee6ca3fb4e1"
+    },
+    {
       "path": "content/production-closure/live-customer-commercial-convergence/unified-release-r12/RELEASE-SCOPES.json",
       "mode": "100644",
       "type": "blob",
       "object": "8860f5a76f3fe00c609169ff00b3990fb883f840"
+    },
+    {
+      "path": "docs/commerce/economics-20261009/bazi-prelive-owner-successors.json",
+      "mode": "100644",
+      "type": "blob",
+      "object": "baffac21e5694c7bb665a3055351e9efb839e04b"
     },
     {
       "path": "functions/_lib/unified-preview-scope.js",
@@ -80,7 +94,7 @@
       "path": "functions/commerce/commerce-stripe-api.js",
       "mode": "100644",
       "type": "blob",
-      "object": "8cba7abb274b966087f970dedfe3b58c3e2b44fe"
+      "object": "6c0f96f7a6f2262c1fa8ae381bbcdacd9c794d0b"
     },
     {
       "path": "functions/personal-reading/deep-manuscript/bazi-production-generation-config.js",
@@ -141,6 +155,24 @@
       "mode": "100644",
       "type": "blob",
       "object": "46f6b0af226ce3a44b3e0ef9966ca467d56349fa"
+    },
+    {
+      "path": "scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "object": "aad0ecabcc465fe0624b9163341471189159fbcf"
+    },
+    {
+      "path": "scripts/check-commerce-qa-price-admission-order-r1.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "object": "e9348a73e32de0914370abc039e999b6c75f63f5"
+    },
+    {
+      "path": "scripts/check-commerce-stripe-r1.mjs",
+      "mode": "100644",
+      "type": "blob",
+      "object": "a3103ad3ee0e89663c5faace83265dfe90c458b8"
     },
     {
       "path": "scripts/check-unified-preview-scope-r12.mjs",
@@ -261,16 +293,49 @@
   },
   "ci": {
     "main": "FAILED_UNSUPPORTED_JSON_IMPORT_WITH_ATTRIBUTE",
-    "candidate": "NOT_RUN",
+    "candidate": "FAILURE",
     "localInvariant": "PASS",
     "newBoundedWorkflow": ".github/workflows/unified-preview-r12.yml",
-    "fullLocalCheck": "NOT_RUN_USER_RESERVED"
+    "fullLocalCheck": "NOT_RUN_USER_RESERVED",
+    "actualCandidateRuns": [
+      {
+        "id": 41379231430,
+        "name": "PTRC repository validation",
+        "event": "workflow_dispatch",
+        "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+        "conclusion": "failure",
+        "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379231430"
+      },
+      {
+        "id": 41379164813,
+        "name": "BaZi R8 Baseline Render Audit",
+        "event": "push",
+        "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+        "conclusion": "success",
+        "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379164813"
+      },
+      {
+        "id": 41379164877,
+        "name": "Unified Preview R1.2 scope safety",
+        "event": "push",
+        "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+        "conclusion": "success",
+        "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379164877"
+      }
+    ]
   },
   "deployment": {
     "productionChanged": false,
     "previewCreated": false,
     "id": null,
-    "url": null
+    "url": null,
+    "skippedWebhookRecords": [
+      {
+        "id": "0a0f7823-ce8a-4e9f-a46e-204d1ef0d1d6",
+        "is_skipped": true,
+        "skip_reason": "branch_config"
+      }
+    ]
   },
   "authorizationNeeded": [
     "Preview-only single public variable update; production object unchanged",
@@ -279,9 +344,9 @@
     "After CI success, deploy exact candidate artifact to independent Cloudflare Preview and perform incremental deployed browser/resource QA"
   ],
   "mutations": {
-    "push": 0,
+    "push": 1,
     "merge": 0,
-    "cloudflareConfigWrite": 0,
+    "cloudflareConfigWrite": 2,
     "previewDeploy": 0,
     "productionWrite": 0,
     "stripeLive": 0,
@@ -293,5 +358,83 @@
     "evidence": "WORLD-READINESS.json",
     "passed": true,
     "elapsedMs": 11339
-  }
+  },
+  "historicalLocalReadinessStatus": "PREVIEW_READY",
+  "authorizedExecution": {
+    "receipt": "authorized-preview/AUTHORIZED-EXECUTION-FINAL.json",
+    "candidateSha": "d305a6ada24e770082762d860758cc88402d537c",
+    "prUrl": "https://github.com/getphioscs-UX/phios/pull/15",
+    "stopCondition": "Required CI failure",
+    "sourceCause": {
+      "classification": "Commerce API status/order contract mismatch, not the JSON-import fix or Asset Config",
+      "ciObserved": {
+        "product": "COM-REPORT-NUMEROLOGY-FULL",
+        "actualHttp": 409,
+        "expectedHttp": 503,
+        "assertion": "scripts/check-commerce-stripe-r1.mjs:148"
+      },
+      "sourceEvidence": {
+        "newCapabilityGuard": "functions/commerce/commerce-stripe-api.js:98",
+        "guardStatus": "functions/report-delivery/paid-report-production-capabilities.js:30 sets409 for unavailable method setup",
+        "nativeRegistry": "paid-report-method-registry.js has BZR and closed ZWR, no NUM adapter",
+        "laterPriceGuard": "functions/commerce/commerce-stripe-api.js:106 verifies QA price after setup guard"
+      },
+      "reason": "NUM fails the new adapter/setup gate before the historical QA-price mismatch guard. The existing regression expects503 from the price-verification path; actual candidate returns409 earlier. Both fail closed, but that does not waive a required CI failure.",
+      "ownerAction": "Commerce/Paid Report owners must reconcile intended error precedence and HTTP contract and its regression coverage, without admitting NUM or opening commerce. A changed candidate requires new SHA authorization; this frozen candidate was not edited."
+    }
+  },
+  "authorizationAlreadyGranted": "Owner authorized scoped Commerce source repair, normal push to existing Draft PR15 and actual GitHub CI only. Preview deployment requires new authorization.",
+  "commerceRepair": {
+    "previousSha": "d305a6ada24e770082762d860758cc88402d537c",
+    "paths": [
+      ".github/workflows/unified-preview-r12.yml",
+      "functions/commerce/commerce-stripe-api.js",
+      "scripts/check-commerce-qa-price-admission-order-r1.mjs",
+      "scripts/check-commerce-stripe-r1.mjs",
+      "content/civilization-atlas/maintenance/book-v-world-unified-preview-build-successor-v20.json",
+      "scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs",
+      "docs/commerce/economics-20261009/bazi-prelive-owner-successors.json"
+    ],
+    "original26Retained": true,
+    "totalReleasePaths": 31,
+    "old503AssertionUnchanged": true,
+    "localReceipt": "commerce-repair/LOCAL-VERIFICATION.json",
+    "ci": "PASS",
+    "previewDeploymentAllowed": false,
+    "intermediateSha": "6d6bad34e6aa10ce4d007f11d5e7049e7fd3ef5f",
+    "additionalFailure": {
+      "run": 41381553805,
+      "owner": "World / Book V frozen build contract; scoped Preview hook belongs to unified-release owner",
+      "assertion": "scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs:197",
+      "actual": "a6c159731aba2318ee147ddf5eb0ebd5e54cd0b3298dc77b99afeb851490bc96",
+      "expected": "53ce6fd2959d9bdefd7e84d5ca8a0b3e957575335b581e219b8f16cb428251e1",
+      "resolution": "Separate pending-human-review successor. Exact inverse three-hook reconstruction proves historical bytes unchanged. No old freeze digest or human approval rewritten.",
+      "focusedCheck": "PASS W16-FOCUSED.log"
+    },
+    "ciReceipt": "commerce-repair/CI-RESULT.json",
+    "reportPreliveFailure": {
+      "previousSha": "6fda32ff609f627f6558397833aa9f9694e32ad4",
+      "run": 41382607343,
+      "assertion": "scripts/check-bazi-deep-manuscript-r2.mjs:79",
+      "owner": "BaZi prelive / approved Report18 delivery handoff",
+      "resolution": "Append existing successor chain for unchanged renderer SHA b11c98bedcc137843e62d36d25d03cb854ffd6582c88b25900edf95c6d6624e2",
+      "sourceProof": [
+        "512e831491373cf6672e0e8825dfe8fd1f6510ae",
+        "d305a6ada24e770082762d860758cc88402d537c"
+      ],
+      "latestParallelOwnerExcluded": true,
+      "humanDecision": "PENDING",
+      "focusedGroups": 46,
+      "providerCalls": 0
+    }
+  },
+  "gitIntegration": {
+    "currentMain": "38eaebcf6d8d0628372eaa59a85da08a6a523fd5",
+    "prMergeable": false,
+    "action": "Separate owner-scoped three-way reconciliation required; no main merge, rebase or force push this round."
+  },
+  "requiredAuthorization": [
+    "Separate Git Integration disposition of current-main conflict",
+    "After required CI PASS and revised manifest/merge-risk review, new Preview-only deployment authorization for exact SHA"
+  ]
 }

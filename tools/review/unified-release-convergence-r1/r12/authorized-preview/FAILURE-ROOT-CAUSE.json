@@ -1,0 +1,17 @@
+{
+  "classification": "Commerce API status/order contract mismatch, not the JSON-import fix or Asset Config",
+  "ciObserved": {
+    "product": "COM-REPORT-NUMEROLOGY-FULL",
+    "actualHttp": 409,
+    "expectedHttp": 503,
+    "assertion": "scripts/check-commerce-stripe-r1.mjs:148"
+  },
+  "sourceEvidence": {
+    "newCapabilityGuard": "functions/commerce/commerce-stripe-api.js:98",
+    "guardStatus": "functions/report-delivery/paid-report-production-capabilities.js:30 sets409 for unavailable method setup",
+    "nativeRegistry": "paid-report-method-registry.js has BZR and closed ZWR, no NUM adapter",
+    "laterPriceGuard": "functions/commerce/commerce-stripe-api.js:106 verifies QA price after setup guard"
+  },
+  "reason": "NUM fails the new adapter/setup gate before the historical QA-price mismatch guard. The existing regression expects503 from the price-verification path; actual candidate returns409 earlier. Both fail closed, but that does not waive a required CI failure.",
+  "ownerAction": "Commerce/Paid Report owners must reconcile intended error precedence and HTTP contract and its regression coverage, without admitting NUM or opening commerce. A changed candidate requires new SHA authorization; this frozen candidate was not edited."
+}

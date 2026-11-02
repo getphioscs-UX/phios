@@ -1,0 +1,154 @@
+{
+  "at": "2026-11-02T02:51:47.143Z",
+  "status": "CI_FAILED_PREVIEW_DEPLOYMENT_STOPPED",
+  "candidateSha": "d305a6ada24e770082762d860758cc88402d537c",
+  "branch": "codex/unified-release-preview-r12",
+  "prUrl": "https://github.com/getphioscs-UX/phios/pull/15",
+  "draft": true,
+  "remoteFileCount": 26,
+  "remoteFileObjectsVerified": true,
+  "cloudflare": {
+    "branchAutoPreviewExcluded": true,
+    "otherBranchRulesPreserved": true,
+    "previewPublicVariable": {
+      "type": "plain_text",
+      "value": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev"
+    },
+    "productionAutoDisabled": true,
+    "canonicalProductionId": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+    "productionConfigUnchanged": true,
+    "secretsAndBindingsUnchanged": true,
+    "rollbackConfig": "ROLLBACK-CONFIG.json"
+  },
+  "ci": {
+    "runs": [
+      {
+        "id": 41379231430,
+        "name": "PTRC repository validation",
+        "event": "workflow_dispatch",
+        "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+        "conclusion": "failure",
+        "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379231430"
+      },
+      {
+        "id": 41379164813,
+        "name": "BaZi R8 Baseline Render Audit",
+        "event": "push",
+        "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+        "conclusion": "success",
+        "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379164813"
+      },
+      {
+        "id": 41379164877,
+        "name": "Unified Preview R1.2 scope safety",
+        "event": "push",
+        "headSha": "d305a6ada24e770082762d860758cc88402d537c",
+        "conclusion": "success",
+        "url": "https://github.com/getphioscs-UX/phios/actions/runs/41379164877"
+      }
+    ],
+    "failedStep": "Run npm run check",
+    "sourceCause": {
+      "classification": "Commerce API status/order contract mismatch, not the JSON-import fix or Asset Config",
+      "ciObserved": {
+        "product": "COM-REPORT-NUMEROLOGY-FULL",
+        "actualHttp": 409,
+        "expectedHttp": 503,
+        "assertion": "scripts/check-commerce-stripe-r1.mjs:148"
+      },
+      "sourceEvidence": {
+        "newCapabilityGuard": "functions/commerce/commerce-stripe-api.js:98",
+        "guardStatus": "functions/report-delivery/paid-report-production-capabilities.js:30 sets409 for unavailable method setup",
+        "nativeRegistry": "paid-report-method-registry.js has BZR and closed ZWR, no NUM adapter",
+        "laterPriceGuard": "functions/commerce/commerce-stripe-api.js:106 verifies QA price after setup guard"
+      },
+      "reason": "NUM fails the new adapter/setup gate before the historical QA-price mismatch guard. The existing regression expects503 from the price-verification path; actual candidate returns409 earlier. Both fail closed, but that does not waive a required CI failure.",
+      "ownerAction": "Commerce/Paid Report owners must reconcile intended error precedence and HTTP contract and its regression coverage, without admitting NUM or opening commerce. A changed candidate requires new SHA authorization; this frozen candidate was not edited."
+    },
+    "localFullNpmCheckRun": false
+  },
+  "deployment": {
+    "manualPreviewPerformed": false,
+    "acceptedPreviewUrl": null,
+    "manualDeploymentId": null,
+    "automaticWebhookRecords": [
+      {
+        "id": "0a0f7823-ce8a-4e9f-a46e-204d1ef0d1d6",
+        "environment": "preview",
+        "url": "https://0a0f7823.phios-github.pages.dev",
+        "is_skipped": true,
+        "skip_reason": "branch_config",
+        "created_on": "2026-11-02T02:42:38.044107Z",
+        "latest_stage": {
+          "name": "queued",
+          "started_on": null,
+          "ended_on": null,
+          "status": "idle"
+        },
+        "stages": [
+          {
+            "name": "queued",
+            "started_on": null,
+            "ended_on": null,
+            "status": "idle"
+          },
+          {
+            "name": "initialize",
+            "started_on": null,
+            "ended_on": null,
+            "status": "idle"
+          },
+          {
+            "name": "clone_repo",
+            "started_on": null,
+            "ended_on": null,
+            "status": "idle"
+          },
+          {
+            "name": "build",
+            "started_on": null,
+            "ended_on": null,
+            "status": "idle"
+          },
+          {
+            "name": "deploy",
+            "started_on": null,
+            "ended_on": null,
+            "status": "idle"
+          }
+        ],
+        "trigger": {
+          "type": "github:push",
+          "metadata": {
+            "branch": "codex/unified-release-preview-r12",
+            "commit_hash": "d305a6ada24e770082762d860758cc88402d537c",
+            "commit_message": "test: carry bounded Preview scope checks into review CI",
+            "commit_dirty": false
+          }
+        }
+      }
+    ],
+    "allTargetRecordsSkipped": true,
+    "productionDeploymentPerformed": false
+  },
+  "actualPreviewAcceptance": {
+    "executed": false,
+    "reason": "CI gate failed; no active candidate Preview was deployed. Prior local evidence is retained, not relabeled as cloud PASS.",
+    "assetConfig503FixedOnNewPreview": "NOT_VERIFIED_NO_DEPLOYMENT"
+  },
+  "mutations": {
+    "frozenBranchPush": 1,
+    "draftPrCreated": 1,
+    "cloudflarePreviewControlsChanged": true,
+    "singlePreviewPublicVariableChanged": true,
+    "merge": 0,
+    "manualDeploy": 0,
+    "productionD1R2StripeCustomerWrites": 0,
+    "paidProviderCalls": 0
+  },
+  "remaining": [
+    "Required PTRC full check fails",
+    "Draft PR conflicts with later main; no merge attempted",
+    "No deployed Preview browser acceptance or active Preview URL/ID"
+  ]
+}

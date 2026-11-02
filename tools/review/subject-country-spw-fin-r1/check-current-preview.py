@@ -1,0 +1,18 @@
+from pathlib import Path
+import urllib.request,urllib.error,json,hashlib,subprocess,datetime
+q=Path('C:/phios/tools/review/subject-country-spw-fin-r1');r=Path(r'C:/Users/Guest Account/.codex/worktrees/world-customer-experience-r3/phios');base='https://05ed252d.phios-github.pages.dev';head='2a56d976e1cff33a524efad6a5e4a61607e5cc4f';checks=[]
+def get(path,method='GET'):
+ req=urllib.request.Request(base+path,headers={'Cache-Control':'no-cache','Accept':'application/json'},method=method,data=b'{}'if method=='POST'else None)
+ try:
+  with urllib.request.urlopen(req,timeout=25)as resp:return resp.status,dict(resp.headers),resp.read()
+ except urllib.error.HTTPError as e:return e.code,dict(e.headers),e.read()
+def check(name,ok,detail=None):checks.append({'name':name,'status':'PASS'if ok else'FAIL','detail':detail})
+status,headers,body=get('/world/?locale=en');h={k.lower():v for k,v in headers.items()};check('Actual Preview world200',status==200,status);check('Immutable source commit identity',h.get('x-phios-source-commit')==head,h.get('x-phios-source-commit'));check('Built World branch read-only scope',h.get('x-phios-review-scope')=='WORLD_BRANCH_BUILD',h.get('x-phios-review-scope'))
+for path in ['assets/customer-ui/js/surfaces/profile-country-r1.js','assets/js/pages/civilization-atlas/world-journey-shell-r3.js','assets/js/pages/civilization-atlas/world-integrated-r42.js','content/civilization-atlas/reconfiguration/world-observation-projection-v1.json']:
+ status,_,body=get('/'+path);expected=subprocess.check_output(['git','-C',str(r),'show',head+':'+path]);check('Exact Git byte binding '+path,status==200 and hashlib.sha256(body).digest()==hashlib.sha256(expected).digest(),{'status':status,'actualSha256':hashlib.sha256(body).hexdigest(),'expectedSha256':hashlib.sha256(expected).hexdigest()})
+for code in ['MYS','SGP','IDN']:
+ status,_,body=get('/api/customer-subject-workspace?publicCountry='+code+'&locale=en');v=json.loads(body);check('Real anonymous source API '+code,status==200 and v.get('subject',{}).get('subjectId')=='WORLD:COUNTRY:'+code and len(v.get('dimensions',[]))==6,{'status':status,'code':v.get('code'),'envelopes':len(v.get('observationProjection',{}).get('envelopes',[]))})
+for path,expected in [('/api/customer-subject-workspace?subjectId=qa-personal-A',503),('/api/customer-subject-workspace?publicCountry=MYS&accountId=qa-owner-A',400),('/api/customer-subject-workspace?publicCountry=ZZQ',404)]:
+ status,_,body=get(path);check('Private/invalid scope denial '+path,status==expected,status)
+status,_,body=get('/api/world-observations','POST');check('Actual Preview POST rejected before any route write',status==503,status)
+result={'base':base,'sha':head,'at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'checks':checks,'passed':sum(c['status']=='PASS'for c in checks),'failed':sum(c['status']=='FAIL'for c in checks),'status':'PASS'if all(c['status']=='PASS'for c in checks)else'FAIL','productionWrites':0,'paidProviderCalls':0};(q/'PREVIEW-IDENTITY-AND-GATES.json').write_bytes((json.dumps(result,indent=2)+'\n').encode());print(json.dumps(result));raise SystemExit(1 if result['failed']else0)

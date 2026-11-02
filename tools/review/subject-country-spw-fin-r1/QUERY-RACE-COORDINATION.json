@@ -1,0 +1,18 @@
+{
+  "scope": "TEST_COORDINATION_ONLY",
+  "initialTimedTest": "FAIL: original700ms/80ms ordering timed out",
+  "isolatedActualRequestBarrier": "PASS: two actual source-owner responses, newer response first, original final assertions unchanged",
+  "productCodeChangedForRace": false,
+  "originalCaseSha256": "0294604367e3f7a455855506ac0916dcadacd766f1641584f959813b7030e25c",
+  "coordinatedCaseSha256": "9525f07624974c7c98ddfe6feca1e8dc918ec1453cfdcf151841ecb84b06729c",
+  "retainedAssertions": [
+    "history.state.worldPublicQuestion.originalQuestion === 'Iceland history'",
+    "#worldQuestion.inputValue() === 'Iceland history'"
+  ],
+  "changes": [
+    "Wait for actual World readiness",
+    "Hold actual old request until actual new context is accepted, rather than assume700ms gives overlap",
+    "Bound request hold and release in finally"
+  ],
+  "fullRerun": "PENDING"
+}

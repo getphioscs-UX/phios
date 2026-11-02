@@ -1,0 +1,37 @@
+{
+  "sourceBefore": {
+    "type": "github",
+    "config": {
+      "owner": "getphioscs-UX",
+      "owner_id": "306417737",
+      "repo_name": "phios",
+      "repo_id": "1304711596",
+      "production_branch": "main",
+      "pr_comments_enabled": true,
+      "deployments_enabled": true,
+      "production_deployments_enabled": false,
+      "preview_deployment_setting": "all",
+      "preview_branch_includes": [
+        "*"
+      ],
+      "preview_branch_excludes": [],
+      "path_includes": [
+        "*"
+      ],
+      "path_excludes": []
+    }
+  },
+  "previewPublicVariableBefore": null,
+  "rollbackVariablePatch": {
+    "deployment_configs": {
+      "preview": {
+        "env_vars": {
+          "PHIOS_PUBLIC_ASSET_BASE_URL": null
+        }
+      }
+    }
+  },
+  "branchNote": "Preserve exclusion after branch push. Restoring old all-branch mode would re-enable target auto deployment and requires separate authorization; not executed.",
+  "productionConfigDigest": "ee15badb01f1c97c680d386c9ee531a26c7cd609436a388b5cb850ffa645ee4f",
+  "secretValuesRecorded": false
+}

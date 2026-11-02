@@ -1,0 +1,1 @@
+import {build} from 'esbuild';await build({entryPoints:['tools/review/financial-document-s1-3/parsed-financial.mjs'],bundle:true,platform:'node',format:'esm',packages:'external',outfile:'.tmp/financial-document-s1-3/parsed-financial.bundle.mjs',logLevel:'warning'});await import(new URL('../../../.tmp/financial-document-s1-3/parsed-financial.bundle.mjs',import.meta.url));

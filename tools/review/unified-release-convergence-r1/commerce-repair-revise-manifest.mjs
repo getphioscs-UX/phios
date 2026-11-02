@@ -1,0 +1,13 @@
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';
+const wt='C:/phios/.worktrees/unified-release-convergence-r1',D='C:/phios/tools/review/unified-release-convergence-r1/r12',git=(...a)=>execFileSync('git',a,{cwd:wt,encoding:'utf8'}).trim(),p=D+'/RELEASE-MANIFEST.json',m=JSON.parse(fs.readFileSync(p));
+if(m.candidateSha!=='6d6bad34e6aa10ce4d007f11d5e7049e7fd3ef5f')throw Error('MANIFEST_DRIFT');
+fs.writeFileSync(D+'/commerce-repair/INTERMEDIATE-RELEASE-MANIFEST.json',fs.readFileSync(p));
+const oldSha=m.candidateSha,sha=git('rev-parse','HEAD'),delta=git('diff','--name-only',oldSha,sha).split('\n');
+if(JSON.stringify(delta)!==JSON.stringify(['content/civilization-atlas/maintenance/book-v-world-unified-preview-build-successor-v20.json','scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs']))throw Error('FOLLOWUP_SCOPE_DRIFT');
+for(const f of m.sourceChangesFromMain)if(git('rev-parse',sha+':'+f.path)!==f.object)throw Error('PRIOR_SOURCE_DRIFT '+f.path);
+Object.assign(m,{candidateSha:sha,candidateTree:git('rev-parse','HEAD^{tree}'),status:'SUCCESSOR_CONTRACT_REPAIR_CI_PENDING_PREVIEW_NOT_AUTHORIZED',at:new Date().toISOString()});
+m.sourceChangesFromMain=git('diff','--name-only',m.baseMain,sha).split('\n').map(path=>({path,mode:'100644',type:'blob',object:git('rev-parse',sha+':'+path)}));
+m.commerceRepair.paths.push(...delta);m.commerceRepair.totalReleasePaths=m.sourceChangesFromMain.length;m.commerceRepair.intermediateSha=oldSha;m.commerceRepair.additionalFailure={run:41381553805,owner:'World / Book V frozen build contract; scoped Preview hook belongs to unified-release owner',assertion:'scripts/check-book-v-civ-atlas-r1-w16-production-freeze.mjs:197',actual:'a6c159731aba2318ee147ddf5eb0ebd5e54cd0b3298dc77b99afeb851490bc96',expected:'53ce6fd2959d9bdefd7e84d5ca8a0b3e957575335b581e219b8f16cb428251e1',resolution:'Separate pending-human-review successor. Exact inverse three-hook reconstruction proves historical bytes unchanged. No old freeze digest or human approval rewritten.',focusedCheck:'PASS W16-FOCUSED.log'};
+fs.writeFileSync(p,JSON.stringify(m,null,2));const safety=JSON.parse(fs.readFileSync(D+'/commerce-repair/CLOUDFLARE-CONTROL-VERIFIED.json'));safety.candidate=sha;safety.postPushReadback='CLOUDFLARE-TARGET-DEPLOYMENTS.json';fs.writeFileSync(D+'/commerce-repair/CLOUDFLARE-CONTROL-VERIFIED.json',JSON.stringify(safety,null,2));
+const dispatch=fs.readFileSync('C:/phios/tools/review/unified-release-convergence-r1/commerce-repair-dispatch-ci.mjs','utf8').replaceAll(oldSha,sha);fs.writeFileSync('C:/phios/tools/review/unified-release-convergence-r1/commerce-repair-dispatch-ci.mjs',dispatch);
+console.log(JSON.stringify({sha,delta,totalPaths:m.sourceChangesFromMain.length,previewAllowed:false}));
