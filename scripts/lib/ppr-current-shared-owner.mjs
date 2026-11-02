@@ -39,7 +39,7 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
   }
   if(path==='perspectives/personal/index.html'&&sha(path)!==record.currentSha256){
     const next=readPprPreentrySuccessor(record);
-    record={...record,currentSha256:next.currentSha256,recognizedPredecessors:[...record.recognizedPredecessors,record.currentSha256],engineeringSuccessorRef:PPR_PREENTRY_SUCCESSOR};
+    record={...record,currentSha256:next.currentSha256,recognizedPredecessors:[...record.recognizedPredecessors,record.currentSha256,...(next.recognizedPredecessors||[])],engineeringSuccessorRef:next.engineeringSuccessorRef||PPR_PREENTRY_SUCCESSOR};
   }
   assert.equal(sha(path),record.currentSha256,`${label}: current owner digest drift: ${path}`);
   if(historicalDigest&&historicalDigest!==record.currentSha256)assert(record.recognizedPredecessors.includes(historicalDigest),`${label}: historical predecessor is not recognized: ${path}`);
