@@ -1,10 +1,12 @@
 import assert from 'node:assert/strict';import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {FINAL_RELEASE_BRANCH,FINAL_PREVIEW_FLAGS,finalReleaseBuildPolicy,finalInternalPath,wrapFinalReleaseWorker} from '../functions/_lib/final-release-scope.js';
 import {requireFiveMethodReportSetup} from '../functions/report-delivery/paid-report-production-capabilities.js';
 import {isolateFinalReleaseWorker} from './lib/final-release-publication.mjs';
 import {requirePublicReleaseReportAdmission} from '../functions/commerce/report-presentation.js';
 import {STRIPE_PRODUCT_REGISTRY} from '../functions/pws/commercial/stripe-product-registry.js';
 const sha='a'.repeat(40),preview=finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:FINAL_RELEASE_BRANCH,CF_PAGES_COMMIT_SHA:sha,CF_PAGES_URL:'https://review.phios-github.pages.dev'}),production=finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:'main',CF_PAGES_COMMIT_SHA:sha,CF_PAGES_ENVIRONMENT:'production'});let checks=0,calls=0,seen;
+for(const path of ['assets/customer-ui/js/surfaces/profile-country-r1.js','assets/js/pages/civilization-atlas/world-journey-shell-r3.js','assets/js/pages/civilization-atlas/world-question-outcome.js','assets/js/pages/civilization-atlas/world-history-coverage-r1.js']){execFileSync(process.execPath,['--check',path],{stdio:'pipe'});checks++;}
 const original={fetch:async(request,env)=>{calls++;seen=env;return new Response('original handler');}};
 for(const policy of [preview,production]){const worker=wrapFinalReleaseWorker(original,policy),env={PHIOS_ENVIRONMENT:'production',PHIOS_D1_MAINTENANCE_MODE:'OFF',STRIPE_ENVIRONMENT:'LIVE',OPENAI_API_KEY:'fixture-only'};
  for(const p of ['/tools/review/test.html','/docs/reports/test.pdf','/content/production-closure/Master.html','/output/a.pdf','/artifacts/a.pdf','/%74ools/a','/config/qa/a.json','/content/private/review.html']){const before=calls,r=await worker.fetch(new Request('https://test.invalid'+p),env,{});assert.equal(r.status,404);assert.equal(calls,before);checks++;}
