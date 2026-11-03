@@ -1,0 +1,4 @@
+import fs from 'node:fs';import {createRequire} from 'node:module';import {gzipSync} from 'node:zlib';
+const wt='C:/phios/.worktrees/final-unified-production-r1',require=createRequire(wt+'/package.json'),{transformSync}=require('esbuild'),input=fs.readFileSync(wt+'/.tmp/final-functions-compiled/index.js','utf8'),results=[];
+for(const charset of ['ascii','utf8'])for(const minifySyntax of [false,true]){const code=transformSync(input,{loader:'js',target:'esnext',minifyWhitespace:true,minifyIdentifiers:true,keepNames:true,minifySyntax,charset,legalComments:'inline'}).code;results.push({charset,minifySyntax,keepNames:true,bytes:Buffer.byteLength(code),gzipBytes:gzipSync(code).length,budget:3*1024*1024,withinBudget:gzipSync(code).length<=3*1024*1024});}
+fs.writeFileSync('C:/phios/tools/review/final-unified-production-r1/COMPACTION-MEASUREMENT.json',JSON.stringify(results,null,2));console.log(JSON.stringify(results));

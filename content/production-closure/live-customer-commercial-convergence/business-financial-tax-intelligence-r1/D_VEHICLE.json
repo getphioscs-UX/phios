@@ -1,0 +1,211 @@
+{
+  "version": "TAX-R1-SYNTHETIC-1",
+  "datasetSha": "667e9ba6416c152defeedb12b48abd1bfde25c146800c1a2d98818d30fab276d",
+  "title": "Vehicle Planning Comparison / 车辆方案比较",
+  "input": {
+    "category": "PASSENGER",
+    "newUsed": "NEW",
+    "purchasePrice": 12000000,
+    "downPayment": 2400000,
+    "annualPrincipal": 1920000,
+    "annualInterest": 480000,
+    "insurance": 300000,
+    "roadTax": 20000,
+    "maintenance": 200000,
+    "fuel": 600000,
+    "annualLease": 3600000,
+    "bookDepreciation": 2400000,
+    "ownership": "BUSINESS",
+    "registration": "SYNTHETIC-REGISTER",
+    "invoice": "SYNTHETIC-VEHICLE-INVOICE",
+    "mileage": null,
+    "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate"
+  },
+  "scenarios": [
+    {
+      "id": "BUSINESS_PURCHASE",
+      "title": "Business purchase / 企业购车",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "BUSINESS",
+      "initialCashOutlay": 2400000,
+      "annualCashOutflow": 3520000,
+      "firstYearCashOutflow": 5920000,
+      "businessCashOutflow": 3520000,
+      "personalCashOutflow": 0,
+      "financingCommitment": 2400000,
+      "bookDepreciation": 2400000,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "NOT_DETERMINED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    },
+    {
+      "id": "PERSONAL_PURCHASE",
+      "title": "Personal purchase / 个人购车",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "INDIVIDUAL",
+      "initialCashOutlay": 2400000,
+      "annualCashOutflow": 3520000,
+      "firstYearCashOutflow": 5920000,
+      "businessCashOutflow": 0,
+      "personalCashOutflow": 3520000,
+      "financingCommitment": 2400000,
+      "bookDepreciation": 2400000,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "NOT_DETERMINED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    },
+    {
+      "id": "LEASE",
+      "title": "Business lease / 企业租赁",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "BUSINESS",
+      "initialCashOutlay": 0,
+      "annualCashOutflow": 4720000,
+      "firstYearCashOutflow": 4720000,
+      "businessCashOutflow": 4720000,
+      "personalCashOutflow": 0,
+      "financingCommitment": 3600000,
+      "bookDepreciation": null,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "NOT_DETERMINED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    },
+    {
+      "id": "MIXED_USE",
+      "title": "Business with private use / 公私混用",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "BUSINESS",
+      "initialCashOutlay": 2400000,
+      "annualCashOutflow": 3520000,
+      "firstYearCashOutflow": 5920000,
+      "businessCashOutflow": 3520000,
+      "personalCashOutflow": 0,
+      "financingCommitment": 2400000,
+      "bookDepreciation": 2400000,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "MILEAGE_AND_BIK_REVIEW_REQUIRED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    }
+  ]
+}

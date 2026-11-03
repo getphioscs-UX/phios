@@ -1,0 +1,26 @@
+{
+  "status": "NOT_EXECUTED_REQUIRES_NARROW_OWNER_EXCEPTION_OR_OWNER_MANUAL_SETTING",
+  "sha": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "project": "phios-github",
+  "environment": "production",
+  "key": "PHIOS_PUBLIC_ASSET_BASE_URL",
+  "actualExistingType": "secret_text",
+  "actualExistingValue": "REDACTED_NOT_READ_OR_RECORDED",
+  "publicApiCurrentStatus": 503,
+  "publicApiCurrentCode": "PUBLIC_ASSET_BASE_URL_UNAVAILABLE",
+  "baselineCorrection": "The earlier ABSENT observation was incorrectly inferred from a plaintext-only filtered view. Canonical production configuration is unchanged; this is an existing key, not a new drift.",
+  "proposedOnlyKey": {
+    "type": "plain_text",
+    "value": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev"
+  },
+  "proposedMechanism": "Single production env_vars key PATCH through the existing Wrangler Pages API mechanism; preserve wrangler_config_hash and verify all other configuration equals the before snapshot.",
+  "authorizationConflict": "Owner explicitly forbids Secret modifications. A same-name plain variable cannot be added without replacing/converting the existing secret_text key.",
+  "requiredException": "Owner explicitly approves converting only this public Base URL key from secret_text to plain_text and replacing its hidden old value with the already approved public URL; all other Secrets remain untouched.",
+  "rollbackDecisionNeeded": "Original ABSENT rollback assumption is invalid. If conversion is approved, retain the approved public URL during a deployment rollback unless Owner separately supplies an approved restoration for this one key. The previous hidden value is not available for automatic exact restoration.",
+  "alternative": "Owner manually sets only this public variable in Cloudflare; Codex reads back the approved plain value and resumes the already accepted release without another release approval.",
+  "mainAlreadyFastForwarded": true,
+  "productionDeploymentUnchanged": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+  "configurationPatchExecuted": false,
+  "productionDeploymentExecuted": false,
+  "secretsValuesExposed": false
+}

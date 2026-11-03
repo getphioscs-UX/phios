@@ -1,3 +1,4 @@
+import {publicEntryAnswer} from '../../../js/pages/public-entry-answer.js';
 import {installAskReportHandoff} from '../report-context-ui.js';
 import {accountRequest} from './secure-drafts.js';
 import {normalizeAskContext} from '../ask-context-contract.js';
@@ -253,8 +254,13 @@ async function loadSeededContexts(){
   }finally{seedLoading=false;queueMicrotask(()=>document.dispatchEvent(new Event('phios:ask-source-rendered')));}
 }
 
-function errorMessage(code){
+function errorMessage(code,httpStatus){
   const value=String(code||'');
+  if(/temporarily_unavailable|READ_ONLY|MAINTENANCE/i.test(value)||httpStatus===503&&value==='REQUEST_FAILED')return tr('Ask is temporarily unavailable. Public readings remain available; changing sources or signing in does not remove this maintenance restriction.','提问服务暂不可用，公开阅读仍可使用；更换来源或登录不会解除当前维护限制。');
+  if(httpStatus===401||/ACCOUNT_REQUIRED|AUTHENTICATION_REQUIRED/.test(value))return tr('Sign in to access this account feature. Signing in does not activate unavailable generation.','请登录以访问此账户功能；登录不会启用尚未开放的生成服务。');
+  if(/QUOTA|ALLOWANCE|CREDIT|BUDGET/.test(value))return tr('The available allowance or budget is insufficient. No new answer was completed.','当前额度或预算不足，没有完成新答案。');
+  if(/PROVIDER|MODEL_NOT|GENERATION_DISABLED/.test(value))return tr('This answering capability is not currently activated. You can continue with public readings.','此回答能力目前未激活，可继续浏览公开阅读。');
+  if(httpStatus===403)return tr('This operation is not authorized for the current account and access scope.','当前账户及访问范围未获准执行此操作。');
   if(value==='SELECTED_SOURCE_VERSION_CHANGED'||value==='SELECTED_SOURCE_SCOPE_INVALID'||value==='PRIVATE_DOCTRINE_NOT_PUBLIC_SOURCE')return tr('The selected source is unavailable or has changed. Reopen the original source and choose it again.','所选来源不可用或已变更。请重新打开原始来源后再选择。');if(value==='SELECTED_SOURCE_UNAVAILABLE')return tr('The selected source could not be loaded. Retry, open the original source, or explicitly choose Knowledge only.','所选来源暂时无法载入。请重试、打开原始来源，或明确选择只使用知识提问。');
   if(value.includes('CONSENT_REQUIRED'))return tr('Please confirm the consent box for the context you selected.','请先确认你所选择情境的同意选项。');
   if(value.includes('ENTITLEMENT_REQUIRED'))return tr('That saved source is not currently available for this Ask session. Open it again from its original page if access is available.','这份已保存来源目前无法用于本次提问。若仍有访问权限，请从原始页面重新打开。');
@@ -295,7 +301,7 @@ function boot(){
     if(!question||form.getAttribute('aria-busy')==='true')return;
     if(form.elements.askTask.value==='ENTRY'){
       form.setAttribute('aria-busy','true');
-      try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q:question,locale:locale()}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});setStatus(status,'');}
+      try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q:question,locale:locale()}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();p.route=await publicEntryAnswer(question,locale(),p.route);renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});setStatus(status,'');}
       catch{setStatus(status,'');renderEntryResult(entryResult,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:tr('Retry','重试')}},{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});}
       finally{form.setAttribute('aria-busy','false');}return;
     }
@@ -316,7 +322,8 @@ function boot(){
       document.querySelector('[data-cx-contextual-ask-result]').scrollIntoView({behavior:'smooth',block:'start'});
     }catch(error){
       form.dataset.askState=navigator.onLine===false?'OFFLINE':error?.code==='SELECTED_SOURCE_UNAVAILABLE'?'SOURCE_UNAVAILABLE':'ERROR';
-      setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code),'error');
+      setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code,error?.httpStatus),'error');
+      let fallback=document.querySelector('[data-ask-public-fallback]');if(!fallback){fallback=document.createElement('nav');fallback.dataset.askPublicFallback='';status.after(fallback);}fallback.replaceChildren();if(error?.httpStatus===503){for(const [href,label]of[['/search/?'+new URLSearchParams({q:question,locale:locale()}),tr('Search public sources','搜索公开来源')],['/knowledge/?locale='+locale(),tr('Read published knowledge','阅读公开知识')]]){const a=document.createElement('a');a.href=href;a.textContent=label;a.style.marginInlineEnd='16px';fallback.append(a);}}
       if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});
     }finally{form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;}
   });

@@ -1,0 +1,50 @@
+{
+  "status": "PASS_MEMORY_ONLY_ACCOUNT_PATH",
+  "durableStorageVerified": false,
+  "coldProcessReopen": false,
+  "environmentBlocker": "C_DRIVE_ENOSPC",
+  "failedDurableJobState": "AUTOMATIC_RECOVERY",
+  "failedDurableJobCode": "ENOSPC",
+  "nativeAccountApiVerified": true,
+  "canonicalProfileAndCurrentConsentVerified": true,
+  "purchaseId": "r30_auto_purchase_1",
+  "jobId": "2f2011805eceb8a25794ccfd434c69f24d0a080f4c2e9aea4b2a62852f0ae7fd",
+  "personId": "b46bd7a7-2385-49d5-a7d9-763217462f6e",
+  "reportId": "2f2011805eceb8a25794ccfd434c69f24d0a080f4c2e9aea4b2a62852f0ae7fd",
+  "entitlementId": "r30_auto_ent_1",
+  "artifactRef": "num-r30/2f2011805eceb8a25794ccfd434c69f24d0a080f4c2e9aea4b2a62852f0ae7fd/pdf",
+  "pdfBytes": 29996100,
+  "sha256": "e79e9e0cc92631d1402a6056fd2c1922ec11503b90e36cfe16ed27ff4d6e0827",
+  "redownloadEqual": true,
+  "reopen": true,
+  "negatives": [
+    {
+      "name": "wrong account",
+      "status": 404
+    },
+    {
+      "name": "revoked entitlement",
+      "status": 404
+    },
+    {
+      "name": "receipt purchase mismatch",
+      "status": 404
+    },
+    {
+      "name": "immutable entitlement receipt mismatch",
+      "status": 404
+    },
+    {
+      "name": "Subject consent revoked",
+      "status": 403
+    }
+  ],
+  "scope": "Actual NUM native calculation, shared Scheduler and existing Account API; QA seeded payment and historical same-subject R30 PDF; SQLite and private bucket in memory. Not signed webhook, durable private storage, cold reopen, new-customer AI content or Cloud E2E.",
+  "p8Admitted": false,
+  "providerCalls": 0,
+  "providerCostUsd": 0,
+  "networkCalls": 0,
+  "newPdfRenders": 0,
+  "receiptOrigin": "Exact successful tool stdout recorded after disk-backed test failed; historical receipts untouched",
+  "reproducer": "tools/review/six-method-paid-report-integration-r2/check-num-account-memory.cjs"
+}

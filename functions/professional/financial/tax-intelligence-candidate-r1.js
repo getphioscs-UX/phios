@@ -1,0 +1,61 @@
+// Thin synthetic Tax adapter under Financial. No ledger, persistence, grants or release authority.
+import {businessSummary,validateBusinessInput} from './business-intake-candidate-r3.js';
+export const TAX_R1='BFT-TAX-INTELLIGENCE-R1';
+const fail=code=>{throw Object.assign(Error(code),{status:422});};
+const money=n=>Number.isSafeInteger(n)&&Math.abs(n)<=1e12;
+const add=xs=>{if(xs.some(x=>!money(x)))return null;const n=xs.reduce((a,b)=>a+BigInt(b),0n);if(n>1000000000000n||n< -1000000000000n)fail('MONEY_LIMIT');return Number(n);};
+const u=reason=>({value:null,status:'UNKNOWN',reason});
+export const TAX_CATEGORIES=Object.freeze(['REVENUE','COST_OF_SALES','OPERATING_EXPENSES','PAYROLL','PROFESSIONAL_FEES','RENTAL','TRAVEL','ENTERTAINMENT','VEHICLES','EQUIPMENT','REPAIRS','FINANCING_INTEREST','INSURANCE','EMPLOYEE_BENEFITS','OWNER_TRANSACTIONS','RELATED_PARTIES','DEPRECIATION_ALLOWANCES','BAD_DEBTS','LOSSES_INCENTIVES','MISSING_RECORDS']);
+export const JURISDICTIONS=Object.freeze({MY:{currency:'MYR',status:'RESTRICTED_SYNTHETIC_QA',authority:'LHDN',year:2025},SG:{currency:'SGD',status:'EDUCATIONAL_ONLY',authority:'IRAS'},GB:{currency:'GBP',status:'EDUCATIONAL_ONLY',authority:'HMRC'}});
+export function contextGate(c){
+ const required=['subjectId','accountAuthorityRef','taxpayerType','legalForm','country','jurisdiction','residency','taxYear','basisStart','basisEnd','reportingCurrency','functionalCurrency','sourceVersion','reviewVersion','regime','ruleVersion','effectiveDate','ruleSource','ruleVerificationStatus','qualifiedReviewerStatus','calculationStatus','publicationStatus','incomeScope'];
+ const missing=required.filter(k=>c?.[k]===undefined||c?.[k]===null||c?.[k]===''||c?.[k]==='UNKNOWN');
+ if(missing.length)return{status:'TAX_CONTEXT_INCOMPLETE',missing};
+ if(!JURISDICTIONS[c.jurisdiction]||c.country!==c.jurisdiction||c.reportingCurrency!==JURISDICTIONS[c.jurisdiction].currency||c.functionalCurrency!==c.reportingCurrency)return{status:'JURISDICTION_CURRENCY_REVIEW_REQUIRED',missing:[]};
+ const forms={INDIVIDUAL_EMPLOYED:'INDIVIDUAL',SOLE_PROPRIETOR:'SOLE_PROPRIETORSHIP',COMPANY:'LIMITED_COMPANY',PARTNERSHIP:'PARTNERSHIP',LLP:'LLP'};
+ if(forms[c.taxpayerType]!==c.legalForm)return{status:'TAXPAYER_TYPE_REVIEW_REQUIRED',missing:[]};
+ if(c.crossBorder===true||c.residency!=='RESIDENT_VERIFIED_SYNTHETIC')return{status:'CROSS_BORDER_OR_RESIDENCY_REVIEW_REQUIRED',missing:[]};
+ if(c.jurisdiction!=='MY'||c.taxYear!==2025||c.basisStart!=='2025-01-01'||c.basisEnd!=='2025-12-31')return{status:'RULE_YEAR_NOT_ADMITTED',missing:[]};
+ return{status:'CONTEXT_COMPLETE_FOR_SYNTHETIC_REVIEW',missing:[]};
+}
+// YA2025 chargeable-income schedule only. Does not derive chargeable income,
+// reliefs/rebates/special regimes or legal residency from gross earnings.
+export function individualTaxScenario(c,chargeableMinor,rule){
+ const gate=contextGate(c);if(gate.status!=='CONTEXT_COMPLETE_FOR_SYNTHETIC_REVIEW')return u(gate.status);
+ if(!['SOLE_PROPRIETOR','INDIVIDUAL_EMPLOYED'].includes(c.taxpayerType))return u('INDIVIDUAL_RULE_NOT_COMPANY_RULE');
+ if(!rule||rule.id!=='MY-INDIVIDUAL-YA2025-R1'||rule.version!==c.ruleVersion||rule.jurisdiction!=='MY'||rule.taxYear!==2025||rule.admission!=='ADMITTED_FOR_SYNTHETIC_QA'||!rule.sourceSha256||c.ruleSource!==rule.sourceSha256||rule.superseded||rule.effectiveTo<'2025-12-31')return u('RULE_VERSION_SOURCE_OR_ADMISSION_REQUIRED');
+ if(JSON.stringify(rule.bands)!==JSON.stringify([[5000,0],[20000,1],[35000,3],[50000,6],[70000,11],[100000,19],[400000,25],[600000,26],[2000000,28],[null,30]]))return u('UNREVIEWED_RATE_PARAMETERS');
+ if(!money(chargeableMinor)||chargeableMinor<0)return u('REVIEWED_NONNEGATIVE_CHARGEABLE_INCOME_REQUIRED');
+ let rest=BigInt(chargeableMinor),last=0n,numerator=0n;for(const [upper,percent] of rule.bands){const cap=upper===null?rest:BigInt(upper)*100n-last;const slice=rest<cap?rest:cap;if(slice>0n){numerator+=slice*BigInt(percent);rest-=slice;}if(upper!==null)last=BigInt(upper)*100n;if(rest===0n)break;}
+ return{value:Number((numerator+50n)/100n),status:'SYNTHETIC_RATE_ONLY_NOT_FINAL_LIABILITY',ruleId:rule.id,ruleVersion:rule.version,rounding:'Half-up once to MYR cent; scenario convention, not tax-return rounding',excludes:['reliefs','rebates','special regimes','dividend tax'],customerUse:false};
+}
+export function classifyExpense(tx,c,source){
+ const base={id:tx.id,category:tx.category,amount:tx.amount,ruleId:tx.ruleId||'MY-ITA-S33-S39-RESEARCH',source:tx.source,evidence:tx.evidence||[],review:'PROFESSIONAL_REVIEW_REQUIRED',confidence:'EVIDENCE_STATE_NOT_PROBABILITY'};
+ if(!TAX_CATEGORIES.includes(tx.category)||!money(tx.amount))fail('TAX_TRANSACTION_INVALID');
+ if(contextGate(c).status!=='CONTEXT_COMPLETE_FOR_SYNTHETIC_REVIEW')return{...base,treatment:'UNKNOWN',missing:['Tax context or jurisdiction/year review']};
+ if(tx.source?.sourceVersion!==source.sourceVersion||!tx.source.documentSha||!tx.source.location||tx.conflict)return{...base,treatment:'CONFLICTING_SOURCE',missing:['Exact reviewed document / location / version']};
+ if(!tx.evidence?.length)return{...base,treatment:'EVIDENCE_MISSING',missing:['Invoice / purpose / payee / period evidence']};
+ const treatment=tx.nature==='PRIVATE'?'POTENTIALLY_DISALLOWABLE':tx.nature==='CAPITAL'||tx.nature==='DEPRECIATION'?'CAPITAL_TREATMENT_REQUIRED':tx.nature==='MIXED'?'MIXED_USE_REVIEW_REQUIRED':tx.nature==='BUSINESS_OPERATING'&&tx.businessPurpose==='EVIDENCED'?'POTENTIALLY_ALLOWABLE':'UNKNOWN';
+ return{...base,treatment,missing:treatment==='POTENTIALLY_ALLOWABLE'?['Tax professional confirmation of applicability']:['Rule eligibility / business purpose / statutory exclusions'],deductionConfirmed:false};
+}
+export function vehicleScenarios(v,c){
+ const scenarios=[['BUSINESS_PURCHASE','Business purchase / 企业购车'],['PERSONAL_PURCHASE','Personal purchase / 个人购车'],['LEASE','Business lease / 企业租赁'],['MIXED_USE','Business with private use / 公私混用']];
+ return scenarios.map(([id,title])=>{const lease=id==='LEASE',personal=id==='PERSONAL_PURCHASE',required=['purchasePrice','downPayment','annualPrincipal','annualInterest','insurance','roadTax','maintenance','fuel','annualLease','bookDepreciation'];const missing=required.filter(k=>!money(v[k])||v[k]<0);if(!v.invoice)missing.push('Invoice');if(!v.registration)missing.push('Registration / licensing');if(!v.mileage)missing.push('Business / private mileage');if(contextGate(c).status!=='CONTEXT_COMPLETE_FOR_SYNTHETIC_REVIEW')missing.push('Jurisdiction / tax year');
+ const cashMissing=required.filter(k=>!money(v[k])||v[k]<0),running=add([v.insurance,v.roadTax,v.maintenance,v.fuel]),annual=cashMissing.length?null:add([running,lease?v.annualLease:v.annualPrincipal,lease?0:v.annualInterest]),initial=cashMissing.length?null:lease?0:v.downPayment;
+ return{id,title,vehicleType:v.category,newUsed:v.newUsed,financing:v.financing,ownership:personal?'INDIVIDUAL':v.ownership,initialCashOutlay:initial,annualCashOutflow:annual,firstYearCashOutflow:add([initial,annual]),businessCashOutflow:personal?0:annual,personalCashOutflow:personal?annual:0,financingCommitment:lease?v.annualLease:add([v.annualPrincipal,v.annualInterest]),bookDepreciation:lease?null:v.bookDepreciation,capitalAllowance:u('VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED'),privateUseAdjustment:id==='MIXED_USE'?u('MILEAGE_AND_BIK_REVIEW_REQUIRED'):{value:null,status:'NOT_DETERMINED'},employeeBenefit:u('BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED'),afterTaxCashImpact:u('TAX_TREATMENT_NOT_VERIFIED'),ownerCashImpact:u('OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED'),missingEvidence:missing,taxSaving:null,ranking:'NOT_RANKED_UNKNOWN_TAX',assumption:'Annual outflow excludes upfront down payment; no price deducted as current-year expense',ruleVersion:c.ruleVersion};});
+}
+export function ownerScenarios(o,c,summary){
+ if(c.taxpayerType==='SOLE_PROPRIETOR')return{kind:'SOLE_PROPRIETOR',profit:summary.metrics.find(x=>x.id==='reportedNetProfit')?.value??null,drawings:o.drawings,personalCashNeeds:o.personalNeeds,companyDividend:{status:'NOT_APPLICABLE',value:null},ownerSalaryDeduction:{status:'NOT_APPLICABLE',value:null},ownerAccessibleCash:summary.ownerCashAccess,personalTax:u('OTHER_INCOME_RELIEFS_AND_FINAL_CHARGEABLE_INCOME_REQUIRED'),warning:'Drawings are not salary or dividends; paid cash is not taxable income.'};
+ if(c.taxpayerType!=='COMPANY')return{kind:'UNCLASSIFIED',status:'TAXPAYER_TYPE_REVIEW_REQUIRED'};
+ return{kind:'COMPANY',scenarios:['SALARY','DIVIDEND','COMBINATION','RETAIN_EARNINGS'].map(id=>{const salary=id==='SALARY'||id==='COMBINATION'?o.salary:0,dividend=id==='DIVIDEND'||id==='COMBINATION'?o.dividend:0,dividendAllowed=dividend===0||o.distributableEvidence===true,netOutflow=dividendAllowed?add([salary,dividend]):null;return{id,salary,proposedDividend:dividend,dividendStatus:dividendAllowed?'SYNTHETIC_PROPOSAL_NOT_LEGAL_APPROVAL':'DISTRIBUTABLE_PROFIT_EVIDENCE_REQUIRED',businessCashOutflow:netOutflow,ownerGrossProposedReceipt:netOutflow,retainedCashBeforeUnverifiedTax:netOutflow===null?null:add([o.businessCash,-netOutflow]),companyTax:u('YA2025_COMPANY_RULE_AND_ELIGIBILITY_REVIEW_REQUIRED'),personalTax:u('PERSONAL_INCOME_RESIDENCY_DIVIDEND_RULE_REQUIRED'),statutoryCosts:u('PAYROLL_EMPLOYMENT_AND_STATUTORY_RATE_REQUIRED'),combinedNetTax:null,ownerAccessibleCash:summary.ownerCashAccess,notPaidOrApproved:true};})};
+}
+export function analyzeTaxCandidate({source,context,transactions,vehicle,owner,rule}){
+ if(!source||!['REVIEWED','RECONCILED'].includes(source.record?.dataQuality)||source.record.review?.reviewedBy===source.preparedByAccount||!source.record.review?.reviewedBy||source.sourceVersion!==context.sourceVersion||context.reviewVersion!==String(source.version))fail('EXACT_INDEPENDENT_FINANCIAL_REVIEW_REQUIRED');
+ const input=source.record,record=validateBusinessInput({...input,rows:Object.values(input.facts||{}).map(f=>({...f}))}),summary=businessSummary({...record,sourceVersion:source.sourceVersion});
+ if(record.context.subjectId!==context.subjectId||record.legalForm!==context.legalForm||record.context.currency!==context.reportingCurrency||record.context.startDate!==context.basisStart||record.context.endDate!==context.basisEnd)fail('TAX_FINANCIAL_CONTEXT_MISMATCH');
+ if(new Set(transactions.map(x=>x.id)).size!==transactions.length)fail('DUPLICATE_TAX_CLAIM');
+ const classifications=transactions.map(t=>classifyExpense(t,context,source)),gate=contextGate(context),net=record.facts.netProfit?.value,tax=record.facts.tax?.value,pbt=add([net,tax]);
+ const candidateAddbacks=add(classifications.filter(x=>x.treatment==='POTENTIALLY_DISALLOWABLE').map(x=>x.amount));
+ const categories=TAX_CATEGORIES.map(category=>({category,items:classifications.filter(x=>x.category===category),status:classifications.some(x=>x.category===category)?'REVIEW_REQUIRED':'EVIDENCE_MISSING'}));
+ return{version:TAX_R1,syntheticOnly:true,context,contextStatus:gate,source:{referenceId:source.referenceId,version:source.version,sourceVersion:source.sourceVersion,review:input.review,preparedBy:source.preparedByAccount},financial:summary,workingPaper:{accountingProfitBeforeTax:pbt,reportedProfitAfterTax:net,candidatePrivateExpenseAddbacks:candidateAddbacks,potentialAdjustedTradingAmount:add([pbt,candidateAddbacks]),chargeableIncome:u('CAPITAL_ALLOWANCES_LOSSES_EXEMPT_INCOME_AND_OTHER_ADJUSTMENTS_NOT_CONFIRMED'),deductionsNotAppliedAgain:true,statutorySequence:'MY candidate addbacks only; not a universal taxable-base formula',loans:'SOURCE_CLASSIFICATION_REQUIRED',finalTaxLiability:null},readiness:{categories,classifications,sourceCoverage:{present:classifications.filter(x=>x.source?.documentSha).length,total:classifications.length},professionalCompletion:0,taxComplianceScore:null},vehicles:vehicleScenarios(vehicle,context),remuneration:ownerScenarios(owner,context,summary),rateOnlyIllustration:individualTaxScenario(context,owner.reviewedChargeableIncome,rule),professional:{state:'TAX_REVIEW_REQUIRED',nativeOwner:'PFR TAX_CONSIDERATION only; taxOpinion forbidden',qualification:'NOT_PROFESSIONALLY_SIGNED',publication:'NOT_CUSTOMER_RELEASE'},navigation:{family:'FINANCIAL',optionsOnly:true,decision:null,approval:null,execution:null,outcome:null},artifactStatus:'BUSINESS_ARTIFACT_ADMISSION_BLOCKED',ruleVersion:context.ruleVersion};
+}

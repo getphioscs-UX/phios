@@ -1,0 +1,31 @@
+{
+  "status": "STOPPED_BEFORE_CONFIGURATION_WRITE_OR_DEPLOYMENT",
+  "approvedReleaseSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "actualMainSha": "419357257da40bca7bdf9579bcf82d785e29d151",
+  "parent": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "author": {
+    "name": "github-actions[bot]",
+    "email": "41898282+github-actions[bot]@users.noreply.github.com",
+    "date": "2026-11-03T02:47:48Z"
+  },
+  "commitMessage": "bazi: materialize R11 content-quality human review package",
+  "changedFiles": [
+    {
+      "path": "docs/acceptance/bazi-paid-report/r11/machine-evidence.json",
+      "status": "modified",
+      "patch": "@@ -1,6 +1,6 @@\n {\n   \"schemaVersion\": \"BAZI_R11_CONTENT_QUALITY_REVIEW_MACHINE_EVIDENCE_V1\",\n-  \"generatedAt\": \"2026-10-31T10:01:28.437Z\",\n+  \"generatedAt\": \"2026-11-03T02:47:47.225Z\",\n   \"locales\": {\n     \"en\": {\n       \"totalPages\": 64,"
+    }
+  ],
+  "rootCause": {
+    "workflow": ".github/workflows/bazi-r9-human-review.yml",
+    "commitLine": 48,
+    "pushLine": 51,
+    "trigger": "Push to main touching BaZi/function/asset source; workflow automatically materializes and commits review evidence",
+    "change": "Only generatedAt timestamp in non-public machine-evidence.json; no runtime source file changed"
+  },
+  "singleKeyExceptionApproved": true,
+  "configurationPatchExecuted": false,
+  "productionDeploymentExecuted": false,
+  "productionDeployment": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+  "requiresOwnerDecision": "Keep the timestamp-only main successor41935725 and deploy the already approved 0c865175 original artifact, recording distinct actual main/release SHAs; or retain old Production. No force push, relabeling of artifacts, new candidate or repeated full checks."
+}

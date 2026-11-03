@@ -10,6 +10,7 @@ const finalPredecessors=finalWorldReleasePredecessors();
 const currentWorldBytes=p=>finalPredecessors.get(p)||fs.readFileSync(path.join(root,p));
 // Current successor capabilities are checked on real current modules first.
 // Historical freeze inputs then use the exact separately validated Git parents.
+await import('./check-world-public-question-maintenance-r1.mjs');
 await import('./check-final-unified-release-r1.mjs');
 await import('./check-country-history-coverage-r1.mjs');
 await import('./check-world-country-latest.mjs');

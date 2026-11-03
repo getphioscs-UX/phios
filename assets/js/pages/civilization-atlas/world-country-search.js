@@ -8,8 +8,13 @@ const names=c=>[c.id,c.iso2,...Object.values(c.name)];
 export function countryCandidates(value,rows=WORLD_COUNTRIES){const q=countryText(value);if(!q)return rows;const exact=rows.filter(c=>names(c).some(n=>countryText(n)===q));return exact.length?exact:rows.filter(c=>names(c).some(n=>countryText(n).includes(q)));}
 export function countriesInQuestion(value){
  const q=countryText(value),original=String(value),rx=n=>new RegExp('\\b'+countryText(n).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i');
- const matched=WORLD_COUNTRIES.filter(c=>Object.entries(c.name).some(([lang,n])=>lang==='zh'?q.includes(countryText(n)):rx(n).test(q))||rx(c.id).test(q)||countryText(c.iso2)===q||(new RegExp('\\b'+c.iso2+'\\b').test(original)&&c.iso2===c.iso2.toUpperCase()));
- const position=c=>Math.min(...names(c).map(n=>/[\u3400-\u9fff]/.test(n)?q.indexOf(countryText(n)):q.search(rx(n))).filter(i=>i>=0));
+ const aliases=c=>c.id==='ARE'?['UAE','阿联酋','阿聯酋']:[];
+ const positions=c=>[
+  ...[...Object.values(c.name),...aliases(c)].map(n=>/[\u3400-\u9fff]/.test(n)?q.indexOf(countryText(n)):q.search(rx(n))),
+  ...[c.id,c.iso2].map(code=>{const upper=new RegExp('\\b'+code+'\\b').exec(original);if(upper)return upper.index;const explicit=new RegExp('(?:\\b(?:ISO(?:[ -]?[23])?|country\\s+code)\\s*[:=]?\\s*|国家代码\\s*[:：]?\\s*)'+code+'\\b','i').exec(original);return explicit?.index??-1;})
+ ].filter(i=>i>=0);
+ const matched=WORLD_COUNTRIES.filter(c=>positions(c).length);
+ const position=c=>Math.min(...positions(c));
  return matched.sort((a,b)=>position(a)-position(b));
 }
 

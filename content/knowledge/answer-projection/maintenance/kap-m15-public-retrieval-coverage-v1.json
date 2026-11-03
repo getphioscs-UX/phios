@@ -1,0 +1,34 @@
+{
+  "status": "ENGINEERING_RECONCILIATION",
+  "scope": "Register the existing public retrieval scoring maintenance: filter English stop words, bound repeated-field overlap and require direct primary/fragment support for strong coverage. No new content admission or authority is granted.",
+  "boundaries": {
+    "canonicalKnowledgeCreated": false,
+    "secondAskRuntimeCreated": false,
+    "historicalFreezeRewritten": false,
+    "checksumValidationRelaxed": false,
+    "knowledgeAuthorityChanged": false,
+    "answerAuthorityChanged": false,
+    "publicationAuthorityChanged": false,
+    "realityReadingAuthorityChanged": false,
+    "mcdAuthorityCreated": false,
+    "aiAuthorityCreated": false,
+    "guidedReadingAuthorityCreated": false,
+    "clientSurfaceAuthorityCreated": false,
+    "humanAccepted": false,
+    "productionAccepted": false
+  },
+  "changes": [
+    {
+      "path": "functions/_lib/public-knowledge-api.js",
+      "predecessorSha256": "04ebb5484c4f82a3965c1a0da80ea69a231fc35b129c177e0e906be1833fe462",
+      "successorSha256": "4b69e1d727d4304b96d4acf35d7ca8f7d3f56e2acfd96949971fcf5bc36ebd90",
+      "changeClass": "Existing published retrieval scoring and conservative coverage classification only; exact matching and provider prohibition preserved"
+    },
+    {
+      "path": "scripts/lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs",
+      "predecessorSha256": "8efa170a37be5f99b82d4ca5e4f9477d99838cdb5018ccbd24479ebdc1720649",
+      "successorSha256": "64d0383d2510fff0a9b93874e54088f57709c6163e4e7793e861462de321c213",
+      "changeClass": "Append the M15 maintenance record to the ordered digest chain; strict digest and predecessor checks preserved"
+    }
+  ]
+}

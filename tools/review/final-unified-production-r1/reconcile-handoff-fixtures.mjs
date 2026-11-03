@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const wt='C:/phios/.worktrees/final-unified-production-r1';
+for(const p of ['scripts/check-ecr-product-r3-w7.mjs','scripts/check-ecr-product-r3-w8.mjs']){const s=fs.readFileSync(wt+'/'+p,'utf8'),next=s.replaceAll("headers:{'content-type':'application/json'}","headers:{'content-type':'application/json',origin:'https://example.test'}");assert.notEqual(s,next);fs.writeFileSync(wt+'/'+p,next);}
+const p=wt+'/scripts/check-b14-sks-reality-boundary.mjs',s=fs.readFileSync(p,'utf8'),next=s.replace("method:'POST',body:JSON.stringify(body)","method:'POST',headers:{origin:'https://test','content-type':'application/json'},body:JSON.stringify(body)");assert.notEqual(s,next);fs.writeFileSync(p,next);
+const c=wt+'/scripts/check-cx-r10-my-reality.mjs',before=fs.readFileSync(c,'utf8'),after=before.replace("new Request('https://phios.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'}","new Request('https://phios.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json',origin:'https://phios.test'}");assert.notEqual(before,after);fs.writeFileSync(c,after);
+console.log('Only synthetic request Origin fixtures updated. Existing positive, consent, non-persistence and evidence assertions unchanged.');

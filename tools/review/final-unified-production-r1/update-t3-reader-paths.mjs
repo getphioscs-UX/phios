@@ -1,0 +1,2 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const wt='C:/phios/.worktrees/final-unified-production-r1';for(const p of ['scripts/build-bazi-editorial-f-artifacts.mjs','scripts/build-bazi-editorial-f-live-review.mjs','scripts/build-bazi-paid-report-evidence.mjs','scripts/check-bazi-editorial-quality-f.mjs','scripts/check-bazi-full-report-t3-coverage.mjs']){const s=fs.readFileSync(wt+'/'+p,'utf8');assert.equal(s.split('baziT3CheckPath').length,3);fs.writeFileSync(wt+'/'+p,s.replaceAll('baziT3CheckPath','baziT3ReadPath'));}

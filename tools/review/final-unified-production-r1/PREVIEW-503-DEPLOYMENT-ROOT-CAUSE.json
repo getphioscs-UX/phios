@@ -1,0 +1,31 @@
+{
+  "sha": "483cfa7b5acf8b6b848b1963e6efd39f2455691f",
+  "failedDeployment": {
+    "id": "c6e1e0e1-cd18-4d63-8c47-2230e1025a09",
+    "url": "https://c6e1e0e1.phios-github.pages.dev",
+    "environment": "preview",
+    "isSkipped": false,
+    "createdOn": "2026-11-03T01:51:09.40693Z",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-11-03T01:51:18.294922Z",
+      "status": "success"
+    },
+    "sha": "483cfa7b5acf8b6b848b1963e6efd39f2455691f",
+    "branch": "codex/final-unified-production-r1"
+  },
+  "actualRequest": "https://c6e1e0e1.phios-github.pages.dev/api/public-asset-config",
+  "status": 503,
+  "code": "PUBLIC_ASSET_BASE_URL_UNAVAILABLE",
+  "projectPublicVariablePresent": true,
+  "rootCause": "Wrangler createUploadWorkerBundleContents passes getBindings(local config) into worker metadata when wrangler.jsonc is discovered. Local env.preview.vars omits PHIOS_PUBLIC_ASSET_BASE_URL; explicit metadata replaces project bindings for this upload even though project configuration remains unchanged.",
+  "sourceEvidence": "wrangler-dist/cli.js:createUploadWorkerBundleContents/createWorkerBundleFormData; config undefined explicitly deletes metadata.bindings",
+  "correction": "Use identical verified artifact and SHA with existing Pages CLI from a task-owned config-free temporary working directory. metadata.bindings omitted so existing verified remote Preview config supplies bindings.",
+  "temporaryRunner": "C:\\Users\\Guest Account\\AppData\\Local\\Packages\\sandbox.{92fab3ee-0cc6-4a54-9704-ed79e7aca951}\\AC\\Temp\\phios-final-preview-remote-config-smR5CH",
+  "sourceChanged": false,
+  "productionChanged": false,
+  "projectSettingsChanged": false,
+  "secretsLogged": false,
+  "priorFailurePreserved": "C:/phios/tools/review/final-unified-production-r1/PREVIEW-ACCEPTANCE-c6e1e0e1-ABORTED-503.json"
+}

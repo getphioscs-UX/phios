@@ -1,0 +1,4 @@
+import fs from 'node:fs';import {execFileSync} from 'node:child_process';
+const wt='C:/phios/.worktrees/final-unified-production-r1',D='C:/phios/tools/review/final-unified-production-r1',p='tools/review/free-ask-manuscript-r1/MANUSCRIPT-BUILD-COMPACTION-EQUIVALENCE-current.json';
+fs.copyFileSync(wt+'/'+p,D+'/COMPACTION-EQUIVALENCE-UTF8.json');fs.writeFileSync(wt+'/'+p,execFileSync('git',['show','HEAD:'+p],{cwd:wt}));
+const script=D+'/update-manifest.mjs',s=fs.readFileSync(script,'utf8');if(!s.includes("const coordinator=['scripts/check-manuscript-build-compaction-equivalence.mjs',"))fs.writeFileSync(script,s.replace('const coordinator=[',"const coordinator=['scripts/check-manuscript-build-compaction-equivalence.mjs',"));console.log('Own current test result archived; prior tracked receipt restored byte-exactly. New runs write only .tmp.');

@@ -1,0 +1,291 @@
+{
+  "at": "2026-11-03T03:19:51.374Z",
+  "localTime": "2026年11月3日星期二 GMT+8 11:19:51",
+  "status": "PRODUCTION_RELEASE_COMPLETE_WITH_DOCUMENTED_NONBLOCKING_DIAGNOSTICS",
+  "liveUrl": "https://getphios.com",
+  "project": "phios-github",
+  "environment": "production",
+  "mainSHA": "419357257da40bca7bdf9579bcf82d785e29d151",
+  "productionSourceSHA": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "shaIdentityException": "OWNER-SHA-IDENTITY-EXCEPTION.json",
+  "deployment": {
+    "id": "d864842e-56bf-4dfb-846a-8dc81902f3d0",
+    "url": "https://d864842e.phios-github.pages.dev",
+    "environment": "production",
+    "isSkipped": false,
+    "createdOn": "2026-11-03T03:03:25.426531Z",
+    "stage": {
+      "name": "deploy",
+      "started_on": null,
+      "ended_on": "2026-11-03T03:03:34.287243Z",
+      "status": "success"
+    },
+    "sha": "0c8651757ce30bdc3806b362d65981975486acf5",
+    "branch": "main",
+    "aliases": [
+      "https://getphios.com"
+    ]
+  },
+  "artifact": {
+    "zipSha256": "3e40616563131466c82a57d4c86f5f17252c91e538d5cb8aa173d20fd88e1c91",
+    "githubDigest": "sha256:3e40616563131466c82a57d4c86f5f17252c91e538d5cb8aa173d20fd88e1c91",
+    "githubArtifactId": 13198279875,
+    "artifactIdentity": "86e887fed5232ceaa0170ce11e875d86fe97ccc506995311f6b563a18b3ca1dc",
+    "workerSha256": "2f0875776cbca940daf2967eaba69d68b6de4efaefb6f1f0d3d9f314d71ca0fc",
+    "files": 11898,
+    "originalCiArtifact": true,
+    "rebuildPerformed": false,
+    "artifactShaRelabeled": false
+  },
+  "ci": {
+    "releasePtrc": 41564516970,
+    "mainPtrc": 41567868577,
+    "artifactWorkflow": 41564502064,
+    "requiredConclusion": "success",
+    "specialistFailures": [
+      {
+        "run": 41567868609,
+        "job": 125693642422,
+        "owner": "Report Narrative / continuity CI",
+        "failure": "scripts/check-rnt2-core.mjs: ERR_IMPORT_ATTRIBUTE_MISSING on continuity-subscription-product-registry-v2.json under direct Node22",
+        "classification": "SPECIALIST_NODE_JSON_LOADER_CONTRACT",
+        "publicReleaseImpact": "No application assertion ran; direct Node launcher omits existing Pages JSON import preload. Production bundle compiled successfully; new paid-report features stay closed.",
+        "disposition": "Independent CI launcher follow-up; remains FAIL, not commercial acceptance"
+      },
+      {
+        "run": 41567868578,
+        "job": 125693642671,
+        "owner": "BaZi editorial CI",
+        "failure": "scripts/audit-bazi-r11-deterministic-editorial.mjs: ERR_IMPORT_ATTRIBUTE_MISSING on report-visual-assets-r2.json",
+        "classification": "SPECIALIST_NODE_JSON_LOADER_CONTRACT",
+        "publicReleaseImpact": "Node audit loader fails before editorial assertions; does not demonstrate a deployed Pages failure. Original build/Preview successful; report commercial admission unchanged.",
+        "disposition": "Independent CI launcher follow-up; editorial/PDF acceptance not granted"
+      },
+      {
+        "run": 41567868631,
+        "job": 125693642352,
+        "owner": "BaZi canonical PDF QA / CI infrastructure",
+        "failure": "GitHub annotation System.IO.IOException: No space left on device in runner _diag log; halted at npm ci. Job-log blob unavailable404.",
+        "classification": "GITHUB_HOSTED_RUNNER_DISK_EXHAUSTION",
+        "publicReleaseImpact": "Browser/PDF audit never started. Does not affect already built/verified public artifact; Full Report publication remains closed.",
+        "disposition": "Independent runner footprint follow-up; no new PDF Cloud QA PASS claimed"
+      },
+      {
+        "run": 41567868628,
+        "job": 125693642395,
+        "owner": "World / Book6 legacy visual contract",
+        "failure": "scripts/check-b6-web-e.mjs:18 regex expects import {t}, actual renderer has valid import {t,getLocale}",
+        "classification": "LEGACY_EXACT_IMPORT_TEXT_ASSERTION",
+        "publicReleaseImpact": "Textual source-contract mismatch, not missing t export or observed browser failure. World public journeys passed actual Preview; no new evidence/entitlement admission.",
+        "disposition": "Independent contract reconciliation; old assertion untouched"
+      }
+    ],
+    "rerunsPerformed": false
+  },
+  "preview": {
+    "url": "https://fa202b8b.phios-github.pages.dev",
+    "checks": 155,
+    "status": "PASS"
+  },
+  "liveAcceptance": {
+    "at": "2026-11-03T03:19:51.373Z",
+    "status": "PUBLIC_CUSTOMER_FUNCTIONAL_PASS_WITH_CSP_ANALYTICS_NOTICE",
+    "functionalChecks": 155,
+    "functionalPassed": 155,
+    "failedPublicFunctionalChecks": 0,
+    "rawAssertions": {
+      "total": 156,
+      "passed": 155,
+      "failed": 1
+    },
+    "financialPolicyCheck": {
+      "at": "2026-11-03T03:18:30.128Z",
+      "status": "PASS_EXPECTED_READ_ONLY_POLICY_DENIAL",
+      "sourceSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+      "actual": {
+        "at": "2026-11-03T03:17:13.318Z",
+        "url": "https://getphios.com/api/professional-financial-review",
+        "method": "POST",
+        "status": 503,
+        "source": "0c8651757ce30bdc3806b362d65981975486acf5",
+        "body": {
+          "ok": false,
+          "status": "temporarily_unavailable"
+        }
+      },
+      "expected": {
+        "status": 503,
+        "body": {
+          "ok": false,
+          "status": "temporarily_unavailable"
+        }
+      },
+      "policy": "functions/_middleware.js POST guard before request dispatch; functions/_lib/d1-maintenance-guard.js maintenanceResponse()",
+      "originalAssertion": "PRODUCTION-ACCEPTANCE.json financial403 expectation remains FAIL; not rewritten",
+      "conclusion": "503 is defined global READ_ONLY protection, not application failure. Anonymous private financial operation cannot reach DB/provider handlers.",
+      "productionPolicyChanged": false,
+      "fullSuiteRerun": false
+    },
+    "browserModuleErrors": 0,
+    "networkErrors": 0,
+    "rawHarnessStatus": "FAIL",
+    "rawHarnessEvidence": "PRODUCTION-ACCEPTANCE.json",
+    "rawEvidenceRewritten": false,
+    "nonBlockingConsole": [
+      {
+        "page": "/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/world/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/profile/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/personal/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/phi-configuration/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/personal/astrology/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/personal/bazi/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/personal/human-design/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/personal/numerology/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/personal/ziwei/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/perspectives/relationship/",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      },
+      {
+        "page": "/health-reality",
+        "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+      }
+    ],
+    "unexpectedApplicationConsole": [],
+    "classification": "Existing CSP intentionally blocks Cloudflare-injected third-party statistics beacon. Keep the security policy. No application script, asset or interaction failure observed; analytics/CSP alignment is an independent follow-up.",
+    "productionSourceSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+    "mainSha": "419357257da40bca7bdf9579bcf82d785e29d151"
+  },
+  "assetConfig": {
+    "status": 200,
+    "success": true,
+    "publicAssetBaseUrl": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev",
+    "source": "PHIOS_PUBLIC_ASSET_BASE_URL",
+    "registryVersion": "1.0.0",
+    "deliveryState": "CONFIGURED_NOT_UPSTREAM_VERIFICATION_AUTHORITY"
+  },
+  "releaseA": {
+    "pages": [
+      "Home",
+      "World search/question/history/company and country navigation",
+      "Profile seven modes/six dimensions/Country latest-compatible comparison",
+      "Personal and five independent Method introductions",
+      "ECR accepted R31 and bounded R4 visual/interactions",
+      "Relationship/Health source-permitted public reading/input handoff only"
+    ],
+    "runtimeBoundary": "Existing READ_ONLY configuration remains; no new private persistence, consent bypass or paid Provider",
+    "humanReview": "Limited LIVE_VISUAL_REVIEW only; prior pending/revise decisions remain recorded"
+  },
+  "releaseB": {
+    "source": "Report publication successors, private artifact/PDF delivery, order/account bindings preserved",
+    "newLiveReportSales": "ALL_CANONICAL_REPORT_PRODUCTS_AND_BUNDLES_SERVER_DENIED",
+    "standaloneRendererDeployment": "DEFERRED",
+    "ziweiFinalPdfCloud": "LOCAL_ONLY_GUARD_RETAINED",
+    "realPayments": false,
+    "productionMigrations": false,
+    "newFullReportPurchasesClosed": true,
+    "financialS2Closed": true
+  },
+  "commercialBoundary": {
+    "status": 200,
+    "checkoutAvailable": false,
+    "reportProducts": 12
+  },
+  "anonymousCheckout": {
+    "status": 503
+  },
+  "financialPrivateBoundary": {
+    "at": "2026-11-03T03:18:30.128Z",
+    "status": "PASS_EXPECTED_READ_ONLY_POLICY_DENIAL",
+    "sourceSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+    "actual": {
+      "at": "2026-11-03T03:17:13.318Z",
+      "url": "https://getphios.com/api/professional-financial-review",
+      "method": "POST",
+      "status": 503,
+      "source": "0c8651757ce30bdc3806b362d65981975486acf5",
+      "body": {
+        "ok": false,
+        "status": "temporarily_unavailable"
+      }
+    },
+    "expected": {
+      "status": 503,
+      "body": {
+        "ok": false,
+        "status": "temporarily_unavailable"
+      }
+    },
+    "policy": "functions/_middleware.js POST guard before request dispatch; functions/_lib/d1-maintenance-guard.js maintenanceResponse()",
+    "originalAssertion": "PRODUCTION-ACCEPTANCE.json financial403 expectation remains FAIL; not rewritten",
+    "conclusion": "503 is defined global READ_ONLY protection, not application failure. Anonymous private financial operation cannot reach DB/provider handlers.",
+    "productionPolicyChanged": false,
+    "fullSuiteRerun": false
+  },
+  "configuration": {
+    "publicAssetVariable": {
+      "type": "plain_text",
+      "value": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev"
+    },
+    "onlyApprovedKeyConverted": true,
+    "otherSecretsWritten": false,
+    "environmentBindingsUnchanged": true,
+    "expectedPagesDeploymentMetadataChange": "wrangler_config_hash removed by config-free Pages deployment; exact normalized full-configuration hash verified",
+    "evidence": "PRODUCTION-POST-DEPLOYMENT-CONFIG-CHECK.json",
+    "productionAutoDeploy": "OFF",
+    "readOnly": "READ_ONLY",
+    "paidProviderAllowed": "false"
+  },
+  "prohibitedActionsPerformed": {
+    "forcePush": false,
+    "historyRewrite": false,
+    "productionD1R2Writes": false,
+    "customerChanges": false,
+    "stripeLiveOperations": false,
+    "paidProviderCalls": false,
+    "newCandidate": false,
+    "fullLocalNpmCheck": false,
+    "repositorySlimming": false
+  },
+  "limitations": {
+    "authenticatedCustomerAccountAndPdf": "NOT_PERFORMED_NO_CUSTOMER_CREDENTIALS",
+    "fullReportCommercialAdmission": "NOT_GRANTED",
+    "r4r6": "LIVE_VISUAL_REVIEW only; prior Human ACCEPT not invented"
+  },
+  "rollback": {
+    "deploymentId": "eb30bd35-5b6f-411c-80f0-d0d57599797d",
+    "sourceSha": "0d9089af4d0227f19867777a30eccd2c4515eb88",
+    "publicAssetVariable": "Retain approved plain_text public URL. Do not restore unknown former secret value."
+  },
+  "master": "C:/phios/content/production-closure/live-customer-commercial-convergence/MASTER-HUMAN-REVIEW.html"
+}

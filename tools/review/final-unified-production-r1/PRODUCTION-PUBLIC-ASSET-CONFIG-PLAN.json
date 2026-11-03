@@ -1,0 +1,34 @@
+{
+  "status": "BLOCKED_EXISTING_SECRET_TEXT_KEY",
+  "project": "phios-github",
+  "account": "0b9f36bdf56f38d7d09aebe388f15204",
+  "environment": "production",
+  "observedProductionVariable": "EXISTS_SECRET_TEXT_VALUE_REDACTED",
+  "proposedSinglePublicVariable": {
+    "name": "PHIOS_PUBLIC_ASSET_BASE_URL",
+    "type": "plain_text",
+    "value": "https://pub-1967bc5812ee4164b19a806fb1427021.r2.dev"
+  },
+  "readLocation": "functions/api/public-asset-config.js:14",
+  "readMode": "FUNCTIONS_RUNTIME; browser consumes the public API; not a build-time secret",
+  "valueSource": "Existing public asset registry verified requested_url origins and the currently configured Preview public variable; preserve existing Asset/R2 owners",
+  "evidence": "FINAL-CLOUD-STATE.json read at 2026-11-02T10:33:50.699Z; preview variable present, production variable absent",
+  "reason": "Without this runtime variable, the new source public Asset Config API returns503 PUBLIC_ASSET_BASE_URL_UNAVAILABLE; a Preview PASS cannot substitute for Production configuration",
+  "scope": "Only this one public production environment variable, after the final owner approval explicitly includes it",
+  "productionSecretsChanged": false,
+  "d1OrR2BindingsChanged": false,
+  "rendererOrOtherFeatureFlagsChanged": false,
+  "databaseWritesOrMigrations": false,
+  "publicAssetUploads": false,
+  "paidProviderOrStripeCalls": false,
+  "rollback": "Existing hidden Secret value is not available for automatic restoration. Current Secret remains untouched. See explicit key-only conversion/rollback decision plan.",
+  "executed": false,
+  "correction": {
+    "at": "2026-11-03T02:48:04.169Z",
+    "previousObservation": "ABSENT",
+    "actualObservation": "EXISTS_SECRET_TEXT_VALUE_REDACTED",
+    "reason": "The earlier ABSENT observation was incorrectly inferred from a plaintext-only filtered view. Canonical production configuration is unchanged; this is an existing key, not a new drift.",
+    "currentApiStatus": 503,
+    "patchExecuted": false
+  }
+}

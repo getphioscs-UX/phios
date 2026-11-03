@@ -1,0 +1,2 @@
+import {loadWorldPlaywright,worldBrowserLaunchOptions} from '../../../scripts/lib/world-browser-runtime.mjs';
+const browser=await loadWorldPlaywright().chromium.launch({...worldBrowserLaunchOptions(),args:['--no-proxy-server']});const page=await browser.newPage();await page.goto('about:blank');console.log(JSON.stringify({browserLaunch:'PASS',version:browser.version(),networkPageVisited:false,previewAcceptance:false}));await browser.close();

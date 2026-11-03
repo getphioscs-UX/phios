@@ -24,7 +24,9 @@ const EXPORT_REDACTED_KEYS = new Set([
   'rawUserInput', 'identity_number', 'national_id', 'passport_number',
   'tax_number', 'bank_account_number', 'account_number', 'policy_number',
   'exact_address', 'password', 'secret', 'private_key', 'seed_phrase',
-  'document_storage_key', 'private_note', 'internal_note'
+  'document_storage_key', 'private_note', 'internal_note', 'otp',
+  'one_time_password', 'recovery_code', 'recovery_codes', 'recovery_seed',
+  'passcode', 'security_answer', 'security_answers'
 ]);
 
 const clean = value => String(value ?? '').trim();
@@ -91,7 +93,7 @@ export function redactTestamentaryExport(value) {
   if (Array.isArray(value)) return Object.freeze(value.map(redactTestamentaryExport));
   if (!value || typeof value !== 'object') return value;
   return Object.freeze(Object.fromEntries(Object.entries(value).flatMap(([key, child]) =>
-    EXPORT_REDACTED_KEYS.has(key) ? [] : [[key, redactTestamentaryExport(child)]]
+    EXPORT_REDACTED_KEYS.has(key.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase()) ? [] : [[key, redactTestamentaryExport(child)]]
   )));
 }
 

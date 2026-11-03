@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "SIX_METHOD_PAID_CLOSURE_R1",
+  "baseline": {
+    "main": "9a84ceabfe05db12f639d4212db6ce10335b3c19",
+    "reportHead": "3c197c509e01e95cc18651cb2a05bf63a1259dc4",
+    "successorHead": "a2b38c3c0916817bd5becba84b4ea9daa7622136",
+    "reportWorkspace": "C:/phios/.worktrees/five-method-paid-report-production-r1",
+    "files": [
+      {
+        "path": "functions/report-delivery/paid-report-production-capabilities.js",
+        "sha256": "bfe59a0e5388ec03ef0087e6515908975241e4cd4d9525cfb6e129aae8e55065",
+        "mainSHA256": null,
+        "successorSHA256": "dc856a005be506df3304d809a68b433357525883d6cb0ebf67e7c8661c43b7c5"
+      },
+      {
+        "path": "functions/personal-reading/narrative/ziwei-r5-provider-registry.js",
+        "sha256": "63077e03893125c0f24cf3e7cbf55adbdfbdda20203eae91d5838c586f6b6a04",
+        "mainSHA256": "63077e03893125c0f24cf3e7cbf55adbdfbdda20203eae91d5838c586f6b6a04",
+        "successorSHA256": "63077e03893125c0f24cf3e7cbf55adbdfbdda20203eae91d5838c586f6b6a04"
+      },
+      {
+        "path": "functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js",
+        "sha256": "5a62468cbdee6cdd81ca5f8b5577d02c3a721f9b09699b3b4c7d46f8e1cc8116",
+        "mainSHA256": "5a62468cbdee6cdd81ca5f8b5577d02c3a721f9b09699b3b4c7d46f8e1cc8116",
+        "successorSHA256": "5a62468cbdee6cdd81ca5f8b5577d02c3a721f9b09699b3b4c7d46f8e1cc8116"
+      },
+      {
+        "path": "functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js",
+        "sha256": "28607e458928df84e5864d509e892b6aeb96d6743ed1ac1feaf9a40700952e38",
+        "mainSHA256": "28607e458928df84e5864d509e892b6aeb96d6743ed1ac1feaf9a40700952e38",
+        "successorSHA256": "28607e458928df84e5864d509e892b6aeb96d6743ed1ac1feaf9a40700952e38"
+      },
+      {
+        "path": "functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js",
+        "sha256": "529953abb694c42106aa916dc9f97772e9412706f20e9fcacb4dfe1f46525b65",
+        "mainSHA256": "529953abb694c42106aa916dc9f97772e9412706f20e9fcacb4dfe1f46525b65",
+        "successorSHA256": "529953abb694c42106aa916dc9f97772e9412706f20e9fcacb4dfe1f46525b65"
+      }
+    ],
+    "releaseOwnership": "Unify PHI OS release readiness retains final integration/deployment/Master ownership",
+    "providerBudgetApproved": false,
+    "actualProviderCalls": 0
+  },
+  "dimensions": [
+    "Native calculation / confirmed input",
+    "Personalized narrative",
+    "Full PDF",
+    "Publication / Human Acceptance",
+    "Actual OpenAI Provider",
+    "Stripe Product / Price / Checkout / Webhook",
+    "Entitlement / Account / Subject / Consent",
+    "Private artifact / download / reopen",
+    "Failure / recovery / refund / cost",
+    "Exact blocker / minimal action"
+  ],
+  "methods": [
+    {
+      "methodId": "BZR",
+      "status": "BLOCKED_WITH_EXACT_REASON",
+      "checks": [
+        {
+          "dimension": "Native calculation / confirmed input",
+          "result": "PASS_WITH_EVIDENCE: native calculation + owned subject snapshot; R1.1 cross-field corrections preserved. Supported time/calendar scope remains mandatory."
+        },
+        {
+          "dimension": "Personalized narrative",
+          "result": "PASS_WITH_EVIDENCE: R11 approved manuscript retained; native deep writer exists. R1.1 additions/final publication approval remains separate."
+        },
+        {
+          "dimension": "Full PDF",
+          "result": "PASS_WITH_EVIDENCE (local synthetic): 48-page delivery artifact cold reopen 35,640,638 bytes SHA 8ee63665c551505a5c394c210ef403296da8186212926f89eb7003a72b156636. Newer 49/49/50-page candidates are distinct versions."
+        },
+        {
+          "dimension": "Publication / Human Acceptance",
+          "result": "PARTIAL: R11 ACCEPT and P10 visual decision preserved. R1.1/R1.2 complete commercial publication, missing timing scope and commercial watermark require scoped Owner sign-off. Do not silently swap adapter 48-page contract."
+        },
+        {
+          "dimension": "Actual OpenAI Provider",
+          "result": "ZERO_COST_REPLAY_ONLY: Owner cancelled new paid Provider QA; no new project/key or budget requested. Historical evidence must match this method, subject and version; no cross-method substitution. Historical 3-call / 18 bilingual units, 7153 input / 20923 output tokens, recorded USD0.447072; current version has PROVIDER_EVIDENCE_VERSION_GAP. See historical manifest."
+        },
+        {
+          "dimension": "Stripe Product / Price / Checkout / Webhook",
+          "result": "IMPLEMENTED_NOT_E2E_VERIFIED: shared product economics, Checkout and verified paid Webhook exist; current Sandbox Product/Price metadata and whole purchase chain not verified. Generic job creation does not prove scheduled execution."
+        },
+        {
+          "dimension": "Entitlement / Account / Subject / Consent",
+          "result": "PASS_WITH_EVIDENCE (local): original order/subject/snapshot/consent and entitlement, wrong account/revoked rights fail closed; not Cloud receipt."
+        },
+        {
+          "dimension": "Private artifact / download / reopen",
+          "result": "PASS_WITH_EVIDENCE (local): exact issued binary SHA, cold-process reopen/redownload without renderer/provider. Cloud private storage not verified."
+        },
+        {
+          "dimension": "Failure / recovery / refund / cost",
+          "result": "PASS_WITH_EVIDENCE (local scoped): recovery/security/refund Webhook receipts. Actual paid Provider cost, durable Cloud recovery and Sandbox refund E2E remain unverified."
+        },
+        {
+          "dimension": "Exact blocker / minimal action",
+          "result": "VERSION + CODE + CLOUD: same-subject replay dispatcher and existing compiler passed in isolation; native Account exact bytes/permissions passed separately. They are distinct publications, not continuous native BZR E2E. Bind one historical source through original producer/adapter/publication then verify Sandbox; new paid API QA not requested."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "C:/phios/tools/review/five-method-paid-report-r1/BZR-COLD-REOPEN-CHECKS.json",
+          "sha256": "3f0bc0b7c67f54b1b9d1d39966afe78160e4ad354de77e3a5abc81c273a5c768",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/five-method-paid-report-r1/REFUND-WEBHOOK-CHECKS.json",
+          "sha256": "a7e3fe711da03816c424dbd6513d7b84077b15d42b0443361bd06a7d60d2d6f3",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/five-method-paid-report-r1/FINAL-VERIFICATION.json",
+          "sha256": "aac0d61a3b2da77c0006780d0a91cb1055e3c4887ea0c48c7c4406684cc6cdfd",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/r12-acceptance-ziwei-next/HUMAN-DECISIONS-PENDING.json",
+          "sha256": "49eadf72642a28fcef51ae06cd8f1e608aa20209029cf377a2dabb74becbf99d",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        }
+      ]
+    },
+    {
+      "methodId": "ZWR",
+      "status": "BLOCKED_WITH_EXACT_REASON",
+      "checks": [
+        {
+          "dimension": "Native calculation / confirmed input",
+          "result": "PASS_WITH_EVIDENCE (local): Native Profile/runtime with verified birth inputs and observation date. Native source 72 pages is not final publication 68 pages."
+        },
+        {
+          "dimension": "Personalized narrative",
+          "result": "IMPLEMENTED / local personalized evidence: five-call composer + authority pack; accepted 68-page reference source is not a default for unrelated customers. Fresh customer manuscript admission still needed."
+        },
+        {
+          "dimension": "Full PDF",
+          "result": "PASS_WITH_EVIDENCE: exact reference Q87 9,807,509 bytes SHA 2dd6e0b3a4c6fba2a5ab7305afdb1cd2a1d4e9c72b56c63f8ca3677275d578b4; 68 pages. WM V2 independent 9,838,466 bytes SHA 7babe9af729f3f82704dfaaa7265f8019066d8c271fc3f27023ded0bd1950d72; 12 bookmarks."
+        },
+        {
+          "dimension": "Publication / Human Acceptance",
+          "result": "PARTIAL: accepted manuscript/15 diagrams retained. R1.3 reference visual signature and R1.4 commercial watermark signature pending, local visual candidates only."
+        },
+        {
+          "dimension": "Actual OpenAI Provider",
+          "result": "ZERO_COST_REPLAY_ONLY: Owner cancelled new paid Provider QA; no new project/key or budget requested. Historical evidence must match this method, subject and version; no cross-method substitution. No same-scope actual response receipt established by this bounded search; do not infer absence or general Provider PASS."
+        },
+        {
+          "dimension": "Stripe Product / Price / Checkout / Webhook",
+          "result": "IMPLEMENTED_NOT_E2E_VERIFIED: shared product economics, Checkout and verified paid Webhook exist; current Sandbox Product/Price metadata and whole purchase chain not verified. Generic job creation does not prove scheduled execution."
+        },
+        {
+          "dimension": "Entitlement / Account / Subject / Consent",
+          "result": "PASS_WITH_EVIDENCE (local final-file test): snapshot/order/entitlement association and 27 negative cases; not authorized Cloud admission."
+        },
+        {
+          "dimension": "Private artifact / download / reopen",
+          "result": "PASS_WITH_EVIDENCE (local): exact final Q87-to-native Account download/reopen, zero rerender/provider. Existing delivery guard explicitly local-only."
+        },
+        {
+          "dimension": "Failure / recovery / refund / cost",
+          "result": "PARTIAL: local receipt/idempotency/permission negatives; actual paid reservation/settlement and generic lifecycle/Cloud recovery not closed."
+        },
+        {
+          "dimension": "Exact blocker / minimal action",
+          "result": "CODE + OWNER + CLOUD: reuse createServerPaidReportContext; complete shared lifecycle/dispatch, scoped Cloud artifact policy only after signatures. Do not mark P8 true to remove guard."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "C:/phios/docs/reports/ziwei/vfr-r1/HUMAN-DECISION.json",
+          "sha256": "81e31ab108602135616965c0c92d838085ddb0f5561c02c02ceb09f8958dc611",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/ziwei-r1-4-final-artifact-handoff/FINAL-VERIFICATION.json",
+          "sha256": "d3ccacf8cd23a80dec9ab019b2939865ccf37556e5d7e8db5f17a90fbc2cd92e",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/ziwei-r14-owner-signoff-cloud-qa/HANDOFF-STATUS.json",
+          "sha256": "ba02c98a1d497c359e79d524cd67c8c381b1683c69664ca504e4beb556baeee2",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        }
+      ]
+    },
+    {
+      "methodId": "AST",
+      "status": "BLOCKED_WITH_EXACT_REASON",
+      "checks": [
+        {
+          "dimension": "Native calculation / confirmed input",
+          "result": "PASS_WITH_EVIDENCE: native production adapter and 21/21 professional semantic admission exist; no new engine needed."
+        },
+        {
+          "dimension": "Personalized narrative",
+          "result": "PASS_WITH_EVIDENCE (accepted reference): English manuscript and bilingual publication accepted; three-case future-input invariant receipt. Three-call experiment exists but no actual unseen-customer run proved."
+        },
+        {
+          "dimension": "Full PDF",
+          "result": "PASS_WITH_EVIDENCE (accepted reference): pinned 64-page bilingual publication system, existing builder/assets/diagrams. Customer paid PDF assembly/store bridge not verified."
+        },
+        {
+          "dimension": "Publication / Human Acceptance",
+          "result": "PASS_WITH_EVIDENCE within exact publication/English scopes. Receipts explicitly exclude production activation, shared E2E, unseen-customer three-call admission."
+        },
+        {
+          "dimension": "Actual OpenAI Provider",
+          "result": "ZERO_COST_REPLAY_ONLY: Owner cancelled new paid Provider QA; no new project/key or budget requested. Historical evidence must match this method, subject and version; no cross-method substitution. No same-scope actual response receipt established by this bounded search; do not infer absence or general Provider PASS."
+        },
+        {
+          "dimension": "Stripe Product / Price / Checkout / Webhook",
+          "result": "IMPLEMENTED_NOT_E2E_VERIFIED: shared product economics, Checkout and verified paid Webhook exist; current Sandbox Product/Price metadata and whole purchase chain not verified. Generic job creation does not prove scheduled execution."
+        },
+        {
+          "dimension": "Entitlement / Account / Subject / Consent",
+          "result": "SHARED OWNER AVAILABLE / method bridge missing: subject/consent/entitlement must feed exact AST authority pack and job; no AST full lifecycle registered."
+        },
+        {
+          "dimension": "Private artifact / download / reopen",
+          "result": "NOT VERIFIED for full customer AST: shared immutable store exists, no receipt proving paid AST bytes through Account and cold reopen."
+        },
+        {
+          "dimension": "Failure / recovery / refund / cost",
+          "result": "PARTIAL: experiment validation/cache/cost logic exists; paid recovery/refund/usage settlement not verified for AST."
+        },
+        {
+          "dimension": "Exact blocker / minimal action",
+          "result": "CODE + QA AUTH: adapt existing AST composer/publication to shared nine-stage owner, exact source/version binding; admit unseen-customer manuscript then targeted Sandbox chain."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "C:/phios/content/professional/ast-full-production/admission/ast-fp-r4a-professional-semantic-human-admission-v1.json",
+          "sha256": "1f03127c8a03aeb0db15ebb80d123096e59481d663b861091fa078f127b2f66c",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/content/professional/ast-full-production/publication/r1r5/human-publication-system-acceptance.json",
+          "sha256": "453b05ce4c4cfadd53ecdf8f0a56dc2481c2c1b6a08d507832201e46c24e09ae",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/content/professional/ast-full-production/publication/r1r5/human-english-manuscript-acceptance.json",
+          "sha256": "05af0be2de8b645ce48c76d04cf2f62411a48123ff171afbe9036936bb4fdb54",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/content/professional/ast-full-production/publication/r1r5/future-customer-invariants-receipt.json",
+          "sha256": "0aa91e358e9b9214525e57d3451342b174c855038eaae12168e5a71c34be4485",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        }
+      ]
+    },
+    {
+      "methodId": "NUM",
+      "status": "BLOCKED_WITH_EXACT_REASON",
+      "checks": [
+        {
+          "dimension": "Native calculation / confirmed input",
+          "result": "PASS_WITH_EVIDENCE: native name/Y/number/school rules and 19 chartModels; four structurally different subjects tested in R30."
+        },
+        {
+          "dimension": "Personalized narrative",
+          "result": "PASS_WITH_EVIDENCE only for admitted offline/replay cases; unseen-customer automation NOT_ACCEPTED. Do not present fixed excerpt replay as general paid generation."
+        },
+        {
+          "dimension": "Full PDF",
+          "result": "PASS_WITH_EVIDENCE (local): 12 PDFs, four subjects × three languages, 33 pages each, 19 dynamic charts. Original fixed visuals preserved."
+        },
+        {
+          "dimension": "Publication / Human Acceptance",
+          "result": "PARTIAL: pilot visual acceptance / continuation preserved; full unseen-customer commercial publication not accepted."
+        },
+        {
+          "dimension": "Actual OpenAI Provider",
+          "result": "ZERO_COST_REPLAY_ONLY: Owner cancelled new paid Provider QA; no new project/key or budget requested. Historical evidence must match this method, subject and version; no cross-method substitution. No same-scope actual response receipt established by this bounded search; do not infer absence or general Provider PASS."
+        },
+        {
+          "dimension": "Stripe Product / Price / Checkout / Webhook",
+          "result": "IMPLEMENTED_NOT_E2E_VERIFIED: shared product economics, Checkout and verified paid Webhook exist; current Sandbox Product/Price metadata and whole purchase chain not verified. Generic job creation does not prove scheduled execution."
+        },
+        {
+          "dimension": "Entitlement / Account / Subject / Consent",
+          "result": "ISOLATED_QA_INJECTION_ONLY adapter exists, old R20 default; R30 projector can be injected. Not production registered; do not promote old profile/version."
+        },
+        {
+          "dimension": "Private artifact / download / reopen",
+          "result": "PASS_WITH_EVIDENCE (local isolated private checks); exact new customer version and shared formal Account chain not admitted."
+        },
+        {
+          "dimension": "Failure / recovery / refund / cost",
+          "result": "PARTIAL local negatives/replay; real Provider, generic lifecycle recovery and Sandbox refund E2E unverified."
+        },
+        {
+          "dimension": "Exact blocker / minimal action",
+          "result": "SOURCE + CODE + OWNER: admit current unseen-customer interpretation policy and R30 version; reuse local adapter with shared paid context and current publication projector, then targeted delivery QA."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "C:/phios/tools/review/numerology-r30/production-acceptance/STATUS.json",
+          "sha256": "c0e31817f228f1aeae4f9fb8782a8aefafc015272cc36a49b8510db30e42a574",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/numerology-r30/production-acceptance/HUMAN-DECISION.json",
+          "sha256": "a90c8799ac7873c35bcd0189c89c3e1d89c83cf618a743efb315d07d0ba0b341",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        }
+      ]
+    },
+    {
+      "methodId": "HD",
+      "status": "BLOCKED_WITH_EXACT_REASON",
+      "checks": [
+        {
+          "dimension": "Native calculation / confirmed input",
+          "result": "PASS_WITH_EVIDENCE: R3 external user-confirmed chart/source binding is admitted. Internal calculated R5 candidate remains blocked for precision/interpretation/rights; these are separate paths."
+        },
+        {
+          "dimension": "Personalized narrative",
+          "result": "PASS_WITH_EVIDENCE: R3 professional deterministic personalized corpus. R611 full 17-section / 503 bilingual paragraphs are review-only; configuration variants need own coverage/admission."
+        },
+        {
+          "dimension": "Full PDF",
+          "result": "PASS_WITH_EVIDENCE (local full candidates): R611 zh 83 / en 95 / bilingual 145 pages, existing PDF files; not a six-page P06 sample or accepted commercial full report."
+        },
+        {
+          "dimension": "Publication / Human Acceptance",
+          "result": "PARTIAL: external R3 96-machine / 12-benchmark / 24-human scope admitted; R611 full visual publication review pending. Do not infer native calculation admission."
+        },
+        {
+          "dimension": "Actual OpenAI Provider",
+          "result": "ZERO_COST_REPLAY_ONLY: Owner cancelled new paid Provider QA; no new project/key or budget requested. Historical evidence must match this method, subject and version; no cross-method substitution. No same-scope actual response receipt established by this bounded search; do not infer absence or general Provider PASS."
+        },
+        {
+          "dimension": "Stripe Product / Price / Checkout / Webhook",
+          "result": "IMPLEMENTED_NOT_E2E_VERIFIED: shared product economics, Checkout and verified paid Webhook exist; current Sandbox Product/Price metadata and whole purchase chain not verified. Generic job creation does not prove scheduled execution."
+        },
+        {
+          "dimension": "Entitlement / Account / Subject / Consent",
+          "result": "PASS_WITH_EVIDENCE (local QA fixture): existing HD entitlement candidate/store; verified external chart ownership is a hard input gate. Formal paid adapter absent."
+        },
+        {
+          "dimension": "Private artifact / download / reopen",
+          "result": "PASS_WITH_EVIDENCE (local R611 full files): byte/SHA isolation/cold reopen with seeded payment; not real Checkout/Webhook or Cloud account proof."
+        },
+        {
+          "dimension": "Failure / recovery / refund / cost",
+          "result": "PARTIAL: local rights/revocation/idempotent delivery exists; actual purchase/recovery/refund/cost chain unverified."
+        },
+        {
+          "dimension": "Exact blocker / minimal action",
+          "result": "OWNER + CODE: choose admitted external-chart product scope; sign exact full publication/config variants; bridge current runtime/publication into shared owner. No native engine redevelopment."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "C:/phios/content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/production/HD-PRO-R3-W25-production-cutover-v1.json",
+          "sha256": "bc9e32ba6388777098badaa5c02589b4eb8d259f980fb61455f781a0204f78d3",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/hd-r6/import-20261027/r611/STATUS.json",
+          "sha256": "45a938ed637f72df26a8f75202fa787d7ca3e037f1601d42ec5064a20187e20b",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/hd-r6/import-20261027/r611/PRIVATE-DELIVERY-QA.json",
+          "sha256": "40daac46e42e5c1abe603df0e69528330c9c6e76ad9fc40f793a6d0d2ae4abdb",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        }
+      ]
+    },
+    {
+      "methodId": "ECR",
+      "status": "BLOCKED_WITH_EXACT_REASON",
+      "checks": [
+        {
+          "dimension": "Native calculation / confirmed input",
+          "result": "PASS_WITH_EVIDENCE: native ECR production adapter; newer R12R4B composition admission 48/48 human and 64 machine cases exists. Older blocked receipt does not invalidate this narrower admitted scope."
+        },
+        {
+          "dimension": "Personalized narrative",
+          "result": "PARTIAL: accepted composition is not full paid manuscript. R31 author-led twenty language bodies/ten sections are exact author-case source, not approved automatic arbitrary-customer writer."
+        },
+        {
+          "dimension": "Full PDF",
+          "result": "PARTIAL: R33 section visual binding approved; R31 visual-only acceptance. No evidence of general customer full paid PDF through formal pipeline. Historical six-page or mandala sample is not full report."
+        },
+        {
+          "dimension": "Publication / Human Acceptance",
+          "result": "PARTIAL: composition admitted; author visual local-only; predecessor full report rejected. Full paid customer publication acceptance still missing."
+        },
+        {
+          "dimension": "Actual OpenAI Provider",
+          "result": "ZERO_COST_REPLAY_ONLY: Owner cancelled new paid Provider QA; no new project/key or budget requested. Historical evidence must match this method, subject and version; no cross-method substitution. No same-scope actual response receipt established by this bounded search; do not infer absence or general Provider PASS."
+        },
+        {
+          "dimension": "Stripe Product / Price / Checkout / Webhook",
+          "result": "IMPLEMENTED_NOT_E2E_VERIFIED: shared product economics, Checkout and verified paid Webhook exist; current Sandbox Product/Price metadata and whole purchase chain not verified. Generic job creation does not prove scheduled execution."
+        },
+        {
+          "dimension": "Entitlement / Account / Subject / Consent",
+          "result": "CODE GAP PARTLY FIXED: ECR now participates in prepayment capability checks and denies SHARED_ADAPTER_ABSENT with/without shared flag; no new entitlement/admission granted."
+        },
+        {
+          "dimension": "Private artifact / download / reopen",
+          "result": "NOT VERIFIED for full customer ECR: existing shared store can be reused only after full publication and adapter admission."
+        },
+        {
+          "dimension": "Failure / recovery / refund / cost",
+          "result": "NOT VERIFIED method full paid chain; common recovery/refund infrastructure exists. Precharge guard now prevents this missing adapter being skipped."
+        },
+        {
+          "dimension": "Exact blocker / minimal action",
+          "result": "SOURCE + OWNER + CODE: define approved customer full-report source/contract preserving author text and composition boundaries; implement only missing shared adapter after admission, then exact PDF/Account QA."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "C:/phios/content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json",
+          "sha256": "2f66d48313bdebbf56fae21ae8712ec6f4730a434e9b062085bac6a5a6582a65",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/content/reports/ecr/ecr-author-visual-binding-r33.json",
+          "sha256": "ea7df4287b46c534577ffaa80896023b1e8892b3c98cf4b9b800e2d966dbb23a",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        },
+        {
+          "path": "C:/phios/tools/review/ecr-flagship-visual-r1/r4/R31-HUMAN-ACCEPTANCE.json",
+          "sha256": "ef505d174a20eddaa6fefc584c542f9a08006dcba5db159a7f0f648c8bcf83b1",
+          "scope": "Historical exact scoped receipt; not rerun or promoted to Live acceptance"
+        }
+      ]
+    }
+  ],
+  "paidProviderCalls": 0,
+  "stripeSandboxE2E": "NOT_RUN",
+  "cloudWrites": 0,
+  "publicSaleAdmission": false,
+  "BaZiCompatibility": {
+    "historicalProvider": "HISTORICAL_PROVIDER_PASS",
+    "versionFlag": "PROVIDER_EVIDENCE_VERSION_GAP",
+    "newPaidQaRequired": false,
+    "currentDeterministicReplay": "CURRENT_DETERMINISTIC_REPLAY_PARTIAL_WITH_PUBLICATION_DEFECTS",
+    "sourceUnits": 18,
+    "diagrams": 15,
+    "pdfPages": 48,
+    "overflowPages": [
+      17,
+      22,
+      29,
+      33
+    ],
+    "sameFileAccountAdmission": "BLOCKED_PUBLICATION_FIT_AND_QA_SCOPE",
+    "details": "compatibility/COMPATIBILITY-RESULT.md"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "rule": {
+    "id": "MY-INDIVIDUAL-YA2025-R1",
+    "version": "MY-INDIVIDUAL-YA2025-R1.0",
+    "jurisdiction": "MY",
+    "taxpayerType": [
+      "SOLE_PROPRIETOR",
+      "INDIVIDUAL_EMPLOYED"
+    ],
+    "taxCategory": "RESIDENT_CHARGEABLE_INCOME_RATE_ONLY",
+    "taxYear": 2025,
+    "effectiveFrom": "2025-01-01",
+    "effectiveTo": "2025-12-31",
+    "citation": "LHDN rate schedule: Year of Assessment 2023, 2024 & 2025",
+    "sourceUrl": "https://www.hasil.gov.my/en/individu/kadar-cukai/",
+    "sourceSha256": "43d243a1543151b839ed267de2b266d82d88bb58f0a41f062de4acc190ccfbef",
+    "publishedDate": null,
+    "lastVerifiedDate": "2026-11-03",
+    "bands": [
+      [
+        5000,
+        0
+      ],
+      [
+        20000,
+        1
+      ],
+      [
+        35000,
+        3
+      ],
+      [
+        50000,
+        6
+      ],
+      [
+        70000,
+        11
+      ],
+      [
+        100000,
+        19
+      ],
+      [
+        400000,
+        25
+      ],
+      [
+        600000,
+        26
+      ],
+      [
+        2000000,
+        28
+      ],
+      [
+        null,
+        30
+      ]
+    ],
+    "eligibility": [
+      "MY resident explicitly supplied for synthetic example",
+      "Reviewed chargeable income, not revenue",
+      "YA2025 only"
+    ],
+    "exclusions": [
+      "non-resident",
+      "special tax regime",
+      "dividend income tax",
+      "reliefs and rebates",
+      "formal tax-return rounding"
+    ],
+    "requiredEvidence": [
+      "Residency basis",
+      "Reviewed income scope and chargeable income",
+      "source/review version"
+    ],
+    "rounding": "BigInt accumulated percentage; half-up once to cent for scenario only",
+    "reviewer": "LOCAL_ENGINEERING_SOURCE_CHECK_NOT_LICENSED_TAX_REVIEW",
+    "history": [
+      "SOURCE_IDENTIFIED",
+      "RULE_RESEARCHED",
+      "RULE_VERIFIED_FOR_YA2025_RATE_SCHEDULE",
+      "ADMITTED_FOR_SYNTHETIC_QA"
+    ],
+    "admission": "ADMITTED_FOR_SYNTHETIC_QA",
+    "customerAdmission": false,
+    "supersessionReference": null
+  },
+  "otherRules": {
+    "company2025": "BLOCKED_SOURCE_CURRENT_PAGE_ONLY_2023_2024",
+    "capitalAllowance": "SOURCE_FETCH_BLOCKED",
+    "bik": "SOURCE_FETCH_BLOCKED",
+    "dividend": "SOURCE_IDENTIFIED_FROM_SEARCH_NOT_CALCULATION_ADMITTED"
+  },
+  "SG": "EDUCATIONAL_ONLY",
+  "GB": "EDUCATIONAL_ONLY",
+  "customerUse": false
+}

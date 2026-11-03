@@ -1,0 +1,57 @@
+{
+  "sha": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "mainPtrc": {
+    "run": 41567868577,
+    "conclusion": "success"
+  },
+  "artifactWorkflow": {
+    "run": 41564502064,
+    "conclusion": "success"
+  },
+  "actualPreview": {
+    "checks": 155,
+    "status": "PASS"
+  },
+  "rows": [
+    {
+      "run": 41567868609,
+      "job": 125693642422,
+      "owner": "Report Narrative / continuity CI",
+      "failure": "scripts/check-rnt2-core.mjs: ERR_IMPORT_ATTRIBUTE_MISSING on continuity-subscription-product-registry-v2.json under direct Node22",
+      "classification": "SPECIALIST_NODE_JSON_LOADER_CONTRACT",
+      "publicReleaseImpact": "No application assertion ran; direct Node launcher omits existing Pages JSON import preload. Production bundle compiled successfully; new paid-report features stay closed.",
+      "disposition": "Independent CI launcher follow-up; remains FAIL, not commercial acceptance"
+    },
+    {
+      "run": 41567868578,
+      "job": 125693642671,
+      "owner": "BaZi editorial CI",
+      "failure": "scripts/audit-bazi-r11-deterministic-editorial.mjs: ERR_IMPORT_ATTRIBUTE_MISSING on report-visual-assets-r2.json",
+      "classification": "SPECIALIST_NODE_JSON_LOADER_CONTRACT",
+      "publicReleaseImpact": "Node audit loader fails before editorial assertions; does not demonstrate a deployed Pages failure. Original build/Preview successful; report commercial admission unchanged.",
+      "disposition": "Independent CI launcher follow-up; editorial/PDF acceptance not granted"
+    },
+    {
+      "run": 41567868631,
+      "job": 125693642352,
+      "owner": "BaZi canonical PDF QA / CI infrastructure",
+      "failure": "GitHub annotation System.IO.IOException: No space left on device in runner _diag log; halted at npm ci. Job-log blob unavailable404.",
+      "classification": "GITHUB_HOSTED_RUNNER_DISK_EXHAUSTION",
+      "publicReleaseImpact": "Browser/PDF audit never started. Does not affect already built/verified public artifact; Full Report publication remains closed.",
+      "disposition": "Independent runner footprint follow-up; no new PDF Cloud QA PASS claimed"
+    },
+    {
+      "run": 41567868628,
+      "job": 125693642395,
+      "owner": "World / Book6 legacy visual contract",
+      "failure": "scripts/check-b6-web-e.mjs:18 regex expects import {t}, actual renderer has valid import {t,getLocale}",
+      "classification": "LEGACY_EXACT_IMPORT_TEXT_ASSERTION",
+      "publicReleaseImpact": "Textual source-contract mismatch, not missing t export or observed browser failure. World public journeys passed actual Preview; no new evidence/entitlement admission.",
+      "disposition": "Independent contract reconciliation; old assertion untouched"
+    }
+  ],
+  "rerunsPerformed": false,
+  "sourceChanged": false,
+  "releaseCriticalFailureObserved": false,
+  "decision": "Proceed under explicit Owner authorization; retain these four actual failures as independent follow-ups. No report commercial/PDF acceptance transferred."
+}

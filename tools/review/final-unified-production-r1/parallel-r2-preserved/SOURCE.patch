@@ -1,0 +1,1307 @@
+diff --git a/assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css b/assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css
+index ae39e01b..bdd4c8ee 100644
+--- a/assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css
++++ b/assets/customer-ui/surfaces/bazi-deep-manuscript-r2.css
+@@ -66,3 +66,7 @@
+ 
+ /* P7R2: measured P10 footer clearance; recover 2px of D04 whitespace only. */
+ .bdm-report .bdm-page[data-page-number="10"] .bdm-compact-diagram[data-diagram-id="D04"]{margin-bottom:calc(3mm - 2px)}
++
++/* Measured overflow only; no text or font changes. */
++.bdm-page[data-publication-spacing="COMPACT_PARAGRAPHS"] .bdm-locale p{margin-bottom:1mm}
++.bdm-page[data-publication-spacing="COMPACT_PARAGRAPHS"] .bdm-locale[lang=en]{margin-top:3mm;padding-top:2mm}
+diff --git a/functions/account/ziwei-controlled-report-material.js b/functions/account/ziwei-controlled-report-material.js
+index 9f067dc3..13ab58f1 100644
+--- a/functions/account/ziwei-controlled-report-material.js
++++ b/functions/account/ziwei-controlled-report-material.js
+@@ -24,7 +24,7 @@ async function intact(candidate){
+ }
+ export async function releaseControlledZiweiReport(context,candidate,{loadSubject,renderVerification}={}){
+  const identity=controlledZiweiIdentity(context);if(candidate.customerId!==identity.userId)deny();
+- const owned=await requireZiweiEntitlement(context,candidate.locale);if(owned.purchase_id!==candidate.purchaseId)deny();
++ const owned=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});if(owned.purchase_id!==candidate.purchaseId)deny();
+  await personAccess(identity.userId,candidate.personId,loadSubject);await intact(candidate);
+  // Receipt is supplied by the server render verifier, never a customer route.
+  const contract=resolveMethodRenderContract(candidate);
+@@ -45,7 +45,7 @@ export async function openControlledZiweiReport(context,{reportId,personId},{loa
+  const row=await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.artifact_id=? AND r.user_id=? AND a.artifact_type=? AND r.status=?').bind(reportId,identity.userId,TYPE,'active').first();
+  if(!row)deny();const m=JSON.parse(row.payload);
+  if(m.customerId!==identity.userId||m.personId!==personId||m.releaseStatus!=='ACTIVE')deny();
+- const owned=await requireZiweiEntitlement(context,m.locale);if(owned.purchase_id!==m.purchaseId)deny();await personAccess(identity.userId,personId,loadSubject);
++ const owned=await requireZiweiEntitlement(context,m.locale,{purchaseId:m.purchaseId});if(owned.purchase_id!==m.purchaseId)deny();await personAccess(identity.userId,personId,loadSubject);
+  const object=await context.env.PRIVATE_REPORTS.get(m.key);if(!object)deny();
+  const candidate=JSON.parse(await object.text());if(await sha256Stable(candidate)!==m.digest)deny();
+  if(candidate.personId!==personId||candidate.customerId!==identity.userId||candidate.snapshot.semanticSnapshotId!==m.snapshotId)deny();
+diff --git a/functions/account/ziwei-pdf-delivery.js b/functions/account/ziwei-pdf-delivery.js
+index 40b0bb1d..b9933b5a 100644
+--- a/functions/account/ziwei-pdf-delivery.js
++++ b/functions/account/ziwei-pdf-delivery.js
+@@ -11,7 +11,7 @@ import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
+ export const ZWR_PDF_VERSION='ZWR-R13-PRIVATE-PDF-1';
+ const fail=code=>{throw Object.assign(Error(code),{code,status:409});};
+ async function bindingFor(context,candidate,reportId){
+- const owner=personIdentity(context).userId,right=await requireZiweiEntitlement(context,candidate.locale);
++ const owner=personIdentity(context).userId,right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
+  if(owner!==candidate.customerId||right.purchase_id!==candidate.purchaseId)fail('REPORT_UNAVAILABLE');
+  await loadCanonicalPersonSubject(context.env,owner,candidate.personId);
+  const order=await context.env.RUNTIME_DB.prepare("SELECT checkout_attempt_id FROM commerce_purchases WHERE purchase_id=? AND customer_id=? AND purchase_state='purchased'").bind(candidate.purchaseId,owner).first();
+@@ -25,12 +25,12 @@ export function assertZiweiPdfScope(context,candidate){
+ }
+ export async function assertAccountZiweiFinalArtifact(context,{candidate,reportId,verification,pdfBytes,finalPublicationReceipt}){
+  assertZiweiPdfScope(context,candidate);
+- const binding=await bindingFor(context,candidate,reportId),right=await requireZiweiEntitlement(context,candidate.locale);
++ const binding=await bindingFor(context,candidate,reportId),right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
+  return assertZiweiFinalArtifact({candidate,verification,pdfBytes,receipt:finalPublicationReceipt,binding,entitlementId:right.entitlement_id});
+ }
+ export async function persistAccountZiweiPdf(context,{candidate,reportId,html,verification,pdfBytes,finalPublicationReceipt=null}){
+  const scope=assertZiweiPdfScope(context,candidate),binding=await bindingFor(context,candidate,reportId),c=candidate.snapshot.semanticContent;
+- const right=await requireZiweiEntitlement(context,candidate.locale);
++ const right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
+  const d=finalPublicationReceipt?await assertZiweiFinalArtifact({candidate,verification,pdfBytes,receipt:finalPublicationReceipt,binding,entitlementId:right.entitlement_id}):verification.pdfDerivative;
+  if(!c.vfrR2PublicationBinding||!d||d.bytes!==pdfBytes?.length||d.outputDigest!==await methodPdfSHA(pdfBytes)||d.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||d.publicationDigest!==c.visualReportIr.publicationIrDigest||d.sourceHtmlDigest!==verification.outputDigest||d.pages!==(finalPublicationReceipt?finalPublicationReceipt.pageCount:verification.pageCount))fail('ZWR_PDF_SOURCE_BINDING_INVALID');
+  const artifact=await createCustomerReportArtifact({reportArtifactId:reportId,customerId:candidate.customerId,personId:candidate.personId,methodCode:'ZWR',productCode:binding.productId,entitlementId:right.entitlement_id,inputDigest:candidate.snapshot.inputFingerprint,authorityPackVersion:c.vfrCompactAuthoringPackDigest,reportContentVersion:c.vfrDeepManuscriptDigest,rendererVersion:verification.rendererVersion,inputSnapshot:c.vfrInputSnapshot||{sourceRef:'ACCEPTED_REFERENCE_ONLY',subject:c.subject},calculationSnapshot:c.evidence,generatedSections:c.visualReportIr.sections,publicationIR:{...c.visualReportIr,digest:c.visualReportIr.publicationIrDigest},htmlSnapshotOrRenderState:{objectKey:`released-method/${reportId}/${verification.outputDigest}.html`,outputDigest:verification.outputDigest},pdfPolicy:'PERSISTED_PRIVATE_PDF_REQUIRED',reviewOnly:true,releaseAdmission:false,scope,...(finalPublicationReceipt?{finalPublicationReceipt}:{})});
+@@ -53,7 +53,7 @@ export async function accountZiweiPdfLink(context,material){
+ }
+ export async function downloadAccountZiweiPdf(context,reportId){
+  const material=await openAccountZiweiMaterial(context,reportId),{candidate}=material,binding=await bindingFor(context,candidate,reportId),store=await createCustomerArtifactStore(context.env,binding),state=await createReportGenerationStore(context.env,binding,{scope:'delivery'}),{artifact}=await store.open(),receipt=await state.withLock('zwr-pdf-release',()=>state.get('zwr-pdf-release'));
+- const right=await requireZiweiEntitlement(context,candidate.locale);
++ const right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
+  if(artifact.entitlementId!==right.entitlement_id||artifact.customerId!==binding.ownerAccountId)fail('REPORT_UNAVAILABLE');
+  if(!receipt||receipt.artifactDigest!==artifact.artifactDigest||receipt.snapshotId!==candidate.snapshot.semanticSnapshotId||receipt.sourceHtmlDigest!==material.row.output_digest||receipt.publicationDigest!==candidate.snapshot.semanticContent.visualReportIr.publicationIrDigest||artifact.personId!==candidate.personId||artifact.methodCode!=='ZWR'||artifact.productCode!==binding.productId)fail('ZWR_PDF_IMMUTABLE_RECEIPT_MISMATCH');
+  if(artifact.finalPublicationReceipt){
+diff --git a/functions/personal-reading/narrative/ziwei-r5-provider-registry.js b/functions/personal-reading/narrative/ziwei-r5-provider-registry.js
+index dc91c59b..5c3aa5ac 100644
+--- a/functions/personal-reading/narrative/ziwei-r5-provider-registry.js
++++ b/functions/personal-reading/narrative/ziwei-r5-provider-registry.js
+@@ -2,7 +2,7 @@
+ // R5 deliberately requests the canonical DEEP model because professional
+ // synthesis is a governed long-form task rather than light paraphrase.
+ export const ZIWEI_R5_PAI_REGISTRY=Object.freeze({
+- version:'ZIWEI-R5-PAI-PROJECTION-v1',
++ version:'ZIWEI-R5-PAI-PRICING-20261102-v2',
+  source:'content/ai-economics/providers/ai-provider-cost-registry-v1.json',
+  models:Object.freeze([
+   Object.freeze({
+@@ -10,15 +10,32 @@ export const ZIWEI_R5_PAI_REGISTRY=Object.freeze({
+    modelId:'gpt-5.6-sol',
+    routingCode:'SOL',
+    capabilityClass:'DEEP',
+-   inputPricePerMillion:2.5,
+-   cachedInputPricePerMillion:0.25,
+-   outputPricePerMillion:15,
+-   effectiveFrom:'2026-09-10',
++   inputPricePerMillion:4,
++   cachedInputPricePerMillion:0.4,
++   outputPricePerMillion:20,
++   longContextInputThresholdTokens:272000,
++   longContextPricing:Object.freeze({input:8,cachedInput:0.8,output:30}),
++   contextTokens:1050000,
++   maxOutputTokens:128000,
++   pricingVerified:true,
++   verifiedAt:'2026-11-02',
++   reviewAfter:'2026-11-21',
++   pricingScope:'STANDARD_NO_TOOLS_OR_RESIDENCY_UPLIFT_CACHE_WRITE_CHARGES_NOT_INCLUDED',
++   accountAvailabilityVerified:false,
++   effectiveFrom:'2026-11-02',
+    effectiveTo:null,
+-   source:'PAI_R1_CONSERVATIVE_PLANNING_ASSUMPTION',
++   source:'https://developers.openai.com/api/docs/models/gpt-5.6-sol',
+    status:'AVAILABLE',
+    planningCostRank:3
+   })
+  ])
+ });
++// Select the full-request price tier; keep the existing PAI cost/usage owner.
++export function ziweiR5PricingForInput(model,inputTokens){
++ if(!Number.isSafeInteger(inputTokens)||inputTokens<0)throw Error('ZWR_PRICING_INPUT_TOKENS_INVALID');
++ if(inputTokens<=model.longContextInputThresholdTokens)return model;
++ const rates=model.longContextPricing;
++ if(!rates)throw Error('ZWR_LONG_CONTEXT_PRICING_REQUIRED');
++ return Object.freeze({...model,inputPricePerMillion:rates.input,cachedInputPricePerMillion:rates.cachedInput,outputPricePerMillion:rates.output,pricingTier:'LONG_CONTEXT'});
++}
+ export default ZIWEI_R5_PAI_REGISTRY;
+diff --git a/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js b/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js
+index 795d7ee6..8bc90f3d 100644
+--- a/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js
++++ b/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js
+@@ -59,3 +59,21 @@ export function measureBaziPublication(root,options={}){
+  return {presentationMode:mode,layoutProfileVersion:profile.id,pageCount:pages.length,diagramCount:diagrams.length,overflowPages,clippedSlots,hiddenTextSlots,fontMinimumViolations,assetFailures,missingLocales,diagramLocaleViolations,diagramViolations,topology,slots,recomposePasses:[],fitStatus:fail?'FAIL':'PASS',providerCalls:0};
+ }
+ export function assertBaziFitRelease(ir,receipt){if(receipt.presentationMode!==ir.presentationMode||!['PASS','PASS_AFTER_RECOMPOSE'].includes(receipt.fitStatus))throw Error('PUBLICATION_OVERFLOW_UNRESOLVED');if(ir.customerPublishable!==true)throw Error('HUMAN_REVIEW_OR_COVERAGE_PENDING');return true;}
++
++// Bounded local reflow: preserve every text node and font; compact paragraph
++// spacing only on measured body-page overflow. Never admit/release the result.
++export function reflowBaziParagraphSpacing(root){
++ const pages=[...root.querySelectorAll('.bdm-page')],changes=[];
++ for(const page of pages){
++  const content=page.querySelector('.bdm-content'),footer=page.querySelector('footer');
++  if(!content||!footer||!content.querySelector('.bdm-locale')||content.querySelector('figure'))continue;
++  const before=content.getBoundingClientRect(),safeBottom=footer.getBoundingClientRect().top-4;
++  if(before.bottom<=safeBottom&&page.scrollHeight<=page.clientHeight+2)continue;
++  const text=content.textContent,fonts=[...content.querySelectorAll('p')].map(p=>getComputedStyle(p).fontSize);
++  page.dataset.publicationSpacing='COMPACT_PARAGRAPHS';
++  const after=content.getBoundingClientRect();
++  if(content.textContent!==text||fonts.some((font,i)=>getComputedStyle(content.querySelectorAll('p')[i]).fontSize!==font))throw Error('BZR_SPACING_REFLOW_CONTENT_OR_FONT_CHANGED');
++  changes.push({page:Number(page.dataset.pageNumber),beforeBottom:before.bottom,afterBottom:after.bottom,safeBottom,resolved:after.bottom<=safeBottom,sourceTextUnchanged:true,fontSizeUnchanged:true});
++ }
++ return {operation:'PARAGRAPH_AND_BILINGUAL_SEPARATOR_SPACING_ONLY',changes,providerCalls:0};
++}
+diff --git a/functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js b/functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js
+index ebf6443e..e8652fd3 100644
+--- a/functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js
++++ b/functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js
+@@ -1,163 +1,163 @@
+-import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
+-import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
+-import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
+-import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
+-import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
+-import {
+- ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
+- ZWR_VFR_FIVE_CALL_BATCHES,
+- buildZwrFiveCallBatchSchema,
+- projectFiveCallManuscriptToReportSections
+-} from './ziwei-vfr-five-call-manuscript.js';
+-
+-export const ZWR_VFR_FIVE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-FIVE-CALL-DEEP-SOL-v1';
+-const EXPERIMENT_BUDGET_USD=1.00;
+-const MAX_OUTPUT_TOKENS_PER_CALL=8000;
+-
+-function modelRecord(){
+- const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
+- const model=ZIWEI_R5_PAI_REGISTRY.models.find(m=>m.modelId===route.selectedModel);
+- if(!route.selectedProvider||!route.selectedModel||!model)throw Error('ZWR_FIVE_CALL_PROVIDER_ROUTE_REQUIRED');
+- return {route,model};
+-}
+-function batchPrompt(batchIds){
+- return [
+-  'You are writing a premium bilingual Zi Wei Dou Shu customer manuscript for exactly two supplied report sections.',
+-  'The supplied compact batch is the complete authority. Do not calculate new chart facts and do not invent missing evidence.',
+-  'For each section, write one coherent Chinese long-form chapter and one coherent English long-form chapter. Target roughly 900-1200 Chinese characters and 1400-2200 English characters per section; finish cleanly and do not fill the maximum merely because space remains. Do not decompose the response into semantic subfields, bullet points, checklists, or mini-summaries.',
+-  'The prose should read like a professional human-written Zi Wei Dou Shu interpretation: begin from the admitted palace and star structure, explain how the configuration works together, then move naturally into recognizable lived situations, constructive expression, pressure distortion, counterweights, timing emphasis where admitted, and a grounded closing observation.',
+-  'Use Zi Wei terminology densely enough that the chapter could not be mistaken for generic personality writing, but always translate technical structure into lived meaning.',
+-  'Include concrete situations from the section domain rather than generic advice. Show how the same structure may look different under supportive conditions and under strain.',
+-  'For timing, clearly distinguish natal baseline from Da Xian and Liu Nian emphasis when the Authority Pack admits timing. Never fabricate guaranteed events.',
+-  'Chinese and English must carry the same substantive meaning but should each read naturally in their own language; do not mechanically translate sentence by sentence.',
+-  'Do not generate layout, diagrams, captions, colors, page counts, headings, cards or presentation structure. PHI OS owns all deterministic presentation.',
+-  'Do not expose internal workflow terms. Preserve uncertainty. Do not diagnose illness or give transaction-level financial advice.',
+-  'Target sections: '+batchIds.join(', ')+'. Return JSON only in the required schema.'
+- ].join('\n');
+-}
+-function batchPack(pack,ids){
+- const selected=new Set(ids);
+- return deepFreeze({
+-  schemaVersion:'ZWR-VFR-R1-FIVE-CALL-BATCH-PACK-v1',
+-  methodId:pack.methodId,
+-  localeMode:'BILINGUAL',
+-  subjectBinding:pack.subjectBinding,
+-  sourceAuthorityVersion:pack.sourceAuthorityVersion,
+-  reportRules:pack.reportRules,
+-  sections:pack.sections.filter(s=>selected.has(s.sectionId)),
+-  realityContext:pack.realityContext,
+-  authorityDigest:pack.authorityDigest
+- });
+-}
+-export async function zwrVfrPromptIdentity(){return sha256Stable({composerVersion:ZWR_VFR_FIVE_CALL_COMPOSER_VERSION,manuscriptVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,prompts:ZWR_VFR_FIVE_CALL_BATCHES.map(batchPrompt),responseSchema:'sections:rawManuscriptSections'});}
+-export function planZwrFiveCallExperiment({pack}={}){
+- if(pack?.schemaVersion!=='ZWR-VFR-R1-COMPACT-AUTHORING-PACK-v1')throw Error('ZWR_FIVE_CALL_COMPACT_PACK_REQUIRED');
+- const {route,model}=modelRecord();
+- const batches=ZWR_VFR_FIVE_CALL_BATCHES.map((ids,index)=>{
+-  const bp=batchPack(pack,ids);
+-  const input={systemPrompt:batchPrompt(ids),payload:{compactBatch:bp}};
+-  const inputTokens=estimateVfrTokens(input);
+-  const maxCost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens:0,outputTokens:MAX_OUTPUT_TOKENS_PER_CALL}));
+-  return deepFreeze({index:index+1,sectionIds:[...ids],inputTokens,maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL,estimatedMaxCost:maxCost});
+- });
+- const estimatedMaxTotalCost=Number(batches.reduce((a,b)=>a+b.estimatedMaxCost,0).toFixed(8));
+- return deepFreeze({
+-  schemaVersion:'ZWR-VFR-R1-FIVE-CALL-PLAN-v1',
+-  experimentVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
+-  provider:route.selectedProvider,
+-  model:route.selectedModel,
+-  providerCallsPlanned:5,
+-  semanticReviewCallsPlanned:0,
+-  budgetLimitUsd:EXPERIMENT_BUDGET_USD,
+-  estimatedMaxTotalCost,
+-  allowed:estimatedMaxTotalCost<=EXPERIMENT_BUDGET_USD,
+-  batches
+- });
+-}
+-export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalThis.fetch,resume=null,onBatchCompleted=null}={}){
+- const plan=planZwrFiveCallExperiment({pack});
+- if(!plan.allowed)return deepFreeze({status:'EXPERIMENT_BUDGET_PRECHECK_BLOCKED',plan,providerCalls:0,semanticReviewCalls:0});
+- assertVfrLiveAllowed(env);
+- const {model}=modelRecord();
+- const manuscriptSections=[...(resume?.manuscriptSections||[])],usageRecords=[...(resume?.usageRecords||[])];
+- let spent=Number(resume?.spent||0),providerCalls=usageRecords.length,totalInput=Number(resume?.totalInput||0),totalCached=Number(resume?.totalCached||0),totalOutput=Number(resume?.totalOutput||0);
+- const completed=new Set(manuscriptSections.map(s=>s.sectionId));
+- for(let i=0;i<ZWR_VFR_FIVE_CALL_BATCHES.length;i++){
+-  const ids=ZWR_VFR_FIVE_CALL_BATCHES[i],bp=batchPack(pack,ids);
+-  if(ids.every(id=>completed.has(id)))continue;
+-  const remaining=EXPERIMENT_BUDGET_USD-spent;
+-  if(remaining<=0)throw Object.assign(new Error('ZWR_FIVE_CALL_BUDGET_EXHAUSTED'),{details:{spent,providerCalls}});
+-  const started=Date.now();
+-  let result;
+-  try{
+-   result=await invokeOpenAIStructured({
+-    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
+-    fetcher,
+-    systemPrompt:batchPrompt(ids),
+-    userPayload:{compactBatch:bp},
+-    schema:buildZwrFiveCallBatchSchema(bp),
+-    schemaName:'zwr_vfr_five_call_batch_'+String(i+1),
+-    maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL
+-   });
+-  }catch(error){
+-   const details=error?.details&&typeof error.details==='object'?error.details:{};
+-   error.details={...details,batch:i+1,sectionIds:[...ids],completedSectionIds:[...completed]};
+-   throw error;
+-  }
+-  providerCalls++;
+-  const usage=result?.usage||{};
+-  const inputTokens=usage.input_tokens||usage.inputTokens||0;
+-  const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
+-  const outputTokens=usage.output_tokens||usage.outputTokens||0;
+-  const cost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens,outputTokens}));
+-  spent=Number((spent+cost).toFixed(8));
+-  if(spent>EXPERIMENT_BUDGET_USD)throw Object.assign(new Error('ZWR_FIVE_CALL_EXPERIMENT_BUDGET_EXCEEDED'),{details:{spent,batch:i+1}});
+-  totalInput+=inputTokens;totalCached+=cachedInputTokens;totalOutput+=outputTokens;
+-  manuscriptSections.push(...result.output.sections);
+-  usageRecords.push(createPaiUsageRecord({
+-   requestId:'ZWR-VFR-FIVE-CALL:'+pack.subjectBinding.subjectKey+':B'+(i+1),
+-   timestamp:new Date().toISOString(),
+-   aiExecutionClass:'T3_DEEP_COMPOSITION',
+-   provider:result.provider||plan.provider,
+-   model:result.model||plan.model,
+-   inputTokens,cachedInputTokens,outputTokens,
+-   estimatedProviderCost:cost,
+-   requestType:'EXPERIMENT',
+-   providerAttemptCount:1,
+-   latencyMs:Date.now()-started,
+-   success:true,
+-   fallbackUsed:false
+-  }));
+-  for(const s of result.output.sections)completed.add(s.sectionId);
+-  if(onBatchCompleted)await onBatchCompleted({
+-   batch:i+1,
+-   sectionIds:[...ids],
+-   manuscriptSections:[...manuscriptSections],
+-   usageRecords:[...usageRecords],
+-   spent,totalInput,totalCached,totalOutput
+-  });
+- }
+- const sections=projectFiveCallManuscriptToReportSections({pack,manuscriptSections});
+- const seed={
+-  schemaVersion:'ZWR-VFR-R1-FIVE-CALL-EXPERIMENT-RESULT-v1',
+-  composerVersion:ZWR_VFR_FIVE_CALL_COMPOSER_VERSION,
+-  manuscriptVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
+-  status:'PASS',
+-  subjectBinding:pack.subjectBinding,
+-  authorityDigest:pack.authorityDigest,
+-  sections,
+-  rawManuscriptSections:manuscriptSections,
+-  providerUsage:{
+-   providerCalls,
+-   semanticReviewCalls:0,
+-   inputTokens:totalInput,
+-   cachedInputTokens:totalCached,
+-   outputTokens:totalOutput,
+-   estimatedProviderCost:spent,
+-   budgetLimit:EXPERIMENT_BUDGET_USD,
+-   usageRecords
+-  }
+- };
+- return deepFreeze({...seed,resultDigest:await sha256Stable(seed)});
+-}
+-export default Object.freeze({planZwrFiveCallExperiment,composeZwrFiveCallExperiment,ZWR_VFR_FIVE_CALL_COMPOSER_VERSION});
++import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
++import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
++import {ZIWEI_R5_PAI_REGISTRY,ziweiR5PricingForInput} from '../narrative/ziwei-r5-provider-registry.js';
++import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
++import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
++import {
++ ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
++ ZWR_VFR_FIVE_CALL_BATCHES,
++ buildZwrFiveCallBatchSchema,
++ projectFiveCallManuscriptToReportSections
++} from './ziwei-vfr-five-call-manuscript.js';
++
++export const ZWR_VFR_FIVE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-FIVE-CALL-DEEP-SOL-v1';
++const EXPERIMENT_BUDGET_USD=1.00;
++const MAX_OUTPUT_TOKENS_PER_CALL=8000;
++
++function modelRecord(){
++ const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
++ const model=ZIWEI_R5_PAI_REGISTRY.models.find(m=>m.modelId===route.selectedModel);
++ if(!route.selectedProvider||!route.selectedModel||!model)throw Error('ZWR_FIVE_CALL_PROVIDER_ROUTE_REQUIRED');
++ return {route,model};
++}
++function batchPrompt(batchIds){
++ return [
++  'You are writing a premium bilingual Zi Wei Dou Shu customer manuscript for exactly two supplied report sections.',
++  'The supplied compact batch is the complete authority. Do not calculate new chart facts and do not invent missing evidence.',
++  'For each section, write one coherent Chinese long-form chapter and one coherent English long-form chapter. Target roughly 900-1200 Chinese characters and 1400-2200 English characters per section; finish cleanly and do not fill the maximum merely because space remains. Do not decompose the response into semantic subfields, bullet points, checklists, or mini-summaries.',
++  'The prose should read like a professional human-written Zi Wei Dou Shu interpretation: begin from the admitted palace and star structure, explain how the configuration works together, then move naturally into recognizable lived situations, constructive expression, pressure distortion, counterweights, timing emphasis where admitted, and a grounded closing observation.',
++  'Use Zi Wei terminology densely enough that the chapter could not be mistaken for generic personality writing, but always translate technical structure into lived meaning.',
++  'Include concrete situations from the section domain rather than generic advice. Show how the same structure may look different under supportive conditions and under strain.',
++  'For timing, clearly distinguish natal baseline from Da Xian and Liu Nian emphasis when the Authority Pack admits timing. Never fabricate guaranteed events.',
++  'Chinese and English must carry the same substantive meaning but should each read naturally in their own language; do not mechanically translate sentence by sentence.',
++  'Do not generate layout, diagrams, captions, colors, page counts, headings, cards or presentation structure. PHI OS owns all deterministic presentation.',
++  'Do not expose internal workflow terms. Preserve uncertainty. Do not diagnose illness or give transaction-level financial advice.',
++  'Target sections: '+batchIds.join(', ')+'. Return JSON only in the required schema.'
++ ].join('\n');
++}
++function batchPack(pack,ids){
++ const selected=new Set(ids);
++ return deepFreeze({
++  schemaVersion:'ZWR-VFR-R1-FIVE-CALL-BATCH-PACK-v1',
++  methodId:pack.methodId,
++  localeMode:'BILINGUAL',
++  subjectBinding:pack.subjectBinding,
++  sourceAuthorityVersion:pack.sourceAuthorityVersion,
++  reportRules:pack.reportRules,
++  sections:pack.sections.filter(s=>selected.has(s.sectionId)),
++  realityContext:pack.realityContext,
++  authorityDigest:pack.authorityDigest
++ });
++}
++export async function zwrVfrPromptIdentity(){return sha256Stable({composerVersion:ZWR_VFR_FIVE_CALL_COMPOSER_VERSION,manuscriptVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,prompts:ZWR_VFR_FIVE_CALL_BATCHES.map(batchPrompt),responseSchema:'sections:rawManuscriptSections'});}
++export function planZwrFiveCallExperiment({pack}={}){
++ if(pack?.schemaVersion!=='ZWR-VFR-R1-COMPACT-AUTHORING-PACK-v1')throw Error('ZWR_FIVE_CALL_COMPACT_PACK_REQUIRED');
++ const {route,model}=modelRecord();
++ const batches=ZWR_VFR_FIVE_CALL_BATCHES.map((ids,index)=>{
++  const bp=batchPack(pack,ids);
++  const input={systemPrompt:batchPrompt(ids),payload:{compactBatch:bp}};
++  const inputTokens=estimateVfrTokens(input);
++  const maxCost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens:0,outputTokens:MAX_OUTPUT_TOKENS_PER_CALL}));
++  return deepFreeze({index:index+1,sectionIds:[...ids],inputTokens,maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL,estimatedMaxCost:maxCost});
++ });
++ const estimatedMaxTotalCost=Number(batches.reduce((a,b)=>a+b.estimatedMaxCost,0).toFixed(8));
++ return deepFreeze({
++  schemaVersion:'ZWR-VFR-R1-FIVE-CALL-PLAN-v1',
++  experimentVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
++  provider:route.selectedProvider,
++  model:route.selectedModel,
++  providerCallsPlanned:5,
++  semanticReviewCallsPlanned:0,
++  budgetLimitUsd:EXPERIMENT_BUDGET_USD,
++  estimatedMaxTotalCost,
++  allowed:estimatedMaxTotalCost<=EXPERIMENT_BUDGET_USD,
++  batches
++ });
++}
++export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalThis.fetch,resume=null,onBatchCompleted=null}={}){
++ const plan=planZwrFiveCallExperiment({pack});
++ if(!plan.allowed)return deepFreeze({status:'EXPERIMENT_BUDGET_PRECHECK_BLOCKED',plan,providerCalls:0,semanticReviewCalls:0});
++ assertVfrLiveAllowed(env);
++ const {model}=modelRecord();
++ const manuscriptSections=[...(resume?.manuscriptSections||[])],usageRecords=[...(resume?.usageRecords||[])];
++ let spent=Number(resume?.spent||0),providerCalls=usageRecords.length,totalInput=Number(resume?.totalInput||0),totalCached=Number(resume?.totalCached||0),totalOutput=Number(resume?.totalOutput||0);
++ const completed=new Set(manuscriptSections.map(s=>s.sectionId));
++ for(let i=0;i<ZWR_VFR_FIVE_CALL_BATCHES.length;i++){
++  const ids=ZWR_VFR_FIVE_CALL_BATCHES[i],bp=batchPack(pack,ids);
++  if(ids.every(id=>completed.has(id)))continue;
++  const remaining=EXPERIMENT_BUDGET_USD-spent;
++  if(remaining<=0)throw Object.assign(new Error('ZWR_FIVE_CALL_BUDGET_EXHAUSTED'),{details:{spent,providerCalls}});
++  const started=Date.now();
++  let result;
++  try{
++   result=await invokeOpenAIStructured({
++    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
++    fetcher,
++    systemPrompt:batchPrompt(ids),
++    userPayload:{compactBatch:bp},
++    schema:buildZwrFiveCallBatchSchema(bp),
++    schemaName:'zwr_vfr_five_call_batch_'+String(i+1),
++    maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL
++   });
++  }catch(error){
++   const details=error?.details&&typeof error.details==='object'?error.details:{};
++   error.details={...details,batch:i+1,sectionIds:[...ids],completedSectionIds:[...completed]};
++   throw error;
++  }
++  providerCalls++;
++  const usage=result?.usage||{};
++  const inputTokens=usage.input_tokens||usage.inputTokens||0;
++  const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
++  const outputTokens=usage.output_tokens||usage.outputTokens||0;
++  const cost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens,outputTokens}));
++  spent=Number((spent+cost).toFixed(8));
++  if(spent>EXPERIMENT_BUDGET_USD)throw Object.assign(new Error('ZWR_FIVE_CALL_EXPERIMENT_BUDGET_EXCEEDED'),{details:{spent,batch:i+1}});
++  totalInput+=inputTokens;totalCached+=cachedInputTokens;totalOutput+=outputTokens;
++  manuscriptSections.push(...result.output.sections);
++  usageRecords.push(createPaiUsageRecord({
++   requestId:'ZWR-VFR-FIVE-CALL:'+pack.subjectBinding.subjectKey+':B'+(i+1),
++   timestamp:new Date().toISOString(),
++   aiExecutionClass:'T3_DEEP_COMPOSITION',
++   provider:result.provider||plan.provider,
++   model:result.model||plan.model,
++   inputTokens,cachedInputTokens,outputTokens,
++   estimatedProviderCost:cost,
++   requestType:'EXPERIMENT',
++   providerAttemptCount:1,
++   latencyMs:Date.now()-started,
++   success:true,
++   fallbackUsed:false
++  }));
++  for(const s of result.output.sections)completed.add(s.sectionId);
++  if(onBatchCompleted)await onBatchCompleted({
++   batch:i+1,
++   sectionIds:[...ids],
++   manuscriptSections:[...manuscriptSections],
++   usageRecords:[...usageRecords],
++   spent,totalInput,totalCached,totalOutput
++  });
++ }
++ const sections=projectFiveCallManuscriptToReportSections({pack,manuscriptSections});
++ const seed={
++  schemaVersion:'ZWR-VFR-R1-FIVE-CALL-EXPERIMENT-RESULT-v1',
++  composerVersion:ZWR_VFR_FIVE_CALL_COMPOSER_VERSION,
++  manuscriptVersion:ZWR_VFR_FIVE_CALL_MANUSCRIPT_VERSION,
++  status:'PASS',
++  subjectBinding:pack.subjectBinding,
++  authorityDigest:pack.authorityDigest,
++  sections,
++  rawManuscriptSections:manuscriptSections,
++  providerUsage:{
++   providerCalls,
++   semanticReviewCalls:0,
++   inputTokens:totalInput,
++   cachedInputTokens:totalCached,
++   outputTokens:totalOutput,
++   estimatedProviderCost:spent,
++   budgetLimit:EXPERIMENT_BUDGET_USD,
++   usageRecords
++  }
++ };
++ return deepFreeze({...seed,resultDigest:await sha256Stable(seed)});
++}
++export default Object.freeze({planZwrFiveCallExperiment,composeZwrFiveCallExperiment,ZWR_VFR_FIVE_CALL_COMPOSER_VERSION});
+diff --git a/functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js b/functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js
+index 51edf179..d5c86515 100644
+--- a/functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js
++++ b/functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js
+@@ -1,111 +1,111 @@
+-import {reportEconomics,reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
+-import {VFR_BILINGUAL_SINGLE_CALL_V1} from '../../canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js';
+-import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
+-import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
+-import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
+-import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
+-import {planVfrProviderBudget,assertVfrLiveAllowed,assertVfrCallCount} from './report-provider-budget.js';
+-import {buildZwrVfrProviderSchema,createZwrVfrReportIr} from './ziwei-vfr-report-ir.js';
+-
+-export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v4';
+-const MAX_OUTPUT_TOKENS=VFR_BILINGUAL_SINGLE_CALL_V1.maxOutputTokens;
+-
+-function systemPrompt(){
+- return [
+-  'You generate bilingual Zi Wei Dou Shu semantic content only. PHI OS owns all presentation structure and diagrams.',
+-  'The supplied Compact Authoring Pack is the complete authority. Do not calculate the chart and do not invent technical facts.',
+-  'For each supplied section return exactly four semantic fields in zhHans and en: coreMeaning, livedExpression, counterweight, navigation. Each field must be a complete natural sentence, not a clipped phrase.',
+-  'Use professional Zi Wei terminology and concrete lived meaning. livedExpression must describe a recognizable life pattern or situation, not generic advice. Avoid generic psychology, star-by-star glossary prose, and workflow language.',
+-  'Do not decide headlines, subheadlines, insight counts, paragraph counts, captions, diagram content, diagram labels, page structure or layout. PHI OS projects those deterministically.',
+-  'Preserve unknowns. Do not predict guaranteed events, diagnose illness, or give transaction-level financial advice.',
+-  'Use authorityRefs only from the supplied section claims.',
+-  'counterweight must explain how the same structure changes under strain, including what specifically becomes distorted or overused. navigation must be specific to that section and framed as a concrete observation or reality test, not a generic checklist; do not recycle review-date, responsibility-list, boundary-list, or set-a-plan formulas across sections. Keep every field compact and information-dense, but never truncate a sentence to satisfy length. Return JSON only.'
+- ].join('\n');
+-}
+-function modelRecord(){
+- const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
+- const model=ZIWEI_R5_PAI_REGISTRY.models.find(m=>m.modelId===route.selectedModel);
+- if(!route.selectedProvider||!route.selectedModel||!model)throw Error('ZWR_VFR_PROVIDER_ROUTE_REQUIRED');
+- return {route,model};
+-}
+-export async function planZwrVfrOneCall({pack}={}){
+- if(pack?.schemaVersion!=='ZWR-VFR-R1-COMPACT-AUTHORING-PACK-v1')throw Error('ZWR_VFR_COMPACT_PACK_REQUIRED');
+- const {route,model}=modelRecord();
+- const payload={compactAuthoringPack:pack};
+- const planningInput={systemPrompt:systemPrompt(),payload};
+- const budget=planVfrProviderBudget({methodId:'ZWR',model,input:planningInput,maxOutputTokens:MAX_OUTPUT_TOKENS,nextCallKind:'PRIMARY'});
+- return deepFreeze({
+-  schemaVersion:'ZWR-VFR-R1-ONE-CALL-PLAN-v1',
+-  provider:route.selectedProvider,
+-  model:route.selectedModel,
+-  providerCallsPlanned:1,
+-  semanticReviewCallsPlanned:0,
+-  maxOutputTokens:MAX_OUTPUT_TOKENS,
+-  budget
+- });
+-}
+-export async function composeZwrVfrOneCall({pack,env={},fetcher=globalThis.fetch,cache=null}={}){
+- const plan=await planZwrVfrOneCall({pack});
+- if(!plan.budget.allowed)return deepFreeze({status:'PROVIDER_BUDGET_PRECHECK_BLOCKED',plan,providerCalls:0,semanticReviewCalls:0});
+- assertVfrLiveAllowed(env);
+- const cacheKey='ZWR-VFR-R1:'+await sha256Stable({authorityDigest:pack.authorityDigest,realityContext:pack.realityContext,composerVersion:ZWR_VFR_ONE_CALL_COMPOSER_VERSION});
+- if(cache?.get){
+-  const cached=await cache.get(cacheKey);
+-  if(cached?.reportIr)return deepFreeze({...cached,status:'PASS',cacheHit:true,providerCalls:0,semanticReviewCalls:0});
+- }
+- const schema=buildZwrVfrProviderSchema(pack);
+- const started=Date.now();
+- const result=await invokeOpenAIStructured({
+-  env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
+-  fetcher,
+-  systemPrompt:systemPrompt(),
+-  userPayload:{compactAuthoringPack:pack},
+-  schema,
+-  schemaName:'zwr_vfr_bilingual_visual_report_ir',
+-  maxOutputTokens:MAX_OUTPUT_TOKENS
+- });
+- const usage=result?.usage||{};
+- const inputTokens=usage.input_tokens||usage.inputTokens||0;
+- const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
+- const outputTokens=usage.output_tokens||usage.outputTokens||0;
+- const {model}=modelRecord();
+- const estimatedProviderCost=estimatePaiProviderCost(model,{inputTokens,cachedInputTokens,outputTokens});
+- const usageRecord=createPaiUsageRecord({
+-  requestId:'ZWR-VFR-R1:'+pack.subjectBinding.subjectKey,
+-  timestamp:new Date().toISOString(),
+-  aiExecutionClass:'T3_DEEP_COMPOSITION',
+-  provider:result.provider||plan.provider,
+-  model:result.model||plan.model,
+-  inputTokens,cachedInputTokens,outputTokens,
+-  estimatedProviderCost,
+-  requestType:'PRODUCTION',
+-  providerAttemptCount:1,
+-  latencyMs:Date.now()-started,
+-  success:true,
+-  fallbackUsed:false
+- });
+- assertVfrCallCount({providerCalls:1,semanticReviewCalls:0});
+- if(estimatedProviderCost>reportGenerationCeiling('ZWR'))throw Error('ZWR_VFR_PROVIDER_BUDGET_EXCEEDED_AFTER_CALL');
+- const reportIr=await createZwrVfrReportIr({pack,providerOutput:result.output,usage:{
+-  providerCalls:1,
+-  semanticReviewCalls:0,
+-  inputTokens,cachedInputTokens,outputTokens,
+-  estimatedProviderCost,
+-  budgetLimit:reportEconomics('ZWR').providerCapUsd,
+-  budgetRemaining:Number((reportEconomics('ZWR').providerCapUsd-estimatedProviderCost).toFixed(8)),
+-  cacheHit:false,
+-  usageRecord
+- }});
+- const out=deepFreeze({
+-  status:'PASS',
+-  schemaVersion:ZWR_VFR_ONE_CALL_COMPOSER_VERSION,
+-  reportIr,
+-  providerCalls:1,
+-  semanticReviewCalls:0,
+-  cacheHit:false,
+-  plan
+- });
+- if(cache?.put)await cache.put(cacheKey,out);
+- return out;
+-}
+-export default Object.freeze({planZwrVfrOneCall,composeZwrVfrOneCall,ZWR_VFR_ONE_CALL_COMPOSER_VERSION});
++import {reportEconomics,reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
++import {VFR_BILINGUAL_SINGLE_CALL_V1} from '../../canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js';
++import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
++import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
++import {ZIWEI_R5_PAI_REGISTRY,ziweiR5PricingForInput} from '../narrative/ziwei-r5-provider-registry.js';
++import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
++import {planVfrProviderBudget,estimateVfrTokens,assertVfrLiveAllowed,assertVfrCallCount} from './report-provider-budget.js';
++import {buildZwrVfrProviderSchema,createZwrVfrReportIr} from './ziwei-vfr-report-ir.js';
++
++export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v4';
++const MAX_OUTPUT_TOKENS=VFR_BILINGUAL_SINGLE_CALL_V1.maxOutputTokens;
++
++function systemPrompt(){
++ return [
++  'You generate bilingual Zi Wei Dou Shu semantic content only. PHI OS owns all presentation structure and diagrams.',
++  'The supplied Compact Authoring Pack is the complete authority. Do not calculate the chart and do not invent technical facts.',
++  'For each supplied section return exactly four semantic fields in zhHans and en: coreMeaning, livedExpression, counterweight, navigation. Each field must be a complete natural sentence, not a clipped phrase.',
++  'Use professional Zi Wei terminology and concrete lived meaning. livedExpression must describe a recognizable life pattern or situation, not generic advice. Avoid generic psychology, star-by-star glossary prose, and workflow language.',
++  'Do not decide headlines, subheadlines, insight counts, paragraph counts, captions, diagram content, diagram labels, page structure or layout. PHI OS projects those deterministically.',
++  'Preserve unknowns. Do not predict guaranteed events, diagnose illness, or give transaction-level financial advice.',
++  'Use authorityRefs only from the supplied section claims.',
++  'counterweight must explain how the same structure changes under strain, including what specifically becomes distorted or overused. navigation must be specific to that section and framed as a concrete observation or reality test, not a generic checklist; do not recycle review-date, responsibility-list, boundary-list, or set-a-plan formulas across sections. Keep every field compact and information-dense, but never truncate a sentence to satisfy length. Return JSON only.'
++ ].join('\n');
++}
++function modelRecord(){
++ const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
++ const model=ZIWEI_R5_PAI_REGISTRY.models.find(m=>m.modelId===route.selectedModel);
++ if(!route.selectedProvider||!route.selectedModel||!model)throw Error('ZWR_VFR_PROVIDER_ROUTE_REQUIRED');
++ return {route,model};
++}
++export async function planZwrVfrOneCall({pack}={}){
++ if(pack?.schemaVersion!=='ZWR-VFR-R1-COMPACT-AUTHORING-PACK-v1')throw Error('ZWR_VFR_COMPACT_PACK_REQUIRED');
++ const {route,model}=modelRecord();
++ const payload={compactAuthoringPack:pack};
++ const planningInput={systemPrompt:systemPrompt(),payload};
++ const budget=planVfrProviderBudget({methodId:'ZWR',model:ziweiR5PricingForInput(model,estimateVfrTokens(planningInput)),input:planningInput,maxOutputTokens:MAX_OUTPUT_TOKENS,nextCallKind:'PRIMARY'});
++ return deepFreeze({
++  schemaVersion:'ZWR-VFR-R1-ONE-CALL-PLAN-v1',
++  provider:route.selectedProvider,
++  model:route.selectedModel,
++  providerCallsPlanned:1,
++  semanticReviewCallsPlanned:0,
++  maxOutputTokens:MAX_OUTPUT_TOKENS,
++  budget
++ });
++}
++export async function composeZwrVfrOneCall({pack,env={},fetcher=globalThis.fetch,cache=null}={}){
++ const plan=await planZwrVfrOneCall({pack});
++ if(!plan.budget.allowed)return deepFreeze({status:'PROVIDER_BUDGET_PRECHECK_BLOCKED',plan,providerCalls:0,semanticReviewCalls:0});
++ assertVfrLiveAllowed(env);
++ const cacheKey='ZWR-VFR-R1:'+await sha256Stable({authorityDigest:pack.authorityDigest,realityContext:pack.realityContext,composerVersion:ZWR_VFR_ONE_CALL_COMPOSER_VERSION});
++ if(cache?.get){
++  const cached=await cache.get(cacheKey);
++  if(cached?.reportIr)return deepFreeze({...cached,status:'PASS',cacheHit:true,providerCalls:0,semanticReviewCalls:0});
++ }
++ const schema=buildZwrVfrProviderSchema(pack);
++ const started=Date.now();
++ const result=await invokeOpenAIStructured({
++  env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
++  fetcher,
++  systemPrompt:systemPrompt(),
++  userPayload:{compactAuthoringPack:pack},
++  schema,
++  schemaName:'zwr_vfr_bilingual_visual_report_ir',
++  maxOutputTokens:MAX_OUTPUT_TOKENS
++ });
++ const usage=result?.usage||{};
++ const inputTokens=usage.input_tokens||usage.inputTokens||0;
++ const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
++ const outputTokens=usage.output_tokens||usage.outputTokens||0;
++ const {model}=modelRecord();
++ const estimatedProviderCost=estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens,outputTokens});
++ const usageRecord=createPaiUsageRecord({
++  requestId:'ZWR-VFR-R1:'+pack.subjectBinding.subjectKey,
++  timestamp:new Date().toISOString(),
++  aiExecutionClass:'T3_DEEP_COMPOSITION',
++  provider:result.provider||plan.provider,
++  model:result.model||plan.model,
++  inputTokens,cachedInputTokens,outputTokens,
++  estimatedProviderCost,
++  requestType:'PRODUCTION',
++  providerAttemptCount:1,
++  latencyMs:Date.now()-started,
++  success:true,
++  fallbackUsed:false
++ });
++ assertVfrCallCount({providerCalls:1,semanticReviewCalls:0});
++ if(estimatedProviderCost>reportGenerationCeiling('ZWR'))throw Error('ZWR_VFR_PROVIDER_BUDGET_EXCEEDED_AFTER_CALL');
++ const reportIr=await createZwrVfrReportIr({pack,providerOutput:result.output,usage:{
++  providerCalls:1,
++  semanticReviewCalls:0,
++  inputTokens,cachedInputTokens,outputTokens,
++  estimatedProviderCost,
++  budgetLimit:reportEconomics('ZWR').providerCapUsd,
++  budgetRemaining:Number((reportEconomics('ZWR').providerCapUsd-estimatedProviderCost).toFixed(8)),
++  cacheHit:false,
++  usageRecord
++ }});
++ const out=deepFreeze({
++  status:'PASS',
++  schemaVersion:ZWR_VFR_ONE_CALL_COMPOSER_VERSION,
++  reportIr,
++  providerCalls:1,
++  semanticReviewCalls:0,
++  cacheHit:false,
++  plan
++ });
++ if(cache?.put)await cache.put(cacheKey,out);
++ return out;
++}
++export default Object.freeze({planZwrVfrOneCall,composeZwrVfrOneCall,ZWR_VFR_ONE_CALL_COMPOSER_VERSION});
+diff --git a/functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js b/functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js
+index 50f5cd5f..49d4a68c 100644
+--- a/functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js
++++ b/functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js
+@@ -1,224 +1,224 @@
+-import {reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
+-import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
+-import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
+-import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
+-import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
+-import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
+-
+-export const ZWR_VFR_TARGETED_REPAIR_VERSION='ZWR-VFR-R1-TARGETED-COMPLETENESS-REPAIR-v1';
+-const TOTAL_EXPERIMENT_BUDGET_USD=reportGenerationCeiling('ZWR');
+-const MAX_OUTPUT_TOKENS_BILINGUAL=3500;
+-const MAX_OUTPUT_TOKENS_EN_ONLY=2200;
+-function maxOutputFor(locales){return locales.length===2?MAX_OUTPUT_TOKENS_BILINGUAL:MAX_OUTPUT_TOKENS_EN_ONLY;}
+-
+-function modelRecord(){
+- const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
+- const model=ZIWEI_R5_PAI_REGISTRY.models.find(m=>m.modelId===route.selectedModel);
+- if(!route.selectedProvider||!route.selectedModel||!model)throw Error('ZWR_TARGETED_REPAIR_PROVIDER_ROUTE_REQUIRED');
+- return {route,model};
+-}
+-function sectionPack(pack,sectionId){
+- const section=pack.sections.find(s=>s.sectionId===sectionId);
+- if(!section)throw Error('ZWR_TARGETED_REPAIR_SECTION_MISSING:'+sectionId);
+- return deepFreeze({
+-  schemaVersion:'ZWR-VFR-R1-TARGETED-REPAIR-PACK-v1',
+-  methodId:pack.methodId,
+-  subjectBinding:pack.subjectBinding,
+-  sourceAuthorityVersion:pack.sourceAuthorityVersion,
+-  reportRules:pack.reportRules,
+-  section,
+-  realityContext:pack.realityContext,
+-  authorityDigest:pack.authorityDigest
+- });
+-}
+-function schemaFor(locales,sectionId){
+- const props={sectionId:{type:'string',enum:[sectionId]}};
+- const required=['sectionId'];
+- if(locales.includes('zhHans')){
+-  props.zhHansManuscript={
+-   type:'string',
+-   minLength:650,
+-   description:'Write one complete publication-quality Chinese Zi Wei Dou Shu chapter in 5-7 natural paragraphs. Target roughly 900-1300 Chinese characters. There is no maximum-length field: finish every sentence and every paragraph cleanly.'
+-  };
+-  required.push('zhHansManuscript');
+- }
+- if(locales.includes('en')){
+-  props.enManuscript={
+-   type:'string',
+-   minLength:1200,
+-   description:'Write one complete publication-quality English Zi Wei Dou Shu chapter in 5-7 natural paragraphs. Target roughly 1600-2600 characters. There is no maximum-length field: finish every sentence and every paragraph cleanly.'
+-  };
+-  required.push('enManuscript');
+- }
+- return {
+-  type:'object',
+-  additionalProperties:false,
+-  required,
+-  properties:props
+- };
+-}
+-function promptFor({sectionId,locales,anchorZh}){
+- const mode=locales.length===2
+-  ?'Rewrite the complete Chinese and English manuscripts for this one section.'
+-  :'Rewrite only the complete English manuscript for this one section. The supplied Chinese manuscript is the semantic anchor: preserve its substantive meaning, but write natural English rather than sentence-by-sentence translation.';
+- return [
+-  'You are repairing publication completeness for one premium Zi Wei Dou Shu customer-report chapter.',
+-  'The supplied section Authority Pack is the complete factual authority. Do not calculate new chart facts and do not invent missing evidence.',
+-  mode,
+-  'Write coherent long-form prose, not bullets, semantic fields, checklists, or mini-summaries.',
+-  'Integrate palace structure, star combinations, transformations, lived situations, supportive expression, pressure distortion, counterweights, timing where admitted, and grounded reality navigation naturally.',
+-  'Use professional Zi Wei terminology and translate technical structure into recognizable lived meaning.',
+-  'Every paragraph must end with a complete sentence. Never stop mid-clause or mid-word. Do not fill space merely because output budget remains.',
+-  'Do not generate layout, diagrams, headings, captions, colors, cards, or page structure. PHI OS owns presentation.',
+-  'Do not expose internal workflow terms. Preserve uncertainty. Do not diagnose illness or give transaction-level financial advice.',
+-  anchorZh?'Existing complete Chinese semantic anchor follows in the user payload.':'',
+-  'Target section: '+sectionId+'. Return JSON only in the required schema.'
+- ].filter(Boolean).join('\n');
+-}
+-export function buildTargetedRepairPlan({pack,result,manifest}={}){
+- if(!pack||!result||!manifest)throw Error('ZWR_TARGETED_REPAIR_INPUT_REQUIRED');
+- const affected=new Set(manifest.affectedSections||[]);
+- const repairs=[];
+- for(const sectionId of affected){
+-  const sectionResult=result.rawManuscriptSections.find(s=>s.sectionId===sectionId);
+-  if(!sectionResult)throw Error('ZWR_TARGETED_REPAIR_RESULT_SECTION_MISSING:'+sectionId);
+-  const defects=(manifest.defects||[]).filter(d=>d.sectionId===sectionId);
+-  const zhBroken=defects.some(d=>d.locale==='zhHans'&&d.code!=='LENGTH_ADVISORY');
+-  const enBroken=defects.some(d=>d.locale==='en'&&d.code!=='LENGTH_ADVISORY');
+-  const locales=[];
+-  if(zhBroken)locales.push('zhHans');
+-  if(enBroken)locales.push('en');
+-  if(!locales.length)continue;
+-  repairs.push({
+-   sectionId,
+-   locales,
+-   preserveZh:!zhBroken&&Boolean(sectionResult.zhHansManuscript),
+-   preserveEn:!enBroken&&Boolean(sectionResult.enManuscript)
+-  });
+- }
+- const {route,model}=modelRecord();
+- const planned=repairs.map((r,index)=>{
+-  const sp=sectionPack(pack,r.sectionId);
+-  const existing=result.rawManuscriptSections.find(s=>s.sectionId===r.sectionId);
+-  const anchorZh=r.locales.length===1&&r.locales[0]==='en'?existing.zhHansManuscript:null;
+-  const input={
+-   systemPrompt:promptFor({sectionId:r.sectionId,locales:r.locales,anchorZh}),
+-   payload:{sectionAuthority:sp,existingChineseAnchor:anchorZh}
+-  };
+-  const inputTokens=estimateVfrTokens(input);
+-  const maxOutputTokens=maxOutputFor(r.locales);
+-  const estimatedMaxCost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens:0,outputTokens:maxOutputTokens}));
+-  return {...r,index:index+1,inputTokens,maxOutputTokens,estimatedMaxCost};
+- });
+- const originalCost=Number(result.providerUsage?.estimatedProviderCost||0);
+- const estimatedRepairMaxCost=Number(planned.reduce((a,b)=>a+b.estimatedMaxCost,0).toFixed(8));
+- const estimatedTotalExperimentCost=Number((originalCost+estimatedRepairMaxCost).toFixed(8));
+- return deepFreeze({
+-  schemaVersion:'ZWR-VFR-R1-TARGETED-REPAIR-PLAN-v1',
+-  repairVersion:ZWR_VFR_TARGETED_REPAIR_VERSION,
+-  provider:route.selectedProvider,
+-  model:route.selectedModel,
+-  originalProviderCost:originalCost,
+-  repairCallsPlanned:planned.length,
+-  semanticReviewCallsPlanned:0,
+-  postCallVerifierCallsPlanned:0,
+-  budgetLimitUsd:TOTAL_EXPERIMENT_BUDGET_USD,
+-  estimatedRepairMaxCost,
+-  estimatedTotalExperimentCost,
+-  allowed:estimatedTotalExperimentCost<=TOTAL_EXPERIMENT_BUDGET_USD,
+-  repairs:planned
+- });
+-}
+-export async function runTargetedRepair({pack,result,manifest,env={},fetcher=globalThis.fetch,onRepairCompleted=null,resume=null}={}){
+- const plan=buildTargetedRepairPlan({pack,result,manifest});
+- if(!plan.allowed)return deepFreeze({status:'TARGETED_REPAIR_BUDGET_PRECHECK_BLOCKED',plan});
+- assertVfrLiveAllowed(env);
+- const {model}=modelRecord();
+- const repaired=new Map(result.rawManuscriptSections.map(s=>[s.sectionId,{...s}]));
+- const usageRecords=[...(resume?.usageRecords||[])];
+- let spent=Number(resume?.spent||0);
+- let totalInput=Number(resume?.totalInput||0);
+- let totalCached=Number(resume?.totalCached||0);
+- let totalOutput=Number(resume?.totalOutput||0);
+- const completed=new Set(resume?.completedSectionIds||[]);
+- for(const repair of plan.repairs){
+-  if(completed.has(repair.sectionId))continue;
+-  const existing=repaired.get(repair.sectionId);
+-  const sp=sectionPack(pack,repair.sectionId);
+-  const anchorZh=repair.locales.length===1&&repair.locales[0]==='en'?existing.zhHansManuscript:null;
+-  const started=Date.now();
+-  let call;
+-  try{
+-   call=await invokeOpenAIStructured({
+-    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
+-    fetcher,
+-    systemPrompt:promptFor({sectionId:repair.sectionId,locales:repair.locales,anchorZh}),
+-    userPayload:{sectionAuthority:sp,existingChineseAnchor:anchorZh},
+-    schema:schemaFor(repair.locales,repair.sectionId),
+-    schemaName:'zwr_vfr_targeted_repair_'+repair.sectionId.toLowerCase(),
+-    maxOutputTokens:repair.maxOutputTokens
+-   });
+-  }catch(error){
+-   const details=error?.details&&typeof error.details==='object'?error.details:{};
+-   error.details={...details,sectionId:repair.sectionId,locales:repair.locales,completedSectionIds:[...completed]};
+-   throw error;
+-  }
+-  const usage=call?.usage||{};
+-  const inputTokens=usage.input_tokens||usage.inputTokens||0;
+-  const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
+-  const outputTokens=usage.output_tokens||usage.outputTokens||0;
+-  const cost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens,outputTokens}));
+-  spent=Number((spent+cost).toFixed(8));
+-  if(Number(result.providerUsage?.estimatedProviderCost||0)+spent>TOTAL_EXPERIMENT_BUDGET_USD){
+-   throw Object.assign(new Error('ZWR_TARGETED_REPAIR_TOTAL_BUDGET_EXCEEDED'),{details:{spent,originalCost:result.providerUsage?.estimatedProviderCost,sectionId:repair.sectionId}});
+-  }
+-  totalInput+=inputTokens;totalCached+=cachedInputTokens;totalOutput+=outputTokens;
+-  const next={...existing};
+-  if(repair.locales.includes('zhHans'))next.zhHansManuscript=call.output.zhHansManuscript;
+-  if(repair.locales.includes('en'))next.enManuscript=call.output.enManuscript;
+-  repaired.set(repair.sectionId,next);
+-  completed.add(repair.sectionId);
+-  usageRecords.push(createPaiUsageRecord({
+-   requestId:'ZWR-VFR-TARGETED-REPAIR:'+pack.subjectBinding.subjectKey+':'+repair.sectionId,
+-   timestamp:new Date().toISOString(),
+-   aiExecutionClass:'T3_DEEP_COMPOSITION',
+-   provider:call.provider||plan.provider,
+-   model:call.model||plan.model,
+-   inputTokens,cachedInputTokens,outputTokens,
+-   estimatedProviderCost:cost,
+-   requestType:'EXPERIMENT_REPAIR',
+-   providerAttemptCount:1,
+-   latencyMs:Date.now()-started,
+-   success:true,
+-   fallbackUsed:false
+-  }));
+-  if(onRepairCompleted)await onRepairCompleted({
+-   completedSectionIds:[...completed],
+-   repairedSections:[...repaired.values()],
+-   usageRecords:[...usageRecords],
+-   spent,totalInput,totalCached,totalOutput
+-  });
+- }
+- const seed={
+-  schemaVersion:'ZWR-VFR-R1-TARGETED-REPAIRED-RESULT-v1',
+-  repairVersion:ZWR_VFR_TARGETED_REPAIR_VERSION,
+-  status:'PASS',
+-  authorityDigest:pack.authorityDigest,
+-  originalResultDigest:result.resultDigest,
+-  rawManuscriptSections:[...repaired.values()],
+-  providerUsage:{
+-   originalProviderCalls:result.providerUsage.providerCalls,
+-   repairProviderCalls:usageRecords.length,
+-   semanticReviewCalls:0,
+-   originalEstimatedProviderCost:Number(result.providerUsage.estimatedProviderCost||0),
+-   repairEstimatedProviderCost:spent,
+-   totalEstimatedProviderCost:Number((Number(result.providerUsage.estimatedProviderCost||0)+spent).toFixed(8)),
+-   repairInputTokens:totalInput,
+-   repairCachedInputTokens:totalCached,
+-   repairOutputTokens:totalOutput,
+-   usageRecords
+-  }
+- };
+- return deepFreeze({...seed,resultDigest:await sha256Stable(seed)});
+-}
+-export default Object.freeze({buildTargetedRepairPlan,runTargetedRepair,ZWR_VFR_TARGETED_REPAIR_VERSION});
++import {reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
++import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
++import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
++import {ZIWEI_R5_PAI_REGISTRY,ziweiR5PricingForInput} from '../narrative/ziwei-r5-provider-registry.js';
++import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
++import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
++
++export const ZWR_VFR_TARGETED_REPAIR_VERSION='ZWR-VFR-R1-TARGETED-COMPLETENESS-REPAIR-v1';
++const TOTAL_EXPERIMENT_BUDGET_USD=reportGenerationCeiling('ZWR');
++const MAX_OUTPUT_TOKENS_BILINGUAL=3500;
++const MAX_OUTPUT_TOKENS_EN_ONLY=2200;
++function maxOutputFor(locales){return locales.length===2?MAX_OUTPUT_TOKENS_BILINGUAL:MAX_OUTPUT_TOKENS_EN_ONLY;}
++
++function modelRecord(){
++ const route=selectPaiRoute({aiExecutionClass:'T3_DEEP_COMPOSITION',deterministicFallbackAvailable:false},ZIWEI_R5_PAI_REGISTRY);
++ const model=ZIWEI_R5_PAI_REGISTRY.models.find(m=>m.modelId===route.selectedModel);
++ if(!route.selectedProvider||!route.selectedModel||!model)throw Error('ZWR_TARGETED_REPAIR_PROVIDER_ROUTE_REQUIRED');
++ return {route,model};
++}
++function sectionPack(pack,sectionId){
++ const section=pack.sections.find(s=>s.sectionId===sectionId);
++ if(!section)throw Error('ZWR_TARGETED_REPAIR_SECTION_MISSING:'+sectionId);
++ return deepFreeze({
++  schemaVersion:'ZWR-VFR-R1-TARGETED-REPAIR-PACK-v1',
++  methodId:pack.methodId,
++  subjectBinding:pack.subjectBinding,
++  sourceAuthorityVersion:pack.sourceAuthorityVersion,
++  reportRules:pack.reportRules,
++  section,
++  realityContext:pack.realityContext,
++  authorityDigest:pack.authorityDigest
++ });
++}
++function schemaFor(locales,sectionId){
++ const props={sectionId:{type:'string',enum:[sectionId]}};
++ const required=['sectionId'];
++ if(locales.includes('zhHans')){
++  props.zhHansManuscript={
++   type:'string',
++   minLength:650,
++   description:'Write one complete publication-quality Chinese Zi Wei Dou Shu chapter in 5-7 natural paragraphs. Target roughly 900-1300 Chinese characters. There is no maximum-length field: finish every sentence and every paragraph cleanly.'
++  };
++  required.push('zhHansManuscript');
++ }
++ if(locales.includes('en')){
++  props.enManuscript={
++   type:'string',
++   minLength:1200,
++   description:'Write one complete publication-quality English Zi Wei Dou Shu chapter in 5-7 natural paragraphs. Target roughly 1600-2600 characters. There is no maximum-length field: finish every sentence and every paragraph cleanly.'
++  };
++  required.push('enManuscript');
++ }
++ return {
++  type:'object',
++  additionalProperties:false,
++  required,
++  properties:props
++ };
++}
++function promptFor({sectionId,locales,anchorZh}){
++ const mode=locales.length===2
++  ?'Rewrite the complete Chinese and English manuscripts for this one section.'
++  :'Rewrite only the complete English manuscript for this one section. The supplied Chinese manuscript is the semantic anchor: preserve its substantive meaning, but write natural English rather than sentence-by-sentence translation.';
++ return [
++  'You are repairing publication completeness for one premium Zi Wei Dou Shu customer-report chapter.',
++  'The supplied section Authority Pack is the complete factual authority. Do not calculate new chart facts and do not invent missing evidence.',
++  mode,
++  'Write coherent long-form prose, not bullets, semantic fields, checklists, or mini-summaries.',
++  'Integrate palace structure, star combinations, transformations, lived situations, supportive expression, pressure distortion, counterweights, timing where admitted, and grounded reality navigation naturally.',
++  'Use professional Zi Wei terminology and translate technical structure into recognizable lived meaning.',
++  'Every paragraph must end with a complete sentence. Never stop mid-clause or mid-word. Do not fill space merely because output budget remains.',
++  'Do not generate layout, diagrams, headings, captions, colors, cards, or page structure. PHI OS owns presentation.',
++  'Do not expose internal workflow terms. Preserve uncertainty. Do not diagnose illness or give transaction-level financial advice.',
++  anchorZh?'Existing complete Chinese semantic anchor follows in the user payload.':'',
++  'Target section: '+sectionId+'. Return JSON only in the required schema.'
++ ].filter(Boolean).join('\n');
++}
++export function buildTargetedRepairPlan({pack,result,manifest}={}){
++ if(!pack||!result||!manifest)throw Error('ZWR_TARGETED_REPAIR_INPUT_REQUIRED');
++ const affected=new Set(manifest.affectedSections||[]);
++ const repairs=[];
++ for(const sectionId of affected){
++  const sectionResult=result.rawManuscriptSections.find(s=>s.sectionId===sectionId);
++  if(!sectionResult)throw Error('ZWR_TARGETED_REPAIR_RESULT_SECTION_MISSING:'+sectionId);
++  const defects=(manifest.defects||[]).filter(d=>d.sectionId===sectionId);
++  const zhBroken=defects.some(d=>d.locale==='zhHans'&&d.code!=='LENGTH_ADVISORY');
++  const enBroken=defects.some(d=>d.locale==='en'&&d.code!=='LENGTH_ADVISORY');
++  const locales=[];
++  if(zhBroken)locales.push('zhHans');
++  if(enBroken)locales.push('en');
++  if(!locales.length)continue;
++  repairs.push({
++   sectionId,
++   locales,
++   preserveZh:!zhBroken&&Boolean(sectionResult.zhHansManuscript),
++   preserveEn:!enBroken&&Boolean(sectionResult.enManuscript)
++  });
++ }
++ const {route,model}=modelRecord();
++ const planned=repairs.map((r,index)=>{
++  const sp=sectionPack(pack,r.sectionId);
++  const existing=result.rawManuscriptSections.find(s=>s.sectionId===r.sectionId);
++  const anchorZh=r.locales.length===1&&r.locales[0]==='en'?existing.zhHansManuscript:null;
++  const input={
++   systemPrompt:promptFor({sectionId:r.sectionId,locales:r.locales,anchorZh}),
++   payload:{sectionAuthority:sp,existingChineseAnchor:anchorZh}
++  };
++  const inputTokens=estimateVfrTokens(input);
++  const maxOutputTokens=maxOutputFor(r.locales);
++  const estimatedMaxCost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens:0,outputTokens:maxOutputTokens}));
++  return {...r,index:index+1,inputTokens,maxOutputTokens,estimatedMaxCost};
++ });
++ const originalCost=Number(result.providerUsage?.estimatedProviderCost||0);
++ const estimatedRepairMaxCost=Number(planned.reduce((a,b)=>a+b.estimatedMaxCost,0).toFixed(8));
++ const estimatedTotalExperimentCost=Number((originalCost+estimatedRepairMaxCost).toFixed(8));
++ return deepFreeze({
++  schemaVersion:'ZWR-VFR-R1-TARGETED-REPAIR-PLAN-v1',
++  repairVersion:ZWR_VFR_TARGETED_REPAIR_VERSION,
++  provider:route.selectedProvider,
++  model:route.selectedModel,
++  originalProviderCost:originalCost,
++  repairCallsPlanned:planned.length,
++  semanticReviewCallsPlanned:0,
++  postCallVerifierCallsPlanned:0,
++  budgetLimitUsd:TOTAL_EXPERIMENT_BUDGET_USD,
++  estimatedRepairMaxCost,
++  estimatedTotalExperimentCost,
++  allowed:estimatedTotalExperimentCost<=TOTAL_EXPERIMENT_BUDGET_USD,
++  repairs:planned
++ });
++}
++export async function runTargetedRepair({pack,result,manifest,env={},fetcher=globalThis.fetch,onRepairCompleted=null,resume=null}={}){
++ const plan=buildTargetedRepairPlan({pack,result,manifest});
++ if(!plan.allowed)return deepFreeze({status:'TARGETED_REPAIR_BUDGET_PRECHECK_BLOCKED',plan});
++ assertVfrLiveAllowed(env);
++ const {model}=modelRecord();
++ const repaired=new Map(result.rawManuscriptSections.map(s=>[s.sectionId,{...s}]));
++ const usageRecords=[...(resume?.usageRecords||[])];
++ let spent=Number(resume?.spent||0);
++ let totalInput=Number(resume?.totalInput||0);
++ let totalCached=Number(resume?.totalCached||0);
++ let totalOutput=Number(resume?.totalOutput||0);
++ const completed=new Set(resume?.completedSectionIds||[]);
++ for(const repair of plan.repairs){
++  if(completed.has(repair.sectionId))continue;
++  const existing=repaired.get(repair.sectionId);
++  const sp=sectionPack(pack,repair.sectionId);
++  const anchorZh=repair.locales.length===1&&repair.locales[0]==='en'?existing.zhHansManuscript:null;
++  const started=Date.now();
++  let call;
++  try{
++   call=await invokeOpenAIStructured({
++    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
++    fetcher,
++    systemPrompt:promptFor({sectionId:repair.sectionId,locales:repair.locales,anchorZh}),
++    userPayload:{sectionAuthority:sp,existingChineseAnchor:anchorZh},
++    schema:schemaFor(repair.locales,repair.sectionId),
++    schemaName:'zwr_vfr_targeted_repair_'+repair.sectionId.toLowerCase(),
++    maxOutputTokens:repair.maxOutputTokens
++   });
++  }catch(error){
++   const details=error?.details&&typeof error.details==='object'?error.details:{};
++   error.details={...details,sectionId:repair.sectionId,locales:repair.locales,completedSectionIds:[...completed]};
++   throw error;
++  }
++  const usage=call?.usage||{};
++  const inputTokens=usage.input_tokens||usage.inputTokens||0;
++  const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
++  const outputTokens=usage.output_tokens||usage.outputTokens||0;
++  const cost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens,outputTokens}));
++  spent=Number((spent+cost).toFixed(8));
++  if(Number(result.providerUsage?.estimatedProviderCost||0)+spent>TOTAL_EXPERIMENT_BUDGET_USD){
++   throw Object.assign(new Error('ZWR_TARGETED_REPAIR_TOTAL_BUDGET_EXCEEDED'),{details:{spent,originalCost:result.providerUsage?.estimatedProviderCost,sectionId:repair.sectionId}});
++  }
++  totalInput+=inputTokens;totalCached+=cachedInputTokens;totalOutput+=outputTokens;
++  const next={...existing};
++  if(repair.locales.includes('zhHans'))next.zhHansManuscript=call.output.zhHansManuscript;
++  if(repair.locales.includes('en'))next.enManuscript=call.output.enManuscript;
++  repaired.set(repair.sectionId,next);
++  completed.add(repair.sectionId);
++  usageRecords.push(createPaiUsageRecord({
++   requestId:'ZWR-VFR-TARGETED-REPAIR:'+pack.subjectBinding.subjectKey+':'+repair.sectionId,
++   timestamp:new Date().toISOString(),
++   aiExecutionClass:'T3_DEEP_COMPOSITION',
++   provider:call.provider||plan.provider,
++   model:call.model||plan.model,
++   inputTokens,cachedInputTokens,outputTokens,
++   estimatedProviderCost:cost,
++   requestType:'EXPERIMENT_REPAIR',
++   providerAttemptCount:1,
++   latencyMs:Date.now()-started,
++   success:true,
++   fallbackUsed:false
++  }));
++  if(onRepairCompleted)await onRepairCompleted({
++   completedSectionIds:[...completed],
++   repairedSections:[...repaired.values()],
++   usageRecords:[...usageRecords],
++   spent,totalInput,totalCached,totalOutput
++  });
++ }
++ const seed={
++  schemaVersion:'ZWR-VFR-R1-TARGETED-REPAIRED-RESULT-v1',
++  repairVersion:ZWR_VFR_TARGETED_REPAIR_VERSION,
++  status:'PASS',
++  authorityDigest:pack.authorityDigest,
++  originalResultDigest:result.resultDigest,
++  rawManuscriptSections:[...repaired.values()],
++  providerUsage:{
++   originalProviderCalls:result.providerUsage.providerCalls,
++   repairProviderCalls:usageRecords.length,
++   semanticReviewCalls:0,
++   originalEstimatedProviderCost:Number(result.providerUsage.estimatedProviderCost||0),
++   repairEstimatedProviderCost:spent,
++   totalEstimatedProviderCost:Number((Number(result.providerUsage.estimatedProviderCost||0)+spent).toFixed(8)),
++   repairInputTokens:totalInput,
++   repairCachedInputTokens:totalCached,
++   repairOutputTokens:totalOutput,
++   usageRecords
++  }
++ };
++ return deepFreeze({...seed,resultDigest:await sha256Stable(seed)});
++}
++export default Object.freeze({buildTargetedRepairPlan,runTargetedRepair,ZWR_VFR_TARGETED_REPAIR_VERSION});
+diff --git a/functions/report-delivery/paid-report-method-registry.js b/functions/report-delivery/paid-report-method-registry.js
+index 7ca8a69a..49431a2c 100644
+--- a/functions/report-delivery/paid-report-method-registry.js
++++ b/functions/report-delivery/paid-report-method-registry.js
+@@ -2,12 +2,13 @@ import {downloadAccountZiweiPdf} from '../account/ziwei-pdf-delivery.js';
+ import {generateAndReleaseAccountBazi,openAccountBaziMaterial,listAccountBaziMaterials} from '../account/bazi-account-delivery.js';
+ import {generateAndReleaseAccountZiwei,openAccountZiweiMaterial,listAccountZiweiMaterials} from '../account/ziwei-account-delivery.js';
+ import {baziPaidReportAdapter} from './paid-report-bazi-adapter.js';
++import {ziweiPaidReportAdapter} from './paid-report-ziwei-adapter.js';
+ export const PAID_REPORT_METHOD_REGISTRY_VERSION='P8-METHOD-REGISTRY-1';
+ // One account adapter map. Existing readable methods remain readable; future
+ // commercial admission requires conformance and does not follow asset existence.
+ export const PAID_REPORT_METHODS=Object.freeze({
+  BZR:Object.freeze({...baziPaidReportAdapter,methodCode:'BZR',productId:'COM-REPORT-BAZI-FULL',reportClass:'PROVIDER_COMPOSED',generateAccount:generateAndReleaseAccountBazi,open:openAccountBaziMaterial,list:listAccountBaziMaterials,p8Admitted:true}),
+- ZWR:Object.freeze({methodCode:'ZWR',productId:'COM-REPORT-ZIWEI-FULL',reportClass:'PROVIDER_COMPOSED',generateAccount:generateAndReleaseAccountZiwei,open:openAccountZiweiMaterial,list:listAccountZiweiMaterials,downloadPdf:downloadAccountZiweiPdf,p8Admitted:false})
++ ZWR:Object.freeze({...ziweiPaidReportAdapter,methodCode:'ZWR',productId:'COM-REPORT-ZIWEI-FULL',reportClass:'PROVIDER_COMPOSED',generateAccount:generateAndReleaseAccountZiwei,open:openAccountZiweiMaterial,list:listAccountZiweiMaterials,downloadPdf:downloadAccountZiweiPdf,p8Admitted:false})
+ });
+ export function resolvePaidReportMethod(methodCode,{requireP8=false}={}){const a=PAID_REPORT_METHODS[methodCode];if(!a||requireP8&&!a.p8Admitted)throw Object.assign(Error('METHOD_DELIVERY_ADAPTER_NOT_ADMITTED'),{code:'METHOD_DELIVERY_ADAPTER_NOT_ADMITTED',status:409});return a;}
+ export function paidReportMethodForProduct(productId){return Object.values(PAID_REPORT_METHODS).find(a=>a.productId===productId)||null;}
+diff --git a/functions/report-delivery/paid-report-production-capabilities.js b/functions/report-delivery/paid-report-production-capabilities.js
+index 5c39329a..064790e9 100644
+--- a/functions/report-delivery/paid-report-production-capabilities.js
++++ b/functions/report-delivery/paid-report-production-capabilities.js
+@@ -8,7 +8,8 @@ const nativeOwners=Object.freeze({
+  BZR:{calculation:'functions/report-delivery/bazi-customer-native-inputs.js',publication:'functions/personal-reading/deep-manuscript/bazi-deep-manuscript-publication.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','VERIFIED_BIRTH_DATE_TIME_PLACE','SUPPORTED_CALENDAR_AND_SOLAR_TERMS']},
+  ZWR:{calculation:'functions/personal-reading/narrative/ziwei-publication-adapter.js',publication:'functions/report-delivery/ziwei-vfr-profile-policy.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','VERIFIED_BIRTH_DATE_TIME_PLACE','REQUIRED_CALCULATION_SEX']},
+  NUM:{calculation:'functions/personal-reading/narrative/numerology-publication-adapter.js',publication:'functions/personal-reading/narrative/numerology-publication-system.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','BIRTH_DATE','OPTIONAL_ORIGINAL_NAME_WITH_DECLARED_RULES']},
+- HD:{calculation:'functions/external-profile/external-profile-confirmation.js',publication:'functions/external-profile/human-design-r3-professional-runtime.js',input:['ACCOUNT_OWNED_SUBJECT','AUTHORISED_EXTERNAL_CHART','USER_CONFIRMED_CHART','SOURCE_BINDING','ADVANCED_FIELDS_REQUIRE_ADMITTED_DATA']}
++ HD:{calculation:'functions/external-profile/external-profile-confirmation.js',publication:'functions/external-profile/human-design-r3-professional-runtime.js',input:['ACCOUNT_OWNED_SUBJECT','AUTHORISED_EXTERNAL_CHART','USER_CONFIRMED_CHART','SOURCE_BINDING','ADVANCED_FIELDS_REQUIRE_ADMITTED_DATA']},
++ ECR:{calculation:'functions/single-method-reading/ecr-production-adapter.js',publication:'functions/ecr-full-report/ecr-author-led-publication-r31.js',input:['ACCOUNT_OWNED_SUBJECT','EXPLICIT_CONSENT','VERIFIED_NATIVE_CONFIGURATION','ADMITTED_ECR_COMPOSITION_SCOPE','CUSTOMER_SPECIFIC_MANUSCRIPT_SOURCE']}
+ });
+ const lifecycle=['readiness','prepare','generate','validate','compile','render','release','reconcile','verifyDelivered'];
+ export function fiveMethodReportCapability(productId,env={},registry=PAID_REPORT_METHODS){
+diff --git a/functions/report-delivery/paid-report-watchdog.js b/functions/report-delivery/paid-report-watchdog.js
+index 30f5dafd..7633c163 100644
+--- a/functions/report-delivery/paid-report-watchdog.js
++++ b/functions/report-delivery/paid-report-watchdog.js
+@@ -1,6 +1,20 @@
+ import {sharedPaidReportCore,ensureVerifiedPaidReportJob} from './paid-report-delivery-core.js';
+ import {paidReportStateStore} from './paid-report-state-store.js';
++import {PAID_REPORT_METHODS} from './paid-report-method-registry.js';
++import {commerceEnvironment} from '../commerce/commerce-environment.js';
+ export const PAID_REPORT_WATCHDOG_VERSION='P8-WATCHDOG-1';
++// Existing scheduled owner, explicit non-production successor. No public API,
++// client-selected identity, new queue, or implied method admission.
++export async function runSandboxPaidReportTick(env,{registry=PAID_REPORT_METHODS,clock=Date.now,refundTransport,observe}={}){
++ if(env.PHIOS_QA_PAID_REPORT_WATCHDOG_ENABLED!=='true')return {state:'SAFE_NO_OP',scanned:0};
++ if(!['local','qa','preview'].includes(env.PHIOS_ENVIRONMENT)||commerceEnvironment(env)!=='QA')throw Error('QA_REPORT_WATCHDOG_ENVIRONMENT_REQUIRED');
++ if(!env.RUNTIME_DB?.prepare||!env.PRIVATE_REPORTS?.get||!env.PRIVATE_REPORTS?.put)throw Error('QA_REPORT_WATCHDOG_PRIVATE_BINDINGS_REQUIRED');
++ const allowed=new Set(['BZR','ZWR','AST','NUM','HD','ECR']);
++ const eligible=job=>job.environment==='QA'&&allowed.has(job.methodCode)&&registry[job.methodCode]?.p8Admitted===true&&registry[job.methodCode]?.productId===job.productId;
++ const eligibleOrder=order=>order.environment==='QA'&&Object.values(registry).some(a=>allowed.has(a.methodCode)&&a.p8Admitted===true&&a.productId===order.product_id);
++ const rows=await sweepPaidReports(env,{registry,clock,refundTransport,observe,eligible,eligibleOrder,contextForOwner:owner=>({env,data:{symbolicAccountIdentity:{userId:owner,providerId:'QA_SERVER_SCHEDULER',verified:true,authenticated:true}},request:new Request('https://paid-report-watchdog.internal/scheduled')})});
++ return {state:'SCANNED_QA_ONLY',scanned:rows.length};
++}
+ // Trusted server scheduler port. P8 has no scheduled deployment trigger; P9 must
+ // supply authenticated server contexts, never accept a client-selected owner.
+ export async function sweepPaidReports(env,{contextForOwner,clock=Date.now,registry,refundTransport,observe,eligible=()=>true,eligibleOrder=()=>true}={}){
+diff --git a/functions/report-delivery/ziwei-controlled-generation.js b/functions/report-delivery/ziwei-controlled-generation.js
+index 439df3b9..537de6e5 100644
+--- a/functions/report-delivery/ziwei-controlled-generation.js
++++ b/functions/report-delivery/ziwei-controlled-generation.js
+@@ -1,7 +1,7 @@
+ // Server-only LOCAL/QA proof adapter. No production activation or browser grants.
+ import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
+ import {admitPersonUse} from '../account/person-use-policy.js';
+-import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
++import {ownedZiweiPurchase} from './ziwei-purchase-binding.js';
+ import {requirePurchasedReportPresentation} from '../pws/commercial/report-successor-contract.js';
+ import {buildZiweiReportEvidence} from '../personal-reading/narrative/ziwei-publication-adapter.js';
+ import {buildZiweiFullReportSections} from '../personal-reading/narrative/ziwei-full-report-sections.js';
+@@ -17,9 +17,9 @@ export function controlledZiweiIdentity(context){
+  const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
+  if(!identity)throw Error('ACCOUNT_REQUIRED');return identity;
+ }
+-export async function requireZiweiEntitlement(context,locale){
++export async function requireZiweiEntitlement(context,locale,{purchaseId=null}={}){
+  const identity=controlledZiweiIdentity(context);
+- const owned=await ownedReportPresentation(context.env,identity.userId,ZIWEI_PRODUCT);
++ const owned=await ownedZiweiPurchase(context,identity.userId,ZIWEI_PRODUCT,{purchaseId});
+  const selection=requirePurchasedReportPresentation(owned);
+  if(!['en','zh-Hans'].includes(locale)||(selection.reportLocale!==locale&&selection.reportLocale!=='bilingual'))throw Error('PURCHASED_LANGUAGE_MISMATCH');
+  return owned;
+diff --git a/functions/report-delivery/ziwei-production-generation-v1.js b/functions/report-delivery/ziwei-production-generation-v1.js
+index 94ef7cc0..e98d4d0e 100644
+--- a/functions/report-delivery/ziwei-production-generation-v1.js
++++ b/functions/report-delivery/ziwei-production-generation-v1.js
+@@ -1,7 +1,7 @@
+ // Separate production-composition successor; delivery remains LOCAL/QA only. No production activation or browser grants.
+ import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
+ import {admitPersonUse} from '../account/person-use-policy.js';
+-import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
++import {ownedZiweiPurchase} from './ziwei-purchase-binding.js';
+ import {requirePurchasedReportPresentation} from '../pws/commercial/report-successor-contract.js';
+ import {buildZiweiReportEvidence} from '../personal-reading/narrative/ziwei-publication-adapter.js';
+ import {buildZiweiProductionSections} from '../personal-reading/narrative/ziwei-production-composer-v1.js';
+@@ -17,9 +17,9 @@ export function controlledZiweiIdentity(context){
+  const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
+  if(!identity)throw Error('ACCOUNT_REQUIRED');return identity;
+ }
+-export async function requireZiweiEntitlement(context,locale){
++export async function requireZiweiEntitlement(context,locale,{purchaseId=null}={}){
+  const identity=controlledZiweiIdentity(context);
+- const owned=await ownedReportPresentation(context.env,identity.userId,ZIWEI_PRODUCT);
++ const owned=await ownedZiweiPurchase(context,identity.userId,ZIWEI_PRODUCT,{purchaseId});
+  const selection=requirePurchasedReportPresentation(owned);
+  if(!['en','zh-Hans'].includes(locale)||(selection.reportLocale!==locale&&selection.reportLocale!=='bilingual'))throw Error('PURCHASED_LANGUAGE_MISMATCH');
+  return owned;
+diff --git a/workers/method-report-renderer/bazi-production-fit.generated.js b/workers/method-report-renderer/bazi-production-fit.generated.js
+index 118a0eb3..5f499041 100644
+--- a/workers/method-report-renderer/bazi-production-fit.generated.js
++++ b/workers/method-report-renderer/bazi-production-fit.generated.js
+@@ -1,3 +1,3 @@
+ // Deterministic browser bundle of the accepted existing fit owner.
+-export const P9_BAZI_FIT_DEPENDENCIES={"functions/bzr-full-production/bazi-structural-registry.js":"8f3c3abadd3cf7277d7ef5dffbdceb05e69c9cd72dfffbb442c66b61d3ef8067","functions/personal-reading/publication-fit/bazi-diagram-fidelity.js":"e3bf19285c769d38446f82f563dc5fbce5c0b8928bdd56202702ddb74312694f","functions/personal-reading/publication-fit/bazi-publication-fit-gate.js":"0b8361afbf19aa893674d132d30211ae6c3fe3ed1b1eaa39aa378c16a52f64f1","functions/personal-reading/publication-fit/bazi-publication-layout-profiles.js":"0200e3a23ff570ff4d051a3fe3b06fcc6d79d5e926fc09c5579a4bddd05cee28"};
+-export const P9_BAZI_FIT_CODE="var P9BaziPublicationFit=(()=>{var L=Object.defineProperty;var F=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertyNames;var Z=Object.prototype.hasOwnProperty;var V=(r,t)=>{for(var u in t)L(r,u,{get:t[u],enumerable:!0})},J=(r,t,u,i)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let l of v(t))!Z.call(r,l)&&l!==u&&L(r,l,{get:()=>t[l],enumerable:!(i=F(t,l))||i.enumerable});return r};var X=r=>J(L({},\"__esModule\",{value:!0}),r);var ee={};V(ee,{assertBaziFitRelease:()=>k,expectedBaziDiagramTopology:()=>Q,measureBaziDiagramTopology:()=>W,measureBaziPublication:()=>$});var M=Object.freeze({BILINGUAL:{id:\"BAZI_PUBLICATION_LAYOUT_PROFILE_BILINGUAL_V1\",locales:[\"zh-Hans\",\"en\"],bodyBudget:{\"zh-Hans\":380,en:1100},cardBudget:{\"zh-Hans\":125,en:480}},EN:{id:\"BAZI_PUBLICATION_LAYOUT_PROFILE_EN_V1\",locales:[\"en\"],bodyBudget:{en:2200},cardBudget:{en:660}},ZH_HANS:{id:\"BAZI_PUBLICATION_LAYOUT_PROFILE_ZH_HANS_V1\",locales:[\"zh-Hans\"],bodyBudget:{\"zh-Hans\":780},cardBudget:{\"zh-Hans\":200}}});function B(r=\"BILINGUAL\"){if(!M[r])throw Error(\"UNSUPPORTED_BAZI_PRESENTATION_MODE\");return M[r]}var P={body:10.5,card:9.5,caption:8.5,title:20,footer:7.5};var q=Object.freeze({JIA:Object.freeze({code:\"JIA\",zh:\"\\u7532\",element:\"WOOD\",polarity:\"YANG\"}),YI:Object.freeze({code:\"YI\",zh:\"\\u4E59\",element:\"WOOD\",polarity:\"YIN\"}),BING:Object.freeze({code:\"BING\",zh:\"\\u4E19\",element:\"FIRE\",polarity:\"YANG\"}),DING:Object.freeze({code:\"DING\",zh:\"\\u4E01\",element:\"FIRE\",polarity:\"YIN\"}),WU:Object.freeze({code:\"WU\",zh:\"\\u620A\",element:\"EARTH\",polarity:\"YANG\"}),JI:Object.freeze({code:\"JI\",zh:\"\\u5DF1\",element:\"EARTH\",polarity:\"YIN\"}),GENG:Object.freeze({code:\"GENG\",zh:\"\\u5E9A\",element:\"METAL\",polarity:\"YANG\"}),XIN:Object.freeze({code:\"XIN\",zh:\"\\u8F9B\",element:\"METAL\",polarity:\"YIN\"}),REN:Object.freeze({code:\"REN\",zh:\"\\u58EC\",element:\"WATER\",polarity:\"YANG\"}),GUI:Object.freeze({code:\"GUI\",zh:\"\\u7678\",element:\"WATER\",polarity:\"YIN\"})}),K=Object.freeze({ZI:Object.freeze({code:\"ZI\",zh:\"\\u5B50\",element:\"WATER\",hiddenStems:[\"GUI\"]}),CHOU:Object.freeze({code:\"CHOU\",zh:\"\\u4E11\",element:\"EARTH\",hiddenStems:[\"JI\",\"GUI\",\"XIN\"]}),YIN:Object.freeze({code:\"YIN\",zh:\"\\u5BC5\",element:\"WOOD\",hiddenStems:[\"JIA\",\"BING\",\"WU\"]}),MAO:Object.freeze({code:\"MAO\",zh:\"\\u536F\",element:\"WOOD\",hiddenStems:[\"YI\"]}),CHEN:Object.freeze({code:\"CHEN\",zh:\"\\u8FB0\",element:\"EARTH\",hiddenStems:[\"WU\",\"YI\",\"GUI\"]}),SI:Object.freeze({code:\"SI\",zh:\"\\u5DF3\",element:\"FIRE\",hiddenStems:[\"BING\",\"WU\",\"GENG\"]}),WU:Object.freeze({code:\"WU\",zh:\"\\u5348\",element:\"FIRE\",hiddenStems:[\"DING\",\"JI\"]}),WEI:Object.freeze({code:\"WEI\",zh:\"\\u672A\",element:\"EARTH\",hiddenStems:[\"JI\",\"DING\",\"YI\"]}),SHEN:Object.freeze({code:\"SHEN\",zh:\"\\u7533\",element:\"METAL\",hiddenStems:[\"GENG\",\"REN\",\"WU\"]}),YOU:Object.freeze({code:\"YOU\",zh:\"\\u9149\",element:\"METAL\",hiddenStems:[\"XIN\"]}),XU:Object.freeze({code:\"XU\",zh:\"\\u620C\",element:\"EARTH\",hiddenStems:[\"WU\",\"XIN\",\"DING\"]}),HAI:Object.freeze({code:\"HAI\",zh:\"\\u4EA5\",element:\"WATER\",hiddenStems:[\"REN\",\"JIA\"]})}),ne=Object.freeze({YIN:\"SPRING\",MAO:\"SPRING\",CHEN:\"LATE_SPRING\",SI:\"SUMMER\",WU:\"SUMMER\",WEI:\"LATE_SUMMER\",SHEN:\"AUTUMN\",YOU:\"AUTUMN\",XU:\"LATE_AUTUMN\",HAI:\"WINTER\",ZI:\"WINTER\",CHOU:\"LATE_WINTER\"}),oe=Object.freeze([[\"JIA\",\"JI\"],[\"YI\",\"GENG\"],[\"BING\",\"XIN\"],[\"DING\",\"REN\"],[\"WU\",\"GUI\"]]),ae=Object.freeze([[\"ZI\",\"CHOU\"],[\"YIN\",\"HAI\"],[\"MAO\",\"XU\"],[\"CHEN\",\"YOU\"],[\"SI\",\"SHEN\"],[\"WU\",\"WEI\"]]),se=Object.freeze([[\"ZI\",\"WU\"],[\"CHOU\",\"WEI\"],[\"YIN\",\"SHEN\"],[\"MAO\",\"YOU\"],[\"CHEN\",\"XU\"],[\"SI\",\"HAI\"]]),ie=Object.freeze([[\"ZI\",\"WEI\"],[\"CHOU\",\"WU\"],[\"YIN\",\"SI\"],[\"MAO\",\"CHEN\"],[\"SHEN\",\"HAI\"],[\"YOU\",\"XU\"]]),le=Object.freeze([[\"ZI\",\"YOU\"],[\"MAO\",\"WU\"],[\"CHEN\",\"CHOU\"],[\"XU\",\"WEI\"],[\"YIN\",\"HAI\"],[\"SI\",\"SHEN\"]]),de=Object.freeze([Object.freeze({branches:[\"SHEN\",\"ZI\",\"CHEN\"],element:\"WATER\"}),Object.freeze({branches:[\"HAI\",\"MAO\",\"WEI\"],element:\"WOOD\"}),Object.freeze({branches:[\"YIN\",\"WU\",\"XU\"],element:\"FIRE\"}),Object.freeze({branches:[\"SI\",\"YOU\",\"CHOU\"],element:\"METAL\"})]),ce=Object.freeze([Object.freeze({branches:[\"YIN\",\"MAO\",\"CHEN\"],element:\"WOOD\"}),Object.freeze({branches:[\"SI\",\"WU\",\"WEI\"],element:\"FIRE\"}),Object.freeze({branches:[\"SHEN\",\"YOU\",\"XU\"],element:\"METAL\"}),Object.freeze({branches:[\"HAI\",\"ZI\",\"CHOU\"],element:\"WATER\"})]),he=Object.freeze([Object.freeze({branches:[\"YIN\",\"SI\",\"SHEN\"],code:\"YIN_SI_SHEN\"}),Object.freeze({branches:[\"CHOU\",\"XU\",\"WEI\"],code:\"CHOU_XU_WEI\"})]),ue=Object.freeze([\"CHEN\",\"WU\",\"YOU\",\"HAI\"]),Ie=Object.freeze({BI_JIAN:Object.freeze({code:\"BI_JIAN\",zh:\"\\u6BD4\\u80A9\",en:\"Peer\"}),JIE_CAI:Object.freeze({code:\"JIE_CAI\",zh:\"\\u52AB\\u8D22\",en:\"Rob Wealth\"}),SHI_SHEN:Object.freeze({code:\"SHI_SHEN\",zh:\"\\u98DF\\u795E\",en:\"Eating God\"}),SHANG_GUAN:Object.freeze({code:\"SHANG_GUAN\",zh:\"\\u4F24\\u5B98\",en:\"Hurting Officer\"}),PIAN_CAI:Object.freeze({code:\"PIAN_CAI\",zh:\"\\u504F\\u8D22\",en:\"Indirect Wealth\"}),ZHENG_CAI:Object.freeze({code:\"ZHENG_CAI\",zh:\"\\u6B63\\u8D22\",en:\"Direct Wealth\"}),QI_SHA:Object.freeze({code:\"QI_SHA\",zh:\"\\u4E03\\u6740\",en:\"Seven Killings\"}),ZHENG_GUAN:Object.freeze({code:\"ZHENG_GUAN\",zh:\"\\u6B63\\u5B98\",en:\"Direct Officer\"}),PIAN_YIN:Object.freeze({code:\"PIAN_YIN\",zh:\"\\u504F\\u5370\",en:\"Indirect Resource\"}),ZHENG_YIN:Object.freeze({code:\"ZHENG_YIN\",zh:\"\\u6B63\\u5370\",en:\"Direct Resource\"})}),Ee=Object.freeze({WOOD:\"FIRE\",FIRE:\"EARTH\",EARTH:\"METAL\",METAL:\"WATER\",WATER:\"WOOD\"}),pe=Object.freeze({WOOD:\"EARTH\",EARTH:\"WATER\",WATER:\"FIRE\",FIRE:\"METAL\",METAL:\"WOOD\"});var ge=Object.freeze({D01:{grammar:\"PILLAR_MATRIX\",features:[\"hidden-stems\",\"ten-god-labels\"]},D02:{grammar:\"ELEMENT_BARS\",features:[\"month-command\"]},D03:{grammar:\"TEN_GOD_RING\",features:[\"ring\",\"visible-hidden\",\"legend\"]},D04:{grammar:\"SUPPORT_DIRECTION\",features:[\"directed-edges\",\"support\",\"drain\"]},D05:{grammar:\"NATAL_NETWORK\",features:[\"relation-edges\",\"legend\"]},D06:{grammar:\"CAPABILITY_CHAIN\",features:[\"ordered-chain\",\"wealth\",\"resource\"]},D07:{grammar:\"OPERATING_LOOP\",features:[\"cycle\"]},D08:{grammar:\"CAREER_CHAIN\",features:[\"ordered-chain\",\"pressure\",\"resource\"]},D09:{grammar:\"WEALTH_FUNNEL\",features:[\"staged-flow\",\"retention\"]},D10:{grammar:\"DAY_BRANCH_INTERIOR\",features:[\"enclosure\",\"hidden-stems\"]},D11:{grammar:\"FAMILY_NETWORK\",features:[\"branches\",\"shared-support\"]},D12:{grammar:\"RECOVERY_PATH\",features:[\"directed-edges\",\"recovery\"]},D13:{grammar:\"FUNCTION_CYCLE\",features:[\"cycle\",\"five-functions\"]},D14:{grammar:\"TIMING_LAYERS\",features:[\"natal\",\"dayun\",\"annual\",\"relation-connectors\"]},D15:{grammar:\"INTEGRATED_RADIAL\",features:[\"center\",\"radial-connections\"]}});var fe=Object.freeze({STEM_COMBINATION:[\"\\u5929\\u5E72\\u5408\",\"Stem combination\"],BRANCH_SIX_COMBINATION:[\"\\u516D\\u5408\",\"Six combination\"],BRANCH_THREE_HARMONY:[\"\\u4E09\\u5408\",\"Three harmony\"],BRANCH_THREE_MEETING:[\"\\u4E09\\u4F1A\",\"Three meeting\"],BRANCH_CLASH:[\"\\u51B2\",\"Clash\"],BRANCH_HARM:[\"\\u5BB3\",\"Harm\"],BRANCH_BREAK:[\"\\u7834\",\"Break\"],BRANCH_PUNISHMENT_GROUP:[\"\\u4E09\\u5211\",\"Punishment group\"],BRANCH_PUNISHMENT_PAIR:[\"\\u76F8\\u5211\",\"Punishment pair\"],BRANCH_SELF_PUNISHMENT:[\"\\u81EA\\u5211\",\"Self punishment\"]});var Y=Object.freeze({D04:{nodes:[\"month\",\"day\",\"peer\",\"resource\",\"support\",\"output\"],edges:[\"month>day\",\"peer>day\",\"resource>day\",\"support>day\",\"day>output\"]},D05:{nodes:[\"year\",\"month\",\"day\",\"hour\"],edges:[\"year>month\",\"month>day\",\"year>hour\"]},D06:{nodes:[\"peer\",\"output\",\"wealth\",\"resource\"],edges:[\"peer>output\",\"output>wealth\",\"wealth>resource\"]},D07:{nodes:[\"day\",\"output\",\"wealth\",\"resource\",\"peer\"],edges:[\"day>output\",\"output>wealth\",\"wealth>resource\",\"resource>peer\",\"peer>day\"]},D08:{nodes:[\"output\",\"wealth\",\"adoption\",\"resource\",\"pressure\"],edges:[\"output>wealth\",\"wealth>adoption\",\"resource>adoption\",\"pressure>adoption\"]},D09:{nodes:[\"output\",\"wealth\",\"cost\",\"resource\",\"retention\"],edges:[\"output>wealth\",\"wealth>cost\",\"cost>resource\",\"resource>retention\"]},D10:{nodes:[\"day\",\"hidden0\",\"hidden1\",\"hidden2\"],edges:[\"day>hidden0\",\"day>hidden1\",\"day>hidden2\"]},D11:{nodes:[\"year\",\"day\",\"hour\",\"resource\",\"shared\"],edges:[\"year>resource\",\"day>resource\",\"hour>resource\",\"resource>shared\"]},D12:{nodes:[\"output\",\"pressure\",\"day\",\"resource\",\"recovery\"],edges:[\"output>pressure\",\"pressure>day\",\"day>resource\",\"resource>recovery\"]},D13:{nodes:[\"peer\",\"output\",\"wealth\",\"pressure\",\"resource\"],edges:[\"peer>output\",\"output>wealth\",\"wealth>pressure\",\"pressure>resource\",\"resource>peer\"]},D14:{nodes:[\"natal\",\"dayun\",\"annual\"],edges:[\"natal>dayun\",\"dayun>annual\"]},D15:{nodes:[\"day\",\"peer\",\"output\",\"wealth\",\"pressure\",\"resource\",\"timing\",\"relations\"],edges:[\"day>peer\",\"day>output\",\"day>wealth\",\"day>pressure\",\"day>resource\",\"day>timing\",\"day>relations\"]}});function Q(r){if(!Array.isArray(r)||r.length!==15||new Set(r.map(t=>t.id)).size!==15)throw Error(\"EXPECTED_DIAGRAM_IR_INCOMPLETE\");return Object.fromEntries(r.map(t=>{if(!t.graph||!Array.isArray(t.graph.nodes)||!Array.isArray(t.graph.edges))throw Error(\"EXPECTED_DIAGRAM_IR_INCOMPLETE\");let u={D01:\"pillar-\",D02:\"element-\",D03:\"god-\"}[t.id],i=u?t.nodes.map((a,N)=>u+N):t.graph.nodes.map(a=>a.id),l=t.graph.edges.map(a=>a.from+\">\"+a.to);if(new Set(i).size!==i.length||t.graph.edges.some(a=>!i.includes(a.from)||!i.includes(a.to)))throw Error(\"EXPECTED_DIAGRAM_IR_INVALID_TOPOLOGY\");return[t.id,{diagramId:t.id,visualGrammarId:t.visualGrammarId,nodes:i,edges:l,layers:(t.graph.layers||[]).map(a=>a.id),features:[...t.features||[]]}]}))}function W(r,{expectedDiagramTopology:t,topologyMode:u=\"PUBLICATION_IR\"}={}){let i=t||(u===\"HISTORICAL_GENG_REFERENCE\"?Y:null),l=[],a={};if(!i)return{status:\"FAIL\",violations:[{kind:\"EXPECTED_DIAGRAM_TOPOLOGY_REQUIRED\"}],actual:a};let N=(c,I)=>c.length===I.length&&[...c].sort().every((p,b)=>p===[...I].sort()[b]),C=[...r.querySelectorAll(\"figure[data-diagram-id]\")],S=C.map(c=>c.dataset.diagramId);u!==\"HISTORICAL_GENG_REFERENCE\"&&!N(S,Object.keys(i))&&l.push({kind:\"DIAGRAM_ID_TOPOLOGY_MISMATCH\"});for(let c of C){let I=c.dataset.diagramId,p=i[I],b=c.querySelector(\"svg\");if(!p){u!==\"HISTORICAL_GENG_REFERENCE\"&&l.push({diagramId:I,kind:\"UNSUPPORTED_DIAGRAM\"});continue}let A=[...c.querySelectorAll(\"[data-node-id]\")].map(O=>O.dataset.nodeId),H=[...c.querySelectorAll(\"[data-edge-from][data-edge-to]\")].map(O=>O.dataset.edgeFrom+\">\"+O.dataset.edgeTo);a[I]={nodes:A,edges:H,visualGrammarId:c.dataset.visualGrammar},(!b||!N(A,p.nodes)||!N(H,p.edges))&&l.push({diagramId:I,kind:\"RENDERED_TOPOLOGY_MISMATCH\",expected:p,actual:a[I]}),p.visualGrammarId&&p.visualGrammarId!==c.dataset.visualGrammar&&l.push({diagramId:I,kind:\"VISUAL_GRAMMAR_MISMATCH\"}),H.some(O=>O.split(\">\").some(G=>!A.includes(G)))&&l.push({diagramId:I,kind:\"DANGLING_EDGE\"})}return{status:l.length?\"FAIL\":\"PASS\",violations:l,actual:a,topologyMode:u}}function $(r,t={}){let u=r.querySelector(\".bdm-report\"),i=u?.dataset.presentationMode||\"BILINGUAL\",l=B(i),a=[...r.querySelectorAll(\".bdm-page\")],N=[],C=[],S=[],c=[],I=[],p=[],b=[],A=[],H=W(r,t);A.push(...H.violations);for(let d of a){let U=d.getBoundingClientRect(),j=d.querySelector(\"footer\").getBoundingClientRect(),D=Number(d.dataset.pageNumber),_=!1;for(let e of d.querySelectorAll(\".bdm-content p,.bdm-content figure,.bdm-insights>div,.pub-heading h2,.pub-footer,.bdm-content svg text\")){let s=e.getBoundingClientRect(),g=getComputedStyle(e),E=e.closest(\"figcaption\")?\"caption\":e.closest(\"svg\")?\"diagram\":e.closest(\".bdm-insights\")?\"card\":e.closest(\".pub-heading\")?\"title\":e.closest(\"footer\")?\"footer\":\"body\",h=(P[E]||10.5)*96/72,o=parseFloat(g.fontSize)*(e.ownerSVGElement?Math.abs(e.getScreenCTM().a):1),m=E===\"footer\"?U.bottom:j.top-4,f=Math.max(0,(E===\"footer\"?U.top:U.top+15)-s.top,s.bottom-m,U.left+(E===\"footer\"?0:15)-s.left,s.right-(U.right-(E===\"footer\"?0:15)),e.ownerSVGElement?0:e.scrollHeight-e.clientHeight,e.ownerSVGElement?0:e.scrollWidth-e.clientWidth),y;if(e.ownerSVGElement)y=[...e.querySelectorAll(\"tspan\")].map(n=>n.getBoundingClientRect());else{let n=e.ownerDocument.createRange();n.selectNodeContents(e),y=[...n.getClientRects()]}let x=new Set(y.filter(n=>n.width&&n.height).map(n=>Math.round(n.top))).size,T={pageId:D,sectionId:d.dataset.sectionId||\"FOUNDATION\",pageRole:d.dataset.pageRole,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,slotId:N.length,presentationMode:i,kind:E,sourceChars:e.textContent.length,sourceStart:e.dataset.sourceStart??null,sourceEnd:e.dataset.sourceEnd??null,width:s.width,height:s.height,slotHeight:m-s.top,contentHeight:s.height,overflowPixels:f,fontSize:o,lineHeight:g.lineHeight,renderedLines:x};N.push(T),f>2&&(_=!0,S.push(T.slotId)),o+.1<h&&I.push(T.slotId),e.textContent.trim()&&(g.display===\"none\"||g.visibility===\"hidden\"||parseFloat(g.opacity)===0||s.width===0||s.height===0)&&c.push(T.slotId);for(let n=e.parentElement;n&&d.contains(n);n=n.parentElement){let R=getComputedStyle(n),z=n.getBoundingClientRect();(R.display===\"none\"||R.visibility===\"hidden\"||Number(R.opacity)===0)&&c.push(T.slotId),(/(hidden|clip|auto|scroll)/.test(R.overflowX)&&s.width&&(s.left<z.left-2||s.right>z.right+2)||/(hidden|clip|auto|scroll)/.test(R.overflowY)&&s.height&&(s.top<z.top-2||s.bottom>z.bottom+2))&&(_=!0,S.push(T.slotId)),R.clipPath!==\"none\"&&(_=!0,S.push(T.slotId))}if(e.ownerSVGElement){let n=e.getBBox(),R=e.ownerSVGElement.viewBox.baseVal;(n.x<0||n.y<0||n.x+n.width>R.width+1||n.y+n.height>R.height+1)&&(_=!0,S.push(T.slotId))}}for(let e of d.querySelectorAll(\"figure svg\")){let s=e.viewBox.baseVal,g=e.closest(\"figure\").dataset.diagramId;for(let h of e.querySelectorAll(\"text\")){let o=h.textContent;(i===\"EN\"&&/支持|承载|责任|月令|泄气|日主|比肩|偏印|七杀|年柱|月柱|日柱|时柱|三合|原局|大运|年度|冲/.test(o)||i===\"ZH_HANS\"&&/[A-Za-z]{2,}/.test(o))&&(b.push({pageId:D,diagramId:g,text:o}),_=!0)}for(let h of e.querySelectorAll(\"[data-node-id] rect,[data-edge-from] path,.bdm-enclosure\")){let o=h.getBBox();(o.x<-.5||o.y<-.5||o.x+o.width>s.width+.5||o.y+o.height>s.height+.5)&&(A.push({pageId:D,diagramId:g,kind:\"SHAPE_OUTSIDE_VIEWBOX\"}),_=!0)}for(let h of e.querySelectorAll(\"[data-node-id]\")){let o=h.querySelector(\"rect.bdm-node\");if(!o)continue;let m=o.getBoundingClientRect();for(let f of h.querySelectorAll(\"text\")){let y=f.getBoundingClientRect();(y.left<m.left-2||y.right>m.right+2||y.top<m.top-2||y.bottom>m.bottom+2)&&(A.push({pageId:D,diagramId:g,nodeId:h.dataset.nodeId,kind:\"LABEL_OUTSIDE_NODE\",text:f.textContent}),_=!0)}}let E=[...e.querySelectorAll(\"text\")];for(let h=0;h<E.length;h++)for(let o=h+1;o<E.length;o++){let m=E[h].getBoundingClientRect(),f=E[o].getBoundingClientRect();Math.min(m.right,f.right)-Math.max(m.left,f.left)>2&&Math.min(m.bottom,f.bottom)-Math.max(m.top,f.top)>2&&(A.push({pageId:D,diagramId:g,kind:\"LABEL_OVERLAP\",text:[E[h].textContent,E[o].textContent]}),_=!0)}}if(d.querySelector(\".bdm-content\")&&[\"INTERPRETATION_A\",\"INTERPRETATION_B\",\"SECTION_OPENER\"].includes(d.dataset.pageRole))for(let e of l.locales)d.querySelector(`[lang=\"${e}\"]`)||p.push({pageId:D,locale:e});_&&C.push(D)}let O=[...r.querySelectorAll(\"img\")].filter(d=>!d.complete||!d.naturalWidth).map(d=>d.src),G=[...r.querySelectorAll(\"figure[data-diagram-id]\")],w=a.length!==48||G.length!==15||new Set(G.map(d=>d.dataset.diagramId)).size!==15||C.length||S.length||c.length||I.length||O.length||p.length||A.length||b.length||r.querySelector(\"[data-missing-required]\");return{presentationMode:i,layoutProfileVersion:l.id,pageCount:a.length,diagramCount:G.length,overflowPages:C,clippedSlots:S,hiddenTextSlots:c,fontMinimumViolations:I,assetFailures:O,missingLocales:p,diagramLocaleViolations:b,diagramViolations:A,topology:H,slots:N,recomposePasses:[],fitStatus:w?\"FAIL\":\"PASS\",providerCalls:0}}function k(r,t){if(t.presentationMode!==r.presentationMode||![\"PASS\",\"PASS_AFTER_RECOMPOSE\"].includes(t.fitStatus))throw Error(\"PUBLICATION_OVERFLOW_UNRESOLVED\");if(r.customerPublishable!==!0)throw Error(\"HUMAN_REVIEW_OR_COVERAGE_PENDING\");return!0}return X(ee);})();\n";
++export const P9_BAZI_FIT_DEPENDENCIES={"functions/bzr-full-production/bazi-structural-registry.js":"8f3c3abadd3cf7277d7ef5dffbdceb05e69c9cd72dfffbb442c66b61d3ef8067","functions/personal-reading/publication-fit/bazi-diagram-fidelity.js":"ee3f8da9e45f828461d18115d112d3b0b8433e82e646386b4ac8f05023261731","functions/personal-reading/publication-fit/bazi-publication-fit-gate.js":"f0b6be3c6ad426a54984c1126f7669e3af0c3912c5e7152a5add376219d3fa65","functions/personal-reading/publication-fit/bazi-publication-layout-profiles.js":"0200e3a23ff570ff4d051a3fe3b06fcc6d79d5e926fc09c5579a4bddd05cee28"};
++export const P9_BAZI_FIT_CODE="var P9BaziPublicationFit=(()=>{var L=Object.defineProperty;var F=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertyNames;var Z=Object.prototype.hasOwnProperty;var V=(r,t)=>{for(var u in t)L(r,u,{get:t[u],enumerable:!0})},q=(r,t,u,o)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let n of v(t))!Z.call(r,n)&&n!==u&&L(r,n,{get:()=>t[n],enumerable:!(o=F(t,n))||o.enumerable});return r};var J=r=>q(L({},\"__esModule\",{value:!0}),r);var re={};V(re,{assertBaziFitRelease:()=>ee,expectedBaziDiagramTopology:()=>$,measureBaziDiagramTopology:()=>w,measureBaziPublication:()=>k,reflowBaziParagraphSpacing:()=>te});var B=Object.freeze({BILINGUAL:{id:\"BAZI_PUBLICATION_LAYOUT_PROFILE_BILINGUAL_V1\",locales:[\"zh-Hans\",\"en\"],bodyBudget:{\"zh-Hans\":380,en:1100},cardBudget:{\"zh-Hans\":125,en:480}},EN:{id:\"BAZI_PUBLICATION_LAYOUT_PROFILE_EN_V1\",locales:[\"en\"],bodyBudget:{en:2200},cardBudget:{en:660}},ZH_HANS:{id:\"BAZI_PUBLICATION_LAYOUT_PROFILE_ZH_HANS_V1\",locales:[\"zh-Hans\"],bodyBudget:{\"zh-Hans\":780},cardBudget:{\"zh-Hans\":200}}});function M(r=\"BILINGUAL\"){if(!B[r])throw Error(\"UNSUPPORTED_BAZI_PRESENTATION_MODE\");return B[r]}var P={body:10.5,card:9.5,caption:8.5,title:20,footer:7.5};var X=Object.freeze({JIA:Object.freeze({code:\"JIA\",zh:\"\\u7532\",element:\"WOOD\",polarity:\"YANG\"}),YI:Object.freeze({code:\"YI\",zh:\"\\u4E59\",element:\"WOOD\",polarity:\"YIN\"}),BING:Object.freeze({code:\"BING\",zh:\"\\u4E19\",element:\"FIRE\",polarity:\"YANG\"}),DING:Object.freeze({code:\"DING\",zh:\"\\u4E01\",element:\"FIRE\",polarity:\"YIN\"}),WU:Object.freeze({code:\"WU\",zh:\"\\u620A\",element:\"EARTH\",polarity:\"YANG\"}),JI:Object.freeze({code:\"JI\",zh:\"\\u5DF1\",element:\"EARTH\",polarity:\"YIN\"}),GENG:Object.freeze({code:\"GENG\",zh:\"\\u5E9A\",element:\"METAL\",polarity:\"YANG\"}),XIN:Object.freeze({code:\"XIN\",zh:\"\\u8F9B\",element:\"METAL\",polarity:\"YIN\"}),REN:Object.freeze({code:\"REN\",zh:\"\\u58EC\",element:\"WATER\",polarity:\"YANG\"}),GUI:Object.freeze({code:\"GUI\",zh:\"\\u7678\",element:\"WATER\",polarity:\"YIN\"})}),K=Object.freeze({ZI:Object.freeze({code:\"ZI\",zh:\"\\u5B50\",element:\"WATER\",hiddenStems:[\"GUI\"]}),CHOU:Object.freeze({code:\"CHOU\",zh:\"\\u4E11\",element:\"EARTH\",hiddenStems:[\"JI\",\"GUI\",\"XIN\"]}),YIN:Object.freeze({code:\"YIN\",zh:\"\\u5BC5\",element:\"WOOD\",hiddenStems:[\"JIA\",\"BING\",\"WU\"]}),MAO:Object.freeze({code:\"MAO\",zh:\"\\u536F\",element:\"WOOD\",hiddenStems:[\"YI\"]}),CHEN:Object.freeze({code:\"CHEN\",zh:\"\\u8FB0\",element:\"EARTH\",hiddenStems:[\"WU\",\"YI\",\"GUI\"]}),SI:Object.freeze({code:\"SI\",zh:\"\\u5DF3\",element:\"FIRE\",hiddenStems:[\"BING\",\"WU\",\"GENG\"]}),WU:Object.freeze({code:\"WU\",zh:\"\\u5348\",element:\"FIRE\",hiddenStems:[\"DING\",\"JI\"]}),WEI:Object.freeze({code:\"WEI\",zh:\"\\u672A\",element:\"EARTH\",hiddenStems:[\"JI\",\"DING\",\"YI\"]}),SHEN:Object.freeze({code:\"SHEN\",zh:\"\\u7533\",element:\"METAL\",hiddenStems:[\"GENG\",\"REN\",\"WU\"]}),YOU:Object.freeze({code:\"YOU\",zh:\"\\u9149\",element:\"METAL\",hiddenStems:[\"XIN\"]}),XU:Object.freeze({code:\"XU\",zh:\"\\u620C\",element:\"EARTH\",hiddenStems:[\"WU\",\"XIN\",\"DING\"]}),HAI:Object.freeze({code:\"HAI\",zh:\"\\u4EA5\",element:\"WATER\",hiddenStems:[\"REN\",\"JIA\"]})}),Q=Object.freeze({YIN:\"SPRING\",MAO:\"SPRING\",CHEN:\"LATE_SPRING\",SI:\"SUMMER\",WU:\"SUMMER\",WEI:\"LATE_SUMMER\",SHEN:\"AUTUMN\",YOU:\"AUTUMN\",XU:\"LATE_AUTUMN\",HAI:\"WINTER\",ZI:\"WINTER\",CHOU:\"LATE_WINTER\"}),ae=Object.freeze([[\"JIA\",\"JI\"],[\"YI\",\"GENG\"],[\"BING\",\"XIN\"],[\"DING\",\"REN\"],[\"WU\",\"GUI\"]]),se=Object.freeze([[\"ZI\",\"CHOU\"],[\"YIN\",\"HAI\"],[\"MAO\",\"XU\"],[\"CHEN\",\"YOU\"],[\"SI\",\"SHEN\"],[\"WU\",\"WEI\"]]),ie=Object.freeze([[\"ZI\",\"WU\"],[\"CHOU\",\"WEI\"],[\"YIN\",\"SHEN\"],[\"MAO\",\"YOU\"],[\"CHEN\",\"XU\"],[\"SI\",\"HAI\"]]),le=Object.freeze([[\"ZI\",\"WEI\"],[\"CHOU\",\"WU\"],[\"YIN\",\"SI\"],[\"MAO\",\"CHEN\"],[\"SHEN\",\"HAI\"],[\"YOU\",\"XU\"]]),de=Object.freeze([[\"ZI\",\"YOU\"],[\"MAO\",\"WU\"],[\"CHEN\",\"CHOU\"],[\"XU\",\"WEI\"],[\"YIN\",\"HAI\"],[\"SI\",\"SHEN\"]]),ce=Object.freeze([Object.freeze({branches:[\"SHEN\",\"ZI\",\"CHEN\"],element:\"WATER\"}),Object.freeze({branches:[\"HAI\",\"MAO\",\"WEI\"],element:\"WOOD\"}),Object.freeze({branches:[\"YIN\",\"WU\",\"XU\"],element:\"FIRE\"}),Object.freeze({branches:[\"SI\",\"YOU\",\"CHOU\"],element:\"METAL\"})]),ue=Object.freeze([Object.freeze({branches:[\"YIN\",\"MAO\",\"CHEN\"],element:\"WOOD\"}),Object.freeze({branches:[\"SI\",\"WU\",\"WEI\"],element:\"FIRE\"}),Object.freeze({branches:[\"SHEN\",\"YOU\",\"XU\"],element:\"METAL\"}),Object.freeze({branches:[\"HAI\",\"ZI\",\"CHOU\"],element:\"WATER\"})]),he=Object.freeze([Object.freeze({branches:[\"YIN\",\"SI\",\"SHEN\"],code:\"YIN_SI_SHEN\"}),Object.freeze({branches:[\"CHOU\",\"XU\",\"WEI\"],code:\"CHOU_XU_WEI\"})]),Ie=Object.freeze([\"CHEN\",\"WU\",\"YOU\",\"HAI\"]),pe=Object.freeze({BI_JIAN:Object.freeze({code:\"BI_JIAN\",zh:\"\\u6BD4\\u80A9\",en:\"Peer\"}),JIE_CAI:Object.freeze({code:\"JIE_CAI\",zh:\"\\u52AB\\u8D22\",en:\"Rob Wealth\"}),SHI_SHEN:Object.freeze({code:\"SHI_SHEN\",zh:\"\\u98DF\\u795E\",en:\"Eating God\"}),SHANG_GUAN:Object.freeze({code:\"SHANG_GUAN\",zh:\"\\u4F24\\u5B98\",en:\"Hurting Officer\"}),PIAN_CAI:Object.freeze({code:\"PIAN_CAI\",zh:\"\\u504F\\u8D22\",en:\"Indirect Wealth\"}),ZHENG_CAI:Object.freeze({code:\"ZHENG_CAI\",zh:\"\\u6B63\\u8D22\",en:\"Direct Wealth\"}),QI_SHA:Object.freeze({code:\"QI_SHA\",zh:\"\\u4E03\\u6740\",en:\"Seven Killings\"}),ZHENG_GUAN:Object.freeze({code:\"ZHENG_GUAN\",zh:\"\\u6B63\\u5B98\",en:\"Direct Officer\"}),PIAN_YIN:Object.freeze({code:\"PIAN_YIN\",zh:\"\\u504F\\u5370\",en:\"Indirect Resource\"}),ZHENG_YIN:Object.freeze({code:\"ZHENG_YIN\",zh:\"\\u6B63\\u5370\",en:\"Direct Resource\"})}),Ee=Object.freeze({WOOD:\"FIRE\",FIRE:\"EARTH\",EARTH:\"METAL\",METAL:\"WATER\",WATER:\"WOOD\"}),me=Object.freeze({WOOD:\"EARTH\",EARTH:\"WATER\",WATER:\"FIRE\",FIRE:\"METAL\",METAL:\"WOOD\"});var fe=Object.freeze({D01:{grammar:\"PILLAR_MATRIX\",features:[\"hidden-stems\",\"ten-god-labels\"]},D02:{grammar:\"ELEMENT_BARS\",features:[\"month-command\"]},D03:{grammar:\"TEN_GOD_RING\",features:[\"ring\",\"visible-hidden\",\"legend\"]},D04:{grammar:\"SUPPORT_DIRECTION\",features:[\"directed-edges\",\"support\",\"drain\"]},D05:{grammar:\"NATAL_NETWORK\",features:[\"relation-edges\",\"legend\"]},D06:{grammar:\"CAPABILITY_CHAIN\",features:[\"ordered-chain\",\"wealth\",\"resource\"]},D07:{grammar:\"OPERATING_LOOP\",features:[\"cycle\"]},D08:{grammar:\"CAREER_CHAIN\",features:[\"ordered-chain\",\"pressure\",\"resource\"]},D09:{grammar:\"WEALTH_FUNNEL\",features:[\"staged-flow\",\"retention\"]},D10:{grammar:\"DAY_BRANCH_INTERIOR\",features:[\"enclosure\",\"hidden-stems\"]},D11:{grammar:\"FAMILY_NETWORK\",features:[\"branches\",\"shared-support\"]},D12:{grammar:\"RECOVERY_PATH\",features:[\"directed-edges\",\"recovery\"]},D13:{grammar:\"FUNCTION_CYCLE\",features:[\"cycle\",\"five-functions\"]},D14:{grammar:\"TIMING_LAYERS\",features:[\"natal\",\"dayun\",\"annual\",\"relation-connectors\"]},D15:{grammar:\"INTEGRATED_RADIAL\",features:[\"center\",\"radial-connections\"]}});var Ne=Object.freeze({STEM_COMBINATION:[\"\\u5929\\u5E72\\u5408\",\"Stem combination\"],BRANCH_SIX_COMBINATION:[\"\\u516D\\u5408\",\"Six combination\"],BRANCH_THREE_HARMONY:[\"\\u4E09\\u5408\",\"Three harmony\"],BRANCH_THREE_MEETING:[\"\\u4E09\\u4F1A\",\"Three meeting\"],BRANCH_CLASH:[\"\\u51B2\",\"Clash\"],BRANCH_HARM:[\"\\u5BB3\",\"Harm\"],BRANCH_BREAK:[\"\\u7834\",\"Break\"],BRANCH_PUNISHMENT_GROUP:[\"\\u4E09\\u5211\",\"Punishment group\"],BRANCH_PUNISHMENT_PAIR:[\"\\u76F8\\u5211\",\"Punishment pair\"],BRANCH_SELF_PUNISHMENT:[\"\\u81EA\\u5211\",\"Self punishment\"]});var Y=Object.freeze({D04:{nodes:[\"month\",\"day\",\"peer\",\"resource\",\"support\",\"output\"],edges:[\"month>day\",\"peer>day\",\"resource>day\",\"support>day\",\"day>output\"]},D05:{nodes:[\"year\",\"month\",\"day\",\"hour\"],edges:[\"year>month\",\"month>day\",\"year>hour\"]},D06:{nodes:[\"peer\",\"output\",\"wealth\",\"resource\"],edges:[\"peer>output\",\"output>wealth\",\"wealth>resource\"]},D07:{nodes:[\"day\",\"output\",\"wealth\",\"resource\",\"peer\"],edges:[\"day>output\",\"output>wealth\",\"wealth>resource\",\"resource>peer\",\"peer>day\"]},D08:{nodes:[\"output\",\"wealth\",\"adoption\",\"resource\",\"pressure\"],edges:[\"output>wealth\",\"wealth>adoption\",\"resource>adoption\",\"pressure>adoption\"]},D09:{nodes:[\"output\",\"wealth\",\"cost\",\"resource\",\"retention\"],edges:[\"output>wealth\",\"wealth>cost\",\"cost>resource\",\"resource>retention\"]},D10:{nodes:[\"day\",\"hidden0\",\"hidden1\",\"hidden2\"],edges:[\"day>hidden0\",\"day>hidden1\",\"day>hidden2\"]},D11:{nodes:[\"year\",\"day\",\"hour\",\"resource\",\"shared\"],edges:[\"year>resource\",\"day>resource\",\"hour>resource\",\"resource>shared\"]},D12:{nodes:[\"output\",\"pressure\",\"day\",\"resource\",\"recovery\"],edges:[\"output>pressure\",\"pressure>day\",\"day>resource\",\"resource>recovery\"]},D13:{nodes:[\"peer\",\"output\",\"wealth\",\"pressure\",\"resource\"],edges:[\"peer>output\",\"output>wealth\",\"wealth>pressure\",\"pressure>resource\",\"resource>peer\"]},D14:{nodes:[\"natal\",\"dayun\",\"annual\"],edges:[\"natal>dayun\",\"dayun>annual\"]},D15:{nodes:[\"day\",\"peer\",\"output\",\"wealth\",\"pressure\",\"resource\",\"timing\",\"relations\"],edges:[\"day>peer\",\"day>output\",\"day>wealth\",\"day>pressure\",\"day>resource\",\"day>timing\",\"day>relations\"]}});function $(r){if(!Array.isArray(r)||r.length!==15||new Set(r.map(t=>t.id)).size!==15)throw Error(\"EXPECTED_DIAGRAM_IR_INCOMPLETE\");return Object.fromEntries(r.map(t=>{if(!t.graph||!Array.isArray(t.graph.nodes)||!Array.isArray(t.graph.edges))throw Error(\"EXPECTED_DIAGRAM_IR_INCOMPLETE\");let u={D01:\"pillar-\",D02:\"element-\",D03:\"god-\"}[t.id],o=u?t.nodes.map((s,m)=>u+m):t.graph.nodes.map(s=>s.id),n=t.graph.edges.map(s=>s.from+\">\"+s.to);if(new Set(o).size!==o.length||t.graph.edges.some(s=>!o.includes(s.from)||!o.includes(s.to)))throw Error(\"EXPECTED_DIAGRAM_IR_INVALID_TOPOLOGY\");return[t.id,{diagramId:t.id,visualGrammarId:t.visualGrammarId,nodes:o,edges:n,layers:(t.graph.layers||[]).map(s=>s.id),features:[...t.features||[]]}]}))}function w(r,{expectedDiagramTopology:t,topologyMode:u=\"PUBLICATION_IR\"}={}){let o=t||(u===\"HISTORICAL_GENG_REFERENCE\"?Y:null),n=[],s={};if(!o)return{status:\"FAIL\",violations:[{kind:\"EXPECTED_DIAGRAM_TOPOLOGY_REQUIRED\"}],actual:s};let m=(d,h)=>d.length===h.length&&[...d].sort().every((I,R)=>I===[...h].sort()[R]),g=[...r.querySelectorAll(\"figure[data-diagram-id]\")],f=g.map(d=>d.dataset.diagramId);u!==\"HISTORICAL_GENG_REFERENCE\"&&!m(f,Object.keys(o))&&n.push({kind:\"DIAGRAM_ID_TOPOLOGY_MISMATCH\"});for(let d of g){let h=d.dataset.diagramId,I=o[h],R=d.querySelector(\"svg\");if(!I){u!==\"HISTORICAL_GENG_REFERENCE\"&&n.push({diagramId:h,kind:\"UNSUPPORTED_DIAGRAM\"});continue}let N=[...d.querySelectorAll(\"[data-node-id]\")].map(S=>S.dataset.nodeId),H=[...d.querySelectorAll(\"[data-edge-from][data-edge-to]\")].map(S=>S.dataset.edgeFrom+\">\"+S.dataset.edgeTo);s[h]={nodes:N,edges:H,visualGrammarId:d.dataset.visualGrammar},(!R||!m(N,I.nodes)||!m(H,I.edges))&&n.push({diagramId:h,kind:\"RENDERED_TOPOLOGY_MISMATCH\",expected:I,actual:s[h]}),I.visualGrammarId&&I.visualGrammarId!==d.dataset.visualGrammar&&n.push({diagramId:h,kind:\"VISUAL_GRAMMAR_MISMATCH\"}),H.some(S=>S.split(\">\").some(G=>!N.includes(G)))&&n.push({diagramId:h,kind:\"DANGLING_EDGE\"})}return{status:n.length?\"FAIL\":\"PASS\",violations:n,actual:s,topologyMode:u}}function k(r,t={}){let u=r.querySelector(\".bdm-report\"),o=u?.dataset.presentationMode||\"BILINGUAL\",n=M(o),s=[...r.querySelectorAll(\".bdm-page\")],m=[],g=[],f=[],d=[],h=[],I=[],R=[],N=[],H=w(r,t);N.push(...H.violations);for(let c of s){let U=c.getBoundingClientRect(),W=c.querySelector(\"footer\").getBoundingClientRect(),C=Number(c.dataset.pageNumber),T=!1;for(let e of c.querySelectorAll(\".bdm-content p,.bdm-content figure,.bdm-insights>div,.pub-heading h2,.pub-footer,.bdm-content svg text\")){let l=e.getBoundingClientRect(),O=getComputedStyle(e),E=e.closest(\"figcaption\")?\"caption\":e.closest(\"svg\")?\"diagram\":e.closest(\".bdm-insights\")?\"card\":e.closest(\".pub-heading\")?\"title\":e.closest(\"footer\")?\"footer\":\"body\",p=(P[E]||10.5)*96/72,i=parseFloat(O.fontSize)*(e.ownerSVGElement?Math.abs(e.getScreenCTM().a):1),A=E===\"footer\"?U.bottom:W.top-4,_=Math.max(0,(E===\"footer\"?U.top:U.top+15)-l.top,l.bottom-A,U.left+(E===\"footer\"?0:15)-l.left,l.right-(U.right-(E===\"footer\"?0:15)),e.ownerSVGElement?0:e.scrollHeight-e.clientHeight,e.ownerSVGElement?0:e.scrollWidth-e.clientWidth),b;if(e.ownerSVGElement)b=[...e.querySelectorAll(\"tspan\")].map(a=>a.getBoundingClientRect());else{let a=e.ownerDocument.createRange();a.selectNodeContents(e),b=[...a.getClientRects()]}let j=new Set(b.filter(a=>a.width&&a.height).map(a=>Math.round(a.top))).size,D={pageId:C,sectionId:c.dataset.sectionId||\"FOUNDATION\",pageRole:c.dataset.pageRole,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,slotId:m.length,presentationMode:o,kind:E,sourceChars:e.textContent.length,sourceStart:e.dataset.sourceStart??null,sourceEnd:e.dataset.sourceEnd??null,width:l.width,height:l.height,slotHeight:A-l.top,contentHeight:l.height,overflowPixels:_,fontSize:i,lineHeight:O.lineHeight,renderedLines:j};m.push(D),_>2&&(T=!0,f.push(D.slotId)),i+.1<p&&h.push(D.slotId),e.textContent.trim()&&(O.display===\"none\"||O.visibility===\"hidden\"||parseFloat(O.opacity)===0||l.width===0||l.height===0)&&d.push(D.slotId);for(let a=e.parentElement;a&&c.contains(a);a=a.parentElement){let y=getComputedStyle(a),z=a.getBoundingClientRect();(y.display===\"none\"||y.visibility===\"hidden\"||Number(y.opacity)===0)&&d.push(D.slotId),(/(hidden|clip|auto|scroll)/.test(y.overflowX)&&l.width&&(l.left<z.left-2||l.right>z.right+2)||/(hidden|clip|auto|scroll)/.test(y.overflowY)&&l.height&&(l.top<z.top-2||l.bottom>z.bottom+2))&&(T=!0,f.push(D.slotId)),y.clipPath!==\"none\"&&(T=!0,f.push(D.slotId))}if(e.ownerSVGElement){let a=e.getBBox(),y=e.ownerSVGElement.viewBox.baseVal;(a.x<0||a.y<0||a.x+a.width>y.width+1||a.y+a.height>y.height+1)&&(T=!0,f.push(D.slotId))}}for(let e of c.querySelectorAll(\"figure svg\")){let l=e.viewBox.baseVal,O=e.closest(\"figure\").dataset.diagramId;for(let p of e.querySelectorAll(\"text\")){let i=p.textContent;(o===\"EN\"&&/支持|承载|责任|月令|泄气|日主|比肩|偏印|七杀|年柱|月柱|日柱|时柱|三合|原局|大运|年度|冲/.test(i)||o===\"ZH_HANS\"&&/[A-Za-z]{2,}/.test(i))&&(R.push({pageId:C,diagramId:O,text:i}),T=!0)}for(let p of e.querySelectorAll(\"[data-node-id] rect,[data-edge-from] path,.bdm-enclosure\")){let i=p.getBBox();(i.x<-.5||i.y<-.5||i.x+i.width>l.width+.5||i.y+i.height>l.height+.5)&&(N.push({pageId:C,diagramId:O,kind:\"SHAPE_OUTSIDE_VIEWBOX\"}),T=!0)}for(let p of e.querySelectorAll(\"[data-node-id]\")){let i=p.querySelector(\"rect.bdm-node\");if(!i)continue;let A=i.getBoundingClientRect();for(let _ of p.querySelectorAll(\"text\")){let b=_.getBoundingClientRect();(b.left<A.left-2||b.right>A.right+2||b.top<A.top-2||b.bottom>A.bottom+2)&&(N.push({pageId:C,diagramId:O,nodeId:p.dataset.nodeId,kind:\"LABEL_OUTSIDE_NODE\",text:_.textContent}),T=!0)}}let E=[...e.querySelectorAll(\"text\")];for(let p=0;p<E.length;p++)for(let i=p+1;i<E.length;i++){let A=E[p].getBoundingClientRect(),_=E[i].getBoundingClientRect();Math.min(A.right,_.right)-Math.max(A.left,_.left)>2&&Math.min(A.bottom,_.bottom)-Math.max(A.top,_.top)>2&&(N.push({pageId:C,diagramId:O,kind:\"LABEL_OVERLAP\",text:[E[p].textContent,E[i].textContent]}),T=!0)}}if(c.querySelector(\".bdm-content\")&&[\"INTERPRETATION_A\",\"INTERPRETATION_B\",\"SECTION_OPENER\"].includes(c.dataset.pageRole))for(let e of n.locales)c.querySelector(`[lang=\"${e}\"]`)||I.push({pageId:C,locale:e});T&&g.push(C)}let S=[...r.querySelectorAll(\"img\")].filter(c=>!c.complete||!c.naturalWidth).map(c=>c.src),G=[...r.querySelectorAll(\"figure[data-diagram-id]\")],x=s.length!==(t.expectedPageCount??48)||G.length!==15||new Set(G.map(c=>c.dataset.diagramId)).size!==15||g.length||f.length||d.length||h.length||S.length||I.length||N.length||R.length||r.querySelector(\"[data-missing-required]\");return{presentationMode:o,layoutProfileVersion:n.id,pageCount:s.length,diagramCount:G.length,overflowPages:g,clippedSlots:f,hiddenTextSlots:d,fontMinimumViolations:h,assetFailures:S,missingLocales:I,diagramLocaleViolations:R,diagramViolations:N,topology:H,slots:m,recomposePasses:[],fitStatus:x?\"FAIL\":\"PASS\",providerCalls:0}}function ee(r,t){if(t.presentationMode!==r.presentationMode||![\"PASS\",\"PASS_AFTER_RECOMPOSE\"].includes(t.fitStatus))throw Error(\"PUBLICATION_OVERFLOW_UNRESOLVED\");if(r.customerPublishable!==!0)throw Error(\"HUMAN_REVIEW_OR_COVERAGE_PENDING\");return!0}function te(r){let t=[...r.querySelectorAll(\".bdm-page\")],u=[];for(let o of t){let n=o.querySelector(\".bdm-content\"),s=o.querySelector(\"footer\");if(!n||!s||!n.querySelector(\".bdm-locale\")||n.querySelector(\"figure\"))continue;let m=n.getBoundingClientRect(),g=s.getBoundingClientRect().top-4;if(m.bottom<=g&&o.scrollHeight<=o.clientHeight+2)continue;let f=n.textContent,d=[...n.querySelectorAll(\"p\")].map(I=>getComputedStyle(I).fontSize);o.dataset.publicationSpacing=\"COMPACT_PARAGRAPHS\";let h=n.getBoundingClientRect();if(n.textContent!==f||d.some((I,R)=>getComputedStyle(n.querySelectorAll(\"p\")[R]).fontSize!==I))throw Error(\"BZR_SPACING_REFLOW_CONTENT_OR_FONT_CHANGED\");u.push({page:Number(o.dataset.pageNumber),beforeBottom:m.bottom,afterBottom:h.bottom,safeBottom:g,resolved:h.bottom<=g,sourceTextUnchanged:!0,fontSizeUnchanged:!0})}return{operation:\"PARAGRAPH_AND_BILINGUAL_SEPARATOR_SPACING_ONLY\",changes:u,providerCalls:0}}return J(re);})();\n";
+diff --git a/workers/method-report-renderer/bazi-verification.js b/workers/method-report-renderer/bazi-verification.js
+index 163f2f03..16bc4aa8 100644
+--- a/workers/method-report-renderer/bazi-verification.js
++++ b/workers/method-report-renderer/bazi-verification.js
+@@ -24,7 +24,7 @@ export async function verifyBaziPublication(publication,env,puppeteer,{pdfRespon
+   await page.emulateMediaType('print');await page.evaluate(()=>document.fonts.ready);
+   const printAssetReadiness=await page.evaluate(()=>[...document.images].map((i,index)=>({index,src:i.src,currentSrc:i.currentSrc,complete:i.complete,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight})).filter(i=>!i.complete||!i.naturalWidth||!i.naturalHeight));
+   if(env.PHIOS_ENVIRONMENT==='production'){if(typeof env.BAZI_BROWSER_FIT_CODE!=='string')throw Error('BAZI_BROWSER_FIT_BUNDLE_REQUIRED');await page.addScriptTag({content:env.BAZI_BROWSER_FIT_CODE});}
+-  const fit=await page.evaluate(async ({origin,expectedDiagramTopology,production})=>{const measureBaziPublication=production?globalThis.P9BaziPublicationFit.measureBaziPublication:(await import(origin+'/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js')).measureBaziPublication;return measureBaziPublication(document,{expectedDiagramTopology,topologyMode:'PUBLICATION_IR'});},{origin,expectedDiagramTopology,production:env.PHIOS_ENVIRONMENT==='production'});
++  const fit=await page.evaluate(async ({origin,expectedDiagramTopology,production})=>{const measureBaziPublication=production?globalThis.P9BaziPublicationFit.measureBaziPublication:(await import(origin+'/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js')).measureBaziPublication;const spacingReflow=production?globalThis.P9BaziPublicationFit.reflowBaziParagraphSpacing:(await import(origin+'/functions/personal-reading/publication-fit/bazi-publication-fit-gate.js')).reflowBaziParagraphSpacing;spacingReflow(document);return measureBaziPublication(document,{expectedDiagramTopology,topologyMode:'PUBLICATION_IR'});},{origin,expectedDiagramTopology,production:env.PHIOS_ENVIRONMENT==='production'});
+   const measured=await page.evaluate(()=>{const pages=[...document.querySelectorAll('.bdm-page')];return {pageCount:pages.length,brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).length,overflowPages:pages.filter(p=>{const c=p.querySelector('.bdm-content'),f=p.querySelector('footer');return p.scrollWidth>p.clientWidth+2||p.scrollHeight>p.clientHeight+2||c&&f&&c.getBoundingClientRect().bottom>f.getBoundingClientRect().top-4;}).map(p=>p.dataset.pageNumber),diagramCount:new Set([...document.querySelectorAll('[data-diagram-id]')].map(d=>d.dataset.diagramId)).size,missingRequiredContent:document.querySelectorAll('[data-missing-required]').length,undefinedText:/\b(?:undefined|NaN)\b/.test(document.body.textContent)};});
+   const pdf=await page.pdf({preferCSSPageSize:true,printBackground:true}),pdfPages=(await PDFDocument.load(pdf)).getPageCount();
+   Object.assign(measured,{fitStatus:fit.fitStatus,diagramViolations:fit.diagramViolations,topology:fit.topology,fit});
+diff --git a/workers/paid-report-watchdog/index.js b/workers/paid-report-watchdog/index.js
+index 26aeb6db..48a8915e 100644
+--- a/workers/paid-report-watchdog/index.js
++++ b/workers/paid-report-watchdog/index.js
+@@ -1,4 +1,4 @@
+-import {sweepPaidReports} from '../../functions/report-delivery/paid-report-watchdog.js';
++import {sweepPaidReports,runSandboxPaidReportTick} from '../../functions/report-delivery/paid-report-watchdog.js';
+ import {p9Policy,requireP9Owner} from '../../functions/report-delivery/p9-canary-admission.js';
+ import {createPaidReportRefundTransport} from '../../functions/commerce/paid-report-refund-transport.js';
+ export async function runP9Watchdog(env){
+@@ -10,4 +10,5 @@ export async function runP9Watchdog(env){
+  const rows=await sweepPaidReports(env,{eligible:job=>job.ownerAccountId===p.ownerAccountId&&job.productId===p.product&&job.environment==='LIVE'&&job.personId===p.personId&&job.readinessId===p.readinessId,eligibleOrder:o=>o.customer_id===p.ownerAccountId&&o.product_id===p.product&&JSON.parse(o.context_json||'{}').p9Canary?.releaseCandidateDigest===p.releaseCandidateDigest,contextForOwner:owner=>{requireP9Owner(env,owner,{allowExpired:true});return {env,data:{symbolicAccountIdentity:{userId:owner,providerId:'P9_SERVER_SCHEDULER',verified:true,authenticated:true}},request:new Request('https://paid-report-watchdog.internal/scheduled')};},refundTransport});
+  return {state:'SCANNED',scanned:rows.length};
+ }
+-export default {async scheduled(controller,env,ctx){ctx.waitUntil(runP9Watchdog(env));},fetch(){return new Response(null,{status:404});}};
++export async function runScheduledReportTick(env){return env.PHIOS_QA_PAID_REPORT_WATCHDOG_ENABLED==='true'?runSandboxPaidReportTick(env):runP9Watchdog(env);}
++export default {async scheduled(controller,env,ctx){ctx.waitUntil(runScheduledReportTick(env));},fetch(){return new Response(null,{status:404});}};

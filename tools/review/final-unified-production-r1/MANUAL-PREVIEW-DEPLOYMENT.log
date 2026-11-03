@@ -1,0 +1,40 @@
+
+ ⛅️ wrangler 4.120.0
+────────────────────
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mWarning: Your working directory is a git repo and has uncommitted changes[0m
+
+  To silence this warning, pass in --commit-dirty=true
+
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mProcessing wrangler.jsonc configuration:[0m
+
+  
+    - "env.preview" environment configuration
+      - The following vars exist at the top level, but not on "env.preview.vars".
+        This is probably not what you want, since "vars" configuration is not inherited by environments.
+        Please add these vars to "env.preview.vars":
+        - PHIOS_D1_MAINTENANCE_MODE
+        - PHIOS_SHARED_PAID_REPORT_ENABLED
+        - PHIOS_P9_CANARY_ENABLED
+        - PHIOS_P9_CHECKOUT_ENABLED
+        - PHIOS_P9_REFUND_ENABLED
+        - REPORT_PROVIDER_LIVE_ALLOWED
+      - There is a r2_buckets binding with name "MANUSCRIPTS" at the top level, but not on "env.preview".
+        This is not what you probably want, since "r2_buckets" configuration is not inherited by environments.
+        Please add a binding for "MANUSCRIPTS" to "env.preview.r2_buckets.bindings".
+
+
+Uploading... (11857/11894)
+Uploading... (11869/11894)
+Uploading... (11881/11894)
+Uploading... (11894/11894)
+✨ Success! Uploaded 37 files (11857 already uploaded) (2.85 sec)
+
+✨ Uploading _headers
+✨ Uploading _redirects
+✨ Compiled Worker successfully
+✨ Uploading Worker bundle
+✨ Uploading _routes.json
+🌎 Deploying...
+✨ Deployment complete! Take a peek over at https://c6e1e0e1.phios-github.pages.dev
+✨ Deployment alias URL: https://codex-final-unified-producti.phios-github.pages.dev

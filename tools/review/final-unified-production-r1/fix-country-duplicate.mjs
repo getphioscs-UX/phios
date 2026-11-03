@@ -1,0 +1,4 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const p='C:/phios/.worktrees/final-unified-production-r1/assets/customer-ui/js/surfaces/profile-country-r1.js';
+const token="const s=root.querySelector('#cp-country');if(s)mountCountrySearch(s,{locale:getLocale(),onSelect:code=>update({country:code==='GLOBAL'?'':code,compare:''})});const other=root.querySelector('#cp-compare');if(other)mountCountrySearch(other,{locale:getLocale(),onSelect:code=>update({compare:code==='GLOBAL'?'':code,view:'compare'})});";
+const before=fs.readFileSync(p,'utf8');assert.equal(before.split(token).length,3);const after=before.replace(token,'');assert.equal(after.split(token).length,2);fs.writeFileSync(p,after);console.log('Removed only duplicated Country search initialization; retained history panel and final initialization.');

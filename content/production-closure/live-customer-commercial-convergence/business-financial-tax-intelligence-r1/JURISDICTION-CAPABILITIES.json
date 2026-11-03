@@ -1,0 +1,75 @@
+{
+  "MY": {
+    "currency": "MYR",
+    "authority": "LHDN",
+    "forms": [
+      "INDIVIDUAL_EMPLOYED",
+      "SOLE_PROPRIETOR",
+      "PARTNERSHIP",
+      "COMPANY",
+      "LLP",
+      "UNKNOWN"
+    ],
+    "implementedFinancialForms": [
+      "SOLE_PROPRIETORSHIP",
+      "LIMITED_COMPANY"
+    ],
+    "residentStatus": "MUST_BE_EXPLICIT; NEVER_INFERRED_FROM_LOCALE_IP_CURRENCY",
+    "year": "2025 only for rate-only synthetic tests",
+    "status": "RESTRICTED_SYNTHETIC_RATE_ONLY",
+    "companyTax2025": "NOT_ADMITTED",
+    "capitalAllowance": "NOT_ADMITTED",
+    "BIK": "NOT_ADMITTED",
+    "dividend2025": "SOURCE_IDENTIFIED_NOT_CALCULATION_ADMITTED",
+    "filing": "NOT_IMPLEMENTED_NOT_AUTHORIZED",
+    "reviewAuthority": "QUALIFIED_TAX_PROFESSIONAL_REQUIRED"
+  },
+  "SG": {
+    "currency": "SGD",
+    "authority": "IRAS",
+    "status": "EDUCATIONAL_ONLY",
+    "legalForms": "Local individual/self-employed/partnership/company/LLP must be independently classified",
+    "residency": "NOT_IMPLEMENTED",
+    "taxYear": "UNVERIFIED",
+    "corporateTax": "NO_CALCULATION",
+    "vehicle": "Private-car expense restrictions differ from MY",
+    "sources": [
+      {
+        "id": "SG-VEHICLE",
+        "url": "https://www.iras.gov.sg/taxes/corporate-income-tax/income-deductions-for-companies/business-expenses/tax-treatment-of-business-expenses-%28m-r%29",
+        "httpStatus": 200,
+        "sha256": "fe8ade2100855ba5c92959d12c4736fa30237c573f41918aea606036aa80619f",
+        "bytes": 302275,
+        "localSource": ".tmp\\bft-tax-r1\\sources\\SG-VEHICLE.html",
+        "status": "SOURCE_IDENTIFIED_NOT_PROFESSIONALLY_ADMITTED",
+        "verifiedAt": "2026-11-03"
+      }
+    ]
+  },
+  "GB": {
+    "currency": "GBP",
+    "authority": "HMRC",
+    "status": "EDUCATIONAL_ONLY",
+    "legalForms": "Local sole trader/partnership/company/LLP must be independently classified",
+    "residency": "NOT_IMPLEMENTED",
+    "taxYear": "Individual and corporate basis periods not interchangeable; not implemented",
+    "corporateTax": "NO_CALCULATION",
+    "vehicle": "Business-car allowance and private benefit rules require separate qualification",
+    "sources": [
+      {
+        "id": "GB-VEHICLE",
+        "url": "https://www.gov.uk/capital-allowances/business-cars",
+        "httpStatus": 200,
+        "sha256": "eb4c231449a604bbdddfad585087b4b393137108cee0949e768acdf2d5572443",
+        "bytes": 91332,
+        "localSource": ".tmp\\bft-tax-r1\\sources\\GB-VEHICLE.html",
+        "status": "SOURCE_IDENTIFIED_NOT_PROFESSIONALLY_ADMITTED",
+        "verifiedAt": "2026-11-03"
+      }
+    ]
+  },
+  "crossBorder": {
+    "status": "PROFESSIONAL_REVIEW_REQUIRED",
+    "automaticTreatyWithholdingFxTransferPricing": false
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "at": "2026-11-03T03:19:51.373Z",
+  "status": "PUBLIC_CUSTOMER_FUNCTIONAL_PASS_WITH_CSP_ANALYTICS_NOTICE",
+  "functionalChecks": 155,
+  "functionalPassed": 155,
+  "failedPublicFunctionalChecks": 0,
+  "rawAssertions": {
+    "total": 156,
+    "passed": 155,
+    "failed": 1
+  },
+  "financialPolicyCheck": {
+    "at": "2026-11-03T03:18:30.128Z",
+    "status": "PASS_EXPECTED_READ_ONLY_POLICY_DENIAL",
+    "sourceSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+    "actual": {
+      "at": "2026-11-03T03:17:13.318Z",
+      "url": "https://getphios.com/api/professional-financial-review",
+      "method": "POST",
+      "status": 503,
+      "source": "0c8651757ce30bdc3806b362d65981975486acf5",
+      "body": {
+        "ok": false,
+        "status": "temporarily_unavailable"
+      }
+    },
+    "expected": {
+      "status": 503,
+      "body": {
+        "ok": false,
+        "status": "temporarily_unavailable"
+      }
+    },
+    "policy": "functions/_middleware.js POST guard before request dispatch; functions/_lib/d1-maintenance-guard.js maintenanceResponse()",
+    "originalAssertion": "PRODUCTION-ACCEPTANCE.json financial403 expectation remains FAIL; not rewritten",
+    "conclusion": "503 is defined global READ_ONLY protection, not application failure. Anonymous private financial operation cannot reach DB/provider handlers.",
+    "productionPolicyChanged": false,
+    "fullSuiteRerun": false
+  },
+  "browserModuleErrors": 0,
+  "networkErrors": 0,
+  "rawHarnessStatus": "FAIL",
+  "rawHarnessEvidence": "PRODUCTION-ACCEPTANCE.json",
+  "rawEvidenceRewritten": false,
+  "nonBlockingConsole": [
+    {
+      "page": "/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/world/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/profile/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/personal/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/phi-configuration/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/personal/astrology/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/personal/bazi/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/personal/human-design/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/personal/numerology/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/personal/ziwei/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/perspectives/relationship/",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    },
+    {
+      "page": "/health-reality",
+      "text": "Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-HJd2aG4vf0ZmBWa9038rQveoaWvRMyi462QBSBNjqyk='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked."
+    }
+  ],
+  "unexpectedApplicationConsole": [],
+  "classification": "Existing CSP intentionally blocks Cloudflare-injected third-party statistics beacon. Keep the security policy. No application script, asset or interaction failure observed; analytics/CSP alignment is an independent follow-up.",
+  "productionSourceSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "mainSha": "419357257da40bca7bdf9579bcf82d785e29d151"
+}

@@ -18,9 +18,10 @@ const normalize = value => String(value ?? '')
   .toLocaleLowerCase()
   .replace(/\s+/g, ' ');
 
+const stopWords = new Set('the a an is are was were be been being do does did what which who why how when where and or but of for to in on at by with from as it its that this those these my your our their me we you they can could would should will may might have has had than then into about please explain tell between difference information needed each'.split(' '));
 const tokens = value => normalize(value)
   .split(/[^\p{L}\p{N}-]+/u)
-  .filter(token => token.length > 1);
+  .filter(token => token.length > 1 && !stopWords.has(token));
 
 async function readProjection(env, name) {
   if (!env?.ASSETS?.fetch) throw new Error('PUBLIC_KNOWLEDGE_ASSETS_UNAVAILABLE');
@@ -45,23 +46,24 @@ function scoreNode({ query, node, aliases, questions, fragments }) {
   for (const item of aliases) {
     if (normalize(item.value) === q || normalize(item.normalized) === q) add(900, 'exact_alias', item.value);
   }
-  const candidates = [node.title, node.summary, ...questions.map(x => x.question), ...aliases.map(x => x.value)];
-  for (const value of candidates) {
+  // A term counts once per field. Repeating paragraphs/aliases must not turn a
+  // tangential article into direct support for a multi-entity question.
+  const overlap = value => {
     const valueTokens = new Set(tokens(value));
-    const matched = [...qTokens].filter(token => valueTokens.has(token)).length;
-    if (matched) add(matched * 25, 'token_match', value);
-  }
-  for (const fragment of fragments) {
-    const valueTokens = new Set(tokens(fragment.text));
-    const matched = [...qTokens].filter(token => valueTokens.has(token)).length;
-    if (matched) add(matched * 5, 'fragment_match', fragment.fragmentCode);
-  }
-  return { score, evidence };
+    return [...qTokens].filter(token => valueTokens.has(token)).length;
+  };
+  const candidates = [node.title, node.summary, ...questions.map(x => x.question), ...aliases.map(x => x.value)];
+  const primaryMatches = Math.max(0,...candidates.map(overlap));
+  const fragmentMatches = Math.max(0,...fragments.map(f=>overlap(f.text)));
+  if(primaryMatches) add(primaryMatches*25,'token_match',node.nodeCode);
+  if(fragmentMatches) add(fragmentMatches*5,'fragment_match',node.nodeCode);
+  const directSupport = qTokens.size>=2 && primaryMatches/qTokens.size>=0.8 && fragmentMatches/qTokens.size>=0.8;
+  return { score, evidence, directSupport };
 }
 
-function coverageFor(score, exact) {
+function coverageFor(score, exact, directSupport) {
   if (exact) return 'exact';
-  if (score >= 200) return 'strong';
+  if (directSupport) return 'strong';
   if (score >= 100) return 'partial';
   if (score > 0) return 'limited';
   return 'none';
@@ -115,7 +117,7 @@ export async function handlePublicKnowledgeRequest(request, env = {}) {
 
   const top=ranked[0];
   const exact=top.evidence.some(x=>x.type.startsWith('exact_'));
-  const coverage=coverageFor(top.score,exact);
+  const coverage=coverageFor(top.score,exact,top.directSupport);
   const mode=requestedMode==='auto' ? (coverage==='exact'||coverage==='strong'?'focused':'overview') : requestedMode;
   const selected=selectFragments(mode,top.fragments,query);
   if(top.node.bookCode==='BOOK-7'&&exact){

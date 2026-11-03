@@ -1,0 +1,75 @@
+{
+  "scope": "FINAL_UNIFIED_PRODUCTION_RELEASE_R1_ONLY",
+  "productionDeployed": false,
+  "mainMerged": false,
+  "failures": [
+    {
+      "sha": "400ac5eed99fb73d7db085e1df3394933dd2fb57",
+      "ptrcRun": 41396446558,
+      "artifactRun": 41396368967,
+      "failure": "scripts/build-cloudflare-pages.mjs:414; gzip exceeded unchanged conservative 3MiB limit",
+      "minimalFix": "Worker compaction charset utf8; keepNames true and minifySyntax false retained; 13 before/after compile behavior assertions pass",
+      "baziR8Run": 41396368930,
+      "baziR8Conclusion": "success"
+    },
+    {
+      "sha": "2abcf2c1f524bf710ee7fdb4d8ac5ccf10a220b4",
+      "ptrcRun": 41414829041,
+      "artifactRun": 41414807981,
+      "artifactConclusion": "success",
+      "failure": "scripts/lib/ppr-five-method-preentry-successor.mjs:15; old R5 Personal HTML hash rejected handed-off R6 visual includes",
+      "minimalFix": "Versioned R6 successor pins actual source/dependencies; exact two-include restoration to old R5; original 15 assertions retained plus 9 negatives; all24 PASS"
+    },
+    {
+      "sha": "eda52b14df396cf6824b14c08e2b9b469e758d92",
+      "ptrcRun": 41417234485,
+      "artifactRun": 41417206620,
+      "artifactConclusion": "success",
+      "failure": "scripts/check-ecr-product-r3-w7.mjs:89; actual403 expected200; old synthetic request omitted Origin required by R6 Same-Origin guard",
+      "minimalFix": "Synthetic same-origin headers; existing positive/consent/non-persistence assertions retained; missing and foreign Origin additionally assert403 AUTH_ORIGIN_REQUIRED"
+    },
+    {
+      "sha": "85c7d0ba4e288bfe412ae1f5dce594029d279516",
+      "ptrcRun": 41417642179,
+      "artifactRun": 41417632500,
+      "artifactConclusion": "success",
+      "failure": "Same ECR W7 Origin fixture failure; fixed in ab1d9897",
+      "localBrowserSourceFailure": "Country semantic merge duplicated const s/other in render(); node --check rejected; removed only duplicate search initialization and added four module syntax checks"
+    },
+    {
+      "sha": "fecc1fc62af2721dad15f9b387f054107ef14f92",
+      "ptrcRun": 41419633634,
+      "artifactRun": 41419618988,
+      "artifactConclusion": "success",
+      "failure": "scripts/check-pis-r1-foundation.mjs:44; inherited193 allocations vs current217 Registry entries; then three R6 surface successors not registered by old consolidation freeze",
+      "minimalFix": "Separate24 candidate allocations, immutable193 predecessor+41 original verification retained; exact Git-bound three surface chain, no old accepted file/assertion rewritten; PIS foundation and presentation PASS"
+    }
+  ],
+  "focusedAdditionalRegression": {
+    "file": "scripts/check-profile-personal-evidence-prd-w7.mjs",
+    "originalFailure": "actual403 expected400; omitted Origin; later positive fixture lacked server-recomputed native source required by R6",
+    "fix": "Synthetic IPIP native assessment through actual profile server owner, consented server recomputation, exact selected signal, malformed-reference rejection; original200/400/403 and zero-persistence assertions retained",
+    "result": "PASS",
+    "serverSecurityWeakened": false,
+    "providerCalls": 0
+  },
+  "currentSha": "0c8651757ce30bdc3806b362d65981975486acf5",
+  "currentPtrcRun": 41564516970,
+  "currentArtifactRun": 41564502064,
+  "currentConclusion": "SUCCESS",
+  "fullLocalNpmCheckRun": false,
+  "previousPassTransferredToCurrentSha": false,
+  "latestRepair": {
+    "previousSha": "23b54044e7eb7c980e340fbe79bd16964ccfb826",
+    "previousNpmCheck": "PASS",
+    "previousFailure": "git diff --exit-code: two offline synthetic T3 outputs",
+    "files": [
+      "docs/guided-report-successor-r2/bazi-t3/shadow-matrix.json",
+      "functions/personal-reading/narrative/bazi-t3-preview-packs.generated.json"
+    ],
+    "fix": "Run-local .tmp generation and same-run readers; deployed baseline bytes must remain identical; no frozen JSON content or previous assertion changed",
+    "sourceFiles": 9,
+    "focusedChecks": 146,
+    "zeroCostGuard": "PASS"
+  }
+}

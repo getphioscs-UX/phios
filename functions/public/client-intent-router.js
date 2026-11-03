@@ -1,6 +1,7 @@
 import {topicRoute} from '../../assets/js/customer-entry-topic-map.js';
 import {ASK_CAPABILITIES} from '../../assets/js/ask-entry-capabilities.js';
 import {routeHealthSafety} from '../health/health-reality-runtime.js';
+import {businessDecisionQuestion} from '../../assets/js/pages/civilization-atlas/world-journey-state-r3.js';
 const rules=[
  ['PHI_CONFIGURATION',/phi\s*(?:configuration|构型)|构型/i,6],['PROFILE',/profile|个人画像|自陈|测评/i,5],
  ['ACADEMY',/academy|learning|course|tutorial|video lesson|learn|study|学院|学习|课程|视频教学/i,6],
@@ -46,6 +47,7 @@ function classifyClientIntent(input={}){
   return {...result('PRODUCT_HELP',helpIds.length?helpIds:['PRODUCT_HELP']),task:'PRODUCT_HELP'};
  }
  if(/今天|最新|today|latest/i.test(q)&&/政策|policy/i.test(q))return result('NEEDS_INPUT',['WORLD'],zh?'涉及哪个地区、哪项政策和日期？请先选择当前来源；历史资料不能证明今天的影响。':'Which jurisdiction, policy and date? Select a current source first; historical material cannot establish today’s effect.');
+ if(businessDecisionQuestion(q))return result('PROFESSIONAL_HANDOFF',['PROFESSIONAL'],zh?'这是企业经营或税务问题，不是上市公司资料查询。请先明确辖区与企业结构；账面利润不等于可提款现金。':'This is a business or tax question, not a listed-company lookup. Clarify the jurisdiction and business structure first; accounting profit is not withdrawable cash.');
  const worldPresentation=topicRoute(q,locale,input.topicId);if(input.task!=='KNOWLEDGE_BASIC'&&worldPresentation?.worldPresentation)return {...base,...worldPresentation,boundaries:{...base.boundaries,...worldPresentation.boundaries}};
  const explanatory=/为什么|为何|为啥|怎么会|如何|怎样(?:形成|影响|理解)|原因是什么|形成原因|理解.*(?:原因|概念|含义)|解释|\b(?:why|how|explain|what\s+causes|what\s+makes|tell\s+me\s+about)\b/i.test(q);
  const topical=topicRoute(q,locale,input.topicId);if(!explanatory&&input.task!=='KNOWLEDGE_BASIC'&&topical&&topical.topicIds.length===1)return {...base,...topical};

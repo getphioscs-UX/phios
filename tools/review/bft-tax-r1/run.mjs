@@ -1,0 +1,3 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const entry=process.argv[2]||'integration';if(!['integration','server','reopen'].includes(entry))throw Error('LOCAL_ENTRY_ONLY');
+await build({entryPoints:['tools/review/bft-tax-r1/'+entry+'.mjs'],bundle:true,platform:'node',format:'esm',packages:'external',outfile:'.tmp/bft-tax-r1/'+entry+'-bundled.mjs',plugins:[{name:'isolate-existing-fixture-paths',setup(b){b.onLoad({filter:/tools[\\/]review[\\/](bft-r1|subject-bft-r3)[\\/]owner\.mjs$/},async a=>({contents:fs.readFileSync(a.path,'utf8').replaceAll('.tmp/bft-r1','.tmp/bft-tax-r1/account').replaceAll('.tmp/subject-bft-r3','.tmp/bft-tax-r1/subject'),loader:'js'}));}}]});await import(new URL('../../../.tmp/bft-tax-r1/'+entry+'-bundled.mjs',import.meta.url));

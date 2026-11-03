@@ -1,0 +1,227 @@
+{
+  "scope": "Isolated Report workspace targeted zero-cost QA; not Cloud, Stripe E2E or customer acceptance",
+  "rows": [
+    {
+      "name": "ECR prepayment gap reproduced and closed",
+      "status": "PASS",
+      "details": {
+        "schemaVersion": "FIVE_METHOD_REPORT_CAPABILITY_V1",
+        "methodId": "ECR",
+        "productId": "COM-REPORT-ECR-FULL",
+        "publication": {
+          "version": null,
+          "profileVersion": null,
+          "status": "PROFILE_GATE_OPEN",
+          "unresolvedFieldCount": 40,
+          "owner": "content/reports/method-publication-profiles-v1.json"
+        },
+        "nativeOwners": {
+          "calculation": "functions/single-method-reading/ecr-production-adapter.js",
+          "publication": "functions/ecr-full-report/ecr-author-led-publication-r31.js"
+        },
+        "eligibleInputRequirements": [
+          "ACCOUNT_OWNED_SUBJECT",
+          "EXPLICIT_CONSENT",
+          "VERIFIED_NATIVE_CONFIGURATION",
+          "ADMITTED_ECR_COMPOSITION_SCOPE",
+          "CUSTOMER_SPECIFIC_MANUSCRIPT_SOURCE"
+        ],
+        "sharedAdapterPresent": false,
+        "admitted": false,
+        "setupAvailable": false,
+        "blockedReason": "SHARED_ADAPTER_ABSENT",
+        "supportedPresentations": [],
+        "checkoutDestination": null,
+        "accountDestination": "/account/",
+        "serverReadinessRequired": true,
+        "grantsEntitlement": false
+      }
+    },
+    {
+      "name": "ECR setup denies before charge: true",
+      "status": "PASS",
+      "details": "SHARED_ADAPTER_ABSENT"
+    },
+    {
+      "name": "ECR setup denies before charge: false",
+      "status": "PASS",
+      "details": "SHARED_ADAPTER_ABSENT"
+    },
+    {
+      "name": "BAZI existing capability unchanged",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "ZIWEI existing capability unchanged",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "ASTROLOGY existing capability unchanged",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "NUMEROLOGY existing capability unchanged",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "HD existing capability unchanged",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "short context inclusive boundary and cached rate",
+      "status": "PASS",
+      "details": {
+        "input": 4,
+        "cached": 0.4,
+        "output": 20
+      }
+    },
+    {
+      "name": "long context full request pricing",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "invalid token counts rejected",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "durable paid context remains mandatory",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "free access remains denied",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "existing five-call plan repriced without budget increase",
+      "status": "PASS",
+      "details": {
+        "plan": {
+          "schemaVersion": "ZWR-VFR-R1-FIVE-CALL-PLAN-v1",
+          "experimentVersion": "ZWR-VFR-R1-FIVE-CALL-DEEP-MANUSCRIPT-v1",
+          "provider": "OPENAI",
+          "model": "gpt-5.6-sol",
+          "providerCallsPlanned": 5,
+          "semanticReviewCallsPlanned": 0,
+          "budgetLimitUsd": 1,
+          "estimatedMaxTotalCost": 0.888452,
+          "allowed": true,
+          "batches": [
+            {
+              "index": 1,
+              "sectionIds": [
+                "S02",
+                "S03"
+              ],
+              "inputTokens": 4212,
+              "maxOutputTokens": 8000,
+              "estimatedMaxCost": 0.176848
+            },
+            {
+              "index": 2,
+              "sectionIds": [
+                "S04",
+                "S05"
+              ],
+              "inputTokens": 4831,
+              "maxOutputTokens": 8000,
+              "estimatedMaxCost": 0.179324
+            },
+            {
+              "index": 3,
+              "sectionIds": [
+                "S06",
+                "S07"
+              ],
+              "inputTokens": 4347,
+              "maxOutputTokens": 8000,
+              "estimatedMaxCost": 0.177388
+            },
+            {
+              "index": 4,
+              "sectionIds": [
+                "S08",
+                "S09"
+              ],
+              "inputTokens": 4845,
+              "maxOutputTokens": 8000,
+              "estimatedMaxCost": 0.17938
+            },
+            {
+              "index": 5,
+              "sectionIds": [
+                "S10",
+                "S11"
+              ],
+              "inputTokens": 3878,
+              "maxOutputTokens": 8000,
+              "estimatedMaxCost": 0.175512
+            }
+          ]
+        },
+        "previousPlanningEstimateUsd": 0.6552825
+      }
+    },
+    {
+      "name": "targeted bundle: functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "targeted bundle: functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "targeted bundle: functions/commerce/commerce-stripe-api.js",
+      "status": "PASS",
+      "details": true
+    },
+    {
+      "name": "zero network calls",
+      "status": "PASS",
+      "details": 0
+    }
+  ],
+  "passed": 18,
+  "failed": 0,
+  "networkCalls": 0,
+  "paidProviderCalls": 0,
+  "newPdfRenders": 0,
+  "files": [
+    {
+      "path": "functions/report-delivery/paid-report-production-capabilities.js",
+      "beforeSHA256": "bfe59a0e5388ec03ef0087e6515908975241e4cd4d9525cfb6e129aae8e55065",
+      "afterSHA256": "3b517f66e85070f10b6e8fd89b2eebecf88bf4092fbfa47e761f88bd0e4bbc36"
+    },
+    {
+      "path": "functions/personal-reading/narrative/ziwei-r5-provider-registry.js",
+      "beforeSHA256": "63077e03893125c0f24cf3e7cbf55adbdfbdda20203eae91d5838c586f6b6a04",
+      "afterSHA256": "cdf30d4d05ae140b1286419544ba0535c99118fc7f17e49759ba8ce9c3550d17"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-five-call-composer.js",
+      "beforeSHA256": "5a62468cbdee6cdd81ca5f8b5577d02c3a721f9b09699b3b4c7d46f8e1cc8116",
+      "afterSHA256": "1e6e00ab2cc963bc74f3627d08fb38d0c9291ae23622d52f2c4c255a3c360273"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-one-call-composer.js",
+      "beforeSHA256": "28607e458928df84e5864d509e892b6aeb96d6743ed1ac1feaf9a40700952e38",
+      "afterSHA256": "820ef9a7c7abc1c26601b3710150742392e6850f9cd57741a4ad7a3e9a6f1efb"
+    },
+    {
+      "path": "functions/personal-reading/visual-first/ziwei-vfr-targeted-repair.js",
+      "beforeSHA256": "529953abb694c42106aa916dc9f97772e9412706f20e9fcacb4dfe1f46525b65",
+      "afterSHA256": "c5b6bfc827569022e599f21a1de21931323afbcf4f2c4bd03a28fd3eebb95b43"
+    }
+  ]
+}

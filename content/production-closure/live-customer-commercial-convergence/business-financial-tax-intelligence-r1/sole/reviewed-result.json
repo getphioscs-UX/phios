@@ -1,0 +1,1079 @@
+{
+  "version": "BFT-TAX-INTELLIGENCE-R1",
+  "syntheticOnly": true,
+  "context": {
+    "subjectId": "r3-tax-fictional-sole",
+    "accountAuthorityRef": "NATIVE-PWS:oidc_fc4fd4c4017a2f9546e751bd2c20db2e9dafbf8cec035b0cc6544b52a18d533e",
+    "taxpayerType": "SOLE_PROPRIETOR",
+    "legalForm": "SOLE_PROPRIETORSHIP",
+    "country": "MY",
+    "jurisdiction": "MY",
+    "residency": "RESIDENT_VERIFIED_SYNTHETIC",
+    "taxYear": 2025,
+    "basisStart": "2025-01-01",
+    "basisEnd": "2025-12-31",
+    "reportingCurrency": "MYR",
+    "functionalCurrency": "MYR",
+    "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7",
+    "reviewVersion": "2",
+    "regime": "ORDINARY_SYNTHETIC_ONLY",
+    "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0",
+    "effectiveDate": "2025-01-01",
+    "ruleSource": "43d243a1543151b839ed267de2b266d82d88bb58f0a41f062de4acc190ccfbef",
+    "ruleVerificationStatus": "RATE_SCHEDULE_ONLY_OTHER_RULES_REQUIRE_REVIEW",
+    "qualifiedReviewerStatus": "NOT_PROFESSIONALLY_SIGNED",
+    "calculationStatus": "SYNTHETIC_ONLY",
+    "publicationStatus": "NOT_CUSTOMER_RELEASE",
+    "incomeScope": "BUSINESS_SOURCE_ONLY_NOT_COMPLETE_PERSONAL_INCOME"
+  },
+  "contextStatus": {
+    "status": "CONTEXT_COMPLETE_FOR_SYNTHETIC_REVIEW",
+    "missing": []
+  },
+  "source": {
+    "referenceId": "r3-intake:02bda2c6-a63c-48bd-84c6-730abc75f8ea",
+    "version": 2,
+    "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7",
+    "review": {
+      "reviewedBy": "oidc_d0c8a5be799882d437e504bcacc0f09ff6ae7b7b3d0fe01f9cf7c375aa8860f2",
+      "note": "Synthetic independent financial source review; not tax opinion",
+      "at": "2026-11-03T04:31:45.632Z",
+      "scope": "LOCAL_SOURCE_REVIEW_NOT_ACCOUNTING_AUDIT"
+    },
+    "preparedBy": "oidc_fc4fd4c4017a2f9546e751bd2c20db2e9dafbf8cec035b0cc6544b52a18d533e"
+  },
+  "financial": {
+    "schemaVersion": "BUSINESS-SUMMARY-CANDIDATE-R3",
+    "subjectId": "r3-tax-fictional-sole",
+    "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7",
+    "legalForm": "SOLE_PROPRIETORSHIP",
+    "metrics": [
+      {
+        "id": "grossProfit",
+        "value": 4000000,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:grossProfit",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Revenue - Cost of Sales",
+        "inputReferences": [
+          "SYNTHETIC-TAX:revenue",
+          "SYNTHETIC-TAX:costOfSales"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "grossMargin",
+        "value": 0.5,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:grossMargin",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Gross Profit / Revenue",
+        "inputReferences": [
+          "SYNTHETIC-TAX:revenue",
+          "SYNTHETIC-TAX:costOfSales"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "RATIO",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "operatingProfit",
+        "value": -1000000,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:operatingProfit",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Gross Profit - Operating Expenses",
+        "inputReferences": [
+          "SYNTHETIC-TAX:revenue",
+          "SYNTHETIC-TAX:costOfSales",
+          "SYNTHETIC-TAX:operatingExpenses"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "calculatedNetProfit",
+        "value": -1000000,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:calculatedNetProfit",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Operating Profit - Finance Costs - Tax",
+        "inputReferences": [
+          "SYNTHETIC-TAX:revenue",
+          "SYNTHETIC-TAX:costOfSales",
+          "SYNTHETIC-TAX:operatingExpenses",
+          "SYNTHETIC-TAX:financeCosts",
+          "SYNTHETIC-TAX:tax"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "reportedNetProfit",
+        "value": -1000000,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:reportedNetProfit",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Source value, not distributable cash",
+        "inputReferences": [
+          "SYNTHETIC-TAX:netProfit"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "workingCapital",
+        "value": 1000000,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:workingCapital",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Current Assets - Current Liabilities",
+        "inputReferences": [
+          "SYNTHETIC-TAX:currentAssets",
+          "SYNTHETIC-TAX:currentLiabilities"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "currentRatio",
+        "value": 1.5,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:currentRatio",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Current Assets / Current Liabilities",
+        "inputReferences": [
+          "SYNTHETIC-TAX:currentAssets",
+          "SYNTHETIC-TAX:currentLiabilities"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "RATIO",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "operatingCashFlow",
+        "value": 300000,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:operatingCashFlow",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Source operating flow; not revenue",
+        "inputReferences": [
+          "SYNTHETIC-TAX:operatingCashFlow"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "DIO",
+        "value": null,
+        "state": "UNAVAILABLE",
+        "formulaId": "BFT-R3:DIO",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Average Inventory / Cost of Sales × days",
+        "inputReferences": [
+          "SYNTHETIC-TAX:costOfSales"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "DAYS",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [
+          "AVERAGE_BALANCE_AND_POSITIVE_MATCHED_DENOMINATOR_REQUIRED"
+        ],
+        "accountingVerified": false
+      },
+      {
+        "id": "DSO",
+        "value": null,
+        "state": "UNAVAILABLE",
+        "formulaId": "BFT-R3:DSO",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Average Receivables / Credit Sales × days",
+        "inputReferences": [],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "DAYS",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [
+          "AVERAGE_BALANCE_AND_POSITIVE_MATCHED_DENOMINATOR_REQUIRED"
+        ],
+        "accountingVerified": false
+      },
+      {
+        "id": "DPO",
+        "value": null,
+        "state": "UNAVAILABLE",
+        "formulaId": "BFT-R3:DPO",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Average Payables / Credit Purchases × days",
+        "inputReferences": [],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "DAYS",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [
+          "AVERAGE_BALANCE_AND_POSITIVE_MATCHED_DENOMINATOR_REQUIRED"
+        ],
+        "accountingVerified": false
+      },
+      {
+        "id": "CCC",
+        "value": null,
+        "state": "UNAVAILABLE",
+        "formulaId": "BFT-R3:CCC",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "DIO + DSO - DPO",
+        "inputReferences": [
+          "SYNTHETIC-TAX:costOfSales"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "DAYS",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [
+          "AVERAGE_BALANCE_AND_POSITIVE_MATCHED_DENOMINATOR_REQUIRED"
+        ],
+        "accountingVerified": false
+      },
+      {
+        "id": "debtServiceCoverage",
+        "value": null,
+        "state": "UNAVAILABLE",
+        "formulaId": "BFT-R3:debtServiceCoverage",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "OCF / (cash principal + cash interest)",
+        "inputReferences": [
+          "SYNTHETIC-TAX:operatingCashFlow"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "RATIO",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [
+          "MISSING_loanPrincipalPayments"
+        ],
+        "accountingVerified": false
+      },
+      {
+        "id": "cashReconciliationDifference",
+        "value": 0,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:cashReconciliationDifference",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Closing - (Opening + Operating + Investing + Financing); never deduct CAPEX twice",
+        "inputReferences": [
+          "SYNTHETIC-TAX:closingCash",
+          "SYNTHETIC-TAX:openingCash",
+          "SYNTHETIC-TAX:operatingCashFlow",
+          "SYNTHETIC-TAX:investingCashFlow",
+          "SYNTHETIC-TAX:financingCashFlow"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      },
+      {
+        "id": "operatingHeadroom",
+        "value": 0,
+        "state": "CALCULATED",
+        "formulaId": "BFT-R3:operatingHeadroom",
+        "formulaVersion": "LOCAL-FINANCIAL-COMPOSITION-R3",
+        "formula": "Business operational headroom, not legal owner access",
+        "inputReferences": [
+          "SYNTHETIC-TAX:closingCash",
+          "SYNTHETIC-TAX:restrictedCash",
+          "SYNTHETIC-TAX:committedCash",
+          "SYNTHETIC-TAX:minimumOperatingReserve"
+        ],
+        "period": "2025",
+        "currency": "MYR",
+        "unit": "CURRENCY_MINOR",
+        "computedAt": "2026-11-03T04:31:46.058Z",
+        "dataQuality": "VALIDATED",
+        "exceptions": [],
+        "accountingVerified": false
+      }
+    ],
+    "sourceFacts": [
+      {
+        "field": "revenue",
+        "value": 8000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:revenue",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "costOfSales",
+        "value": 4000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:costOfSales",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "operatingExpenses",
+        "value": 5000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:operatingExpenses",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "financeCosts",
+        "value": 0,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:financeCosts",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "tax",
+        "value": 0,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:tax",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "netProfit",
+        "value": -1000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:netProfit",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "currentAssets",
+        "value": 3000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:currentAssets",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "currentLiabilities",
+        "value": 2000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:currentLiabilities",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "closingCash",
+        "value": 1500000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:closingCash",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "openingCash",
+        "value": 2000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:openingCash",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "operatingCashFlow",
+        "value": 300000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:operatingCashFlow",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "investingCashFlow",
+        "value": 0,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:investingCashFlow",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "financingCashFlow",
+        "value": -800000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:financingCashFlow",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "restrictedCash",
+        "value": 0,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:restrictedCash",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "committedCash",
+        "value": 500000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:committedCash",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      },
+      {
+        "field": "minimumOperatingReserve",
+        "value": 1000000,
+        "unit": "CURRENCY_MINOR",
+        "period": "2025",
+        "currency": "MYR",
+        "sourceRef": "SYNTHETIC-TAX:minimumOperatingReserve",
+        "sourceDate": "2025-12-31",
+        "subjectId": "r3-tax-fictional-sole",
+        "quality": "VALIDATED",
+        "balanceBasis": null
+      }
+    ],
+    "ownerCashAccess": {
+      "state": "OWNER_ACCESSIBLE_CASH_NOT_ESTABLISHED",
+      "value": null,
+      "reason": "Legal authority, complete cash constraints and sustainable withdrawal policy require independent admission"
+    },
+    "ownerActualReceived": {
+      "state": "UNAVAILABLE",
+      "value": null,
+      "period": "2025",
+      "currency": "MYR",
+      "sourceRefs": [],
+      "notFutureWithdrawableCash": true
+    },
+    "householdRequirement": {
+      "state": "MISSING",
+      "liquidityGap": null
+    },
+    "cashReconciliation": "MATHEMATICALLY_BALANCED_NOT_AUDITED",
+    "diagnosis": {
+      "possibleExplanations": [
+        "Collection timing",
+        "Inventory occupation",
+        "Debt / CAPEX / restrictions",
+        "Missing owner-payment evidence"
+      ],
+      "conclusion": "INSUFFICIENT_EVIDENCE_FOR_DEFINITE_OWNER_CASH_CAUSE",
+      "notManagementMisconduct": true
+    },
+    "guarantees": "CONTINGENT_NOT_ADDED_TO_DIRECT_DEBT",
+    "scenarios": [
+      {
+        "id": "CURRENT_STRUCTURE",
+        "state": "SOURCE_AND_EXPLICIT_ASSUMPTIONS_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "COLLECTION_CYCLE",
+        "state": "SOURCE_AND_EXPLICIT_ASSUMPTIONS_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "INVENTORY",
+        "state": "SOURCE_AND_EXPLICIT_ASSUMPTIONS_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "COST_STRUCTURE",
+        "state": "SOURCE_AND_EXPLICIT_ASSUMPTIONS_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "DEBT_REVIEW",
+        "state": "PROFESSIONAL_REVIEW_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "OWNER_WITHDRAWAL_REVIEW",
+        "state": "PROFESSIONAL_REVIEW_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "EMERGENCY_RESERVE",
+        "state": "SOURCE_AND_EXPLICIT_ASSUMPTIONS_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      },
+      {
+        "id": "RISK_PROTECTION",
+        "state": "PROFESSIONAL_REVIEW_REQUIRED",
+        "expectedImpact": null,
+        "guaranteed": false
+      }
+    ],
+    "formalSourceAdmission": false,
+    "regulatedRecommendation": null
+  },
+  "workingPaper": {
+    "accountingProfitBeforeTax": -1000000,
+    "reportedProfitAfterTax": -1000000,
+    "candidatePrivateExpenseAddbacks": 800000,
+    "potentialAdjustedTradingAmount": -200000,
+    "chargeableIncome": {
+      "value": null,
+      "status": "UNKNOWN",
+      "reason": "CAPITAL_ALLOWANCES_LOSSES_EXEMPT_INCOME_AND_OTHER_ADJUSTMENTS_NOT_CONFIRMED"
+    },
+    "deductionsNotAppliedAgain": true,
+    "statutorySequence": "MY candidate addbacks only; not a universal taxable-base formula",
+    "loans": "SOURCE_CLASSIFICATION_REQUIRED",
+    "finalTaxLiability": null
+  },
+  "readiness": {
+    "categories": [
+      {
+        "category": "REVENUE",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "COST_OF_SALES",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "OPERATING_EXPENSES",
+        "items": [
+          {
+            "id": "TX-1",
+            "category": "OPERATING_EXPENSES",
+            "amount": 4200000,
+            "ruleId": "MY-ITA-S33-S39-RESEARCH",
+            "source": {
+              "documentSha": "b6daa5664faf54787a16a092660c0df4a21093f64d56cd745b7573c8f0744375",
+              "location": {
+                "row": 2,
+                "column": "amountMYR"
+              },
+              "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7"
+            },
+            "evidence": [
+              "SYNTHETIC-INVOICE-1"
+            ],
+            "review": "PROFESSIONAL_REVIEW_REQUIRED",
+            "confidence": "EVIDENCE_STATE_NOT_PROBABILITY",
+            "treatment": "POTENTIALLY_ALLOWABLE",
+            "missing": [
+              "Tax professional confirmation of applicability"
+            ],
+            "deductionConfirmed": false
+          }
+        ],
+        "status": "REVIEW_REQUIRED"
+      },
+      {
+        "category": "PAYROLL",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "PROFESSIONAL_FEES",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "RENTAL",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "TRAVEL",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "ENTERTAINMENT",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "VEHICLES",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "EQUIPMENT",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "REPAIRS",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "FINANCING_INTEREST",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "INSURANCE",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "EMPLOYEE_BENEFITS",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "OWNER_TRANSACTIONS",
+        "items": [
+          {
+            "id": "TX-2",
+            "category": "OWNER_TRANSACTIONS",
+            "amount": 800000,
+            "ruleId": "MY-ITA-S33-S39-RESEARCH",
+            "source": {
+              "documentSha": "b6daa5664faf54787a16a092660c0df4a21093f64d56cd745b7573c8f0744375",
+              "location": {
+                "row": 3,
+                "column": "amountMYR"
+              },
+              "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7"
+            },
+            "evidence": [
+              "SYNTHETIC-INVOICE-2"
+            ],
+            "review": "PROFESSIONAL_REVIEW_REQUIRED",
+            "confidence": "EVIDENCE_STATE_NOT_PROBABILITY",
+            "treatment": "POTENTIALLY_DISALLOWABLE",
+            "missing": [
+              "Rule eligibility / business purpose / statutory exclusions"
+            ],
+            "deductionConfirmed": false
+          }
+        ],
+        "status": "REVIEW_REQUIRED"
+      },
+      {
+        "category": "RELATED_PARTIES",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "DEPRECIATION_ALLOWANCES",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "BAD_DEBTS",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "LOSSES_INCENTIVES",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      },
+      {
+        "category": "MISSING_RECORDS",
+        "items": [],
+        "status": "EVIDENCE_MISSING"
+      }
+    ],
+    "classifications": [
+      {
+        "id": "TX-1",
+        "category": "OPERATING_EXPENSES",
+        "amount": 4200000,
+        "ruleId": "MY-ITA-S33-S39-RESEARCH",
+        "source": {
+          "documentSha": "b6daa5664faf54787a16a092660c0df4a21093f64d56cd745b7573c8f0744375",
+          "location": {
+            "row": 2,
+            "column": "amountMYR"
+          },
+          "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7"
+        },
+        "evidence": [
+          "SYNTHETIC-INVOICE-1"
+        ],
+        "review": "PROFESSIONAL_REVIEW_REQUIRED",
+        "confidence": "EVIDENCE_STATE_NOT_PROBABILITY",
+        "treatment": "POTENTIALLY_ALLOWABLE",
+        "missing": [
+          "Tax professional confirmation of applicability"
+        ],
+        "deductionConfirmed": false
+      },
+      {
+        "id": "TX-2",
+        "category": "OWNER_TRANSACTIONS",
+        "amount": 800000,
+        "ruleId": "MY-ITA-S33-S39-RESEARCH",
+        "source": {
+          "documentSha": "b6daa5664faf54787a16a092660c0df4a21093f64d56cd745b7573c8f0744375",
+          "location": {
+            "row": 3,
+            "column": "amountMYR"
+          },
+          "sourceVersion": "186d8289c78fb427960b85df50803bb6270cbb302091fafe07efbaf3cf5bdfc7"
+        },
+        "evidence": [
+          "SYNTHETIC-INVOICE-2"
+        ],
+        "review": "PROFESSIONAL_REVIEW_REQUIRED",
+        "confidence": "EVIDENCE_STATE_NOT_PROBABILITY",
+        "treatment": "POTENTIALLY_DISALLOWABLE",
+        "missing": [
+          "Rule eligibility / business purpose / statutory exclusions"
+        ],
+        "deductionConfirmed": false
+      }
+    ],
+    "sourceCoverage": {
+      "present": 2,
+      "total": 2
+    },
+    "professionalCompletion": 0,
+    "taxComplianceScore": null
+  },
+  "vehicles": [
+    {
+      "id": "BUSINESS_PURCHASE",
+      "title": "Business purchase / 企业购车",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "BUSINESS",
+      "initialCashOutlay": 2400000,
+      "annualCashOutflow": 3520000,
+      "firstYearCashOutflow": 5920000,
+      "businessCashOutflow": 3520000,
+      "personalCashOutflow": 0,
+      "financingCommitment": 2400000,
+      "bookDepreciation": 2400000,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "NOT_DETERMINED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    },
+    {
+      "id": "PERSONAL_PURCHASE",
+      "title": "Personal purchase / 个人购车",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "INDIVIDUAL",
+      "initialCashOutlay": 2400000,
+      "annualCashOutflow": 3520000,
+      "firstYearCashOutflow": 5920000,
+      "businessCashOutflow": 0,
+      "personalCashOutflow": 3520000,
+      "financingCommitment": 2400000,
+      "bookDepreciation": 2400000,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "NOT_DETERMINED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    },
+    {
+      "id": "LEASE",
+      "title": "Business lease / 企业租赁",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "BUSINESS",
+      "initialCashOutlay": 0,
+      "annualCashOutflow": 4720000,
+      "firstYearCashOutflow": 4720000,
+      "businessCashOutflow": 4720000,
+      "personalCashOutflow": 0,
+      "financingCommitment": 3600000,
+      "bookDepreciation": null,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "NOT_DETERMINED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    },
+    {
+      "id": "MIXED_USE",
+      "title": "Business with private use / 公私混用",
+      "vehicleType": "PASSENGER",
+      "newUsed": "NEW",
+      "financing": "SYNTHETIC_HIRE_PURCHASE; principal and interest separate",
+      "ownership": "BUSINESS",
+      "initialCashOutlay": 2400000,
+      "annualCashOutflow": 3520000,
+      "firstYearCashOutflow": 5920000,
+      "businessCashOutflow": 3520000,
+      "personalCashOutflow": 0,
+      "financingCommitment": 2400000,
+      "bookDepreciation": 2400000,
+      "capitalAllowance": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "VEHICLE_RULE_ELIGIBILITY_NOT_ADMITTED"
+      },
+      "privateUseAdjustment": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "MILEAGE_AND_BIK_REVIEW_REQUIRED"
+      },
+      "employeeBenefit": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "BIK_RULE_VERSION_AND_EMPLOYMENT_SCOPE_REQUIRED"
+      },
+      "afterTaxCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "TAX_TREATMENT_NOT_VERIFIED"
+      },
+      "ownerCashImpact": {
+        "value": null,
+        "status": "UNKNOWN",
+        "reason": "OWNER_ACCESS_AUTHORITY_NOT_ESTABLISHED"
+      },
+      "missingEvidence": [
+        "Business / private mileage"
+      ],
+      "taxSaving": null,
+      "ranking": "NOT_RANKED_UNKNOWN_TAX",
+      "assumption": "Annual outflow excludes upfront down payment; no price deducted as current-year expense",
+      "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+    }
+  ],
+  "remuneration": {
+    "kind": "SOLE_PROPRIETOR",
+    "profit": -1000000,
+    "drawings": 800000,
+    "personalCashNeeds": 1800000,
+    "companyDividend": {
+      "status": "NOT_APPLICABLE",
+      "value": null
+    },
+    "ownerSalaryDeduction": {
+      "status": "NOT_APPLICABLE",
+      "value": null
+    },
+    "ownerAccessibleCash": {
+      "state": "OWNER_ACCESSIBLE_CASH_NOT_ESTABLISHED",
+      "value": null,
+      "reason": "Legal authority, complete cash constraints and sustainable withdrawal policy require independent admission"
+    },
+    "personalTax": {
+      "value": null,
+      "status": "UNKNOWN",
+      "reason": "OTHER_INCOME_RELIEFS_AND_FINAL_CHARGEABLE_INCOME_REQUIRED"
+    },
+    "warning": "Drawings are not salary or dividends; paid cash is not taxable income."
+  },
+  "rateOnlyIllustration": {
+    "value": null,
+    "status": "UNKNOWN",
+    "reason": "REVIEWED_NONNEGATIVE_CHARGEABLE_INCOME_REQUIRED"
+  },
+  "professional": {
+    "state": "TAX_REVIEW_REQUIRED",
+    "nativeOwner": "PFR TAX_CONSIDERATION only; taxOpinion forbidden",
+    "qualification": "NOT_PROFESSIONALLY_SIGNED",
+    "publication": "NOT_CUSTOMER_RELEASE"
+  },
+  "navigation": {
+    "family": "FINANCIAL",
+    "optionsOnly": true,
+    "decision": null,
+    "approval": null,
+    "execution": null,
+    "outcome": null
+  },
+  "artifactStatus": "BUSINESS_ARTIFACT_ADMISSION_BLOCKED",
+  "ruleVersion": "MY-INDIVIDUAL-YA2025-R1.0"
+}

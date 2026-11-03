@@ -1,0 +1,236 @@
+{
+  "schemaVersion": "BZR_BATCH_A_CONDITIONAL_PREFLIGHT_R1",
+  "ownerBudget": {
+    "approved": true,
+    "conditional": true,
+    "totalUsd": 3.6,
+    "maximumReports": 1,
+    "normalAndRecoveryCombined": true,
+    "followupReserveAvailable": false,
+    "otherMethodsApproved": false
+  },
+  "state": "BLOCKED_BEFORE_PROVIDER",
+  "tests": [
+    {
+      "name": "generation and followup budget remain partitioned",
+      "status": "PASS",
+      "details": "REPORT_GENERATION_AND_REPAIR_BUDGET_EXCEEDED"
+    },
+    {
+      "name": "over-cap request denied before invocation",
+      "status": "PASS",
+      "details": "REPORT_GENERATION_AND_REPAIR_BUDGET_EXCEEDED"
+    },
+    {
+      "name": "unknown usage holds reservation and blocks retry",
+      "status": "PASS",
+      "details": "REPORT_USAGE_RECONCILIATION_REQUIRED"
+    },
+    {
+      "name": "normal + recovery combined cap enforced",
+      "status": "PASS",
+      "details": "BAZI_REPORT_GENERATION_COST_HARD_STOP"
+    },
+    {
+      "name": "fourth normal call denied",
+      "status": "PASS",
+      "details": "BAZI_FOURTH_NORMAL_CALL_DENIED"
+    },
+    {
+      "name": "inflight unknown recovery denied",
+      "status": "PASS",
+      "details": "BAZI_USAGE_RECONCILIATION_REQUIRED"
+    },
+    {
+      "name": "repeated request is replay and not a new reservation",
+      "status": "PASS",
+      "details": true
+    }
+  ],
+  "passed": 7,
+  "failed": 0,
+  "planning": {
+    "scope": "Existing synthetic review authority, not a new issued report or an approved batch subject",
+    "model": "gpt-5.6-sol",
+    "plans": [
+      {
+        "batchId": "B01",
+        "reasoningEffort": "medium",
+        "model": "gpt-5.6-sol",
+        "authorityInputChars": 5813,
+        "estimatedInputTokens": 12510,
+        "plannedInputTokens": 12510,
+        "historicalVisibleTargetTokens": 10800,
+        "netUniqueVisibleTargetTokens": 10800,
+        "expectedVisibleTokens": 10800,
+        "expectedOutputTokens": 10800,
+        "reasoningReserveTokens": 25000,
+        "structuredOutputReserveTokens": 600,
+        "safetyFactor": 1.2,
+        "generatedBase": 36400,
+        "expectedGeneratedTokens": 36400,
+        "expectedGeneratedAssumption": "Visible target + full reasoning and structure reserve; not measured billed usage",
+        "plannedMaxOutputTokens": 43680,
+        "safetyHeadroom": 32880,
+        "modelMaxOutputTokens": 128000,
+        "contextWindowTokens": 1050000,
+        "projectedContextUse": 56190,
+        "capacityAdmission": "SAFE",
+        "truncationRisk": "LOW",
+        "allowed": true,
+        "reason": null,
+        "expectedCost": 0.77804,
+        "estimatedCost": 0.77804,
+        "configuredWorstCaseCost": 0.92364,
+        "configuredWorstCaseOutputCost": 0.8736,
+        "costWarning": false,
+        "costState": "WITHIN_CONFIGURED_TARGET_OR_UNSET",
+        "pricingState": "SHORT_CONTEXT_PRICING",
+        "authoritySizeAuditRequired": false,
+        "estimationMethod": "UTF8_BYTE_UPPER_BOUND_PLUS_ENVELOPE_256",
+        "estimator": "Conservative UTF-8 byte upper bound including actual prompt, schema and payload; 256 boundary tokens",
+        "TOKEN_ESTIMATE_CONFIDENCE": "CONSERVATIVE",
+        "constraintsVerified": true,
+        "pricingVerified": true
+      },
+      {
+        "batchId": "B02",
+        "reasoningEffort": "medium",
+        "model": "gpt-5.6-sol",
+        "authorityInputChars": 5713,
+        "estimatedInputTokens": 12762,
+        "plannedInputTokens": 12762,
+        "historicalVisibleTargetTokens": 10800,
+        "netUniqueVisibleTargetTokens": 10800,
+        "expectedVisibleTokens": 10800,
+        "expectedOutputTokens": 10800,
+        "reasoningReserveTokens": 25000,
+        "structuredOutputReserveTokens": 600,
+        "safetyFactor": 1.2,
+        "generatedBase": 36400,
+        "expectedGeneratedTokens": 36400,
+        "expectedGeneratedAssumption": "Visible target + full reasoning and structure reserve; not measured billed usage",
+        "plannedMaxOutputTokens": 43680,
+        "safetyHeadroom": 32880,
+        "modelMaxOutputTokens": 128000,
+        "contextWindowTokens": 1050000,
+        "projectedContextUse": 56442,
+        "capacityAdmission": "SAFE",
+        "truncationRisk": "LOW",
+        "allowed": true,
+        "reason": null,
+        "expectedCost": 0.779048,
+        "estimatedCost": 0.779048,
+        "configuredWorstCaseCost": 0.924648,
+        "configuredWorstCaseOutputCost": 0.8736,
+        "costWarning": false,
+        "costState": "WITHIN_CONFIGURED_TARGET_OR_UNSET",
+        "pricingState": "SHORT_CONTEXT_PRICING",
+        "authoritySizeAuditRequired": false,
+        "estimationMethod": "UTF8_BYTE_UPPER_BOUND_PLUS_ENVELOPE_256",
+        "estimator": "Conservative UTF-8 byte upper bound including actual prompt, schema and payload; 256 boundary tokens",
+        "TOKEN_ESTIMATE_CONFIDENCE": "CONSERVATIVE",
+        "constraintsVerified": true,
+        "pricingVerified": true
+      },
+      {
+        "batchId": "B03",
+        "reasoningEffort": "medium",
+        "model": "gpt-5.6-sol",
+        "authorityInputChars": 6458,
+        "estimatedInputTokens": 13835,
+        "plannedInputTokens": 13835,
+        "historicalVisibleTargetTokens": 10800,
+        "netUniqueVisibleTargetTokens": 10800,
+        "expectedVisibleTokens": 10800,
+        "expectedOutputTokens": 10800,
+        "reasoningReserveTokens": 30000,
+        "structuredOutputReserveTokens": 600,
+        "safetyFactor": 1.25,
+        "generatedBase": 41400,
+        "expectedGeneratedTokens": 41400,
+        "expectedGeneratedAssumption": "Visible target + full reasoning and structure reserve; not measured billed usage",
+        "plannedMaxOutputTokens": 51750,
+        "safetyHeadroom": 40950,
+        "modelMaxOutputTokens": 128000,
+        "contextWindowTokens": 1050000,
+        "projectedContextUse": 65585,
+        "capacityAdmission": "SAFE",
+        "truncationRisk": "LOW",
+        "allowed": true,
+        "reason": null,
+        "expectedCost": 0.88334,
+        "estimatedCost": 0.88334,
+        "configuredWorstCaseCost": 1.09034,
+        "configuredWorstCaseOutputCost": 1.035,
+        "costWarning": false,
+        "costState": "WITHIN_CONFIGURED_TARGET_OR_UNSET",
+        "pricingState": "SHORT_CONTEXT_PRICING",
+        "authoritySizeAuditRequired": false,
+        "estimationMethod": "UTF8_BYTE_UPPER_BOUND_PLUS_ENVELOPE_256",
+        "estimator": "Conservative UTF-8 byte upper bound including actual prompt, schema and payload; 256 boundary tokens",
+        "TOKEN_ESTIMATE_CONFIDENCE": "CONSERVATIVE",
+        "constraintsVerified": true,
+        "pricingVerified": true
+      }
+    ],
+    "totalConfiguredWorstCaseUsd": 2.9386280000000005,
+    "withinBatchCap": true
+  },
+  "blockers": [
+    {
+      "code": "DEDICATED_NON_PRODUCTION_PROJECT_UNVERIFIED",
+      "kind": "CONFIG",
+      "detail": "Project ID and safe secret reference not supplied; no ambient key used."
+    },
+    {
+      "code": "TRUSTED_SANDBOX_JOB_DISPATCH_NOT_VERIFIED",
+      "kind": "CODE_OR_CONFIG",
+      "detail": "Existing deployed watchdog is P9 LIVE BZR scoped; this batch cannot use it. No zero-cost receipt for an actual trusted Sandbox scheduled job."
+    },
+    {
+      "code": "QA_PUBLICATION_SOURCE_PIN_REQUIRED",
+      "kind": "VERSION",
+      "detail": "R11 accepted source remains accepted; 48-page adapter and newer R1.1/R1.2 candidates are distinct. Select source, snapshot and assembly for this synthetic run; commercial acceptance is not required to label a QA sample."
+    },
+    {
+      "code": "BATCH_LEVEL_IDENTITY_AND_ONE_REPORT_FENCE_UNVERIFIED",
+      "kind": "SAFETY",
+      "detail": "Existing limits are per report/purchase; this approval is one report across all recoveries. No durable batch/run binding to supplied dedicated project exists yet."
+    }
+  ],
+  "actualProviderCalls": 0,
+  "actualTokens": 0,
+  "actualCostUsd": 0,
+  "actualJobExecutions": 0,
+  "newPdfGenerated": false,
+  "cloudWrites": 0,
+  "sourceHashes": [
+    {
+      "path": "C:/phios/.worktrees/five-method-paid-report-production-r1/functions/personal-reading/report-generation-budget.js",
+      "sha256": "09bb1e0d8468ffb132eeaaf174029093f9c729a3ce165ec70a1eaca9203eb104"
+    },
+    {
+      "path": "C:/phios/.worktrees/five-method-paid-report-production-r1/functions/personal-reading/deep-manuscript/bazi-owner-cost-contract.js",
+      "sha256": "6c93a37a9a9fd0bab02199fdbb0afe200f30a60a53aafd8aaad9f3900a82fe79"
+    },
+    {
+      "path": "C:/phios/.worktrees/five-method-paid-report-production-r1/functions/personal-reading/deep-manuscript/bazi-production-generation-config.js",
+      "sha256": "37df164c2c9d81b693dd95ac565b245fe3b653761d6d5c2f4f0aeaa9ffeba9dd"
+    },
+    {
+      "path": "C:/phios/.worktrees/five-method-paid-report-production-r1/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js",
+      "sha256": "4e2bd9b8688fc8deb7df422f05c34b549c54be738185937190191c70509b1a0d"
+    },
+    {
+      "path": "C:/phios/.worktrees/five-method-paid-report-production-r1/functions/personal-reading/deep-manuscript/bazi-deep-manuscript-provider.js",
+      "sha256": "75e59574a37ddae96361d89c03c6862dbe0fb141e2a0929eb1bade3a132f59bc"
+    },
+    {
+      "path": "C:/phios/.worktrees/five-method-paid-report-production-r1/functions/report-delivery/paid-report-bazi-adapter.js",
+      "sha256": "52cb94f4ba1dcbf5f33211807cd966380fd806b947f84839f93840cc7a74b6c6"
+    }
+  ],
+  "officialPricing": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+  "projectLimitCaveat": "https://developers.openai.com/api/docs/guides/spend-limits"
+}

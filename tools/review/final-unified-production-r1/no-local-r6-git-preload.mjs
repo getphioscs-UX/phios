@@ -1,0 +1,2 @@
+import cp from 'node:child_process';import {syncBuiltinESMExports} from 'node:module';
+const original=cp.execFileSync;cp.execFileSync=function(command,args,...rest){if(command==='git'&&args?.some(a=>String(a).includes('39176d2f1a2f97e28cd17096fcc62efd5764daf2')))throw Error('CI_PORTABILITY_LOCAL_ONLY_R6_GIT_OBJECT_UNAVAILABLE');return original.call(this,command,args,...rest);};syncBuiltinESMExports();

@@ -14,7 +14,9 @@ export const PTRC_TESTAMENTARY_SECTION_STATUSES = Object.freeze([
 const FORBIDDEN_EXACT_IDENTIFIER_KEYS = new Set([
   'identity_number', 'national_id', 'passport_number', 'tax_number',
   'bank_account_number', 'account_number', 'policy_number', 'exact_address',
-  'password', 'secret', 'private_key', 'seed_phrase'
+  'password', 'secret', 'private_key', 'seed_phrase', 'otp',
+  'one_time_password', 'recovery_code', 'recovery_codes', 'recovery_seed',
+  'passcode', 'security_answer', 'security_answers'
 ]);
 
 const text = value => typeof value === 'string' ? value.trim() : '';
@@ -48,7 +50,8 @@ function cloneAndValidate(value, path = 'input') {
   }
   const output = {};
   for (const [key, child] of Object.entries(value)) {
-    if (FORBIDDEN_EXACT_IDENTIFIER_KEYS.has(key) && child !== null && child !== '') {
+    const normalizedKey = key.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+    if (FORBIDDEN_EXACT_IDENTIFIER_KEYS.has(normalizedKey) && child !== null && child !== '') {
       throw new TypeError(`PTRC_W9_RESTRICTED_IDENTIFIER:${path}.${key}`);
     }
     output[key] = cloneAndValidate(child, `${path}.${key}`);
