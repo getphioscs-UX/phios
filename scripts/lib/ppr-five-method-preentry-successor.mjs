@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
+import {r6VisualOwnerBytes} from './final-health-route-successor.mjs';
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 export const PPR_PREENTRY_SUCCESSOR='content/professional/personal-reality/current/ppr-five-method-preentry-engineering-successor-v1.json';
 const path='perspectives/personal/index.html';
@@ -47,7 +48,7 @@ export function validatePprR6Successor(record,current){
  assert.deepEqual(record.dependencies.map(d=>d.path).sort(),changed.sort());
  for(const d of record.dependencies){assert.equal(d.previousSha256,predecessor.dependencies.find(p=>p.path===d.path)?.sha256);assert.equal(d.previousGitRevision,'9a84ceabfe05db12f639d4212db6ce10335b3c19');assert.equal(d.ownerGitRevision,record.ownerGitRevision);assert.equal(sha(fs.readFileSync(d.path)),d.currentSha256);}
  assert.deepEqual(record.additionalDependencies.map(d=>d.path),['assets/customer-ui/js/surfaces/journey-method-visual-model-r1.js','assets/customer-ui/js/surfaces/journey-method-visual-r1.js','assets/customer-ui/surfaces/journey-method-visual-r1.css','content/web-production/registries/current-client-visual-registry.json','content/web-production/registries/client-visual-asset-registry-v1.9.json']);
- for(const d of record.additionalDependencies){assert.equal(d.ownerGitRevision,record.ownerGitRevision);assert.equal(sha(fs.readFileSync(d.path)),d.sha256);}
+ for(const d of record.additionalDependencies){assert.equal(d.ownerGitRevision,record.ownerGitRevision);assert.equal(sha(r6VisualOwnerBytes(d.path)),d.sha256);}
  return restored;
 }
 export function readPprPreentrySuccessor(owner){

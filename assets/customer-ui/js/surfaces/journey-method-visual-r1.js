@@ -90,7 +90,7 @@ function relationship(){
  translate();
 }
 function health(){
- if(location.pathname!=='/health-reality.html')return;document.body.classList.add('jm-health-page');
+ if(!['/health-reality','/health-reality/','/health-reality.html'].includes(location.pathname))return;document.body.classList.add('jm-health-page');
  const main=document.querySelector('main'),header=main.querySelector('header'),hero=el('section','jm-block jm-editorial-hero');hero.dataset.jmHealthHero='';const intro=el('div');intro.append(copy(el('p','jm-eyebrow'),'Health and everyday life','身体与生活'),copy(el('h1'),'Start with what you have noticed','从你注意到的变化开始'),copy(el('p','jm-lead'),'Keep your experience, measurements and unanswered questions distinct. Organize one observation without turning it into a diagnosis.','区分自己的体验、测量与未知问题，整理一项观察，不把它变成诊断。'),link('Organize an observation','整理一项观察','#health-observation'));
  hero.append(intro,art('HEALTH-REALITY-HERO','A quiet outdoor scene for reflection on health and everyday life','安静的户外场景：身体与日常生活意象',{eager:true}));if(header)header.replaceWith(hero);else main.prepend(hero);
  const form=document.querySelector('[data-health-reality-form]');form.id='health-observation';

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {finalR6VisualSuccessor} from './lib/final-r6-visual-successor.mjs';
 import {createHash} from 'node:crypto';
+import {HEALTH_VISUAL_PATH,HEALTH_VISUAL_OWNER_SHA,HEALTH_CURRENT_GUARD,healthVisualOwnerBytes} from './lib/final-health-route-successor.mjs';
 import {frozenZwrV1Bytes,validateZwrInputSuccessor,ZWR_INPUT_SUCCESSOR} from './lib/final-zwr-input-successor.mjs';
 import {validateFinalBaziRendererSuccessor} from './lib/final-bazi-renderer-successor.mjs';
 import path from 'node:path';
@@ -51,6 +52,9 @@ assert.equal(finalInternalPath('/perspectives/personal/bazi/'),false);checks++;
 fs.mkdirSync('.tmp/final-release-policy',{recursive:true});const stub=process.cwd()+'/.tmp/final-release-policy/original.mjs';
 fs.writeFileSync(stub,"export default {fetch:async(request,env)=>Response.json({environment:env.PHIOS_ENVIRONMENT,maintenance:env.PHIOS_D1_MAINTENANCE_MODE,stripe:env.STRIPE_ENVIRONMENT})};");
 for(const policy of [preview,production]){const code=isolateFinalReleaseWorker(stub,policy),worker=(await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'))).default,r=await worker.fetch(new Request('https://test.invalid/world/'),{PHIOS_ENVIRONMENT:'production',PHIOS_D1_MAINTENANCE_MODE:'OFF',STRIPE_ENVIRONMENT:'LIVE'},{});assert.deepEqual(await r.json(),policy.preview?{environment:'qa',maintenance:'READ_ONLY',stripe:'QA'}:{environment:'production',maintenance:'OFF',stripe:'LIVE'});checks++;if(!policy.preview){assert(!code.includes('X-PHIOS-Review-Scope'),'Production composed bundle excludes Preview wrapper');checks++;}}
+const healthBytes=fs.readFileSync(HEALTH_VISUAL_PATH);assert(healthBytes.toString().includes(HEALTH_CURRENT_GUARD));assert.equal(createHash('sha256').update(healthVisualOwnerBytes(healthBytes)).digest('hex'),HEALTH_VISUAL_OWNER_SHA);checks+=2;
+const healthGuard=new Function('location',HEALTH_CURRENT_GUARD+'return true;');for(const pathname of ['/health-reality','/health-reality/','/health-reality.html']){assert.equal(healthGuard({pathname}),true);checks++;}for(const pathname of ['/health-reality-extra','/perspectives/relationship/','/health-reality/private']){assert.equal(healthGuard({pathname}),undefined);checks++;}
+assert.throws(()=>healthVisualOwnerBytes(Buffer.concat([healthBytes,Buffer.from('\n// unregistered change')])));checks++;
 const homeInline=[...fs.readFileSync('index.html','utf8').matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].filter(m=>!m[1].includes('src=')&&!m[1].includes('application/ld+json'));
 assert.equal(homeInline.length,1,'Only the existing Home asset bootstrap may be hash-authorized');checks++;
 assert.equal(homeInline[0][2],"import {hydrateSevenVolumeAssets} from '/assets/customer-ui/js/seven-volume-assets.js'; hydrateSevenVolumeAssets(document);");checks++;

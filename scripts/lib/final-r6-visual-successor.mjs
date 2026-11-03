@@ -1,7 +1,8 @@
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+import {r6VisualOwnerBytes} from './final-health-route-successor.mjs';
 import {methodVisualIds} from '../../assets/customer-ui/js/surfaces/journey-method-visual-model-r1.js';
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const sha=p=>crypto.createHash('sha256').update(r6VisualOwnerBytes(p)).digest('hex');
 export function finalR6VisualSuccessor(r=JSON.parse(fs.readFileSync('content/production-closure/live-customer-commercial-convergence/final-unified-production-r1/R6-VISUAL-ALLOCATION-SUCCESSOR.json'))){
  assert.equal(r.status,'ENGINEERING_SUCCESSOR_PENDING_OWNER_RELEASE_ACCEPT');assert.equal(r.ownerGitRevision,'39176d2f1a2f97e28cd17096fcc62efd5764daf2');for(const k of ['humanAcceptanceGranted','productionActivated','createsVisualAuthority','historicalRecordsRewritten'])assert.equal(r[k],false);
  assert.equal(r.allocation.path,'content/web/index-surfaces/public-index-visual-allocation-v1.json');assert.equal(r.predecessor.path,'content/web-production/registries/client-visual-asset-registry-v1.8.json');assert.equal(r.registry.path,'content/web-production/registries/client-visual-asset-registry-v1.9.json');assert.equal(r.pointer.path,'content/web-production/registries/current-client-visual-registry.json');
