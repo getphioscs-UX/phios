@@ -15,6 +15,17 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
   assert.equal(registry.boundaries.admittedMethodProductionMayReachFrontend,true);
   assert.equal(registry.boundaries.futureUnregisteredDriftAllowed,false);
   let record=registry.files[path];
+  if(!record&&path==='functions/external-profile/hd-profile-parser.js'){
+    const predecessor='274e6f2b267440b6686663779643dd2216c27879cb62dfe97ebf3a0662ae9c7c';
+    const successor='b0da128b4f01a0a4934fab20b8bb3ade06d7a901489a97df29a2b177d03b41fd';
+    const convergence=JSON.parse(read('content/civilization-atlas/maintenance/main-convergence-r1-successor.json'));
+    const proofs=Object.values(convergence).filter(Array.isArray).flat().filter(x=>x?.path===path&&x.predecessorSha256===predecessor&&x.successorSha256===successor);
+    assert.equal(proofs.length,1,`${label}: missing exact HD alias convergence proof`);
+    const source=read(path),addition="['G',['g','g center'",previous="['G',['g center'";
+    assert.equal(source.split(addition).length,2);
+    assert.equal(crypto.createHash('sha256').update(source.replace(addition,previous)).digest('hex'),predecessor,'HD alias must be the only parser delta');
+    record={currentSha256:successor,recognizedPredecessors:[predecessor,'2ee72ecbdf696e2afe50982a6554ad929a7eca40ae5f44b159207c2d9ce3af0b']};
+  }
   assert(record,`${label}: unregistered shared runtime file: ${path}`);
   if(path==='assets/customer-ui/js/surfaces/personal-reality.js'&&sha(path)!==record.currentSha256){
     const next=JSON.parse(read('content/professional/personal-reality/current/ppr-hd-local-confirmation-engineering-successor-v1.json'));

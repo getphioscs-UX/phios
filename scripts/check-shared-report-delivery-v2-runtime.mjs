@@ -55,10 +55,17 @@ const zwrCutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';
 if(fs.existsSync(zwrCutoverPath)){
  const cutover=JSON.parse(fs.readFileSync(zwrCutoverPath,'utf8'));
  assert.equal(cutover.schemaVersion,'ZWR-VFR-R1-DEEP-PRODUCTION-CUTOVER-v2');
+ // Default production generation must fail at the newer trusted Worker fence.
+ await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),{code:'ZWR_PAID_WORKER_CONTEXT_REQUIRED',status:409});
+ let deniedTransportCalls=0;
+ // Exercise the original downstream Provider denial through the existing
+ // explicitly local replay port, without manufacturing a paid Worker context.
+ const providerDeniedContext={...a,env:{...env,REPORT_ZERO_COST_REPLAY:'true'}};
  await assert.rejects(
-  ()=>generateProductionAccountZiweiCandidate(a,selection),
+  ()=>generateProductionAccountZiweiCandidate(providerDeniedContext,selection,{generateCandidate:(ctx,s,deps)=>generateZiweiVfrR1Candidate(ctx,s,{...deps,fetcher:async()=>{deniedTransportCalls++;throw Error('DENIED_PROVIDER_TRANSPORT_MUST_NOT_RUN');}})}),
   error=>error?.message==='VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED'||error?.code==='VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED'
  );
+ assert.equal(deniedTransportCalls,0,'Provider-disabled replay cannot initiate transport');
 }else{
  await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),{code:'ZIWEI_R5_OPENAI_API_KEY_REQUIRED'});
 }
@@ -77,7 +84,7 @@ const fakeTransport=async(_url,options)=>{
  return Response.json({id:'SYNTHETIC_OFFLINE_RESPONSE',status:'completed',output_text:JSON.stringify({sections}),usage:{input_tokens:1,output_tokens:1}});
 };
 // Explicit fixture transport only; no global fetch and no real API key.
-const fixtureContext={...a,env:{...env,REPORT_PROVIDER_LIVE_ALLOWED:'true',OPENAI_API_KEY:'SYNTHETIC_OFFLINE_KEY'}};
+const fixtureContext={...a,env:{...env,REPORT_ZERO_COST_REPLAY:'true',REPORT_PROVIDER_LIVE_ALLOWED:'true',OPENAI_API_KEY:'SYNTHETIC_OFFLINE_KEY'}};
 const fixtureGenerator=(context,selected)=>generateProductionAccountZiweiCandidate(context,selected,{generateCandidate:(ctx,s,deps)=>generateZiweiVfrR1Candidate(ctx,s,{...deps,fetcher:fakeTransport})});
 const candidate=await fixtureGenerator(fixtureContext,selection);
 assert.equal(fakeTransportCalls,5);

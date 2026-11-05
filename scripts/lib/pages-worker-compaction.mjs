@@ -2,7 +2,7 @@
 // shortening internal lexical bindings in the generated deployment bundle.
 export const pagesWorkerCompactionOptions = Object.freeze({
   loader: 'js', target: 'esnext', minifyWhitespace: true,
-  minifyIdentifiers: true, keepNames: true, minifySyntax: false,
+  minifyIdentifiers: true, keepNames: true, minifySyntax: true,
   // Emit equivalent native Unicode instead of ASCII escape expansion.
   charset: 'utf8',
   legalComments: 'inline'

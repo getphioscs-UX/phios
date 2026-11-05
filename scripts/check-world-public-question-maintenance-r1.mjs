@@ -21,10 +21,17 @@ assert.equal(parseWorldQuestion('What is my bank balance?'),null);
 const profile=new URL(worldCountryProfileURL(previous),'https://local');
 assert.equal(profile.searchParams.get('q'),previous.originalQuestion);assert.equal(profile.searchParams.get('year'),'2024');
 const pointer=JSON.parse(fs.readFileSync('content/world/world-country-public-evidence-current.json'));
-const coverage=countryEvidenceCoverage(JSON.parse(fs.readFileSync(pointer.snapshotPath)));
+// Keep the accepted pilot assertions bound to the original immutable pilot.
+const coverage=countryEvidenceCoverage(JSON.parse(fs.readFileSync('content/world/world-country-public-evidence-r1.json')));
 assert.ok(coverage.length>170);
 assert.deepEqual(coverage.filter(c=>c.state!=='OUTSIDE_NATIVE_DATA_COVERAGE').map(c=>c.countryCode).sort(),['IDN','MYS','SGP']);
 assert.ok(coverage.filter(c=>c.state==='OUTSIDE_NATIVE_DATA_COVERAGE').every(c=>c.validIndicators===0));
+const currentCoverage=countryEvidenceCoverage(JSON.parse(fs.readFileSync(pointer.snapshotPath)));
+assert.ok(currentCoverage.filter(c=>c.state!=='OUTSIDE_NATIVE_DATA_COVERAGE').length>3);
+assert.ok(currentCoverage.filter(c=>c.state==='OUTSIDE_NATIVE_DATA_COVERAGE').every(c=>c.validIndicators===0));
+assert.match(pointer.publicationStatus,/HUMAN_PENDING/);
+assert.equal(pointer.productionAutomaticRefreshEnabled,false);
+for(const question of ['公司现金能转走吗？','公司資金可以轉給老闆嗎？'])assert.equal(worldQuestionTarget(question),null);
 await build({entryPoints:[
   'assets/js/pages/civilization-atlas/world-journey-shell-r3.js',
   'assets/customer-ui/js/surfaces/profile-country-r1.js',

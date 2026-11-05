@@ -1,0 +1,5 @@
+// Targeted regression after the paid cache-hit ledger initialization change.
+// No bundle, renderer, browser or C: output. Original QA source stays untouched.
+const fs=require('fs'),path=require('path'),{registerHooks}=require('node:module'),{pathToFileURL}=require('url');
+const root=path.resolve(process.env.PHIOS_REPORT_QA_RUN||'');if(!root.startsWith(path.resolve('D:/PHIOS/QA-TEMP/SIX-METHOD-R2/REPORT-SECONDARY-QA')+path.sep))throw Error('OWN_D_QA_ROOT_REQUIRED');
+const target=pathToFileURL(__dirname+'/check-observation-budget.mjs').href;let source=fs.readFileSync(new URL(target),'utf8');const anchor="const review='C:/phios/tools/review/six-method-paid-report-integration-r2'";if(!source.includes(anchor))throw Error('REGRESSION_OUTPUT_ANCHOR_CHANGED');source=source.replace(anchor,'const review='+JSON.stringify(root));const hook=registerHooks({load(url,context,next){return url===target?{format:'module',source,shortCircuit:true}:next(url,context);}});import(target).catch(e=>{console.error(e.stack);process.exitCode=1;}).finally(()=>hook.deregister());

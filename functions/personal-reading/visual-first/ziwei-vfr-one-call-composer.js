@@ -2,9 +2,9 @@ import {reportEconomics,reportGenerationCeiling} from '../../pws/commercial/comm
 import {VFR_BILINGUAL_SINGLE_CALL_V1} from '../../canonical-presentation-runtime/vfr-trilayer-bilingual-contract.js';
 import {sha256Stable,deepFreeze} from '../../interpretation-runtime/mir7-utils.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
-import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
+import {ZIWEI_R5_PAI_REGISTRY,ziweiR5PricingForInput} from '../narrative/ziwei-r5-provider-registry.js';
 import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
-import {planVfrProviderBudget,assertVfrLiveAllowed,assertVfrCallCount} from './report-provider-budget.js';
+import {planVfrProviderBudget,estimateVfrTokens,assertVfrLiveAllowed,assertVfrCallCount} from './report-provider-budget.js';
 import {buildZwrVfrProviderSchema,createZwrVfrReportIr} from './ziwei-vfr-report-ir.js';
 
 export const ZWR_VFR_ONE_CALL_COMPOSER_VERSION='ZWR-VFR-R1-ONE-CALL-BILINGUAL-SOL-v4';
@@ -33,7 +33,7 @@ export async function planZwrVfrOneCall({pack}={}){
  const {route,model}=modelRecord();
  const payload={compactAuthoringPack:pack};
  const planningInput={systemPrompt:systemPrompt(),payload};
- const budget=planVfrProviderBudget({methodId:'ZWR',model,input:planningInput,maxOutputTokens:MAX_OUTPUT_TOKENS,nextCallKind:'PRIMARY'});
+ const budget=planVfrProviderBudget({methodId:'ZWR',model:ziweiR5PricingForInput(model,estimateVfrTokens(planningInput)),input:planningInput,maxOutputTokens:MAX_OUTPUT_TOKENS,nextCallKind:'PRIMARY'});
  return deepFreeze({
   schemaVersion:'ZWR-VFR-R1-ONE-CALL-PLAN-v1',
   provider:route.selectedProvider,
@@ -69,7 +69,7 @@ export async function composeZwrVfrOneCall({pack,env={},fetcher=globalThis.fetch
  const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
  const outputTokens=usage.output_tokens||usage.outputTokens||0;
  const {model}=modelRecord();
- const estimatedProviderCost=estimatePaiProviderCost(model,{inputTokens,cachedInputTokens,outputTokens});
+ const estimatedProviderCost=estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens,outputTokens});
  const usageRecord=createPaiUsageRecord({
   requestId:'ZWR-VFR-R1:'+pack.subjectBinding.subjectKey,
   timestamp:new Date().toISOString(),

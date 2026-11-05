@@ -23,7 +23,8 @@ const PATHS = Object.freeze([
   'content/knowledge/answer-projection/maintenance/kap-m13-public-ask-execution-policy-v1.json',
   'content/knowledge/answer-projection/maintenance/kap-m14-manuscript-source-access-v1.json',
   'content/knowledge/answer-projection/maintenance/kap-m15-public-retrieval-coverage-v1.json',
-  'content/knowledge/answer-projection/maintenance/kap-m16-contextual-navigation-reconciliation-v1.json'
+  'content/knowledge/answer-projection/maintenance/kap-m16-contextual-navigation-reconciliation-v1.json',
+  'content/civilization-atlas/maintenance/main-convergence-r1-successor.json'
 ]);
 const digest = path => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
 const maintenanceDocs = () => PATHS.filter(path => fs.existsSync(path)).map(path => JSON.parse(fs.readFileSync(path, 'utf8')));

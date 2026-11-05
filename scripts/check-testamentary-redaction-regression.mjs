@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {redactTestamentaryExport,createTestamentaryAuditEvent} from '../functions/professional/financial/testamentary-security-v1.js';
+
+const fields=['raw_user_input','identity_number','national_id','passport_number','tax_number','bank_account_number','account_number','policy_number','exact_address','password','secret','private_key','seed_phrase','document_storage_key','private_note','internal_note','otp','one_time_password','recovery_code','recovery_codes','recovery_seed','passcode','security_answer','security_answers'];
+const camel=s=>s.replace(/_([a-z])/g,(_,c)=>c.toUpperCase());
+const keys=[...new Set(fields.flatMap(s=>[s,camel(s)]))];
+const sensitive=Object.fromEntries(keys.map(key=>[key,'SYNTHETIC_REDACTION_SENTINEL']));
+const original={caseId:'SYNTHETIC-CASE',safe:'visible',count:3,active:false,unknown:null,...sensitive,nested:{safe:'nested',...sensitive},rows:[{safe:'row',...sensitive},['public',{...sensitive}]]};
+const digest=o=>createHash('sha256').update(JSON.stringify(o)).digest('hex');
+const before=digest(original),result=redactTestamentaryExport(original);
+assert.deepEqual(result,{caseId:'SYNTHETIC-CASE',safe:'visible',count:3,active:false,unknown:null,nested:{safe:'nested'},rows:[{safe:'row'},['public',{}]]});
+assert.equal(digest(original),before,'redaction must not mutate source/history');
+assert.equal(Object.isFrozen(result.nested),true);
+assert.equal(Object.isFrozen(result.rows),true);
+assert.equal(JSON.stringify(result).includes('SYNTHETIC_REDACTION_SENTINEL'),false);
+const audit=createTestamentaryAuditEvent({action:'REVIEW',actorRole:'PROFESSIONAL',caseId:'SYNTHETIC-CASE',now:'2026-11-04T00:00:00Z',details:original});
+assert.deepEqual(audit.details,result);
+assert.equal(audit.sensitivePayloadIncluded,false);
+assert.equal(Object.isFrozen(audit.details.nested),true);
+assert.equal(JSON.stringify(audit).includes('SYNTHETIC_REDACTION_SENTINEL'),false,'serialized audit must exclude restricted fields');
+assert.equal(digest(original),before);
+assert.throws(()=>createTestamentaryAuditEvent({action:'EDIT',actorRole:'AUDITOR',caseId:'SYNTHETIC-CASE',now:'2026-11-04T00:00:00Z',details:original}),/ACCESS_DENIED/);
+console.log(JSON.stringify({status:'PASS',sensitiveKeyVariants:keys.length,placements:['root','nested-object','array-object','nested-array'],auditSerialization:'PASS',sourceImmutable:'PASS',permissionsUnchanged:'PASS',boundary:'Structured sensitive keys only; unrestricted free-text content is not a general PII detector.'}));

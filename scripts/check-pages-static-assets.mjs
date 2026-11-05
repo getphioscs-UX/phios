@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {acquirePagesCheckLease} from './lib/pages-output-check-lease.mjs';
+import {pagesFileSizeAllowed} from './lib/pages-worker-size-policy.mjs';
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -16,7 +17,6 @@ const config=JSON.parse(fs.readFileSync(path.join(root,'wrangler.jsonc'),'utf8')
 if(path.resolve(root,config.pages_build_output_dir)!==output)throw Error('PAGES_OUTPUT_DIRECTORY_MISMATCH: checker and wrangler configuration differ');
 const lease=await acquirePagesCheckLease(root);
 
-const MAX_FILE_SIZE = 25 * 1024 * 1024;
 
 const forbidden = new Set([
   'content/civilization-atlas/reconfiguration/market-provider-intake-v1.json',
@@ -60,7 +60,7 @@ for (const absolute of files) {
 
   const size = fs.statSync(absolute).size;
 
-  if (size > MAX_FILE_SIZE) {
+  if (!pagesFileSizeAllowed(rel, size)) {
     failures.push(
       `${rel}: ${(size / 1024 / 1024).toFixed(2)} MiB`
     );
@@ -101,6 +101,6 @@ if (failures.length) {
 }
 
 console.log(
-  `PASS Pages publication boundary: ${files.length} files; no asset exceeds 25 MiB; provider runtime payloads excluded.`
+  `PASS Pages publication boundary: ${files.length} files; static assets <=25 MiB; Worker <=64 MiB uncompressed; provider runtime payloads excluded.`
 );
 lease.release();

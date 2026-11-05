@@ -1,3 +1,4 @@
+import {normalizePaidReportMethodInputs} from './paid-report-method-inputs.js';
 import {personIdentity} from '../account/canonical-person-store.js';
 import {PAID_REPORT_POLICY,paidReportError} from './paid-report-policy.js';
 import {p9Policy,requireP9Owner} from './p9-canary-admission.js';
@@ -12,7 +13,8 @@ export async function evaluatePaidReportReadiness(context,selection,{registry=PA
  if(selection.readinessId&&!prior)throw paidReportError('REPORT_SETUP_UNAVAILABLE',404);
  const method=registry[selection.methodCode||prior?.methodCode];if(!method?.p8Admitted)throw paidReportError('METHOD_DELIVERY_ADAPTER_NOT_ADMITTED');
  if(prior&&(selection.methodCode&&selection.methodCode!==prior.methodCode||selection.presentation&&JSON.stringify(selection.presentation)!==JSON.stringify(prior.presentation)))throw paidReportError('REPORT_SETUP_IDENTITY_INVALID');
- const r=prior||{readinessId:policy?.readinessId||'intent_'+crypto.randomUUID().replaceAll('-',''),ownerAccountId:owner,productId:method.productId,methodCode:method.methodCode,personId:selection.personId,presentation:selection.presentation,createdAt:clock(),attempts:0};
+ const methodInputs=normalizePaidReportMethodInputs(method.methodCode,selection.methodInputs);if(prior&&methodInputs!==undefined&&JSON.stringify(methodInputs)!==JSON.stringify(prior.methodInputs))throw paidReportError('REPORT_SETUP_IDENTITY_INVALID');
+ const r=prior||{...(methodInputs?{methodInputs}:{}),readinessId:policy?.readinessId||'intent_'+crypto.randomUUID().replaceAll('-',''),ownerAccountId:owner,productId:method.productId,methodCode:method.methodCode,personId:selection.personId,presentation:selection.presentation,createdAt:clock(),attempts:0};
  if(!r.personId||r.personId!== (selection.personId||r.personId)||r.productId!==method.productId)throw paidReportError('REPORT_SETUP_IDENTITY_INVALID');
  if(!r.presentation||Object.keys(r.presentation).some(k=>!['reportLocale','reportLanguageMode'].includes(k)))throw paidReportError('REPORT_PRESENTATION_REQUIRED',422);
  if(!method.supportedPresentations.includes(r.presentation?.reportLocale)||r.presentation.reportLanguageMode!==(r.presentation.reportLocale==='bilingual'?'BILINGUAL':'SINGLE'))throw paidReportError('REPORT_PRESENTATION_REQUIRED',422);
@@ -35,5 +37,6 @@ export function customerReportStatus(r){const details=/TIME/.test(r.blockerCode|
 export function paidReportSubjectSnapshot(r){
  const s={methodCode:r?.methodCode,personId:r?.personId,personVersion:r?.personVersion,inputDigest:r?.inputDigest,authorityDigest:r?.authorityDigest};
  if(typeof s.methodCode!=='string'||!/^[A-Z]{2,8}$/.test(s.methodCode)||typeof s.personId!=='string'||!s.personId||s.personId.length>200||!Number.isSafeInteger(s.personVersion)||s.personVersion<1||['inputDigest','authorityDigest'].some(k=>typeof s[k]!=='string'||!s[k]||s[k].length>512))throw paidReportError('PAID_REPORT_SUBJECT_SNAPSHOT_INVALID',409);
+ if(r?.methodInputs!==undefined)s.methodInputs=normalizePaidReportMethodInputs(s.methodCode,r.methodInputs);
  return Object.freeze(s);
 }

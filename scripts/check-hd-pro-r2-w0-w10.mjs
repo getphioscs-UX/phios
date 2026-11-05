@@ -43,7 +43,11 @@ const assertCurrentPublishedOwner=(path,{historicalDigest=null,label='HD current
   const record=r3W25OwnerByPath.get(path);
   assert(record,`${label}: unregistered current successor owner: ${path}`);
   assert.equal(record.ownerPathChanged,false,`${label}: current successor owner path changed: ${path}`);
-  assert.equal(record.currentMainSha256,sha(path),`${label}: reconciled current digest drift: ${path}`);
+  if(record.currentMainSha256!==sha(path)){
+    const convergence=readJson('content/civilization-atlas/maintenance/main-convergence-r1-successor.json');
+    const proofs=Object.values(convergence).filter(Array.isArray).flat().filter(x=>x?.path===path&&x.predecessorSha256===record.currentMainSha256&&x.successorSha256===sha(path));
+    assert.equal(proofs.length,1,`${label}: unregistered convergence successor: ${path}`);
+  }
   if(historicalDigest)assert((record.recognizedPredecessors||[]).includes(historicalDigest),`${label}: historical predecessor not recognized: ${path}`);
   return record;
 };

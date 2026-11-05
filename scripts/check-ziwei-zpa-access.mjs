@@ -44,6 +44,9 @@ sqlite.prepare("INSERT INTO commerce_purchases(purchase_id,customer_id,product_i
 sqlite.prepare("INSERT INTO digital_entitlements(entitlement_id,purchase_id,customer_id,product_id,subject_hash,entitlement_code,entitlement_status,granted_at,created_at,updated_at) VALUES('local-entitlement','local-purchase',?,?,'controlled','REPORT_ZIWEI_FULL','active','2026-10-01','2026-10-01','2026-10-01')").run(owner,ZIWEI_PRODUCT);
 const objects=new Map(),env={PHIOS_ENVIRONMENT:'local',RUNTIME_DB:db,PRIVATE_REPORTS:{async put(k,v){objects.set(k,v);},async get(k){return objects.has(k)?{text:async()=>objects.get(k)}:null;}}};
 const context={env,data:{symbolicAccountIdentity:{userId:owner,providerId:'EXISTING_LOCAL_FIXTURE_MECHANISM',verified:true,authenticated:true}}};
+// Match the canonical owner loader's versioned subject contract. An undefined
+// version is omitted by JSON storage and cannot preserve the candidate digest.
+record.personVersion=1;
 let loads=0;const loadSubject=async(user,id)=>{loads++;if(user!==owner||id!==personId)throw Error('PERSON_USE_DENIED');return structuredClone(record);};
 const negatives=[];async function reject(name,call){await assert.rejects(call);negatives.push({name,result:'DENIED'});}
 assert.equal((await requireZiweiEntitlement(context,'en')).purchase_id,'local-purchase','Local QA purchase must resolve before exercising access-policy negatives');
@@ -59,6 +62,8 @@ await reject('unpurchased locale',()=>requireZiweiEntitlement(context,'zh-Hans')
 sqlite.prepare('UPDATE commerce_checkout_attempts SET context_json=?').run(JSON.stringify({reportPresentation:{reportLanguageMode:'BILINGUAL',reportLocale:'bilingual'}}));
 
 const candidate=await generateControlledZiweiReport(context,{personId,locale:'en'},{loadSubject,now:()=> '2026-10-01T00:00:00Z'});
+assert.equal(candidate.personVersion,1);
+assert.deepEqual(JSON.parse(JSON.stringify(candidate)),candidate,'Released candidate must survive JSON storage unchanged');
 const receipt={passed:true,pageCount:33,semanticSnapshotId:candidate.snapshot.semanticSnapshotId};
 // Local access-policy fixture receipt only; actual 24-report rendering is a
 // separate browser gate. This direct call does not establish deployed QA E2E.

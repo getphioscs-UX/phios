@@ -1,10 +1,19 @@
 import {historicalQuestionScope} from './world-history-coverage-r1.js';
 import {WORLD_COUNTRIES,countryText,countriesInQuestion} from './world-country-search.js';
-function countriesForQuestion(value){const h=historicalQuestionScope(value),q=String(value);let rows=countriesInQuestion(value);if(/马六甲苏丹国|馬六甲蘇丹國/.test(q)&&!/(?:与|和|比较|比較).*苏丹|\bSudan\b/i.test(q))rows=rows.filter(x=>x.id!=='SDN');if(!rows.length&&h.countryCode){const country=WORLD_COUNTRIES.find(x=>x.id===h.countryCode);if(country)rows=[country];}return rows;}
+function countriesForQuestion(value){
+ const h=historicalQuestionScope(value),q=String(value),entity=/马六甲苏丹国|馬六甲蘇丹國|\b(?:malacca|melaka) sultanate\b/i.exec(q);
+ // Match modern countries outside the historical entity, preserving explicit
+ // Sudan comparisons and the order in which the countries were requested.
+ const modern=entity?q.replace(/马六甲苏丹国|馬六甲蘇丹國|\b(?:malacca|melaka) sultanate\b/gi,m=>' '.repeat(m.length)):q;
+ let rows=countriesInQuestion(modern);
+ if(entity){const country=WORLD_COUNTRIES.find(c=>c.id==='MYS'),before=countriesInQuestion(modern.slice(0,entity.index));rows=rows.filter(c=>c.id!=='MYS');rows.splice(rows.filter(c=>before.some(b=>b.id===c.id)).length,0,country);}
+ if(!rows.length&&h.countryCode){const country=WORLD_COUNTRIES.find(x=>x.id===h.countryCode);if(country)rows=[country];}
+ return rows;
+}
 // One presentation interpreter shared by Home discovery and World. No data authority.
 export const WORLD_JOURNEYS=Object.freeze(['now','connections','history','compare']);
 const modes=new Set(['landing',...WORLD_JOURNEYS,'companies']);
-export function businessDecisionQuestion(value){return /(?:我的?|我们(?:的)?|我(?:经营|經營|的)|\b(?:my|our|own)\b).{0,24}(?:公司|企业|企業|生意|company|business)|(?:公司|企业|企業|\bcompan(?:y|ies)\b).{0,100}(?:提款|提取|扣税|扣稅|抵税|抵稅|税务|稅務|买车|買車|\b(?:withdraw|deduct|tax|car)\b)/i.test(String(value||''));}
+export function businessDecisionQuestion(value){return /(?:我的?|我们(?:的)?|我(?:经营|經營|的)|\b(?:my|our|own)\b).{0,24}(?:公司|企业|企業|生意|company|business)|(?:公司|企业|企業|\bcompan(?:y|ies)\b).{0,100}(?:提款|提取|转走|轉走|转给老板|轉給老闆|扣税|扣稅|抵税|抵稅|税务|稅務|买车|買車|\b(?:withdraw|deduct|tax|car)\b)/i.test(String(value||''));}
 export function worldQuestionTarget(value,{selected=false}={}){
  const q=String(value||'').normalize('NFKC').trim();
  if(!publicWorldQuestion(q)||businessDecisionQuestion(q)||!q||q.length>500||/自杀|自傷|自伤|suicid|emergency|急救|我的(?:账户|投资|工资|家庭|关系)|my (?:account|portfolio|salary|relationship)/i.test(q))return null;

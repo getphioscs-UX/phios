@@ -76,12 +76,14 @@ export function contextualAskDisclosure(contexts=[],currentFacts=null,locale='en
 }
 export function contextRegistryForAudit(){return ASK_CONTEXT_SOURCE_REGISTRY}
 
+export const PUBLIC_ARTICLE_MANIFEST_PATHS=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book6-publication-v1/visual-article-release.json'];
+
 // Resolve the existing published-article projection; never use URL-supplied prose as evidence.
 export async function resolveSelectedArticle(env,slug,locale='en') {
  if(!/^[a-zA-Z0-9_-]+$/.test(slug||'')||!env?.ASSETS?.fetch)return null;
  const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};
  try{
-  const paths=['/content/knowledge/public/visual-article-release.json','/content/knowledge/public/abl-bilingual-release.json','/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book5-publication-v1/visual-article-release.json','/content/knowledge/public/successors/book6-publication-v1/visual-article-release.json'];
+  const paths=PUBLIC_ARTICLE_MANIFEST_PATHS;
   const digest=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));if(!r.ok)return null;return [...new Uint8Array(await crypto.subtle.digest('SHA-256',await r.arrayBuffer()))].map(b=>b.toString(16).padStart(2,'0')).join('');};
   const manifests=await Promise.all(paths.map(read));
   const admitted=[];

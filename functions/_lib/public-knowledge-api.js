@@ -1,3 +1,4 @@
+import {resolveSelectedArticle,PUBLIC_ARTICLE_MANIFEST_PATHS} from '../contextual-ask/contextual-ask-runtime.js';
 import {loadBookViiPublishedAdmission,appendBookViiProjection} from './book-vii-published-admission.js';
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
 const SUPPORTED_MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
@@ -87,10 +88,17 @@ function selectFragments(mode, fragments, query) {
   return ordered.length <= 5 ? ordered : [ordered[0], ordered[1], ordered[2], ordered.at(-1)];
 }
 
+// Search the existing publication owners without creating canonical node identities.
+const articleTerms=value=>[...new Set([...normalize(value).replace(/请解释|为什么|为何|如何|怎样|怎么/g,' ').matchAll(/[a-z]{3,}|[\u3400-\u9fff]{2,}/g)].flatMap(m=>/[\u3400-\u9fff]/.test(m[0])?Array.from({length:m[0].length-1},(_,i)=>m[0].slice(i,i+2)):[m[0].replace(/ies$/,'y').replace(/s$/,'')]).filter(t=>!stopWords.has(t)))];
+async function publishedArticleMatch(env,query,locale,selectedSlug=null){
+ if(!env?.ASSETS?.fetch)return null;const terms=articleTerms(query);if(!selectedSlug&&terms.length<2)return null;const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};const manifests=await Promise.all(PUBLIC_ARTICLE_MANIFEST_PATHS.map(read)),candidates=manifests.flatMap((m,i)=>(m?.records||[]).filter(r=>r.locale===locale&&r.status==='published').map(r=>({...r,manifestPath:PUBLIC_ARTICLE_MANIFEST_PATHS[i]}))).map(row=>{const title=new Set(articleTerms(row.title+' '+(row.searchAliases||[]).join(' '))),matched=terms.filter(t=>title.has(t)).length;return{row,score:matched/terms.length};}).filter(x=>selectedSlug?x.row.slug===selectedSlug:x.score>=.45&&x.score*terms.length>=3).sort((a,b)=>b.score-a.score);for(const c of candidates.slice(0,3)){const article=await resolveSelectedArticle(env,c.row.slug,locale);if(!article)continue;const body=new Set(articleTerms(article.sources.map(s=>s.text).join(' '))),support=terms.filter(t=>body.has(t)).length/terms.length;if(!selectedSlug&&support<.65)continue;const r=await env.ASSETS.fetch(new Request('https://assets.local'+c.row.path));if(!r.ok)continue;const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',await r.arrayBuffer()))].map(x=>x.toString(16).padStart(2,'0')).join('');return{article,row:c.row,digest,score:c.score,bodyCoverage:support};}return null;
+}
 export async function handlePublicKnowledgeRequest(request, env = {}) {
   if (request.method !== 'GET') return jsonResponse({ ok:false, error:{ code:'METHOD_NOT_ALLOWED' } },405);
   const url = new URL(request.url);
-  const query = (url.searchParams.get('q') || '').trim();
+  const selectedSlug=url.searchParams.get('article');
+  if(selectedSlug&&!/^[a-zA-Z0-9_-]{1,150}$/.test(selectedSlug))return jsonResponse({ok:false,error:{code:'ARTICLE_INVALID'}},400);
+  const query = (url.searchParams.get('q') || selectedSlug || '').trim();
   const locale = url.searchParams.get('locale') || 'en';
   const requestedMode = url.searchParams.get('mode') || 'auto';
   if (!query || query.length > MAX_QUERY_LENGTH) return jsonResponse({ ok:false,error:{code:'QUERY_INVALID'} },400);
@@ -110,6 +118,8 @@ export async function handlePublicKnowledgeRequest(request, env = {}) {
     const scored=scoreNode({query,node,aliases,questions,fragments});
     return {node,aliases,questions,fragments,...scored};
   }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.node.nodeCode.localeCompare(b.node.nodeCode));
+  const publication=selectedSlug?await publishedArticleMatch(env,query,locale,selectedSlug):(!ranked[0]||(!ranked[0].directSupport&&!ranked[0].evidence.some(e=>e.type.startsWith('exact_'))))?await publishedArticleMatch(env,query,locale):null;if(publication){const {article,row,digest}=publication;return jsonResponse({ok:true,query:{text:query,locale,mode:requestedMode},coverage:{level:'strong',basis:'EXISTING_PUBLISHED_ARTICLE_BODY_MATCH_NOT_SEMANTIC_PROOF',answerGenerationAllowed:false},results:[{nodeCode:row.nodeCode,articleId:row.articleId,identityClass:row.identityClass||'PUBLICATION_ARTICLE_NOT_CANONICAL_NODE',locale,title:article.title,summary:null,href:article.href,score:publication.score}],projection:{nodeCode:row.nodeCode,locale,sourceClass:'PUBLISHED_ARTICLE_AUTHORITY',mode:'SOURCE_BOUND_EXCERPTS',fragments:await Promise.all(article.sources.map(async(f,i)=>({fragmentCode:f.fragmentCode,nodeCode:row.nodeCode,ordinal:i+1,kind:'paragraph',text:f.text,digest:[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(f.text)))].map(b=>b.toString(16).padStart(2,'0')).join(''),sourceVersion:article.sourceVersion,href:f.href})))},publicationProvenance:{manifestPath:row.manifestPath,articlePath:row.path,articleSHA256:digest,canonicalRegistryAltered:false},readingPath:{steps:[{type:'published_article',href:article.href,title:article.title}]},indexDigest:'PUBLICATION:'+digest,baseIndexDigest:index.indexDigest},200,'public,max-age=60');}
+  if(selectedSlug)return jsonResponse({ok:false,error:{code:'SELECTED_SOURCE_UNAVAILABLE'}},404);
   if (!ranked.length) return jsonResponse({
     ok:true, query:{text:query,locale,mode:requestedMode}, coverage:{level:'none',answerGenerationAllowed:false},
     results:[], projection:null, readingPath:null, indexDigest:index.indexDigest

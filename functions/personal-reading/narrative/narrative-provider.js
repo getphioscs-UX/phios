@@ -39,6 +39,10 @@ export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,sy
     text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
   })});}
   catch(error){
+    // Durable paid-budget/fence failures are not network failures. Keep their
+    // existing job recovery classification; never retry a denied reservation.
+    const ownedCode=String(error?.code||error?.message||'');
+    if(!paidContext.fixture&&/^(?:REPORT_(?:USAGE_RECONCILIATION_REQUIRED|GENERATION_AND_REPAIR_BUDGET_EXCEEDED|TOTAL_COST_CAP_EXCEEDED|SHARED_COST_RECONCILIATION_REQUIRED|PROVIDER_USAGE_EXCEEDED_RESERVATION)|PAID_REPORT_WORKER_FENCE_LOST|COMPLETE_PRODUCT_COST_LIMIT_OR_UNKNOWN_USAGE|PRODUCT_COST_USAGE_UNKNOWN_OR_OVER_BOUND)$/.test(ownedCode))throw error;
     const name=String(error?.name||'').toLowerCase();
     const cause=error?.cause||null;
     const code=String(cause?.code||error?.code||'').toUpperCase();

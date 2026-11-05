@@ -1,6 +1,6 @@
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
-import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
+import {ZIWEI_R5_PAI_REGISTRY,ziweiR5PricingForInput} from '../narrative/ziwei-r5-provider-registry.js';
 import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
 import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
 import {
@@ -57,7 +57,7 @@ export function planZwrFiveCallExperiment({pack}={}){
   const bp=batchPack(pack,ids);
   const input={systemPrompt:batchPrompt(ids),payload:{compactBatch:bp}};
   const inputTokens=estimateVfrTokens(input);
-  const maxCost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens:0,outputTokens:MAX_OUTPUT_TOKENS_PER_CALL}));
+  const maxCost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens:0,outputTokens:MAX_OUTPUT_TOKENS_PER_CALL}));
   return deepFreeze({index:index+1,sectionIds:[...ids],inputTokens,maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL,estimatedMaxCost:maxCost});
  });
  const estimatedMaxTotalCost=Number(batches.reduce((a,b)=>a+b.estimatedMaxCost,0).toFixed(8));
@@ -90,8 +90,9 @@ export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalTh
   const started=Date.now();
   let result;
   try{
+   const paidContext=typeof env.REPORT_PAID_CONTEXT_FACTORY==='function'?await env.REPORT_PAID_CONTEXT_FACTORY({phase:'PRIMARY',systemPrompt:batchPrompt(ids),userPayload:{compactBatch:bp},schema:buildZwrFiveCallBatchSchema(bp),schemaName:'zwr_vfr_five_call_batch_'+String(i+1),maxOutputTokens:MAX_OUTPUT_TOKENS_PER_CALL}):env.REPORT_PAID_GENERATION_CONTEXT;
    result=await invokeOpenAIStructured({
-    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
+    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model,REPORT_PAID_GENERATION_CONTEXT:paidContext},
     fetcher,
     systemPrompt:batchPrompt(ids),
     userPayload:{compactBatch:bp},
@@ -109,7 +110,7 @@ export async function composeZwrFiveCallExperiment({pack,env={},fetcher=globalTh
   const inputTokens=usage.input_tokens||usage.inputTokens||0;
   const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
   const outputTokens=usage.output_tokens||usage.outputTokens||0;
-  const cost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens,outputTokens}));
+  const cost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens,outputTokens}));
   spent=Number((spent+cost).toFixed(8));
   if(spent>EXPERIMENT_BUDGET_USD)throw Object.assign(new Error('ZWR_FIVE_CALL_EXPERIMENT_BUDGET_EXCEEDED'),{details:{spent,batch:i+1}});
   totalInput+=inputTokens;totalCached+=cachedInputTokens;totalOutput+=outputTokens;

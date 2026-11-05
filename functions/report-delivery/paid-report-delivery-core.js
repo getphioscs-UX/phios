@@ -29,7 +29,7 @@ export async function ensureVerifiedPaidReportJob(env,order,{registry=PAID_REPOR
  const presentation=JSON.parse(order.context_json).reportPresentation;
  if(presentation?.reportLocale!==r.presentation.reportLocale||presentation?.reportLanguageMode!==r.presentation.reportLanguageMode)throw paidReportError('PURCHASE_PRESENTATION_MISMATCH');
  const id=await digest([commerceEnvironment(env),p.purchase_id,r.methodCode,r.personId].join('\0'));
- const j={jobId:id,environment:commerceEnvironment(env),ownerAccountId:r.ownerAccountId,purchaseId:p.purchase_id,orderId:order.checkout_attempt_id,productId:r.productId,methodCode:r.methodCode,personId:r.personId,personVersion:r.personVersion,inputDigest:r.inputDigest,readinessId:r.readinessId,presentation:r.presentation,authorityDigest:r.authorityDigest,reportId:id,state:'DELIVERY_JOB_CREATED',stageIndex:0,attempts:0,rescueUsed:false,createdAt:clock(),updatedAt:clock(),dueAt:clock()+PAID_REPORT_POLICY.jobStartGrace};
+ const j={jobId:id,environment:commerceEnvironment(env),ownerAccountId:r.ownerAccountId,purchaseId:p.purchase_id,orderId:order.checkout_attempt_id,productId:r.productId,methodCode:r.methodCode,personId:r.personId,personVersion:r.personVersion,inputDigest:r.inputDigest,...(r.methodInputs?{methodInputs:r.methodInputs}:{}),readinessId:r.readinessId,presentation:r.presentation,authorityDigest:r.authorityDigest,reportId:id,state:'DELIVERY_JOB_CREATED',stageIndex:0,attempts:0,rescueUsed:false,createdAt:clock(),updatedAt:clock(),dueAt:clock()+PAID_REPORT_POLICY.jobStartGrace};
  return store.insertJob(j);
 }
 export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock=Date.now,refundTransport,crashAfter,observe=()=>{}}={}){
