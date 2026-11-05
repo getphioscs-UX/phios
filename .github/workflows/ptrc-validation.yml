@@ -11,9 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
+      - name: Runner disk before checkout
+        shell: bash
+        run: |
+          df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          df -i "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          filter: blob:none
+      - name: Runner disk after checkout
+        if: always()
+        shell: bash
+        run: |
+          df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          df -i "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          if [ -d .git ]; then
+            du -sh .git .
+            git rev-parse HEAD
+            git rev-parse --is-shallow-repository
+            git config --get remote.origin.partialclonefilter
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
