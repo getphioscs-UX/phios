@@ -11,7 +11,7 @@ import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
 export const ZWR_PDF_VERSION='ZWR-R13-PRIVATE-PDF-1';
 const fail=code=>{throw Object.assign(Error(code),{code,status:409});};
 async function bindingFor(context,candidate,reportId){
- const owner=personIdentity(context).userId,right=await requireZiweiEntitlement(context,candidate.locale);
+ const owner=personIdentity(context).userId,right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
  if(owner!==candidate.customerId||right.purchase_id!==candidate.purchaseId)fail('REPORT_UNAVAILABLE');
  await loadCanonicalPersonSubject(context.env,owner,candidate.personId);
  const order=await context.env.RUNTIME_DB.prepare("SELECT checkout_attempt_id FROM commerce_purchases WHERE purchase_id=? AND customer_id=? AND purchase_state='purchased'").bind(candidate.purchaseId,owner).first();
@@ -25,12 +25,12 @@ export function assertZiweiPdfScope(context,candidate){
 }
 export async function assertAccountZiweiFinalArtifact(context,{candidate,reportId,verification,pdfBytes,finalPublicationReceipt}){
  assertZiweiPdfScope(context,candidate);
- const binding=await bindingFor(context,candidate,reportId),right=await requireZiweiEntitlement(context,candidate.locale);
+ const binding=await bindingFor(context,candidate,reportId),right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
  return assertZiweiFinalArtifact({candidate,verification,pdfBytes,receipt:finalPublicationReceipt,binding,entitlementId:right.entitlement_id});
 }
 export async function persistAccountZiweiPdf(context,{candidate,reportId,html,verification,pdfBytes,finalPublicationReceipt=null}){
  const scope=assertZiweiPdfScope(context,candidate),binding=await bindingFor(context,candidate,reportId),c=candidate.snapshot.semanticContent;
- const right=await requireZiweiEntitlement(context,candidate.locale);
+ const right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
  const d=finalPublicationReceipt?await assertZiweiFinalArtifact({candidate,verification,pdfBytes,receipt:finalPublicationReceipt,binding,entitlementId:right.entitlement_id}):verification.pdfDerivative;
  if(!c.vfrR2PublicationBinding||!d||d.bytes!==pdfBytes?.length||d.outputDigest!==await methodPdfSHA(pdfBytes)||d.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||d.publicationDigest!==c.visualReportIr.publicationIrDigest||d.sourceHtmlDigest!==verification.outputDigest||d.pages!==(finalPublicationReceipt?finalPublicationReceipt.pageCount:verification.pageCount))fail('ZWR_PDF_SOURCE_BINDING_INVALID');
  const artifact=await createCustomerReportArtifact({reportArtifactId:reportId,customerId:candidate.customerId,personId:candidate.personId,methodCode:'ZWR',productCode:binding.productId,entitlementId:right.entitlement_id,inputDigest:candidate.snapshot.inputFingerprint,authorityPackVersion:c.vfrCompactAuthoringPackDigest,reportContentVersion:c.vfrDeepManuscriptDigest,rendererVersion:verification.rendererVersion,inputSnapshot:c.vfrInputSnapshot||{sourceRef:'ACCEPTED_REFERENCE_ONLY',subject:c.subject},calculationSnapshot:c.evidence,generatedSections:c.visualReportIr.sections,publicationIR:{...c.visualReportIr,digest:c.visualReportIr.publicationIrDigest},htmlSnapshotOrRenderState:{objectKey:`released-method/${reportId}/${verification.outputDigest}.html`,outputDigest:verification.outputDigest},pdfPolicy:'PERSISTED_PRIVATE_PDF_REQUIRED',reviewOnly:true,releaseAdmission:false,scope,...(finalPublicationReceipt?{finalPublicationReceipt}:{})});
@@ -53,7 +53,7 @@ export async function accountZiweiPdfLink(context,material){
 }
 export async function downloadAccountZiweiPdf(context,reportId){
  const material=await openAccountZiweiMaterial(context,reportId),{candidate}=material,binding=await bindingFor(context,candidate,reportId),store=await createCustomerArtifactStore(context.env,binding),state=await createReportGenerationStore(context.env,binding,{scope:'delivery'}),{artifact}=await store.open(),receipt=await state.withLock('zwr-pdf-release',()=>state.get('zwr-pdf-release'));
- const right=await requireZiweiEntitlement(context,candidate.locale);
+ const right=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});
  if(artifact.entitlementId!==right.entitlement_id||artifact.customerId!==binding.ownerAccountId)fail('REPORT_UNAVAILABLE');
  if(!receipt||receipt.artifactDigest!==artifact.artifactDigest||receipt.snapshotId!==candidate.snapshot.semanticSnapshotId||receipt.sourceHtmlDigest!==material.row.output_digest||receipt.publicationDigest!==candidate.snapshot.semanticContent.visualReportIr.publicationIrDigest||artifact.personId!==candidate.personId||artifact.methodCode!=='ZWR'||artifact.productCode!==binding.productId)fail('ZWR_PDF_IMMUTABLE_RECEIPT_MISMATCH');
  if(artifact.finalPublicationReceipt){

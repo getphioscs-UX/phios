@@ -1,5 +1,7 @@
 import {createStrictSqliteD1TestAdapter} from './lib/sqlite-d1-test-adapter.mjs';
 import fs from 'node:fs';
+import path from 'node:path';
+import {tmpdir} from 'node:os';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {randomBytes,createHash} from 'node:crypto';
@@ -54,11 +56,10 @@ await assert.rejects(()=>requireZiweiEntitlement({...a,env:{...env,STRIPE_ENVIRO
 tests.push({name:'QA purchase cannot authorize LIVE environment',result:'DENIED'});
 // Current method-owner admission replaced the deleted shared E2E gate.
 // This local fixture has no deployed private-browser admission and must remain
-// unable to enter paid writing. The inherited zero-cost gate may reject first.
+// unable to enter paid writing. The current generator requires the paid Worker
+// context before reaching the provider/cache admission gate.
 await assert.rejects(()=>requireZwrVfrGenerationAdmission(env),{code:'METHOD_GENERATION_ADMISSION_REQUIRED',status:503});
-await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),error=>[
- 'VFR_REPORT_PROVIDER_LIVE_NOT_ALLOWED','METHOD_GENERATION_ADMISSION_REQUIRED'
-].includes(error?.code||error?.message));
+await assert.rejects(()=>generateProductionAccountZiweiCandidate(a,selection),{code:'ZWR_PAID_WORKER_CONTEXT_REQUIRED',status:409});
 tests.push({name:'current method admission absent; production writing blocked before paid provider',result:'DENIED'});
 const candidate=await generateAccountZiweiCandidate(a,selection),loader=(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
 await denied('unconfigured server browser verifier cannot release',()=>generateAndReleaseAccountZiwei(a,selection));
@@ -103,6 +104,8 @@ for(const forbidden of ["name=\"latitude\"","name=\"longitude\"","name=\"timezon
 const canonicalPersonSource=fs.readFileSync('functions/account/canonical-person-store.js','utf8');
 assert(canonicalPersonSource.includes('resolveBirthPlace'),'Canonical person owner must resolve selected birth places server-side');
 assert(canonicalPersonSource.includes("source:'GOVERNED_RESOLUTION'"),'Resolved timezone authority must remain governed');
-const dir='docs/reports/ziwei/production-admission/cpa-v1';fs.mkdirSync(dir,{recursive:true});
+// A new run is current QA evidence, not a rewrite of the tracked historical
+// proof. TEMP/TMP is process-scoped to D: by the controlled local check runner.
+const dir=fs.mkdtempSync(path.join(tmpdir(),'phios-canonical-person-qa-'));
 fs.writeFileSync(dir+'/local-person-proof.json',JSON.stringify({scope:'LOCAL_REAL_SQL_AND_CALCULATION_ONLY',canonicalPersonOwner:'IMPLEMENTED_AND_BOUND_LOCAL',encryptedAtRest:true,methodIndependent:true,subjectBinding:'PASS',birthVersioning:'PASS',oldReleasedMaterialUnchanged:true,tests,qaAccountDelivery:'NOT_PROVEN',realStripeEntitlement:'NOT_PROVEN',renderReceipt:'LOCAL_POLICY_FIXTURE_NOT_DEPLOYED_BROWSER_PROOF',productionDelivery:'NOT_RUN',sourceHashes:Object.fromEntries(['functions/account/canonical-person-store.js','functions/api/account-persons.js','functions/report-delivery/ziwei-canonical-person-binding.js','db/migrations/0009_canonical_account_person.sql'].map(path=>[path,createHash('sha256').update(fs.readFileSync(path)).digest('hex')]))},null,2)+'\n');
 sqlite.close();console.log('PASS canonical account person: real SQL, real Zi Wei calculation, owner isolation, encryption, consent, birth versioning, immutable local release. QA not claimed.');

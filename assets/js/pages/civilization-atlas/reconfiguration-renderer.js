@@ -1,7 +1,8 @@
 import {acceptedCurrentView,compareAcceptedScopes,renderAcceptedCurrent,sourceWindowDisplay,authorDisplayDetails} from './book6-current-view.js';
 import {loadAcceptedDossier} from './atlas-data.js';
 import {worldSystemLabel} from './world-system-copy.js';
-import {t,getLocale} from '../../i18n.js';
+import {t} from '../../i18n.js';
+import {getLocale} from '../../i18n.js';
 import {resolveAtlasVisualById} from './atlas-static-visual.js';
 
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");

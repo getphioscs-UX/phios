@@ -25,7 +25,7 @@ const STRUCTURAL_SPECS=Object.freeze({
   personalityActivations:['personality activated gate','personality activated gates','personality activations','人格激活闸门','人格激活閘門','人格激活']
 });
 const CENTER_ALIASES=Object.freeze([
-  ['HEAD',['head','头','頭','头顶','頭頂']],['AJNA',['ajna','逻辑中心','邏輯中心','阿基那']],['THROAT',['throat','喉咙','喉嚨','喉中心']],['G',['g center','g-center','g中心','方向中心']],['EGO',['ego','will','heart','意志','意志力','心脏','心臟']],['SPLEEN',['spleen','脾','脾中心']],['SOLAR_PLEXUS',['solar plexus','emotional','情绪中心','情緒中心','太阳神经丛','太陽神經叢']],['SACRAL',['sacral','骶骨','薦骨']],['ROOT',['root','根部','根中心']]
+  ['HEAD',['head','头','頭','头顶','頭頂']],['AJNA',['ajna','逻辑中心','邏輯中心','阿基那']],['THROAT',['throat','喉咙','喉嚨','喉中心']],['G',['g','g center','g-center','g中心','方向中心']],['EGO',['ego','will','heart','意志','意志力','心脏','心臟']],['SPLEEN',['spleen','脾','脾中心']],['SOLAR_PLEXUS',['solar plexus','emotional','情绪中心','情緒中心','太阳神经丛','太陽神經叢']],['SACRAL',['sacral','骶骨','薦骨']],['ROOT',['root','根部','根中心']]
 ]);
 const BODY_ALIASES=Object.freeze([
   ['SUN',['sun','太阳','太陽']],['EARTH',['earth','地球']],['MOON',['moon','月亮']],['NORTH_NODE',['north node','northnode','北交点','北交點']],['SOUTH_NODE',['south node','southnode','南交点','南交點']],['MERCURY',['mercury','水星']],['VENUS',['venus','金星']],['MARS',['mars','火星']],['JUPITER',['jupiter','木星']],['SATURN',['saturn','土星']],['URANUS',['uranus','天王星']],['NEPTUNE',['neptune','海王星']],['PLUTO',['pluto','冥王星']]

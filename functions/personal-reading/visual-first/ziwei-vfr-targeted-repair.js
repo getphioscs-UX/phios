@@ -1,7 +1,7 @@
 import {reportGenerationCeiling} from '../../pws/commercial/commerce-economics-policy.js';
 import {deepFreeze,sha256Stable} from '../../interpretation-runtime/mir7-utils.js';
 import {invokeOpenAIStructured} from '../narrative/narrative-provider.js';
-import {ZIWEI_R5_PAI_REGISTRY} from '../narrative/ziwei-r5-provider-registry.js';
+import {ZIWEI_R5_PAI_REGISTRY,ziweiR5PricingForInput} from '../narrative/ziwei-r5-provider-registry.js';
 import {selectPaiRoute,estimatePaiProviderCost,createPaiUsageRecord} from '../../_lib/pai-r1-economics.js';
 import {assertVfrLiveAllowed,estimateVfrTokens} from './report-provider-budget.js';
 
@@ -107,7 +107,7 @@ export function buildTargetedRepairPlan({pack,result,manifest}={}){
   };
   const inputTokens=estimateVfrTokens(input);
   const maxOutputTokens=maxOutputFor(r.locales);
-  const estimatedMaxCost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens:0,outputTokens:maxOutputTokens}));
+  const estimatedMaxCost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens:0,outputTokens:maxOutputTokens}));
   return {...r,index:index+1,inputTokens,maxOutputTokens,estimatedMaxCost};
  });
  const originalCost=Number(result.providerUsage?.estimatedProviderCost||0);
@@ -149,8 +149,9 @@ export async function runTargetedRepair({pack,result,manifest,env={},fetcher=glo
   const started=Date.now();
   let call;
   try{
+   const paidContext=typeof env.REPORT_PAID_CONTEXT_FACTORY==='function'?await env.REPORT_PAID_CONTEXT_FACTORY({phase:'REPAIR',systemPrompt:promptFor({sectionId:repair.sectionId,locales:repair.locales,anchorZh}),userPayload:{sectionAuthority:sp,existingChineseAnchor:anchorZh},schema:schemaFor(repair.locales,repair.sectionId),schemaName:'zwr_vfr_targeted_repair_'+repair.sectionId.toLowerCase(),maxOutputTokens:repair.maxOutputTokens}):env.REPORT_PAID_GENERATION_CONTEXT;
    call=await invokeOpenAIStructured({
-    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model},
+    env:{...env,OPENAI_NARRATIVE_MODEL:plan.model,REPORT_PAID_GENERATION_CONTEXT:paidContext},
     fetcher,
     systemPrompt:promptFor({sectionId:repair.sectionId,locales:repair.locales,anchorZh}),
     userPayload:{sectionAuthority:sp,existingChineseAnchor:anchorZh},
@@ -167,7 +168,7 @@ export async function runTargetedRepair({pack,result,manifest,env={},fetcher=glo
   const inputTokens=usage.input_tokens||usage.inputTokens||0;
   const cachedInputTokens=usage.input_tokens_details?.cached_tokens||usage.cachedInputTokens||0;
   const outputTokens=usage.output_tokens||usage.outputTokens||0;
-  const cost=Number(estimatePaiProviderCost(model,{inputTokens,cachedInputTokens,outputTokens}));
+  const cost=Number(estimatePaiProviderCost(ziweiR5PricingForInput(model,inputTokens),{inputTokens,cachedInputTokens,outputTokens}));
   spent=Number((spent+cost).toFixed(8));
   if(Number(result.providerUsage?.estimatedProviderCost||0)+spent>TOTAL_EXPERIMENT_BUDGET_USD){
    throw Object.assign(new Error('ZWR_TARGETED_REPAIR_TOTAL_BUDGET_EXCEEDED'),{details:{spent,originalCost:result.providerUsage?.estimatedProviderCost,sectionId:repair.sectionId}});

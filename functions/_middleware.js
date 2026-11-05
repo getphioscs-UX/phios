@@ -1,6 +1,8 @@
 import { maintenanceMode, guardD1Binding, d1ViolationCount, maintenanceResponse } from './_lib/d1-maintenance-guard.js';
+import {financialQaPath} from './_lib/final-release-scope.js';
 
 export async function onRequest(context) {
+  if(financialQaPath(new URL(context.request.url).pathname))return new Response('Not found',{status:404,headers:{'Cache-Control':'no-store'}});
   const mode = maintenanceMode(context.env.PHIOS_D1_MAINTENANCE_MODE);
   if (mode === 'OFF') return context.next();
   if (mode !== 'READ_ONLY') return maintenanceResponse();

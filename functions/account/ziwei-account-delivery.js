@@ -11,6 +11,9 @@ import {releaseControlledZiweiReport,openControlledZiweiReport} from './ziwei-co
 import {digest} from './oidc-auth.js';
 import {generateContextualAccountZiweiCandidate} from '../report-delivery/ziwei-contextual-person-binding-r1.js';
 import {assertZiweiFinalArtifact} from '../report-delivery/ziwei-final-artifact-contract.js';
+import {assertPaidReportWorkerFence} from '../report-delivery/paid-report-worker-fence.js';
+import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
+import {assertZiweiReferenceJobAuthority} from '../report-delivery/ziwei-reference-authority-compatibility.js';
 const fail=(code,status=409)=>Object.assign(new Error(code),{code,status});
 const loader=env=>(owner,id)=>loadCanonicalPersonSubject(env,owner,id);
 async function bounded(response,max){const reader=response.body?.getReader();if(!reader)throw fail('REPORT_RENDER_FAILED');let bytes=0,text='';const decoder=new TextDecoder();for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>max){await reader.cancel();throw fail('REPORT_RENDER_TOO_LARGE');}text+=decoder.decode(value,{stream:true});}return text+decoder.decode();}
@@ -18,12 +21,19 @@ async function bounded(response,max){const reader=response.body?.getReader();if(
 // Server-only final-file handoff: no renderer, Provider, new API or regeneration.
 export async function handoffFinalAccountZiwei(context,{candidate,html,verification,pdfBytes,finalPublicationReceipt}){
  controlledZiweiIdentity(context);assertZiweiPdfScope(context,candidate);
+ let authorityCompatibility=null;
+ if(candidate.paidReportBinding){
+  const f=await assertPaidReportWorkerFence(context.env);if(!f)throw fail('ZWR_FINAL_JOB_FENCE_REQUIRED');
+  const row=await context.env.RUNTIME_DB.prepare("SELECT record_json FROM paid_report_jobs WHERE job_id=? AND owner_account_id=? AND method_code='ZWR'").bind(f.jobId,candidate.customerId).first(),j=row&&JSON.parse(row.record_json),b=candidate.paidReportBinding;
+  if(!j||j.reportId!==b.reportId||j.jobId!==f.jobId||j.purchaseId!==candidate.purchaseId||j.personId!==candidate.personId||j.personVersion!==candidate.personVersion||j.ownerAccountId!==candidate.customerId||j.productId!==b.productId||j.orderId!==b.orderId||j.authorityDigest!==b.authorityDigest||await sha256Stable(resolveZiweiLiveTargetContext(j.methodInputs?.targetContext))!==await sha256Stable(resolveZiweiLiveTargetContext(candidate.snapshot.semanticContent.evidence.targetContext)))throw fail('ZWR_FINAL_JOB_BINDING_MISMATCH');
+  authorityCompatibility=await assertZiweiReferenceJobAuthority(context,j,candidate);
+ }
  await assertZiweiFinalArtifact({candidate,verification,pdfBytes,receipt:finalPublicationReceipt});
  if(await digest(html)!==verification.outputDigest)throw fail('ZWR_FINAL_HTML_SOURCE_MISMATCH');
  const subject=await loadCanonicalPersonSubject(context.env,candidate.customerId,candidate.personId),s=candidate.snapshot.semanticContent;
  if(subject.person.displayName!==s.subject.displayName||await sha256Stable(subject.canonicalBirthInput)!==await sha256Stable(s.vfrInputSnapshot))throw fail('ZWR_FINAL_PROFILE_SNAPSHOT_MISMATCH');
- const finalCandidate={...candidate,finalPublicationReceiptDigest:await sha256Stable(finalPublicationReceipt)};
- const reportId='zwr-'+await sha256Stable(finalCandidate);
+ const finalCandidate={...candidate,...(authorityCompatibility?{paidReferenceAuthorityCompatibility:authorityCompatibility}:{}),finalPublicationReceiptDigest:await sha256Stable(finalPublicationReceipt)};
+ const reportId=finalCandidate.paidReportBinding?.reportId||'zwr-'+await sha256Stable(finalCandidate);
  await assertAccountZiweiFinalArtifact(context,{candidate:finalCandidate,reportId,verification,pdfBytes,finalPublicationReceipt});
  const finalVersion=await cachedMethodDelivery(context.env,{ownerAccountId:candidate.customerId,kind:'PUBLICATION',key:await methodCacheIdentity({contract:'ZWR_FINAL_FILE_VERSION_1',subjectId:candidate.personId,purchaseId:candidate.purchaseId,snapshotId:candidate.snapshot.semanticSnapshotId,version:finalPublicationReceipt.version}),produce:async()=>({finalPublicationReceiptDigest:finalCandidate.finalPublicationReceiptDigest,finalPublicationReceipt}),validate:async value=>{if(value.finalPublicationReceiptDigest!==finalCandidate.finalPublicationReceiptDigest||await sha256Stable(value.finalPublicationReceipt)!==finalCandidate.finalPublicationReceiptDigest)throw fail('ZWR_FINAL_VERSION_IMMUTABLE');}});
  if(finalVersion.value.finalPublicationReceiptDigest!==finalCandidate.finalPublicationReceiptDigest)throw fail('ZWR_FINAL_VERSION_IMMUTABLE');
@@ -34,13 +44,19 @@ export async function handoffFinalAccountZiwei(context,{candidate,html,verificat
  await persistMethodReportMaterial(context,{release,candidate:finalCandidate,html,receipt:verification,identity});
  return {reportId:release.reportId,cacheHit:false,rendererCalls:0,providerCalls:0,scope:'LOCAL_SYNTHETIC_FINAL_FILE_QA'};
 }
-export async function generateAndReleaseAccountZiwei(context,selection,{generateCandidate=generateAccountZiweiCandidate}={}){
+export async function generateAndReleaseAccountZiwei(context,selection,{generateCandidate=generateAccountZiweiCandidate,loadFinalPublication=null}={}){
  controlledZiweiIdentity(context);
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
  const candidate=selection?.reportMode!=null||selection?.realityBriefId!=null?await generateContextualAccountZiweiCandidate(context,selection):await generateCandidate(context,selection);
  // An actual private server browser verifier must be configured. Customer claims
  // and local test receipts cannot cross this boundary.
  await assertMethodGeneration(candidate);
+ if(loadFinalPublication){
+  if(context.env.PHIOS_ENVIRONMENT!=='local'||context.env.REPORT_ZERO_COST_REPLAY!=='true'||!candidate.paidReportBinding||typeof loadFinalPublication!=='function')throw fail('ZWR_FINAL_REPLAY_LOCAL_JOB_REQUIRED');
+  // Trusted server-only test producer; Account request JSON cannot supply it.
+  // Final-file/Subject/Job/publication/watermark boundaries remain enforced.
+  return handoffFinalAccountZiwei(context,{candidate,...await loadFinalPublication(context,candidate)});
+ }
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
  if(context.env.ZWR_PDF_DELIVERY_CANDIDATE==='true'){
   assertZiweiPdfScope(context,candidate);

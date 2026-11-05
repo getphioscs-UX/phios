@@ -40,11 +40,20 @@ const data={
 };
 const {document}=parseHTML('<html><head></head><body><main data-civilization-atlas-root data-atlas-mode="reconfiguration"></main></body></html>');
 globalThis.document=document;globalThis.window=document.defaultView;
+// Exercise the browser event bridge in the DOM harness, including its payload.
+globalThis.dispatchEvent=document.defaultView.dispatchEvent.bind(document.defaultView);
+globalThis.CustomEvent=document.defaultView.CustomEvent;
+const readingContexts=[];
+document.defaultView.addEventListener('phios:world-reading-context',event=>readingContexts.push(event.detail));
 setLocale('zh-Hans',{persist:false,translate:false,emit:false});
 const root=document.querySelector('main');
 const store=createReconfigurationAtlasState({locale:'zh-Hans'});
 store.set({activeLayer:'search',query:''},{source:'test'});
 const off=mountReconfigurationAtlas(root,data,{locale:'zh-Hans',store});
+assert.equal(readingContexts.length,1);
+assert.equal(readingContexts[0].book,'BOOK-6');
+assert.equal(readingContexts[0].data,data);
+assert.equal(readingContexts[0].store,store);
 let text=root.textContent||'';
 for(const raw of ['BOOK_SECTION','LIVED_REALITY','MULTI_STATE_SYSTEM','CANONICAL_HISTORY','ECONOMIC_RECONFIGURATION','TECHNOLOGICAL_RECONFIGURATION'])assert.ok(!text.includes(raw),'raw enum leaked in zh search: '+raw);
 assert.match(renderer,/detail:\[entityTypeLabel\(x\.entityType\),stateLabel\(x\.dataClass,l\),x\.version\]/);

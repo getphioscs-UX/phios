@@ -24,13 +24,14 @@ async function intact(candidate){
 }
 export async function releaseControlledZiweiReport(context,candidate,{loadSubject,renderVerification}={}){
  const identity=controlledZiweiIdentity(context);if(candidate.customerId!==identity.userId)deny();
- const owned=await requireZiweiEntitlement(context,candidate.locale);if(owned.purchase_id!==candidate.purchaseId)deny();
+ const owned=await requireZiweiEntitlement(context,candidate.locale,{purchaseId:candidate.purchaseId});if(owned.purchase_id!==candidate.purchaseId)deny();
  await personAccess(identity.userId,candidate.personId,loadSubject);await intact(candidate);
  // Receipt is supplied by the server render verifier, never a customer route.
  const contract=resolveMethodRenderContract(candidate);
  if(contract.rendererId==='ZIWEI_VFR')assertMethodRenderReceipt(candidate,renderVerification);
  else if(renderVerification?.semanticSnapshotId!==candidate.snapshot.semanticSnapshotId||renderVerification.passed!==true||renderVerification.pageCount!==contract.expectedPageCount)throw Error('REPORT_RENDER_VERIFICATION_REQUIRED');
- const db=storage(context),digest=await sha256Stable(candidate),id='zwr-'+digest,key='controlled-ziwei/'+digest+'.json',now=new Date().toISOString();
+ if(candidate.paidReportBinding&&(candidate.paidReportBinding.ownerAccountId!==identity.userId||candidate.paidReportBinding.purchaseId!==candidate.purchaseId||candidate.paidReportBinding.productId!=='COM-REPORT-ZIWEI-FULL'))throw Error('ZWR_PAID_RELEASE_BINDING_MISMATCH');
+ const db=storage(context),digest=await sha256Stable(candidate),id=candidate.paidReportBinding?.reportId||'zwr-'+digest,key='controlled-ziwei/'+digest+'.json',now=new Date().toISOString();
  const metadata={scope:'CONTROLLED_QA_ONLY',customerId:identity.userId,personId:candidate.personId,locale:candidate.locale,purchaseId:candidate.purchaseId,snapshotId:candidate.snapshot.semanticSnapshotId,key,digest,releaseStatus:'ACTIVE',releasedAt:now,renderVerification};
  await context.env.PRIVATE_REPORTS.put(key,JSON.stringify(candidate),{httpMetadata:{contentType:'application/json',cacheControl:'private, no-store'}});
  await db.batch([
@@ -45,7 +46,7 @@ export async function openControlledZiweiReport(context,{reportId,personId},{loa
  const row=await db.prepare('SELECT a.payload FROM runtime_artifacts a JOIN runtimes r ON r.runtime_id=a.runtime_id WHERE a.artifact_id=? AND r.user_id=? AND a.artifact_type=? AND r.status=?').bind(reportId,identity.userId,TYPE,'active').first();
  if(!row)deny();const m=JSON.parse(row.payload);
  if(m.customerId!==identity.userId||m.personId!==personId||m.releaseStatus!=='ACTIVE')deny();
- const owned=await requireZiweiEntitlement(context,m.locale);if(owned.purchase_id!==m.purchaseId)deny();await personAccess(identity.userId,personId,loadSubject);
+ const owned=await requireZiweiEntitlement(context,m.locale,{purchaseId:m.purchaseId});if(owned.purchase_id!==m.purchaseId)deny();await personAccess(identity.userId,personId,loadSubject);
  const object=await context.env.PRIVATE_REPORTS.get(m.key);if(!object)deny();
  const candidate=JSON.parse(await object.text());if(await sha256Stable(candidate)!==m.digest)deny();
  if(candidate.personId!==personId||candidate.customerId!==identity.userId||candidate.snapshot.semanticSnapshotId!==m.snapshotId)deny();

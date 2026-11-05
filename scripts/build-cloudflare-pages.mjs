@@ -11,6 +11,7 @@ import { transformSync } from 'esbuild';
 import {createHash} from 'node:crypto';
 import {acquirePagesOutputLock} from './lib/pages-output-lock.mjs';
 import {pagesWorkerCompactionOptions} from './lib/pages-worker-compaction.mjs';
+import {assessWorkerSize} from './lib/pages-worker-size-policy.mjs';
 import {requireDiskSpace} from './lib/disk-space-guard.mjs';
 
 requireDiskSpace({label:'Pages production build',estimatedBytes:2_000_000_000});
@@ -142,7 +143,7 @@ function run(command, args) {
     {
       cwd: root,
       stdio: 'inherit',
-      env:{...process.env,PHIOS_PAGES_BUILD_TOKEN:buildLease.token}
+      env:{...process.env,WRANGLER_LOG_PATH:process.env.WRANGLER_LOG_PATH||path.join(root,'.tmp','pages-wrangler.log'),WRANGLER_SEND_METRICS:process.env.WRANGLER_SEND_METRICS||'false',PHIOS_PAGES_BUILD_TOKEN:buildLease.token}
     }
   );
 
@@ -333,6 +334,7 @@ run(
     'pages',
     'functions',
     'build',
+    '--minify',
     '--build-output-directory',
     emptyAssets,
     '--outdir',
@@ -386,7 +388,7 @@ if (
 }
 
 // Compact generated bindings and whitespace, preserving runtime names, syntax
-// and legal comments. Enforce unchanged budgets on the actual shipped bytes.
+// and legal comments. Apply the current platform policy to shipped modules.
 const worldPreviewPolicy=worldPreviewBuildPolicy(process.env);
 const finalReleasePolicy=finalReleaseBuildPolicy(process.env);
 const compiledWorker = finalReleasePolicy.active?isolateFinalReleaseWorker(workerSource,finalReleasePolicy):isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
@@ -404,16 +406,32 @@ console.log(
   `Pages Worker: ${workerBytes.length} bytes; gzip ${compressedBytes} bytes`
 );
 
-if (workerBytes.length > 25 * 1024 * 1024) {
-  throw new Error(
-    'Pages Functions bundle exceeds 25 MiB'
-  );
+// Count generated runtime payloads, not website assets or route/source-map metadata.
+// The current publisher emits a single bundled entry. Fail explicitly if Wrangler
+// begins emitting additional modules instead of silently measuring only the entry.
+const workerModules = [];
+function collectWorkerModules(dir) {
+  for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) collectWorkerModules(file);
+    else if (entry.isFile() && file !== routeSource && !file.endsWith('.map')) {
+      workerModules.push({path:path.relative(workerBuild,file).replaceAll('\\','/'),bytes:fs.statSync(file).size});
+    }
+  }
 }
-
-if (compressedBytes > 3 * 1024 * 1024) {
-  throw new Error(
-    'Worker exceeds conservative 3 MiB preflight budget'
-  );
+collectWorkerModules(workerBuild);
+const sizePolicy = assessWorkerSize({
+  uncompressedBytes:workerModules.reduce((sum,module)=>sum+module.bytes,0),
+  gzipBytes:compressedBytes
+});
+console.log(sizePolicy.gzipStatus + ': no compressed-size hard limit.');
+console.log(sizePolicy.status + ': ' + JSON.stringify({...sizePolicy,modules:workerModules}));
+if (sizePolicy.status === 'WORKER_SIZE_PLATFORM_FAIL') {
+  throw new Error('WORKER_SIZE_PLATFORM_FAIL: Worker exceeds Cloudflare 64 MiB uncompressed size limit');
+}
+if (sizePolicy.warning) console.warn('WORKER_SIZE_WARNING: bundle exceeds 48 MiB; review dependencies and startup performance.');
+if (workerModules.length !== 1 || workerModules[0].path !== 'index.js') {
+  throw new Error('WORKER_ADDITIONAL_MODULE_PUBLICATION_REQUIRED: reconcile Wrangler Total Upload and publisher before release');
 }
 
 recordStage('PUBLISH_GENERATED_WORKER_AND_ROUTES');

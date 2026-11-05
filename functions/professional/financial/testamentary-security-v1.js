@@ -21,7 +21,7 @@ export const PTRC_TESTAMENTARY_SECURITY_POLICY = Object.freeze({
 });
 
 const EXPORT_REDACTED_KEYS = new Set([
-  'rawUserInput', 'identity_number', 'national_id', 'passport_number',
+  'raw_user_input', 'identity_number', 'national_id', 'passport_number',
   'tax_number', 'bank_account_number', 'account_number', 'policy_number',
   'exact_address', 'password', 'secret', 'private_key', 'seed_phrase',
   'document_storage_key', 'private_note', 'internal_note', 'otp',
@@ -54,7 +54,7 @@ export function createTestamentaryAuditEvent({ action, actorRole, caseId, snapsh
     caseId: clean(caseId),
     snapshotId: clean(snapshotId) || null,
     occurredAt: instant(now || new Date().toISOString(), 'audit.now'),
-    details: Object.freeze({ ...details }),
+    details: redactTestamentaryExport({ ...details }),
     sensitivePayloadIncluded: false
   });
 }

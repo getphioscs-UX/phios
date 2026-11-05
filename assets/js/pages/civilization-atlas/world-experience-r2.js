@@ -191,14 +191,13 @@ function doSearch(){searchText=$('#globalSearch').value.trim();if(!searchText){t
 function renderSearchResults(){const el=$('#searchResults');el.hidden=!searchResults;if(!searchResults)return;const has=Object.values(searchResults).some(x=>x.length);el.innerHTML=`<p class="small muted">${T('searchNoAnswer')}</p><div class="actions">${(searchResults.readings||[]).map(id=>{const r=SEED.readings.find(r=>r.id===id);const u=new URL(r.href,location.origin);u.searchParams.set('locale',getLocale());u.hash=location.hash;return `<a class="source-reading-link" href="${esc(u.pathname+u.search+u.hash)}">${esc(r.title[getLocale()])}</a>`}).join('')}${searchResults.geos.map(id=>button('searchRegion',nameGeo(id),`data-id="${id}"`)).join('')}${searchResults.topics.map(id=>button('topic',vtext(TOPICS[id].name),`data-topic="${id}"`)).join('')}${searchResults.cases.map(id=>button('case',caseTitle(caseById(id)),`data-case="${id}"`)).join('')}${searchResults.figs.map(id=>button('figure',figureLabel(id),`data-id="${id}"`)).join('')}</div>${has?'':`<p>${T('noMatches')}</p>`}${button('closeSearch',T('close'))}`}
 async function readPublicData(both=false){
  if(readBusy)return;const ids=[state.region,...(both?[state.baseline]:[])];
- if(ids.some(id=>!country(id)?.iso2)){toast(T('choosePlace'));return}
+ if(ids.some(id=>!WORLD_COUNTRIES.some(c=>c.id===id))){toast(T('choosePlace'));return}
  if(state.year<1960||state.year>new Date().getUTCFullYear()){toast(T('unsupportedYear'));return}
  const sequence=++dataRequestSequence;const year=state.year,requestContext=[state.region,state.topic,state.year,state.baseline].join('|');readBusy=true;dataRequestState=T('readingData');render();let success=0,missing=0,failed=0;
+ const profiles=new Map();
  for(const id of [...new Set(ids)])for(const i of INDICATORS){try{
- const params=new URLSearchParams({country:country(id).iso2,indicator:i.id,year:String(year)});
- const r=await fetch('/api/world-observations?'+params,{credentials:'omit'});if(sequence!==dataRequestSequence)return;if(!r.ok)throw Error('SERVICE_ERROR');const b=await r.json(),o=b.observation;
- if(!o||o.country!==country(id).iso2||o.indicator!==i.id||o.year!==year)throw Error('IDENTITY_MISMATCH');
- const status=o.state==='OBSERVED'?'value':o.state==='YEAR_MISSING'?'missing':'error';
+ if(!profiles.has(id)){const r=await fetch('/api/customer-subject-workspace?'+new URLSearchParams({publicCountry:id,year:String(year),locale:getLocale(),presentation:'reading'}),{credentials:'omit'});if(sequence!==dataRequestSequence)return;if(!r.ok)throw Error('SERVICE_ERROR');const b=await r.json();if(!b.ok||b.subject?.subjectId!=='WORLD:COUNTRY:'+id||!b.sourceVersion)throw Error('IDENTITY_MISMATCH');profiles.set(id,b);}
+ const profile=profiles.get(id),row=profile.dimensions.flatMap(d=>d.observations).find(o=>o.indicatorId===i.id&&o.year===year);if(!row)throw Error('INDICATOR_NOT_AVAILABLE');const o={country:id,indicator:i.id,year:row.year,value:row.value,sourceUrl:row.sourceUrl,retrievedAt:row.retrievedAt,datasetUpdatedAt:row.sourceUpdatedAt,sourceVersion:profile.sourceVersion},status=row.qualityState==='OBSERVED'?'value':row.qualityState==='MISSING'?'missing':'error';
  observations.set(obsKey(id,i.id,year),{...o,status,region:id,indicator:i.id,url:o.sourceUrl,lastupdated:o.datasetUpdatedAt||null});
  status==='value'?success++:status==='missing'?missing++:failed++;
  }catch{if(sequence!==dataRequestSequence)return;observations.set(obsKey(id,i.id,year),{status:'error',state:'SERVICE_ERROR',year,region:id,indicator:i.id});failed++;}}

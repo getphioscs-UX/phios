@@ -1,4 +1,4 @@
-import {sweepPaidReports} from '../../functions/report-delivery/paid-report-watchdog.js';
+import {sweepPaidReports,runSandboxPaidReportTick} from '../../functions/report-delivery/paid-report-watchdog.js';
 import {p9Policy,requireP9Owner} from '../../functions/report-delivery/p9-canary-admission.js';
 import {createPaidReportRefundTransport} from '../../functions/commerce/paid-report-refund-transport.js';
 export async function runP9Watchdog(env){
@@ -10,4 +10,5 @@ export async function runP9Watchdog(env){
  const rows=await sweepPaidReports(env,{eligible:job=>job.ownerAccountId===p.ownerAccountId&&job.productId===p.product&&job.environment==='LIVE'&&job.personId===p.personId&&job.readinessId===p.readinessId,eligibleOrder:o=>o.customer_id===p.ownerAccountId&&o.product_id===p.product&&JSON.parse(o.context_json||'{}').p9Canary?.releaseCandidateDigest===p.releaseCandidateDigest,contextForOwner:owner=>{requireP9Owner(env,owner,{allowExpired:true});return {env,data:{symbolicAccountIdentity:{userId:owner,providerId:'P9_SERVER_SCHEDULER',verified:true,authenticated:true}},request:new Request('https://paid-report-watchdog.internal/scheduled')};},refundTransport});
  return {state:'SCANNED',scanned:rows.length};
 }
-export default {async scheduled(controller,env,ctx){ctx.waitUntil(runP9Watchdog(env));},fetch(){return new Response(null,{status:404});}};
+export async function runScheduledReportTick(env){return env.PHIOS_QA_PAID_REPORT_WATCHDOG_ENABLED==='true'?runSandboxPaidReportTick(env):runP9Watchdog(env);}
+export default {async scheduled(controller,env,ctx){ctx.waitUntil(runScheduledReportTick(env));},fetch(){return new Response(null,{status:404});}};

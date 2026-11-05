@@ -1,8 +1,9 @@
+import {financialQaPath} from '../../functions/_lib/final-release-scope.js';
 // HTML under content is evidence or source material, not a customer route.
 // Runtime JSON and accepted image assets keep their existing admission policy.
 export function internalPublicationFile(rel) {
   const file = rel.replaceAll('\\', '/');
-  return /^content\/.*\.html?$/i.test(file) ||
+  return financialQaPath('/'+file) || /^content\/.*\.html?$/i.test(file) ||
     /^content\/civilization-atlas\/maintenance\//.test(file) ||
     /^content\/knowledge\/manuscripts\/completed\//.test(file) ||
     /^content\/civilization-atlas\/reconfiguration\/(?:moomoo-|market-provider-).*\.json$/.test(file) ||

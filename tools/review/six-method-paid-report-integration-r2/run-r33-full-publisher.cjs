@@ -1,0 +1,6 @@
+const fs=require('node:fs'),path=require('node:path'),{createRequire}=require('node:module'),{spawnSync}=require('node:child_process');
+const root='D:/PHIOS/QA-TEMP/SIX-METHOD-R2/r33-full-publisher-'+Date.now();fs.mkdirSync(root);
+createRequire('C:/phios/package.json')('esbuild').buildSync({entryPoints:[path.join(__dirname,'check-r33-full-publisher.mjs')],outfile:root+'/full-publisher.mjs',bundle:true,platform:'node',format:'esm',logLevel:'silent'});
+const env={...process.env,PHIOS_R33_QA_RUN:root,TEMP:root,TMP:root,NODE_COMPILE_CACHE:root+'/node-cache',REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true'};
+for(const k of Object.keys(env))if(/^(OPENAI|ANTHROPIC|DEEPSEEK|GEMINI|GOOGLE_AI|OPENROUTER).*(API_KEY|ACCESS_TOKEN|SECRET)$/.test(k))delete env[k];
+const r=spawnSync(process.execPath,['--import','file:///C:/phios/scripts/lib/report-zero-cost-preload.mjs',root+'/full-publisher.mjs'],{cwd:path.resolve(__dirname,'../../..'),env,encoding:'utf8',timeout:300000,maxBuffer:2000000});fs.writeFileSync(root+'/stderr.log',r.stderr||'');fs.writeFileSync(root+'/stdout.log',r.stdout||'');console.log(JSON.stringify({root,exit:r.status}));console.log(r.stdout);console.log(r.stderr);if(r.error)console.log(r.error.message);process.exit(r.status||0);

@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import {requireFullPublicationOwnerR32} from '../../../functions/report-delivery/full-publication-owner-gate-r32.js';
+import {buildAstFixedAssetR21Candidate} from '../../../functions/ast-full-production/ast-fixed-asset-r21-candidate.js';
+const root=process.env.PHIOS_R32_QA_RUN;if(!root?.replaceAll('\\','/').startsWith('D:/PHIOS/QA-TEMP/SIX-METHOD-R2/'))throw Error('D_QA_ROOT_REQUIRED');
+const sha=b=>createHash('sha256').update(b).digest('hex'),read=p=>JSON.parse(fs.readFileSync(p,'utf8')),r31='D:/PHIOS/QA-TEMP/SIX-METHOD-R2/r31-customer-publication-1793762675710',r3='D:/PHIOS/QA-TEMP/SIX-METHOD-R2/r3-native-delivery-1793760849772';
+let networkCalls=0;globalThis.fetch=async()=>{networkCalls++;throw Error('R32_ZERO_NETWORK');};
+const denials=[];for(const method of ['AST','HD']){const source=read(r31+'/'+method+'-COMPOSER-SOURCE.json');assert.throws(()=>requireFullPublicationOwnerR32(method,source,{}),e=>{denials.push({method,code:e.code,sourceClassification:'PARTIAL_NATIVE_READING_REVIEW'});return e.code===method+'_PARTIAL_READING_IS_NOT_FULL_PUBLICATION';});assert.throws(()=>requireFullPublicationOwnerR32(method,null,{}),new RegExp(method+'_FULL_PUBLICATION_OWNER_HANDOFF_REQUIRED'));}
+const html=fs.readFileSync('C:/phios/tools/review/AST-VFR-R1R5-TL-BILINGUAL-PUBLICATION-REVIEW.html','utf8'),manifest=read('C:/phios/content/reports/shared/report-visual-assets-r2.json');
+const reference=await buildAstFixedAssetR21Candidate({publicationHtml:html,manifest});assert(reference.html.includes('BODY_CONTENT'));
+await assert.rejects(()=>buildAstFixedAssetR21Candidate({publicationHtml:fs.readFileSync(r31+'/AST-CUSTOMER-READING-REVIEW.html','utf8'),manifest}),/AST_ACCEPTED_PUBLICATION_SOURCE_DRIFT/);
+const preserved=read(r3+'/ISSUED.json').map(r=>{const p=r3+'/'+r.method+'-SYNTHETIC-DELIVERY.pdf',b=fs.readFileSync(p);assert.equal(sha(b),r.pdfSHA256);return {method:r.method,pdfSHA256:sha(b),orderId:r.orderId,jobId:r.jobId};});
+assert.equal(networkCalls,0);fs.writeFileSync(root+'/VALIDATION.json',JSON.stringify({status:'PASS_EXISTING_FULL_OWNER_REFERENCE_AND_PARTIAL_FALLBACK_DENIAL',denials,astExistingOwnerUnchangedReferenceAccepted:true,astPartialCannotEnterR21Publisher:true,r3Frozen:preserved,lifecycleRerun:false,pdfGenerated:0,providerCalls:0,usd:0,networkCalls},null,2),{flag:'wx'});console.log(JSON.stringify({status:'PASS_EXISTING_FULL_OWNER_REFERENCE_AND_PARTIAL_FALLBACK_DENIAL',denials,pdfGenerated:0,providerCalls:0,usd:0}));

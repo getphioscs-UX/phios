@@ -5,6 +5,8 @@ import {composeHumanDesignRealityBridge} from '../external-profile/human-design-
 import {HD_EXTERNAL_PRODUCTION} from '../external-profile/human-design-external-authority.js';
 import {buildHumanDesignR3ProfessionalProduct} from '../external-profile/human-design-r3-professional-runtime.js';
 import {HD_R3_PRODUCTION_AUTHORITY} from '../external-profile/human-design-r3-production-authority.js';
+import {prepareOwnedHumanDesignReportSource} from '../report-delivery/human-design-paid-source.js';
+import {requireSameOrigin} from '../account/oidc-auth.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -14,6 +16,12 @@ export async function onRequestPost(context){
   if(body?.consent!==true)return json({ok:false,error:'EXTERNAL_PROFILE_CONFIRMATION_CONSENT_REQUIRED'},403);
   try{
     const confirmedExternalProfile=confirmExternalProfile({confirmationDraft:body.confirmationDraft,edits:body.edits||{},structureEdits:body.structureEdits||{}});
+    let reportSource=null;
+    if(body.reportSource!==undefined){
+      requireSameOrigin(context.request);
+      if(!body.reportSource||Object.keys(body.reportSource).some(k=>!['personId','sourceUseConsent'].includes(k)))throw Error('HD_REPORT_SOURCE_SELECTION_INVALID');
+      reportSource=await prepareOwnedHumanDesignReportSource(context,{...body.reportSource,confirmedExternalProfile});
+    }
     const canonicalHumanDesignChart=buildCanonicalHumanDesignExternalChart(confirmedExternalProfile);
     const customerPublishable=HD_EXTERNAL_PRODUCTION.customerReadingPublicationAllowed===true&&HD_EXTERNAL_PRODUCTION.humanReviewAccepted===true;
     const humanDesignReading=customerPublishable?buildHumanDesignExternalReadingIr(canonicalHumanDesignChart,{locale:body.locale==='zh-Hans'?'zh-Hans':'en',intent:body.intent||''}):null;
@@ -27,6 +35,7 @@ export async function onRequestPost(context){
       humanDesignReading,
       humanDesignRealityComposition,
       humanDesignProfessionalReading,
+      ...(reportSource?{reportSource}:{}),
       readingAvailability:{
         state:r3Publishable?'CUSTOMER_PUBLISHED':customerPublishable?'CUSTOMER_PUBLISHED':'HUMAN_REVIEW_PENDING',
         activeCustomerReadingVersion:r3Publishable?'HD_PRO_R3':customerPublishable?'HD_PRO_R2':null,

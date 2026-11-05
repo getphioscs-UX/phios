@@ -290,7 +290,7 @@ export async function exportChatGptBrief({ root = ROOT, briefCode, outputRoot = 
   const { brief } = resolveBriefByCode(root, briefCode); const validation = validateProductionBrief({ root, brief });
   const kind = brief.briefCode.includes('-MECHANISM-') ? normalizeProductionKind('mechanism_diagram') : normalizeProductionKind('hero_illustration');
   const authorities = loadAuthorities(root); const article = articleAuthorityForBrief(brief, authorities);
-  const target = path.join(root, outputRoot, briefCode); await fsp.mkdir(target, { recursive: true });
+  const target = path.join(path.resolve(root, outputRoot), briefCode); await fsp.mkdir(target, { recursive: true });
   const canonicalPath = path.join(target, 'canonical-asset-brief.json'); await fsp.writeFile(canonicalPath, `${JSON.stringify(brief,null,2)}\n`, 'utf8');
   const lines = [
     '# PHI OS Canonical Asset Production','',`Asset:\n${kind.chatgptAsset}`,'',`Node:\n${brief.nodeCode}`,'',`Locale:\n${brief.locale}`,'',`Purpose:\n${brief.purpose}`,'',

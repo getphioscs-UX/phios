@@ -99,3 +99,24 @@ export async function loadCanonicalPersonSubject(env,owner,id){
  admitPersonUse({userId:owner,person,consent:r.reportConsent,purpose:'REPORT'});
  return {person,canonicalBirthInput:r.canonicalBirthInput,methodConsent:r.methodConsent,reportConsent:r.reportConsent,birthSourceRef:r.birthSourceRef,personVersion:r.version,calculationSex:r.calculationSex};
 }
+
+// Private method-input capsule, using the existing Person encryption/consent
+// owner. Does not change Person rows, invent an order, or create entitlement.
+const sourceSchema='CANONICAL_PERSON_REPORT_SOURCE_V1';
+const sourceAad=(owner,id,version,type)=>encoder.encode(JSON.stringify([sourceSchema,owner,id,version,type]));
+export async function sealCanonicalPersonReportSource(context,{personId,sourceType,sourceSnapshot,sourceUseConsent}){
+ if(sourceType!=='HD_CUSTOMER_CONFIRMED_EXTERNAL_CHART'||sourceUseConsent!==true)throw fail('PERSON_REPORT_SOURCE_CONSENT_REQUIRED',403);
+ assertNoPersistedIdentity(sourceSnapshot);
+ const owner=personIdentity(context).userId,subject=await loadCanonicalPersonSubject(context.env,owner,personId);
+ const body={schemaVersion:sourceSchema,ownerAccountId:owner,personId,personVersion:subject.personVersion,sourceType,sourceSnapshot,sourceUseConsent:true,methodConsentId:subject.methodConsent.consentId,reportConsentId:subject.reportConsent.consentId};
+ const text=JSON.stringify(body);if(encoder.encode(text).length>65536)throw fail('PERSON_REPORT_SOURCE_TOO_LARGE',413);
+ const iv=crypto.getRandomValues(new Uint8Array(12)),ciphertext=await crypto.subtle.encrypt({name:'AES-GCM',iv,additionalData:sourceAad(owner,personId,subject.personVersion,sourceType)},await key(context.env),encoder.encode(text));
+ const capsule={schemaVersion:sourceSchema,personId,personVersion:subject.personVersion,sourceType,iv:b64(iv),ciphertext:b64(new Uint8Array(ciphertext)),digest:await digest(text)};
+ return 'PERSON_SOURCE_1.'+b64(encoder.encode(JSON.stringify(capsule))).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
+}
+export async function openCanonicalPersonReportSource(context,{personId,sourceType,token}){
+ if(typeof token!=='string'||token.length>131072||!token.startsWith('PERSON_SOURCE_1.')||sourceType!=='HD_CUSTOMER_CONFIRMED_EXTERNAL_CHART')throw fail('PERSON_REPORT_SOURCE_REQUIRED',422);
+ const owner=personIdentity(context).userId,subject=await loadCanonicalPersonSubject(context.env,owner,personId);let capsule,body,text;
+ try{let encoded=token.slice(16).replaceAll('-','+').replaceAll('_','/');encoded+='='.repeat((4-encoded.length%4)%4);capsule=JSON.parse(decoder.decode(unb64(encoded)));if(capsule.schemaVersion!==sourceSchema||capsule.personId!==personId||capsule.sourceType!==sourceType||capsule.personVersion!==subject.personVersion)throw 0;text=decoder.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(capsule.iv),additionalData:sourceAad(owner,personId,subject.personVersion,sourceType)},await key(context.env),unb64(capsule.ciphertext)));body=JSON.parse(text);if(await digest(text)!==capsule.digest||body.ownerAccountId!==owner||body.personId!==personId||body.personVersion!==subject.personVersion||body.sourceType!==sourceType||body.sourceUseConsent!==true||body.methodConsentId!==subject.methodConsent.consentId||body.reportConsentId!==subject.reportConsent.consentId)throw 0;}catch{throw fail('PERSON_REPORT_SOURCE_INTEGRITY_OR_VERSION_MISMATCH',409);}
+ return Object.freeze({subject,sourceSnapshot:body.sourceSnapshot,sourceDigest:capsule.digest,personVersion:subject.personVersion});
+}

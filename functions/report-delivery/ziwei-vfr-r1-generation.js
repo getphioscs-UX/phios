@@ -1,3 +1,4 @@
+import {createZiweiPaidProviderContext} from './ziwei-paid-provider-context.js';
 import {cachedMethodDelivery,methodCacheIdentity} from './method-delivery-cache.js';
 import {requireZwrVfrProfile,requireZwrVfrGenerationAdmission} from './ziwei-vfr-profile-policy.js';
 import {planZwrFiveCallExperiment,zwrVfrPromptIdentity} from '../personal-reading/visual-first/ziwei-vfr-five-call-composer.js';
@@ -36,13 +37,15 @@ export async function generateZiweiVfrR1Candidate(context,selection,deps={}){
  const plan=planZwrFiveCallExperiment({pack});
  if(!plan.allowed)unavailable('ZWR_VFR_GENERATION_PLAN_BLOCKED');
  const semanticKey=await methodCacheIdentity({schemaVersion:'METHOD_SEMANTIC_CACHE_KEY_V1',methodCode:profile.methodCode,productId:profile.productId,generationVersion:profile.generationVersion,profileVersion:profile.profileVersion,subjectId:base.personId,birthSourceRef:base.birthSourceRef,canonicalInputDigest:base.canonicalInputDigest,calculationDigest:await sha256Stable(evidence),authorityDigest:pack.authorityDigest,realityContext:selection?.targetContext||null,presentationMode:profile.presentationMode,locale:base.locale,promptIdentity:await zwrVfrPromptIdentity(),generationPlan:plan});
+ const replayOnly=deps.fetcher&&context.env.PHIOS_ENVIRONMENT==='local'&&context.env.REPORT_ZERO_COST_REPLAY==='true';
+ const paid=replayOnly?null:await createZiweiPaidProviderContext({context,candidate:base,authorityDigest:pack.authorityDigest,semanticKey});
  const semantic=await cachedMethodDelivery(context.env,{ownerAccountId:base.customerId,kind:'SEMANTIC',key:semanticKey,beforeClaim:async()=>{assertVfrLiveAllowed(context.env||{});if(!deps.fetcher||context.env.PHIOS_ENVIRONMENT!=='local')await requireZwrVfrGenerationAdmission(context.env);},
   validate:async value=>{if(value.status!=='PASS'||value.repairedResult?.authorityDigest!==pack.authorityDigest||value.completeness?.status!=='PASS')unavailable('METHOD_SEMANTIC_CACHE_INVALID');},
   produce:async()=>{
    // Only a cache miss can cross the paid-provider gate. Rights and consent were
    // rechecked by the canonical generator before this persistent lookup.
    assertVfrLiveAllowed(context.env||{});
-   return composeZwrVfrProductionDeepManuscript({pack,env:context.env||{},fetcher:deps.fetcher||globalThis.fetch});
+   return composeZwrVfrProductionDeepManuscript({pack,env:{...context.env,...(paid?{REPORT_PAID_CONTEXT_FACTORY:paid.forRequest}:{})},fetcher:deps.fetcher||globalThis.fetch});
   }
  });
  const composed=semantic.value;
@@ -93,6 +96,7 @@ export async function generateZiweiVfrR1Candidate(context,selection,deps={}){
   visualFirst:true,
   physicalPageCount:pages.length,
   deterministicDiagramCount:15,
+  ...(paid?{paidReportBinding:paid.binding}:{}),
   productionAdmissionGranted:false,
   productionAdmissionStatus:profile.releaseStatus
  };

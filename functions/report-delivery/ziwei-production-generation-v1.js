@@ -1,7 +1,7 @@
 // Separate production-composition successor; delivery remains LOCAL/QA only. No production activation or browser grants.
 import {normalizeVerifiedSymbolicAccountIdentity} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
 import {admitPersonUse} from '../account/person-use-policy.js';
-import {ownedReportPresentation} from '../commerce/book-commerce-store.js';
+import {ownedZiweiPurchase} from './ziwei-purchase-binding.js';
 import {requirePurchasedReportPresentation} from '../pws/commercial/report-successor-contract.js';
 import {buildZiweiReportEvidence} from '../personal-reading/narrative/ziwei-publication-adapter.js';
 import {buildZiweiProductionSections} from '../personal-reading/narrative/ziwei-production-composer-v1.js';
@@ -17,9 +17,9 @@ export function controlledZiweiIdentity(context){
  const identity=normalizeVerifiedSymbolicAccountIdentity(context.data?.symbolicAccountIdentity);
  if(!identity)throw Error('ACCOUNT_REQUIRED');return identity;
 }
-export async function requireZiweiEntitlement(context,locale){
+export async function requireZiweiEntitlement(context,locale,{purchaseId=null}={}){
  const identity=controlledZiweiIdentity(context);
- const owned=await ownedReportPresentation(context.env,identity.userId,ZIWEI_PRODUCT);
+ const owned=await ownedZiweiPurchase(context,identity.userId,ZIWEI_PRODUCT,{purchaseId});
  const selection=requirePurchasedReportPresentation(owned);
  if(!['en','zh-Hans'].includes(locale)||(selection.reportLocale!==locale&&selection.reportLocale!=='bilingual'))throw Error('PURCHASED_LANGUAGE_MISMATCH');
  return owned;
@@ -48,5 +48,5 @@ export async function generateZiweiProductionCandidate(context,{personId,locale}
  await assertReportSubjectBinding({presentation:subject,expectedBinding:binding});
  const sections=await buildZiweiProductionSections({evidence,locale}),report=buildZiweiProductionPublication({evidence,sections,locale,subjectPresentation:subject});
  const snapshot=await createCustomerDeliverySnapshot({methodId:'ZWR',locale,subjectFingerprint:fingerprint,inputFingerprint:evidence.structured.inputFingerprint,compositionVersion:'ZIWEI-PRODUCTION-COMPOSER-V1',authorityVersion:'ZIWEI_PRO_R2_AUTHORITY_V2',claimIrVersion:'REPORT_PUBLICATION_IR_V2',verifierVersion:'ZWR-CONTROLLED-DELIVERY-1',createdAt:now(),semanticContent:{report,sections,evidence:evidence.structured,subjectBinding:binding,subject}});
- return {schemaVersion:'ZWR-PRODUCTION-COMPOSITION-CANDIDATE-1',scope:'CONTROLLED_QA_ONLY',customerId:identity.userId,personId,locale,purchaseId:owned.purchase_id,snapshot,executionReuse:evidence.executionReuse,canonicalInputSnapshot:structuredClone(input),canonicalInputDigest:await sha256Stable(input),birthSourceRef:record.birthSourceRef,productionAdmissionGranted:false};
+ return {schemaVersion:'ZWR-PRODUCTION-COMPOSITION-CANDIDATE-1',scope:'CONTROLLED_QA_ONLY',customerId:identity.userId,personId,personVersion:record.personVersion,locale,purchaseId:owned.purchase_id,snapshot,executionReuse:evidence.executionReuse,canonicalInputSnapshot:structuredClone(input),canonicalInputDigest:await sha256Stable(input),birthSourceRef:record.birthSourceRef,productionAdmissionGranted:false};
 }
