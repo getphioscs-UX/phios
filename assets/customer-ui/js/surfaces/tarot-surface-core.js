@@ -439,17 +439,23 @@ function installation(scope = document) {
         }),
         signal: controller.signal
       });
-      const payload = await response.json();
-      if (!response.ok || !payload.ok) throw new Error(payload?.error?.code || 'EXECUTION_FAILED');
-      render(payload.publicView);
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || payload?.ok !== true) {
+        const code = String(payload?.error?.code || payload?.status || `HTTP_${response.status}`).toUpperCase();
+        throw Object.assign(new Error(code), { httpStatus: response.status });
+      }
+      if (!payload?.publicView?.spreadComposition) throw new Error('TAROT_COMPOSITION_MISSING');
+      try { render(payload.publicView); }
+      catch { throw new Error('TAROT_RESULT_RENDER_FAILED'); }
     } catch (error) {
       const timedOut = error?.name === 'AbortError' || String(error?.message || '').includes('timeout');
-      setExecutionStatus(
-        timedOut
-          ? t('PHI OS took too long to finish this check. Please try again.', 'PHI OS 检查时间过长，请再试一次。')
-          : t('Reading unavailable right now. Please try again.', '当前暂时无法完成读取，请稍后再试。'),
-        'error'
-      );
+      // Show only a stable, non-sensitive error code; never expose user questions or card IDs.
+      const code = String(error?.message || 'TAROT_EXECUTION_UNAVAILABLE').toUpperCase();
+      const safeCode = /^[A-Z0-9_:-]{3,72}$/.test(code) ? code : 'TAROT_EXECUTION_UNAVAILABLE';
+      const message = timedOut
+        ? t('PHI OS took too long to finish this check. Please try again.', 'PHI OS 检查时间过长，请再试一次。')
+        : t('Reading unavailable right now. Please try again.', '当前暂时无法完成读取，请稍后再试。');
+      setExecutionStatus(`${message} [${safeCode}]`, 'error');
     } finally {
       clearTimeout(timeoutId);
       state.isExecuting = false;
