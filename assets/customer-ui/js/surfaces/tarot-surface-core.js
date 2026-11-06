@@ -88,12 +88,12 @@ function disclosureText(payload) {
   if (payload.currentRealityAvailable === true || payload.currentRealityContextAvailable === true) {
     return t(
       'Your current Reality context is available if you explicitly choose it.',
-      '如果你明确勾选，当前 Reality context 可以一并比较。'
+      '如果你明确勾选，当前现实上下文 可以一并比较。'
     );
   }
   return t(
     'No current Reality context is active for comparison right now.',
-    '目前没有可供比较的当前 Reality context。'
+    '目前没有可供比较的当前现实上下文。'
   );
 }
 
@@ -377,6 +377,11 @@ function installation(scope = document) {
     updateButton();
   }
 
+  function localizedReadingText(text,composition=state.currentView?.spreadComposition){
+    let value=String(text??'');
+    return isZh()?value.replaceAll('Reality context','现实上下文').replaceAll('Waite','韦特'):value;
+  }
+
   function render(view) {
     state.currentView = view;
     const composition = view.spreadComposition;
@@ -385,10 +390,10 @@ function installation(scope = document) {
     if (!results) return;
     results.hidden = false;
     const summary = q('[data-reading-summary]', scope);
-    if (summary) summary.textContent = t(composition.wholeSpreadSynthesis.narrative.en, composition.wholeSpreadSynthesis.narrative.zhHans);
+    if (summary) summary.textContent = localizedReadingText(t(composition.wholeSpreadSynthesis.narrative.en, composition.wholeSpreadSynthesis.narrative.zhHans),composition);
     const drawDisplay = q('[data-draw-display]', scope);
     if (drawDisplay) {
-      drawDisplay.innerHTML = `<div class="sp-card-grid sp-card-grid--reading">${arr(view.hierarchy?.find(entry => entry.id === 'PROJECTION')?.data?.cards).map(card => `
+      drawDisplay.innerHTML = `<div class="sp-card-grid sp-card-grid--reading">${arr(view.hierarchy?.find(entry => entry.id === 'PROJECTION')?.data?.cards).map((card,index) => `
         <article class="sp-card">
           <div class="sp-card__art">${card.artwork?.src ? `<img src="${esc(card.artwork.src)}" alt="${esc(card.canonicalTitle)}" loading="lazy">` : ''}</div>
           <div class="sp-card__body"><p>${esc(card.canonicalTitle)}</p></div>
@@ -397,19 +402,19 @@ function installation(scope = document) {
     }
     const interpretationDisplay = q('[data-interpretation-display]', scope);
     if (interpretationDisplay) {
-      interpretationDisplay.innerHTML = composition.positionReadings.map(item => `
+      interpretationDisplay.innerHTML = composition.positionReadings.map((item,index) => `
         <article class="sp-reading-card">
           <p class="sp-kicker">${esc(t(item.position.labelEn, item.position.labelZhHans))}</p>
           <h4>${esc(item.canonicalTitle)}</h4>
-          <p>${esc(t(item.composedReading.en, item.composedReading.zhHans))}</p>
+          <p>${esc(localizedReadingText(t(item.composedReading.en, item.composedReading.zhHans),composition))}</p>
           <div class="sp-reading-question"><strong>${esc(t('Reality question', '现实追问'))}</strong><p>${esc(t(item.positionPrompt.en, item.positionPrompt.zhHans))}</p></div>
         </article>
-      `).join('') + `<section class="sp-reading-card"><h4>${esc(t('How the cards relate', '这些牌如何连起来'))}</h4>${composition.relationships.map(relationship => `<p>${esc(t(relationship.statement.en, relationship.statement.zhHans))}</p>`).join('')}</section>`;
+      `).join('') + `<section class="sp-reading-card"><h4>${esc(t('How the cards relate', '这些牌如何连起来'))}</h4>${composition.relationships.map(relationship => `<p>${esc(localizedReadingText(t(relationship.statement.en, relationship.statement.zhHans),composition))}</p>`).join('')}</section>`;
     }
     const realityDisplay = q('[data-reality-display]', scope);
-    if (realityDisplay) realityDisplay.innerHTML = `<p>${esc(t(composition.realityComparison.summary.en, composition.realityComparison.summary.zhHans))}</p>`;
+    if (realityDisplay) realityDisplay.innerHTML = `<p>${esc(localizedReadingText(t(composition.realityComparison.summary.en, composition.realityComparison.summary.zhHans),composition))}</p>`;
     const nextDisplay = q('[data-next-display]', scope);
-    if (nextDisplay) nextDisplay.innerHTML = `<p>${esc(t(composition.wholeSpreadSynthesis.decisionBoundary.en, composition.wholeSpreadSynthesis.decisionBoundary.zhHans))}</p>`;
+    if (nextDisplay) nextDisplay.innerHTML = `<p>${esc(localizedReadingText(t(composition.wholeSpreadSynthesis.decisionBoundary.en, composition.wholeSpreadSynthesis.decisionBoundary.zhHans),composition))}</p>`;
     setExecutionStatus(t('Reading ready.', '读取已生成。'), 'done');
     results.scrollIntoView({ behavior: 'smooth' });
   }
@@ -462,6 +467,7 @@ function installation(scope = document) {
     const button = q('[data-new-reading]', scope);
     if (!button) return;
     button.addEventListener('click', () => {
+      state.currentView = null;
       state.selectedCardIds = [];
       state.shuffledCardIds = [];
       const results = q('[data-symbolic-results]', scope);
@@ -484,16 +490,24 @@ function installation(scope = document) {
       else chooseSpread(state.spreadId);
       await loadContext();
 
-      q('[data-start-draw]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', 'Tarot 暂时无法运行。'), 'error')));
-      q('[data-reshuffle]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', 'Tarot 暂时无法运行。'), 'error')));
+      q('[data-start-draw]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', '塔罗暂时无法运行。'), 'error')));
+      q('[data-reshuffle]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', '塔罗暂时无法运行。'), 'error')));
       q('[data-symbolic-execute]', scope)?.addEventListener('click', () => execute());
       q('[data-symbolic-question]', scope)?.addEventListener('input', state.questionGuide ? checkQuestion : updateButton);
       q('[data-use-reality-context]', scope)?.addEventListener('change', () => loadContext());
       installNewReadingReset();
+      window.addEventListener('phios:localechange',()=>{
+        renderSpreadSelector();
+        qa('[data-intent]',scope).forEach(button=>{const item=arr(state.questionGuide?.intents).find(i=>i.intentId===button.dataset.intent);if(item)button.textContent=t(item.labelEn,item.labelZhHans);});
+        const record=intent(),note=q('[data-question-guidance]',scope);
+        if(record&&note)note.innerHTML='<strong>'+esc(t('Suggested question','建议问法'))+'</strong><p>'+esc(t(record.exampleEn,record.exampleZhHans))+'</p><small>'+esc(t(record.promptEn,record.promptZhHans))+'</small>';
+        renderSelectionSummary();if(state.shuffledCardIds.length)renderDeck();
+        if(state.currentView)render(state.currentView);else if(state.questionGuide)checkQuestion();else updateButton();
+      });
       if (state.questionGuide) checkQuestion();
       else updateButton();
     } catch {
-      setExecutionStatus(t('Tarot is temporarily unavailable.', 'Tarot 暂时无法运行。'), 'error');
+      setExecutionStatus(t('Tarot is temporarily unavailable.', '塔罗暂时无法运行。'), 'error');
     }
   }
 

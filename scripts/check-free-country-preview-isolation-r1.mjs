@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+import {freeCountryPreviewBuildPolicy,isolateFreeCountryPreviewWorker} from './lib/free-country-preview-isolation-r1.mjs';
+const env={CF_PAGES:'1',CF_PAGES_BRANCH:'codex/codex4-free-country-preview-r1',CF_PAGES_ENVIRONMENT:'preview',CF_PAGES_PROJECT:'phios-free-country-review',CF_PAGES_URL:'https://review.phios-free-country-review.pages.dev',CF_PAGES_COMMIT_SHA:'2166de8e1bf2cc5e5a33926145c8d7f4bbbe68ae'};
+assert.equal(freeCountryPreviewBuildPolicy({...env,CF_PAGES_BRANCH:'main'}).active,false);
+for(const change of [{CF_PAGES_ENVIRONMENT:'production'},{CF_PAGES_PROJECT:'phios-github'},{CF_PAGES_URL:'https://unrelated.pages.dev'},{CF_PAGES_COMMIT_SHA:'invalid'}])assert.throws(()=>freeCountryPreviewBuildPolicy({...env,...change}));
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'phios-preview-boundary-'));const fixture=path.join(dir,'worker.mjs');
+fs.writeFileSync(fixture,'export default {async fetch(request,env){return Response.json({keys:Object.keys(env),mode:env.PHIOS_D1_MAINTENANCE_MODE,provider:env.REPORT_PROVIDER_LIVE_ALLOWED,paid:env.PHIOS_SHARED_PAID_REPORT_ENABLED});}}');
+const code=isolateFreeCountryPreviewWorker(fixture,freeCountryPreviewBuildPolicy(env));
+const {default:worker}=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
+const response=await worker.fetch(new Request('https://review.phios-free-country-review.pages.dev/'),{ASSETS:{},RUNTIME_DB:{},AI:{},PRIVATE_REPORTS:{},METHOD_REPORT_RENDERER:{},STRIPE_SECRET_KEY:'fixture-not-a-secret',OPENAI_API_KEY:'fixture-not-a-secret',PHIOS_D1_MAINTENANCE_MODE:'OFF'},{});
+const result=await response.json();for(const key of ['AI','PRIVATE_REPORTS','METHOD_REPORT_RENDERER','STRIPE_SECRET_KEY','OPENAI_API_KEY'])assert.ok(!result.keys.includes(key));
+assert.equal(result.mode,'READ_ONLY');assert.equal(result.provider,'false');assert.equal(result.paid,'false');assert.equal(response.headers.get('X-PHIOS-Source-Commit'),env.CF_PAGES_COMMIT_SHA);
+console.log('PASS isolated build identity, binding allowlist, forced READ_ONLY and Paid/Provider closed');
