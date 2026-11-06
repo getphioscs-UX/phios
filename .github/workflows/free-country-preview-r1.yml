@@ -1,0 +1,66 @@
+name: Free and Country admission boundaries
+on:
+  pull_request:
+    paths:
+      - 'functions/_middleware.js'
+      - 'functions/_lib/stateless-free-request-r3.js'
+      - 'assets/js/pages/civilization-atlas/*history*'
+      - 'content/civilization-atlas/evidence/country-history-source-bindings-r1.json'
+      - 'scripts/check-free-read-only-r3.mjs'
+      - 'scripts/check-country-history-public-admission-r4.mjs'
+      - 'scripts/lib/country-history-publication-r4.mjs'
+      - 'scripts/lib/free-country-preview-isolation-r1.mjs'
+      - 'scripts/check-free-country-preview-isolation-r1.mjs'
+      - 'scripts/build-cloudflare-pages.mjs'
+      - 'scripts/lib/main-convergence-source-successor-r1.mjs'
+      - 'content/civilization-atlas/maintenance/free-country-r1-source-successor.json'
+      - '.github/workflows/free-country-preview-r1.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  boundaries:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+      WRANGLER_SEND_METRICS: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - run: node scripts/check-free-read-only-r3.mjs
+      - run: node scripts/check-country-history-public-admission-r4.mjs
+      - run: node scripts/check-free-country-preview-isolation-r1.mjs
+      - name: Verify exact source successor chain and rejection boundaries
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import fs from 'node:fs';
+          import {execFileSync} from 'node:child_process';
+          import {FREE_COUNTRY_SUCCESSOR_RECORD,validateFreeCountrySourceSuccessor,mainConvergencePredecessors,mainHistoricalPredecessors} from './scripts/lib/main-convergence-source-successor-r1.mjs';
+          const recordBytes=fs.readFileSync(FREE_COUNTRY_SUCCESSOR_RECORD),record=JSON.parse(recordBytes);
+          assert.equal(validateFreeCountrySourceSuccessor().size,5);
+          assert.ok(mainConvergencePredecessors().size>=5);
+          assert.equal(mainHistoricalPredecessors().size,8);
+          const mutations=[
+            r=>r.changes.pop(),r=>r.changes[1]=r.changes[0],
+            r=>r.changes.push({...r.changes[0],path:'functions/unapproved.js'}),
+            r=>r.changes[0].path='../outside',r=>r.changes[0].predecessorSha256='0'.repeat(64),
+            r=>r.baseline='1'.repeat(40),r=>r.sourceCommit='2'.repeat(40),
+            r=>r.boundaries.commercialAdmissionGranted=true,r=>r.humanDecision='ACCEPTED'
+          ];
+          for(const mutate of mutations){const changed=structuredClone(record);mutate(changed);assert.throws(()=>validateFreeCountrySourceSuccessor({recordBytes:Buffer.from(JSON.stringify(changed))}));}
+          assert.throws(()=>validateFreeCountrySourceSuccessor({recordBytes:Buffer.alloc(0)}));
+          assert.throws(()=>validateFreeCountrySourceSuccessor({frozenBytes:Buffer.from('{}')}));
+          const first=record.changes[0].path;
+          for(const ref of ['2391e4e104269b30d95987dda7f82a00e580227b',record.baseline,record.sourceCommit])
+            assert.throws(()=>validateFreeCountrySourceSuccessor({readGit:(r,p)=>r===ref&&p===first?Buffer.from('wrong endpoint'):execFileSync('git',['show',r+':'+p],{maxBuffer:32*1024*1024})}));
+          assert.throws(()=>validateFreeCountrySourceSuccessor({readCurrent:p=>p===first?Buffer.from('unregistered third SHA'):fs.readFileSync(p)}));
+          console.log('PASS exact 2391→freeze→Main2166→PR19→current chain; 15 negative cases rejected');
+          NODE

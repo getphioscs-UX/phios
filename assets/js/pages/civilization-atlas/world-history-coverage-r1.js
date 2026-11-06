@@ -1,6 +1,8 @@
-import {COUNTRY_HISTORY_SOURCE_BINDINGS as binding} from './world-history-sources.generated.js';
+import {COUNTRY_HISTORY_SOURCE_BINDINGS as candidateBinding} from './world-history-sources.generated.js';
+import {publicCountryHistoryBinding} from './country-history-public-admission-r4.js';
 import {searchWorld} from './world-search.js';
 import {WORLD_COUNTRIES} from './world-country-search.js';
+const binding=publicCountryHistoryBinding(candidateBinding);
 
 const clean=s=>String(s||'').normalize('NFKC').toLowerCase().replace(/[?？。!！]/g,'').trim();
 const names={MYS:['malaysia','malayan','malaya','马来西亚','馬來西亞','马来亚','馬來亞'],SGP:['singapore','新加坡'],IDN:['indonesia','indonesian','印度尼西亚','印度尼西亞','印尼']};
