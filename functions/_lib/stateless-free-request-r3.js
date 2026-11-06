@@ -59,7 +59,10 @@ export async function classifyStatelessFreeRequest(request, env = {}) {
 
 // A Free exception never receives private storage, AI, Renderer or queue capabilities.
 // Count violations even if a downstream catch tries to translate one into success.
+const sealedEnvironments = new WeakMap();
 export function sealStatelessFreeBindings(env) {
+  // Pages may reuse an env object. Reuse its sealed capabilities and counter.
+  if (sealedEnvironments.has(env)) return sealedEnvironments.get(env);
   let violations = 0;
   const deny = () => { violations++; throw new Error('STATELESS_FREE_CAPABILITY_DENIED'); };
   for (const name of ['AI','PRIVATE_REPORTS','MANUSCRIPTS','BOOKS','METHOD_REPORT_RENDERER']) {
@@ -70,5 +73,7 @@ export function sealStatelessFreeBindings(env) {
     }));
     Object.defineProperty(env,name,{value:blocked,writable:false,configurable:false,enumerable:true});
   }
-  return () => violations;
+  const count = () => violations;
+  sealedEnvironments.set(env,count);
+  return count;
 }

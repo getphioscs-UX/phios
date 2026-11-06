@@ -12,6 +12,7 @@ export async function onRequest(context) {
     const freeRoute = mutation ? await classifyStatelessFreeRequest(context.request, context.env) : null;
     if (mutation && !freeRoute) return maintenanceResponse();
     const freeViolations = freeRoute ? sealStatelessFreeBindings(context.env) : () => 0;
+    const freeBefore = freeViolations();
     // Pages next() captures this env object. Replacing context.env would NOT
     // propagate. Seal only the binding in that object before nested handlers.
     // Do not restore it after next(): waitUntil and concurrent requests must
@@ -22,7 +23,7 @@ export async function onRequest(context) {
     const response = await context.next();
     // Route-owned catches cannot turn a rejected write into success or leak
     // their diagnostics. A concurrent rejection may conservatively deny a read.
-    return d1ViolationCount(guarded) === before && freeViolations() === 0 ? response : maintenanceResponse();
+    return d1ViolationCount(guarded) === before && freeViolations() === freeBefore ? response : maintenanceResponse();
   } catch {
     // Existing handlers may translate a guard error themselves; neither path
     // exposes SQL, topology or an original binding to a customer.

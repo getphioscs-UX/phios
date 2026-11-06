@@ -70,6 +70,14 @@ export async function checks() {
     assert.ok(JSON.stringify(payload).includes(tarotBody.question));assert.ok(JSON.stringify(payload).includes('RWS-MAJOR-00'));
     assert.equal(payload.production.providerUsed,false);assert.equal(result.counters.dbWrite,0);assert.equal(result.counters.private,0);assert.equal(external,0);
     rows.push({label:'real Tarot handler and auth middleware',status:200,counters:result.counters,external});
+    const shared=environment();
+    assert.equal((await execute(request('/api/symbolic-method-execute',tarotBody),{env:shared.env})).response.status,200);
+    assert.equal((await execute(request('/api/symbolic-method-execute',tarotBody),{env:shared.env})).response.status,200);
+    rows.push({label:'same env consecutive legal requests remain available',status:200});
+    await denied('same env caught write rejected',request('/api/symbolic-method-execute',tarotBody),{env:shared.env,handler:async c=>{try{c.env.PRIVATE_REPORTS.put('x','x');}catch{}return Response.json({ok:true});}});
+    assert.equal((await execute(request('/api/symbolic-method-execute',tarotBody),{env:shared.env})).response.status,200);
+    rows.push({label:'same env recovers after rejected private write without restoring capabilities',status:200});
+    assert.equal(shared.counters.private,0);assert.equal(shared.counters.dbWrite,0);
     const revoked=environment().env;revoked.RUNTIME_DB.prepare=()=>({bind(){return this;},async first(){return {payload:JSON.stringify({methodCode:'TAROT',releaseId:'TAROT-1.1.0',authorityDigest:'4762f2df7ae7bc950ae8e62a6a101c1dd49c18b89b9e664358b16ca67ef6b204',state:'REVOKED',explicitRevocation:true})};}});
     assert.equal((await execute(request('/api/symbolic-method-execute',tarotBody),{env:revoked})).response.status,423);
     rows.push({label:'server revocation preserved',status:423});
