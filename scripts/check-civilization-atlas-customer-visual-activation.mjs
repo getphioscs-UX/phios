@@ -26,7 +26,7 @@ for(const a of bindings.assets){
 const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js');
 for(const label of ['Timeline','World','Civilizations','Compare','Reconfiguration']) assert.ok(shell.includes(label),`Missing customer entry: ${label}`);
 assert.ok(shell.includes("const CIVILIZATION_VIEWS=['cases','trajectories','transitions','loss']"));
-assert.ok(shell.includes("href:'/books/reality-configuration/#atlas'"));
+assert.ok(shell.includes("{id:'reconfiguration',href:'/world?view=reconfiguration&atlas=overview'"),'Reconfiguration must enter the canonical World workspace with its explicit Atlas scope');
 
 const visual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
 for(const token of ['period?.caseIds','snapshot?.majorCaseIds','family?.caseIds','trajectory?.relatedCases','transition?.relatedCases','lossType.exampleCaseIds']) assert.ok(visual.includes(token),`Missing context relation: ${token}`);

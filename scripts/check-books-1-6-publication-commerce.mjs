@@ -42,7 +42,11 @@ for(let i=1;i<=50;i++){
   assert.ok(s6.previewPages[i-1].endsWith(expected),`Book VI preview order mismatch at page ${i}`);
 }
 
-const bookProducts=STRIPE_PRODUCT_REGISTRY.filter(p=>p.category==='BOOK'&&p.active&&Number(p.publicationVolume)<=6);
+const allBookProducts=STRIPE_PRODUCT_REGISTRY.filter(p=>p.category==='BOOK'&&p.active&&Number(p.publicationVolume)>=1&&Number(p.publicationVolume)<=6);
+const localized=allBookProducts.filter(p=>/-(?:ZH|EN)$/.test(p.productId));
+assert.deepEqual(localized.map(p=>p.productId).sort(),[1,2,3,4].flatMap(v=>['EN','ZH'].map(locale=>`COM-BOOK-0${v}-${locale}`)).sort(),'Only the existing eight language SKUs may accompany the six canonical products.');
+for(const product of localized)assert.equal(product.publicationBookCode,`BOOK-${product.publicationVolume}`);
+const bookProducts=allBookProducts.filter(p=>!localized.includes(p));
 assert.equal(bookProducts.length,6,'Books I-VI must each have one active commerce product');
 for(let volume=1;volume<=6;volume++){
   const product=bookProducts.find(p=>Number(p.publicationVolume)===volume);

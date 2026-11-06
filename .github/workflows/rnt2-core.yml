@@ -40,20 +40,64 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Runner disk before checkout
+        shell: bash
+        run: |
+          df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          df -i "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: blob:none
+      - name: Runner disk after checkout
+        if: always()
+        shell: bash
+        run: |
+          df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          df -i "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          if [ -d .git ]; then
+            du -sh .git .
+            git rev-parse HEAD
+            git rev-parse --is-shallow-repository
+            git config --get remote.origin.partialclonefilter
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
           cache: npm
       - run: npm ci
       - run: node scripts/check-rnt2-core.mjs
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/scripts/lib/report-zero-cost-preload.mjs --import=${{ github.workspace }}/scripts/lib/pages-json-import-preload.mjs
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
       - run: node scripts/check-rnt2-adversarial.mjs
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/scripts/lib/report-zero-cost-preload.mjs --import=${{ github.workspace }}/scripts/lib/pages-json-import-preload.mjs
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
       - run: node scripts/check-rnt2-report-subject-flow.mjs
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/scripts/lib/report-zero-cost-preload.mjs --import=${{ github.workspace }}/scripts/lib/pages-json-import-preload.mjs
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
       - run: node scripts/check-rnt2-private-review.mjs
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/scripts/lib/report-zero-cost-preload.mjs --import=${{ github.workspace }}/scripts/lib/pages-json-import-preload.mjs
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
       - run: npm run check:bazi-s04-csd
       - run: npm run check:bazi-s04-v3-editorial
       - run: npm run check:bazi-s04-v4
       - run: npm run check:bazi-s05-market
       - run: node scripts/check-bazi-s02-s03-reconciliation.mjs
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/scripts/lib/report-zero-cost-preload.mjs --import=${{ github.workspace }}/scripts/lib/pages-json-import-preload.mjs
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
       - run: node scripts/check-bazi-owner-receipts.mjs
+        env:
+          NODE_OPTIONS: --import=${{ github.workspace }}/scripts/lib/report-zero-cost-preload.mjs --import=${{ github.workspace }}/scripts/lib/pages-json-import-preload.mjs
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
       - run: node --check assets/customer-ui/js/personal-products/rnt2-s04-review.js
