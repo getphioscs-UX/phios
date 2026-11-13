@@ -23,6 +23,7 @@ async function bindingFor(context,candidate,reportId){
 }
 // Review files have their own explicit local scope. No QA boolean grants customer release.
 export function assertZiweiPdfScope(context,candidate){
+ if(context.env.PHIOS_ENVIRONMENT==='local'&&context.env.STRIPE_ENVIRONMENT==='QA'&&context.env.PHIOS_LOCAL_ZWR_CURRENT_NATIVE_QA==='true'&&candidate.schemaVersion==='ZWR-VFR-R1-AUTO-DEEP-CANDIDATE-v3'&&candidate.productionAdmissionGranted===false&&candidate.paidReportBinding?.ownerAccountId===personIdentity(context).userId&&candidate.paidReportBinding?.purchaseId===candidate.purchaseId&&candidate.paidReportBinding?.productId==='COM-REPORT-ZIWEI-FULL'&&candidate.paidReportBinding?.reportId)return 'LOCAL_CURRENT_NATIVE_QA_NOT_CUSTOMER_RELEASE';
  if(context.env.PHIOS_ENVIRONMENT!=='local'||candidate.schemaVersion!=='ZWR-VFR-R1-ACCEPTED-RENDERER-FIXTURE-v1'||candidate.productionAdmissionGranted!==false)fail('ZWR_COMMERCIAL_WATERMARK_AND_P8_ADMISSION_REQUIRED');
  return 'LOCAL_SYNTHETIC_REFERENCE_ONLY';
 }

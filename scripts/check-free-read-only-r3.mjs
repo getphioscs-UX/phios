@@ -1,3 +1,5 @@
+import {symbolicFrozen20Bytes} from './lib/symbolic-frozen20-receiver-successor-r1.mjs';
+import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
@@ -7,7 +9,7 @@ import {onRequestPost as tarot} from '../functions/api/symbolic-method-execute.j
 import {onRequestPost as location} from '../functions/api/location-resolve.js';
 
 export const base = fileURLToPath(new URL('../',import.meta.url));
-export const tarotBody = {method:'TAROT',question:'What should I consider when planning a learning project?',spreadId:'ONE_CARD_FOCUS',selectedCardIds:['RWS-MAJOR-00'],useCurrentRealityContext:false};
+export const tarotBody = {method:'TAROT',question:'What should I consider when planning a learning project?',spreadId:'ONE_CARD_FOCUS',selectedCardIds:['RWS-MAJOR-01'],useCurrentRealityContext:false};
 export const locationBody = {providerRef:'R123',birthDate:'2000-01-15',birthTime:'12:00',locale:'en'};
 export function environment() {
   const counters = {dbRead:0,dbWrite:0,private:0,assets:0};
@@ -67,9 +69,12 @@ export async function checks() {
   try {
     const result=await execute(request('/api/symbolic-method-execute',tarotBody));const payload=await result.response.json();
     assert.equal(result.response.status,200,JSON.stringify(payload));assert.equal(payload.ok,true);assert.ok(payload.publicView.spreadComposition);
-    assert.ok(JSON.stringify(payload).includes(tarotBody.question));assert.ok(JSON.stringify(payload).includes('RWS-MAJOR-00'));
+    assert.ok(JSON.stringify(payload).includes(tarotBody.question));assert.ok(JSON.stringify(payload).includes(tarotBody.selectedCardIds[0]));
     assert.equal(payload.production.providerUsed,false);assert.equal(result.counters.dbWrite,0);assert.equal(result.counters.private,0);assert.equal(external,0);
     rows.push({label:'real Tarot handler and auth middleware',status:200,counters:result.counters,external});
+    const legacySource=symbolicFrozen20Bytes('functions/api/symbolic-method-execute.js').toString('utf8').replace(/from '(\.\.\/[^']+)'/g,(_m,p)=>'from '+JSON.stringify(new URL(p,pathToFileURL(process.cwd()+'/functions/api/symbolic-method-execute.js')).href));const legacyEndpoint=await import('data:text/javascript;base64,'+Buffer.from(legacySource).toString('base64'));
+    const historical=await execute(request('/api/symbolic-method-execute',{...tarotBody,selectedCardIds:['RWS-MAJOR-00']}),{handler:legacyEndpoint.onRequestPost});assert.equal(historical.response.status,200);assert.ok((await historical.response.json()).publicView);
+    const held=await execute(request('/api/symbolic-method-execute',{...tarotBody,selectedCardIds:['RWS-MAJOR-00']})),heldBody=await held.response.json();assert.equal(held.response.status,409);assert.equal(heldBody.error.code,'TAROT_SELECTED_CARD_CONTENT_REVIEW_PENDING');assert.equal(heldBody.publicView,undefined);assert.equal(held.counters.dbWrite,0);assert.equal(held.counters.private,0);assert.equal(external,0);rows.push({label:'Fool review hold current409 and historical frozen20 positive retained',status:409});
     const shared=environment();
     assert.equal((await execute(request('/api/symbolic-method-execute',tarotBody),{env:shared.env})).response.status,200);
     assert.equal((await execute(request('/api/symbolic-method-execute',tarotBody),{env:shared.env})).response.status,200);

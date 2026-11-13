@@ -1,3 +1,5 @@
+import {canonicalJson} from '../document-assembly/canonical-json.js';
+import {sha256Hex} from '../commerce/commerce-crypto.js';
 import { assertVerifiedSymbolicAccountIdentity } from './symbolic-account-identity-v1.js';
 import { patchSymbolicReadingPersistenceEnvelope, SYMBOLIC_READING_PERSISTENCE_SCHEMA } from './symbolic-reading-envelope-v1.js';
 
@@ -49,9 +51,11 @@ export function createSymbolicReadingD1Store({ db, clock, createId } = {}) {
       const identity = assertVerifiedSymbolicAccountIdentity(identityInput);
       if (envelope?.schemaVersion !== SYMBOLIC_READING_PERSISTENCE_SCHEMA) throw new TypeError('SYMBOLIC_PERSISTENCE_ENVELOPE_REQUIRED');
       const timestamp = nowIso(clock);
-      const readingId = uuid('symbolic_reading', createId);
-      const artifactId = uuid('symbolic_artifact', createId);
-      const eventId = uuid('symbolic_event', createId);
+      const fingerprint=await sha256Hex(canonicalJson([identity.userId,envelope.methodCode,envelope.question,envelope.drawEvidence,envelope.projection,envelope.publicReadingView]));
+      const readingId = 'symbolic_reading_'+fingerprint;
+      const prior=await store.read({identity,readingId});if(prior){const state=await db.prepare('SELECT status FROM runtimes WHERE runtime_id=? AND user_id=?').bind(readingId,identity.userId).first();if(state?.status!=='active')throw Object.assign(Error('SYMBOLIC_READING_NOT_ACTIVE'),{status:403});if(prior.reading.retention?.expiresAt&&Date.parse(prior.reading.retention.expiresAt)<=Date.parse(timestamp))throw Object.assign(Error('READING_EXPIRED'),{status:410});return Object.freeze({recordId:readingId,artifactId:prior.artifactId,createdAt:prior.createdAt,provider:store.provider,reused:true});}
+      const artifactId = 'symbolic_artifact_'+fingerprint;
+      const eventId = 'symbolic_event_'+fingerprint;
       const runtimeState = JSON.stringify({
         methodCode: envelope.methodCode,
         artifactId,
@@ -63,9 +67,9 @@ export function createSymbolicReadingD1Store({ db, clock, createId } = {}) {
       const eventPayload = JSON.stringify({ artifactId, methodCode: envelope.methodCode, reviewState: envelope.reviewState, retentionExplicit: true });
       const statements = [
         db.prepare(`INSERT INTO runtime_users (user_id,status,created_at,updated_at) VALUES (?1,'active',?2,?2) ON CONFLICT(user_id) DO UPDATE SET updated_at=excluded.updated_at`).bind(identity.userId, timestamp),
-        db.prepare(`INSERT INTO runtimes (runtime_id,user_id,status,current_stage,schema_version,state,created_at,updated_at) VALUES (?1,?2,'active',?3,?4,?5,?6,?6)`).bind(readingId, identity.userId, STAGE, RUNTIME_SCHEMA, runtimeState, timestamp),
-        db.prepare(`INSERT INTO runtime_artifacts (artifact_id,runtime_id,artifact_type,stage,payload,schema_version,created_at,updated_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?7)`).bind(artifactId, readingId, ARTIFACT_TYPE, STAGE, artifactPayload, ARTIFACT_SCHEMA, timestamp),
-        db.prepare(`INSERT INTO runtime_events (event_id,runtime_id,event_type,payload,event_version,created_at) VALUES (?1,?2,'symbolic.reading.saved',?3,'1.0.0',?4)`).bind(eventId, readingId, eventPayload, timestamp)
+        db.prepare(`INSERT OR IGNORE INTO runtimes (runtime_id,user_id,status,current_stage,schema_version,state,created_at,updated_at) VALUES (?1,?2,'active',?3,?4,?5,?6,?6)`).bind(readingId, identity.userId, STAGE, RUNTIME_SCHEMA, runtimeState, timestamp),
+        db.prepare(`INSERT OR IGNORE INTO runtime_artifacts (artifact_id,runtime_id,artifact_type,stage,payload,schema_version,created_at,updated_at) VALUES (?1,?2,?3,?4,?5,?6,?7,?7)`).bind(artifactId, readingId, ARTIFACT_TYPE, STAGE, artifactPayload, ARTIFACT_SCHEMA, timestamp),
+        db.prepare(`INSERT OR IGNORE INTO runtime_events (event_id,runtime_id,event_type,payload,event_version,created_at) VALUES (?1,?2,'symbolic.reading.saved',?3,'1.0.0',?4)`).bind(eventId, readingId, eventPayload, timestamp)
       ];
       if (typeof db.batch === 'function') await db.batch(statements); else { for (const statement of statements) await statement.run(); }
       return Object.freeze({ recordId: readingId, artifactId, createdAt: timestamp, provider: store.provider });

@@ -1,3 +1,6 @@
+import {countryIdentity,readCountryEvidence,projectCountryEvidence} from './world-country-evidence.js';
+import {countryReadingContext} from './knowledge-country-reading.js';
+import {DIMENSIONS} from '../profile/subject-context-r1.js';
 import {resolveSelectedArticle,PUBLIC_ARTICLE_MANIFEST_PATHS} from '../contextual-ask/contextual-ask-runtime.js';
 import {loadBookViiPublishedAdmission,appendBookViiProjection} from './book-vii-published-admission.js';
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
@@ -93,9 +96,37 @@ const articleTerms=value=>[...new Set([...normalize(value).replace(/请解释|�
 async function publishedArticleMatch(env,query,locale,selectedSlug=null){
  if(!env?.ASSETS?.fetch)return null;const terms=articleTerms(query);if(!selectedSlug&&terms.length<2)return null;const read=async path=>{const r=await env.ASSETS.fetch(new Request('https://assets.local'+path));return r.ok?r.json():null;};const manifests=await Promise.all(PUBLIC_ARTICLE_MANIFEST_PATHS.map(read)),candidates=manifests.flatMap((m,i)=>(m?.records||[]).filter(r=>r.locale===locale&&r.status==='published').map(r=>({...r,manifestPath:PUBLIC_ARTICLE_MANIFEST_PATHS[i]}))).map(row=>{const title=new Set(articleTerms(row.title+' '+(row.searchAliases||[]).join(' '))),matched=terms.filter(t=>title.has(t)).length;return{row,score:matched/terms.length};}).filter(x=>selectedSlug?x.row.slug===selectedSlug:x.score>=.45&&x.score*terms.length>=3).sort((a,b)=>b.score-a.score);for(const c of candidates.slice(0,3)){const article=await resolveSelectedArticle(env,c.row.slug,locale);if(!article)continue;const body=new Set(articleTerms(article.sources.map(s=>s.text).join(' '))),support=terms.filter(t=>body.has(t)).length/terms.length;if(!selectedSlug&&support<.65)continue;const r=await env.ASSETS.fetch(new Request('https://assets.local'+c.row.path));if(!r.ok)continue;const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',await r.arrayBuffer()))].map(x=>x.toString(16).padStart(2,'0')).join('');return{article,row:c.row,digest,score:c.score,bodyCoverage:support};}return null;
 }
+
+// A public, source-bound reader. The caller cannot choose a consumer or a subject.
+async function countryKnowledgeResponse(request, env, url) {
+  const allowed = new Set(['country', 'dimension', 'locale']);
+  if ([...url.searchParams.keys()].some(key => !allowed.has(key) || url.searchParams.getAll(key).length !== 1)) return jsonResponse({ok:false,error:{code:'COUNTRY_KNOWLEDGE_FIELDS_ONLY'}},400);
+  const country = url.searchParams.get('country');
+  const dimension = url.searchParams.get('dimension') || 'identity';
+  const locale = url.searchParams.get('locale') || 'en';
+  if (!/^[A-Z]{3}$/.test(country || '')) return jsonResponse({ok:false,error:{code:'COUNTRY_INVALID'}},400);
+  if (!countryIdentity(country)) return jsonResponse({ok:false,error:{code:'COUNTRY_IDENTITY_UNKNOWN'}},404);
+  if (!DIMENSIONS.includes(dimension)) return jsonResponse({ok:false,error:{code:'DIMENSION_INVALID'}},400);
+  if (!SUPPORTED_LOCALES.has(locale)) return jsonResponse({ok:false,error:{code:'LOCALE_UNSUPPORTED'}},400);
+  try {
+    const snapshot = await readCountryEvidence(env, request.url);
+    const projection = projectCountryEvidence(snapshot, country);
+    const readingContext = countryReadingContext(projection.identity, dimension, projection.rows.filter(row => row.dimensionIds.includes(dimension)), {
+      locale, sourceVersion:projection.sourceVersion, historyConsumer:'KNOWLEDGE_COUNTRY_CONTEXT'
+    });
+    return jsonResponse({ok:true,kind:'PUBLIC_COUNTRY_KNOWLEDGE_R1',consumer:'KNOWLEDGE_COUNTRY_CONTEXT',query:{country,dimension,locale},subject:projection.identity,readingContext,
+      sourceVersion:projection.sourceVersion,sourceMeta:snapshot.runtimeSourceMeta,privateDataUsed:false,persistence:false,paidProviderCalls:0,productionAdmissionGranted:false});
+  } catch (error) {
+    const known = new Set(['PUBLIC_COUNTRY_LATEST_SOURCE_UNAVAILABLE','COUNTRY_SOURCE_POINTER_INVALID','LATEST_SOURCE_CHECK_FAILED_ARCHIVE_NOT_LATEST','PUBLIC_COUNTRY_SOURCE_UNAVAILABLE','COUNTRY_SOURCE_DIGEST_MISMATCH','COUNTRY_SOURCE_VERSION_INVALID']);
+    return jsonResponse({ok:false,error:{code:known.has(error?.message)?error.message:'COUNTRY_KNOWLEDGE_UNAVAILABLE'}},503);
+  }
+}
+
 export async function handlePublicKnowledgeRequest(request, env = {}) {
   if (request.method !== 'GET') return jsonResponse({ ok:false, error:{ code:'METHOD_NOT_ALLOWED' } },405);
   const url = new URL(request.url);
+  if (url.searchParams.has('consumer')) return jsonResponse({ok:false,error:{code:'CLIENT_CONSUMER_FORBIDDEN'}},400);
+  if (url.searchParams.has('country')) return countryKnowledgeResponse(request, env, url);
   const selectedSlug=url.searchParams.get('article');
   if(selectedSlug&&!/^[a-zA-Z0-9_-]{1,150}$/.test(selectedSlug))return jsonResponse({ok:false,error:{code:'ARTICLE_INVALID'}},400);
   const query = (url.searchParams.get('q') || selectedSlug || '').trim();

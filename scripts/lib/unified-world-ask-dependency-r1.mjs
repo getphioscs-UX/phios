@@ -1,0 +1,6 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex'),path="content/civilization-atlas/maintenance/unified-world-ask-dependency-r1-successor.json";
+export function worldAskDependencyPredecessors({recordBytes=fs.readFileSync(path),readCurrent=p=>fs.readFileSync(p)}={}){
+ assert.equal(hash(recordBytes),"6a43725a29c5d137dbde457cfad8b6b32c7b8e46c75e48b26f69dda8de4003b8",'WORLD_ASK_DEPENDENCY_RECORD_DRIFT');const r=JSON.parse(recordBytes);assert.deepEqual(r.changes.map(x=>x.path),["assets/js/pages/civilization-atlas/world-company-question.js"]);for(const v of Object.values(r.boundaries))assert.equal(v,false);
+ assert.equal(hash(fs.readFileSync(r.freeze.path)),r.freeze.sha256,'WORLD_V25_FREEZE_DRIFT');const out=new Map();for(const row of r.changes){const a=execFileSync('git',['cat-file','blob',r.baseline+':'+row.path]),b=execFileSync('git',['cat-file','blob',r.acceptedCommit+':'+row.path]);assert.equal(hash(a),row.previousSha256);assert.equal(hash(b),row.sha256);assert.equal(hash(readCurrent(row.path)),row.sha256,'WORLD_ASK_CURRENT_DRIFT');assert.equal(JSON.parse(fs.readFileSync(r.freeze.path)).dependencies.find(x=>x.path===row.path).sha256,row.previousSha256);out.set(row.path,a);}return out;
+}

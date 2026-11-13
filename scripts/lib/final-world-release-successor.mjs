@@ -1,3 +1,4 @@
+import {worldAskDependencyPredecessors} from './unified-world-ask-dependency-r1.mjs';
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
 import {mainConvergencePredecessors,mainHistoricalPredecessors} from './main-convergence-source-successor-r1.mjs';
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -47,7 +48,7 @@ export function validateWorldContrastSourceSuccessor({
 }
 export function finalWorldReleasePredecessors(){
  const worldContrastPrevious=validateWorldContrastSourceSuccessor();
- const convergence=mainConvergencePredecessors(),currentBytes=p=>convergence.get(p)||fs.readFileSync(p);
+ const convergence=mainConvergencePredecessors(),askDependency=worldAskDependencyPredecessors(),currentBytes=p=>askDependency.get(p)||convergence.get(p)||fs.readFileSync(p);
  const r=JSON.parse(fs.readFileSync('content/civilization-atlas/maintenance/book-v-final-unified-release-successor-v24.json','utf8'));
  assert.equal(r.work,'FINAL-UNIFIED-PRODUCTION-RELEASE-R1');assert.equal(r.status,'ENGINEERING_SUCCESSOR_PENDING_OWNER_RELEASE_ACCEPT');assert.equal(r.humanDecision,'PENDING');assert.equal(hash(fs.readFileSync(r.predecessor)),r.predecessorSha256);
  for(const k of ['historicalEvidenceRewritten','canonicalTheoryChanged','commercialAdmissionGranted','productionDeployed'])assert.equal(r[k],false);
@@ -65,6 +66,7 @@ export function finalWorldReleasePredecessors(){
  for(const c of r.changes){assert.equal(c.previousGitRevision,'8cdc4875df3bfc74c92efba3e0f619536443b45b');const prior=execFileSync('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(hash(prior),c.previousSha256,c.path+' immutable predecessor');assert.equal(hash(currentPredecessors.get(c.path)||currentBytes(c.path)),c.successorSha256,c.path+' unregistered final-source drift');map.set(c.path,prior);}
  for(const [p,prior]of mainHistoricalPredecessors()){assert.ok(!r.changes.some(c=>c.path===p),'Historical successor must not replace a V24 entry');map.set(p,prior);}
  assert.ok(!map.has(WORLD_CONTRAST_CSS),'World contrast cannot replace another registered successor');
+ for(const [path,bytes] of askDependency){assert.ok(!map.has(path),'Ask dependency cannot replace another successor');map.set(path,bytes);}
  map.set(WORLD_CONTRAST_CSS,worldContrastPrevious);
  return map;
 }

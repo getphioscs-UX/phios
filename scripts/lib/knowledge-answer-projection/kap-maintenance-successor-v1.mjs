@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
+import {readPreConsumerSource,unifiedConsumerSuccessors} from '../unified-country-consumer-reception-r1.mjs';
 
 const PATHS = Object.freeze([
   'content/knowledge/answer-projection/maintenance/kap-m1-ask-retrieval-successor-v1.json',
@@ -28,7 +29,7 @@ const PATHS = Object.freeze([
   'content/civilization-atlas/maintenance/main-convergence-r1-successor.json',
   'content/knowledge/answer-projection/maintenance/kap-free-ask-monthly-budget-r1-source-successor.json'
 ]);
-const digest = path => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
+const digest = path => crypto.createHash('sha256').update(readPreConsumerSource(path)).digest('hex');
 
 const KAP_FREE_MONTHLY_RECORD='content/knowledge/answer-projection/maintenance/kap-free-ask-monthly-budget-r1-source-successor.json';
 const KAP_FREE_MONTHLY_CONTRACT={
@@ -83,7 +84,7 @@ const changesFor = path => maintenanceDocs().flatMap(doc => (doc.changes || []).
 export function kapMaintenanceSuccessorSha(path, fallback = null) {
   const changes = changesFor(path);
   if(changes.length && fallback) assertKapEvidenceOrMaintenance({path,sha256:fallback});
-  return changes.length ? changes.at(-1).item.successorSha256 : fallback;
+  return unifiedConsumerSuccessors().get(path) ?? (changes.length ? changes.at(-1).item.successorSha256 : fallback);
 }
 
 export function assertKapEvidenceOrMaintenance(entry) {

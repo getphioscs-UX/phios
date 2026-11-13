@@ -1,5 +1,5 @@
 import {createIChingGovernedCast} from '../iching-casting/iching-casting-adapter-v1.js';
-import {resolveIChingFullProductionAuthority,ensureIChingGuestSession} from '../iching-full-production/iching-full-production-v1.js';
+import {resolveIChingFullProductionAuthority} from '../iching-full-production/iching-full-production-v1.js';
 
 const headers={
   'content-type':'application/json; charset=utf-8',
@@ -32,7 +32,8 @@ export async function onRequestPost(context){
   }
 
   let guest=null;
-  try{guest=await ensureIChingGuestSession(context);}catch{}
+  // Casting is read-only; signed guest identity is created by explicit save,
+  // never implicitly by a Free cast. The production Secret gate remains above.
 
   try{
     const cast=await createIChingGovernedCast({question});
@@ -44,7 +45,8 @@ export async function onRequestPost(context){
         state:'FULL_PRODUCTION',
         runAllowed:true,
         globalPublicExecution:true,
-        guestPersistenceAllowed:production.guestPersistenceAllowed===true,
+        guestPersistenceAllowed:context.env?.PHIOS_D1_MAINTENANCE_MODE!=='READ_ONLY'&&production.guestPersistenceAllowed===true,
+        applicationGuestPersistenceAllowed:production.guestPersistenceAllowed===true,
         approvedCommitSha:production.approvedCommitSha,
         releaseId:production.releaseId
       },

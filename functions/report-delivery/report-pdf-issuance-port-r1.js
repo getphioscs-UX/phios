@@ -69,7 +69,7 @@ export async function prepareBaziPdfIssuanceR1(context,inputs){
 }
 export async function prepareZiweiPdfIssuanceR1(context,{binding,candidate,artifact,verification,sourceReceipt,version}){
  const owned=structuredClone({binding,artifact,sourceReceipt,version});
- const witness=await resolveZiweiIssuanceSourceMappingR1(context,{legacyBinding:binding,candidate,artifact,verification,sourceReceipt,mode:'LOCAL_FROZEN_REFERENCE'});
+ const witness=await resolveZiweiIssuanceSourceMappingR1(context,{legacyBinding:binding,candidate,artifact,verification,sourceReceipt,mode:context.env.PHIOS_ENVIRONMENT==='local'&&context.env.STRIPE_ENVIRONMENT==='QA'&&context.env.PHIOS_LOCAL_ZWR_CURRENT_NATIVE_QA==='true'&&candidate.schemaVersion==='ZWR-VFR-R1-AUTO-DEEP-CANDIDATE-v3'?'CURRENT_NATIVE_SOURCE':'LOCAL_FROZEN_REFERENCE'});
  return plan(owned,async()=>{await assertZiweiIssuanceSourceMappingR1(witness);return witness;});
 }
 export async function assertReportPdfIssuanceR1(port,{binding,artifact,version}){

@@ -1,3 +1,5 @@
+import {readPreConsumerSource,unifiedConsumerSuccessors} from './unified-country-consumer-reception-r1.mjs';
+import {validateMain096ReceiverGovernance} from './ppr-five-method-preentry-successor.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -18,7 +20,7 @@ const gitSource=(ref,file)=>execFileSync('git',['show',ref+':'+file],{maxBuffer:
 export function validateFreeCountrySourceSuccessor({
  recordBytes=fs.readFileSync(FREE_COUNTRY_SUCCESSOR_RECORD),
  frozenBytes=fs.readFileSync(MAIN_CONVERGENCE_RECORD),
- readGit=gitSource,readCurrent=file=>fs.readFileSync(file)
+ readGit=gitSource,readCurrent=readPreConsumerSource
 }={}){
  assert.equal(sha(recordBytes),FREE_COUNTRY_RECORD_SHA256,'Immutable PR19 source successor record');
  assert.equal(sha(frozenBytes),ORIGINAL_RECORD_SHA256,'Original convergence freeze must remain unchanged');
@@ -53,7 +55,7 @@ export function validateFreeCountrySourceSuccessor({
 
 export const TECHNICAL_ASK_SUCCESSOR_RECORD='content/civilization-atlas/maintenance/technical-release-ask-r1-source-successor.json';
 const TECHNICAL_ASK_RECORD_SHA256='13884b0ec0ad1a2db9cf521d286daeea3c131e12cc2e3f6948bf287f775c8bb8';
-export function validateTechnicalAskSourceSuccessor({recordBytes=fs.readFileSync(TECHNICAL_ASK_SUCCESSOR_RECORD),readGit=gitSource,readCurrent=file=>fs.readFileSync(file)}={}){
+export function validateTechnicalAskSourceSuccessor({recordBytes=fs.readFileSync(TECHNICAL_ASK_SUCCESSOR_RECORD),readGit=gitSource,readCurrent=readPreConsumerSource}={}){
  assert.equal(sha(recordBytes),TECHNICAL_ASK_RECORD_SHA256,'Immutable technical Ask successor');
  const doc=JSON.parse(recordBytes);assert.equal(doc.work,'TECHNICAL_RELEASE_ASK_R1_SOURCE_SUCCESSOR');assert.equal(doc.status,'ENGINEERING_SUCCESSOR_PENDING_RELEASE_ACCEPTANCE');assert.equal(doc.ownerAuthorization,'OWNER_TECHNICAL_RELEASE_CLOSURE_20261113');assert.equal(doc.humanDecision,'PENDING');assert.equal(doc.baseline,'096b22df9e43d2bed0a82ba5bb010b2eea337ca3');assert.equal(doc.sourceSetB,'9fed06918c9faf8658ab281e28693eaaf0d4ea5cbd6ffb6a6eb33522879079c2');
  assert.deepEqual(doc.changes.map(r=>r.path),['assets/js/pages/public-entry-answer.js'],'Exactly one approved Main-compatible consumer');
@@ -66,7 +68,7 @@ export function validateTechnicalAskSourceSuccessor({recordBytes=fs.readFileSync
 
 export const TECHNICAL_COUNTRY_REPORT_SUCCESSOR_RECORD='content/civilization-atlas/maintenance/technical-release-country-report-r1-source-successor.json';
 const TECHNICAL_COUNTRY_REPORT_RECORD_SHA256='1f2906f2e40e1ba57580e2f4aa6d40a279de362a736a3d060f02228833970c6e';
-export function validateTechnicalCountryReportSourceSuccessor({recordBytes=fs.readFileSync(TECHNICAL_COUNTRY_REPORT_SUCCESSOR_RECORD),readGit=gitSource,readCurrent=file=>fs.readFileSync(file)}={}){
+export function validateTechnicalCountryReportSourceSuccessor({recordBytes=fs.readFileSync(TECHNICAL_COUNTRY_REPORT_SUCCESSOR_RECORD),readGit=gitSource,readCurrent=readPreConsumerSource}={}){
  assert.equal(sha(recordBytes),TECHNICAL_COUNTRY_REPORT_RECORD_SHA256,'Immutable two-hook technical successor');
  const doc=JSON.parse(recordBytes);assert.equal(doc.work,'TECHNICAL_RELEASE_COUNTRY_REPORT_R1_SOURCE_SUCCESSOR');assert.equal(doc.status,'ENGINEERING_SUCCESSOR_PENDING_OWNER_APPROVAL');assert.equal(doc.humanDecision,'PENDING');assert.equal(doc.baseline,'096b22df9e43d2bed0a82ba5bb010b2eea337ca3');
  assert.deepEqual(doc.frozenCandidate,{head:'fa0926cfddd775796f42290caf00a14c2a07b936',sourceSetSHA256:'0a1843677fd3b015b88058aff790c380e000d000d0eb4593c09d023ae86f7ee9'});
@@ -88,6 +90,8 @@ export function mainConvergencePredecessors({paths=null}={}){
  const currentSuccessors=validateFreeCountrySourceSuccessor();
  for(const [file,digest]of validateTechnicalAskSourceSuccessor())currentSuccessors.set(file,digest);
  for(const [file,digest]of validateTechnicalCountryReportSourceSuccessor())currentSuccessors.set(file,digest);
+ for(const [file,digest] of unifiedConsumerSuccessors())currentSuccessors.set(file,digest);
+ const receiver=validateMain096ReceiverGovernance();const hdPath='functions/external-profile/hd-profile-parser.js';assert.equal(receiver.overlay[hdPath].currentSha256,'1d2ce7fcc9047b4f165e06d4d19eff46b7f035c6d04b4235bc9f78b21aa1aff0');currentSuccessors.set(hdPath,receiver.overlay[hdPath].currentSha256);
  const result=new Map();
  for(const c of doc.changes){
   if(paths&&!paths.includes(c.path))continue;
@@ -107,6 +111,7 @@ export function mainHistoricalPredecessors(){
  const currentSuccessors=validateFreeCountrySourceSuccessor();
  for(const [file,digest]of validateTechnicalAskSourceSuccessor())currentSuccessors.set(file,digest);
  for(const [file,digest]of validateTechnicalCountryReportSourceSuccessor())currentSuccessors.set(file,digest);
+ for(const [file,digest] of unifiedConsumerSuccessors())currentSuccessors.set(file,digest);
  const result=new Map();
  for(const r of rows){
   assert(['419357257da40bca7bdf9579bcf82d785e29d151','400ac5eed99fb73d7db085e1df3394933dd2fb57'].includes(r.previousGitRevision));

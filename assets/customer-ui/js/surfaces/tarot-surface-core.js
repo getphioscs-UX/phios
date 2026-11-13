@@ -1,4 +1,5 @@
 import {startRitual} from './ritual-sequence.js';
+import {renderQuestionConnection} from './symbolic-question-connection-r2.js';
 const q = (selector, scope = document) => scope.querySelector(selector);
 const qa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
 const arr = value => Array.isArray(value) ? value : [];
@@ -65,6 +66,8 @@ function createState() {
     selectedCardIds: [],
     shuffledCardIds: [],
     currentView: null,
+    saveTransportAllowed: false,
+    savedReadingId: null,
     isExecuting: false
   };
 }
@@ -326,19 +329,25 @@ function installation(scope = document) {
   async function loadContext() {
     try {
       const use = q('[data-use-reality-context]', scope)?.checked === true;
-      const [contextResponse, statusResponse] = await Promise.all([
-        fetch(`/api/symbolic-method-context?method=TAROT&useCurrentRealityContext=${use ? '1' : '0'}`, { cache: 'no-store' }),
-        fetch('/api/tarot-production-status', { cache: 'no-store' })
-      ]);
-      state.contextPayload = await contextResponse.json();
+      const statusResponse=await fetch('/api/tarot-production-status',{cache:'no-store'});
       const statusPayload = await statusResponse.json();
+      state.saveTransportAllowed=statusPayload?.service?.persistence?.writeTransportAllowed===true;
+      if(use&&statusPayload?.service?.transport?.maintenanceMode==='READ_ONLY'){
+        state.serverAuthorityOk=false;state.contextPayload=null;
+        setExecutionStatus(t('Private context is unavailable in this Free read-only service. Turn off Current Reality context to use only your question and cards.','此Free只读服务不能使用私人情境。关闭当前现实情境后，可仅使用问题和选牌。'),'error');
+        updateRealityDisclosure();updateButton();return;
+      }
+      const contextResponse=await fetch(`/api/symbolic-method-context?method=TAROT&useCurrentRealityContext=${use?'1':'0'}`,{cache:'no-store'});
+      state.contextPayload=await contextResponse.json();
       state.serverAuthorityOk = contextResponse.ok
         && statusResponse.ok
         && state.contextPayload?.production?.runAllowed === true
         && statusPayload?.production?.runAllowed === true;
+      if(!state.serverAuthorityOk)setExecutionStatus(t('Reading is not available in this service configuration. This is not caused by your question or card choice.','当前服务配置暂不能解读，并非你的问题或选牌有误。'),'error');
     } catch {
       state.serverAuthorityOk = false;
       state.contextPayload = null;
+      setExecutionStatus(t('The reading service could not be reached. Your question and cards remain on this page.','未能连接解读服务。本页问题与选牌保留。'),'error');
     }
     updateRealityDisclosure();
     updateButton();
@@ -402,7 +411,7 @@ function installation(scope = document) {
     }
     const interpretationDisplay = q('[data-interpretation-display]', scope);
     if (interpretationDisplay) {
-      interpretationDisplay.innerHTML = composition.positionReadings.map((item,index) => `
+      interpretationDisplay.innerHTML = renderQuestionConnection(view,isZh()?'zh-Hans':'en') + composition.positionReadings.map((item,index) => `
         <article class="sp-reading-card">
           <p class="sp-kicker">${esc(t(item.position.labelEn, item.position.labelZhHans))}</p>
           <h4>${esc(item.canonicalTitle)}</h4>
@@ -415,7 +424,8 @@ function installation(scope = document) {
     if (realityDisplay) realityDisplay.innerHTML = `<p>${esc(localizedReadingText(t(composition.realityComparison.summary.en, composition.realityComparison.summary.zhHans),composition))}</p>`;
     const nextDisplay = q('[data-next-display]', scope);
     if (nextDisplay) nextDisplay.innerHTML = `<p>${esc(localizedReadingText(t(composition.wholeSpreadSynthesis.decisionBoundary.en, composition.wholeSpreadSynthesis.decisionBoundary.zhHans),composition))}</p>`;
-    setExecutionStatus(t('Reading ready.', '读取已生成。'), 'done');
+    setExecutionStatus(t('Basic reading ready. No LLM interpretation was generated.', '基础读取已生成，未调用 LLM 深入解读。'), 'done');
+    const save=q('[data-symbolic-save]',scope);if(save)save.disabled=!(state.saveTransportAllowed&&state.contextPayload?.account?.saveContractAvailable===true&&!state.savedReadingId);
     results.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -445,14 +455,17 @@ function installation(scope = document) {
         signal: controller.signal
       });
       const payload = await response.json();
-      if (!response.ok || !payload.ok) throw new Error(payload?.error?.code || 'EXECUTION_FAILED');
-      render(payload.publicView);
+      if (!response.ok || !payload.ok){const error=new Error(payload?.error?.code||'EXECUTION_FAILED');error.serviceUnavailable=response.status>=500||response.status===423;error.contentReviewPending=response.status===409&&payload?.error?.code==='TAROT_SELECTED_CARD_CONTENT_REVIEW_PENDING';throw error;}
+      state.savedReadingId=null;render(payload.publicView);
     } catch (error) {
       const timedOut = error?.name === 'AbortError' || String(error?.message || '').includes('timeout');
+      if(error.serviceUnavailable!==false||timedOut)state.serverAuthorityOk=false;
       setExecutionStatus(
-        timedOut
-          ? t('PHI OS took too long to finish this check. Please try again.', 'PHI OS 检查时间过长，请再试一次。')
-          : t('Reading unavailable right now. Please try again.', '当前暂时无法完成读取，请稍后再试。'),
+        error.contentReviewPending
+          ? t('The selected Fool card content is under review, so this reading is unavailable. Your question, cards and their order remain unchanged; no new draw or payment was made.', '已选愚者牌的内容正在审阅，本次解读暂不提供。原问题、已选牌及顺序保持不变，没有重新抽牌或付款。')
+          : timedOut
+          ? t('The service did not finish. Your question and selected cards remain on this page; no new draw or payment was made.', '服务未能完成。本页问题与已选牌保留，没有重新抽牌或付款。')
+          : t('The reading could not be completed. Your question and selected cards remain on this page; this is not a request to draw again.', '本次解读未能完成。本页问题与已选牌保留，无需重新抽牌。'),
         'error'
       );
     } finally {
@@ -468,6 +481,9 @@ function installation(scope = document) {
     if (!button) return;
     button.addEventListener('click', () => {
       state.currentView = null;
+      state.savedReadingId=null;
+      const save=q('[data-symbolic-save]',scope);if(save)save.disabled=true;
+      const saveStatus=q('[data-save-status]',scope);if(saveStatus)saveStatus.textContent='';
       state.selectedCardIds = [];
       state.shuffledCardIds = [];
       const results = q('[data-symbolic-results]', scope);
@@ -493,6 +509,13 @@ function installation(scope = document) {
       q('[data-start-draw]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', '塔罗暂时无法运行。'), 'error')));
       q('[data-reshuffle]', scope)?.addEventListener('click', () => startDraw().catch(() => setExecutionStatus(t('Tarot is temporarily unavailable.', '塔罗暂时无法运行。'), 'error')));
       q('[data-symbolic-execute]', scope)?.addEventListener('click', () => execute());
+      q('[data-symbolic-save]',scope)?.addEventListener('click',async()=>{
+        if(!state.currentView||state.savedReadingId||!state.saveTransportAllowed)return;
+        if(!confirm(t('Save this exact question and draw to your account?','把本次问题和选牌保存到你的账户吗？')))return;
+        const button=q('[data-symbolic-save]',scope),note=q('[data-save-status]',scope);button.disabled=true;
+        try{const response=await fetch('/api/symbolic-method-save',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({method:'TAROT',reading:state.currentView})}),payload=await response.json();if(!response.ok)throw Error();state.savedReadingId=payload.recordId;if(note)note.textContent=t('Saved to Account. Reopening uses this same draw.','已保存到账户；重开使用同一次选牌。');}
+        catch{if(note)note.textContent=t('Save was not confirmed. No new draw or purchase was made.','尚未确认保存；没有重新抽牌或购买。');button.disabled=false;}
+      });
       q('[data-symbolic-question]', scope)?.addEventListener('input', state.questionGuide ? checkQuestion : updateButton);
       q('[data-use-reality-context]', scope)?.addEventListener('change', () => loadContext());
       installNewReadingReset();
