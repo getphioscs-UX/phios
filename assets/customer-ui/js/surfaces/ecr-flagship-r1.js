@@ -1,9 +1,10 @@
+import {installMethodNativeIntakeR2} from './method-native-intake-r2.js';
 import {renderPhiMandalaVisual,installPhiMandalaInteractions} from '../specialists/ecr/mandala-renderer.js';
 import {ASK_CAPABILITIES} from '../../../js/ask-entry-capabilities.js';
 const root=document.querySelector('[data-ecr-flagship]');
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const configuration=ASK_CAPABILITIES.methods.find(m=>m.methodId==='ECR');
-const start=configuration?.formValue?'/perspectives/personal/?method='+encodeURIComponent(configuration.formValue)+'#personal-input':'/perspectives/personal/#personal-input';
+const start='/perspectives/phi-configuration/#method-input';
 const groupIds=['CORE','DRIVER','GIFT','TENSION','FIELD','PHASE'];
 const groupNames={en:['Core','Driver','Gift','Tension','Field','Phase'],'zh-Hans':['核心','驱动','天赋','张力','场域','阶段']};
 const state={layer:0,mode:1,selected:new Set(),indices:Object.fromEntries(groupIds.map(g=>[g,0])),scene:0,note:'',reportLocale:null,chapter:Math.max(0,Math.min(9,Number(location.hash.match(/^#report-chapter-(\d+)$/)?.[1]||1)-1))};
@@ -109,8 +110,10 @@ function render(){
  <div class="ef-report-preview-strip"><div><h3>${t('看看报告的阅读形式','See the reading format')}</h3><p class="ef-caption">${t('已批准的公开固定图稿，不展示私人个案正文。','Approved public fixed visuals, without private case manuscripts.')}</p></div><div class="ef-report-art">${presentation.preview.map((a,i)=>`<figure><img loading="lazy" decoding="async" width="300" height="450" src="${esc(a.url)}" alt="${esc([t('PHI 构型公开封面','PHI Configuration public cover'),t('方法介绍固定页','Method introduction fixed page'),t('现实语法与问题章节视觉','Reality Grammar and questions section visual')][i])}"><figcaption>${[t('封面','Cover'),t('方法介绍','Method introduction'),t('章节视觉','Section visual')][i]}</figcaption></figure>`).join('')}</div></div>`,'ef-report-conversion')}
 
  <section class="ef-notes"><div class="ef-wrap"><details><summary>${t('阅读方法与边界','Reading approach & limits')}</summary><p>${t('构型关系属于 PHI OS 模型解释，不是对人格、经历、医学状态或未来事件的事实证明。请以本人提供的经历核对。图中的方法示例不改变个人计算规则；个人资料仍由现有输入与同意流程处理。公开牌卡、自主反思与付费个人报告保持不同的准入和权益。','Configuration relationships are interpretations within the PHI OS model, not proof of personality, experiences, medical conditions or future events. Compare them with experience you choose to share. The method illustration does not change personal calculation rules; the existing input and consent flow handles personal information. Public cards, voluntary reflection and paid personal reports retain separate admission and entitlement.')}</p></details><div class="ef-actions">${button(t('开始个人构型','Start your configuration'),start,true)}</div></div></section>`;
+ const model=root.querySelector('#configuration-model');
+ if(model){const alias=document.createElement('span');alias.id='configuration-example';alias.setAttribute('aria-hidden','true');model.prepend(alias);if(location.hash==='#configuration-example'&&root.dataset.efReady!=='true')requestAnimationFrame(()=>model.scrollIntoView({block:'start'}));}
  if(retainedReceiver)root.prepend(retainedReceiver);
- mountMandala();renderScene();renderGallery();renderQuote();renderReportChapter();root.dataset.efReady='true';
+ mountMandala();renderScene();renderGallery();renderQuote();renderReportChapter();root.dataset.efReady='true';installMethodNativeIntakeR2(root,'phi-configuration');
 }
 if(root){
  root.addEventListener('click',event=>{

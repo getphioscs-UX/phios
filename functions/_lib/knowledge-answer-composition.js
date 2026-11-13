@@ -1,3 +1,4 @@
+import {createFreeAskPublicProvider,freeAskPublicSources} from '../public/free-ask-provider-consumer-r1.js';
 import {safeSources,safeGroundingBundle,customerSourceLabel,customerText,NO_SUPPORT_COPY} from './knowledge-source-eligibility.js';
 import {deriveEpistemicReading,isBookViiManuscriptRequest,excludeProtectedBookViiSources} from './knowledge-epistemic-reading.js';
 import {runKirR2ProductionProjection} from './kir-r2-production.js';
@@ -384,17 +385,23 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     projection.governance = {...projection.governance, upstreamGroundedAnswerConsumed: true};
   }
   const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true && !projection.answer?.epistemicReading && !grounding.groundingBundle?.sources?.some(s=>s.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT'||s.bookId==='BOOK-7'||s.bookCode==='BOOK-7'||/^KN-B7-/.test(s.nodeCode||''));
-  // Public knowledge retrieval never starts new synthesis, including DEEP requests.
-  // Paid report and continuity products keep their independent entitlement/provider owners.
-  const executionPolicy=publicAskExecutionPolicy();
-  const kir = executionPolicy.providerAllowed && relevanceEstablished ? await runKirR2ProductionProjection({
+  // Facts/source-native units stay deterministic. Only a server-admitted public
+  // organization request may consume the shared monthly Free ledger.
+  const executionPolicy=publicAskExecutionPolicy({env});
+  let publicProvider=null;
+  if(executionPolicy.providerAllowed&&relevanceEstablished){try{
+    publicProvider=await createFreeAskPublicProvider({env,question:input?.question||'',locale:input?.locale||'zh-Hans',bundle:grounding.groundingBundle,projection,coverageDecision:grounding.coverageDecision,sourceNativeAnswered:acceptedSourceNativeUnit});
+  }catch{/* Account/policy/ledger failure preserves the original deterministic answer. */}}
+  const kir = publicProvider ? await runKirR2ProductionProjection({
     question: input?.question || grounding.groundingBundle?.question?.text || '',
     locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
     env,
     upstreamGroundedAnswer: projection?.answer?.content?.directAnswer || null,
-    upstreamGroundingBundle: grounding.groundingBundle
-  }) : {status:'KNOWLEDGE_BASIC_PROVIDER_PROHIBITED',applied:false};
-  const kirApplied = kir?.applied === true;
+    upstreamGroundingBundle: {...grounding.groundingBundle,sources:freeAskPublicSources(grounding.groundingBundle)},
+    provider:publicProvider
+  }) : {status:executionPolicy.providerAllowed?'FREE_ASK_DIRECT_OR_UNAVAILABLE':'KNOWLEDGE_BASIC_PROVIDER_PROHIBITED',applied:false};
+  const freeAskReceipt=publicProvider?.freeAskReceipt?.()||{providerCalls:0,providerInvoked:false,model:null,usageState:'NOT_INVOKED'};
+  const kirApplied = kir?.applied === true && kir?.result?.answer?.providerInvoked === true;
   const kirAnswer = kirApplied ? kir.result.answer.text : null;
   const ptrcContract = grounding.intake?.requestContract || null;
   const ptrcStages = ptrcContract ? buildPtrcRetrievalStages(grounding.groundingBundle, ptrcContract) : [];
@@ -408,11 +415,12 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
   const answer = kirApplied ? {
     ...projection.answer,
     content: {...projection.answer.content,directAnswer:kirAnswer},
-    generation: {...projection.answer.generation,generationMode:kir.result.answer.providerInvoked?'KIR_R2_GROUNDED_AI':'KIR_R2_GROUNDED_DETERMINISTIC',generativeModelUsed:kir.result.answer.providerInvoked,modelRef:kir.result.answer.providerInvoked?kir.result.answer.model:null}
+    generation: {...projection.answer.generation,generationMode:kir.result.answer.providerInvoked?'KIR_R2_GROUNDED_AI':'KIR_R2_GROUNDED_DETERMINISTIC',generativeModelUsed:kir.result.answer.providerInvoked,modelRef:kir.result.answer.providerInvoked?freeAskReceipt.model:null}
   } : projection.answer;
   return {
     ...projection,
     answer,
+    freeAsk:freeAskReceipt,
     ...(ptrcContract ? {ptrc: {requestContract: ptrcContract, quality: grounding.ptrcQuality, retrievalStages: ptrcStages, trace: ptrcTrace}} : {}),
     kirR2: kirApplied ? {
       status: kir.status,

@@ -7,7 +7,9 @@ const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js');
 const css=read('assets/css/civilization-atlas.css');
 const evidence=JSON.parse(read('content/civilization-atlas/evidence/civ-atlas-fr5-g-case-dossier-projection-v1.json'));
 
-assert.equal(evidence.status,'IMPLEMENTED_READY_FOR_HUMAN_REVIEW');
+assert.equal(evidence.status,'OWNER_ACCEPTED');
+assert.equal(evidence.humanReview,'ACCEPT','Reuse the existing recorded Owner decision; never manufacture a new one.');
+assert.equal(evidence.ownerDecisionAt,'2026-09-28');
 assert.equal(evidence.scope.caseCount,120);
 assert.equal(evidence.scope.runtimeFields,19);
 assert.equal(evidence.scope.customerProjection,'GROUPED_PROGRESSIVE_DOSSIER');

@@ -12,8 +12,8 @@ const stable=value=>Array.isArray(value)?value.map(stable):value&&typeof value==
 const digest=value=>crypto.createHash('sha256').update(JSON.stringify(stable(value))).digest('hex');
 const clean=value=>cleanExternalProfileText(value,800)||null;
 
-function records(profile){const map=new Map();for(const record of profile?.records||[]){if(record?.field)map.set(record.field,record)}return map}
-function scalar(map,field){const record=map.get(field);return freeze({value:clean(record?.value),sourceType:record?.sourceType||null,sourceRegion:record?.sourceRegion||null,customerConfirmed:record?.customerConfirmed===true,phiosCalculated:false})}
+function records(profile){const map=new Map();for(const record of profile?.records||[]){if(record?.field&&record.customerConfirmed===true)map.set(record.field,record)}return map}
+function scalar(map,field){const record=map.get(field);return freeze({value:clean(record?.value),sourceType:record?.sourceType||null,sourceValue:clean(record?.intakeEvidence?.find(item=>item?.value)?.value??record?.sourceValue),normalizedValue:clean(record?.sourceValue),sourceRegion:record?.sourceRegion||null,customerConfirmed:record?.customerConfirmed===true,phiosCalculated:false})}
 function channelCode(value){const match=String(value??'').trim().match(/^([1-9]|[1-5]\d|6[0-4])\s*[–—-]\s*([1-9]|[1-5]\d|6[0-4])$/);if(!match)return null;const a=Number(match[1]),b=Number(match[2]);return a===b?null:`${a}-${b}`}
 function normalizeChannels(value){return [...new Set((Array.isArray(value)?value:[]).map(channelCode).filter(Boolean))].sort((a,b)=>Number(a.split('-')[0])-Number(b.split('-')[0])||Number(a.split('-')[1])-Number(b.split('-')[1]))}
 function normalizeCenters(value){return HD_CENTER_CODES.filter(code=>new Set(Array.isArray(value)?value.map(x=>String(x).trim().toUpperCase()):[]).has(code))}

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-import {readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR} from './ppr-five-method-preentry-successor.mjs';
+import {readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR,validateMain096ReceiverGovernance,MAIN096_RECEIVER_GOVERNANCE} from './ppr-five-method-preentry-successor.mjs';
 
 const REGISTRY='content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json';
 const read=p=>fs.readFileSync(p,'utf8');
@@ -15,6 +15,7 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
   assert.equal(registry.boundaries.admittedMethodProductionMayReachFrontend,true);
   assert.equal(registry.boundaries.futureUnregisteredDriftAllowed,false);
   let record=registry.files[path];
+  if(fs.existsSync(MAIN096_RECEIVER_GOVERNANCE)){const entry=validateMain096ReceiverGovernance().overlay[path];if(entry)record={...record,...entry,recognizedPredecessors:[...new Set([...(record?.recognizedPredecessors||[]),record?.currentSha256,...entry.recognizedPredecessors].filter(Boolean))]};}
   if(!record&&path==='functions/external-profile/hd-profile-parser.js'){
     const predecessor='274e6f2b267440b6686663779643dd2216c27879cb62dfe97ebf3a0662ae9c7c';
     const successor='b0da128b4f01a0a4934fab20b8bb3ade06d7a901489a97df29a2b177d03b41fd';

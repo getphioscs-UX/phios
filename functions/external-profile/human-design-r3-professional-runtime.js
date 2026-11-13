@@ -21,9 +21,19 @@ function publishBoundarySections(editorial){
   ])}):section);
 }
 
+function limitUnconfirmedNetwork(priority,chart){
+  if(chart.structure?.channels?.length)return priority;
+  const tiers=['primaryFindings','secondaryFindings','contextualFindings','advancedDetails'];
+  const rows=Object.fromEntries(tiers.map(tier=>[tier,Object.freeze((priority[tier]||[]).map(f=>
+    (f.technicalRefs?.structureRefs||[]).some(ref=>String(ref).startsWith('DEFINITION.'))
+      ?Object.freeze({...f,howStructuresCombine:zh('This uses the reported Definition classification only. The Center/Channel network has not been confirmed, so no structural cluster finding is made.','这里只使用图表报告的定义分类。中心／通道网络尚未确认，因此不作结构群组判断。'),whyThisAppears:zh('The confirmed source supplies a Definition label; it does not establish a verified network map.','已确认来源提供了定义标签，但尚未建立经过核对的网络图。')})
+      :f))]));
+  return Object.freeze({...priority,...rows,networkScope:'REPORTED_DEFINITION_ONLY',priorityDigest:digest({previous:priority.priorityDigest,...rows,networkScope:'REPORTED_DEFINITION_ONLY'})});
+}
+
 export function buildHumanDesignR3ProfessionalProduct(chart,{locale='en',intent=''}={}){
   const facts=adaptCanonicalHumanDesignChartToR3Facts(chart,{customerIntent:intent});
-  const priority=prioritizeHumanDesignR3WholeChart(facts,{customerIntent:intent});
+  const priority=limitUnconfirmedNetwork(prioritizeHumanDesignR3WholeChart(facts,{customerIntent:intent}),chart);
   const readingIr=buildHumanDesignR3ProfessionalReadingIr(facts,{priorityResult:priority});
   const editorial=editorializeHumanDesignR3Reading(facts,{readingIr});assertNoHumanDesignR3EditorialLeaks(editorial);
   const reality=buildHumanDesignR3RealityCompositionV2(facts,{priorityResult:priority});

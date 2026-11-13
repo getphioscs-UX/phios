@@ -49,7 +49,7 @@ function parseLabelValue(line){
     for(const alias of aliases){
       const re=new RegExp(`^\\s*${alias.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s+(.+?)\\s*$`,'i');
       const match=line.match(re);
-      if(match&&!/[：:]/.test(match[1]))return {field,value:compact(match[1]),confidence:'MEDIUM',matchType:'LEADING_LABEL'};
+      if(match&&!/^[\s]*(?:&|and\b|[\/／])/i.test(match[1])&&!/[：:]/.test(match[1]))return {field,value:compact(match[1]),confidence:'MEDIUM',matchType:'LEADING_LABEL'};
     }
   }
   return null;

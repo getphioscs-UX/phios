@@ -1,6 +1,6 @@
 // Presentation mapping onto existing admitted company metric IDs; no calculations.
 const metricQueries=[
- ['livePrice',/实时(?:股价|行情)|實時(?:股價|行情)|\b(?:live|current|today.s)\s+(?:stock\s+)?price\b/i],
+ ['livePrice',/(?:实时|實時|今天|今日|当前|當前)(?:的)?(?:股价|股價|行情)|\b(?:live|current|today(?:['’]s)?)\s+(?:(?:live|stock|share)\s+)*price\b/i],
  ['totalAssets',/总资产|總資產|\btotal assets\b/i],['totalLiabilities',/总负债|總負債|\btotal liabilities\b/i],
  ['equity',/股东权益|股東權益|\bequity\b/i],['marketCap',/市值|\bmarket cap(?:italization)?\b/i],
  ['grossMargin',/毛利率|\bgross margin\b/i],['operatingMargin',/营业利润率|營業利潤率|\boperating margin\b/i],
@@ -29,5 +29,5 @@ export function companyQuestionEvidence(ctx,projection){
  return {identityMatched,metrics,source:identityMatched?company.source:null,answerState:metrics.some(m=>m.known)?'MATCHED_PARTIAL':'NO_MATCHING_SOURCE'};
 }
 
-export const companyMetricLabels={marketCap:['市值','Market cap'],totalAssets:['总资产','Total assets'],totalLiabilities:['总负债','Total liabilities'],equity:['权益','Equity'],revenue:['收入','Revenue'],netProfit:['净利润','Net profit'],eps:['每股收益','EPS'],pe:['市盈率','PE'],pb:['市净率','PB'],roe:['股本回报率','ROE'],revenueGrowth:['同比收入增长','Revenue growth YoY'],profitMargin:['净利润率','Net profit margin'],grossMargin:['毛利率','Gross margin'],operatingMargin:['营业利润率','Operating margin'],revenueGrowthQoQ:['环比收入增长','Revenue growth QoQ'],cash:['现金','Cash'],debt:['借款','Borrowings'],netDebt:['净债务（负值为净现金）','Net debt (negative means net cash)'],debtToEquity:['借款／权益','Borrowings / equity'],currentRatio:['流动比率','Current ratio'],ttmEps:['过去十二个月每股收益','TTM EPS'],roa:['资产回报率','ROA'],operatingCashFlow:['经营现金流','Operating cash flow'],freeCashFlow:['自由现金流','Free cash flow'],dividendsPaid:['已付股息','Dividends paid'],dividendYield:['过去十二个月股息率','Trailing dividend yield']};
+export const companyMetricLabels={livePrice:['实时股价','Live share price'],marketCap:['市值','Market cap'],totalAssets:['总资产','Total assets'],totalLiabilities:['总负债','Total liabilities'],equity:['权益','Equity'],revenue:['收入','Revenue'],netProfit:['净利润','Net profit'],eps:['每股收益','EPS'],pe:['市盈率','PE'],pb:['市净率','PB'],roe:['股本回报率','ROE'],revenueGrowth:['同比收入增长','Revenue growth YoY'],profitMargin:['净利润率','Net profit margin'],grossMargin:['毛利率','Gross margin'],operatingMargin:['营业利润率','Operating margin'],revenueGrowthQoQ:['环比收入增长','Revenue growth QoQ'],cash:['现金','Cash'],debt:['借款','Borrowings'],netDebt:['净债务（负值为净现金）','Net debt (negative means net cash)'],debtToEquity:['借款／权益','Borrowings / equity'],currentRatio:['流动比率','Current ratio'],ttmEps:['过去十二个月每股收益','TTM EPS'],roa:['资产回报率','ROA'],operatingCashFlow:['经营现金流','Operating cash flow'],freeCashFlow:['自由现金流','Free cash flow'],dividendsPaid:['已付股息','Dividends paid'],dividendYield:['过去十二个月股息率','Trailing dividend yield']};
 export function companyMetricLabel(id,locale='en'){return companyMetricLabels[id]?.[locale==='zh-Hans'?0:1]||(locale==='zh-Hans'?'来源指标':'Source metric');}

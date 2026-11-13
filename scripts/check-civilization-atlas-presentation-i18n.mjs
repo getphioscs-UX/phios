@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {parseHTML} from 'linkedom';
+import {renderWorldInspector} from '../assets/js/pages/civilization-atlas/world-slice-renderer.js';
+import {renderTrajectories} from '../assets/js/pages/civilization-atlas/trajectory-renderer.js';
+import {normalizeReconfigurationAtlasState} from '../assets/js/pages/civilization-atlas/atlas-state.js';
 
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
@@ -41,16 +45,18 @@ assert.ok(!comparison.includes('knowledge-eyebrow\">${esc(selected.familyId)}'),
 assert.ok(!/relationType/.test(comparison),'Comparison customer view should not render raw relationType.');
 assert.ok(timeline.includes('civ-atlas-detail-table'),'Timeline full table must be progressive disclosure.');
 assert.ok(worldRenderer.includes('civ-atlas-evidence-note'),'World evidence boundary must be progressive disclosure.');
-assert.ok(worldRenderer.includes('loc(selected.technologyContext,lang)'),'World technology context must read the localized object directly.');
-assert.ok(worldRenderer.includes('loc(selected.energyContext,lang)'),'World energy context must read the localized object directly.');
+assert.ok(worldRenderer.includes('loc(selected.technologyContext,l)'),'World technology context must read the normalized localized object directly.');
+assert.ok(worldRenderer.includes('loc(selected.energyContext,l)'),'World energy context must read the normalized localized object directly.');
+assert.ok(worldRenderer.includes("const l=locale==='zh-Hans'?'zh-Hans':'en'"),'The normalized locale must remain explicitly bounded to the two supported languages.');
 assert.ok(!timeline.includes("(p.caseIds||[]).join(','"),'Timeline table must not expose raw case ID lists.');
 assert.ok(!shell.includes("state.time!==null?"),'Atlas context strip must not expose unformatted raw year state.');
 assert.ok(cases.includes('civ-atlas-evidence-note'),'Case evidence boundary must be progressive disclosure.');
 
 
 const reconfig=read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js');
-assert.ok(reconfig.includes("const tabs=[['overview',c.overview],['cases',c.cases],['timeline',c.timeline],['snapshots',c.snapshots],['lived',c.lived],['compare',c.compare]]"),'Book VI primary navigation must stay reduced to six customer reading views.');
-assert.ok(reconfig.includes("const tools=[['search',c.search],['windows',c.windows],['dossiers',c.dossiers],['visuals',c.visuals],['dossiercompare',c.compareRuntime]]"),'Book VI secondary tools must remain available behind More tools.');
+for(const [id,zh,en] of [['windows','重组窗口','Windows'],['snapshots','世界变化','World shifts'],['cases','重组案例','Cases'],['dossiers','当前档案','Current dossiers'],['lived','日常现实','Lived reality']])assert.ok(reconfig.includes(`['${id}',l==='zh-Hans'?'${zh}':'${en}']`),'Current Book VI primary view must retain both language labels: '+id);
+assert.ok(reconfig.includes("const tools=[['positions',l==='zh-Hans'?'四十八运行位置':'48 runtime positions'],['search',c.search],['compare',c.compare],['dossiercompare',c.compareRuntime]]"),'Current secondary tools must remain bounded and available behind More tools.');
+for(const [previous,current] of [['overview','cases'],['timeline','windows'],['visuals','snapshots']])assert.equal(normalizeReconfigurationAtlasState({activeLayer:previous}).activeLayer,current,'Historical navigation must retain its canonical successor: '+previous);
 assert.ok(reconfig.includes('civ-reconfig-more'),'Book VI secondary navigation must use progressive disclosure.');
 
 
@@ -65,7 +71,7 @@ assert.ok(!shell.includes('data-atlas-visual-resources'),'Generic visual-library
 assert.ok(shell.includes('civ-atlas-secondary'),'Structured data view must be progressive disclosure.');
 
 const staticVisual=read('assets/js/pages/civilization-atlas/atlas-static-visual.js');
-assert.ok(staticVisual.includes("img.loading='eager'"),'Primary Atlas visual must load eagerly.');
+assert.ok(staticVisual.includes("img.loading=requested?'lazy':'eager'"),'Ordinary primary Atlas visuals must load eagerly; explicit deep-linked visuals retain bounded lazy loading.');
 assert.ok(staticVisual.includes("fetchpriority','high'"),'Primary Atlas visual must receive high fetch priority.');
 assert.ok(!staticVisual.includes("civ-atlas-visual-resources"),'Generic related/full visual library must be removed.');
 assert.ok(staticVisual.includes("const [primary]=assets"),'Only one context visual may own the generic primary slot.');
@@ -81,8 +87,8 @@ const worldReader=worldRenderer.indexOf('civ-world__slice--reader');
 const worldNav=worldRenderer.indexOf('civ-world__navigator');
 assert.ok(worldReader>=0&&worldNav>worldReader,'World must present the current snapshot before the snapshot navigator.');
 assert.ok(worldRenderer.includes('civ-world__featured'),'World reader must foreground representative civilizations.');
-assert.ok(worldRenderer.includes('civ-world__deep-dive'),'World map and networks must use progressive disclosure.');
-assert.ok(worldRenderer.indexOf('civ-world__featured')<worldRenderer.indexOf('civ-world__deep-dive'),'Representative civilizations must appear before deep world data.');
+assert.ok(worldRenderer.includes('<details class="civ-atlas-evidence-note">'),'World source, city, technology and network boundaries must use progressive disclosure.');
+assert.ok(worldRenderer.indexOf('civ-world__featured')<worldRenderer.indexOf('<details class="civ-atlas-evidence-note">'),'Representative civilizations must appear before deep source and network data.');
 assert.ok(timeline.includes('About this periodization')||timeline.includes('关于这个分期'),'Timeline evidence note must remain secondary.');
 
 
@@ -98,7 +104,19 @@ const transitions=read('assets/js/pages/civilization-atlas/transition-renderer.j
 const loss=read('assets/js/pages/civilization-atlas/loss-renderer.js');
 
 assert.ok(trajectories.includes('civ-trajectory-panel-grid'),'L6 detail reader must retain all canonical trajectory panels.');
-assert.ok(trajectories.includes('items.map(t=>'),'L6 detail reader must keep all canonical trajectories reachable.');
+assert.ok(trajectories.includes('displayItems.map(t=>'),'L6 must render the explicitly scoped current trajectory selection.');
+assert.ok(trajectories.includes('focusedId?items.filter(t=>t.trajectoryId===focusedId):items'),'L6 overview must retain the complete registry while focus selects only the requested identity.');
+{
+ const registry=json('content/civilization-atlas/trajectories/long-duration-trajectories-v1.json'),{document}=parseHTML('<div id="trajectories"></div>'),host=document.querySelector('#trajectories');
+ assert.equal(registry.trajectories.length,16,'The canonical trajectory census remains fixed.');
+ renderTrajectories(host,{registry,state:{trajectoryIds:[]},locale:'zh-Hans'});
+ assert.equal(host.querySelectorAll('[data-trajectory-panel]').length,16,'All canonical trajectories must actually render in overview.');
+ const id=registry.trajectories[0].trajectoryId;
+ renderTrajectories(host,{registry,state:{trajectoryIds:[id]},locale:'en'});
+ assert.equal(host.querySelectorAll('[data-trajectory-panel]').length,1);
+ assert.equal(host.querySelector('[data-trajectory-panel]')?.dataset.trajectoryPanel,id);
+ assert(host.querySelector('[data-trajectory-overview]'),'Focused reading must retain the route back to the full overview.');
+}
 assert.ok(!trajectories.includes('slice(0,5)'),'L6 must not regress to the old five-trajectory subset.');
 assert.ok(trajectories.includes('<polyline class="civ-trajectory-panel__line'),'Each L6 trajectory detail must retain a dynamic SVG curve.');
 assert.ok(trajectories.includes('civ-trajectory-panel__details'),'Method and uncertainty must remain progressive disclosure within each trajectory panel.');
@@ -119,8 +137,18 @@ assert.ok(css.includes('.civ-atlas-inspector__summary{display:none}'),'Mobile mu
 assert.ok(css.includes('.civ-atlas-ask .knowledge-action{width:100%'),'Mobile Ask must remain a full-width bottom action.');
 assert.ok(shell.includes('Ask using the current reading context.')&&shell.includes('使用当前阅读情境提问。'),'Ask helper copy must remain concise and context-specific.');
 
-for(const [name,source] of [['cases',cases],['comparison',comparison],['world',worldRenderer],['trajectories',trajectories],['transitions',transitions],['loss',loss]]){
+for(const [name,source] of [['cases',cases],['comparison',comparison],['trajectories',trajectories],['transitions',transitions],['loss',loss]]){
  assert.ok(source.includes('civ-atlas-inspector__summary'),`${name} inspector must use the lightweight summary wrapper.`);
+}
+// World uses the shared shell's summary host rather than duplicating its
+// wrapper in the renderer. Validate the host and the real bilingual output.
+assert.ok(shell.includes('civ-atlas-inspector__summary'),'The shared inspector summary host must remain present.');
+for(const locale of ['en','zh-Hans']){
+ const {document}=parseHTML('<div id="summary"></div>'),host=document.querySelector('#summary'),snapshot=world.snapshots[0];
+ assert.equal(renderWorldInspector(host,{snapshot,locale}),true);
+ assert.equal(host.querySelector('h3')?.textContent,snapshot.title[locale]);
+ assert.equal(host.querySelectorAll('p').length,1,'World inspector must remain a lightweight date summary.');
+ assert(!host.textContent.includes(snapshot.snapshotId),'World inspector must not expose the machine snapshot identity.');
 }
 assert.ok(!cases.includes("'政治结构':'Political architecture',label(caseRecord.politicalArchitecture"),'Case inspector must not repeat the full dossier field set.');
 

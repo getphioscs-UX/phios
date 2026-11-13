@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import path from 'node:path';
+import {MAIN096_RECEIVER_GOVERNANCE,validateMain096ReceiverGovernance,validatePprR6Successor,readPprPreentrySuccessor,PPR_R6_SUCCESSOR} from './lib/ppr-five-method-preentry-successor.mjs';
+import {assertPprCurrentSharedOwner,assertPprCurrentSharedOwnerRegistry} from './lib/ppr-current-shared-owner.mjs';
+const digest=b=>crypto.createHash('sha256').update(b).digest('hex');
+const rows=[];const check=(name,fn)=>{try{fn();rows.push({name,status:'PASS'});}catch(e){rows.push({name,status:'FAIL',error:String(e.stack||e)});}};
+const raw=(p,e)=>fs.readFileSync(p,e),recordBytes=raw(MAIN096_RECEIVER_GOVERNANCE),doc=JSON.parse(recordBytes);
+let validated;
+check('Exact 72 product identities, 31 inverse deltas and approved Source chains',()=>{validated=validateMain096ReceiverGovernance();assert.equal(Object.keys(validated.overlay).length,7);});
+check('Existing shared registry consumers including historical predecessors',()=>{const r=assertPprCurrentSharedOwnerRegistry();assert.equal(r.status,'ACTIVE_CURRENT_RUNTIME_AUTHORITY');});
+for(const f of doc.changes.filter(f=>f.path.startsWith('functions/external-profile/')||f.path.includes('specialists/human-design/'))){check('HD current and recognized predecessor '+f.path,()=>{assert.equal(assertPprCurrentSharedOwner(f.path,{historicalDigest:f.sourcePredecessorSHA256}).currentSha256,f.currentSha256);});}
+const registry=JSON.parse(raw('content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json'));
+check('Preentry historical R6 contract with exact validated dependency view',()=>{const v=readPprPreentrySuccessor(registry.files['perspectives/personal/index.html']);assert.equal(v.currentSha256,digest(raw('perspectives/personal/index.html')));});
+check('Direct R6 consumer uses validated predecessor view',()=>{const r6=JSON.parse(raw(PPR_R6_SUCCESSOR));assert.equal(typeof validatePprR6Successor(r6,raw('perspectives/personal/index.html','utf8')),'string');});
+check('Historical raw R6 dependency assertion still rejects new dependency bytes',()=>{const r6=JSON.parse(raw(PPR_R6_SUCCESSOR));assert.throws(()=>validatePprR6Successor(r6,raw('perspectives/personal/index.html','utf8'),{readFile:raw}));});
+const memory=new Map([...doc.productFiles,...doc.protectedPaths,...doc.immutableAuthorities.filter(a=>!a.gitOnlyHistoricalSnapshot)].map(f=>[f.path,raw(f.path)]));
+const memoryRead=p=>memory.get(String(p))||raw(p);
+const changed=(p,edit)=>f=>String(f)===p?Buffer.from(edit(memoryRead(f).toString())):memoryRead(f);
+const parser='functions/external-profile/hd-profile-parser.js';
+check('Reject loss of Main canonical G alias',()=>assert.throws(()=>validateMain096ReceiverGovernance({readCurrent:changed(parser,s=>s.replace("['G',['g','g center'","['G',['g center'"))})));
+check('Reject loss of source heading guard',()=>assert.throws(()=>validateMain096ReceiverGovernance({readCurrent:changed(parser,s=>s.replace("!/^[\\s]*(?:&|and\\b|[\\/／])/i.test(match[1])&&",''))})));
+check('Reject Ask method context regression',()=>assert.throws(()=>validateMain096ReceiverGovernance({readCurrent:changed('assets/customer-ui/js/surfaces/preentry-five-method-r5.js',s=>s.replace('selectedMethod:method.code','method:method.code'))})));
+for(const f of doc.changes){check('Reject unregistered extra hunk '+f.path,()=>assert.throws(()=>validateMain096ReceiverGovernance({readCurrent:changed(f.path,s=>s+'\n// UNREGISTERED_QA_MUTATION\n')})));}
+for(const f of doc.protectedPaths){check('Reject protected config/original extraction drift '+f.path,()=>assert.throws(()=>validateMain096ReceiverGovernance({readCurrent:changed(f.path,s=>s+'\n')})));}
+for(const k of Object.keys(doc.boundaries)){check('Reject authority/checksum escalation '+k,()=>{const d=structuredClone(doc);d.boundaries[k]=true;assert.throws(()=>validateMain096ReceiverGovernance({recordBytes:Buffer.from(JSON.stringify(d))}));});}
+check('Reject changed base, source identities or governance bytes',()=>{const d=structuredClone(doc);d.base='0000000000000000000000000000000000000000';assert.throws(()=>validateMain096ReceiverGovernance({recordBytes:Buffer.from(JSON.stringify(d))}));});
+check('Reject absent or wrong immutable Git predecessor',()=>assert.throws(()=>validateMain096ReceiverGovernance({readGit:()=>Buffer.from('WRONG_IMMUTABLE_OBJECT')})));
+check('Reject historical authority byte drift',()=>{const f=doc.immutableAuthorities.find(a=>!a.gitOnlyHistoricalSnapshot);assert.throws(()=>validateMain096ReceiverGovernance({readCurrent:changed(f.path,s=>s+'\n')}));});
+check('Original shared helper assertions reconstruct byte-for-byte',()=>{let s=raw('scripts/lib/ppr-current-shared-owner.mjs','utf8');s=s.replace('readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR,validateMain096ReceiverGovernance,MAIN096_RECEIVER_GOVERNANCE','readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR');s=s.replace("  if(fs.existsSync(MAIN096_RECEIVER_GOVERNANCE)){const entry=validateMain096ReceiverGovernance().overlay[path];if(entry)record={...record,...entry,recognizedPredecessors:[...new Set([...(record?.recognizedPredecessors||[]),record?.currentSha256,...entry.recognizedPredecessors].filter(Boolean))]};}\n",'');assert.equal(digest(s),'07ade332a6a9124545c96feec45d20f4ec98bf3824c1b91630a8f9c156dbaad7');});
+check('Original preentry assertions reconstruct byte-for-byte',()=>{let s=raw('scripts/lib/ppr-five-method-preentry-successor.mjs','utf8').split('\n// Independent receiver authority.')[0];s=s.replace("import {execFileSync} from 'node:child_process';\n",'').replace('export function validatePprR6Successor(record,current,{readFile=main096HistoricalReader()}={}){','export function validatePprR6Successor(record,current){').replace('function readPprPreentryHistoricalSuccessor(owner,readFile){','export function readPprPreentrySuccessor(owner){').replace('validatePprR6Successor(r6,current,{readFile}),','validatePprR6Successor(r6,current),').replaceAll('readFile(', 'fs.readFileSync(');assert.equal(digest(s),'433b1a39ee3f4cf7c669380297531ccec7839b0a8099c50f59dce357d3dc24fa');});
+check('Governance paths follow existing Pages exclusion without policy changes',()=>{const s=raw('scripts/build-cloudflare-pages.mjs','utf8');assert(s.includes("'scripts',"));assert(s.includes("if(file.startsWith('content/production-closure/')) return false;"));assert(!doc.productFiles.some(f=>f.path===MAIN096_RECEIVER_GOVERNANCE));});
+const result={version:'SIX_METHOD_MAIN096_RECEIVER_GOVERNANCE_R1',base:doc.base,productSourceSetSHA256:doc.productSourceSetSHA256,recordSHA256:digest(recordBytes),passed:rows.filter(r=>r.status==='PASS').length,failed:rows.filter(r=>r.status==='FAIL').length,rows,scope:'Exact engineering authority only; no Human/Public/Commercial/Production admission',providerCalls:0,productionWrites:0,fullCheck:'NOT_RUN',requiredCI:'NOT_RUN_NO_COMMIT',privateSourcesUsed:false};
+if(process.env.PHIOS_GOVERNANCE_QA_OUTPUT_DIR){const dir=path.resolve(process.env.PHIOS_GOVERNANCE_QA_OUTPUT_DIR);assert(/^E:\\PHIOS\\QA-TEMP\\/i.test(dir),'Use existing E QA output root');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'GOVERNANCE-TARGETED-RESULT.json'),JSON.stringify(result,null,2));}
+console.log(JSON.stringify(result));if(result.failed)process.exitCode=1;

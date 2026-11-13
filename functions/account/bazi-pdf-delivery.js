@@ -2,6 +2,8 @@ import {openAccountBaziMaterial} from './bazi-account-delivery.js';
 import {createCustomerArtifactStore} from '../report-delivery/customer-artifact-store.js';
 import {personIdentity,loadCanonicalPersonSubject} from './canonical-person-store.js';
 import {commerceEnvironment} from '../commerce/commerce-environment.js';
+import {prepareBaziPdfIssuanceR1,REPORT_PDF_RENDITION_VERSIONS} from '../report-delivery/report-pdf-issuance-port-r1.js';
+import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
 export const BAZI_PDF_DERIVATIVE_VERSION='BZR-PRIVATE-PDF-DERIVATIVE-1';
 const fail=(code,status=409)=>{throw Object.assign(Error(code),{code,status});};
 const hash=async b=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b)),v=>v.toString(16).padStart(2,'0')).join('');
@@ -24,12 +26,14 @@ async function repairFromFrozenPublication(context,artifact){
 // A successful first render supplies its original bytes; no second render occurs.
 export async function persistAccountBaziPdf(context,{binding,artifact,pdfBytes,verification}={}){
  if(!artifact||!binding)fail('REPORT_PDF_MATERIAL_REQUIRED');await authorizeSource(context,binding,artifact);const store=await createCustomerArtifactStore(context.env,binding);
- const result=await store.pdfDerivative({artifact,version:BAZI_PDF_DERIVATIVE_VERSION,allowCreate:true,authorize:()=>authorizeSource(context,binding,artifact),render:async()=>{
+ const legacy=await store.hasPdfDerivative({artifact,version:BAZI_PDF_DERIVATIVE_VERSION}),version=legacy?BAZI_PDF_DERIVATIVE_VERSION:REPORT_PDF_RENDITION_VERSIONS.BZR;
+ const prepareIssuance=async()=>{const d=verification?.pdfDerivative;if(verification?.passed!==true||verification.outputDigest!==artifact.htmlSnapshotOrRenderState.outputDigest||verification.publicationDigest!==artifact.publicationIR.digest||d?.pages!==48)fail('REPORT_PDF_VERIFIED_SOURCE_RECEIPT_REQUIRED');return prepareBaziPdfIssuanceR1(context,{binding,artifact,version,sourceReceipt:{schemaVersion:'BZR-FROZEN-PDF-SOURCE-R1',version:BAZI_PDF_DERIVATIVE_VERSION,methodCode:'BZR',ownerAccountId:binding.ownerAccountId,subjectId:artifact.personId,orderId:binding.orderId,purchaseId:binding.purchaseId,productId:binding.productId,outputSHA256:d.outputDigest,bytes:d.bytes,pageCount:d.pages,publicationIRDigest:artifact.publicationIR.digest,sourceHtmlDigest:verification.outputDigest}});};
+ const result=await store.pdfDerivative({artifact,version,allowCreate:true,authorize:()=>authorizeSource(context,binding,artifact),prepareIssuance,render:async()=>{
   if(!pdfBytes)return repairFromFrozenPublication(context,artifact);
   if(verification?.outputDigest!==artifact.htmlSnapshotOrRenderState.outputDigest||verification.publicationDigest!==artifact.publicationIR.digest||verification.pdfDerivative?.pages!==48||verification.pdfDerivative.bytes!==pdfBytes.length||verification.pdfDerivative.outputDigest!==await hash(pdfBytes))fail('REPORT_PDF_SOURCE_BINDING_INVALID');
   return pdfBytes;
  }});
- return {persisted:true,outputDigest:result.outputDigest,bytes:result.bytes.length,artifactDigest:artifact.artifactDigest,sourceHtmlDigest:artifact.htmlSnapshotOrRenderState.outputDigest,publicationDigest:artifact.publicationIR.digest,derivativeVersion:BAZI_PDF_DERIVATIVE_VERSION,optimization:'NONE_UNOPTIMIZED_VERIFIED_RENDER',cacheHit:result.cacheHit};
+ return {persisted:true,outputDigest:result.outputDigest,bytes:result.bytes.length,artifactDigest:artifact.artifactDigest,sourceHtmlDigest:artifact.htmlSnapshotOrRenderState.outputDigest,publicationDigest:artifact.publicationIR.digest,derivativeVersion:version,optimization:result.renditionReceipt?result.optimizationReceipt.profile:'NONE_UNOPTIMIZED_VERIFIED_RENDER',...(result.renditionReceipt?{renditionReceiptDigest:await sha256Stable(result.renditionReceipt)}:{}),cacheHit:result.cacheHit};
 }
 export async function hasAccountBaziPdf(context,material){
  if(!material.artifact||!material.candidate.paidReportBinding)return false;
@@ -42,6 +46,7 @@ export async function downloadAccountBaziPdf(context,reportId){
  const store=await createCustomerArtifactStore(context.env,binding);
  // Intentionally no renderer callback: missing/corrupt issued files fail safely.
  const result=await store.pdfDerivative({artifact,version:material.pdfRef?.derivativeVersion||BAZI_PDF_DERIVATIVE_VERSION,authorize:()=>authorizeSource(context,binding,artifact)});
+ if(material.pdfRef?.renditionReceiptDigest&&material.pdfRef.renditionReceiptDigest!==await sha256Stable(result.renditionReceipt))fail('REPORT_PDF_RENDITION_RECEIPT_MISMATCH');
  if(artifact.pdfPolicy==='PERSISTED_PRIVATE_PDF_REQUIRED'&&!material.pdfRef)fail('REPORT_PDF_RELEASE_RECEIPT_REQUIRED');
  if(material.pdfRef&&(material.pdfRef.outputDigest!==result.outputDigest||material.pdfRef.bytes!==result.bytes.length||material.pdfRef.artifactDigest!==artifact.artifactDigest||material.pdfRef.publicationDigest!==artifact.publicationIR.digest||material.pdfRef.sourceHtmlDigest!==artifact.htmlSnapshotOrRenderState.outputDigest))fail('REPORT_PDF_IMMUTABLE_RECEIPT_MISMATCH');
  return new Response(result.bytes,{headers:{'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="PHI-OS-BaZi-${reportId.replace(/[^A-Za-z0-9_-]/g,'')}.pdf"`,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow','X-PHIOS-Output-Digest':result.outputDigest}});
