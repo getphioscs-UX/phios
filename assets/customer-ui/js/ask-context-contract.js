@@ -7,5 +7,5 @@ export function normalizeAskContext(input={}) {
  if(contextRef.startsWith('ARTICLE:'))contextRef='ARTICLE:'+contextRef.slice(8).toLowerCase();
  const publicRef=/^(ARTICLE|BOOK|FIGURE|CONCEPT|NODE):[a-zA-Z0-9_-]+$/.test(contextRef);
  const route=get('contextRoute')||get('entryRoute');
- return {entrySurface:get('entrySurface'),contextType:publicRef?'KNOWLEDGE':get('contextType'),contextRef,contextId:contextRef,contextLabel:get('contextLabel').slice(0,160),contextRoute:route.startsWith('/')&&!route.startsWith('//')?route:'/knowledge/',contextSummary:get('contextSummary').slice(0,320),readingPath:get('readingPath'),relatedKnowledgeRef:get('relatedKnowledgeRef'),retrievalScope:get('retrievalScope'),locale:get('locale'),fallbackPolicy:contextRef?'EXPLICIT_SOURCE_ONLY':'GENERAL_KNOWLEDGE'};
+ return {selectedMethod:get('selectedMethod').slice(0,64),entrySurface:get('entrySurface'),contextType:publicRef?'KNOWLEDGE':get('contextType'),contextRef,contextId:contextRef,contextLabel:get('contextLabel').slice(0,160),contextRoute:route.startsWith('/')&&!route.startsWith('//')?route:'/knowledge/',contextSummary:get('contextSummary').slice(0,320),readingPath:get('readingPath'),relatedKnowledgeRef:get('relatedKnowledgeRef'),retrievalScope:get('retrievalScope'),locale:get('locale'),fallbackPolicy:contextRef?'EXPLICIT_SOURCE_ONLY':'GENERAL_KNOWLEDGE'};
 }

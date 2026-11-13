@@ -2,6 +2,8 @@ import {worldPreviewBuildPolicy,isolateWorldPreviewWorker} from './lib/world-pre
 import {finalReleaseBuildPolicy,isolateFinalReleaseWorker} from './lib/final-release-publication.mjs';
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
 import {internalPublicationFile} from './lib/publication-boundary.mjs';
+import {emitPublicCountryHistoryAssets} from './lib/country-history-publication-r4.mjs';
+import {freeCountryPreviewBuildPolicy,isolateFreeCountryPreviewWorker} from './lib/free-country-preview-isolation-r1.mjs';
 ﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -310,6 +312,10 @@ if (!fs.existsSync(path.join(output, 'index.html'))) {
   );
 }
 
+// Source-controlled R4 review candidates are not public-content admission.
+// Omit their prose in both static representations; server consumers apply the same gate.
+console.log('Country public admission boundary:',JSON.stringify(emitPublicCountryHistoryAssets(root,output)));
+
 console.log(
   `Pages static publication: copied=${copied}, skipped=${skipped}`
 );
@@ -391,7 +397,9 @@ if (
 // and legal comments. Apply the current platform policy to shipped modules.
 const worldPreviewPolicy=worldPreviewBuildPolicy(process.env);
 const finalReleasePolicy=finalReleaseBuildPolicy(process.env);
-const compiledWorker = finalReleasePolicy.active?isolateFinalReleaseWorker(workerSource,finalReleasePolicy):isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
+const freeCountryPolicy=freeCountryPreviewBuildPolicy(process.env);
+const compiledWorker = freeCountryPolicy.active?isolateFreeCountryPreviewWorker(workerSource,freeCountryPolicy):finalReleasePolicy.active?isolateFinalReleaseWorker(workerSource,finalReleasePolicy):isolateWorldPreviewWorker(workerSource,worldPreviewPolicy);
+console.log('Free/Country isolated build scope: '+JSON.stringify(freeCountryPolicy));
 console.log('World immutable build scope: '+JSON.stringify(worldPreviewPolicy));
 const compactWorker = transformSync(compiledWorker, pagesWorkerCompactionOptions).code;
 fs.writeFileSync(workerSource, compactWorker);
