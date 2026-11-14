@@ -193,6 +193,8 @@ export async function initializeCustomerShell(scope = document) {
   document.documentElement.dataset.cxAccountPresentation = state;
 }
 
+// Optional presentation must never block navigation, inputs or account controls.
+void import('./customer-experience-r1.js').catch(error => console.warn('CX_PRESENTATION_UNAVAILABLE', error));
 initializeCustomerShell().then(async () => {
   if (document.body.dataset.cxSurface === 'SYMBOLIC_ICHING') {
     await import('./surfaces/iching-customer-entry.js');

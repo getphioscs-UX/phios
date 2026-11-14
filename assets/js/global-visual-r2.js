@@ -3,9 +3,11 @@ const zh=()=>document.documentElement.lang.toLowerCase().startsWith('zh');
 const localized=()=>{for(const n of document.querySelectorAll('[data-vr2-en]'))n.textContent=n.getAttribute(zh()?'data-vr2-zh':'data-vr2-en');for(const n of document.querySelectorAll('[data-vr2-en-alt]'))n.alt=n.getAttribute(zh()?'data-vr2-zh-alt':'data-vr2-en-alt');};
 localized();new MutationObserver(localized).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 const resolved=new Map();
+const attempts=new WeakMap();
 export async function hydrateApprovedVisuals(root=document){
  await Promise.all([...root.querySelectorAll('img[data-approved-visual]')].map(async image=>{
   if(image.dataset.vr2Bound)return;image.dataset.vr2Bound='loading';
+  const attempt={};attempts.set(image,attempt);
   try{const code=image.dataset.approvedVisual;if(!resolved.has(code))resolved.set(code,resolveApprovedVisual(code));const a=await resolved.get(code);
    image.width=a.width||image.width||1600;image.height=a.height||image.height||1000;image.decoding='async';
    if(!image.loading)image.loading=image.closest('[data-vr2-role="HERO"]')?'eager':'lazy';
@@ -13,10 +15,11 @@ export async function hydrateApprovedVisuals(root=document){
    if(a.srcset){image.srcset=a.srcset;image.sizes='(max-width: 768px) 100vw, 1120px';}
    const link=image.closest('a[data-vr2-inspect]');if(link)link.href=a.src;
    image.addEventListener('load',()=>{image.dataset.vr2Bound='decoded';image.nextElementSibling?.matches('[data-vr2-retry]')&&image.nextElementSibling.remove();},{once:true});
-   image.addEventListener('error',()=>{image.dataset.vr2Bound='failed';const retry=document.createElement('button');retry.type='button';retry.dataset.vr2Retry='';retry.textContent=zh()?'重新加载图片':'Reload image';retry.onclick=()=>{image.dataset.vr2Bound='';image.hidden=false;image.removeAttribute('src');retry.remove();image.parentElement.querySelector('[data-vr2-failure-state]')?.remove();hydrateApprovedVisuals(image.parentElement);};image.after(retry);if(image.dataset.approvedVisual!=='PHIOS-ILLUSTRATION-TEMPORARY-LOAD-FAILURE-v1.webp')resolveApprovedVisual('PHIOS-ILLUSTRATION-TEMPORARY-LOAD-FAILURE-v1.webp').then(a=>{const state=document.createElement('img');state.dataset.vr2FailureState='';state.src=a.src;state.alt=zh()?'图片未能载入，可以重试。':'The image could not load. You can retry.';state.width=a.width||1600;state.height=a.height||1000;state.loading='lazy';image.hidden=true;retry.before(state);}).catch(()=>{});},{once:true});
+   const failure=()=>{if(attempts.get(image)!==attempt||image.dataset.vr2Bound==='failed')return;image.dataset.vr2Bound='failed';const retry=document.createElement('button');retry.type='button';retry.dataset.vr2Retry='';retry.textContent=zh()?'重新加载图片':'Reload image';retry.onclick=()=>{image.dataset.vr2Bound='';image.hidden=false;image.removeAttribute('src');retry.remove();image.parentElement.querySelector('[data-vr2-failure-state]')?.remove();hydrateApprovedVisuals(image.parentElement);};image.after(retry);if(image.dataset.approvedVisual!=='PHIOS-ILLUSTRATION-TEMPORARY-LOAD-FAILURE-v1.webp')resolveApprovedVisual('PHIOS-ILLUSTRATION-TEMPORARY-LOAD-FAILURE-v1.webp').then(a=>{const state=document.createElement('img');state.dataset.vr2FailureState='';state.src=a.src;state.alt=zh()?'图片未能载入，可以重试。':'The image could not load. You can retry.';state.width=a.width||1600;state.height=a.height||1000;state.loading='lazy';image.hidden=true;retry.before(state);}).catch(()=>{});};
+   image.addEventListener('error',failure,{once:true});
    if(image.src!==new URL(a.src,location.href).href)image.src=a.src;
    if(image.complete&&image.naturalWidth>0)image.dataset.vr2Bound='decoded';
-   else if(image.complete)image.dispatchEvent(new Event('error'));
+   else if(image.complete&&typeof image.decode==='function')void image.decode().catch(()=>{if(image.dataset.vr2Bound==='loading')failure();});
   }catch(error){resolved.delete(image.dataset.approvedVisual);image.dataset.vr2Bound='resolution-failed';image.dataset.vr2Error=error.message;const retry=document.createElement('button');retry.type='button';retry.dataset.vr2Retry='';retry.textContent=zh()?'重新加载图片':'Reload image';retry.onclick=()=>{image.dataset.vr2Bound='';image.removeAttribute('src');retry.remove();hydrateApprovedVisuals(image.parentElement);};image.after(retry);}
  }));
 }
