@@ -34,7 +34,7 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - run: node scripts/check-free-read-only-r3.mjs
+      - run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-free-read-only-r3.mjs
       - run: node scripts/check-country-history-public-admission-r4.mjs
       - run: node scripts/check-free-country-preview-isolation-r1.mjs
       - name: Verify exact source successor chain and rejection boundaries
