@@ -13,7 +13,7 @@ const locale=()=>document.documentElement.lang.startsWith('zh')?'zh-Hans':'en';
 const t=(zh,en)=>locale()==='zh-Hans'?zh:en;
 const section=(id,n,title,sub,body,cls='')=>`<section id="${id}" class="ef-section ${cls}" data-ef-section="${n}"><div class="ef-wrap"><div class="ef-intro"><p class="ef-kicker">${n} / ${t('PHI 构型','PHI Configuration')}</p><h2>${title}</h2><p>${sub}</p></div>${body}</div></section>`;
 const button=(label,href,primary=false)=>`<a class="ef-button${primary?' ef-button--primary':''}" href="${href}">${label}</a>`;
-const fetchJson=async p=>{const r=await fetch(p,{credentials:'same-origin'});if(!r.ok)throw Error('RESOURCE_UNAVAILABLE');return r.json();};
+const fetchJson=async p=>{const r=await fetch(p,{credentials:'same-origin',signal:AbortSignal.timeout(10000)});if(!r.ok)throw Error('RESOURCE_UNAVAILABLE');return r.json();};
 
 function sceneArt(which){
  const art=[
@@ -131,7 +131,8 @@ if(root){
  root.addEventListener('input',e=>{if(e.target.matches('[data-ef-note]'))state.note=e.target.value;});
  root.addEventListener('error',e=>{if(e.target.tagName!=='IMG')return;const im=e.target;if(im.dataset.efFigureFallback&&im.dataset.efFallbackUsed!=='true'){im.dataset.efFallbackUsed='true';im.src=im.dataset.efFigureFallback;return;}im.hidden=true;if(im.dataset.efR2Image){const fallback=im.parentElement.querySelector('[data-ef-scene-fallback],[data-ef-hero-art]');if(fallback){fallback.hidden=false;return;}}if(im.parentElement.querySelector('.ef-image-fallback'))return;const s=document.createElement('span');s.className='ef-image-fallback';s.textContent=t('图像暂未载入，仍可浏览说明。','Image unavailable; the description remains available.');im.parentElement.append(s);},true);
  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
- const loaded=await Promise.allSettled([fetchJson('/assets/customer-ui/media/ecr-deep-r2/public-explorer.json'),fetchJson('/assets/customer-ui/media/ecr-flagship-r1/presentation.json'),fetchJson('/api/commerce-catalog')]);
- data=loaded[0].status==='fulfilled'?loaded[0].value:null;presentation=loaded[1].status==='fulfilled'?loaded[1].value:null;catalog=loaded[2].status==='fulfilled'?loaded[2].value:null;
+ fetchJson('/api/commerce-catalog').then(v=>{catalog=v;if(data&&presentation)renderQuote();}).catch(()=>{});
+ const loaded=await Promise.allSettled([fetchJson('/assets/customer-ui/media/ecr-deep-r2/public-explorer.json'),fetchJson('/assets/customer-ui/media/ecr-flagship-r1/presentation.json')]);
+ data=loaded[0].status==='fulfilled'?loaded[0].value:null;presentation=loaded[1].status==='fulfilled'?loaded[1].value:null;
  if(data&&presentation)render();else root.querySelector('[data-ef-loading]').textContent=t('模型暂未载入，你仍可进入现有个人读取或稍后再试。','The model could not load. You can still use the existing personal reading or try again later.');
 }

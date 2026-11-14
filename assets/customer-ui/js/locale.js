@@ -117,6 +117,7 @@ export function preferredCustomerLocale(){
 
 export function applyCustomerLocale(locale,scope=document){
   const next=locale==='zh-Hans'?'zh-Hans':'en';
+  const url=new URL(location.href);url.searchParams.set('locale',next);history.replaceState(history.state,'',url);
   document.documentElement.lang=next;
   document.documentElement.dataset.cxLocale=next;
   writeStorage(KEY,next);

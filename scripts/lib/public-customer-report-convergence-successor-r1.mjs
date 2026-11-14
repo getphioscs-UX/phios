@@ -1,6 +1,7 @@
+import {auditPublicPredecessor} from './audit-r2-public-receiver-r2.mjs';
 import {hdPrivateDecorationPredecessor,validateHdPrivateDecorationCurrent} from './hd-private-decorative-reception-r1.mjs';
 import {bzrPublicFidelityPredecessor,validateBzrPublicFidelityCurrent} from './bzr-public-fidelity-reception-r1.mjs';
-const convergenceChildBytes=(path,bytes)=>zwrChildBytes(path,bzrPublicFidelityPredecessor(path,hdPrivateDecorationPredecessor(path,bytes)));
+const convergenceChildBytes=(path,bytes)=>zwrChildBytes(path,bzrPublicFidelityPredecessor(path,hdPrivateDecorationPredecessor(path,auditPublicPredecessor(path,bytes))));
 import {worldReadabilityPredecessor} from './world-readability-compatibility-r1.mjs';
 import {convergenceChildBytes as zwrChildBytes,validateZwrReceptionCurrent} from './report-zwr-revision-reception-r1.mjs';
 import fs from 'node:fs';

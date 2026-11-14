@@ -1,6 +1,7 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
 import {publicVisualDeliveryPredecessor} from './public-visual-delivery-successor-r1.mjs';
 import {publicVisualRepairPredecessorBytes} from './public-visual-repair-successor-r1.mjs';
-import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 export const HEALTH_VISUAL_PATH='assets/customer-ui/js/surfaces/journey-method-visual-r1.js';
 export const HEALTH_VISUAL_OWNER_SHA='de16b2413c2dc2c73db0a54f4c0f6ab05a2a81a4819662d51e5f04d7103d3d81';
 export const HEALTH_OLD_GUARD="if(location.pathname!=='/health-reality.html')return;";

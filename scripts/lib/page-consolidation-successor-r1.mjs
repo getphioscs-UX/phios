@@ -1,9 +1,10 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
 import {isConvergenceCurrent,assertConvergenceHome,convergenceRedirectTarget} from './public-customer-report-convergence-successor-r1.mjs';
 import {assertLocaleBootstrapCurrent} from './locale-bootstrap-current-successor.mjs';
 import {finalR6ConsolidationBytes} from './final-r6-visual-successor.mjs';
 import {professionalConsolidationBytes,financialServiceScopeBytes} from './professional-consolidation-successor-r1.mjs';
 import {currentConsolidationDigest} from './founder-human-presence-successor-r2.mjs';
-import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {parseHTML} from 'linkedom';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};import crypto from 'node:crypto';import assert from 'node:assert/strict';import {parseHTML} from 'linkedom';
 const root='content/production-closure/live-customer-commercial-convergence/page-consolidation-r1',manifest='content/web/index-surfaces/page-consolidation-configuration-profile-successor-r1.json',sha=x=>crypto.createHash('sha256').update(x).digest('hex');
 function financialEverydayDigest(file,expected){
  const next=JSON.parse(fs.readFileSync('content/web/index-surfaces/pis-financial-everyday-successor-v5.json'));

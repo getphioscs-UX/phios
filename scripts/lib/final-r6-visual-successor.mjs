@@ -1,5 +1,6 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
 import {isConvergenceCurrent,convergencePredecessor} from './public-customer-report-convergence-successor-r1.mjs';
-import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};import crypto from 'node:crypto';import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {r6VisualOwnerBytes} from './final-health-route-successor.mjs';
 import {methodVisualIds} from '../../assets/customer-ui/js/surfaces/journey-method-visual-model-r1.js';

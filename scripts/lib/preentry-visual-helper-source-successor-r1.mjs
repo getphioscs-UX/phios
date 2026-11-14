@@ -1,4 +1,5 @@
-import fs from 'node:fs';
+import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';

@@ -1,3 +1,4 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -7,7 +8,7 @@ import crypto from 'node:crypto';
 const root = process.cwd();
 
 async function read(relativePath) {
-  return (await fs.readFile(path.join(root, relativePath), 'utf8'))
+  return auditPublicReadFile(relativePath, 'utf8')
     .replace(/^\uFEFF/, '')
     .replace(/\r\n?/g, '\n');
 }
@@ -18,7 +19,7 @@ async function readJson(relativePath) {
 
 const contract = await readJson('content/registry/pds-w3-core-component-shell-contract.json');
 const fixture = await readJson('tests/fixtures/pds-w3-core-component-shell-contract.json');
-const shell = await read(contract.sharedShell.script);
+const shell = auditPublicPredecessor(contract.sharedShell.script,await fs.readFile(path.join(root,contract.sharedShell.script))).toString('utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const css = await read(contract.sharedShell.stylesheet);
 const tokens = await read('assets/css/tokens.css');
 const foundation = await read('assets/css/design/foundation.css');

@@ -1,3 +1,4 @@
+import {buildPublicLoanCalculator} from './build-public-loan-calculator.mjs';
 import {worldPreviewBuildPolicy,isolateWorldPreviewWorker} from './lib/world-preview-worker-isolation.mjs';
 import {finalReleaseBuildPolicy,isolateFinalReleaseWorker} from './lib/final-release-publication.mjs';
 import {loadBookViiPublishedAdmission,BOOK_VII_ADMISSION_PATH} from '../functions/_lib/book-vii-published-admission.js';
@@ -17,6 +18,7 @@ import {assessWorkerSize} from './lib/pages-worker-size-policy.mjs';
 import {requireDiskSpace} from './lib/disk-space-guard.mjs';
 
 requireDiskSpace({label:'Pages production build',estimatedBytes:2_000_000_000});
+await buildPublicLoanCalculator();
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -312,6 +314,14 @@ if (!fs.existsSync(path.join(output, 'index.html'))) {
   );
 }
 
+// A static fallback still identifies the exact artifact if Functions cannot run.
+const publicationCommit=String(process.env.CF_PAGES_COMMIT_SHA||spawnSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).stdout||'').trim();
+if(!/^[a-f0-9]{40}$/.test(publicationCommit))throw Error('PUBLICATION_COMMIT_ID_REQUIRED');
+const publicHeadersPath=path.join(output,'_headers');
+const publicHeaders=fs.readFileSync(publicHeadersPath,'utf8');
+if(!publicHeaders.startsWith('/*\n')&&!publicHeaders.startsWith('/*\r\n'))throw Error('GLOBAL_STATIC_HEADERS_REQUIRED');
+fs.writeFileSync(publicHeadersPath,publicHeaders.replace(/^\/\*\r?\n/,`/*\n  X-PHIOS-Source-Commit: ${publicationCommit}\n`));
+
 // Source-controlled R4 review candidates are not public-content admission.
 // Omit their prose in both static representations; server consumers apply the same gate.
 console.log('Country public admission boundary:',JSON.stringify(emitPublicCountryHistoryAssets(root,output)));
@@ -392,6 +402,11 @@ if (
     'Missing generated Pages Functions routes'
   );
 }
+
+// Public assets are already constrained by the publication allowlist. Avoid
+// spending a Function invocation for each module, font, image and content file.
+routes.exclude=[...new Set([...(routes.exclude||[]),'/assets/*','/content/*','/data/*','/favicon.ico','/robots.txt','/sitemap.xml','/reality-entry','/reality-entry/','/reality-entry.html'])];
+fs.writeFileSync(routeSource,JSON.stringify(routes,null,2)+'\n');
 
 // Compact generated bindings and whitespace, preserving runtime names, syntax
 // and legal comments. Apply the current platform policy to shipped modules.

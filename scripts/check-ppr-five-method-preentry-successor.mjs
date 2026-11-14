@@ -1,3 +1,4 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -5,7 +6,7 @@ import {validatePprPreentryDelta,readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR
 const sha=s=>crypto.createHash('sha256').update(s).digest('hex');
 const next=JSON.parse(fs.readFileSync(PPR_PREENTRY_SUCCESSOR));
 const registry=JSON.parse(fs.readFileSync('content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json'));
-const actual=fs.readFileSync(next.path,'utf8'),r6=JSON.parse(fs.readFileSync(PPR_R6_SUCCESSOR)),current=validatePprR6Successor(r6,actual),previous=fs.readFileSync(next.previousPath,'utf8'),tests=[];
+const actual=auditPublicReadFile(next.path,'utf8'),r6=JSON.parse(fs.readFileSync(PPR_R6_SUCCESSOR)),current=validatePprR6Successor(r6,actual),previous=fs.readFileSync(next.previousPath,'utf8'),tests=[];
 const check=(name,fn)=>{fn();tests.push({name,status:'PASS'});};
 check('Actual pinned dependencies and predecessor accepted',()=>readPprPreentrySuccessor(registry.files[next.path]));
 check('Six insertion restoration exact',()=>validatePprPreentryDelta(next,current,previous));

@@ -1,5 +1,6 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};
 import crypto from 'node:crypto';
 import {readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR,validateMain096ReceiverGovernance,MAIN096_RECEIVER_GOVERNANCE} from './ppr-five-method-preentry-successor.mjs';
 

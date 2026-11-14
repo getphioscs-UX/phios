@@ -1,11 +1,11 @@
 export function renderBookPublicSamples(host,book,locale='en'){
  const doc=host.ownerDocument,zh=locale==='zh-Hans';host.replaceChildren();
- const heading=doc.createElement('h2');heading.textContent=book.previewPages?.length||book.figures?.length?(zh?'免费阅读预览':'Free reading preview'):(zh?'本册封面':'Book cover');host.append(heading);
+ const heading=doc.createElement('h2');heading.textContent=book.previewPages?.length?(zh?'免费阅读预览':'Free reading preview'):book.figures?.length?(zh?'本册总结图':'Volume summary figures'):(zh?'本册封面':'Book cover');host.append(heading);
  if(Number.isInteger(book.publicationPageCount)&&book.publicationPageCount>0){const count=doc.createElement('p');count.dataset.bookPublicationPages=String(book.publicationPageCount);count.textContent=zh?`本册共 ${book.publicationPageCount} 页。以下为免费预览与总结图。`:`This volume has ${book.publicationPageCount} pages. Free samples and summary figures follow.`;host.append(count);}
  if(book.cover){const cover=doc.createElement('img');cover.src=book.cover;cover.alt=zh?'本册封面':'Book cover';cover.loading='lazy';cover.style.cssText='width:200px;max-width:100%;height:auto';host.append(cover);}
- else {const note=doc.createElement('p');note.textContent=zh?'本册封面与预览尚待公布。':'Cover and preview will be announced.';host.append(note);}
+ else if(!book.suppressCoverNotice&&!book.previewPages?.length&&!book.figures?.length){const note=doc.createElement('p');note.textContent=zh?'目前暂无可公开显示的封面或预览。':'No public cover or preview is currently available.';host.append(note);}
  const pages=book.previewPages||[];
- if(pages.length){const note=doc.createElement('p');note.textContent=zh?'购买前可免费阅读以下静态预览页。原文语言保持不变。':'Read these sample pages free before purchasing. The original page language is preserved.';host.append(note);
+ if(pages.length){const note=doc.createElement('p');note.textContent=zh?'以下静态预览页可免费阅读。原文语言保持不变。':'Read these sample pages free. The original page language is preserved.';host.append(note);
  const controls=doc.createElement('div'),prev=doc.createElement('button'),next=doc.createElement('button'),select=doc.createElement('select'),image=doc.createElement('img'),status=doc.createElement('p');
  prev.type=next.type='button';prev.textContent=zh?'上一页':'Previous';next.textContent=zh?'下一页':'Next';select.setAttribute('aria-label',zh?'预览页码':'Preview page');status.setAttribute('role','status');
  pages.forEach((url,i)=>{const o=doc.createElement('option');o.value=String(i);o.textContent=`${i+1} / ${pages.length}`;select.append(o)});

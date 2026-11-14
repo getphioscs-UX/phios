@@ -18,13 +18,13 @@ const NAVIGATION = Object.freeze([
 ]);
 
 const FOOTER_LINKS = Object.freeze([
-  { href: '/library', key: 'publicShell.nav.knowledge' },
+  { href: '/knowledge/', key: 'publicShell.nav.knowledge' },
   { href: '/articles', key: 'publicShell.footer.articles' },
   { href: '/thesis', key: 'publicShell.footer.thesis' },
-  { href: '/book-one', key: 'publicShell.footer.books' },
+  { href: '/books/', key: 'publicShell.footer.books' },
   { href: '/world/', key: 'publicShell.footer.atlas' },
   { href: '/reality/', key: 'publicShell.nav.realityJourney' },
-  { href: '/services', key: 'publicShell.nav.professional' },
+  { href: '/professional/', key: 'publicShell.nav.professional' },
   { href: '/about/founder/', key: 'publicShell.nav.about' },
   { href: '/privacy', key: 'publicShell.footer.privacy' },
   { href: '/terms', key: 'publicShell.footer.terms' },
@@ -76,7 +76,7 @@ function auxiliaryMarkup() {
     <div class="public-nav__actions">
       <a class="public-nav__auxiliary" href="/search/" data-i18n="publicShell.nav.search"></a>
       <a class="public-nav__auxiliary" href="/knowledge/ask/" data-i18n="worldRecovery.terms.ask">Ask PHI OS</a>
-      <a class="public-nav__auxiliary" href="/account" data-i18n="publicShell.nav.signIn"></a>
+      <a class="public-nav__auxiliary" href="/account/" data-cx-en="Account" data-cx-zh="账户">Account</a>
     </div>
   `;
 }
