@@ -1,0 +1,67 @@
+{
+  "schema": "PREENTRY_VISUAL_HELPER_SOURCE_SUCCESSOR_R1",
+  "base": "58b4e464cf44bd3ec3b68ba5f4def1d0994ceb89",
+  "received": "400efec478704cb4dce92b1167104b9a2dd46ea5",
+  "paths": [
+    "scripts/lib/ppr-five-method-preentry-successor.mjs",
+    "scripts/check-six-method-main096-receiver-governance-r1.mjs"
+  ],
+  "parents": [
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/final-unified-production-r1/SHARED-VISUAL-SOURCE-RECEPTION-R1.json",
+      "sha256": "d7da7938bf30a86492e64881ae6b4b87bf92fc6c7af5f320b3628d11779d2c74"
+    },
+    {
+      "path": "content/production-closure/live-customer-commercial-convergence/final-unified-production-r1/SIX-METHOD-MAIN096-RECEIVER-GOVERNANCE-SUCCESSOR.json",
+      "sha256": "5848e10f9872a3717da5f1bef96b7d88ad1c2ec6b904f34afa7b1ae554fe0675"
+    }
+  ],
+  "helper": {
+    "path": "scripts/lib/ppr-five-method-preentry-successor.mjs",
+    "sha256": "0f89c9c2ddf81a2eaaa12ef188b2c44350610ba672606adb10581598261da8cb",
+    "previousCommit": "58b4e464cf44bd3ec3b68ba5f4def1d0994ceb89",
+    "previousSHA256": "fff5470fb25ed7a5e533c7b273e4ac932ee36d543779ee9706a93251d540a114",
+    "previousObject": "a7617d444c9abfa3d9fbe068ae135990eebb42f0",
+    "prefixSHA256": "9044ac87d5ff8e2ba9f095cbcd32301dff666e0628c32cbf8883d0e3dbb5e2e6",
+    "inverse": [
+      {
+        "after": "import {sharedVisualPredecessorBytes} from './shared-visual-source-predecessor-r1.mjs';\n",
+        "before": ""
+      },
+      {
+        "after": "  const expected=replacement?.currentSha256||e.sha256;assert.equal(sha(sharedVisualPredecessorBytes(e.path,expected,readFile(e.path))),expected,'Pre-entry dependency/provenance drift: '+e.path);",
+        "before": "  assert.equal(sha(readFile(e.path)),replacement?.currentSha256||e.sha256,'Pre-entry dependency/provenance drift: '+e.path);"
+      }
+    ]
+  },
+  "checker": {
+    "path": "scripts/check-six-method-main096-receiver-governance-r1.mjs",
+    "sha256": "41a759f12eed1bb43df2f613bbaf172ddaebb69f23b4fd689aef751f1ac3589c",
+    "previousCommit": "400efec478704cb4dce92b1167104b9a2dd46ea5",
+    "previousSHA256": "e8f190d1a8b0284d3f111400e0f1d95ffd061fe072d30b63a86ed35b7bd19b1a",
+    "previousObject": "68076c52b4504ecb11b59fff487e4f34b52cb196",
+    "inverse": [
+      {
+        "after": "import {preentryVisualHelperHistoricalPrefix,validatePreentryVisualHelperSuccessor,readPreentryVisualHelperRecord} from './lib/preentry-visual-helper-source-successor-r1.mjs';\n",
+        "before": ""
+      },
+      {
+        "after": "let s=preentryVisualHelperHistoricalPrefix(raw('scripts/lib/ppr-five-method-preentry-successor.mjs'));",
+        "before": "let s=raw('scripts/lib/ppr-five-method-preentry-successor.mjs','utf8').split('\\n// Independent receiver authority.')[0];"
+      },
+      {
+        "after": "check('Exact registered visual helper predecessor and checker inverse',()=>validatePreentryVisualHelperSuccessor());\nfor(const p of ['scripts/lib/ppr-five-method-preentry-successor.mjs','scripts/check-six-method-main096-receiver-governance-r1.mjs'])check('Reject visual helper/checker current drift '+p,()=>assert.throws(()=>validatePreentryVisualHelperSuccessor({readCurrent:f=>String(f)===p?Buffer.concat([raw(f),Buffer.from('\\n')]):raw(f)})));\ncheck('Reject visual helper false Git predecessor',()=>assert.throws(()=>validatePreentryVisualHelperSuccessor({readGit:()=>Buffer.from('UNREGISTERED_GIT_PREDECESSOR')})));\ncheck('Reject visual helper missing Git predecessor',()=>assert.throws(()=>validatePreentryVisualHelperSuccessor({readGit:()=>null})));\nfor(const edit of [r=>r.paths.push('scripts/extra.mjs'),r=>r.helper.prefixSHA256='0'.repeat(64),r=>r.boundaries.commercialAdmission=true])check('Reject visual helper record escalation '+rows.length,()=>{const r=structuredClone(readPreentryVisualHelperRecord());edit(r);assert.throws(()=>readPreentryVisualHelperRecord(Buffer.from(JSON.stringify(r))));});\ncheck('Reject immutable visual helper parent drift',()=>{const r=readPreentryVisualHelperRecord(),p=r.parents[0].path;assert.throws(()=>validatePreentryVisualHelperSuccessor({readCurrent:f=>String(f)===p?Buffer.concat([raw(f),Buffer.from('\\n')]):raw(f)}));});\n",
+        "before": ""
+      }
+    ]
+  },
+  "originalPreentryAssertionDigest": "433b1a39ee3f4cf7c669380297531ccec7839b0a8099c50f59dce357d3dc24fa",
+  "boundaries": {
+    "oldAssertionsChanged": false,
+    "oldFrozenDigestChanged": false,
+    "extraPathsAllowed": false,
+    "commercialAdmission": false,
+    "providerAdmission": false,
+    "productionAdmission": false
+  }
+}
