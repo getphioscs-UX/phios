@@ -1,7 +1,7 @@
 /* Shared semantic composition; images preserve their complete structural field. */
 .vr2-page{--vr2-ink:#123b48;--vr2-gold:#b98a48;--vr2-paper:#f5f1e7;overflow-wrap:break-word}
 .vr2-page.pm-shell{--pm-bg:#f5f1e7;--pm-ink:#123b48;--pm-muted:#335762;--pm-panel:#eee7d7;background:var(--pm-bg);color:var(--pm-ink)}
-.vr2-page.pm-shell a{color:#164d61}.vr2-page.pm-shell .pm-section p{color:#335762}.vr2-page.pm-shell .pm-hero .pm-kicker{color:#805418!important}
+.vr2-page.pm-shell a:not(:where(.cx-button,.btn,.jm-button,[role="button"])){color:#164d61}.vr2-page.pm-shell .pm-section p{color:#335762}.vr2-page.pm-shell .pm-hero .pm-kicker{color:#805418!important}
 .vr2-page main{min-width:0}.vr2-page img{max-width:100%}
 .vr2-page main{background-image:var(--vr2-texture);background-size:1200px auto}
 .vr2-page .figure-editorial img{background:#f5f1e7}
@@ -23,7 +23,7 @@ body.vr2-page .cx-personal-hero--r5::before{display:none}
 .method-lens-card{display:inline-flex;align-items:center;gap:12px;padding:16px;min-height:48px}.method-lens-card img{width:40px;height:40px;object-fit:contain}
 .book-identity-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}.book-identity-card{display:block;color:inherit;text-decoration:none}.book-identity-card img{width:100%;height:auto;object-fit:contain}.book-identity-card span{display:block;padding-block:12px}
 .vr2-lightbox{width:min(96vw,1700px);max-width:96vw;max-height:96vh;overflow:auto;padding:16px;background:#f5f1e7;border:0}.vr2-lightbox::backdrop{background:#092630df}.vr2-lightbox img{display:block;width:100%;height:auto}.vr2-lightbox button{position:sticky;top:0;padding:12px 24px;min-height:44px;z-index:1}
-.vr2-page a:focus-visible,.vr2-page button:focus-visible,.vr2-page summary:focus-visible{outline:3px solid #137b76;outline-offset:4px}
+.vr2-page a:focus-visible,.vr2-page button:focus-visible,.vr2-page summary:focus-visible{outline:3px solid var(--cx-control-focus,#137b76);outline-offset:4px}
 .vr2-skeleton{display:grid;gap:16px;min-height:160px;padding:24px;background:#eee9df}.vr2-skeleton span{display:block;height:24px;background:#d7dcd8;border-radius:4px}.vr2-skeleton span:last-child{width:65%}
 .vr2-page .r5-context-guide{max-width:1280px}.vr2-page .pis-landing-hero__image{object-position:center}.vr2-page .pm-product-thumb{max-height:none;height:auto;width:100%}
 @media(max-width:768px){.vr2-story{width:calc(100% - 32px);margin-block:36px}.vr2-hero{display:flex;flex-direction:column;min-height:0}.vr2-hero>figure{order:-1}.visual-entry-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.vr2-editorial-panels{grid-template-columns:minmax(0,1fr)}.book-identity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.vr2-lenses{grid-template-columns:minmax(0,1fr)}.figure-editorial{margin-block:24px}.flagship-feature{padding:20px}.vr2-page .cx-home-hero__grid{grid-template-columns:minmax(0,1fr)}.vr2-page .cx-home-hero__visual{order:-1;min-height:0}.vr2-page .pm-hero{grid-template-columns:minmax(0,1fr)}.vr2-page .pm-grid{grid-template-columns:minmax(0,1fr)}}
@@ -41,8 +41,10 @@ body.vr2-page .cx-personal-hero-visual::before,body.vr2-page .cx-personal-hero-v
 .vr2-page main{background-image:linear-gradient(rgba(245,241,231,.94),rgba(245,241,231,.94)),var(--vr2-texture);background-size:auto,1200px auto}
 .vr2-page .vr2-hero-surface .cx-knowledge-hero__visual{min-height:0}
 /* Marketing heroes retain the approved dark palette; reading/forms stay ivory. */
-body.vr2-page .vr2-hero-surface,body.vr2-page .cx-home-hero{background:#0c2935;color:#f5f1e7}
-body.vr2-page .vr2-hero-surface :is(h1,h2,p,a),body.vr2-page .cx-home-hero :is(h1,h2,p,label){color:#f5f1e7}
+body.vr2-page .vr2-hero-surface,body.vr2-page .cx-home-hero{background:#0c2935;color:#f5f1e7;--cx-context-link:#f5f1e7;--cx-context-muted:#d5ded8;--cx-context-critical:#ffb4a9;--cx-control-boundary:#b5c4bc;--cx-control-focus:#e3bd78}
+/* Composition owns copy; interactive controls own their complete color pair. */
+body.vr2-page :is(.vr2-hero-surface,.cx-home-hero) :where(h1,h2,p,label):not(:where(.cx-field-helper,.cx-field-error,[role="status"],[role="alert"])){color:inherit}
+body.vr2-page :is(.vr2-hero-surface,.cx-home-hero) a:not(:where(.cx-button,.btn,.jm-button,[role="button"])){color:inherit}
 body.vr2-page .vr2-hero-surface .vr2-kicker,body.vr2-page .cx-home-hero .cx-eyebrow{color:#e3bd78}
 body.vr2-page .vr2-hero-surface [data-vr2-role="HERO"] img{background:transparent}
 body.vr2-page .cx-home-hero input{background:#fbf8f0;color:#123b48}

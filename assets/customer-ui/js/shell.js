@@ -26,8 +26,12 @@ export function presentedAccountState(scope = document) {
   return Object.hasOwn(ACCOUNT_PRESENTATION, declared) ? declared : 'GUEST';
 }
 
+const SUBJECT_LINKS = [{"id":"personal","en":"Personal","zh":"个人","href":"/subjects/personal/"},{"id":"family","en":"Family","zh":"家庭","href":"/subjects/family/"},{"id":"team","en":"Team","zh":"团队","href":"/subjects/team/"},{"id":"business","en":"Business","zh":"企业","href":"/subjects/business/"},{"id":"institution","en":"Institution","zh":"机构","href":"/subjects/institution/"},{"id":"country","en":"Country","zh":"国家","href":"/subjects/country/"}];
 function navLinks(active, extraClass = '') {
-  return CX_NAVIGATION.primary.map(item => item.id==='PERSPECTIVES'?`<details class="cx-personal-menu"><summary ${t(item.en,item.zh)}>${item.en}</summary><div><a class="cx-nav-link ${extraClass}" href="/perspectives/phi-configuration/" data-cx-nav-link ${t('PHI Configuration','PHI 构型')}>PHI Configuration</a><a class="cx-nav-link ${extraClass}" href="/perspectives/profile/" data-cx-nav-link ${t('Profile','个人画像')}>Profile</a><a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${t('All perspectives','所有视角')}>All perspectives</a></div></details>`:`<a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${item.id === active ? 'aria-current="page"' : ''} ${t(item.en, item.zh)}>${item.en}</a>`).join('');
+  return CX_NAVIGATION.primary.map(item => {
+    if(item.id==='SUBJECTS') return `<details class="cx-personal-menu cx-subject-menu"><summary ${t(item.en,item.zh)}>${item.en}</summary><div>${SUBJECT_LINKS.map(subject=>`<a class="cx-nav-link ${extraClass}" href="${subject.href}" data-cx-nav-link ${location.pathname===subject.href?'aria-current="page"':''} ${t(subject.en,subject.zh)}>${subject.en}</a>`).join('')}</div></details>`;
+    return `<a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${item.id===active?'aria-current="page"':''} ${t(item.en,item.zh)}>${item.en}</a>`;
+  }).join('');
 }
 
 function accountStateBadge(state) {
@@ -157,7 +161,7 @@ function footerLink(href, en, zh) {
 function footerMarkup() {
   return `<footer class="cx-shell-footer" data-cx-shell-region="footer"><div class="cx-container cx-shell-footer__grid">
     <div class="cx-stack"><a class="cx-brand" href="/" ${aria('PHI OS home', 'PHI OS 首页')}><img data-cx-asset="LOGO-006" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a><p class="cx-meta" ${t('Reality changes. Your understanding should be able to change with it.', '现实会继续变化，你的理解也应该能够随之更新。')}>Reality changes. Your understanding should be able to change with it.</p></div>
-    <div><p class="cx-eyebrow" ${t('Navigate', '浏览')}>Navigate</p><p class="cx-meta">${footerLink('/about/founder/', 'About PHI OS', '关于 PHI OS')}<br>${footerLink('/reality/', 'My Reality', '我的现实')}<br>${footerLink('/perspectives/', 'Perspectives', '视角')}</p></div>
+    <div><p class="cx-eyebrow" ${t('Navigate', '浏览')}>Navigate</p><p class="cx-meta">${footerLink('/about/founder/', 'About PHI OS', '关于 PHI OS')}<br>${footerLink('/reality/', 'My Reality', '我的现实')}<br>${footerLink('/#six-perspectives', 'Six Perspectives', '六个主体')}<br>${footerLink('/perspectives/', 'Personal methods', '个人方法')}</p></div>
     <div><p class="cx-eyebrow" ${t('Knowledge', '知识')}>Knowledge</p><p class="cx-meta">${footerLink('/knowledge/', 'Knowledge home', '知识主页')}<br>${footerLink('/search/', 'Search', '搜索')}<br>${footerLink('/knowledge/ask/', 'Ask PHI OS', '向 PHI OS 提问')}</p></div>
     <div><p class="cx-eyebrow" ${t('Continue', '继续')}>Continue</p><p class="cx-meta">${footerLink('/professional/', 'Professional', '专业')}<br>${footerLink('/account/', 'Account', '账户')}<br>${footerLink('/terms', 'Terms', '条款')} · ${footerLink('/privacy', 'Privacy', '隐私')}</p></div>
   </div></footer>`;

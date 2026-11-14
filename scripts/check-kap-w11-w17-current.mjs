@@ -4,6 +4,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import {parseHTML} from 'linkedom';
 import {historicalPisBytes,consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
 import { spawnSync } from 'node:child_process';
 import { onRequestGet } from '../functions/api/ask-phios.js';
 import {kapMaintenanceSuccessorSha} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
@@ -74,7 +75,11 @@ const currentHomepage = text(paths.homepage);
 const homepage = historicalPisBytes(paths.homepage).toString('utf8');
 if(consolidationSuccessor()?.surfaces.some(s=>s.file===paths.homepage)){
  assertCurrentConsolidatedSurface(parseHTML(currentHomepage).document,paths.homepage);
- for(const href of ['/knowledge/ask/','/reality/','/books/','/perspectives/personal/','/professional/financial/'])assert(currentHomepage.includes(`href="${href}"`),'KAP_CURRENT_CONSOLIDATED_HOME_ROUTE_MISSING:'+href);
+ if(isConvergenceCurrent(paths.homepage)){
+  assertConvergenceHome(parseHTML(currentHomepage).document);
+  const {document:personal}=parseHTML(text('subjects/personal/index.html'));
+  for(const href of ['/perspectives/personal/','/professional/financial/'])assert(personal.querySelector(`a[href="${href}"]`),'KAP_R3_PERSONAL_DESTINATION_MISSING:'+href);
+ }else for(const href of ['/knowledge/ask/','/reality/','/books/','/perspectives/personal/','/professional/financial/'])assert(currentHomepage.includes(`href="${href}"`),'KAP_CURRENT_CONSOLIDATED_HOME_ROUTE_MISSING:'+href);
  assert(currentHomepage.includes('/assets/customer-ui/js/shell.js'));
  const routerCheck=spawnSync(process.execPath,['scripts/check-stage16-client-intent-router.mjs'],{stdio:'inherit'});
  assert.equal(routerCheck.status,0,'KAP consolidated home intent routing must preserve answer boundaries');

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseHTML} from 'linkedom';
 import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
 
 const read = file => fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const json = file => JSON.parse(read(file));
@@ -123,7 +124,10 @@ if(consolidatedHome)assertCurrentConsolidatedSurface(parseHTML(home).document,'i
 for (const href of ['/articles/', '/figures/', '/knowledge/concepts/', '/knowledge/ask/', '/reality/']) {
   const knowledgeDestination=consolidatedHome&&['/articles/','/figures/','/knowledge/concepts/'].includes(href);
   if(knowledgeDestination){assert(home.includes('href="/knowledge/"'),'Homepage knowledge entry missing');assert(read('knowledge/index.html').includes(`href="${href}"`),`Knowledge is missing canonical destination ${href}`);}
-  else assert.ok(home.includes(`href="${href}"`), `Homepage is missing canonical destination ${href}`);
+  else if(href==='/knowledge/ask/'&&isConvergenceCurrent('index.html')){
+    // Registered R3 retains the single native GET form rather than a second Ask link.
+    assertConvergenceHome(parseHTML(home).document);
+  }else assert.ok(home.includes(`href="${href}"`), `Homepage is missing canonical destination ${href}`);
 }
 for (const retiredHref of ['/figures.html', '/glossary.html', '/ask.html', '/personal-runtime.html', '/my-reality.html']) {
   assert.equal(home.includes(`href="${retiredHref}"`), false, `Homepage retained retired route ${retiredHref}`);

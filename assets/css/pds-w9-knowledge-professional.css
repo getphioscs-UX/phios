@@ -17,7 +17,7 @@
   [data-public-section],
   .professional-workspace-page
 ) :is(a, button, input, select, textarea, summary):focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--phi-action-platform) 55%, transparent);
+  outline: 3px solid var(--phi-action-platform);
   outline-offset: 3px;
 }
 
@@ -57,7 +57,10 @@
   .professional-workspace-page
 ) :is(.btn, .public-button, button):disabled {
   cursor: not-allowed;
-  opacity: 0.58;
+  background:#e5e1d8;
+  color:#4e554d;
+  border-color:#74796e;
+  opacity: 1;
 }
 
 :where(

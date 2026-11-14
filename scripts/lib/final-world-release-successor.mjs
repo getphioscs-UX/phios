@@ -1,3 +1,6 @@
+import {atlasVisualStylePredecessor} from './atlas-visual-w16-source-bridge-r1.mjs';
+import {worldReadabilityPredecessor} from './world-readability-compatibility-r1.mjs';
+import {convergencePredecessor} from './public-customer-report-convergence-successor-r1.mjs';
 import {worldAskDependencyPredecessors} from './unified-world-ask-dependency-r1.mjs';
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
 import {mainConvergencePredecessors,mainHistoricalPredecessors} from './main-convergence-source-successor-r1.mjs';
@@ -39,7 +42,7 @@ export function validateWorldContrastSourceSuccessor({
  assert.equal(row.approvedAppendSHA256,WORLD_CONTRAST_APPEND_SHA);
  assert.equal(row.approvedRuleCount,2);
  assert.equal(hash(readGit(WORLD_CONTRAST_BASELINE,WORLD_CONTRAST_FROZEN)),WORLD_CONTRAST_FROZEN_SHA,'Immutable Main096 V20 record');
- const previous=readGit(WORLD_CONTRAST_BASELINE,WORLD_CONTRAST_CSS),current=readCurrent(WORLD_CONTRAST_CSS);
+ const previous=readGit(WORLD_CONTRAST_BASELINE,WORLD_CONTRAST_CSS),current=worldReadabilityPredecessor(WORLD_CONTRAST_CSS,readCurrent(WORLD_CONTRAST_CSS));
  assert.equal(hash(previous),WORLD_CONTRAST_PREVIOUS_SHA,'Immutable Main096 CSS predecessor');
  assert.equal(hash(current),WORLD_CONTRAST_CURRENT_SHA,'Unregistered World contrast CSS drift');
  assert.ok(current.subarray(0,previous.length).equals(previous),'Historical CSS prefix must remain byte-identical');
@@ -47,6 +50,7 @@ export function validateWorldContrastSourceSuccessor({
  return previous;
 }
 export function finalWorldReleasePredecessors(){
+ const atlasVisualPrevious=atlasVisualStylePredecessor();
  const worldContrastPrevious=validateWorldContrastSourceSuccessor();
  const convergence=mainConvergencePredecessors(),askDependency=worldAskDependencyPredecessors(),currentBytes=p=>askDependency.get(p)||convergence.get(p)||fs.readFileSync(p);
  const r=JSON.parse(fs.readFileSync('content/civilization-atlas/maintenance/book-v-final-unified-release-successor-v24.json','utf8'));
@@ -60,13 +64,14 @@ export function finalWorldReleasePredecessors(){
  assert.deepEqual(maintenance.requiredCurrentChecks,['scripts/check-world-public-question-maintenance-r1.mjs']);
  assert.equal(new Set(maintenance.changes.map(c=>c.path)).size,maintenance.changes.length);
  const currentPredecessors=new Map();
- for(const c of maintenance.changes){const registered=r.changes.find(item=>item.path===c.path);assert.ok(registered,c.path+' unknown final-source predecessor');assert.equal(c.previousSha256,registered.successorSha256,c.path+' maintenance chain mismatch');assert.match(c.previousGitRevision,/^[a-f0-9]{40}$/);const prior=execFileSync('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(hash(prior),c.previousSha256,c.path+' immutable maintenance predecessor');assert.equal(hash(currentBytes(c.path)),c.successorSha256,c.path+' unregistered maintenance-source drift');currentPredecessors.set(c.path,prior);}
- for(const d of maintenance.dependencies)assert.equal(hash(currentBytes(d.path)),d.sha256,d.path+' maintenance dependency drift');
+ for(const c of maintenance.changes){const registered=r.changes.find(item=>item.path===c.path);assert.ok(registered,c.path+' unknown final-source predecessor');assert.equal(c.previousSha256,registered.successorSha256,c.path+' maintenance chain mismatch');assert.match(c.previousGitRevision,/^[a-f0-9]{40}$/);const prior=execFileSync('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(hash(prior),c.previousSha256,c.path+' immutable maintenance predecessor');assert.equal(hash(convergencePredecessor(c.path,c.successorSha256,currentBytes)),c.successorSha256,c.path+' unregistered maintenance-source drift');currentPredecessors.set(c.path,prior);}
+ for(const d of maintenance.dependencies)assert.equal(hash(convergencePredecessor(d.path,d.sha256,currentBytes)),d.sha256,d.path+' maintenance dependency drift');
  assert.equal(new Set(r.changes.map(c=>c.path)).size,r.changes.length);const map=new Map(convergence);
- for(const c of r.changes){assert.equal(c.previousGitRevision,'8cdc4875df3bfc74c92efba3e0f619536443b45b');const prior=execFileSync('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(hash(prior),c.previousSha256,c.path+' immutable predecessor');assert.equal(hash(currentPredecessors.get(c.path)||currentBytes(c.path)),c.successorSha256,c.path+' unregistered final-source drift');map.set(c.path,prior);}
+ for(const c of r.changes){assert.equal(c.previousGitRevision,'8cdc4875df3bfc74c92efba3e0f619536443b45b');const prior=execFileSync('git',['show',c.previousGitRevision+':'+c.path]);assert.equal(hash(prior),c.previousSha256,c.path+' immutable predecessor');assert.equal(hash(convergencePredecessor(c.path,c.successorSha256,p=>currentPredecessors.get(p)||currentBytes(p))),c.successorSha256,c.path+' unregistered final-source drift');map.set(c.path,prior);}
  for(const [p,prior]of mainHistoricalPredecessors()){assert.ok(!r.changes.some(c=>c.path===p),'Historical successor must not replace a V24 entry');map.set(p,prior);}
  assert.ok(!map.has(WORLD_CONTRAST_CSS),'World contrast cannot replace another registered successor');
  for(const [path,bytes] of askDependency){assert.ok(!map.has(path),'Ask dependency cannot replace another successor');map.set(path,bytes);}
  map.set(WORLD_CONTRAST_CSS,worldContrastPrevious);
+ assert.ok(!map.has('assets/css/civilization-atlas.css'),'Atlas visual cannot replace another registered successor');map.set('assets/css/civilization-atlas.css',atlasVisualPrevious);
  return map;
 }

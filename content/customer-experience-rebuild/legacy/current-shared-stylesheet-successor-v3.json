@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "CURRENT_SHARED_STYLESHEET_DEFECT_SUCCESSOR_V3",
+  "status": "ENGINEERING_DEFECT_FIX_PENDING_CONTROLLED_RELEASE",
+  "predecessor": {
+    "path": "content/customer-experience-rebuild/legacy/current-shared-stylesheet-successor-v1.json",
+    "sha256": "1b66c0cbb28f74fd844af74c3e77ba69525c9deaf382796801662cd357dd771b"
+  },
+  "historicalFreezeRewritten": false,
+  "humanAcceptanceGranted": false,
+  "productionAcceptanceGranted": false,
+  "allowsNewLegacyImports": false,
+  "stylesheets": [
+    {
+      "path": "assets/css/global-visual-r2.css",
+      "beforeSHA": "7d4052b10f968acf3b703c3d761473ba656105139f2ec65fd1acda52ea4c218c",
+      "afterSHA": "2b8f73aa9678f5695cdf050837919eb1f6f9b9d544cbe4607979aaaab5367482",
+      "reverseHunks": [
+        {
+          "oldOffset": 312,
+          "newOffset": 312,
+          "before": ".vr2-page.pm-shell a{color:#164d61}.vr2-page.pm-shell .pm-section p{color:#335762}.vr2-page.pm-shell .pm-hero .pm-kicker{color:#805418!important}\n",
+          "after": ".vr2-page.pm-shell a:not(:where(.cx-button,.btn,.jm-button,[role=\"button\"])){color:#164d61}.vr2-page.pm-shell .pm-section p{color:#335762}.vr2-page.pm-shell .pm-hero .pm-kicker{color:#805418!important}\n"
+        },
+        {
+          "oldOffset": 4152,
+          "newOffset": 4208,
+          "before": ".vr2-page a:focus-visible,.vr2-page button:focus-visible,.vr2-page summary:focus-visible{outline:3px solid #137b76;outline-offset:4px}\n",
+          "after": ".vr2-page a:focus-visible,.vr2-page button:focus-visible,.vr2-page summary:focus-visible{outline:3px solid var(--cx-control-focus,#137b76);outline-offset:4px}\n"
+        },
+        {
+          "oldOffset": 6847,
+          "newOffset": 6927,
+          "before": "body.vr2-page .vr2-hero-surface,body.vr2-page .cx-home-hero{background:#0c2935;color:#f5f1e7}\nbody.vr2-page .vr2-hero-surface :is(h1,h2,p,a),body.vr2-page .cx-home-hero :is(h1,h2,p,label){color:#f5f1e7}\n",
+          "after": "body.vr2-page .vr2-hero-surface,body.vr2-page .cx-home-hero{background:#0c2935;color:#f5f1e7;--cx-context-link:#f5f1e7;--cx-context-muted:#d5ded8;--cx-context-critical:#ffb4a9;--cx-control-boundary:#b5c4bc;--cx-control-focus:#e3bd78}\n/* Composition owns copy; interactive controls own their complete color pair. */\nbody.vr2-page :is(.vr2-hero-surface,.cx-home-hero) :where(h1,h2,p,label):not(:where(.cx-field-helper,.cx-field-error,[role=\"status\"],[role=\"alert\"])){color:inherit}\nbody.vr2-page :is(.vr2-hero-surface,.cx-home-hero) a:not(:where(.cx-button,.btn,.jm-button,[role=\"button\"])){color:inherit}\n"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "failure": "PUBLIC-VISUAL-REPAIR-20261114/CONTINUATION-SLOT-CONTRAST/PERSPECTIVES-FAILURE-BEFORE.json",
+    "candidate": "FROZEN-CANDIDATE-V3.json",
+    "scope": "Shared semantic color custody and explicit Hero ownership; no layout redesign or asset mutation"
+  },
+  "predecessors": [
+    {
+      "path": "content/customer-experience-rebuild/legacy/current-shared-stylesheet-successor-v1.json",
+      "sha256": "1b66c0cbb28f74fd844af74c3e77ba69525c9deaf382796801662cd357dd771b"
+    },
+    {
+      "path": "content/customer-experience-rebuild/legacy/current-shared-stylesheet-successor-v2.json",
+      "sha256": "ed02d1af3e5d861d8ca48328bbb9b9b392876b2e0fd0b14a1dfaf7e633cda0d8"
+    }
+  ]
+}

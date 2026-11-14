@@ -39,6 +39,7 @@ export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,sy
     text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
   })});}
   catch(error){
+    if(/^NARRATIVE_PROVIDER_/.test(error?.code||'')||/^SYMBOLIC_(?:NARRATIVE_OUTPUT_|QUESTION_)/.test(error?.code||'')||['PAID_REPORT_OUTPUT_VALIDATION_FAILED','PAID_REPORT_PROVIDER_ERROR'].includes(error?.code))throw error;
     // Durable paid-budget/fence failures are not network failures. Keep their
     // existing job recovery classification; never retry a denied reservation.
     const ownedCode=String(error?.code||error?.message||'');

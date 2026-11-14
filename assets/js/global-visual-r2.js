@@ -20,6 +20,9 @@ export async function hydrateApprovedVisuals(root=document){
   }catch(error){resolved.delete(image.dataset.approvedVisual);image.dataset.vr2Bound='resolution-failed';image.dataset.vr2Error=error.message;const retry=document.createElement('button');retry.type='button';retry.dataset.vr2Retry='';retry.textContent=zh()?'重新加载图片':'Reload image';retry.onclick=()=>{image.dataset.vr2Bound='';image.removeAttribute('src');retry.remove();hydrateApprovedVisuals(image.parentElement);};image.after(retry);}
  }));
 }
+export function installGlobalVisuals(){
+const installation=Symbol.for('phios.global-visual.r2.installation');if(window[installation])return window[installation];
+const installed={hydrate:hydrateApprovedVisuals};window[installation]=installed;
 let trigger;
 const dialog=document.createElement('dialog');dialog.className='vr2-lightbox';dialog.setAttribute('aria-label','Full resolution visual / 完整图像');
 const close=document.createElement('button');close.type='button';close.textContent=zh()?'关闭':'Close';close.onclick=()=>dialog.close();
@@ -35,3 +38,8 @@ resolveApprovedVisual(texture).then(a=>document.body.style.setProperty('--vr2-te
 
 // Optional presentation layer; an unavailable deck must not block the asset resolver.
 void import('./figure-story-deck.js').catch(()=>console.warn('FIGURE_STORY_DECK_UNAVAILABLE'));
+
+window.addEventListener('pageshow',()=>hydrateApprovedVisuals());
+return installed;
+}
+installGlobalVisuals();

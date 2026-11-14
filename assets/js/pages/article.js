@@ -142,10 +142,11 @@ async function render() {
 
   try {
     const locale = getLocale();
-    const [article, publishedArticles] = await Promise.all([
-      loadPublishedArticleBySlug(slug, locale),
-      loadPublishedArticles(locale)
-    ]);
+    // Institution readings must not wait for the optional related catalogue.
+    const institutionReading = ['book4-article-018','book4-article-041'].includes(slug);
+    const [article, publishedArticles] = institutionReading
+      ? [await loadPublishedArticleBySlug(slug, locale), []]
+      : await Promise.all([loadPublishedArticleBySlug(slug, locale), loadPublishedArticles(locale)]);
     if(generation!==renderGeneration)return;
 
     if (!article) {
@@ -168,6 +169,16 @@ async function render() {
     bindSave(article);
     appendAskEntry(article);
     hydrateKnowledgeSpineVisuals(root);
+    // Preserve existing related navigation without replacing the active reading.
+    if (institutionReading) void loadPublishedArticles(locale).then(articles => {
+      if (generation !== renderGeneration || !articleElement.isConnected) return;
+      const related = renderArticleDocument(document, article, {publishedArticles:articles, translate:t}).querySelector('.knowledge-related');
+      if (related) {
+        const current = articleElement.querySelector('.knowledge-related');
+        if (current) current.replaceWith(related);
+        else articleElement.append(related);
+      }
+    }).catch(() => {});
   } catch (error) {
     if(generation!==renderGeneration)return;
     if (!root.querySelector('[data-static-article-admission]')) {

@@ -75,7 +75,20 @@ if(p1Deleted){
   for(const candidate of deletePlan.candidates) assert.equal(fs.existsSync(candidate.path),false,`retired P1 presentation still exists: ${candidate.path}`);
 }
 assert.ok(navigationAuthority&&Array.isArray(navigationAuthority.primary)&&Array.isArray(navigationAuthority.utilities),'current CX navigation module does not export the expected semantic authority');
-for(const item of routes.primaryNavigation){
+const {isConvergenceCurrent,assertConvergenceHome}=await import('./lib/public-customer-report-convergence-successor-r1.mjs');
+const exactR3=isConvergenceCurrent('index.html');
+if(exactR3){
+ assert(isConvergenceCurrent(successor.currentAuthority.navigationRuntime));
+ assert(isConvergenceCurrent('assets/customer-ui/js/shell.js'));
+ const {parseHTML}=await import('linkedom');assertConvergenceHome(parseHTML(text('index.html')).document);
+ assert.deepEqual(navigationAuthority.primary.map(({id,href})=>({id,href})),[
+  {id:'SUBJECTS',href:'/#six-perspectives'},{id:'KNOWLEDGE',href:'/knowledge/'},
+  {id:'ASK',href:'/knowledge/ask/'},{id:'MY_REALITY',href:'/reality/'}
+ ]);
+ for(const subject of ['personal','family','team','business','institution','country'])assert(shell.includes('/subjects/'+subject+'/'),'R3 subject navigation missing: '+subject);
+ assert(text('index.html').includes('href="/about/founder/"'),'R3 About destination missing');
+}
+for(const item of exactR3?[]:routes.primaryNavigation){
   const route=routes.routes.find(candidate=>candidate.routeId===item);assert.ok(route);
   if(item==='EXPLORE'&&text('index.html').includes('data-page-consolidation="R1"')){
     const {consolidationSuccessor}=await import('./lib/page-consolidation-successor-r1.mjs');assert(consolidationSuccessor());
@@ -91,7 +104,7 @@ for(const item of routes.primaryNavigation){
   const navItem=navigationAuthority.primary.find(candidate=>candidate.id===item);assert.ok(navItem,`current navigation authority missing primary item ${item}`);
   assert.equal(navItem.href,route.canonicalPath,`current navigation authority route mismatch for ${item}`);
 }
-for(const item of routes.utilities.filter(value=>value!=='LOCALE')) assert.ok(navigationAuthority.utilities.some(candidate=>candidate.id===item),`current navigation authority missing utility ${item}`);
+for(const item of routes.utilities.filter(value=>value!=='LOCALE')) assert.ok(navigationAuthority.utilities.some(candidate=>candidate.id===item)||(exactR3&&item==='ASK'&&navigationAuthority.primary.some(candidate=>candidate.id==='ASK'&&candidate.href==='/knowledge/ask/')),`current navigation authority missing utility ${item}`);
 assert.equal(navigation.includes('/personal-runtime'),false);
 assert.equal(navigation.includes('/financial-reality'),false);
 assert.equal(navigation.includes('/my-reality'),false);

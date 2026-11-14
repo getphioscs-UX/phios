@@ -98,7 +98,8 @@ export function mainConvergencePredecessors({paths=null}={}){
   assert.ok(!c.path.startsWith('/')&&!c.path.split('/').includes('..'));
   const previous=execFileSync('git',['show',doc.baseline+':'+c.path],{maxBuffer:32*1024*1024});
   assert.equal(sha(previous),c.predecessorSha256,c.path+' immutable convergence predecessor');
-  assert.equal(sha(fs.readFileSync(c.path)),currentSuccessors.get(c.path)??c.successorSha256,c.path+' unregistered convergence source drift');
+  const expectedCurrent=currentSuccessors.get(c.path)??c.successorSha256;
+  assert.equal(sha(convergencePredecessor(c.path,expectedCurrent)),expectedCurrent,c.path+' unregistered convergence source drift');
   result.set(c.path,previous);
  }
  return result;
@@ -122,3 +123,4 @@ export function mainHistoricalPredecessors(){
  }
  return result;
 }
+import {convergencePredecessor} from './public-customer-report-convergence-successor-r1.mjs';

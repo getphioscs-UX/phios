@@ -12,12 +12,12 @@ async function fetchJson(url) {
   return response.json();
 }
 async function currentPointer() {
-  if (!pointerPromise) pointerPromise = fetchJson(POINTER_URL);
+  if (!pointerPromise) pointerPromise = fetchJson(POINTER_URL).catch(error => {pointerPromise=null;throw error;});
   return pointerPromise;
 }
 async function clientVisualRegistry() {
   if (!clientRegistryPromise) {
-    clientRegistryPromise = currentPointer().then(pointer => fetchJson(pointer.currentRegistryPath));
+    clientRegistryPromise = currentPointer().then(pointer => fetchJson(pointer.currentRegistryPath)).catch(error => {clientRegistryPromise=null;throw error;});
   }
   return clientRegistryPromise;
 }
@@ -39,6 +39,7 @@ export async function resolveUnifiedPublicVisual(code, options = {}) {
     }
     return await resolvePublicAssetForWeb(code, options);
   } catch (primaryError) {
+    if(primaryError?.code==='APPROVED_VISUAL_WITHHELD')throw primaryError;
     const [clientRegistry, publicRegistry] = await Promise.all([clientVisualRegistry(), fetchPublicAssetRegistry()]);
     const entry = clientEntry(clientRegistry, code);
     if (!entry?.r2?.objectKey || entry.r2.remoteVerified !== true) throw primaryError;

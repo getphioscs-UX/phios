@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
 
 const text = path => fs.readFileSync(path,'utf8');
 const read = path => JSON.parse(text(path));
@@ -96,7 +97,10 @@ assert.equal(homeAuthority.status,'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');
 const home = text(paths.home);
 if(consolidationSuccessor()?.surfaces.some(s=>s.file===paths.home)){
  assertCurrentConsolidatedSurface(parseHTML(home).document,paths.home);
- for(const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','/assets/customer-ui/js/shell.js','href="/knowledge/ask/"'])assert.ok(home.includes(marker),'CURRENT_HOME_MARKER_MISSING:'+marker);
+ if(isConvergenceCurrent(paths.home)){
+  assertConvergenceHome(parseHTML(home).document);
+  for(const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','/assets/customer-ui/js/shell.js'])assert.ok(home.includes(marker),'CURRENT_HOME_MARKER_MISSING:'+marker);
+ }else for(const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','/assets/customer-ui/js/shell.js','href="/knowledge/ask/"'])assert.ok(home.includes(marker),'CURRENT_HOME_MARKER_MISSING:'+marker);
  for(const retired of ['href="/ask"','href="/personal-runtime"','href="/financial-reality"','href="/my-reality"'])assert.ok(!home.includes(retired),'RETIRED_HOME_PRESENTATION_RESTORED:'+retired);
 }else{
 for (const marker of ['data-cx-surface="HOME"','data-cx-home-section="H01"','data-cx-home-section="H09"','/assets/customer-ui/js/shell.js','/assets/customer-ui/js/surfaces/home.js','href="/knowledge/ask/"']) assert.ok(home.includes(marker),`CURRENT_HOME_MARKER_MISSING:${marker}`);

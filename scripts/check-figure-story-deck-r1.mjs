@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {parseHTML} from 'linkedom';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
 
 const targets=[
  ['perspectives/tarot/index.html','/perspectives/tarot/',[3]],
@@ -52,7 +53,11 @@ for(let n=0;n<targets.length;n++){
   assert.equal(document.querySelectorAll('.phios-figure-context-guide').length,7,'Each financial stage must keep its own figure');
  }
  if(path==='/'){
-  assert.equal(document.querySelectorAll('.phios-figure-editorial-split').length,3,'Home must compact exactly 3 selected editorial figures');
+  if(isConvergenceCurrent(file)){
+   assertConvergenceHome(document);
+   assert.equal(document.querySelectorAll('.phios-figure-editorial-split').length,0,'Exact R3 Home uses its separately frozen six-subject presentation');
+   console.log('R3 Home technical source identity verified; prior Home visual acceptance is not inherited.');
+  }else assert.equal(document.querySelectorAll('.phios-figure-editorial-split').length,3,'Home must compact exactly 3 selected editorial figures');
  }
  if(path==='/about/founder/'){
   assert.equal(document.querySelectorAll('.phios-figure-compact').length,6,'Founder mechanism figures must compact without moving portrait');

@@ -1,3 +1,4 @@
+import {isConvergenceCurrent,convergencePredecessor} from './public-customer-report-convergence-successor-r1.mjs';
 import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {r6VisualOwnerBytes} from './final-health-route-successor.mjs';
@@ -19,6 +20,7 @@ export function finalR6VisualSuccessor(r=JSON.parse(fs.readFileSync('content/pro
 }
 export function finalR6ConsolidationBytes(file,expected){
  const current=fs.readFileSync(file);if(crypto.createHash('sha256').update(current).digest('hex')===expected)return current;
+ if(isConvergenceCurrent(file))return convergencePredecessor(file,expected);
  const s=finalR6VisualSuccessor().record.surfaces.find(s=>s.path===file);assert(s,'Unregistered consolidation successor '+file);assert.equal(s.previousSha256,expected);
  const before=execFileSync('git',['show',s.predecessorGitRevision+':'+file]),owner=s.relation==='EXACT_OWNER_R6'?current:Buffer.from(s.ownerBytesBase64,'base64');assert.equal(crypto.createHash('sha256').update(before).digest('hex'),expected);assert.equal(crypto.createHash('sha256').update(owner).digest('hex'),s.ownerSha256,'Pinned R6 Owner bytes must be self-contained; local-only commits are not CI dependencies');return before;
 }

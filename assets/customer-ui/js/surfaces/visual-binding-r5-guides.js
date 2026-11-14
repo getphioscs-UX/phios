@@ -1,3 +1,4 @@
+import {claimExistingHeroSlot} from '../visual-slot-owner.js';
 import {customerAssetRegistry,hydrateCustomerAssets} from '../assets.js';
 const path=location.pathname.replace(/index\.html$/,'');
 const targets={
@@ -39,7 +40,11 @@ const targets={
  ,'/digital-product-policy':[[84,'[data-r6-digital-policy-guide]']]
 }[path]||[];
 const english={1:'Start with a question',2:'Start with reading',3:'Start with your current reality',4:'Choose a perspective',5:'Continue over time',6:'Find professional help',7:'How the platform connects',8:'Choose your starting point',10:'Directions and positions',11:'Versions and changes',12:'Evidence and interpretation',13:'How a navigation network forms',15:'Choices and constraints',16:'Keep unknowns visible',17:'Observe, review and continue',18:'Your PHI OS workspace',19:'Consent and access scope',20:'Report delivery and reopening',21:'People and permissions',22:'Timeline and versions',23:'Temporary and saved work',24:'Recovering access',33:'Sources for Personal Evidence'};
-if(targets.length){
+export async function installVisualGuides(){
+ if(!targets.length)return null;
+ const installation=Symbol.for('phios.visual-guides.r5.installation');
+ if(window[installation])return window[installation];
+ window[installation]=(async()=>{
  Object.assign(english,{34:'Seven ways to add Personal Evidence',35:'Reading your evidence result',36:'Confirm the source of an external result',37:'One bilingual evidence dossier',38:'Choose evidence to carry into Reality',39:'Differences and unknowns between sources',40:'Focus your Tarot question',41:'Choose the spread positions',42:'Shuffle and select your own cards',43:'Read the symbols in their positions',44:'Compare the reading with lived experience',45:'Continue from the same reading'});
  Object.assign(english,{46:'One question and a choice of casting method',53:'Service scope and actual deliverables',54:'An appointment request requires confirmation',55:'Choose the information you authorize for professional handoff',58:'Provide the source of an external reading',62:'Keep the question and its selected sources visible',63:'Explore connected knowledge',74:'Two people and their real circumstances',75:'Shared decisions and individual permissions',83:'Data storage, retention and withdrawal'});
  Object.assign(english,{9:'Your current reality remains a sourced view',14:'Connect evidence without turning it into certainty',61:'Natural Healer service scope',68:'Search results retain their source relationships',69:'Find a learning path through connected topics',70:'Compare learning with lived experience'});
@@ -52,8 +57,17 @@ if(targets.length){
  const registry=await customerAssetRegistry();
  const zh=()=>document.documentElement.lang.toLowerCase().startsWith('zh');
  function localized(node,en,cn){node.dataset.cxEn=en;node.dataset.cxZh=cn;node.textContent=zh()?cn:en;}
- function bind(){for(const [sequence,selector,inline]of targets){
+ // Watch only the declared Hero owner and direct main replacements, not the whole content tree.
+ let heroObserver=null,heroScope=null;
+ function observeHeroOwner(){
+  if(!targets.some(([sequence])=>sequence===78))return;
+  const next=document.querySelector('[data-r6-perspectives-hero]')?.closest('.vr2-hero-surface');
+  if(next===heroScope)return;heroObserver?.disconnect();heroScope=next;
+  if(next){heroObserver=new MutationObserver(records=>{if(records.some(r=>[...r.addedNodes,...r.removedNodes].some(n=>n.nodeType===1&&!n.matches('[data-r5-guide]'))))schedule();});heroObserver.observe(next,{childList:true,subtree:true});}
+ }
+ function bind(){observeHeroOwner();for(const [sequence,selector,inline]of targets){
   const host=document.querySelector(selector),asset=registry.entries.find(x=>x.r5Sequence===sequence);
+  if(sequence===78&&host&&asset?.available){const existing=claimExistingHeroSlot(host,asset);if(existing){window.phiosVisualBindingState??={};window.phiosVisualBindingState[sequence]={selector,state:'REUSED_PAGE_COMPOSITION',owner:'PAGE_COMPOSITION'};continue;}}
   if(asset && document.querySelector(`[data-vr2-guide="${asset.assetId}"]`))continue;
   const state=!host?'MISSING_SLOT':!asset?.available?'ASSET_UNAVAILABLE':'BOUND';
   window.phiosVisualBindingState??={};window.phiosVisualBindingState[sequence]={selector,state};
@@ -74,4 +88,11 @@ if(targets.length){
  for(const event of ['change','phios:reading-rendered','phios:profile-rendered','phios:account-rendered','phios:search-rendered','phios:ask-source-rendered','phios:estate-rendered','phios:draft-rendered'])document.addEventListener(event,schedule);
  document.addEventListener('DOMContentLoaded',schedule,{once:true});
  window.addEventListener('phios:localechange',()=>{document.querySelectorAll('[data-r5-guide] [data-cx-en]').forEach(node=>node.textContent=zh()?node.dataset.cxZh:node.dataset.cxEn);document.querySelectorAll('[data-r5-guide] img,[data-r5-financial-guide] img').forEach(node=>node.alt=zh()?node.dataset.cxZhAlt:node.dataset.cxEnAlt);schedule();});
+ if(targets.some(([sequence])=>sequence===78)){const main=document.querySelector('main');if(main)new MutationObserver(records=>{if(records.some(r=>[...r.addedNodes,...r.removedNodes].some(n=>n.nodeType===1&&(n.matches('.vr2-hero-surface')||n.querySelector('[data-r6-perspectives-hero]')))))schedule();}).observe(main,{childList:true});}
+ window.addEventListener('pageshow',schedule);window.addEventListener('popstate',schedule);
+ return {bind,schedule};
+ })().catch(error=>{delete window[installation];throw error;});
+ return window[installation];
 }
+await installVisualGuides();
+

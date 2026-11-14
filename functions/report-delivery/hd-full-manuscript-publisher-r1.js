@@ -1,3 +1,4 @@
+import decorativeBindings from './hd-full17-decorative-bindings-r1.json';
 import {HD_QUARANTINE_VERSION} from './hd-manuscript-admission-successor-r2.js';
 import {loadCanonicalPersonSubject,personIdentity} from '../account/canonical-person-store.js';
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
@@ -20,7 +21,7 @@ export async function prepareHdFullManuscriptPublisherR1(context,{job,native,sou
  }
  const mapped=mapHdFull17PublisherParagraphsR1(selected.sections,source.version),selection=mapped.selection;
  const packets=selection.sections.map(s=>({sectionId:s.id,paragraphs:s.paragraphs,calculation:{chartResultDigest:job.authorityDigest,...facts},commercial:false}));
- return {selection,packets,preview:{source:'PHIOS_CURRENT_SUBJECT_NATIVE_SOURCE',chart:native.chart,chartDigest:job.authorityDigest,subjectBinding:selected.subjectBinding,customerConfirmed:false},sourceBinding:selected,personalCognition:'UNKNOWN',sourceQuarantineVersion:HD_QUARANTINE_VERSION,advancedUnknown:[...(native.ownedSource.full17Facts.unknown||[]),{section:'personal_cognition',reason:'HD_R2_QUARANTINED_PERSONAL_INFERENCE_UNKNOWN'}],diagramPolicy:{knownFactsOnly:true,unknownAdvancedPanelRequired:true,neverRunOldPersonalGraphicBranches:true},publisherOwner:'tools/review/hd-r6/import-20261027/r611/render.py',flowPolicy:{adapter:'tools/review/six-method-paid-report-integration-r2/hd-full17-paragraph-flow-r1.py',source:'Original R65 section-loop used by R611; frozen main/old intro must not execute',languages:selected.contentLanguage==='bilingual'?['zh-Hans','en']:[selected.contentLanguage],chineseFontPt:11,englishFontPt:11.5,oneShortParagraphPerChapterForbidden:true,noPdfProduced:true},formalPublicationAccepted:false,commercialAdmission:false};
+ return {selection,packets,decorativeBinding:buildHdFull17DecorativeBindingR1({contentLanguage:selected.contentLanguage,sectionIds:selection.sections.map(s=>s.id)}),preview:{source:'PHIOS_CURRENT_SUBJECT_NATIVE_SOURCE',chart:native.chart,chartDigest:job.authorityDigest,subjectBinding:selected.subjectBinding,customerConfirmed:false},sourceBinding:selected,personalCognition:'UNKNOWN',sourceQuarantineVersion:HD_QUARANTINE_VERSION,advancedUnknown:[...(native.ownedSource.full17Facts.unknown||[]),{section:'personal_cognition',reason:'HD_R2_QUARANTINED_PERSONAL_INFERENCE_UNKNOWN'}],diagramPolicy:{knownFactsOnly:true,unknownAdvancedPanelRequired:true,neverRunOldPersonalGraphicBranches:true},publisherOwner:'tools/review/hd-r6/import-20261027/r611/render.py',flowPolicy:{adapter:'tools/review/six-method-paid-report-integration-r2/hd-full17-paragraph-flow-r1.py',source:'Original R65 section-loop used by R611; frozen main/old intro must not execute',languages:selected.contentLanguage==='bilingual'?['zh-Hans','en']:[selected.contentLanguage],chineseFontPt:11,englishFontPt:11.5,oneShortParagraphPerChapterForbidden:true,decorativeBindingField:'decorativeBinding',backgroundCallbackField:'backgroundCallback',noPdfProduced:true},formalPublicationAccepted:false,commercialAdmission:false};
 }
 
 // Structural projection only; callers still need the subject/source contract.
@@ -28,4 +29,10 @@ export async function prepareHdFullManuscriptPublisherR1(context,{job,native,sou
 export function mapHdFull17PublisherParagraphsR1(sections,candidateId){
  if(sections?.length!==17||sections.some((s,i)=>s.sectionId!=='SEC'+String(i+1).padStart(2,'0')))fail('HD_FULL17_COMPLETE_STRUCTURE_REQUIRED');
  return {selection:{candidateId,sections:sections.map((s,i)=>({id:s.sectionId,number:i+1,title:s.title,paragraphs:s.paragraphs.map(p=>({...p,id:p.paragraphId||p.id,sectionId:s.sectionId,subsectionId:p.coverageUnitId||p.subsectionId}))}))},publicationAccepted:false};
+}
+// Decorative files do not admit personal claims, diagrams, PHS or publication.
+export function buildHdFull17DecorativeBindingR1({contentLanguage,sectionIds}){
+ if(!['zh-Hans','en','bilingual'].includes(contentLanguage)||JSON.stringify(sectionIds)!==JSON.stringify(Array.from({length:17},(_,i)=>'SEC'+String(i+1).padStart(2,'0'))))fail('HD_DECORATIVE_COMPLETE_LANGUAGE_STRUCTURE_REQUIRED');
+ if(decorativeBindings.scope!=='LOCAL_OWNER_DESIGN_ONLY'||decorativeBindings.semanticAuthority!==false||decorativeBindings.commercialAdmission!==false||decorativeBindings.assetActivation!==false||JSON.stringify(decorativeBindings.rows.map(r=>r.id))!==JSON.stringify(['BODY',...sectionIds]))fail('HD_DECORATIVE_BINDING_SCOPE_REQUIRED');
+ return structuredClone(decorativeBindings);
 }
