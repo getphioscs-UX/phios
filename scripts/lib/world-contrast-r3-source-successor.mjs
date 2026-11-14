@@ -1,3 +1,4 @@
+import {founderLegacyRoutePredecessor} from './founder-legacy-route-compatibility-r1.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -20,6 +21,7 @@ export function validateWorldContrastR3({readFile=p=>fs.readFileSync(p),recordBy
  return {record:r,previousCSS:previous,previousReader:prior};
 }
 export function worldContrastR3Predecessor(path,bytes,options={}){
+ bytes=founderLegacyRoutePredecessor(path,bytes,options);
  if(path!==WORLD_R3_CSS&&path!==WORLD_R3_HOOK)return bytes;
  const v=validateWorldContrastR3(options),row=v.record.changes.find(x=>x.path===path),input=Buffer.from(bytes),digest=sha(input);assert([row.sha256,row.previousSHA256].includes(digest),'WORLD_R3_INPUT_DRIFT:'+path);
  return digest===row.previousSHA256?bytes:path===WORLD_R3_CSS?v.previousCSS:v.previousReader;

@@ -1,3 +1,7 @@
+import {validateFounderLegacyRoutes} from './lib/founder-legacy-route-compatibility-r1.mjs';
+import {runInNewContext} from 'node:vm';
+import {founderR3Predecessor} from './lib/founder-r3-historical-view-r1.mjs';
+import {auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {execFileSync} from 'node:child_process';
 import {assertCurrentMigrationBoundary,methodCacheSuccessor} from './lib/production-closure-migration-boundary.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
@@ -34,7 +38,7 @@ const [
   readJson('content/knowledge/registry/assets.json'),
   readJson('content/knowledge/registry/themes.json'),
   effectivePackageScripts(readJson('package.json')),
-  read('assets/js/public-shell.js'),
+  Promise.resolve(auditPublicReadFile('assets/js/public-shell.js','utf8')),
   read('assets/js/knowledge/published-content.js')
 ]);
 
@@ -270,6 +274,10 @@ for (const [id, href] of expectedMainNavigation) {
     `Missing main navigation route: ${id}`
   );
 }
+const currentPublicShell=await read('assets/js/public-shell.js');
+assert(currentPublicShell.includes('href="/account/"'),'Registered current Account route must exist');
+assert.equal(currentPublicShell.includes('href="/account"'),false,'Current route must not regress to the superseded literal');
+assert(await exists('account/index.html'),'Current Account route target must exist');
 assert(publicShell.includes('href="/account"'));
 assert(publicShell.includes("{ id: 'reality', href: '/reality/'"));
 assert(publicShell.includes('public-nav__actions'));
@@ -290,10 +298,16 @@ const currentPageByHistoricalPage = new Map([
 const cxMigratedPjaPages = new Set(['index.html', 'articles/index.html', 'explore/index.html']);
 const px2MigratedPjaPages = new Set(['library.html']);
 async function assertExploreAboutRedirect(html){
+ validateFounderLegacyRoutes();
  assert(html.includes('href="https://www.getphios.com/about/founder/"'));
  assert(html.includes('src="/assets/js/explore-about-compat.js"'));
  const redirect=await read('assets/js/explore-about-compat.js');assert(redirect.includes("location.replace('/about/founder/'"));
- const target=await read('about/founder/index.html');assert(target.includes('/assets/js/public-shell.js'));for(const anchor of ['why','how','start','faq'])assert(target.includes(`id="${anchor}"`));
+ const actualTarget=await read('about/founder/index.html');
+ await import('./check-founder-owner-r3.mjs');
+ const target=founderR3Predecessor('about/founder/index.html',Buffer.from(actualTarget)).toString('utf8');assert(target.includes('/assets/js/public-shell.js'));for(const anchor of ['why','how','start','faq'])assert(target.includes(`id="${anchor}"`));
+ const destinations=new Map([['why','founder-origin'],['how','founder-connected-reality'],['start','founder-next-step'],['faq','founder-trust']]);
+ for(const [oldId,newId]of destinations){let resolved;runInNewContext(redirect,{location:{hash:'#'+oldId,replace:value=>{resolved=value;}}});assert.equal(resolved,'/about/founder/#'+newId);assert(actualTarget.includes('id="'+newId+'"'),'Current Founder target must actually exist');}
+ for(const hash of ['', '#unknown','#constructor','#__proto__','#https://untrusted.invalid/']){let resolved;runInNewContext(redirect,{location:{hash,replace:value=>{resolved=value;}}});assert.equal(resolved,'/about/founder/','Unknown hash must fall back to the fixed local route');}
 }
 for (const historicalPage of requiredPages) {
   const page = currentPageByHistoricalPage.get(historicalPage) || historicalPage;

@@ -1,3 +1,4 @@
+import {auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {STRIPE_PRODUCT_REGISTRY} from '../functions/pws/commercial/stripe-product-registry.js';
@@ -10,7 +11,7 @@ const publicMeta=json('content/knowledge/public/successors/eight-volume-v1/publi
 const samples=json('content/web-production/registries/book-public-samples-v1.json');
 const bookRoutes=read('assets/js/web-production/public-surface-data-seven.js');
 const knowledge=read('assets/customer-ui/js/surfaces/knowledge.js');
-const volumePage=read('assets/js/pages/book-volume-seven.js');
+const volumePage=auditPublicReadFile('assets/js/pages/book-volume-seven.js','utf8');
 const booksIndex=read('books/index.html');
 
 assert.equal(books.books.length,8);
@@ -67,3 +68,6 @@ assert.ok(booksIndex.includes('Volumes I–VI are complete and published for pur
 assert.ok(booksIndex.includes('第一册至第六册已经完成并正式出版'));
 
 console.log('Books I-VI publication + commerce gate PASS: six completed published volumes, six active catalog products, and Book VI 50-page preview registration.');
+
+// Current availability and locked purchase messaging are verified separately from the retained historical publication contract.
+await import('./check-book-preview-availability-r2.mjs');

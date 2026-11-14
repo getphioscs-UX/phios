@@ -1,7 +1,13 @@
+import {founderR3Predecessor} from './lib/founder-r3-historical-view-r1.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {parseHTML} from 'linkedom';
 import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
+
+// Current R3 is validated against its own exact runtime and retained semantic contract.
+await import('./check-founder-owner-r3.mjs');
+// Only Founder legacy figure assertions receive the registered exact R2 predecessor.
+const readFigureContractMarkup=file=>file==='about/founder/index.html'?founderR3Predecessor(file,readFileSync(file)).toString('utf8'):readFileSync(file,'utf8');
 
 const targets=[
  ['perspectives/tarot/index.html','/perspectives/tarot/',[3]],
@@ -19,7 +25,7 @@ const targets=[
 let total=0,figuresPreserved=0,heroPreserved=0;
 for(let n=0;n<targets.length;n++){
  const [file,path,expected]=targets[n];
- const markup=readFileSync(file,'utf8');
+ const markup=readFigureContractMarkup(file);
  const {document,window}=parseHTML(markup);
  const before=[...document.querySelectorAll('figure')].length;
  const originalImages=[...document.querySelectorAll('figure img')].map(img=>img.getAttribute('data-approved-visual')||img.getAttribute('data-px2-asset')||img.getAttribute('src')||'').sort();
@@ -69,7 +75,7 @@ const style=readFileSync('assets/css/figure-story-deck.css','utf8');
 const global=readFileSync('assets/js/global-visual-r2.js','utf8');
 assert.match(global,/import\('\.\/figure-story-deck\.js'\)/);
 for(const file of ['about/founder/index.html','about/reality-navigation/index.html'])
- assert.match(readFileSync(file,'utf8'),/assets\/js\/figure-story-deck\.js/);
+ assert.match(readFigureContractMarkup(file),/assets\/js\/figure-story-deck\.js/);
 assert.match(style,/object-fit:contain/,'Do not crop original figures');
 assert.match(style,/prefers-reduced-motion/,'Respect reduced motion');
 assert.match(readFileSync('assets/js/figure-story-deck.js','utf8'),/event\.key==='ArrowRight'/,'Keyboard controls must exist');
