@@ -1,3 +1,4 @@
+import {symbolicHistoricalBytes} from './lib/symbolic-frozen20-receiver-successor-r1.mjs';
 import {assertLocaleBootstrapCurrent} from './lib/locale-bootstrap-current-successor.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -5,7 +6,7 @@ import crypto from 'node:crypto';
 import {verifyRitualMaintenanceDependency} from './lib/iching-ritual-maintenance-successor.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const text=p=>fs.readFileSync(p,'utf8');
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const sha=p=>crypto.createHash('sha256').update(symbolicHistoricalBytes(p)).digest('hex');
 const current=read('content/production/symbolic-method/authority/iching-current-authority.json');
 const release=read(current.releaseManifest);
 const successor=read('content/production/symbolic-method/reconciliation/iching-release-1.0.1-cx-presentation-successor-v1.json');

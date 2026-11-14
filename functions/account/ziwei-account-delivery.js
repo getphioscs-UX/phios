@@ -1,3 +1,4 @@
+import {deliverCurrentAccountZiweiR2} from './ziwei-current-native-delivery-r2.js';
 import {readMethodPdfMultipart} from '../report-delivery/method-pdf-transfer.js';
 import {assertZiweiPdfScope,persistAccountZiweiPdf,assertAccountZiweiFinalArtifact,accountZiweiPdfLink} from './ziwei-pdf-delivery.js';
 import {cachedMethodDelivery,methodCacheIdentity} from '../report-delivery/method-delivery-cache.js';
@@ -58,6 +59,7 @@ export async function generateAndReleaseAccountZiwei(context,selection,{generate
   return handoffFinalAccountZiwei(context,{candidate,...await loadFinalPublication(context,candidate)});
  }
  if(!context.env.METHOD_REPORT_RENDERER?.fetch)throw fail('REPORT_BROWSER_VERIFIER_NOT_CONFIGURED',503);
+ if(context.env.ZWR_PDF_DELIVERY_CANDIDATE==='true'&&context.env.PHIOS_LOCAL_ZWR_CURRENT_NATIVE_QA==='true'&&candidate.schemaVersion==='ZWR-VFR-R1-AUTO-DEEP-CANDIDATE-v3')return deliverCurrentAccountZiweiR2(context,candidate,{loadSubject:loader(context.env)});
  if(context.env.ZWR_PDF_DELIVERY_CANDIDATE==='true'){
   assertZiweiPdfScope(context,candidate);
   const prior=await context.env.RUNTIME_DB.prepare("SELECT report_id FROM account_method_report_materials WHERE owner_account_id=? AND snapshot_id=? AND method_code='ZWR'").bind(candidate.customerId,candidate.snapshot.semanticSnapshotId).first();

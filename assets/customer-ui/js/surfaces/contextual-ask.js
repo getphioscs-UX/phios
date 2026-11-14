@@ -255,6 +255,7 @@ async function loadSeededContexts(){
 }
 
 function errorMessage(code,httpStatus){
+  if(String(code)==='ASK_SELECTED_METHOD_INVALID')return tr('The selected method is not recognized. Reopen its original method page.','无法识别所选方法，请从原方法页面重新进入。');
   const value=String(code||'');
   if(/temporarily_unavailable|READ_ONLY|MAINTENANCE/i.test(value)||httpStatus===503&&value==='REQUEST_FAILED')return tr('Ask is temporarily unavailable. Public readings remain available; changing sources or signing in does not remove this maintenance restriction.','提问服务暂不可用，公开阅读仍可使用；更换来源或登录不会解除当前维护限制。');
   if(httpStatus===401||/ACCOUNT_REQUIRED|AUTHENTICATION_REQUIRED/.test(value))return tr('Sign in to access this account feature. Signing in does not activate unavailable generation.','请登录以访问此账户功能；登录不会启用尚未开放的生成服务。');
@@ -276,7 +277,10 @@ function boot(){
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
   const task=document.createElement('label');task.className='ask-r1-task';task.innerHTML='<span data-cx-en="What would you like to do?" data-cx-zh="你想怎样继续？">'+tr('What would you like to do?','你想怎样继续？')+'</span><select name="askTask"><option value="ENTRY" data-cx-en="Find an entrance" data-cx-zh="找到入口">'+tr('Find an entrance','找到入口')+'</option><option value="KNOWLEDGE_BASIC" data-cx-en="Understand knowledge" data-cx-zh="理解知识">'+tr('Understand knowledge','理解知识')+'</option><option value="REALITY_NAVIGATION" data-cx-en="Continue my reality" data-cx-zh="继续我的现实">'+tr('Continue my reality','继续我的现实')+'</option></select>';form.prepend(task);
-  const taskParams=new URLSearchParams(location.search);form.elements.askTask.value=taskParams.has('contextRef')||taskParams.get('task')==='KNOWLEDGE_BASIC'?'KNOWLEDGE_BASIC':'ENTRY';
+  const taskParams=new URLSearchParams(location.search),incomingContext=normalizeAskContext(taskParams),selectedMethod=incomingContext.selectedMethod||null;
+  form.elements.askTask.value=taskParams.get('task')==='ENTRY'?'ENTRY':taskParams.has('contextRef')||taskParams.get('task')==='KNOWLEDGE_BASIC'||selectedMethod?'KNOWLEDGE_BASIC':'ENTRY';
+  const methodNotice=selectedMethod?document.createElement('p'):null;
+  if(methodNotice){methodNotice.dataset.askSelectedMethod=selectedMethod;methodNotice.textContent=tr('Selected method: ','已选择方法：')+selectedMethod;task.after(methodNotice);}
   if(form.elements.askTask.value==='KNOWLEDGE_BASIC'&&!taskParams.has('contextRef')){form.elements.questionOnly.checked=false;form.elements.contextKnowledge.checked=true;}
   const entryResult=document.createElement('section');entryResult.dataset.askR1Result='';entryResult.hidden=true;form.after(entryResult);installCapabilityOverview(entryResult.parentElement);
   const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
@@ -299,9 +303,9 @@ function boot(){
     event.preventDefault();
     const question=String(form.elements.question.value||'').trim();
     if(!question||form.getAttribute('aria-busy')==='true')return;
-    if(form.elements.askTask.value==='ENTRY'){
+    if(form.elements.askTask.value==='ENTRY'&&!selectedMethod){
       form.setAttribute('aria-busy','true');
-      try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q:question,locale:locale()}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();p.route=await publicEntryAnswer(question,locale(),p.route);renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});setStatus(status,'');}
+      try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q:question,locale:locale()}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();p.route=await publicEntryAnswer(question,locale(),p.route);renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});if(['BOUNDED_GENERAL_GUIDANCE','BASIC_SAFETY_GUIDANCE'].includes(p.route?.outcome)){const title=entryResult.querySelector('h2');if(title)title.textContent=p.route.outcome==='BASIC_SAFETY_GUIDANCE'?tr('Basic safety guidance','基础安全指导'):tr('General guidance and its limits','一般建议与适用边界');if(!p.route.publicAnswer?.sources?.length)entryResult.querySelector('[data-public-source-answer] details')?.remove();}setStatus(status,'');}
       catch{setStatus(status,'');renderEntryResult(entryResult,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:tr('Retry','重试')}},{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});}
       finally{form.setAttribute('aria-busy','false');}return;
     }
@@ -314,7 +318,7 @@ function boot(){
     form.dataset.askState='RETRIEVING';
     try{
       entryResult.hidden=true;
-      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,followUpContext:followUp?{parentAnswerId:followUp.answerContext?.answerId,groundingBundleId:followUp.knowledgeContext?.groundingBundleId,followUpDepth:followUp.depth+1}:null,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
+      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,followUpContext:followUp?{parentAnswerId:followUp.answerContext?.answerId,groundingBundleId:followUp.knowledgeContext?.groundingBundleId,followUpDepth:followUp.depth+1}:null,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,...(selectedMethod?{selectedMethod}:{}),guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
       view=payload.view;followUp=payload.followUp||null;
       form.dataset.askState=['SUFFICIENT','PARTIAL','INSUFFICIENT','AMBIGUOUS','CONTRADICTORY'].includes(view?.qualityOutcome)?view.qualityOutcome:(view?.state||'IDLE');
       render();
@@ -346,10 +350,10 @@ function boot(){
     emitCxR31('paidUpgradeContinueKnowledge');
   });
   const initial=new URLSearchParams(location.search).get('q');
-  if(initial)form.elements.question.value=initial.slice(0,500);
+  if(initial&&!form.elements.question.value)form.elements.question.value=initial.slice(0,500);
   loadSeededContexts().finally(()=>syncSelection(form));
   syncSelection(form);
-  reRenderOnLocale(()=>{loadSeededContexts().finally(()=>syncSelection(form));if(view)render();});
+  reRenderOnLocale(()=>{if(methodNotice)methodNotice.textContent=tr('Selected method: ','已选择方法：')+selectedMethod;loadSeededContexts().finally(()=>syncSelection(form));if(view)render();});
 }
 
 boot();

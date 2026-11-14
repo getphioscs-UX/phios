@@ -4,14 +4,14 @@ import {reconfigurationAtlasStateFromUrl,reconfigurationAtlasUrlFromState} from 
 import {normalizeAtlasRetrievalScope,retrieveAtlasScope} from '../functions/_lib/atlas-retrieval-scope.js';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),read=p=>fs.readFile(path.join(root,p),'utf8');
 const renderer=await read('assets/js/pages/civilization-atlas/reconfiguration-renderer.js'),discovery=await read('assets/js/knowledge/public-discovery.js'),knowledge=await read('assets/customer-ui/js/surfaces/knowledge.js'),book=await read('assets/js/pages/book-volume-seven.js'),localeEn=await read('assets/js/locales/en/book6-reconfiguration-atlas.js'),localeZh=await read('assets/js/locales/zh-Hans/book6-reconfiguration-atlas.js');
-for(const token of ['data-window-filter','data-region','data-type','data-trigger','data-pressure','data-change','civ-reconfig-timeline','compareCaseIds','snapshotLayer','previousVersion','compareDossierIds','livedRealityDimensionId'])assert.match(renderer,new RegExp(token));
+for(const token of ['data-window-filter','data-region','data-type','searchText\\(state.triggerQuery\\)','searchText\\(state.pressureQuery\\)','caseChangeMatch\\(x,state.changeFilter\\)','civ-reconfig-timeline','compareCaseIds','snapshotLayer','previousVersion','compareDossierIds','livedRealityDimensionId'])assert.match(renderer,new RegExp(token));
 assert.match(renderer,/slice\(0,4\)/);assert.match(localeEn,/One static base visual/);assert.match(localeZh,/同一张静态底图/);assert.match(localeEn,/No universal score/);assert.match(localeZh,/不转换为通用分数/);
 for(const type of ['CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY']){assert.match(discovery,new RegExp("type:'"+type+"'"));assert.match(knowledge,new RegExp(type));}
 for(const type of ['CASE','WINDOW','SNAPSHOT','DOSSIER','BOOK_SECTION','LIVED_REALITY'])assert.match(discovery,new RegExp("locale:l,type:'"+type+"'"));
 assert.match(knowledge,/BOOK-6':\{en:'Reality Reconfiguration'/);
 for(const token of ['External Dependency','Pressure','Direction','Transition Signals'])assert.match(localeEn,new RegExp(token));
-assert.match(renderer,/history\.filter\(h=>h\.id===d\.id\)/);
-assert.match(renderer,/dimMap\.get\(id\)\|\|humanize\(id\)/);
+assert.match(renderer,/await loadAcceptedDossier\(dossier\.id\)/,'current history is retrieved through the accepted, identity-bound source loader');
+assert.match(renderer,/dimMap\.get\(k\)\|\|humanize\(k\)/);
 
 for(const entry of ['atlas=snapshots','atlas=compare','atlas=dossiers','atlas=lived'])assert.match(book,new RegExp(entry));
 const normalized=normalizeReconfigurationAtlasState({activeLayer:'compare',compareCaseIds:['RC-04','RC-05','RC-06','RC-07','RC-08'],snapshotLayer:'finance'});assert.equal(normalized.compareCaseIds.length,4);assert.equal(normalized.snapshotLayer,'finance');

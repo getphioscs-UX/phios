@@ -15,6 +15,7 @@ let method='SYSTEM_RANDOM';
 let serviceReady=false;
 let guestSaveAvailable=false;
 let latestView=null;
+let latestViews=null;
 let latestRequest=null;
 let coinLineIndex=0;
 let coinChoices={1:null,2:null,3:null};
@@ -25,9 +26,9 @@ function lineMeaning(value){return ({6:t('old yin · changing','老阴 · 变爻
 function lineMark(value){return ({6:'⚋ ×',7:'⚊',8:'⚋',9:'⚊ ○'})[Number(value)]||'—';}
 function linePositionLabel(index){return index===0?t('bottom line','初爻'):index===5?t('top line','上爻'):t(`line ${index+1}`,`第 ${index+1} 爻`);}
 function setServiceMessage(message=''){const node=q('[data-service-message]');if(!node)return;node.textContent=message;node.hidden=!message;}
-function setBusy(busy){for(const node of qa('[data-start-system-cast],[data-read-manual],[data-read-coins],[data-record-line]'))node.disabled=busy||node.dataset.recordLineDisabled==='true';document.body.dataset.ichingBusy=String(busy);}
+function setBusy(busy){for(const node of qa('[data-start-system-cast],[data-read-manual],[data-read-coins],[data-record-line]'))node.disabled=busy||!serviceReady||node.dataset.recordLineDisabled==='true';document.body.dataset.ichingBusy=String(busy);}
 function ensureQuestion(){const value=question();if(value)return value;setServiceMessage(t('Write one clear question before casting.','请先写下一个你想理解的问题，再开始起卦。'));q('[data-consult-question]')?.focus();q('[data-consult-question]')?.scrollIntoView({behavior:'smooth',block:'center'});return null;}
-function updateQuestionCount(){const node=q('[data-question-count]');if(node)node.textContent=String(q('[data-consult-question]')?.value?.length||0);setServiceMessage('');}
+function updateQuestionCount(){const node=q('[data-question-count]');if(node)node.textContent=String(q('[data-consult-question]')?.value?.length||0);if(serviceReady)setServiceMessage('');}
 function updateGuideImages(){const l=locale();const overview=q('[data-guide-overview-img]');const coin=q('[data-guide-three-coin-img]');if(overview)overview.src=ASSETS.overview[l];if(coin)coin.src=ASSETS.threeCoin[l];}
 
 async function refreshService(){
@@ -35,10 +36,12 @@ async function refreshService(){
     const response=await fetch('/api/iching-full-production-status',{cache:'no-store',headers:{accept:'application/json'}});
     const payload=await response.json();
     serviceReady=response.ok&&payload?.production?.runAllowed===true&&payload?.production?.globalPublicExecution===true;
-    if(!serviceReady)setServiceMessage(t('The reading service is temporarily unavailable. Please try again shortly.','阅读服务暂时不可用，请稍后再试。'));
+    guestSaveAvailable=serviceReady&&payload?.service?.persistence?.writeTransportAllowed===true&&payload?.production?.guestPersistenceAllowed===true;
+    if(!serviceReady)setServiceMessage(t('The reading service is not ready. It cannot cast or interpret in this configuration. Your question is kept on this page.','阅读服务尚未就绪，当前配置不能起卦或解读。本页已填问题保留。'));
     else setServiceMessage('');
-  }catch{serviceReady=false;setServiceMessage(t('The reading service is temporarily unavailable. Please try again shortly.','阅读服务暂时不可用，请稍后再试。'));}
-  try{const r=await fetch('/api/iching-full-context',{cache:'no-store'});const p=await r.json();guestSaveAvailable=Boolean(p?.guest?.saveContractAvailable);}catch{guestSaveAvailable=false;}
+  }catch{serviceReady=false;guestSaveAvailable=false;setServiceMessage(t('The reading service could not be reached. Your question is kept on this page.','未能连接阅读服务。本页已填问题保留。'));}
+  // Do not create a guest identity merely to inspect save availability.
+  setBusy(false);
 }
 
 function setMethod(next){
@@ -46,7 +49,7 @@ function setMethod(next){
   qa('[data-method]').forEach(btn=>btn.setAttribute('aria-selected',String(btn.dataset.method===method)));
   qa('[data-method-panel]').forEach(panel=>panel.hidden=panel.dataset.methodPanel!==method);
   if(method==='COIN_CAST'||method==='MANUAL_LINES')q('[data-method-guide]').open=true;
-  setServiceMessage('');
+  if(serviceReady)setServiceMessage('');
 }
 
 function renderCoinRecorder(){
@@ -95,8 +98,9 @@ async function executeReading(body){
   try{
     const response=await fetch('/api/iching-full-execute',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},cache:'no-store',body:JSON.stringify({...body,locale:locale()})});
     const payload=await response.json().catch(()=>null);
-    if(!response.ok||!payload?.publicView)throw new Error(payload?.error?.code||'READING_UNAVAILABLE');
+    if(!response.ok||!payload?.publicView){const error=new Error(payload?.error?.code||'READING_UNAVAILABLE');error.serviceUnavailable=response.status>=500||response.status===423;throw error;}
     latestView=payload.publicView;
+    latestViews=payload.languageViews||null;
     q('[data-reading-content]').innerHTML=renderIChingCustomerReading(latestView,locale());
     q('[data-reading-actions]').hidden=false;
     q('[data-save-reading]').hidden=!guestSaveAvailable;
@@ -105,7 +109,8 @@ async function executeReading(body){
     q('[data-reading]').scrollIntoView({behavior:'smooth',block:'start'});
     qa('.icx-steps li').forEach((li,index)=>li.classList.toggle('is-active',index===2));
   }catch(error){
-    setServiceMessage(t(`The reading could not be completed: ${error.message}`,`这次阅读暂时无法完成：${error.message}`));
+    if(error.serviceUnavailable!==false)serviceReady=false;
+    setServiceMessage(t('This reading could not be completed. Your question and cast are kept on this page; no new cast or payment was made.','本次解读未能完成。本页问题和卦保留，没有重新起卦或付款。'));
     q('[data-reading]').hidden=true;
   }finally{q('[data-reading-loading]').hidden=true;setBusy(false);}
 }
@@ -120,8 +125,8 @@ async function systemCast(){
     const cast=payload.cast;const lines=cast.selection?.selectedSymbols?.map(Number)||[];const coins=cast.selection?.coinGroups||[];
     await renderCastProgress(lines,coins)();
     setServiceMessage(t('The six lines are complete. Preparing the interpretation…','六爻已经形成，正在整理解释……'));
-    await executeReading({method:'I_CHING',question:currentQuestion,inputMode:'SYSTEM_RANDOM',randomSelectionEvidence:cast.randomSelectionEvidence,sessionId:cast.castId,timestamp:cast.createdAt,projectionVersion:'1.0.0',useCurrentRealityContext:false});
-  }catch(error){setBusy(false);setServiceMessage(t(`Casting is temporarily unavailable: ${error.message}`,`起卦暂时不可用：${error.message}`));}
+    await executeReading({method:'I_CHING',question:currentQuestion,inputMode:'SYSTEM_RANDOM',randomSelectionEvidence:cast.randomSelectionEvidence,governedCast:cast,sessionId:cast.castId,timestamp:cast.createdAt,projectionVersion:'1.0.0',useCurrentRealityContext:false});
+  }catch(error){serviceReady=false;setBusy(false);setServiceMessage(t('Casting is unavailable. Your question is kept; no completed cast has been replaced.','起卦服务不可用。问题保留，已有完整卦不会被替换。'));}
 }
 async function readManual(){
   const currentQuestion=ensureQuestion();if(!currentQuestion)return;
@@ -151,8 +156,9 @@ async function saveReading(){
 }
 function rerenderLocale(){
   updateGuideImages();renderCoinRecorder();
-  if(latestView)q('[data-reading-content]').innerHTML=renderIChingCustomerReading(latestView,locale());
+  if(latestView)q('[data-reading-content]').innerHTML=latestViews?.[locale()]?renderIChingCustomerReading(latestViews[locale()],locale()):t('This language version is unavailable; the original cast is unchanged.','此语言版本不可用，原卦保持不变。');
   qa('[data-question-prompt]').forEach(btn=>{btn.textContent=isZh()?btn.dataset.zh:btn.dataset.en;});
+  if(!serviceReady)void refreshService(); // One idempotent status GET, never a cast replay.
 }
 
 q('[data-consult-question]')?.addEventListener('input',updateQuestionCount);
@@ -169,4 +175,4 @@ q('[data-toggle-workflow]')?.addEventListener('click',toggleWorkflow);
 q('[data-new-reading]')?.addEventListener('click',()=>{if(confirm(t('Start a new reading? The current screen will be cleared.','要开始新的阅读吗？当前画面会被清空。')))resetReading();});
 q('[data-save-reading]')?.addEventListener('click',saveReading);
 window.addEventListener('phios:localechange',rerenderLocale);
-updateQuestionCount();resetCoinRecorder();setMethod('SYSTEM_RANDOM');rerenderLocale();refreshService();q('[data-consult-question]')?.focus();
+updateQuestionCount();resetCoinRecorder();setMethod('SYSTEM_RANDOM');rerenderLocale();q('[data-consult-question]')?.focus();

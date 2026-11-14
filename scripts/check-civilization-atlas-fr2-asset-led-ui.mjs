@@ -58,7 +58,7 @@ assert.ok(css.includes('FR2 asset-led layer interfaces'),'FR2 asset-led CSS miss
 
 
 assert.ok(cases.includes("'CASE_SECONDARY'"),'Active civilization cards must use accepted CASE_SECONDARY visuals when available.');
-assert.ok(cases.includes('civ-case-secondary'),'CASE_SECONDARY must be projected as a customer-facing secondary visual layer.');
+assert.ok(cases.includes('civ-case-dossier__secondary'),'CASE_SECONDARY must be projected inside the current customer dossier.');
 assert.ok(transitions.includes("'SCALE_SHIFT'"),'Transition scale shifts must use accepted SCALE_SHIFT visuals.');
 assert.ok(transitions.includes('civ-scale-shift-card'),'Scale shifts must render as visual interface cards.');
 assert.ok(css.includes('FR2 secondary case + scale shift visuals'),'FR2 secondary visual CSS missing.');
@@ -66,7 +66,7 @@ assert.ok(css.includes('FR2 secondary case + scale shift visuals'),'FR2 secondar
 
 assert.ok(timeline.includes('civ-timeline__focus-visual'),'Timeline anchor visual must live inside the era reader.');
 assert.ok(world.includes("'WORLD_SNAPSHOT_ATMOSPHERE'"),'World snapshot atmosphere must be consumed inside the World interface.');
-assert.ok(world.includes('civ-world__globe'),'World snapshot visual must occupy the map field, not a detached hero.');
+assert.ok(world.includes('primaryVisualMarkup(asset,loc(selected.title,l),l)'),'The current World snapshot must render its own resolved primary visual with its localized title, rather than an unrelated generic image.');
 assert.ok(css.includes('FR2 atlas-board visual language'),'FR2 Atlas board theme missing.');
 assert.ok(css.includes('--phi-action-knowledge:#d5b36c'),'FR2 Atlas board must retain the gold interaction language.');
 

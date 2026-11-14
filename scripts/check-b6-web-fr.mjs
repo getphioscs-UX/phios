@@ -6,6 +6,7 @@ import {setLocale} from '../assets/js/i18n.js';
 import {createReconfigurationAtlasState,RECONFIG_ATLAS_LAYERS} from '../assets/js/pages/civilization-atlas/atlas-state.js';
 import {mountReconfigurationAtlas} from '../assets/js/pages/civilization-atlas/reconfiguration-renderer.js';
 import {resolveAtlasVisualById} from '../assets/js/pages/civilization-atlas/atlas-static-visual.js';
+import {loadAcceptedDossier,clearAtlasDataCache} from '../assets/js/pages/civilization-atlas/atlas-data.js';
 import {buildBook6DossierRreProjection} from './lib/civilization-atlas/book6-rre-adapter-v1.mjs';
 
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -35,7 +36,37 @@ assert.match(renderer,/activeLayer==='visuals'/);
 assert.match(renderer,/currentDataNotAdmitted/);
 assert.match(renderer,/currentDataBoundary/);
 assert.match(renderer,/hydrateDossierRuntimeReadout/);
-assert.match(renderer,/\/api\/book6-runtime-readout/);
+// The renderer delegates retrieval to the shared source loader. Verify the
+// complete call chain, including dossier identity and failure boundaries.
+const atlasData=fs.readFileSync('assets/js/pages/civilization-atlas/atlas-data.js','utf8');
+assert.match(renderer,/import\s*\{loadAcceptedDossier\}\s*from\s*'\.\/atlas-data\.js'/);
+assert.match(renderer,/await loadAcceptedDossier\(dossier\.id\)/);
+assert.match(atlasData,/export async function loadAcceptedDossier\(id\)/);
+assert.match(atlasData,/const path='\/api\/book6-runtime-readout\?dossier='\+encodeURIComponent\(id\)/);
+assert.match(atlasData,/fetch\(path,JSON_HEADERS\)/);
+assert.match(atlasData,/if\(!r\.ok\)throw Error\('ATLAS_DATA_HTTP_'\+r\.status\)/);
+assert.match(atlasData,/body\.ok&&body\.projection\?\.dossierId!==id/);
+assert.match(atlasData,/BOOK6_DOSSIER_IDENTITY_MISMATCH/);
+assert.match(atlasData,/ACCEPTED_CACHE\.delete\(path\)/);
+// Exercise the delegated loader with an isolated, network-free transport.
+const originalFetch=globalThis.fetch,sourceRequests=[];
+try{
+ for(const [status,body,expected] of [
+  [200,{ok:true,projection:{dossierId:'DOSSIER-US'}},'ACCEPTED_SCOPE'],
+  [200,{ok:true,projection:{dossierId:'DOSSIER-EU'}},'SERVICE_ERROR'],
+  [404,{ok:false},'NOT_ACTIVATED'],
+  [503,{ok:false},'SERVICE_ERROR']
+ ]){
+  clearAtlasDataCache();
+  globalThis.fetch=async(url,options)=>{sourceRequests.push({url,options});return Response.json(body,{status});};
+  const loaded=await loadAcceptedDossier('DOSSIER-US');
+  assert.equal(loaded.currentLoadState,expected);
+  if(expected==='ACCEPTED_SCOPE')assert.equal(loaded.acceptedCurrent.dossierId,'DOSSIER-US');
+  else assert.equal(loaded.acceptedCurrent,null,'wrong identity and failed sources must never become admitted projections');
+ }
+ assert.equal(sourceRequests.length,4);
+ for(const request of sourceRequests){assert.equal(request.url,'/api/book6-runtime-readout?dossier=DOSSIER-US');assert.equal(request.options.headers.Accept,'application/json');assert.equal(request.options.method,undefined,'source lookup uses GET, never a write');}
+}finally{globalThis.fetch=originalFetch;clearAtlasDataCache();}
 assert.match(renderer,/data-runtime-readout/);
 assert.match(renderer,/PHRASE_KEY_BY_TEXT/);
 for(const token of ['visualLibrary','visualFamily','visualSubject','currentDataNotAdmitted','currentDataBoundary','CASE_PRESSURE_BOUNDARY','WINDOW_PRESSURE_BOUNDARY']) {
@@ -94,7 +125,17 @@ for(const projection of dossierRre){
 }
 const endpointSource=fs.readFileSync('functions/api/book6-runtime-readout.js','utf8');
 const adapterSource=fs.readFileSync('scripts/lib/civilization-atlas/book6-rre-adapter-v1.mjs','utf8');
-assert.match(endpointSource,/buildBook6DossierRreProjection/);
+// Accepted current projections supersede the predecessor RRE builder at the
+// public endpoint; the historical adapter contracts below remain required.
+const currentSource=fs.readFileSync('functions/_lib/book6-current-source.js','utf8');
+assert.match(endpointSource,/import \{getAcceptedBook6Projection\} from '\.\.\/_lib\/book6-current-source\.js'/);
+assert.match(endpointSource,/import \{publicBook6ProviderBoundary\} from '\.\.\/_lib\/book6-public-provider-boundary\.js'/);
+assert.match(endpointSource,/publicBook6ProviderBoundary\(getAcceptedBook6Projection\(id\)\)/);
+assert.match(endpointSource,/BOOK6_ACCEPTED_DOSSIER_NOT_FOUND/);
+assert.match(endpointSource,/status:404/);
+assert.match(currentSource,/export function getAcceptedBook6Projection\(id,/);
+assert.match(currentSource,/rows\.find\(r=>r\.accepted\.dossierId===id\)/);
+assert.match(currentSource,/row\?projectAcceptedBook6Current\(/);
 assert.match(adapterSource,/buildCanonicalRuntimeReadout/);
 assert.match(adapterSource,/RRE-READOUT-B6-/);
 assert.match(adapterSource,/targetCodes:\['WPR'\]/);
@@ -102,6 +143,16 @@ assert.doesNotMatch(endpointSource,/with\s*\{\s*type\s*:\s*['"]json['"]\s*\}/);
 
 const {document}=parseHTML('<html><head></head><body><main data-civilization-atlas-root data-atlas-mode="reconfiguration"></main></body></html>');
 globalThis.document=document;globalThis.window=document.defaultView;
+globalThis.dispatchEvent=document.defaultView.dispatchEvent.bind(document.defaultView);
+globalThis.CustomEvent=document.defaultView.CustomEvent;
+// LinkeDOM exposes a getter-only select.value. Model the browser setter in
+// the DOM fixture, without changing runtime code or disabling assertions.
+const selectPrototype=document.defaultView.HTMLSelectElement.prototype;
+const selectValue=Object.getOwnPropertyDescriptor(selectPrototype,'value');
+if(!selectValue?.set)Object.defineProperty(selectPrototype,'value',{
+ configurable:true,get:selectValue.get,
+ set(value){for(const option of this.options)option.selected=option.value===String(value);}
+});
 setLocale('zh-Hans',{persist:false,translate:false,emit:false});
 const root=document.querySelector('main');
 
@@ -124,20 +175,24 @@ off?.();
 store=createReconfigurationAtlasState({locale:'zh-Hans',activeLayer:'visuals'});
 off=mountReconfigurationAtlas(root,data,{locale:'zh-Hans',store});
 text=root.textContent||'';
-assert.ok(text.includes('392'),'visual library must expose the accepted visual census');
-assert.equal(root.querySelectorAll('[data-visual-preview] img').length,1,'visual library must lazy-project one selected image, not mass render 392');
+assert.equal(store.get().activeLayer,'snapshots','legacy visuals entry must resolve to the accepted Book VI snapshot surface');
+assert.equal(data.visualBindings.assets.length,392,'the inherited visual census must remain intact');
+assert.equal(data.visualBindings.assets.filter(a=>a.family==='WORLD_RECONFIGURATION_SNAPSHOT').length,12,'Book VI retains its exact twelve bound snapshots');
+assert.equal(root.querySelectorAll('.is-current [data-snapshot-image]').length,1,'exactly one current snapshot must be shown');
+assert.equal(root.querySelectorAll('[data-snapshot-image]').length,2,'initial snapshot comparison renders current and next only, not all twelve or 392 assets');
 off?.();
 
 store=createReconfigurationAtlasState({locale:'zh-Hans',activeLayer:'dossiers',dossierId:'DOSSIER-US'});
 off=mountReconfigurationAtlas(root,data,{locale:'zh-Hans',store});
 text=root.textContent||'';
-assert.ok(text.includes('尚未接入已获准的当前资料'),'unadmitted dossier must present a bounded customer explanation');
+assert.ok(text.includes('未接入通过时效性验收的当前值，因此不生成数值预测'),'unadmitted dossier must retain the explicit no-forecast evidence boundary');
 assert.ok(!text.includes('运行阶段\n未知'),'unadmitted dossier must not present a wall of repeated UNKNOWN runtime fields');
 off?.();
 
 store=createReconfigurationAtlasState({locale:'zh-Hans',activeLayer:'lived',dossierId:'DOSSIER-US'});
 off=mountReconfigurationAtlas(root,data,{locale:'zh-Hans',store});
-assert.ok((root.textContent||'').includes('当前资料结构已经就绪'),'unadmitted lived reality must present one evidence boundary');
+assert.ok((root.textContent||'').includes('当前数值层尚未验收'),'unadmitted lived reality must present its current-value evidence boundary');
+assert.equal(root.querySelectorAll('.civ-reconfig-lived-key .civ-reconfig-lived-card').length,5,'the accepted bounded structural reading remains available without inventing live values');
 assert.equal(root.querySelectorAll('.civ-reconfig-card').length,0,'unadmitted lived reality must not render fourteen UNKNOWN cards');
 off?.();
 

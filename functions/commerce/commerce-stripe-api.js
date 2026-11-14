@@ -1,4 +1,5 @@
 import {fiveMethodReportCapability,requireFiveMethodReportSetup} from '../report-delivery/paid-report-production-capabilities.js';
+import {requireSymbolicCheckoutBinding} from './symbolic-reading-checkout-binding-r2.js';
 import {requirePaidReportCheckout,paidReportSubjectSnapshot} from '../report-delivery/paid-report-readiness.js';
 import {paidReportMethodForProduct} from '../report-delivery/paid-report-method-registry.js';
 import {requireP9Payment} from '../report-delivery/p9-canary-admission.js';
@@ -88,6 +89,7 @@ export async function commerceApi(context,action){
     // Context stores only an opaque existing report reference, never raw intake.
     const reference=body.context?.readingId;
     if(body.context&&(Object.keys(body.context).some(k=>!['readingId','reportIntentId'].includes(k))||(reference!==undefined&&(typeof reference!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(reference)))||(body.context.reportIntentId!==undefined&&(typeof body.context.reportIntentId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(body.context.reportIntentId))))) throw Object.assign(new Error('Invalid report reference.'),{status:422,code:'checkout_context_invalid'});
+    await requireSymbolicCheckoutBinding(context,product.productId,reference);
     const contextSnapshot=reference?{readingId:reference}:{};if(bookPdf)contextSnapshot.bookPdf=bookPdf;
     // R1.2 leaves purchased refill units intact; new sales require reconciliation
     // with the explicit account-period $3 cap. No paid refill can expand that cap.

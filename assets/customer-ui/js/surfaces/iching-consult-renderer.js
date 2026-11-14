@@ -1,4 +1,5 @@
 import {composeIChingCustomerReading,customerCopy} from './iching-consult-composition.js';
+import {renderQuestionConnection} from './symbolic-question-connection-r2.js';
 
 const arr=value=>Array.isArray(value)?value:[];
 const str=value=>String(value??'').normalize('NFKC').trim();
@@ -55,8 +56,8 @@ function hexTitle(hexagram,locale,prefix=''){
   const number=hexagram?.number||'—';
   const zhName=hexagram?.chineseNameZhHans||hexagram?.chineseName||'';
   const enName=hexagram?.canonicalName||'';
-  if(zh(locale)) return `${prefix}${prefix?' ':''}第${esc(number)}卦 · ${esc(zhName)}${enName?` · ${esc(enName)}`:''}`;
-  return `${prefix}${prefix?' ':''}Hexagram ${esc(number)}${enName?` · ${esc(enName)}`:''}${zhName?` · ${esc(zhName)}`:''}`;
+  if(zh(locale)) return `${prefix}${prefix?' ':''}第${esc(number)}卦 · ${esc(zhName)}`;
+  return `${prefix}${prefix?' ':''}Hexagram ${esc(number)}${enName?` · ${esc(enName)}`:''}`;
 }
 function renderLineCards(model){
   const locale=model.locale;
@@ -84,6 +85,10 @@ export function renderIChingCustomerReading(view,locale='en'){
   const claims=m.claims.map(item=>`<li>${item.linePosition?`<span>${esc(tt(locale,`Line ${item.linePosition}`,`第 ${item.linePosition} 爻`))}</span>`:''}<blockquote>${esc(item.claim)}</blockquote></li>`).join('');
   const sources=m.sources.map(source=>`<li><strong>${esc(source.sourceTitle||tt(locale,'Canonical source','原典来源'))}</strong>${source.digitalWitness?`<a href="${esc(source.digitalWitness)}" target="_blank" rel="noopener noreferrer">${esc(tt(locale,'Open source','查看来源'))}</a>`:''}</li>`).join('');
   const lineCards=renderLineCards(m);
+  // A named local-only editorial successor; the admitted 448 units stay intact.
+  // Repeated generic application/timing/observation blocks are not presented as
+  // a completed situation analysis. Source-specific meanings stay visible.
+  if(view.localQuestionConnectionReview===true)return `<article class="icx-reading-shell"><header><h2>${primaryTitle}</h2><blockquote>${esc(m.question)}</blockquote></header><section class="icx-hexagram-pair"><article>${figureLines(m.lines,locale)}</article>${m.changing.length?`<article><h3>${relatingTitle}</h3>${reflectingFigureLines(m.lines,locale)}</article>`:''}</section><p>${esc(c.transitionText)}</p>${renderQuestionConnection(view,locale)}<details><summary>${esc(tt(locale,'Sources and retained editorial details','来源与保留的编辑细节'))}</summary><ul>${sources}</ul><p>${esc(c.situation)}</p><p>${esc(c.direction)}</p>${lineCards}</details></article>`;
   return `<article class="icx-reading-shell">
     <header class="icx-reading-hero">
       <p class="cx-eyebrow">${esc(tt(locale,'YOUR READING','这次阅读'))}</p>

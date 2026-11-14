@@ -34,7 +34,7 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - run: node scripts/check-free-read-only-r3.mjs
+      - run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-free-read-only-r3.mjs
       - run: node scripts/check-country-history-public-admission-r4.mjs
       - run: node scripts/check-free-country-preview-isolation-r1.mjs
       - name: Verify exact source successor chain and rejection boundaries
@@ -64,3 +64,8 @@ jobs:
           assert.throws(()=>validateFreeCountrySourceSuccessor({readCurrent:p=>p===first?Buffer.from('unregistered third SHA'):fs.readFileSync(p)}));
           console.log('PASS exact 2391→freeze→Main2166→PR19→current chain; 15 negative cases rejected');
           NODE
+      - name: Verify strict receiver predecessors and actual successor rejection cases
+        run: node scripts/check-six-method-main096-receiver-governance-r1.mjs
+
+      - name: Current symbolic content review hold
+        run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-symbolic-free-content-review-hold-r1.mjs

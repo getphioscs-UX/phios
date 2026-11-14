@@ -1,3 +1,4 @@
+import {withPaidReportLeaseHeartbeat} from './paid-report-lease-heartbeat.js';
 import {personIdentity} from '../account/canonical-person-store.js';
 import {commerceEnvironment} from '../commerce/commerce-environment.js';
 import {requireP9Owner,requireP9Job} from './p9-canary-admission.js';
@@ -61,7 +62,7 @@ export function sharedPaidReportCore(context,{registry=PAID_REPORT_METHODS,clock
    for(let i=j.stageIndex;i<methods.length;i++){
     if(j.state!==states[i])j=await store.update(j,{state:states[i]});event(i===1?'GENERATION_STARTED':i===4?'RENDER_STARTED':'DELIVERY_CHECKPOINT',j);
     j=await store.update(j,{inFlightStage:methods[i]});
-    const output=await adapter[methods[i]](workerContext,j,j.output);
+    const output=await withPaidReportLeaseHeartbeat({store,job:j,work:()=>adapter[methods[i]](workerContext,j,j.output)});
     // Lifecycle SQL carries references only. Content/authority remain in existing
     // method and immutable artifact stores, never duplicated in generic job rows.
     if(!output||Object.keys(output).some(k=>!['personId','locale','reportId','artifactRef','snapshotDigest','outputDigest','checkpointRef'].includes(k)))throw paidReportError('ADAPTER_OPAQUE_OUTPUT_REQUIRED');

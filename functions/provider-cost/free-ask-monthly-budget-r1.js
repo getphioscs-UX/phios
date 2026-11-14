@@ -1,0 +1,42 @@
+// Explicit Free scope in the EXISTING provider_product_cost_* ledger (0015).
+// PERIOD in its legacy purchase_id column is not a Commerce order or entitlement.
+// No migration, second ledger, paid-identity exception or public write endpoint.
+export const FREE_ASK_MONTHLY_POLICY=Object.freeze({version:'FREE_ASK_MONTHLY_USD10_R1',timeZone:'Asia/Kuala_Lumpur',maximumMicroUSD:10000000,model:'gpt-6-luna',inputTokenBound:8192,outputTokenLimit:1024,inputBoundNanoUSD:250,outputNanoUSD:500,actorPerMinute:3,globalPerMinute:60,providerEnabledByThisModule:false});
+const OWNER='PHIOS_PLATFORM_FREE_ASK',PRODUCT='FREE_ASK_GLOBAL_MONTHLY_R1',AUTHORITY='OWNER_FREE_ASK_MONTHLY_USD10_20261113',VERSION=FREE_ASK_MONTHLY_POLICY.version;
+const fail=code=>{throw Object.assign(Error(code),{code,status:409});};
+const digest=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
+const month=now=>{const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kuala_Lumpur',year:'numeric',month:'2-digit'}).formatToParts(new Date(now));return p.find(x=>x.type==='year').value+'-'+p.find(x=>x.type==='month').value;};
+export function createFreeAskMonthlyBudget(env,{clock=Date.now}={}){
+ const db=env.RUNTIME_DB;if(!db?.prepare||typeof clock!=='function')fail('FREE_ASK_LEDGER_UNAVAILABLE');
+ const identity=x=>{if(!x||typeof x.requestId!=='string'||!/^[-A-Za-z0-9_:]{8,100}$/.test(x.requestId)||!digest(x.contextDigest)||!digest(x.actorDigest))fail('FREE_ASK_REQUEST_IDENTITY_REQUIRED');return'FREEASK_R1:'+x.requestId;};
+ const load=async x=>{const id=identity(x),r=await db.prepare('SELECT x.*,a.product_id,a.owner_account_id,a.maximum_cost_micro_usd,a.authority_version FROM provider_product_cost_entries x JOIN provider_product_cost_envelopes a ON a.envelope_id=x.envelope_id WHERE x.request_id=? AND a.owner_account_id=? AND a.product_id=?').bind(id,OWNER,PRODUCT).first();if(!r)return null;let p;try{p=JSON.parse(r.payload_json);}catch{fail('FREE_ASK_LEDGER_CORRUPT');}if(p.version!==VERSION||p.contextDigest!==x.contextDigest||p.actorDigest!==x.actorDigest||p.model!==FREE_ASK_MONTHLY_POLICY.model||r.authority_version!==AUTHORITY||r.maximum_cost_micro_usd!==10000000)fail('FREE_ASK_IDEMPOTENCY_CONFLICT');return{r,p};};
+ const view=(r,p,extra={})=>Object.freeze({requestId:r.request_id.slice(11),month:p.month,model:p.model,state:r.state,phase:p.phase,maximumMicroUSD:r.reserved_micro_usd,settledMicroUSD:r.measured_micro_usd,mayInvoke:false,...extra});
+ const markUnknown=async(x,blockMonth=false,measured=null)=>{const v=await load(x);if(!v||!x.claimToken||v.p.claimToken!==x.claimToken||!['CLAIMED','SETTLED','UNKNOWN'].includes(v.p.phase))fail('FREE_ASK_CLAIM_REQUIRED');if(v.r.state!=='RESERVED')return view(v.r,v.p);const result=await db.prepare("UPDATE provider_product_cost_entries SET state='USAGE_UNKNOWN',measured_micro_usd=?,cost_basis='UNKNOWN_USAGE_RETAINS_FULL_RESERVATION',payload_json=json_set(payload_json,'$.blockMonth',?,'$.phase','UNKNOWN') WHERE request_id=? AND state='RESERVED' AND json_extract(payload_json,'$.claimToken')=?").bind(measured,blockMonth?1:0,identity(x),x.claimToken).run();if(result.meta?.changes!==1)fail('FREE_ASK_SETTLEMENT_RACE');const next=await load(x);return view(next.r,next.p);};
+ return Object.freeze({
+  async reserve(x){
+   const id=identity(x),ib=x.inputTokenBound,ob=x.outputTokenLimit;if(!Number.isSafeInteger(ib)||ib<1||ib>8192||!Number.isSafeInteger(ob)||ob<1||ob>1024)fail('FREE_ASK_TOKEN_BOUND_INVALID');
+   const bound=Math.ceil((ib*250+ob*500)/1000),prior=await load(x);if(prior){if(prior.r.reserved_micro_usd!==bound||prior.p.inputTokenBound!==ib||prior.p.outputTokenLimit!==ob)fail('FREE_ASK_IDEMPOTENCY_CONFLICT');return view(prior.r,prior.p,{newReservation:false});}
+   const now=clock();if(!Number.isSafeInteger(now)||now<0)fail('FREE_ASK_CLOCK_INVALID');const period=month(now),envelope='FREEASK:'+period,created=new Date(now).toISOString();
+   await db.prepare('INSERT OR IGNORE INTO provider_product_cost_envelopes(envelope_id,owner_account_id,purchase_id,product_id,maximum_cost_micro_usd,authority_version,created_at) VALUES(?,?,?,?,?,?,?)').bind(envelope,OWNER,'PERIOD:'+period+':ASIA_KUALA_LUMPUR',PRODUCT,10000000,AUTHORITY,created).run();
+   const payload=JSON.stringify({version:VERSION,month:period,model:'gpt-6-luna',contextDigest:x.contextDigest,actorDigest:x.actorDigest,inputTokenBound:ib,outputTokenLimit:ob,phase:'RESERVED'});
+   // One SQLite/D1 statement atomically enforces budget AND frequency limits.
+   const result=await db.prepare(`INSERT OR IGNORE INTO provider_product_cost_entries(request_id,envelope_id,cost_class,context_id,reserved_micro_usd,state,cost_basis,payload_json,created_at)
+SELECT ?1,a.envelope_id,'MODEL',?2,?3,'RESERVED','CONSERVATIVE_ALL_CACHE_WRITE_AND_OUTPUT_BOUND',?4,?5 FROM provider_product_cost_envelopes a
+WHERE a.envelope_id=?6 AND a.owner_account_id=?7 AND a.product_id=?8 AND a.maximum_cost_micro_usd=10000000 AND a.authority_version=?9
+AND COALESCE((SELECT SUM(COALESCE(measured_micro_usd,reserved_micro_usd)) FROM provider_product_cost_entries WHERE envelope_id=a.envelope_id),0)+?3<=10000000
+AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries WHERE envelope_id=a.envelope_id AND json_extract(payload_json,'$.blockMonth')=1)
+AND (SELECT COUNT(*) FROM provider_product_cost_entries rate JOIN provider_product_cost_envelopes scope ON scope.envelope_id=rate.envelope_id WHERE scope.owner_account_id=?7 AND scope.product_id=?8 AND rate.created_at>=?10)<60
+AND (SELECT COUNT(*) FROM provider_product_cost_entries rate JOIN provider_product_cost_envelopes scope ON scope.envelope_id=rate.envelope_id WHERE scope.owner_account_id=?7 AND scope.product_id=?8 AND rate.created_at>=?10 AND json_extract(rate.payload_json,'$.actorDigest')=?11)<3`).bind(id,x.contextDigest,bound,payload,created,envelope,OWNER,PRODUCT,AUTHORITY,new Date(now-60000).toISOString(),x.actorDigest).run();
+   const saved=await load(x);if(!saved)fail('FREE_ASK_BUDGET_RATE_OR_LEDGER_BLOCKED');if(saved.r.reserved_micro_usd!==bound||saved.p.inputTokenBound!==ib||saved.p.outputTokenLimit!==ob)fail('FREE_ASK_IDEMPOTENCY_CONFLICT');return view(saved.r,saved.p,{newReservation:result.meta?.changes===1});
+  },
+  async claim(x){const v=await load(x);if(!v)fail('FREE_ASK_RESERVATION_REQUIRED');if(v.r.state!=='RESERVED'||v.p.phase!=='RESERVED')return view(v.r,v.p);if(v.p.month!==month(clock()))fail('FREE_ASK_MONTH_CHANGED_BEFORE_CALL');const claimToken=crypto.randomUUID();const result=await db.prepare("UPDATE provider_product_cost_entries SET payload_json=json_set(payload_json,'$.phase','CLAIMED','$.claimToken',?,'$.claimedAt',?) WHERE request_id=? AND state='RESERVED' AND json_extract(payload_json,'$.phase')='RESERVED' AND NOT EXISTS(SELECT 1 FROM provider_product_cost_entries z WHERE z.envelope_id=provider_product_cost_entries.envelope_id AND json_extract(z.payload_json,'$.blockMonth')=1)").bind(claimToken,new Date(clock()).toISOString(),identity(x)).run();const next=await load(x);return view(next.r,next.p,result.meta?.changes===1?{mayInvoke:true,claimToken}:{});},
+  async settle(x){const v=await load(x);if(!v||!x.claimToken||v.p.claimToken!==x.claimToken||!['CLAIMED','SETTLED','UNKNOWN'].includes(v.p.phase))fail('FREE_ASK_CLAIM_REQUIRED');if(v.r.state!=='RESERVED')return view(v.r,v.p);
+   const input=x.usage?.input_tokens,output=x.usage?.output_tokens,cached=x.usage?.input_tokens_details?.cached_tokens??0,reasoning=x.usage?.output_tokens_details?.reasoning_tokens??0;
+   if(x.model!=='gpt-6-luna'||![input,output,cached,reasoning].every(n=>Number.isSafeInteger(n)&&n>=0)||cached>input||reasoning>output)return markUnknown(x,true);
+   const measured=Math.ceil((input*250+output*500)/1000);if(input>v.p.inputTokenBound||output>v.p.outputTokenLimit||measured>v.r.reserved_micro_usd)return markUnknown(x,true,Math.max(measured,v.r.reserved_micro_usd));
+   const result=await db.prepare("UPDATE provider_product_cost_entries SET measured_micro_usd=?,state='METERED',cost_basis='CONSERVATIVE_USAGE_TOKENS_INCLUDING_REASONING_AND_CACHE_WRITES_NOT_INVOICE',payload_json=json_set(payload_json,'$.phase','SETTLED') WHERE request_id=? AND state='RESERVED' AND json_extract(payload_json,'$.claimToken')=?").bind(measured,identity(x),x.claimToken).run();if(result.meta?.changes!==1)fail('FREE_ASK_SETTLEMENT_RACE');const next=await load(x);return view(next.r,next.p);
+  },
+  async unknown(x){return markUnknown(x);},
+  async read(x){const v=await load(x);return v?view(v.r,v.p):null;}
+ });
+}

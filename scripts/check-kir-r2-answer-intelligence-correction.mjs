@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {verifyKirGroundingHandoffR1} from './lib/kir-public-grounding-owner-successor-r1.mjs';
 import {runKirR2Pipeline} from '../functions/_lib/kir-r2-intelligence.js';
 import {articleAuthorityToKirSources} from '../functions/_lib/kir-r2-answer-intelligence.js';
 import {runKirR2ProductionProjection,KIR_R2_PRODUCTION_PROFILE_PATH,KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH} from '../functions/_lib/kir-r2-production.js';
@@ -21,7 +22,10 @@ const first=benchmark.cases[0];const authority=read(first.expected.authorityPath
 const rerun=await runKirR2Pipeline({question:first.question,locale:'zh-Hans',profiles:enriched,articleSources});assert.equal(rerun.guard.passed,true);assert.equal(rerun.answer.articleContentConsumed,true);assert.equal(rerun.answer.materialGroundedContentConsumed,true);assert.ok(rerun.answer.consumedContentChars>=80);assert.equal(/这个问题首先指向|Book I–III \/ canonical evidence/.test(rerun.answer.text),false);assert.ok(rerun.answer.text.length>100);
 const manuscriptBundle={sources:[{sourceId:'MANUSCRIPT:TEST',sourceType:'COMPLETED_MANUSCRIPT',bookCode:'BOOK-3',sectionCode:'CM-B3V1-P8-S041',text:'恢复如果永远排在其他事情做完以后，就很难成为稳定条件。现实越忙，剩余时间越少，而越高负荷的阶段恰恰越需要恢复。未完成的恢复会进入下一轮，使未来恢复需要越来越大。'}]};const manuscriptTest=await runKirR2Pipeline({question:'恢复为什么必须被排进结构？',locale:'zh-Hans',profiles:enriched,groundingBundle:manuscriptBundle});assert.equal(manuscriptTest.guard.passed,true);assert.equal(manuscriptTest.answer.bookContentConsumed,true);assert.equal(manuscriptTest.usage.bookContentConsumed,true);
 const env={ASSETS:{fetch:async req=>{const p=new URL(req.url).pathname.slice(1);if(p===KIR_R2_PRODUCTION_PROFILE_PATH)return Response.json(profiles);if(p===KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH)return Response.json(bindings);return new Response('not found',{status:404})}}};const productionBundle={sources:articleSources.map(x=>({...x,sourceType:'PUBLISHED_CANONICAL_ARTICLE'}))};const production=await runKirR2ProductionProjection({question:first.question,locale:'zh-Hans',env,upstreamGroundingBundle:productionBundle});assert.equal(production.applied,true);assert.equal(production.result.guard.passed,true);assert.equal(production.result.answer.articleContentConsumed,true);
-const composition=fs.readFileSync('functions/_lib/knowledge-answer-composition.js','utf8');assert.ok(composition.includes('upstreamGroundingBundle: grounding.groundingBundle'));
+const composition=fs.readFileSync('functions/_lib/knowledge-answer-composition.js','utf8');
+const kirHandoff=await verifyKirGroundingHandoffR1({composition,publicFixture:{question:first.question,env,sources:productionBundle.sources}});
+if(kirHandoff.version==='LEGACY_EXACT'){assert.ok(composition.includes('upstreamGroundingBundle: grounding.groundingBundle'));}
+else {assert.equal(kirHandoff.version,'FILTERED_EXACT_BEHAVIOR_VERIFIED');await import('./check-kir-public-grounding-strict-successor-r1.mjs');}
 console.log('✓ KIR-R2 Answer Intelligence Correction W3R/W6R–W16R machine gate passed.');
 console.log(`  Published article bindings: ${bindings.recordCount} locale records / ${bindings.nodeCount} nodes.`);
 console.log(`  W15R v2: 100 cases, article-content consumed ${(benchmark.summary.articleContentConsumptionRate*100).toFixed(0)}%, semantic guard ${(benchmark.summary.semanticGuardPassRate*100).toFixed(0)}%, no-empty-rephrase ${(benchmark.summary.noEmptyRephraseRate*100).toFixed(0)}%.`);

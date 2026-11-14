@@ -9,8 +9,7 @@ export const PREENTRY_METHODS=Object.freeze([
 export function preentryStartRoute(slug,locale='en'){
  const m=PREENTRY_METHODS.find(x=>x.slug===slug);if(!m)throw Error('PREENTRY_METHOD_NOT_ALLOWED');
  const q=new URLSearchParams({locale:locale==='zh-Hans'?'zh-Hans':'en'});
- if(m.code==='HD')q.set('externalProfile','human-design');else{const value=ASK_CAPABILITIES.methods.find(x=>x.methodId===m.code)?.formValue;if(!value)throw Error('EXISTING_METHOD_ENTRY_UNAVAILABLE');q.set('method',value);}
- return'/perspectives/personal/?'+q+'#personal-input';
+ return '/perspectives/personal/'+m.slug+'/?'+q+'#method-input';
 }
 export function preentryFullOffer(products,code){
  // A catalog projection is an offer, never proof of customer entitlement.

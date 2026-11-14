@@ -1,3 +1,6 @@
+import {boundedBeliefGuidance,beliefGuidanceView,guidanceExecution} from '../customer-projection/codex3-belief-reality-guidance-r13.js';
+import {investigateScam,scamAskResponse} from '../external-reality-impact/consumer-scam-navigation.js';
+import {resolveCodex3PublicAnswer,codex3PublicScope} from '../customer-projection/codex3-public-answer.js';
 import {routeClientIntent} from '../public/client-intent-router.js';
 import {handlePublicKnowledgeRequest} from '../_lib/public-knowledge-api.js';
 const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer','x-content-type-options':'nosniff'};
@@ -5,6 +8,20 @@ const reply=(body,status=200)=>new Response(JSON.stringify(body),{status,headers
 export async function onRequestPost({request,env={}}){
  let body;try{const raw=await request.text();if(raw.length>6000)return reply({ok:false,error:'INPUT_TOO_LARGE'},413);body=JSON.parse(raw);if(!body||typeof body!=='object'||Array.isArray(body))throw Error();}catch{return reply({ok:false,error:'CLIENT_INTENT_ROUTE_INVALID'},400);}
  const route=routeClientIntent(body),locale=body.locale==='zh-Hans'?'zh-Hans':'en',zh=locale==='zh-Hans';
+ const question=String(body.question||body.q||'').trim();
+ if(!['EMERGENCY','URGENT_EVALUATION'].includes(route.safety?.careState)){
+  const scam=investigateScam({question,locale,jurisdiction:body.jurisdiction||'MY'});
+  const urgent=scam&&['PAID_OR_LOST','CREDENTIALS_SHARED','APP_INSTALLED','SCREEN_SHARED'].includes(scam.stage);
+  const noSelectedContext=codex3PublicScope({body})&&!body.selectedMethod&&!body.selectedMethodId&&!body.knowledgeContext&&!body.navigationHandoff&&!body.contexts?.length&&!body.contextRef;
+  const risk=scam&&(urgent||noSelectedContext&&body.task!=='PRODUCT_HELP');
+  const text=risk?scamAskResponse(scam,{question,locale}).view.answer.text:noSelectedContext&&body.task!=='PRODUCT_HELP'?boundedBeliefGuidance(question,locale):null;
+  if(text){const view=risk?scamAskResponse(scam,{question,locale}).view:beliefGuidanceView(question,locale,text);return reply({ok:true,view,execution:guidanceExecution,route:{...route,outcome:risk?'BASIC_SAFETY_GUIDANCE':'BOUNDED_GENERAL_GUIDANCE',codex3PublicAnswer:'CODEX3_PUBLIC_ANSWER_R2',candidates:[],clarification:null,publicAnswer:{paragraphs:[text],sources:(view.basedOn?.sources||[]).map(s=>({title:s.label,href:s.href})),note:view.basedOn?.statement||''},primaryAction:{kind:'CLARIFY',label:zh?'继续提问':'Ask a follow-up'}},...(risk?{scam}:{})});}
+ }
+
+ if(!['PROFESSIONAL_HANDOFF','PRODUCT_HELP','LIMITED_SUPPORT','CAPABILITY_UNAVAILABLE'].includes(route.outcome)){
+  try{const direct=await resolveCodex3PublicAnswer({question:String(body.question||body.q||''),locale,body,env,origin:request.url});if(direct)return reply({ok:true,route:direct.route,execution:direct.execution,sourceBinding:direct.sourceBinding});}
+  catch(error){return reply({ok:false,error:error.code||'PUBLIC_ANSWER_UNAVAILABLE'},error.status||503);}
+ }
  if(route.outcome!=='KNOWLEDGE_LOOKUP')return reply({ok:true,route});
  const query=String(route.retrievalQuery??route.query??body.question??body.q??'').trim();
  if(query.length>500)return reply({ok:true,route:{...route,outcome:'NEEDS_CLARIFICATION',candidates:[],clarification:zh?'请先选一个具体问题（500 字以内）。':'Choose one specific question (up to 500 characters).'}});

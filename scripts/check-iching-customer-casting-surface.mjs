@@ -1,3 +1,5 @@
+import {symbolicHistoricalBytes} from './lib/symbolic-frozen20-receiver-successor-r1.mjs';
+import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {webcrypto} from 'node:crypto';
@@ -115,7 +117,12 @@ const endpointRequest=new Request('https://example.test/api/iching-full-cast',{
 });
 const endpointResponse=await castEndpoint({request:endpointRequest,env:liveEnv,data:{}});
 assert.equal(endpointResponse.status,200,await endpointResponse.clone().text());
-assert.match(endpointResponse.headers.get('set-cookie')||'',/__Host-PHIOS_ICHING_GUEST=/);
+assert.equal(endpointResponse.headers.get('set-cookie'),null,'Stateless Free cast must not create guest identity');
+const legacySource=symbolicHistoricalBytes('functions/api/iching-full-cast.js').toString('utf8').replace(/from '(\.\.\/[^']+)'/g,(_m,p)=>'from '+JSON.stringify(pathToFileURL(new URL(p,pathToFileURL(process.cwd()+'/functions/api/iching-full-cast.js')).pathname.replace(/^\/([A-Za-z]:)/,'$1')).href));
+const legacyEndpoint=await import('data:text/javascript;base64,'+Buffer.from(legacySource).toString('base64'));
+const legacyEndpointResponse=await legacyEndpoint.onRequestPost({request:new Request(endpointRequest.url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({method:"I_CHING",intent:"CREATE_NEW_CAST",question})}),env:liveEnv,data:{}});
+assert.equal(legacyEndpointResponse.status,200);
+assert.match(legacyEndpointResponse.headers.get('set-cookie')||'',/__Host-PHIOS_ICHING_GUEST=/);
 const endpointBody=await endpointResponse.json();
 assert.equal(endpointBody.ok,true);
 assert.equal(endpointBody.production.state,'FULL_PRODUCTION');
@@ -135,7 +142,8 @@ assert.equal(deniedResponse.status,423);
 const getResponse=await castEndpointGet();
 assert.equal(getResponse.status,405);
 
-const endpoint=read('functions/api/iching-full-cast.js');
+const endpoint=symbolicHistoricalBytes('functions/api/iching-full-cast.js').toString('utf8');
+assert.equal(read('functions/api/iching-full-cast.js').includes('ensureIChingGuestSession'),false,'Current stateless cast must not create Guest Session');
 for(const marker of ['createIChingGovernedCast','resolveIChingFullProductionAuthority','ensureIChingGuestSession','CREATE_NEW_CAST','questionSemanticsInfluenceSelection:false','automaticReroll:false'])assert.ok(endpoint.includes(marker),`cast endpoint missing ${marker}`);
 assert.equal(endpoint.includes('interpretation-runtime'),false,'casting endpoint must not own interpretation');
 assert.equal(endpoint.includes('iching-depth-admitted-editorial-corpus'),false,'casting endpoint must not own corpus');

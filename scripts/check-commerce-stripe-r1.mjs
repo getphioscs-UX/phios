@@ -196,6 +196,16 @@ await test('active single products fulfill after verified payment',async()=>{
   for(const product of STRIPE_PRODUCT_REGISTRY.filter(p=>p.active&&!p.productId.includes('BUNDLE'))){
     const beforeCalls=stripeCalls.length,beforeOrders=sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n;
     const response=await commerceApi(context({productId:product.productId}),'checkout');
+    if(['COM-READING-TAROT-FULL','COM-READING-ICHING-FULL'].includes(product.productId)){
+      assert.equal(product.checkoutBlockedReason,'SYMBOLIC_PAID_LLM_REVIEW_REQUIRED');
+      assert.equal(product.currency,'MYR');
+      assert.equal(product.amountMinor,product.productId==='COM-READING-TAROT-FULL'?1900:3900);
+      assert.equal(response.status,503,product.productId);
+      assert.equal((await response.json()).error,'SYMBOLIC_PAID_LLM_REVIEW_REQUIRED');
+      assert.equal(stripeCalls.length,beforeCalls,'Unadmitted Symbolic product must not call Stripe');
+      assert.equal(sqlite.prepare('SELECT COUNT(*) n FROM commerce_checkout_attempts').get().n,beforeOrders,'Unadmitted Symbolic product must not create an order');
+      continue;
+    }
     if(product.checkoutBlockedReason==='BOOK_LANGUAGE_VERSION_REQUIRED'||product.requiresBookPdfReadiness){
       assert.equal(response.status,503,product.productId);
       const error=(await response.json()).error;
