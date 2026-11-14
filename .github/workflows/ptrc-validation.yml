@@ -36,6 +36,10 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
+      - name: Prepare exact immutable Main096 validation inputs
+        run: |
+          node scripts/prepare-main096-immutable-ci-inputs-r1.mjs --self-test
+          node scripts/prepare-main096-immutable-ci-inputs-r1.mjs
       - run: npm ci
       - run: npm run check:ptrc:machine
       - run: npm run build:pages
