@@ -1,3 +1,4 @@
+import {validateIChingCastCheckResponseSuccessor,readIChingCastCheckResponseRecord,ichingCastCheckPredecessor} from './lib/iching-cast-check-response-successor-r1.mjs';
 import {symbolicHistoricalBytes} from './lib/symbolic-frozen20-receiver-successor-r1.mjs';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
@@ -13,6 +14,14 @@ import {createIChingFullProductionAuthorityPayload} from '../functions/iching-fu
 const readJson=path=>JSON.parse(fs.readFileSync(path,'utf8'));
 const read=path=>fs.readFileSync(path,'utf8');
 
+{
+ const proof=validateIChingCastCheckResponseSuccessor();
+ for(const p of proof.record.paths)assert.throws(()=>validateIChingCastCheckResponseSuccessor({readCurrent:f=>String(f)===p?Buffer.concat([fs.readFileSync(f),Buffer.from('\n')]):fs.readFileSync(f)}),'CI response successor drift must reject');
+ assert.throws(()=>ichingCastCheckPredecessor('scripts/check-iching-customer-casting-surface.mjs',Buffer.from('UNREGISTERED_CHECKER')));
+ for(const edit of [r=>r.paths.push('functions/api/unapproved.js'),r=>r.test.beforeSHA256='0'.repeat(64),r=>r.boundaries.executionAuthorityChanged=true]){const r=structuredClone(readIChingCastCheckResponseRecord());edit(r);assert.throws(()=>readIChingCastCheckResponseRecord(Buffer.from(JSON.stringify(r))));}
+ const parent=proof.record.parent.path;assert.throws(()=>validateIChingCastCheckResponseSuccessor({readCurrent:f=>String(f)===parent?Buffer.concat([fs.readFileSync(f),Buffer.from('\n')]):fs.readFileSync(f)}));
+ const unrelated=Buffer.from('unchanged');assert.equal(ichingCastCheckPredecessor('functions/api/unapproved.js',unrelated),unrelated);
+}
 const contract=readJson('content/production/symbolic-method/contracts/iching-customer-casting-surface-completion-v1.json');
 const current=readJson('content/production/symbolic-method/authority/iching-current-authority.json');
 const release=readJson('content/production/symbolic-method/releases/iching/ICHING-1.0.1.json');
@@ -116,14 +125,14 @@ const endpointRequest=new Request('https://example.test/api/iching-full-cast',{
   body:JSON.stringify({method:'I_CHING',intent:'CREATE_NEW_CAST',question})
 });
 const endpointResponse=await castEndpoint({request:endpointRequest,env:liveEnv,data:{}});
-assert.equal(endpointResponse.status,200,await endpointResponse.clone().text());
+const endpointBody=await endpointResponse.json();
+assert.equal(endpointResponse.status,200,JSON.stringify(endpointBody));
 assert.equal(endpointResponse.headers.get('set-cookie'),null,'Stateless Free cast must not create guest identity');
 const legacySource=symbolicHistoricalBytes('functions/api/iching-full-cast.js').toString('utf8').replace(/from '(\.\.\/[^']+)'/g,(_m,p)=>'from '+JSON.stringify(pathToFileURL(new URL(p,pathToFileURL(process.cwd()+'/functions/api/iching-full-cast.js')).pathname.replace(/^\/([A-Za-z]:)/,'$1')).href));
 const legacyEndpoint=await import('data:text/javascript;base64,'+Buffer.from(legacySource).toString('base64'));
 const legacyEndpointResponse=await legacyEndpoint.onRequestPost({request:new Request(endpointRequest.url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({method:"I_CHING",intent:"CREATE_NEW_CAST",question})}),env:liveEnv,data:{}});
 assert.equal(legacyEndpointResponse.status,200);
 assert.match(legacyEndpointResponse.headers.get('set-cookie')||'',/__Host-PHIOS_ICHING_GUEST=/);
-const endpointBody=await endpointResponse.json();
 assert.equal(endpointBody.ok,true);
 assert.equal(endpointBody.production.state,'FULL_PRODUCTION');
 assert.equal(endpointBody.production.runAllowed,true);

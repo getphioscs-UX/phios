@@ -6,6 +6,8 @@ const footerLogo=currentFooterLogo();
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
+import {parseHTML} from 'linkedom';
 
 const root = process.cwd();
 const readText = rel => fs.readFileSync(path.join(root, rel), 'utf8');
@@ -54,6 +56,12 @@ assert.equal(acceptance.rules.readyForCxR6Homepage, true);
 assert.deepEqual(authority.primaryNavigation, ia.primaryNavigation);
 assert.deepEqual(authority.utilities, ia.utilities);
 const currentNavigationPath='content/web/index-surfaces/pis-r1-world-about-navigation-successor-v2.json';
+const exactR3=isConvergenceCurrent(modules[1]);
+if(exactR3){
+ assert(isConvergenceCurrent(modules[0]));
+ assertConvergenceHome(parseHTML(readText('index.html')).document);
+ for(const subject of ['personal','family','team','business','institution','country'])assert(shell.includes('/subjects/'+subject+'/'),'R3 shell subject missing: '+subject);
+}
 if(exists(currentNavigationPath)){
  const current=readJson(currentNavigationPath);assert.equal(current.status,'ENGINEERING_RECONCILIATION');
  for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(current[key],false);
@@ -63,14 +71,18 @@ if(exists(currentNavigationPath)){
  const expected=current.primaryNavigation.map(item=>({id:ids[item.id],href:item.href}));
  assert.ok(expected.every(item=>item.id),'Unknown current navigation authority item');
  const sort=items=>items.toSorted((a,b)=>a.id.localeCompare(b.id));
- assert.deepEqual(sort(CX_NAVIGATION.primary.map(({id,href})=>({id,href}))),sort(expected));
+ if(exactR3)assert.deepEqual(sort(CX_NAVIGATION.primary.map(({id,href})=>({id,href}))),sort([
+  {id:'SUBJECTS',href:'/#six-perspectives'},{id:'KNOWLEDGE',href:'/knowledge/'},
+  {id:'ASK',href:'/knowledge/ask/'},{id:'MY_REALITY',href:'/reality/'}
+ ]));
+ else assert.deepEqual(sort(CX_NAVIGATION.primary.map(({id,href})=>({id,href}))),sort(expected));
  for(const item of CX_NAVIGATION.primary)assert.ok(item.en&&item.zh,'Navigation requires bilingual labels: '+item.id);
 }else{
 for (const label of ['Explore', 'My Reality', 'Perspectives', 'Knowledge', 'Professional']) {
   assert.ok(navigation.includes(label), `primary navigation missing ${label}`);
 }
 }
-for (const label of ['Search', 'Ask PHI OS', 'Account']) assert.ok(navigation.includes(label), `utility navigation missing ${label}`);
+for (const label of exactR3?['Search','Ask','Account']:['Search', 'Ask PHI OS', 'Account']) assert.ok(navigation.includes(label), `utility navigation missing ${label}`);
 for (const forbidden of ['REALITY_JOURNEY', 'READINGS', 'SERVICES', 'ACADEMY', 'REPORTS', 'FINANCIAL', 'BOOKS']) {
   assert.equal(new RegExp(`id:\\s*['\"]${forbidden}['\"]`).test(navigation), false, `forbidden top-level navigation returned: ${forbidden}`);
 }

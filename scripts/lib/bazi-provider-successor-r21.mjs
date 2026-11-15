@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {readConvergenceRecord} from './public-customer-report-convergence-successor-r1.mjs';
 
 export const PROVIDER_PATH='functions/personal-reading/narrative/narrative-provider.js';
 export const SUCCESSOR_RECORD='docs/commerce/economics-20261009/bazi-prelive-owner-successors.json';
@@ -18,6 +19,16 @@ const step={predecessorSha256:OLD,successorSha256:NEW,
  scope:'Only preserve existing durable budget/fence rejection classification; all admission, transport, prompt and response bytes unchanged.',
  authorityOrAcceptedTextRewritten:false,commercialReleaseGranted:false,providerLiveEnabled:false};
 
+function exactCurrentEndpoint(current){
+ if(sha(current)===NEW)return NEW;
+ const row=readConvergenceRecord().paths.find(x=>x.path===PROVIDER_PATH);
+ assert(row,'Unregistered current Provider endpoint');
+ assert.equal(row.previousSHA256,NEW,'Exact R2.1 endpoint must precede the separate current source');
+ assert.equal(sha(Buffer.from(row.previousBytesBase64,'base64')),NEW,'Immutable R2.1 bytes');
+ assert.equal(sha(current),row.sha256,'CURRENT Provider must equal the exact registered source, never a substituted predecessor');
+ return row.sha256;
+}
+
 // This is an additional narrow assertion. The original prelive loop still hashes
 // the CURRENT file and compares it against its fully linked registered endpoint.
 export function assertExactBaziProviderSuccessor({record=JSON.parse(fs.readFileSync(SUCCESSOR_RECORD,'utf8')),current=fs.readFileSync(PROVIDER_PATH)}={}){
@@ -28,10 +39,12 @@ export function assertExactBaziProviderSuccessor({record=JSON.parse(fs.readFileS
  assert.equal(owner.successorSha256,OLD);assert.equal(owner.successorChain,undefined);
  owner.successorChain=[step];assert.deepEqual(record,expected,'only the exact Owner-authorized chain append is allowed');
  const old=git(PROVIDER_PATH);assert.equal(sha(old),OLD,'immutable provider predecessor');
- assert.equal(sha(current),NEW,'current provider must equal exact authorized endpoint');
+ const currentEndpoint=exactCurrentEndpoint(current);
+ assert.equal(sha(current),currentEndpoint,'current provider must equal exact authorized endpoint');
  const currentOwner=record.owners.find(x=>x.path===PROVIDER_PATH);
  let endpoint=currentOwner.successorSha256;
  for(const link of currentOwner.successorChain){assert.equal(link.predecessorSha256,endpoint);assert.equal(link.authorityOrAcceptedTextRewritten,false);endpoint=link.successorSha256;}
- assert.equal(sha(current),endpoint,'CURRENT bytes, never predecessor substitution');
- return {predecessorSha256:OLD,currentSha256:sha(current),historicalAuditUnchanged:true};
+ assert.equal(endpoint,NEW,'Original R2.1 chain endpoint remains unchanged');
+ assert.equal(sha(current),currentEndpoint,'CURRENT bytes, never predecessor substitution');
+ return {predecessorSha256:OLD,historicalEndpointSha256:NEW,currentSha256:sha(current),historicalAuditUnchanged:true};
 }

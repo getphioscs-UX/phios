@@ -1,0 +1,4 @@
+// Select existing canonical monochrome variants; this is not another asset registry.
+export function selectJourneySurfaceBrand({isHeader=false,backgroundColors=[]}={}){
+ if(!isHeader)return 'LOGO-010';const layers=[];for(const value of backgroundColors){if(typeof value!=='string'||!/^rgba?\(/i.test(value))continue;const p=value.match(/[\d.]+/g)?.map(Number);if(!p||p.length<3||p.some(x=>!Number.isFinite(x)))continue;const c=p.slice(0,3).map(x=>Math.max(0,Math.min(255,x))),alpha=Math.max(0,Math.min(1,p[3]??1));layers.push({c,alpha});if(alpha===1)break;}if(!layers.length)return 'LOGO-010';let bg=[7,11,10];for(const {c,alpha}of layers.reverse())bg=bg.map((x,i)=>c[i]*alpha+x*(1-alpha));const linear=bg.map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4}),luminance=linear.reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],0);return luminance>.179?'LOGO-009':'LOGO-010';
+}

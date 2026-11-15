@@ -331,7 +331,7 @@ export function loadPublishedArticles(locale) {
 
 export async function loadPublishedArticleBySlug(slug, locale) {
   // Successor manifests carry route metadata. Fetch only the selected body.
-  const manifests = await Promise.all([loadBook5PublicationMetadata().catch(() => ({records:[]})), loadBook6PublicationMetadata().catch(() => ({records:[]}))]);
+  const manifests = await Promise.all([...(['book4-article-018','book4-article-041'].includes(slug) ? [fetchJson(BOOK4_PUBLICATION_SUCCESSOR_MANIFEST).catch(() => ({records:[]}))] : []), loadBook5PublicationMetadata().catch(() => ({records:[]})), loadBook6PublicationMetadata().catch(() => ({records:[]}))]);
   const row = manifests.flatMap(manifest => manifest.records || []).find(record => record.slug === slug && record.locale === normalizeLocale(locale) && record.status === 'published');
   if (row) {
     const article = canonicalizeSuccessorArticleContext(await fetchJson(row.path));

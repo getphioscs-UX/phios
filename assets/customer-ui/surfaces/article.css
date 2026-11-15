@@ -247,3 +247,8 @@
 .knowledge-article__source-reading, .knowledge-article__source-reading h3 { scroll-margin-top: 6rem; }
 .knowledge-article .knowledge-exit-grid{display:flex;flex-wrap:wrap;gap:.6rem;min-width:0;max-width:100%}
 .knowledge-article .knowledge-exit-grid>a{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+
+/* Institution reading journey: title first; an unavailable optional visual reserves no blank area. */
+:is([data-article-slug="book4-article-018"],[data-article-slug="book4-article-041"]) .knowledge-article__header{min-height:0}
+:is([data-article-slug="book4-article-018"],[data-article-slug="book4-article-041"]) .knowledge-article__hero-visual{order:0}
+:is([data-article-slug="book4-article-018"],[data-article-slug="book4-article-041"]) .knowledge-article__hero-visual:has(img.is-unavailable){display:none}

@@ -9,13 +9,17 @@ const copy=(node,en,cn)=>{node.dataset.jmEn=en;node.dataset.jmZh=cn;node.textCon
 const localLink=(path)=>{const u=new URL(path,location.href);u.searchParams.set('locale',zh()?'zh-Hans':'en');return u.pathname+u.search+u.hash;};
 const link=(en,cn,path,className='jm-button')=>{const a=copy(el('a',className),en,cn);a.dataset.jmRoute=path;a.href=localLink(path);return a;};
 const imagePromises=new Map();
+function visualPromise(code){
+ if(!imagePromises.has(code))imagePromises.set(code,resolveUnifiedPublicVisual(code).catch(error=>{imagePromises.delete(code);throw error;}));
+ return imagePromises.get(code);
+}
 function art(code,en,cn,{eager=false}={}){
  const img=el('img');img.dataset.jmAsset=code;img.dataset.jmAltEn=en;img.dataset.jmAltZh=cn;img.alt=t(en,cn);img.loading=eager?'eager':'lazy';img.decoding='async';if(eager)img.fetchPriority='high';
- img.addEventListener('load',()=>{if(img.naturalWidth>0)img.dataset.jmAssetState='loaded';});
+ img.addEventListener('load',()=>{if(img.naturalWidth>0){img.hidden=false;img.classList.remove('jm-asset-unavailable');img.dataset.jmAssetState='loaded';const figure=img.closest('.jm-method-figure');if(figure)figure.hidden=false;const holder=img.closest('.jm-editorial-hero,.jm-method-card,.jm-state');if(holder&&!holder.querySelector('img.jm-asset-unavailable'))holder.classList.remove('jm-text-only');}});
  const unavailable=()=>{img.hidden=true;img.classList.add('jm-asset-unavailable');img.closest('.jm-editorial-hero,.jm-method-card,.jm-state')?.classList.add('jm-text-only');img.dataset.jmAssetState='unavailable';const fig=img.closest('.jm-method-figure');if(fig)fig.hidden=true;};
  img.addEventListener('error',unavailable);
- if(!imagePromises.has(code))imagePromises.set(code,resolveUnifiedPublicVisual(code));
- imagePromises.get(code).then(result=>{if(!result.renderable)throw Error('VISUAL_NOT_RENDERABLE');img.width=result.width||1600;img.height=result.height||1000;img.src=result.src;img.dataset.jmAssetState='bound';}).catch(unavailable);
+ const bind=attempt=>visualPromise(code).then(result=>{if(!result.renderable)throw Error('VISUAL_NOT_RENDERABLE');img.width=result.width||1600;img.height=result.height||1000;img.src=result.src;img.dataset.jmAssetState='bound';}).catch(()=>{if(attempt===0)setTimeout(()=>bind(1),250);else unavailable();});
+ bind(0);
  return img;
 }
 function translate(){
@@ -60,7 +64,7 @@ function methodPage(){
  const root=document.querySelector('[data-preentry-method]');if(!root)return;
  const m=PREENTRY_METHODS.find(x=>x.slug===root.dataset.preentryMethod);if(!m)return;const ids=methodVisualIds(m.slug);
  function mount(){
-  const hero=root.querySelector('#top');if(!hero||hero.dataset.jmMounted)return;hero.dataset.jmMounted='true';hero.classList.add('jm-method-hero');hero.prepend(art(ids.hero,m.en+' — illustrative method scene',m.zh+'：方法意象图',{eager:true}));root.querySelector('.pe5-local-note')?.remove();
+  const hero=root.querySelector('#top');if(!hero||hero.dataset.jmMounted)return;hero.dataset.jmMounted='true';hero.classList.add('jm-method-hero');const heroImage=art(ids.hero,m.en+' — illustrative method scene',m.zh+'：方法意象图',{eager:true});heroImage.classList.add('jm-hero-img');hero.prepend(heroImage);root.querySelector('.pe5-local-note')?.remove();
   root.querySelector('#read .wrap')?.prepend(copy(el('p','jm-meta'),'This is a method introduction, not your calculated result. Continue with your own information through the existing intake below.','这里是方法导览，不是你的个人计算结果。请通过下方现有资料入口继续。'));
   const slots=[['method','p02','Method structure illustration, not a personal calculated chart','方法结构意象，不是个人精确排盘'],['origin','p03','Illustration of the method’s background','方法背景意象'],['lens','p04','Model, themes, lived experience and choice','模型、主题、生活经验与选择']];
   for(const [id,key,en,cn] of slots){const chapter=root.querySelector('#'+id),wrap=chapter?.querySelector('.wrap');if(!wrap)continue;const figure=el('figure','jm-method-figure jm-method-figure--'+key);figure.append(art(ids[key],en,cn),copy(el('figcaption'),en,cn));

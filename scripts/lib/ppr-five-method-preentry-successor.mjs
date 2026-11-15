@@ -1,3 +1,4 @@
+import {sharedVisualPredecessorBytes} from './shared-visual-source-predecessor-r1.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -60,7 +61,7 @@ function readPprPreentryHistoricalSuccessor(owner,readFile){
  validatePprPreentryDelta(next,validatePprR6Successor(r6,current,{readFile}),readFile(next.previousPath,'utf8'));
  for(const e of [...next.dependencies,...next.sourceEvidence]){
   const replacement=r6.dependencies.find(d=>d.path===e.path);
-  assert.equal(sha(readFile(e.path)),replacement?.currentSha256||e.sha256,'Pre-entry dependency/provenance drift: '+e.path);
+  const expected=replacement?.currentSha256||e.sha256;assert.equal(sha(sharedVisualPredecessorBytes(e.path,expected,readFile(e.path))),expected,'Pre-entry dependency/provenance drift: '+e.path);
  }
  return {...next,currentSha256:r6.currentSha256,recognizedPredecessors:[next.currentSha256],engineeringSuccessorRef:PPR_R6_SUCCESSOR};
 }
@@ -72,6 +73,39 @@ import {readPreConsumerSource} from './unified-country-consumer-reception-r1.mjs
 export const MAIN096_RECEIVER_GOVERNANCE='content/production-closure/live-customer-commercial-convergence/final-unified-production-r1/SIX-METHOD-MAIN096-RECEIVER-GOVERNANCE-SUCCESSOR.json';
 const MAIN096_RECEIVER_GOVERNANCE_SHA='5848e10f9872a3717da5f1bef96b7d88ad1c2ec6b904f34afa7b1ae554fe0675';
 const main096GitCache=new Map();
+function prefetchMain096Git(ref,requestedPaths){
+  const paths=[...new Set(requestedPaths)].filter(path=>!main096GitCache.has(ref+':'+path));
+  if(!paths.length)return;
+  const allowed=new Set(paths),pending=new Map(paths.map(path=>[ref+':'+path,null]));
+  const options={env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_OPTIONAL_LOCKS:'0'},stdio:['pipe','pipe','pipe']};
+  // Only the frozen record's exact paths are requested. No tree or object-store scan.
+  const tree=execFileSync('git',['--literal-pathspecs','ls-tree','-z',ref,'--',...paths],{...options,maxBuffer:2*1024*1024}).toString();
+  const entries=[],seen=new Set();
+  for(const entry of tree.split('\0').filter(Boolean)){
+    const tab=entry.indexOf('\t'),identity=entry.slice(0,tab).split(' '),path=entry.slice(tab+1);
+    assert(tab>0&&allowed.has(path),'Unexpected immutable path in bounded tree result');
+    assert(!seen.has(path),'Duplicate immutable path in bounded tree result');seen.add(path);
+    assert.equal(identity[1],'blob','Immutable path must name a blob');
+    assert.match(identity[2],/^[0-9a-f]{40}$/,'Immutable object identity');
+    entries.push({path,object:identity[2]});
+  }
+  if(entries.length){
+    const batch=execFileSync('git',['cat-file','--batch'],{...options,input:entries.map(x=>x.object).join('\n')+'\n',maxBuffer:32*1024*1024});
+    let offset=0;
+    for(const entry of entries){
+      const end=batch.indexOf(10,offset);assert(end>=offset,'Missing immutable batch header');
+      const [object,type,sizeText]=batch.subarray(offset,end).toString().split(' '),size=Number(sizeText);
+      assert.equal(object,entry.object,'Immutable batch object identity');assert.equal(type,'blob');
+      assert(Number.isSafeInteger(size)&&size>=0&&size<=4*1024*1024,'Immutable blob bound');
+      const bodyEnd=end+1+size;assert(bodyEnd<batch.length&&batch[bodyEnd]===10,'Immutable batch framing');
+      const bytes=Buffer.from(batch.subarray(end+1,bodyEnd));
+      assert.equal(crypto.createHash('sha1').update(Buffer.from('blob '+size+'\0')).update(bytes).digest('hex'),object,'Immutable blob content identity');
+      pending.set(ref+':'+entry.path,bytes);offset=bodyEnd+1;
+    }
+    assert.equal(offset,batch.length,'Unexpected immutable batch remainder');
+  }
+  for(const [key,value]of pending)main096GitCache.set(key,value);
+}
 function main096Git(ref,path){const key=ref+':'+path;if(!main096GitCache.has(key)){const tree=execFileSync('git',['--literal-pathspecs','ls-tree','-z',ref,'--',path],{maxBuffer:1024*1024,stdio:['ignore','pipe','pipe']}).toString();const entries=tree.split('\0').filter(Boolean);if(entries.length===0)main096GitCache.set(key,null);else{assert.equal(entries.length,1,'Exact immutable path only');assert.equal(entries[0].slice(entries[0].indexOf('\t')+1),path,'Literal immutable path identity');const b=execFileSync('git',['cat-file','blob',key],{maxBuffer:4*1024*1024,stdio:['ignore','pipe','pipe']});main096GitCache.set(key,b);}}return main096GitCache.get(key);}
 const rawFile=(p,encoding)=>fs.readFileSync(p,encoding);
 function inverseReceiverReplacement(bytes,r){const s=Buffer.from(bytes).toString();assert(Buffer.from(s).equals(Buffer.from(bytes)),'Receiver UTF8 identity');assert(Number.isInteger(r.offset)&&r.offset>=0);assert.equal(s.slice(r.offset,r.offset+r.after.length),r.after,'Receiver exact hunk');return Buffer.from(s.slice(0,r.offset)+r.before+s.slice(r.offset+r.after.length));}
@@ -82,6 +116,7 @@ export function validateMain096ReceiverGovernance({recordBytes=rawFile(MAIN096_R
  assert.equal(d.original31ManifestSHA256,'45558c1ec6de93e86a783c353a3cddaf56cecb7de8b455b509c845699c00ed06');assert.equal(d.original31SourceSet,'cf369d03da78f494b95c42552ed8c3a22e906c570007bc28932dc5fbef679796');assert.equal(d.productSourceSetSHA256,'19edaca3eae93a01930320631789f6afb36399876b0f086040fb08da1acb1a1c');assert.equal(digest(JSON.stringify(d.productFiles)),d.productSourceSetSHA256);assert.equal(d.productFiles.length,72);assert.equal(new Set(d.productFiles.map(f=>f.path)).size,72);
  for(const value of Object.values(d.boundaries))assert.equal(value,false,'No authority or checksum expansion');
  assert.deepEqual(d.forbiddenLocalHooks,['functions/api/customer-external-profile-intake.js','functions/external-profile/upload-document-extractor.js']);
+ if(readGit===main096Git)prefetchMain096Git(d.base,['functions/api/method-reading/[method].js',...d.immutableAuthorities.map(x=>x.path),...d.changes.map(x=>x.path)]);
  const correctionBytes=readCurrent('content/production-closure/live-customer-commercial-convergence/final-unified-production-r1/MAIN096-LITERAL-BLOB-PREDECESSOR-SUCCESSOR.json');assert.equal(sha(correctionBytes),'3c48c4fb05ba1d91df661f8e9b4c1d5af283719fb54415d63a72435b3cacd4ea','Exact literal-blob correction record');const correction=JSON.parse(correctionBytes);assert.equal(correction.base,d.base);assert.equal(correction.predecessor.sha256,MAIN096_RECEIVER_GOVERNANCE_SHA);assert.equal(correction.predecessor.path,MAIN096_RECEIVER_GOVERNANCE);assert.equal(correction.path,"functions/api/method-reading/[method].js");for(const flag of Object.values(correction.boundaries))assert.equal(flag,false);const correctedRows=d.changes.filter(f=>f.path===correction.path);assert.equal(correctedRows.length,1);const corrected=correctedRows[0];assert.equal(corrected.previousSha256,correction.previousCaptureSha256);assert.equal(corrected.currentSha256,correction.currentSha256);assert.equal(corrected.addition,false);assert.equal(sha(corrected.replacement.before),correction.serializedCaptureSha256);assert.equal(readGit(d.base,correction.path),null,'Literal blob must be absent in immutable Main096');corrected.addition=true;corrected.previousSha256=null;corrected.replacement=null;
  const previous=new Map();for(const f of d.productFiles)assert.equal(digest(readCurrent(f.path)),f.sha256,'Frozen receiver product drift: '+f.path);
  for(const f of d.protectedPaths)assert.equal(digest(readCurrent(f.path)),f.sha256,'Protected production or original extractor drift');

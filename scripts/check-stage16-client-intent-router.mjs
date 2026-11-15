@@ -17,7 +17,14 @@ assert.equal(intents.intents.length,6);assert.equal(new Set(intents.intents.map(
 assert.equal(surfaces.surfaces.length,7);for(const route of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey'])assert.ok(surfaces.surfaces.some(x=>x.route===route));
 assert.deepEqual(surfaces.hiddenBehindOrchestration,['AST','BZR','ZI_WEI','NUM','HDR','CCR','CWA','RLR']);assert.equal(surfaces.realityJourneyIsFirstVisitDefault,false);
 const index=read('index.html');
-if(index.includes('data-page-consolidation="R1"')){
+const {isConvergenceCurrent,assertConvergenceHome}=await import('./lib/public-customer-report-convergence-successor-r1.mjs');
+if(isConvergenceCurrent('index.html')){
+ const {parseHTML}=await import('linkedom');const {document}=parseHTML(index);
+ assertConvergenceHome(document);
+ const form=document.querySelector('form[action="/knowledge/ask/"]');
+ assert(form);assert.equal(form.getAttribute('method'),'get');
+ for(const forbidden of ['data-method','ASTROLOGY_PROJECTION','BAZI_PROJECTION','ZI_WEI_PROJECTION','HDR.OPERATING_READING'])assert(!form.outerHTML.includes(forbidden));
+}else if(index.includes('data-page-consolidation="R1"')){
  const {consolidationSuccessor,historicalPisBytes}=await import('./lib/page-consolidation-successor-r1.mjs');
  assert(consolidationSuccessor());historicalPisBytes('index.html');
  for(const selector of ['data-cir-root','data-cir-form','data-cir-question','data-cir-status','src="/assets/js/pages/client-intent-router.js"','id="start"'])assert(index.includes(selector));

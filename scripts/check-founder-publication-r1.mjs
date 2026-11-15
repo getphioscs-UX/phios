@@ -1,5 +1,16 @@
-import crypto from 'node:crypto';import {parseHTML} from 'linkedom';import {founderR2Successor} from './lib/founder-human-presence-successor-r2.mjs';
-import fs from 'node:fs';import assert from 'node:assert/strict';import en from '../assets/js/locales/en.js';import zh from '../assets/js/locales/zh-Hans.js';
+import crypto from 'node:crypto';
+import {parseHTML} from 'linkedom';
+import {founderR2Successor} from './lib/founder-human-presence-successor-r2.mjs';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import en from '../assets/js/locales/en.js';
+import zh from '../assets/js/locales/zh-Hans.js';
+import {assertFounderR3StrictTransition} from './lib/founder-owner-r3-strict-r4.mjs';
+const founderR3Page=fs.readFileSync('about/founder/index.html','utf8').includes('data-founder-publication="R3"');
+if(founderR3Page){
+ assertFounderR3StrictTransition();
+ await import('./check-founder-owner-r3.mjs');
+}else{
 const html=fs.readFileSync('about/founder/index.html','utf8'),base='content/production-closure/live-customer-commercial-convergence';
 assert.equal((html.match(/<h1\b/g)||[]).length,1);
 for(let i=1;i<=9;i++)assert.equal((html.match(new RegExp('data-founder-r1="S0'+i+'"','g'))||[]).length,1);
@@ -23,3 +34,4 @@ assert.ok(html.includes('NAVIGATION-FORMATION-1B'));assert.ok(html.includes('CUS
 for(const m of html.matchAll(/href="(\/[^"?#]*)/g)){const p=m[1].slice(1);assert.ok(fs.existsSync(p)||fs.existsSync(p+'index.html'),m[1]);}
 const schemas=[...html.matchAll(/<script type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map(m=>JSON.parse(m[1]));assert.equal(schemas.filter(s=>s['@type']==='Person').length,1);
 console.log('PASS Founder R1: nine sections; exact approved bilingual copy in existing locale owner; canonical assets/links; one Person/H1; legacy duplication removed. Portrait/source and browser acceptance are separate gates.');
+}

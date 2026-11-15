@@ -1,3 +1,4 @@
+import {installAskServiceStatus} from './public-service-status.js';
 import {publicEntryAnswer} from '../../../js/pages/public-entry-answer.js';
 import {installAskReportHandoff} from '../report-context-ui.js';
 import {accountRequest} from './secure-drafts.js';
@@ -284,6 +285,9 @@ function boot(){
   if(form.elements.askTask.value==='KNOWLEDGE_BASIC'&&!taskParams.has('contextRef')){form.elements.questionOnly.checked=false;form.elements.contextKnowledge.checked=true;}
   const entryResult=document.createElement('section');entryResult.dataset.askR1Result='';entryResult.hidden=true;form.after(entryResult);installCapabilityOverview(entryResult.parentElement);
   const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
+  installAskServiceStatus(form);
+  let lastSubmissionError=null;
+  window.addEventListener('phios:localechange',()=>{if(lastSubmissionError)setStatus(status,errorMessage(lastSubmissionError.code,lastSubmissionError.httpStatus),'error');});
   form.dataset.askState=navigator.onLine===false?'OFFLINE':'IDLE';
   form.elements.question.addEventListener('input',()=>{if(form.getAttribute('aria-busy')!=='true')form.dataset.askState=navigator.onLine===false?'OFFLINE':form.elements.question.value.trim()?'COMPOSING':'IDLE';});
   window.addEventListener('offline',()=>{form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');});
@@ -300,7 +304,7 @@ function boot(){
   form.elements.contextKnowledge.addEventListener('change',()=>{seedFailed=false;if(form.elements.contextKnowledge.checked){form.elements.questionOnly.checked=false;form.querySelectorAll('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]').forEach(x=>x.checked=false);}syncSelection(form);});
   form.elements.contextReality.addEventListener('change',()=>{if(form.elements.contextReality.checked)form.elements.questionOnly.checked=false;syncSelection(form);});
   form.addEventListener('submit',async event=>{
-    event.preventDefault();
+    event.preventDefault();lastSubmissionError=null;
     const question=String(form.elements.question.value||'').trim();
     if(!question||form.getAttribute('aria-busy')==='true')return;
     if(form.elements.askTask.value==='ENTRY'&&!selectedMethod){
@@ -326,6 +330,7 @@ function boot(){
       document.querySelector('[data-cx-contextual-ask-result]').scrollIntoView({behavior:'smooth',block:'start'});
     }catch(error){
       form.dataset.askState=navigator.onLine===false?'OFFLINE':error?.code==='SELECTED_SOURCE_UNAVAILABLE'?'SOURCE_UNAVAILABLE':'ERROR';
+      lastSubmissionError=error;
       setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code,error?.httpStatus),'error');
       let fallback=document.querySelector('[data-ask-public-fallback]');if(!fallback){fallback=document.createElement('nav');fallback.dataset.askPublicFallback='';status.after(fallback);}fallback.replaceChildren();if(error?.httpStatus===503){for(const [href,label]of[['/search/?'+new URLSearchParams({q:question,locale:locale()}),tr('Search public sources','搜索公开来源')],['/knowledge/?locale='+locale(),tr('Read published knowledge','阅读公开知识')]]){const a=document.createElement('a');a.href=href;a.textContent=label;a.style.marginInlineEnd='16px';fallback.append(a);}}
       if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});

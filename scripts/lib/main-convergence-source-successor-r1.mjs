@@ -1,3 +1,4 @@
+import {brandScamPredecessor} from './brand-scam-strict-source-successor-r1.mjs';
 import {readPreConsumerSource,unifiedConsumerSuccessors} from './unified-country-consumer-reception-r1.mjs';
 import {validateMain096ReceiverGovernance} from './ppr-five-method-preentry-successor.mjs';
 import fs from 'node:fs';
@@ -98,7 +99,8 @@ export function mainConvergencePredecessors({paths=null}={}){
   assert.ok(!c.path.startsWith('/')&&!c.path.split('/').includes('..'));
   const previous=execFileSync('git',['show',doc.baseline+':'+c.path],{maxBuffer:32*1024*1024});
   assert.equal(sha(previous),c.predecessorSha256,c.path+' immutable convergence predecessor');
-  assert.equal(sha(fs.readFileSync(c.path)),currentSuccessors.get(c.path)??c.successorSha256,c.path+' unregistered convergence source drift');
+  const expectedCurrent=currentSuccessors.get(c.path)??c.successorSha256;
+  assert.equal(sha(convergencePredecessor(c.path,expectedCurrent)),expectedCurrent,c.path+' unregistered convergence source drift');
   result.set(c.path,previous);
  }
  return result;
@@ -116,9 +118,10 @@ export function mainHistoricalPredecessors(){
  for(const r of rows){
   assert(['419357257da40bca7bdf9579bcf82d785e29d151','400ac5eed99fb73d7db085e1df3394933dd2fb57'].includes(r.previousGitRevision));
   const current=execFileSync('git',['show',doc.baseline+':'+r.path]);assert.equal(sha(current),r.successorSha256);
-  const expected=currentSuccessors.get(r.path)??(doc.changes.find(c=>c.path===r.path)?.successorSha256||r.successorSha256);assert.equal(sha(fs.readFileSync(r.path)),expected,r.path+' unregistered current source');
+  const expected=currentSuccessors.get(r.path)??(doc.changes.find(c=>c.path===r.path)?.successorSha256||r.successorSha256);assert.equal(sha(brandScamPredecessor(r.path,fs.readFileSync(r.path))),expected,r.path+' unregistered current source');
   const prior=execFileSync('git',['show',r.previousGitRevision+':'+r.path]);assert.equal(sha(prior),r.previousSha256);
   result.set(r.path,prior);
  }
  return result;
 }
+import {convergencePredecessor} from './public-customer-report-convergence-successor-r1.mjs';

@@ -17,6 +17,7 @@ let guestSaveAvailable=false;
 let latestView=null;
 let latestViews=null;
 let latestRequest=null;
+let latestPersonalizationFailure=null;
 let coinLineIndex=0;
 let coinChoices={1:null,2:null,3:null};
 let recordedCoinLines=[];
@@ -101,6 +102,8 @@ async function executeReading(body){
     if(!response.ok||!payload?.publicView){const error=new Error(payload?.error?.code||'READING_UNAVAILABLE');error.serviceUnavailable=response.status>=500||response.status===423;throw error;}
     latestView=payload.publicView;
     latestViews=payload.languageViews||null;
+    latestPersonalizationFailure=payload.personalization?.failure||null;
+    if(latestPersonalizationFailure)setServiceMessage(t(latestPersonalizationFailure.messageEn,latestPersonalizationFailure.messageZhHans));
     q('[data-reading-content]').innerHTML=renderIChingCustomerReading(latestView,locale());
     q('[data-reading-actions]').hidden=false;
     q('[data-save-reading]').hidden=!guestSaveAvailable;
@@ -156,6 +159,7 @@ async function saveReading(){
 }
 function rerenderLocale(){
   updateGuideImages();renderCoinRecorder();
+  if(latestPersonalizationFailure)setServiceMessage(t(latestPersonalizationFailure.messageEn,latestPersonalizationFailure.messageZhHans));
   if(latestView)q('[data-reading-content]').innerHTML=latestViews?.[locale()]?renderIChingCustomerReading(latestViews[locale()],locale()):t('This language version is unavailable; the original cast is unchanged.','此语言版本不可用，原卦保持不变。');
   qa('[data-question-prompt]').forEach(btn=>{btn.textContent=isZh()?btn.dataset.zh:btn.dataset.en;});
   if(!serviceReady)void refreshService(); // One idempotent status GET, never a cast replay.

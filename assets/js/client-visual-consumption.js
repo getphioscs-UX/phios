@@ -1,3 +1,5 @@
+import {declaredPageHero} from '../customer-ui/js/visual-slot-owner.js';
+import {BRCL_VISUAL_SURFACES,brclOwnsEditorialHero} from './pages/brand-research-commerce-legal-contract.js';
 import {
   fetchPublicAssetConfig,
   fetchPublicAssetRegistry,
@@ -188,9 +190,9 @@ function insertIconRailForManagedSurface(record, context, managedTarget) {
 function createMasthead(record, context) {
   const main = document.querySelector('main');
   if (!main || !record?.hero?.assetCode) return { heroRendered: false, iconCount: 0 };
-  if (document.querySelector(`[data-client-visual-masthead="${record.surfaceCode}"]`)) {
-    return { heroRendered: true, iconCount: 0 };
-  }
+  const priorSignature=document.querySelector(`[data-client-visual-signature="${record.surfaceCode}"]`);if(priorSignature){priorSignature.hidden=true;priorSignature.dataset.visualSupersededBy='CLIENT_MASTHEAD';}
+  const existingMasthead=document.querySelector(`[data-client-visual-masthead="${record.surfaceCode}"]`);
+  if(existingMasthead){existingMasthead.hidden=false;delete existingMasthead.dataset.visualSupersededBy;return {heroRendered:true,iconCount:Number(existingMasthead.querySelector('[data-client-visual-icon-rail]')?.dataset.clientVisualRenderedIconCount||0)};}
 
   let resolved;
   try {
@@ -208,6 +210,7 @@ function createMasthead(record, context) {
   section.className = 'client-visual-masthead';
   section.dataset.clientVisualMasthead = record.surfaceCode;
   section.dataset.clientVisualHero = record.hero.assetCode;
+  section.dataset.visualSlot='MAIN_HERO';section.dataset.visualOwner='CLIENT_MASTHEAD';
   section.setAttribute('aria-hidden', 'true');
 
   const figure = document.createElement('figure');
@@ -225,7 +228,10 @@ function createMasthead(record, context) {
 
 function createStandaloneIconSignature(record, context) {
   const main = document.querySelector('main');
-  if (!main || document.querySelector(`[data-client-visual-signature="${record.surfaceCode}"]`)) return 0;
+  const priorMasthead=document.querySelector(`[data-client-visual-masthead="${record.surfaceCode}"]`);if(priorMasthead){priorMasthead.hidden=true;priorMasthead.dataset.visualSupersededBy='PAGE_HERO_OWNER';}
+  if (!main) return 0;
+  const existing=document.querySelector(`[data-client-visual-signature="${record.surfaceCode}"]`);
+  if(existing){existing.hidden=false;delete existing.dataset.visualSupersededBy;return Number(existing.querySelector('[data-client-visual-icon-rail]')?.dataset.clientVisualRenderedIconCount||0);}
   const rail = iconRail(record, context);
   if (!rail) return 0;
   const section = document.createElement('section');
@@ -305,7 +311,7 @@ function dispatchReady(detail) {
 export async function initializeClientVisualConsumption({ fetchImpl = fetch, pathname = window.location.pathname } = {}) {
   // Composed heroes and eight-volume readers own their media. Delegation is
   // based on the renderer's static slot, so locale rerenders cannot race it.
-  if (document.body?.dataset.page === 'book-volume' || document.querySelector('main [data-vr2-role="HERO"],main .wpr-book-hero,main [data-wpr-book-volume]')) {
+  if (document.body?.dataset.page === 'book-volume' || declaredPageHero(document.querySelector('main')) || document.querySelector('main .wpr-book-hero,main [data-wpr-book-volume]')) {
     return { state: 'DELEGATED_TO_PAGE_HERO', record: null };
   }
   // The current article renderer owns its hero, including asynchronous locale rerenders.
@@ -330,6 +336,37 @@ export async function initializeClientVisualConsumption({ fetchImpl = fetch, pat
     document.documentElement.dataset.clientVisualConsumption = 'NONE_BY_DESIGN';
     document.documentElement.dataset.clientVisualSurface = record.surfaceCode;
     return { state: 'NONE_BY_DESIGN', record };
+  }
+
+  // Service Continuity declares the canonical hero before its async hydration.
+  // Match its registered identity, not image URLs or arbitrary repeated media.
+  // Its renderer retains responsibility for loading/failure and support content.
+  const serviceHero = document.body?.dataset.serviceContinuitySurface &&
+    document.querySelector('main > .sc-hero');
+  const serviceImage = serviceHero?.querySelector('[data-sc-asset]');
+  if (serviceImage && serviceImage.dataset.scAsset === record.hero?.assetCode) {
+    serviceHero.dataset.visualSlot = 'MAIN_HERO';
+    serviceHero.dataset.visualOwner = 'SERVICE_CONTINUITY';
+    document.documentElement.dataset.clientVisualConsumption = 'DELEGATED_TO_SERVICE_CONTINUITY';
+    const iconCount = createStandaloneIconSignature(record, context);
+    const brandingCount = await hydrateAdditionalBranding(context);
+    document.documentElement.dataset.clientVisualBrandingCount = String(brandingCount);
+    document.documentElement.dataset.clientVisualIconCount = String(iconCount);
+    return { state: 'DELEGATED_TO_SERVICE_CONTINUITY', record, brandingCount, iconCount };
+  }
+
+  // The static page declares BRCL ownership before either async renderer runs.
+  // A shared existing contract prevents timing-dependent duplicate mastheads.
+  const brclSurface=document.body?.dataset.brclSurface;
+  const brcl=Object.hasOwn(BRCL_VISUAL_SURFACES,brclSurface||'')?BRCL_VISUAL_SURFACES[brclSurface]:null;
+  if(brcl&&brcl.hero!==record.hero?.assetCode){document.documentElement.dataset.clientVisualConsumption='BRCL_ASSET_IDENTITY_CONFLICT';return {state:'BRCL_ASSET_IDENTITY_CONFLICT',record};}
+  if(brcl&&brclOwnsEditorialHero(document.querySelector('main'))){
+    const iconCount=createStandaloneIconSignature(record,context);
+    const brandingCount=await hydrateAdditionalBranding(context);
+    document.documentElement.dataset.clientVisualConsumption='DELEGATED_TO_BRCL';
+    document.documentElement.dataset.clientVisualBrandingCount=String(brandingCount);
+    document.documentElement.dataset.clientVisualIconCount=String(iconCount);
+    return {state:'DELEGATED_TO_BRCL',record,brandingCount,iconCount};
   }
 
   markDestinationUpgrade(record);

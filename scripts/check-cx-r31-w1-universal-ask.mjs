@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {parseHTML} from 'linkedom';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
 const c=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w1-universal-ask-composer-v1.json');
@@ -8,7 +10,13 @@ assert.equal(c.status,'COMPLETE');
 assert.equal(c.homeQuestionInput.oneClearInput,true);
 assert.equal(c.askQuestionInput.primaryEntryMechanism,true);
 assert.equal(c.authorityBoundary.mandatoryFunnel,false);
-for(const marker of ['data-cx-r31-home-ask','action="/knowledge/ask/"','name="q"','data-cx-r31-direct-starts','href="/reality/"','href="/perspectives/"'])assert.ok(home.includes(marker),`home missing ${marker}`);
+if(isConvergenceCurrent('index.html')){
+ assertConvergenceHome(parseHTML(home).document);
+ for(const marker of ['data-cx-r31-home-ask','action="/knowledge/ask/"','name="q"','href="/reality/"'])assert.ok(home.includes(marker),`home missing ${marker}`);
+ const personal=read('subjects/personal/index.html');assert(isConvergenceCurrent('subjects/personal/index.html'));
+ for(const route of ['/perspectives/personal/','/perspectives/phi-configuration/'])assert(personal.includes('href="'+route+'"'),'R3 independent Personal destination missing:'+route);
+ console.log('  Exact R3 technical successor preserves independent subject routes and the original Ask entry; original CX-R31 human acceptance does not accept the new R3 presentation.');
+}else for(const marker of ['data-cx-r31-home-ask','action="/knowledge/ask/"','name="q"','data-cx-r31-direct-starts','href="/reality/"','href="/perspectives/"'])assert.ok(home.includes(marker),`home missing ${marker}`);
 for(const marker of ['data-cx-r31="W0-W8-MACHINE-ACTIVE"','data-cx-contextual-ask-form','name="question"','Ask a question. Start with Knowledge.'])assert.ok(ask.includes(marker),`Ask missing ${marker}`);
 assert.ok(client.includes("new URLSearchParams(location.search).get('q')"),'Ask does not consume homepage q');
 console.log('✓ CX-R31-W1 Universal Ask Composer passed: one clear question input on / and /knowledge/ask/.');

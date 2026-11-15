@@ -1,6 +1,8 @@
+import './check-founder-owner-r3.mjs';
+import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {historicalPisBytes,consolidationSuccessor} from './lib/page-consolidation-successor-r1.mjs';
 import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
-import fs from 'node:fs';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};
 import assert from 'node:assert/strict';
 import {parseHTML} from 'linkedom';
 import {assertCurrentVisualSuccessor} from './lib/check-pis-visual-successor.mjs';

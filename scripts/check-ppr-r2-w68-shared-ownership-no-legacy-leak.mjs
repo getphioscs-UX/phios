@@ -1,4 +1,18 @@
-import fs from 'node:fs';
+import sourceFs from 'node:fs';
+import {auditPublicPredecessor} from './lib/audit-r2-public-receiver-r2.mjs';
+// W68 compares the exact historical owner view, as the existing owner helper does.
+// Only this registered Personal surface may be projected; all other reads stay native.
+const personalSurface='perspectives/personal/index.html';
+const fs={...sourceFs,readFileSync(file,options){
+  const relative=path.relative(process.cwd(),String(file)).replaceAll('\\','/');
+  if(relative!==personalSurface)return sourceFs.readFileSync(file,options);
+  const raw=sourceFs.readFileSync(file);
+  for(const token of ['OPENAI_NARRATIVE_MODEL','OPENAI_API_KEY','fixture-model-v1'])assert(!raw.toString('utf8').includes(token),`W68 live customer surface leaked provider authority token ${token}`);
+  const bytes=auditPublicPredecessor(personalSurface,raw);
+  assert(bytes,'W68 Personal predecessor must exist');
+  const encoding=typeof options==='string'?options:options?.encoding;
+  return encoding?bytes.toString(encoding):bytes;
+}};
 import path from 'node:path';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';

@@ -41,7 +41,7 @@
 
 .knowledge-eyebrow {
   margin: 0 0 1rem;
-  color: #756342;
+  color: var(--knowledge-kicker,#756342);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -89,7 +89,8 @@
   border: 1px solid rgba(17, 20, 26, 0.2);
   border-radius: 999px;
   background: transparent;
-  color: #11141a;
+  color: var(--knowledge-context-ink,#11141a);
+  border-color: var(--knowledge-action-border,rgba(17,20,26,.2));
   cursor: pointer;
   font: inherit;
   font-size: 0.82rem;
@@ -321,6 +322,7 @@
 }
 
 .knowledge-boundary {
+  --phi-text-secondary:#686d76;--knowledge-context-ink:#4e4a40;--knowledge-kicker:#756342;--knowledge-muted:#686d76;--knowledge-action-border:#74796e;
   padding: 1.25rem 1.4rem;
   border-left: 3px solid #9a7b3f;
   background: #eee9db;
@@ -432,7 +434,10 @@
 
 .preview-page-controls button:disabled {
   cursor: not-allowed;
-  opacity: 0.4;
+  color: #4e554d;
+  background: #e5e1d8;
+  border-color: #74796e;
+  opacity: 1;
   transform: none;
 }
 
@@ -583,6 +588,7 @@
 }
 
 .checkout-product {
+  --phi-text-secondary:#686d76;--knowledge-context-ink:#11141a;--knowledge-kicker:#756342;--knowledge-muted:#686d76;--knowledge-action-border:#74796e;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -592,6 +598,7 @@
   border: 1px solid rgba(17, 20, 26, 0.12);
   border-radius: 1rem;
   background: #fff;
+  color: #11141a;
 }
 
 .checkout-product h2,
@@ -626,7 +633,7 @@
 }
 
 .checkout-facts dt {
-  color: #686d76;
+  color: var(--knowledge-muted,#686d76);
   font-weight: 600;
 }
 
@@ -635,10 +642,12 @@
 }
 
 .checkout-form {
+  --phi-text-secondary:#686d76;--knowledge-context-ink:#11141a;--knowledge-kicker:#756342;--knowledge-muted:#686d76;--knowledge-action-border:#74796e;
   margin-top: 2rem;
   padding: 1.25rem;
   border-radius: 1rem;
   background: #f2efe7;
+  color: #11141a;
 }
 
 .checkout-consent {
@@ -657,13 +666,16 @@
 
 .checkout-form button[disabled] {
   cursor: not-allowed;
-  opacity: 0.55;
+  background: #e5e1d8;
+  color: #4e554d;
+  border-color: #74796e;
+  opacity: 1;
 }
 
 .checkout-status {
   min-height: 1.5em;
   margin-top: 1rem;
-  color: #5a4c32;
+  color: var(--knowledge-muted,#5a4c32);
   font-weight: 600;
 }
 

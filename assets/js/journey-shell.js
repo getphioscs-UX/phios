@@ -1,3 +1,4 @@
+import {selectJourneySurfaceBrand} from './branding/journey-surface-brand-r1.js';
 import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
 import { ensureCanonicalPhiosFavicon } from './branding/favicon-authority.js';
 
@@ -182,6 +183,12 @@ function ensureJourneyBrandTargets() {
 }
 
 async function hydrateJourneyBrandImage(image) {
+  const header=image.closest('header');
+  const backgroundColors=[];
+  if(header)for(let node=header;node;node=node.parentElement)backgroundColors.push(getComputedStyle(node).backgroundColor);
+  const desired=selectJourneySurfaceBrand({isHeader:!!header,backgroundColors});
+  if(image.dataset.journeyBrandAsset!==desired){image.dataset.journeyBrandAsset=desired;image.dataset.brandHydration='idle';}
+
   if (image.dataset.brandHydration === 'pending' || image.dataset.brandHydration === 'ready') return;
   image.dataset.brandHydration = 'pending';
 

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {finalR6VisualSuccessor} from './lib/final-r6-visual-successor.mjs';
+import {isConvergenceCurrent,convergencePredecessor,readConvergenceRecord} from './lib/public-customer-report-convergence-successor-r1.mjs';
 import {createHash} from 'node:crypto';
 import {HEALTH_VISUAL_PATH,HEALTH_VISUAL_OWNER_SHA,HEALTH_CURRENT_GUARD,healthVisualOwnerBytes} from './lib/final-health-route-successor.mjs';
 import {frozenZwrV1Bytes,validateZwrInputSuccessor,ZWR_INPUT_SUCCESSOR} from './lib/final-zwr-input-successor.mjs';
@@ -56,8 +57,16 @@ const healthBytes=fs.readFileSync(HEALTH_VISUAL_PATH);assert(healthBytes.toStrin
 const healthGuard=new Function('location',HEALTH_CURRENT_GUARD+'return true;');for(const pathname of ['/health-reality','/health-reality/','/health-reality.html']){assert.equal(healthGuard({pathname}),true);checks++;}for(const pathname of ['/health-reality-extra','/perspectives/relationship/','/health-reality/private']){assert.equal(healthGuard({pathname}),undefined);checks++;}
 assert.throws(()=>healthVisualOwnerBytes(Buffer.concat([healthBytes,Buffer.from('\n// unregistered change')])));checks++;
 const homeInline=[...fs.readFileSync('index.html','utf8').matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].filter(m=>!m[1].includes('src=')&&!m[1].includes('application/ld+json'));
-assert.equal(homeInline.length,1,'Only the existing Home asset bootstrap may be hash-authorized');checks++;
-assert.equal(homeInline[0][2],"import {hydrateSevenVolumeAssets} from '/assets/customer-ui/js/seven-volume-assets.js'; hydrateSevenVolumeAssets(document);");checks++;
-const homeHash=createHash('sha256').update(homeInline[0][2]).digest('base64'),scriptPolicy=fs.readFileSync('_headers','utf8').match(/script-src ([^;]+);/)[1];
+const homeBootstrap="import {hydrateSevenVolumeAssets} from '/assets/customer-ui/js/seven-volume-assets.js'; hydrateSevenVolumeAssets(document);";
+if(isConvergenceCurrent('index.html')){
+ assert.equal(homeInline.length,0,'Exact R3 Home must not introduce inline executable scripts');checks++;
+ const previous=convergencePredecessor('index.html',readConvergenceRecord().paths.find(x=>x.path==='index.html').previousSHA256).toString('utf8');
+ const oldInline=[...previous.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].filter(m=>!m[1].includes('src=')&&!m[1].includes('application/ld+json'));
+ assert.equal(oldInline.length,1);assert.equal(oldInline[0][2],homeBootstrap);checks+=2;
+}else{
+ assert.equal(homeInline.length,1,'Only the existing Home asset bootstrap may be hash-authorized');checks++;
+ assert.equal(homeInline[0][2],homeBootstrap);checks++;
+}
+const homeHash=createHash('sha256').update(homeBootstrap).digest('base64'),scriptPolicy=fs.readFileSync('_headers','utf8').match(/script-src ([^;]+);/)[1];
 assert.deepEqual(scriptPolicy.trim().split(/\s+/),["'self'",`'sha256-${homeHash}'`],'CSP must authorize only self and the exact known bootstrap, without unsafe-inline or eval');checks++;
 console.log(`Final unified release: ${checks} source, Preview/Production separation, publication and admission checks PASS; no network.`);

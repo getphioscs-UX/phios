@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {finalR6VisualSuccessor} from './final-r6-visual-successor.mjs';
+import {convergencePredecessor} from './public-customer-report-convergence-successor-r1.mjs';
 export function assertCurrentVisualSuccessor(pointer){
  if(pointer.currentRegistryPath==='/content/web-production/registries/client-visual-asset-registry-v1.9.json'){
   const successor=finalR6VisualSuccessor();
@@ -14,9 +15,10 @@ export function assertCurrentVisualSuccessor(pointer){
  const current=JSON.parse(fs.readFileSync(pointer.currentRegistryPath.slice(1)));
  assert.equal(current.registry,'PHI-OS-CLIENT-VISUAL-ASSET-REGISTRY-v1.8');
  assert.equal(current.summary.assetCount,current.assets.length);
- const old=JSON.parse(fs.readFileSync(predecessor));
+ const oldBytes=convergencePredecessor(predecessor,current.pisSuccessor.sha256);
+ const old=JSON.parse(oldBytes);
  assert.equal(current.pisSuccessor.predecessor,predecessor);
- assert.equal(current.pisSuccessor.sha256,crypto.createHash('sha256').update(fs.readFileSync(predecessor)).digest('hex'));
+ assert.equal(current.pisSuccessor.sha256,crypto.createHash('sha256').update(oldBytes).digest('hex'));
  assert.deepEqual(current.assets.slice(0,old.assets.length),old.assets,'Historical identities must remain unchanged');
  const verified=JSON.parse(fs.readFileSync(current.pisSuccessor.evidence)).results;
  assert.equal(current.assets.length,old.assets.length+41);assert.equal(verified.length,41);

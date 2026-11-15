@@ -1,7 +1,16 @@
+import {publicReadabilityPredecessor} from './lib/public-readability-source-successor-r1.mjs';
+import {readFileSync as readReadabilityCurrent} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+import {founderLegacyRoutePredecessor,validateFounderLegacyRoutes} from './lib/founder-legacy-route-compatibility-r1.mjs';
+import {founderR3Predecessor} from './lib/founder-r3-historical-view-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseHTML} from 'linkedom';
 import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
+
+// Raw current R3 must pass its own exact source/semantic checker.
+await import('./check-founder-owner-r3.mjs');
 
 const read = file => fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const json = file => JSON.parse(read(file));
@@ -9,11 +18,16 @@ const json = file => JSON.parse(read(file));
 function exploreAboutDestination(source = read('explore/index.html')) {
   assert(source.includes('href="https://www.getphios.com/about/founder/"'), 'Explore canonical About destination missing');
   assert(source.includes('src="/assets/js/explore-about-compat.js"'), 'Explore compatibility runtime missing');
-  const runtime = read('assets/js/explore-about-compat.js');
+  validateFounderLegacyRoutes({readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))});
+  const currentRuntime=read('assets/js/explore-about-compat.js'),currentTarget=read('about/founder/index.html');
+  const destinations=new Map([['why','founder-origin'],['how','founder-connected-reality'],['start','founder-next-step'],['faq','founder-trust']]);
+  for(const [oldId,newId]of destinations){let resolved;runInNewContext(currentRuntime,{location:{hash:'#'+oldId,replace:x=>{resolved=x;}}});assert.equal(resolved,'/about/founder/#'+newId);assert(currentTarget.includes('id="'+newId+'"'),'Actual R3 mapped target must exist');}
+  for(const hash of ['', '#unknown','#constructor','#__proto__','#https://untrusted.invalid/']){let resolved;runInNewContext(currentRuntime,{location:{hash,replace:x=>{resolved=x;}}});assert.equal(resolved,'/about/founder/','Unknown legacy hash must keep fixed local fallback');}
+  const runtime = founderLegacyRoutePredecessor('assets/js/explore-about-compat.js',fs.readFileSync('assets/js/explore-about-compat.js'), {readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))}).toString('utf8');
   assert(runtime.includes("location.replace('/about/founder/'"), 'Explore About routing missing');
   assert(runtime.includes("new Set(['why','how','start','faq'])"));
   assert(runtime.includes("allowed.has(id)?'#'+id:''"), 'Explore bounded anchor routing missing');
-  const target = read('about/founder/index.html');
+  const target = founderR3Predecessor('about/founder/index.html',fs.readFileSync('about/founder/index.html')).toString('utf8');
   assert(target.includes('/assets/js/public-shell.js'), 'About destination shell missing');
   assert.equal(target.includes('/assets/js/public-shell-v2.js'), false);
   for (const anchor of ['why', 'how', 'start', 'faq']) assert(target.includes(`id="${anchor}"`), `About destination anchor missing: ${anchor}`);
@@ -24,7 +38,7 @@ const deletePlan = json('content/customer-experience-rebuild/migration/p1-legacy
 const homepage = json('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
 const explore = json('content/customer-experience-rebuild/authority/explore-customer-experience-v1.json');
 const knowledge = json('content/customer-experience-rebuild/authority/knowledge-customer-experience-v1.json');
-const redirects = read('_redirects');
+const redirects = founderLegacyRoutePredecessor('_redirects',fs.readFileSync('_redirects'), {readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))}).toString('utf8');
 
 assert.equal(deletePlan.status, 'PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE');
 assert.equal(homepage.status, 'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');
@@ -123,7 +137,10 @@ if(consolidatedHome)assertCurrentConsolidatedSurface(parseHTML(home).document,'i
 for (const href of ['/articles/', '/figures/', '/knowledge/concepts/', '/knowledge/ask/', '/reality/']) {
   const knowledgeDestination=consolidatedHome&&['/articles/','/figures/','/knowledge/concepts/'].includes(href);
   if(knowledgeDestination){assert(home.includes('href="/knowledge/"'),'Homepage knowledge entry missing');assert(read('knowledge/index.html').includes(`href="${href}"`),`Knowledge is missing canonical destination ${href}`);}
-  else assert.ok(home.includes(`href="${href}"`), `Homepage is missing canonical destination ${href}`);
+  else if(href==='/knowledge/ask/'&&isConvergenceCurrent('index.html')){
+    // Registered R3 retains the single native GET form rather than a second Ask link.
+    assertConvergenceHome(parseHTML(home).document);
+  }else assert.ok(home.includes(`href="${href}"`), `Homepage is missing canonical destination ${href}`);
 }
 for (const retiredHref of ['/figures.html', '/glossary.html', '/ask.html', '/personal-runtime.html', '/my-reality.html']) {
   assert.equal(home.includes(`href="${retiredHref}"`), false, `Homepage retained retired route ${retiredHref}`);

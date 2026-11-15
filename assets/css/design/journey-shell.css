@@ -211,3 +211,10 @@
     max-width: 8.75rem;
   }
 }
+
+/* Existing light journey surfaces and narrow-screen stage navigation. */
+.navigation-page .navigation-intro .eyebrow,.reading-page .reading-intro .eyebrow{color:#6d5526}
+@media(max-width:48rem){.runtime-workspace-sidebar ol{grid-template-columns:minmax(0,1fr);overflow:visible}.runtime-workspace-sidebar li>a,.runtime-workspace-sidebar li.is-locked>div{min-width:0;grid-template-columns:34px minmax(0,1fr)}}
+
+/* Keep the existing Navigation masthead in the main column, not in auto-placement competition with its sidebar. */
+@media(min-width:901px){.navigation-page .runtime-workspace-layout:has(>.client-visual-masthead)>[data-runtime-workspace]{grid-column:1;grid-row:1/span 2}.navigation-page .runtime-workspace-layout>.client-visual-masthead{grid-column:2;grid-row:1}.navigation-page .runtime-workspace-layout:has(>.client-visual-masthead)>.runtime-workspace-main{grid-column:2;grid-row:2}}

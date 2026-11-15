@@ -45,14 +45,16 @@ export function validateIChingFullProductionAuthorityRecord(record={},liveSha=''
     payload.fullProduction===true&&payload.globalPublicExecution===true&&payload.guestPersistenceAllowed===true&&payload.productionCapabilityPromoted===true&&
     gates.w33FinalLimitedProductionAcceptance===true&&gates.humanApprovedDepth448===true&&gates.bilingualRuntime896===true&&
     gates.initialPromotionExactShaVerified===true&&gates.releaseScopedDeploymentContinuity===true&&gates.verifiedPersistenceProvider===true&&gates.globalRightsReviewAttested===true&&
-    gates.guestPersistenceExplicitConsentRequired===true&&fullSha(promotionSha)&&fullSha(sha)&&secret.length>=32;
-  if(!ok)return denied(secret.length<32?'GUEST_SESSION_SECRET_NOT_CONFIGURED':'FULL_PRODUCTION_AUTHORITY_INVALID_OR_INCOMPLETE',{
+    gates.guestPersistenceExplicitConsentRequired===true&&fullSha(promotionSha)&&fullSha(sha);
+  // Reading creates no guest session. A missing persistence signing key must
+  // close guest saving, while preserving an already promoted stateless reading.
+  if(!ok)return denied('FULL_PRODUCTION_AUTHORITY_INVALID_OR_INCOMPLETE',{
     approvedCommitSha:fullSha(promotionSha)?promotionSha:null,promotionCommitSha:fullSha(promotionSha)?promotionSha:null,liveProductionSha:fullSha(sha)?sha:null,
     releaseId:payload?.releaseId||null,authorityScope:payload?.authorityScope||null
   });
   return Object.freeze({
     authorized:true,state:'FULL_PRODUCTION',runAllowed:true,fullProduction:true,limitedProduction:false,
-    globalPublicExecution:true,guestPersistenceAllowed:true,productionCapabilityPromoted:true,
+    globalPublicExecution:true,guestPersistenceAllowed:secret.length>=32,guestPersistenceConfigured:secret.length>=32,productionCapabilityPromoted:true,
     approvedCommitSha:promotionSha,promotionCommitSha:promotionSha,liveProductionSha:sha,
     deploymentContinuityApplied:promotionSha!==sha,authorityScope:'RELEASE',promotedAt:payload.promotedAt||null,
     releaseId:payload.releaseId,rightsReviewId:payload.rightsReviewId||null,rightsScope:'GLOBAL',

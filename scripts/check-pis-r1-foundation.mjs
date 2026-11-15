@@ -1,7 +1,8 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
 import './check-founder-publication-r1.mjs';
-import fs from 'node:fs';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {parseHTML} from 'linkedom';

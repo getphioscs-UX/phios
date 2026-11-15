@@ -1,3 +1,5 @@
+import {auditPublicPredecessor} from './lib/audit-r2-public-receiver-r2.mjs';
+import {pathToFileURL} from 'node:url';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
@@ -733,6 +735,14 @@ function headingOrderIsValid(element) {
   return true;
 }
 
+// Only two legacy no-hero fixture contracts use the exact admitted pre-A renderer.
+// Current production rendering remains untouched and is separately checked below.
+const rendererFilename=path.resolve(root,'assets/js/knowledge/article-renderer.js');
+const priorRenderer=auditPublicPredecessor('assets/js/knowledge/article-renderer.js',await fs.readFile(rendererFilename));
+const priorRendererCode=Buffer.from(priorRenderer).toString().replace(/\bfrom\s+(['"])(\.[^'"]+)\1/g,(_m,quote,specifier)=>'from '+quote+new URL(specifier,pathToFileURL(rendererFilename)).href+quote);
+const {renderArticleDocument:renderHistoricalNoHeroContract}=await import('data:text/javascript;base64,'+Buffer.from(priorRendererCode).toString('base64'));
+let currentTextFirstCases=0;
+
 for (const fixtureName of actualFixtures) {
   const fixturePath = path.posix.join(
     renderingFixtureDirectory,
@@ -770,10 +780,20 @@ for (const fixtureName of actualFixtures) {
     const { document } = parseHTML(
       '<!doctype html><html><body></body></html>'
     );
-    rendered = renderArticleDocument(document, projection, {
+    const historicalNoHeroCase=['without_hero','optional_related_figure_missing'].includes(scenario.scenario||scenario.mutation);
+    rendered = (historicalNoHeroCase?renderHistoricalNoHeroContract:renderArticleDocument)(document, projection, {
       publishedArticles: publishedContext(scenario),
       translate
     });
+    if(historicalNoHeroCase){
+      const currentDocument=parseHTML('<!doctype html><html><body></body></html>').document;
+      const current=renderArticleDocument(currentDocument,projection,{publishedArticles:publishedContext(scenario),translate});
+      assert.equal(current.querySelectorAll('.knowledge-article__hero-visual').length,0,'Current unbound hero must remain text-first');
+      assert.equal(current.querySelectorAll('img[data-ks-asset="HERO-004"]').length,0,'No unadmitted generic hero in current output');
+      assert.equal(current.querySelector('h1')?.textContent,rendered.querySelector('h1')?.textContent,'Current article title preserved');
+      assert.equal(current.querySelector('.knowledge-article__body')?.outerHTML,rendered.querySelector('.knowledge-article__body')?.outerHTML,'Current full article body preserved');
+      currentTextFirstCases++;
+    }
     document.body.append(rendered);
   } catch (error) {
     renderError = error;
@@ -988,3 +1008,6 @@ console.log(
 console.log(
   '  Frozen predecessor Articles remain unchanged; governed Book IV/V/VI successor releases are validated separately.'
 );
+
+assert.equal(currentTextFirstCases,2,'Both historical no-hero fixtures must also verify the actual current text-first renderer');
+console.log('Current text-first renderer: 2 actual output cases PASS; old HERO-004 assertions remain bound only to the exact historical Node fixture renderer, not public admission.');

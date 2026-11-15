@@ -1,3 +1,4 @@
+import {sharedVisualPredecessorBytes} from './lib/shared-visual-source-predecessor-r1.mjs';
 import {stylesheetRefs,normalizedLocalAsset} from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -119,7 +120,7 @@ const sharedStyle=json(base+'/legacy/current-shared-stylesheet-successor-v1.json
 assert.equal(sharedStyle.status,'ENGINEERING_RECONCILIATION');
 for(const key of ['historicalFreezeRewritten','humanAcceptanceGranted','productionAcceptanceGranted'])assert.equal(sharedStyle[key],false);
 const visualStyle=sharedStyle.stylesheets.find(item=>item.path==='assets/css/global-visual-r2.css');
-assert.ok(visualStyle,'Personal shared visual stylesheet successor missing');assert.equal(sha(visualStyle.path),visualStyle.sha256,'Personal shared visual stylesheet digest drift');
+assert.ok(visualStyle,'Personal shared visual stylesheet successor missing');const inheritedVisualStyle=sharedVisualPredecessorBytes(visualStyle.path,visualStyle.sha256,fs.readFileSync(path.join(root,visualStyle.path)));assert.equal(crypto.createHash('sha256').update(inheritedVisualStyle).digest('hex'),visualStyle.sha256,'Personal shared visual stylesheet digest drift');
 const frozenStyles=new Set(json(base+'/legacy/legacy-css-freeze-v2.json').entries.map(item=>item.stylesheet));
 for(const href of stylesheetRefs(html)){
  const local=normalizedLocalAsset(href);if(!local)continue;

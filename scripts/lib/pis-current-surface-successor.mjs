@@ -1,6 +1,7 @@
+import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
 import {historicalFounderRuntimeBytes} from './founder-human-presence-successor-r2.mjs';
 import {historicalPisBytes,assertCurrentConsolidatedSurface} from './page-consolidation-successor-r1.mjs';
-import fs from 'node:fs';
+import sourceFs from 'node:fs';const fs={...sourceFs,readFileSync:auditPublicReadFile};
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 const sha=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
 import {parseHTML} from 'linkedom';
 import {historicalPisBytes,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
+import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-report-convergence-successor-r1.mjs';
 import {STRIPE_PRODUCT_REGISTRY,commerceProduct,commerceEntitlements} from '../functions/pws/commercial/stripe-product-registry.js';
 import {resolveCommerceBookSourceKey} from '../functions/commerce/book-product-registry.js';
 import {isPublicKnowledgeContextRef} from '../functions/contextual-ask/contextual-ask-runtime.js';
@@ -56,10 +57,18 @@ for(const id of ['HERO-8V-SYSTEM',...[6,7,8].flatMap(n=>[`BOOK-${n}-HARDCOVER`,`
 const currentHome=text('index.html');
 const {document:homeDocument}=parseHTML(currentHome);
 if(assertCurrentConsolidatedSurface(homeDocument,'index.html')){
+ if(isConvergenceCurrent('index.html')){
+  assertConvergenceHome(homeDocument);
+  const booksEntry=homeDocument.querySelector('section.r3-continuity .r3-small-links a[href="/books/"]');
+  assert(booksEntry,'Registered R3 homepage must retain its canonical Books continuation');
+  assert.equal(booksEntry.getAttribute('data-cx-en'),'Books');
+  assert.equal(booksEntry.getAttribute('data-cx-zh'),'书籍');
+ }else{
  const booksEntry=homeDocument.querySelector('#world-knowledge a[href="/books/"]');
  assert(booksEntry,'Current homepage must retain the canonical books entry');
  assert.equal(booksEntry.getAttribute('data-cx-en'),'Eight-volume foundations');
  assert.equal(booksEntry.getAttribute('data-cx-zh'),'八册思想基础');
+ }
 }
 const home=historicalPisBytes('index.html').toString('utf8');assert(home.includes('EIGHT BOOKS'));
 for(let n=1;n<=8;n++)assert.equal(home.split(`data-cx-seven-volume-asset="BOOK-${n}-HARDCOVER"`).length-1,1);

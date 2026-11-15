@@ -3,6 +3,12 @@ import {financialQaPath} from './_lib/final-release-scope.js';
 import {classifyStatelessFreeRequest, sealStatelessFreeBindings} from './_lib/stateless-free-request-r3.js';
 
 export async function onRequest(context) {
+  // Retire the legacy entry before its frozen scripts or meta refresh can run.
+  const entryUrl = new URL(context.request.url);
+  if (['GET','HEAD'].includes(context.request.method) && ['/reality-entry','/reality-entry/','/reality-entry.html'].includes(entryUrl.pathname)) {
+    entryUrl.pathname = '/reality/';
+    return Response.redirect(entryUrl.href,308);
+  }
   if(financialQaPath(new URL(context.request.url).pathname))return new Response('Not found',{status:404,headers:{'Cache-Control':'no-store'}});
   const mode = maintenanceMode(context.env.PHIOS_D1_MAINTENANCE_MODE);
   if (mode === 'OFF') return context.next();

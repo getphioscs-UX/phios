@@ -383,6 +383,7 @@ export function setLocale(
   const previousLocale = currentLocale;
 
   currentLocale = nextLocale;
+  if(typeof location!=='undefined'&&typeof history!=='undefined'){const url=new URL(location.href);url.searchParams.set('locale',nextLocale);history.replaceState(history.state,'',url);}
 
   if (persist) {
     storeLocale(currentLocale);
