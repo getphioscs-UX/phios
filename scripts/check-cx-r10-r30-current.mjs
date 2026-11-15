@@ -1,3 +1,5 @@
+import {validateCxReadabilityReader,readCxReadabilityPredecessor} from './lib/public-readability-cx-reader-successor-r2.mjs';
+validateCxReadabilityReader();
 import './check-public-entry-brand-guard-successor-r1.mjs';
 import './check-brand-scam-strict-receiver-r1.mjs';
 import {founderLegacyRoutePredecessor} from './lib/founder-legacy-route-compatibility-r1.mjs';
@@ -14,7 +16,7 @@ const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
 const json=p=>JSON.parse(read(p));
 const exists=p=>fs.existsSync(path.join(ROOT,p));
 const check=(id,fn)=>{if(phase!=='ALL'&&phase!==id)return;fn();console.log(`✓ CX-${id} current customer-system contract passed.`)};
-const redirects=founderLegacyRoutePredecessor('_redirects',fs.readFileSync(path.join(ROOT,'_redirects'))).toString('utf8').split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&!x.startsWith('#')).map(x=>x.split(/\s+/));
+const redirects=founderLegacyRoutePredecessor('_redirects',fs.readFileSync(path.join(ROOT,'_redirects')),{readFile:readCxReadabilityPredecessor}).toString('utf8').split(/\r?\n/).map(x=>x.trim()).filter(x=>x&&!x.startsWith('#')).map(x=>x.split(/\s+/));
 const redirectMap=new Map(redirects.map(([from,to,status])=>[from,{to,status}]));
 const routeFile=r=>r==='/'?'index.html':`${r.replace(/^\//,'').replace(/\/$/,'')}/index.html`;
 const cxPage=p=>{assert(exists(p),`${p} missing`);const h=read(p);if(h.includes('data-consolidation-target=')){const document=parseHTML(h).document;assert(assertCurrentConsolidatedSurface(document,p),'Unregistered consolidated redirect: '+p);const target=document.querySelector('[data-consolidation-target]').getAttribute('data-consolidation-target');assert(target.startsWith('/')&&!target.startsWith('//'),'Invalid consolidation destination: '+p);const successor=routeFile(target.split('#')[0].split('?')[0]);assert.notEqual(successor,p,'Consolidation redirect cycle: '+p);return cxPage(successor);}assert.match(h,/data-cx-surface=/);assert.match(h,/data-cx-header/);assert.match(h,/data-cx-footer/);assert.match(h,/\/assets\/customer-ui\/js\/shell\.js/);assert.doesNotMatch(h,/\/assets\/css\/(?:public-experience|design\/|tokens\.css)/);assert.doesNotMatch(h,/data-public-header-placeholder|data-public-footer-placeholder|class="public-page"|puxr-/);return h};
