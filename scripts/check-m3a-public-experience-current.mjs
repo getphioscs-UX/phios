@@ -1,3 +1,5 @@
+import {publicReadabilityPredecessor} from './lib/public-readability-source-successor-r1.mjs';
+import {readFileSync as readReadabilityCurrent} from 'node:fs';
 import {runInNewContext} from 'node:vm';
 import {founderLegacyRoutePredecessor,validateFounderLegacyRoutes} from './lib/founder-legacy-route-compatibility-r1.mjs';
 import {founderR3Predecessor} from './lib/founder-r3-historical-view-r1.mjs';
@@ -16,12 +18,12 @@ const json = file => JSON.parse(read(file));
 function exploreAboutDestination(source = read('explore/index.html')) {
   assert(source.includes('href="https://www.getphios.com/about/founder/"'), 'Explore canonical About destination missing');
   assert(source.includes('src="/assets/js/explore-about-compat.js"'), 'Explore compatibility runtime missing');
-  validateFounderLegacyRoutes();
+  validateFounderLegacyRoutes({readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))});
   const currentRuntime=read('assets/js/explore-about-compat.js'),currentTarget=read('about/founder/index.html');
   const destinations=new Map([['why','founder-origin'],['how','founder-connected-reality'],['start','founder-next-step'],['faq','founder-trust']]);
   for(const [oldId,newId]of destinations){let resolved;runInNewContext(currentRuntime,{location:{hash:'#'+oldId,replace:x=>{resolved=x;}}});assert.equal(resolved,'/about/founder/#'+newId);assert(currentTarget.includes('id="'+newId+'"'),'Actual R3 mapped target must exist');}
   for(const hash of ['', '#unknown','#constructor','#__proto__','#https://untrusted.invalid/']){let resolved;runInNewContext(currentRuntime,{location:{hash,replace:x=>{resolved=x;}}});assert.equal(resolved,'/about/founder/','Unknown legacy hash must keep fixed local fallback');}
-  const runtime = founderLegacyRoutePredecessor('assets/js/explore-about-compat.js',fs.readFileSync('assets/js/explore-about-compat.js')).toString('utf8');
+  const runtime = founderLegacyRoutePredecessor('assets/js/explore-about-compat.js',fs.readFileSync('assets/js/explore-about-compat.js'), {readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))}).toString('utf8');
   assert(runtime.includes("location.replace('/about/founder/'"), 'Explore About routing missing');
   assert(runtime.includes("new Set(['why','how','start','faq'])"));
   assert(runtime.includes("allowed.has(id)?'#'+id:''"), 'Explore bounded anchor routing missing');
@@ -36,7 +38,7 @@ const deletePlan = json('content/customer-experience-rebuild/migration/p1-legacy
 const homepage = json('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
 const explore = json('content/customer-experience-rebuild/authority/explore-customer-experience-v1.json');
 const knowledge = json('content/customer-experience-rebuild/authority/knowledge-customer-experience-v1.json');
-const redirects = founderLegacyRoutePredecessor('_redirects',fs.readFileSync('_redirects')).toString('utf8');
+const redirects = founderLegacyRoutePredecessor('_redirects',fs.readFileSync('_redirects'), {readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))}).toString('utf8');
 
 assert.equal(deletePlan.status, 'PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE');
 assert.equal(homepage.status, 'HOMEPAGE_EIGHT_VOLUME_IDENTITY_ALIGNED');

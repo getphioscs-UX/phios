@@ -1,3 +1,5 @@
+import {publicReadabilityPredecessor} from './lib/public-readability-source-successor-r1.mjs';
+import {readFileSync as readReadabilityCurrent} from 'node:fs';
 import {validateFounderLegacyRoutes} from './lib/founder-legacy-route-compatibility-r1.mjs';
 import {runInNewContext} from 'node:vm';
 import {founderR3Predecessor} from './lib/founder-r3-historical-view-r1.mjs';
@@ -298,7 +300,7 @@ const currentPageByHistoricalPage = new Map([
 const cxMigratedPjaPages = new Set(['index.html', 'articles/index.html', 'explore/index.html']);
 const px2MigratedPjaPages = new Set(['library.html']);
 async function assertExploreAboutRedirect(html){
- validateFounderLegacyRoutes();
+ validateFounderLegacyRoutes({readFile:p=>publicReadabilityPredecessor(p,readReadabilityCurrent(p))});
  assert(html.includes('href="https://www.getphios.com/about/founder/"'));
  assert(html.includes('src="/assets/js/explore-about-compat.js"'));
  const redirect=await read('assets/js/explore-about-compat.js');assert(redirect.includes("location.replace('/about/founder/'"));

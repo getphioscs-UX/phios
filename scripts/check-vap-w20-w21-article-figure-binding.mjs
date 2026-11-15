@@ -123,6 +123,8 @@ assert.equal(contract21.existingCapabilitiesReused.figureBlockType, 'figure');
 assert.equal(contract21.existingCapabilitiesReused.secondImageRendererCreated, false);
 assert.equal(contract21.currentBaseline.liveStructuredFigureProjectionCount, 0);
 
+// Explicit independent fixture Hero: the current renderer must not invent one.
+const fixtureHero={assetCode:'VAP_EXPLICIT_HERO_FIXTURE',assetType:'mechanism_diagram',publicSrc:'/assets/images/figures/vap-explicit-hero-fixture.webp',altText:'Explicit fixture hero',caption:'Explicit fixture hero caption',width:1200,height:800,publicProjection:true};
 const publicArticle = {
   ...article,
   title: 'Fixture article',
@@ -131,13 +133,13 @@ const publicArticle = {
   shortAnswer: 'Fixture short answer.',
   readingTimeMinutes: 2,
   publishedAt: '2026-08-11T00:00:00.000Z',
-  hero: null,
+  hero: {assetCode:fixtureHero.assetCode},
   keyConcepts: [],
   publicSources: [],
   knowledgeBoundary: [],
   connections: { previousNode: null, nextNode: null, relatedNodes: [], relatedArticles: [] },
   publicHref: '/articles/fixture',
-  visualAssets: []
+  visualAssets: [fixtureHero]
 };
 const publishedVisualAssets = [{
   assetCode: binding.assetCode,
@@ -148,7 +150,7 @@ const publishedVisualAssets = [{
   width: 1200,
   height: 800,
   publicProjection: true
-}];
+}, fixtureHero];
 const projected = projectStructuredFigureBinding({ publicArticle, resolvedBinding: resolved, publishedVisualAssets });
 assert.equal(projected.figureReferences.length, 1);
 assert.equal(projected.figureReferences[0].assetCode, binding.assetCode);
@@ -174,11 +176,11 @@ try {
   const { parseHTML } = await import('linkedom');
   const { document } = parseHTML('<!doctype html><html><body></body></html>');
   const rendered = renderArticleDocument(document, projected, { publishedArticles: [], translate: key => key });
-  // The current renderer also owns a fallback hero; this gate targets the bound body figure.
+  // This fixture explicitly declares its header Hero; the bound body figure stays independently governed.
   assert.equal(rendered.querySelectorAll('.knowledge-article__hero-visual').length, 1);
   const bodyFigures = [...rendered.querySelectorAll('figure')].filter(node => !node.classList.contains('knowledge-article__hero-visual'));
   assert.equal(bodyFigures.length, 1);
-  assert.equal(rendered.querySelectorAll('picture').length, 1);
+  assert.equal(rendered.querySelectorAll('picture').length, 2); // One explicit header picture + one governed body picture.
   assert.equal(rendered.querySelectorAll('img').length, 2);
   assert.equal(bodyFigures[0].querySelectorAll('img').length, 1);
   const image = bodyFigures[0].querySelector('img');
@@ -187,11 +189,23 @@ try {
   assert.equal(image.getAttribute('width'), '1200');
   assert.equal(image.getAttribute('height'), '800');
   assert.equal(bodyFigures[0].querySelector('figcaption').textContent, publishedVisualAssets[0].caption);
+  assert.equal(rendered.querySelector('.knowledge-article__hero-visual img').getAttribute('src'),fixtureHero.publicSrc);
+  assert.equal(rendered.querySelector('.knowledge-article__hero-visual img').getAttribute('alt'),fixtureHero.altText);
+  const bodyOnly={...projected,hero:null,visualAssets:projected.visualAssets.filter(x=>x.assetCode!==fixtureHero.assetCode)};
+  const unbound=renderArticleDocument(document,bodyOnly,{publishedArticles:[],translate:key=>key});
+  assert.equal(unbound.querySelectorAll('.knowledge-article__hero-visual').length,0);
+  assert.equal(unbound.querySelectorAll('picture').length,1);assert.equal(unbound.querySelectorAll('img').length,1);
+  const bodyImage=unbound.querySelector('figure img');
+  for(const [attribute,value]of Object.entries({src:publishedVisualAssets[0].publicSrc,alt:publishedVisualAssets[0].altText,width:'1200',height:'800'}))assert.equal(bodyImage.getAttribute(attribute),value);
+  assert.equal(unbound.querySelector('figure figcaption').textContent,publishedVisualAssets[0].caption);
+  const unknown=renderArticleDocument(document,{...bodyOnly,hero:{assetCode:'VAP_UNPUBLISHED_HERO_FIXTURE'}},{publishedArticles:[],translate:key=>key});
+  assert.equal(unknown.querySelectorAll('.knowledge-article__hero-visual').length,0);assert.equal(unknown.querySelectorAll('picture').length,1);assert.equal(unknown.querySelector('figure img').getAttribute('src'),publishedVisualAssets[0].publicSrc);
   domRendered = true;
 } catch (error) {
   if (error?.code !== 'ERR_MODULE_NOT_FOUND') throw error;
 }
 
+assert.equal(domRendered,true,'VAP current renderer DOM coverage requires installed linkedom');
 assert.equal(acceptance.status, 'ACCEPTED_CAPABILITY_READY_LIVE_BINDING_BLOCKED_UPSTREAM');
 assert.equal(acceptance.productionReality.liveBindingCount, 0);
 assert.equal(acceptance.productionReality.falseActivationForbidden, true);
@@ -208,3 +222,5 @@ console.log('✓ Article references CAR Published Asset authority; Article never
 console.log('✓ Existing figure block, published visual resolver, <picture>/<img> factory and Article renderer are reused; no second image renderer exists.');
 console.log(domRendered ? '✓ Controlled acceptance fixture renders one governed Figure block after S04 with publicSrc, alt, caption, width and height.' : '✓ Structured Figure projection and existing <figure>/<picture>/<img> renderer path validated; DOM execution is additionally exercised when linkedom is installed.');
 console.log('✓ Current main remains fail-closed at 0 live bindings because CAR has 0 Published Assets and the target legacy Published Article has no stable sectionCode identity.');
+
+console.log('PASS current explicit single Hero / body-only / unregistered-Hero refusal, with body src/alt/dimensions/caption assertions retained.');
