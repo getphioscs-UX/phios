@@ -1,3 +1,4 @@
+import {auditPublicPredecessor} from './lib/audit-r2-public-receiver-r2.mjs';
 import {parseHTML} from 'linkedom';
 import {isConvergenceCurrent,readConvergenceRecord,assertConvergenceHome,convergencePredecessor,convergenceRedirectTarget} from './lib/public-customer-report-convergence-successor-r1.mjs';
 import './check-public-visual-slot-contrast-current.mjs';
@@ -23,6 +24,11 @@ await assert.rejects(()=>verifiedDeltaBytes(fixtureProof,{readCache:missingCache
 await assert.rejects(()=>verifiedDeltaBytes(fixtureProof,{readCache:missingCache,publicFetch:async()=>new Response('tamper'),ignoreCache:false}),/DELTA_BYTES_DRIFT/);
 let invalidCacheFetched=false;await assert.rejects(()=>verifiedDeltaBytes(fixtureProof,{readCache:()=>Buffer.from('tamper'),publicFetch:async()=>{invalidCacheFetched=true;return fixtureFetch();},ignoreCache:false}),/DELTA_BYTES_DRIFT/);assert.equal(invalidCacheFetched,false);
 function financialBoundaryPredecessor(html,{recordBytes=fs.readFileSync("content/customer-experience-rebuild/legacy/financial-evidence-boundary-successor-v1.json")}={}){
+ // Validate the real accepted current boundary before the exact historical view.
+ assert.ok(!html.includes('data-px2-asset="FIG-036"'),'RETIRED_BOUNDARY_CONSUMER_RESTORED_WITHOUT_SUCCESSOR');
+ assert.ok(html.includes('The financial snapshot, deterministic calculations and bounded findings keep their original labels.')&&html.includes('财务快照、确定性计算与边界化发现会保留原有标签'),'CURRENT_EVIDENCE_DECISION_COPY_MISSING');
+ try {html=auditPublicPredecessor('professional/financial/index.html',Buffer.from(html)).toString('utf8');}
+ catch(error){if(error.message?.startsWith('AUDIT_PUBLIC_INPUT_DRIFT:professional/financial/index.html'))assert.fail('FINANCIAL_BOUNDARY_CURRENT_DRIFT: '+error.message);throw error;}
  assert.equal(proofSha(recordBytes),"d75da4205e89c25966fea2d0f344f352adc92527d0a2645cb1b8bf1cff3c5873",'UNREGISTERED_FINANCIAL_BOUNDARY_SUCCESSOR');const record=JSON.parse(recordBytes);assert.equal(record.status,'ENGINEERING_FINANCIAL_VISUAL_PREDECESSOR_RECONCILIATION');assert.equal(record.path,'professional/financial/index.html');for(const key of ['humanAcceptanceGranted','productionAcceptanceGranted','restoresLegacyImage'])assert.equal(record[key],false);assert.equal(proofSha(html),record.afterSHA,'FINANCIAL_BOUNDARY_CURRENT_DRIFT');
  assert.ok(!html.includes('data-px2-asset="FIG-036"'),'RETIRED_BOUNDARY_CONSUMER_RESTORED_WITHOUT_SUCCESSOR');assert.ok(html.includes('The financial snapshot, deterministic calculations and bounded findings keep their original labels.')&&html.includes('财务快照、确定性计算与边界化发现会保留原有标签'),'CURRENT_EVIDENCE_DECISION_COPY_MISSING');
  const legacy=JSON.parse(fs.readFileSync('content/registry/public-assets.json')).assets.find(a=>a.asset_code==='FIG-036'),approved=JSON.parse(fs.readFileSync('data/visual/approved-r2-visual-assets.json')).assets.find(a=>a.aliases.includes('FIG-036'));assert.equal(proofSha(JSON.stringify(legacy)),record.legacyRegistryEntrySHA,'LEGACY_BOUNDARY_AUTHORITY_DRIFT');assert.equal(proofSha(JSON.stringify(approved)),record.approvedInventoryEntrySHA,'BOUNDARY_ACCEPTANCE_REQUIRES_RECONCILIATION');
