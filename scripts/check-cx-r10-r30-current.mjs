@@ -1,3 +1,5 @@
+import './check-public-entry-brand-guard-successor-r1.mjs';
+import './check-brand-scam-strict-receiver-r1.mjs';
 import {founderLegacyRoutePredecessor} from './lib/founder-legacy-route-compatibility-r1.mjs';
 import crypto from 'node:crypto';
 import {assertCurrentConsolidatedSurface,consolidationSuccessor} from './lib/page-consolidation-successor-r1.mjs';

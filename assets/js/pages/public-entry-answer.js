@@ -6,6 +6,7 @@ import{relatedMechanismReading}from'./civilization-atlas/world-guided-readings.j
 import{ASK_CAPABILITIES}from'../ask-entry-capabilities.js';
 export async function publicEntryAnswer(question,locale,route,fetcher=fetch){
  if(route?.codex3PublicAnswer==='CODEX3_PUBLIC_ANSWER_R2')return route;
+ if(route?.outcome==='PLATFORM_INTRODUCTION')return route;
  if(['PROFESSIONAL_HANDOFF','PRODUCT_HELP','LIMITED_SUPPORT','CAPABILITY_UNAVAILABLE'].includes(route?.outcome)||route?.task==='PRODUCT_HELP')return route;
  const q=parseWorldQuestion(question,{locale});if(!q)return route;const zh=locale==='zh-Hans',t=(z,e)=>zh?z:e;
  const displayUnit=unit=>({persons:t('人','persons'),percent:'%',USD:t('美元（现价）','USD (current)')})[unit]||unit;

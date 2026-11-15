@@ -23,7 +23,7 @@ const rows=[
  ['APPOINTMENT','预约申请','Appointment requests','/professional/appointments/','PROFESSIONAL','functions/professional/appointments/appointment-request-store.js','Selected service, necessary information and explicit consent','Unscheduled REQUESTED application; no automatic confirmation'],
  ['WILL','遗嘱资料整理','Will information draft','/professional/financial/#estate-planning','FINANCIAL_REALITY','functions/account/will-information-delivery.js','Jurisdiction, information and save/delivery consent','Existing informational draft; not a legally executed Will'],
  ['CONTINUITY','持续会员','Continuity membership','/membership.html','MY_REALITY','functions/personal-reading/continuity/continuity-commercial-authority.js','Established material; existing subscription and quota owner','Ongoing follow-up; no monthly regeneration or automatic enrollment'],
- ['ABOUT','关于 PHI OS','About PHI OS','/about/founder/#how','KNOWLEDGE','about/founder/index.html','Public platform introduction','Existing platform/founder copy and real feature entrances'],
+ ['ABOUT','关于 PHI OS','About PHI OS','/about/founder/#founder-connected-reality','KNOWLEDGE','about/founder/index.html','Public platform introduction','Existing platform/founder copy and real feature entrances'],
  ['THESIS','核心论述','Thesis','/thesis.html','KNOWLEDGE','thesis.html','Published thesis and available PDF projection','Existing research reading/download; no invented PDF'],
  ['REALITY','继续我的现实','Continue My Reality','/reality/','MY_REALITY','functions/api/customer-contextual-ask.js','Explicitly selected authorized records or current self-report','Existing Reality and entitled contextual follow-up']
 ];
@@ -32,7 +32,7 @@ const registry={version:'PHI-OS-ASK-ENTRY-R1-v2',generatedFrom:[domainPath,metho
 fs.writeFileSync('content/public/client-intent-router/registries/client-capability-projection-r1.json',JSON.stringify(registry,null,2)+'\n');
 fs.writeFileSync('assets/js/ask-entry-capabilities.js','// Generated public projection; existing owners alone grant execution.\nexport const ASK_CAPABILITIES='+JSON.stringify(registry,null,2)+';\n');
 const csv=(name,fields,rows)=>fs.writeFileSync(dir+'/'+name,[fields.join(','),...rows.map(r=>fields.map(k=>'"'+String(r[k]??'').replaceAll('"','""')+'"').join(','))].join('\n')+'\n');
-csv('PHIOS-ASK-R1-CAPABILITY-LEDGER.csv',['capabilityId','canonicalRoute','routeOwner','availability','inputRequirements','outputKinds'],capabilities);
+csv('PHIOS-ASK-R1-CAPABILITY-LEDGER-FOUNDER-R3-SUCCESSOR.csv',['capabilityId','canonicalRoute','routeOwner','availability','inputRequirements','outputKinds'],capabilities);
 csv('PHIOS-ASK-R1-DOMAIN-PRODUCT-MAPPING.csv',['capabilityId','canonicalDomainRefs','mappingGap'],capabilities);
 const baseline=dir+'/BASELINE.json';if(!fs.existsSync(baseline))fs.writeFileSync(baseline,JSON.stringify({head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),branch:execFileSync('git',['branch','--show-current'],{encoding:'utf8'}).trim(),worktree:execFileSync('git',['status','--short'],{encoding:'utf8'}),at:new Date().toISOString(),authoritySHA256:crypto.createHash('sha256').update(fs.readFileSync(dir+'/OWNER-WORK-STEP.md')).digest('hex')},null,2));
 console.log('Built public capability projection from existing domains and method authority: '+capabilities.length);

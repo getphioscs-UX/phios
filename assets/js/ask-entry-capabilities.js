@@ -506,7 +506,7 @@ export const ASK_CAPABILITIES={
         "en": "About PHI OS",
         "zh-Hans": "关于 PHI OS"
       },
-      "canonicalRoute": "/about/founder/#how",
+      "canonicalRoute": "/about/founder/#founder-connected-reality",
       "routeOwner": "about/founder/index.html",
       "canonicalDomainRefs": [
         "KNOWLEDGE"
