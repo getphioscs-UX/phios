@@ -1,14 +1,16 @@
+import {ichingCurrentParentPredecessor} from './iching-current-parent-successor-r1.mjs';
 import path from 'node:path';import {pathToFileURL} from 'node:url';
 import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 const hash=b=>createHash('sha256').update(b).digest('hex'),RECORD='content/production-closure/live-customer-commercial-convergence/final-unified-production-r1/ICHING-STATELESS-RECEIVER-R2.json',EXPECTED='0a1272514369a8d696c2a4d1e8f3a20b4ab9fd6e0e6cc60803d2dbb7aac88ca0';
 const registered=["functions/iching-full-production/iching-full-production-v1.js", "functions/api/iching-full-context.js", "scripts/check-iching-full-production-deployment-continuity.mjs", "config/reports/zero-cost-check-commands.json"];
 export function validateCurrentIChingInputs({readCurrent=p=>fs.readFileSync(p),recordBytes=fs.readFileSync(RECORD)}={}){
  assert.equal(hash(recordBytes),EXPECTED,'ICHING_STATELESS_RECORD_DRIFT');const r=JSON.parse(recordBytes);assert.equal(r.schema,'ICHING_STATELESS_RECEIVER_R2');assert.deepEqual(r.changes.map(x=>x.path),registered);for(const value of Object.values(r.boundaries))assert.equal(value,false);
- for(const item of r.currentInputs)assert.equal(hash(readCurrent(item.path)),item.sha256,'ICHING_STATELESS_PHYSICAL_DRIFT:'+item.path);
+ for(const item of r.currentInputs)assert.equal(hash(ichingCurrentParentPredecessor(item.path,readCurrent(item.path))),item.sha256,'ICHING_STATELESS_PHYSICAL_DRIFT:'+item.path);
  for(const item of r.changes)assert.equal(hash(Buffer.from(item.beforeBytesBase64,'base64')),item.beforeSHA256,'ICHING_STATELESS_ARCHIVE_DRIFT:'+item.path);
  return r;
 }
 export function ichingStatelessPredecessor(file,bytes,options){
+ bytes=ichingCurrentParentPredecessor(file,bytes);
  if(!registered.includes(file))return bytes;const r=validateCurrentIChingInputs(options),row=r.changes.find(x=>x.path===file),actual=hash(bytes);if(actual===row.beforeSHA256)return bytes;assert.equal(actual,row.afterSHA256,'ICHING_STATELESS_INPUT_DRIFT:'+file);return Buffer.from(row.beforeBytesBase64,'base64');
 }
 export async function runHistoricalIChingContinuity(){
