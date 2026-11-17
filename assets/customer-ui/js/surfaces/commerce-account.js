@@ -3,9 +3,10 @@ import {installPaidReportSetup} from './paid-report-setup.js';
 import {fetchCommerceProductVisuals,resolveCommerceProductVisual,commerceProductName} from './commerce-product-visuals.js';
 // Account projection of the existing Commerce owner; browser state is never an entitlement.
 const host=document.querySelector('main .cx-container');
-const root=document.createElement('section');root.id='commerce';root.className='cx-stack cx-stack--loose';root.dataset.commerceAccount='';host?.append(root);
+const root=document.createElement('section');root.id='commerce';root.className='cx-stack cx-stack--loose';root.dataset.commerceAccount='';(document.querySelector('[data-account-commerce-slot]')||host)?.append(root);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const zh=()=>document.documentElement.lang==='zh-Hans';const t=(en,cn)=>zh()?cn:en;
+let privacyEpoch=0;
 let catalog=null,account=null,checkoutKey=null,productVisuals=[];
 const money=p=>new Intl.NumberFormat(zh()?'zh-MY':'en-MY',{style:'currency',currency:p.currency}).format(p.amountMinor/100);
 function name(p){return commerceProductName(p,document.documentElement.lang);}
@@ -45,5 +46,7 @@ function render(){
 }
 function message(text){root.querySelector('[data-commerce-message]').textContent=text;}
 async function postAction(path,body,key,host){try{const r=await fetch(path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),p=await r.json();if(!r.ok)throw new Error();const url=new URL(p[key],location.origin);if(host?url.hostname!==host||url.protocol!=='https:':url.origin!==location.origin)throw new Error();location.assign(url.href);}catch{message(t('This action is not available yet. Please try again later.','暂时无法执行，请稍后重试。'));}}
-async function load(){try{const [c,a,v]=await Promise.all([fetch('/api/commerce-catalog',{cache:'no-store'}),fetch('/api/commerce-account',{cache:'no-store'}),fetchCommerceProductVisuals().then(assets=>({assets})).catch(()=>null)]);catalog=c.ok?await c.json():null;account=a.ok?await a.json():null;productVisuals=v?.assets||[];render();}catch{root.textContent=t('Purchases are temporarily unavailable.','暂时无法读取购买记录。');}}
+async function load(){const generation=privacyEpoch;try{const [c,a,v]=await Promise.all([fetch('/api/commerce-catalog',{cache:'no-store'}),fetch('/api/commerce-account',{cache:'no-store'}),fetchCommerceProductVisuals().then(assets=>({assets})).catch(()=>null)]);const nextCatalog=c.ok?await c.json():null,nextAccount=a.ok?await a.json():null;if(generation!==privacyEpoch)return;catalog=nextCatalog;account=nextAccount;productVisuals=v?.assets||[];render();}catch{root.textContent=t('Purchases are temporarily unavailable.','暂时无法读取购买记录。');}}
+function clearCommerce(){privacyEpoch++;account=null;checkoutKey=null;root.replaceChildren();render();}
+window.addEventListener('phios:account-logout',clearCommerce);window.addEventListener('pagehide',clearCommerce);window.addEventListener('pageshow',e=>{if(e.persisted)load();});
 window.addEventListener('phios:localechange',render);load();

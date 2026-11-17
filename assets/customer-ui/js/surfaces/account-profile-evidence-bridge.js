@@ -6,7 +6,7 @@ if(host){
   const list=host.querySelector('[data-account-profile-items]');
   const zh=()=>String(document.documentElement.lang||'').toLowerCase().startsWith('zh');
   const t=(en,cn)=>zh()?cn:en;
-  let loading=false;
+  let epoch=0;let loading=false;
   let latest=null;
   const labels={
     QUICK_PROFILE:['Quick self-report','快速自陈'],
@@ -52,23 +52,23 @@ if(host){
   }
   async function refresh(){
     if(loading)return;
-    loading=true;button.disabled=true;
+    const generation=epoch;loading=true;button.disabled=true;
     status.textContent=t('Checking saved evidence…','正在读取已保存的证据……');
     try{
       const r=await fetch('/api/auth/session',{credentials:'same-origin',cache:'no-store',headers:{accept:'application/json'}});
       if(!r.ok)throw new Error('SESSION_UNAVAILABLE');
-      const session=await r.json();
+      const session=await r.json();if(generation!==epoch)return;
       if(session.authenticated!==true){latest={kind:'GUEST'};render();return;}
       const response=await fetch('/api/account-profile-evidence',{credentials:'same-origin',cache:'no-store',headers:{accept:'application/json'}});
       if(!response.ok)throw new Error('EVIDENCE_UNAVAILABLE');
-      const data=await response.json();
+      const data=await response.json();if(generation!==epoch)return;
       if(!Array.isArray(data.objects))throw new Error('INVALID_EVIDENCE_RESPONSE');
       latest={kind:'AVAILABLE',objects:data.objects};render();
-    }catch{latest={kind:'UNAVAILABLE'};render();}
+    }catch{if(generation!==epoch)return;latest={kind:'UNAVAILABLE'};render();}
     finally{loading=false;button.disabled=false;}
   }
   button.addEventListener('click',()=>{void refresh();});
   window.addEventListener('phios:localechange',render);
   window.addEventListener('pageshow',e=>{if(e.persisted){latest=null;list.replaceChildren();status.textContent=t('Check saved evidence when signed in.','登录后可查看已存证据。');}});
-  window.addEventListener('phios:account-logout',()=>{latest=null;list.replaceChildren();status.textContent=t('Sign in to view your saved evidence.','请登录后查看已存证据。');});
+  window.addEventListener('phios:account-logout',()=>{epoch++;latest=null;list.replaceChildren();status.textContent=t('Sign in to view your saved evidence.','请登录后查看已存证据。');});
 }

@@ -66,7 +66,8 @@ export async function installVisualGuides(){
   if(next){heroObserver=new MutationObserver(records=>{if(records.some(r=>[...r.addedNodes,...r.removedNodes].some(n=>n.nodeType===1&&!n.matches('[data-r5-guide]'))))schedule();});heroObserver.observe(next,{childList:true,subtree:true});}
  }
  function bind(){observeHeroOwner();for(const [sequence,selector,inline]of targets){
-  const host=document.querySelector(selector),asset=registry.entries.find(x=>x.r5Sequence===sequence);
+  const declaredHost=document.querySelector(selector),accountReference=document.querySelector("[data-account-r5-hub]")&&document.getElementById("account-reference-figures");
+  const host=declaredHost&&accountReference&&[24,88].includes(sequence)?accountReference:declaredHost,asset=registry.entries.find(x=>x.r5Sequence===sequence);
   if(sequence===78&&host&&asset?.available){const existing=claimExistingHeroSlot(host,asset);if(existing){window.phiosVisualBindingState??={};window.phiosVisualBindingState[sequence]={selector,state:'REUSED_PAGE_COMPOSITION',owner:'PAGE_COMPOSITION'};continue;}}
   if(asset && document.querySelector(`[data-vr2-guide="${asset.assetId}"]`))continue;
   const state=!host?'MISSING_SLOT':!asset?.available?'ASSET_UNAVAILABLE':'BOUND';

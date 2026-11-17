@@ -5,7 +5,8 @@ import {esc,tr} from './runtime-ui.js';
 import {accountRequest} from './secure-drafts.js';
 const reportMethodTitle=code=>{const titles={BZR:['BaZi report','八字报告'],ZWR:['Zi Wei report','紫微报告'],AST:['Astrology report','占星报告'],NUM:['Numerology report','数字学报告'],HD:['Human Design report','人类图报告'],ECR:['PHI Configuration report','PHI 构型报告']};return Object.hasOwn(titles,code)?tr(...titles[code]):tr('Method report','方法报告');};
 const host=document.createElement('section');host.className='cx-card cx-stack cx-person-hub';host.id='account-persons';
-document.querySelector('#main .cx-container')?.append(host);
+(document.querySelector('[data-account-people-slot]')||document.querySelector('#main .cx-container'))?.append(host);
+let privacyEpoch=0;
 let reportsState='loading',reportsError=null;
 let persons=[],reports=[],editing=null,message='',available=false,locationCandidates=[],selectedLocation=null,locationBusy=false,searchTimer=null;
 const field=(name,en,zh,type='text',value='',extra='')=>`<label class="cx-field"><span>${esc(tr(en,zh))}</span><input class="cx-input" name="${name}" type="${type}" value="${esc(value)}" ${extra}></label>`;
@@ -43,8 +44,8 @@ function render(){
  if(reportSection&&editor)host.insertBefore(reportSection,editor);
  host.querySelector('[data-refresh-reports]')?.addEventListener('click',()=>refreshReports());
  host.querySelectorAll('[data-method-pdf]').forEach(button=>button.onclick=async()=>{
-  let status=button.closest('article').querySelector('[data-method-pdf-status]');if(!status){status=document.createElement('p');status.dataset.methodPdfStatus='';status.setAttribute('role','status');button.after(status);}button.disabled=true;status.textContent=tr('Preparing your PDF…','正在准备 PDF…');
-  try{const response=await fetch('/api/account-method-reports?reportId='+encodeURIComponent(button.dataset.methodPdf)+'&format=pdf',{credentials:'same-origin',headers:{Accept:'application/pdf'}});if(!response.ok||!response.headers.get('content-type')?.startsWith('application/pdf'))throw Error('PDF_UNAVAILABLE');const blob=await response.blob(),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='PHI-OS-'+button.dataset.methodPdf.replace(/[^A-Za-z0-9_-]/g,'')+'.pdf';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent=tr('PDF download started.','PDF 已开始下载。');}
+  const generation=privacyEpoch;let status=button.closest('article').querySelector('[data-method-pdf-status]');if(!status){status=document.createElement('p');status.dataset.methodPdfStatus='';status.setAttribute('role','status');button.after(status);}button.disabled=true;status.textContent=tr('Preparing your PDF…','正在准备 PDF…');
+  try{const response=await fetch('/api/account-method-reports?reportId='+encodeURIComponent(button.dataset.methodPdf)+'&format=pdf',{credentials:'same-origin',headers:{Accept:'application/pdf'}});if(!response.ok||!response.headers.get('content-type')?.startsWith('application/pdf'))throw Error('PDF_UNAVAILABLE');const blob=await response.blob();if(generation!==privacyEpoch)return;const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='PHI-OS-'+button.dataset.methodPdf.replace(/[^A-Za-z0-9_-]/g,'')+'.pdf';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status.textContent=tr('PDF download started.','PDF 已开始下载。');}
   catch{status.textContent=tr('The PDF could not be downloaded. Refresh the report list and retry later; you do not need to pay again.','PDF 暂时无法下载。请刷新报告列表后稍后重试，无需再次付款。');}finally{button.disabled=false;}
  });
  host.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>{editing=b.dataset.edit;selectedLocation=null;locationCandidates=[];message='';render();});
@@ -70,20 +71,23 @@ function bindPlaceOption(button){button.onclick=()=>{const item=locationCandidat
 function renderPlaceResults(){const node=host.querySelector('[data-place-results]');if(!node)return;node.innerHTML=placeResults();node.querySelectorAll('[data-place-ref]').forEach(bindPlaceOption);}
 async function searchPlaces(query){locationBusy=true;renderPlaceResults();try{const response=await fetch('/api/location-search?q='+encodeURIComponent(query)+'&locale='+encodeURIComponent(locale()),{headers:{Accept:'application/json'},cache:'no-store'}),payload=await response.json();locationCandidates=response.ok&&payload?.ok?payload.candidates||[]:[];}catch{locationCandidates=[];}finally{locationBusy=false;renderPlaceResults();}}
 async function refreshReports(){
+ const generation=privacyEpoch;
  reportsState='loading';reportsError=null;render();
- try{const response=await accountRequest('/api/account-method-reports');if(!Array.isArray(response.reports))throw new Error('REPORT_LIST_INVALID');reports=response.reports;reportsState='ready';}
- catch(e){reports=[];reportsState='error';reportsError=e.status||null;}
+ try{const response=await accountRequest('/api/account-method-reports');if(generation!==privacyEpoch)return;if(!Array.isArray(response.reports))throw new Error('REPORT_LIST_INVALID');reports=response.reports;reportsState='ready';}
+ catch(e){if(generation!==privacyEpoch)return;reports=[];reportsState='error';reportsError=e.status||null;}
  render();
 }
 async function refresh(){
+ const generation=privacyEpoch;
  const loadReports=refreshReports();
- try{const response=await accountRequest('/api/account-persons');persons=Array.isArray(response.persons)?response.persons:[];available=true;}
- catch(e){persons=[];available=false;message=e.status===401?tr('Sign in to manage your birth profile.','请登录以管理出生资料。'):tr('Birth profiles are temporarily unavailable.','出生资料暂不可用。');}
- await loadReports;render();
+ try{const response=await accountRequest('/api/account-persons');if(generation!==privacyEpoch)return;persons=Array.isArray(response.persons)?response.persons:[];available=true;}
+ catch(e){if(generation!==privacyEpoch)return;persons=[];available=false;message=e.status===401?tr('Sign in to manage your birth profile.','请登录以管理出生资料。'):tr('Birth profiles are temporarily unavailable.','出生资料暂不可用。');}
+ await loadReports;if(generation!==privacyEpoch)return;render();
  if(!available&&reportsState!=='error'){
   // Reports remain reachable when profile management is temporarily unavailable.
   const section=document.createElement('section');section.className='cx-account-reports';
   section.innerHTML=reports.map(r=>`<article class="cx-account-report-card"><h3>${esc(reportMethodTitle(r.method))} · ${esc(r.subjectName||'')}</h3><a class="cx-button" target="_blank" rel="noopener" href="/api/account-method-reports?reportId=${encodeURIComponent(r.reportId)}">${esc(tr('Open report','打开报告'))}</a></article>`).join('');host.append(section);installReportQuestions(host);
  }
 }
-refresh();window.addEventListener('phios:localechange',()=>{selectedLocation=null;locationCandidates=[];render();});window.addEventListener('pageshow',e=>{if(e.persisted)refresh();});window.addEventListener('pagehide',()=>{persons=[];reports=[];editing=null;available=false;selectedLocation=null;locationCandidates=[];render();});
+refresh();window.addEventListener('phios:localechange',()=>{selectedLocation=null;locationCandidates=[];render();});window.addEventListener('pageshow',e=>{if(e.persisted)refresh();});function clearPersons(){privacyEpoch++;persons=[];reports=[];editing=null;available=false;reportsState='ready';selectedLocation=null;locationCandidates=[];clearTimeout(searchTimer);render();}
+window.addEventListener('pagehide',clearPersons);window.addEventListener('phios:account-logout',clearPersons);

@@ -1,8 +1,8 @@
 import {notifyAccountLogout} from '../account-session-signal.js';
 const host=document.createElement('section');host.dataset.r5AccountAuth='';
 host.className='cx-card cx-stack';host.setAttribute('aria-live','polite');
-document.querySelector('#main .cx-container')?.prepend(host);
-let session=null;
+const authSlot=document.querySelector('[data-account-auth-slot]');if(authSlot)authSlot.append(host);else document.querySelector('#main .cx-container')?.prepend(host);
+let session=null,sessionEpoch=0;
 const zh=()=>document.documentElement.lang==='zh-Hans';
 function render(){
  queueMicrotask(()=>document.dispatchEvent(new Event("phios:account-rendered")));
@@ -32,5 +32,8 @@ host.addEventListener('submit',async event=>{
   status.textContent=zh()?'暂时无法完成退出，请重试。':'Sign-out could not finish. Please try again.';
  }
 });
-fetch('/api/auth/session',{cache:'no-store',credentials:'same-origin'}).then(async r=>{session=r.ok?await r.json():null;render();}).catch(()=>render());
+async function loadSession(){const generation=++sessionEpoch;try{const r=await fetch('/api/auth/session',{cache:'no-store',credentials:'same-origin'}),next=r.ok?await r.json():null;if(generation!==sessionEpoch)return;session=next;render();}catch{if(generation===sessionEpoch){session=null;render();}}}
+loadSession();window.addEventListener('pageshow',e=>{if(e.persisted)loadSession();});
 window.addEventListener('phios:localechange',render);
+
+window.addEventListener('phios:account-logout',()=>{sessionEpoch++;session={authenticated:false,providerConfigured:session?.providerConfigured===true};render();});
