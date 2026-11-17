@@ -8,6 +8,6 @@ Actual local Worker layouts: 20/20 EN/zh-Hans × five widths × local-unavailabl
 
 The saved-reading module's existing malformed automatic list-button invocation is repaired so authenticated Commerce rendering can complete.
 
-SOURCESET.json binds all 11 product paths to exact local Worker HTTP and artifact bytes. R2-ASSET-AUDIT.json contains original identities/MIME/remote SHA values. IMAGE-DIAGNOSIS.json records lazy/reserved-space diagnosis and KEEP/ARCHIVE decisions. Only original Hero remains an active dashboard figure; archive template retains original registrations.
+SOURCESET.json binds all 11 product paths to exact local Worker HTTP and artifact bytes. R2-ASSET-AUDIT.json contains original identities/MIME/remote SHA values. IMAGE-DIAGNOSIS.json records lazy/reserved-space diagnosis and KEEP/ARCHIVE decisions. Only original Hero remains an active dashboard figure; hidden inert archive retains original registrations.
 
 Single Master Review is updated in place outside this repository. No deployment or commercial launch was performed. Final remote CI is appended to PR22 and Master after the source commit, with inherited blockers explicit.
