@@ -1,3 +1,4 @@
+import {publishAccountView} from '../account-view-state.js';
 import {notifyAccountLogout} from '../account-session-signal.js';
 const host=document.createElement('section');host.dataset.r5AccountAuth='';
 host.className='cx-card cx-stack';host.setAttribute('aria-live','polite');
@@ -8,8 +9,9 @@ function render(){
  queueMicrotask(()=>document.dispatchEvent(new Event("phios:account-rendered")));
   delete host.dataset.r6AccountPermissionGate;
   const z=zh(),login=`/api/auth/login?locale=${z?'zh-Hans':'en'}`;
-  if(!session){host.textContent=z?'暂时无法读取登录状态，请稍后重试。':'Sign-in status is temporarily unavailable. Please try again.';return;}
+  if(!session){publishAccountView('auth',{state:'unavailable'});host.textContent=z?'暂时无法读取登录状态，请稍后重试。':'Sign-in status is temporarily unavailable. Please try again.';return;}
   const state=session.authenticated?'AUTHENTICATED':'GUEST';
+  publishAccountView('auth',{state:session.authenticated?'signed-in':session.providerConfigured?'guest':'unavailable'});
   if(session.authenticated===false)host.dataset.r6AccountPermissionGate='true';
   document.body.dataset.cxAccountState=state;
   for(const badge of document.querySelectorAll('.cx-account-state')){
@@ -32,7 +34,7 @@ host.addEventListener('submit',async event=>{
   status.textContent=zh()?'暂时无法完成退出，请重试。':'Sign-out could not finish. Please try again.';
  }
 });
-async function loadSession(){const generation=++sessionEpoch;try{const r=await fetch('/api/auth/session',{cache:'no-store',credentials:'same-origin'}),next=r.ok?await r.json():null;if(generation!==sessionEpoch)return;session=next;render();}catch{if(generation===sessionEpoch){session=null;render();}}}
+async function loadSession(){const generation=++sessionEpoch;try{const r=await fetch('/api/auth/session',{cache:'no-store',credentials:'same-origin'}),next=r.ok?await r.json():null;if(generation!==sessionEpoch)return;session=next&&typeof next.authenticated==='boolean'?next:null;render();}catch{if(generation===sessionEpoch){session=null;render();}}}
 loadSession();window.addEventListener('pageshow',e=>{if(e.persisted)loadSession();});
 window.addEventListener('phios:localechange',render);
 
