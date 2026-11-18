@@ -39,12 +39,16 @@ if(main){
  function renderViews(){
   const auth=views.get('auth')?.state||'loading',commerce=views.get('commerce'),reports=views.get('reports'),account=commerce?.account;
   let lines=[];
+  const activeRight=e=>!['REVOKED','EXPIRED','REFUNDED'].includes(String(e.state).toUpperCase())&&e.deliveryState==='ready';
+  const member=commerce?.state==='verified'&&account.subscriptions.some(s=>s.accessGranted===true),owner=commerce?.state==='verified'&&account.entitlements.some(activeRight);
+  const restricted=!!reports?.restricted||commerce?.state==='verified'&&(account.entitlements.some(e=>['REVOKED','EXPIRED','REFUNDED'].includes(String(e.state).toUpperCase()))||account.orders.some(o=>['REFUNDED','PARTIALLY_REFUNDED','PAYMENT_FAILED','CANCELED'].includes(o.state)));
+  main.dataset.accountCustomerState=auth!=='signed-in'?auth:restricted?'restricted':member?'membership-active':owner?'product-owner':'authenticated';
   if(auth==='guest')lines.push(tr('Guest · Sign in to see your purchases, rights and private reports.','访客 · 登录后可核实购买、权益与私人报告。'));
   else if(auth==='unavailable')lines.push(tr('Authentication unavailable · Your purchases and access have not been confirmed.','登录服务暂不可用 · 购买及访问权限尚未确认。'));
   else if(auth==='signed-in'){
-   lines.push(tr('Signed in and verified.','已登录并验证。'));
+   lines.push(tr('Authenticated account','已验证账户')+(member?' · '+tr('Membership active','会员有效'):'')+(owner?' · '+tr('Product owner · active access','产品所有者 · 访问权益有效'):''));
    if(commerce?.state==='verified'){
-    const active=account.subscriptions?.some(s=>s.accessGranted===true);if(active)lines.push(tr('Active membership verified.','已核实有效会员。'));
+
     lines.push(account.orders.length?tr(account.orders.length+' verified order records. Order status is separate from access.',account.orders.length+' 条已核实订单；订单状态与访问权限分别判断。'):tr('No purchases were returned by your verified account.','已验证的账户当前未返回购买记录。'));
     if(account.orders.some(o=>['REFUNDED','PARTIALLY_REFUNDED','PAYMENT_FAILED','CANCELED'].includes(o.state))||account.subscriptions?.some(s=>s.accessGranted===false)||account.entitlements?.some(e=>['REVOKED','EXPIRED','REFUNDED'].includes(e.state)||['revoked','expired'].includes(e.deliveryState)))lines.push(tr('Some orders or rights are inactive, failed, expired, refunded or revoked. Review Orders and Settings.','部分订单或权益未生效、失败、已到期、退款或撤销；请查看订单与设置。'));
    }else lines.push(tr('Purchase history has not been verified.','购买历史尚未核实。'));
@@ -53,10 +57,24 @@ if(main){
    if(reports?.restricted)lines.push(tr('Report access is expired, refunded or revoked. It is not downloadable.','部分报告访问已到期、退款或撤销，不能下载。'));
    if(reports?.state==='unavailable'||views.get('drafts')?.state==='unavailable'||views.get('methods')?.state==='error')lines.push(tr('Some private records could not be loaded. Open the relevant area for its error and recovery action.','部分私人记录读取失败；请进入对应分区查看错误与恢复操作。'));
   }else lines.push(statusText(auth));
-  const overview=main.querySelector('[data-account-overview]');overview.dataset.accountState=auth;const icon=document.createElement('img');icon.width=24;icon.height=24;icon.alt='';icon.setAttribute('aria-hidden','true');icon.className='account-r51__status-icon';const status=auth==='unavailable'?'UNAVAILABLE':auth==='loading'?'TEMPORARY':auth==='guest'?'SEPARATE':commerce?.state!=='verified'?(commerce?.state==='unavailable'?'UNAVAILABLE':'TEMPORARY'):reports?.restricted||account?.orders?.some(o=>['REFUNDED','PAYMENT_FAILED','CANCELED'].includes(o.state))?'PARTIAL':reports?.pending?'TEMPORARY':account?.subscriptions?.some(s=>s.accessGranted===true)||account?.entitlements?.some(e=>e.deliveryState==='ready')||reports?.released?'AVAILABLE':'SEPARATE';icon.dataset.accountIcon='PHIOS-ICON-STATUS-'+status+'-v1.svg';overview.dataset.statusIcon=status;const text=document.createElement('div');text.replaceChildren(...lines.map(value=>{const n=document.createElement('p');n.textContent=value;return n;}));overview.replaceChildren(icon,text);
+  const overview=main.querySelector('[data-account-overview]');overview.dataset.accountState=auth;overview.hidden=auth!=='signed-in';const icon=document.createElement('img');icon.width=24;icon.height=24;icon.alt='';icon.setAttribute('aria-hidden','true');icon.className='account-r51__status-icon';const status=auth==='unavailable'?'UNAVAILABLE':auth==='loading'?'TEMPORARY':auth==='guest'?'SEPARATE':commerce?.state!=='verified'?(commerce?.state==='unavailable'?'UNAVAILABLE':'TEMPORARY'):reports?.restricted||account?.orders?.some(o=>['REFUNDED','PAYMENT_FAILED','CANCELED'].includes(o.state))?'PARTIAL':reports?.pending?'TEMPORARY':account?.subscriptions?.some(s=>s.accessGranted===true)||account?.entitlements?.some(e=>e.deliveryState==='ready')||reports?.released?'AVAILABLE':'SEPARATE';icon.dataset.accountIcon='PHIOS-ICON-STATUS-'+status+'-v1.svg';overview.dataset.statusIcon=status;const text=document.createElement('div');text.replaceChildren(...lines.map(value=>{const n=document.createElement('p');n.textContent=value;return n;}));overview.replaceChildren(icon,text);
   const membership=main.querySelector('[data-account-membership-view]');membership.innerHTML=auth!=='signed-in'?p(statusText(auth)):commerce?.state!=='verified'?p(statusText(commerce?.state)):p(account.subscriptions?.some(s=>s.accessGranted===true)?tr('Active membership · verified by your account service.','有效会员 · 已由账户服务核实。'):tr('No active membership was verified.','未核实到有效会员。'))+(account.subscriptions||[]).map(s=>p(tr('Plan','方案')+': '+(s.planName||commerceProductName(s)||s.entitlementCode||tr('Not provided by the account service','账户服务未提供'))+' · '+tr('Status','状态')+': '+(s.accessGranted===true?tr('Active','有效'):tr('Inactive or expired','未生效或已到期'))+(s.paidUntil?' · '+tr('Paid until','付款有效至')+': '+new Date(typeof s.paidUntil==='number'&&s.paidUntil<1e12?s.paidUntil*1000:s.paidUntil).toLocaleDateString(document.documentElement.lang):''))).join('')+p(tr('Product rights are listed below exactly as returned by the account service. A paid order alone does not unlock another product.','以下仅列出账户服务返回的产品权益；订单已付不代表其他产品已解锁。'))+((account.entitlements||[]).length?'<ul>'+account.entitlements.map(e=>'<li>'+esc(e.title||commerceProductName(e)||e.entitlementCode||tr('Product right','产品权益'))+' · '+esc(e.deliveryState||e.state||tr('Check order details','请核对订单详情'))+'</li>').join('')+'</ul>':p(tr('No product entitlements returned.','账户未返回产品权益。')));
   if(auth==='signed-in'&&commerce?.state==='verified')membership.innerHTML+=p(ask.state==='ready'?tr('Verified remaining usage: ','已核实剩余额度：')+ask.balance.credits+' PHI Credits':tr('Usage has not been verified. Open Paid Ask to check its availability and balance.','使用额度尚未核实，可进入会员 Ask 查看开放状态与余额。'));
-  renderAsk();bindIcons();
+  renderAsk();renderNextStep();bindIcons();
+ }
+
+ function renderNextStep(){
+  const host=main.querySelector('[data-account-next-content]'),auth=views.get('auth')?.state,commerce=views.get('commerce'),reports=views.get('reports'),drafts=views.get('drafts'),methods=views.get('methods'),items=[];
+  const add=(key,label,href)=>items.push('<li data-account-priority="'+key+'"><a href="'+href+'">'+esc(label)+'</a></li>');
+  if(auth!=='signed-in'){host.innerHTML=p(auth==='guest'?tr('Use Sign in above to verify your account. Your private activity is only shown after authentication.','请使用上方登录入口核实账户，验证后才显示私人活动。'):auth==='unavailable'?tr('Use Check account access again above to request a fresh session check. No purchase or saved activity is assumed.','可使用上方“重新检查账户访问”读取最新状态；不推定购买或保存活动。'):tr('Checking account access…','正在核实账户访问……'));return;}
+  if(reports?.state==='verified'&&reports.requiredInputs)add('inputs',tr('Review required report information','查看报告所需资料'),'#account-persons');
+  if(reports?.state==='verified'&&reports.pending)add('pending',tr('Check report preparation status','查看报告准备状态'),'#account-reports');
+  if(reports?.state==='verified'&&reports.released||methods?.state==='ready'&&methods.released)add('released',tr('Open your released report versions','打开已发布的报告版本'),'#account-reports');
+  if(commerce?.state==='verified'&&commerce.account.subscriptions.some(s=>s.accessGranted===true))add('membership',ask.state==='ready'?tr('Review membership · remaining usage: ','查看会员 · 剩余额度：')+ask.balance.credits+' PHI Credits':tr('Review verified membership; usage is not yet verified','查看已核实会员；使用额度尚未核实'),'#account-membership-panel');
+  if(drafts?.state==='verified'&&drafts.will)add('will',tr('Continue your saved Will preparation','继续已保存的遗嘱准备'),'#account-drafts');
+  if(drafts?.state==='verified'&&drafts.financial)add('financial',tr('Continue your saved financial work','继续已保存的财务资料'),'#financial-account-reports');
+  const checked=reports?.state==='verified'||methods?.state==='ready'||drafts?.state==='verified'||commerce?.state==='verified';
+  host.innerHTML=items.length?'<ul>'+items.slice(0,3).join('')+'</ul>':p(checked?tr('No actionable priority was returned by the verified services. Use the areas below to review your account.','已核实服务当前未返回可执行的优先事项，可在下方分区查看账户。'):tr('Activity has not been verified. Open the relevant area to check its service status.','活动尚未核实，可进入对应分区核对服务状态。'));
  }
  function renderAsk(){const host=main.querySelector('[data-account-ask-view]'),auth=views.get('auth')?.state;
   if(auth!=='signed-in'){host.innerHTML=p(statusText(auth));return;}
@@ -64,9 +82,9 @@ if(main){
   }else host.innerHTML=p(ask.state==='loading'?tr('Checking availability and usage…','正在核实开放状态与额度……'):tr('Paid Ask availability or usage could not be verified. No access or credits are assumed.','尚无法核实会员 Ask 的开放状态或额度，不推定已开通或拥有额度。'))+'<a href="/membership.html">'+esc(tr('Read the existing membership and Ask conditions','查看现有会员及 Ask 条件'))+'</a>';
  }
  async function loadAsk(){if(views.get('auth')?.state!=='signed-in'||['loading','ready','unavailable'].includes(ask.state))return;const generation=++askEpoch;ask={state:'loading'};renderAsk();try{const r=await fetch('/api/membership-ask',{credentials:'same-origin',cache:'no-store'}),j=await r.json();if(generation!==askEpoch)return;ask=r.ok&&j.ok&&Number.isFinite(j.balance?.credits)?{state:'ready',...j}:{state:'unavailable'};}catch{if(generation===askEpoch)ask={state:'unavailable'};}renderViews();}
- observeAccountViews(next=>{views=next;renderViews();if(area==='paid-ask')void loadAsk();});
+ observeAccountViews(next=>{views=next;renderViews();if(area==='paid-ask'||next.get('auth')?.state==='signed-in'&&next.get('commerce')?.state==='verified'&&next.get('commerce').account.subscriptions.some(s=>s.accessGranted===true))void loadAsk();});
  window.addEventListener('phios:localechange',()=>{renderViews();select(area);});window.addEventListener('phios:account-logout',()=>{askEpoch++;ask={state:'unchecked'};renderViews();});window.addEventListener('pagehide',()=>{askEpoch++;ask={state:'unchecked'};});
- // No conceptual images mount in the task area. Archive bytes remain in the
- // inert template and source registry; Help explains saved/session boundaries.
+ // The approved original Hero remains visible. Other reference bytes remain in the
+ // hidden inert archive and source registry; Help explains saved/session boundaries.
  select(areaForHash(),!!location.hash);bindIcons();void loadHero();
 }

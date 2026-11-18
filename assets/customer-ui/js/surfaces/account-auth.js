@@ -4,12 +4,13 @@ const host=document.createElement('section');host.dataset.r5AccountAuth='';
 host.className='cx-card cx-stack';host.setAttribute('aria-live','polite');
 const authSlot=document.querySelector('[data-account-auth-slot]');if(authSlot)authSlot.append(host);else document.querySelector('#main .cx-container')?.prepend(host);
 let session=null,sessionEpoch=0;
+const dashboard=!!document.querySelector('[data-account-r51]');
 const zh=()=>document.documentElement.lang==='zh-Hans';
 function render(){
  queueMicrotask(()=>document.dispatchEvent(new Event("phios:account-rendered")));
   delete host.dataset.r6AccountPermissionGate;
   const z=zh(),login=`/api/auth/login?locale=${z?'zh-Hans':'en'}`;
-  if(!session){publishAccountView('auth',{state:'unavailable'});host.textContent=z?'暂时无法读取登录状态，请稍后重试。':'Sign-in status is temporarily unavailable. Please try again.';return;}
+  if(!session){publishAccountView('auth',{state:'unavailable'});host.innerHTML=`<p>${z?'暂时无法核实账户登录状态。购买与私人资料尚未确认。':'Account sign-in status could not be verified. Purchases and private records are unconfirmed.'}</p><button type="button" class="cx-button" data-auth-retry>${z?'重新检查账户访问':'Check account access again'}</button>`;return;}
   const state=session.authenticated?'AUTHENTICATED':'GUEST';
   publishAccountView('auth',{state:session.authenticated?'signed-in':session.providerConfigured?'guest':'unavailable'});
   if(session.authenticated===false)host.dataset.r6AccountPermissionGate='true';
@@ -20,8 +21,9 @@ function render(){
     badge.dataset.cxZh=session.authenticated?'已登录':'访客';
     badge.textContent=z?badge.dataset.cxZh:badge.dataset.cxEn;
   }
-  host.innerHTML=session.authenticated?`<h2 class="cx-heading-2">${z?'已登录并验证':'Signed in and verified'}</h2><form action="/api/auth/logout" method="post"><button class="cx-button" type="submit">${z?'退出登录':'Sign out'}</button></form>`:session.providerConfigured?`<h2 class="cx-heading-2">${z?'登录你的账户':'Sign in to your account'}</h2><div class="cx-cluster"><a class="cx-button" href="${login}">${z?'登录':'Sign in'}</a><a class="cx-button" href="${login}&mode=signup">${z?'注册':'Create account'}</a></div><p>${z?'请在登录页面使用密码找回功能；邮箱验证后方可使用账户功能。':'Use account recovery on the sign-in page. Verify your email before using account features.'}</p>`:`<p>${z?'账户登录暂未可用。你仍可使用访客功能。':'Account sign-in is not available yet. Guest features remain available.'}</p>`;
+  host.innerHTML=session.authenticated?`${dashboard?'':`<h2 class="cx-heading-2">${z?'已登录并验证':'Signed in and verified'}</h2>`}<form action="/api/auth/logout" method="post"><button class="cx-button" type="submit">${z?'退出登录':'Sign out'}</button></form>`:session.providerConfigured?`<h2 class="cx-heading-2">${z?'登录你的账户':'Sign in to your account'}</h2><div class="cx-cluster"><a class="cx-button" href="${login}">${z?'登录':'Sign in'}</a><a class="cx-button" href="${login}&mode=signup">${z?'注册':'Create account'}</a></div><p>${z?'请在登录页面使用密码找回功能；邮箱验证后方可使用账户功能。':'Use account recovery on the sign-in page. Verify your email before using account features.'}</p>`:`<p>${z?'账户登录服务暂不可用。购买与私人资料尚未确认，公开内容仍可访问。':'Account sign-in provider is unavailable. Purchases and private records are unconfirmed; public content remains accessible.'}</p><button type="button" class="cx-button" data-auth-retry>${z?'重新检查账户访问':'Check account access again'}</button>`;
 }
+host.addEventListener('click',event=>{const button=event.target.closest('[data-auth-retry]');if(button){button.disabled=true;void loadSession();}});
 host.addEventListener('submit',async event=>{
  const form=event.target;if(!(form instanceof HTMLFormElement)||form.getAttribute('action')!=='/api/auth/logout')return;
  event.preventDefault();const button=form.querySelector('button');button.disabled=true;
