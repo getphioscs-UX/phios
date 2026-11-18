@@ -1,10 +1,11 @@
 export const CX_NAVIGATION = Object.freeze({
   primary: Object.freeze([
-    Object.freeze({id:'SUBJECTS',href:'/#six-perspectives',en:'Six Perspectives',zh:'六主体'}),
-    Object.freeze({id:'KNOWLEDGE',href:'/knowledge/',en:'Knowledge',zh:'知识'}),
-    Object.freeze({id:'ASK',href:'/knowledge/ask/',en:'Ask',zh:'提问'}),
-    Object.freeze({id:'MY_REALITY',href:'/reality/',en:'My Reality',zh:'我的现实'})
-  ]),
+Object.freeze({id:'SUBJECTS',href:'/#six-perspectives',en:'Six Perspectives',zh:'六种视角'}),
+Object.freeze({id:'WORLD',href:'/world/',en:'World',zh:'世界'}),
+Object.freeze({id:'KNOWLEDGE',href:'/knowledge/',en:'Knowledge',zh:'知识'}),
+Object.freeze({id:'METHODS',href:'/perspectives/personal/',en:'Methods',zh:'方法'}),
+Object.freeze({id:'PROFESSIONAL',href:'/professional/',en:'Professional',zh:'专业服务'})
+]),
   utilities: Object.freeze([
     Object.freeze({ id: 'SEARCH', mode: 'dialog', dialogId: 'cx-shell-search', en: 'Search', zh: '搜索' }),
     Object.freeze({ id: 'ACCOUNT', mode: 'link', href: '/account/', en: 'Account', zh: '账户' })

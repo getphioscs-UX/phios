@@ -6,3 +6,6 @@ body[data-iching-product-surface] [data-iching-production-state][hidden]{display
 .iching-entry-available,.iching-entry-unavailable{display:none}
 @supports selector(body:has(button)){body[data-iching-product-surface] .iching-entry-check-note{display:none}body[data-iching-product-surface]:has([data-iching-execute]:disabled) .iching-entry-unavailable{display:block}body[data-iching-product-surface]:has([data-iching-execute]:not(:disabled)) .iching-entry-available{display:block}}
 .iching-entry-history{margin-top:1rem}.iching-entry-history>summary{cursor:pointer;font-weight:650}
+
+/* Restore readable labels on the two existing light I Ching panels only. */
+body[data-iching-product-surface] .puxr-section--soft .sp-panel>.puxr-eyebrow{color:#6d5526}

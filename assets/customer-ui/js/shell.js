@@ -1,3 +1,4 @@
+const r5NavigationStyle=document.createElement('link');r5NavigationStyle.rel='stylesheet';r5NavigationStyle.href='/assets/css/navigation-r5.css';document.head.append(r5NavigationStyle);
 import {knowledgeNavigationIntent} from './navigation-intent.js';
 import {installEntryInputReceiver} from '../../js/entry-context-handoff.js';
 installEntryInputReceiver();
@@ -30,7 +31,7 @@ const SUBJECT_LINKS = [{"id":"personal","en":"Personal","zh":"个人","href":"/s
 function navLinks(active, extraClass = '') {
   return CX_NAVIGATION.primary.map(item => {
     if(item.id==='SUBJECTS') return `<details class="cx-personal-menu cx-subject-menu"><summary ${t(item.en,item.zh)}>${item.en}</summary><div>${SUBJECT_LINKS.map(subject=>`<a class="cx-nav-link ${extraClass}" href="${subject.href}" data-cx-nav-link ${location.pathname===subject.href?'aria-current="page"':''} ${t(subject.en,subject.zh)}>${subject.en}</a>`).join('')}</div></details>`;
-    return `<a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${item.id===active?'aria-current="page"':''} ${t(item.en,item.zh)}>${item.en}</a>`;
+    return `<a class="cx-nav-link ${extraClass}" href="${item.href}" data-cx-nav-link ${(item.id===active || (item.id!=='SUBJECTS' && location.pathname.startsWith(item.href)))?'aria-current="page"':''} ${t(item.en,item.zh)}>${item.en}</a>`;
   }).join('');
 }
 
@@ -42,7 +43,7 @@ function accountStateBadge(state) {
 function utilityControl(item, state, mobile = false) {
   const cls = mobile ? 'cx-drawer-link' : 'cx-utility-link';
   if (item.id === 'ACCOUNT') {
-    return `<a class="${cls} cx-account-link" href="${item.href}" data-cx-nav-link><span ${t(item.en, item.zh)}>${item.en}</span>${accountStateBadge(state)}</a>`;
+    return `<a class="${cls} cx-account-link" href="${item.href}" data-cx-nav-link><span ${t(item.en, item.zh)}>${item.en}</span></a>`;
   }
   return `<button class="${cls}" type="button" data-cx-dialog-open="${item.dialogId}" ${aria(item.en, item.zh)}><span ${t(item.en, item.zh)}>${item.en}</span></button>`;
 }
@@ -58,9 +59,10 @@ function localeControl(compact = false) {
 function headerMarkup(active, state) {
   return `<header class="cx-shell-header" data-open="false" data-cx-shell-region="header">
     <div class="cx-container cx-shell-header__inner">
-      <a class="cx-brand" href="/" ${aria('PHI OS home', 'PHI OS 首页')}><img data-cx-asset="LOGO-009" data-cx-asset-auto="contrast" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
+      <a class="cx-brand" href="/" ${aria('PHI OS home', 'PHI OS 首页')}><img data-cx-asset="LOGO-009" data-cx-asset-auto="contrast" alt="PHI OS"><span class="r5-brand-fallback" data-cx-asset-fallback>PHI OS</span></a>
       <nav class="cx-primary-nav" ${aria('Primary navigation', '主导航')}>${navLinks(active)}</nav>
       <div class="cx-utilities">${utilityControls(state)}${localeControl()}</div>
+      <a class="r5-mobile-account" href="/account/" ${aria('Account','账户')}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><span ${t('Account','账户')}>Account</span></a>
       <button class="cx-menu-button" type="button" data-cx-menu data-cx-dialog-open="cx-shell-navigation" aria-controls="cx-shell-navigation" aria-expanded="false" ${aria('Open menu', '打开菜单')}><span ${t('Menu', '菜单')}>Menu</span></button>
     </div>
   </header>`;
@@ -71,7 +73,7 @@ function navigationDrawerMarkup(active, state) {
     <div class="cx-shell-drawer__body">
       <div class="cx-shell-drawer__bar"><strong id="cx-shell-navigation-title" ${t('Navigate PHI OS', '浏览 PHI OS')}>Navigate PHI OS</strong><button class="cx-button cx-button--icon cx-button--quiet" type="button" data-cx-dialog-close ${aria('Close menu', '关闭菜单')}>×</button></div>
       <nav class="cx-drawer-nav" aria-label="Mobile primary">${navLinks(active, 'cx-drawer-link')}</nav>
-      <div class="cx-drawer-utilities">${utilityControls(state, true)}</div>
+      <div class="cx-drawer-utilities">${CX_NAVIGATION.utilities.filter(item=>item.id!=='ACCOUNT').map(item=>utilityControl(item,state,true)).join('')}</div>
       ${localeControl(true)}
     </div>
   </dialog>`;

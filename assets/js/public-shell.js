@@ -1,3 +1,5 @@
+const r5NavigationStyle=document.createElement('link');r5NavigationStyle.rel='stylesheet';r5NavigationStyle.href='/assets/css/navigation-r5.css';document.head.append(r5NavigationStyle);
+import {CX_NAVIGATION} from '../customer-ui/js/navigation.js';
 import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
 import { ensureCanonicalPhiosFavicon, ensurePhiosWebManifest } from './branding/favicon-authority.js';
 
@@ -18,6 +20,7 @@ const NAVIGATION = Object.freeze([
 ]);
 
 const FOOTER_LINKS = Object.freeze([
+  { href: '/knowledge/ask/', key: 'worldRecovery.terms.ask' },
   { href: '/knowledge/', key: 'publicShell.nav.knowledge' },
   { href: '/articles', key: 'publicShell.footer.articles' },
   { href: '/thesis', key: 'publicShell.footer.thesis' },
@@ -32,18 +35,9 @@ const FOOTER_LINKS = Object.freeze([
 ]);
 
 function navigationMarkup(activeSection) {
-  return NAVIGATION.map(item => {
-    const current = item.id === activeSection
-      ? ' aria-current="page"'
-      : '';
-
-    return `
-      <a class="public-nav__link" href="${item.href}"${current}>
-        <span data-i18n="${item.id==='world'?'worldRecovery.nav':item.key}"></span>
-      </a>
-    `;
-  }).join('');
+ return CX_NAVIGATION.primary.map(item=>`<a class="public-nav__link" href="${item.href}" data-r5-en="${item.en}" data-r5-zh="${item.zh}" ${location.pathname.startsWith(item.href)&&item.id!=='SUBJECTS'?'aria-current="page"':''}>${item.en}</a>`).join('');
 }
+function translateR5Navigation(){const zh=document.documentElement.lang==='zh-Hans';document.querySelectorAll('[data-r5-en]').forEach(n=>{n.textContent=zh?n.dataset.r5Zh:n.dataset.r5En;});}
 
 function languageMarkup() {
   return `
@@ -75,8 +69,8 @@ function auxiliaryMarkup() {
   return `
     <div class="public-nav__actions">
       <a class="public-nav__auxiliary" href="/search/" data-i18n="publicShell.nav.search"></a>
-      <a class="public-nav__auxiliary" href="/knowledge/ask/" data-i18n="worldRecovery.terms.ask">Ask PHI OS</a>
-      <a class="public-nav__auxiliary" href="/account/" data-cx-en="Account" data-cx-zh="账户">Account</a>
+      <a class="public-nav__auxiliary r5-public-account-desktop" href="/account/" data-r5-en="Account" data-r5-zh="账户">Account</a>
+
     </div>
   `;
 }
@@ -96,6 +90,7 @@ function headerMarkup(activeSection) {
           </span>
           <img class="public-brand__logo" data-public-brand-asset="LOGO-003" alt="" hidden />
         </a>
+        <a class="r5-public-account" href="/account/"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3"/></svg><span data-r5-en="Account" data-r5-zh="账户">Account</span></a>
         <button
           class="public-menu-toggle"
           type="button"
@@ -241,7 +236,7 @@ function bindMobileNavigation(header) {
   ].join(',');
 
   function setOpen(open, { restoreFocus = false } = {}) {
-    const nextOpen = Boolean(open && window.innerWidth <= 1000);
+    const nextOpen = Boolean(open && window.innerWidth <= 1199);
 
     toggle?.setAttribute('aria-expanded', String(nextOpen));
     toggle?.setAttribute(
@@ -303,7 +298,7 @@ function bindMobileNavigation(header) {
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1000) {
+    if (window.innerWidth > 1199) {
       setOpen(false);
     }
   });
@@ -379,6 +374,8 @@ export function initializePublicShell() {
   bindMobileNavigation(header);
   initializeI18n();
   translatePage();
+  translateR5Navigation();
+  onLocaleChange(translateR5Navigation);
   void hydratePublicBranding();
 }
 
