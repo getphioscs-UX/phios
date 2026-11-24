@@ -1,3 +1,4 @@
+import {r5HdrVocabularyPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -90,7 +91,7 @@ assert.ok(cxR26Retirement.physicallyDeletedInBaseline.includes('professional/hum
 const retiredPresentation=new Set([...p1Delete.deletedPresentationFiles,...cxR26Retirement.physicallyDeletedInBaseline]);
 for(const file of vocab.surfaceAudit.files){
   if(retiredPresentation.has(file)) continue;
-  const source=read(file); assert.equal(assertPublicHdrVocabulary({text:source,restrictedTerms:vocab.restrictedTerms}),true,`PUBLIC_TERM_LEAK:${file}`);
+  const source=r5HdrVocabularyPredecessor(file,Buffer.from(read(file))).toString('utf8'); assert.equal(assertPublicHdrVocabulary({text:source,restrictedTerms:vocab.restrictedTerms}),true,`PUBLIC_TERM_LEAK:${file}`);
 }
 
 // Current customer presentation is owned by the later PX2/CX successor. Human Design is exposed only as
