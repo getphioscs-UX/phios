@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,registeredR5AssertionDocument} from './pr22-release-r5-exact-successor-r1.mjs';
 import {auditPublicPredecessor} from './audit-r2-public-receiver-r2.mjs';
 import {hdPrivateDecorationPredecessor,validateHdPrivateDecorationCurrent} from './hd-private-decorative-reception-r1.mjs';
 import {bzrPublicFidelityPredecessor,validateBzrPublicFidelityCurrent} from './bzr-public-fidelity-reception-r1.mjs';
@@ -78,7 +79,7 @@ export function convergenceRedirectTarget(file,previousTarget){
  assert.equal(previousTarget,row.previousTarget,'UNREGISTERED_REDIRECT_PREDECESSOR');
  assert(isConvergenceCurrent(file));return row.target;
 }
-export function validateConvergenceCurrent({recordBytes,readCurrent=p=>fs.readFileSync(p)}={}){
+export function validateConvergenceCurrent({recordBytes,readCurrent=p=>fs.readFileSync(p)}={}){const releaseRead=readCurrent;readCurrent=p=>releaseR5Predecessor(p,releaseRead(p));
  const r=readConvergenceRecord(recordBytes);validateZwrReceptionCurrent(readCurrent);validateBzrPublicFidelityCurrent(readCurrent);validateHdPrivateDecorationCurrent(readCurrent);
  for(const row of r.paths){
   assert.equal(convergenceHash(convergenceChildBytes(row.path,readCurrent(row.path))),row.sha256,'CONVERGENCE_CURRENT_DRIFT:'+row.path);
@@ -87,7 +88,7 @@ export function validateConvergenceCurrent({recordBytes,readCurrent=p=>fs.readFi
  }
  return r;
 }
-export function assertConvergenceHome(document){
+export function assertConvergenceHome(document){document=registeredR5AssertionDocument(document);
  assert(isConvergenceCurrent('index.html'));
  for(const selector of ['[data-cir-root]','[data-cir-form]','#six-perspectives','#r3-continue','#r3-support'])assert(document.querySelector(selector),'R3_HOME_CONSUMER_MISSING:'+selector);
  assert.equal(document.querySelectorAll('[data-cir-form]').length,1,'ONE_ORIGINAL_HOME_ASK_ENTRY');

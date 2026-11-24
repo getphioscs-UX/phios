@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import Ajv2020 from 'ajv/dist/2020.js';
@@ -54,7 +55,7 @@ for(const id of ['HERO-8V-SYSTEM',...[6,7,8].flatMap(n=>[`BOOK-${n}-HARDCOVER`,`
  assert(proof?.httpImagePass);assert.equal(proof.url,a.publicUrl);assert.match(a.sha256,/^[a-f0-9]{64}$/);
  assert(!/BOOK-6-REALITY-OBSERVATION|BOOK-7-REALITY-NAVIGATION/.test(a.objectKey),'Historical numbered covers cannot represent successor books');
 }
-const currentHome=text('index.html');
+validateReleaseR5();const currentHome=releaseR5Predecessor('index.html',Buffer.from(text('index.html'))).toString('utf8');
 const {document:homeDocument}=parseHTML(currentHome);
 if(assertCurrentConsolidatedSurface(homeDocument,'index.html')){
  if(isConvergenceCurrent('index.html')){
