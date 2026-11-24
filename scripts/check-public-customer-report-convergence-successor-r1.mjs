@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseHTML} from 'linkedom';
@@ -17,7 +18,7 @@ for(const change of [x=>{x.paths.push({...x.paths[0],path:'extra-unapproved.js'}
  const forged=JSON.parse(record);change(forged);refuses(()=>readConvergenceRecord(Buffer.from(JSON.stringify(forged))));
 }
 refuses(()=>convergencePredecessor('unregistered-extra-path.js','0'.repeat(64),()=>Buffer.from('unregistered bytes')));
-const home=fs.readFileSync('index.html','utf8');assertConvergenceHome(parseHTML(home).document);
+validateReleaseR5();const home=releaseR5Predecessor('index.html',fs.readFileSync('index.html')).toString('utf8');assertConvergenceHome(parseHTML(home).document);
 for(const selector of ['[data-cir-form]','#six-perspectives','#r3-continue','#r3-support','a[href="/subjects/institution/"]','a[href="/books/"]']){
  const {document}=parseHTML(home);document.querySelector(selector).remove();refuses(()=>assertConvergenceHome(document));
 }

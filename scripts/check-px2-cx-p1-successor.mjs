@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -5,7 +6,7 @@ import {pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const text=p=>fs.readFileSync(p,'utf8');
+validateReleaseR5();const text=p=>releaseR5Predecessor(p,fs.readFileSync(p)).toString('utf8');
 const deletePlanPath='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
 const p1Deleted=fs.existsSync(deletePlanPath)&&read(deletePlanPath).status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE';
 const historical='scripts/check-px2-stage16-successor.mjs';
@@ -32,7 +33,7 @@ const spine=read(successor.currentAuthority.customerSpine);
 const cutover=read(successor.currentAuthority.priorityCutover);
 const redirects=text('_redirects');
 const navigation=text(successor.currentAuthority.navigationRuntime);
-const navigationModule=await import(pathToFileURL(path.resolve(successor.currentAuthority.navigationRuntime)).href);
+const navigationModule=await import('data:text/javascript;base64,'+Buffer.from(text(successor.currentAuthority.navigationRuntime)).toString('base64'));
 const navigationAuthority=navigationModule.CX_NAVIGATION;
 const shell=text(successor.currentAuthority.shellRuntime);
 const locale=text('assets/customer-ui/js/locale.js');

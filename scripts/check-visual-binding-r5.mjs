@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {auditPublicPredecessor} from './lib/audit-r2-public-receiver-r2.mjs';
 import {parseHTML} from 'linkedom';
 import {isConvergenceCurrent,readConvergenceRecord,assertConvergenceHome,convergencePredecessor,convergenceRedirectTarget} from './lib/public-customer-report-convergence-successor-r1.mjs';
@@ -68,7 +69,7 @@ assert.throws(()=>financialBoundaryPredecessor(financial,{recordBytes:Buffer.fro
 assert.ok(!r.entries.some(x=>x.assetId==='PLAN-FIN-036'),'FAILED_REMOTE_ASSET_PROMOTED');
 const currentProofs=remote.records.map(x=>delta.find(d=>d.planId===x.planId&&d.decoded)||x);
 for(const proof of currentProofs){const asset=r.entries.find(x=>x.assetId===proof.planId);if(proof.decoded){assert.ok(asset?.available);assert.equal(asset.contentHash,proof.sha256);assert.equal(asset.publicUrl,proof.requestedURL);assert.equal(asset.r5Sequence,proof.sequence);}else assert.ok(!asset?.available,'NOT_UPLOADED_ASSET_PROMOTED');}
-function currentR5ConsumerHTML(file,html){
+function currentR5ConsumerHTML(file,html){if(file==='index.html'){validateReleaseR5();html=releaseR5Predecessor(file,Buffer.from(html)).toString('utf8');}
  // Two exact R4 successors retain their own composition/redirect authority.
  // Validate actual R3 Home and its original Ask; historical R5 assertions below
  // receive only the immutable, byte-proven predecessor of these two paths.

@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,7 +17,7 @@ assert.equal(contract.rules.homepageMethodButtonsAllowed,false);assert.equal(con
 assert.equal(intents.intents.length,6);assert.equal(new Set(intents.intents.map(x=>x.code)).size,6);assert.ok(intents.intents.every(x=>x.route==='/ask'));
 assert.equal(surfaces.surfaces.length,7);for(const route of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey'])assert.ok(surfaces.surfaces.some(x=>x.route===route));
 assert.deepEqual(surfaces.hiddenBehindOrchestration,['AST','BZR','ZI_WEI','NUM','HDR','CCR','CWA','RLR']);assert.equal(surfaces.realityJourneyIsFirstVisitDefault,false);
-const index=read('index.html');
+validateReleaseR5();const index=releaseR5Predecessor('index.html',Buffer.from(read('index.html'))).toString('utf8');
 const {isConvergenceCurrent,assertConvergenceHome}=await import('./lib/public-customer-report-convergence-successor-r1.mjs');
 if(isConvergenceCurrent('index.html')){
  const {parseHTML}=await import('linkedom');const {document}=parseHTML(index);
