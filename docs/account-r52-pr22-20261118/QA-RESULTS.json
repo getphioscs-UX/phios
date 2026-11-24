@@ -1,0 +1,76 @@
+[
+  {
+    "id": "ordinary-check",
+    "command": "npm.cmd run check",
+    "exit": 1,
+    "result": "FAIL",
+    "failure": "AssertionError [ERR_ASSERTION]: AUDIT_PUBLIC_PHYSICAL_CURRENT_DRIFT:assets/js/public-shell.js\r"
+  },
+  {
+    "id": "zero-cost-protection",
+    "command": "npm.cmd run check:zero-cost-provider-foundation",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "oidc-auth",
+    "command": "node scripts/check-fw-account-auth.mjs",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "person-isolation",
+    "command": "npm.cmd run check:canonical-account-person",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "commerce-fixtures",
+    "command": "npm.cmd run check:commerce-stripe",
+    "exit": 0,
+    "result": "PASS",
+    "failure": "{\"component\":\"commerce\",\"event\":\"PAYMENT_FAILED\",\"order_id\":\"ord_9b9aa46c98ef485ea1152458d6cc2fb9\",\"status\":\"PAYMENT_FAILED\"}"
+  },
+  {
+    "id": "account-membership-contract",
+    "command": "npm.cmd run check:m4c-account-membership",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "membership-provider-closed",
+    "command": "node scripts/check-membership-production-closed.mjs",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "report-delivery",
+    "command": "node scripts/check-fw-report-material.mjs",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "private-bindings",
+    "command": "node scripts/check-fw-private-bindings.mjs",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "will-person-privacy",
+    "command": "node scripts/check-fw-s1-contract-privacy.mjs",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "financial-will-boundary",
+    "command": "node scripts/check-financial-will-successor.mjs",
+    "exit": 0,
+    "result": "PASS"
+  },
+  {
+    "id": "academy-locked",
+    "command": "node scripts/check-wpr-w19-academy-production.mjs",
+    "exit": 0,
+    "result": "PASS"
+  }
+]

@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {founderR3Predecessor} from './lib/founder-r3-historical-view-r1.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -7,7 +8,10 @@ import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-
 // Current R3 is validated against its own exact runtime and retained semantic contract.
 await import('./check-founder-owner-r3.mjs');
 // Only Founder legacy figure assertions receive the registered exact R2 predecessor.
-const readFigureContractMarkup=file=>file==='about/founder/index.html'?founderR3Predecessor(file,readFileSync(file)).toString('utf8'):readFileSync(file,'utf8');
+await import('./check-pr22-release-r5-exact-successor-r1.mjs');
+await import('./check-client-visual-consumption-current.mjs');
+validateReleaseR5();
+const readFigureContractMarkup=file=>file==='about/founder/index.html'?founderR3Predecessor(file,readFileSync(file)).toString('utf8'):releaseR5Predecessor(file,readFileSync(file)).toString('utf8');
 
 const targets=[
  ['perspectives/tarot/index.html','/perspectives/tarot/',[3]],

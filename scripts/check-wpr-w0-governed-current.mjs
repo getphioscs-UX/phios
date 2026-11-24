@@ -1,8 +1,10 @@
+import fs from 'node:fs';import {createHash} from 'node:crypto';import {bookR5PublicAssetsPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 // Current-only W0 audit; historical W0/v7 bytes remain frozen.
 // Engineering verification only: no human acceptance or production admission.
 import {assertM3cWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import assert from 'node:assert/strict';
-import { readJson, sha256, BASELINE, exists } from './lib/web-production/wpr-foundation-v1.mjs';
+import { readJson as originalReadJson, sha256 as originalSha256, BASELINE, exists } from './lib/web-production/wpr-foundation-v1.mjs';
+const bookView=p=>bookR5PublicAssetsPredecessor(p,fs.readFileSync(p),{consumer:'scripts/check-wpr-w0-governed-current.mjs'});const readJson=p=>p==='content/registry/public-assets.json'?JSON.parse(bookView(p)):originalReadJson(p);const sha256=p=>p==='content/registry/public-assets.json'?'sha256:'+createHash('sha256').update(bookView(p)).digest('hex'):originalSha256(p);
 const b='content/web-production/audits';
 for (const f of ['wpr-production-baseline-v1.json','wpr-route-baseline-v1.json','wpr-runtime-consumption-baseline-v1.json','wpr-frontend-authority-gap-v1.json','wpr-asset-delivery-gap-v1.json']) assert.ok(exists(`${b}/${f}`),f);
 const audit=readJson(`${b}/wpr-production-baseline-v1.json`); assert.equal(audit.baseline.commit,BASELINE); assert.equal(audit.upstreamState.cpr.productionStatus,'validation_only'); assert.equal(audit.upstreamState.cpr.canonicalPresentationProductionRecordCount,0); assert.equal(audit.upstreamState.carPublishedAsset.productionStatus,'validation_only'); assert.equal(audit.upstreamState.carPublishedAsset.publicationCount,0); assert.equal(audit.upstreamState.alr.liveAcademyDelivery,false); assert.equal(audit.upstreamState.rmo.productionExecutionActivated,false); assert.equal(audit.upstreamState.vap.w4ArticleEligibilityActive,true); assert.equal(audit.upstreamState.vap.w5PjaBriefExportAccepted,true);

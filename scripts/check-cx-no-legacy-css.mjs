@@ -1,3 +1,4 @@
+import {validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {currentSharedStylesheetPredecessorBytes} from './lib/current-shared-css-defect-successor-v3.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -57,6 +58,8 @@ function inspect(rel, text) {
 assert.deepEqual(inspect('fixture-safe', '<link rel="stylesheet" href="/assets/customer-ui/base.css">'), []);
 assert.ok(inspect('fixture-bad', '<link rel="stylesheet" href="/assets/css/phios-public-v2.css">').includes('assets/css/phios-public-v2.css'));
 
+function r5ScopedStylesheet(rel,css){if(rel!=='index.html'||!['assets/css/homepage-hero-r4.css','assets/css/homepage-r5.css'].includes(css)||frozen.has(css))return false;validateReleaseR5();return true;}
+assert.equal(r5ScopedStylesheet('books/index.html','assets/css/homepage-r5.css'),false);assert.equal(r5ScopedStylesheet('index.html','assets/css/unregistered.css'),false);assert.equal(r5ScopedStylesheet('index.html','assets/css/phios-public-v2.css'),false);
 const violations = [];
 for (const rel of cxImplementationFiles()) {
   const text = fs.readFileSync(path.join(root, rel), 'utf8');
@@ -69,7 +72,7 @@ for (const rel of cxHtmlSurfaces()) {
   for (const href of stylesheetRefs(html)) {
     const local = normalizedLocalAsset(href);
     if (!local) continue;
-    if (!local.startsWith('assets/customer-ui/') && !currentSharedStylesheets.has(local) && !scopedStylesheets.get(local)?.has(rel) && !r3ScopedStylesheet(rel,local)) violations.push({ file: rel, stylesheet: local, reason: 'LOCAL_CSS_OUTSIDE_CUSTOMER_UI' });
+    if (!local.startsWith('assets/customer-ui/') && !currentSharedStylesheets.has(local) && !scopedStylesheets.get(local)?.has(rel) && !r3ScopedStylesheet(rel,local) && !r5ScopedStylesheet(rel,local)) violations.push({ file: rel, stylesheet: local, reason: 'LOCAL_CSS_OUTSIDE_CUSTOMER_UI' });
   }
 }
 

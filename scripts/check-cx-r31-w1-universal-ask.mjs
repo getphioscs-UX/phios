@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {parseHTML} from 'linkedom';
@@ -5,7 +6,7 @@ import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
 const c=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w1-universal-ask-composer-v1.json');
-const home=read('index.html'),ask=read('knowledge/ask/index.html'),client=read('assets/customer-ui/js/surfaces/contextual-ask.js');
+validateReleaseR5();const home=releaseR5Predecessor('index.html',fs.readFileSync('index.html')).toString('utf8'),ask=read('knowledge/ask/index.html'),client=read('assets/customer-ui/js/surfaces/contextual-ask.js');
 assert.equal(c.status,'COMPLETE');
 assert.equal(c.homeQuestionInput.oneClearInput,true);
 assert.equal(c.askQuestionInput.primaryEntryMechanism,true);

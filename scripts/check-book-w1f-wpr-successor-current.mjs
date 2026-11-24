@@ -1,3 +1,4 @@
+import {bookR5PublicAssetsPredecessor,releaseR5Predecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
@@ -5,7 +6,7 @@ import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { deriveWprObservation } from './lib/web-production/wpr-observability-v1.mjs';
 
-const read = path => fs.readFileSync(path, 'utf8');
+const read = path => {const b=fs.readFileSync(path);return (path==='content/registry/public-assets.json'?bookR5PublicAssetsPredecessor(path,b):releaseR5Predecessor(path,b)).toString('utf8');};
 const json = path => JSON.parse(read(path));
 const sha256 = path => crypto.createHash('sha256')
   .update(read(path).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n'), 'utf8')

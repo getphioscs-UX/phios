@@ -1,0 +1,138 @@
+/* PHI OS — Account R5 customer hub. Presentation only; no entitlement authority. */
+body[data-cx-surface="ACCOUNT"]{background:#faf9f5}
+body[data-cx-surface="ACCOUNT"] .account-r5{color:#203b37;padding:clamp(1.2rem,3vw,2.8rem) 0 1rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:1rem;margin-bottom:1.6rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__kicker{margin:0 0 .25rem;color:#6f7f77;font-size:.8rem;letter-spacing:.1em;font-weight:700}
+body[data-cx-surface="ACCOUNT"] .account-r5__title{font:600 clamp(1.7rem,3.2vw,2.65rem)/1.18 Georgia,"Noto Serif SC",serif;letter-spacing:-.025em;margin:0 0 .5rem;color:#183f3b}
+body[data-cx-surface="ACCOUNT"] .account-r5__lede{color:#546561;font-size:clamp(.94rem,1.5vw,1.05rem);line-height:1.65;margin:0;max-width:57ch}
+body[data-cx-surface="ACCOUNT"] .account-r5__auth{min-width:180px;max-width:330px;justify-self:end}
+body[data-cx-surface="ACCOUNT"] .account-r5__auth>[data-r5-account-auth]{background:#fff;border:1px solid #dce1dd;border-radius:12px;padding:.8rem 1rem;box-shadow:none;margin:0;font-size:.87rem;gap:.5rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__auth .cx-heading-2{font-family:inherit;font-size:.87rem;line-height:1.35;margin:0;color:#254540}
+body[data-cx-surface="ACCOUNT"] .account-r5__auth .cx-button{font-size:.84rem;min-height:38px;padding:.45rem .75rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile{min-width:0}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile-link{min-height:142px;display:flex;flex-direction:column;align-items:flex-start;gap:.45rem;padding:1.1rem 1.15rem;background:#fff;border:1px solid #dce2dd;border-radius:15px;color:#183f3b;text-decoration:none;transition:box-shadow .16s ease,border-color .16s ease,transform .16s ease;box-sizing:border-box}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile-link:hover{border-color:#9caea6;box-shadow:0 6px 22px rgba(32,62,52,.08);transform:translateY(-1px)}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile-link:focus-visible{outline:3px solid #986f37;outline-offset:3px}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile-icon{width:29px;height:29px;object-fit:contain;display:block;filter:grayscale(.25)}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile-title{font-weight:700;font-size:1.05rem;line-height:1.35}
+body[data-cx-surface="ACCOUNT"] .account-r5__tile-description{font-size:.86rem;line-height:1.5;color:#62716d}
+body[data-cx-surface="ACCOUNT"] .account-r5__bottom{margin:.95rem 0 0;color:#63716d;font-size:.85rem;line-height:1.6}
+body[data-cx-surface="ACCOUNT"] .account-r5__flow{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem .5rem;margin:1.1rem 0 0;color:#55766b;font-weight:600;font-size:.85rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__flow b{font-weight:600}
+body[data-cx-surface="ACCOUNT"] .account-r5__flow span[aria-hidden="true"]{opacity:.55}
+body[data-cx-surface="ACCOUNT"] .account-r5__panels{display:grid;gap:1rem;margin:clamp(2rem,4vw,3.5rem) 0}
+body[data-cx-surface="ACCOUNT"] .account-r5__section-title{font:500 clamp(1.4rem,2.5vw,2rem)/1.3 Georgia,"Noto Serif SC",serif;margin:0;color:#173a38}
+body[data-cx-surface="ACCOUNT"] .account-r5__section-lede{margin:0;color:#536b65;line-height:1.65;max-width:65ch}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel{border:1px solid #dce2dd;border-radius:16px;background:#fff;overflow:hidden;scroll-margin-top:6rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel>summary{cursor:pointer;min-height:58px;display:flex;gap:.8rem;align-items:center;padding:1rem 1.25rem;color:#1d403c;font-weight:700;list-style-position:inside}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel>summary img{width:27px;height:27px;object-fit:contain}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel[open]>summary{border-bottom:1px solid #e8ece8;background:#fafbf9}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel-content{padding:1.15rem 1.25rem 1.4rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel-content>*+*{margin-top:.9rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel-content .cx-card{max-width:100%}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel-content [data-commerce-account]{width:100%}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel-content [data-account-private-material]{width:100%}
+body[data-cx-surface="ACCOUNT"] .account-r5__panel-content .cx-person-hub{padding:clamp(1rem,2vw,1.6rem)}
+body[data-cx-surface="ACCOUNT"] .account-r5__settings-links{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.85rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__settings-links a{color:#185d54;display:inline-flex;align-items:center;min-height:42px;text-underline-offset:.2em}
+body[data-cx-surface="ACCOUNT"] .account-r5__reference{max-width:1100px;margin:1rem auto 2rem;padding:1rem 1.25rem;border:1px solid #dce2dd;border-radius:16px;background:#fff;color:#2b4842}
+body[data-cx-surface="ACCOUNT"] .account-r5__reference>summary{cursor:pointer;font-weight:600}
+body[data-cx-surface="ACCOUNT"] .account-r5__reference .vr2-story{padding-block:1.5rem}
+body[data-cx-surface="ACCOUNT"] .account-r5__reference .vr2-hero{min-height:0}
+body[data-cx-surface="ACCOUNT"] .account-r5__reference figure img{max-width:100%;height:auto}
+body[data-cx-surface="ACCOUNT"] #commerce,body[data-cx-surface="ACCOUNT"] #account-reports,body[data-cx-surface="ACCOUNT"] #account-drafts,body[data-cx-surface="ACCOUNT"] #financial-account-reports{scroll-margin-top:6rem}
+body[data-cx-surface="ACCOUNT"] .cx-account-shortcut-icon{width:2rem;height:2rem}
+@media(max-width:680px){
+ body[data-cx-surface="ACCOUNT"] .account-r5__head{grid-template-columns:1fr}
+ body[data-cx-surface="ACCOUNT"] .account-r5__auth{justify-self:stretch;max-width:none}
+ body[data-cx-surface="ACCOUNT"] .account-r5__grid{gap:.65rem}
+ body[data-cx-surface="ACCOUNT"] .account-r5__tile-link{min-height:145px;padding:.95rem}
+ body[data-cx-surface="ACCOUNT"] .account-r5__tile-title{font-size:.98rem}
+ body[data-cx-surface="ACCOUNT"] .account-r5__tile-description{font-size:.82rem}
+ body[data-cx-surface="ACCOUNT"] .account-r5__panel-content{padding:1rem}
+}
+@media(max-width:430px){body[data-cx-surface="ACCOUNT"] .account-r5__grid{grid-template-columns:1fr}body[data-cx-surface="ACCOUNT"] .account-r5__tile-link{min-height:108px;display:grid;grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto auto;gap:.2rem .8rem;align-content:center}body[data-cx-surface="ACCOUNT"] .account-r5__tile-icon{grid-row:1/3}body[data-cx-surface="ACCOUNT"] .account-r5__tile-description{grid-column:2}}
+@media(prefers-reduced-motion:reduce){body[data-cx-surface="ACCOUNT"] .account-r5__tile-link{transition:none}body[data-cx-surface="ACCOUNT"] .account-r5__tile-link:hover{transform:none}}
+@media print{body[data-cx-surface="ACCOUNT"] .cx-skip,body[data-cx-surface="ACCOUNT"] .account-r5__reference,body[data-cx-surface="ACCOUNT"] .account-r5__auth{display:none!important}body[data-cx-surface="ACCOUNT"] .account-r5__grid{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-cx-surface="ACCOUNT"] .account-r5__tile{break-inside:avoid}}
+@media(min-width:1024px){body[data-cx-surface="ACCOUNT"] .account-r5__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+body.vr2-page[data-cx-surface="ACCOUNT"] #main>.vr2-hero-surface{background:#faf9f5;color:#203b37;--cx-context-link:#185d54;--cx-context-muted:#536b65;--cx-context-critical:#963a30;--cx-control-boundary:#74796e;--cx-control-focus:#986f37}
+
+/* R5.1: focused customer areas; conceptual media stays in inert source archive. */
+[data-account-r51]{background:#faf9f5;color:#203b37;--cx-context-link:#185d54;--cx-context-muted:#536b65}
+[data-account-r51] [hidden]{display:none!important}
+[data-account-r51]>.account-r51-surface{padding:clamp(20px,4vw,48px) 0;background:#faf9f5;color:#203b37}
+[data-account-r51]>.account-r51-surface>.cx-container{width:calc(100% - 40px);max-width:1216px;margin:auto}
+[data-account-r51] .account-r5{padding:0}
+body[data-cx-surface="ACCOUNT"] [data-account-r51] .account-r5__head{align-items:center;margin-bottom:20px}
+[data-account-r51] .account-r5__auth{max-width:330px;min-width:180px}
+[data-account-r51] .account-r5__auth .cx-card{margin:0;padding:16px;gap:8px;border-radius:12px}
+[data-account-r51] .account-r5__auth h2{font:600 16px/1.5 system-ui;margin:0}
+[data-account-r51] .account-r5__auth p{font-size:14px;line-height:1.6;margin:0}
+[data-account-r51] .account-r51__overview{border-left:3px solid #a1844e;background:#f0f3ed;border-radius:0 10px 10px 0;padding:14px 18px;margin:0 0 20px;line-height:1.65;font-size:15px}
+[data-account-r51] .account-r51__overview p{margin:0}
+[data-account-r51] .account-r51__overview p+p{margin-top:4px}
+[data-account-r51] .account-r5__tile-link{min-height:155px;padding:20px;gap:8px;border-radius:13px;position:relative}
+[data-account-r51] .account-r5__tile-title{font-size:17px}
+[data-account-r51] .account-r5__tile-description{font-size:14px;color:#50675e}
+[data-account-r51] .account-r5__tile-link[aria-current]{border:2px solid #997b40;padding:19px;background:#f5f5ec}
+[data-account-r51] .account-r51__detail{margin-top:28px;padding:24px;background:#fff;border:1px solid #d8e0d9;border-radius:14px;scroll-margin-top:100px}
+[data-account-r51] .account-r51__detail-head{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid #e0e6df;padding-bottom:16px;margin-bottom:18px}
+[data-account-r51] #account-detail-title{font:600 clamp(22px,3vw,28px)/1.4 Georgia,"Noto Serif SC",serif;margin:0;scroll-margin-top:110px}
+[data-account-r51] .account-r51__panel>h2{font:600 20px/1.4 system-ui;margin:0 0 14px}
+[data-account-r51] .account-r51__panel p{max-width:72ch;line-height:1.7}
+[data-account-r51] .account-r51__panel a{color:#185d54;text-underline-offset:4px}
+[data-account-r51] .cx-button{min-height:44px;max-width:100%;white-space:normal}
+[data-account-r51] .cx-card{margin:0;padding:18px;min-height:0;gap:12px;background:#fff;color:#203b37;border:1px solid #dce3dc;border-radius:10px}
+[data-account-r51] .cx-card h2,[data-account-r51] .cx-card h3{font:600 19px/1.45 system-ui;margin:0}
+[data-account-r51] .cx-card p{font-size:15px;line-height:1.7;margin:0}
+[data-account-r51] .account-r51__materials{margin-bottom:18px}
+[data-account-r51] [data-account-private-material]>section{margin-bottom:12px}
+[data-account-r51] [data-account-draft-shortcut]{display:none}
+[data-account-r51] .cx-person-hub__header{margin-bottom:12px}
+[data-account-r51] .cx-person-hub__header p:last-child{font-size:14px;margin-top:8px}
+[data-account-r51] .cx-account-editor{margin-top:12px}
+[data-account-r51] .cx-account-editor summary{min-height:48px;padding:12px 16px}
+[data-account-r51] .cx-account-reports{padding:12px 0!important}
+[data-account-r51] [data-commerce-account]>.cx-grid{gap:12px;margin:14px 0}
+[data-account-r51] #account-settings-panel{margin-top:24px;border-top:1px solid #dce3dc;padding-top:20px}
+[data-account-r51] #account-settings-panel>details{margin-top:18px}
+[data-account-r51] #account-settings-panel summary{min-height:44px;cursor:pointer}
+[data-account-r51] .account-r51__help{margin:28px 0 0;border-top:1px solid #dce3dc;padding:14px 0;color:#50675e;font-size:14px}
+[data-account-r51] .account-r51__help>summary{cursor:pointer;min-height:44px;font-weight:600;color:#203b37}
+[data-account-r51] .account-r51__help p{max-width:78ch;line-height:1.7}
+[data-account-r51] .account-r51-timeline{list-style:none;margin:16px 0;padding-left:16px;border-left:2px solid #d3ded4}
+[data-account-r51] .account-r51-timeline li{padding:0 0 16px}
+/* Keep the existing text-brand fallback usable while its approved logo loads.
+   Opacity preserves the lazy image's layout/intersection box. */
+body:has(main[data-account-r51]) .cx-brand img:not([data-cx-asset-state="ready"]){opacity:0}
+body:has(main[data-account-r51]) .cx-brand:has(img:not([data-cx-asset-state="ready"])) [data-cx-asset-fallback]{display:inline!important;position:static;width:auto;height:auto;clip:auto;clip-path:none;overflow:visible;white-space:normal;font-weight:700;letter-spacing:.1em}
+[data-account-r51] input,[data-account-r51] select,[data-account-r51] textarea{max-width:100%;min-width:0}
+[data-account-r51] [data-account-r5-tile] a:focus-visible,[data-account-r51] summary:focus-visible{outline:3px solid #997b40;outline-offset:3px}
+@media(max-width:680px){[data-account-r51]>.account-r51-surface>.cx-container{width:calc(100% - 32px)}[data-account-r51] .account-r51__detail{padding:16px}[data-account-r51] .account-r51__detail-head{align-items:flex-start;flex-direction:column}[data-account-r51] .account-r5__auth{max-width:none}[data-account-r51] .account-r5__tile-link{min-height:125px;padding:16px}[data-account-r51] .account-r5__tile-link[aria-current]{padding:15px}[data-account-r51] .account-r51__overview{font-size:14px;padding:12px 14px}}
+@media print{[data-account-r51] .account-r5__auth,[data-account-r51] [data-account-close]{display:none!important}[data-account-r51] .account-r51__detail{border:0;padding:0}[data-account-r51] .account-r5__grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Final Owner visual decision: original HERO-017 remains in the dashboard. */
+body[data-cx-surface="ACCOUNT"] [data-account-r51] .account-r5__head{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:32px;align-items:center;margin-bottom:24px}
+[data-account-r51] .account-r51__hero-copy{min-width:0}
+[data-account-r51] .account-r5__auth{justify-self:start;max-width:none;min-width:0;margin-top:16px}
+[data-account-r51] .account-r5__auth .cx-card{background:#fffdf8;padding:12px 16px}
+[data-account-r51] .account-r51__overview{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:12px 14px;font-size:14px}
+[data-account-r51] .account-r51__status-icon{flex:0 0 24px;width:24px;height:24px;object-fit:contain;margin-top:2px}
+[data-account-r51] .account-r51__hero-media{margin:0;min-width:0;aspect-ratio:16/9;overflow:hidden;border-radius:16px;background:#f1eee4;align-self:center}
+[data-account-r51] .account-r51__hero-media>img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;display:block}
+[data-account-r51] .account-r51__hero-media[data-account-asset-state="unavailable"]{aspect-ratio:auto;background:#f0f3ed;padding:16px}
+[data-account-r51] [data-account-hero-fallback]{font-size:14px;line-height:1.65;margin:0;color:#344e45}
+[data-account-r51] [data-account-hero-retry]{display:block;margin-top:10px;min-height:44px;border:1px solid #aebdb1;border-radius:6px;background:white;padding:8px 12px}
+[data-account-r51] .account-r51__inline-icon{display:inline-block;width:22px;height:22px;object-fit:contain;vertical-align:middle;margin-right:6px}
+[data-account-r51] [data-account-panel] .cx-button img{flex:none}
+@media(max-width:999px){body[data-cx-surface="ACCOUNT"] [data-account-r51] .account-r5__head{grid-template-columns:1fr;gap:20px}[data-account-r51] .account-r51__hero-media{width:100%;max-width:640px;justify-self:center}[data-account-r51] .account-r51__overview{font-size:14px}}
+@media print{[data-account-r51] .account-r51__hero-media{max-width:420px;break-inside:avoid}}
+
+/* R5.2: compact verified activity; approved R5.1 architecture retained. */
+[data-account-r51] .account-r52-next{margin:0 0 22px;padding:16px 20px;border:1px solid #d8e0d9;border-radius:12px;background:#f3f4ee}
+[data-account-r51] .account-r52-next h2{font:600 19px/1.4 Georgia,"Noto Serif SC",serif;margin:0 0 8px}
+[data-account-r51] .account-r52-next p{font-size:14px;line-height:1.65;margin:0}
+[data-account-r51] .account-r52-next ul{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0;padding:0;list-style:none}
+[data-account-r51] .account-r52-next a{display:inline-flex;align-items:center;min-height:44px;font-size:14px;color:#185d54;text-underline-offset:4px}
+[data-account-r51] .account-r52-next a:focus-visible{outline:3px solid #997b40;outline-offset:3px}
+@media(max-width:680px){[data-account-r51] .account-r52-next ul{display:block}}

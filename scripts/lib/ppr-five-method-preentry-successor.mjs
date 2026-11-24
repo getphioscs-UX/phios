@@ -1,3 +1,4 @@
+import {releaseR5Predecessor} from './pr22-release-r5-exact-successor-r1.mjs';
 import {sharedVisualPredecessorBytes} from './shared-visual-source-predecessor-r1.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
@@ -110,7 +111,7 @@ function main096Git(ref,path){const key=ref+':'+path;if(!main096GitCache.has(key
 const rawFile=(p,encoding)=>fs.readFileSync(p,encoding);
 function inverseReceiverReplacement(bytes,r){const s=Buffer.from(bytes).toString();assert(Buffer.from(s).equals(Buffer.from(bytes)),'Receiver UTF8 identity');assert(Number.isInteger(r.offset)&&r.offset>=0);assert.equal(s.slice(r.offset,r.offset+r.after.length),r.after,'Receiver exact hunk');return Buffer.from(s.slice(0,r.offset)+r.before+s.slice(r.offset+r.after.length));}
 function inverseUnique(source,r){assert.equal(source.split(r.after).length,2,'Exact unique source hunk');return source.replace(r.after,r.before);}
-export function validateMain096ReceiverGovernance({recordBytes=rawFile(MAIN096_RECEIVER_GOVERNANCE),readCurrent=readPreConsumerSource,readGit=main096Git}={}){
+export function validateMain096ReceiverGovernance({recordBytes=rawFile(MAIN096_RECEIVER_GOVERNANCE),readCurrent=readPreConsumerSource,readGit=main096Git}={}){const releaseRead=readCurrent;readCurrent=p=>releaseR5Predecessor(p,releaseRead(p));
  const digest=b=>sha(Buffer.from(b));assert.equal(digest(recordBytes),MAIN096_RECEIVER_GOVERNANCE_SHA,'Immutable receiver governance record');const d=JSON.parse(recordBytes);
  assert.equal(d.schemaVersion,'SIX_METHOD_MAIN096_RECEIVER_GOVERNANCE_R1');assert.equal(d.status,'ENGINEERING_SUCCESSOR_PENDING_HUMAN_REVIEW');assert.equal(d.base,'096b22df9e43d2bed0a82ba5bb010b2eea337ca3');assert.equal(d.sourceBase,'a05cbb00dd240f8b304d1f52334500f77885812a');
  assert.equal(d.original31ManifestSHA256,'45558c1ec6de93e86a783c353a3cddaf56cecb7de8b455b509c845699c00ed06');assert.equal(d.original31SourceSet,'cf369d03da78f494b95c42552ed8c3a22e906c570007bc28932dc5fbef679796');assert.equal(d.productSourceSetSHA256,'19edaca3eae93a01930320631789f6afb36399876b0f086040fb08da1acb1a1c');assert.equal(digest(JSON.stringify(d.productFiles)),d.productSourceSetSHA256);assert.equal(d.productFiles.length,72);assert.equal(new Set(d.productFiles.map(f=>f.path)).size,72);
