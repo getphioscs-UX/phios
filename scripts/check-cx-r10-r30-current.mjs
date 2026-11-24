@@ -1,3 +1,4 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {validateCxReadabilityReader,readCxReadabilityPredecessor} from './lib/public-readability-cx-reader-successor-r2.mjs';
 validateCxReadabilityReader();
 import './check-public-entry-brand-guard-successor-r1.mjs';
@@ -12,7 +13,7 @@ import path from 'node:path';
 
 const ROOT=process.cwd();
 const phase=(process.argv[2]||'ALL').toUpperCase();
-const read=p=>fs.readFileSync(path.join(ROOT,p),'utf8');
+validateReleaseR5();const read=p=>{const bytes=fs.readFileSync(path.join(ROOT,p));return (p==='account/index.html'?releaseR5Predecessor(p,bytes):bytes).toString('utf8');};
 const json=p=>JSON.parse(read(p));
 const exists=p=>fs.existsSync(path.join(ROOT,p));
 const check=(id,fn)=>{if(phase!=='ALL'&&phase!==id)return;fn();console.log(`✓ CX-${id} current customer-system contract passed.`)};

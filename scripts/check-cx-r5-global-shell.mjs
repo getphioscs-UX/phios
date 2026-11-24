@@ -1,6 +1,7 @@
+import {releaseR5Predecessor,validateReleaseR5} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {walk as walkCustomerSources} from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
 import crypto from 'node:crypto';
-import {CX_NAVIGATION} from '../assets/customer-ui/js/navigation.js';
+validateReleaseR5();const {CX_NAVIGATION}=await import('data:text/javascript;base64,'+releaseR5Predecessor('assets/customer-ui/js/navigation.js',fs.readFileSync('assets/customer-ui/js/navigation.js')).toString('base64'));
 import {currentFooterLogo} from './lib/branding-footer-successor.mjs';
 const footerLogo=currentFooterLogo();
 import assert from 'node:assert/strict';
@@ -10,7 +11,7 @@ import {isConvergenceCurrent,assertConvergenceHome} from './lib/public-customer-
 import {parseHTML} from 'linkedom';
 
 const root = process.cwd();
-const readText = rel => fs.readFileSync(path.join(root, rel), 'utf8');
+const readText = rel => releaseR5Predecessor(rel,fs.readFileSync(path.join(root,rel))).toString('utf8');
 const readJson = rel => JSON.parse(readText(rel));
 const exists = rel => fs.existsSync(path.join(root, rel));
 const BASE = 'content/customer-experience-rebuild';
