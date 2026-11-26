@@ -1,4 +1,5 @@
 import {renderBookPublicSamples} from '../knowledge/book-public-samples.js';
+import {englishPreviewForBook} from '../knowledge/book-english-preview-assets.js';
 import { getLocale, onLocaleChange, t } from '../i18n.js';
 import {bookRoute,canonicalPartsForBook,loadSevenVolumeBooks,loadSevenVolumeParts,resolveSevenVolumeBookCover} from '../web-production/public-surface-data-seven.js';
 import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
@@ -10,6 +11,63 @@ const root = document.querySelector('[data-wpr-book-volume]');
 const bookId = document.body.dataset.bookId || root?.dataset.bookId || 'book-7';
 let disposeFormation = () => {};
 let renderGeneration = 0;
+
+let disposePreviewAnchor = () => {};
+function maintainInitialPreviewAnchor(host) {
+  disposePreviewAnchor();
+  if (location.hash !== '#free-english-preview') return;
+  const target = host.querySelector('#free-english-preview');
+  if (!target) return;
+  let stopped = false, frame = 0;
+  const align = () => {
+    if (stopped || frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (!stopped && location.hash === '#free-english-preview') target.scrollIntoView({block:'start'});
+    });
+  };
+  const observer = new ResizeObserver(align);
+  const types = ['wheel','pointerdown','keydown','touchstart'];
+  const stop = () => {
+    if (stopped) return;
+    stopped = true; observer.disconnect();
+    if (frame) cancelAnimationFrame(frame);
+    for (const type of types) window.removeEventListener(type, user, true);
+    window.removeEventListener('hashchange', hash);
+    window.removeEventListener('pagehide', stop);
+  };
+  const user = event => { if (event.isTrusted) stop(); };
+  const hash = () => { if (location.hash !== '#free-english-preview') stop(); else align(); };
+  disposePreviewAnchor = stop;
+  for (const type of types) window.addEventListener(type, user, {capture:true,passive:true});
+  window.addEventListener('hashchange', hash);
+  window.addEventListener('pagehide', stop, {once:true});
+  observer.observe(host); align();
+}
+async function mountPublicBookPreview(host, locale, generation) {
+  const response = await fetch('/content/web-production/registries/book-public-samples-v1.json');
+  if (!response.ok) throw new Error('SAMPLES_UNAVAILABLE');
+  const registry = await response.json();
+  if (generation !== renderGeneration) return;
+  const sample = registry.books.find(book => book.bookId === bookId);
+  if (!sample) return;
+  const english = englishPreviewForBook(bookId);
+  const useEnglish = Boolean(english && (locale === 'en' || new URL(location.href).searchParams.get('preview') === 'en'));
+  host.querySelector('#free-samples')?.remove();
+  for (const previous of host.querySelectorAll('[data-book-preview-entry],[data-book-english-preview-entry]')) previous.remove();
+  const section = document.createElement('section'); section.id='free-samples'; section.className='knowledge-section'; section.dataset.bookPreviewOwner=bookId;
+  const shell = document.createElement('div'); shell.className='knowledge-shell'; section.append(shell); host.append(section);
+  renderBookPublicSamples(shell, {...sample,cover:useEnglish?null:sample.cover,figures:[],previewPages:useEnglish?english.pages.map(page=>page.url):(sample.previewPages||[]),previewLanguage:useEnglish?'en':null,publicationPageCount:useEnglish?null:sample.publicationPageCount}, locale);
+  const actions = host.querySelector('.knowledge-actions');
+  const link = document.createElement('a'); link.className='knowledge-action'; link.dataset.bookPreviewEntry=bookId;
+  link.href=useEnglish?'#free-english-preview':'#free-samples';
+  link.textContent=useEnglish?(locale==='zh-Hans'?'免费阅读英文预览 · 前30页':'Read Free Preview · English · first 30 pages'):(sample.previewPages?.length?(locale==='zh-Hans'?'免费阅读预览':'Read Free Preview'):(locale==='zh-Hans'?'查看本册封面':'View book cover'));
+  if (useEnglish) { link.dataset.bookEnglishPreviewEntry=bookId; link.addEventListener('click',()=>requestAnimationFrame(()=>maintainInitialPreviewAnchor(host))); }
+  actions?.append(link);
+  if (english && !useEnglish) { const choice=document.createElement('a'); choice.className='knowledge-action'; choice.dataset.bookEnglishPreviewEntry=bookId; choice.href=location.pathname+'?locale=en&preview=en#free-english-preview'; choice.textContent=locale==='zh-Hans'?'免费阅读英文预览 · 前30页':'Read Free Preview · English · first 30 pages'; actions?.append(choice); }
+  if (useEnglish) maintainInitialPreviewAnchor(host);
+}
+
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -31,7 +89,12 @@ function partMarkup(part, locale) {
 }
 
 async function render() {
-  if (!root) return;
+  disposePreviewAnchor();
+  if (!root) {
+    const host=document.getElementById('book-main');
+    if(host&&englishPreviewForBook(bookId)) await mountPublicBookPreview(host,getLocale(),++renderGeneration).catch(()=>{});
+    return;
+  }
   const generation = ++renderGeneration;
   disposeFormation();
   const locale = getLocale();
@@ -215,11 +278,7 @@ async function render() {
       const actions=root.querySelector('.knowledge-actions');if(actions)actions.prepend(link);
       price.append(' · ',document.createTextNode(locale==='zh-Hans'?'数字版交付':'Digital delivery'));root.querySelector('.knowledge-hero__lead')?.after(price);
     }).catch(()=>{});
-    fetch('/content/web-production/registries/book-public-samples-v1.json').then(r=>{if(!r.ok)throw new Error('SAMPLES_UNAVAILABLE');return r.json();}).then(registry=>{
-      if(generation!==renderGeneration)return;const sample=registry.books.find(b=>b.bookId===bookId);if(!sample)return;
-      const section=document.createElement('section');section.id='free-samples';section.className='knowledge-section';const shell=document.createElement('div');shell.className='knowledge-shell';section.append(shell);root.append(section);renderBookPublicSamples(shell,{...sample,figures:[]},locale);
-      const link=document.createElement('a');link.className='knowledge-action';link.href='#free-samples';link.textContent=locale==='zh-Hans'?'免费预览与总结图':'Free previews and summary figures';root.querySelector('.knowledge-actions')?.append(link);
-    }).catch(()=>{});
+    mountPublicBookPreview(root,locale,generation).catch(()=>{});
 
     if (bookId === 'book-1') {
       const action=document.createElement('a');action.className='knowledge-action';action.href='#explorer';action.textContent=locale==='zh-Hans'?'探索形成机制':'Explore formation';root.querySelector('.knowledge-actions')?.append(action);
