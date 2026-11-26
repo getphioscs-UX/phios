@@ -10,7 +10,6 @@ import reading from './zh-Hans/reading.js';
 import navigation from './zh-Hans/navigation.js';
 import review from './zh-Hans/review.js';
 import about from './zh-Hans/about.js';
-import thesis from './zh-Hans/thesis.js';
 import publicExperience from './zh-Hans/public.js';
 import knowledgeRelease from './zh-Hans/knowledge.js';
 import journeyPublic from './zh-Hans/journey.js';
@@ -33,7 +32,6 @@ const dictionary = Object.freeze({
   ...navigation,
   ...review,
   ...about,
-  ...thesis,
   ...publicExperience,
   ...knowledgeRelease,
   ...journeyPublic,

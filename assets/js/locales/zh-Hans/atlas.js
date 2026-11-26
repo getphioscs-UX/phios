@@ -17,15 +17,13 @@ const atlas = Object.freeze({
     hero: {
       eyebrow: '知识旅程 · 现实地图集',
       title: '探索现实如何组织自身。',
-      subtitle: '一张可以滚动、逐层探索的知识地图，连接 PHI OS 论文、八册体系、十五个架构层与相关图像。',
+      subtitle: '一张可以滚动、逐层探索的知识地图，连接 PHI OS 八册体系、十五个架构层与相关图像。',
       beginAction: '进入现实地图集',
-      thesisAction: '阅读论文',
       orientationLabel: '你在这里',
       orientationTitle: '现实地图集'
     },
     path: {
       atlas: '地图集',
-      thesis: '论文',
       books: '八册',
       figures: '图像与影音',
       academy: '学院'
@@ -33,8 +31,6 @@ const atlas = Object.freeze({
     overview: {
       eyebrow: '如何阅读这张地图',
       title: '同一个架构，通过彼此连接的形式展开。',
-      thesisTitle: '论文',
-      thesisDescription: '说明为什么世界需要现实导航。',
       layersTitle: '十五个架构层',
       layersDescription: '定义 PHI OS 架构如何运行。',
       booksTitle: '八册体系',
@@ -204,8 +200,6 @@ const atlas = Object.freeze({
       eyebrow: '继续知识旅程',
       title: '通过同一个架构阅读、观看、聆听与学习。',
       description: '新的呈现形式会不断深化地图集，但不会产生另一套彼此冲突的系统。',
-      thesisTitle: 'PHI OS 论文',
-      thesisDescription: '理论基础与现实导航基础设施论证。',
       figuresTitle: '图像与影音',
       figuresDescription: '与每个架构层连接的总结图像、视频与音频。',
       libraryTitle: '现实知识库',

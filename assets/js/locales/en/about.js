@@ -16,13 +16,12 @@ const about = Object.freeze({
       "titleLine2": "Navigation must continue.",
       "lead": "PHI OS is being developed as a Reality Navigation system: a unified way to understand how a specific reality is forming, changing and continuing through time.",
       "begin": "Begin Reality Navigation",
-      "thesis": "Read the Thesis",
       "atlas": "Explore the Reality Atlas"
     },
     "origin": {
       "eyebrow": "Architecture Alignment",
       "title": "From research to infrastructure",
-      "copy": "The Reality Navigation Thesis establishes the category. The Unified Runtime Framework defines the architecture. PHI OS turns both into an evolving knowledge, experience and platform environment.",
+      "copy": "The Unified Runtime Framework defines the architecture. PHI OS turns this into an evolving knowledge, experience and platform environment.",
       "link": "See the architecture ↓"
     },
     "why": {
@@ -55,7 +54,7 @@ const about = Object.freeze({
     "architecture": {
       "eyebrow": "03 · From Research to PHI OS",
       "title": "One continuous architecture.",
-      "intro": "PHI OS is not a separate idea placed on top of the thesis. It is the operational continuation of the research.",
+      "intro": "PHI OS is the operational continuation of the research.",
       "p1": "The proposed computational category.",
       "p2": "The research foundation explaining why the category is necessary.",
       "p3": "The theoretical language for evidence, state, transition and continuity.",
@@ -105,7 +104,7 @@ const about = Object.freeze({
       },
       "j2": {
         "title": "Knowledge Journey",
-        "copy": "For readers and learners entering the Thesis, Atlas, books, figures and Academy."
+        "copy": "For readers and learners entering Atlas, books, figures and Academy."
       },
       "j3": {
         "title": "Platform Journey",
@@ -135,7 +134,6 @@ const about = Object.freeze({
       "title": "Start with the reality, knowledge or pathway that matters now.",
       "copy": "PHI OS is still developing, but its core route is already available: observe what is changing, preserve the evidence and continue from a more coherent position.",
       "begin": "Begin Reality Navigation",
-      "thesis": "Read the Thesis",
       "atlas": "Explore the Atlas"
     },
     "footer": {

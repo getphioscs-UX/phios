@@ -532,37 +532,6 @@ export const ASK_CAPABILITIES={
       "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
     },
     {
-      "capabilityId": "THESIS",
-      "displayLabels": {
-        "en": "Thesis",
-        "zh-Hans": "核心论述"
-      },
-      "canonicalRoute": "/thesis.html",
-      "routeOwner": "thesis.html",
-      "canonicalDomainRefs": [
-        "KNOWLEDGE"
-      ],
-      "mappingGap": null,
-      "verifiedAt": "2026-10-11T02:19:12.523Z",
-      "canonicalDomainOwner": "CANONICAL_KNOWLEDGE",
-      "availability": "DISCOVERY_ONLY_EXECUTION_GATED_BY_EXISTING_OWNER",
-      "availabilitySource": "content/product-convergence-r1/registries/canonical-product-domain-registry-v1.json",
-      "inputRequirements": [
-        "Published thesis and available PDF projection"
-      ],
-      "sourceRequirements": [
-        "Existing registered owner; no client-provided authority"
-      ],
-      "consentRequirement": "EXPLICIT_WHERE_PERSONAL",
-      "entitlementRequirement": "EXISTING_SERVER_OWNER",
-      "executionClass": "ENTRY",
-      "outputKinds": [
-        "Existing research reading/download; no invented PDF"
-      ],
-      "capabilityVersion": "R1-v2",
-      "indexVersion": "PHI-OS-ASK-ENTRY-R1-v2"
-    },
-    {
       "capabilityId": "REALITY",
       "displayLabels": {
         "en": "Continue My Reality",
