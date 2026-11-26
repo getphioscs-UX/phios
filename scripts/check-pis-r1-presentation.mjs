@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import './check-founder-owner-r3.mjs';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
@@ -9,6 +10,7 @@ const pages=read('content/web/index-surfaces/pis-r1-presentation-manifest-v1.jso
 assert.equal(pages.length,29);assert.equal(books.length,8);
 const activeCodes=new Set(),routeResults=[];
 for(const p of pages){
+ if(p.file==='thesis.html'){await assertCurrentThesisRetirement();routeResults.push({file:p.file,state:'OWNER_RETIRED_PHYSICALLY_ABSENT'});continue;}
  const source=fs.readFileSync(p.file,'utf8'),document=parseHTML(source).document;
  if(p.file==='explore/index.html'){
   assert.equal(document.querySelectorAll('script[src="/assets/js/explore-about-compat.js"]').length,1);
@@ -38,4 +40,4 @@ const deleted=read('content/customer-experience-rebuild/migration/p1-legacy-dele
 assert.doesNotMatch(fs.readFileSync('assets/customer-ui/js/public-index-copy.js','utf8'),/checkout|stripe|localStorage|\/api\//i);
 const result={scope:'ACTUAL_CURRENT_PIS_ROUTES_REGISTERED_ASSETS_BOOK_AND_DENIAL_BOUNDARIES_NOT_HISTORICAL_REPLAY',routes:routeResults,books:8,registeredContextIdentities:39,registeredPISAssetIdentities:41,actuallyObservedCurrentPISCodes:[...activeCodes],historicalBeforeRead:false,sourceAuthorityChanged:false,providerCalls:0,liveBrowserAcceptance:false};
 if(process.env.PHIOS_PIS_QA_OUTPUT_DIR)fs.writeFileSync(process.env.PHIOS_PIS_QA_OUTPUT_DIR+'/PRESENTATION-CURRENT-RESULT.json',JSON.stringify(result,null,2));
-console.log('PASS current PIS presentation: actual29routes,39registered figure identities,41approved PIS identities,eightbooks,closed commerce,and retiredpage denial; no historical before required.');
+console.log('PASS current PIS presentation: 28currentroutes+1Ownerretiredpoint,39registered figure identities,41approved PIS identities,eightbooks,closed commerce,and retiredpage denial; no historical before required.');

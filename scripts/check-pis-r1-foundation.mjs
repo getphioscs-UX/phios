@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
@@ -49,6 +50,7 @@ const copy=read('content/web/index-surfaces/pis-r1-discovery-copy-v1.json');
 const successor=pisCurrentSurfaceSuccessor();
 assert.equal(Object.keys(copy.pages).length,29);
 for(const [file,sections] of Object.entries(copy.pages)){
+ if(file==='thesis.html'){await assertCurrentThesisRetirement();continue;} // exact Owner-retired point, never substitute a body
  const source=fs.readFileSync(file,'utf8');
  const {document}=parseHTML(source);
  if(file==='explore/index.html'&&source.includes('/assets/js/explore-about-compat.js')){
@@ -84,7 +86,8 @@ for(const [file,sections] of Object.entries(copy.pages)){
    assert.ok(link.en&&link.zh);
    assert.ok(link.href.startsWith('/')&&!link.href.startsWith('//'));
    const destination=link.href.split(/[?#]/)[0].slice(1);
-   assert.ok(fs.existsSync(destination.endsWith('/')?destination+'index.html':destination),`${file}: missing destination ${link.href}`);
+   if(destination==='thesis.html')await assertCurrentThesisRetirement();
+   else assert.ok(fs.existsSync(destination.endsWith('/')?destination+'index.html':destination),`${file}: missing destination ${link.href}`);
    assert.ok(!/checkout|payment|subscribe|buy/i.test(link.href),'No new purchase CTA in discovery additions');
   }
  }
