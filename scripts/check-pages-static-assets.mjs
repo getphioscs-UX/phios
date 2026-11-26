@@ -88,7 +88,16 @@ if (!fs.existsSync(path.join(output, '_worker.js'))) {
 if (!fs.existsSync(path.join(output, '_routes.json'))) {
   failures.push('_routes.json: missing');
 } else {
-  try {const routes=JSON.parse(fs.readFileSync(path.join(output,'_routes.json'),'utf8'));if(routes.version!==1||!Array.isArray(routes.include)||routes.include.length===0)failures.push('_routes.json: generated routing contract invalid');}
+  try {
+    const routes=JSON.parse(fs.readFileSync(path.join(output,'_routes.json'),'utf8'));
+    if(routes.version!==1||!Array.isArray(routes.include)||routes.include.length===0)failures.push('_routes.json: generated routing contract invalid');
+    else {
+      const matches=(pattern,url)=>new RegExp('^'+pattern.split('*').map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('.*')+'$').test(url);
+      for(const url of ['/content/world/world-country-public-evidence-r1.json','/content/world/world-country-public-evidence-r2-136b941c00f890aa.json','/content/world/world-country-public-evidence-r2-136b941c00f890aa.json/','/content/world/world-country-public-evidence-r2-136b941c00f890aa.json%2F']){
+        if(!routes.include.some(p=>matches(p,url))||(routes.exclude||[]).some(p=>matches(p,url)))failures.push('_routes.json: internal World snapshot bypasses Worker '+url);
+      }
+    }
+  }
   catch {failures.push('_routes.json: invalid JSON');}
 }
 
