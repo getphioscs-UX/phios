@@ -1,3 +1,5 @@
+import {parseHTML} from 'linkedom';
+import {resolveExplicitAskContexts} from '../functions/contextual-ask/contextual-ask-runtime.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -10,7 +12,19 @@ assert.equal(review.humanAccepted,true);
 assert.equal(review.acceptanceDecision,'ACCEPTED_AS_A_SET');
 assert.equal(review.individualQuestionScoresInvented,false);
 assert.equal(review.phase7Authorized,true);
-assert.equal(fs.existsSync('tools/review/CX-R31-W9-HUMAN-FIRST-USE.html'),true);
+// Owner Override 2026-11-26 retires obsolete review HTML, not Human acceptance.
+assert.equal(freeze.humanAcceptance,'content/customer-experience-rebuild/cx-r31/review/cx-r31-w9-human-first-use-review-v1.json');
+assert.equal(review.acceptanceSource,'TL_EXPLICIT_HUMAN_FIRST_USE_ACCEPTANCE');
+assert.equal(review.questions.length,10);
+const {document:currentAsk}=parseHTML(fs.readFileSync('knowledge/ask/index.html','utf8'));
+assert.equal(currentAsk.querySelectorAll('[data-cx-contextual-ask-form]').length,1,'CURRENT_FIRST_USE_ASK_ENTRY_REQUIRED');
+assert(currentAsk.querySelector('[data-cx-contextual-ask-form] [name="question"]'),'CURRENT_FIRST_USE_QUESTION_REQUIRED');
+const direct=read('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w5-specialist-direct-route-protection-v1.json');
+for(const row of direct.protectedEntries)assert(fs.readFileSync(row.physical).length>0,'CURRENT_FIRST_USE_DIRECT_ENTRY_REQUIRED:'+row.id);
+assert.equal(direct.universalAskMandatoryProxy,false);
+assert.equal(freeze.invariants.silentPersonalContextConsumptionAllowed,false);
+const actualDefault=resolveExplicitAskContexts({requested:[{contextType:'KNOWLEDGE'}],resolvedContexts:[{contextType:'RELATIONSHIP_GOVERNED_READING',contextRef:'UNREQUESTED_PRIVATE_CONTEXT',serverAuthorized:true,consent:{accepted:true}}],locale:'en'});
+assert.deepEqual(actualDefault.map(x=>x.contextType),['KNOWLEDGE'],'CURRENT_FIRST_USE_MUST_NOT_CONSUME_UNREQUESTED_PRIVATE_CONTEXT');
 assert.equal(acceptance.work['CX-R31-W9'],'HUMAN_ACCEPTED');
 assert.equal(acceptance.exitGates.FIRST_USE_HUMAN_ACCEPTED,true);
 assert.equal(acceptance.phase6ExitComplete,true);

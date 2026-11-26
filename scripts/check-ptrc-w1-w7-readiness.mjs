@@ -1,4 +1,6 @@
 import {assertAskCurrentVisual} from './lib/ask-current-visual.mjs';
+import {publicBasicAskRequest} from '../functions/_lib/public-basic-ask-transport-r2.js';
+import {FINAL_RELEASE_BRANCH,FINAL_PREVIEW_FLAGS,finalInternalPath,finalReleaseBuildPolicy} from '../functions/_lib/final-release-scope.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -115,12 +117,18 @@ for(const state of ux.askStates)assert.match(client,new RegExp(`['\"]${state}['\
 assert.match(client,/window\.addEventListener\('offline'/);assert.match(client,/aria-busy/);
 assert.match(askHtml,/role="status" aria-live="polite"/);assertAskCurrentVisual(askHtml);
 
-// W7 — machine readiness can pass while human approval remains explicitly pending.
-const reviewHtml=text('tools/review/PTRC-W7-HUMAN-REVIEW.html');
-const decision=json('tools/review/PTRC-W7-HUMAN-DECISION.json');
-assert.match(reviewHtml,/Two distinct human reviewers/);assert.match(reviewHtml,/Download decision JSON/);
-assert.equal(decision.status,'PENDING_TWO_REVIEWERS');assert.equal(decision.reviewers.length,0);
-
+// W7 — current machine readiness grants no Owner acceptance or release authority.
+// Owner Override retires the historical review HTML/two-reviewer artifact requirement;
+// Main merge and Production still require the Owner's separate release decision.
+const publicQuestion={question:'How might Malaysia change from 2026 to 2036?',task:'KNOWLEDGE_BASIC',locale:'en',questionOnly:false,contexts:[{contextType:'KNOWLEDGE'}]};
+assert.equal(publicBasicAskRequest(publicQuestion),true);
+for(const extra of [{humanApproved:true},{productionApproved:true},{personId:'UNAUTHORIZED_PERSON'},{task:'KNOWLEDGE_ENHANCED'}])assert.equal(publicBasicAskRequest({...publicQuestion,...extra}),false,'Client input cannot grant private, paid, human or production authority');
+assert.equal(FINAL_PREVIEW_FLAGS.PHIOS_D1_MAINTENANCE_MODE,'READ_ONLY');
+for(const key of ['PHIOS_SHARED_PAID_REPORT_ENABLED','PHIOS_P9_CHECKOUT_ENABLED','REPORT_PROVIDER_LIVE_ALLOWED','PHIOS_COMMERCE_QA_ENABLED'])assert.equal(FINAL_PREVIEW_FLAGS[key],'false',key+' stays closed');
+assert.equal(finalInternalPath('/tools/review/PTRC-W7-HUMAN-REVIEW.html'),true,'Retired internal review is not a public release route');
+assert.throws(()=>finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:'main',CF_PAGES_ENVIRONMENT:'production'}),/FINAL_RELEASE_COMMIT_REQUIRED/);
+assert.throws(()=>finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:'main',CF_PAGES_COMMIT_SHA:'0'.repeat(40),CF_PAGES_ENVIRONMENT:'preview'}),/FINAL_PRODUCTION_ENVIRONMENT_REQUIRED/);
+assert.throws(()=>finalReleaseBuildPolicy({CF_PAGES:'1',CF_PAGES_BRANCH:FINAL_RELEASE_BRANCH,CF_PAGES_COMMIT_SHA:'0'.repeat(40),CF_PAGES_ENVIRONMENT:'production',CF_PAGES_URL:'https://qa.phios-github.pages.dev'}),/FINAL_PREVIEW_IDENTITY_INVALID/);
 console.log('✓ PTRC-W1–W7 machine/readiness checks passed.');
 console.log('  W1 approved R2 logo selection + favicon/app manifest binding: passed (raster byte derivatives explicitly evidence-blocked, not fabricated).');
 console.log('  W2 structured question/scope separation: passed.');
@@ -128,4 +136,4 @@ console.log('  W3 Atlas → evidence → Part 12 → broader Knowledge trace/pol
 console.log('  W4 relevance/sufficiency/abstention five-way gate: passed.');
 console.log(`  W5 offline production-shaped regression: ${regression.criticalCases.length}/${regression.criticalCases.length} passed; live canary remains post-deploy.`);
 console.log('  W6 full-bleed responsive state contract: passed source-level machine acceptance.');
-console.log('  W7 human acceptance harness: ready; final two-reviewer acceptance is intentionally still pending.');
+console.log('  W7 current transport/release boundaries: passed; machine readiness does not grant Owner acceptance, paid execution or Production release.');

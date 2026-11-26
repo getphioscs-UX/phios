@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {readConvergenceRecord} from './public-customer-report-convergence-successor-r1.mjs';
+import {readConvergenceRecord,currentNarrativePreparationPredecessor} from './public-customer-report-convergence-successor-r1.mjs';
 
 export const PROVIDER_PATH='functions/personal-reading/narrative/narrative-provider.js';
 export const SUCCESSOR_RECORD='docs/commerce/economics-20261009/bazi-prelive-owner-successors.json';
@@ -25,6 +25,8 @@ function exactCurrentEndpoint(current){
  assert(row,'Unregistered current Provider endpoint');
  assert.equal(row.previousSHA256,NEW,'Exact R2.1 endpoint must precede the separate current source');
  assert.equal(sha(Buffer.from(row.previousBytesBase64,'base64')),NEW,'Immutable R2.1 bytes');
+ // Current pure request extraction must invert byte-exactly to the registered source.
+ if(sha(current)==='cdf46681ba2bace46a04468c09817293eb67545c61a899327977d3d7a56fc88f'){assert.equal(sha(currentNarrativePreparationPredecessor(PROVIDER_PATH,current)),row.sha256,'PURE_REQUEST_PREPARATION_EXACT_REGISTERED_PARENT');return sha(current);}
  assert.equal(sha(current),row.sha256,'CURRENT Provider must equal the exact registered source, never a substituted predecessor');
  return row.sha256;
 }

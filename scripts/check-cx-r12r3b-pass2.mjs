@@ -1,3 +1,6 @@
+import {parseHTML} from 'linkedom';
+import {resolveCustomerCompositionAdmission} from '../functions/interpretation-runtime/customer-composition-admission-resolver-v1.js';
+import {CX_R12R3B_COMPOSITION_VERSION} from '../functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -25,7 +28,15 @@ for(const methodId of ['AST','NUM','BZR','ZWR']){
  assert.equal(pack.methodId,methodId);assert.equal(pack.humanReview.accepted,0);assert.equal(pack.productionSha,null);
 }
 assert.equal(aggregate.fullProduction,false);assert.equal(aggregate.humanReviewResults,null);
-for(const p of ['tools/review/cx-r12r3b-human-review.html','scripts/validate-cx-r12r3b-human-review-results.mjs','docs/CX-R12R3B-PASS2-ACCEPTANCE-STATUS.md'])assert(fs.existsSync(p),`${p} missing`);
+// Owner Override retires the old review HTML shell; fixed campaign states remain above.
+for(const p of ['scripts/validate-cx-r12r3b-human-review-results.mjs','docs/CX-R12R3B-PASS2-ACCEPTANCE-STATUS.md'])assert(fs.existsSync(p),p+' missing');
+const {document:ask}=parseHTML(fs.readFileSync('knowledge/ask/index.html','utf8')),personal=fs.readFileSync('perspectives/personal/index.html','utf8');
+assert.equal(ask.querySelectorAll('[data-cx-contextual-ask-form]').length,1,'CURRENT_INTERPRETATION_ENTRY_REQUIRED');
+assert(personal.includes('data-cx-personal-results'),'CURRENT_METHOD_RESULT_ENTRY_REQUIRED');
+const request={methodId:'NUM',candidateSchemaVersion:'PHI-OS-METHOD-INTERPRETATION-CANDIDATE-v2.0.0',meaningBundleCode:'',compositionRuleVersion:CX_R12R3B_COMPOSITION_VERSION,locale:'en',projectionAuthorityVersion:'current-boundary-test'};
+const missingMeaning=resolveCustomerCompositionAdmission(request);assert.equal(missingMeaning.admitted,false);assert.equal(missingMeaning.publicationAllowed,false);assert(missingMeaning.constraints.includes('MEANING_BUNDLE_REQUIRED'));
+const unknownMethod=resolveCustomerCompositionAdmission({...request,methodId:'UNKNOWN',meaningBundleCode:'not-a-source'});assert.equal(unknownMethod.publicationAllowed,false);assert(unknownMethod.constraints.includes('METHOD_NOT_ADMITTED'));assert.equal(unknownMethod.authority.liveCustomerHumanReviewClaimed,false);
+for(const gate of Object.values(gates.controlledProduction))assert.equal(gate.publicRunAllowed,false);
 console.log('✓ CX-R12R3B Pass 2 audit/preflight passed.');
 console.log('  W0–W60 DEVELOPMENT_ACCEPTED is preserved.');
 console.log('  96 case identities are preserved, but 0/96 are review-eligible because case-specific candidate/graph snapshots are not materialized and composition/customer-language blockers remain.');

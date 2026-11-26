@@ -22,6 +22,14 @@ function outputText(data){
   if(chunks.length)return chunks.join('');
   fail('NARRATIVE_PROVIDER_EMPTY_OUTPUT');
 }
+// Pure preparation for existing callers to preflight the exact wire body.
+// No access grant, Provider invocation, persistence or cost reservation occurs here.
+export function prepareOpenAIStructuredRequest({model,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200}){
+  return {
+    model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],
+    text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
+  };
+}
 export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200,accessTier}){
   const replay=typeof process!=='undefined'&&process.env?.REPORT_ZERO_COST_REPLAY==='true';
   const optedIn=env.REPORT_PROVIDER_LIVE_ALLOWED??(typeof process!=='undefined'?process.env?.REPORT_PROVIDER_LIVE_ALLOWED:false);
@@ -34,10 +42,7 @@ export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,sy
   if(!model)fail('OPENAI_NARRATIVE_MODEL_NOT_CONFIGURED');
   if(typeof fetcher!=='function')fail('NARRATIVE_PROVIDER_FETCH_UNAVAILABLE');
   let response;
-  try{const transport=paidContext.fixture?fetcher:(url,options)=>paidContext.invokeBudgeted(()=>fetcher(url,options));response=await transport(RESPONSES_URL,{method:'POST',headers:{'content-type':'application/json',authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({
-    model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],
-    text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
-  })});}
+  try{const transport=paidContext.fixture?fetcher:(url,options)=>paidContext.invokeBudgeted(()=>fetcher(url,options));response=await transport(RESPONSES_URL,{method:'POST',headers:{'content-type':'application/json',authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify(prepareOpenAIStructuredRequest({model,systemPrompt,userPayload,schema,schemaName,maxOutputTokens}))});}
   catch(error){
     if(/^NARRATIVE_PROVIDER_/.test(error?.code||'')||/^SYMBOLIC_(?:NARRATIVE_OUTPUT_|QUESTION_)/.test(error?.code||'')||['PAID_REPORT_OUTPUT_VALIDATION_FAILED','PAID_REPORT_PROVIDER_ERROR'].includes(error?.code))throw error;
     // Durable paid-budget/fence failures are not network failures. Keep their

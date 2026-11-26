@@ -1,8 +1,9 @@
+import {prepareOpenAIStructuredRequest} from '../../functions/personal-reading/narrative/narrative-provider.js';
 import {releaseR5Predecessor,registeredR5AssertionDocument} from './pr22-release-r5-exact-successor-r1.mjs';
 import {auditPublicPredecessor} from './audit-r2-public-receiver-r2.mjs';
 import {hdPrivateDecorationPredecessor,validateHdPrivateDecorationCurrent} from './hd-private-decorative-reception-r1.mjs';
 import {bzrPublicFidelityPredecessor,validateBzrPublicFidelityCurrent} from './bzr-public-fidelity-reception-r1.mjs';
-const convergenceChildBytes=(path,bytes)=>zwrChildBytes(path,bzrPublicFidelityPredecessor(path,hdPrivateDecorationPredecessor(path,auditPublicPredecessor(path,bytes))));
+const convergenceChildBytes=(path,bytes)=>zwrChildBytes(path,bzrPublicFidelityPredecessor(path,hdPrivateDecorationPredecessor(path,auditPublicPredecessor(path,currentNarrativePreparationPredecessor(path,bytes)))));
 import {worldReadabilityPredecessor} from './world-readability-compatibility-r1.mjs';
 import {convergenceChildBytes as zwrChildBytes,validateZwrReceptionCurrent} from './report-zwr-revision-reception-r1.mjs';
 import fs from 'node:fs';
@@ -102,4 +103,31 @@ export function assertConvergenceHome(document){document=registeredR5AssertionDo
  }
  for(const route of ['/knowledge/','/articles/','/books/','/search/','/reality/','/professional/','/about/founder/'])assert(document.querySelector('main a[href="'+route+'"]'),'R3_PRESERVED_DEEP_ENTRY:'+route);
  assert.equal(document.querySelectorAll('main h1').length,1);
+}
+
+// Current Owner-received pure extraction; no changed caller, budget or access gate.
+// Prove the exact inverse in memory rather than changing a frozen expected SHA.
+export function currentNarrativePreparationPredecessor(path,bytes){
+ if(path!=='functions/personal-reading/narrative/narrative-provider.js')return bytes;
+ const before='b2ef6d68738f3ec52b4d1430b3233e01ea659429b56d92a8b647873c3dbcd5b1';
+ if(convergenceHash(bytes)===before)return bytes;
+ assert.equal(convergenceHash(bytes),'cdf46681ba2bace46a04468c09817293eb67545c61a899327977d3d7a56fc88f','CURRENT_NARRATIVE_PREPARATION_UNREGISTERED_BYTES');
+ const source=bytes.toString('utf8');
+ const start=source.indexOf('// Pure preparation for existing callers');
+ const end=source.indexOf('export async function invokeOpenAIStructured',start);
+ assert(start>=0&&end>start,'CURRENT_NARRATIVE_PREPARATION_EXTRACTION_MISSING');
+ const pure=source.slice(start,end);
+ assert.equal((source.match(/export function prepareOpenAIStructuredRequest/g)||[]).length,1);
+ const call='JSON.stringify(prepareOpenAIStructuredRequest({model,systemPrompt,userPayload,schema,schemaName,maxOutputTokens}))';
+ assert.equal(source.split(call).length,2,'CURRENT_NARRATIVE_PREPARATION_CALL_COUNT');
+ const inline=({model,systemPrompt,userPayload,schema,schemaName,maxOutputTokens=5200})=>({model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens});
+ const base={model:'current-test',schema:{type:'object',additionalProperties:false,properties:{ok:{type:'boolean'}}},schemaName:'current_test'};
+ for(const test of [{userPayload:'literal\n"text"'},{userPayload:{a:1,zh:'中'}},{systemPrompt:'',userPayload:{}},{userPayload:'x'},{systemPrompt:null,userPayload:null},{maxOutputTokens:19},{maxOutputTokens:0,userPayload:0},{}]){
+  const input={...base,...test};assert.equal(JSON.stringify(prepareOpenAIStructuredRequest(input)),JSON.stringify(inline(input)),'CURRENT_NARRATIVE_WIRE_BYTES_CHANGED');
+ }
+ const eol=source.includes('\r\n')?'\r\n':'\n';
+ const oldBody=["JSON.stringify({","    model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],","    text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens","  })"].join(eol);
+ const previous=Buffer.from(source.replace(pure,'').replace(call,oldBody),'utf8');
+ assert.equal(convergenceHash(previous),before,'CURRENT_NARRATIVE_EXACT_INVERSE_FAILED');
+ return previous;
 }

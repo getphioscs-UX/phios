@@ -1,3 +1,4 @@
+import {baziFreeChartRequest,baziFreeChartCapability} from './bazi-free-chart-contract.js';
 import {publicBasicAskRequest} from './public-basic-ask-transport-r2.js';
 // Server-owned transport policy, not a client-declared free/readOnly capability.
 const MAX_BYTES = 16384;
@@ -35,7 +36,7 @@ async function limitedJson(request) {
 export async function classifyStatelessFreeRequest(request, env = {}) {
   const url = new URL(request.url);
   if (request.method !== 'POST' || url.search ||
-      !['/api/location-resolve','/api/customer-contextual-ask',...symbolicPaths].includes(url.pathname)) return null;
+      !['/api/location-resolve','/api/customer-contextual-ask','/api/method-reading/bazi',...symbolicPaths].includes(url.pathname)) return null;
   // Browser POSTs must be same origin. Missing Origin is deliberately denied.
   if (request.headers.get('origin') !== url.origin) return null;
   const site = request.headers.get('sec-fetch-site');
@@ -45,6 +46,7 @@ export async function classifyStatelessFreeRequest(request, env = {}) {
   if (length !== null && (!/^\d+$/.test(length) || Number(length) > MAX_BYTES)) return null;
   const body = await limitedJson(request);
   if (!plain(body)) return null;
+  if(url.pathname==='/api/method-reading/bazi')return baziFreeChartCapability(env)&&baziFreeChartRequest(body)?'BAZI_FREE_CHART':null;
   if(url.pathname==='/api/customer-contextual-ask')return publicBasicAskRequest(body)?'PUBLIC_BASIC_ASK':null;
   if (url.pathname === '/api/location-resolve') {
     // These exact existing non-paid public lookup endpoints are the only audited configuration.

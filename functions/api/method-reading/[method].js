@@ -1,5 +1,7 @@
+import {onRequestPost as pureBaziFree} from '../../personal-professional-reading/bazi-free-chart-request.js';
+import {baziFreeChartCapability} from '../../_lib/bazi-free-chart-contract.js';
 import {onRequestPost as owner} from '../customer-personal-reality.js';
 import {scopedMethodReadingR2} from '../../_lib/method-native-request-scope-r2.js';
-export const onRequestPost=scopedMethodReadingR2(owner);
+export const onRequestPost=scopedMethodReadingR2(context=>context.params?.method==='bazi'?pureBaziFree(context):owner(context));
 
-export async function onRequestGet(context){const slug=context.params?.method;if(!['bazi','ziwei','astrology','numerology','human-design','phi-configuration'].includes(slug))return Response.json({ok:false,error:'METHOD_ROUTE_INVALID'},{status:404});const mode=context.env?.PHIOS_D1_MAINTENANCE_MODE;return Response.json({ok:true,method:slug,submissionStatus:mode==='OFF'?'OWNER_CHECK_REQUIRED':'TEMPORARILY_UNAVAILABLE'},{headers:{'cache-control':'no-store'}});}
+export async function onRequestGet(context){const slug=context.params?.method;if(!['bazi','ziwei','astrology','numerology','human-design','phi-configuration'].includes(slug))return Response.json({ok:false,error:'METHOD_ROUTE_INVALID'},{status:404});const mode=context.env?.PHIOS_D1_MAINTENANCE_MODE;return Response.json({ok:true,method:slug,submissionStatus:slug==='bazi'?(baziFreeChartCapability(context.env)?'OWNER_CHECK_REQUIRED':'TEMPORARILY_UNAVAILABLE'):(mode==='OFF'?'OWNER_CHECK_REQUIRED':'TEMPORARILY_UNAVAILABLE')},{headers:{'cache-control':'no-store'}});}

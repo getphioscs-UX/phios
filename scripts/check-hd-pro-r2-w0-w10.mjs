@@ -1,3 +1,4 @@
+import {assertR5HdrPublicPolicy,R5_HDR_PATHS} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -113,7 +114,13 @@ for(const [path,proof] of Object.entries(sharedSuccessor.addedRuntimeFiles)){
 }
 for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){if(proof.successorSha256!==sha(path))assertCurrentPublishedOwner(path,{historicalDigest:proof.successorSha256,label:'HD publication runtime'});assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
 for(const [path,proof] of Object.entries(publishSuccessor.admissionArtifacts))assert.equal(proof.sha256,sha(path),`HD admission artifact digest drift: ${path}`);
-assert.equal(fs.existsSync('tools/review/HD-PRO-R2-W9-HUMAN-REVIEW.html'),true);
+// Owner Override 2026-11-26 retires only the obsolete review HTML existence gate.
+// Original human24/source/licence/parser/rights assertions remain below/above.
+assert(fs.readFileSync(R5_HDR_PATHS.target).length>0,'HD_CURRENT_REGISTERED_PAGE_REQUIRED');
+assertR5HdrPublicPolicy({catalog:readJson(R5_HDR_PATHS.catalog),methodRegistry:readJson(R5_HDR_PATHS.methods),hdrFreeze:readJson(R5_HDR_PATHS.freeze),hdrManifest:readJson(R5_HDR_PATHS.manifest)});
+const currentExternalOnly=parseHumanDesignProfileText('Type: Generator\nStrategy: Wait to Respond');
+assert(currentExternalOnly.candidates.length>0,'HD_EXTERNAL_PARSER_CURRENT_REQUIRED');
+assert(currentExternalOnly.candidates.every(x=>x.phiosCalculated===false&&x.customerConfirmed===false),'HD_EXTERNAL_PARSE_MUST_NOT_GRANT_CALCULATION_OR_CONFIRMATION');
 assert.equal(fs.existsSync(`${root}/review/hd-w9-human-review-cases-v1.json`),true);
 assert.equal(fs.existsSync(`${root}/review/hd-w9-human-review-results-v1.json`),true);
 
