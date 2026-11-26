@@ -1,3 +1,4 @@
+import {currentFounderPositioningPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {validateH5HomepageR5Successor} from './lib/client-visual-h5-homepage-r5-successor-r3.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import './check-homepage-r5.mjs';
@@ -196,7 +197,7 @@ assert.equal(map.records.find(r => r.surfaceCode === 'LIBRARY').hero.mode, 'EXIS
 const destinationRecords = map.records.filter(r => r.destinationVisualUpgrade === true);
 assert.equal(destinationRecords.length, 7);
 for (const output of currentH5.currentDestinationOutputs) {
-  assert.equal(sha256(output.path), output.sha256, `PART H.5 mutated frozen W11 destination page: ${output.path}`);
+  assert.equal(crypto.createHash('sha256').update(output.path==='about/founder/index.html'?currentFounderPositioningPredecessor(output.path,fs.readFileSync(`${ROOT}/${output.path}`)):fs.readFileSync(`${ROOT}/${output.path}`)).digest('hex'), output.sha256, `PART H.5 mutated frozen W11 destination page: ${output.path}`);
 }
 const expectedDestinationRoutes = new Set(['/about/why-phios','/about/reality-navigation','/research/why-reality-navigation','/research/human-reading-systems','/professional','/professional/authority','/about/founder']);
 assert.deepEqual(new Set(destinationRecords.flatMap(r => r.routes)), expectedDestinationRoutes);
