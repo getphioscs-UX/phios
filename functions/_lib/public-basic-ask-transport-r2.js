@@ -4,7 +4,8 @@ const plain=v=>v&&typeof v==='object'&&!Array.isArray(v);
 const only=(v,keys)=>Object.keys(v).every(k=>keys.includes(k));
 // Explicit unsaved scam review reaches the existing deterministic handler only.
 function publicScamReview(body){
- if(!plain(body)||!only(body,['question','task','locale','jurisdiction','bankJurisdiction','eventJurisdiction','exposure','contexts','questionOnly','guidedContext','contextConsent','guidedRouting','methodGuidanceRequested','followUpContext']))return false;
+ if(!plain(body)||!only(body,['question','task','locale','jurisdiction','bankJurisdiction','eventJurisdiction','exposure','knowledgeContext','contexts','questionOnly','guidedContext','contextConsent','guidedRouting','methodGuidanceRequested','followUpContext']))return false;
+ if(body.knowledgeContext!=null)return false;
  if(body.task!=='SCAM_CHECK'||typeof body.question!=='string'||!body.question.trim()||body.question.length>2000||!['en','zh-Hans'].includes(body.locale))return false;
  if(!Array.isArray(body.contexts)||body.contexts.length||body.questionOnly!==true||body.guidedRouting!==false||body.methodGuidanceRequested!==false||body.followUpContext!=null)return false;
  if(!plain(body.guidedContext)||Object.keys(body.guidedContext).length||!plain(body.contextConsent)||Object.keys(body.contextConsent).length)return false;
