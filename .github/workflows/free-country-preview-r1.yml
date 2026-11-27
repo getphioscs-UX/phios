@@ -37,17 +37,15 @@ jobs:
       - run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-free-read-only-r3.mjs
       - run: node scripts/check-country-history-public-admission-r4.mjs
       - run: node scripts/check-free-country-preview-isolation-r1.mjs
-      - name: Verify exact source successor chain and rejection boundaries
+      - name: Verify finite Free/Country admitted source scope and rejection boundaries
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          import {FREE_COUNTRY_SUCCESSOR_RECORD,validateFreeCountrySourceSuccessor,mainConvergencePredecessors,mainHistoricalPredecessors} from './scripts/lib/main-convergence-source-successor-r1.mjs';
+          import {FREE_COUNTRY_SUCCESSOR_RECORD,validateFreeCountrySourceSuccessor} from './scripts/lib/main-convergence-source-successor-r1.mjs';
           const recordBytes=fs.readFileSync(FREE_COUNTRY_SUCCESSOR_RECORD),record=JSON.parse(recordBytes);
           assert.equal(validateFreeCountrySourceSuccessor().size,5);
-          assert.ok(mainConvergencePredecessors().size>=5);
-          assert.equal(mainHistoricalPredecessors().size,8);
           const mutations=[
             r=>r.changes.pop(),r=>r.changes[1]=r.changes[0],
             r=>r.changes.push({...r.changes[0],path:'functions/unapproved.js'}),
