@@ -1,5 +1,5 @@
 import {boundedBeliefGuidance,beliefGuidanceView,guidanceExecution} from '../customer-projection/codex3-belief-reality-guidance-r13.js';
-import {investigateScam,scamAskResponse} from '../external-reality-impact/consumer-scam-navigation.js';
+import {investigateScam,scamAskResponse,validScamExposure} from '../external-reality-impact/consumer-scam-navigation.js';
 import {resolveCodex3PublicAnswer,codex3PublicScope} from '../customer-projection/codex3-public-answer.js';
 import {routeClientIntent} from '../public/client-intent-router.js';
 import {handlePublicKnowledgeRequest} from '../_lib/public-knowledge-api.js';
@@ -7,15 +7,17 @@ const headers={'content-type':'application/json; charset=utf-8','cache-control':
 const reply=(body,status=200)=>new Response(JSON.stringify(body),{status,headers});
 export async function onRequestPost({request,env={}}){
  let body;try{const raw=await request.text();if(raw.length>6000)return reply({ok:false,error:'INPUT_TOO_LARGE'},413);body=JSON.parse(raw);if(!body||typeof body!=='object'||Array.isArray(body))throw Error();}catch{return reply({ok:false,error:'CLIENT_INTENT_ROUTE_INVALID'},400);}
+ if(!validScamExposure(body.exposure))return reply({ok:false,error:'SCAM_EXPOSURE_INVALID'},400);
  const route=routeClientIntent(body),locale=body.locale==='zh-Hans'?'zh-Hans':'en',zh=locale==='zh-Hans';
  const question=String(body.question||body.q||'').trim();
+ if(body.task==='SCAM_CHECK'&&question.length>2000)return reply({ok:false,error:'QUESTION_TOO_LONG'},400);
  if(!['EMERGENCY','URGENT_EVALUATION'].includes(route.safety?.careState)){
-  const scam=investigateScam({question,locale,jurisdiction:body.jurisdiction||'MY'});
-  const urgent=scam&&['PAID_OR_LOST','CREDENTIALS_SHARED','APP_INSTALLED','SCREEN_SHARED'].includes(scam.stage);
+  const scam=investigateScam({question,locale,jurisdiction:body.jurisdiction,bankJurisdiction:body.bankJurisdiction,eventJurisdiction:body.eventJurisdiction,exposure:body.exposure,explicitCheck:body.task==='SCAM_CHECK'});
+  const urgent=scam&&scam.exposures.length>0;
   const noSelectedContext=codex3PublicScope({body})&&!body.selectedMethod&&!body.selectedMethodId&&!body.knowledgeContext&&!body.navigationHandoff&&!body.contexts?.length&&!body.contextRef;
-  const risk=scam&&(urgent||noSelectedContext&&body.task!=='PRODUCT_HELP');
+  const risk=scam&&(body.task==='SCAM_CHECK'||urgent||noSelectedContext&&body.task!=='PRODUCT_HELP');
   const text=risk?scamAskResponse(scam,{question,locale}).view.answer.text:noSelectedContext&&body.task!=='PRODUCT_HELP'?boundedBeliefGuidance(question,locale):null;
-  if(text){const view=risk?scamAskResponse(scam,{question,locale}).view:beliefGuidanceView(question,locale,text);return reply({ok:true,view,execution:guidanceExecution,route:{...route,outcome:risk?'BASIC_SAFETY_GUIDANCE':'BOUNDED_GENERAL_GUIDANCE',codex3PublicAnswer:'CODEX3_PUBLIC_ANSWER_R2',candidates:[],clarification:null,publicAnswer:{paragraphs:[text],sources:(view.basedOn?.sources||[]).map(s=>({title:s.label,href:s.href})),note:view.basedOn?.statement||''},primaryAction:{kind:'CLARIFY',label:zh?'继续提问':'Ask a follow-up'}},...(risk?{scam}:{})});}
+  if(text){const view=risk?scamAskResponse(scam,{question,locale}).view:beliefGuidanceView(question,locale,text);return reply({ok:true,view,execution:guidanceExecution,route:{...(risk?{task:route.task,safety:route.safety,providerCalls:0}:route),outcome:risk?'BASIC_SAFETY_GUIDANCE':'BOUNDED_GENERAL_GUIDANCE',codex3PublicAnswer:'CODEX3_PUBLIC_ANSWER_R2',candidates:[],clarification:null,publicAnswer:{paragraphs:[text],sources:(view.basedOn?.sources||[]).map(s=>({title:s.label,href:s.href})),note:view.basedOn?.statement||''},primaryAction:risk?{href:'/knowledge/ask/?task=SCAM_CHECK',label:zh?'按所在国家复核暴露与官方来源':'Review exposure and official sources by country'}:{kind:'CLARIFY',label:zh?'继续提问':'Ask a follow-up'}},...(risk?{scam}:{})});}
  }
 
  if(!['PROFESSIONAL_HANDOFF','PRODUCT_HELP','LIMITED_SUPPORT','CAPABILITY_UNAVAILABLE'].includes(route.outcome)){
@@ -35,4 +37,4 @@ export async function onRequestPost({request,env={}}){
  }catch(error){const indexFailure=/PUBLIC_KNOWLEDGE_(?:ASSETS|PROJECTION)_UNAVAILABLE|Unexpected token|JSON/.test(error.message||'');return reply({ok:true,route:{...route,outcome:indexFailure?'INDEX_LOADING_FAILED':'SERVICE_FAILURE',candidates:[],clarification:null,primaryAction:{kind:'RETRY',label:zh?'重试':'Retry'},providerCalls:0}});}
 }
 // Read-only discovery; no account, quota, database or model execution. POST policy remains unchanged.
-export async function onRequestGet({request,env={}}){const u=new URL(request.url),question=u.searchParams.get('q')||'';if(question.length>500)return reply({ok:false,error:'QUESTION_TOO_LONG'},400);return onRequestPost({env,request:new Request(new URL('/api/client-intent-route',u),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question,locale:u.searchParams.get('locale'),topicId:u.searchParams.get('topicId')||undefined,task:u.searchParams.get('task')||undefined,capabilityId:u.searchParams.get('capabilityId')||undefined,selectedMethodId:u.searchParams.get('selectedMethodId')||undefined,selectionConfirmed:u.searchParams.get('selectionConfirmed')==='true'})})});}
+export async function onRequestGet({request,env={}}){const u=new URL(request.url),question=u.searchParams.get('q')||'';if(question.length>500)return reply({ok:false,error:'QUESTION_TOO_LONG'},400);return onRequestPost({env,request:new Request(new URL('/api/client-intent-route',u),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question,locale:u.searchParams.get('locale'),jurisdiction:u.searchParams.get('jurisdiction')||undefined,topicId:u.searchParams.get('topicId')||undefined,task:u.searchParams.get('task')||undefined,capabilityId:u.searchParams.get('capabilityId')||undefined,selectedMethodId:u.searchParams.get('selectedMethodId')||undefined,selectionConfirmed:u.searchParams.get('selectionConfirmed')==='true'})})});}

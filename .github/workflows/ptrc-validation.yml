@@ -41,6 +41,11 @@ jobs:
           node scripts/prepare-main096-immutable-ci-inputs-r1.mjs --self-test
           node scripts/prepare-main096-immutable-ci-inputs-r1.mjs
       - run: npm ci
+      - name: Global fraud R5 current rules, real handlers, DOM and version boundaries
+        env:
+          REPORT_PROVIDER_LIVE_ALLOWED: 'false'
+          REPORT_ZERO_COST_REPLAY: 'true'
+        run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs --test tests/fraud/*.test.mjs
       - run: npm run check:ptrc:machine
       - run: npm run build:pages
       - run: npm run check

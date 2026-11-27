@@ -1,3 +1,4 @@
+import {installScamAskControls,renderScamAskReview} from './scam-ask-controls.js';
 import {installAskServiceStatus} from './public-service-status.js';
 import {publicEntryAnswer} from '../../../js/pages/public-entry-answer.js';
 import {installAskReportHandoff} from '../report-context-ui.js';
@@ -14,6 +15,7 @@ const CX_R31_HANDOFF_ROUTES=Object.freeze({RELATIONSHIP:'/perspectives/relations
 const emitCxR31=(name,detail={})=>document.dispatchEvent(new CustomEvent('phi:cx-r31',{detail:{name,...detail}}));
 
 const sourceClassLabel=value=>({
+  OFFICIAL_REFERENCE:tr('Official reference','官方参考'),
   GOVERNED_KNOWLEDGE:tr('PHI OS knowledge','PHI OS 知识'),
   CURRENT_PUBLIC_FACT:tr('Current public information','当前公共信息'),
   CURRENT_REALITY:tr('Current situation','当前处境'),
@@ -89,6 +91,14 @@ function syncLocalizedInputs(form){
 }
 
 function syncSelection(form){
+  const scamMode=form.elements.askTask?.value==='SCAM_CHECK';
+  const contextPanel=document.querySelector('[data-cx-add-context]');if(contextPanel)contextPanel.hidden=scamMode;
+  if(scamMode){
+    document.querySelector('[data-cx-current-reality-fields]').hidden=true;
+    document.querySelector('[data-cx-context-disclosure-title]').textContent=tr('Using: Your reported request and selected country references','使用：你描述的请求与所选国家参考');
+    document.querySelector('[data-cx-context-disclosure] p').textContent=tr('No account context is read. No model, live database lookup, automatic saving or reporting.','不读取账户情境，不调用模型或实时数据库，不自动保存或报案。');
+    syncLocalizedInputs(form);return;
+  }
   const none=form.elements.questionOnly,knowledge=form.elements.contextKnowledge,reality=form.elements.contextReality;
   if(none.checked){knowledge.checked=false;reality.checked=false;form.querySelectorAll('[data-cx-seeded-context]').forEach(x=>x.checked=false);}
   if((knowledge.checked||reality.checked||[...form.querySelectorAll('[data-cx-seeded-context]')].some(x=>x.checked))&&none.checked)none.checked=false;
@@ -115,6 +125,8 @@ function sourceMeta(s){
   const participant=participantLabel(s.participant),scope=scopeLabel(s.caseScope);
   if(participant)values.push(participant);
   if(scope)values.push(scope);
+  if(s.scope)values.push(s.scope);
+  if(s.reviewedAt)values.push(tr('Reference reviewed: ','参考复核日期：')+s.reviewedAt);
   return values.join(' · ');
 }
 
@@ -199,11 +211,12 @@ function showPaidUpgrade(detail={}){
 function render(){
   if(!view)return;
   document.querySelector('[data-cx-contextual-ask-result]').hidden=false;
-  const answerNode=document.querySelector('[data-cx-answer-text]'),answerText=view?.answer?.text||'';
+  const answerNode=document.querySelector('[data-cx-answer-text]'),answerText=view.scamReview?.assessment||view?.answer?.text||'';
   answerNode.textContent=answerText.length>240?answerText.slice(0,240)+'…':answerText;
   document.querySelector('[data-cx-answer-full]')?.remove();
   if(answerText.length>240){const more=document.createElement('details');more.dataset.cxAnswerFull='';const summary=document.createElement('summary');summary.textContent=tr('Read the full answer','展开完整回答');const body=document.createElement('p');body.textContent=answerText;more.append(summary,body);answerNode.after(more);}
   document.querySelector('[data-cx-answer-supporting]').innerHTML=view?.answer?.structuredAnswer?renderStructuredAnswer(view.answer.structuredAnswer,document.documentElement.lang):arr(view?.answer?.supporting).length?list(view.answer.supporting):'';
+  let scamReview=document.querySelector('[data-scam-ask-review]');if(!scamReview){scamReview=document.createElement('section');scamReview.dataset.scamAskReview='';answerNode.after(scamReview);}renderScamAskReview(scamReview,view.scamReview);
   renderBasis();
   renderTemporal();
   document.querySelector('[data-cx-answer-limits]').innerHTML=list(view?.limits?.items);
@@ -280,11 +293,13 @@ function boot(){
   const task=document.createElement('label');task.className='ask-r1-task';task.innerHTML='<span data-cx-en="What would you like to do?" data-cx-zh="你想怎样继续？">'+tr('What would you like to do?','你想怎样继续？')+'</span><select name="askTask"><option value="ENTRY" data-cx-en="Find an entrance" data-cx-zh="找到入口">'+tr('Find an entrance','找到入口')+'</option><option value="KNOWLEDGE_BASIC" data-cx-en="Understand knowledge" data-cx-zh="理解知识">'+tr('Understand knowledge','理解知识')+'</option><option value="REALITY_NAVIGATION" data-cx-en="Continue my reality" data-cx-zh="继续我的现实">'+tr('Continue my reality','继续我的现实')+'</option></select>';form.prepend(task);
   const taskParams=new URLSearchParams(location.search),incomingContext=normalizeAskContext(taskParams),selectedMethod=incomingContext.selectedMethod||null;
   form.elements.askTask.value=taskParams.get('task')==='ENTRY'?'ENTRY':taskParams.has('contextRef')||taskParams.get('task')==='KNOWLEDGE_BASIC'||selectedMethod?'KNOWLEDGE_BASIC':'ENTRY';
+  const scamControls=installScamAskControls(form);
+  if(taskParams.get('task')==='SCAM_CHECK'){form.elements.askTask.value='SCAM_CHECK';scamControls.sync();}
   const methodNotice=selectedMethod?document.createElement('p'):null;
   if(methodNotice){methodNotice.dataset.askSelectedMethod=selectedMethod;methodNotice.textContent=tr('Selected method: ','已选择方法：')+selectedMethod;task.after(methodNotice);}
   if(form.elements.askTask.value==='KNOWLEDGE_BASIC'&&!taskParams.has('contextRef')){form.elements.questionOnly.checked=false;form.elements.contextKnowledge.checked=true;}
   const entryResult=document.createElement('section');entryResult.dataset.askR1Result='';entryResult.hidden=true;form.after(entryResult);installCapabilityOverview(entryResult.parentElement);
-  const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);
+  const routing=document.createElement('label');routing.innerHTML='<span data-routing-label>'+tr('How would you like to continue? ','你想如何继续？ ')+'</span><select name="guidedRoutingMode"><option value="AUTO">'+tr('Answer or clarify','回答或澄清')+'</option><option value="GUIDE">'+tr('Help me choose a method','帮助我选择方法')+'</option></select>';form.prepend(routing);scamControls.sync();
   installAskServiceStatus(form);
   let lastSubmissionError=null;
   window.addEventListener('phios:localechange',()=>{if(lastSubmissionError)setStatus(status,errorMessage(lastSubmissionError.code,lastSubmissionError.httpStatus),'error');});
@@ -309,21 +324,21 @@ function boot(){
     if(!question||form.getAttribute('aria-busy')==='true')return;
     if(form.elements.askTask.value==='ENTRY'&&!selectedMethod){
       form.setAttribute('aria-busy','true');
-      try{const response=await fetch('/api/client-intent-route?'+new URLSearchParams({q:question,locale:locale()}),{cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();p.route=await publicEntryAnswer(question,locale(),p.route);renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});if(['BOUNDED_GENERAL_GUIDANCE','BASIC_SAFETY_GUIDANCE'].includes(p.route?.outcome)){const title=entryResult.querySelector('h2');if(title)title.textContent=p.route.outcome==='BASIC_SAFETY_GUIDANCE'?tr('Basic safety guidance','基础安全指导'):tr('General guidance and its limits','一般建议与适用边界');if(!p.route.publicAnswer?.sources?.length)entryResult.querySelector('[data-public-source-answer] details')?.remove();}setStatus(status,'');}
+      try{const response=await fetch('/api/client-intent-route',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question,locale:locale()}),cache:'no-store',signal:AbortSignal.timeout(10000),referrerPolicy:'no-referrer'});if(!response.ok)throw Error('ENTRY_UNAVAILABLE');const p=await response.json();p.route=await publicEntryAnswer(question,locale(),p.route);renderEntryResult(entryResult,p.route,{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});if(['BOUNDED_GENERAL_GUIDANCE','BASIC_SAFETY_GUIDANCE'].includes(p.route?.outcome)){const title=entryResult.querySelector('h2');if(title)title.textContent=p.route.outcome==='BASIC_SAFETY_GUIDANCE'?tr('Basic safety guidance','基础安全指导'):tr('General guidance and its limits','一般建议与适用边界');if(!p.route.publicAnswer?.sources?.length)entryResult.querySelector('[data-public-source-answer] details')?.remove();}setStatus(status,'');}
       catch{setStatus(status,'');renderEntryResult(entryResult,{outcome:'SERVICE_FAILURE',primaryAction:{kind:'RETRY',label:tr('Retry','重试')}},{retry:()=>form.requestSubmit(),clarify:()=>form.elements.question.focus()});}
       finally{form.setAttribute('aria-busy','false');}return;
     }
-    if(navigator.onLine===false){form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');return;}
-    if(seedLoading||seedFailed){setStatus(status,tr('The selected source is still unavailable. Reload to retry, or explicitly choose Knowledge only.','所选来源尚未载入。请刷新重试，或明确选择只使用知识提问。'),'error');return;}
+    if(navigator.onLine===false){form.dataset.askState='OFFLINE';setStatus(status,scamControls.request()?tr('You are offline. Pause further payments and disclosures. If money, credentials or devices are exposed, use a trusted device to contact your bank or affected service through independently verified details.','目前离线。暂停进一步付款及资料披露。如资金、凭证或设备已暴露，使用可信设备，通过独立核实的渠道联系银行或受影响服务。'):tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');return;}
+    if(form.elements.askTask.value!=='SCAM_CHECK'&&(seedLoading||seedFailed)){setStatus(status,tr('The selected source is still unavailable. Reload to retry, or explicitly choose Knowledge only.','所选来源尚未载入。请刷新重试，或明确选择只使用知识提问。'),'error');return;}
     const selection=selectedRequest(form),guided=guidedContext(form);
-    if(form.elements.contextReality.checked&&!form.elements.currentRealityConsent.checked){setStatus(status,tr('Confirm that the situation you entered may be used for this question.','请确认你填写的当前处境可以用于这个问题。'),'error');return;}
+    if(form.elements.askTask.value!=='SCAM_CHECK'&&form.elements.contextReality.checked&&!form.elements.currentRealityConsent.checked){setStatus(status,tr('Confirm that the situation you entered may be used for this question.','请确认你填写的当前处境可以用于这个问题。'),'error');return;}
     setStatus(status,tr('Connecting your question to the selected sources…','正在把你的问题与所选来源连接起来…'));
     form.setAttribute('aria-busy','true');const submit=form.querySelector('[type=submit]');if(submit)submit.disabled=true;
     form.dataset.askState='RETRIEVING';
     try{
       entryResult.hidden=true;
-      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,followUpContext:followUp?{parentAnswerId:followUp.answerContext?.answerId,groundingBundleId:followUp.knowledgeContext?.groundingBundleId,followUpDepth:followUp.depth+1}:null,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,...(selectedMethod?{selectedMethod}:{}),guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
-      view=payload.view;followUp=payload.followUp||null;
+      const payload=await postJson('/api/customer-contextual-ask',{question,task:form.elements.askTask.value,followUpContext:followUp?{parentAnswerId:followUp.answerContext?.answerId,groundingBundleId:followUp.knowledgeContext?.groundingBundleId,followUpDepth:followUp.depth+1}:null,locale:locale(),guidedRouting:true,methodGuidanceRequested:form.elements.guidedRoutingMode.value==='GUIDE',...selection,...(selectedMethod?{selectedMethod}:{}),guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true},...(scamControls.request()||{})},{timeoutMs:25000});
+      view=payload.scam?{...payload.view,scamReview:payload.scam}:payload.view;followUp=payload.followUp||null;
       form.dataset.askState=['SUFFICIENT','PARTIAL','INSUFFICIENT','AMBIGUOUS','CONTRADICTORY'].includes(view?.qualityOutcome)?view.qualityOutcome:(view?.state||'IDLE');
       render();
       setStatus(status,'','success');
@@ -331,8 +346,8 @@ function boot(){
     }catch(error){
       form.dataset.askState=navigator.onLine===false?'OFFLINE':error?.code==='SELECTED_SOURCE_UNAVAILABLE'?'SOURCE_UNAVAILABLE':'ERROR';
       lastSubmissionError=error;
-      setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code,error?.httpStatus),'error');
-      let fallback=document.querySelector('[data-ask-public-fallback]');if(!fallback){fallback=document.createElement('nav');fallback.dataset.askPublicFallback='';status.after(fallback);}fallback.replaceChildren();if(error?.httpStatus===503){for(const [href,label]of[['/search/?'+new URLSearchParams({q:question,locale:locale()}),tr('Search public sources','搜索公开来源')],['/knowledge/?locale='+locale(),tr('Read published knowledge','阅读公开知识')]]){const a=document.createElement('a');a.href=href;a.textContent=label;a.style.marginInlineEnd='16px';fallback.append(a);}}
+      setStatus(status,scamControls.request()?tr('The check is unavailable. Pause further payments and disclosures. If money, credentials or devices are exposed, use a trusted device to contact your bank or affected service through independently verified details. No safety result has been established.','核对暂不可用。暂停进一步付款及资料披露。如资金、凭证或设备已暴露，使用可信设备，通过独立核实的渠道联系银行或受影响服务；目前没有安全结论。'):error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code,error?.httpStatus),'error');
+      let fallback=document.querySelector('[data-ask-public-fallback]');if(!fallback){fallback=document.createElement('nav');fallback.dataset.askPublicFallback='';status.after(fallback);}fallback.replaceChildren();if(error?.httpStatus===503&&form.elements.askTask.value!=='SCAM_CHECK'){for(const [href,label]of[['/search/?'+new URLSearchParams({q:question,locale:locale()}),tr('Search public sources','搜索公开来源')],['/knowledge/?locale='+locale(),tr('Read published knowledge','阅读公开知识')]]){const a=document.createElement('a');a.href=href;a.textContent=label;a.style.marginInlineEnd='16px';fallback.append(a);}}
       if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});
     }finally{form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;}
   });
