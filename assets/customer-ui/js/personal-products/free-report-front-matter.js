@@ -3,6 +3,7 @@ const titles={COVER:['Cover','封面'],METHOD_INTRO:['About this method','方法
 const language=()=>document.documentElement.lang.startsWith('zh')?'zh-Hans':'en';
 export function installFreeReportFrontMatter(parent,slug){
  if(!parent||!supported.has(slug)||slug==='astrology'&&parent.matches('[data-ast-entry]'))return;
+ if(slug==='numerology')parent.querySelectorAll('.num-r3-fixed-page-state').forEach(node=>node.remove());
  let section=parent.querySelector('[data-free-front-matter]');
  if(section&&section.dataset.freeLocale===language())return;
  section?.remove();section=document.createElement('section');section.className='chapter chapter-light';section.dataset.freeFrontMatter=slug;section.dataset.freeLocale=language();section.id='free-fixed-pages';
@@ -22,7 +23,7 @@ export function installFreeReportFrontMatter(parent,slug){
     const details=document.createElement('details'),summary=document.createElement('summary'),img=document.createElement('img');
     summary.textContent=page.pageId+' · '+(titles[page.role]||['Reading page','阅读页'])[locale==='en'?0:1];details.append(summary);img.alt=summary.textContent;img.loading='lazy';img.decoding='async';img.style.maxWidth='100%';img.style.height='auto';if(page.width)img.width=page.width;if(page.height)img.height=page.height;
     img.addEventListener('load',()=>{details.dataset.imageState=img.naturalWidth>0?'decoded':'failed';});
-    img.addEventListener('error',()=>{details.dataset.imageState='failed';img.hidden=true;const note=document.createElement('p');note.textContent=locale==='en'?'This page could not be loaded. Your free calculation remains available.':'此固定页暂时无法读取，免费计算仍可使用。';details.append(note);});
+    img.addEventListener('error',()=>{details.dataset.imageState='failed';img.hidden=true;const note=document.createElement('p');note.textContent=locale==='en'?'This page could not be loaded. You can continue reading the method guide.':'此固定页暂时无法读取，你仍可继续阅读方法介绍。';details.append(note);});
     const a=document.createElement('a');a.href=page.url;a.target='_blank';a.rel='noopener noreferrer';a.append(img);details.append(a);wrap.append(details);img.src=page.url;
    }
    section.dataset.freeState='registered-pages-loaded';
