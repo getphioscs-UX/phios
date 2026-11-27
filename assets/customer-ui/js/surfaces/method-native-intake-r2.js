@@ -1,3 +1,4 @@
+import {installFreeReportFrontMatter} from '../personal-products/free-report-front-matter.js';
 import {METHOD_NATIVE_READING_COPY_R2} from './method-native-reading-copy-r2.js';
 // Thin view adapter. The existing Personal owner retains all input/calculation rules.
 const mounted=new Map();
@@ -37,6 +38,7 @@ export function installMethodNativeIntakeR2(parent,slug){
  let entry=mounted.get(slug);
  if(!entry){const host=document.createElement('section');host.id='method-input';host.className='chapter chapter-beige';host.dataset.methodNativeIntake=slug;entry={host,loaded:false,busy:false};mounted.set(slug,entry);}
  if(!entry.host.isConnected)parent.append(entry.host);if(!parent.querySelector('[data-method-native-reading]')){const section=document.createElement('section');section.className='chapter';section.dataset.methodNativeReading=slug;const wrap=document.createElement('div');wrap.className='wrap';for(const [heading,body] of METHOD_NATIVE_READING_COPY_R2[slug]?.[language()==='en'?'en':'zh']||[]){const article=document.createElement('article'),h=document.createElement('h3'),p=document.createElement('p');h.textContent=heading;p.textContent=body;article.append(h,p);wrap.append(article);}section.append(wrap);entry.host.before(section);}
+ installFreeReportFrontMatter(parent,slug);
  if(!entry.loaded){entry.host.innerHTML='<div class="wrap"><h2></h2><p data-native-note></p><button type="button" data-native-open></button><p role="status" data-native-status></p></div>';const zh=language()==='zh-Hans';entry.host.querySelector('h2').textContent=(zh?'开始':'Start ')+names[slug][zh?1:0]+(zh?'阅读':' reading');entry.host.querySelector('[data-native-note]').textContent=zh?'在本页填写此方法所需的资料，不自动保存。是否可执行由服务端核对；完整报告购买保持独立准入。':'Provide only this method’s details here. Nothing is saved automatically. The server checks execution availability; Full Report purchase remains separately gated.';entry.host.querySelector('[data-native-open]').textContent=zh?'打开本方法输入':'Open this method’s input';entry.host.querySelector('[data-native-open]').onclick=()=>open();}
  else translate(entry.host);
  if(!parent.dataset.nativeIntakeListener){parent.dataset.nativeIntakeListener='true';parent.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const u=new URL(a.href,location.href);if(u.pathname===location.pathname&&u.hash==='#method-input'){e.preventDefault();u.searchParams.set('locale',language());history.replaceState(history.state,'',u.pathname+u.search+u.hash);entry.host.scrollIntoView({block:'start'});void open();}});}
@@ -45,7 +47,7 @@ export function installMethodNativeIntakeR2(parent,slug){
   try{const response=await fetch('/perspectives/personal/',{credentials:'omit',cache:'no-store'});if(!response.ok)throw Error('INPUT_TEMPLATE_UNAVAILABLE');const doc=new DOMParser().parseFromString(await response.text(),'text/html'),form=doc.querySelector('[data-cx-personal-form]'),results=doc.querySelector('[data-cx-personal-results]');if(!form||!results)throw Error('INPUT_TEMPLATE_INVALID');
    form.dataset.dedicatedMethod=keys[slug];form.dataset.methodEndpoint='/api/method-reading/'+slug;
    if(slug==='bazi')prepareBaziFreeForm(form);
-   if(slug==='bazi'&&form.elements.reportSubjectName){form.elements.reportSubjectName.required=false;const label=form.elements.reportSubjectName.closest('label')?.querySelector('span');if(label){label.dataset.cxEn='Display name (optional)';label.dataset.cxZh='显示姓名（选填）';}}
+   if(['bazi','numerology'].includes(slug)&&form.elements.reportSubjectName){form.elements.reportSubjectName.required=false;const label=form.elements.reportSubjectName.closest('label')?.querySelector('span');if(label){label.dataset.cxEn='Display name (optional)';label.dataset.cxZh='显示姓名（选填）';}}
    for(const input of form.querySelectorAll('input[name=methods]')){input.checked=input.value===keys[slug];input.defaultChecked=input.checked;if(input.value!==keys[slug])input.closest('label')?.remove();else input.closest('fieldset').hidden=true;}
    form.querySelectorAll('[data-cx-selection-mode]').forEach(b=>b.hidden=true);
    const external=form.elements.externalProfileEnabled;if(external){external.checked=slug==='human-design';external.defaultChecked=external.checked;external.disabled=slug!=='human-design';external.closest('label').hidden=true;}

@@ -33,10 +33,19 @@ async function limitedJson(request) {
     return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
   } catch { return null; }
 }
+// Existing NUM calculation/approved static meanings only; no context, saved
+// subject, entitlement, Provider or delivery capability is accepted from JSON.
+function numerologyFreeRequest(body){
+ const allowed=['reportSubjectName','birthDate','birthTime','birthTimeUnknown','placeRef','intent','methods','traditionalCalculationSex','numerologyTargetDate','numerologyFullBirthName','numerologyNameConfirmed','numerologyComparisonBirthDate','astTargetContext','baziTemporalContext','ziweiTargetPlaceRef','ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource','ecrTargetContext','hdrTargetContext','birthLocationSnapshot','confirmedExternalProfile','externalProfileContextConsent','consent','locale'];
+ const empty=v=>v==null||v==='';
+ const text=(v,n)=>v==null||typeof v==='string'&&v.length<=n;
+ const unused=['birthTime','placeRef','traditionalCalculationSex','astTargetContext','baziTemporalContext','ziweiTargetPlaceRef','ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource','ecrTargetContext','hdrTargetContext','birthLocationSnapshot','confirmedExternalProfile'];
+ return keysOnly(body,allowed)&&body.consent===true&&Array.isArray(body.methods)&&body.methods.length===1&&body.methods[0]==='numeric'&&['en','zh-Hans'].includes(body.locale)&&typeof body.birthDate==='string'&&body.birthDate.length<=10&&unused.every(k=>empty(body[k]))&&(body.birthTimeUnknown===undefined||body.birthTimeUnknown===true)&&(body.externalProfileContextConsent===undefined||body.externalProfileContextConsent===false)&&text(body.reportSubjectName,120)&&text(body.intent,800)&&text(body.numerologyFullBirthName,MAX_BYTES)&&text(body.numerologyTargetDate,10)&&text(body.numerologyComparisonBirthDate,10)&&(body.numerologyNameConfirmed===undefined||typeof body.numerologyNameConfirmed==='boolean');
+}
 export async function classifyStatelessFreeRequest(request, env = {}) {
   const url = new URL(request.url);
   if (request.method !== 'POST' || url.search ||
-      !['/api/location-resolve','/api/customer-contextual-ask','/api/method-reading/bazi',...symbolicPaths].includes(url.pathname)) return null;
+      !['/api/location-resolve','/api/customer-contextual-ask','/api/method-reading/numerology','/api/method-reading/bazi',...symbolicPaths].includes(url.pathname)) return null;
   // Browser POSTs must be same origin. Missing Origin is deliberately denied.
   if (request.headers.get('origin') !== url.origin) return null;
   const site = request.headers.get('sec-fetch-site');
@@ -47,6 +56,7 @@ export async function classifyStatelessFreeRequest(request, env = {}) {
   const body = await limitedJson(request);
   if (!plain(body)) return null;
   if(url.pathname==='/api/method-reading/bazi')return baziFreeChartCapability(env)&&baziFreeChartRequest(body)?'BAZI_FREE_CHART':null;
+  if(url.pathname==='/api/method-reading/numerology')return numerologyFreeRequest(body)?'NUMEROLOGY_FREE':null;
   if(url.pathname==='/api/customer-contextual-ask')return publicBasicAskRequest(body)?'PUBLIC_BASIC_ASK':null;
   if (url.pathname === '/api/location-resolve') {
     // These exact existing non-paid public lookup endpoints are the only audited configuration.
