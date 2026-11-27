@@ -1,5 +1,5 @@
-import sources from '../../content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2A-user-authored-source-units-v1.json' with {type:'json'};
-import gateSources from '../../content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W9-gate-source-resolution-v1.json' with {type:'json'};
+import sources from '../../content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2A-user-authored-source-units-v1.json';
+import gateSources from '../../content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W9-gate-source-resolution-v1.json';
 import {TYPE_RULES} from '../external-profile/hd-intake-reconciliation.js';
 import {resolveActivationSubstructure} from '../method-runtime/personal-structure/substructure.js';
 import {deriveCalibrationVariables} from '../method-runtime/personal-structure/variable-calibration.js';

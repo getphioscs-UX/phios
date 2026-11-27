@@ -30,6 +30,7 @@ export function bookR5PublicAssetsPredecessor(file,bytes,{readCurrent=p=>fs.read
 // Current pure-request checker reception: exact memory-only inverse for the
 // protected checker file. Product Home/Hero/router checks remain unchanged.
 export function currentR5ProtectedCheckerPredecessor(file,bytes){
+ bytes=currentResearchR6InventoryView(file,bytes);
  bytes=currentTopicCoreCapacityPredecessor(file,bytes);
  bytes=currentBooksEnglishPreviewPredecessor(file,bytes);
  bytes=currentPublicationCheckerPredecessor(file,bytes);

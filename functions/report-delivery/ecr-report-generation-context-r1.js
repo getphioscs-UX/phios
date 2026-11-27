@@ -1,6 +1,6 @@
 import accepted from './ecr-accepted-editorial-source-r1.js';
-import policy from '../../content/embodied-configuration/v4-1/semantic-admission-r2/composition-policy.json' with {type:'json'};
-import evidence from '../../content/embodied-configuration/v4-1/semantic-admission-r2/operational-tag-evidence-r7-v1.json' with {type:'json'};
+import policy from '../../content/embodied-configuration/v4-1/semantic-admission-r2/composition-policy.json';
+import evidence from '../../content/embodied-configuration/v4-1/semantic-admission-r2/operational-tag-evidence-r7-v1.json';
 import {resolveEcrReusableModules} from '../embodied-configuration/ecr-semantic-composition-r2.js';
 import {buildEcrDeepReadingR2} from '../ecr-full-report/ecr-deep-reading-r2.js';
 import {sha256Stable} from '../interpretation-runtime/mir7-utils.js';
