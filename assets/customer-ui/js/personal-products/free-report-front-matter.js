@@ -27,6 +27,6 @@ export function installFreeReportFrontMatter(parent,slug){
     const a=document.createElement('a');a.href=page.url;a.target='_blank';a.rel='noopener noreferrer';a.append(img);details.append(a);wrap.append(details);img.src=page.url;
    }
    section.dataset.freeState='registered-pages-loaded';
-  }catch{if(section.isConnected){status.textContent=locale==='en'?'The fixed pages are temporarily unavailable. You can still use the free input and calculation.':'固定页暂时无法读取，你仍可使用免费输入和计算。';section.dataset.freeState='unavailable';}}
+  }catch{if(section.isConnected){status.textContent=locale==='en'?'The fixed pages are temporarily unavailable. You can continue reading the method guide.':'固定页暂时无法读取，你仍可继续阅读方法介绍。';section.dataset.freeState='unavailable';}}
  })();
 }
