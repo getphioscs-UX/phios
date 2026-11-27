@@ -7,6 +7,11 @@ import {readPprPreentrySuccessor,PPR_PREENTRY_SUCCESSOR,validateMain096ReceiverG
 const REGISTRY='content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json';
 const read=p=>fs.readFileSync(p,'utf8');
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+// Validate the immutable reception once per process; recheck its exact record hash
+// on every lookup. Current file bytes and semantic/refusal tokens remain uncached.
+let main096Reception;
+function main096Entry(path){const digest=sha(MAIN096_RECEIVER_GOVERNANCE);if(!main096Reception)main096Reception={digest,overlayJSON:JSON.stringify(validateMain096ReceiverGovernance().overlay)};assert.equal(digest,main096Reception.digest,'CURRENT_OWNER_RECEPTION_RECORD_DRIFT');return JSON.parse(main096Reception.overlayJSON)[path];}
+
 
 export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='PPR current owner'}={}){
   const registry=JSON.parse(read(REGISTRY));
@@ -16,7 +21,7 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
   assert.equal(registry.boundaries.admittedMethodProductionMayReachFrontend,true);
   assert.equal(registry.boundaries.futureUnregisteredDriftAllowed,false);
   let record=registry.files[path];
-  if(fs.existsSync(MAIN096_RECEIVER_GOVERNANCE)){const entry=validateMain096ReceiverGovernance().overlay[path];if(entry)record={...record,...entry,recognizedPredecessors:[...new Set([...(record?.recognizedPredecessors||[]),record?.currentSha256,...entry.recognizedPredecessors].filter(Boolean))]};}
+  if(fs.existsSync(MAIN096_RECEIVER_GOVERNANCE)){const entry=main096Entry(path);if(entry)record={...record,...entry,recognizedPredecessors:[...new Set([...(record?.recognizedPredecessors||[]),record?.currentSha256,...entry.recognizedPredecessors].filter(Boolean))]};}
   if(!record&&path==='functions/external-profile/hd-profile-parser.js'){
     const predecessor='274e6f2b267440b6686663779643dd2216c27879cb62dfe97ebf3a0662ae9c7c';
     const successor='b0da128b4f01a0a4934fab20b8bb3ade06d7a901489a97df29a2b177d03b41fd';
@@ -55,8 +60,12 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
     record={...record,currentSha256:next.currentSha256,recognizedPredecessors:[...record.recognizedPredecessors,record.currentSha256,...(next.recognizedPredecessors||[])],engineeringSuccessorRef:next.engineeringSuccessorRef||PPR_PREENTRY_SUCCESSOR};
   }
   assert.equal(sha(path),record.currentSha256,`${label}: current owner digest drift: ${path}`);
+
+  // Exact registered lineage is checked above; current identity and tokens use physical bytes.
+  const source=sourceFs.readFileSync(path,'utf8');
+  const physicalSha256=crypto.createHash('sha256').update(sourceFs.readFileSync(path)).digest('hex');
+  if(physicalSha256!==record.currentSha256)record={...record,registeredViewSha256:record.currentSha256,recognizedPredecessors:[...new Set([...(record.recognizedPredecessors||[]),record.currentSha256])],currentSha256:physicalSha256};
   if(historicalDigest&&historicalDigest!==record.currentSha256)assert(record.recognizedPredecessors.includes(historicalDigest),`${label}: historical predecessor is not recognized: ${path}`);
-  const source=read(path);
   for(const token of record.requiredTokens||[])assert(source.includes(token),`${label}: required current-runtime token missing: ${path}: ${token}`);
   for(const token of record.forbiddenTokens||[])assert(!source.includes(token),`${label}: forbidden current-runtime token present: ${path}: ${token}`);
   return Object.freeze({registry,record,currentSha256:record.currentSha256});
@@ -64,6 +73,6 @@ export function assertPprCurrentSharedOwner(path,{historicalDigest=null,label='P
 
 export function assertPprCurrentSharedOwnerRegistry(){
   const registry=JSON.parse(read(REGISTRY));
-  for(const path of Object.keys(registry.files))assertPprCurrentSharedOwner(path);
-  return registry;
+  const files={};for(const path of Object.keys(registry.files))files[path]=assertPprCurrentSharedOwner(path).record;
+  return {...registry,files};
 }

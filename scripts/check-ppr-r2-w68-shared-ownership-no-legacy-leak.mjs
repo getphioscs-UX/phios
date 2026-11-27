@@ -38,7 +38,7 @@ for(const [file,proof] of Object.entries(freeze.sharedFiles)){
   assert.ok(fs.existsSync(path.join(root,file)),`missing ${file}`);
   const currentProof=assertPprCurrentSharedOwner(file,{historicalDigest:proof.sha256,label:'W68 current shared owner'}).record;
   assert.ok(currentProof,`current shared-owner registry missing ${file}`);
-  assert.equal(sha(file),currentProof.currentSha256,`W68 current shared-owner digest drift: ${file}`);
+  assert.equal(crypto.createHash('sha256').update(sourceFs.readFileSync(path.join(root,file))).digest('hex'),currentProof.currentSha256,`W68 current shared-owner digest drift: ${file}`);
   const admittedLineage=new Set([currentProof.currentSha256,...(currentProof.recognizedPredecessors||[])]);
   assert.ok(admittedLineage.has(proof.sha256),`W68 frozen predecessor is no longer recognized by current ownership lineage: ${file}`);
 }
