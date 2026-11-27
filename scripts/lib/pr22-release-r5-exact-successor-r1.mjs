@@ -267,7 +267,7 @@ const receivedPr23ValidationInputs=[{"path":"scripts/lib/audit-r2-public-receive
 function r5CurrentBoundaryBytes(file,bytes,boundary){
  const received=receivedPr23ValidationInputs.find(x=>x.path===file);if(received){const hash=sha(bytes);if(hash===received.sha256)bytes=Buffer.from(received.beforeBytesBase64,'base64');}
 
- try{return currentR5ProtectedCheckerPredecessor(file,bytes);}
+ try{return currentR5ProtectedCheckerPredecessor(file,currentResearchR6InventoryView(file,bytes));}
  catch(cause){
   const error=new assert.AssertionError({message:boundary+':'+file,actual:cause?.actual,expected:cause?.expected,operator:cause?.operator||'strictEqual'});
   error.cause=cause;error.sourceDriftMessage=cause?.message||String(cause);
@@ -326,4 +326,22 @@ export async function assertCurrentThesisRetirement(){
  for(const file of ['about/index.html','research/index.html','research/why-reality-navigation/index.html']){const d=parseHTML(fs.readFileSync(file,'utf8')).document;for(const a of d.querySelectorAll('a[href],form[action]')){const href=a.getAttribute('href')||a.getAttribute('action');assert(!retiredResearchTopicPath(new URL(href,'https://www.getphios.com').pathname),'OWNER_RETIRED_TOPIC_CURRENT_LINK:'+file);}}
  for(const file of ['assets/js/public-shell.js','assets/js/knowledge/catalog.js','assets/js/pages/library.js'])assert(!new RegExp('["\x27\x60]/thesis(?:\\.html)?["\x27\x60?#/]').test(fs.readFileSync(file,'utf8')),'OWNER_RETIRED_TOPIC_CURRENT_ENTRY:'+file);
  let downstream=0;for(const route of ['/thesis','/thesis.html','/api/thesis-download']){assert(retiredResearchTopicPath(route));const request=new Request('https://qa.invalid'+route);assert.equal((await onRequest({request,env:{},next:()=>{downstream++;throw Error('OWNER_RETIRED_ROOT_DOWNSTREAM');}})).status,404);const worker=wrapFinalReleaseWorker({fetch:()=>{downstream++;throw Error('OWNER_RETIRED_FINAL_DOWNSTREAM');}},{active:true,preview:true,commit:'0'.repeat(40)});assert.equal((await worker.fetch(request,{},{})).status,404);}assert.equal(downstream,0);return {status:'OWNER_RETIRED_CURRENT_CONTRACT_PASS',filesAbsent:8,rootAndFinal404:true,historicalBodySupplied:false};
+}
+
+// Owner-approved R6 extends the existing visual inventory only. The prior
+// customer assets remain byte-identical; current R6 assets retain exact
+// identities and cannot grant calculation, data, paid or private access.
+function currentResearchR6InventoryView(file,bytes){
+ if(file!=='data/visual/approved-r2-visual-assets.json')return bytes;
+ let doc;try{doc=JSON.parse(bytes)}catch{return bytes}
+ const added=doc.assets.filter(a=>a.aliases.some(id=>id.startsWith('RESEARCH-R6-')));if(!added.length)return bytes;
+ assert.equal(bytes.toString(),JSON.stringify(doc,null,2)+'\n','R6_INVENTORY_UNREGISTERED_ENCODING');
+ const names=[...Array.from({length:8},(_,i)=>['art-'+(i+1)+'.webp','hard-'+(i+1)+'.webp','hero-'+(i+1)+'.webp']).flat(),...['access','journey','library','reading','system','visual'].map(x=>'PHIOS-'+x+'-hero.webp'),'positioning.webp'].sort();
+ assert.deepEqual(added.map(a=>a.r2Path.split('/').at(-1)).sort(),names,'R6_EXACT_31_IDENTITIES');
+ assert.equal(new Set(added.map(a=>a.r2Path)).size,31,'R6_DUPLICATE_VISUAL');
+ const fields=new Set(['canonicalFilename','r2Path','semanticName','family','role','aliases','sources','intendedRoutes','desktopPresentation','mobilePresentation','status','boundConsumers','visibility','width','height','remoteProof','unusedReason']);
+ for(const a of added){const name=a.r2Path.split('/').at(-1);assert(Object.keys(a).every(k=>fields.has(k)),'R6_UNREGISTERED_DATA_FIELD');assert.equal(a.r2Path,'images/research/r6/'+name);assert.equal(a.canonicalFilename,'RESEARCH-R6-'+name);assert.deepEqual(a.aliases,['RESEARCH-R6-'+name.slice(0,-5).toUpperCase()]);assert.equal(a.role,'PUBLIC_EDITORIAL_VISUAL');assert.deepEqual(a.intendedRoutes,['/research/']);assert.deepEqual(a.boundConsumers,['assets/js/pages/research-r6.js']);assert.equal(a.visibility,'public');assert.equal(a.remoteProof.httpStatus,200);assert.equal(a.remoteProof.contentType,'image/webp');assert(/^[a-f0-9]{64}$/.test(a.remoteProof.sha256));assert(a.width>0&&a.height>0);}
+ const prior={...doc,assets:doc.assets.filter(a=>!added.includes(a))},view=Buffer.from(JSON.stringify(prior,null,2)+'\n');
+ assert.equal(sha(view),'ff1b9ce2715a523d55691feaee6993af321459068513a4c31e73899948c9baa7','R6_PRIOR_VISUAL_CONSUMERS_CHANGED');
+ return view;
 }
