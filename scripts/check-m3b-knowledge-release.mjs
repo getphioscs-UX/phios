@@ -1,3 +1,5 @@
+import {assertCurrentThesisRetirement,currentTopicCoreCapacityPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
+import currentCatalogFs from 'node:fs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -97,14 +99,18 @@ assert.equal(accessPayload.accessGranted, false);
 assert.equal(accessPayload.accessConfigured, false);
 
 const categories = new Set(LIBRARY_RESOURCES.map(resource => resource.category));
-assert.deepEqual([...categories].sort(), [
-  'atlas',
-  'books',
-  'downloads',
-  'figures',
-  'glossary',
-  'research'
-]);
+await assertCurrentThesisRetirement();
+const catalogBeforeRetirement=currentTopicCoreCapacityPredecessor('assets/js/knowledge/catalog.js',currentCatalogFs.readFileSync('assets/js/knowledge/catalog.js'));
+const {LIBRARY_RESOURCES: originalLibraryResources}=await import('data:text/javascript;base64,'+catalogBeforeRetirement.toString('base64'));
+const retiredResearchResources=originalLibraryResources.filter(resource=>resource.category==='research');
+assert.equal(retiredResearchResources.length,1);
+assert.equal(retiredResearchResources[0].id,'reality-navigation-thesis');
+assert.equal(retiredResearchResources[0].href,'/thesis');
+assert.deepEqual([...new Set(originalLibraryResources.map(resource=>resource.category))].sort(),['atlas','books','downloads','figures','glossary','research']);
+const retiredDownload=originalLibraryResources.filter(resource=>resource.id==='thesis-download');
+assert.equal(retiredDownload.length,1);assert.equal(retiredDownload[0].category,'downloads');assert.equal(retiredDownload[0].href,'/thesis#downloads');
+assert.deepEqual(LIBRARY_RESOURCES,originalLibraryResources.filter(resource=>!['reality-navigation-thesis','thesis-download'].includes(resource.id)),'ONLY_EXACT_OWNER_RETIRED_THESIS_RESOURCES_REMOVED');
+assert.deepEqual([...categories].sort(),['atlas','books','downloads','figures','glossary']);
 const resourceStatuses = new Set(LIBRARY_RESOURCES.map(resource => resource.status));
 for (const requiredStatus of ['available', 'preview', 'development', 'later']) {
   assert.equal(resourceStatuses.has(requiredStatus), true);

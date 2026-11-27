@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
@@ -64,6 +65,7 @@ for (const id of activeNavigationIds) {
 
 cursor = shell.indexOf('const FOOTER_LINKS');
 for (const href of currentNavigation.footerLinks) {
+  if(href==='/thesis'){await assertCurrentThesisRetirement();continue;} // historical identity retained, current route Owner-retired
   const index = shell.indexOf(`href: '${href}'`, cursor + 1);
   assert.ok(index > cursor, `Footer order changed at ${href}`);
   cursor = index;
@@ -105,6 +107,7 @@ assert.equal(cxHome.invariants.legacyShellDependency, false);
 const cxPages = new Set(['index.html', 'about/index.html', 'explore/index.html']);
 const px2Pages = new Set(['library.html', 'services.html', 'books/index.html', 'professional/financial/index.html', 'reality/index.html']);
 for (const page of fixture.publicPages) {
+  if(page==='thesis.html'){await assertCurrentThesisRetirement();continue;} // exact retirement contract, never a missing-file filter
   const source = await read(page);
   if(page==='explore/index.html'){
     assert.ok(source.includes('href="https://www.getphios.com/about/founder/"'));

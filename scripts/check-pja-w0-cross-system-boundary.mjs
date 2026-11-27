@@ -1,4 +1,5 @@
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -299,6 +300,7 @@ const retiredPresentationPages = new Set([
   ...p1PhysicalDelete.deletedPresentationFiles.filter(file => !file.includes('/')),
   ...cxR26Retirement.physicallyDeletedInBaseline.filter(file => !file.includes('/'))
 ]);
+await assertCurrentThesisRetirement();retiredPresentationPages.add('thesis.html'); // exact Owner retirement, immutable capability history stays intact
 for (const retiredPage of retiredPresentationPages) {
   assert.equal(
     await exists(retiredPage),

@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -24,6 +25,7 @@ const successorCandidates = destination => {
   return [clean,`${clean}.html`,`${clean}/index.html`];
 };
 async function requireHistoricalOrRedirectedSurface(surface){
+  if(surface==='thesis.html'){await assertCurrentThesisRetirement();return 'OWNER_RETIRED_TOPIC_404';} // explicit Owner withdrawal differs from a compatibility migration
   if(await fileExists(surface))return 'PRESENT';
   const route=`/${surface}`;
   const redirect=redirectMap.get(route);
