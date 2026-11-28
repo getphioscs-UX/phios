@@ -7,7 +7,7 @@ import {CX_NAVIGATION} from '../assets/customer-ui/js/navigation.js';
 const record=JSON.parse(fs.readFileSync('content/web/homepage/homepage-r5-pr22-integration.json','utf8')),sha=b=>createHash('sha256').update(b).digest('hex');
 for(const row of record.sourceFiles)assert.equal(sha(currentR5ProtectedCheckerPredecessor(row.path,fs.readFileSync(row.path))),row.sha256,'R5_CURRENT_SOURCE_DRIFT:'+row.path);
 for(const row of record.protectedOriginalSeven)assert.equal(sha(releaseR5Predecessor(row.path,fs.readFileSync(row.path))),row.sha256,'PR22_PREEXISTING_PATH_DRIFT:'+row.path);
-for(const row of record.sixSubjects)assert.equal(sha(fs.readFileSync(row.path)),row.sourceSHA256,'R5_SIX_SUBJECT_DRIFT:'+row.path);
+for(const row of record.sixSubjects)assert.equal(sha(currentR5ProtectedCheckerPredecessor(row.path,fs.readFileSync(row.path))),row.sourceSHA256,'R5_SIX_SUBJECT_DRIFT:'+row.path);
 const home=fs.readFileSync('index.html','utf8'),hero=home.match(/<section class="r3-home-hero[\s\S]*?<\/section>/)?.[0];assert.equal(sha(hero||''),record.r4HeroHTMLSHA256,'ACCEPTED_R4_HERO_DRIFT');
 assert.deepEqual([...home.matchAll(/data-cx-home-section="(H\d+)"/g)].map(x=>x[1]),Array.from({length:10},(_,i)=>'H'+String(i+1).padStart(2,'0')));
 assert.deepEqual(CX_NAVIGATION.primary.map(x=>x.id),['SUBJECTS','WORLD','KNOWLEDGE','METHODS','PROFESSIONAL']);
