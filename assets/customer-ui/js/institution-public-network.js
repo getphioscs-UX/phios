@@ -1,3 +1,4 @@
+import {resolveApprovedVisual} from '../../js/runtime/web-production/asset-resolver.js';
 import {mountMainNetwork} from './institution-main-network-r2.js';
 const host=document.querySelector('[data-institution-public-network]');
 export function allowedPublicNetwork(value){
@@ -25,3 +26,8 @@ if(host){
  try{const response=await fetch('/data/institution/public-network.json',{credentials:'omit'});if(!response.ok)throw Error('PUBLIC_NETWORK_UNAVAILABLE');const data=await response.json();if(!allowedPublicNetwork(data))throw Error('PUBLIC_NETWORK_NOT_ADMITTED');if(data.nodes.length){canvas.hidden=false;status.hidden=true;let pending=false;const render=()=>{if(pending)return;pending=true;queueMicrotask(()=>{pending=false;canvas.replaceChildren();mountMainNetwork(canvas,data);});};window.addEventListener('popstate',render);window.addEventListener('phios:localechange',render);render();}else{canvas.hidden=true;}}
  catch{canvas.hidden=true;status.hidden=false;}
 }
+
+const concepts=[...(document.querySelectorAll?.("[data-institution-concept]")||[])];
+for(const card of concepts){const visual=await resolveApprovedVisual(card.dataset.institutionConcept,{surface:"institution-concepts"});if(visual?.src){card.querySelector("img").src=visual.src;card.querySelector("[data-cx-expandable-figure]").dataset.cxFigureSrc=visual.src;}}
+
+if(concepts.length){const update=()=>{const zh=document.documentElement.lang.startsWith("zh");for(const card of concepts){const h=card.querySelector("h3"),b=card.querySelector("button"),img=card.querySelector("img");b.dataset.cxFigureTitle=zh?h.dataset.cxZh:h.dataset.cxEn;b.setAttribute("aria-label",zh?"查看概念原图":"View original conceptual diagram");img.alt=(zh?h.dataset.cxZh:h.dataset.cxEn)+(zh?"；原图中文角色标签":"; original Chinese role labels");}};window.addEventListener("phios:localechange",update);update();}

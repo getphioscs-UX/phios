@@ -1,3 +1,4 @@
+import {isInstitutionArticle,readInstitutionFactualBrief,institutionBriefPath} from './institution-factual-brief-v1.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -17,7 +18,7 @@ export async function buildPublication(root,{candidate,review,approval,publisher
  const av=validateHumanApproval(approval,candidate,review);if(!av.valid||approval.decision!=='approve')throw fail('PUBLICATION_REQUIRES_APPROVAL',JSON.stringify(av.errors));
  if(!publishedAt||Number.isNaN(Date.parse(publishedAt)))throw fail('PUBLISHED_AT_INVALID',String(publishedAt));
  const slug=candidate.sourceBrief?.briefCode?candidate.nodeCode.toLowerCase():candidate.nodeCode.toLowerCase();
- const briefPath=`content/knowledge/production/briefs/zh-Hans/${candidate.nodeCode}-production-brief.v2.json`;
+ const briefPath=isInstitutionArticle(candidate)?institutionBriefPath(candidate.nodeCode,candidate.locale):`content/knowledge/production/briefs/zh-Hans/${candidate.nodeCode}-production-brief.v2.json`;
  const brief=JSON.parse(await fs.readFile(path.join(root,briefPath),'utf8'));
  const articleCode=`KA-${candidate.nodeCode.replace(/^KN-/,'')}-ZH-ARTICLE`;
  const payload={publicationType:PUBLICATION_TYPE,publicationSchemaVersion:PUBLICATION_SCHEMA_VERSION,publicationCode:`PUBLICATION-${approval.approvalCode}-V1`,candidate:{candidateCode:candidate.candidateCode,candidateDigest:candidate.candidateDigest,nodeCode:candidate.nodeCode,locale:candidate.locale},review:{reviewCode:review.reviewCode,reviewDigest:review.reviewDigest,decision:review.decision},approval:{approvalCode:approval.approvalCode,approvalDigest:approval.approvalDigest,decision:approval.decision},publisher:{publisherCode,authority:'TL Independent Publication Authority'},decision:'publish',article:{articleCode,nodeCode:candidate.nodeCode,locale:candidate.locale,title:candidate.article.title,summary:candidate.article.summary,bodyMarkdown:candidate.article.bodyMarkdown,slug:brief.localizedIdentity.slug,href:`/articles/${brief.localizedIdentity.slug}`,version},authority:{canonicalMeaning:'TL',review:'human_review_accepted',approval:'human_approval_recorded',publication:'independent_publication_recorded'},governance:{candidateMutationAllowed:false,reviewMutationAllowed:false,approvalMutationAllowed:false,knowledgeRegistryMutationAllowed:false,publicRuntimeProjectionWritten:false,localeInheritanceAllowed:false},publishedAt:new Date(publishedAt).toISOString()};
