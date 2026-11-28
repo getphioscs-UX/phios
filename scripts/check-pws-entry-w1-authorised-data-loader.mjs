@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement,currentTopicCoreCapacityPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -267,7 +268,13 @@ const runtimeContracts = JSON.parse(
 const migrations = JSON.parse(
   await read('content/registry/runtime-migrations.json')
 );
-assert.equal(Object.keys(registryIndex.registries).length, 51);
+await assertCurrentThesisRetirement();
+const registryBeforeRetirement=JSON.parse(currentTopicCoreCapacityPredecessor('content/registry/index.json',Buffer.from(await read('content/registry/index.json'))).toString());
+assert.equal(Object.keys(registryBeforeRetirement.registries).length,51,'ORIGINAL_51_REGISTRY_AUTHORITY_PRESERVED');
+assert.equal(registryBeforeRetirement.registries.thesis,'./thesis.json');
+const expectedCurrentRegistry=structuredClone(registryBeforeRetirement);delete expectedCurrentRegistry.registries.thesis;
+assert.deepEqual(registryIndex,expectedCurrentRegistry,'ONLY_EXACT_OWNER_RETIRED_THESIS_REGISTRY_REMOVED');
+assert.equal(Object.keys(registryIndex.registries).length,50);assert.equal(Object.hasOwn(registryIndex.registries,'thesis'),false);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(runtimeContracts.contracts.length, 20);

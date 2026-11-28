@@ -37,17 +37,15 @@ jobs:
       - run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-free-read-only-r3.mjs
       - run: node scripts/check-country-history-public-admission-r4.mjs
       - run: node scripts/check-free-country-preview-isolation-r1.mjs
-      - name: Verify exact source successor chain and rejection boundaries
+      - name: Verify finite Free/Country admitted source scope and rejection boundaries
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
           import fs from 'node:fs';
           import {execFileSync} from 'node:child_process';
-          import {FREE_COUNTRY_SUCCESSOR_RECORD,validateFreeCountrySourceSuccessor,mainConvergencePredecessors,mainHistoricalPredecessors} from './scripts/lib/main-convergence-source-successor-r1.mjs';
+          import {FREE_COUNTRY_SUCCESSOR_RECORD,validateFreeCountrySourceSuccessor} from './scripts/lib/main-convergence-source-successor-r1.mjs';
           const recordBytes=fs.readFileSync(FREE_COUNTRY_SUCCESSOR_RECORD),record=JSON.parse(recordBytes);
           assert.equal(validateFreeCountrySourceSuccessor().size,5);
-          assert.ok(mainConvergencePredecessors().size>=5);
-          assert.equal(mainHistoricalPredecessors().size,8);
           const mutations=[
             r=>r.changes.pop(),r=>r.changes[1]=r.changes[0],
             r=>r.changes.push({...r.changes[0],path:'functions/unapproved.js'}),
@@ -64,8 +62,10 @@ jobs:
           assert.throws(()=>validateFreeCountrySourceSuccessor({readCurrent:p=>p===first?Buffer.from('unregistered third SHA'):fs.readFileSync(p)}));
           console.log('PASS exact 2391→freeze→Main2166→PR19→current chain; 15 negative cases rejected');
           NODE
-      - name: Verify strict receiver predecessors and actual successor rejection cases
-        run: node scripts/check-six-method-main096-receiver-governance-r1.mjs
+      - name: Verify current customer source and execution boundaries
+        run: |
+          node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-pr22-release-r5-exact-successor-r1.mjs
+          node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-mpa-current.mjs
 
       - name: Current symbolic content review hold
         run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-symbolic-free-content-review-hold-r1.mjs

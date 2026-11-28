@@ -9,9 +9,24 @@ import {createReportSubjectPresentationFromAccountPerson} from '../functions/can
 import {validatePhysicalComposition} from '../functions/canonical-presentation-runtime/physical-composition-contract.js';
 import {ZIWEI_STAR_PROFILES as stars} from '../functions/personal-reading/narrative/ziwei-semantic-canon.js';
 import {frozenZwrV1Bytes} from './lib/final-zwr-input-successor.mjs';
+import {renderPublicationReport} from '../assets/customer-ui/js/personal-products/publication-report-pages.js';
+import {requireZiweiEntitlement} from '../functions/report-delivery/ziwei-production-generation-v1.js';
 const dir='docs/reports/ziwei/production-admission/zpa-v1',outputDir=fs.mkdtempSync(path.join(os.tmpdir(),'phios-zpa-check-')),read=p=>JSON.parse(fs.readFileSync(p)),write=(p,v)=>fs.writeFileSync(p.replace(dir,outputDir),JSON.stringify(v,null,2)+'\n');
+// Owner Override retires only these generated review HTML byte obligations.
+// The immutable acceptance records and every non-HTML source/evidence hash stay intact.
+const retiredGeneratedReviewHtml=new Set([
+ ...Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0')).flatMap(id=>['en','zh-Hans'].map(locale=>'tools/review/ZPA-CONTROLLED-'+id+'-'+locale+'.html')),
+ ...['A','B'].flatMap(id=>['en','zh-Hans'].map(locale=>'tools/review/ZIWEI-FULL-REPORT-R2-SUBJECT_'+id+'-'+locale+'.html'))
+]);
+assert.equal(retiredGeneratedReviewHtml.size,28);
+for(const artifact of retiredGeneratedReviewHtml)assert.match(artifact,/^tools\/review\/(?:ZPA-CONTROLLED-(?:0[1-9]|1[0-2])|ZIWEI-FULL-REPORT-R2-SUBJECT_[AB])-(?:en|zh-Hans)\.html$/);
+let currentNetworkCalls=0;const originalFetch=globalThis.fetch;globalThis.fetch=()=>{currentNetworkCalls++;throw Error('ZPA_CURRENT_CHECK_NETWORK_FORBIDDEN');};
 const frozen=read('content/reports/ziwei/production-v1-acceptance.json');
-for(const [p,h] of Object.entries(frozen.files))assert.equal(createHash('sha256').update(frozenZwrV1Bytes(p,h)).digest('hex'),h,'Frozen V1 evidence changed: '+p);
+assert.equal(frozen.productionAdmission,'NOT_GRANTED','Machine composition does not grant production admission');
+for(const [p,h] of Object.entries(frozen.files)){
+ if(retiredGeneratedReviewHtml.has(p))continue; // Explicitly retired generated HTML, not a source fallback.
+ assert.equal(createHash('sha256').update(frozenZwrV1Bytes(p,h)).digest('hex'),h,'Frozen V1 evidence changed: '+p);
+}
 const baseline=read('config/reports/ziwei-production-v1-presentation-successor.json');
 const originalBaseline=read(dir+'/baseline.json');
 assert.deepEqual(Object.keys(baseline.files),Object.keys(originalBaseline.files));
@@ -26,6 +41,7 @@ for(const migration of baseline.migrations){
  assert.equal(migration.semanticAuthorityChanged,false);
 }
 for(const [p,d] of Object.entries(baseline.files)){
+ if(retiredGeneratedReviewHtml.has(p))continue; // Only the four listed R2 generated review HTMLs.
  if(presentationSuccessors.has(p)){
   assert(fs.existsSync(p),'Presentation successor missing: '+p);
   continue;
@@ -51,7 +67,15 @@ for(const [i,[birthDate,birthTime,sex]] of inputs.entries()){
   for(const section of sections){assert(assertPublicationIrV2Preservation({publicationIr:section.publicationIr,brief:section.brief}).accepted);assert(!section.paragraphs.some(p=>/undefined|\[object Object\]/.test(p)));for(const r of section.supportingEvidence)assert.equal(r.text,stars[r.starCode].dimensions[r.dimension][locale]);assert.deepEqual(section.unknowns,evidence.structured.unknowns);}
   const subject=await createReportSubjectPresentationFromAccountPerson({accountPersonReference:{personId:subjectId,displayName:'Controlled '+String(i+1)},canonicalBirthInput:canonicalInput,birthSourceRef:`${dir}/${subjectId}-input.json#executionRequest/canonicalInput`});
   const snapshot=buildZiweiProductionPublication({evidence,sections,locale,subjectPresentation:subject});assert.equal(snapshot.totalPages,33);validatePhysicalComposition({...snapshot,...snapshot.physicalComposition});
-  write(`${dir}/${subjectId}-${locale}.json`,{canonicalInput,subject,evidence:evidence.structured,sections,snapshot});row.locales.push({locale,calculation:'PASS',publicationIr:'PASS',composition:'PASS',pages:33});
+  write(`${dir}/${subjectId}-${locale}.json`,{canonicalInput,subject,evidence:evidence.structured,sections,snapshot});const generated=read(outputDir+'/'+subjectId+'-'+locale+'.json');
+  assert.equal(generated.sections.length,12);assert.equal(generated.snapshot.totalPages,33);assert.equal(generated.snapshot.methodId,'ZWR');
+  assert.deepEqual(generated.evidence.unknowns,evidence.structured.unknowns);
+  const html=renderPublicationReport(snapshot);
+  assert.match(html,/data-method="ZWR"/);assert.equal((html.match(/data-page-number="\d+"/g)||[]).length,33);
+  assert.doesNotMatch(html,/undefined|\[object Object\]/);
+  for(const page of snapshot.pages)for(const node of page.compositionNodes||[])assert.ok(html.includes('data-source-node="'+node.sourceNodeId+'"'),'Rendered source binding missing');
+  fs.writeFileSync(outputDir+'/'+subjectId+'-'+locale+'.html',html);
+  row.locales.push({locale,calculation:'PASS',publicationIr:'PASS',composition:'PASS',pages:33});
  }
  results.push(row);console.log(subjectId,'ZH + EN PASS');
 }
@@ -84,6 +108,13 @@ for(const subject of ['A','B'])for(const locale of ['en','zh-Hans']){
 }
 const foreign=structuredClone(prior.sections);foreign[0].subjectId='FOREIGN-SUBJECT';
 await assert.rejects(buildZiweiProductionSections({evidence:prior.evidence,locale:'en',sourceSections:foreign}),/ZIWEI_SOURCE_IR_SUBJECT_MISMATCH/);
+// Current negative authority remains independent of local composition success.
+assert.equal(read('content/reports/ziwei/production-admission-state.json').ZIWEI_PRODUCTION_ADMISSION,'NOT_GRANTED');
+for(const locale of ['en','zh-Hans']){
+ await assert.rejects(requireZiweiEntitlement({data:{},env:{PHIOS_ENVIRONMENT:'production'}},locale),/ZIWEI_PRODUCTION_DELIVERY_NOT_ADMITTED/);
+ await assert.rejects(requireZiweiEntitlement({data:{},env:{PHIOS_ENVIRONMENT:'local'}},locale),/ACCOUNT_REQUIRED/);
+}
+assert.equal(currentNetworkCalls,0);globalThis.fetch=originalFetch;
 write(dir+'/root-causes.json',roots);write(dir+'/generation-coverage.json',{ZIWEI_GENERAL_GENERATION_COVERAGE:'PASS',realControlledStructures:12,locales:['zh-Hans','en'],results,variety,optional,regressions,undefinedReferences:0,fabricatedSemanticRecords:0,unsupportedBrightnessInference:0,unsupportedLiuYue:0,editorialAcceptance:'NOT_REQUESTED_OR_GRANTED',qaAccountDelivery:'NOT_PROVEN',productionAdmission:'NOT_GRANTED'});
 fs.rmSync(outputDir,{recursive:true,force:true});
-console.log('PASS ZPA: 12/12 real calculations, 24/24 IR and composition; optional evidence and frozen R2 regressions.');
+console.log('PASS ZPA: 12/12 real calculations, 24/24 IR/composition and current HTML/JSON source bindings; optional evidence, frozen R2 source regressions and production/owner denials retained. Only28 retired generated HTML byte obligations removed; production admission NOT_GRANTED.');

@@ -21,6 +21,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - name: Validate received current customer products and closed execution boundaries
+        run: node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-current-product-reception.mjs && node --import ./scripts/lib/report-zero-cost-preload.mjs --import ./scripts/lib/pages-json-import-preload.mjs scripts/check-num-current-free-transport.mjs
       - run: npm run check:final-unified-release-r1 && npm run check:country-history-coverage-r1 && npm run check:cloudflare-function-import-compat
       - name: Build exact Preview artifact without deployment
         run: npm run build:pages

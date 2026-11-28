@@ -335,10 +335,10 @@ export async function onRequestPost(context){
   const shape=validateCanonicalBirthInput(input);
   if(!shape.valid)return json({ok:false,error:'PERSONAL_REALITY_INPUT_INVALID',reasonCodes:shape.reasonCodes},422);
   const reportSubjectName=clean(body?.reportSubjectName);
-  if(!reportSubjectName)return json({ok:false,error:'REPORT_SUBJECT_NAME_REQUIRED'},422);
+  if(!reportSubjectName&&!(selected.length===1&&selected[0]==='numeric'))return json({ok:false,error:'REPORT_SUBJECT_NAME_REQUIRED'},422);
   if(reportSubjectName.length>120)return json({ok:false,error:'REPORT_SUBJECT_NAME_INVALID'},422);
   const accountIdentity=context.data?.symbolicAccountIdentity||null;
-  if(accountIdentity?.authenticated===true&&accountIdentity?.userId){
+  if(reportSubjectName&&accountIdentity?.authenticated===true&&accountIdentity?.userId){
     try{
       context.data.reportSubjectPresentation=await createReportSubjectPresentation({
         subjectReference:accountIdentity.userId,

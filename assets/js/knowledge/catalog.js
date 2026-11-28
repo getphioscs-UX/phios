@@ -1,19 +1,5 @@
 export const LIBRARY_RESOURCES = Object.freeze([
   {
-    id: 'reality-navigation-thesis',
-    category: 'research',
-    status: 'available',
-    href: '/thesis',
-    title: {
-      en: 'Reality Navigation Thesis',
-      'zh-Hans': '现实导航论文'
-    },
-    description: {
-      en: 'The research foundation for observable, computable and navigable Reality.',
-      'zh-Hans': '使现实能够被观察、计算与导航的研究基础。'
-    }
-  },
-  {
     id: 'book-one',
     category: 'books',
     status: 'available',
@@ -143,20 +129,6 @@ export const LIBRARY_RESOURCES = Object.freeze([
     description: {
       en: 'Forty-one registered concepts with stable and provisional states.',
       'zh-Hans': '四十一个带稳定与暂定状态的登记概念。'
-    }
-  },
-  {
-    id: 'thesis-download',
-    category: 'downloads',
-    status: 'available',
-    href: '/thesis#downloads',
-    title: {
-      en: 'Public Thesis Downloads',
-      'zh-Hans': '公开论文下载'
-    },
-    description: {
-      en: 'Only files explicitly released for public download.',
-      'zh-Hans': '仅包含明确获准公开下载的文件。'
     }
   },
   {

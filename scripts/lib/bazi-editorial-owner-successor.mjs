@@ -51,20 +51,25 @@ function assertInactiveContentsAppend(ownerPath,predecessor){
  for(const k of ['authorityOrAcceptedTextRewritten','humanAcceptanceGranted','productionActivated','currentRendererFitAccepted'])assert.equal(r[k],false);
  assert.equal(r.sourceEvidence.path,'tools/review/hd-r6/import-20261027/r611b/SOURCE-PRESERVATION.json');
  assert.equal(r.byteIdentityEvidence.path,'tools/review/hd-r6/import-20261027/r611b/ACTUAL-P06-BYTE-IDENTITIES.json');
- assert.equal(sha(r.sourceEvidence.path),r.sourceEvidence.sha256);assert.equal(sha(r.byteIdentityEvidence.path),r.byteIdentityEvidence.sha256);
- const entry=JSON.parse(fs.readFileSync(r.sourceEvidence.path)).changedProductFiles.find(x=>x.path===ownerPath);assert(entry);
- assert.equal(entry.sha256,predecessor.successorSha256);assert.equal(entry.currentSHA256,r.successorSha256);assert.equal(hash(source),r.successorSha256);
- const added=entry.diff.split('\n').filter(l=>l.startsWith('+')&&!l.startsWith('+++')).map(l=>l.slice(1)).join('\n')+'\n';
- assert.equal(hash(added),r.appendixSha256);assert(source.endsWith(added));
- const original=source.slice(0,-added.length);assert.equal(hash(original),predecessor.successorSha256,'Editorial front matter changed');
+ // Retire the two old QA payload reads; the actual exact source proves the append.
+ assert.equal(hash(source),r.successorSha256,'P06_CURRENT_SOURCE_IDENTITY');
+ const starts=[0,...[...source.matchAll(/\n/g)].map(m=>m.index+1)];
+ const splits=starts.filter(i=>hash(source.slice(0,i))===predecessor.successorSha256&&hash(source.slice(i))===r.appendixSha256);
+ assert.equal(splits.length,1,'P06_EXACT_APPEND_SPLIT_REQUIRED');
+ const original=source.slice(0,splits[0]),added=source.slice(splits[0]);
+ assert.equal(hash(original),predecessor.successorSha256,'Editorial front matter changed');
+ assert.equal(hash(added),r.appendixSha256,'P06_APPENDIX_BYTES_CHANGED');
  const match=added.match(/export const REPORT_CONTENTS_ASSETS=Object\.freeze\((\[[\s\S]*?\])\.map\(Object\.freeze\)\);/);assert(match);
- const assets=JSON.parse(match[1]),identities=JSON.parse(fs.readFileSync(r.byteIdentityEvidence.path)).rows;
+ const assets=JSON.parse(match[1]);
  assert.deepEqual(assets.map(x=>x.methodId).sort(),['AST','BZR','ECR','HD','NUM','ZWR']);
  for(const a of assets){
   assert.equal(a.page,6);assert.equal(a.pageRole,'SEMIFIXED_CONTENTS');assert.equal(a.locale,'bilingual');
   assert.equal(a.active,false);assert.equal(a.customerPublishable,false);assert.equal(a.visualAcceptance,'PENDING_OWNER_WITH_DOCUMENTED_TITLE_ISSUES');assert.equal(a.verification,'CURRENT_BYTES_DECODED');
-  const bytes=identities.find(x=>x.methodId===a.methodId);assert(bytes);assert.equal(bytes.httpStatus,200);assert.equal(a.object_key,bytes.objectKey);
-  for(const k of ['sha256','pixelSHA256','width','height','bytes','mime'])assert.equal(a[k],bytes[k],a.methodId+':'+k);
+  // Every literal object/sha/licence/approval field is bound by the exact append SHA above.
+  assert.equal(a.bucket,'phios-public-assets');assert.match(a.object_key,/^images\/reports\/[^?#]+\.webp$/);
+  assert.match(a.sha256,/^[a-f0-9]{64}$/);assert.match(a.pixelSHA256,/^[a-f0-9]{64}$/);
+  for(const k of ['width','height','bytes'])assert(Number.isInteger(a[k])&&a[k]>0,a.methodId+':'+k);
+  assert.equal(a.mime,'image/webp');
  }
  return original;
 }

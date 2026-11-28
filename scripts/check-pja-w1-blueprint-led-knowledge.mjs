@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {publicReadabilityPredecessor} from './lib/public-readability-source-successor-r1.mjs';
 import {readFileSync as readReadabilityCurrent} from 'node:fs';
 import {validateFounderLegacyRoutes} from './lib/founder-legacy-route-compatibility-r1.mjs';
@@ -313,6 +314,7 @@ async function assertExploreAboutRedirect(html){
 }
 for (const historicalPage of requiredPages) {
   const page = currentPageByHistoricalPage.get(historicalPage) || historicalPage;
+  if(page==='thesis.html'){await assertCurrentThesisRetirement();continue;}
   assert.equal(await exists(page), true, `Missing current PJA-W1 page: ${page}`);
   const html = await read(page);
   if(page==='explore/index.html'){await assertExploreAboutRedirect(html);continue;}
@@ -349,6 +351,7 @@ const expW2 = await readJson('docs/experience/EXP-W2-home-discover-about-contrac
 assert.equal(expW2.freezeId, 'EXP-W2-v1.0.0-Frozen');
 assert.equal((await read('index.html')).includes('data-knowledge-article-grid'), false);
 for (const page of ['library.html', 'book-one.html', 'thesis.html']) {
+  if(page==='thesis.html'){await assertCurrentThesisRetirement();continue;}
   const html = await read(page);
   if (page === 'library.html') {
     const px2Publications = await read('assets/js/components/publications-v2.js');
@@ -488,6 +491,6 @@ assert.deepEqual(evidence.acceptance, {
 console.log('✓ PJA-W1 Blueprint-led Public Knowledge Ecosystem passed.');
 console.log('  3 frozen Canonical Nodes publish 3 Chinese articles and 3 required English localizations.');
 console.log('  5 Wave 1 Nodes remain publication-deferred; their Registry identities are supplied by PKR population, not PJA.');
-console.log('  Home, Hub, Articles, Book I, Thesis, Atlas and shared navigation use published-only projections.');
+console.log('  Home, Hub, Articles, Book I, Atlas and shared navigation use published-only projections; the exact Owner-retired Thesis point is absent and returns 404.');
 console.log('  No case Provider, personal judgment, default service recommendation, Runtime write or Entitlement substitute exists.');
 console.log('  State: PJA-W1-v1.1.0-Blueprint-led.');

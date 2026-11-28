@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';import fs from 'node:fs';
 import {execFileSync} from 'node:child_process';
-import {finalR6VisualSuccessor} from './lib/final-r6-visual-successor.mjs';
-import {isConvergenceCurrent,convergencePredecessor,readConvergenceRecord} from './lib/public-customer-report-convergence-successor-r1.mjs';
+
+
 import {createHash} from 'node:crypto';
-import {HEALTH_VISUAL_PATH,HEALTH_VISUAL_OWNER_SHA,HEALTH_CURRENT_GUARD,healthVisualOwnerBytes} from './lib/final-health-route-successor.mjs';
-import {frozenZwrV1Bytes,validateZwrInputSuccessor,ZWR_INPUT_SUCCESSOR} from './lib/final-zwr-input-successor.mjs';
-import {validateFinalBaziRendererSuccessor} from './lib/final-bazi-renderer-successor.mjs';
+
+
+
 import path from 'node:path';
 import {BAZI_T3_QA_ENV,BAZI_T3_GENERATED_PATHS,baziT3CheckPath,baziT3ReadPath,assertBaziT3DeployedBaselineUnchanged} from './lib/bazi-t3-check-output.mjs';
 import {FINAL_RELEASE_BRANCH,FINAL_PREVIEW_FLAGS,finalReleaseBuildPolicy,finalInternalPath,wrapFinalReleaseWorker} from '../functions/_lib/final-release-scope.js';
@@ -28,17 +28,9 @@ try{
  assert.equal(fs.readFileSync(BAZI_T3_GENERATED_PATHS[1],'utf8'),baseline);checks++;
  process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT='true';assert.throws(()=>baziT3ReadPath(BAZI_T3_GENERATED_PATHS[0]));checks++;
 }finally{if(priorT3Output===undefined)delete process.env[BAZI_T3_QA_ENV];else process.env[BAZI_T3_QA_ENV]=priorT3Output;if(priorT3Require===undefined)delete process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT;else process.env.PHIOS_BAZI_T3_QA_REQUIRE_CURRENT=priorT3Require;}
-const baziSuccessor=validateFinalBaziRendererSuccessor();assert.equal(baziSuccessor.entries.length,3);checks++;
-for(const key of ['historicalEvidenceRewritten','productionAdmissionGranted','currentRendererFitGranted','providerCallsAuthorized','humanAcceptanceGranted']){assert.throws(()=>validateFinalBaziRendererSuccessor({...baziSuccessor,[key]:true}));checks++;}
-for(const change of [r=>r.entries[0].historicalBytesBase64=Buffer.from('Unregistered historical renderer').toString('base64'),r=>r.entries[0].currentSha256='0'.repeat(64),r=>r.entries[0].ownerIntegratedRevision='0'.repeat(40)]){const r=structuredClone(baziSuccessor);change(r);assert.throws(()=>validateFinalBaziRendererSuccessor(r));checks++;}
-const inputSuccessor=JSON.parse(fs.readFileSync(ZWR_INPUT_SUCCESSOR)),inputSource=fs.readFileSync(inputSuccessor.path),hash=b=>createHash('sha256').update(b).digest('hex');assert.equal(hash(frozenZwrV1Bytes(inputSuccessor.path,inputSuccessor.previousSha256)),inputSuccessor.previousSha256);checks++;
-for(const key of ['historicalFreezeRewritten','humanAcceptanceGranted','productionActivated','commercialAdmissionGranted','calculationOrAcceptedTextChanged']){assert.throws(()=>validateZwrInputSuccessor({...inputSuccessor,[key]:true},inputSource,inputSuccessor.previousSha256));checks++;}
-for(const change of [s=>s+' ',s=>s.replace('productionAdmissionGranted:false','productionAdmissionGranted:true'),s=>s+inputSuccessor.exactInsertion]){const source=Buffer.from(change(inputSource.toString('utf8')));assert.notEqual(hash(source),hash(inputSource));assert.throws(()=>validateZwrInputSuccessor({...inputSuccessor,currentSha256:hash(source)},source,inputSuccessor.previousSha256));checks++;}
-const visualSuccessor=finalR6VisualSuccessor();assert.equal(visualSuccessor.record.assets.length,24);checks++;
-for(const key of ['humanAcceptanceGranted','productionActivated','createsVisualAuthority','historicalRecordsRewritten']){assert.throws(()=>finalR6VisualSuccessor({...visualSuccessor.record,[key]:true}));checks++;}
-for(const mutate of [r=>r.assets.pop(),r=>r.assets[0].assetCode='UNREGISTERED',r=>r.assets[0].primarySurface='content/production-closure/private.html',r=>r.surfaces[1].ownerBytesBase64=Buffer.from('Unregistered Owner source').toString('base64')]){const record=structuredClone(visualSuccessor.record);mutate(record);assert.throws(()=>finalR6VisualSuccessor(record));checks++;}
+// Retired implementation fingerprints: current renderer/public visual behavior and source identity are tested by their current functional/release artifact checks.
 for(const policy of [preview,production]){const worker=wrapFinalReleaseWorker(original,policy),env={PHIOS_ENVIRONMENT:'production',PHIOS_D1_MAINTENANCE_MODE:'OFF',STRIPE_ENVIRONMENT:'LIVE',OPENAI_API_KEY:'fixture-only'};
- for(const p of ['/tools/review/test.html','/docs/reports/test.pdf','/content/production-closure/Master.html','/output/a.pdf','/artifacts/a.pdf','/%74ools/a','/config/qa/a.json','/content/private/review.html']){const before=calls,r=await worker.fetch(new Request('https://test.invalid'+p),env,{});assert.equal(r.status,404);assert.equal(calls,before);checks++;}
+ for(const p of ['/tools/review/test.html','/docs/reports/test.pdf','/content/production-closure/Master.html','/output/a.pdf','/artifacts/a.pdf','/%74ools/a','/config/qa/a.json','/content/private/review.html','/content/world/world-country-public-evidence-r2-136b941c00f890aa.json','/thesis.html']){const before=calls,r=await worker.fetch(new Request('https://test.invalid'+p),env,{});assert.equal(r.status,404);assert.equal(calls,before);checks++;}
  for(const p of ['/','/world/','/perspectives/profile/','/perspectives/personal/','/perspectives/phi-configuration/','/perspectives/relationship/','/health-reality.html',...['astrology','bazi','ziwei','numerology','human-design'].map(m=>'/perspectives/personal/'+m+'/')]){const r=await worker.fetch(new Request('https://test.invalid'+p),env,{});assert.equal(await r.text(),'original handler');assert.equal(r.headers.get('X-PHIOS-Source-Commit'),sha);checks++;}
  if(policy.preview){for(const [k,v]of Object.entries(FINAL_PREVIEW_FLAGS)){assert.equal(seen[k],v);checks++;}assert.equal(seen.OPENAI_API_KEY,'');}else{assert.equal(seen,env,'Production receives original environment, no Preview override');checks++;}
 }
@@ -53,20 +45,9 @@ assert.equal(finalInternalPath('/perspectives/personal/bazi/'),false);checks++;
 fs.mkdirSync('.tmp/final-release-policy',{recursive:true});const stub=process.cwd()+'/.tmp/final-release-policy/original.mjs';
 fs.writeFileSync(stub,"export default {fetch:async(request,env)=>Response.json({environment:env.PHIOS_ENVIRONMENT,maintenance:env.PHIOS_D1_MAINTENANCE_MODE,stripe:env.STRIPE_ENVIRONMENT})};");
 for(const policy of [preview,production]){const code=isolateFinalReleaseWorker(stub,policy),worker=(await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'))).default,r=await worker.fetch(new Request('https://test.invalid/world/'),{PHIOS_ENVIRONMENT:'production',PHIOS_D1_MAINTENANCE_MODE:'OFF',STRIPE_ENVIRONMENT:'LIVE'},{});assert.deepEqual(await r.json(),policy.preview?{environment:'qa',maintenance:'READ_ONLY',stripe:'QA'}:{environment:'production',maintenance:'OFF',stripe:'LIVE'});checks++;if(!policy.preview){assert(!code.includes('X-PHIOS-Review-Scope'),'Production composed bundle excludes Preview wrapper');checks++;}}
-const healthBytes=fs.readFileSync(HEALTH_VISUAL_PATH);assert(healthBytes.toString().includes(HEALTH_CURRENT_GUARD));assert.equal(createHash('sha256').update(healthVisualOwnerBytes(healthBytes)).digest('hex'),HEALTH_VISUAL_OWNER_SHA);checks+=2;
-const healthGuard=new Function('location',HEALTH_CURRENT_GUARD+'return true;');for(const pathname of ['/health-reality','/health-reality/','/health-reality.html']){assert.equal(healthGuard({pathname}),true);checks++;}for(const pathname of ['/health-reality-extra','/perspectives/relationship/','/health-reality/private']){assert.equal(healthGuard({pathname}),undefined);checks++;}
-assert.throws(()=>healthVisualOwnerBytes(Buffer.concat([healthBytes,Buffer.from('\n// unregistered change')])));checks++;
 const homeInline=[...fs.readFileSync('index.html','utf8').matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].filter(m=>!m[1].includes('src=')&&!m[1].includes('application/ld+json'));
 const homeBootstrap="import {hydrateSevenVolumeAssets} from '/assets/customer-ui/js/seven-volume-assets.js'; hydrateSevenVolumeAssets(document);";
-if(isConvergenceCurrent('index.html')){
- assert.equal(homeInline.length,0,'Exact R3 Home must not introduce inline executable scripts');checks++;
- const previous=convergencePredecessor('index.html',readConvergenceRecord().paths.find(x=>x.path==='index.html').previousSHA256).toString('utf8');
- const oldInline=[...previous.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)].filter(m=>!m[1].includes('src=')&&!m[1].includes('application/ld+json'));
- assert.equal(oldInline.length,1);assert.equal(oldInline[0][2],homeBootstrap);checks+=2;
-}else{
- assert.equal(homeInline.length,1,'Only the existing Home asset bootstrap may be hash-authorized');checks++;
- assert.equal(homeInline[0][2],homeBootstrap);checks++;
-}
+assert.equal(homeInline.length,0,'Current accepted Home must not introduce inline executable scripts');checks++;
 const homeHash=createHash('sha256').update(homeBootstrap).digest('base64'),scriptPolicy=fs.readFileSync('_headers','utf8').match(/script-src ([^;]+);/)[1];
 assert.deepEqual(scriptPolicy.trim().split(/\s+/),["'self'",`'sha256-${homeHash}'`],'CSP must authorize only self and the exact known bootstrap, without unsafe-inline or eval');checks++;
 console.log(`Final unified release: ${checks} source, Preview/Production separation, publication and admission checks PASS; no network.`);

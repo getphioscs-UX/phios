@@ -118,14 +118,6 @@ async function buildResources(locale) {
         ? 'Ask 用于理解知识；Search 与 Library 用于查找、浏览和发现，两者不会合并成重复产品。'
         : 'Ask is for understanding knowledge; Search and Library are for finding, browsing and discovery without becoming duplicate products.'
     },
-    {
-      id: 'reality-navigation-thesis',
-      category: 'research',
-      status: 'available',
-      href: '/thesis',
-      title: t('knowledge.production.thesisTitle'),
-      description: t('knowledge.production.thesisCopy')
-    },
     ...bookResources,
     {
       id: 'book-one-preview',
@@ -168,14 +160,6 @@ async function buildResources(locale) {
       title: t('knowledge.production.academyTitle'),
       description: t('knowledge.production.academyCopy')
     },
-    {
-      id: 'thesis-downloads',
-      category: 'downloads',
-      status: 'available',
-      href: '/thesis#downloads',
-      title: t('knowledge.production.downloadsTitle'),
-      description: t('knowledge.production.downloadsCopy')
-    }
   ];
 }
 

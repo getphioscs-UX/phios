@@ -23,7 +23,10 @@ for(const [patch,expected] of [
  ["const original=fs.existsSync;fs.existsSync=p=>String(p).endsWith('.pages-output')?false:original(p);",/does not exist/],
  ["const original=fs.existsSync;fs.existsSync=p=>String(p).endsWith('_worker.js')||String(p).endsWith('_routes.json')?false:original(p);",/_worker.js: missing/],
  ["const original=fs.statSync;fs.statSync=p=>{const r=original(p);return String(p).endsWith('_worker.js')?Object.assign(r,{size:0}):r;};",/_worker.js: empty/],
- ["const original=fs.readFileSync;fs.readFileSync=(p,...args)=>String(p).endsWith('_routes.json')?'{\"version\":1,\"include\":[]}':original(p,...args);",/generated routing contract invalid/]
+ ["const original=fs.readFileSync;fs.readFileSync=(p,...args)=>String(p).endsWith('_routes.json')?'{\"version\":1,\"include\":[]}':original(p,...args);",/generated routing contract invalid/],
+ ["const original=fs.readFileSync;fs.readFileSync=(p,...args)=>String(p).endsWith('_routes.json')?JSON.stringify({version:1,include:['/*'],exclude:['/content/*']}):original(p,...args);",/internal World snapshot bypasses Worker/],
+ ["const original=fs.readFileSync;fs.readFileSync=(p,...args)=>String(p).endsWith('_routes.json')?JSON.stringify({version:1,include:['/api/*'],exclude:[]}):original(p,...args);",/internal World snapshot bypasses Worker/],
+ ["const original=fs.readFileSync;fs.readFileSync=(p,...args)=>String(p).endsWith('_routes.json')?JSON.stringify({version:1,include:['/*'],exclude:['/content/world/*']}):original(p,...args);",/internal World snapshot bypasses Worker/]
 ]){
  const code="import fs from 'node:fs';import {syncBuiltinESMExports} from 'node:module';"+patch+"syncBuiltinESMExports();await import('./scripts/check-pages-static-assets.mjs');";
  const r=spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',env:{...process.env,PHIOS_PAGES_BUILD_TOKEN:''}});

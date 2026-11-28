@@ -36,6 +36,8 @@ assert.equal(digest(preserved.predecessor.path),preserved.predecessor.sha256);
 for(const key of ['historicalBaselineRewritten','currentFailurePromotedToPass','productionAdmissionGranted'])assert.equal(preserved[key],false);
 assert.deepEqual(preserved.entries.map(e=>e.path),['docs/acceptance/bazi-paid-report/deep-manuscript-r2/FINAL-CLOSURE-CHECK-all.json']);
 for(const [path,hash] of Object.entries(protectedBaseline.files)){
+ // Owner Override retires only this generated review HTML, not its Human decision.
+ if(path==='tools/review/ZWR-VFR-R1-HUMAN-REVIEW.html'){assertCurrentZwrAcceptedPublication({retiredReviewHash:hash});continue;}
  const entry=preserved.entries.find(e=>e.path===path);
  if(entry){assert.equal(entry.sha256,hash);assert.equal(entry.historicalPath,'docs/reports/delivery-r4/history/FINAL-CLOSURE-CHECK-all.accepted-baseline.json');}
  assert.equal(digest(entry?.historicalPath||path),hash,'Accepted/historical source changed: '+path);
@@ -53,3 +55,25 @@ assert(proof.indexOf("if(body.action==='finalize')")<proof.indexOf('sharedDelive
 for(const token of ['SHARED_E2E_REQUIRED_LIVE_PHASES_INCOMPLETE','SHARED_E2E_RENDERER_STABILITY_REQUIRED','SHARED_E2E_ALL_TARGET_METHOD_DELTAS_REQUIRED','SHARED_E2E_CROSS_ACCOUNT_SUBJECT_LEAK'])assert(proof.includes(token));
 if(registry.methods.some(x=>x.status!=='PASS'))assert.equal(registry.sharedFinalLiveE2EAllowed,false);
 console.log('PASS shared delivery v2 readiness/contracts: native profiles indexed; unresolved gates explicit; protected sources unchanged; no final live authority granted. Provider calls=0.');
+
+export function assertCurrentZwrAcceptedPublication({read=json,digestFile=digest,retiredReviewHash}={}){
+ const humanPath='docs/reports/ziwei/vfr-r1/HUMAN-DECISION.json',cutoverPath='docs/reports/ziwei/vfr-r1/PRODUCTION-CUTOVER.json';
+ const human=read(humanPath),cutover=read(cutoverPath),delta=read('docs/reports/delivery-r4/ZIWEI-METHOD-DELIVERY-DELTA-v1.json');
+ assert.equal(human.decision,'ACCEPT','ZWR_CURRENT_HUMAN_ACCEPTANCE_REQUIRED');
+ assert.equal(human.reviewHtmlSha256,retiredReviewHash,'ZWR_RETIRED_REVIEW_IDENTITY');
+ assert.equal(cutover.reviewHtmlSha256,retiredReviewHash);
+ assert.equal(digestFile(humanPath),cutover.humanDecisionSha256,'ZWR_HUMAN_DECISION_BINDING');
+ assert.equal(delta.contentAcceptanceExisting,true);assert.equal(delta.contentAcceptanceDigest,cutover.humanDecisionSha256);
+ assert.equal(delta.nativeOwnerRef,cutoverPath);assert.equal(delta.nativeOwnerSha256,digestFile(cutoverPath));
+ assert.equal(human.publicationIrSha256,digestFile('docs/reports/ziwei/vfr-r1/DEEP-PUBLICATION-IR.json'),'ZWR_ACCEPTED_PUBLICATION_IR_BINDING');
+ assert.equal(human.publicationIrDigest,cutover.publicationIrDigest);
+ assert.equal(read('docs/reports/ziwei/vfr-r1/PAGE-PLAN.json').length,human.physicalPageCount);
+ assert.equal(read('docs/reports/ziwei/vfr-r1/PUBLICATION-FIT-PLAN.json').pageCount,human.physicalPageCount);
+ assert.equal(read('docs/reports/ziwei/vfr-r1/DIAGRAM-DATA.json').diagramCount,human.deterministicDiagramCount);
+ assert.match(human.scope,/candidate only; no authority expansion; production cutover separately gated/);
+ assert.equal(cutover.providerCallsDuringProductionPublication,0);assert.equal(cutover.semanticAiReviewCalls,0);
+ assert.equal(delta.sharedDeliveryAuthorityEligible,false,'ZWR_CURRENT_LIVE_DELIVERY_STILL_BLOCKED');
+ assert.equal(delta.realAccountReleasePass,false);assert.equal(delta.deployedRendererPass,false);assert.equal(delta.differentSessionReopenPass,false);
+ assert.equal(read('content/reports/method-report-delivery-delta-registry-v1.json').sharedFinalLiveE2EAllowed,false);
+ return true;
+}

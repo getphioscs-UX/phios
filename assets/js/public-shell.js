@@ -23,7 +23,6 @@ const FOOTER_LINKS = Object.freeze([
   { href: '/knowledge/ask/', key: 'worldRecovery.terms.ask' },
   { href: '/knowledge/', key: 'publicShell.nav.knowledge' },
   { href: '/articles', key: 'publicShell.footer.articles' },
-  { href: '/thesis', key: 'publicShell.footer.thesis' },
   { href: '/books/', key: 'publicShell.footer.books' },
   { href: '/world/', key: 'publicShell.footer.atlas' },
   { href: '/reality/', key: 'publicShell.nav.realityJourney' },
@@ -200,7 +199,7 @@ function activeSectionFromPage() {
     path === '/digital-product-policy' ||
     path.startsWith('/read/book-one')
   ) return 'knowledge';
-  if (path === '/explore' || path === '/thesis') return 'knowledge';
+  if (path === '/explore') return 'knowledge';
   if (
     path === '/free-observation' ||
     path === '/reality' ||

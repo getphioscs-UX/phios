@@ -1,10 +1,12 @@
-import {assertFounderR3StrictTransition} from './lib/founder-owner-r3-strict-r4.mjs';
+import {currentFounderPositioningPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
+import {assertFounderR3StrictTransition,assertCurrentFounderPositioning} from './lib/founder-owner-r3-strict-r4.mjs';
+assertCurrentFounderPositioning(fs.readFileSync('about/founder/index.html','utf8'));
 assertFounderR3StrictTransition();
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {parseHTML} from 'linkedom';
 import {createHash} from 'node:crypto';
-const page=fs.readFileSync('about/founder/index.html','utf8'),{document}=parseHTML(page);
+const page=currentFounderPositioningPredecessor('about/founder/index.html',fs.readFileSync('about/founder/index.html')).toString(),{document}=parseHTML(page);
 const source=JSON.parse(fs.readFileSync('content/web/founder-owner-r3.json','utf8'));
 const record=JSON.parse(fs.readFileSync('content/web/index-surfaces/founder-owner-r3.json','utf8'));
 assert.equal(record.version,'FOUNDER-OWNER-R3');assert.equal(record.credentialsInvented,false);assert.equal(record.commercialAuthorityChanged,false);

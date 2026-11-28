@@ -32,7 +32,11 @@ for(const c of manifest.cases){
   }
 }
 assert.equal(caseFiles,96);assert.equal(graphFiles,96);assert.equal(internalVisible,0,'internal semantic-slot prose leaked into review candidates');assert.equal(selectorlessRefs,0);
-assert(fs.existsSync('tools/review/cx-r12r3b-human-review-materialized-v1.html'));
+// Current fixed graph/candidate contracts replace the retired rendering shell only.
+for(const c of manifest.cases){
+ const graph=read(c.candidateMaterialization.graphSnapshotRef);assert.equal(graph.caseId,c.caseId);assert.equal(graph.methodId,c.methodId);
+ for(const localized of graph.localized){assert.equal(localized.projectionDigest,c.candidateMaterialization.projectionDigest);assert.equal(localized.customerInterpretationBindingsAccepted,false);assert(Array.isArray(localized.nodes)&&localized.nodes.length>0);assert(localized.nodes.some(n=>typeof n.canonicalRef==='string'&&n.canonicalRef.length>0),'MATERIALIZED_GRAPH_SOURCE_REFERENCE_REQUIRED');}
+}
 assert.equal(acceptance.claims.humanReviewReady,true);assert.equal(acceptance.claims.humanAccepted,false);assert.equal(acceptance.claims.liveBrowserAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
 console.log('✓ CX-R12R3B PASS2A passed: selector remediation + customer-language projection + 96/96 materialized review cases.');
 console.log('  External dual human review remains required; 0/96 are human accepted and no production authority is promoted.');

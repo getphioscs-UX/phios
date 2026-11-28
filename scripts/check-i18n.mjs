@@ -1,3 +1,5 @@
+import {finalInternalPath} from '../functions/_lib/final-release-scope.js';
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +24,8 @@ async function* walk(directory) {
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
     if (ignoredDirectories.has(entry.name)) continue;
     const absolute = path.join(directory, entry.name);
+    const relative = path.relative(root, absolute).replaceAll(path.sep, '/');
+    if (finalInternalPath('/'+relative+(entry.isDirectory()?'/':''))) continue;
     if (entry.isDirectory()) yield* walk(absolute);
     else yield absolute;
   }
@@ -44,6 +48,9 @@ function collectTranslationMapKeys(source) {
   return keys;
 }
 
+assert.equal(finalInternalPath('/tools/review/unified-release-convergence-r1/r12/local-runtime/public/assets/js/pages/library.js'),true);
+assert.equal(finalInternalPath('/assets/js/pages/library.js'),false);
+assert.equal(finalInternalPath('/books/reality-differentiation/'),false);
 const enKeys = flatten(en);
 const zhKeys = flatten(zhHans);
 const errors = [];

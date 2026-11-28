@@ -60,7 +60,12 @@ export function readBaziSharedOwnerPredecessor(path,expectedSha256){
  const r=JSON.parse(fs.readFileSync(recordPath));
  assert.equal(r.status,'ENGINEERING_RECONCILIATION');assert.equal(r.changeType,'NUM_ONLY_SHARED_OWNER_SUCCESSOR');
  for(const k of ['authorityOrAcceptedTextRewritten','humanAcceptanceGranted','productionActivated','currentRendererFitAccepted'])assert.equal(r[k],false);
- for(const e of r.sourceEvidence)assert.equal(hash(fs.readFileSync(e.path)),e.sha256,'NUM provenance drift');
+ // Owner Override retires these two generated provenance documents only.
+ assert.deepEqual(r.sourceEvidence.map(e=>e.path),['tools/review/numerology-owner-sections-r1/CHANGES-AND-PROVENANCE.md','tools/review/numerology-owner-sections-r1/ASSET-BINDINGS.json']);
+ const currentContents=contents(fs.readFileSync(registryPath,'utf8')),numContents=currentContents.find(a=>a.methodId==='NUM');
+ assert.equal(numContents.active,true);assert.equal(numContents.customerPublishable,false,'NUM_P06_NOT_PUBLICATION_ADMITTED');
+ assert.equal(numContents.ownerEvidence,'USER_20261030_P06_CORRECT_BIND_WITHOUT_CONTENT_REVIEW');
+ assert.equal(numContents.visualAcceptance,'OWNER_CONFIRMED_CONTENT_20261030');
  const e=r.entries.find(e=>e.path===path);assert(e,'No exact shared-owner successor');
  assert.equal(e.predecessorSha256,expectedSha256);
  return restoreExactSharedPredecessor(e,bytes);

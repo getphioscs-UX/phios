@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {assertBaziGenerationAdmission} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js';
+import {invokeBaziDeepManuscript} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-provider.js';
 import {BATCHES,LOCALES,POLICY} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-contract.js';
 import {planBaziDeepManuscriptOutputBudget,baziTokenCost,estimateBaziTokens} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-budget.js';
 import {buildBaziManuscriptSchema} from '../functions/personal-reading/deep-manuscript/bazi-deep-manuscript-schema.js';
@@ -41,7 +43,24 @@ check('31 checkpoint preserved',()=>assert(r.preserved.find(f=>f.path.includes('
 check('32 recovery max two',()=>assert.equal(POLICY.maxStandardRecoveryCalls,2));
 check('33 rescue preserved',()=>assert(r.preserved.find(f=>f.path.includes('recovery.js')).status==='UNCHANGED'));
 check('34 delivery policy preserved',()=>assert.deepEqual(r.policy,POLICY));
-check('35 review exists',()=>assert(fs.existsSync('tools/review/BAZI-DEEP-MANUSCRIPT-R2-MODEL-CAPACITY-ADMISSION.html')));
+// The retired generated review HTML is not capacity, spending or Owner authority.
+let currentProviderFetches=0,currentSecretReads=0;
+const closedProviderEnv={REPORT_PROVIDER_LIVE_ALLOWED:'false',REPORT_ZERO_COST_REPLAY:'true'};
+Object.defineProperty(closedProviderEnv,'OPENAI_API_KEY',{get(){currentSecretReads++;throw Error('CAPACITY_CHECK_SECRET_READ_FORBIDDEN');}});
+await assert.rejects(invokeBaziDeepManuscript({env:closedProviderEnv,request:{},fetcher:async()=>{currentProviderFetches++;throw Error('CAPACITY_CHECK_PROVIDER_FORBIDDEN');}}),/REPORT_PROVIDER_LIVE_OPT_IN_REQUIRED/);
+check('35 current capacity and execution authority are separate',()=>{
+ assert.equal(model.constraintsVerified,true);assert.equal(model.pricingVerified,true);
+ assert(plans.every(p=>p.allowed===['SAFE','SAFE_WITH_ELEVATED_HEADROOM'].includes(p.capacityAdmission)));
+ assert.equal(policy.productionActivated,false);assert.equal(policy.REPORT_PROVIDER_LIVE_ALLOWED,false);
+ const owner=read(policy.productionAdmissionPath);
+ assert.equal(owner.decision,'HUMAN_ACCEPTED_PRODUCTION_ADMISSION');assert.equal(owner.approval.statement,policy.humanAcceptReceipt.statement);assert.equal(owner.approval.productionFrozen,true);assert.equal(owner.productionPolicy.modelId,model.modelId);
+ assert.throws(()=>assertBaziGenerationAdmission({mode:'PRODUCTION',env:closedProviderEnv,approval:owner.approval,pack,model}),/REPORT_PROVIDER_LIVE_OPT_IN_REQUIRED/);
+ // Pure denial checks only: no generation, store, Provider or paid call is invoked.
+ const optInShape={REPORT_PROVIDER_LIVE_ALLOWED:'true',REPORT_ZERO_COST_REPLAY:'false'};
+ assert.throws(()=>assertBaziGenerationAdmission({mode:'PRODUCTION',env:optInShape,approval:null,pack,model}),/BDM_PRODUCTION_FREEZE_REQUIRED/);
+ assert.throws(()=>assertBaziGenerationAdmission({mode:'PRODUCTION',env:optInShape,approval:owner.approval,order:null,pack,model}),/BDM_PAID_VALID_ORDER_REQUIRED/);
+ assert.equal(currentProviderFetches,0);assert.equal(currentSecretReads,0);
+});
 check('36 receipt calculated decision',()=>assert.equal(r.THREE_CALL_CAPACITY_ADMISSION,plans.some(p=>p.capacityAdmission==='UNSAFE')?'BLOCKED':plans.some(p=>p.capacityAdmission==='NEAR_LIMIT')?'REVIEW_REQUIRED':'PASS'));
 check('Official receipts and maintenance dates',()=>{assert.equal(model.verifiedAt,'2026-10-06');assert(Date.parse(model.reviewAfter)>Date.parse(model.verifiedAt));assert.equal(model.sources.length,5);assert(model.sources.every(s=>s.url.startsWith('https://developers.openai.com/')));});
 check('Single capacity source in implementation',()=>{for(const path of ['functions/personal-reading/deep-manuscript/bazi-deep-manuscript-budget.js','scripts/lib/bazi-deep-manuscript-review.mjs','config/reports/bazi-deep-manuscript-r2/policy.json'])assert(!/128_?000|1_?050_?000/.test(fs.readFileSync(path,'utf8')));});
@@ -55,5 +74,5 @@ check('Context capacity independently enforced',()=>{const p=planBaziDeepManuscr
 check('Transport envelope without semantics or maxLength',()=>assert(!/maxLength|coreMeaning|structuralMechanism/.test(JSON.stringify(buildBaziManuscriptSchema(args(0).units)))));
 check('No capacity probe; first effort medium',()=>{assert.equal(policy.reasoningEffort,'medium');const code=fs.readFileSync('functions/personal-reading/deep-manuscript/bazi-deep-manuscript-provider.js','utf8');assert(code.includes('reasoning:{effort:request.plan.reasoningEffort'));assert(code.includes('incompleteReason:data.incomplete_details'));});
 check('Generated telemetry captures reasoning and technical truncation',()=>{const code=fs.readFileSync('functions/personal-reading/deep-manuscript/bazi-deep-manuscript-runtime.js','utf8');assert(code.includes('output_tokens_details?.reasoning_tokens'));assert(code.includes('TECHNICAL_TRUNCATION'));assert(code.includes('visibleManuscriptTokenEstimate'));});
-write(ROOT+'CAPACITY-CHECK-EVIDENCE.json',{status:'PASS',groups:tests.length,tests,providerCalls:0,providerCostUsd:0,REPORT_PROVIDER_LIVE_ALLOWED:false});
+write('.tmp/bazi-deep-manuscript-r2-capacity/CAPACITY-CHECK-EVIDENCE.json',{status:'PASS',groups:tests.length,tests,providerCalls:0,providerCostUsd:0,REPORT_PROVIDER_LIVE_ALLOWED:false});
 console.log(`PASS capacity ${tests.length} groups; providerCalls=0, cost=$0.`);

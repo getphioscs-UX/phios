@@ -1,3 +1,5 @@
+import {assertCurrentThesisRetirement,currentTopicCoreCapacityPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
+import currentRegistryFs from 'node:fs';
 import {assertWorldPreviewWranglerSuccessor} from './lib/m3c-wrangler-successor.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import assert from 'node:assert/strict';
@@ -67,7 +69,10 @@ assert(
 const preSevenVolumeRegistryFiles = contentRegistryFiles.filter(
   file => !authorisedSevenVolumeSuccessorRegistryFiles.has(file)
 );
-assert.equal(preSevenVolumeRegistryFiles.length, 114);
+await assertCurrentThesisRetirement();
+assert.equal(preSevenVolumeRegistryFiles.includes('thesis.json'),false);
+assert.equal(preSevenVolumeRegistryFiles.length,113);
+assert.equal(preSevenVolumeRegistryFiles.length+1,114,'HISTORICAL_REGISTRY_FILES_MINUS_EXACT_RETIRED_THESIS');
 assert.equal((await readJson('content/registry/runtime-position-48-v1.json')).schemaVersion,'PHI-OS-48-RUNTIME-POSITION-BACKBONE-v1.0.0');
 assert.equal((await readJson('content/registry/runtime-position-48-crosswalk-v1.json')).runtimePositionRegistry,'content/registry/runtime-position-48-v1.json');
 assert.equal((await readJson('content/registry/runtime-position-48-source-windows-v1.json')).schemaVersion,'PHI-OS-48-PHASE-SOURCE-WINDOWS-v1.0.0');
@@ -75,7 +80,12 @@ const visualFreeze = await readJson('content/registry/report-visual-reference-fr
 assert.equal(visualFreeze.schemaVersion, 'PHI-OS-REPORT-VISUAL-REFERENCE-FREEZE-R1');
 assert.equal(visualFreeze.tokenOwner, 'assets/css/tokens.css');
 assert.equal(visualFreeze.productionAccepted, false);
-assert.equal(indexedFiles.length, 51);
+const registryBeforeRetirement=JSON.parse(currentTopicCoreCapacityPredecessor('content/registry/index.json',currentRegistryFs.readFileSync('content/registry/index.json')).toString());
+assert.equal(Object.keys(registryBeforeRetirement.registries).length,51,'ORIGINAL_51_REGISTRY_AUTHORITY_PRESERVED');
+assert.equal(registryBeforeRetirement.registries.thesis,'./thesis.json');
+const expectedCurrentRegistry=structuredClone(registryBeforeRetirement);delete expectedCurrentRegistry.registries.thesis;
+assert.deepEqual(registryIndex,expectedCurrentRegistry,'ONLY_EXACT_OWNER_RETIRED_THESIS_REGISTRY_REMOVED');
+assert.equal(indexedFiles.length,50);assert.equal(indexedFiles.includes('thesis.json'),false);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(

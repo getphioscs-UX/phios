@@ -1,3 +1,4 @@
+import {isInstitutionArticle,readInstitutionFactualBrief,institutionBriefPath} from './institution-factual-brief-v1.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -34,7 +35,7 @@ export async function validateZhHansCandidate(root,candidate,{briefPath,commit,v
   if(candidate.candidateType!==CANDIDATE_TYPE)add('CANDIDATE_TYPE_INVALID',String(candidate.candidateType));
   if(candidate.candidateSchemaVersion!==CANDIDATE_SCHEMA_VERSION)add('CANDIDATE_SCHEMA_VERSION_INVALID',String(candidate.candidateSchemaVersion));
   if(candidate.locale!=='zh-Hans')add('CANDIDATE_LOCALE_INVALID',String(candidate.locale));
-  if(!/^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$/.test(candidate.nodeCode||''))add('CANDIDATE_NODE_CODE_INVALID',String(candidate.nodeCode));
+  if(!isInstitutionArticle(candidate)&&!/^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$/.test(candidate.nodeCode||''))add('CANDIDATE_NODE_CODE_INVALID',String(candidate.nodeCode));
   if(candidate.candidateCode!==`CANDIDATE-${candidate.nodeCode}-ZH-HANS-V1`)add('CANDIDATE_CODE_INVALID',String(candidate.candidateCode));
   if(!ALLOWED_STATES.includes(candidate.candidateState))add('CANDIDATE_STATE_INVALID',String(candidate.candidateState));
   const article=candidate.article||{};
@@ -52,7 +53,8 @@ export async function validateZhHansCandidate(root,candidate,{briefPath,commit,v
   if(!/^[a-f0-9]{64}$/.test(candidate.candidateDigest||''))add('CANDIDATE_DIGEST_FORMAT_INVALID',String(candidate.candidateDigest));
   else if(candidate.candidateDigest!==computeCandidateDigest(candidate))add('CANDIDATE_DIGEST_INVALID','candidateDigest does not match candidate payload.');
   let brief;
-  if(validateBriefBinding && briefPath){ brief=JSON.parse(await fs.readFile(briefPath,'utf8')); }
+  if(isInstitutionArticle(candidate)){try{brief=await readInstitutionFactualBrief(root,candidate);}catch(error){add('INSTITUTION_BRIEF_INVALID',error.message);}}
+  else if(validateBriefBinding && briefPath){ brief=JSON.parse(await fs.readFile(briefPath,'utf8')); }
   else if(validateBriefBinding && candidate.nodeCode){ brief=await buildCanonicalBriefV2(root,candidate.nodeCode,{commit:candidate.sourceBrief?.repositoryCommit||commit}); }
   if(brief){
     if(candidate.sourceBrief?.briefCode!==brief.briefCode)add('CANDIDATE_BRIEF_CODE_MISMATCH',String(candidate.sourceBrief?.briefCode));

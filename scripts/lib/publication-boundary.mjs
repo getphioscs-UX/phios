@@ -3,7 +3,8 @@ import {financialQaPath} from '../../functions/_lib/final-release-scope.js';
 // Runtime JSON and accepted image assets keep their existing admission policy.
 export function internalPublicationFile(rel) {
   const file = rel.replaceAll('\\', '/');
-  return financialQaPath('/'+file) || /^content\/.*\.html?$/i.test(file) ||
+  // Historical capability snapshots are QA inputs, never a current public discovery directory.
+  return file === 'content/public/client-intent-router/registries/client-capability-projection-r1.json' || financialQaPath('/'+file) || /^content\/.*\.html?$/i.test(file) ||
     /^content\/civilization-atlas\/maintenance\//.test(file) ||
     /^content\/knowledge\/manuscripts\/completed\//.test(file) ||
     /^content\/civilization-atlas\/reconfiguration\/(?:moomoo-|market-provider-).*\.json$/.test(file) ||

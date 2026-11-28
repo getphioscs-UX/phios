@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {auditPublicPredecessor,auditPublicReadFile} from './lib/audit-r2-public-receiver-r2.mjs';
 import {consolidationSuccessor,assertCurrentConsolidatedSurface} from './lib/page-consolidation-successor-r1.mjs';
 import {pisCurrentSurfaceSuccessor,assertPisCurrentSurface} from './lib/pis-current-surface-successor.mjs';
@@ -49,22 +50,34 @@ const copy=read('content/web/index-surfaces/pis-r1-discovery-copy-v1.json');
 const successor=pisCurrentSurfaceSuccessor();
 assert.equal(Object.keys(copy.pages).length,29);
 for(const [file,sections] of Object.entries(copy.pages)){
+ if(file==='thesis.html'){await assertCurrentThesisRetirement();continue;} // exact Owner-retired point, never substitute a body
  const source=fs.readFileSync(file,'utf8');
  const {document}=parseHTML(source);
  if(file==='explore/index.html'&&source.includes('/assets/js/explore-about-compat.js')){
-  const {historicalPisBytes}=await import('./lib/page-consolidation-successor-r1.mjs');historicalPisBytes(file);
+  // Owner Override: validate the live compatibility route; retired before bytes are not product input.
+  assert.equal(document.querySelectorAll('script[src="/assets/js/explore-about-compat.js"]').length,1,'CURRENT_EXPLORE_COMPAT_RUNTIME_REQUIRED');
+  assert.equal(document.querySelectorAll('form,input,textarea,iframe').length,0,'CURRENT_EXPLORE_COMPAT_NO_EXECUTION_OR_INPUT');
   assert.equal(document.querySelector('link[rel="canonical"]')?.getAttribute('href'),'https://www.getphios.com/about/founder/');
   assert.equal(document.querySelector('a')?.getAttribute('href'),'/about/founder/');
-  const destination=parseHTML(fs.readFileSync('about/founder/index.html','utf8')).document;
-  for(const anchor of ['why','how','start','faq'])assert(destination.getElementById(anchor),'About destination anchor missing: '+anchor);
+  const destination=parseHTML(sourceFs.readFileSync('about/founder/index.html','utf8')).document;
+  for(const anchor of ['founder-origin','founder-connected-reality','founder-next-step','founder-trust'])assert(destination.getElementById(anchor),'Current Founder destination anchor missing: '+anchor);
   continue;
  }
- if(document.querySelector('[data-consolidation-target]')){assert(assertCurrentConsolidatedSurface(document,file),'Unregistered redirect surface: '+file);continue;}
+ if(document.querySelector('[data-consolidation-target]')){const {assertCurrentConsolidationLocale}=await import('./lib/page-consolidation-successor-r1.mjs');assert(assertCurrentConsolidationLocale(file,p=>sourceFs.readFileSync(p,'utf8')),'Current redirect/localization invalid: '+file);continue;}
  assert.equal(document.querySelectorAll('h1').length,1,`${file}: one h1`);
  const current=successor.surfaces.find(s=>s.file===file);
  assertPisCurrentSurface(document,current);
  const consolidated=consolidationSuccessor()?.surfaces.some(item=>item.file===file);
- if(!consolidated)assert.equal(document.querySelectorAll('.pis-editorial:not(.pis-visual-story)').length,current?.editorialReplaced?0:sections.length+(current?.additionalEditorial.length||0),file+': editorial scope');
+ // Current About adds one Owner-directed positioning section; preserve the original editorial count separately.
+ const currentPositioning=file==='about/index.html'?document.querySelectorAll('section#reality-intelligence-platform'):[];
+ if(file==='about/index.html'){
+  assert.equal(currentPositioning.length,1,'CURRENT_ABOUT_POSITIONING_REQUIRED');const position=currentPositioning[0];
+  assert.equal(position.querySelector('h2')?.id,'reality-intelligence-title');
+  for(const node of position.querySelectorAll('[data-pis-copy]'))assert(node.getAttribute('data-cx-en')&&node.getAttribute('data-cx-zh'),'CURRENT_ABOUT_BILINGUAL_REQUIRED');
+  assert.equal(position.querySelectorAll('form,script,img,iframe').length,0,'POSITIONING_MUST_NOT_CREATE_EXECUTION_OR_REPLACE_ASSETS');
+  assert.deepEqual([...position.querySelectorAll('a')].map(a=>a.getAttribute('href')),['/world/','/knowledge/','/subjects/personal/']);
+ }
+ if(!consolidated)assert.equal(document.querySelectorAll(file==='about/index.html'?'.pis-editorial:not(.pis-visual-story):not(#reality-intelligence-platform)':'.pis-editorial:not(.pis-visual-story)').length,current?.editorialReplaced?0:sections.length+(current?.additionalEditorial.length||0),file+': editorial scope');
  if(!consolidated)assert.ok(document.querySelector(`script[src="${current?.copyRuntime||'/assets/customer-ui/js/public-index-copy.js'}"]`));
  for(const section of sections){
   assert.ok(section.body.en.length>120&&section.body.zh.length>40);
@@ -73,7 +86,8 @@ for(const [file,sections] of Object.entries(copy.pages)){
    assert.ok(link.en&&link.zh);
    assert.ok(link.href.startsWith('/')&&!link.href.startsWith('//'));
    const destination=link.href.split(/[?#]/)[0].slice(1);
-   assert.ok(fs.existsSync(destination.endsWith('/')?destination+'index.html':destination),`${file}: missing destination ${link.href}`);
+   if(destination==='thesis.html')await assertCurrentThesisRetirement();
+   else assert.ok(fs.existsSync(destination.endsWith('/')?destination+'index.html':destination),`${file}: missing destination ${link.href}`);
    assert.ok(!/checkout|payment|subscribe|buy/i.test(link.href),'No new purchase CTA in discovery additions');
   }
  }

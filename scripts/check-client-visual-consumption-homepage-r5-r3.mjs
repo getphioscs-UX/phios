@@ -1,3 +1,6 @@
+import {retiredResearchTopicPath,wrapFinalReleaseWorker} from '../functions/_lib/final-release-scope.js';
+import {onRequest as currentRootRequest} from '../functions/_middleware.js';
+import {currentFounderPositioningPredecessor,currentR5ProtectedCheckerPredecessor} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import {validateH5HomepageR5Successor} from './lib/client-visual-h5-homepage-r5-successor-r3.mjs';
 import {effectivePackageScripts} from './lib/effective-package-scripts.mjs';
 import './check-homepage-r5.mjs';
@@ -177,6 +180,14 @@ function htmlReachesH5Bootstrap(file,seen=new Set()) {
 }
 let bootstrapFileCount = 0;
 for (const record of map.records.filter(record => record.visualState === 'ACTIVE_REQUIRED')) {
+  if(record.surfaceCode==='THESIS'){
+    // Owner-retired topic: historical visual identity remains, current page does not publish.
+    assert(record.routes.every(route=>retiredResearchTopicPath(route)), 'ONLY_EXACT_RETIRED_THESIS_CONSUMER');
+    for(const file of ['thesis.html','functions/api/thesis-download.js','content/registry/thesis.json','assets/js/thesis.js','assets/js/pages/thesis.js','assets/js/pages/thesis-seven.js','assets/js/locales/en/thesis.js','assets/js/locales/zh-Hans/thesis.js'])assert(!fs.existsSync(file),'RETIRED_THESIS_FILE_REAPPEARED:'+file);
+    for(const file of ['assets/js/public-shell.js','assets/js/knowledge/catalog.js','assets/js/pages/library.js','about/index.html','research/index.html'])assert(!new RegExp("[\"'`]/thesis(?:\\.html)?[\"'`?#/]").test(text(file)),'RETIRED_THESIS_CURRENT_ENTRY:'+file);
+    for(const route of record.routes){assert.equal((await currentRootRequest({request:new Request('https://qa.invalid'+route),env:{},next:()=>{throw Error('RETIRED_TOPIC_ROOT_DOWNSTREAM_FORBIDDEN')}})).status,404);const worker=wrapFinalReleaseWorker({fetch:()=>{throw Error('RETIRED_TOPIC_FINAL_DOWNSTREAM_FORBIDDEN')}},{active:true,preview:true,commit:'0'.repeat(40)});assert.equal((await worker.fetch(new Request('https://qa.invalid'+route),{},{})).status,404);}
+    continue;
+  }
   const files = [...new Set(record.routes.flatMap(route=>routeFiles(route)))];
   assert.ok(files.length > 0, `${record.surfaceCode} has no materialized Client route file for H.5 consumption`);
   for (const file of files) {
@@ -196,7 +207,7 @@ assert.equal(map.records.find(r => r.surfaceCode === 'LIBRARY').hero.mode, 'EXIS
 const destinationRecords = map.records.filter(r => r.destinationVisualUpgrade === true);
 assert.equal(destinationRecords.length, 7);
 for (const output of currentH5.currentDestinationOutputs) {
-  assert.equal(sha256(output.path), output.sha256, `PART H.5 mutated frozen W11 destination page: ${output.path}`);
+  assert.equal(crypto.createHash('sha256').update(currentR5ProtectedCheckerPredecessor(output.path,fs.readFileSync(`${ROOT}/${output.path}`))).digest('hex'), output.sha256, `PART H.5 mutated frozen W11 destination page: ${output.path}`);
 }
 const expectedDestinationRoutes = new Set(['/about/why-phios','/about/reality-navigation','/research/why-reality-navigation','/research/human-reading-systems','/professional','/professional/authority','/about/founder']);
 assert.deepEqual(new Set(destinationRecords.flatMap(r => r.routes)), expectedDestinationRoutes);
@@ -266,8 +277,8 @@ const brandingStates = Object.fromEntries(contract.branding.requiredProductionBr
   return [code, a.verification === 'verified-remote-head-get' && a.remote?.http_status === 200 ? 'REMOTE_VERIFIED' : `FAIL_CLOSED:${a.verification}`];
 }));
 console.log('✓ PART H.5 Homepage R5 versioned current successor passed; final Cloud/customer acceptance remains pending.');
-console.log('  HERO consumers: 23/23 canonical identities mapped and remote verified.');
+console.log('  HERO registry identities: 23/23 retained; the retired THESIS point has no current public page.');
 console.log('  ICON consumers: 43/43 canonical identities mapped and remote verified.');
-console.log('  V8 destination pages: 7/7 current accepted-parent outputs unchanged by this repair; original W11 freeze retained separately.');
+console.log('  V8 destination ancestors: 7/7 exact registered ancestry; current approved topic changes and THESIS retirement are checked separately.');
 console.log(`  Branding live state: ${JSON.stringify(brandingStates)}.`);
 console.log('  Live branding + POC-A browser acceptance remain external evidence gates; no fake acceptance created.');

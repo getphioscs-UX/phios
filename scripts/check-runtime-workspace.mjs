@@ -1,3 +1,4 @@
+import {assertCurrentThesisRetirement} from './lib/pr22-release-r5-exact-successor-r1.mjs';
 import fs from 'node:fs';
 
 const p1DeletePath='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
@@ -16,7 +17,10 @@ const required = [
   'assets/js/locales/en/thesis.js',
   'assets/js/locales/zh-Hans/thesis.js'
 ];
-for (const file of required) if (!(p1Deleted&&file==='my-reality.html')&&!fs.existsSync(file)) throw new Error(`Missing ${file}`);
+for (const file of required) {
+  if(['thesis.html','assets/js/locales/en/thesis.js','assets/js/locales/zh-Hans/thesis.js'].includes(file)){await assertCurrentThesisRetirement();continue;}
+  if (!(p1Deleted&&file==='my-reality.html')&&!fs.existsSync(file)) throw new Error(`Missing ${file}`);
+}
 if(p1Deleted&&!fs.existsSync('reality/index.html'))throw new Error('P1 canonical My Reality missing after legacy delete');
 
 for (const file of ['reality-entry.html','reality-reconstruction.html','reality-reading.html','reality-navigation.html','reality-review.html','my-reality.html']) {

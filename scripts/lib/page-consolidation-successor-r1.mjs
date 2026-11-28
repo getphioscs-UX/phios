@@ -1,3 +1,5 @@
+import vm from 'node:vm';
+import {resolveConsolidationRedirect} from '../../functions/public/page-consolidation.js';
 import {auditPublicPredecessor,auditPublicReadFile} from './audit-r2-public-receiver-r2.mjs';
 import {isConvergenceCurrent,assertConvergenceHome,convergenceRedirectTarget} from './public-customer-report-convergence-successor-r1.mjs';
 import {assertLocaleBootstrapCurrent} from './locale-bootstrap-current-successor.mjs';
@@ -47,7 +49,7 @@ export function historicalPisBytes(file){const record=consolidationSuccessor(),i
  const staticPath='content/web/index-surfaces/home-static-visual-successor-v1.json';
  if(file==='index.html'&&fs.existsSync(staticPath)){const next=JSON.parse(fs.readFileSync(staticPath));assert.equal(next.status,'ENGINEERING_RECONCILIATION');assert.equal(next.file,file);assert.equal(next.predecessor.path,visualLedger);assert.equal(next.predecessor.sha256,sha(fs.readFileSync(visualLedger)));assert.equal(next.humanAcceptanceGranted,false);assert.equal(next.productionActivated,false);assert.equal(next.previousSha256,expected);assert.equal(sha(fs.readFileSync(next.previousPath)),expected);expected=next.sha256;}
  const localePath='content/web/index-surfaces/consolidation-locale-bootstrap-successor-v1.json';
- if(fs.existsSync(localePath)){const locale=JSON.parse(fs.readFileSync(localePath)),change=locale.changes.find(s=>s.file===file);if(change){assert.equal(locale.status,'ENGINEERING_RECONCILIATION');assert.equal(locale.predecessor.path,manifest);assert.equal(locale.predecessor.sha256,sha(fs.readFileSync(manifest)));for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(locale[key],false);assertLocaleBootstrapCurrent(locale.runtime);assert.equal(change.previousSha256,expected);assert.equal(sha(fs.readFileSync(change.previousPath)),expected);expected=change.sha256;}}
+ if(fs.existsSync(localePath)){const locale=JSON.parse(fs.readFileSync(localePath)),change=locale.changes.find(s=>s.file===file);if(change){assert.equal(locale.status,'ENGINEERING_RECONCILIATION');assert.equal(locale.predecessor.path,manifest);assert.equal(locale.predecessor.sha256,sha(fs.readFileSync(manifest)));for(const key of ['historicalRecordsRewritten','humanAcceptanceGranted','productionActivated'])assert.equal(locale[key],false);assertLocaleBootstrapCurrent(locale.runtime);assert.equal(change.previousSha256,expected);assertCurrentConsolidationLocale(file);expected=change.sha256;}}
  const aboutPath='content/web/index-surfaces/home-about-entry-successor-v2.json';
  if(file==='index.html'&&fs.existsSync(aboutPath)){const about=JSON.parse(fs.readFileSync(aboutPath));assert.equal(about.status,'ENGINEERING_RECONCILIATION');assert.equal(about.file,file);assert.equal(about.predecessor.path,staticPath);assert.equal(about.predecessor.sha256,sha(fs.readFileSync(staticPath)));for(const key of ['humanAcceptanceGranted','productionActivated','historicalRecordsRewritten'])assert.equal(about[key],false);assert.equal(about.previousSha256,expected);assert.equal(sha(fs.readFileSync(about.previousPath)),expected);expected=about.sha256;}
  if(file==='perspectives/index.html'){
@@ -58,3 +60,33 @@ export function historicalPisBytes(file){const record=consolidationSuccessor(),i
  const entryPath='content/web/index-surfaces/customer-entry-home-successor-r1.json';if(file==='index.html'&&fs.existsSync(entryPath)){const entry=JSON.parse(fs.readFileSync(entryPath));assert.equal(entry.status,'ENGINEERING_RECONCILIATION');assert.equal(entry.file,file);assert.equal(entry.predecessor.path,'content/web/index-surfaces/pis-current-surface-followup-successor-v4.json');assert.equal(entry.predecessor.sha256,sha(fs.readFileSync(entry.predecessor.path)));assert.equal(entry.ownerInstructionSha256,sha(fs.readFileSync(entry.ownerInstruction)));for(const k of ['humanAcceptanceGranted','productionActivated','historicalRecordsRewritten'])assert.equal(entry[k],false);assert.equal(entry.previousSha256,expected);assert.equal(sha(fs.readFileSync(entry.previousPath)),expected);expected=entry.sha256;}
  assert.equal(sha(file==='professional/index.html'?professionalConsolidationBytes(file,expected):finalR6ConsolidationBytes(file,expected)),expected,file+': consolidation source drift');return before;}
 export function assertCurrentConsolidatedSurface(document,file){if(file==='index.html'&&isConvergenceCurrent(file)){historicalPisBytes(file);assertConvergenceHome(document);return true;}const item=consolidationSuccessor()?.surfaces.find(s=>s.file===file);if(!item)return false;historicalPisBytes(file);const {document:before}=parseHTML(fs.readFileSync(root+'/before/'+file,'utf8'));assert(before.querySelector('main'),file+': historical source lost');for(const selector of item.requiredSelectors)assert(document.querySelector(selector),file+': missing consolidated consumer '+selector);if(item.redirect){assert.equal(document.querySelector('[data-consolidation-target]')?.dataset.consolidationTarget,item.redirect);assert(!document.querySelector('[data-pis-context-figures]'));}return true;}
+
+// Owner Override 2026-11-26 retires only locale-before local snapshots.
+// Current source digest, registered destination and locale implementation stay checked.
+export function assertCurrentConsolidationLocale(file,read=p=>fs.readFileSync(p,'utf8')){
+ if(file==='explore/index.html')return true; // Current About compatibility has its own original checker.
+ const target=consolidationSuccessor()?.surfaces.find(s=>s.file===file)?.redirect;
+ assert(target,'CURRENT_LOCALE_REGISTERED_REDIRECT_REQUIRED');
+ const {document}=parseHTML(read(file));
+ assert.equal(document.querySelectorAll('script[src="/assets/js/locale-bootstrap.js"]').length,1,'CURRENT_LOCALE_BOOTSTRAP_REQUIRED');
+ assert.equal(document.querySelectorAll('script[src="/assets/customer-ui/js/surfaces/page-consolidation-redirect.js"]').length,1,'CURRENT_LOCALE_REDIRECT_RUNTIME_REQUIRED');
+ const link=document.querySelector('[data-consolidation-target]');assert.equal(link?.getAttribute('href'),target,'CURRENT_LOCALE_ROUTE_MISMATCH');assert.equal(link?.dataset.consolidationTarget,target);
+ assert(/Continue/.test(link.textContent)&&/继续/.test(link.textContent),'CURRENT_LOCALE_BILINGUAL_FALLBACK_REQUIRED');
+ assert.equal(document.querySelectorAll('form,input,textarea').length,0,'CURRENT_LOCALE_REDIRECT_MUST_NOT_COLLECT_INPUT');
+ const [route,anchor]=target.split('#');const destination=route==='/'?'index.html':route.slice(1)+'index.html';
+ assert(read(destination).length>0,'CURRENT_LOCALE_REAL_DESTINATION_REQUIRED');
+ const requestPath='/'+file.replace(/index\.html$/,'');
+ for(const locale of ['en','zh-Hans'])for(const method of ['GET','HEAD']){
+  const url='https://qa.invalid'+requestPath+'?locale='+locale+'&method=ecr&returnTo=%2Faccount%2F';
+  const response=resolveConsolidationRedirect({request:new Request(url,{method})});assert.equal(response?.status,308);const to=new URL(response.headers.get('Location'));assert.equal(to.searchParams.get('locale'),locale);assert.equal(to.searchParams.get('returnTo'),'/account/');assert.equal(to.pathname+to.hash,target);
+ }
+ assert.equal(resolveConsolidationRedirect({request:new Request('https://qa.invalid'+requestPath,{method:'POST',body:'no-write'})}),null);
+ const bootstrap=read('assets/js/locale-bootstrap.js');
+ for(const locale of ['en','zh-Hans']){
+  const {document:d}=parseHTML('<html><body><p data-cx-en="English current" data-cx-zh="当前中文">English current</p></body></html>');
+  let writes=0;const store={getItem(){return null;},setItem(){writes++;throw Error('CURRENT_LOCALE_STORAGE_WRITE_FORBIDDEN');},removeItem(){writes++;throw Error('CURRENT_LOCALE_STORAGE_WRITE_FORBIDDEN');}};
+  vm.runInNewContext(bootstrap,{window:{opener:null},document:d,location:{search:'?locale='+locale},URLSearchParams,navigator:{language:'en'},localStorage:store,MutationObserver:class{observe(){}}},{timeout:1000});
+  assert.equal(d.documentElement.lang,locale);assert.equal(d.querySelector('p').textContent,locale==='en'?'English current':'当前中文');assert.equal(writes,0);
+ }
+ return true;
+}

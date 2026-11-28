@@ -1,3 +1,4 @@
+import {installFreeReportFrontMatter} from '../personal-products/free-report-front-matter.js';
 import {METHOD_NATIVE_READING_COPY_R2} from './method-native-reading-copy-r2.js';
 // Thin view adapter. The existing Personal owner retains all input/calculation rules.
 const mounted=new Map();
@@ -5,11 +6,39 @@ const keys={bazi:'bazi',ziwei:'ziwei',astrology:'astrology',numerology:'numeric'
 const names={bazi:['BaZi','八字'],ziwei:['Zi Wei Dou Shu','紫微斗数'],astrology:['Astrology','占星'],numerology:['Numerology','数字学'],'human-design':['Human Design','人类图'],'phi-configuration':['PHI Configuration','PHI 构型']};
 function language(){return document.documentElement.lang.startsWith('zh')?'zh-Hans':'en';}
 function translate(root){for(const node of root.querySelectorAll('[data-cx-en][data-cx-zh]'))if(!node.querySelector('input,select,textarea,button'))node.textContent=node.dataset[language()==='en'?'cxEn':'cxZh'];}
+function prepareBaziFreeForm(form){
+ // Prevent native GET navigation even while the existing owner module is loading.
+ // Do not stop propagation: the owner's JSON submission listener still runs.
+ form.addEventListener('submit',event=>event.preventDefault());
+ form.querySelectorAll('[data-cx-shared-target-context]').forEach(node=>node.remove());
+ form.querySelectorAll('[name^="sharedTarget"]').forEach(node=>node.remove());
+ const draft=form.elements.intent;if(!draft)return;
+ draft.removeAttribute('name');draft.removeAttribute('placeholder');draft.autocomplete='off';draft.dataset.baziLocalDraft='';
+ const label=draft.closest('label'),heading=label?.querySelector('span');
+ const text=(node,en,zh)=>{if(!node)return;node.dataset.cxEn=en;node.dataset.cxZh=zh;node.textContent=language()==='en'?en:zh;};
+ text(heading,'Current situation draft (optional)','当前处境草稿（选填）');
+ const note=document.createElement('p');note.className='cx-p1-note';note.dataset.baziDraftBoundary='';
+ text(note,'Reality-specific analysis requires separately admitted paid access. This draft stays only on this page: it is not sent, saved or used in your free chart.','具体处境分析须另行通过付费准入。此草稿仅留在本页，不发送、不保存，也不参与免费排盘。');label.before(note);
+ const actions=document.createElement('div');actions.className='cx-p1-inline';actions.dataset.baziDraftActions='';
+ const make=(key,en,zh)=>{const b=document.createElement('button');b.type='button';b.className='cx-button';b.dataset[key]='';text(b,en,zh);actions.append(b);return b;};
+ const confirm=make('baziDraftConfirm','Confirm this draft','确认原文'),edit=make('baziDraftEdit','Edit draft','修改原文'),cancel=make('baziDraftCancel','Cancel draft','取消草稿');
+ const status=document.createElement('p');status.className='cx-p1-note';status.setAttribute('role','status');status.dataset.baziDraftStatus='';label.after(actions,status);
+ function paint(confirmed=false,cleared=false){draft.readOnly=confirmed;confirm.hidden=confirmed;edit.hidden=!confirmed;form.dataset.baziDraftState=confirmed?'CONFIRMED':cleared?'CLEARED':'EDITING';text(status,confirmed?'Draft confirmed on this page only. Your free chart uses birth details only.':cleared?'Draft cleared. Nothing was sent or saved.':'You can edit or cancel this page-only draft. It does not change your free chart.',confirmed?'原文仅在本页确认，免费排盘只使用出生资料。':cleared?'草稿已清除，没有发送或保存。':'你可以修改或取消本页草稿；它不会改变免费排盘。');}
+ confirm.addEventListener('click',()=>paint(true));
+ edit.addEventListener('click',()=>{paint(false);draft.focus();});
+ cancel.addEventListener('click',()=>{draft.value='';paint(false,true);});
+ form.addEventListener('reset',()=>{draft.value='';paint(false,true);});
+ let hiddenBeforePrint=false,displayBeforePrint='',displayPriorityBeforePrint='';
+ window.addEventListener('beforeprint',()=>{hiddenBeforePrint=form.hidden;displayBeforePrint=form.style.getPropertyValue('display');displayPriorityBeforePrint=form.style.getPropertyPriority('display');form.hidden=true;form.style.setProperty('display','none','important');});
+ window.addEventListener('afterprint',()=>{form.hidden=hiddenBeforePrint;if(displayBeforePrint)form.style.setProperty('display',displayBeforePrint,displayPriorityBeforePrint);else form.style.removeProperty('display');});
+ paint();
+}
 export function installMethodNativeIntakeR2(parent,slug){
  if(!keys[slug]||!parent)return;if(!document.querySelector('link[data-method-intake-style]')){const link=document.createElement('link');link.rel='stylesheet';link.href='/assets/customer-ui/surfaces/method-native-intake-r2.css';link.dataset.methodIntakeStyle='';document.head.append(link);}
  let entry=mounted.get(slug);
  if(!entry){const host=document.createElement('section');host.id='method-input';host.className='chapter chapter-beige';host.dataset.methodNativeIntake=slug;entry={host,loaded:false,busy:false};mounted.set(slug,entry);}
  if(!entry.host.isConnected)parent.append(entry.host);if(!parent.querySelector('[data-method-native-reading]')){const section=document.createElement('section');section.className='chapter';section.dataset.methodNativeReading=slug;const wrap=document.createElement('div');wrap.className='wrap';for(const [heading,body] of METHOD_NATIVE_READING_COPY_R2[slug]?.[language()==='en'?'en':'zh']||[]){const article=document.createElement('article'),h=document.createElement('h3'),p=document.createElement('p');h.textContent=heading;p.textContent=body;article.append(h,p);wrap.append(article);}section.append(wrap);entry.host.before(section);}
+ installFreeReportFrontMatter(parent,slug);
  if(!entry.loaded){entry.host.innerHTML='<div class="wrap"><h2></h2><p data-native-note></p><button type="button" data-native-open></button><p role="status" data-native-status></p></div>';const zh=language()==='zh-Hans';entry.host.querySelector('h2').textContent=(zh?'开始':'Start ')+names[slug][zh?1:0]+(zh?'阅读':' reading');entry.host.querySelector('[data-native-note]').textContent=zh?'在本页填写此方法所需的资料，不自动保存。是否可执行由服务端核对；完整报告购买保持独立准入。':'Provide only this method’s details here. Nothing is saved automatically. The server checks execution availability; Full Report purchase remains separately gated.';entry.host.querySelector('[data-native-open]').textContent=zh?'打开本方法输入':'Open this method’s input';entry.host.querySelector('[data-native-open]').onclick=()=>open();}
  else translate(entry.host);
  if(!parent.dataset.nativeIntakeListener){parent.dataset.nativeIntakeListener='true';parent.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const u=new URL(a.href,location.href);if(u.pathname===location.pathname&&u.hash==='#method-input'){e.preventDefault();u.searchParams.set('locale',language());history.replaceState(history.state,'',u.pathname+u.search+u.hash);entry.host.scrollIntoView({block:'start'});void open();}});}
@@ -17,6 +46,8 @@ export function installMethodNativeIntakeR2(parent,slug){
   if(entry.loaded||entry.busy)return;entry.busy=true;const status=entry.host.querySelector('[data-native-status]');status.textContent=language()==='en'?'Loading this method’s input…':'正在读取本方法输入…';
   try{const response=await fetch('/perspectives/personal/',{credentials:'omit',cache:'no-store'});if(!response.ok)throw Error('INPUT_TEMPLATE_UNAVAILABLE');const doc=new DOMParser().parseFromString(await response.text(),'text/html'),form=doc.querySelector('[data-cx-personal-form]'),results=doc.querySelector('[data-cx-personal-results]');if(!form||!results)throw Error('INPUT_TEMPLATE_INVALID');
    form.dataset.dedicatedMethod=keys[slug];form.dataset.methodEndpoint='/api/method-reading/'+slug;
+   if(slug==='bazi')prepareBaziFreeForm(form);
+   if(['bazi','numerology'].includes(slug)&&form.elements.reportSubjectName){form.elements.reportSubjectName.required=false;const label=form.elements.reportSubjectName.closest('label')?.querySelector('span');if(label){label.dataset.cxEn='Display name (optional)';label.dataset.cxZh='显示姓名（选填）';}}
    for(const input of form.querySelectorAll('input[name=methods]')){input.checked=input.value===keys[slug];input.defaultChecked=input.checked;if(input.value!==keys[slug])input.closest('label')?.remove();else input.closest('fieldset').hidden=true;}
    form.querySelectorAll('[data-cx-selection-mode]').forEach(b=>b.hidden=true);
    const external=form.elements.externalProfileEnabled;if(external){external.checked=slug==='human-design';external.defaultChecked=external.checked;external.disabled=slug!=='human-design';external.closest('label').hidden=true;}

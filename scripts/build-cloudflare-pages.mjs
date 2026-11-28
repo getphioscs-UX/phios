@@ -405,7 +405,9 @@ if (
 
 // Public assets are already constrained by the publication allowlist. Avoid
 // spending a Function invocation for each module, font, image and content file.
-routes.exclude=[...new Set([...(routes.exclude||[]),'/assets/*','/content/*','/data/*','/favicon.ico','/robots.txt','/sitemap.xml','/reality-entry','/reality-entry/','/reality-entry.html'])];
+// Content includes internal-only World snapshots. Their public URLs must reach
+// the Worker denial even though env.ASSETS remains available to the projector.
+routes.exclude=[...new Set([...(routes.exclude||[]),'/assets/*','/data/*','/favicon.ico','/robots.txt','/sitemap.xml','/reality-entry','/reality-entry/','/reality-entry.html'])].filter(p=>p!=='/content/*');
 fs.writeFileSync(routeSource,JSON.stringify(routes,null,2)+'\n');
 
 // Compact generated bindings and whitespace, preserving runtime names, syntax

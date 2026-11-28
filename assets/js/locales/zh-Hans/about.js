@@ -16,13 +16,12 @@ const about = Object.freeze({
       "titleLine2": "导航必须继续。",
       "lead": "PHI OS 正在被发展为一个 Reality Navigation 系统：以统一方式理解一个具体的现实如何形成、改变，并随时间继续运行。",
       "begin": "开始现实导航",
-      "thesis": "阅读论文",
       "atlas": "探索现实地图集"
     },
     "origin": {
       "eyebrow": "架构对齐",
       "title": "从研究走向基础设施",
-      "copy": "Reality Navigation Thesis 建立计算类别；Unified Runtime Framework 定义理论架构；PHI OS 将两者转化为持续发展的知识、体验与平台环境。",
+      "copy": "Unified Runtime Framework 定义理论架构；PHI OS 将其转化为持续发展的知识、体验与平台环境。",
       "link": "查看完整架构 ↓"
     },
     "why": {
@@ -55,7 +54,7 @@ const about = Object.freeze({
     "architecture": {
       "eyebrow": "03 · 从研究走向 PHI OS",
       "title": "一个连续的架构。",
-      "intro": "PHI OS 不是叠加在论文上的另一个概念，而是研究进入运行与实践后的延续。",
+      "intro": "PHI OS 是研究进入运行与实践后的延续。",
       "p1": "所提出的新计算类别。",
       "p2": "解释这一类别为何必要的研究基础。",
       "p3": "关于证据、状态、转变与连续性的理论语言。",
@@ -105,7 +104,7 @@ const about = Object.freeze({
       },
       "j2": {
         "title": "知识旅程",
-        "copy": "适合从 Thesis、Atlas、八册书、图像与 Academy 进入的读者和学习者。"
+        "copy": "适合从 Atlas、八册书、图像与 Academy 进入的读者和学习者。"
       },
       "j3": {
         "title": "平台旅程",
@@ -135,7 +134,6 @@ const about = Object.freeze({
       "title": "从此刻真正重要的现实、知识或路径开始。",
       "copy": "PHI OS 仍在发展，但核心路径已经可以使用：观察什么正在改变，保存证据，并从更连贯的位置继续。",
       "begin": "开始现实导航",
-      "thesis": "阅读论文",
       "atlas": "探索地图集"
     },
     "footer": {

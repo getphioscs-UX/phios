@@ -8,7 +8,6 @@ const rules=[
  ['BOOKS',/books|book\s*(?:[1-7]|i{1,3}|iv|v|vi|vii)\b|book catalog|书籍|书册|书库|阅读第|读第/i,6],
  ['WILL',/遗嘱|estate planning|\b(?:will (?:draft|writing|information)|(?:prepare|write|draft|executed|a|the|my|signed) (?:a |my )?will)\b/i,6],
  ['CONTINUITY',/continuity|membership|subscription|quota|会员|订阅|额度/i,6],
- ['THESIS',/thesis|research\s*(?:paper|pdf)|核心论述|论文|研究 PDF/i,6],
  ['PROFESSIONAL',/professional (?:assistance|service|help)|consultation|专业(?:协助|服务|帮助)|咨询服务/i,5],
  ['PERSONAL_METHODS',/八字|四柱|紫微|占星|人类图|数字学|bazi|four pillars|zi\s*wei|astrology|human design|numerology|birth chart|personal methods|个人方法/i,5],
  ['RELATIONSHIP',/关系|丈夫|伴侣|夫妻|relationship|husband|wife|partner|spouse/i,3],
